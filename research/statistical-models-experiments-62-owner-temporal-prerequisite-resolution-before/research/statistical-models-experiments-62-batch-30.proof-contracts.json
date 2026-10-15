@@ -1,0 +1,2038 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-continuous-finite-variation-martingale-is-zero",
+    "lem-bounded-stopping-preserves-cadlag-square-integrable-martingales",
+    "def-counting-process-intensity-and-compensator-contract",
+    "def-optional-and-predictable-brackets-for-counting-processes",
+    "def-elementary-predictable-counting-process-integral",
+    "lem-predictable-step-processes-dense-in-compensator-l2",
+    "def-l2-counting-process-integral",
+    "lem-continuous-predictable-bracket-uniqueness",
+    "lem-elementary-counting-integral-preserves-martingales",
+    "lem-finite-variation-integration-by-parts-for-counting-process-martingales",
+    "thm-compensated-counting-process-brackets",
+    "thm-cross-brackets-vanish-under-no-simultaneous-jumps",
+    "lem-elementary-counting-process-integral-isometry",
+    "thm-l2-counting-process-integral-isometry",
+    "ex-delayed-entry-predictable-risk-process",
+    "ex-tied-jumps-produce-nonzero-cross-bracket",
+    "ex-one-event-exponential-compensator-and-isometry"
+  ],
+  "contracts": {
+    "lem-continuous-finite-variation-martingale-is-zero": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-continuous-time-adapted-process-and-martingale",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a probability space\n$(\\Omega,\\mathcal F,P)$ with a continuous-time filtration\n$(\\mathcal F_t)_{t\\ge0}$ in the sense of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes in\nthis definition are real-valued and indexed by $[0,\\infty)$; the filtration is\nneither assumed complete nor right-continuous. The Axiom of Choice is declared\nbecause the conditional-expectation classes used in clause 3 are supplied by\nthe Radon--Nikodym interface of [[def-conditional-expectation-as-an-ae-class]],\nwhich assumes it; the countable-choice obligations inherited from that\ninterface are declared as dependencies of this item.\n\n1. **Adapted.** $X=(X_t)_{t\\ge0}$ is **adapted** to $(\\mathcal F_t)$ when $X_t$\n   is $\\mathcal F_t$-measurable for every $t\\ge0$. This is exactly the notion\n   of [[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n2. **Stopped process.** For a stopping time $\\tau$ for $(\\mathcal F_t)$\n   [[def-continuous-time-stopping-time]] the **stopped process** is\n   $$X^{\\tau}_t(\\omega):=X_{t\\wedge\\tau(\\omega)}(\\omega),\\qquad t\\ge0,$$\n   with the convention $t\\wedge\\infty:=t$, so no value $X_\\infty$ is ever\n   required and $X^\\tau_0=X_0$ identically. This formula defines a pathwise\n   family; adaptedness of $X$ alone does not assert measurability or\n   adaptedness of its stopped values. If in addition $\\tau\\le c$ for a\n   deterministic constant $c$, then $X^\\tau_t=X_{t\\wedge\\tau}$, and only the\n   values of $X$ on $[0,c]$ enter. Stopping at a stopping time is not the same\n   as replacing a process by a modification; it is a pathwise operation.\n\n3. **Martingale.** $M=(M_t)_{t\\ge0}$ is a **martingale** (an all-pairs\n   continuous-time martingale) relative to $(\\mathcal F_t)$ when it is adapted,\n   $E|M_t|<\\infty$ for every $t\\ge0$, and for all $0\\le s\\le t$\n   $$E[M_t\\mid\\mathcal F_s]=M_s\\qquad\\text{almost surely}.$$\n   The equality is an equality of the almost-everywhere classes of\n   [[def-conditional-expectation-as-an-ae-class]]; equivalently, every version\n   of the conditional expectation on the left equals $M_s$ off one null set.\n   At $s=t$ the identity reduces to the known-variable case. The word\n   \"continuous-time\" refers to the index set only and does not assert path\n   continuity.\n\n4. **Local martingale.** $X=(X_t)_{t\\ge0}$ is a **local martingale** relative\n   to $(\\mathcal F_t)$ when it is adapted, $E|X_0|<\\infty$, and there exist stopping times\n   $(\\tau_n)_{n\\ge0}$ with $\\tau_0\\le\\tau_1\\le\\cdots$ and\n   $\\tau_n\\uparrow\\infty$ almost surely such that for every $n\\ge0$ the stopped process\n   $$X^{\\tau_n}-X_0=(X_{t\\wedge\\tau_n}-X_0)_{t\\ge0}$$\n   is a martingale in the sense of clause 3. The sequence $(\\tau_n)$ is called\n   a **localizing sequence**. Equivalently, every $X^{\\tau_n}$ is a\n   martingale: adaptedness makes the integrable variable $X_0$ measurable with\n   respect to every $\\mathcal F_t$, so the constant process with value $X_0$\n   is a martingale and may be added to, or subtracted from, each stopped\n   process. The centering merely makes every localized process start at $0$;\n   apart from the required integrability of $X_0$, no claim is made that $X$\n   is integrable at a positive deterministic time, and no claim is made that\n   $X$ has continuous paths.\n\n5. **Path and integrability attributes.** A process has **continuous paths**\n   when $t\\mapsto X_t(\\omega)$ is continuous on $[0,\\infty)$ for every $\\omega$\n   in an event of probability one; the usual almost-sure path conventions of\n   [[def-law-modification-and-indistinguishability-of-processes]] apply. A\n   martingale $M$ is **square-integrable** when $EM_t^2<\\infty$ for every\n   $t\\ge0$, and **$L^2$-bounded** when $\\sup_{t\\ge0}EM_t^2<\\infty$. These are\n   properties of the single process under consideration, not of its versions:\n   a modification of a martingale need not be adapted, so every later statement\n   names the adapted versions it uses.\n\nThe following remarks specify what follows directly from this vocabulary.\n\n1. **A martingale is a local martingale.** If $M$ is a martingale, the constant\n   sequence $\\tau_n:=n$, $n\\ge0$, localizes it: the stopped process $M^{n}-M_0$ is again\n   a martingale by the martingale identity applied at the deterministic times\n   $s\\wedge n\\le t\\wedge n$. The converse fails; a local martingale need not be\n   a martingale, and no such implication is used in this development.\n2. **Localization after a separately justified stopping operation.** Suppose\n   $(\\tau_n)$ localizes $X$, $\\sigma$ is a stopping time, $X^\\sigma$ is\n   adapted, and each $(X^{\\tau_n}-X_0)^\\sigma$ is a martingale. Then\n   $(\\tau_n)$ localizes $X^\\sigma$. Indeed it still increases to infinity,\n   $(X^\\sigma)_0=X_0$, and the pathwise identity\n   $$(X^\\sigma)^{\\tau_n}-(X^\\sigma)_0=X^{\\sigma\\wedge\\tau_n}-X_0=(X^{\\tau_n}-X_0)^\\sigma$$\n   verifies exactly clause 4. The stopped-piece martingale assertion and\n   adaptedness are hypotheses here, not consequences of the unrestricted\n   all-pairs definition. They must be established in each application.\n   The sequence $(\\sigma\\wedge\\tau_n)$ is not a substitute for $(\\tau_n)$:\n   its almost-sure limit is $\\sigma$, which need not be infinity.\n\nNo path continuity, no right continuity of the filtration, and no completeness\nof the underlying probability space is imposed by this definition. Choice\nenters only through the conditional-expectation interface named above,\nwhose countable-choice obligations are declared as dependencies of this item.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-continuous-time-stopping-time",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let\n$(\\mathcal F_t)_{t\\ge0}$ be a continuous-time filtration\n[[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n1. A map $\\tau:\\Omega\\to[0,\\infty]$ (infinite values allowed) is a **stopping\n   time** for $(\\mathcal F_t)$ when\n   $$\\{\\tau\\le t\\}\\in\\mathcal F_t\\qquad\\text{for every }t\\ge0 .$$\n2. For a stopping time $\\tau$ its **stopped sigma-algebra** is\n   $$\\mathcal F_\\tau:=\\{A\\in\\mathcal F:A\\cap\\{\\tau\\le t\\}\\in\\mathcal F_t \\text{ for every }t\\ge0\\}.$$\n\nThe following facts are used below, and each is a direct set computation.\n\n(a) $\\mathcal F_\\tau$ is a sigma-algebra: $\\emptyset\\cap\\{\\tau\\le\n    t\\}=\\emptyset\\in\\mathcal F_t$; for $A\\in\\mathcal F_\\tau$ one has\n    $A^c\\cap\\{\\tau\\le t\\}=\\{\\tau\\le t\\}\\setminus(A\\cap\\{\\tau\\le t\\})\\in\\mathcal\n    F_t$; and for a sequence $A_n\\in\\mathcal F_\\tau$ the union satisfies\n    $\\bigl(\\bigcup_nA_n\\bigr)\\cap\\{\\tau\\le t\\}=\\bigcup_n(A_n\\cap\\{\\tau\\le\n    t\\})\\in\\mathcal F_t$. All operations are literal, not modulo null sets, and\n    no completeness of the filtration is assumed.\n(b) If $\\tau\\equiv t_0<\\infty$ is deterministic, then\n    $A\\cap\\{\\tau\\le t\\}$ is $A$ for $t\\ge t_0$ and $\\emptyset$ for $t<t_0$, so\n    $\\mathcal F_\\tau=\\bigcap_{t\\ge t_0}\\mathcal F_t=\\mathcal F_{t_0}$, where\n    the last equality follows because the intersection includes its least\n    member $\\mathcal F_{t_0}$. If $\\tau\\equiv\\infty$, then every test event\n    $\\{\\tau\\le t\\}$ is empty and $\\mathcal F_\\tau=\\mathcal F$.\n(c) Suppose the filtration is right-continuous. Then $\\tau$ is a stopping time\n    if and only if $\\{\\tau<t\\}\\in\\mathcal F_t$ for every $t>0$. Indeed\n    $$\\{\\tau<t\\}=\\bigcup_{n\\ge1}\\{\\tau\\le t-\\tfrac1n\\}$$\n    (with the terms for $t-\\tfrac1n<0$ read as the empty set, since\n    $\\tau\\ge0$), which gives the forward implication; conversely\n    $$\\{\\tau\\le t\\}=\\bigcap_{n\\ge1}\\{\\tau<t+\\tfrac1n\\},$$\n    and $\\bigcap_n\\mathcal F_{t+1/n}=\\bigcap_{s>t}\\mathcal F_s=\\mathcal F_t$ by\n    right-continuity together with monotonicity of the filtration.\n(d) Under the same right-continuity assumption, for $A\\in\\mathcal F$ one has\n    $A\\in\\mathcal F_\\tau$ if and only if $A\\cap\\{\\tau<t\\}\\in\\mathcal F_t$ for\n    every $t>0$: the forward implication follows from\n    $A\\cap\\{\\tau<t\\}=\\bigcup_n(A\\cap\\{\\tau\\le t-\\tfrac1n\\})$ and the converse\n    from $A\\cap\\{\\tau\\le t\\}=\\bigcap_n(A\\cap\\{\\tau<t+\\tfrac1n\\})$ together with\n    $\\bigcap_n\\mathcal F_{t+1/n}=\\mathcal F_t$.\n\nBecause the two versions of each test are interchangeable exactly when the\nfiltration is right-continuous, the convention is recorded here once: the\nBrownian strong Markov theorem is stated for the usual augmentation, which is\nright-continuous, and the raw-filtration statements use the non-strict test\ndirectly. No choice principle is used by this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-bounded-variation-and-total-variation",
+          "source_section": "Definition",
+          "quote": "Let $a\\le b$ and let $f:[a,b]\\to\\mathbb R$ ([[def-interval]]). If $a<b$ and\n$P=(n,t)$ is a partition of $[a,b]$ ([[def-partition-and-refinement]]), the\n**variation of $f$ over $P$** is\n\n$$V(f,P):=\\sum_{i<n}|f(t_{i+1})-f(t_i)|.$$\n\nThe sum is finite ([[def-finite-sum]], [[lem-finite-sum-laws]]) and nonnegative\n([[def-abs-value]]). The set of all such sums is nonempty, since $[a,b]$ has the\npartition with point set $\\{a,b\\}$. The function $f$ has **bounded variation**\non $[a,b]$ when this set of sums is bounded above ([[def-bounded-set]]). In that\ncase its **total variation** is\n\n$$\\operatorname{Var}_{[a,b]}(f):=\\sup_P V(f,P).$$\n\nCompleteness of $\\mathbb R$ gives this supremum and [[lem-sup-unique]] makes it\nunique ([[def-complete-ordered-field]]). On a singleton interval, by convention,\n$\\operatorname{Var}_{[a,a]}(f):=0$; no partition from\n[[def-partition-and-refinement]], whose standing hypothesis is $a<b$, is invoked.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-law-modification-and-indistinguishability-of-processes",
+          "source_section": "Definition",
+          "quote": "Two processes with the same index set and corresponding target spaces have the\nsame **process law** if all corresponding finite-dimensional laws agree; their\nsource probability spaces need not be the same. Suppose in addition that\n$X=(X_t)_{t\\in I}$ and $Y=(Y_t)_{t\\in I}$ are defined on one common\nprobability space $(\\Omega,\\mathcal F,\\mathbb P)$, take values in the same\nmeasurable space at each $t$, and $\\{X_t=Y_t\\}$ is measurable for each $t$.\nThen $Y$ is a **modification** (or version) of $X$ when\n$\\mathbb P(X_t=Y_t)=1$ for every fixed $t$. They are **indistinguishable**\nwhen the event\n$\\{\\omega:X_t(\\omega)=Y_t(\\omega)\\text{ for every }t\\in I\\}$ is measurable\nand has probability one. The latter has one exceptional null event; the former\nmay have a different null event at every time.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $t$, define $V_t$ as the total variation of $D$ on $[0,t]$ by [F5]. Since $D$ is continuous, this is the supremum of the variation sums over partitions with rational interior points and endpoint $t$, so $V_t$ is $\\mathcal F_t$-measurable; its paths are continuous and nondecreasing. For each integer $n\\ge1$, let $\\tau_n=\\inf\\{t:V_t\\ge n\\}\\wedge T$. Continuity and monotonicity give $\\{\\tau_n\\le t\\}=\\{V_t\\ge n\\}$ for $t<T$, so [F2] makes $\\tau_n$ a bounded stopping time. The stopped path $D^{\\tau_n}$ is continuous, has variation at most $n$, and is bounded by $n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $0\\le s<t\\le T$, $B\\in\\mathcal F_s$, and deterministic partitions $s=u_0<\\cdots<u_m=t$ whose mesh tends to zero. Set $S_m=\\sum_{j=0}^{m-1}\\mathbf1_B\\mathbf1_{\\{\\tau_n>u_j\\}}(D_{u_{j+1}}-D_{u_j})$. Each coefficient is bounded and $\\mathcal F_{u_j}$-measurable, so [F1] and [F3] give $\\mathbb E S_m=0$. Pathwise the sum telescopes up to the first partition point after $\\tau_n$; continuity gives $S_m\\to\\mathbf1_B(D_{t\\wedge\\tau_n}-D_{s\\wedge\\tau_n})$. Also $|S_m|\\le V_T(D)$, which is integrable. By [F4], $\\mathbb E[\\mathbf1_B(D_{t\\wedge\\tau_n}-D_{s\\wedge\\tau_n})]=0$. Since this holds for every $B\\in\\mathcal F_s$, $D^{\\tau_n}$ is a martingale.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "F1",
+            "F3",
+            "F4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any deterministic partition $0=t_0<\\cdots<t_m=T$, increments of the bounded martingale $D^{\\tau_n}$ are square-integrable and pairwise orthogonal: for $i<j$, $\\mathbb E[\\Delta_iD^{\\tau_n}\\Delta_jD^{\\tau_n}]=\\mathbb E[\\Delta_iD^{\\tau_n}\\,\\mathbb E(\\Delta_jD^{\\tau_n}\\mid\\mathcal F_{t_j})]=0$. Hence $\\mathbb E[(D_{T\\wedge\\tau_n})^2]=\\sum_j\\mathbb E[(\\Delta_jD^{\\tau_n})^2]$. The pathwise sum is at most $n\\max_j|\\Delta_jD^{\\tau_n}|$, which tends to zero as the mesh tends to zero by continuity; it is bounded by $n^2$. Dominated convergence gives $D_{T\\wedge\\tau_n}=0$ almost surely. The martingale identity then gives $D_{r\\wedge\\tau_n}=0$ almost surely at every rational $r\\in[0,T]$; continuity and countability give $D^{\\tau_n}\\equiv0$ almost surely.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $V_T(D)<\\infty$ almost surely, for each path some integer $n>V_T(D)$ has $\\tau_n=T$. Intersecting the probability-one events from step 3.1 over the countably many $n$ therefore gives $D_t=0$ for every $t\\in[0,T]$ on one probability-one event. By [F6], $D$ is indistinguishably zero.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "step 3.1",
+            "given",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The constant zero path is covered by the squared-increment argument in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypothesis D0=0 and conclusion zero are handled in steps 1.1 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement concerns a process path, not a single distinguished numerical value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If total variation is zero then every increment vanishes; the localization and partition proof in steps 1.1 and 3.1 includes this case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite horizon endpoints are included in the stopping and terminal argument in steps 1.1 and 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only countable intersection is over the explicit integer localizers in step 4.1; no choice of versions is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-bounded-stopping-preserves-cadlag-square-integrable-martingales": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-continuous-time-adapted-process-and-martingale",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a probability space\n$(\\Omega,\\mathcal F,P)$ with a continuous-time filtration\n$(\\mathcal F_t)_{t\\ge0}$ in the sense of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes in\nthis definition are real-valued and indexed by $[0,\\infty)$; the filtration is\nneither assumed complete nor right-continuous. The Axiom of Choice is declared\nbecause the conditional-expectation classes used in clause 3 are supplied by\nthe Radon--Nikodym interface of [[def-conditional-expectation-as-an-ae-class]],\nwhich assumes it; the countable-choice obligations inherited from that\ninterface are declared as dependencies of this item.\n\n1. **Adapted.** $X=(X_t)_{t\\ge0}$ is **adapted** to $(\\mathcal F_t)$ when $X_t$\n   is $\\mathcal F_t$-measurable for every $t\\ge0$. This is exactly the notion\n   of [[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n2. **Stopped process.** For a stopping time $\\tau$ for $(\\mathcal F_t)$\n   [[def-continuous-time-stopping-time]] the **stopped process** is\n   $$X^{\\tau}_t(\\omega):=X_{t\\wedge\\tau(\\omega)}(\\omega),\\qquad t\\ge0,$$\n   with the convention $t\\wedge\\infty:=t$, so no value $X_\\infty$ is ever\n   required and $X^\\tau_0=X_0$ identically. This formula defines a pathwise\n   family; adaptedness of $X$ alone does not assert measurability or\n   adaptedness of its stopped values. If in addition $\\tau\\le c$ for a\n   deterministic constant $c$, then $X^\\tau_t=X_{t\\wedge\\tau}$, and only the\n   values of $X$ on $[0,c]$ enter. Stopping at a stopping time is not the same\n   as replacing a process by a modification; it is a pathwise operation.\n\n3. **Martingale.** $M=(M_t)_{t\\ge0}$ is a **martingale** (an all-pairs\n   continuous-time martingale) relative to $(\\mathcal F_t)$ when it is adapted,\n   $E|M_t|<\\infty$ for every $t\\ge0$, and for all $0\\le s\\le t$\n   $$E[M_t\\mid\\mathcal F_s]=M_s\\qquad\\text{almost surely}.$$\n   The equality is an equality of the almost-everywhere classes of\n   [[def-conditional-expectation-as-an-ae-class]]; equivalently, every version\n   of the conditional expectation on the left equals $M_s$ off one null set.\n   At $s=t$ the identity reduces to the known-variable case. The word\n   \"continuous-time\" refers to the index set only and does not assert path\n   continuity.\n\n4. **Local martingale.** $X=(X_t)_{t\\ge0}$ is a **local martingale** relative\n   to $(\\mathcal F_t)$ when it is adapted, $E|X_0|<\\infty$, and there exist stopping times\n   $(\\tau_n)_{n\\ge0}$ with $\\tau_0\\le\\tau_1\\le\\cdots$ and\n   $\\tau_n\\uparrow\\infty$ almost surely such that for every $n\\ge0$ the stopped process\n   $$X^{\\tau_n}-X_0=(X_{t\\wedge\\tau_n}-X_0)_{t\\ge0}$$\n   is a martingale in the sense of clause 3. The sequence $(\\tau_n)$ is called\n   a **localizing sequence**. Equivalently, every $X^{\\tau_n}$ is a\n   martingale: adaptedness makes the integrable variable $X_0$ measurable with\n   respect to every $\\mathcal F_t$, so the constant process with value $X_0$\n   is a martingale and may be added to, or subtracted from, each stopped\n   process. The centering merely makes every localized process start at $0$;\n   apart from the required integrability of $X_0$, no claim is made that $X$\n   is integrable at a positive deterministic time, and no claim is made that\n   $X$ has continuous paths.\n\n5. **Path and integrability attributes.** A process has **continuous paths**\n   when $t\\mapsto X_t(\\omega)$ is continuous on $[0,\\infty)$ for every $\\omega$\n   in an event of probability one; the usual almost-sure path conventions of\n   [[def-law-modification-and-indistinguishability-of-processes]] apply. A\n   martingale $M$ is **square-integrable** when $EM_t^2<\\infty$ for every\n   $t\\ge0$, and **$L^2$-bounded** when $\\sup_{t\\ge0}EM_t^2<\\infty$. These are\n   properties of the single process under consideration, not of its versions:\n   a modification of a martingale need not be adapted, so every later statement\n   names the adapted versions it uses.\n\nThe following remarks specify what follows directly from this vocabulary.\n\n1. **A martingale is a local martingale.** If $M$ is a martingale, the constant\n   sequence $\\tau_n:=n$, $n\\ge0$, localizes it: the stopped process $M^{n}-M_0$ is again\n   a martingale by the martingale identity applied at the deterministic times\n   $s\\wedge n\\le t\\wedge n$. The converse fails; a local martingale need not be\n   a martingale, and no such implication is used in this development.\n2. **Localization after a separately justified stopping operation.** Suppose\n   $(\\tau_n)$ localizes $X$, $\\sigma$ is a stopping time, $X^\\sigma$ is\n   adapted, and each $(X^{\\tau_n}-X_0)^\\sigma$ is a martingale. Then\n   $(\\tau_n)$ localizes $X^\\sigma$. Indeed it still increases to infinity,\n   $(X^\\sigma)_0=X_0$, and the pathwise identity\n   $$(X^\\sigma)^{\\tau_n}-(X^\\sigma)_0=X^{\\sigma\\wedge\\tau_n}-X_0=(X^{\\tau_n}-X_0)^\\sigma$$\n   verifies exactly clause 4. The stopped-piece martingale assertion and\n   adaptedness are hypotheses here, not consequences of the unrestricted\n   all-pairs definition. They must be established in each application.\n   The sequence $(\\sigma\\wedge\\tau_n)$ is not a substitute for $(\\tau_n)$:\n   its almost-sure limit is $\\sigma$, which need not be infinity.\n\nNo path continuity, no right continuity of the filtration, and no completeness\nof the underlying probability space is imposed by this definition. Choice\nenters only through the conditional-expectation interface named above,\nwhose countable-choice obligations are declared as dependencies of this item.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-continuous-time-stopping-time",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let\n$(\\mathcal F_t)_{t\\ge0}$ be a continuous-time filtration\n[[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n1. A map $\\tau:\\Omega\\to[0,\\infty]$ (infinite values allowed) is a **stopping\n   time** for $(\\mathcal F_t)$ when\n   $$\\{\\tau\\le t\\}\\in\\mathcal F_t\\qquad\\text{for every }t\\ge0 .$$\n2. For a stopping time $\\tau$ its **stopped sigma-algebra** is\n   $$\\mathcal F_\\tau:=\\{A\\in\\mathcal F:A\\cap\\{\\tau\\le t\\}\\in\\mathcal F_t \\text{ for every }t\\ge0\\}.$$\n\nThe following facts are used below, and each is a direct set computation.\n\n(a) $\\mathcal F_\\tau$ is a sigma-algebra: $\\emptyset\\cap\\{\\tau\\le\n    t\\}=\\emptyset\\in\\mathcal F_t$; for $A\\in\\mathcal F_\\tau$ one has\n    $A^c\\cap\\{\\tau\\le t\\}=\\{\\tau\\le t\\}\\setminus(A\\cap\\{\\tau\\le t\\})\\in\\mathcal\n    F_t$; and for a sequence $A_n\\in\\mathcal F_\\tau$ the union satisfies\n    $\\bigl(\\bigcup_nA_n\\bigr)\\cap\\{\\tau\\le t\\}=\\bigcup_n(A_n\\cap\\{\\tau\\le\n    t\\})\\in\\mathcal F_t$. All operations are literal, not modulo null sets, and\n    no completeness of the filtration is assumed.\n(b) If $\\tau\\equiv t_0<\\infty$ is deterministic, then\n    $A\\cap\\{\\tau\\le t\\}$ is $A$ for $t\\ge t_0$ and $\\emptyset$ for $t<t_0$, so\n    $\\mathcal F_\\tau=\\bigcap_{t\\ge t_0}\\mathcal F_t=\\mathcal F_{t_0}$, where\n    the last equality follows because the intersection includes its least\n    member $\\mathcal F_{t_0}$. If $\\tau\\equiv\\infty$, then every test event\n    $\\{\\tau\\le t\\}$ is empty and $\\mathcal F_\\tau=\\mathcal F$.\n(c) Suppose the filtration is right-continuous. Then $\\tau$ is a stopping time\n    if and only if $\\{\\tau<t\\}\\in\\mathcal F_t$ for every $t>0$. Indeed\n    $$\\{\\tau<t\\}=\\bigcup_{n\\ge1}\\{\\tau\\le t-\\tfrac1n\\}$$\n    (with the terms for $t-\\tfrac1n<0$ read as the empty set, since\n    $\\tau\\ge0$), which gives the forward implication; conversely\n    $$\\{\\tau\\le t\\}=\\bigcap_{n\\ge1}\\{\\tau<t+\\tfrac1n\\},$$\n    and $\\bigcap_n\\mathcal F_{t+1/n}=\\bigcap_{s>t}\\mathcal F_s=\\mathcal F_t$ by\n    right-continuity together with monotonicity of the filtration.\n(d) Under the same right-continuity assumption, for $A\\in\\mathcal F$ one has\n    $A\\in\\mathcal F_\\tau$ if and only if $A\\cap\\{\\tau<t\\}\\in\\mathcal F_t$ for\n    every $t>0$: the forward implication follows from\n    $A\\cap\\{\\tau<t\\}=\\bigcup_n(A\\cap\\{\\tau\\le t-\\tfrac1n\\})$ and the converse\n    from $A\\cap\\{\\tau\\le t\\}=\\bigcap_n(A\\cap\\{\\tau<t+\\tfrac1n\\})$ together with\n    $\\bigcap_n\\mathcal F_{t+1/n}=\\mathcal F_t$.\n\nBecause the two versions of each test are interchangeable exactly when the\nfiltration is right-continuous, the convention is recorded here once: the\nBrownian strong Markov theorem is stated for the usual augmentation, which is\nright-continuous, and the raw-filtration statements use the non-strict test\ndirectly. No choice principle is used by this definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-absolute-value-and-powers-of-a-martingale-are-submartingales",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $M$ is a martingale then $(|M_n|)$ is a submartingale. More generally, for real $p\\ge1$, if $E|M_n|^p<\\infty$ for every $n\\ge0$, then $(|M_n|^p)$ is a submartingale. We use $0^p=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-doob-lp-maximal-inequality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $N\\in\\mathbb N_0$, $p>1$, and $q=p/(p-1)$. If $X=(X_n)_{n\\ge0}$ is a nonnegative submartingale and $X_N\\in L^p$, then\n$$\\left\\|\\max_{0\\le k\\le N}X_k\\right\\|_p\\le q\\|X_N\\|_p.$$\nIn particular, for a martingale $M$ with $M_N\\in L^p$,\n$$\\left\\|\\max_{0\\le k\\le N}|M_k|\\right\\|_p\\le q\\|M_N\\|_p.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\pi_n$ be nested finite partitions of $[0,T]$ containing any fixed $s,t$ with mesh tending to zero. For each $\\pi_n$, the values of $|M|$ on its grid form a discrete-time nonnegative submartingale by [F1, F3]. The Doob bound gives $\\mathbb E\\max_{u\\in\\pi_n}|M_u|^2\\le4\\mathbb E|M_T|^2$. Càdlàg paths and the nested dense grids imply $\\sup_{u\\le T}|M_u|=\\sup_{u\\in\\cup_n\\pi_n}|M_u|$; [F5] then gives $\\mathbb E\\sup_{u\\le T}|M_u|^2<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a finite partition $\\pi_n=\\{r_0<\\cdots<r_m\\}$, round $\\tau$ up to the first grid point $\\tau_n\\ge\\tau$. This is a finite-valued stopping time because $\\{\\tau_n\\le r_j\\}=\\{\\tau\\le r_j\\}\\in\\mathcal F_{r_j}$. At adjacent grid points, $M_{r_k\\wedge\\tau_n}-M_{r_{k-1}\\wedge\\tau_n}=\\mathbf1_{\\{\\tau_n>r_{k-1}\\}}(M_{r_k}-M_{r_{k-1}})$; the indicator is $\\mathcal F_{r_{k-1}}$-measurable. Conditioning each increment on its left endpoint proves the stopped grid values have the martingale identity at grid times, in particular at $s,t$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Refine the partitions while keeping $s,t$ as grid points. Then $\\tau_n\\downarrow\\tau$, and pathwise right continuity gives $M_{s\\wedge\\tau_n}\\to M_{s\\wedge\\tau}$ and $M_{t\\wedge\\tau_n}\\to M_{t\\wedge\\tau}$. For $u=s$ or $u=t$, the events $\\{\\tau_n=r_j\\}$ with grid value $r_j<u$ lie in $\\mathcal F_{r_j}\\subseteq\\mathcal F_u$, and their complement $\\{\\tau_n\\ge u\\}$ is also in $\\mathcal F_u$; expressing $M_{u\\wedge\\tau_n}$ over these finitely many events proves $\\mathcal F_u$-measurability. The pointwise limits are then measurable there without completing the filtration. Both are dominated by $\\sup_{u\\le T}|M_u|$, integrable by step 1.1. For each $B\\in\\mathcal F_s$, apply [F4] to the event-integral martingale identity from step 1.2; it yields $\\mathbb E[\\mathbf1_B(M_{t\\wedge\\tau}-M_{s\\wedge\\tau})]=0$, hence the stopped process satisfies the all-pairs martingale identity. Also $|M_{t\\wedge\\tau}|\\le\\sup_{u\\le T}|M_u|$ gives square integrability.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero martingale remains zero after stopping, and the grid argument in steps 1.2–2.1 covers it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The constant zero martingale and the stopping endpoint τ=0 are included in steps 1.2–2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result has no one-valued parameter or single distinguished numerical value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For a constant martingale, every stopped increment is zero; the proof in steps 1.2–2.1 still applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The grid includes 0 and T, and boundedness at those endpoints is covered in steps 1.1–2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The rounded stopping times are explicit finite-valued grid maps; the inherited AC use is recorded in [A1] and step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-counting-process-intensity-and-compensator-contract": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition permits the zero count with A=0 and M=0 under the stated contract."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The intensity may be zero; the definition still gives A=0 and the model contract is explicit."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition has no single distinguished numerical value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A no-event process with zero compensator satisfies the displayed contract; the definition asserts no more."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition fixes N0=A0=0 and all objects on [0,T], including T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Choice is explicitly declared through conditional expectation; no process or version is selected by the definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition, not an equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-optional-and-predictable-brackets-for-counting-processes": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For zero paths the jump sum and both compensators are zero by the definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition boundary: A zero bracket candidate has zero initial value and a zero martingale difference when the model martingale is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No single numerical value is distinguished by the bracket definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition boundary: The jump-square convention gives zero when every jump vanishes; existence is not asserted unless verified later."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition boundary: The sums and compensators are defined on the closed finite horizon, with the initial value fixed at zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Choice is inherited through the martingale interface and no further selection is made in the definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition does not state an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition does not state an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-elementary-predictable-counting-process-integral": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero step integrand gives the zero finite sum at every t by the definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The time-zero convention H0=0 makes I0=0; the definition includes this boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition boundary: A partition with one interval is explicitly permitted and gives the single increment formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition boundary: The zero martingale or zero integrand produces the zero integral."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition boundary: The formula is defined for every t in [0,T], including 0 and T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The step representation is supplied as input; the definition selects no representation or version."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition does not assert an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition does not assert an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-predictable-step-processes-dense-in-compensator-l2": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-product-measure-on-sigma-finite-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. For $E \\in \\mathcal A \\otimes \\mathcal B$, define\n\n$$(\\mu \\times \\nu)(E) := \\int_X \\nu(E_x)\\,d\\mu = \\int_Y \\mu(E^y)\\,d\\nu.$$\n\nThe two displayed integrals are well-defined by\n[[prop-sigma-finite-section-measure-functions-are-measurable]] and equal by\n[[thm-iterated-section-measures-agree-on-product-measurable-sets]]. This is the\n**product measure** of $\\mu$ and $\\nu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1 \\le p < \\infty$. Then\nevery element of $L^p(\\mu)$ can be approximated in $L^p$ by simple functions\nwhose supports have finite measure.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1 \\le p < \\infty$. Then\nevery element of $L^p(\\mu)$ can be approximated in $L^p$ by simple functions\nwhose supports have finite measure.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $f(s,\\omega)=Y_s(\\omega)\\lambda_s(\\omega)$. By [F1], $f$ is product-measurable, so [F2] defines $\\mu$ and gives $\\mu([0,T]\\times\\Omega)=\\int f\\,d(ds\\times P)=\\mathbb E\\int_0^T f(s,\\omega)ds=\\mathbb E A_T<\\infty$. Countable additivity follows from the product measure; [F5] also gives it by monotone convergence on disjoint unions. Lebesgue measure gives $\\mu(\\{0\\}\\times B)=0$ for every $B\\in\\mathcal F_0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\mathcal G$ contain the empty set, whole space, time-zero generators, and interval rectangles from [F1]. Their finite intersections are empty or generators, so $\\mathcal G$ is a $\\pi$-system generating $\\mathcal P_T$. Let $\\mathcal D$ be the sets whose indicators lie in the $L^2(\\mu)$-closure of the span of generator indicators. The whole space is in $\\mathcal D$ because $\\mathbf1_{(0,T]\\times\\Omega}$ is an elementary step and the time-zero slice is null. Complements preserve $\\mathcal D$ by subtraction from $\\mathbf1$; disjoint countable unions preserve it because finite partial sums converge in $L^2(\\mu)$, with squared tail norm the measure of a decreasing tail tending to zero as $\\mu$ is finite. Thus $\\mathcal D$ is a $\\lambda$-system containing $\\mathcal G$, and [F3] gives $\\mathcal D=\\mathcal P_T$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], every $L^2(\\mu)$ class is an $L^2$ limit of finite simple functions on measurable sets. Each indicator in such a simple function belongs to the closure from step 2.1, so each simple function does as well; hence the span of bounded predictable step indicators is dense in $L^2(\\mu)$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If μ is zero then L²(μ) contains only the zero class, which is represented by the zero step process in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The time-zero slice is μ-null by step 1.1, and the closure argument includes it in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The density theorem has no singled-out value equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When μ is the zero measure the conclusion reduces to density of {0} in the zero L² space; steps 1.1–3.1 cover it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The time-zero boundary is proved null in step 1.1; the remaining horizon is generated by (s,t] rectangles in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The approximating sequence is the only choice-sensitive interface and is explicitly tied to [A1] and step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a density assertion, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a density assertion, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-l2-counting-process-integral": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition boundary: For H=0 the zero sequence gives the zero integral class whenever the limit exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition sets the integral at t=0 through the elementary zero initial value."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-valued parameter is singled out by the definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-energy class has the zero limit; the conditional definition does not claim a limit for other integrands without the theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition applies at each t∈[0,T], and its time-zero value is zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition boundary: The Axiom of Choice is inherited from completion and conditional expectation; approximation independence is deferred to the theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition does not state an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition does not state an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-continuous-predictable-bracket-uniqueness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-continuous-finite-variation-martingale-is-zero",
+          "source_section": "Statement",
+          "quote": "Let $D=(D_t)_{0\\le t\\le T}$ be a continuous martingale relative to a\nfiltration $(\\mathcal F_t)$, with $D_0=0$. Suppose each path has finite total\nvariation $V_T(D)$ and $\\mathbb E V_T(D)<\\infty$. Then $D$ is indistinguishably\nzero on $[0,T]$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-continuous-time-adapted-process-and-martingale",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a probability space\n$(\\Omega,\\mathcal F,P)$ with a continuous-time filtration\n$(\\mathcal F_t)_{t\\ge0}$ in the sense of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes in\nthis definition are real-valued and indexed by $[0,\\infty)$; the filtration is\nneither assumed complete nor right-continuous. The Axiom of Choice is declared\nbecause the conditional-expectation classes used in clause 3 are supplied by\nthe Radon--Nikodym interface of [[def-conditional-expectation-as-an-ae-class]],\nwhich assumes it; the countable-choice obligations inherited from that\ninterface are declared as dependencies of this item.\n\n1. **Adapted.** $X=(X_t)_{t\\ge0}$ is **adapted** to $(\\mathcal F_t)$ when $X_t$\n   is $\\mathcal F_t$-measurable for every $t\\ge0$. This is exactly the notion\n   of [[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n2. **Stopped process.** For a stopping time $\\tau$ for $(\\mathcal F_t)$\n   [[def-continuous-time-stopping-time]] the **stopped process** is\n   $$X^{\\tau}_t(\\omega):=X_{t\\wedge\\tau(\\omega)}(\\omega),\\qquad t\\ge0,$$\n   with the convention $t\\wedge\\infty:=t$, so no value $X_\\infty$ is ever\n   required and $X^\\tau_0=X_0$ identically. This formula defines a pathwise\n   family; adaptedness of $X$ alone does not assert measurability or\n   adaptedness of its stopped values. If in addition $\\tau\\le c$ for a\n   deterministic constant $c$, then $X^\\tau_t=X_{t\\wedge\\tau}$, and only the\n   values of $X$ on $[0,c]$ enter. Stopping at a stopping time is not the same\n   as replacing a process by a modification; it is a pathwise operation.\n\n3. **Martingale.** $M=(M_t)_{t\\ge0}$ is a **martingale** (an all-pairs\n   continuous-time martingale) relative to $(\\mathcal F_t)$ when it is adapted,\n   $E|M_t|<\\infty$ for every $t\\ge0$, and for all $0\\le s\\le t$\n   $$E[M_t\\mid\\mathcal F_s]=M_s\\qquad\\text{almost surely}.$$\n   The equality is an equality of the almost-everywhere classes of\n   [[def-conditional-expectation-as-an-ae-class]]; equivalently, every version\n   of the conditional expectation on the left equals $M_s$ off one null set.\n   At $s=t$ the identity reduces to the known-variable case. The word\n   \"continuous-time\" refers to the index set only and does not assert path\n   continuity.\n\n4. **Local martingale.** $X=(X_t)_{t\\ge0}$ is a **local martingale** relative\n   to $(\\mathcal F_t)$ when it is adapted, $E|X_0|<\\infty$, and there exist stopping times\n   $(\\tau_n)_{n\\ge0}$ with $\\tau_0\\le\\tau_1\\le\\cdots$ and\n   $\\tau_n\\uparrow\\infty$ almost surely such that for every $n\\ge0$ the stopped process\n   $$X^{\\tau_n}-X_0=(X_{t\\wedge\\tau_n}-X_0)_{t\\ge0}$$\n   is a martingale in the sense of clause 3. The sequence $(\\tau_n)$ is called\n   a **localizing sequence**. Equivalently, every $X^{\\tau_n}$ is a\n   martingale: adaptedness makes the integrable variable $X_0$ measurable with\n   respect to every $\\mathcal F_t$, so the constant process with value $X_0$\n   is a martingale and may be added to, or subtracted from, each stopped\n   process. The centering merely makes every localized process start at $0$;\n   apart from the required integrability of $X_0$, no claim is made that $X$\n   is integrable at a positive deterministic time, and no claim is made that\n   $X$ has continuous paths.\n\n5. **Path and integrability attributes.** A process has **continuous paths**\n   when $t\\mapsto X_t(\\omega)$ is continuous on $[0,\\infty)$ for every $\\omega$\n   in an event of probability one; the usual almost-sure path conventions of\n   [[def-law-modification-and-indistinguishability-of-processes]] apply. A\n   martingale $M$ is **square-integrable** when $EM_t^2<\\infty$ for every\n   $t\\ge0$, and **$L^2$-bounded** when $\\sup_{t\\ge0}EM_t^2<\\infty$. These are\n   properties of the single process under consideration, not of its versions:\n   a modification of a martingale need not be adapted, so every later statement\n   names the adapted versions it uses.\n\nThe following remarks specify what follows directly from this vocabulary.\n\n1. **A martingale is a local martingale.** If $M$ is a martingale, the constant\n   sequence $\\tau_n:=n$, $n\\ge0$, localizes it: the stopped process $M^{n}-M_0$ is again\n   a martingale by the martingale identity applied at the deterministic times\n   $s\\wedge n\\le t\\wedge n$. The converse fails; a local martingale need not be\n   a martingale, and no such implication is used in this development.\n2. **Localization after a separately justified stopping operation.** Suppose\n   $(\\tau_n)$ localizes $X$, $\\sigma$ is a stopping time, $X^\\sigma$ is\n   adapted, and each $(X^{\\tau_n}-X_0)^\\sigma$ is a martingale. Then\n   $(\\tau_n)$ localizes $X^\\sigma$. Indeed it still increases to infinity,\n   $(X^\\sigma)_0=X_0$, and the pathwise identity\n   $$(X^\\sigma)^{\\tau_n}-(X^\\sigma)_0=X^{\\sigma\\wedge\\tau_n}-X_0=(X^{\\tau_n}-X_0)^\\sigma$$\n   verifies exactly clause 4. The stopped-piece martingale assertion and\n   adaptedness are hypotheses here, not consequences of the unrestricted\n   all-pairs definition. They must be established in each application.\n   The sequence $(\\sigma\\wedge\\tau_n)$ is not a substitute for $(\\tau_n)$:\n   its almost-sure limit is $\\sigma$, which need not be infinity.\n\nNo path continuity, no right continuity of the filtration, and no completeness\nof the underlying probability space is imposed by this definition. Choice\nenters only through the conditional-expectation interface named above,\nwhose countable-choice obligations are declared as dependencies of this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-law-modification-and-indistinguishability-of-processes",
+          "source_section": "Definition",
+          "quote": "Two processes with the same index set and corresponding target spaces have the\nsame **process law** if all corresponding finite-dimensional laws agree; their\nsource probability spaces need not be the same. Suppose in addition that\n$X=(X_t)_{t\\in I}$ and $Y=(Y_t)_{t\\in I}$ are defined on one common\nprobability space $(\\Omega,\\mathcal F,\\mathbb P)$, take values in the same\nmeasurable space at each $t$, and $\\{X_t=Y_t\\}$ is measurable for each $t$.\nThen $Y$ is a **modification** (or version) of $X$ when\n$\\mathbb P(X_t=Y_t)=1$ for every fixed $t$. They are **indistinguishable**\nwhen the event\n$\\{\\omega:X_t(\\omega)=Y_t(\\omega)\\text{ for every }t\\in I\\}$ is measurable\nand has probability one. The latter has one exceptional null event; the former\nmay have a different null event at every time.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The difference $D-C=(X-C)-(X-D)$ is a martingale by [F3]. It is continuous, has finite variation, starts at zero, and $\\mathbb E\\operatorname{Var}(D-C)_T\\le\\mathbb E\\operatorname{Var}(D)_T+\\mathbb E\\operatorname{Var}(C)_T<\\infty$, so it satisfies [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $D-C$ is zero outside one probability-one event, which is indistinguishability by [F4]. Hence $C=D$ indistinguishably, proving uniqueness for both scalar and cross-bracket compensators in the stated continuous class.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If C and D are both zero then the difference is zero; the argument in steps 1.1–2.1 covers this case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero compensator is allowed and the difference-martingale lemma in steps 1.1–2.1 gives equality."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no unique numerical value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When the difference has zero variation it is constant at its zero initial value; steps 1.1–2.1 prove the general case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both compensators start at zero and are compared through the whole finite horizon in steps 1.1–2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The inherited conditional-expectation AC is listed in [A1] and used when forming the martingale difference in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts uniqueness, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts uniqueness, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-elementary-counting-integral-preserves-martingales": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-continuous-time-adapted-process-and-martingale",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a probability space\n$(\\Omega,\\mathcal F,P)$ with a continuous-time filtration\n$(\\mathcal F_t)_{t\\ge0}$ in the sense of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes in\nthis definition are real-valued and indexed by $[0,\\infty)$; the filtration is\nneither assumed complete nor right-continuous. The Axiom of Choice is declared\nbecause the conditional-expectation classes used in clause 3 are supplied by\nthe Radon--Nikodym interface of [[def-conditional-expectation-as-an-ae-class]],\nwhich assumes it; the countable-choice obligations inherited from that\ninterface are declared as dependencies of this item.\n\n1. **Adapted.** $X=(X_t)_{t\\ge0}$ is **adapted** to $(\\mathcal F_t)$ when $X_t$\n   is $\\mathcal F_t$-measurable for every $t\\ge0$. This is exactly the notion\n   of [[def-continuous-time-filtration-and-all-pairs-martingale]].\n\n2. **Stopped process.** For a stopping time $\\tau$ for $(\\mathcal F_t)$\n   [[def-continuous-time-stopping-time]] the **stopped process** is\n   $$X^{\\tau}_t(\\omega):=X_{t\\wedge\\tau(\\omega)}(\\omega),\\qquad t\\ge0,$$\n   with the convention $t\\wedge\\infty:=t$, so no value $X_\\infty$ is ever\n   required and $X^\\tau_0=X_0$ identically. This formula defines a pathwise\n   family; adaptedness of $X$ alone does not assert measurability or\n   adaptedness of its stopped values. If in addition $\\tau\\le c$ for a\n   deterministic constant $c$, then $X^\\tau_t=X_{t\\wedge\\tau}$, and only the\n   values of $X$ on $[0,c]$ enter. Stopping at a stopping time is not the same\n   as replacing a process by a modification; it is a pathwise operation.\n\n3. **Martingale.** $M=(M_t)_{t\\ge0}$ is a **martingale** (an all-pairs\n   continuous-time martingale) relative to $(\\mathcal F_t)$ when it is adapted,\n   $E|M_t|<\\infty$ for every $t\\ge0$, and for all $0\\le s\\le t$\n   $$E[M_t\\mid\\mathcal F_s]=M_s\\qquad\\text{almost surely}.$$\n   The equality is an equality of the almost-everywhere classes of\n   [[def-conditional-expectation-as-an-ae-class]]; equivalently, every version\n   of the conditional expectation on the left equals $M_s$ off one null set.\n   At $s=t$ the identity reduces to the known-variable case. The word\n   \"continuous-time\" refers to the index set only and does not assert path\n   continuity.\n\n4. **Local martingale.** $X=(X_t)_{t\\ge0}$ is a **local martingale** relative\n   to $(\\mathcal F_t)$ when it is adapted, $E|X_0|<\\infty$, and there exist stopping times\n   $(\\tau_n)_{n\\ge0}$ with $\\tau_0\\le\\tau_1\\le\\cdots$ and\n   $\\tau_n\\uparrow\\infty$ almost surely such that for every $n\\ge0$ the stopped process\n   $$X^{\\tau_n}-X_0=(X_{t\\wedge\\tau_n}-X_0)_{t\\ge0}$$\n   is a martingale in the sense of clause 3. The sequence $(\\tau_n)$ is called\n   a **localizing sequence**. Equivalently, every $X^{\\tau_n}$ is a\n   martingale: adaptedness makes the integrable variable $X_0$ measurable with\n   respect to every $\\mathcal F_t$, so the constant process with value $X_0$\n   is a martingale and may be added to, or subtracted from, each stopped\n   process. The centering merely makes every localized process start at $0$;\n   apart from the required integrability of $X_0$, no claim is made that $X$\n   is integrable at a positive deterministic time, and no claim is made that\n   $X$ has continuous paths.\n\n5. **Path and integrability attributes.** A process has **continuous paths**\n   when $t\\mapsto X_t(\\omega)$ is continuous on $[0,\\infty)$ for every $\\omega$\n   in an event of probability one; the usual almost-sure path conventions of\n   [[def-law-modification-and-indistinguishability-of-processes]] apply. A\n   martingale $M$ is **square-integrable** when $EM_t^2<\\infty$ for every\n   $t\\ge0$, and **$L^2$-bounded** when $\\sup_{t\\ge0}EM_t^2<\\infty$. These are\n   properties of the single process under consideration, not of its versions:\n   a modification of a martingale need not be adapted, so every later statement\n   names the adapted versions it uses.\n\nThe following remarks specify what follows directly from this vocabulary.\n\n1. **A martingale is a local martingale.** If $M$ is a martingale, the constant\n   sequence $\\tau_n:=n$, $n\\ge0$, localizes it: the stopped process $M^{n}-M_0$ is again\n   a martingale by the martingale identity applied at the deterministic times\n   $s\\wedge n\\le t\\wedge n$. The converse fails; a local martingale need not be\n   a martingale, and no such implication is used in this development.\n2. **Localization after a separately justified stopping operation.** Suppose\n   $(\\tau_n)$ localizes $X$, $\\sigma$ is a stopping time, $X^\\sigma$ is\n   adapted, and each $(X^{\\tau_n}-X_0)^\\sigma$ is a martingale. Then\n   $(\\tau_n)$ localizes $X^\\sigma$. Indeed it still increases to infinity,\n   $(X^\\sigma)_0=X_0$, and the pathwise identity\n   $$(X^\\sigma)^{\\tau_n}-(X^\\sigma)_0=X^{\\sigma\\wedge\\tau_n}-X_0=(X^{\\tau_n}-X_0)^\\sigma$$\n   verifies exactly clause 4. The stopped-piece martingale assertion and\n   adaptedness are hypotheses here, not consequences of the unrestricted\n   all-pairs definition. They must be established in each application.\n   The sequence $(\\sigma\\wedge\\tau_n)$ is not a substitute for $(\\tau_n)$:\n   its almost-sure limit is $\\sigma$, which need not be infinity.\n\nNo path continuity, no right continuity of the filtration, and no completeness\nof the underlying probability space is imposed by this definition. Choice\nenters only through the conditional-expectation interface named above,\nwhose countable-choice obligations are declared as dependencies of this item.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-elementary-predictable-counting-process-integral",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a square-integrable martingale on a finite horizon $[0,T]$ in the\nall-pairs convention of\n[[def-continuous-time-adapted-process-and-martingale]] (in particular, it may\nbe the compensated counting-process martingale of\n[[def-counting-process-intensity-and-compensator-contract]]). Let\n$$0=t_0<t_1<\\cdots<t_m=T$$\nbe a deterministic partition, and let each bounded random variable $H_j$ be\n$\\mathcal F_{t_j}$-measurable. The associated **bounded predictable step\nintegrand** is $H_0=0$ at time $0$ and $H_s=H_j$ on $(t_j,t_{j+1}]$. For this\nchosen step representation define, for $0\\le t\\le T$,\n$$I_t(H):=\\sum_{j=0}^{m-1}H_j\\bigl(M_{t\\wedge t_{j+1}}-M_{t\\wedge t_j}\\bigr).$$\nThis is a finite sum of square-integrable random variables. At this stage the\nrepresentation is part of the input; representation independence and the\nisometry are established in\n[[lem-elementary-counting-process-integral-isometry]].\nThe Axiom of Choice is inherited from the all-pairs martingale and\nconditional-expectation interface; the finite-sum definition makes no\nadditional choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each summand in [F2] is $\\mathcal F_t$-measurable at its current endpoint. It is square-integrable because $H_j$ is bounded and each martingale increment is in $L^2$. A finite sum is therefore adapted and square-integrable at every $t\\le T$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $0\\le s\\le t\\le T$ and $B\\in\\mathcal F_s$. Refine the original deterministic partition by inserting $s$ and $t$. After subtracting $I_s(H)$ from $I_t(H)$, each remaining piece has the form $H_j(M_v-M_u)$ on an interval $(u,v]$ with $u\\ge s$ and $t_j\\le u$. Thus $\\mathbf1_BH_j$ is bounded and $\\mathcal F_u$-measurable. Since $\\mathbb E[M_v-M_u\\mid\\mathcal F_u]=0$, [F3] gives $\\mathbb E[\\mathbf1_BH_j(M_v-M_u)]=0$. Summing the finitely many pieces yields $\\mathbb E[\\mathbf1_B(I_t(H)-I_s(H))]=0$. The event-integral characterization of conditional expectation proves $\\mathbb E[I_t(H)\\mid\\mathcal F_s]=I_s(H)$. Thus the elementary integral is a square-integrable martingale.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero integrand gives the zero martingale; the finite-sum proof in steps 1.1–2.1 includes it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At t=0 every finite-sum increment vanishes by the definition and step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-interval partition yields one martingale increment; steps 1.1–2.1 do not require multiple intervals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant martingale has zero increments, so the integral is zero; the argument in steps 1.1–2.1 covers it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The proof fixes arbitrary 0≤s≤t≤T in step 2.1, including both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The bounded predictable coefficients are part of the input; the conditional-expectation AC is recorded in [A1] and used in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an implication, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an implication, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-finite-variation-integration-by-parts-for-counting-process-martingales": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-optional-and-predictable-brackets-for-counting-processes",
+          "source_section": "Definition",
+          "quote": "Work on the finite horizon $[0,T]$ of\n[[def-counting-process-intensity-and-compensator-contract]]. For càdlàg\n(right-continuous with left limits) finite-variation processes $X,Y$ starting\nat zero, with $\\Delta X_s:=X_s-X_{s-}$ and $\\Delta Y_s:=Y_s-Y_{s-}$, define\ntheir **optional quadratic covariation** by\n$$[X,Y]_t:=\\sum_{0<s\\le t}\\Delta X_s\\,\\Delta Y_s,$$\nand write $[X]:=[X,X]$. The series is absolutely convergent because each path\nhas finite variation. This is the jump-sum convention for optional brackets\nused on this page.\n\nFor a square-integrable model martingale $M=N-A$ from\n[[def-counting-process-intensity-and-compensator-contract]], a **continuous\npredictable bracket** $\\langle M\\rangle$ is a continuous, predictable,\nincreasing process $B$ with $B_0=0$, $\\mathbb E[B_T]<\\infty$, and $M^2-B$ a\nmartingale, when such a process exists. For two square-integrable model\nmartingales $M=N-A$ and $M'=N'-A'$ from that contract, a **continuous\npredictable cross bracket** $\\langle M,M'\\rangle$ is a continuous, predictable\nfinite-variation process $C$ with $C_0=0$, $\\mathbb E\\operatorname{Var}(C)_T\n<\\infty$, and $[M,M']-C$ a martingale, when such a process exists. The\nuniqueness lemma below fixes the meaning of “the” bracket in this continuous\ncompensator class. No general bracket-existence theorem is asserted.\nThe Axiom of Choice is inherited through the model martingale's\nconditional-expectation interface; this definition makes no further choice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-bounded-variation-and-total-variation",
+          "source_section": "Definition",
+          "quote": "Let $a\\le b$ and let $f:[a,b]\\to\\mathbb R$ ([[def-interval]]). If $a<b$ and\n$P=(n,t)$ is a partition of $[a,b]$ ([[def-partition-and-refinement]]), the\n**variation of $f$ over $P$** is\n\n$$V(f,P):=\\sum_{i<n}|f(t_{i+1})-f(t_i)|.$$\n\nThe sum is finite ([[def-finite-sum]], [[lem-finite-sum-laws]]) and nonnegative\n([[def-abs-value]]). The set of all such sums is nonempty, since $[a,b]$ has the\npartition with point set $\\{a,b\\}$. The function $f$ has **bounded variation**\non $[a,b]$ when this set of sums is bounded above ([[def-bounded-set]]). In that\ncase its **total variation** is\n\n$$\\operatorname{Var}_{[a,b]}(f):=\\sup_P V(f,P).$$\n\nCompleteness of $\\mathbb R$ gives this supremum and [[lem-sup-unique]] makes it\nunique ([[def-complete-ordered-field]]). On a singleton interval, by convention,\n$\\operatorname{Var}_{[a,a]}(f):=0$; no partition from\n[[def-partition-and-refinement]], whose standing hypothesis is $a<b$, is invoked.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-finite",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $a_0, \\dots, a_{n-1}$ and $b_0, \\dots, b_{n-1}$ be\nreals, with finite sums as in [[def-finite-sum]]. Then\n\n$$\\Big(\\sum_{k<n} a_k b_k\\Big)^{2} \\;\\le\\; \\Big(\\sum_{k<n} a_k^{2}\\Big)\\Big(\\sum_{k<n} b_k^{2}\\Big),$$\n\nand, in root form ([[thm-of-square-roots]]),\n\n$$\\Big|\\sum_{k<n} a_k b_k\\Big| \\;\\le\\; \\sqrt{\\sum_{k<n} a_k^{2}} \\; \\sqrt{\\sum_{k<n} b_k^{2}}.$$\n\nEquality holds in the first display if and only if the two lists are\nproportional, in the symmetric sense that there is a pair\n$(\\lambda, \\mu) \\ne (0,0)$ of reals with $\\lambda a_k = \\mu b_k$ for every\n$k < n$.\n\n**No root is used in the proof of the squared form.** That form is an identity\nplus a sign argument in the ordered field, and the root form is only a\nrestatement of it through the monotonicity of squaring on the nonnegatives\n([[lem-of-square-monotone]]); the root enters nowhere but the last step, where\nthat restatement is made and [[thm-of-square-roots]] is what supplies the\nsquare-root symbol. This matters here, because it makes the squared\ninequality independent of the existence theorem for roots.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $J_t=\\sum_{0<s\\le t}\\Delta x_s$; [F2] makes this an absolutely convergent jump sum, and each omitted tail is uniformly bounded by its total absolute sum, so finite jump partial sums converge uniformly to a path $J$; right continuity passes by an $\\varepsilon/3$ estimate, and their left limits are Cauchy under the uniform tail bound, so completeness of $\\mathbb R$ gives left limits for $J$. Absolute convergence gives $\\Delta J_s=\\Delta x_s$. Therefore $x^c:=x-J$ is continuous and of finite variation. For every $m$, only finitely many jumps have size at least $1/m$ because their absolute sum is bounded by [F2], so the nonzero jumps are countable and their absolute series has a finite tail. Choose a finite retained jump sum $z$ with omitted jump tail $r:=J-z$ satisfying $\\operatorname{Var}(r)_T<\\varepsilon$, and set $y=x-r=x^c+z$. By [F3], the continuous part has squared-increment sum at most $\\omega_{x^c}(\\|\\pi_n\\|)\\operatorname{Var}(x^c)_T\\to0$, where $\\omega_{x^c}(\\delta):=\\sup_{|u-v|\\le\\delta}|x^c_u-x^c_v|$; sufficiently fine partitions separate the finitely many retained jump times, so $\\sum_j(\\Delta_j^n y(t))^2$ tends to the sum of their squared jumps, with cross terms between each retained jump and the continuous increment in its partition cell tending to zero by the same modulus.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every partition, expansion of squares and [F4] give $|\\sum_j(\\Delta_j^n x(t))^2-\\sum_j(\\Delta_j^n y(t))^2|\\le2\\operatorname{Var}(y)_T\\operatorname{Var}(r)_T+\\operatorname{Var}(r)_T^2\\le2\\operatorname{Var}(x)_T\\varepsilon+3\\varepsilon^2$, since $\\operatorname{Var}(y)_T\\le\\operatorname{Var}(x)_T+\\varepsilon$. Letting $\\varepsilon\\to0$ and using absolute convergence of the jump-square sum from [F1] proves $\\sum_j(\\Delta_j^n x(t))^2\\to\\sum_{s\\le t}(\\Delta x_s)^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every finite partition, telescoping differences of squares gives $x_t^2-x_0^2=2\\sum_jx_{t\\wedge t_j^n}\\Delta_j^n x(t)+\\sum_j(\\Delta_j^n x(t))^2$. Step 2.1 gives the limit of the second sum, and rearrangement gives the stated limit of the left-endpoint sums.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For a constant path all increments and jumps vanish, so both limits in the Statement are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero path and zero jump-square sum are immediate cases of the identity in steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The identity has no singled-out one-valued parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The continuous finite-variation case has zero jump-square limit by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The partition is clipped at every fixed t≤T; the endpoints are covered by steps 1.1–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "This is a deterministic path argument using the supplied partitions and no choice axiom; step 1.1 gives the finite-jump approximation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an identity, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-compensated-counting-process-brackets": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a finite horizon\n$T>0$, a probability space $(\\Omega,\\mathcal F,P)$ and a continuous-time\nfiltration $(\\mathcal F_t)_{0\\le t\\le T}$ in the all-pairs convention of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nThe **continuous intensity compensator contract** requires that this integral\nbe finite pathwise, that $A$ be continuous, adapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.\n\nThe displayed intensity density alone does **not** assert that $N-A$ is a\nmartingale, that such a process exists for a given $N$, or that the contract\nfollows from an empirical observation scheme. No general compensator-existence\ntheorem is included here. The Axiom of Choice is inherited from the\ncontinuous-time martingale and conditional-expectation interfaces; no further\nchoice is used to state the model contract.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-optional-and-predictable-brackets-for-counting-processes",
+          "source_section": "Definition",
+          "quote": "Work on the finite horizon $[0,T]$ of\n[[def-counting-process-intensity-and-compensator-contract]]. For càdlàg\n(right-continuous with left limits) finite-variation processes $X,Y$ starting\nat zero, with $\\Delta X_s:=X_s-X_{s-}$ and $\\Delta Y_s:=Y_s-Y_{s-}$, define\ntheir **optional quadratic covariation** by\n$$[X,Y]_t:=\\sum_{0<s\\le t}\\Delta X_s\\,\\Delta Y_s,$$\nand write $[X]:=[X,X]$. The series is absolutely convergent because each path\nhas finite variation. This is the jump-sum convention for optional brackets\nused on this page.\n\nFor a square-integrable model martingale $M=N-A$ from\n[[def-counting-process-intensity-and-compensator-contract]], a **continuous\npredictable bracket** $\\langle M\\rangle$ is a continuous, predictable,\nincreasing process $B$ with $B_0=0$, $\\mathbb E[B_T]<\\infty$, and $M^2-B$ a\nmartingale, when such a process exists. For two square-integrable model\nmartingales $M=N-A$ and $M'=N'-A'$ from that contract, a **continuous\npredictable cross bracket** $\\langle M,M'\\rangle$ is a continuous, predictable\nfinite-variation process $C$ with $C_0=0$, $\\mathbb E\\operatorname{Var}(C)_T\n<\\infty$, and $[M,M']-C$ a martingale, when such a process exists. The\nuniqueness lemma below fixes the meaning of “the” bracket in this continuous\ncompensator class. No general bracket-existence theorem is asserted.\nThe Axiom of Choice is inherited through the model martingale's\nconditional-expectation interface; this definition makes no further choice.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-elementary-counting-integral-preserves-martingales",
+          "source_section": "Statement",
+          "quote": "Let $M$ be any square-integrable martingale on $[0,T]$, and let $H$ be a\nbounded predictable step integrand on a deterministic partition. The elementary integral\n$(I_t(H))_{0\\le t\\le T}$ of\n[[def-elementary-predictable-counting-process-integral]] is a\nsquare-integrable martingale.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-variation-integration-by-parts-for-counting-process-martingales",
+          "source_section": "Statement",
+          "quote": "Let $x:[0,T]\\to\\mathbb R$ be càdlàg (right-continuous with left limits) and of finite total variation. For any\ndeterministic partitions $\\pi_n$ of $[0,T]$ with mesh tending to zero, and\neach fixed $t\\le T$, put $\\Delta_j^n x(t)=x_{t\\wedge t_{j+1}^n}-x_{t\\wedge t_j^n}$.\nThen\n$$\\sum_j(\\Delta_j^n x(t))^2\\longrightarrow [x]_t:=\\sum_{0<s\\le t}(\\Delta x_s)^2,$$\nand the left-endpoint sums satisfy\n$$\\sum_jx_{t\\wedge t_j^n}\\,\\Delta_j^n x(t)\\longrightarrow\\frac{x_t^2-x_0^2-[x]_t}{2}.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-bounded-stopping-preserves-cadlag-square-integrable-martingales",
+          "source_section": "Statement",
+          "quote": "Let $M=(M_t)_{0\\le t\\le T}$ be a square-integrable all-pairs martingale with\nright-continuous paths with left limits for every $\\omega$, and let $\\tau\\le T$\nbe a stopping time. Then the stopped process\n$M^\\tau_t:=M_{t\\wedge\\tau}$ is a square-integrable martingale on $[0,T]$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-doob-lp-maximal-inequality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $N\\in\\mathbb N_0$, $p>1$, and $q=p/(p-1)$. If $X=(X_n)_{n\\ge0}$ is a nonnegative submartingale and $X_N\\in L^p$, then\n$$\\left\\|\\max_{0\\le k\\le N}X_k\\right\\|_p\\le q\\|X_N\\|_p.$$\nIn particular, for a martingale $M$ with $M_N\\in L^p$,\n$$\\left\\|\\max_{0\\le k\\le N}|M_k|\\right\\|_p\\le q\\|M_N\\|_p.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $A$ is continuous, $\\Delta M_s=\\Delta N_s$; each jump of $N$ is zero or one, so the jump-square definition gives $[M]_t=\\sum_{0<s\\le t}(\\Delta N_s)^2=N_t$, using $N_0=0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $S=N+A$ and $\\tau_n=\\inf\\{t:S_t\\ge n\\}\\wedge T$ for integers $n\\ge1$. The adapted nondecreasing càdlàg process $S$ satisfies $\\{\\tau_n\\le t\\}=\\{S_t\\ge n\\}$ for $t<T$, so $\\tau_n$ is bounded stopping; at the first crossing, continuity of $A$ and unit jumps of $N$ give $S_{\\tau_n}\\le n+1$, hence $|M_{t\\wedge\\tau_n}|\\le n+1$. By [F5], $M^{\\tau_n}$ is a square-integrable martingale.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The variables $M_T$ and $A_T$ are integrable, so $N_T=M_T+A_T$ is integrable; since $M$ is a martingale starting at zero, $\\mathbb E N_T=\\mathbb E A_T<\\infty$. The pathwise total variation of $M$ is at most $N_T+A_T$, hence is integrable.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Choose nested deterministic partitions $\\pi_m=\\{0=t_0^m<\\cdots<t_{q_m}^m=T\\}$ with mesh tending to zero. The coefficients $H_j^{n,m}=M_{t_j^m\\wedge\\tau_n}$ are $\\mathcal F_{t_j^m}$-measurable and bounded by $n+1$, so [F3] makes the step integral against $M^{\\tau_n}$ a martingale. The partition identity [F4] gives $(M_{t\\wedge\\tau_n})^2-\\sum_j(M_{t\\wedge t_{j+1}^m\\wedge\\tau_n}-M_{t\\wedge t_j^m\\wedge\\tau_n})^2=2I_t(H^{n,m})$. The stopped process has the same unit jumps as $N^{\\tau_n}$, so the squared-increment sum converges to $[M^{\\tau_n}]_t=N_{t\\wedge\\tau_n}$ by [F4] and step 1.1. Also $\\operatorname{Var}(M^{\\tau_n})_T\\le N_{T\\wedge\\tau_n}+A_{T\\wedge\\tau_n}\\le n+1$, so the terms are bounded by a deterministic constant depending only on $n$; dominated convergence in the martingale event identities proves $(M_{t\\wedge\\tau_n})^2-N_{t\\wedge\\tau_n}$ is a martingale.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $S_T=N_T+A_T<\\infty$ a.s., $\\tau_n=T$ eventually on each path. On nested deterministic grids, [F6] gives $\\mathbb E\\max_{u\\in\\pi_m}|M_u|^2\\le4\\mathbb E|M_T|^2$; right continuity identifies the increasing grid limit with $\\sup_{u\\le T}|M_u|$, and [F8] gives $\\mathbb E\\sup_{u\\le T}|M_u|^2<\\infty$. Thus $R=\\sup_{u\\le T}|M_u|^2+N_T$ is integrable and dominates every stopped value $|(M_{t\\wedge\\tau_n})^2-N_{t\\wedge\\tau_n}|$. For $B\\in\\mathcal F_s$, [F7] and the event identities from step 2.2 let $n\\to\\infty$, proving $M^2-N$ is a martingale.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $N-A=M$ is a martingale, $M^2-A=(M^2-N)+M$ is a martingale by step 3.1 and linearity, so [F2] and [F1] make $A$ a scalar bracket candidate; uniqueness gives $\\langle M\\rangle=A$. Also $[M,M]=[M]=N$, so $[M,M]-A=N-A=M$ is a martingale, making $A$ a cross-bracket candidate too; uniqueness gives $\\langle M,M\\rangle=A$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The no-event case N=A=M=0 gives zero optional and predictable brackets; the identities in steps 1.1 and 6.1 include it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The initial values N0=A0=M0=0 are used in steps 1.1 and 6.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No single numerical value is singled out by the theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The unit-jump and continuous-compensator case with no jumps reduces to zero; steps 1.1 and 6.1 verify the identities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The closed horizon and stopped endpoint are included in steps 1.2–4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC inherited through conditional expectation and sampled Doob is explicit in [A1] and used in steps 2.1, 2.2, 3.1, and 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts identities and existence, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts identities and existence, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-cross-brackets-vanish-under-no-simultaneous-jumps": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a finite horizon\n$T>0$, a probability space $(\\Omega,\\mathcal F,P)$ and a continuous-time\nfiltration $(\\mathcal F_t)_{0\\le t\\le T}$ in the all-pairs convention of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nThe **continuous intensity compensator contract** requires that this integral\nbe finite pathwise, that $A$ be continuous, adapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.\n\nThe displayed intensity density alone does **not** assert that $N-A$ is a\nmartingale, that such a process exists for a given $N$, or that the contract\nfollows from an empirical observation scheme. No general compensator-existence\ntheorem is included here. The Axiom of Choice is inherited from the\ncontinuous-time martingale and conditional-expectation interfaces; no further\nchoice is used to state the model contract.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-optional-and-predictable-brackets-for-counting-processes",
+          "source_section": "Definition",
+          "quote": "Work on the finite horizon $[0,T]$ of\n[[def-counting-process-intensity-and-compensator-contract]]. For càdlàg\n(right-continuous with left limits) finite-variation processes $X,Y$ starting\nat zero, with $\\Delta X_s:=X_s-X_{s-}$ and $\\Delta Y_s:=Y_s-Y_{s-}$, define\ntheir **optional quadratic covariation** by\n$$[X,Y]_t:=\\sum_{0<s\\le t}\\Delta X_s\\,\\Delta Y_s,$$\nand write $[X]:=[X,X]$. The series is absolutely convergent because each path\nhas finite variation. This is the jump-sum convention for optional brackets\nused on this page.\n\nFor a square-integrable model martingale $M=N-A$ from\n[[def-counting-process-intensity-and-compensator-contract]], a **continuous\npredictable bracket** $\\langle M\\rangle$ is a continuous, predictable,\nincreasing process $B$ with $B_0=0$, $\\mathbb E[B_T]<\\infty$, and $M^2-B$ a\nmartingale, when such a process exists. For two square-integrable model\nmartingales $M=N-A$ and $M'=N'-A'$ from that contract, a **continuous\npredictable cross bracket** $\\langle M,M'\\rangle$ is a continuous, predictable\nfinite-variation process $C$ with $C_0=0$, $\\mathbb E\\operatorname{Var}(C)_T\n<\\infty$, and $[M,M']-C$ a martingale, when such a process exists. The\nuniqueness lemma below fixes the meaning of “the” bracket in this continuous\ncompensator class. No general bracket-existence theorem is asserted.\nThe Axiom of Choice is inherited through the model martingale's\nconditional-expectation interface; this definition makes no further choice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-continuous-predictable-bracket-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $X$ be an adapted process on $[0,T]$. Suppose $C,D$ are continuous,\npredictable finite-variation processes with $C_0=D_0=0$,\n$\\mathbb E[\\operatorname{Var}(C)_T+\\operatorname{Var}(D)_T]<\\infty$, and\nboth $X-C$ and $X-D$ are martingales. Then $C$ and $D$ are indistinguishable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $s$, continuity of each $A^i$ gives $\\Delta M^i_s=\\Delta N^i_s$. The no-simultaneous-jump hypothesis therefore gives $\\Delta M^i_s\\Delta M^j_s=0$ for every $s$ and every $i\\ne j$, outside one probability-zero event. By the optional cross-variation definition in [F2], $[M^i,M^j]_t=\\sum_{s\\le t}\\Delta M^i_s\\Delta M^j_s=0$ for all $t\\le T$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The zero process is continuous, predictable, has finite variation, and satisfies $[M^i,M^j]-0=0$, which is a martingale. Thus it is a continuous predictable cross-bracket candidate. Uniqueness [F3] implies $\\langle M^i,M^j\\rangle=0$. The proof uses the common filtration for the component martingale contracts and uses no independence.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For k=1 there are no distinct indices, so the cross-bracket assertion is vacuous; for k≥2 step 1.1 handles pairs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A process with no jumps gives zero optional cross variation, as shown in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem treats each pair i≠j; no distinguished single value is part of the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The one-process case k=1 is vacuous; the pairwise argument in steps 1.1–2.1 covers all nontrivial cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The identities hold simultaneously for all 0≤t≤T by the jump-sum argument in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited through the martingale/uniqueness interfaces and cited in [A1] and step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-elementary-counting-process-integral-isometry": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a finite horizon\n$T>0$, a probability space $(\\Omega,\\mathcal F,P)$ and a continuous-time\nfiltration $(\\mathcal F_t)_{0\\le t\\le T}$ in the all-pairs convention of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nThe **continuous intensity compensator contract** requires that this integral\nbe finite pathwise, that $A$ be continuous, adapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.\n\nThe displayed intensity density alone does **not** assert that $N-A$ is a\nmartingale, that such a process exists for a given $N$, or that the contract\nfollows from an empirical observation scheme. No general compensator-existence\ntheorem is included here. The Axiom of Choice is inherited from the\ncontinuous-time martingale and conditional-expectation interfaces; no further\nchoice is used to state the model contract.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "Under the finite-horizon contract of\n[[def-counting-process-intensity-and-compensator-contract]], the optional\nquadratic variation of $M=N-A$ is $[M]_t=N_t$, its continuous predictable\nbracket is $\\langle M\\rangle_t=A_t$, its self-cross predictable bracket is\n$\\langle M,M\\rangle_t=A_t$, and $M_t^2-A_t$ is a martingale on $[0,T]$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-elementary-predictable-counting-process-integral",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a square-integrable martingale on a finite horizon $[0,T]$ in the\nall-pairs convention of\n[[def-continuous-time-adapted-process-and-martingale]] (in particular, it may\nbe the compensated counting-process martingale of\n[[def-counting-process-intensity-and-compensator-contract]]). Let\n$$0=t_0<t_1<\\cdots<t_m=T$$\nbe a deterministic partition, and let each bounded random variable $H_j$ be\n$\\mathcal F_{t_j}$-measurable. The associated **bounded predictable step\nintegrand** is $H_0=0$ at time $0$ and $H_s=H_j$ on $(t_j,t_{j+1}]$. For this\nchosen step representation define, for $0\\le t\\le T$,\n$$I_t(H):=\\sum_{j=0}^{m-1}H_j\\bigl(M_{t\\wedge t_{j+1}}-M_{t\\wedge t_j}\\bigr).$$\nThis is a finite sum of square-integrable random variables. At this stage the\nrepresentation is part of the input; representation independence and the\nisometry are established in\n[[lem-elementary-counting-process-integral-isometry]].\nThe Axiom of Choice is inherited from the all-pairs martingale and\nconditional-expectation interface; the finite-sum definition makes no\nadditional choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-elementary-counting-integral-preserves-martingales",
+          "source_section": "Statement",
+          "quote": "Let $M$ be any square-integrable martingale on $[0,T]$, and let $H$ be a\nbounded predictable step integrand on a deterministic partition. The elementary integral\n$(I_t(H))_{0\\le t\\le T}$ of\n[[def-elementary-predictable-counting-process-integral]] is a\nsquare-integrable martingale.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On each $(t_j,t_{j+1}]$, write $\\Delta M_j=M_{t_{j+1}}-M_{t_j}$ and $\\Delta A_j=A_{t_{j+1}}-A_{t_j}$. The martingale $M^2-A$ gives $\\mathbb E[M_{t_{j+1}}^2-M_{t_j}^2\\mid\\mathcal F_{t_j}]=\\mathbb E[\\Delta A_j\\mid\\mathcal F_{t_j}]$; expand the left square as $(\\Delta M_j)^2+2M_{t_j}\\Delta M_j$ and use $\\mathbb E[\\Delta M_j\\mid\\mathcal F_{t_j}]=0$ to get $\\mathbb E[(\\Delta M_j)^2\\mid\\mathcal F_{t_j}]=\\mathbb E[\\Delta A_j\\mid\\mathcal F_{t_j}]$. By [F3], $\\mathbb E[H_j^2(\\Delta M_j)^2]=\\mathbb E[H_j^2\\Delta A_j]$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $i<j$, then $H_i\\Delta M_iH_j$ is $\\mathcal F_{t_j}$-measurable and its product with $\\Delta M_j$ is integrable by boundedness of $H$ and [F5]; [F3] and $\\mathbb E[\\Delta M_j\\mid\\mathcal F_{t_j}]=0$ give $\\mathbb E[H_i\\Delta M_iH_j\\Delta M_j]=0$. Expanding the finite-sum square [F2], all off-diagonal terms vanish, and step 1.1 gives $\\mathbb E[I_T(H)^2]=\\sum_j\\mathbb E[H_j^2(\\Delta M_j)^2]=\\sum_j\\mathbb E[H_j^2\\Delta A_j]=\\mathbb E\\int_0^TH_s^2\\,dA_s$; the martingale assertion is [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If two step representations agree in the compensator $L^2$ seminorm, their difference has seminorm zero; applying the isometry in step 2.1 to the refined difference representation makes the squared $L^2$ norm of their terminal-integral difference zero, so they define the same terminal class.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero step integrand gives zero on both sides of the isometry in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At the initial time I0=0 and A0=0; the definition and step 1.1 include this endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-interval partition the conditional variance calculation in step 1.1 yields the single-term isometry."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If all martingale increments vanish, both integral variance and compensator energy vanish by step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The terminal endpoint T is in the partition and isometry; fixed-time behavior is stated for every t in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The representation is supplied; the only choice interface is the inherited martingale/conditional-expectation assumption in [A1], used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives an identity and martingale property, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives an identity and martingale property, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-l2-counting-process-integral-isometry": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-elementary-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "Under the finite-horizon contract, for every bounded predictable step\nintegrand $H$, the elementary process $I_t(H)=\\int_0^tH_s\\,dM_s$ is a\nsquare-integrable martingale and\n$$\\mathbb E[I_T(H)^2]=\\mathbb E\\int_0^TH_s^2\\,dA_s.$$\nThe terminal $L^2$ class is independent of the chosen finite-step\nrepresentation of the same integrand in the compensator $L^2$ seminorm.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-predictable-step-processes-dense-in-compensator-l2",
+          "source_section": "Statement",
+          "quote": "For the contract of\n[[def-counting-process-intensity-and-compensator-contract]], let\n$\\mathcal P_T$ be the predictable sigma-algebra on $[0,T]\\times\\Omega$ and\ndefine the finite measure\n$$\\mu(E):=\\int_EY_s(\\omega)\\lambda_s(\\omega)\\,(ds\\times P)(d(s,\\omega)),\\qquad E\\in\\mathcal P_T.$$\nThen bounded predictable step processes are dense in $L^2(\\mu)$. The time-zero\nslice has $\\mu$-measure zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-riesz-fischer-completeness-of-l-p",
+          "source_section": "Statement",
+          "quote": "Assume countable choice (in particular, the Axiom of Choice suffices). Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1\\le p\\le\\infty$. Then\n$L^p(\\mu)$, with the norm of\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], is\ncomplete. Equivalently, the metric induced by that norm is a complete metric in\nthe sense of [[def-complete-metric-space]].\n\nMoreover, if a sequence in $L^p(\\mu)$ converges in norm, then some subsequence\nadmits measurable representatives converging almost everywhere in the sense of\n[[def-convergence-almost-everywhere-relative-to-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-conditional-lp-contraction",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $1\\le p\\le\\infty$, conditional expectation is a linear map from real $L^p(P)$ to real $L^p(P|_{\\mathcal G})$ satisfying $\\|E[X\\mid\\mathcal G]\\|_p\\le\\|X\\|_p$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-l2-counting-process-integral",
+          "source_section": "Definition",
+          "quote": "For the compensator contract on $[0,T]$, let $H$ be a predictable real\nprocess with\n$$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty.$$\nWhen the elementary integrals of a sequence of bounded predictable step\nprocesses converging to $H$ in this norm converge in $L^2(P)$, denote the\nresulting $L^2(P)$ class at time $t$ by\n$$\\int_0^t H_s\\,dM_s.$$\nThe definition is conditional on existence of the limit. The L²-extension\ntheorem below proves existence for every such predictable $H$, independence\nfrom the approximating sequence, the martingale property, and the isometry.\nThe Axiom of Choice is inherited through the conditional-expectation and\n$L^2$-completion interfaces used by that theorem.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], choose bounded predictable step processes $H_n$ with $\\mathbb E\\int_0^T|H_n-H|^2dA\\to0$. For any $m,n$, [F1] gives $\\mathbb E|I_T(H_n)-I_T(H_m)|^2=\\mathbb E\\int_0^T|H_n-H_m|^2dA$, so terminal integrals are Cauchy in $L^2(P)$; the same estimate on $[0,t]$ gives the Cauchy property at every $t\\le T$. [F3] gives a unique full-space limit and, since every $I_t(H_n)$ is $\\mathcal F_t$-measurable, also an $\\mathcal F_t$-measurable limit at each fixed $t$; uniqueness makes these the same $L^2$ class.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $K_n$ is another step sequence converging to $H$, then $\\mathbb E\\int_0^T|H_n-K_n|^2dA\\to0$. Applying [F1] to $H_n-K_n$ makes the terminal limits and each fixed-time limit equal in $L^2$, so the limits in [F5] are independent of approximation.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Norm continuity and [F1] give, for every $t\\le T$, $\\mathbb E|I_t(H)|^2=\\lim_n\\mathbb E|I_t(H_n)|^2=\\lim_n\\mathbb E\\int_0^tH_{n,s}^2dA_s=\\mathbb E\\int_0^tH_s^2dA_s$. This proves square integrability and the isometry.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $s\\le t$, [F1] gives $\\mathbb E[I_t(H_n)\\mid\\mathcal F_s]=I_s(H_n)$. By [F4], conditional expectations converge in $L^2$ to $\\mathbb E[I_t(H)\\mid\\mathcal F_s]$, while $I_s(H_n)\\to I_s(H)$ in $L^2$ by step 1.1; uniqueness of limits yields $\\mathbb E[I_t(H)\\mid\\mathcal F_s]=I_s(H)$. Hence the extension is a square-integrable martingale, with no claim for predictable integrands of infinite compensator energy.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For H=0 choose the zero step sequence; steps 1.1 and 2.2 give zero limit and zero energy."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At t=0 all elementary approximants and the limit are zero by steps 1.1 and 2.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no singled-out one-valued parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If H has zero compensator L² norm, the isometry makes the integral zero as an L² class; steps 1.1–3.1 show this."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The theorem is for each t≤T; the endpoints 0 and T are included in steps 1.1 and 2.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC-sensitive approximation and conditional expectation are explicitly declared in [A1] and used in steps 1.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence and identities, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts existence and identities, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-delayed-entry-predictable-risk-process": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a finite horizon\n$T>0$, a probability space $(\\Omega,\\mathcal F,P)$ and a continuous-time\nfiltration $(\\mathcal F_t)_{0\\le t\\le T}$ in the all-pairs convention of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nThe **continuous intensity compensator contract** requires that this integral\nbe finite pathwise, that $A$ be continuous, adapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.\n\nThe displayed intensity density alone does **not** assert that $N-A$ is a\nmartingale, that such a process exists for a given $N$, or that the contract\nfollows from an empirical observation scheme. No general compensator-existence\ntheorem is included here. The Axiom of Choice is inherited from the\ncontinuous-time martingale and conditional-expectation interfaces; no further\nchoice is used to state the model contract.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The process $N$ is adapted, càdlàg, has one unit jump, and starts at zero. On dyadic partitions, left-step processes with value $N_{t_j}$ on $(t_j,t_{j+1}]$ are predictable by [F1] and converge pointwise to $N_{t-}$, so $N_-$ is predictable. Since $t\\mapsto\\mathbf1_{\\{t>L\\}}$ is deterministic Borel, $Y_t=\\mathbf1_{\\{t>L\\}}(1-N_{t-})$ is predictable by [F1]; this also gives $Y_L=0$ and $Y_U=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Direct integration gives $A_t=\\lambda((t-L)^+\\wedge W)$, so $A$ is continuous and increasing, $A_0=0$, and $A_t\\le\\lambda T$. Left Riemann sums make $A_t$ $\\mathcal F_t$-measurable; its continuous adapted left-step approximations are predictable by [F1]. The exponential density gives $\\mathbb E A_T=\\lambda(\\int_0^{T-L}u\\lambda e^{-\\lambda u}du+(T-L)e^{-\\lambda(T-L)})=1-e^{-\\lambda(T-L)}<\\infty$, and for every $t>L$ the same calculation with $T$ replaced by $t$ gives $\\mathbb E A_t=1-e^{-\\lambda(t-L)}=\\mathbb P(U\\le t)=\\mathbb E N_t$. Thus the compensator integrability requirements in [F2] hold.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $s<L$ and $t\\le L$, then $N$ and $A$ are zero on $[s,t]$; if $s<L<t$, then $\\mathcal F_s$ is trivial and step 1.2 gives $\\mathbb E[M_t\\mid\\mathcal F_s]=0=M_s$. If $s\\ge L$ and $U\\le s$, the martingale increment is zero. On $\\{U>s\\}$ the event-free history gives $W>s-L$, and the residual survival ratio is $\\mathbb P(W-(s-L)>u\\mid W>s-L)=e^{-\\lambda u}$. With $h=t-s$, the conditional expected event increment is $1-e^{-\\lambda h}$, and the same residual density gives $\\lambda\\mathbb E[\\min(h,W-(s-L))\\mid W>s-L]=\\lambda(\\int_0^h u\\lambda e^{-\\lambda u}du+h e^{-\\lambda h})=1-e^{-\\lambda h}$. Thus every conditional increment has mean zero. Finally $|M_t|\\le1+\\lambda T$, so $M$ is square-integrable and satisfies [F2].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "On {W>T−L} there is no observed event by T; the formula in step 1.2 still gives the finite compensator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The entry endpoint has Y_L=0 and the event endpoint has Y_U=1, verified in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One subject and one event are the defining boundary model; the exponential conditional calculation is in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If no event is observed on the horizon, Y stays at risk after L and A is still the integrated hazard, as step 2.1 states."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The conventions at L and U are checked explicitly in step 1.1; the finite horizon T is checked in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited through conditional expectation and cited in [A1] at step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one model and does not assert an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one model and does not assert an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-tied-jumps-produce-nonzero-cross-bracket": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a finite horizon\n$T>0$, a probability space $(\\Omega,\\mathcal F,P)$ and a continuous-time\nfiltration $(\\mathcal F_t)_{0\\le t\\le T}$ in the all-pairs convention of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nThe **continuous intensity compensator contract** requires that this integral\nbe finite pathwise, that $A$ be continuous, adapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.\n\nThe displayed intensity density alone does **not** assert that $N-A$ is a\nmartingale, that such a process exists for a given $N$, or that the contract\nfollows from an empirical observation scheme. No general compensator-existence\ntheorem is included here. The Axiom of Choice is inherited from the\ncontinuous-time martingale and conditional-expectation interfaces; no further\nchoice is used to state the model contract.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "Under the finite-horizon contract of\n[[def-counting-process-intensity-and-compensator-contract]], the optional\nquadratic variation of $M=N-A$ is $[M]_t=N_t$, its continuous predictable\nbracket is $\\langle M\\rangle_t=A_t$, its self-cross predictable bracket is\n$\\langle M,M\\rangle_t=A_t$, and $M_t^2-A_t$ is a martingale on $[0,T]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-optional-and-predictable-brackets-for-counting-processes",
+          "source_section": "Definition",
+          "quote": "Work on the finite horizon $[0,T]$ of\n[[def-counting-process-intensity-and-compensator-contract]]. For càdlàg\n(right-continuous with left limits) finite-variation processes $X,Y$ starting\nat zero, with $\\Delta X_s:=X_s-X_{s-}$ and $\\Delta Y_s:=Y_s-Y_{s-}$, define\ntheir **optional quadratic covariation** by\n$$[X,Y]_t:=\\sum_{0<s\\le t}\\Delta X_s\\,\\Delta Y_s,$$\nand write $[X]:=[X,X]$. The series is absolutely convergent because each path\nhas finite variation. This is the jump-sum convention for optional brackets\nused on this page.\n\nFor a square-integrable model martingale $M=N-A$ from\n[[def-counting-process-intensity-and-compensator-contract]], a **continuous\npredictable bracket** $\\langle M\\rangle$ is a continuous, predictable,\nincreasing process $B$ with $B_0=0$, $\\mathbb E[B_T]<\\infty$, and $M^2-B$ a\nmartingale, when such a process exists. For two square-integrable model\nmartingales $M=N-A$ and $M'=N'-A'$ from that contract, a **continuous\npredictable cross bracket** $\\langle M,M'\\rangle$ is a continuous, predictable\nfinite-variation process $C$ with $C_0=0$, $\\mathbb E\\operatorname{Var}(C)_T\n<\\infty$, and $[M,M']-C$ a martingale, when such a process exists. The\nuniqueness lemma below fixes the meaning of “the” bracket in this continuous\ncompensator class. No general bracket-existence theorem is asserted.\nThe Axiom of Choice is inherited through the model martingale's\nconditional-expectation interface; this definition makes no further choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $N^i$ has one unit jump, and $Y^i_t=1-(N^i)_{t-}$ is predictable by dyadic left-step approximation using [F4]. Direct integration gives $A^i_t=\\lambda(t\\wedge W)$; left Riemann sums make it adapted, and continuous left-step approximations make it predictable by [F4]. The exponential density gives $\\mathbb E A^i_T=\\lambda(\\int_0^T u\\lambda e^{-\\lambda u}du+Te^{-\\lambda T})=1-e^{-\\lambda T}<\\infty$. If $W\\le s$, the martingale increment is zero; if $W>s$, the residual waiting time $R=W-s$ is exponential and, for $h=t-s$, $\\mathbb E[N_t-N_s\\mid\\mathcal F_s]=1-e^{-\\lambda h}=\\mathbb E[A_t-A_s\\mid\\mathcal F_s]$ on that event, since $\\lambda(\\int_0^h u\\lambda e^{-\\lambda u}du+he^{-\\lambda h})=1-e^{-\\lambda h}$. Hence each $M^i$ is an all-pairs martingale; $|M^i_t|\\le1+\\lambda T$ makes it square-integrable and verifies [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two component martingales are identical, so [F3] gives $[M^1,M^2]=[M,M]$. By [F2], $[M,M]=N$ and $\\langle M,M\\rangle=A$, hence the pair has the same cross-bracket values. For every $t>0$, $\\mathbb P(N_t=1)=1-e^{-\\lambda t}>0$ and $A_t=\\lambda(t\\wedge W)>0$ almost surely because $W>0$ almost surely; neither cross-bracket process is identically zero when simultaneous jumps are allowed.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For t=0 the event count and both brackets are zero; the nonzero claim is restricted to t>0 in the Example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example assumes λ>0, so the zero-intensity case is excluded rather than asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "There is one shared event time W, and step 1.1 verifies each component contract."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The identical components give the degenerate fully tied case; step 2.1 identifies both cross brackets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The formula is stated for every t>0 and the process identities hold on [0,T] in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC inherited through the model and uniqueness interfaces is stated in [A1] and cited in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a counterexample to a false unconditional claim, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a counterexample to a false unconditional claim, not an iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-one-event-exponential-compensator-and-isometry": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a finite horizon\n$T>0$, a probability space $(\\Omega,\\mathcal F,P)$ and a continuous-time\nfiltration $(\\mathcal F_t)_{0\\le t\\le T}$ in the all-pairs convention of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nThe **continuous intensity compensator contract** requires that this integral\nbe finite pathwise, that $A$ be continuous, adapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.\n\nThe displayed intensity density alone does **not** assert that $N-A$ is a\nmartingale, that such a process exists for a given $N$, or that the contract\nfollows from an empirical observation scheme. No general compensator-existence\ntheorem is included here. The Axiom of Choice is inherited from the\ncontinuous-time martingale and conditional-expectation interfaces; no further\nchoice is used to state the model contract.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-elementary-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "Under the finite-horizon contract, for every bounded predictable step\nintegrand $H$, the elementary process $I_t(H)=\\int_0^tH_s\\,dM_s$ is a\nsquare-integrable martingale and\n$$\\mathbb E[I_T(H)^2]=\\mathbb E\\int_0^TH_s^2\\,dA_s.$$\nThe terminal $L^2$ class is independent of the chosen finite-step\nrepresentation of the same integrand in the compensator $L^2$ seminorm.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "Under the finite-horizon contract of\n[[def-counting-process-intensity-and-compensator-contract]], the optional\nquadratic variation of $M=N-A$ is $[M]_t=N_t$, its continuous predictable\nbracket is $\\langle M\\rangle_t=A_t$, its self-cross predictable bracket is\n$\\langle M,M\\rangle_t=A_t$, and $M_t^2-A_t$ is a martingale on $[0,T]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The process $N$ has one unit jump and $Y_t=1-N_{t-}$ is predictable by dyadic left-step approximation. Therefore $A_t=\\lambda(t\\wedge W)$ is continuous, increasing, starts at zero, and is adapted by left Riemann sums; continuous adapted left-step approximations make it predictable by [F1]. The exponential density gives $\\mathbb E A_T=\\lambda(\\int_0^T u\\lambda e^{-\\lambda u}du+Te^{-\\lambda T})=1-e^{-\\lambda T}<\\infty$, verifying the compensator hypotheses in [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $0\\le s<t\\le T$. On $\\{W\\le s\\}$ both $N$ and $A$ have stopped changing, so $M_t-M_s=0$. On $\\{W>s\\}$, $\\mathbb P(W-s>u\\mid W>s)=\\mathbb P(W>s+u)/\\mathbb P(W>s)=e^{-\\lambda u}$; with $h=t-s$, the conditional event increment is $\\mathbf1_{\\{W>s\\}}(1-e^{-\\lambda h})$, and the residual exponential density gives the same compensator increment $\\mathbf1_{\\{W>s\\}}\\lambda(\\int_0^h u\\lambda e^{-\\lambda u}du+he^{-\\lambda h})=\\mathbf1_{\\{W>s\\}}(1-e^{-\\lambda h})$. Thus $\\mathbb E[M_t\\mid\\mathcal F_s]=M_s$ for every pair, and $|M_t|\\le1+\\lambda T$ makes $M$ square-integrable and verifies [F2].",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The process $H=1$ on $(0,T]$ and $H_0=0$ is a bounded predictable step integrand with elementary integral $M_T-M_0=M_T$. By [F3], $\\mathbb E M_T^2=\\mathbb E A_T=1-e^{-\\lambda T}$; by [F4], its optional and predictable brackets are $N$ and $A$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "On {W>T} no event is observed, but A_T=λT; step 1.1 computes its expectation and step 2.1 verifies the isometry."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "M0=A0=N0=0, so the zero endpoint is covered in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The model has exactly one possible event; steps 1.1–2.1 verify the contract and its event/no-event cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "On the no-event event W>T, the calculation in step 2.1 still gives matching conditional event and compensator increments."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The terminal time T is included in the event count and compensator; step 2.1 gives the terminal isometry."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited through the martingale interface and cited in [A1] at step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a model and does not assert an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a model and does not assert an iff."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

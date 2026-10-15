@@ -14,12 +14,8 @@ status: published
 origin: pipeline
 proof_strategy: direct
 verification:
-  verified:
-    model: gpt-6-sol
-    verdict: locally-reviewed
-    date: '2026-09-23'
-    scope: Owner-authorized bounded mathematical repair review; evidence research/ap-319-sol-repair/agent-03-receipts.jsonl (lem-normal-density-has-total-mass-one). No independent judge or whole-closure certification.
-    delegated_by: owner
+  precheck: pass
+  repair: research/statistical-models-experiments-62-published-normal-density-repair.json
 ---
 
 ## Statement
@@ -70,4 +66,4 @@ This is the point at which the completeness of Lebesgue measure is used essentia
 
 2.1 For integer $n\ge1$, F5 with $\varphi(x)=x/\sqrt2$ and continuous f(t)=exp(-t^2) gives $\int_{-n}^n e^{-x^2/2}\,dx=\sqrt2\int_{-n/\sqrt2}^{n/\sqrt2}e^{-t^2}\,dt$. The derivative is the constant 1/sqrt2, hence integrable. Both integrands are continuous on the compact intervals, so F6 gives bounded Riemann integrability. F7 identifies the left side with its Lebesgue integral, under the CC in step 1.1. [F5, F6, F7, step 1.1]
 
-3.1 The nonnegative functions $e^{-x^2/2}\mathbf1_{[-n,n]}$ increase to $e^{-x^2/2}$. By F8, its Lebesgue integral is the limit of the compact integrals in step 2.1. F9 identifies the right-hand improper limit as $\sqrt2\sqrt\pi=\sqrt{2\pi}$; the equality follows because both sides are positive with square $2\pi$, by square-root uniqueness. Applying F10 with the positive scalar $1/\sqrt{2\pi}$ gives $\int\phi\,d\lambda_1=1$. [F8, F9, F10, step 2.1] ∎
+3.1 Put $g_n(x)=e^{-x^2/2}\mathbf1_{[-n,n]}(x)$. Each $g_n$ is Borel measurable: for $a<0$, $\{x:g_n(x)>a\}=\mathbb R$, while for $a\ge0$ it is $[-n,n]\cap\{x:e^{-x^2/2}>a\}$, a Borel set because the exponential expression is continuous by step 1.1. Thus the nonnegative measurable functions $g_n$ increase pointwise to $e^{-x^2/2}$. By F8, its Lebesgue integral is the limit of the compact integrals in step 2.1. F9 identifies the right-hand improper limit as $\sqrt2\sqrt\pi=\sqrt{2\pi}$; the equality follows because both sides are positive with square $2\pi$, by square-root uniqueness. Applying F10 with the positive scalar $1/\sqrt{2\pi}$ gives $\int\phi\,d\lambda_1=1$. [F8, F9, F10, step 1.1, step 2.1] ∎

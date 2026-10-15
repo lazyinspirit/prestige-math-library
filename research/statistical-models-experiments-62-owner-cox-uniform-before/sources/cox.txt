@@ -1,0 +1,632 @@
+
+PAGE 1
+STAT331
+Example of Martingale CLT with Cox’s Model
+In this unit we illustrate the Martingale Central Limit Theorem by applying
+it to the partial likelihood score function from Cox’s model. For simplicity
+of presentation we assume that we have a scalar covariate Z; however, the
+same methods apply for vector Z.
+Suppose that Z denotes a scalar covariate and assume that the hazard func-
+tion for someone with covariate value Z is
+h(t | Z) = λ0(t)eβZ .
+The observations consist of n triplets (Ui, δi, Zi), for i = 1, 2, . . . , n, arising
+from i.i.d. (Ti, Ci, Zi). As usual, we assume that censoring is noninformative
+(Ti ⊥Ci | Zi).
+Let
+Un = n−1
+2 ∂lnL1(β)
+∂β
+,
+where L1 is Cox’s partial likelihood. Recall that if L1 were a ’real’ likelihood
+function based on n i.i.d. observations, then under some regularity conditions
+we would have that
+n−1
+2 ∂lnL1(β)
+∂β
+= √n
+(1
+n∂lnL1/∂β
+)
+L
+−→N(0, v) ,
+since the bracketed term is an average of i.i.d. zero-mean random variables
+(say, with some variance v). This is why we ’standardize’ ∂lnL1(β)/∂β by
+n−1/2.
+1
+
+
+PAGE 2
+Returning to Cox’s partial likelihood, we indicated in Unit 12 that we can
+express Un as
+Un = ΣUn(t) |t=∞,
+where
+ΣUn(t) =
+n
+∑
+i=1
+∫t
+0
+(
+Zi −
+∑n
+l=1 ZleβZlYl(s)
+∑n
+l=1 eβZlYl(s)
+)
+dMi(s),
+and where Ni(t) = 1[Ui ≤t, δi = 1] , Yi(t) = 1(Ui ≥t) , Mi(t) = Ni(t)−Ai(t),
+and
+Ai(t) =
+∫t
+0
+λ0(s)eβZlYi(s)ds.
+Letting
+Hi(s)
+def
+= n−1
+2
+(
+Zi −
+∑ZleβZlYl(s)
+∑eβZlYl(s)
+)
+,
+we can thus write
+ΣUn(t) = n
+1
+2
+n
+∑
+i=1
+∫t
+0
+Hi(s)dMi(s).
+Setting this equal to zero is the same as setting
+n
+∑
+i=1
+∫t
+0
+Hi(s)dMi(s)
+to zero.
+Note that Ai(·) is continuous because Ti is continuous, so λ0 is continu-
+ous.
+To apply the martingale CLT, we need Hi(·) to be predictable and
+locally bounded. It is clear that Hi(·) is predictable (it is left continuous
+and adapted). One way to ensure that it is locally bounded is to assume
+that Z is bounded (Exercise 8 of Unit 12). Also, because the survival times
+T1, T2, . . . , Tn for the n subjects are assumed to be independent and contin-
+uously distributed, they cannot jump at the same time, and so the Mi(·)
+are orthogonal. Thus, the setting of the martingale central limit theorem,
+(13.3)-(13.5), has been established.
+2
+
+
+PAGE 3
+We now evaluate conditions (a) and (b) of the Martingale CLT.
+(a) Does < ΣUn, ΣUn > (t)
+P→α(t) (some deterministic function) as
+n →∞?
+Because Ai(·) is continuous and Mi and Mj are orthogonal for i ̸= j,
+< ΣUn, ΣUn > (t) =
+n
+∑
+i=1
+n
+∑
+j=1
+∫t
+0
+Hi(s)Hj(s)d < Mi, Mj > (s)
+=
+n
+∑
+i=1
+∫t
+0
+H2
+i (s)dAi(s)
+=
+n
+∑
+i=1
+1
+n
+∫t
+0
+(Zi −Qn(s))2 λ0(s) eβZiYi(s)ds
+=
+∫t
+0
+λ0(s)
+(
+1
+n
+n
+∑
+i=1
+(Zi −Qn(s))2 eβZiYi(s)
+)
+ds ,
+where
+Qn(s) =
+1
+n
+∑n
+l=1 ZleβZlYl(s)
+1
+n
+∑n
+l=1 eβZlYl(s)
+.
+Consider the term in large brackets for ﬁxed s. This has the same probability
+limit as
+1
+n
+n
+∑
+i=1
+{
+(Zi −µ(s))2 eβZiYi(s)
+}
+,
+(14.1)
+where
+µ(s) = E
+(
+ZleβZlYl(s)
+)
+E (eβZlYl(s)) .
+To see this, note that their diﬀerence equals
+1
+n
+n
+∑
+i=1
+(Zi −Qn(s))2 eβZiYi(s)
+−
+1
+n
+n
+∑
+i=1
+(Zi −µ(s))2 eβZiYi(s)
+= 1
+n
+n
+∑
+i=1
+Yi(s)eβZi (
+Q2
+n(s) −µ2(s) + 2Zi(µ(s) −Qn(s))
+)
+3
+
+
+PAGE 4
+= (Q2
+n(s)−µ2(s))1
+n
+n
+∑
+i=1
+Yi(s)eβZi −2 (Qn(s)−µ(s))1
+n
+n
+∑
+i=1
+Yi(s)eβZiZi .
+(14.2)
+By the Law of Large Numbers,
+1
+n
+n
+∑
+i=1
+Yi(s)eβZi
+P→E(Yi(s)eβZi)
+and
+1
+n
+n
+∑
+i=1
+Yi(s)eβZiZi
+P→E(Yi(s)eβZiZi).
+Since Qn(s) converges in probability to µ(s) (Law of Large Numbers and
+Slutzky), Q2
+n(s)−µ2(s) converges in probability to zero (Continuous Mapping
+Theorem), and hence (14.2) converges to zero (repeatedly apply Slutzky’s
+lemma).
+Now let’s consider (14.1) for any arbitrary s. Since it is an average of i.i.d.
+random variables, it converges in probability to
+m(s)
+def
+= E
+(
+(Zi −µ(s))2 eβZiYi(s)
+)
+.
+It follows from this that
+< ΣUn, ΣUn > (t) =
+∫t
+0
+λ0(s)
+(
+1
+n
+n
+∑
+i=1
+(Zi −Qn(s))2 eβZiYi(s)
+)
+ds
+P→
+∫t
+0
+λ0(s)m(s)ds.
+(14.3)
+That is, if the limit of the integral is the integral of the limit (we will show
+this more rigorously in Unit 15). Thus, in the notation of the Martingale
+CLT,
+α(t) =
+∫t
+0
+λ0(s)m(s)ds.
+4
+
+
+PAGE 5
+Now consider condition (b) of the Martingale Central Limit Theorem:
+Does < ΣUn,ϵ, ΣUn,ϵ > (t)
+P→0 for all ϵ > 0 ?
+We have
+< ΣUn,ϵ , ΣUn,ϵ > (t) =
+n
+∑
+i=1
+∫t
+0
+H2
+i (s) · 1[| Hi(s) |≥ϵ]dAi(s) =
+=
+∫t
+0
+λ0(s){1
+n
+n
+∑
+i=1
+(
+Zi −
+1
+n
+∑n
+j=1 Zj(s)eβZjYj(s)
+1
+n
+∑n
+j=1 eβZjYj(s)
+)2
+·1
+[
+| Zi −
+1
+n
+∑n
+j=1 ZjeβZjYj(s)
+1
+n
+∑n
+j=1 eβZjYj(s)
+|≥√nϵ
+]
+eβZiYi(s)}ds.
+Note that the limit, in probability, of
+1
+[
+| Zi −
+1
+n
+∑n
+j=1 ZjeβZjYj(s)
+1
+n
+∑n
+j=1 eβZjYj(s)
+|
+≥√n ϵ
+]
+is zero because the term in absolute value is bounded (still assume Z is
+bounded) whereas √nϵ →∞(Exercise 1). It follows that the entire inte-
+grand in the above integral converges to zero in probability, and hence that
+< ΣUn,ϵ, ΣUn,ϵ > (t)
+P→0 for every t and ϵ as n →∞(implicit in this state-
+ment is that the limit of the integral equals the integral of the limit. This
+requires some assumptions that we will return to in Unit 15).
+Thus, the conditions of Martingale CLT hold, so that
+ΣUn(·)
+w→Q(·),
+as n →∞, where Q(·) is a zero-mean Gaussian process with independent
+increments and var (Q(t)) = α(t). By taking t = ∞, it follows that
+Un = ΣUn(∞)
+L→N(0, σ2)
+as n →∞,
+where σ2 = α(∞) =
+∫∞
+0 λ0(s)m(s)ds.
+Note: not clear why we can evaluate these processes at inﬁnity. Usually, one
+assumes that the support of U does not extend beyond some time τ, so that
+the process evaluated at time τ is same as at inﬁnity.
+5
+
+
+PAGE 6
+The expression (14.3) for α(t) cannot be simpliﬁed much more without being
+more speciﬁc about Z and the censoring distribution. For example, consider
+the 2-sample problem, where
+Zi =
+{ 0
+for group 0
+1
+for group 1
+and suppose that P(Zi = 0) = 1
+2, and that the distribution of Ci does not
+depend on (Ti, Zi), and has c.d.f. G(·). Then it is not diﬃcult to show that
+under H0 : β = 0,
+E
+(
+(ZleβZlYl(s)
+)
+= 1
+2(1 −F0(s))(1 −G(s))
+and
+E
+(
+eβZlYl(s)
+)
+= (1 −F0(s))(1 −G(s)),
+where
+F0(t) = 1 −e−
+∫t
+0 λ0(s)ds.
+Thus, µ(s) = 1/2. It can also be easily shown that, under H0,
+m(s) = E
+(
+(Zi −1
+2)2Yi(s)
+)
+=
+1
+4(1 −F0(s))(1 −G(s)).
+Thus
+α(t) =
+1
+4
+∫t
+0 λ0(s)(1 −F0(s))(1 −G(s))ds
+=
+1
+4
+∫t
+0 f0(s)(1 −G(s))ds,
+where f0(s) = λ0(s)(1 −F0(s)).
+When t = ∞,
+σ2 = α(∞) = 1
+4
+∫∞
+0
+f0(s)(1 −G(s))ds = p
+4,
+where p = Pr(δi = 1).
+6
+
+
+PAGE 7
+Hence we have shown that under H0 : β = 0,
+Un = n−1/2∂lnL1(β)/∂β
+converges in distribution to a normal distribution with mean zero and vari-
+ance σ2. Therefore, the partial likelihood score test of H0, obtained by evalu-
+ating this at β = 0 and standardizing it by σ, is asymptotically N(0, 1) under
+H0. We later use very similar techniques to ﬁnd the non-null distribution of
+Cox’s partial likelihood score test when β ̸= 0.
+Note: this result shows that logrank test is asymptotically N(0,1) under the
+null: recall that it can be viewed as arising from a Cox proportional hazards
+model as a score test!
+7
+
+
+PAGE 8
+Brief Review of Some Key Martingale Theory Results
+• X(·) is a martingale if it is adapted to Ft and:
+
+
+
+· X(·) is right continuous with left-hand limits
+· E|X(t)| < ∞
+∀t
+· E[X(t + s)|Ft]
+a.s.
+= X(t)
+∀s ≥0, t ≥0.
+• X(·) is a sub-martingale if the ’=’ is replaced by ’≥’.
+• If X(·) is a martingale, then E(X(t)) is constant in t; without loss of
+generality we can take E(X(t)) = 0.
+• N(·) is a counting process if
+
+
+
+· N(0) = 0,
+N(t) < ∞
+· N(·) is right-continuous
+· N(·) is a step function with jumps of size +1.
+• H(·) is a predictable process if its value at t determined by Ft−(e.g.,
+left continuous and adapted).
+• Doob-Meyer decomposition: X(·) = non-negative sub-martingale ⇒∃
+right-continuous, ↗, predictable process A(·) s.t. E(A(t)) < ∞∀t, and
+M(·) = X(·) −A(·) is a martingale. A(·) is called the compensator for
+X(·). If A(0)
+a.s.
+= 0, A(·) is almost surely unique.
+• Any counting process N(·) such that E(N(t)) < ∞is a sub-martingale,
+⇒∃A(·) such that N(·) −A(·)
+is a martingale.
+• If M(·) is any martingale and EM 2(t) < ∞, M 2(·) is a sub-martingale
+⇒∃! predictable process < M, M > (·) such that M 2(·)−< M, M >
+(·) is a martingale. The process < M, M > (·) is called the predictable
+quadratic variation.
+Note: If E(M(t)) = 0, var (M(t)) = E(M 2(t)) = E(< M, M > (t)).
+• If the zero mean martingale M = N−A satisﬁes E(M 2(t)) < ∞and A(·)
+is continuous, then < M, M > (·)
+as= A(·). Thus, V ar(M(t)) = E(A(t)).
+8
+
+
+PAGE 9
+Next suppose that M1(·), M2(·), · · · are zero-mean martingales deﬁned on the
+same ﬁltration. Then
+• a M1(·) + bM2(·) is a martingale (for any constants a, b).
+• If E(M 2
+j (t)) < ∞for j = 1, 2, ∃a right-continuous predictable process
+< M1, M2 > (·) such that < M1, M2 > (0) = 0, E |< M1, M2 > (t)| < ∞,
+and M1(·) · M2(·)−< M1, M2 > (·) is a martingale.
+• If < M1, M2 >
+as= 0,
+M1(·) and M2(·) are called orthogonal.
+• If Mj = Nj −Aj, where Nj is a counting process and Aj is its contin-
+uous compensator, then if Ni and Nj cannot jump at the same time,
+< Mi, Mj > (·)
+as= 0.
+Next suppose that N(·) is a bounded counting process, that A(·) is the com-
+pensator for N(·), and E(N −A)2(t) < ∞for every t. Moreover, H(·) is a
+bounded, predictable process. Deﬁne Q(·) by
+Q(t) =
+∫t
+0
+H(s)dM(s)
+where M(·) = N(·) −A(·).
+Then
+• Q(·) is a zero-mean martingale.
+• V ar(Q(t)) = E(Q2(t)).
+• Q2(·) is a sub-martingale, and thus ∃predictable < Q, Q > (·) such that
+Q2(·)−< Q, Q > (·) is a martingale. Hence, var (Q(t)) = E(< Q, Q >
+(t)).
+• If A(·) is continuous, < Q, Q > (t)
+a.s.
+=
+∫t
+0 H2(s)dA(s), and thus V ar(Q(t)) =
+E(
+∫t
+0 H2(s)dA(s)).
+• If M1, M2 are 2 martingales deﬁned similarly to M(·), H1 and H2 are
+bounded predictable processes, and Q1(·) and Q2(·) are deﬁned in the
+same way as Q(·), the predictable quadratic covariance process < Q1, Q2 >
+satisﬁes < Q1, Q2 > (t) =
+∫t
+0 H1(s) H2(·)d < M1, M2 > (s).
+9
+
+
+PAGE 10
+Martingale CLT:
+For i=1,2,...,n, let
+Nin(·) = counting processes that can’t jump at the same time
+Ain(·) =
+continuous compensators
+Hin(·) =
+locally bounded predictable processes
+Deﬁne
+Min(·) = Nin(·) −Ain(·)
+Uin(t) =
+∫t
+0 Hin(s)dMin(s)
+H∗
+in(s) = Hin(s)1[|Hin(s)| ≥ϵ]
+Uin,ϵ(t) =
+∫t
+0 H∗
+in(s)dMin(s)
+ΣUn(·) = ∑
+i Uin(·), and
+ΣUin,ϵ(·) = ∑
+i Uin,ϵ(·).
+Suppose that
+(a) < ΣUn, ΣUn > (t)
+P→α(t) for all t, for some function α(·).
+(b) < ΣUn,ϵ, ΣUn,ϵ >(t)
+P→0 for all t and all ϵ > 0.
+Then
+ΣUn(·)
+L→U(·),
+where U(·) is a zero-mean Gaussian process with independent increments and
+variance function V ar(U(t)) = α(t).
+Note: By the deﬁnitions of Nin(·), Ain(·), and Hin(·):
+< ΣUn, ΣUn > (t) =
+n
+∑
+i=1
+∫t
+0
+H2
+in(s)dAin(s)
+< ΣUn,ϵ, ΣUn,ϵ > (t) =
+n
+∑
+i=1
+∫t
+0
+H∗2
+in (s)dAin(s),
+where H∗
+in(s) = Hin(s) · 1[|Hin(s)| ≥ϵ].
+Intuition: While the proof of the Martingale CLT is rather detailed, the
+result is not surprising. One forms a sum, Un(·) = ∑Uin(·), of n orthogonal
+10
+
+
+PAGE 11
+martingales, where each has zero mean, and where the variance of the sum
+converges in probability to some constant function α(·). In the classical CLT
+we are used to seeing a sum of i.i.d. random variables multiplied by n−1/2.
+Thus, the variance of the standardized sum is (and converges to) 1
+nnσ2 = σ2,
+where σ2 is the variance of each term in the sum. In the way we have set up
+the Martingale CLT, the multiplier n−1/2 is buried in the integrands, Hin(·)
+of the martingales Qin, so the analogy is really the same as in the classical
+CLT. If we consider the asymptotic distribution of Un(t) for some ﬁxed t, it
+is not surprising that the result is a normal distribution with mean 0. From
+this one would expect the ﬁnite-dimensional distributions of Un(·) to converge
+to zero mean multivariate normal distributions. Thus, if tightness holds, we
+would expect Un(·) to converge to a zero mean Gaussian process. The inde-
+pendent increments of this limiting process are assured from the uncorrelated
+increment property of the individual martingales Uin(·).
+11
+
+
+PAGE 12
+Exercises
+1. Prove that (see page 5)
+Qn(s)
+P→0
+as
+n →∞,
+where
+Qn(s) = 1
+{(
+Zi −
+1
+n
+∑n
+j=1 ZjeβZjYj(s)
+1
+n
+∑n
+j=1 eβZjYj(s)
+)
+≥√nϵ
+}
+.
+2. Prove the expressions for µ, m and σ2 on page 6. Do not take any of
+the expressions on page 6 for granted.
+12

@@ -1,0 +1,1255 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62-batch-2",
+  "scope": [
+    "def-fixed-design-linear-regression-model",
+    "lem-linear-contrast-statistics-are-borel-measurable",
+    "def-least-squares-solution-set",
+    "thm-least-squares-fitted-vector-and-solution-set",
+    "def-linear-estimability-in-fixed-design",
+    "thm-linear-estimability-iff-row-space",
+    "thm-ols-unbiasedness-and-covariance-full-rank",
+    "thm-gauss-markov-for-fixed-design-regression",
+    "ex-collinear-fixed-design-estimability",
+    "cex-heteroskedasticity-invalidates-ols-blue",
+    "ex-high-leverage-is-a-design-feature"
+  ],
+  "contracts": {
+    "def-fixed-design-linear-regression-model": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: n and p are explicitly positive, so empty coordinate spaces are outside the model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: X=0 and zero response means satisfy the written first-moment contract when the law exists."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the boundary n=p=1 is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: no rank or covariance condition is imposed; X=0 is allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no interval or ordered endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts no equivalence."
+        }
+      ]
+    },
+    "lem-linear-contrast-statistics-are-borel-measurable": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $m,n\\ge1$. A map $L:\\mathbb R^m\\to\\mathbb R^n$ is **linear** when\n\n$$L(\\alpha u+\\beta v)=\\alpha L(u)+\\beta L(v)$$\n\nfor all $u,v\\in\\mathbb R^m$ and all $\\alpha,\\beta\\in\\mathbb R$. Both spaces carry their Euclidean vector-space operations and Euclidean norms from [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-metric-open-set-algebra",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open and closed sets\nas in [[def-metric-topology]] and balls as in [[def-metric-ball]]. Then:\n\n1. **Balls are open.** $B(x,r)$ is open, for every $x \\in X$ and every $r > 0$.\n2. **Arbitrary unions.** If $\\mathcal{U}$ is any collection of open subsets of\n   $X$, then $\\bigcup \\mathcal{U}$ is open.\n3. **Finite intersections.** If $n \\ge 1$ and $U_0, \\dots, U_{n-1}$ are open,\n   then $U_0 \\cap \\dots \\cap U_{n-1}$ is open.\n4. **Closed balls are closed.** $\\bar B(x,r)$ is closed, for every $x \\in X$ and\n   every $r > 0$.\n\nTogether with the fact that $\\emptyset$ and $X$ are open, recorded already in\n[[def-metric-topology]], claims 2 and 3 say that $\\mathcal{T}_d$ has exactly the\nclosure properties that the word *topology* names.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define\n\n$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$\n\n$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the\n**sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly\npositive real; a ball of radius $0$ or of negative radius is never written in\nthis library.\n\n**Immediate consequences of the definitions.** For every $x \\in X$ and $r > 0$:\n\n- $x \\in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of [[def-metric-space]]);\n  in particular open and closed balls are nonempty.\n- $B(x,r) \\subseteq \\bar B(x,r)$ and $S(x,r) \\subseteq \\bar B(x,r)$, and\n  $\\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of\n  the order of $\\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]):\n  each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.\n- If $0 < s \\le r$ then $B(x,s) \\subseteq B(x,r)$ and\n  $\\bar B(x,s) \\subseteq \\bar B(x,r)$, by transitivity of the order.\n- Nonnegativity of the metric ([[lem-metric-nonnegativity]]) is what forces the\n  radius convention, and it forces it for the **open** ball only: if $r \\le 0$\n  then $B(x,r) = \\{y : d(x,y) < r\\}$ is empty, because $d(x,y) \\ge 0 \\ge r$\n  for every $y$. The other two sets behave differently at $r = 0$, and the\n  convention $r > 0$ excludes them for uniformity rather than for emptiness:\n  $\\bar B(x,0) = S(x,0) = \\{x\\}$, since $d(x,y) \\le 0$ together with\n  $d(x,y) \\ge 0$ gives $d(x,y) = 0$ and hence $y = x$ by (M1). For $r < 0$ all\n  three sets are empty.\n\n**A sphere may be empty, and so the three sets are not on a par.** For $r > 0$\nthe open and closed balls always contain $x$, but nothing in the definition\nproduces a point at distance exactly $r$ from $x$. If a metric takes only the\nvalues $0$ and $1$, as the discrete metric on the companion page does, then\n$S(x,2) = \\emptyset$ while $B(x,2) = \\bar B(x,2)$ is the whole space. So\nnonemptiness of a sphere is never available by convention: where it is used, it\nis proved.\n\n**The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and\nnot on $x$ and $r$ alone. When more than one space or more than one metric is in\nplay we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\\bar B$ and $S$. This\nmatters as soon as subspaces appear ([[def-isometry-and-metric-embedding]]): a\nball of a subspace is the trace on it of a ball of the ambient space, and the two\nare different sets.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and write $\\mathcal{P}(X)$ for its power set. A **topology** on\n$X$ is a family $\\mathcal{T} \\subseteq \\mathcal{P}(X)$ such that\n\n- **(T1)** $\\varnothing \\in \\mathcal{T}$ and $X \\in \\mathcal{T}$;\n- **(T2)** $\\bigcup \\mathcal{S} \\in \\mathcal{T}$ for every $\\mathcal{S} \\subseteq \\mathcal{T}$;\n- **(T3)** $U \\cap V \\in \\mathcal{T}$ for all $U, V \\in \\mathcal{T}$.\n\nA **topological space** is a pair $(X, \\mathcal{T})$ consisting of a set $X$ and\na topology $\\mathcal{T}$ on it; the elements of $X$ are its **points**. When only\none topology is in play we write $X$ for the pair; when several are, the topology\nis always named.\n\nThe members of $\\mathcal{T}$ are the **open** sets of $(X,\\mathcal{T})$. A subset\n$F \\subseteq X$ is **closed** when its complement $X \\setminus F$ is open, and\n**clopen** when it is both open and closed. By (T1) both $\\varnothing$ and $X$\nare clopen. *Open and closed are not opposites*: a set may be neither, and it may\nbe both, so \"not open\" is never a synonym for \"closed\".\n\n**Finite intersections, and the empty one.** Axiom (T3) is stated for two sets\nbecause that is all that is ever needed: if $n \\ge 1$ and\n$U_1, \\dots, U_n \\in \\mathcal{T}$, then $U_1 \\cap \\dots \\cap U_n \\in \\mathcal{T}$\nfollows by iterating (T3) $n-1$ times. The intersection of the **empty** family\nof subsets of $X$ is $X$, since the condition \"lies in every member of the empty\nfamily\" is vacuous; that case is covered by (T1) rather than by (T3), which is\none of the two reasons $X \\in \\mathcal{T}$ is demanded outright. The other is\nthat (T2) alone gives only $\\bigcup \\varnothing = \\varnothing$.\n\n**The closed sets, and the dual axiomatisation.** Put\n$\\mathcal{C} := \\{\\, X \\setminus U : U \\in \\mathcal{T} \\,\\}$, the family of closed\nsets. Then\n\n- **(C1)** $\\varnothing \\in \\mathcal{C}$ and $X \\in \\mathcal{C}$;\n- **(C2)** $\\bigcap \\mathcal{D} \\in \\mathcal{C}$ for every **nonempty**\n  $\\mathcal{D} \\subseteq \\mathcal{C}$;\n- **(C3)** $C \\cup D \\in \\mathcal{C}$ for all $C, D \\in \\mathcal{C}$.\n\nConversely, if a family $\\mathcal{C} \\subseteq \\mathcal{P}(X)$ satisfies (C1),\n(C2) and (C3), then $\\mathcal{T} := \\{\\, X \\setminus C : C \\in \\mathcal{C} \\,\\}$\nis a topology on $X$ whose closed sets are exactly the members of $\\mathcal{C}$.\nSo a topology may be presented equally well by its open sets or by its closed\nsets, and this library uses whichever is shorter.\n\n*Both directions are one computation, and it is carried out here rather than\nassumed.* The map $U \\mapsto X \\setminus U$ is an involution of\n$\\mathcal{P}(X)$, hence a bijection, and it carries the two De Morgan identities\n\n$$X \\setminus \\bigcup_{i \\in I} A_i = \\bigcap_{i \\in I} (X \\setminus A_i) \\quad (I \\ne \\varnothing), \\qquad X \\setminus \\bigcap_{i \\in I} A_i = \\bigcup_{i \\in I} (X \\setminus A_i) \\quad (I \\ne \\varnothing)$$\n\nterm by term into each other. Given (T1)–(T3): $\\varnothing = X \\setminus X$ and\n$X = X \\setminus \\varnothing$ lie in $\\mathcal{C}$, which is (C1); for nonempty\n$\\mathcal{D} \\subseteq \\mathcal{C}$ the family\n$\\mathcal{S} = \\{\\, X \\setminus C : C \\in \\mathcal{D} \\,\\}$ lies in $\\mathcal{T}$\nand $\\bigcap \\mathcal{D} = X \\setminus \\bigcup \\mathcal{S}$ is closed by (T2),\nwhich is (C2); and $C \\cup D = X \\setminus ((X \\setminus C) \\cap (X \\setminus D))$\nis closed by (T3), which is (C3). Given (C1)–(C3) the same three lines run\nbackwards, the empty-union case $\\bigcup \\varnothing = \\varnothing$ being supplied\nby (C1) rather than by (C2); and $\\{\\, X \\setminus C : C \\in \\mathcal{C} \\,\\}$ has\n$\\mathcal{C}$ as its family of complements because complementation is an\ninvolution.\n\n**Comparison of topologies.** If $\\mathcal{T}_1$ and $\\mathcal{T}_2$ are\ntopologies on the same set $X$ and $\\mathcal{T}_1 \\subseteq \\mathcal{T}_2$, then\n$\\mathcal{T}_1$ is **coarser** than $\\mathcal{T}_2$ and $\\mathcal{T}_2$ is\n**finer** than $\\mathcal{T}_1$; the comparison is **strict** when the inclusion\nis. Inclusion is a partial order on the set of topologies on $X$\n([[def-partial-order]]), and it is not a total one: two topologies on the same\nset may be incomparable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-continuous-map-top",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces\n([[def-topological-space]]), let $f : X \\to Y$ be a function and let $x \\in X$.\nNeighbourhoods are as in [[def-neighbourhood-top]].\n\n$f$ is **continuous at $x$** if for every neighbourhood $V$ of $f(x)$ in $Y$ the\npreimage $f^{-1}[V]$ is a neighbourhood of $x$ in $X$.\n\n$f$ is **continuous** if it is continuous at every point of $X$.\n\n**The same condition with open sets only.** $f$ is continuous at $x$ if and only\nif for every open $V \\subseteq Y$ with $f(x) \\in V$ there is an open\n$U \\subseteq X$ with $x \\in U$ and $f[U] \\subseteq V$. Indeed, if $f$ is\ncontinuous at $x$ and $V$ is such an open set, then $V$ is a neighbourhood of\n$f(x)$, so $f^{-1}[V]$ is a neighbourhood of $x$ and contains an open $U \\ni x$,\nwhich satisfies $f[U] \\subseteq V$. Conversely, given the displayed condition and\na neighbourhood $V$ of $f(x)$, fix open $V_0$ with $f(x) \\in V_0 \\subseteq V$ and\nthen open $U \\ni x$ with $f[U] \\subseteq V_0$; then $x \\in U \\subseteq f^{-1}[V_0] \\subseteq f^{-1}[V]$,\nso $f^{-1}[V]$ is a neighbourhood of $x$. Both forms are used below and are the\nsame statement written twice.\n\n**Preimage, not image.** $f^{-1}[V] = \\{\\, x \\in X : f(x) \\in V \\,\\}$\nis the preimage in the sense of [[def-injection-surjection-bijection]] and is\ndefined for every function, invertible or not; no inverse function is being\nasserted to exist. Continuity is a condition on preimages throughout, and the\ncorresponding conditions on images define the *open* and *closed* maps of a later\nitem, which are different notions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $\\ell_a$ is linear. By [F1] and [F2], choose $K\\ge0$ such that $d_2(\\ell_a(y),\\ell_a(z))\\le Kd_2(y,z)$ for all $y,z\\in\\mathbb R^n$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $y\\in\\mathbb R^n$ and let $V$ be open in the target metric topology with $\\ell_a(y)\\in V$. By [F3], choose $\\varepsilon>0$ with $B(\\ell_a(y),\\varepsilon)\\subseteq V$. Put $\\delta:=\\varepsilon/(K+1)>0$, where $K$ is from step 1.1. If $z\\in B(y,\\delta)$, then step 1.1 gives $d_2(\\ell_a(z),\\ell_a(y))\\le Kd_2(z,y)\\le (K+1)d_2(z,y)<(K+1)\\delta=\\varepsilon$. Thus $\\ell_a[B(y,\\delta)]\\subseteq B(\\ell_a(y),\\varepsilon)\\subseteq V$. The source ball is open by [F3], so [F4] shows that $\\ell_a$ is continuous as a map between the topological spaces in [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5], every Borel subset of the target has a Borel preimage in the source; [F6] therefore makes $\\ell_a$ measurable.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes n>=1, so the empty coordinate space is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to a=0 with Lipschitz constant K=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies in the one-dimensional Euclidean metric."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 permits the zero functional and its zero Lipschitz bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or ordered parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 takes one bound K from the supplied boundedness result; no family of choices is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states a measurability implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states a measurability implication, not an equivalence."
+        }
+      ]
+    },
+    "def-least-squares-solution-set": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes positive dimensions n and p."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: y=0 is allowed and gives the stated argmin set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the case n=p=1 is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: no rank hypothesis is imposed on X."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition has no interval or ordered parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition denotes the entire argmin set and selects no element."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts no equivalence."
+        }
+      ]
+    },
+    "thm-least-squares-fitted-vector-and-solution-set": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-least-squares-solution-set",
+          "source_section": "Definition",
+          "quote": "For integers $n,p\\ge1$, a matrix $X\\in\\mathbb R^{n\\times p}$, and a response\nvector $y\\in\\mathbb R^n$, define the **least-squares solution set**\n$$\n\\mathcal B_{\\mathrm{LS}}(y):=\\operatorname*{arg\\,min}_{b\\in\\mathbb R^p}\\|y-Xb\\|_2^2.\n$$\nThis is a set-valued definition; it does not select one coefficient vector.\nThe next theorem proves that the set is nonempty and identifies the fitted\nvector and residual as unique, including when $X$ is rank-deficient.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces and let $b\\in W$. A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional inner product spaces. In orthonormal bases $\\mathcal E=(e_j)$ of $V$ and $\\mathcal F=(f_i)$ of $W$,\n\n$$[T^*]_{\\mathcal E\\leftarrow\\mathcal F}=\\overline{[T]_{\\mathcal F\\leftarrow\\mathcal E}}^{\\mathsf T}.$$\n\nOver $\\mathbb R$ this is the transpose. The statement includes zero-sized bases.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. For every $v\\in V$, the vector $P_Wv$ is the unique point of $W$ nearest to $v$: for every $w\\in W$,\n\n$$\\lVert v-P_Wv\\rVert\\le\\lVert v-w\\rVert,$$\n\nwith equality if and only if $w=P_Wv$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard $X$ as the linear map $T_X:\\mathbb R^p\\to\\mathbb R^n$, $T_Xb=Xb$, with the Euclidean inner products of [F3]. Every residual norm is nonnegative, and [F8] says squaring is strictly increasing on the nonnegative reals. Therefore the minimizers of $\\|y-Xb\\|_2^2$ are exactly the minimizers of $\\|Xb-y\\|_2$. Applying [F2] and identifying $T_X^*=X^T$ by [F4] gives a minimizer, the normal equation $X^T(Xb-y)=0$, and the full solution set $b_0+\\ker X$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The image of $T_X$ is $C$. Every minimizer maps to a point of $C$ nearest to $y$, and every point of $C$ has a preimage under $T_X$. By [F5] and [F6] that nearest point is exactly $P_Cy$ and is unique. Thus every minimizing $b$ has fitted vector $Xb=P_Cy$, and its residual is the unique vector $y-P_Cy$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By step 1.1 the solution set is the affine translate $b_0+\\ker X$, whose direction space is $\\ker X$; its affine dimension is therefore $\\dim\\ker X$. By rank-nullity [F7], $\\dim\\ker X=p-\\dim\\operatorname{im}X=p-\\operatorname{rank}(X)$, so this is the affine dimension of the solution set.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n,p>=1, so empty domains are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives fit 0 and residual 0 when y=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 include n=p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 allow X=0; then the fit is P_{0}y=0 and the solution set is all R^p."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no interval or ordered endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses one preimage of P_C y under X; this is a single existential witness and does not use Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 applies the published normal-equation characterization to each minimizer."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 applies both directions of the published normal-equation characterization."
+        }
+      ]
+    },
+    "def-linear-estimability-in-fixed-design": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model dimensions n and p are positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: c=0 is an allowed contrast and a=0 is an allowed statistic."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one observation and one parameter are included when the model is defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: rank-deficient designs are explicitly within scope."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The estimand is a function on R^p, not an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition states one existential vector a and chooses no family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence theorem."
+        }
+      ]
+    },
+    "thm-linear-estimability-iff-row-space": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fixed-design-linear-regression-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ be integers and let $X\\in\\mathbb R^{n\\times p}$ be a fixed matrix.\nA **fixed-design first-moment linear regression model** is a parametric\nstatistical experiment on $(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ with parameter\nset $\\mathbb R^p$, laws $(P_\\beta)_{\\beta\\in\\mathbb R^p}$, and observed vector\n$Y(y)=y$, such that every coordinate of $Y$ is integrable under $P_\\beta$ and\n$$\n\\mathbb E_\\beta Y=X\\beta\\qquad(\\beta\\in\\mathbb R^p).\n$$\nHere $\\mathcal B(\\mathbb R^n)$ is the Borel sigma-algebra, and expectation is\ntaken under the particular law $P_\\beta$. The residual vector\n$\\epsilon_\\beta:=Y-X\\beta$ therefore has coordinatewise mean zero. The phrase\n**fixed design** means that $X$ is held constant in this experiment; it carries\nno probability law or assignment mechanism for $X$.\n\nThis definition states only the first-moment model. It imposes no covariance,\nindependence, or Gaussian assumption. Such assumptions must be stated where\nused.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-estimability-in-fixed-design",
+          "source_section": "Definition",
+          "quote": "In a fixed-design first-moment regression model with parameter\n$\\beta\\in\\mathbb R^p$, a **linear contrast** is the estimand\n$$\n\\psi_c(\\beta):=c^T\\beta,\\qquad c\\in\\mathbb R^p.\n$$\nThe contrast is **linearly estimable** if there is a fixed vector\n$a\\in\\mathbb R^n$ such that the statistic $a^TY$ is unbiased for $\\psi_c$ at\nevery parameter value:\n$$\n\\mathbb E_\\beta[a^TY]=c^T\\beta\\qquad\\text{for every }\\beta\\in\\mathbb R^p.\n$$\nThe vector $a$ may depend on the fixed design and on $c$, but not on the\nobserved response or on the unknown parameter. The map $y\\mapsto a^Ty$ is a\nmeasurable statistic by\n[[lem-linear-contrast-statistics-are-borel-measurable]] and\n[[def-statistic-and-estimator]].",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any fixed $a$, each coordinate of $Y$ is integrable by [F1], so the finite linear combination $a^TY$ is integrable. Linearity [F3] gives $\\mathbb E_\\beta[a^TY]=a^T\\mathbb E_\\beta Y=a^TX\\beta=(X^Ta)^T\\beta.$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $X^Ta=c$, step 1.1 gives $\\mathbb E_\\beta[a^TY]=c^T\\beta$ for every $\\beta$. By [F2] the contrast is linearly estimable. The equation $X^Ta=c$ says exactly that $c\\in\\operatorname{im}(X^T)=\\operatorname{row}(X)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Conversely, suppose $c^T\\beta$ is linearly estimable. By [F2] there is a fixed $a$ for which the expectation in step 1.1 equals $c^T\\beta$ for every $\\beta$. Thus $(X^Ta-c)^T\\beta=0$ for every $\\beta$; taking $\\beta$ equal to each standard basis vector of $\\mathbb R^p$ shows coordinatewise that $X^Ta=c$. Hence $c$ belongs to the row space.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 prove both implications, and step 1.1 proves the stated unbiasedness for every representative $a$ with $X^Ta=c$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses positive finite dimensions n and p."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers c=0 with a=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.1 apply when n=p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For X=0, the Statement reduces to c=0 iff X^T a=0; steps 2.1 and 2.1 remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or ordered parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 uses one estimator witness a supplied by the definition; no family is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves X^T a=c implies estimability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 proves estimability implies X^T a=c."
+        }
+      ]
+    },
+    "thm-ols-unbiasedness-and-covariance-full-rank": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fixed-design-linear-regression-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ be integers and let $X\\in\\mathbb R^{n\\times p}$ be a fixed matrix.\nA **fixed-design first-moment linear regression model** is a parametric\nstatistical experiment on $(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ with parameter\nset $\\mathbb R^p$, laws $(P_\\beta)_{\\beta\\in\\mathbb R^p}$, and observed vector\n$Y(y)=y$, such that every coordinate of $Y$ is integrable under $P_\\beta$ and\n$$\n\\mathbb E_\\beta Y=X\\beta\\qquad(\\beta\\in\\mathbb R^p).\n$$\nHere $\\mathcal B(\\mathbb R^n)$ is the Borel sigma-algebra, and expectation is\ntaken under the particular law $P_\\beta$. The residual vector\n$\\epsilon_\\beta:=Y-X\\beta$ therefore has coordinatewise mean zero. The phrase\n**fixed design** means that $X$ is held constant in this experiment; it carries\nno probability law or assignment mechanism for $X$.\n\nThis definition states only the first-moment model. It imposes no covariance,\nindependence, or Gaussian assumption. Such assumptions must be stated where\nused.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-least-squares-fitted-vector-and-solution-set",
+          "source_section": "Statement",
+          "quote": "Let $n,p\\ge1$, $X\\in\\mathbb R^{n\\times p}$, $y\\in\\mathbb R^n$, and\n$C=\\operatorname{col}(X)\\subseteq\\mathbb R^n$. For the least-squares solution\nset $\\mathcal B_{\\mathrm{LS}}(y)$ of\n[[def-least-squares-solution-set]], the following hold:\n\n1. $\\mathcal B_{\\mathrm{LS}}(y)$ is nonempty, and $b$ is in it exactly when\n   $X^T(Xb-y)=0$.\n2. If $b_0\\in\\mathcal B_{\\mathrm{LS}}(y)$, then\n   $\\mathcal B_{\\mathrm{LS}}(y)=b_0+\\ker X$.\n3. Every least-squares solution has the same fitted vector $P_Cy$ and residual\n   $y-P_Cy$.\n4. The affine solution set has dimension $p-\\operatorname{rank}(X)$.\n\nThe theorem makes no statistical moment or distributional assumption.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Full column rank means $\\ker X=\\{0\\}$. By [F3], $\\operatorname{rank}(X)=p$. For every nonzero $v\\in\\mathbb R^p$, $v^TX^TXv=\\|Xv\\|_2^2>0,$ so $X^TX$ is injective and hence invertible by rank-nullity. The normal equation in [F2] now gives the unique minimizer $\\widehat\\beta=(X^TX)^{-1}X^TY$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $A=(X^TX)^{-1}X^T$. By the fixed-design model [F1], $\\epsilon_\\beta=Y-X\\beta$, so $Y=X\\beta+\\epsilon_\\beta$. Step 1.1 gives $\\widehat\\beta=\\beta+A\\epsilon_\\beta$. By [F4] and [A1], $\\mathbb E_\\beta\\widehat\\beta=\\beta+A\\mathbb E_\\beta\\epsilon_\\beta=\\beta.$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5] and [F6], the $(r,s)$ entry of the covariance matrix of $A\\epsilon_\\beta$ is $\\sum_{i=1}^n\\sum_{j=1}^n A_{ri}A_{sj}\\operatorname{Cov}_\\beta(\\epsilon_{\\beta,i},\\epsilon_{\\beta,j})=\\sigma^2\\sum_{i=1}^n A_{ri}A_{si}.$ Thus $\\operatorname{Cov}_\\beta(\\widehat\\beta)=\\sigma^2AA^T$ by step 2.1. Since $X^TX$ is symmetric, $AA^T=(X^TX)^{-1}X^TX(X^TX)^{-1}=(X^TX)^{-1}.$ No step uses the shape of the error distribution beyond its stated moments.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n,p>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: beta=0 is allowed, while sigma^2>0 excludes zero covariance; step 2.1 proves the mean formula for beta=0 as well."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers n=p=1 whenever the one design column is nonzero."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Rank-deficient X and sigma^2=0 are explicitly excluded by full rank and sigma^2>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or ordered parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The full-rank least-squares coefficient is unique, so no selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states formulas, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states formulas, not an equivalence."
+        }
+      ]
+    },
+    "thm-gauss-markov-for-fixed-design-regression": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ols-unbiasedness-and-covariance-full-rank",
+          "source_section": "Statement",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$ have full column rank in a fixed-design\nfirst-moment regression model. Suppose for some $\\sigma^2>0$ the error vector\n$\\epsilon_\\beta:=Y-X\\beta$ has finite second moments,\n$\\mathbb E_\\beta\\epsilon_\\beta=0$, and\n$\\operatorname{Cov}_\\beta(\\epsilon_\\beta)=\\sigma^2 I_n$ for every $\\beta$,\nwhere the vector covariance matrix has entries\n$\\operatorname{Cov}_\\beta(\\epsilon_{\\beta,i},\\epsilon_{\\beta,j})$.\nThen the unique least-squares estimator is\n$$\n\\widehat\\beta=(X^TX)^{-1}X^TY,\n$$\nit is unbiased for $\\beta$, and its covariance matrix is\n$$\n\\operatorname{Cov}_\\beta(\\widehat\\beta)=\\sigma^2(X^TX)^{-1}.\n$$\nNo Gaussian assumption is made.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linear-estimability-iff-row-space",
+          "source_section": "Statement",
+          "quote": "In a fixed-design first-moment regression model with $X\\in\\mathbb R^{n\\times p}$,\na contrast $c^T\\beta$ is linearly estimable if and only if\n$$\nc\\in\\operatorname{row}(X)=\\operatorname{im}(X^T),\n$$\nequivalently if and only if there exists $a\\in\\mathbb R^n$ with $X^Ta=c$.\nWhenever this holds, $a^TY$ is unbiased for $c^T\\beta$ for every $\\beta$.\nHere $\\operatorname{row}(X)$ is defined as the image of the transpose map.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $a_0:=X(X^TX)^{-1}c\\in\\mathbb R^n$. Then $X^Ta_0=c$ and $a_0^TY=c^T(X^TX)^{-1}X^TY=c^T\\widehat\\beta$. By [F2], $c^T\\beta$ is estimable and $a_0^TY$ is unbiased.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $a^TY$ be any linear unbiased estimator of the same contrast. By [F2], $X^Ta=c$. Set $q:=a-a_0$. Then $X^Tq=0$, while $a_0\\in\\operatorname{col}(X)$; hence $q^Ta_0=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "From $Y=X\\beta+\\epsilon_\\beta$, [A1], [F3], and [F4], $\\operatorname{Var}_\\beta(a^TY)=\\sigma^2\\|a\\|_2^2=\\sigma^2\\|a_0+q\\|_2^2=\\sigma^2\\|a_0\\|_2^2+\\sigma^2\\|q\\|_2^2\\ge \\operatorname{Var}_\\beta(a_0^TY).$ Since $\\sigma^2>0$, equality holds exactly when $q=0$. Therefore the OLS contrast estimator has minimum variance among all linear unbiased estimates.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes positive dimensions and a full-column-rank design."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers c=0: the OLS contrast has variance zero and every competing variance is nonnegative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 include n=p=1 under the stated positive variance assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Rank-deficient designs and sigma^2=0 are outside the stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or ordered parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof constructs one coefficient vector a_0 and handles an arbitrary competitor; no family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states an optimality claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states an optimality claim, not an equivalence."
+        }
+      ]
+    },
+    "ex-collinear-fixed-design-estimability": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-least-squares-fitted-vector-and-solution-set",
+          "source_section": "Statement",
+          "quote": "Let $n,p\\ge1$, $X\\in\\mathbb R^{n\\times p}$, $y\\in\\mathbb R^n$, and\n$C=\\operatorname{col}(X)\\subseteq\\mathbb R^n$. For the least-squares solution\nset $\\mathcal B_{\\mathrm{LS}}(y)$ of\n[[def-least-squares-solution-set]], the following hold:\n\n1. $\\mathcal B_{\\mathrm{LS}}(y)$ is nonempty, and $b$ is in it exactly when\n   $X^T(Xb-y)=0$.\n2. If $b_0\\in\\mathcal B_{\\mathrm{LS}}(y)$, then\n   $\\mathcal B_{\\mathrm{LS}}(y)=b_0+\\ker X$.\n3. Every least-squares solution has the same fitted vector $P_Cy$ and residual\n   $y-P_Cy$.\n4. The affine solution set has dimension $p-\\operatorname{rank}(X)$.\n\nThe theorem makes no statistical moment or distributional assumption.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linear-estimability-iff-row-space",
+          "source_section": "Statement",
+          "quote": "In a fixed-design first-moment regression model with $X\\in\\mathbb R^{n\\times p}$,\na contrast $c^T\\beta$ is linearly estimable if and only if\n$$\nc\\in\\operatorname{row}(X)=\\operatorname{im}(X^T),\n$$\nequivalently if and only if there exists $a\\in\\mathbb R^n$ with $X^Ta=c$.\nWhenever this holds, $a^TY$ is unbiased for $c^T\\beta$ for every $\\beta$.\nHere $\\operatorname{row}(X)$ is defined as the image of the transpose map.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "step-1-1",
+          "claim": "For $b=(b_1,b_2)^T$, put $s=b_1+b_2$. Then $Xb=(s,s)^T$, and the squared residual is $(1-s)^2+(3-s)^2=2(s-2)^2+2.$ It is minimized exactly when $s=2$. Thus the full coefficient solution set is $(1,1)^T+t(1,-1)^T$ for $t\\in\\mathbb R$, its fitted vector is $(2,2)^T$, and its residual is $(-1,1)^T$, in agreement with [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The row space of $X$ is $\\operatorname{span}\\{(1,1)^T\\}$. Hence $c=(1,1)^T$ is in the row space and is estimable; indeed $X^T(1/2,1/2)^T=(1,1)^T$, so $(Y_1+Y_2)/2$ estimates $\\beta_1+\\beta_2$ unbiasedly. The vector $(1,0)^T$ is not in that row space, since every vector $X^Ta$ has equal coordinates. Therefore neither single coefficient is linearly estimable by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two observations and two coefficient coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the zero contrast as estimable through a=0; the displayed nonzero contrasts are the worked cases."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example's two nonzero columns are identical, and the calculation explicitly exhibits their one-dimensional kernel."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.2 use the rank-one design as the intended boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite example has no interval or endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example describes the entire affine solution set and selects no coefficient representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the row-space-to-estimability direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the failure of row-space membership to rule out linear estimability."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "collinear-two-column-witness",
+          "design": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "vector": [
+            1,
+            -1
+          ],
+          "asserts": "for the two-column design $X=\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$ and $v=(1,-1)^T$, $Xv=0$, the Gram matrix $X^TX/2$ differs from $I_2$, and $v_1\\ne0$."
+        }
+      ]
+    },
+    "cex-heteroskedasticity-invalidates-ols-blue": {
+      "risk": "low",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gauss-markov-for-fixed-design-regression",
+          "source_section": "Statement",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$ have full column rank in a fixed-design\nfirst-moment regression model. Suppose\n$\\operatorname{Cov}_\\beta(\\epsilon_\\beta)=\\sigma^2 I_n$ for a fixed\n$\\sigma^2>0$, where the vector covariance matrix has entries\n$\\operatorname{Cov}_\\beta(\\epsilon_{\\beta,i},\\epsilon_{\\beta,j})$. For every\ncontrast $c^T\\beta$, the OLS estimate\n$c^T\\widehat\\beta$ is unbiased and has variance no larger than any other\nlinear unbiased estimator of that contrast. Thus OLS is **best linear\nunbiased (BLUE)** for every estimable contrast. Here “best” means minimum\nvariance within the class of linear unbiased estimators; Gaussianity is not\nassumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and let $X:\\Omega\\to\\mathbb R$.\nAfter identifying $(\\Omega,w)$ with the full-power-set probability space of\n[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],\nthe expectation defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with\nthe published finite formulas:\n$$\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)=\\sum_{x\\in X(\\Omega)}x\\,\\mathbb P(X=x).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "step-1-1",
+          "claim": "The four point masses sum to $4(1/4)=1$, so they define a probability measure by [F4]. Directly summing over the four equally weighted outcomes using [F3] gives $\\mathbb E U=\\mathbb E V=0$, $\\mathbb E U^2=\\mathbb E V^2=1$, and $\\mathbb E(UV)=0$. Thus $\\mathbb E\\epsilon=0$ and, by [F5], $\\operatorname{Cov}(\\epsilon)=\\operatorname{diag}(1,9)$, which is not a scalar multiple of $I_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Here $X^TX=2$, so the unique OLS estimate is $\\widehat\\beta=\\frac{Y_1+Y_2}{2}=\\beta+\\frac{U+3V}{2}.$ It is unbiased by [F2], and bilinearity gives $\\operatorname{Var}(\\widehat\\beta)=(1+9)/4=5/2$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The alternative estimator $\\widetilde\\beta=\\frac9{10}Y_1+\\frac1{10}Y_2=\\beta+\\frac9{10}U+\\frac3{10}V$ is linear and unbiased because its coefficients sum to one and both error means vanish. Its variance is $\\frac{81}{100}\\operatorname{Var}(U)+\\frac9{100}\\operatorname{Var}(V)+\\frac{54}{100}\\operatorname{Cov}(U,V)=\\frac9{10}<\\frac52.$ So OLS is not BLUE in this model. The covariance premise in [F1] fails, which is the stated boundary of the Gauss–Markov theorem.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample has two observations and a nonempty four-point sample space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes centered errors and their covariance directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two-error vector is enumerated on all four atoms in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives strictly positive coordinate variances 1 and 9; no zero-variance coordinate is hidden."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite sample space has no interval or endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Counterexample: all four outcomes and both estimators are explicit; no selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal optimality claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal optimality claim, not an equivalence."
+        }
+      ]
+    },
+    "ex-high-leverage-is-a-design-feature": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-least-squares-fitted-vector-and-solution-set",
+          "source_section": "Statement",
+          "quote": "Let $n,p\\ge1$, $X\\in\\mathbb R^{n\\times p}$, $y\\in\\mathbb R^n$, and\n$C=\\operatorname{col}(X)\\subseteq\\mathbb R^n$. For the least-squares solution\nset $\\mathcal B_{\\mathrm{LS}}(y)$ of\n[[def-least-squares-solution-set]], the following hold:\n\n1. $\\mathcal B_{\\mathrm{LS}}(y)$ is nonempty, and $b$ is in it exactly when\n   $X^T(Xb-y)=0$.\n2. If $b_0\\in\\mathcal B_{\\mathrm{LS}}(y)$, then\n   $\\mathcal B_{\\mathrm{LS}}(y)=b_0+\\ker X$.\n3. Every least-squares solution has the same fitted vector $P_Cy$ and residual\n   $y-P_Cy$.\n4. The affine solution set has dimension $p-\\operatorname{rank}(X)$.\n\nThe theorem makes no statistical moment or distributional assumption.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "step-1-1",
+          "claim": "The predictor mean is $\\bar x=26/5$. Put $z=x-\\bar x\\mathbf1=(-26,-21,-16,-11,74)^T/5$. Then $\\mathbf1^Tz=0$ and $z^Tz=\\frac{676+441+256+121+5476}{25}=\\frac{1394}{5}.$ Since $x=z+\\bar x\\mathbf1$, the column space is $C=\\operatorname{span}\\{\\mathbf1,z\\}$, with these two generators nonzero and orthogonal.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every $y\\in\\mathbb R^5$, the vector $p(y)=\\frac{\\mathbf1^Ty}{5}\\mathbf1+\\frac{z^Ty}{z^Tz}z$ lies in $C$, and $y-p(y)$ is orthogonal to both generators, hence to all of $C$. By [F2], $p(y)=P_Cy$; [F1] identifies this as the fitted vector. Therefore $H=\\frac{\\mathbf1\\mathbf1^T}{5}+\\frac{zz^T}{z^Tz},\\qquad h_{55}=\\frac15+\\frac{(74/5)^2}{1394/5}=\\frac15+\\frac{2738}{3485}=\\frac{687}{697}.$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $h_{55}=1-10/697$ is close to one and its formula involves only the design vector, this is a high-leverage design row. The calculation makes no claim that the fifth response has a large residual or is influential; those are separate diagnostics.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The worked design has five rows and two columns."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: the projection diagonal is defined only from X, so y=0 or any other response leaves the computed leverage unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the fifth diagonal entry from the five stated predictor values."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies a nonconstant predictor, so the intercept and centered predictor span two orthogonal directions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval or endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The projection formula is explicit and involves no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        }
+      ]
+    }
+  }
+}

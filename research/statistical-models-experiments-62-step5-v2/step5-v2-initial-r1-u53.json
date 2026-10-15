@@ -1,0 +1,117 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "53",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "lem-holm-rejection-events-are-measurable",
+      "model": "gpt-6-luna",
+      "context_sha256": "67856d767edb0ff7be08d639453f67aaf8050fa890814a8f301a40fc9e5b76d7",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The cited algorithm restricts inputs to a fixed null-valid family, while this lemma assumes only measurable p-value statistics. This is a nonfatal interface omission: the existing permutation/prefix-cell proof uses only finite real comparisons and proves the broader claim. Explicitly defining the same numerical formulas on all measurable inputs resolves the mismatch without adding validity assumptions or weakening measurability.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-holm-rejection-events-are-measurable",
+      "disposition": "repaired",
+      "post_sha256": "3f4a098a38e1e8237a003b7e515ad4ddfaf32a6da2a35a3137b30a4b17960a2a",
+      "review_context_sha256": "701932cf52bb05806c1014c660af5e304f92d85ccb6e0594738e0de565e60c5f",
+      "reason": "Checked all six direct supplier interfaces and the proof. Trace-Borel p-values are real measurable; finite differences yield strict and weak comparison events. The weak/strict pairwise conditions implement index tie-breaking exactly. Intersecting pass events and the first failure gives a finite measurable partition; taking the cells containing index i gives D_i. This covers ties, m=1, alpha=0 or 1, empty data spaces and prefix lengths 0 or m. The clarified numerical formulas are total and coincide with the original algorithm on valid inputs. No independence or choice is used. This is a repair review, not independent acceptance of my own edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-holm-stepdown-strong-fwer"
+  ],
+  "downstream_reviews": [
+    {
+      "id": "thm-holm-stepdown-strong-fwer",
+      "path": "items/thm-holm-stepdown-strong-fwer.md",
+      "affected_use": "Statement: By [[lem-holm-rejection-events-are-measurable]], the rejection events are measurable; Facts F4 and proof step 1.1 use this to define FWER.",
+      "disposition": "unaffected",
+      "reason": "The theorem assumes valid p-values, a fixed family and alpha in [0,1]. The clarified total numerical rule agrees with the algorithm on this domain, so every cited rejection event and the FWER definition remain unchanged. No consumer edit or further hop is necessary.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "lem-holm-rejection-events-are-measurable",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "The cited algorithm restricts inputs to a fixed null-valid family, while this lemma assumes only measurable p-value statistics. This is a nonfatal interface omission: the existing permutation/prefix-cell proof uses only finite real comparisons and proves the broader claim. Explicitly defining the same numerical formulas on all measurable inputs resolves the mismatch without adding validity assumptions or weakening measurability.",
+      "correction": "Statement now defines the numerical rule on arbitrary measurable inputs and establishes totality; F3 explicitly distinguishes this extension from the null-valid error-control procedure."
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "id": "thm-bonferroni-familywise-error-control",
+      "status": "route-to-frontier-owner",
+      "owner_batch": "52",
+      "published": false,
+      "path": "items/thm-bonferroni-familywise-error-control.md",
+      "finding": "Verified the Step-4 digest alert against the current carrier, which is draft rather than published. Its Statement ends: This is strong FWER control; it is not an FDR guarantee. With the stated FDP convention, 0 <= V_theta/(R vee 1) <= indicator{V_theta >= 1}, so taking expectations gives FDR_theta <= FWER_theta <= alpha. The negative FDR clause is therefore incorrect; the FWER proof and the Holm consumer use are sound.",
+      "affected_use": "The final sentence of the Bonferroni Statement denies an FDR guarantee despite its proved strong FWER bound. Holm uses only the valid FWER conclusion in F5 and step 2.1.",
+      "invalidated_claim": "The clause it is not an FDR guarantee contradicts FDR <= FWER under the supplier definition.",
+      "minimality": "The owning frontier lane should replace the negative FDR clause with the implication FDR <= FWER <= alpha, retaining the full FWER statement and proof. Any resulting Statement change requires its owner to examine direct consumers. No edit or adjudication of this unassigned item was performed.",
+      "route": "Separate out-of-lane finding to batch-52 frontier owner; no published-maintenance repair is licensed or needed for its current draft status.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "checkpoint": "Mathematical review, interface clarification, direct-consumer examination and focused mechanical checks complete.",
+    "interface_change": "The Statement replaces the unqualified invocation of the algorithm with an explicit extension of exactly its numerical formulas to all measurable p-value statistics; the original broad measurability conclusion is preserved.",
+    "page_use": {
+      "path": "library/statistical-models-and-experiments/holm-step-down-familywise-error-control.md",
+      "affected_use": "The summary says the page verifies that Holm rejection events are measurable before proving strong familywise error control.",
+      "disposition": "unaffected",
+      "reason": "The clarified lemma includes all fixed null-valid inputs used by this page; its summary remains accurate."
+    },
+    "prerequisites": [
+      "alg-holm-step-down-procedure",
+      "def-p-value",
+      "def-statistic-and-estimator",
+      "def-measurable-function-between-measurable-spaces",
+      "def-sigma-algebra",
+      "thm-arithmetic-and-lattice-operations-preserve-measurability"
+    ],
+    "contract": "research/statistical-models-experiments-62-batch-53.proof-contracts.json: supplier quotations and proof derivations unchanged; prior risk_review retained verbatim.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent rejudgment of the changed frontier item; route the separate Bonferroni wording defect to its batch-52 owner.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-holm-rejection-events-are-measurable.md --json",
+        "exit_code": 0,
+        "result": "1 proof checked; pass; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-holm-rejection-events-are-measurable.md --json",
+        "exit_code": 0,
+        "result": "1 item checked; 0 errors; 0 warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-53.proof-contracts.json --items lem-holm-rejection-events-are-measurable --strict --json",
+        "exit_code": 0,
+        "result": "Assigned item checked; ok true; 0 errors; 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-holm-rejection-events-are-measurable.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects."
+      }
+    ]
+  }
+}

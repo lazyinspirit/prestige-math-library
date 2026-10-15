@@ -1,0 +1,177 @@
+{
+  "group": "d",
+  "batches": ["10"],
+  "pages_read": [
+    "stratified-sampling-and-allocation",
+    "stratified-sampling-and-allocation-examples"
+  ],
+  "items_read": [
+    "def-stratified-sampling-design-and-estimator",
+    "thm-stratified-total-unbiasedness-and-variance",
+    "thm-neyman-allocation-minimizes-stratified-variance",
+    "thm-cost-optimal-stratified-allocation",
+    "ex-proportional-and-disproportionate-stratified-allocation",
+    "ex-zero-variance-stratum-allocation-boundary",
+    "ex-rounding-neyman-allocation-to-integer-sample-sizes"
+  ],
+  "conventions": [
+    {
+      "convention": "Population values are fixed. Nonempty strata receive independent SRSWOR samples with integer sizes 1 ≤ n_h ≤ N_h; the joint design law is the product of the uniform within-stratum laws.",
+      "fixed_by": "def-stratified-sampling-design-and-estimator",
+      "matters_for": [
+        "thm-stratified-total-unbiasedness-and-variance",
+        "ex-proportional-and-disproportionate-stratified-allocation",
+        "ex-zero-variance-stratum-allocation-boundary",
+        "ex-rounding-neyman-allocation-to-integer-sample-sizes"
+      ]
+    },
+    {
+      "convention": "For noncertainty strata, S_h² uses denominator N_h−1 and S_h is its nonnegative square root. Certainty strata contribute their fixed totals and require no variance term, including singleton strata.",
+      "fixed_by": "def-stratified-sampling-design-and-estimator",
+      "matters_for": [
+        "thm-stratified-total-unbiasedness-and-variance",
+        "thm-neyman-allocation-minimizes-stratified-variance",
+        "thm-cost-optimal-stratified-allocation",
+        "ex-proportional-and-disproportionate-stratified-allocation",
+        "ex-zero-variance-stratum-allocation-boundary",
+        "ex-rounding-neyman-allocation-to-integer-sample-sizes"
+      ]
+    },
+    {
+      "convention": "Neyman allocation optimizes an uncapped continuous expression over a nonempty set J with S_h > 0, x_h > 0 and sum x_h = n★ > 0, holding other allocations fixed. Integer, capacity and minimum-sample constraints are excluded.",
+      "fixed_by": "thm-neyman-allocation-minimizes-stratified-variance",
+      "matters_for": [
+        "ex-zero-variance-stratum-allocation-boundary",
+        "ex-rounding-neyman-allocation-to-integer-sample-sizes"
+      ]
+    },
+    {
+      "convention": "Cost allocation uses positive per-unit costs and the equality budget sum c_h x_h = C★ > 0 over positive real allocations; fixed-stratum costs have already been removed from the residual budget.",
+      "fixed_by": "thm-cost-optimal-stratified-allocation",
+      "matters_for": [
+        "thm-cost-optimal-stratified-allocation"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-stratified-sampling-design-and-estimator",
+      "statement": "A finite population is partitioned into nonempty strata, sampled independently by SRSWOR with 1 ≤ n_h ≤ N_h. The stratified total estimator is sum_h N_h times the sample mean in stratum h.",
+      "used_by": [
+        "thm-stratified-total-unbiasedness-and-variance",
+        "thm-neyman-allocation-minimizes-stratified-variance",
+        "thm-cost-optimal-stratified-allocation",
+        "ex-proportional-and-disproportionate-stratified-allocation",
+        "ex-zero-variance-stratum-allocation-boundary",
+        "ex-rounding-neyman-allocation-to-integer-sample-sizes"
+      ]
+    },
+    {
+      "id": "thm-stratified-total-unbiasedness-and-variance",
+      "statement": "Under the stratified SRSWOR design, E_d[T̂_st] = sum_i y_i and Var_d(T̂_st) = sum_{h:n_h<N_h} N_h²(1−n_h/N_h)S_h²/n_h. Certainty strata contribute zero and require no within-stratum variance term.",
+      "used_by": [
+        "thm-neyman-allocation-minimizes-stratified-variance",
+        "thm-cost-optimal-stratified-allocation",
+        "ex-proportional-and-disproportionate-stratified-allocation",
+        "ex-zero-variance-stratum-allocation-boundary",
+        "ex-rounding-neyman-allocation-to-integer-sample-sizes"
+      ]
+    },
+    {
+      "id": "thm-neyman-allocation-minimizes-stratified-variance",
+      "statement": "For a nonempty set J of variable noncertainty strata with S_h > 0, holding other allocations fixed, the uncapped continuous variance expression on x_h > 0 and sum_{h∈J} x_h = n★ > 0 has the unique minimizer x_h = n★ N_h S_h / sum_{k∈J} N_k S_k.",
+      "used_by": [
+        "ex-zero-variance-stratum-allocation-boundary",
+        "ex-rounding-neyman-allocation-to-integer-sample-sizes"
+      ]
+    },
+    {
+      "id": "thm-cost-optimal-stratified-allocation",
+      "statement": "For a nonempty set J of variable noncertainty strata with S_h > 0, positive costs c_h and residual budget C★ > 0, holding other allocations fixed, the uncapped continuous variance expression on x_h > 0 and sum_{h∈J} c_h x_h = C★ has the unique minimizer x_h = C★(N_h S_h/√c_h) / sum_{k∈J} N_k S_k √c_k.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Centered-square variance, centered-product covariance and variance scaling in the stratified variance proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-variance-of-a-finite-sum",
+      "used_for": "Summing stratum variances after the product design law establishes zero cross-stratum covariances; finite support ensures square-integrability.",
+      "opened": true
+    },
+    {
+      "id": "thm-covariance-bilinearity-and-symmetry",
+      "used_for": "The finite-sum variance supplier and the HT variance prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-on-a-finite-probability-space",
+      "used_for": "Finite weighted expectations in the design and HT unbiasedness prerequisites.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-expectation",
+      "used_for": "Finite linearity in the HT unbiasedness prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "lem-indicator-expectation-and-products",
+      "used_for": "Inclusion-indicator expectations in the HT unbiasedness prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Normalized finite design laws and event probabilities.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-real-random-variable-and-distribution",
+      "used_for": "Finite random-variable and indicator conventions underlying design expectations.",
+      "opened": true
+    },
+    {
+      "id": "def-indicator-random-variable",
+      "used_for": "Inclusion indicators in the HT unbiasedness prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "General expectation convention underlying the published moment and covariance suppliers.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-of-an-indicator-is-probability",
+      "used_for": "First- and second-order indicator expectations in the HT variance prerequisite.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Integrable finite linearity in the HT variance and covariance prerequisites.",
+      "opened": true
+    },
+    {
+      "id": "lem-variance-and-covariance-identities-for-random-variables",
+      "used_for": "The covariance identity and integrability justification underlying covariance bilinearity.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "stratified-sampling-and-allocation",
+      "to": "finite-populations-and-sampling-designs",
+      "faithful": true,
+      "note": "The supplier fixes population values and randomizes sampled subsets. The consumer's product law is a normalized finite design; its inclusion probabilities n_h/N_h are positive, and its estimator equals the observed-record HT total. The HT unbiasedness statement is used with its required positive inclusion probabilities."
+    },
+    {
+      "from": "stratified-sampling-and-allocation",
+      "to": "horvitz-thompson-variance-and-srswor",
+      "faithful": true,
+      "note": "The consumer uses the supplier's uniform n-element-subset design and SRSWOR mean variance with denominator N_h−1. Every noncertainty stratum has N_h > 1, including when n_h = 1. Certainty strata, including singletons, are handled directly as constants. No pair-inclusion positivity assumption is imported from the separate variance-estimator result."
+    }
+  ]
+}

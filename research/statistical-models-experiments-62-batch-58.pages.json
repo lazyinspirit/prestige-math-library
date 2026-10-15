@@ -1,0 +1,149 @@
+[
+  {
+    "order": 2032,
+    "id": "discrete-sequential-test-validity-and-ville",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Discrete test supermartingales and Ville",
+    "companion": "discrete-sequential-test-validity-and-ville-examples",
+    "requires": [
+      "sequential-testing-and-anytime-valid-inference",
+      "discrete-time-martingales",
+      "stopping-times-and-optional-stopping",
+      "probability-spaces-random-variables-and-expectation",
+      "independence-borel-cantelli-and-zero-one-laws"
+    ],
+    "items": [
+      {
+        "id": "lem-finite-horizon-test-supermartingale-crossing-bound",
+        "kind": "lemma",
+        "title": "Finite-horizon crossing bound for a nonnegative test supermartingale",
+        "dependency_level": 0,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-discrete-stopping-time",
+          "def-nonnegative-test-supermartingale",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-expectation-of-an-indicator-is-probability",
+          "lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time",
+          "thm-optional-sampling-for-bounded-stopping-times"
+        ],
+        "statement": "Assume AC. For a null law P and a nonnegative test supermartingale M with E_P M_0 <= 1, every a > 0 and N in N_0 satisfy P(max_{0 <= t <= N} M_t >= a) <= 1/a.",
+        "strategy": "For fixed P and a, stop at the first crossing and truncate at N. Bounded optional sampling bounds E[M_{tau wedge N}] by E[M_0]; nonnegativity on the no-crossing event then gives the probability bound by indicator expectation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon, Time-uniform Chernoff bounds via nonnegative supermartingales, Probability Surveys 17 (2020), 257\u2013317",
+              "url": "https://arxiv.org/pdf/1808.03204",
+              "locator": "\u00a72.3, Lemma 1 (printed p. 14); \u00a76.1, proof of Lemma 1 (printed pp. 44\u201345). The source uses bounded optional stopping for a nonnegative supermartingale crossing event."
+            },
+            {
+              "title": "R. L. Wolpert, STA 205: Martingales, Duke University lecture notes (2010)",
+              "url": "https://www2.stat.duke.edu/courses/Fall10/sta205/lec/topics/mg.pdf",
+              "locator": "\u00a71, discrete optional stopping (PDF p. 1); \u00a75, Theorem 4 and proof (PDF pp. 11\u201312), stated for martingales. The local proof uses the published supermartingale optional-sampling supplier for the downward inequality."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-discrete-ville-inequality",
+        "kind": "theorem",
+        "title": "Discrete Ville inequality and anytime threshold validity",
+        "dependency_level": 1,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-discrete-stopping-time",
+          "def-nonnegative-test-supermartingale",
+          "lem-finite-horizon-test-supermartingale-crossing-bound",
+          "thm-continuity-from-below-for-measures"
+        ],
+        "statement": "Assume AC. For every null law P and alpha in (0,1), a nonnegative test supermartingale M with E_P M_0 <= 1 satisfies P(sup_{t >= 0} M_t >= 1/alpha) <= alpha and P(tau_alpha < infinity) <= alpha, where tau_alpha = inf{t >= 0: M_t >= 1/alpha}. For every discrete stopping time sigma, P(sigma < infinity, M_sigma >= 1/alpha) <= alpha.",
+        "strategy": "Pass from the finite-horizon crossing bound to the infinite crossing event by continuity from below. For the supremum event, compare against a sequence of strictly lower thresholds increasing to 1/alpha; do not assume the supremum is attained. A threshold crossing at any stopping time is contained in the all-time crossing event.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon, Time-uniform Chernoff bounds via nonnegative supermartingales, Probability Surveys 17 (2020), 257\u2013317",
+              "url": "https://arxiv.org/pdf/1808.03204",
+              "locator": "\u00a72.3, Lemma 1 (printed p. 14); \u00a76.1, proof of Lemma 1 (printed pp. 44\u201345). The source proves the first-crossing probability using bounded optional stopping and a finite-horizon limit."
+            },
+            {
+              "title": "R. L. Wolpert, STA 205: Martingales, Duke University lecture notes (2010)",
+              "url": "https://www2.stat.duke.edu/courses/Fall10/sta205/lec/topics/mg.pdf",
+              "locator": "\u00a71, discrete optional stopping (PDF p. 1); \u00a75, Theorem 4 and proof (PDF pp. 11\u201313), stated for martingales. The source independently supports the bounded maximal-inequality route; the local theorem handles supermartingales."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 2033,
+    "id": "discrete-sequential-test-validity-and-ville-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Discrete test supermartingales and Ville \u2014 Examples",
+    "companion": "discrete-sequential-test-validity-and-ville",
+    "requires": [
+      "discrete-sequential-test-validity-and-ville"
+    ],
+    "items": [
+      {
+        "id": "ex-independent-uniform-repeated-peeking-inflates-global-null-error",
+        "kind": "example",
+        "title": "Repeated unadjusted tests inflate global-null error",
+        "dependency_level": 2,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-discrete-stopping-time",
+          "def-independent-random-elements",
+          "thm-discrete-ville-inequality",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "statement": "For K >= 2 independent random variables P_1,...,P_K with P(P_i <= u) = u for every u in [0,1] under a global-null law, repeating the unadjusted rule to reject at look i when P_i <= alpha, for fixed alpha in (0,1), rejects at least once with probability 1-(1-alpha)^K > alpha. The first rejection time is a stopping time for F_k = sigma(P_1,...,P_min(k,K)) for all k >= 0, with F_0 trivial and no new information after K; the first rejection is taken over 1 <= i <= K, with infinity if none occurs.",
+        "strategy": "Use the product joint law to compute the probability that every look misses, take its complement, and compare the exact value with alpha. The Ville theorem is used only to state the distinct supermartingale premise that provides time-uniform control.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-test-supermartingale-supremum-threshold-need-not-be-attained",
+        "kind": "counterexample",
+        "title": "A supermartingale supremum threshold need not be attained",
+        "dependency_level": 2,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-filtration-and-filtered-probability-space",
+          "def-martingale-submartingale-and-supermartingale",
+          "def-nonnegative-test-supermartingale",
+          "def-probability-measure",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-discrete-ville-inequality"
+        ],
+        "statement": "The identity P(sup_{t >= 0} M_t >= 1/alpha) = P(tau_alpha < infinity), with tau_alpha = inf{t >= 0: M_t >= 1/alpha}, does not hold for every nonnegative test supermartingale M and alpha in (0,1).",
+        "strategy": "On a countable probability space, reveal singleton outcomes one at a time while retaining an atom in the never-yet-revealed tail. A conditional-expectation martingale approaches the threshold on that atom without reaching it; the tail atom has positive probability.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

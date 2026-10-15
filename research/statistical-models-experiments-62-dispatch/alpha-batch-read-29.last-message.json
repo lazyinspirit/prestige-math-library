@@ -1,0 +1,174 @@
+{
+  "group": "j",
+  "batches": ["29"],
+  "pages_read": [
+    "parametric-survival-and-reliability",
+    "parametric-survival-and-reliability-examples"
+  ],
+  "items_read": [
+    "def-parametric-survival-and-reliability",
+    "thm-exponential-and-weibull-survival-laws",
+    "thm-survival-cumulative-hazard-identity",
+    "thm-jump-hazard-survival-product",
+    "thm-censored-exponential-likelihood-and-mle",
+    "ex-exponential-weibull-hazards-and-censored-likelihood",
+    "ex-zero-exposure-censored-mle-boundary"
+  ],
+  "conventions": [
+    {
+      "convention": "Event times are finite and nonnegative. Right censoring records U=min(T,C) and δ=1{T≤C}, assigning ties to the event branch.",
+      "fixed_by": "def-event-time-observation-schemes",
+      "matters_for": [
+        "def-parametric-survival-and-reliability",
+        "thm-censored-exponential-likelihood-and-mle",
+        "ex-exponential-weibull-hazards-and-censored-likelihood",
+        "ex-zero-exposure-censored-mle-boundary"
+      ]
+    },
+    {
+      "convention": "Survival is S(t)=P(T>t), pre-event survival is S(t−)=P(T≥t), density hazard is a chosen density version divided by S(t) where S(t)>0, and atomic hazard is P(T=t)/P(T≥t) where its denominator is positive.",
+      "fixed_by": "def-parametric-survival-and-reliability",
+      "matters_for": [
+        "thm-exponential-and-weibull-survival-laws",
+        "thm-survival-cumulative-hazard-identity",
+        "thm-jump-hazard-survival-product",
+        "ex-exponential-weibull-hazards-and-censored-likelihood"
+      ]
+    },
+    {
+      "convention": "Exponential λ and Weibull shape k and scale η are strictly positive; the displayed densities vanish for t≤0 and the hazard formulas are asserted for t>0.",
+      "fixed_by": "thm-exponential-and-weibull-survival-laws",
+      "matters_for": [
+        "thm-censored-exponential-likelihood-and-mle",
+        "ex-exponential-weibull-hazards-and-censored-likelihood",
+        "ex-zero-exposure-censored-mle-boundary"
+      ]
+    },
+    {
+      "convention": "The continuous hazard identity assumes Countable Choice, Dependent Choice, a finite-valued Lebesgue density and S(0)=1. It uses the density hazard only before the first survival zero; thereafter cumulative hazard is extended by +∞ and exp(−∞)=0.",
+      "fixed_by": "thm-survival-cumulative-hazard-identity",
+      "matters_for": ["parametric-survival-and-reliability"]
+    },
+    {
+      "convention": "The finite atomic product assumes a nonempty finite support of distinct ordered nonnegative times, each with positive mass; it does not describe continuous decreases between atoms.",
+      "fixed_by": "thm-jump-hazard-survival-product",
+      "matters_for": ["ex-exponential-weibull-hazards-and-censored-likelihood"]
+    },
+    {
+      "convention": "The censoring family has specified finite-valued Borel densities relative to one parameter-independent sigma-finite Borel measure. Parameters form a product space, event and censor laws have separate parameters, and subject pairs are iid with within-subject independence.",
+      "fixed_by": "thm-censored-exponential-likelihood-and-mle",
+      "matters_for": [
+        "ex-exponential-weibull-hazards-and-censored-likelihood",
+        "ex-zero-exposure-censored-mle-boundary"
+      ]
+    },
+    {
+      "convention": "Likelihood uses explicitly specified density representatives. Rate-maximizing claims require a positive censor-only factor. λ=0 is a formal likelihood boundary, not a proper exponential law for finite event times.",
+      "fixed_by": "thm-censored-exponential-likelihood-and-mle",
+      "matters_for": [
+        "ex-exponential-weibull-hazards-and-censored-likelihood",
+        "ex-zero-exposure-censored-mle-boundary"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-parametric-survival-and-reliability",
+      "statement": "S_T(t):=P(T>t)=1−F_T(t); S_T(t−):=P(T≥t). The density hazard is f(t)/S_T(t) where S_T(t)>0, and the jump hazard is P(T=t)/P(T≥t) where P(T≥t)>0. Exponential and Weibull survival specifications have positive parameters.",
+      "used_by": [
+        "thm-exponential-and-weibull-survival-laws",
+        "thm-survival-cumulative-hazard-identity",
+        "thm-jump-hazard-survival-product",
+        "thm-censored-exponential-likelihood-and-mle",
+        "ex-exponential-weibull-hazards-and-censored-likelihood"
+      ]
+    },
+    {
+      "id": "thm-exponential-and-weibull-survival-laws",
+      "statement": "Assume Countable Choice. For λ>0, f_λ(t)=λ exp(−λt) for t>0 and zero for t≤0 defines a probability law with survival exp(−λt). For k,η>0, f_{k,η}(t)=(k/η)(t/η)^{k−1} exp(−(t/η)^k) for t>0 and zero for t≤0 defines a probability law with survival exp(−(t/η)^k). Each law is unique among probability laws on [0,∞) with that survival. Their density hazards for t>0 are λ and (k/η)(t/η)^{k−1}.",
+      "used_by": [
+        "thm-censored-exponential-likelihood-and-mle",
+        "ex-exponential-weibull-hazards-and-censored-likelihood",
+        "ex-zero-exposure-censored-mle-boundary"
+      ]
+    },
+    {
+      "id": "thm-censored-exponential-likelihood-and-mle",
+      "statement": "Under Countable Choice and the stated iid independent, parameter-distinct, commonly dominated censoring model, the branch densities are h(u,1)=λ exp(−λu) G_ψ([u,∞)) and h(u,0)=exp(−λu)g_ψ(u). The likelihood factorizes as λ^d exp(−λE)C_ψ. For C_ψ>0: d>0,E>0 gives the unique maximum d/E; d=0,E>0 gives a strictly decreasing likelihood with an unattained supremum as λ↓0; d=0,E=0 gives a constant likelihood. Under the model d>0,E=0 has probability zero. λ=0 is only a formal likelihood extension.",
+      "used_by": [
+        "ex-exponential-weibull-hazards-and-censored-likelihood",
+        "ex-zero-exposure-censored-mle-boundary"
+      ]
+    },
+    {
+      "id": "thm-jump-hazard-survival-product",
+      "statement": "Assume Countable Choice. For t≥0 with P(T≥t)>0, S_T(t)=S_T(t−)(1−q_T(t)). If the law has finite support 0≤t_1<⋯<t_m, m≥1, with positive mass at every listed time, then S_T(t_j)=∏_{r=1}^j(1−q_T(t_r)) for 1≤j≤m.",
+      "used_by": ["ex-exponential-weibull-hazards-and-censored-likelihood"]
+    }
+  ],
+  "published_dependencies": [
+    {"id":"cor-exponential-reciprocal-and-positivity","used_for":"Positivity and reciprocal identity for exponential survival and densities.","opened":true},
+    {"id":"cor-integral-over-a-null-set-vanishes","used_for":"Removing singleton endpoints from density integrals.","opened":true},
+    {"id":"cor-mean-value-theorem","used_for":"Monotonicity of powers, logarithms, candidate CDFs and log likelihoods.","opened":true},
+    {"id":"cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous","used_for":"Absolute continuity of survival and integrated hazard on compact intervals.","opened":true},
+    {"id":"def-absolutely-continuous-function","used_for":"The finite-interval criterion establishing absolute continuity of log composed with survival.","opened":true},
+    {"id":"def-borel-sigma-algebra","used_for":"Borel domains, branch densities and observation-map measurability.","opened":true},
+    {"id":"def-countable-choice","used_for":"Explicit choice assumptions inherited by measure, family, jump and likelihood results.","opened":true},
+    {"id":"def-cumulative-distribution-function-of-a-random-variable","used_for":"CDF convention P(T≤t) and its relation to survival.","opened":true},
+    {"id":"def-dependent-choice","used_for":"The explicit assumption inherited from the absolutely continuous FTC.","opened":true},
+    {"id":"def-dominated-statistical-experiment","used_for":"A fixed sigma-finite dominator for every observation law.","opened":true},
+    {"id":"def-independent-random-elements","used_for":"Within-subject independence and iid subject-pair assumptions.","opened":true},
+    {"id":"def-lebesgue-measure-and-the-lebesgue-sigma-algebra","used_for":"The base measure for event-time densities and hazards.","opened":true},
+    {"id":"def-likelihood-density","used_for":"Density-version likelihood conventions; the explicit construction avoids arbitrary simultaneous representative selection.","opened":true},
+    {"id":"def-measure-with-density","used_for":"Constructing event laws and specifying censor-law densities.","opened":true},
+    {"id":"def-natural-logarithm","used_for":"Logarithm and exponential inverse identities in the hazard proof.","opened":true},
+    {"id":"def-parametric-statistical-model","used_for":"Parameter-to-law maps and distinct event/censor parameter components.","opened":true},
+    {"id":"def-real-exponential-function-and-e","used_for":"The exponential convention and exp(0)=1.","opened":true},
+    {"id":"def-real-power","used_for":"Weibull positive-base powers and the zero-base convention for positive shape.","opened":true},
+    {"id":"def-statistical-experiment","used_for":"Sampling-law family and measurable sample-space conventions.","opened":true},
+    {"id":"prop-measure-monotonicity","used_for":"Nonincreasing survival.","opened":true},
+    {"id":"thm-arithmetic-and-lattice-operations-preserve-measurability","used_for":"Measurability of hazard quotients, branch densities and finite density products.","opened":true},
+    {"id":"thm-borel-sets-are-lebesgue-measurable","used_for":"Restricting density measures to Borel probability laws under Countable Choice.","opened":true},
+    {"id":"thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral","used_for":"Identifying compact-interval Riemann and Lebesgue density integrals.","opened":true},
+    {"id":"thm-c1-lipschitz-ac-bv-hierarchy","used_for":"Continuity of absolutely continuous survival at a finite terminal endpoint.","opened":true},
+    {"id":"thm-chain-rule","used_for":"Differentiating Weibull CDFs and log survival at differentiability points.","opened":true},
+    {"id":"thm-composition-with-borel-functions-preserves-measurability","used_for":"Measurability of observed right-censoring records.","opened":true},
+    {"id":"thm-continuity-from-below-for-measures","used_for":"Ruling out a finite-event-time exponential law with rate zero.","opened":true},
+    {"id":"thm-continuous-implies-integrable","used_for":"Compact-interval integrability of smooth event densities.","opened":true},
+    {"id":"thm-derivative-of-exponential","used_for":"CDF differentiation and continuity at the likelihood boundary.","opened":true},
+    {"id":"thm-exponential-is-strictly-increasing","used_for":"CDF positivity and strict decrease of the no-failure positive-exposure likelihood.","opened":true},
+    {"id":"thm-exponential-limits-and-range","used_for":"Candidate CDF endpoint limits.","opened":true},
+    {"id":"thm-first-fundamental-theorem-of-calculus-for-l-one","used_for":"Almost-everywhere derivatives of survival and integrated hazard.","opened":true},
+    {"id":"thm-ftc-second-part","used_for":"Evaluating compact-interval density integrals by CDF increments.","opened":true},
+    {"id":"thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions","used_for":"Integrating the almost-everywhere derivative of log survival under Countable Choice and Dependent Choice.","opened":true},
+    {"id":"thm-independent-random-elements-have-product-joint-law","used_for":"Product laws within subjects and across independent subject records.","opened":true},
+    {"id":"thm-integral-logarithm-is-unbounded","used_for":"Logarithmic endpoint limits, together with the logarithm integral identity.","opened":true},
+    {"id":"thm-integration-against-a-density","used_for":"Changing censor-branch integration from G_ψ to g_ψ dν.","opened":true},
+    {"id":"thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures","used_for":"The CDF jump formula P(T=t)=F_T(t)−F_T(t−).","opened":true},
+    {"id":"thm-lebesgue-measure-is-a-complete-measure","used_for":"Lebesgue measure and its sigma-algebra under Countable Choice.","opened":true},
+    {"id":"thm-lebesgue-measure-of-a-box-of-every-kind","used_for":"Interval measurability, null singletons and finite-measure exhaustion of the event branch.","opened":true},
+    {"id":"thm-logarithm-derivative-and-integral","used_for":"Logarithmic derivatives, the log-survival Lipschitz estimate and rate optimization.","opened":true},
+    {"id":"thm-monotone-convergence-for-the-integral","used_for":"Passing compact density integrals to the origin and total mass.","opened":true},
+    {"id":"thm-monotone-real-functions-are-borel-measurable","used_for":"Measurability of the censor tail G_ψ([u,∞)).","opened":true},
+    {"id":"thm-probability-law-and-distribution-function-correspondence","used_for":"Uniqueness of laws from their CDFs and identification of the law used in the atom formula.","opened":true},
+    {"id":"thm-real-power-continuity-and-derivatives","used_for":"Weibull power differentiation on positive times.","opened":true},
+    {"id":"thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique","used_for":"Product reference measures and uniqueness from rectangle probabilities.","opened":true},
+    {"id":"thm-tonelli-theorem-for-sigma-finite-product-spaces","used_for":"Branch-density calculations and integration of the finite product observation density.","opened":true}
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures",
+      "finding": "Published supplier thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures splits numbered steps 1.1, 2.1, 3.1 and 5.1 into multiple blank-line-separated paragraphs. Its last numbered step ends with '[step 1.1, step 2.1, step 3.1, step 4.1, step 5.1]' and a separate paragraph repeats '[step 1.1, step 2.1, step 3.1, step 4.1, step 5.1] ∎'. This violates SCHEMA.md's requirement that each complete numbered step occupy one paragraph and that the final step itself end with '[tags] ∎'. The cited atom formula is mathematically sound.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "parametric-survival-and-reliability",
+      "to": "event-time-censoring-and-truncation",
+      "faithful": true,
+      "note": "Checked the prerequisite page, def-event-time-observation-schemes and thm-likelihood-contributions-under-censoring-and-delayed-entry against the batch's actual uses. Finite nonnegative event times, U=min(T,C), event-assigned ties, independent parameter-distinct censoring and branch-specific domination agree. The batch independently derives its unconditional exponential likelihood; it does not import the conditional-kernel theorem without its AC and conditional-law hypotheses. No reverse logical dependency or conflicting endpoint convention was found."
+    }
+  ]
+}

@@ -1,15 +1,15 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 837ca5788ded by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 60b3edeb73ba by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 17079 |
-| now mechanically prevented | 372 |
-| escaped to publication | 1 |
-| still open | 102 |
+| defects caught before publication | 17667 |
+| now mechanically prevented | 373 |
+| escaped to publication | 7 |
+| still open | 103 |
 
 ## frontier-11 — 4 row(s)
 
@@ -928,6 +928,37 @@
 | unsupported-field-claim | 1 |  |  |  |
 | invalid-inference-and-target-type | 1 |  |  |  |
 
+## mathematical-statistics-foundations-37 — 177 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate | 5.2-impact |
+|---|---|---|---|
+| citation-inaccurate | 42 | 10 |  |
+| unsupported-inference | 22 |  |  |
+| reader-repair | 16 |  |  |
+| missing-hypothesis | 12 |  |  |
+| invalid-inference |  | 12 |  |
+| citation-missing | 8 |  |  |
+| ill-formed | 6 |  |  |
+| ill-typed-claim | 4 | 1 |  |
+| undefined-notation | 4 | 1 |  |
+| citation-inflated | 5 |  |  |
+| missing-choice-scope |  |  | 5 |
+| arithmetic-error | 4 |  |  |
+| false-or-overstrong-title | 4 |  |  |
+| frontmatter-schema | 4 |  |  |
+| citation-truncated | 2 |  |  |
+| unlicensed-inference | 2 |  |  |
+| ill-typed-construction | 2 |  |  |
+| false-or-overstrong-statement | 1 | 1 |  |
+| overstrong-title-or-statement | 2 |  |  |
+| proof-step-overstatement | 1 |  |  |
+| citation-misattributed | 1 |  |  |
+| false-claim | 1 |  |  |
+| invalid-witness | 1 |  |  |
+| false-computation | 1 |  |  |
+| contract-mismatch | 1 |  |  |
+| missing-case | 1 |  |  |
+
 ## phase-2-catchup-24 — 14 row(s)
 
 | subclass | 6b-adjudicate |
@@ -1172,6 +1203,37 @@
 |---|---|---|
 | other | 1 | 1 |
 
+## statistical-models-experiments-62 — 417 row(s)
+
+| subclass | 1-scaffold | 2-scope-review | 3a-adjudicate | 5-adjudicate | 5.2-impact | 6-scope | owner | post-publication | 3-review |
+|---|---|---|---|---|---|---|---|---|---|
+| citation-missing | 6 | 60 | 7 | 2 |  |  | 1 |  |  |
+| contract-mismatch | 1 | 61 |  |  |  | 1 | 4 |  |  |
+| citation-inaccurate | 1 | 4 | 34 | 2 |  |  |  |  | 5 |
+| false-boundary-disposition | 1 | 42 | 1 |  |  |  | 1 |  |  |
+| missing-hypothesis | 2 | 2 | 29 | 5 |  |  |  |  |  |
+| unsupported-inference | 5 | 12 | 12 |  |  |  | 1 |  |  |
+| false-or-overstrong-statement | 6 | 2 | 9 | 4 |  |  |  |  |  |
+| invalid-inference | 2 | 1 | 7 | 1 |  |  | 1 | 1 |  |
+| undefined-notation | 2 | 1 | 8 | 1 |  |  |  |  |  |
+| unlicensed-inference |  |  | 7 |  |  |  | 1 | 2 |  |
+| other |  | 3 |  | 1 |  |  | 4 |  |  |
+| citation-misattributed |  | 3 | 2 | 3 |  |  |  |  |  |
+| ill-typed-construction | 1 |  | 1 | 3 | 1 |  |  |  |  |
+| citation-inflated |  |  | 2 | 4 |  |  |  |  |  |
+| ill-formed |  |  | 3 |  |  |  | 1 | 2 |  |
+| frontmatter-schema | 1 | 1 | 2 |  |  |  |  | 1 |  |
+| missing-choice-scope |  | 2 | 1 | 1 |  |  |  |  |  |
+| false-or-overstrong-title |  |  | 3 |  |  |  |  |  |  |
+| scope-loss |  | 2 |  |  |  |  |  |  |  |
+| gate-wrong-signature |  | 2 |  |  |  |  |  |  |  |
+| ill-typed-claim |  |  | 1 | 1 |  |  |  |  |  |
+| missing-case |  |  | 1 |  |  |  | 1 |  |  |
+| citation-corrupted |  |  | 1 |  |  |  |  |  | 1 |
+| scope-drop | 1 |  |  |  |  |  |  |  |  |
+| arithmetic-error |  | 1 |  |  |  |  |  |  |  |
+| false-claim |  |  | 1 |  |  |  |  |  |  |
+
 ## subjects-01 — 7 row(s)
 
 | subclass | unknown |
@@ -1282,3 +1344,4 @@
 - `f44-six-b47-lower-global-label-premise` frontier-44-special-representation-examples-28-six-step · invalid-inference · thm-self-dual-indecomposable-cyclotomic-klr-projectives-give-the-lower-global-basis
 - `f44-six-b47-upper-global-label-premise` frontier-44-special-representation-examples-28-six-step · invalid-inference · thm-self-dual-simple-cyclotomic-klr-modules-give-the-upper-global-basis
 - `f44-six-b47-page-foundation-overclaim` frontier-44-special-representation-examples-28-six-step · overstrong-title-or-statement · cyclotomic-klr-algebras-and-highest-weight-categorification
+- `msf37-step5-impact-initial-r1-u3-thm-huber-sparse-covariance-upper-and-lower-risk-ac-route` mathematical-statistics-foundations-37 · missing-choice-scope · thm-huber-sparse-covariance-upper-and-lower-risk

@@ -10,12 +10,8 @@ provenance:
 deps: [def-measurable-function-between-measurable-spaces]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
+  repair: research/statistical-models-experiments-62-published-composition-format-repair.json
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-27
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Definition 3.3"
@@ -42,10 +38,6 @@ its codomain, then $g \circ f$ is measurable.
 
 **Proof technique:** direct.
 
-1.1 Let $C \in \mathcal{C}$. Since $g$ is measurable, [L1] gives [given, L1] $g^{-1}(C) \in \mathcal{B}$. [given, L1]
+1.1 Let $C \in \mathcal{C}$. Since $g$ is measurable, [L1] gives $g^{-1}(C) \in \mathcal{B}$. [given, L1]
 
-2.1 Since $f$ is measurable, [L1] applied again gives [step 1.1, L1]
-
-$$(g \circ f)^{-1}(C) = f^{-1}(g^{-1}(C)) \in \mathcal{A}.$$
-
-So $g \circ f$ is measurable. [step 1.1, L1] ∎
+2.1 Since $f$ is measurable, [L1] applied again gives $$(g \circ f)^{-1}(C) = f^{-1}(g^{-1}(C)) \in \mathcal{A}.$$ So $g \circ f$ is measurable. [step 1.1, L1] ∎

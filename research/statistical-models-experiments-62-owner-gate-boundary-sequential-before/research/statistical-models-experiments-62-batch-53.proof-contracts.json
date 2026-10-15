@@ -1,0 +1,419 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-holm-step-down-procedure",
+    "lem-holm-rejection-events-are-measurable",
+    "thm-holm-stepdown-strong-fwer",
+    "ex-holm-step-down-versus-bonferroni"
+  ],
+  "contracts": {
+    "alg-holm-step-down-procedure": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition specifies m=0 and an empty rejected set without evaluating a cutoff."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At α=0 every tested cutoff is zero; the Definition still returns the prefix satisfying the inclusive comparisons."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for m=1 the only cutoff is α/(1−1+1)=α, so the rule reduces to the single p-value threshold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: if all p-values tie, ordering by the hypothesis index gives a unique permutation and the same finite-prefix rule."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: for α=1, p_i∈[0,1] and the first cutoff is 1/m; all denominators remain positive. For α=0, the rule is defined by the zero cutoff."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice function is used; the finite ordering and maximum are defined deterministically, including ties."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a procedure definition and asserts no biconditional characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a procedure definition and asserts no converse theorem."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": []
+    },
+    "lem-holm-rejection-events-are-measurable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "A **p-value statistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the trace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "A **statistic** with target measurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-holm-step-down-procedure",
+          "source_section": "Definition",
+          "quote": "Given $\\alpha\\in[0,1]$ and an observation $x\\in\\mathcal X$, order the indices by the pairs $(p_i(x),i)$ in lexicographic order. This gives a unique permutation $\\pi$ with $p_{\\pi(1)}(x)\\le\\cdots\\le p_{\\pi(m)}(x)$; ties are ordered by increasing index.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n[[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\nproduct $fg$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ordering-and-cutoff-cells",
+          "claim": "Each pairwise value comparison is measurable because p_a-p_b is measurable and the comparison is a Borel threshold set. For each permutation and prefix length, its ordering-plus-cutoff cell is a finite intersection of these comparisons and cutoff events, hence measurable; the cells partition the data space.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "finite-union-of-rejection-cells",
+          "claim": "For each index i, its rejection event is the union of the finitely many ordering and prefix-length cells whose rejected prefix contains i, hence is measurable.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma assumes m≥1 so there is at least one rejection event to check."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 cover α=0 because each cutoff event is a Borel threshold preimage."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1, step 2.1 reduces to the measurable threshold event {p_1≤α}."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include tied p-values because the lexicographic order uses the index to choose a unique ordering cell."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses closed or open Borel half-lines and remains valid for α=0 and α=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof takes finite unions over the finitely many permutations; no choice function or axiom of choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves a measurability implication and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves a measurability implication and states no converse."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": []
+    },
+    "thm-holm-stepdown-strong-fwer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-null-valid-p-value-and-fwer-fdr",
+          "source_section": "Definition",
+          "quote": "For each $i\\in[m]$, let $p_i:\\mathcal X\\to[0,1]$ be a p-value statistic ([[def-p-value]]). It is **valid for $H_{0i}$** when\n\n$$P_\\theta\\{x:p_i(x)\\le u\\}\\le u\\qquad(\\theta\\in H_{0i},\\ 0\\le u\\le1).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-null-valid-p-value-and-fwer-fdr",
+          "source_section": "Definition",
+          "quote": "For $\\theta\\in\\Theta$, the **true-null index set** is\n$$I_0(\\theta):=\\{i\\in[m]:\\theta\\in H_{0i}\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-holm-step-down-procedure",
+          "source_section": "Definition",
+          "quote": "The rejected-index set is $R_\\alpha(x)=\\{\\pi(j):1\\le j\\le r_\\alpha(x)\\}$. Reject $H_{0i}$ exactly when $i\\in R_\\alpha(x)$; equivalently, compare sequentially to $\\alpha/(m-j+1)$, stop at the first failed comparison, and reject only the preceding ranks.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-holm-rejection-events-are-measurable",
+          "source_section": "Statement",
+          "quote": "For the rejected-index set $R_\\alpha(x)$ from [[alg-holm-step-down-procedure]], each rejection event $D_i(\\alpha):=\\{x\\in\\mathcal X:i\\in R_\\alpha(x)\\}$ belongs to $\\mathcal A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bonferroni-familywise-error-control",
+          "source_section": "Statement",
+          "quote": "For $\\alpha\\in[0,1]$, reject $H_{0i}$ exactly when $p_i(X)\\le\\alpha/m$. Then, for every $\\theta$ in the parameter space,\n$$P_\\theta\\{\\text{at least one true null is rejected}\\}=P_\\theta(V_\\theta\\ge1)\\le\\alpha.$$ \nThe bound holds for every true-null configuration, including the global null and configurations with false nulls, and for arbitrary dependence among the p-values.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "earliest-true-null",
+          "claim": "For m_0>0, any Holm rejection of a true null forces rejection of the earliest-ranked true null. Its rank j_0 satisfies m-j_0+1≥m_0, so its rejected p-value is at most α/m_0. The Holm false-rejection event is therefore contained in the union of the m_0 true-null events {p_i(X)≤α/m_0}.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bonferroni-on-true-subfamily",
+          "claim": "For fixed θ with m_0>0, the true-null subfamily has m_0 members and all are true under θ. Applying the Bonferroni theorem with cutoff α/m_0 bounds the probability of its union of threshold events by α. The Holm error event is a subset of this union.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes m≥1; the empty input is defined by the algorithm separately."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At α=0, step 1.1 gives true-null p-values at most zero and step 2.1 applies Bonferroni at level zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For m=1, the algorithm is the single threshold at α and the Bonferroni comparison in step 2.1 gives the same error bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 1.1 covers m_0=0 directly and m_0=m through j_0=1, giving the global-null cutoff α/m."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement permits α=0 and α=1; when m_0>0, α/m_0 lies in [0,1] and each rank denominator is positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses the least rank in a finite nonempty set; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a one-way probability bound and makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves a one-way probability bound and makes no converse claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": []
+    },
+    "ex-holm-step-down-versus-bonferroni": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-holm-step-down-procedure",
+          "source_section": "Definition",
+          "quote": "The rejected-index set is $R_\\alpha(x)=\\{\\pi(j):1\\le j\\le r_\\alpha(x)\\}$. Reject $H_{0i}$ exactly when $i\\in R_\\alpha(x)$; equivalently, compare sequentially to $\\alpha/(m-j+1)$, stop at the first failed comparison, and reject only the preceding ranks.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-holm-stepdown-strong-fwer",
+          "source_section": "Statement",
+          "quote": "Then $\\operatorname{FWER}_\\theta\\le\\alpha$ for every $\\theta\\in\\Theta$. This is strong familywise error control and requires no independence or other restriction on the joint distribution of the p-values.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "holm-arithmetic",
+          "claim": "The first two observed p-values meet α/4=1/80 and α/3=1/60, while p_(3)=3/100 exceeds α/2=1/40, so the stop-at-first-failure rule rejects exactly {1,2}.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bonferroni-arithmetic",
+          "claim": "The one-step threshold is α/4=1/80; p_1 passes and p_2,p_3,p_4 fail, so the Bonferroni rejection set is {1}.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "example-limit",
+          "claim": "A single observed vector determines neither null validity nor an error probability; those are the distributional hypotheses in the strong-FWER theorem.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The worked calculation fixes four hypotheses and does not evaluate an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes α=1/20, strictly between zero and one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked family has four hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The four displayed p-values are distinct and strictly between zero and one."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The selected α and all four p-values lie strictly inside their permitted intervals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses exact rational arithmetic and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no converse claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "axioms_used": []
+    }
+  }
+}

@@ -1,0 +1,740 @@
+{
+  "version": 1,
+  "scope": [
+    "def-group-sequential-alpha-spending-design",
+    "alg-group-sequential-alpha-spending-boundary-calibration",
+    "thm-group-sequential-alpha-spending-calibration",
+    "ex-pocock-spending-two-look",
+    "ex-obrien-fleming-spending-two-look"
+  ],
+  "contracts": {
+    "def-group-sequential-alpha-spending-design": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The design domain requires a positive finite integer K, so an empty look schedule is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: A(0)=0; the algorithm separately handles every flat increment as zero additional spend."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: t_K=1 and A(1)=alpha; the terminal look and total budget are explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: strict information fractions make Sigma positive definite, as proved in the justified-by calibration theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both endpoints t_0=0,A(0)=0 and t_K=1,A(1)=alpha are stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition assumes AC for the Gaussian law and names its use through the supplied normal-law construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition stipulates K>=1, prescheduled fractions, a canonical Gaussian null law and a spending function; exact calibration is defined by the cumulative probabilities A(tk). It defines the design vocabulary without asserting a theorem characterizing all designs with size alpha."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition stipulates K>=1, prescheduled fractions, a canonical Gaussian null law and a spending function; exact calibration is defined by the cumulative probabilities A(tk). It defines the design vocabulary without asserting a theorem characterizing all designs with size alpha."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-61",
+        "notes": "Reviewed Definition and all six declared suppliers, algorithm and justified-by theorem. K>=1 excludes empty schedules; strict positive fractions yield the invertible triangular factor LL^T=Sigma (theorem 1.1), including K=1. A need only be nondecreasing with endpoints 0 and alpha: jumps and plateaus are admissible for the finite schedule. AC is explicitly inherited from normal-law existence/independent-coordinate representation and uniqueness, not finite root selection. Singleton-null size agrees with def-test-size-and-power with a nonempty alternative. Separate symmetric calibration and exact stipulated Gaussian law avoid independence, CLT, estimated-variance or data-dependent-timing claims. DeMets\u2013Lan PDF pp.6\u20137, Grayling et al. \u00a7\u00a72\u20133.1 and Minas \u00a7\u00a75.3\u20135.3.1 checked; current definition is a sound restricted exact model. Reader/refuter found no defects; independent review finds none."
+      }
+    },
+    "alg-group-sequential-alpha-spending-boundary-calibration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The input design has K>=1 and the algorithm starts from R_0=empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Algorithm definition: if A(t_k)=A(t_{k-1}), the +infinity boundary has an empty crossing event and preserves the previous spend."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Algorithm definition: t_K=1 and A(1)=alpha, so the last look receives the remaining calibrated budget."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Algorithm definition: the justified-by theorem proves positive-definite covariance and a unique finite root for every positive increment."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Algorithm definition: the theorem checks both tail endpoints of each boundary function; flat increments use the explicit +infinity branch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Algorithm definition: no arbitrary root is selected; every finite solution is unique by the calibration theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition is a finite recursion: a flat spending increment sets an infinite boundary and a positive increment solves its cumulative crossing equation. These instructions and their unique-root supplier specify the procedure rather than a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition is a finite recursion: a flat spending increment sets an infinite boundary and a positive increment solves its cumulative crossing equation. These instructions and their unique-root supplier specify the procedure rather than a biconditional theorem."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-group-sequential-alpha-spending-calibration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-sequential-alpha-spending-design",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Fix a finite integer\nmaximum $K\\ge1$, prescheduled information fractions\n$0<t_1<\\cdots<t_K=1$ (where $t_j$ is the fraction of total planned\ninformation available at look $j$), and a nominal level $\\alpha\\in(0,1)$. An\n**alpha-spending function** is a nondecreasing map\n$A:[0,1]\\to[0,\\alpha]$ with $A(0)=0$ and $A(1)=\\alpha$.\n\nUnder the stipulated simple null law $P_0$, the standardized look vector is\n$Z=(Z_1,\\ldots,Z_K)\\sim N_K(0,\\Sigma)$, where\n$$\\Sigma_{jk}=\\sqrt{t_j/t_k}\\quad(j\\le k),\\qquad \\Sigma_{jk}=\\Sigma_{kj}\\quad(j>k).$$\nHere $N_K$ is the finite-dimensional multivariate normal law of\n[[def-multivariate-normal-law]], whose projection characterization determines\nthe law by [[lem-characteristic-function-of-a-multivariate-normal-law]].\nThe construction of this covariance matrix as a valid Gaussian covariance is\nproved in [[thm-group-sequential-alpha-spending-calibration]]. The standardized\ncoordinates are correlated; independence of the $Z_j$ is not assumed.\n\nFor a **one-sided upper-boundary design**, look $j$ rejects when\n$Z_j\\ge b_j$. For a **symmetric two-sided design**, look $j$ rejects when\n$|Z_j|\\ge c_j$. In either case, the procedure stops at its first crossing.\nFor each $k$, its cumulative type-I probability is the probability under the\nstipulated null law of crossing at one of looks $1,\\ldots,k$. The design is\nexactly calibrated to $A$ when this cumulative probability equals $A(t_k)$\nfor every $k$. If it is embedded in an experiment with a nonempty alternative\nand singleton null hypothesis, this null rejection probability is the test\nsize in the sense of [[def-test-size-and-power]].\n\nThe fractions and joint null law are assumptions of this definition. It does\nnot derive a Gaussian model from an asymptotic central limit theorem, justify\ndata-dependent look timing, justify estimated variance, or establish error\ncontrol over an unspecified composite null. A two-sided design calibrates its\ntwo-sided crossing events separately; one-sided boundaries are not doubled\nto obtain two-sided boundaries.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] \u2014 hence the least-upper-bound property \u2014 that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-test-size-and-power",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.\n\nFor a randomized test with test function\n$\\varphi:\\mathcal X\\to[0,1]$ ([[def-randomized-test]]), its **power function**\nis\n$$\\beta(\\theta):=E_\\theta[\\varphi(X)]\\qquad(\\theta\\in\\Theta).$$\nIts **size** is\n$$\\sup_{\\theta\\in\\Theta_0}\\beta(\\theta),$$\nand it has **level $\\alpha$** when this supremum is at most\n$\\alpha\\in[0,1]$. The expectations exist and lie in $[0,1]$ because\n$0\\le\\varphi\\le1$ and each $P_\\theta$ is a probability measure\n([[def-probability-measure]],\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).\nThe supremum exists because $\\Theta_0$ is nonempty, the values lie in\n$[0,1]$, and $\\mathbb R$ has the least-upper-bound property\n([[def-complete-ordered-field]]).\n\nFor the binary action $a\\in\\{0,1\\}$, where $1$ means reject, the\n**zero-one error loss** is $1$ when $a=1$ and $\\theta\\in\\Theta_0$, or when\n$a=0$ and $\\theta\\in\\Theta_1$, and is $0$ otherwise. The decision-rule risk\nfrom [[def-loss-function-and-risk]] integrates this loss against the action\nkernel and data law. For each fixed $\\theta$, its section on the binary\naction space is measurable. The risk identities proved in\n[[lem-test-zero-one-loss-risk-identities]] show that risk equals\n$\\beta(\\theta)$ on $\\Theta_0$ and $1-\\beta(\\theta)$ on $\\Theta_1$. Thus size\nis the worst null error risk, and power is the rejection probability under\neach alternative parameter.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "alg-group-sequential-alpha-spending-boundary-calibration",
+          "source_section": "Definition",
+          "quote": "**Inputs:** The Axiom of Choice ([[def-axiom-of-choice]]) and a canonical design from\n[[def-group-sequential-alpha-spending-design]] and a mode, either one-sided\nupper-boundary or symmetric two-sided.\n\n**Output:** The look boundaries for the selected mode.\n\nSet $t_0=0$, $R_0=\\varnothing$, and process $k=1,\\ldots,K$ in order. Let\n$R_{k-1}$ be the union of the crossing events already defined at the earlier\nlooks.\n\n- If $A(t_k)=A(t_{k-1})$, set the boundary at look $k$ to $+\\infty$. Its\n  crossing event is empty, so $R_k=R_{k-1}$.\n- If $A(t_k)>A(t_{k-1})$ and the mode is one-sided, choose the real number\n  $b_k$ satisfying\n  $$P_0(R_{k-1}\\cup\\{Z_k\\ge b_k\\})=A(t_k),$$\n  and set $R_k=R_{k-1}\\cup\\{Z_k\\ge b_k\\}$.\n- If $A(t_k)>A(t_{k-1})$ and the mode is symmetric two-sided, choose\n  $c_k\\ge0$ satisfying\n  $$P_0(R_{k-1}\\cup\\{|Z_k|\\ge c_k\\})=A(t_k),$$\n  and set $R_k=R_{k-1}\\cup\\{|Z_k|\\ge c_k\\}$.\n\nThe root-existence theorem\n[[thm-group-sequential-alpha-spending-calibration]] proves that every\npositive spending increment has a unique finite solution; the algorithm\ntherefore makes no arbitrary boundary selection. The procedure specifies\nexact boundaries under the supplied joint null law. It does not prescribe a\nnumerical integration package or tolerance.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $1\\le i\\le j\\le K$, define a lower-triangular matrix $L$ by $L_{j1}=\\sqrt{t_1/t_j}$ and, for $2\\le i\\le j$, $L_{ji}=\\sqrt{(t_i-t_{i-1})/t_j}$, with $L_{ji}=0$ for $i>j$. For $j\\le k$, the $(j,k)$ entry of $LL^T$ is $$\\frac{t_1+\\sum_{i=2}^{j}(t_i-t_{i-1})}{\\sqrt{t_jt_k}}=\\sqrt{t_j/t_k}=\\Sigma_{jk}.$$ Thus $\\Sigma=LL^T$. Its diagonal entries in $L$ are $1$ and $\\sqrt{(t_i-t_{i-1})/t_i}>0$ for $i\\ge2$, so $L$ is invertible and $v^T\\Sigma v=\\|L^Tv\\|^2>0$ for every nonzero $v$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every $k$, the $k$th coordinate has law $N(0,1)$ by the projection clause in [F2]. It has no atoms, and for $x<y$, $$0<P_0(x<Z_k<y)=\\int_x^y\\phi(u)\\,du\\le\\frac{y-x}{\\sqrt{2\\pi}}.$$ Positivity follows from [F5]; the upper bound follows from $0<e^{-u^2/2}\\le1$. The same facts bound a two-sided strip by $P_0(c<|Z_k|<d)\\le2(d-c)/\\sqrt{2\\pi}$ when $0\\le c<d$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] and [F3], the canonical law exists and is represented by $Z=\\Sigma^{1/2}Y$ for independent standard-normal coordinates $Y$. Since $\\Sigma$ is positive definite by step 1.1, $\\Sigma^{1/2}$ is invertible: if $\\Sigma^{1/2}v=0$, then $v^T\\Sigma v=0$, forcing $v=0$. The inverse image under this linear homeomorphism of any nonempty open subset of $\\mathbb R^K$ is nonempty and open, hence contains a product of nonempty open intervals. Each interval has positive standard-normal probability by [F4]\u2013[F5], and independence makes the product probability positive. Therefore every nonempty open subset of $\\mathbb R^K$ has positive $P_0$-probability.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the induction step, fix $k\\in\\{1,\\ldots,K\\}$. Assume that the boundaries through $k-1$ have been constructed with $P_0(R_{k-1})=A(t_{k-1})$; for $k=1$ this is the empty base case $R_0=\\varnothing$, $A(t_0)=A(0)=0$. Any finite two-sided boundary already constructed is positive, as established when its root was obtained. Let $S=R_{k-1}^c$. In the one-sided mode, $S$ is the intersection of the open conditions $Z_j<b_j$ for earlier finite boundaries; in the symmetric two-sided mode, it is the intersection of $|Z_j|<c_j$ for earlier finite boundaries. These conditions describe a nonempty open set: choose each constrained coordinate below its upper boundary, or inside its interval $(-c_j,c_j)$, and ignore infinite boundaries. Thus $P_0(S)=1-A(t_{k-1})\\ge1-\\alpha>0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In the one-sided mode set $q(x)=A(t_{k-1})+P_0(S\\cap\\{Z_k\\ge x\\})$ for $x\\in\\mathbb R$. If $x<y$, then $q(x)-q(y)=P_0(S\\cap\\{x\\le Z_k<y\\})>0$. Although $S\\subseteq\\mathbb R^K$, it restricts only coordinates $j<k$, as described in step 3.1. Thus $O_{x,y}:=S\\cap\\{z\\in\\mathbb R^K:x<z_k<y\\}$ is nonempty and open: choose each earlier coordinate below its finite one-sided boundary (or arbitrarily when its boundary is $+\\infty$), choose $z_k\\in(x,y)$, and choose the remaining coordinates arbitrarily. By step 2.1, $P_0(O_{x,y})>0$; the only part of $S\\cap\\{x\\le Z_k<y\\}$ omitted from $O_{x,y}$ lies on $Z_k=x$, which has probability zero by step 1.2. Also $|q(x)-q(y)|\\le(y-x)/\\sqrt{2\\pi}$ by step 1.2, so $q$ is continuous. Moreover $q(x)\\to1$ as $x\\to-\\infty$ and $q(x)\\to A(t_{k-1})$ as $x\\to+\\infty$, since the omitted lower and upper normal tails tend to zero. For the symmetric two-sided mode set $q(c)=A(t_{k-1})+P_0(S\\cap\\{|Z_k|\\ge c\\})$ for $c\\ge0$. For $0\\le c<d$, $q(c)-q(d)=P_0(S\\cap\\{c\\le|Z_k|<d\\})>0$. Here $S$ again restricts only coordinates $j<k$, so $O_{c,d}:=S\\cap\\{z\\in\\mathbb R^K:c<|z_k|<d\\}$ is nonempty and open: set every earlier coordinate to $0$ (which satisfies every finite earlier symmetric no-crossing condition because its boundary is positive), choose $z_k=(c+d)/2$, and choose the remaining coordinates arbitrarily. Step 2.1 gives $P_0(O_{c,d})>0$. The bound in step 1.2 makes $q$ continuous. Here $q(0)=1$ and $q(c)\\to A(t_{k-1})$ as $c\\to+\\infty$. The tail limits in both modes follow from [F6] applied to increasing lower or central intervals of the standard-normal coordinate.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 1.2",
+            "F6",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since $A$ is nondecreasing, either $A(t_k)=A(t_{k-1})$ or $A(t_{k-1})<A(t_k)\\le\\alpha<1$. In the flat case, [F9] assigns $+\\infty$, whose crossing event is empty, so the previous cumulative probability is unchanged. In the increasing case, the target lies strictly between the endpoint limits of $q$. The limits in step 4.1 give finite endpoints on which the continuous function takes values on opposite sides of $A(t_k)$; [F7] gives a root. Strict decrease in step 4.1 makes that finite root unique. The induction therefore defines every boundary through the finite maximum $K$. In the symmetric two-sided mode $q(0)=1>A(t_k)$, so the root is strictly positive.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "F9",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The induction step is complete: at an increasing look the selected root gives $P_0(R_k)=A(t_k)$ by [F9]; at a flat look the event union is unchanged and $A(t_k)=A(t_{k-1})$. Induction from $R_0=\\varnothing$ proves the equality for every $k$. Stopping at the first crossing makes $R_k$ exactly the event of rejection by look $k$. At $k=K$, $t_K=1$ and $A(1)=\\alpha$, so the terminal simple-null rejection probability is $\\alpha$. For any embedding with a nonempty alternative and singleton null $\\{\\theta_0\\}$ whose law is $P_0$, the rejection indicator is a measurable test function because $R_K$ is a finite union of Borel threshold events; [F8] then makes its size $\\alpha$. AC is used in the supplied Gaussian law and representation [F2] and [F4], not in the finite root selection: each root is unique and there are only finitely many looks.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "F9",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "K is a positive finite integer, so the induction has a nonempty finite index set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 5.1 and 6.1 treat a flat increment; its +infinity crossing event is empty and cumulative spend is unchanged."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1 uses t_K=1 and A(1)=alpha to obtain the terminal null rejection probability."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 prove positive-definite covariance and full support; step 3.1 covers the K=1 induction base case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 6.1 use the boundary-function tails and final endpoint t_K=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts A1, F2 and F4 state the AC branch for Gaussian suppliers; step 6.1 notes no additional choice in the unique finite recursion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement assumes the canonical Gaussian design and proves existence/uniqueness of the recursive roots plus P0(Rk)=A(tk). Proof 3.1\u20136.1 establishes this sufficient calibration result; it does not claim that terminal size alpha characterizes the stipulated null law or timing."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement assumes the canonical Gaussian design and proves existence/uniqueness of the recursive roots plus P0(Rk)=A(tk). Proof 3.1\u20136.1 establishes this sufficient calibration result; it does not claim that terminal size alpha characterizes the stipulated null law or timing."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-61",
+        "notes": "Read all seven proof steps and exact F1\u2013F9/A1 suppliers. LL^T telescopes to Sigma and the positive triangular diagonal proves nonsingularity even at K=1. Gaussian square-root representation and independent positive-density coordinates imply full support; marginal density bounds give atomlessness and Lipschitz continuity of both crossing functions. Earlier no-crossing constraints omit coordinate k, so every finite one-sided strip and every nonempty symmetric annulus meets S in a nonempty open set. Symmetric roots are strictly positive, preserving induction. Continuity from below gives normal tail limits; targets A(tprev)<A(tk)<=alpha<1 admit finite IVT brackets and unique roots. Flat increments use an empty crossing, including initial zero spend or flat final spend; jumps need no continuity of A. Finite recursion establishes all cumulative identities, measurable union and singleton-null size. AC use is correctly limited to Gaussian suppliers, not unique finite roots. Sources checked at DeMets\u2013Lan PDF pp.6\u20137, Grayling \u00a7\u00a72\u20133.1 and Minas \u00a7\u00a75.3\u20135.3.1; no independence of looks, estimated variance, composite-null or adaptive-timing conclusion is asserted. No reader/refuter findings; independent review finds no defect."
+      }
+    },
+    "ex-pocock-spending-two-look": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-sequential-alpha-spending-design",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Fix a finite integer\nmaximum $K\\ge1$, prescheduled information fractions\n$0<t_1<\\cdots<t_K=1$ (where $t_j$ is the fraction of total planned\ninformation available at look $j$), and a nominal level $\\alpha\\in(0,1)$. An\n**alpha-spending function** is a nondecreasing map\n$A:[0,1]\\to[0,\\alpha]$ with $A(0)=0$ and $A(1)=\\alpha$.\n\nUnder the stipulated simple null law $P_0$, the standardized look vector is\n$Z=(Z_1,\\ldots,Z_K)\\sim N_K(0,\\Sigma)$, where\n$$\\Sigma_{jk}=\\sqrt{t_j/t_k}\\quad(j\\le k),\\qquad \\Sigma_{jk}=\\Sigma_{kj}\\quad(j>k).$$\nHere $N_K$ is the finite-dimensional multivariate normal law of\n[[def-multivariate-normal-law]], whose projection characterization determines\nthe law by [[lem-characteristic-function-of-a-multivariate-normal-law]].\nThe construction of this covariance matrix as a valid Gaussian covariance is\nproved in [[thm-group-sequential-alpha-spending-calibration]]. The standardized\ncoordinates are correlated; independence of the $Z_j$ is not assumed.\n\nFor a **one-sided upper-boundary design**, look $j$ rejects when\n$Z_j\\ge b_j$. For a **symmetric two-sided design**, look $j$ rejects when\n$|Z_j|\\ge c_j$. In either case, the procedure stops at its first crossing.\nFor each $k$, its cumulative type-I probability is the probability under the\nstipulated null law of crossing at one of looks $1,\\ldots,k$. The design is\nexactly calibrated to $A$ when this cumulative probability equals $A(t_k)$\nfor every $k$. If it is embedded in an experiment with a nonempty alternative\nand singleton null hypothesis, this null rejection probability is the test\nsize in the sense of [[def-test-size-and-power]].\n\nThe fractions and joint null law are assumptions of this definition. It does\nnot derive a Gaussian model from an asymptotic central limit theorem, justify\ndata-dependent look timing, justify estimated variance, or establish error\ncontrol over an unspecified composite null. A two-sided design calibrates its\ntwo-sided crossing events separately; one-sided boundaries are not doubled\nto obtain two-sided boundaries.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-group-sequential-alpha-spending-boundary-calibration",
+          "source_section": "Definition",
+          "quote": "**Inputs:** The Axiom of Choice ([[def-axiom-of-choice]]) and a canonical design from\n[[def-group-sequential-alpha-spending-design]] and a mode, either one-sided\nupper-boundary or symmetric two-sided.\n\n**Output:** The look boundaries for the selected mode.\n\nSet $t_0=0$, $R_0=\\varnothing$, and process $k=1,\\ldots,K$ in order. Let\n$R_{k-1}$ be the union of the crossing events already defined at the earlier\nlooks.\n\n- If $A(t_k)=A(t_{k-1})$, set the boundary at look $k$ to $+\\infty$. Its\n  crossing event is empty, so $R_k=R_{k-1}$.\n- If $A(t_k)>A(t_{k-1})$ and the mode is one-sided, choose the real number\n  $b_k$ satisfying\n  $$P_0(R_{k-1}\\cup\\{Z_k\\ge b_k\\})=A(t_k),$$\n  and set $R_k=R_{k-1}\\cup\\{Z_k\\ge b_k\\}$.\n- If $A(t_k)>A(t_{k-1})$ and the mode is symmetric two-sided, choose\n  $c_k\\ge0$ satisfying\n  $$P_0(R_{k-1}\\cup\\{|Z_k|\\ge c_k\\})=A(t_k),$$\n  and set $R_k=R_{k-1}\\cup\\{|Z_k|\\ge c_k\\}$.\n\nThe root-existence theorem\n[[thm-group-sequential-alpha-spending-calibration]] proves that every\npositive spending increment has a unique finite solution; the algorithm\ntherefore makes no arbitrary boundary selection. The procedure specifies\nexact boundaries under the supplied joint null law. It does not prescribe a\nnumerical integration package or tolerance.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-group-sequential-alpha-spending-calibration",
+          "source_section": "Statement",
+          "quote": "Assume AC and the canonical group-sequential design of\n[[def-group-sequential-alpha-spending-design]]. The recursive boundary\nalgorithm [[alg-group-sequential-alpha-spending-boundary-calibration]] is\nwell-defined: every positive spending increment has a unique finite boundary,\nwhile a zero increment has boundary $+\\infty$. For every $k$, the probability\nunder $P_0$ of a rejection by look $k$ is $A(t_k)$; in particular the terminal\nsimple-null rejection probability is $\\alpha$. When embedded in an experiment\nwith a nonempty alternative and a singleton null whose law is $P_0$, the test\nsize is therefore $\\alpha$. The same cumulative-probability conclusion holds\nfor separately calibrated symmetric two-sided crossing events. This exact\nstatement is conditional on the specified joint Gaussian null law and\nprescheduled information fractions; it does not cover data-dependent timing,\nan estimated variance, or a composite null without an additional argument.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] \u2014 hence the least-upper-bound property \u2014 that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\exp(0)=1$ by its power series and $\\exp$ is strictly increasing by [F9], $e=\\exp(1)>1$. Thus $1+(e-1)t$ increases from $1$ to $e$ as $t$ goes from $0$ to $1$. By [F7]\u2013[F8], $A_P(0)=0$, $A_P(1)=\\alpha\\log e=\\alpha$, and $A_P$ is nondecreasing with values in $[0,\\alpha]$. At $t_1=1/2$ this gives $a_1=\\alpha\\log((1+e)/2)$ and $0<a_1<\\alpha$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The standard normal CDF satisfies $\\Phi(y)-\\Phi(x)=\\int_x^y\\phi(s)\\,ds$ for $x<y$. By [F4]\u2013[F5], this difference is positive and at most $(y-x)/\\sqrt{2\\pi}$, so $\\Phi$ is strictly increasing and continuous. Its limits at $-\\infty$ and $+\\infty$ are $0$ and $1$: [F10] applied to $(-n,\\infty)$ gives the lower-tail limit, and [F10] applied to $(-\\infty,n]$ gives the upper-tail limit; the density has no point masses. Therefore [F11] gives a unique $q(u)$ for every $u\\in(0,1)$. In particular $c_1=q(1-a_1/2)$ is finite, positive, and symmetry and atomlessness give $P_0(|Z_1|\\ge c_1)=a_1$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F10",
+            "F11",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The canonical covariance matrix is $\\Sigma=\\begin{pmatrix}1&1/\\sqrt2\\\\1/\\sqrt2&1\\end{pmatrix}$, so its determinant is $1/2>0$ and the correlation is $1/\\sqrt2$. Applying [F2]\u2013[F3] at the second look gives the unique finite $c_2$ satisfying the displayed cumulative two-sided crossing equation. The event $\\{|Z_1|\\ge c_1\\}$ and the continued-path event $\\{|Z_1|<c_1,\\ |Z_2|\\ge c_2\\}$ are disjoint and their union is the final rejection event. Hence the continued-path event has joint probability $\\alpha-a_1$, and since $P_0(|Z_1|<c_1)=1-a_1>0$, its conditional probability given continuation is $(\\alpha-a_1)/(1-a_1)$. The total rejection probability is $A_P(1)=\\alpha$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes exactly two nonempty planned looks."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies A(0)=0 for the Pocock curve; step 2.1 spends the positive first increment."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses A(1)=alpha for the final one-sided crossing probability."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the canonical 2x2 covariance with determinant 1/2>0 and correlation 1/sqrt(2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.2 verify spending endpoints and the standard-normal CDF quantile endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and step 1.2 make the AC use explicit; both boundary roots and the quantile are unique."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example fixes K=2, fractions 1/2 and 1, alpha=1/20 and the logarithmic Pocock spending curve. Verification 1.1\u20132.1 computes admissibility and the two crossing probabilities for that curve, with no necessary-and-sufficient model characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example fixes K=2, fractions 1/2 and 1, alpha=1/20 and the logarithmic Pocock spending curve. Verification 1.1\u20132.1 computes admissibility and the two crossing probabilities for that curve, with no necessary-and-sufficient model characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-61",
+        "notes": "Read Example, all three verification steps and twelve actual suppliers. Power-series exp(0)=1 and strict exponential increase give e>1. Log is defined on the positive interval [1,e], strictly increasing and inverse to exp, so spending has endpoints 0 and alpha=1/20 with 0<a1=alpha*log((1+e)/2)<alpha. Positive bounded normal density and continuity-from-below tails give continuous strictly increasing Phi and unique interior quantile; symmetry and atomlessness make c1=q(1-a1/2)>0 spend a1. Covariance determinant 1/2 and correlation 1/sqrt(2) checked. Positive remaining increment meets calibration hypotheses and gives unique finite positive c2. Disjoint first-crossing and continued-path events prove joint second-look probability alpha-a1; division by 1-a1>0 proves the conditional expression. No constant-boundary claim, independence substitution or numerical-root claim. AC stated and inherited from Gaussian suppliers. DeMets\u2013Lan PDF p.6 gives alpha log(1+(e-1)t); Grayling \u00a7\u00a72\u20133.1 and Minas \u00a7\u00a75.3\u20135.3.1 give model/crossing context. Reader/refuter empty; independent review finds no defect."
+      }
+    },
+    "ex-obrien-fleming-spending-two-look": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-sequential-alpha-spending-design",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Fix a finite integer\nmaximum $K\\ge1$, prescheduled information fractions\n$0<t_1<\\cdots<t_K=1$ (where $t_j$ is the fraction of total planned\ninformation available at look $j$), and a nominal level $\\alpha\\in(0,1)$. An\n**alpha-spending function** is a nondecreasing map\n$A:[0,1]\\to[0,\\alpha]$ with $A(0)=0$ and $A(1)=\\alpha$.\n\nUnder the stipulated simple null law $P_0$, the standardized look vector is\n$Z=(Z_1,\\ldots,Z_K)\\sim N_K(0,\\Sigma)$, where\n$$\\Sigma_{jk}=\\sqrt{t_j/t_k}\\quad(j\\le k),\\qquad \\Sigma_{jk}=\\Sigma_{kj}\\quad(j>k).$$\nHere $N_K$ is the finite-dimensional multivariate normal law of\n[[def-multivariate-normal-law]], whose projection characterization determines\nthe law by [[lem-characteristic-function-of-a-multivariate-normal-law]].\nThe construction of this covariance matrix as a valid Gaussian covariance is\nproved in [[thm-group-sequential-alpha-spending-calibration]]. The standardized\ncoordinates are correlated; independence of the $Z_j$ is not assumed.\n\nFor a **one-sided upper-boundary design**, look $j$ rejects when\n$Z_j\\ge b_j$. For a **symmetric two-sided design**, look $j$ rejects when\n$|Z_j|\\ge c_j$. In either case, the procedure stops at its first crossing.\nFor each $k$, its cumulative type-I probability is the probability under the\nstipulated null law of crossing at one of looks $1,\\ldots,k$. The design is\nexactly calibrated to $A$ when this cumulative probability equals $A(t_k)$\nfor every $k$. If it is embedded in an experiment with a nonempty alternative\nand singleton null hypothesis, this null rejection probability is the test\nsize in the sense of [[def-test-size-and-power]].\n\nThe fractions and joint null law are assumptions of this definition. It does\nnot derive a Gaussian model from an asymptotic central limit theorem, justify\ndata-dependent look timing, justify estimated variance, or establish error\ncontrol over an unspecified composite null. A two-sided design calibrates its\ntwo-sided crossing events separately; one-sided boundaries are not doubled\nto obtain two-sided boundaries.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-group-sequential-alpha-spending-boundary-calibration",
+          "source_section": "Definition",
+          "quote": "**Inputs:** The Axiom of Choice ([[def-axiom-of-choice]]) and a canonical design from\n[[def-group-sequential-alpha-spending-design]] and a mode, either one-sided\nupper-boundary or symmetric two-sided.\n\n**Output:** The look boundaries for the selected mode.\n\nSet $t_0=0$, $R_0=\\varnothing$, and process $k=1,\\ldots,K$ in order. Let\n$R_{k-1}$ be the union of the crossing events already defined at the earlier\nlooks.\n\n- If $A(t_k)=A(t_{k-1})$, set the boundary at look $k$ to $+\\infty$. Its\n  crossing event is empty, so $R_k=R_{k-1}$.\n- If $A(t_k)>A(t_{k-1})$ and the mode is one-sided, choose the real number\n  $b_k$ satisfying\n  $$P_0(R_{k-1}\\cup\\{Z_k\\ge b_k\\})=A(t_k),$$\n  and set $R_k=R_{k-1}\\cup\\{Z_k\\ge b_k\\}$.\n- If $A(t_k)>A(t_{k-1})$ and the mode is symmetric two-sided, choose\n  $c_k\\ge0$ satisfying\n  $$P_0(R_{k-1}\\cup\\{|Z_k|\\ge c_k\\})=A(t_k),$$\n  and set $R_k=R_{k-1}\\cup\\{|Z_k|\\ge c_k\\}$.\n\nThe root-existence theorem\n[[thm-group-sequential-alpha-spending-calibration]] proves that every\npositive spending increment has a unique finite solution; the algorithm\ntherefore makes no arbitrary boundary selection. The procedure specifies\nexact boundaries under the supplied joint null law. It does not prescribe a\nnumerical integration package or tolerance.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-group-sequential-alpha-spending-calibration",
+          "source_section": "Statement",
+          "quote": "Assume AC and the canonical group-sequential design of\n[[def-group-sequential-alpha-spending-design]]. The recursive boundary\nalgorithm [[alg-group-sequential-alpha-spending-boundary-calibration]] is\nwell-defined: every positive spending increment has a unique finite boundary,\nwhile a zero increment has boundary $+\\infty$. For every $k$, the probability\nunder $P_0$ of a rejection by look $k$ is $A(t_k)$; in particular the terminal\nsimple-null rejection probability is $\\alpha$. When embedded in an experiment\nwith a nonempty alternative and a singleton null whose law is $P_0$, the test\nsize is therefore $\\alpha$. The same cumulative-probability conclusion holds\nfor separately calibrated symmetric two-sided crossing events. This exact\nstatement is conditional on the specified joint Gaussian null law and\nprescheduled information fractions; it does not cover data-dependent timing,\nan estimated variance, or a composite null without an additional argument.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] \u2014 hence the least-upper-bound property \u2014 that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\Phi(x)=\\int_{-\\infty}^{x}\\phi(s)\\,ds$. For $x<y$, positivity in [F5] gives $\\Phi(y)-\\Phi(x)>0$, while $\\phi(s)\\le1/\\sqrt{2\\pi}$ gives $\\Phi(y)-\\Phi(x)\\le(y-x)/\\sqrt{2\\pi}$. Thus $\\Phi$ is strictly increasing and continuous.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The density $\\phi$ is even, so $\\Phi(0)=1/2$. Applying [F6] to the increasing upper half-lines $(-n,\\infty)$ gives $\\Phi(x)\\to0$ as $x\\to-\\infty$; applying it to the increasing lower half-lines $(-\\infty,n]$ gives $\\Phi(x)\\to1$ as $x\\to+\\infty$. Hence [F7] gives a unique quantile $z_p$ for each $p\\in(0,1)$, and $z_{0.975}>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $0<t\\le1$, $z_{0.975}/\\sqrt t$ decreases as $t$ increases; since $\\Phi$ increases, $A_{OF}(t)$ is nondecreasing. Its values are positive and at most $2[1-\\Phi(z_{0.975})]=0.05$, and its limit at $0$ is $0$ by the upper-tail limit in step 2.1. Thus the declared $A_{OF}(0)=0$ makes it admissible. At $t_1=1/2$, its value is $a_1=2[1-\\Phi(z_{0.975}\\sqrt2)]$, with $0<a_1<0.05$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By symmetry of the density in [F4], $P_0(|Z_1|\\ge c)=2[1-\\Phi(c)]$ for $c\\ge0$. Therefore $c_1=z_{1-a_1/2}$ has first-look crossing probability $a_1$. The canonical covariance matrix is $\\Sigma=\\begin{pmatrix}1&1/\\sqrt2\\\\1/\\sqrt2&1\\end{pmatrix}$, so its determinant is $1/2>0$ and the correlation is $1/\\sqrt2$. Applying [F2]\u2013[F3] at the second look gives the unique finite $c_2$ satisfying the displayed cumulative two-sided crossing equation, with total probability $A_{OF}(1)=0.05$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes exactly two nonempty planned looks."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 defines A_OF(0)=0 and verifies its zero endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.1\u20134.1 verify A_OF(1)=0.05 at the final look."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 computes the canonical 2x2 covariance with determinant 1/2>0 and correlation 1/sqrt(2)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 verify the CDF tails, alpha-spending endpoints, and first-look spend."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and steps 1.1\u20132.1 make the AC use explicit; both normal quantiles and boundary roots are unique."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example fixes two looks, alpha=0.05 and the normal-tail O\u2019Brien\u2013Fleming spending curve. Verification 3.1\u20134.1 checks admissibility and the calibrated crossing probability; the fixed example asserts no biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example fixes two looks, alpha=0.05 and the normal-tail O\u2019Brien\u2013Fleming spending curve. Verification 3.1\u20134.1 checks admissibility and the calibrated crossing probability; the fixed example asserts no biconditional theorem."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-61",
+        "notes": "Read Example, all four verification steps and eight actual suppliers. Positive bounded normal density makes Phi continuous and strictly increasing; evenness yields Phi(0)=1/2 and continuity from below yields both tail limits. IVT thus gives unique quantiles for p in (0,1), with z_0.975>0. The inverse-square-root argument decreases on (0,1], so spending increases from its zero limit to 0.05, and at t=1/2 its first spend lies strictly between 0 and 0.05. Symmetry/atomlessness gives the first boundary z_(1-a1/2), a positive finite quantile (equivalently z_0.975*sqrt(2)). Both looks therefore have positive increments and calibration gives a unique positive finite second boundary. Correlation 1/sqrt(2) and determinant 1/2 checked; final root retains the correlated absolute-value union. AC inherited explicitly. DeMets\u2013Lan PDF p.6 supplies the two-sided OBrien\u2013Fleming-type curve; Grayling \u00a7\u00a72\u20133.1 supplies joint covariance/crossing context. No unstated numerical root, one-sided doubling or independent-look inference. Reader/refuter empty; no defect observed."
+      }
+    }
+  }
+}

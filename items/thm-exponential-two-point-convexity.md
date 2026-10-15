@@ -14,8 +14,8 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  repair: research/statistical-models-experiments-62-published-convex-endpoints-repair.json
   precheck: pass
-  audited: 2026-08-02
 sources:
   scraped: []
   references:
@@ -52,6 +52,6 @@ If $0<t<1$, equality holds exactly when $x=y$.
 
 2.1 If $0<s<1$, apply the mean value theorem to $g$ on $[0,s]$ and $[s,1]$; since $g'$ is nonincreasing by the mean value theorem applied to $g'$, their slopes give $g(s)/s\ge-g(s)/(1-s)$, hence $g(s)\ge0$. [step 1.1, L1, L2]
 
-3.1 Multiplying by $\exp x>0$ converts $g(t)\ge0$ into the displayed inequality. [step 2.1, L3]
+3.1 At $t=0$, both sides of the displayed inequality equal $\exp x$; at $t=1$, both sides equal $\exp y$. For $0<t<1$, step 2.1 gives $g(t)\ge0$, and multiplying by $\exp x>0$ converts this into the displayed inequality. Thus the inequality holds for every $t\in[0,1]$. [step 2.1, L3, algebra]
 
 4.1 When $0<t<1$ and $d\ne0$, $g''<0$, so the slope comparison is strict and $g(t)>0$; when $d=0$, equality is immediate. [step 1.1, step 2.1, L3] ∎

@@ -1,0 +1,773 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62-batch-10",
+  "scope": [
+    "def-stratified-sampling-design-and-estimator",
+    "thm-stratified-total-unbiasedness-and-variance",
+    "thm-neyman-allocation-minimizes-stratified-variance",
+    "thm-cost-optimal-stratified-allocation",
+    "ex-proportional-and-disproportionate-stratified-allocation",
+    "ex-zero-variance-stratum-allocation-boundary",
+    "ex-rounding-neyman-allocation-to-integer-sample-sizes"
+  ],
+  "contracts": {
+    "def-stratified-sampling-design-and-estimator": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite population and stratum set are nonempty by the cited finite-population definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero-valued y_i; the displayed stratum means and estimator remain finite and equal zero when all values are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows H=1, reducing the design to one SRSWOR sample; when N_h=1 the only allowed n_h is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition gives one product outcome when every n_h=N_h; the stratified estimator is then the fixed total."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition permits both n_h=1 and n_h=N_h; they coincide when N_h=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sets and finite sums are used; no arbitrary selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-stratified-total-unbiasedness-and-variance": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stratified-sampling-design-and-estimator",
+          "source_section": "Definition",
+          "quote": "\\prod_{h=1}^H\\binom{N_h}{n_h}^{-1}",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-population-and-sampling-design",
+          "source_section": "Definition",
+          "quote": "expectation here average over the design while holding every $y_i$ fixed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-horvitz-thompson-total-is-design-unbiased",
+          "source_section": "Statement",
+          "quote": "E_y^d[\\widehat T_{HT}]=T(y)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-srswor-mean-variance-and-finite-population-correction",
+          "source_section": "Statement",
+          "quote": "\\operatorname{Var}_d(\\bar y_S)=\\left(1-\\frac nN\\right)\\frac{S_U^2}{n}",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-variance-of-a-finite-sum",
+          "source_section": "Statement",
+          "quote": "Equivalently, it is $\\sum_{i,j\\in I}\\operatorname{Cov}(X_i,X_j)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "positive-stratum-inclusion-and-ht-identity",
+          "step": "1.1",
+          "claim": "Counting within-stratum samples gives pi_i=n_h/N_h>0, and substitution identifies the estimator with the HT total; the HT theorem yields unbiasedness.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "within-stratum-variance-and-certainty",
+          "step": "1.2",
+          "claim": "The SRSWOR variance theorem gives each noncertainty contribution, while each certainty total is constant and has zero variance.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cross-stratum-covariance-factorization",
+          "step": "1.3",
+          "claim": "The product law factors the finite expectation E[Z_h Z_k] into E[Z_h]E[Z_k], so distinct stratum totals have zero covariance.",
+          "inputs": [
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sum-of-stratum-variances",
+          "step": "2.1",
+          "claim": "The finite-sum variance formula and zero cross covariances give the stated variance sum; step 1.1 already proves unbiasedness.",
+          "inputs": [
+            "F6",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonempty finite population and a finite normalized design."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement gives zero expectation and zero variance when every y_i=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to a one-unit population; then the only stratum is a census and step 1.2 gives variance zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 treats each census stratum as constant, and step 2.1 sums their zero variances."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 applies the SRSWOR result at n_h=1 and handles n_h=N_h directly as certainty."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sets and finite sums are used; no arbitrary selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-neyman-allocation-minimizes-stratified-variance": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stratified-sampling-design-and-estimator",
+          "source_section": "Definition",
+          "quote": "S_h^2=\\frac1{N_h-1}\\sum_{i\\in U_h}(y_i-\\bar y_h)^2",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stratified-total-unbiasedness-and-variance",
+          "source_section": "Statement",
+          "quote": "\\operatorname{Var}_d(\\widehat T_{st})=\\sum_{h:n_h<N_h}N_h^2\\left(1-\\frac{n_h}{N_h}\\right)\\frac{S_h^2}{n_h}",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "remove-allocation-independent-fpc-term",
+          "step": "1.1",
+          "claim": "Each variable stratum term equals a_h^2/x_h minus N_h S_h^2, so minimizing at fixed sum reduces to minimizing sum a_h^2/x_h.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pairwise-square-lower-bound",
+          "step": "2.1",
+          "claim": "The finite pairwise-square identity gives (sum a_h^2/x_h)(sum x_h) >= (sum a_h)^2, with equality exactly when a_h/x_h is constant.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "attain-and-normalize",
+          "step": "3.1",
+          "claim": "The normalized allocation x_h=n* a_h/sum a_k is positive, feasible, and uniquely satisfies the equality condition, so it attains the global minimum.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonempty set J and a positive total n*."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement requires S_h>0 for each variable noncertainty stratum; zero-variance cases are treated in the separate example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes singleton J; step 3.1 gives x_h=n^star under the sole positive budget constraint."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim optimizes a positive continuous allocation and does not include a degenerate sampling design."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs in the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sets and finite sums are used; no arbitrary selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-cost-optimal-stratified-allocation": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stratified-sampling-design-and-estimator",
+          "source_section": "Definition",
+          "quote": "S_h^2=\\frac1{N_h-1}\\sum_{i\\in U_h}(y_i-\\bar y_h)^2",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stratified-total-unbiasedness-and-variance",
+          "source_section": "Statement",
+          "quote": "\\operatorname{Var}_d(\\widehat T_{st})=\\sum_{h:n_h<N_h}N_h^2\\left(1-\\frac{n_h}{N_h}\\right)\\frac{S_h^2}{n_h}",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "reduce-cost-objective",
+          "step": "1.1",
+          "claim": "The allocation-dependent variance is sum a_h^2/x_h plus a constant, under the stated cost constraint.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cost-weighted-pairwise-square-bound",
+          "step": "2.1",
+          "claim": "Set p_h=a_h/sqrt(x_h), q_h=sqrt(c_h x_h); the pairwise-square identity gives the lower bound (sum a_h sqrt(c_h))^2/C*.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cost-normalize-and-attain",
+          "step": "3.1",
+          "claim": "The normalized allocation x_h=C*(a_h/sqrt(c_h))/sum a_k sqrt(c_k) is positive, meets the budget, and uniquely attains equality.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nonempty set J and positive residual cost C*."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement requires S_h>0 for each variable noncertainty stratum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes singleton J; step 3.1 reduces to the only feasible x_h=C^star/c_h."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim optimizes a positive continuous cost allocation and does not include a degenerate sampling design."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs in the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sets and finite sums are used; no arbitrary selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-proportional-and-disproportionate-stratified-allocation": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stratified-sampling-design-and-estimator",
+          "source_section": "Definition",
+          "quote": "\\widehat T_{st}=\\sum_{h=1}^H N_h\\bar y_{h,R}",
+          "uses": [
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stratified-total-unbiasedness-and-variance",
+          "source_section": "Statement",
+          "quote": "E_d[\\widehat T_{st}]=\\sum_{i\\in U}y_i",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "finite-stratum-means-and-variances",
+          "step": "1.1",
+          "claim": "The two fixed stratum means, finite-population variances, and total are computed from the six values.",
+          "inputs": [
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "two-valid-unbiased-allocations",
+          "step": "2.1",
+          "claim": "Both sample-size pairs satisfy the design bounds and the stratified estimator has expectation 80.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "proportional-allocation-variance",
+          "step": "2.2",
+          "claim": "The exact variance formula gives 128/3 for allocation (2,1).",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "disproportionate-census-variance",
+          "step": "2.3",
+          "claim": "For allocation (1,2), the second stratum is a census and the first-stratum contribution is 80.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "comparison-and-conclusion",
+          "step": "3.1",
+          "claim": "The expected totals agree, while the variance calculations give 128/3<80.",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a nonempty six-unit population."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example step 1.1 computes the stratum variances; zero-valued entries would leave the finite weighted estimator and variance formula defined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The explicit example has stratum sizes 4 and 2; it contains no singleton stratum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example step 2.3 treats a census stratum as a constant with zero variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example step 2.1 checks both allocations against 1<=n_h<=N_h."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sets and finite sums are used; no arbitrary selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-zero-variance-stratum-allocation-boundary": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stratified-sampling-design-and-estimator",
+          "source_section": "Definition",
+          "quote": "1\\le n_h\\le N_h",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-neyman-allocation-minimizes-stratified-variance",
+          "source_section": "Statement",
+          "quote": "$S_h>0$ for each",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-stratified-total-unbiasedness-and-variance",
+          "source_section": "Statement",
+          "quote": "\\operatorname{Var}_d(\\widehat T_{st})=\\sum_{h:n_h<N_h}N_h^2\\left(1-\\frac{n_h}{N_h}\\right)\\frac{S_h^2}{n_h}",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "zero-and-positive-stratum-moments",
+          "step": "1.1",
+          "claim": "The constant stratum has variance zero; the second stratum has mean 3 and variance 9, and the total is 19.",
+          "inputs": [
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unqualified-allocation-violates-domain",
+          "step": "2.1",
+          "claim": "The formal N_h S_h weights are (0,9), which normalize to (0,3) but violate the positive-variance hypothesis and design lower bound.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "valid-positive-sample-variance",
+          "step": "3.1",
+          "claim": "The admissible allocation (1,2) gives variance 27/2; the zero allocation is outside the stated design class.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two nonempty finite strata."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example step 1.1 explicitly computes S_1^2=0 for a noncertainty stratum."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The explicit example has stratum sizes 2 and 3; it contains no singleton stratum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example step 3.1 distinguishes the valid positive allocation from the formal zero sample allocation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example step 3.1 uses the admissible boundary allocation (1,2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sets and finite sums are used; no arbitrary selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-rounding-neyman-allocation-to-integer-sample-sizes": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stratified-sampling-design-and-estimator",
+          "source_section": "Definition",
+          "quote": "1\\le n_h\\le N_h",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-neyman-allocation-minimizes-stratified-variance",
+          "source_section": "Statement",
+          "quote": "x_h=n^\\star\\frac{N_hS_h}{\\sum_{k\\in J}N_kS_k}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-stratified-total-unbiasedness-and-variance",
+          "source_section": "Statement",
+          "quote": "\\operatorname{Var}_d(\\widehat T_{st})=\\sum_{h:n_h<N_h}N_h^2\\left(1-\\frac{n_h}{N_h}\\right)\\frac{S_h^2}{n_h}",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "construct-finite-strata",
+          "step": "1.1",
+          "claim": "The two specified finite strata have zero means and standard deviations 1 and 3.",
+          "inputs": [
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "continuous-allocation-and-rounding",
+          "step": "2.1",
+          "claim": "The positive N_h S_h weights yield (3/8,45/8); nearest-integer rounding gives (0,6), violating n_1>=1.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "feasible-correction-variance",
+          "step": "3.1",
+          "claim": "Allocation (1,5) respects the total and capacities and has exact variance 92; no general optimality claim is made.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two example strata are nonempty and finite."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example has positive within-stratum variances; the zero-variance case is handled separately."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The explicit example has stratum sizes 2 and 10; it contains no singleton stratum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example step 2.1 rejects the zero rounded stratum size; step 3.1 gives a valid positive allocation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example step 2.1 identifies the rounded zero lower-bound violation, and step 3.1 checks the corrected positive sizes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only finite sets and finite sums are used; no arbitrary selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

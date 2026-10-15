@@ -1,0 +1,124 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "51",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "ex-poisson-and-history-dependent-temporal-intensities",
+      "model": "gpt-6-luna",
+      "context_sha256": "1923612f64e90d963970a8ec4046706353ec41f4483483705caf23b2b9ba8ca1",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The temporal definition records initial information in H_t, and the likelihood theorem permits a common nonempty initial history. With one prior event s<0 and alpha>0, the empty observed pattern has ratio e^T exp[-mu T-alpha exp(beta s)(1-exp(-beta T))/beta], whereas the original formula gave e^T exp(-mu T). Verification 1.3 also omitted alpha exp[-beta(t_i-s)] in every event factor. Retained the full conditional claim by including finite initial excitation c_0 in the intensity, event factors and integrated hazard; empty history sets c_0=0. This is a false likelihood under allowed histories, hence a fatal logic defect.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1806.00221"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-poisson-and-history-dependent-temporal-intensities",
+      "disposition": "repaired",
+      "post_sha256": "3f7219b2fc9fe4d3a6eed5916d3e084a04e21346b2797bf439e4eee495b1322e",
+      "review_context_sha256": "dadb73b327a6da5352af47ba648c6b9d074b9f1406c976959db8e7e1608715e4",
+      "reason": "Checked the supplied-law hypothesis and common-history likelihood theorem, and integrated c_0 exp(-beta u) and each observed-event exponential directly. The formula retains terminal survival at m=0, the t_i=T zero integral, the empty-history case, and the alpha=0 baseline. Repaired the additional nonfatal citation-scope gap by proving simplicity of the arbitrary supplied Poisson process using dyadic cell-count collision bounds from its factorial moment, and restricting F2 to the cited construction. Verified independent future increments by Boolean-cell refinement and the generating-pi-system criterion, kernel normalization and measurability, the square-integrable compensator, and both Poisson MLE boundaries. Corrected the author name against the source title page. This is local review of the repair, with independent rejudgment left to the controller.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1806.00221"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "defect_id": "statistical-models-experiments-62-step5-u51-initial-history",
+      "run": "statistical-models-experiments-62",
+      "at": "2026-10-14T23:31:27.191940+00:00",
+      "class": "accuracy",
+      "subclass": "missing-hypothesis",
+      "severity": "fatal",
+      "location": "proof-step",
+      "subject": "ex-poisson-and-history-dependent-temporal-intensities",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "disposition": "fixed",
+      "finding": "Original Verification 1.3 and the Example likelihood omit all pre-window excitation although the supplied temporal law may condition on nonempty initial history. With one past event s<0, the m=0 hazard misses alpha exp(beta s)(1-exp(-beta T))/beta.",
+      "repair": "Include finite initial excitation c_0, its pre-event factor c_0 exp(-beta t_i), and its integrated term c_0(1-exp(-beta T))/beta; retain c_0=0 for empty history.",
+      "adjudication_ref": [
+        "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u51.json"
+      ],
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1806.00221"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "defect_id": "statistical-models-experiments-62-step5-u51-poisson-simplicity",
+      "run": "statistical-models-experiments-62",
+      "at": "2026-10-14T23:31:27.191940+00:00",
+      "class": "accuracy",
+      "subclass": "citation-inflated",
+      "severity": "nonfatal",
+      "location": "facts-block",
+      "subject": "ex-poisson-and-history-dependent-temporal-intensities",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "disposition": "fixed",
+      "finding": "Original F2 and Verification 1.1 transfer simplicity of the process constructed by lem-homogeneous-poisson-ordered-event-time-density to an arbitrary supplied Poisson process, without a transfer argument.",
+      "repair": "Restrict F2 to the constructed process and prove simplicity directly for the supplied process: Poisson factorial moments and the union bound give dyadic collision probability at most theta^2 T^2/2^(n+1).",
+      "adjudication_ref": [
+        "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u51.json"
+      ],
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1806.00221"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "defect_id": "statistical-models-experiments-62-step5-u51-rasmussen-author",
+      "run": "statistical-models-experiments-62",
+      "at": "2026-10-14T23:31:27.191940+00:00",
+      "class": "accuracy",
+      "subclass": "citation-misattributed",
+      "severity": "polish",
+      "location": "frontmatter",
+      "subject": "ex-poisson-and-history-dependent-temporal-intensities",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "disposition": "fixed",
+      "finding": "The assigned sources.references calls the author Joseph G. Rasmussen. The consulted title page of arXiv:1806.00221 identifies Jakob Gulddahl Rasmussen.",
+      "repair": "Corrected the assigned item and its owning manifest source title; other draft occurrences are reported for their owners.",
+      "adjudication_ref": [
+        "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u51.json"
+      ],
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1806.00221"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Current item review complete; review-contexts run immediately before further metadata work. Source consulted: Rasmussen PDF p. 1 (author), p. 4 (past history), p. 6 (Example 2.3), pp. 12-13 (complete Proposition 3.1 argument and Example 3.1). Proposition 3.1 explicitly uses empty initial history; the local likelihood supplier establishes the common specified-history interface used for the correction.",
+    "Changed only the Example, Facts, Verification and source metadata. Direct comparison with frozen before_statements confirms this example has no Statement or Definition section, so no Statement/Definition propagation event occurs. No prerequisites were authored and all dependency IDs remain unchanged.",
+    "Focused checks all exited 0: node tools/tsx-run.mjs tools/precheck.mts items/ex-poisson-and-history-dependent-temporal-intensities.md --json (1 checked, 0 failed); node tools/rendercheck.mjs items/ex-poisson-and-history-dependent-temporal-intensities.md --json (1 checked, 0 errors/warnings); node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-51.proof-contracts.json --items ex-poisson-and-history-dependent-temporal-intensities --strict --json (1 checked, no errors/warnings); final node tools/proof-layout.mjs items/ex-poisson-and-history-dependent-temporal-intensities.md (1 item, 8 steps, 0 defects).",
+    "Owning metadata synchronized under tools/step5-shared-write-lock.mjs acquire/reread/edit/check/release: only the assigned manifest row and assigned batch proof-contract entry were changed. Citations/derivations were regenerated for this ID and boundary evidence corrected to steps 1.3 and 2.2. There was no verification.judge block in the pre-edit carrier; no new stamp or independent acceptance was written.",
+    "Owner route, nonfatal bibliography repairs outside assignment: items/def-temporal-point-process-and-conditional-intensity.md:28, items/lem-conditional-intensity-interevent-survival-and-density.md:32, items/lem-homogeneous-poisson-ordered-event-time-density.md:31, items/thm-conditional-intensity-interevent-law-and-point-pattern-likelihood.md:25, and items/ex-terminating-temporal-point-process-with-terminal-mass.md:30 still name Joseph G. Rasmussen in sources.references. The actual source title page says Jakob Gulddahl Rasmussen. All are draft; propose source-title corrections by their owning lanes, with no mathematical interface change. Their items were not edited.",
+    "Published-consumer ledger: no proposed update, because no published repair or potentially defective published consumer was identified. No Statement/Definition change occurred, no separate maintenance interface event was generated, and no gate diagnostics were assigned. No unresolved mathematical obligation remains in this assigned item; the controller owns independent rejudgment and certification."
+  ]
+}

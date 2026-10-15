@@ -1,0 +1,990 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62",
+  "scope": [
+    "def-cluster-sampling-design-and-cluster-totals",
+    "def-two-stage-cluster-sampling-and-expansion-estimator",
+    "thm-srswor-cluster-total-estimator-unbiased-and-variance",
+    "thm-equal-cluster-size-design-effect",
+    "thm-two-stage-expansion-total-unbiasedness-and-variance",
+    "ex-two-stage-village-field-subsampling",
+    "cex-average-cluster-size-does-not-determine-unequal-size-design-effect"
+  ],
+  "contracts": {
+    "def-cluster-sampling-design-and-cluster-totals": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the finite PSU index set is nonempty and every stated design has nonempty finite support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the design laws have positive support weights; where estimator positivity is needed, zero first-order inclusion probabilities are explicitly excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: a one-PSU population is allowed by the definition, and the one-stage SRSWOR specialization has the singleton case m=M=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: a sampling law supported on one sample is permitted; the design law remains normalized."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: first-order inclusion probabilities may equal one; an inclusion event of probability zero is not used in an estimator denominator."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: only finite populations, finite supports, and explicit probability mass functions are specified; the definition uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies PSU partition, fixed SSU values, cluster totals and the one-stage subset law. It does not claim that aggregating SSUs identifies an equivalent law of independently sampled elements. The forward boundary would require a separate asserted biconditional, which this specific claim does not contain."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies PSU partition, fixed SSU values, cluster totals and the one-stage subset law. It does not claim that aggregating SSUs identifies an equivalent law of independently sampled elements. The reverse boundary would infer these hypotheses or this construction from the conclusion, an implication this specific item does not assert."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-finite-population-and-sampling-design",
+          "source_section": "Definition",
+          "excerpt": "A **sampling design** on $U$ is a nonempty finite set\n$\\mathcal S_d\\subseteq\\mathcal P(U)$ and a function\n$p_d:\\mathcal S_d\\to(0,1]$ with $\\sum_{s\\in\\mathcal S_d}p_d(s)=1$.",
+          "use": "Supplies the finite support, normalized design pmf, fixed-value convention, and design expectation refined here.",
+          "status": "draft body inspected"
+        }
+      ]
+    },
+    "def-two-stage-cluster-sampling-and-expansion-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the finite PSU index set is nonempty and every stated design has nonempty finite support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the design laws have positive support weights; where estimator positivity is needed, zero first-order inclusion probabilities are explicitly excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: a one-PSU population is allowed by the definition, and the one-stage SRSWOR specialization has the singleton case m=M=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: a sampling law supported on one sample is permitted; the design law remains normalized."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: first-order inclusion probabilities may equal one; an inclusion event of probability zero is not used in an estimator denominator."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: only finite populations, finite supports, and explicit probability mass functions are specified; the definition uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The entry assumes the explicit product law p1(s) product p2i, and defines expansion weights under positive first-order inclusions. It does not assert an iff characterization of conditional independence from stagewise inclusion probabilities. The forward boundary would require a separate asserted biconditional, which this specific claim does not contain."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The entry assumes the explicit product law p1(s) product p2i, and defines expansion weights under positive first-order inclusions. It does not assert an iff characterization of conditional independence from stagewise inclusion probabilities. The reverse boundary would infer these hypotheses or this construction from the conclusion, an implication this specific item does not assert."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "supplier_interfaces": [
+        {
+          "supplier": "def-cluster-sampling-design-and-cluster-totals",
+          "source_section": "Definition",
+          "excerpt": "Let the finite element population be partitioned into\nnonempty finite sets\n$$\\mathcal U=\\bigsqcup_{i=1}^{M}U_i,$$\nwhere $M\\ge1$ and $U_i$ is the set of secondary sampling units (SSUs) in the\n$i$th primary sampling unit (PSU).",
+          "use": "Supplies the finite PSU/SSU partition and fixed cluster totals.",
+          "status": "current local draft inspected"
+        },
+        {
+          "supplier": "def-finite-population-and-sampling-design",
+          "source_section": "Definition",
+          "excerpt": "A **sampling design** on $U$ is a nonempty finite set\n$\\mathcal S_d\\subseteq\\mathcal P(U)$ and a function\n$p_d:\\mathcal S_d\\to(0,1]$ with $\\sum_{s\\in\\mathcal S_d}p_d(s)=1$.",
+          "use": "Supplies the finite design-law convention used at both stages.",
+          "status": "draft body inspected"
+        },
+        {
+          "supplier": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "excerpt": "If $X$ is square-integrable, its **variance** is\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "use": "Defines the finite-law variance notation used below.",
+          "status": "published body inspected"
+        }
+      ]
+    },
+    "thm-srswor-cluster-total-estimator-unbiased-and-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cluster-sampling-design-and-cluster-totals",
+          "source_section": "Definition",
+          "quote": "For a uniform simple random sample without replacement (SRSWOR) of $m$ PSUs,\n$1\\le m\\le M$, the first-stage sample space is the set of all $m$-element\nsubsets of $[M]$, each with probability $\\binom{M}{m}^{-1}$. For $i,r\\in[M]$,\nwrite $I_i=1\\{i\\in S_1\\}$,\n$$\\pi_i^{(1)}=P_d(I_i=1),\\qquad\n\\pi_{ir}^{(1)}=P_d(I_i=I_r=1),$$\nwith $\\pi_{ii}^{(1)}=\\pi_i^{(1)}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-variance-of-a-finite-sum",
+          "source_section": "Statement",
+          "quote": "Equivalently, it is\n$\\sum_{i,j\\in I}\\operatorname{Cov}(X_i,X_j)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Count one-PSU and two-distinct-PSU incidences to obtain π_i=m/M, π_ir=m(m−1)/(M(M−1)), Var(I_i)=m(M−m)/M², and Cov(I_i,I_r)=−m(M−m)/(M²(M−1)); for m=1 the pair probability is zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Using E_d[I_i]=m/M, the expectation of (M/m)Σ_i I_iT_i is Σ_iT_i=T.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Center x_i=T_i−T̄, expand the variance of (M/m)Σ_iI_ix_i, use Σ_{i≠r}x_ix_r=−Σ_ix_i² and the covariances from step 1.1, and simplify to M²(1−m/M)S_T²/m.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes M>=2 and 1<=m<=M, forbidding an empty selected-PSU set. Proof1.1 explicitly treats m=1 by zero pair inclusion while3.1 still gives a defined cluster-total variance; singleton PSU SAMPLE is covered, not an empty sample.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner-delegated-focused-boundary-review",
+            "reason": "The Statement fixes M>=2 and 1<=m<=M, forbidding an empty selected-PSU set. Proof1.1 explicitly treats m=1 by zero pair inclusion while3.1 still gives a defined cluster-total variance; singleton PSU SAMPLE is covered, not an empty sample."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers m=M, so all indicator variances vanish and step 3.1 gives zero estimator variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats m=1, where distinct pair inclusion is zero; step 3.1 still gives the stated variance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If all T_i are equal, S_T²=0 and the estimator is exact; the formula in step 2.1 is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 cover m=1 and m=M without dividing by M−m or a pair-inclusion probability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 count finitely many samples and use finite sums only; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proof1.1 derives inclusion moments under uniform PSU SRSWOR;2.1 and3.1 give unbiasedness and the exact finite-population variance. These formulas do not conversely characterize a PSU sampling design or its fixed cluster totals. The forward boundary would require a separate asserted biconditional, which this specific claim does not contain."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof1.1 derives inclusion moments under uniform PSU SRSWOR;2.1 and3.1 give unbiasedness and the exact finite-population variance. These formulas do not conversely characterize a PSU sampling design or its fixed cluster totals. The reverse boundary would infer these hypotheses or this construction from the conclusion, an implication this specific item does not assert."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-psu-m1-and-census",
+          "claim": "For M=2 and totals (0,2), direct enumeration at m=1 gives estimates 0 and 4 with variance 4; at m=2 the estimator is exact.",
+          "result": "Here S_T^2=2, so the formula gives 4 at m=1 and 0 at m=2, matching direct enumeration."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-equal-cluster-size-design-effect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cluster-sampling-design-and-cluster-totals",
+          "source_section": "Definition",
+          "quote": "Let the finite element population be partitioned into\nnonempty finite sets\n$$\\mathcal U=\\bigsqcup_{i=1}^{M}U_i,$$\nwhere $M\\ge1$ and $U_i$ is the set of secondary sampling units (SSUs) in the\n$i$th primary sampling unit (PSU).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-variance-of-a-finite-sum",
+          "source_section": "Statement",
+          "quote": "Equivalently, it is\n$\\sum_{i,j\\in I}\\operatorname{Cov}(X_i,X_j)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Nonnegative variances of a within-PSU difference and the within-PSU sum force ρ≤1 and ρ≥−1/(m_c−1), respectively.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "A cluster mean averages m_c SSU outcomes; covariance expansion gives variance σ²[1+(m_c−1)ρ]/m_c.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Independence across PSUs divides the single-cluster-mean variance by k; the no-FPC element reference has variance σ²/(km_c).",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "A1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Divide by the positive element-reference variance to obtain DEFF=1+(m_c−1)ρ; at ρ=0 both variances remain σ²/(km_c)>0.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The superpopulation comparison has k>=1 complete PSUs and m_c>=2 elements in each, with sigma^2>0. Proof2.1 averages k cluster means and k m_c independent reference draws; no empty averaging family or zero reference denominator is admitted.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner-delegated-focused-boundary-review",
+            "reason": "The superpopulation comparison has k>=1 complete PSUs and m_c>=2 elements in each, with sigma^2>0. Proof2.1 averages k cluster means and k m_c independent reference draws; no empty averaging family or zero reference denominator is admitted."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks ρ=0: DEFF=1 while both variances equal σ²/(km_c)>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement assumes m_c≥2 so that a within-PSU pair and its correlation are defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement assumes σ²>0; if σ²=0 both compared variances vanish and their ratio is undefined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 gives −1/(m_c−1)≤ρ≤1; substitution gives DEFF 0 and m_c at the two covariance endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use finite sums of square-integrable variables only; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Independent equal-size exchangeable-covariance PSUs and the no-FPC marginal reference imply DEFF=1+(mc-1)rho in3.1. The ratio does not identify the entire within-cluster distribution or give a converse to those model assumptions. The forward boundary would require a separate asserted biconditional, which this specific claim does not contain."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Independent equal-size exchangeable-covariance PSUs and the no-FPC marginal reference imply DEFF=1+(mc-1)rho in3.1. The ratio does not identify the entire within-cluster distribution or give a converse to those model assumptions. The reverse boundary would infer these hypotheses or this construction from the conclusion, an implication this specific item does not assert."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "rho-zero-boundary",
+          "claim": "At ρ=0, Var(Ȳ_C)=Var(Ȳ_E)=σ²/(km_c).",
+          "result": "Direct substitution gives DEFF=1 with positive variance σ²/(km_c), so zero ICC is not zero sampling error."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-two-stage-expansion-total-unbiasedness-and-variance": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write\n$E[X\\mid\\mathcal G]$ for the unique class in\n$L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of\nconditional-expectation versions of $X$.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-variance",
+          "source_section": "Definition",
+          "quote": "Assume AC. For real $X\\in L^2(P)$ define\n$\\operatorname{Var}(X\\mid\\mathcal G)=E[(X-E[X\\mid\\mathcal G])^2\\mid\\mathcal G]$\nas an almost-sure class.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-conditional-variance-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume AC. For real $X\\in L^2(P)$, $\\operatorname{Var}(X)=E[\\operatorname{Var}(X\\mid\\mathcal G)]+\\operatorname{Var}(E[X\\mid\\mathcal G])$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "1.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "1.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-variance-of-a-finite-sum",
+          "source_section": "Statement",
+          "quote": "Equivalently, it is\n$\\sum_{i,j\\in I}\\operatorname{Cov}(X_i,X_j)$.",
+          "uses": [
+            "1.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-two-stage-cluster-sampling-and-expansion-estimator",
+          "source_section": "Definition",
+          "quote": "Given the selected PSU set $S_1$, the second-stage samples\n$(S_i)_{i\\in S_1}$ are independent, with each $S_i$ drawn from $p_{2i}$,\nindependently of the identities of other selected PSUs. The joint law is\n$$P_d\\bigl(S_1,(S_i)_{i\\in S_1}\\bigr)\n=p_1(S_1)\\prod_{i\\in S_1}p_{2i}(S_i).$$\nIt is a probability mass function: summing over the second-stage supports\nfirst gives $p_1(S_1)$ for each $S_1$, and summing these values gives $1$.\nFor a function $g$ of the joint outcome, write\n$$E_1[h]=\\sum_{S_1\\in\\mathcal S_1}p_1(S_1)h(S_1),\\qquad\nE_2[g\\mid S_1=s]=\\sum_{(S_i)_{i\\in s}}\n\\left(\\prod_{i\\in s}p_{2i}(S_i)\\right)g\\bigl(s,(S_i)_{i\\in s}\\bigr).$$\nFor a first-stage function $h$, define\n$\\operatorname{Var}_1(h)=E_1[(h-E_1h)^2]$. For a function $g$ of the full\nsecond-stage outcome and fixed $S_1=s$, define\n$$\\operatorname{Var}_2(g\\mid S_1=s)\n=E_2[(g-E_2[g\\mid S_1=s])^2\\mid S_1=s].$$\nThe symbol $\\operatorname{Var}_{2i}$ denotes centered-square variance under\n$p_{2i}$, and $\\operatorname{Var}_d$ denotes centered-square variance under\nthe joint law. These use the variance definition in\n[[def-moments-variance-and-covariance]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-two-stage-cluster-sampling-and-expansion-estimator",
+          "source_section": "Definition",
+          "quote": "For the first stage, put\n$$\\pi_i^{(1)}=P_d(i\\in S_1),\\qquad\n\\pi_{ir}^{(1)}=P_d(i,r\\in S_1).$$\nFor the second-stage design in PSU $i$, put\n$$\\pi_{j\\mid i}^{(2)}=P_{2i}(j\\in S_i),\\qquad\n\\pi_{j\\ell\\mid i}^{(2)}=P_{2i}(j,\\ell\\in S_i).$$\nThe stage-specific covariance differences are\n$$\\Delta_{ir}^{(1)}=\\pi_{ir}^{(1)}-\\pi_i^{(1)}\\pi_r^{(1)},\\qquad\n\\Delta_{j\\ell\\mid i}^{(2)}=\\pi_{j\\ell\\mid i}^{(2)}-\n\\pi_{j\\mid i}^{(2)}\\pi_{\\ell\\mid i}^{(2)}.$$\n\nIf $\\pi_i^{(1)}>0$ for every PSU and $\\pi_{j\\mid i}^{(2)}>0$ for every SSU,\nthe within-PSU expansion total and the two-stage expansion total are defined by\n$$\\widehat T_i=\\sum_{j\\in S_i}\\frac{y_{ij}}{\\pi_{j\\mid i}^{(2)}},\\qquad\n\\widehat T=\\sum_{i\\in S_1}\\frac{\\widehat T_i}{\\pi_i^{(1)}}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-two-stage-cluster-sampling-and-expansion-estimator",
+          "source_section": "Definition",
+          "quote": "For a function $g$ of the joint outcome, write\n$$E_1[h]=\\sum_{S_1\\in\\mathcal S_1}p_1(S_1)h(S_1),\\qquad\nE_2[g\\mid S_1=s]=\\sum_{(S_i)_{i\\in s}}\n\\left(\\prod_{i\\in s}p_{2i}(S_i)\\right)g\\bigl(s,(S_i)_{i\\in s}\\bigr).$$\nFor a first-stage function $h$, define\n$\\operatorname{Var}_1(h)=E_1[(h-E_1h)^2]$. For a function $g$ of the full\nsecond-stage outcome and fixed $S_1=s$, define\n$$\\operatorname{Var}_2(g\\mid S_1=s)\n=E_2[(g-E_2[g\\mid S_1=s])^2\\mid S_1=s].$$\nThe symbol $\\operatorname{Var}_{2i}$ denotes centered-square variance under\n$p_{2i}$, and $\\operatorname{Var}_d$ denotes centered-square variance under\nthe joint law. These use the variance definition in\n[[def-moments-variance-and-covariance]].",
+          "uses": [
+            "3.2",
+            "3.3",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each selected PSU, the second-stage HT total has conditional expectation Σ_j y_ij=T_i because E[J_ij|S_1]=π^(2)_j|i.",
+          "inputs": [
+            "given",
+            "F1",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Expand each within-PSU HT variance as a finite covariance sum and substitute Cov(J_ij,J_iℓ)=Δ^(2,i)_jℓ; only positive first-order probabilities appear in denominators.",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The first-stage fibers form σ(S_1); H(S_1)=Σ_{i∈S_1}T_i/π_i^(1) is measurable and integrable, and summing the product law on each fiber verifies its defining event integrals, so E[T̂|σ(S_1)]=H.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Taking the first-stage expectation of H and using E[I_i^(1)]=π_i^(1) gives E_d[T̂]=Σ_iT_i=T.",
+          "inputs": [
+            "given",
+            "F1",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Construct K(s)=Var_2(T̂|S_1=s) as the finite conditional expectation of the squared residual; verify its event integrals, identify the supplied conditional-variance class, then apply total-variance decomposition under AC.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F10",
+            "F11",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "step": "3.3",
+          "claim": "Expand the variance of the first-stage HT estimator of the true PSU totals into covariances and substitute Cov(I_i^(1),I_r^(1))=Δ^(1)_ir.",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Product-law conditional independence makes cross-PSU conditional covariances zero; add the within-PSU variances and average PSU inclusion indicators to obtain Σ_i V_i/π_i^(1).",
+          "inputs": [
+            "F1",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1",
+            "step 1.2",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Substitute the within-stage expression from steps 1.2 and 4.1 and the between-stage expression from step 3.3 into step 3.2; unbiasedness is from step 3.1.",
+          "inputs": [
+            "step 1.2",
+            "step 3.1",
+            "step 3.2",
+            "step 3.3",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the first-stage support and each second-stage support are nonempty finite sets; an empty selected PSU set, if in the support, has estimator zero and is permitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero first-order inclusion probabilities are excluded wherever the estimator divides by them; pair-inclusion probabilities may be zero because no pair probability is divided by."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If M=1, π₁^(1)=1 and the first-stage variance term in the Statement is zero; the formula reduces to the second-stage variance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: if a stage is a census, its covariance differences vanish and its variance contribution is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: π_i^(1)=1 and π_{j|i}^(2)=1 are permitted; their corresponding covariance differences vanish and denominators remain positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–5.1 use finite outcome spaces and finite sums; the stated AC use is inherited only from the named conditional-expectation suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Under the specified independent conditional second-stage laws, Proof3.2 verifies finite-fiber conditional variance and4.1 sums within-PSU variances. The decomposition does not conversely characterize independent second-stage designs from their moments. The forward boundary would require a separate asserted biconditional, which this specific claim does not contain."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Under the specified independent conditional second-stage laws, Proof3.2 verifies finite-fiber conditional variance and4.1 sums within-PSU variances. The decomposition does not conversely characterize independent second-stage designs from their moments. The reverse boundary would infer these hypotheses or this construction from the conclusion, an implication this specific item does not assert."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-village-variance-decomposition",
+          "claim": "For the B-page values, the true-total first-stage HT variance is 16; each within-village expansion variance is 80/3 and the expected within-stage term is 320/3.",
+          "result": "The sum 16+320/3=368/3 agrees with the B-page direct enumeration."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-two-stage-village-field-subsampling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-stage-cluster-sampling-and-expansion-estimator",
+          "source_section": "Definition",
+          "quote": "The joint law is\n$$P_d\\bigl(S_1,(S_i)_{i\\in S_1}\\bigr)\n=p_1(S_1)\\prod_{i\\in S_1}p_{2i}(S_i).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The village totals are 20 and 16, both first-stage inclusions and every second-stage field inclusion are 1/2, so each expansion estimate is four times the selected pair sum.",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Enumerate all six pairs in each village; the twelve expansion estimates sum to 432, giving mean 36=T_1+T_2.",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The squared deviations of the twelve estimates from 36 sum to 1472, hence variance is 1472/12=368/3.",
+          "inputs": [
+            "F2",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two nonempty villages and four fields in each."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All twelve joint outcomes have positive probability 1/12."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first-stage sample has one village; steps 1.1–3.1 enumerate both possible first-stage selections."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Step 2.1 lists distinct expansion estimates, so the estimator is not constant."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter or endpoint is part of the example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 enumerates the finite twelve-outcome sample space directly; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification2.1 enumerates twelve equally likely expansion totals with mean36 and3.1 gives variance368/3. A direct finite witness asserts these moments, not an iff identification of the two-stage law from mean and variance. The forward boundary would require a separate asserted biconditional, which this specific claim does not contain."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification2.1 enumerates twelve equally likely expansion totals with mean36 and3.1 gives variance368/3. A direct finite witness asserts these moments, not an iff identification of the two-stage law from mean and variance. The reverse boundary would infer these hypotheses or this construction from the conclusion, an implication this specific item does not assert."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-village-twelve-outcome-enumeration",
+          "claim": "The joint design has twelve equally likely outcomes; the expansion estimates sum to 432 and their squared deviations from 36 sum to 1472.",
+          "result": "The exact mean is 36 and the exact design variance is 1472/12=368/3, matching the direct proof."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-average-cluster-size-does-not-determine-unequal-size-design-effect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cluster-sampling-design-and-cluster-totals",
+          "source_section": "Definition",
+          "quote": "Let the finite element population be partitioned into\nnonempty finite sets\n$$\\mathcal U=\\bigsqcup_{i=1}^{M}U_i,$$\nwhere $M\\ge1$ and $U_i$ is the set of secondary sampling units (SSUs) in the\n$i$th primary sampling unit (PSU).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-srswor-cluster-total-estimator-unbiased-and-variance",
+          "source_section": "Statement",
+          "quote": "Let a fixed finite population have $M\\ge2$ PSUs with fixed cluster totals\n$T_1,\\ldots,T_M$. Select $m$ PSUs by uniform SRSWOR, where $1\\le m\\le M$.\nFor $S_1$ the selected set, define\n$$\\widehat T_C=\\frac{M}{m}\\sum_{i\\in S_1}T_i,\n\\qquad S_T^2=\\frac1{M-1}\\sum_{i=1}^M(T_i-\\bar T)^2,\n\\qquad \\bar T=\\frac1M\\sum_{i=1}^M T_i.$$\nThen $E_d[\\widehat T_C]=T:=\\sum_{i=1}^M T_i$ and\n$$\\operatorname{Var}_d(\\widehat T_C)\n=\\frac{M^2(1-m/M)}{m}S_T^2.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-variance-of-a-finite-sum",
+          "source_section": "Statement",
+          "quote": "Equivalently, it is\n$\\sum_{i,j\\in I}\\operatorname{Cov}(X_i,X_j)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Half the PSUs have size 1 and half size 3, so average size is 2; size-3 cluster values share B_i, giving correlation 1 for every existing within-cluster pair and marginal variance σ².",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For N=2M elements, Var_B(Ȳ_U)=5σ²/(4M), E_B[S_U²]=σ²(2M−5/2)/(2M−1), and the singleton-PSU SRSWOR formula gives the element-sample mean variance.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "With T_i=n_iB_i and Σn_i²=5M, derive E_B[S_T²]=5σ²; the cluster SRSWOR theorem gives expected cluster-sample mean variance 5σ²(1−k/M)/(4k).",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Cancel the shared FPC and sample-size factors to obtain (5/2)(2M−1)/(2M−5/2), which is 199/79 at M=100 and tends to 5/2, not the substituted-size prediction 2.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample assumes an even M≥4 and k≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The model assumes σ²>0; otherwise both variance ratio terms vanish and DEFF is undefined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The model includes size-1 PSUs and permits k=1; step 1.1 and the formulas in steps 1.2–2.2 cover these cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The size-3 PSUs have perfect within-cluster correlation; steps 1.1–3.1 compute the resulting valid model-averaged variance ratio."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cluster census k=M is excluded; both design variances would be zero and their ratio undefined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use finite sums and finite SRSWOR laws only; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The size1/size3 construction yields model-averaged ratio(5/2)(2M-1)/(2M-5/2) in Counterexample3.1, refuting arithmetic-average-size substitution. It does not offer a biconditional or a general unequal-cluster DEFF formula. The forward boundary would require a separate asserted biconditional, which this specific claim does not contain."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The size1/size3 construction yields model-averaged ratio(5/2)(2M-1)/(2M-5/2) in Counterexample3.1, refuting arithmetic-average-size substitution. It does not offer a biconditional or a general unequal-cluster DEFF formula. The reverse boundary would infer these hypotheses or this construction from the conclusion, an implication this specific item does not assert."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "unequal-size-deff-M100",
+          "claim": "At M=100 and k=1, the exact model-averaged design-effect ratio is (5/2)·199/(197.5).",
+          "result": "The ratio reduces to 199/79≈2.519, whereas substituting average cluster size 2 and ρ=1 predicts 2."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

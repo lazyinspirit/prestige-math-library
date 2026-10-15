@@ -1,0 +1,770 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-classical-error-attenuation-in-simple-linear-regression",
+    "thm-berkson-error-slope-in-simple-linear-model",
+    "prop-observed-law-does-not-identify-latent-error-variance-split",
+    "ex-classical-berkson-differential-error-and-validation"
+  ],
+  "contracts": {
+    "thm-classical-error-attenuation-in-simple-linear-regression": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurement-error-models",
+          "source_section": "Definition",
+          "quote": "Let $X,W,U$ be real random variables on one probability space, meaning\nmeasurable maps into $(\\mathbb R,\\mathcal B(\\mathbb R))$\n([[def-random-element-and-real-random-variable]]). The variable $X$ is the\n**latent true value**, $W$ is its **measured value**, and $U$ is an\n**error term**. We use the following two additive models:\n\n- **Classical additive error:** $W=X+U$, with $\\mathbb E[U]=0$ and $U$\n  independent of $X$ in the sense of\n  [[def-independent-random-elements]].\n- **Berkson additive error:** $X=W+U$, with $\\mathbb E[U]=0$ and $U$\n  independent of $W$ in that same sense.\n\nThe equations have opposite directions and their independence conditions\nrefer to different variables. They are distinct model assumptions.\n\nFor nonempty finite sets $\\mathcal X$ and $\\mathcal W$, a **categorical\nmisclassification mechanism** is a row-stochastic matrix\n$K(w\\mid x)\\in[0,1]$, indexed by $x\\in\\mathcal X$ and $w\\in\\mathcal W$:\nfor every $x$, $\\sum_{w\\in\\mathcal W}K(w\\mid x)=1$. When categorical random\nvariables $X,W$ have $\\mathbb P(X=x)>0$, the entry represents\n$$K(w\\mid x)=\\frac{\\mathbb P(W=w,\\ X=x)}{\\mathbb P(X=x)}.$$\nIf $\\mathbb P(X=x)=0$, the observed joint law determines no conditional row\nat that $x$; any row there is an additional part of a specified model, not an\nempirical consequence.\n\nThe matrix $K(w\\mid x)$ describes the conditional law given $X$ alone. If an\noutcome or covariate is also named, whether the error is nondifferential must\nbe stated relative to those variables; the marginal matrix alone does not\nsettle that question.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-expectation-of-products-of-independent-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be a finite mutually independent family of real random variables on a common probability space, with independence in the sense of [[def-independent-random-elements]].\n\n1. If every $X_i$ is integrable, then $\\prod_{i\\in I}X_i$ is integrable and\n   $$\\mathbb E\\!\\left[\\prod_{i\\in I}X_i\\right]=\\prod_{i\\in I}\\mathbb E[X_i]$$\n   in $\\mathbb R$.\n2. If every $X_i$ is nonnegative, the same identity holds in $[0,+\\infty]$. A zero factor on the right makes the product zero even if another factor is $+\\infty$; otherwise the usual extended nonnegative product is used.\n\nThe original finite-probability-space case is included: for a finite family of finite-valued real random variables, mutual atom independence as in [[def-independence-of-finite-random-variables]] suffices, and all expectations are finite. For $I=\\varnothing$, both sides equal $1$. The converse is not asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-normal-equations-for-best-affine-l2-prediction",
+          "source_section": "Statement",
+          "quote": "Let $X,Y_1,\\dots,Y_n$ be square-integrable real random variables on one\nprobability space, and write\n$$W:=\\operatorname{span}\\big([1],[Y_1],\\dots,[Y_n]\\big)\\subseteq L^2(\\mathbb P),$$\nwhere $[\\cdot]$ denotes the almost-everywhere class from\n[[def-l-p-space-as-a-quotient-by-null-functions]].\n\nThen there is a unique class $[Z_*]\\in W$ minimizing $\\|[X]-[Z]\\|_2$ over\n$[Z]\\in W$. This minimizing class has an affine representative\n$Z_*=a_0+\\sum_{j=1}^n a_jY_j$, and its coefficients satisfy\n$$a_0=\\mathbb E[X]-\\sum_{j=1}^n a_j\\mathbb E[Y_j],$$\n$$\\sum_{j=1}^n \\operatorname{Cov}(Y_i,Y_j)a_j=\\operatorname{Cov}(X,Y_i)\\qquad(1\\le i\\le n).$$\n\nThe class $[Z_*]$ is unique. If the covariance matrix\n$\\Gamma=(\\operatorname{Cov}(Y_i,Y_j))_{i,j}$ is singular, the coefficient vector\nneed not be uniquely determined by the normal equations, but any two solutions\nyield the same predictor almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F7] the variables are integrable. Independence of $U$ from $(X,\\epsilon)$ implies independence of $U$ from each coordinate, because the coordinate sigma-algebras are contained in that of the pair; together with $\\epsilon$ independent of $X$, [F4] and [F5] give $\\mathbb E[XU]=\\mathbb E[\\epsilon U]=\\mathbb E[X\\epsilon]=0$. Centering and [F2] therefore give $\\operatorname{Cov}(X,U)=\\operatorname{Cov}(\\epsilon,U)=\\operatorname{Cov}(X,\\epsilon)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $W=X+U$; by bilinearity [F3] and the zero covariances in step 1.1, $$\\operatorname{Cov}(Y,W)=\\operatorname{Cov}(\\alpha+\\beta X+\\epsilon,X+U)=\\beta\\operatorname{Var}(X).$$ The same expansion gives $$\\operatorname{Var}(W)=\\operatorname{Var}(X)+2\\operatorname{Cov}(X,U)+\\operatorname{Var}(U)=\\operatorname{Var}(X)+\\operatorname{Var}(U).$$",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The variance sum is positive by hypothesis, so [F6] determines the unique slope $\\gamma=\\operatorname{Cov}(Y,W)/\\operatorname{Var}(W)$. Substitution from step 2.1 gives the displayed formula.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Nonnegative variances and a positive sum give $0\\le\\operatorname{Var}(X)/(\\operatorname{Var}(X)+\\operatorname{Var}(U))\\le1$. Equality at $0$ occurs exactly when $\\operatorname{Var}(X)=0$; equality at $1$ occurs exactly when $\\operatorname{Var}(U)=0$. When both are positive the factor is strictly between the endpoints, so for $\\beta\\ne0$ step 3.1 gives a coefficient of the same sign and smaller absolute value; when $\\beta=0$, step 3.1 gives $\\gamma=0$, so no strict reduction holds. This proves the stated attenuation and boundary cases.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability space with total mass one is nonempty, and no sample-size-indexed empty data set appears in the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 treats Var(X)=0, where the factor is 0 and the denominator remains positive by the hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The single-predictor case is the Statement; step 3.1 uses its one-dimensional covariance normal equation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 checks Var(X)=0 and Var(U)=0 separately; the simultaneous zero case is excluded by the positive-sum premise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 proves that the factor reaches 0 and 1 exactly at the stated zero-variance endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a finite covariance calculation and selects no element from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way slope identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication or characterization is claimed."
+        }
+      ]
+    },
+    "thm-berkson-error-slope-in-simple-linear-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurement-error-models",
+          "source_section": "Definition",
+          "quote": "**Berkson additive error:** $X=W+U$, with $\\mathbb E[U]=0$ and $U$ independent of $W$ in that same sense.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$ If $X$ and $Y$ are square-integrable real random variables on the same probability space, their **covariance** is $$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Then covariance is symmetric, and for real scalars $a_i,b_j$, $$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent in the sense of [[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-expectation-of-products-of-independent-random-variables",
+          "source_section": "Statement",
+          "quote": "If every $X_i$ is integrable, then $\\prod_{i\\in I}X_i$ is integrable and $$\\mathbb E\\!\\left[\\prod_{i\\in I}X_i\\right]=\\prod_{i\\in I}\\mathbb E[X_i]$$ in $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-normal-equations-for-best-affine-l2-prediction",
+          "source_section": "Statement",
+          "quote": "\\sum_{j=1}^n \\operatorname{Cov}(Y_i,Y_j)a_j=\\operatorname{Cov}(X,Y_i)\\qquad(1\\le i\\le n).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then $$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The separate independence assumptions force Cov(U,W)=Cov(epsilon,W)=0.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution of X=W+U into Y and bilinearity gives Cov(Y,W)=beta Var(W).",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Positive Var(W) lets the one-predictor normal equation identify the unique slope beta.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a probability law on a nonempty probability space and has no empty-sample case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 divides only by Var(W), which is explicitly assumed positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "There is exactly one measured predictor W, and step 3.1 applies the one-predictor normal equation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The error U or residual epsilon may be zero; step 1.1 still gives the required zero covariances."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval-valued parameter or endpoint conclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The covariance expansion uses no choice principle and selects no elements."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way slope identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication or characterization is claimed."
+        }
+      ]
+    },
+    "prop-observed-law-does-not-identify-latent-error-variance-split": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurement-error-models",
+          "source_section": "Definition",
+          "quote": "**Classical additive error:** $W=X+U$, with $\\mathbb E[U]=0$ and $U$ independent of $X$ in the sense of [[def-independent-random-elements]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent in the sense of [[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-expectation-of-products-of-independent-random-variables",
+          "source_section": "Statement",
+          "quote": "If every $X_i$ is integrable, then $\\prod_{i\\in I}X_i$ is integrable and $$\\mathbb E\\!\\left[\\prod_{i\\in I}X_i\\right]=\\prod_{i\\in I}\\mathbb E[X_i]$$ in $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Then covariance is symmetric, and for real scalars $a_i,b_j$, $$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "Its **parametric statistical model** is the parameter map $$ \\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta, $$ regarded together with its parameter set and sample space",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "an **estimand** or **parameter target** is a specified function $$ \\psi:\\Theta\\to\\mathcal T_0, $$ where $\\mathcal T_0$ is a set of target values",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric model $\\mathsf P$ when $$ P_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta), $$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Uniform counting gives four mutually independent centered signs, each with variance one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two decompositions are classical, have independent latent/error blocks, and give the same W pointwise.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Bilinearity computes distinct variance pairs (2,2) and (3,1).",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The parameterized observed laws agree while the variance target differs, violating identifiability.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 defines the explicit two-point parameter set Theta={0,1}, so it is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No division by a variance occurs; both constructed variance pairs are strictly positive in step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample uses two distinct parameter points; a singleton model cannot witness nonidentifiability."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives nondegenerate signs and step 2.2 computes positive variance in every latent and error component."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The target is a pair of variances and the Statement makes no endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The sample space and both decompositions are explicitly finite; the construction uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way slope identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication or characterization is claimed."
+        }
+      ]
+    },
+    "ex-classical-berkson-differential-error-and-validation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurement-error-models",
+          "source_section": "Definition",
+          "quote": "Let $X,W,U$ be real random variables on one probability space, meaning\nmeasurable maps into $(\\mathbb R,\\mathcal B(\\mathbb R))$\n([[def-random-element-and-real-random-variable]]). The variable $X$ is the\n**latent true value**, $W$ is its **measured value**, and $U$ is an\n**error term**. We use the following two additive models:\n\n- **Classical additive error:** $W=X+U$, with $\\mathbb E[U]=0$ and $U$\n  independent of $X$ in the sense of\n  [[def-independent-random-elements]].\n- **Berkson additive error:** $X=W+U$, with $\\mathbb E[U]=0$ and $U$\n  independent of $W$ in that same sense.\n\nThe equations have opposite directions and their independence conditions\nrefer to different variables. They are distinct model assumptions.\n\nFor nonempty finite sets $\\mathcal X$ and $\\mathcal W$, a **categorical\nmisclassification mechanism** is a row-stochastic matrix\n$K(w\\mid x)\\in[0,1]$, indexed by $x\\in\\mathcal X$ and $w\\in\\mathcal W$:\nfor every $x$, $\\sum_{w\\in\\mathcal W}K(w\\mid x)=1$. When categorical random\nvariables $X,W$ have $\\mathbb P(X=x)>0$, the entry represents\n$$K(w\\mid x)=\\frac{\\mathbb P(W=w,\\ X=x)}{\\mathbb P(X=x)}.$$\nIf $\\mathbb P(X=x)=0$, the observed joint law determines no conditional row\nat that $x$; any row there is an additional part of a specified model, not an\nempirical consequence.\n\nThe matrix $K(w\\mid x)$ describes the conditional law given $X$ alone. If an\noutcome or covariate is also named, whether the error is nondifferential must\nbe stated relative to those variables; the marginal matrix alone does not\nsettle that question.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.5",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-expectation-of-products-of-independent-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be a finite mutually independent family of real random variables on a common probability space, with independence in the sense of [[def-independent-random-elements]].\n\n1. If every $X_i$ is integrable, then $\\prod_{i\\in I}X_i$ is integrable and\n   $$\\mathbb E\\!\\left[\\prod_{i\\in I}X_i\\right]=\\prod_{i\\in I}\\mathbb E[X_i]$$\n   in $\\mathbb R$.\n2. If every $X_i$ is nonnegative, the same identity holds in $[0,+\\infty]$. A zero factor on the right makes the product zero even if another factor is $+\\infty$; otherwise the usual extended nonnegative product is used.\n\nThe original finite-probability-space case is included: for a finite family of finite-valued real random variables, mutual atom independence as in [[def-independence-of-finite-random-variables]] suffices, and all expectations are finite. For $I=\\varnothing$, both sides equal $1$. The converse is not asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.5",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-classical-error-attenuation-in-simple-linear-regression",
+          "source_section": "Statement",
+          "quote": "Let $X,U,\\epsilon,W,Y$ be square-integrable real random variables on one\nprobability space with\n$\\mathbb E[X]=\\mathbb E[U]=\\mathbb E[\\epsilon]=0$,\n$U$ independent of the random element $(X,\\epsilon)$, and $\\epsilon$\nindependent of $X$. Set\n$$W=X+U,\\qquad Y=\\alpha+\\beta X+\\epsilon,\\qquad \\alpha,\\beta\\in\\mathbb R,$$\nso $W$ has classical additive error. If\n$\\operatorname{Var}(X)+\\operatorname{Var}(U)>0$, the coefficient $\\gamma$\nof the best affine $L^2$ predictor of $Y$ from $W$ is\n$$\\gamma=\\frac{\\operatorname{Cov}(Y,W)}{\\operatorname{Var}(W)}=\\beta\\frac{\\operatorname{Var}(X)}{\\operatorname{Var}(X)+\\operatorname{Var}(U)}.$$\nThe attenuation factor lies in $[0,1]$. When both variances are positive, it\nis strictly between $0$ and $1$, so for $\\beta\\ne0$ the coefficient has the\nsame sign as $\\beta$ and smaller absolute value; when $\\beta=0$, $\\gamma=0$.\nThe boundary cases are: if $\\operatorname{Var}(X)=0$, the factor is $0$; if\n$\\operatorname{Var}(U)=0$ and $\\operatorname{Var}(X)>0$, it is $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-berkson-error-slope-in-simple-linear-model",
+          "source_section": "Statement",
+          "quote": "Let $W,U,\\epsilon,X,Y$ be square-integrable real random variables on one\nprobability space with\n$\\mathbb E[W]=\\mathbb E[U]=\\mathbb E[\\epsilon]=0$, $U$ independent of $W$,\nand $\\epsilon$ independent of $W$. Put\n$$X=W+U,\\qquad Y=\\alpha+\\beta X+\\epsilon,\\qquad \\alpha,\\beta\\in\\mathbb R,$$\nso $X$ has Berkson additive error relative to $W$. If\n$\\operatorname{Var}(W)>0$, the coefficient of the best affine $L^2$\npredictor of $Y$ from $W$ is $\\beta$. Independence between $U$ and\n$\\epsilon$ is not assumed or needed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nondifferential-measurement-error-relative-to-named-variables",
+          "source_section": "Definition",
+          "quote": "Let $X,W,Y,Z$ be real random variables on a common probability space. Let\n$\\mathcal G$ be the smallest sub-sigma-algebra of the ambient sigma-algebra\nthat makes both $X$ and $Z$ measurable; when no $Z$ is named, take\n$\\mathcal G=\\sigma(X)$. The error in measuring $X$ by $W$ is\n**nondifferential with respect to $Y$ relative to $(X,Z)$** exactly when\n$$W\\perp\\!\\!\\!\\perp Y\\mid\\mathcal G,$$\nusing the library definition\n[[def-conditional-independence-given-a-sigma-algebra]]. It is\n**differential with respect to $Y$ relative to $(X,Z)$** when this conditional\nindependence fails.\n\nThe named variables are part of the definition: changing $Y$ or $Z$ can\nchange the classification. This condition alone fixes no direction of bias\nfor a specified estimator or target. Such a direction requires additional\nmodel and target assumptions.\n\n**Axiom:** This definition assumes the Axiom of Choice\n([[def-axiom-of-choice]]) because the cited\nconditional-independence definition is stated using the library's\nconditional-expectation classes.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-observed-law-does-not-identify-latent-error-variance-split",
+          "source_section": "Statement",
+          "quote": "Within the class of centered, square-integrable classical additive error\nmodels with $U$ independent of $X$, the observed law of $W=X+U$ need not\nidentify the target\n$$\\psi(\\theta)=(\\operatorname{Var}_{\\theta}(X_{\\theta}),\\operatorname{Var}_{\\theta}(U_{\\theta}))\\in[0,+\\infty)^2.$$\nIn particular, there is a two-point parametric model whose two parameter\nvalues give the same law of $W$ but different latent-error variance pairs.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the first construction, each of the four sign pairs has probability $1/4$ and each coordinate sign has probability $1/2$, so $X$ and $U$ are independent. Each has $\\mathbb E[X]=0$ and $\\operatorname{Var}(X)=1$, and likewise for $U$. Their covariance is $0$ by [F2]–[F4]. The error is classical, $\\epsilon=0$, and the response coefficient is $\\beta=2$. Applying [F5] gives measured slope $2(1)/(1+1)=1$, while $Y=2X$ gives latent slope $2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the second construction, $W$ and $U$ are independent centered signs with variance $1$, $X=W+U$, and $\\epsilon=0$. Thus the distinct Berkson hypotheses hold, and [F6] gives measured slope $2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In the third construction $Y=X$. On each positive-probability stratum $X=x$, the variable $Y$ is constant. The conditional-independence definition [F10], applied under the explicit Axiom of Choice premise [F8], therefore gives for all bounded measurable $f,g$, $$\\mathbb E[f(W)g(Y)\\mid\\sigma(X)]=g(X)\\mathbb E[f(W)\\mid\\sigma(X)]=\\mathbb E[f(W)\\mid\\sigma(X)]\\mathbb E[g(Y)\\mid\\sigma(X)].$$\nBy [F7], the error is nondifferential relative to $Y$ given $X$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "In the fourth construction, $\\mathbb E[Y\\mid X=1]-\\mathbb E[Y\\mid X=0]=3/4-1/4=1/2$. Since $W=1-Y$, $\\mathbb E[Y\\mid W=1]-\\mathbb E[Y\\mid W=0]=0-1=-1$. On the positive stratum $X=1$, the conditional expectation of $\\mathbf 1_{\\{W=1\\}}\\mathbf 1_{\\{Y=1\\}}$ is $0$, whereas the product of the two conditional expectations is $(1/4)(3/4)=3/16$. The factorization in [F10] fails, so the error is differential relative to $Y$ given $X$.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "On the uniform four-sign space, every specified pattern of $k$ distinct signs has probability $2^{-k}$; thus the coordinates are mutually independent, centered, and have variance $1$. For sign-pattern sets $E,F$ on disjoint blocks of sizes $2,2$ or $3,1$, the joint probability is $|E||F|/16$, the product of the two block probabilities; hence $X_i$ is independent of $U_i$ for $i=0,1$. Their distinct-coordinate covariances are zero by [F4]. They satisfy $W_0=W_1=A+B+C+D$ pointwise.",
+          "step": "1.5",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The true contrast is $\\mathbb E[Y\\mid X=1]-\\mathbb E[Y\\mid X=0]=1$. The table gives $\\mathbb P(W=1)=1/2$, $\\mathbb E[Y\\mid W=1]=1/5$, and $\\mathbb E[Y\\mid W=0]=4/5$, so the measured contrast is $1/5-4/5=-3/5$. Thus this nondifferential mechanism reverses the contrast direction.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Bilinearity [F2] and the zero coordinate covariances from step 1.5 give $\\operatorname{Var}(X_0)=1+1=2$, $\\operatorname{Var}(U_0)=1+1=2$, $\\operatorname{Var}(X_1)=1+1+1=3$, and $\\operatorname{Var}(U_1)=1$. Thus the same observed $W$ law is compatible with distinct variance pairs, as asserted in [F9].",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "step 1.5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The event $X_0=0$ requires opposite signs among $A,B$, so has probability $2/4=1/2$. Since $X_1=A+B+C$ is a sum of three signs, it takes values only in $\\{-3,-1,1,3\\}$, and therefore $\\mathbb P(X_1=0)=0$. These unequal marginals show that the joint validation laws of $(X,W)$ differ, so observing $X$ adds information that separates these two candidate laws.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.5",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Each construction has explicit nonempty finite support, and step 1.5 uses the sixteen-point model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The residual is zero in steps 1.1 and 1.2, and step 1.4 handles zero-probability cells without dividing by them."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 each use one measured predictor."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 1.4 include deterministic conditional variables while retaining positive-probability conditioning strata."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.4 checks the deterministic endpoint W=1-Y, where one conditional joint probability is zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3 records the explicit Choice premise for the conditional-independence definition; the finite constructions are enumerated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example supplies worked models and counterexamples, not a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is stated or used by these finite constructions."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "symmetric-rademacher-covariance",
+          "asserts": "Each has $\\mathbb E[X]=0$ and $\\operatorname{Var}(X)=1"
+        }
+      ]
+    }
+  }
+}

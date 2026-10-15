@@ -1,0 +1,350 @@
+[
+  {
+    "order": 1924,
+    "id": "generalized-linear-models-and-fisher-scoring",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Generalized linear models and Fisher scoring",
+    "companion": "generalized-linear-models-and-fisher-scoring-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "dominated-experiments-likelihood-and-sufficiency",
+      "complete-sufficiency-exponential-families-and-basu",
+      "fisher-information-and-finite-sample-information-bounds",
+      "likelihood-asymptotics-wald-score-and-likelihood-ratio",
+      "matrix-differentiation-and-first-order-spectral-perturbation",
+      "central-limit-theorems",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "inner-product-spaces-and-orthogonality"
+    ],
+    "items": [
+      {
+        "id": "def-glm-observation-family",
+        "kind": "definition",
+        "title": "Explicit exponential-family response contracts",
+        "statement": "For a finite independent response vector, specify its component densities or masses, sigma-finite base measures, common supports, dispersion factors, and product sampling law.",
+        "strategy": "Definition: give the normalized component laws and their finite product; state support and differentiability conventions.",
+        "deps": [
+          "def-scientific-statistical-model-contract",
+          "def-dominated-statistical-experiment",
+          "def-independent-random-elements",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-glm-mean-and-variance-identities",
+        "kind": "lemma",
+        "title": "Mean and variance from the cumulant function",
+        "statement": "Under common support, twice differentiable densities, local integrable derivative envelopes, and finite second moments, the displayed one-parameter family has mean b'(theta) and variance a(phi)b''(theta).",
+        "strategy": "Differentiate the normalized density integral once and twice, with the mean value theorem and dominated convergence justifying both interchanges.",
+        "deps": [
+          "def-glm-observation-family",
+          "cor-mean-value-theorem",
+          "thm-dominated-convergence",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-moments-variance-and-covariance",
+          "thm-integration-against-a-density",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-glm-product-density",
+        "kind": "lemma",
+        "title": "The product response law has the product density",
+        "statement": "In the setup of [[def-glm-observation-family]], let $P_\\theta=\\bigotimes_{i=1}^nP_{i,\\theta_i,\\phi}$ and $\\nu=\\bigotimes_{i=1}^n\\nu_i$. Then the joint sampling law has density\n\n$$q_\\theta(y_1,\\ldots,y_n)=\\prod_{i=1}^n f_i(y_i;\\theta_i,\\phi)$$\n\nrelative to $\\nu$. At any $y$ for which every factor $f_i(y_i;\\theta_i,\\phi)$ is positive, the log likelihood is $\\log q_\\theta(y)=\\sum_i\\log f_i(y_i;\\theta_i,\\phi)$.",
+        "strategy": "Prove measurability, use Tonelli on rectangles and total mass, then apply finite-measure uniqueness on the generating rectangle pi-system.",
+        "deps": [
+          "def-glm-observation-family",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-measure-with-density",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-generalized-linear-model",
+        "kind": "definition",
+        "title": "Generalized linear model with explicit conditioning",
+        "statement": "Fix $n\\ge1$, $p\\ge1$, a finite design matrix $X\\in\\mathbb R^{n\\times p}$ with rows $x_i^\\mathsf T$, a dispersion value $\\phi$, and an open parameter domain $\\Theta\\subseteq\\mathbb R^p$. A **generalized linear model (GLM)** on this design consists of the response family in [[def-glm-observation-family]], a differentiable one-to-one link $g:\\mathcal M\\to g(\\mathcal M)$ on a specified mean domain $\\mathcal M$, and a specified map $\\tau:\\mathcal M\\to J$ satisfying $b'(\\tau(\\mu))=\\mu$. For $\\beta\\in\\Theta$, put\n\n$$\\eta_i=x_i^\\mathsf T\\beta,\\qquad \\mu_i=g^{-1}(\\eta_i),\\qquad \\theta_i=\\tau(\\mu_i),$$\n\nand require $\\eta_i\\in g(\\mathcal M)$ and $\\theta_i\\in J$ for every $i$. The **canonical link** is the choice $g=\\tau$, equivalently $\\theta_i=\\eta_i$. When $\\theta_i=\\eta_i$ and the component scales are common, write $a_i(\\phi)=a(\\phi)>0$; this common-scale restriction is part of every formula that uses $a(\\phi)$.\n\nThe joint sampling density is the product density from [[lem-glm-product-density]]. For an observed $y=(y_1,\\ldots,y_n)$ with $f_i(y_i;\\theta_i,\\phi)>0$ for every $i$, define its log likelihood by\n\n$$\\ell(\\beta;y,\\phi)=\\sum_{i=1}^n\\left\\{\\frac{y_i\\theta_i-b(\\theta_i)}{a_i(\\phi)}+c_i(y_i,\\phi)\\right\\}.$$\n\nFor a differentiable log likelihood, the **score** is $U(\\beta;y,\\phi):=\\nabla_\\beta\\ell(\\beta;y,\\phi)$. When its entries have finite second moments, the **expected score outer-product information** is $I(\\beta,\\phi):=\\mathbb E_{\\beta,\\phi}[U U^\\mathsf T]$. This page treats $X$ as fixed or conditions on its realized value; it supplies no random-design asymptotic conclusion.",
+        "strategy": "Definition: specify the parameter domain, the fixed or conditioned design, common-scale convention, response family, link, likelihood, score, and information.",
+        "deps": [
+          "def-glm-observation-family",
+          "lem-glm-product-density",
+          "lem-glm-mean-and-variance-identities"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-nested-model-deviance",
+        "kind": "definition",
+        "title": "Likelihood deviance for nested models on common support",
+        "statement": "Fix an observed response vector $y$ for which the component densities are positive throughout both models' parameter sets, and two stated GLMs with the same response family, base support, and log-likelihood function $\\ell(\\beta;y)$. They are **nested** here only when a stated embedding identifies the fitted parameter set with a subset $\\Theta_{\\mathrm{fit}}\\subseteq\\Theta_{\\mathrm{sat}}$ of the saturated reference parameter set. Require both sets to be nonempty and both suprema to be finite real numbers. The **likelihood deviance** is\n\n$$D(y)=2\\left\\{\\sup_{\\beta\\in\\Theta_{\\mathrm{sat}}}\\ell(\\beta;y)-\\sup_{\\beta\\in\\Theta_{\\mathrm{fit}}}\\ell(\\beta;y)\\right\\}.$$\n\nThe definition makes no claim about deviance residuals, goodness-of-fit diagnostics, or a reference distribution. The two full-text GLM notes cited above support likelihood setup but do not supply a deviance-diagnostics treatment; the nonnegativity result below is proved only from the stated set inclusion.",
+        "strategy": "Definition only; residual diagnostics and reference distributions are outside scope.",
+        "deps": [
+          "def-generalized-linear-model",
+          "lem-glm-product-density"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-canonical-glm-score-and-hessian",
+        "kind": "theorem",
+        "title": "Canonical-link score and Hessian",
+        "statement": "Let $(Y_i)_{i=1}^n$ follow [[def-generalized-linear-model]] with a common scale $a(\\phi)>0$, canonical link $\\theta_i=\\eta_i=x_i^\\mathsf T\\beta$, and twice differentiable $b$. For an observed $y$ with $f_i(y_i;\\eta_i,\\phi)>0$ for every $i$,\n\n$$\\nabla_\\beta\\ell(\\beta;y,\\phi)=\\frac{X^\\mathsf T(y-\\mu)}{a(\\phi)},\\qquad \\nabla_\\beta^2\\ell(\\beta;y,\\phi)=-\\frac{X^\\mathsf T\\operatorname{diag}(b''(\\eta_i))X}{a(\\phi)}.$$",
+        "strategy": "Differentiate the product log likelihood coordinatewise and assemble the gradient and Hessian using the stated matrix differential rules.",
+        "deps": [
+          "def-generalized-linear-model",
+          "lem-glm-product-density",
+          "lem-glm-mean-and-variance-identities",
+          "thm-chain-rule",
+          "prop-matrix-differentials-obey-sum-product-and-adjoint-rules"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-glm-general-link-score-and-information",
+        "kind": "theorem",
+        "title": "General-link score and Fisher information",
+        "statement": "Consider [[def-generalized-linear-model]] at an admissible finite $\\beta$ with common scale $a(\\phi)>0$. Assume each $\\eta_i\\mapsto\\theta_i$ is differentiable, each $\\eta_i\\mapsto\\mu_i$ is differentiable with $\\dot\\mu_i:=d\\mu_i/d\\eta_i\\ne0$, $V_i:=b''(\\theta_i)>0$, the component scores have finite second moments, and the common-support, differentiability, and local integrable derivative-envelope conditions from [[def-glm-observation-family]] hold. Put\n\n$$w_i=\\frac{\\dot\\mu_i^2}{a(\\phi)V_i},\\qquad z_i=\\eta_i+\\frac{y_i-\\mu_i}{\\dot\\mu_i}.$$\n\nFor every observed $y$ with $f_i(y_i;\\theta_i,\\phi)>0$ for each $i$, the score and expected score outer-product information are\n\n$$U(\\beta;y,\\phi)=X^\\mathsf T\\left(\\frac{\\dot\\mu_i(y_i-\\mu_i)}{a(\\phi)V_i}\\right)_{i=1}^n,\\qquad I(\\beta,\\phi)=X^\\mathsf T\\operatorname{diag}(w_i)X.$$\n\nIn particular, if $X$ has full column rank, then $I$ is positive definite.",
+        "strategy": "Apply the chain rule through theta=(b')^{-1}(mu), then compute the score second moment from the component means, variances, and independence.",
+        "deps": [
+          "def-generalized-linear-model",
+          "def-glm-observation-family",
+          "lem-glm-product-density",
+          "lem-glm-mean-and-variance-identities",
+          "thm-chain-rule",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-fisher-scoring-irls",
+        "kind": "algorithm",
+        "title": "One minimum-norm IRLS step",
+        "statement": "Inputs are an observed response vector $y$ with $f_i(y_i;\\theta_i,\\phi)>0$ for every $i$, a finite design matrix $X$, an admissible finite current parameter $\\beta$, and a GLM with common scale $a(\\phi)>0$. Require each $\\dot\\mu_i=d\\mu_i/d\\eta_i$ to be finite and nonzero and each $V_i=b''(\\theta_i)$ to be finite and positive.\n\n1. Compute $\\eta_i=x_i^\\mathsf T\\beta$ and $\\mu_i=g^{-1}(\\eta_i)$.\n2. Compute the **working response** and positive weight\n$$z_i=\\eta_i+\\frac{y_i-\\mu_i}{\\dot\\mu_i},\\qquad w_i=\\frac{\\dot\\mu_i^2}{a(\\phi)V_i}.$$\n3. Form $W^{1/2}=\\operatorname{diag}(\\sqrt{w_i})$ using [[thm-of-square-roots]], and put $A=W^{1/2}X$, $r=W^{1/2}z$. By [[def-moore-penrose-pseudoinverse]] and [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]], form $A^+$. Return $\\beta_{\\mathrm{new}}=A^+r$, the unique minimum-Euclidean-norm member of the nonempty weighted least-squares minimizer set by [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]].\n\nThe Moore--Penrose convention makes the procedure single-valued even when $X$ is rank deficient; the underlying least-squares minimizer need not then be unique. Existence and the minimum-norm property follow from [[thm-moore-penrose-pseudoinverse-exists-and-is-unique]] and [[thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution]]. The output need not lie in $\\Theta$, and this definition makes no claim that repeated updates terminate or converge to a maximizer.",
+        "strategy": "Define a single-valued minimum-norm generalized-inverse convention; no termination, convergence, or MLE-existence property is claimed.",
+        "deps": [
+          "def-generalized-linear-model",
+          "thm-glm-general-link-score-and-information",
+          "thm-of-square-roots",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution"
+        ],
+        "justified_by": [
+          "lem-fisher-scoring-irls-is-well-defined"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-fisher-scoring-irls-is-well-defined",
+        "kind": "lemma",
+        "title": "The minimum-norm IRLS step is well-defined for every design rank",
+        "deps": [
+          "alg-fisher-scoring-irls",
+          "def-generalized-linear-model",
+          "thm-of-square-roots",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution"
+        ],
+        "axiom_use": "This is a finite real-matrix specialization of the stated suppliers; it introduces no choice among minimizers and no additional choice assumption.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford CS205L, Unit 11: Zero Singular Values, Moore–Penrose least-squares selection",
+              "url": "https://web.stanford.edu/class/cs205l/assets/unit_11_svd_pinv_solns.pdf"
+            },
+            {
+              "title": "Ryan Tibshirani, Generalized Linear Models, CMU Advanced Methods for Data Analysis, Fisher scoring and weighted least squares",
+              "url": "https://www.stat.cmu.edu/~ryantibs/advmethods/notes/glm.pdf"
+            }
+          ]
+        },
+        "statement": "For every input satisfying the Definition of [[alg-fisher-scoring-irls]], every intermediate quantity in its three instructions is uniquely determined and finite. Its output $\\beta_{\\mathrm{new}}\\in\\mathbb R^p$ is the unique minimum-Euclidean-norm member of the nonempty set\n$$\\operatorname*{argmin}_{\\gamma\\in\\mathbb R^p}\\sum_{i=1}^n w_i(z_i-x_i^\\mathsf T\\gamma)^2.$$\nThis holds for every rank of $X$, including $X=0$. The weighted normal matrix $H=X^\\mathsf T W X$ is positive semidefinite and has kernel $\\ker H=\\ker X$; its singularity does not obstruct this output. No assertion that the output lies in the model parameter domain, or that repeated updates converge, is made.",
+        "strategy": "direct",
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-nested-model-deviance-nonnegative",
+        "kind": "lemma",
+        "title": "Nested-model deviance is nonnegative",
+        "statement": "For the finite-supremum deviance definition, inclusion of the fitted model in the saturated model implies D>=0.",
+        "strategy": "Compare the suprema over nested parameter sets and multiply the resulting inequality by two.",
+        "deps": [
+          "def-nested-model-deviance"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-canonical-glm-strict-concavity",
+        "kind": "theorem",
+        "title": "Strict concavity and uniqueness of a finite stationary maximizer",
+        "statement": "Suppose the canonical-link GLM has an open convex parameter domain $\\Theta\\subseteq\\mathbb R^p$, full-column-rank design $X$, common scale $a(\\phi)>0$, and $b''(\\eta_i)>0$ at every predictor vector in $X\\Theta$. For a fixed response vector $y$ whose component densities are positive throughout $\\Theta$, $\\ell(\\,\\cdot\\,;y,\\phi)$ is strictly concave on $\\Theta$. It has at most one stationary point; if a stationary point exists, it is the unique global maximizer. This conclusion does not assert that a finite maximizer exists.",
+        "strategy": "Restrict the log likelihood to each nonconstant line and use its strictly negative second derivative; use the mean value theorem to compare values.",
+        "deps": [
+          "thm-canonical-glm-score-and-hessian",
+          "cor-mean-value-theorem"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-irls-is-fisher-scoring-step",
+        "kind": "theorem",
+        "title": "IRLS equals the Fisher-scoring step when information is invertible",
+        "statement": "Under the admissibility hypotheses of [[alg-fisher-scoring-irls]], assume also that each map $\\eta_i\\mapsto\\theta_i$ is differentiable, each map $\\eta_i\\mapsto\\mu_i$ is differentiable with finite nonzero derivative $\\dot\\mu_i$, and $V_i:=b''(\\theta_i)>0$. Each response has finite second moment, its density has the fixed common support and locally uniform integrable envelopes for its first and second $\\theta_i$ derivatives required by [[def-glm-observation-family]], and each component score has finite second moment. If $I(\\beta)=X^\\mathsf T W X$ is invertible, let $U(\\beta)$ and $I(\\beta)$ be the score and expected score outer-product information from [[thm-glm-general-link-score-and-information]]. Then the weighted least-squares output satisfies\n\n$$\\beta_{\\mathrm{new}}=\\beta+I(\\beta)^{-1}U(\\beta).$$",
+        "strategy": "Rewrite the weighted response residual as the score contribution and apply the weighted least-squares normal equation.",
+        "deps": [
+          "alg-fisher-scoring-irls",
+          "thm-glm-general-link-score-and-information",
+          "thm-least-squares-solutions-and-normal-equation"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 1925,
+    "id": "generalized-linear-models-and-fisher-scoring-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Generalized linear models and Fisher scoring — Examples",
+    "companion": "generalized-linear-models-and-fisher-scoring",
+    "requires": [
+      "generalized-linear-models-and-fisher-scoring"
+    ],
+    "items": [
+      {
+        "id": "ex-poisson-overdispersion",
+        "kind": "example",
+        "title": "A mean-matched count law can be overdispersed relative to Poisson",
+        "statement": "The law assigning probability one half to 0 and one half to 20 has mean 10 and variance 100, so it shares a Poisson(10) mean but not its variance 10.",
+        "strategy": "Compute the two moments and compare them with the Poisson variance identity.",
+        "deps": [
+          "def-generalized-linear-model",
+          "lem-glm-mean-and-variance-identities",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-addition-formula",
+          "def-factorial-and-falling-factorial",
+          "thm-derivative-of-exponential"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-identity-link-bernoulli-boundary",
+        "kind": "example",
+        "title": "The Bernoulli identity-link boundary leaves the regular family",
+        "statement": "For a Bernoulli identity-link model, the boundary mean mu=0 is outside the finite natural-parameter interior and the Fisher-scoring weight 1/(mu(1-mu)) diverges as mu decreases to 0.",
+        "strategy": "Use the Bernoulli variance function and the nonzero identity-link derivative to compute the weight and identify the excluded boundary.",
+        "deps": [
+          "def-generalized-linear-model",
+          "thm-glm-general-link-score-and-information",
+          "alg-fisher-scoring-irls",
+          "def-bernoulli-and-binomial-random-variables",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-logistic-separation-no-finite-mle",
+        "kind": "example",
+        "title": "Complete separation prevents a finite logistic MLE",
+        "statement": "For x=(-1,1) and y=(0,1), the logistic log likelihood is strictly increasing on every finite beta and approaches its supremum only as beta tends to positive infinity.",
+        "strategy": "Write the two Bernoulli likelihood factors, differentiate the log likelihood, and compute the limiting supremum.",
+        "deps": [
+          "def-generalized-linear-model",
+          "thm-canonical-glm-score-and-hessian",
+          "thm-canonical-glm-strict-concavity",
+          "def-bernoulli-and-binomial-random-variables",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-singular-fisher-information-nonunique-irls",
+        "kind": "example",
+        "title": "Rank deficiency gives singular information and nonunique weighted least squares",
+        "statement": "For the two-column design with rows (1,1) and (2,2), Bernoulli-logit beta=0, and responses (0,1), the information matrix is singular and the weighted least-squares minimizers form a line; the Moore-Penrose convention selects one member.",
+        "strategy": "Compute the positive weights, the rank-one information matrix, and the objective as a function of beta_1+beta_2.",
+        "deps": [
+          "def-generalized-linear-model",
+          "thm-glm-general-link-score-and-information",
+          "alg-fisher-scoring-irls",
+          "def-bernoulli-and-binomial-random-variables",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-bernoulli-logit-glm-one-step",
+        "kind": "example",
+        "title": "A one-observation Bernoulli-logit Fisher-scoring step",
+        "statement": "For y=x=1 and beta=0, the Bernoulli-logit score is 1/2, information and weight are 1/4, working response is 2, and both IRLS and Fisher scoring return beta+=2.",
+        "strategy": "Compute the Bernoulli cumulant, mean, variance, score, information, working response, and weighted least-squares minimizer explicitly.",
+        "deps": [
+          "def-generalized-linear-model",
+          "thm-canonical-glm-score-and-hessian",
+          "thm-glm-general-link-score-and-information",
+          "alg-fisher-scoring-irls",
+          "thm-irls-is-fisher-scoring-step",
+          "def-bernoulli-and-binomial-random-variables",
+          "thm-derivative-of-exponential",
+          "thm-logarithm-derivative-and-integral"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-poisson-log-glm-one-step",
+        "kind": "example",
+        "title": "A one-observation Poisson-log Fisher-scoring step",
+        "statement": "For y=2, x=1 and beta=0, the Poisson-log score, information and weight are 1, the working response is 1, and both IRLS and Fisher scoring return beta+=1.",
+        "strategy": "Use b(theta)=exp(theta), evaluate the score and information, and solve the one-dimensional weighted least-squares problem.",
+        "deps": [
+          "def-generalized-linear-model",
+          "lem-glm-mean-and-variance-identities",
+          "thm-canonical-glm-score-and-hessian",
+          "thm-glm-general-link-score-and-information",
+          "alg-fisher-scoring-irls",
+          "thm-irls-is-fisher-scoring-step",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-addition-formula",
+          "def-factorial-and-falling-factorial",
+          "thm-derivative-of-exponential"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      }
+    ]
+  }
+]

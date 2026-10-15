@@ -1,0 +1,1419 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62-batch-13",
+  "scope": [
+    "def-randomized-complete-block-design",
+    "lem-rcbd-nested-contrast-model-and-projection",
+    "def-randomized-latin-square-design",
+    "thm-paired-randomization-contrast-moments",
+    "lem-randomly-selected-unit-effect-moments",
+    "prop-rcbd-treatment-block-interaction-confounded-with-residual",
+    "thm-rcbd-treatment-contrast-f-law",
+    "ex-missing-treatment-is-not-a-complete-block",
+    "ex-latin-square-assignment-is-restricted",
+    "ex-paired-randomization-contrast-with-heterogeneous-effects",
+    "ex-rcbd-interaction-shares-the-residual-subspace",
+    "cex-observed-paired-contrast-variance-is-not-effect-heterogeneity"
+  ],
+  "contracts": {
+    "def-randomized-complete-block-design": {
+      "kind": "definition",
+      "risk": "low",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The domain requires t≥2 and b≥1, so there is at least one unit and at least two treatments."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Every tuple in (S_t)^b has weight (t!)^-b>0; zero-weight assignments are outside the specified assignment space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: b=1 is allowed and gives a single complete block; t=2,b=1 is the paired-design boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: No response or error model is imposed, so constant or nonconstant potential-outcome schedules are both permitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition allows the integer endpoints t=2 and b=1 and explicitly identifies their pair as that special RCBD. The assignment space then has2!=2 equally likely permutations; the formula(t!)^{-b} remains1/2. It excludes t=1 and b=0 from this design convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Each S_t contains the identity permutation, hence the finite product assignment space is nonempty; the law is uniform and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition makes a block complete exactly by assigning each of the t treatments once; the finite unit-to-treatment map is a permutation in S_t, in both directions. Completeness gives one occurrence of each label among exactly t units, so the map is bijective."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition makes a block complete exactly by assigning each of the t treatments once; the finite unit-to-treatment map is a permutation in S_t, in both directions. A permutation hits every treatment exactly once and therefore is a complete block by the Definition."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-rcbd-nested-contrast-model-and-projection": {
+      "kind": "lemma",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-randomized-complete-block-design",
+          "source_section": "Definition",
+          "quote": "Fix integers $t\\ge2$ and $b\\ge1$. There are $b$ blocks, each containing the\nsame $t$ fixed experimental units, indexed within block $j$ by\n$i\\in\\{1,\\ldots,t\\}$. The $t$ treatments form a fixed set $\\mathcal T$ with\n$|\\mathcal T|=t$. A **complete block** is a block in which each treatment is\nassigned to exactly one unit. The blocks and their units are fixed before\nrandomization.\n\nLet $S_t$ be the set of permutations from the unit labels to $\\mathcal T$.\nThe **randomized complete-block design (RCBD)** uses assignment space\n$\\mathcal Z=(S_t)^b$ and the uniform probability law on this finite nonempty\nset. Thus each $z=(\\pi_1,\\ldots,\\pi_b)$ has probability $(t!)^{-b}$; the\nwithin-block treatment permutations are independent and individually uniform.\nThis is a finite randomized-treatment assignment model\n([[def-finite-randomized-treatment-assignment-model]]) whose units are the\n$tb$ cells and whose assignment is the only randomness supplied by the\ndesign. The design specifies no response model, Gaussian errors, additivity,\nor absence of interference. A pair is the special case $t=2,b=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-dimension-of-a-direct-sum",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$, let $V$ be a vector\nspace over $F$ ([[def-vector-space]]) and let $U$ be a family of linear subspaces\n$U_i$ of $V$ indexed by $i < n$ ([[def-linear-subspace]],\n[[def-sum-of-linear-subspaces]]) with\n\n$$V \\;=\\; \\bigoplus_{i<n} U_i$$\n\n([[def-internal-direct-sum]]) and every $U_i$ finite-dimensional over $F$\n([[def-dimension]]). Then $V$ is finite-dimensional over $F$ and\n\n$$\\dim_F V \\;=\\; \\sum_{i<n} \\dim_F U_i ,$$\n\nthe right-hand side being the finite sum of [[def-monoid-finite-product]] read\nadditively in the commutative monoid $(\\mathbb{N}, +, 0)$\n([[def-nat-addition]], [[lem-nat-add-identity]],\n[[lem-nat-add-associative]], [[lem-nat-add-commutative]]).\n\n**The base case is a genuine case.** At $n = 0$ the direct sum of the empty\nfamily is $\\{0_V\\}$ and the empty sum of natural numbers is $0$, so the formula\nreads $\\dim_F\\{0_V\\} = 0$. **At $n = 2$** it reads\n$\\dim_F(U \\oplus W) = \\dim_F U + \\dim_F W$.\n\n**No choice principle is used.** The only inputs are\n[[thm-dimension-formula]] and [[thm-dimension-of-a-linear-subspace]], both of\nwhich are proved in finite dimension without one.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(F)$. Its **row space** $\\operatorname{Row}(A)\\subseteq F^n$ is the span of its rows, its **column space** $\\operatorname{Col}(A)\\subseteq F^m$ is the span of its columns, and its **nullspace** is\n$$N(A):=\\{x\\in F^n:Ax=0\\}.$$\n\nThe **row rank** and **column rank** are\n$$\\operatorname{rrank}(A):=\\dim_F\\operatorname{Row}(A),\\qquad \\operatorname{crank}(A):=\\dim_F\\operatorname{Col}(A).$$\nThese dimensions are defined because each space is spanned by a finite list.\nStarting with the empty list, inspect the spanning vectors in order and retain a\nvector exactly when it is not in the span of those already retained. Induction\nshows that the retained list is independent and has the same span as the\noriginal finite list, so it is a finite basis. The **rank** of $A$ is its row\nrank; [[thm-row-rank-equals-column-rank]] proves that it also equals the column\nrank.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-row-rank-equals-column-rank",
+          "source_section": "Statement",
+          "quote": "For every finite matrix over a field,\n$$\\operatorname{rrank}(A)=\\operatorname{crank}(A).$$\nBoth dimensions equal the number of pivots in any echelon form of $A$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $H=\\{a\\in\\mathbb R^t:\\mathbf1_t^Ta=0\\}$. The coordinate-sum map $\\mathbb R^t\\to\\mathbb R$ is onto, so [F2] gives $\\dim H=t-1$. By [F6], $\\dim\\operatorname{row}(C)=\\dim\\operatorname{im}C=\\operatorname{rank}C=q$. For every $a\\in\\mathbb R^t$, the vector $h=a-(\\mathbf1_t^Ta/t)\\mathbf1_t$ lies in $H$ and satisfies $Ch=Ca$, because $C\\mathbf1_t=0$. Thus $\\operatorname{im}(C|_H)=\\operatorname{im}C$ has dimension $q$, and [F2] gives $\\dim(H\\cap\\ker C)=t-1-q$. The row space of $C$ lies in $H$ and is orthogonal to $H\\cap\\ker C$. The orthogonal complement of $H\\cap\\ker C$ within $H$ has dimension $q$: both subspaces are finite-dimensional by [F4], and [F3]–[F5] subtract dimensions from $\\dim H=t-1$. Since this complement contains the $q$-dimensional row space, the equality case of [F4] identifies it with that row space.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In $V$, the constant arrays form a one-dimensional space $G$, the arrays $(a_i)_{ij}$ for $a\\in H$ form a $(t-1)$-dimensional treatment space $T$, and the arrays $(d_j)_{ij}$ for $d\\in\\mathbb R^b$ with $\\sum_jd_j=0$ form a $(b-1)$-dimensional block space $B$. The replication maps from the two zero-sum coordinate spaces to $T$ and $B$ are linear bijections: their repeated rows or columns recover the original coordinates, so they transport bases and give the stated dimensions; the block zero-sum space has dimension $b-1$ by [F2] applied to its onto coordinate-sum map. These spaces are pairwise orthogonal: the treatment-block inner product is $\\sum_{i,j}a_id_j=(\\sum_i a_i)(\\sum_jd_j)=0$, and either zero-sum condition also makes the relevant inner product with $G$ zero. Their sum is direct: if three mutually orthogonal vectors sum to zero, taking the inner product with each one gives its squared norm zero. Thus $W_U=G\\oplus T\\oplus B$, and the finite-dimensional direct-sum formula [F5] gives $\\dim W_U=1+(t-1)+(b-1)=t+b-1$. The reduced space replaces $T$ by the replicated arrays from $H\\cap\\ker C$, whose dimension is $t-1-q$ by step 1.1; the same formula gives $\\dim W_R(C)=1+(t-1-q)+(b-1)=t+b-1-q$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any $y$, set $r_{ij}=y_{ij}-\\bar y_{i\\cdot}-\\bar y_{\\cdot j}+\\bar y_{\\cdot\\cdot}$. Summing $r$ over any row gives zero because $\\sum_j y_{ij}=b\\bar y_{i\\cdot}$ and $\\sum_j\\bar y_{\\cdot j}=b\\bar y_{\\cdot\\cdot}$; summing over any column likewise gives zero. Conversely, if $v$ is orthogonal to $T$, then its row-sum vector is orthogonal to every $a\\in H$, so all row sums are equal; orthogonality to $G$ makes their total zero, so every row sum is zero. The same argument with $B$ gives zero column sums. Thus $W_U^\\perp=E$. Also $(y-r)_{ij}=\\bar y_{i\\cdot}+\\bar y_{\\cdot j}-\\bar y_{\\cdot\\cdot}$ belongs to $W_U$. By [F3], this is the orthogonal decomposition of $y$ relative to $W_U$, proving the formula for $RSS_U$; the subspace $E$ is finite-dimensional by [F4], and [F3] gives $V=W_U\\oplus E$. Since the standard cell-coordinate basis makes $\\dim V=tb$, [F5] gives $\\dim E=tb-(t+b-1)=(t-1)(b-1)$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Put $P_C=C^T(CC^T)^{-1}C$. The matrix $CC^T$ is invertible since $C$ has full row rank. Direct multiplication gives $P_C^T=P_C$, $P_C^2=P_C$, and image $P_C=\\operatorname{row}(C)$. For any $x$ and $a\\in\\mathbb R^q$, $\\langle x-P_Cx,C^Ta\\rangle=a^TCx-a^TCC^T(CC^T)^{-1}Cx=0$, so [F3] identifies $P_C$ as the orthogonal projection onto $\\operatorname{row}(C)$. Consequently $T$ is the orthogonal direct sum of the reduced treatment space and the treatment arrays formed from $\\operatorname{row}(C)$. Therefore $W_U=W_R(C)\\oplus D_C$, where $D_C=\\{(a_i)_{ij}:a\\in\\operatorname{row}(C)\\}$.",
+          "step": "3.2",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The projection of $y$ onto $D_C$ is the array repeating $P_C\\bar y$ across all $b$ blocks: its residual is orthogonal to every repeated $a\\in\\operatorname{row}(C)$ because the inner product is $b\\,a^T(\\bar y-P_C\\bar y)=0$. Its squared norm is $b\\|P_C\\bar y\\|^2=b(C\\bar y)^T(CC^T)^{-1}(C\\bar y)$. In the orthogonal direct sum of step 3.2, $y-P_{W_R}y$ is this projection plus $y-P_{W_U}y$, and the two parts are orthogonal; expanding the squared norm gives the claimed residual-sum reduction.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement restricts t,b≥2 and 1≤q≤t−1; all cell and contrast spaces are nonempty finite-dimensional spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: C has full row rank q, so CC^T is positive definite and invertible; the zero-rank contrast case is excluded by q≥1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The smallest admissible case t=b=2,q=1 has p=3, n=4, and one positive residual degree of freedom."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: C1_t=0 and full row rank are essential; a rank-deficient C would make the displayed inverse undefined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement bounds the integer contrast rank by1<=q<=t-1; step 1.1 handles q=t-1 with a zero-dimensional restricted treatment space, and step 2.1 retains the constant/block directions. Both allowed q endpoints are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses finite-dimensional rank-nullity and orthogonal decomposition only; it selects no arbitrary-index family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement identifies W_U perpendicular with the zero-row-and-column-sum arrays E. Step 3.1 proves double-centered arrays orthogonal to the additive directions and conversely uses orthogonality to G,T,B to force every row and column sum zero. For v perpendicular to W_U, step 3.1 uses orthogonality to treatment, block and constant directions to force each row and column sum0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement identifies W_U perpendicular with the zero-row-and-column-sum arrays E. Step 3.1 proves double-centered arrays orthogonal to the additive directions and conversely uses orthogonality to G,T,B to force every row and column sum zero. For v with row and column sums0, its inner product with each additive array is0; this is the E subset W_U-perpendicular direction of step 3.1."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all five proof steps and the eight direct suppliers. C1=0 makes C restricted to H have image of dimension q, giving kernel dimension t−1−q. Constant, treatment and block spaces are pairwise orthogonal and their replication maps injective. Row/column zero sums characterize the orthogonal complement; double centering gives the explicit projection. Full row rank makes CC^T positive definite: a^TCC^Ta=||C^Ta||²>0 for a≠0. P_C projects onto row(C); replication scales squared norm by b. Orthogonality gives the stated RSS difference with no distributional hypothesis. Checked t=b=2, q=1 and q=t−1 (zero reduced treatment space), zero arrays and C ybar=0. Oehlert §13.2.2 pp.319–321 gives the additive context; the local linear algebra proves the formulas. No AC is required. Empty reader/refuter findings; no defect found."
+      }
+    },
+    "def-randomized-latin-square-design": {
+      "kind": "definition",
+      "risk": "low",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition requires t≥1; t=0 is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The uniform law gives positive mass to each Latin square and zero mass to non-Latin assignments."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For t=1 there is exactly one allocation and its uniform probability is one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The cyclic construction works for every t≥1, including the one-treatment case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition permits the order endpoint t=1: R_t has one residue, L0(0,0)=0 is the unique allocation. The comparison with independent RCBD permutations is explicitly restricted to t>=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The cyclic square r+c mod t explicitly witnesses nonemptiness, so no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition requires bijections in every row and column; because each has t entries into t treatments, this is equivalent to each treatment appearing once in each row and column, not an implication about arbitrary RCBD assignments. Each specified row/column bijection visits every residue exactly once, giving the occurrence criterion in the Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition requires bijections in every row and column; because each has t entries into t treatments, this is equivalent to each treatment appearing once in each row and column, not an implication about arbitrary RCBD assignments. One occurrence per treatment in each row/column gives a bijection of each finite t-element row/column to R_t, hence the defined allocation."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Checked the full Definition and all four supplier definitions. The allocation set is a subset of the finite function set R_t^(R_t×R_t); L0(r,c)=r+c mod t explicitly witnesses nonemptiness for every integer t≥1. At t=1 the sole allocation has mass one. For t≥2, identical treatment permutations in all rows have positive product-RCBD mass but violate column uniqueness, so the laws differ. Row/column bijectivity is equivalent to each treatment occurring once. No quotient or AC is used. Oehlert Ch.13 §13.3 pp.325–327 supports the balance definition; uniformity over all squares is the expressly chosen local law, not an attribution to his randomization procedure. Reader/refuter findings are empty; no defect found."
+      }
+    },
+    "thm-paired-randomization-contrast-moments": {
+      "kind": "theorem",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "assignments of probability\nzero may remain in $\\mathcal Z$. A **potential-outcome schedule** is a function\n$\\theta:\\mathcal I\\times\\mathcal Z\\to\\mathbb R$, with\n$Y_i(z):=\\theta(i,z)$. The schedule and the units are fixed; the assignment\n$Z$ is the only randomness supplied by the design, and the observed response\nvector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$. The schedule is defined\nfor every allowed assignment, including zero-probability assignments, and\nmay depend on the full assignment vector, so no no-interference assumption is\nimplicit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-population-average-treatment-effect-and-weak-null",
+          "source_section": "Definition",
+          "quote": "Consider the no-interference binary-treatment submodel of\n[[def-finite-randomized-treatment-assignment-model]] in which the allowed\nassignment set is $\\{0,1\\}^{\\mathcal I}$ and unit $i$'s response under\nassignment vector $z$ is $Y_i(z)=Y_i(z_i)$ for fixed real potential responses\n$Y_i(0)$ and $Y_i(1)$. For the fixed units, define the\n**finite-population average treatment effect** by\n$$\\tau_F:=\\frac1N\\sum_{i\\in\\mathcal I}\\bigl(Y_i(1)-Y_i(0)\\bigr).$$\nThe **weak zero-average-effect null** is the hypothesis $\\tau_F=0$; it\nconstrains the average of the unit-level effects, not each effect separately.\nThe Fisher sharp null in this submodel, defined in\n[[def-fisher-sharp-null-and-predeclared-test-orderings]], requires\n$Y_i(1)=Y_i(0)$ for every unit. No probability distribution on the fixed\npotential responses is part of either definition.\n",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-randomized-complete-block-design",
+          "source_section": "Definition",
+          "quote": "Fix integers $t\\ge2$ and $b\\ge1$. There are $b$ blocks, each containing the\nsame $t$ fixed experimental units, indexed within block $j$ by\n$i\\in\\{1,\\ldots,t\\}$. The $t$ treatments form a fixed set $\\mathcal T$ with\n$|\\mathcal T|=t$. A **complete block** is a block in which each treatment is\nassigned to exactly one unit. The blocks and their units are fixed before\nrandomization.\n\nLet $S_t$ be the set of permutations from the unit labels to $\\mathcal T$.\nThe **randomized complete-block design (RCBD)** uses assignment space\n$\\mathcal Z=(S_t)^b$ and the uniform probability law on this finite nonempty\nset. Thus each $z=(\\pi_1,\\ldots,\\pi_b)$ has probability $(t!)^{-b}$; the\nwithin-block treatment permutations are independent and individually uniform.\nThis is a finite randomized-treatment assignment model\n([[def-finite-randomized-treatment-assignment-model]]) whose units are the\n$tb$ cells and whose assignment is the only randomness supplied by the\ndesign. The design specifies no response model, Gaussian errors, additivity,\nor absence of interference. A pair is the special case $t=2,b=1$.\n",
+          "uses": [
+            "1.1",
+            "2.2",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.\n",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\n",
+          "uses": [
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "take the data space\n$\\mathcal X=\\mathcal Z\\times\\mathbb R^{\\mathcal I}$ with its full power-set\nsigma-algebra,",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.\n\n",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Embed the pair's design law in the finite binary assignment model on $\\{0,1\\}^2$ by giving weight $1/2$ to $(1,0)$ and $(0,1)$ and weight zero to $(0,0)$ and $(1,1)$. Zero-probability assignments are allowed by [F1]. The positive-weight assignments give the displayed $D_1,D_2$, with average $(\\delta_1+\\delta_2)/2$ and difference $(\\delta_1-\\delta_2)+2(Y_1(0)-Y_2(0))$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $D$ by the treated-minus-control formula on the two positive-weight assignments and, for example, by zero on the two zero-weight assignments. This is a function on the full-power-set data space [F7], hence a measurable statistic and estimator of $\\tau$ by [F6]; its arbitrary zero-weight values do not affect design moments.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F4], $\\mathbb E_d[D]=(D_1+D_2)/2=(\\delta_1+\\delta_2)/2=\\tau$, so the contrast estimates the pair's finite-population average effect without bias.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Let $X$ indicate that unit $1$ is assigned treatment $1$, so $D=D_2+(D_1-D_2)X$. Since the assignment space is finite, the variables are square-integrable. By [F5] and [F8], covariance with a constant is zero and $\\operatorname{Var}_d(D)=(D_1-D_2)^2\\operatorname{Var}_d(X)$.",
+          "step": "2.3",
+          "inputs": [
+            "F3",
+            "F5",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two equally weighted assignments give $\\mathbb E_d[X]=1/2$ by [F4], hence $\\operatorname{Var}_d(X)=1/4$ by [F5]. Therefore $\\operatorname{Var}_d(D)=(D_1-D_2)^2/4$, which is the formula in the Statement.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The claim is for exactly two units and two treatments; the finite assignment space has two positive-weight allocations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Potential outcomes may include zero values; the variance remains the squared difference between the two possible observed contrasts divided by four."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: If D_1=D_2 the observed contrast is constant and its variance is zero; equal unit-level treatment effects alone need not make D_1=D_2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The observed contrast is degenerate exactly when D_1=D_2, including cases with unequal baselines and effects that cancel in the displayed contrast difference."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement fixes exactly two units and binary treatment labels0,1; steps 1.1 and2.1 explicitly extend the contrast to the zero-weight assignments(0,0),(1,1). There is no variable confidence level or time interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The two assignments are explicitly enumerated; finite expectation and covariance algebra use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement derives the expectation and variance of the two assigned contrasts. Steps 2.2 and3.1 compute these moments from equal weights; it asserts no converse identifying a potential-outcome schedule from its moments."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement derives the expectation and variance of the two assigned contrasts. Steps 2.2 and3.1 compute these moments from equal weights; it asserts no converse identifying a potential-outcome schedule from its moments."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all five steps and eight suppliers, including the complete covariance proof. The zero-weight extension embeds the paired law in the full binary schedule model, with no-interference explicit. D is the response-difference function of assignment plus observed responses, measurable on the full power set. D1+D2=δ1+δ2, D1−D2=δ1−δ2+2(Y1(0)−Y2(0)); finite two-point moments give τ and (D1−D2)²/4. The representation in step 2.3 holds on the positive-mass support (almost surely): its failure at the two zero-weight extension points has no effect on moments. This is immediately closable proof polish, not a false moment or statistic claim. Covariance bilinearity applies to the bounded finite-space variables. Equal D values give variance zero; equal δ alone need not. Zero-weight assignments are retained legitimately; t=2,b=1 is permitted by the RCBD supplier even though the projection lemma requires b≥2 and is not used here. Holmes–Huber §13.4.4 supports pairing/randomized position; the formulas are proved locally. No AC required; no substantive defect found; findings empty."
+      }
+    },
+    "prop-rcbd-treatment-block-interaction-confounded-with-residual": {
+      "kind": "proposition",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-rcbd-nested-contrast-model-and-projection",
+          "source_section": "Statement",
+          "quote": "Let $t,b\\ge2$, $1\\le q\\le t-1$, and let $C\\in\\mathbb R^{q\\times t}$ have\nrank $q$ and satisfy $C\\mathbf 1_t=0$. Give $V=\\mathbb R^{t\\times b}$ the\nFrobenius inner product $\\langle u,v\\rangle=\\sum_{i,j}u_{ij}v_{ij}$. Write\n$\\operatorname{row}(C)=\\operatorname{im}(C^T)$ for the span of the rows of $C$,\nand define the full additive mean space\n$$W_U=\\{(\\mu+\\tau_i+\\beta_j)_{ij}:\\mu\\in\\mathbb R,\\ \\sum_i\\tau_i=0,\\ \\sum_j\\beta_j=0\\}$$\nand the reduced space $W_R(C)$ by the same formula with the extra restriction\n$C\\tau=0$. For an array $y$, write\n$\\bar y_{i\\cdot}=b^{-1}\\sum_jy_{ij}$,\n$\\bar y_{\\cdot j}=t^{-1}\\sum_iy_{ij}$, and\n$\\bar y_{\\cdot\\cdot}=(tb)^{-1}\\sum_{i,j}y_{ij}$. Let\n$RSS_U=\\|y-P_{W_U}y\\|^2$ and $RSS_R=\\|y-P_{W_R(C)}y\\|^2$, where $P_W$ is\nthe orthogonal projection onto $W$ ([[def-orthogonal-projection]]). Then\n$$\\dim W_U=t+b-1,\\qquad \\dim W_R(C)=t+b-1-q,$$\n$$W_U^\\perp=E:=\\{r\\in\\mathbb R^{t\\times b}:\\sum_jr_{ij}=0\\text{ for every }i,\\ \\sum_ir_{ij}=0\\text{ for every }j\\},\\qquad \\dim E=(t-1)(b-1),$$\n$$RSS_U=\\sum_{i,j}(y_{ij}-\\bar y_{i\\cdot}-\\bar y_{\\cdot j}+\\bar y_{\\cdot\\cdot})^2,$$\nand\n$$RSS_R-RSS_U=b(C\\bar y)^T(CC^T)^{-1}(C\\bar y),$$\nwhere $\\bar y=(\\bar y_{1\\cdot},\\ldots,\\bar y_{t\\cdot})^T$.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-randomized-complete-block-design",
+          "source_section": "Definition",
+          "quote": "Fix integers $t\\ge2$ and $b\\ge1$. There are $b$ blocks, each containing the\nsame $t$ fixed experimental units, indexed within block $j$ by\n$i\\in\\{1,\\ldots,t\\}$. The $t$ treatments form a fixed set $\\mathcal T$ with\n$|\\mathcal T|=t$. A **complete block** is a block in which each treatment is\nassigned to exactly one unit. The blocks and their units are fixed before\nrandomization.\n\nLet $S_t$ be the set of permutations from the unit labels to $\\mathcal T$.\nThe **randomized complete-block design (RCBD)** uses assignment space\n$\\mathcal Z=(S_t)^b$ and the uniform probability law on this finite nonempty\nset. Thus each $z=(\\pi_1,\\ldots,\\pi_b)$ has probability $(t!)^{-b}$; the\nwithin-block treatment permutations are independent and individually uniform.\nThis is a finite randomized-treatment assignment model\n([[def-finite-randomized-treatment-assignment-model]]) whose units are the\n$tb$ cells and whose assignment is the only randomness supplied by the\ndesign. The design specifies no response model, Gaussian errors, additivity,\nor absence of interference. A pair is the special case $t=2,b=1$.\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write the cell array as $Y=m+\\gamma+\\epsilon$, where $m\\in W_U$ is additive and $\\gamma\\in E$. By [F1], the residual from projection onto $W_U$ is $(I-P_{W_U})Y=\\gamma+(I-P_{W_U})\\epsilon$, and the latter error projection lies in $E=W_U^\\perp$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $h\\in E$, the identity $\\gamma+(I-P_{W_U})\\epsilon=(\\gamma+h)+((I-P_{W_U})\\epsilon-h)$ gives two decompositions of the same observed residual into vectors in $E$. Thus the cell data alone do not distinguish the unrestricted interaction component from the projected error component.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The additive space has dimension $t+b-1$ and $E$ has dimension $(t-1)(b-1)$, so their orthogonal direct sum has dimension $tb$, the full cell-space dimension. Therefore the model with a free interaction uses all cell-space directions and leaves zero residual degrees of freedom for a separate pure-error estimate.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement assumes t,b≥2 and one real observation in every treatment-by-block cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The interaction may be zero; the proposition concerns the residual subspace and remains true."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For the minimal t=b=2 design the residual subspace has dimension one, so the nonunique decomposition is already present."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The claim concerns unrestricted double-centered interactions; restricted interaction models can leave residual directions and are outside this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement sets t,b>=2 and one response per cell; step 3.1 includes the smallest t=b=2 residual dimension1. The zero pure-error degrees after saturation are an asserted result, not an excluded endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Only finite-dimensional projections and algebra are used; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement asserts failure of a unique algebraic decomposition for unrestricted interaction/error vectors. Step 2.1 exhibits arbitrary h shifts, and step 3.1 computes saturated degrees of freedom; it explicitly disclaims a characterization under every extra stochastic model."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement asserts failure of a unique algebraic decomposition for unrestricted interaction/error vectors. Step 2.1 exhibits arbitrary h shifts, and step 3.1 computes saturated degrees of freedom; it explicitly disclaims a characterization under every extra stochastic model."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read the Statement, all three proof steps and both suppliers. P_E annihilates the additive mean and fixes γ∈E, so residual equals γ+P_Eε. Every h∈E preserves this sum and both new components remain in E; a nonzero h exists because t,b≥2 gives positive dimension. W_U⊕E fills all tb directions, leaving zero pure-error residual degrees of freedom with unrestricted interaction. At t=b=2, E has dimension one; zero residual still admits canceling nonzero components. The statement explicitly limits the inference to realized residual decomposition and does not claim nonidentifiability under every stochastic model. Oehlert Ch.13 §13.2.2 pp.320–321 describes the same zero-pure-error layout. No choice/distributional assumption is used; no defect found; reader/refuter findings empty."
+      }
+    },
+    "thm-rcbd-treatment-contrast-f-law": {
+      "kind": "theorem",
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-linear-model-qr-and-exact-t-f-pivots",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix a deterministic matrix $X\\in\\mathbb R^{n\\times p}$ with $n>p\\ge1$ whose $p$ columns are linearly independent. Use the experiment on $(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ indexed by $(\\beta,\\sigma^2)\\in\\mathbb R^p\\times(0,\\infty)$, with observation $Y=X\\beta+\\varepsilon$ and independent errors $\\varepsilon_i\\sim N(0,\\sigma^2)$. Define the least-squares statistic and residual sum of squares by\n$$\\widehat\\beta=(X^TX)^{-1}X^TY,\\qquad P_X=X(X^TX)^{-1}X^T,\\qquad RSS_X=\\|(I_n-P_X)Y\\|^2,\\qquad S^2=\\frac{RSS_X}{n-p},\\qquad S=\\sqrt{S^2}.$$\nFor every nonzero $c\\in\\mathbb R^p$,\n$$\\widetilde T_c:=\\begin{cases} \\dfrac{c^T\\widehat\\beta-c^T\\beta}{S\\sqrt{c^T(X^TX)^{-1}c}},&S>0,\\\\ 0,&S=0 \\end{cases} \\sim t_{n-p},\\qquad \\frac{RSS_X}{\\sigma^2}\\sim\\chi_{n-p}^2,$$\nand $\\widehat\\beta$ is independent of $RSS_X$, with $S>0$ almost surely.\n\nFor nested deterministic full and reduced design spaces $W_R\\subset W_U\\subseteq\\mathbb R^n$ of dimensions $p-q$ and $p$, where $q$ is an integer and $1\\le q\\le p<n$, let $P_R,P_U$ be the orthogonal projections onto these spaces and define $RSS_R=\\|(I-P_R)Y\\|^2$ and $RSS_U=\\|(I-P_U)Y\\|^2$. Under the null hypothesis that the mean vector belongs to $W_R$,\n$$\\widetilde F:=\\begin{cases} \\dfrac{(RSS_R-RSS_U)/q}{RSS_U/(n-p)},&RSS_U>0,\\\\ 0,&RSS_U=0 \\end{cases} \\sim F_{q,n-p}.$$\nThe numerator and denominator chi-square contributions are independent. All t and F denominator degrees of freedom in the statement are positive.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rcbd-nested-contrast-model-and-projection",
+          "source_section": "Statement",
+          "quote": "Let $t,b\\ge2$, $1\\le q\\le t-1$, and let $C\\in\\mathbb R^{q\\times t}$ have\nrank $q$ and satisfy $C\\mathbf 1_t=0$. Give $V=\\mathbb R^{t\\times b}$ the\nFrobenius inner product $\\langle u,v\\rangle=\\sum_{i,j}u_{ij}v_{ij}$. Write\n$\\operatorname{row}(C)=\\operatorname{im}(C^T)$ for the span of the rows of $C$,\nand define the full additive mean space\n$$W_U=\\{(\\mu+\\tau_i+\\beta_j)_{ij}:\\mu\\in\\mathbb R,\\ \\sum_i\\tau_i=0,\\ \\sum_j\\beta_j=0\\}$$\nand the reduced space $W_R(C)$ by the same formula with the extra restriction\n$C\\tau=0$. For an array $y$, write\n$\\bar y_{i\\cdot}=b^{-1}\\sum_jy_{ij}$,\n$\\bar y_{\\cdot j}=t^{-1}\\sum_iy_{ij}$, and\n$\\bar y_{\\cdot\\cdot}=(tb)^{-1}\\sum_{i,j}y_{ij}$. Let\n$RSS_U=\\|y-P_{W_U}y\\|^2$ and $RSS_R=\\|y-P_{W_R(C)}y\\|^2$, where $P_W$ is\nthe orthogonal projection onto $W$ ([[def-orthogonal-projection]]). Then\n$$\\dim W_U=t+b-1,\\qquad \\dim W_R(C)=t+b-1-q,$$\n$$W_U^\\perp=E:=\\{r\\in\\mathbb R^{t\\times b}:\\sum_jr_{ij}=0\\text{ for every }i,\\ \\sum_ir_{ij}=0\\text{ for every }j\\},\\qquad \\dim E=(t-1)(b-1),$$\n$$RSS_U=\\sum_{i,j}(y_{ij}-\\bar y_{i\\cdot}-\\bar y_{\\cdot j}+\\bar y_{\\cdot\\cdot})^2,$$\nand\n$$RSS_R-RSS_U=b(C\\bar y)^T(CC^T)^{-1}(C\\bar y),$$\nwhere $\\bar y=(\\bar y_{1\\cdot},\\ldots,\\bar y_{t\\cdot})^T$.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.\n",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "The assignment\nlaw asserts no response-error model, Gaussian law, superpopulation\nrandomization, or sampling representativeness beyond the stated finite\nassignment mechanism.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $W_R(C)\\subset W_U$, $p=\\dim W_U=t+b-1$, $q=\\dim W_U-\\dim W_R(C)$, and $n=tb$. Since $t,b\\ge2$, $n-p=tb-t-b+1=(t-1)(b-1)=\\nu>0$, and $q\\le t-1\\le p$. Under $C\\tau=0$, the mean array $(\\mu+\\tau_i+\\beta_j)_{ij}$ belongs to $W_R(C)$. Thus the nested-space, positive-degree, and null-mean hypotheses of [F1] hold.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F1] gives the piecewise nested-model statistic $\\{(RSS_R-RSS_U)/q\\}/\\{RSS_U/\\nu\\}$ the law $F_{q,\\nu}$, with its value set to zero when $RSS_U=0$. The finite assignment law [F5] supplies no normal-error assumption; Gaussianity here is separately imposed in the Given. AC is used exactly through [A1] and [F1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F2], the numerator reduction is $b(C\\bar Y)^T(CC^T)^{-1}(C\\bar Y)$, so the statistic in the Statement is the same piecewise ratio. Its numerator and residual sum of squares are continuous functions of the data, and the ratio with the stated zero-denominator branch is Borel measurable; hence it is a statistic by [F4].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $q,\\nu>0$, [F3] defines the named central law and step 3.1 is the piecewise nested-model ratio from [F1]. It therefore has law $F_{q,\\nu}$, as claimed.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The hypotheses require t,b≥2 and 1≤q≤t−1, so p<n and both F degrees are positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: σ²=0 is excluded; σ²>0 is required by the nested Gaussian theorem."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The smallest t=b=2,q=1 case has p=3,n=4 and ν=1, so the denominator degrees remain positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The null Cτ=0 is included; alternatives are not assigned a distributional claim here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes q=1 and q=t-1 with nu=(t-1)(b-1)>0; step 1.1 verifies all numerator and denominator degrees. Steps 2.1–3.1 also retain the RSS_U=0 branch on its null-probability set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is explicitly assumed and placed in deps because the Gaussian supplier uses it in the standard-normal construction and orthogonal invariance."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives the central F law under the contrast null and separately imposed conditional Gaussian errors. Steps 1.1–4.1 derive that implication, without inferring Gaussianity or a null mean from a realized statistic."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement gives the central F law under the contrast null and separately imposed conditional Gaussian errors. Steps 1.1–4.1 derive that implication, without inferring Gaussianity or a null mean from a realized statistic."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all four steps and the seven direct suppliers, including the entire current published Gaussian theorem proof. With n=tb, p=t+b−1 and full-row-rank C, the projection lemma gives nested dimensions p−q,p, RSS reduction b(C Ybar)^T(CC^T)^−1(C Ybar), and n−p=ν=(t−1)(b−1)>0. Under Cτ=0 the mean is in W_R. Conditional independent Gaussian errors with σ²>0 meet the supplier exactly. Its step 4.1 splits the error into reduced, contrast and residual orthogonal coordinate blocks, giving independent σ²χ²_q and σ²χ²_ν contributions. AC and its countable-choice measurability consequence are carried from the supplier. The piecewise ratio is Borel and the zero denominator has probability zero. Checked t=b=2,q=1 (ν=1), q=t−1, zero observed array and non-null exclusion; randomization alone supplies none of these error assumptions. Oehlert §13.2.2 supplies additive context; Chen Lecture 8 §§8.4–8.4.1 PDF pp.9–11 supports Gaussian coordinate/projection properties. Empty findings; no defect found in the current required supplier proof or consumer."
+      }
+    },
+    "ex-missing-treatment-is-not-a-complete-block": {
+      "kind": "example",
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-randomized-complete-block-design",
+          "source_section": "Definition",
+          "quote": "Fix integers $t\\ge2$ and $b\\ge1$. There are $b$ blocks, each containing the\nsame $t$ fixed experimental units, indexed within block $j$ by\n$i\\in\\{1,\\ldots,t\\}$. The $t$ treatments form a fixed set $\\mathcal T$ with\n$|\\mathcal T|=t$. A **complete block** is a block in which each treatment is\nassigned to exactly one unit. The blocks and their units are fixed before\nrandomization.\n\nLet $S_t$ be the set of permutations from the unit labels to $\\mathcal T$.\nThe **randomized complete-block design (RCBD)** uses assignment space\n$\\mathcal Z=(S_t)^b$ and the uniform probability law on this finite nonempty\nset. Thus each $z=(\\pi_1,\\ldots,\\pi_b)$ has probability $(t!)^{-b}$; the\nwithin-block treatment permutations are independent and individually uniform.\nThis is a finite randomized-treatment assignment model\n([[def-finite-randomized-treatment-assignment-model]]) whose units are the\n$tb$ cells and whose assignment is the only randomness supplied by the\ndesign. The design specifies no response model, Gaussian errors, additivity,\nor absence of interference. A pair is the special case $t=2,b=1$.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The image of this block's assignment is $\\{A,C\\}$, which omits $B$, so the map is not onto $\\{A,B,C\\}$ and is not a permutation.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every assignment in the RCBD sample space is a permutation, while this assignment is not; therefore this block is incomplete and outside that sample space.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example specifies one block and three treatment labels."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: No probability calculation is asserted; the issue is membership in the assignment space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A block receiving all three treatments once would be complete; omitting one treatment fails the condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The result is independent of response values and outcomes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example fixes three treatment labels and one block with two assigned units; step 1.1 tests surjectivity to that fixed three-element set, not an endpoint of a varying interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite assignment space is explicitly characterized by permutations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example only exhibits a specific incomplete assignment: step 1.1 checks its image{A,C} misses B, and step 2.1 excludes it from permutations. It states no converse classifying every possible three-treatment block."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example only exhibits a specific incomplete assignment: step 1.1 checks its image{A,C} misses B, and step 2.1 excludes it from permutations. It states no converse classifying every possible three-treatment block."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-latin-square-assignment-is-restricted": {
+      "kind": "example",
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-randomized-complete-block-design",
+          "source_section": "Definition",
+          "quote": "Fix integers $t\\ge2$ and $b\\ge1$. There are $b$ blocks, each containing the\nsame $t$ fixed experimental units, indexed within block $j$ by\n$i\\in\\{1,\\ldots,t\\}$. The $t$ treatments form a fixed set $\\mathcal T$ with\n$|\\mathcal T|=t$. A **complete block** is a block in which each treatment is\nassigned to exactly one unit. The blocks and their units are fixed before\nrandomization.\n\nLet $S_t$ be the set of permutations from the unit labels to $\\mathcal T$.\nThe **randomized complete-block design (RCBD)** uses assignment space\n$\\mathcal Z=(S_t)^b$ and the uniform probability law on this finite nonempty\nset. Thus each $z=(\\pi_1,\\ldots,\\pi_b)$ has probability $(t!)^{-b}$; the\nwithin-block treatment permutations are independent and individually uniform.\nThis is a finite randomized-treatment assignment model\n([[def-finite-randomized-treatment-assignment-model]]) whose units are the\n$tb$ cells and whose assignment is the only randomness supplied by the\ndesign. The design specifies no response model, Gaussian errors, additivity,\nor absence of interference. A pair is the special case $t=2,b=1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-randomized-latin-square-design",
+          "source_section": "Definition",
+          "quote": "Fix $t\\ge1$ and put $R_t=\\{0,1,\\ldots,t-1\\}$, with addition interpreted\nmodulo $t$. A **Latin-square allocation of order $t$** is a function\n$L:R_t\\times R_t\\to R_t$ such that for\neach fixed row the map from columns to treatments is a bijection, and for\neach fixed column the map from rows to treatments is a bijection. Thus each\ntreatment occurs exactly once in every row and every column. Let\n$\\mathcal L_t$ be the finite set of these allocations and assign the uniform\nlaw on $\\mathcal L_t$. This law is well-defined: $L_0(r,c)=r+c\\pmod t$ is a\nLatin square, since adding a fixed residue modulo $t$ permutes the residues; hence\n$\\mathcal L_t$ is nonempty. This specifies one exact\nrestricted randomization law. It randomizes over treatment-by-row-by-column\nassignments and, for $t\\ge2$, is distinct from the product of independent\nwithin-block permutations in an RCBD ([[def-randomized-complete-block-design]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the cyclic array, each row and each column contains $A,B,C$ once, so it belongs to the Latin-square sample space.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the repeated-row array, each row contains $A,B,C$ once, so it is an RCBD assignment; each column repeats a single treatment, so it is not a Latin square.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "There are $3!=6$ permutations per RCBD block and the blocks are independently uniform, so the particular repeated-row assignment has probability $6^{-3}=1/216$. It has probability zero under a law supported only on Latin squares.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example fixes three treatment labels and three blocks."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The repeated-row assignment has zero weight under the Latin-square law because it is not in its support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The specified cyclic array is an admissible Latin square and therefore has positive uniform mass."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: This comparison is about assignment support and does not depend on observed responses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At the probability endpoint zero, step 2.1 assigns the repeated-row array Latin-square probability0, while its RCBD probability is1/216. The positive finite count6^3 and excluded allocation support are computed explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Both sample spaces are finite; the Latin-square set is nonempty by the cyclic construction in its definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example separates two specific arrays, not equivalent design laws: step 1.1 verifies the cyclic array and step 1.2 shows the repeated-row array is RCBD but not Latin. No reverse relation between all square and RCBD outcomes is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example separates two specific arrays, not equivalent design laws: step 1.1 verifies the cyclic array and step 1.2 shows the repeated-row array is RCBD but not Latin. No reverse relation between all square and RCBD outcomes is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-paired-randomization-contrast-with-heterogeneous-effects": {
+      "kind": "example",
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-randomized-complete-block-design",
+          "source_section": "Definition",
+          "quote": "Fix integers $t\\ge2$ and $b\\ge1$. There are $b$ blocks, each containing the\nsame $t$ fixed experimental units, indexed within block $j$ by\n$i\\in\\{1,\\ldots,t\\}$. The $t$ treatments form a fixed set $\\mathcal T$ with\n$|\\mathcal T|=t$. A **complete block** is a block in which each treatment is\nassigned to exactly one unit. The blocks and their units are fixed before\nrandomization.\n\nLet $S_t$ be the set of permutations from the unit labels to $\\mathcal T$.\nThe **randomized complete-block design (RCBD)** uses assignment space\n$\\mathcal Z=(S_t)^b$ and the uniform probability law on this finite nonempty\nset. Thus each $z=(\\pi_1,\\ldots,\\pi_b)$ has probability $(t!)^{-b}$; the\nwithin-block treatment permutations are independent and individually uniform.\nThis is a finite randomized-treatment assignment model\n([[def-finite-randomized-treatment-assignment-model]]) whose units are the\n$tb$ cells and whose assignment is the only randomness supplied by the\ndesign. The design specifies no response model, Gaussian errors, additivity,\nor absence of interference. A pair is the special case $t=2,b=1$.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If unit $1$ receives treatment, the contrast is $Y_1(1)-Y_2(0)=4$; if unit $2$ receives treatment, it is $Y_2(1)-Y_1(0)=2$. They are equally likely by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] the contrast mean is $(4+2)/2=3$, the pair average effect. By [F3] its variance is $\\{(4-3)^2+(2-3)^2\\}/2=1$. Thus the example has unequal unit effects and directly computes the observed contrast moments.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example has a two-unit pair and two assignments."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The listed effects are positive; the general theorem also covers zero effects."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The effects are unequal, so the design variance is positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the effects were equal, the theorem would give zero variance; this example is outside that boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The binary assignment endpoints are the two treatment permutations in step 1.1; they both have weight1/2, and step 2.1 evaluates both squared deviations. No probability parameter tends to0 or1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The two assignments are directly enumerated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example computes contrasts4,2, mean3 and variance1 for one fixed schedule. Steps 1.1–2.1 establish those numbers and do not reconstruct the schedule from a variance value."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example computes contrasts4,2, mean3 and variance1 for one fixed schedule. Steps 1.1–2.1 establish those numbers and do not reconstruct the schedule from a variance value."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [
+        {
+          "check": "symmetric-rademacher-covariance",
+          "asserts": "The centered paired-contrast values are $+1$ and $-1$ with equal weights, so their variance is $1$."
+        }
+      ]
+    },
+    "ex-rcbd-interaction-shares-the-residual-subspace": {
+      "kind": "example",
+      "risk": "low",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-rcbd-treatment-block-interaction-confounded-with-residual",
+          "source_section": "Statement",
+          "quote": "Let $t,b\\ge2$ and observe one real response $Y_{ij}$ for each treatment $i$\nand block $j$. In the additive mean model, the residual subspace consists of\nthe double-centered arrays\n$$E=\\{\\gamma\\in\\mathbb R^{t\\times b}:\\sum_j\\gamma_{ij}=0\\ \\text{for every }i,\\ \\sum_i\\gamma_{ij}=0\\ \\text{for every }j\\},$$\nwhich has dimension $(t-1)(b-1)$ ([[lem-rcbd-nested-contrast-model-and-projection]]).\nIf a treatment-by-block interaction $\\gamma\\in E$ is included in the mean,\nthen the additive-fit residual is $\\gamma+P_E\\epsilon$, where $P_E\\epsilon$\nis the projection of the cell error onto $E$. For every $h\\in E$ this same\nresidual equals $(\\gamma+h)+(P_E\\epsilon-h)$. Hence one observation per cell\ndoes not separately decompose the realized residual into unrestricted\ninteraction and projected error, and fitting the unrestricted interaction\nleaves zero pure-error residual degrees of freedom. This is an algebraic\ndesign limitation; it does not assert nonidentifiability under every\nadditional stochastic model.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each row and each column of $R$ sums to zero, so $R$ is double-centered and belongs to that residual subspace.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both pairs $(\\gamma,e)=(R,0)$ and $(\\gamma,e)=(0,R)$ consist of vectors in the residual subspace and sum to $R$; hence they yield the identical observed residual with different interaction/error allocations.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example uses one observation in each of four treatment-by-block cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The zero array is also in the residual subspace; the displayed nonzero array witnesses the ambiguity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two-by-two design has one residual direction, and the example uses that direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The ambiguity concerns the realized additive residual, not a probability law for the error."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes a2-by2 array with entries+1,-1. Step 2.1 explicitly includes zero interaction and zero projected error as alternate component endpoints, both within the double-centered subspace."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example is a direct finite array calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example provides two distinct interaction/error pairs summing to R. Step 2.1 proves both yield the same residual; it does not assert these are the only possible decompositions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example provides two distinct interaction/error pairs summing to R. Step 2.1 proves both yield the same residual; it does not assert these are the only possible decompositions."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "lem-randomly-selected-unit-effect-moments": {
+      "kind": "lemma",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "The schedule and the units are fixed; the assignment\n$Z$ is the only randomness supplied by the design, and the observed response\nvector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-population-average-treatment-effect-and-weak-null",
+          "source_section": "Definition",
+          "quote": "Consider the no-interference binary-treatment submodel of\n[[def-finite-randomized-treatment-assignment-model]] in which the allowed\nassignment set is $\\{0,1\\}^{\\mathcal I}$ and unit $i$'s response under\nassignment vector $z$ is $Y_i(z)=Y_i(z_i)$ for fixed real potential responses\n$Y_i(0)$ and $Y_i(1)$. For the fixed units, define the\n**finite-population average treatment effect** by\n$$\\tau_F:=\\frac1N\\sum_{i\\in\\mathcal I}\\bigl(Y_i(1)-Y_i(0)\\bigr).$$\nThe **weak zero-average-effect null** is the hypothesis $\\tau_F=0$; it\nconstrains the average of the unit-level effects, not each effect separately.\nThe Fisher sharp null in this submodel, defined in\n[[def-fisher-sharp-null-and-predeclared-test-orderings]], requires\n$Y_i(1)=Y_i(0)$ for every unit. No probability distribution on the fixed\npotential responses is part of either definition.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-randomized-complete-block-design",
+          "source_section": "Definition",
+          "quote": "Fix integers $t\\ge2$ and $b\\ge1$. There are $b$ blocks, each containing the\nsame $t$ fixed experimental units, indexed within block $j$ by\n$i\\in\\{1,\\ldots,t\\}$. The $t$ treatments form a fixed set $\\mathcal T$ with\n$|\\mathcal T|=t$. A **complete block** is a block in which each treatment is\nassigned to exactly one unit. The blocks and their units are fixed before\nrandomization.\n\nLet $S_t$ be the set of permutations from the unit labels to $\\mathcal T$.\nThe **randomized complete-block design (RCBD)** uses assignment space\n$\\mathcal Z=(S_t)^b$ and the uniform probability law on this finite nonempty\nset. Thus each $z=(\\pi_1,\\ldots,\\pi_b)$ has probability $(t!)^{-b}$; the\nwithin-block treatment permutations are independent and individually uniform.\nThis is a finite randomized-treatment assignment model\n([[def-finite-randomized-treatment-assignment-model]]) whose units are the\n$tb$ cells and whose assignment is the only randomness supplied by the\ndesign. The design specifies no response model, Gaussian errors, additivity,\nor absence of interference. A pair is the special case $t=2,b=1$.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "The status of the quantities is explicit: $\\theta$ and all\n$Y_i(z)$ are fixed, $Z$ is random, $(Z,Y_\\theta(Z))$ is observed, and\npotential responses under unassigned vectors are fixed but latent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "A **statistic** with target measurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $S=\\delta_1$ when unit $1$ receives treatment $1$ and $S=\\delta_2$ when unit $2$ receives it. These outcomes have weights $1/2$ by [F3]. Under assignment $(1,0)$, fix $Y_1(1)$ and $Y_2(0)$ but change $Y_1(0)$; the observed assignment and response data stay the same while $S=Y_1(1)-Y_1(0)$ changes. By [F7], no statistic of the observed data can equal $S$ over the model.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "given",
+            "construct",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], $\\mathbb E_d[S]=(\\delta_1+\\delta_2)/2=\\tau$, agreeing with the pair's finite-population average effect [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5], $\\operatorname{Var}_d(S)=\\tfrac12(\\delta_1-\\tau)^2+\\tfrac12(\\delta_2-\\tau)^2=(\\delta_1-\\delta_2)^2/4$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement is for exactly two units and binary treatments."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Either unit effect may be zero; the finite weighted formula still applies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: If δ_1=δ_2 the selected effect is constant and its variance is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If δ_1=δ_2 the selected effect is constant and its variance is zero; unequal effects give positive variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The selected label has exactly two equiprobable possibilities. Steps 2.1–3.1 allow any real fixed effects, including equal effects and zero variance, without a varying probability endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The two assignment outcomes are explicitly enumerated; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives two moments of the selected unit effect and says it is not observed-data measurable. Step 1.1 varies an unobserved baseline while keeping observed outcomes fixed; the moment identities do not characterize the schedule conversely."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement gives two moments of the selected unit effect and says it is not observed-data measurable. Step 1.1 varies an unobserved baseline while keeping observed outcomes fixed; the moment identities do not characterize the schedule conversely."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-13",
+        "notes": "Read all three steps and six direct definitions. Two assignments have weights 1/2, giving mean (δ1+δ2)/2 and variance (δ1−δ2)²/4; all moments exist on this finite space. Equal effects give zero variance, including both zero. With assignment (1,0), hold Y1(1),Y2(0) fixed and vary Y1(0): data (assignment,responses) agree while S differs on a positive-probability outcome. Thus no one parameter-independent statistic works across the unrestricted no-interference model. This does not deny a constant statistic on a restricted known-effect submodel. The reader supplied the exact statistic definition, F7 and dependency/contract/manifest links; the argument and claim are sound. Oehlert §13.2 gives pairing context, while the moment/nonfunctionality results follow locally. No choice is used; no further defect found."
+      }
+    },
+    "cex-observed-paired-contrast-variance-is-not-effect-heterogeneity": {
+      "kind": "counterexample",
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-paired-randomization-contrast-moments",
+          "source_section": "Statement",
+          "quote": "Consider one pair in the $t=2,b=1$ RCBD, with the two treatments labelled\n$0$ and $1$. Let $Y_\\ell(z)\\in\\mathbb R$ be unit $\\ell$'s fixed potential\noutcome under its own treatment $z\\in\\{0,1\\}$, and assume no interference:\nthe outcome depends on the pair assignment only through that unit's own\ntreatment. Define $\\delta_\\ell=Y_\\ell(1)-Y_\\ell(0)$,\n$\\tau=(\\delta_1+\\delta_2)/2$, and the two possible observed contrasts\n$$D_1=Y_1(1)-Y_2(0),\\qquad D_2=Y_2(1)-Y_1(0).$$\nIf exactly one unit is assigned treatment $1$ uniformly at random, the\nobserved treated-minus-control contrast $D$ obeys\n$$\\mathbb E_d[D]=\\tau,\\qquad \\operatorname{Var}_d(D)=\\frac{(D_1-D_2)^2}{4}=\\frac{\\bigl((\\delta_1-\\delta_2)+2(Y_1(0)-Y_2(0))\\bigr)^2}{4}.$$\nHere $\\mathbb E_d$ and $\\operatorname{Var}_d$ average over treatment\nassignment only, holding all potential outcomes fixed. The variance depends\non baseline outcomes as well as effect heterogeneity.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-randomly-selected-unit-effect-moments",
+          "source_section": "Statement",
+          "quote": "In the two-unit, two-treatment paired randomization, let\n$\\delta_\\ell=Y_\\ell(1)-Y_\\ell(0)$ and\n$\\tau=(\\delta_1+\\delta_2)/2$. Define $S$ to be the fixed treatment effect\n$\\delta_\\ell$ of whichever unit $\\ell$ is assigned treatment $1$. Then\n$$\\mathbb E_d[S]=\\tau,\\qquad \\operatorname{Var}_d(S)=\\frac{(\\delta_1-\\delta_2)^2}{4}.$$\nThe random variable $S$ uses both potential outcomes of the selected unit;\nit is not the observed treated-minus-control contrast and is not a statistic\nof the observed assignment and response data.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The fixed effects are $\\delta_1=1$ and $\\delta_2=0$. If unit $1$ is treated, the observed contrast is $D_1=Y_1(1)-Y_2(0)=-9$; if unit $2$ is treated, it is $D_2=Y_2(1)-Y_1(0)=10$. The two assignments each have weight $1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The observed contrast has mean $(-9+10)/2=1/2$ and variance $\\{(-9-1/2)^2+(10-1/2)^2\\}/2=90.25$, also given by [F1]. But the proposed expression is $(\\delta_1-\\delta_2)^2/4=1/4$. Hence it is not the variance of the observed paired contrast.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The variance $1/4$ is instead the variance of the randomly selected unit effect $S\\in\\{1,0\\}$ from [F2]. This distinguishes that latent schedule quantity from the observed contrast, and completes the counterexample.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The witness has two units and the two nonempty pair allocations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: All mass is on the two complete-pair allocations, each with weight one half."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A single unit cannot form a pair; the two-unit condition is essential."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The witness has distinct observed contrasts −9 and 10, so its design variance is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Counterexample has fixed unit effects1 and0; step 1.1 includes the zero effect and the two equally weighted contrasts-9,10. There is no confidence-probability interval whose endpoints require extension."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All four potential outcomes and both assignment outcomes are specified explicitly; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted is a proposed universal variance equality, not an iff characterization. Steps 2.1–3.1 distinguish observed variance90.25 from selected-effect variance1/4 at the displayed schedule."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted is a proposed universal variance equality, not an iff characterization. Steps 2.1–3.1 distinguish observed variance90.25 from selected-effect variance1/4 at the displayed schedule."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    }
+  }
+}

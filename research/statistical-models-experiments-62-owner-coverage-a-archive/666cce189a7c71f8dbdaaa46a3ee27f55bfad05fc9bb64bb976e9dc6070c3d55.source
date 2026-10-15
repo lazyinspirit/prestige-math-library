@@ -1,0 +1,235 @@
+[
+  {
+    "order": 1940,
+    "id": "randomized-treatment-assignment-and-sharp-null-tests",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Assignment randomization and sharp-null tests",
+    "companion": "randomized-treatment-assignment-and-sharp-null-tests-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "statistical-experiments-models-and-identifiability",
+      "estimators-and-randomized-procedures",
+      "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "finite-probability-spaces-and-random-variables"
+    ],
+    "items": [
+      {
+        "id": "lem-finite-weighted-upper-tail-pvalues-and-randomized-ties",
+        "kind": "lemma",
+        "title": "Finite weighted upper-tail p-values and randomized ties",
+        "statement": "Let $(\\Omega,w)$ be a finite probability space, let $T:\\Omega\\to\\mathbb R$,\nand let $Z$ have law $w$. Define\n$$q(z):=\\sum_{\\omega\\in\\Omega}w(\\omega)1\\{T(\\omega)\\ge T(z)\\}.$$\nThen $\\Pr(q(Z)\\le u)\\le u$ for every $u\\in[0,1]$. If an auxiliary random\nvariable $U$ is independent of $Z$ and uniform on $[0,1]$, define\n$$q^+(Z,U):=\\sum_{\\omega\\in\\Omega}w(\\omega)1\\{T(\\omega)>T(Z)\\}+U\\sum_{\\omega\\in\\Omega}w(\\omega)1\\{T(\\omega)=T(Z)\\}.$$\nThen $\\Pr(q^+(Z,U)\\le u)=u$ for every $u\\in[0,1]$.",
+        "strategy": "Sort the positive-mass score levels in decreasing order. Inclusive upper-tail probabilities are their increasing cumulative masses; randomized ties fill the consecutive intervals whose lengths are the score-level masses.",
+        "deps": [
+          "def-finite-probability-space-and-event"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13, §13.2.3",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            },
+            {
+              "title": "Susan Holmes and Wolfgang Huber, Modern Statistics for Modern Biology, Chapter 13, §§13.2 and 13.4",
+              "url": "https://www.huber.embl.de/msmb/13-chap.html"
+            },
+            {
+              "title": "Siva Balakrishnan, CMU 36-705 Lecture 28, §28.5 Fisher's Exact p-values",
+              "url": "https://www.stat.cmu.edu/~siva/teaching/705/lec28.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-finite-randomized-treatment-assignment-model",
+        "kind": "definition",
+        "title": "Finite randomized treatment-assignment models",
+        "statement": "Let $N\\ge1$, and let $\\mathcal I=\\{1,\\ldots,N\\}$ index the fixed\nexperimental units at the actual treatment-assignment level. Let\n$\\mathcal Z$ be a nonempty finite set of allowed assignments. If treatment\nis assigned to clusters, each cluster is one indexed unit; no separate\nprobability-sampling unit is present. The index $i$ identifies that unit,\nand no visit or repeated-measurement index is modeled here.\n\nA known assignment law is a function $p:\\mathcal Z\\to[0,1]$ satisfying\n$\\sum_{z\\in\\mathcal Z}p(z)=1$, so $(\\mathcal Z,p)$ is a finite probability\nspace ([[def-finite-probability-space-and-event]]); assignments of probability\nzero may remain in $\\mathcal Z$. A **potential-outcome schedule** is a function\n$\\theta:\\mathcal I\\times\\mathcal Z\\to\\mathbb R$, with\n$Y_i(z):=\\theta(i,z)$. The schedule and the units are fixed; the assignment\n$Z$ is the only randomness supplied by the design, and the observed response\nvector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$. The schedule is defined\nfor every allowed assignment, including zero-probability assignments, and\nmay depend on the full assignment vector, so no no-interference assumption is\nimplicit. The scientific statistical model contract\n[[def-scientific-statistical-model-contract]] requires the observation space,\nunits, quantity status, observation mechanism, support, conditioning\nconvention, and adequacy assumptions to be recorded; this model specifies\nthose fields as follows.\n\nTo express this as a statistical experiment, take the data space\n$\\mathcal X=\\mathcal Z\\times\\mathbb R^{\\mathcal I}$ with its full power-set\nsigma-algebra, which is a sigma-algebra by [[def-sigma-algebra]] and makes\n$\\mathcal X$ a measurable space ([[def-measurable-space]]), and parameter\nset $\\Theta=\\mathbb R^{\\mathcal I\\times\\mathcal Z}$. For each $\\theta\\in\\Theta$\nlet $P_\\theta$ be the law\n([[def-law-or-distribution-of-a-random-element]]) of the deterministic\nobservation map $O_\\theta(z)=(z,Y_\\theta(z))$ from $(\\mathcal Z,p)$. The map\nis measurable because its domain has the full power set, in the preimage\nsense of [[def-measurable-function-between-measurable-spaces]], and its law\nis a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]]. Thus\n$((\\mathcal X,2^{\\mathcal X}),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ is an\nexperiment in the sense of [[def-statistical-experiment]]. The assignment\nlaw asserts no response-error model, Gaussian law, superpopulation\nrandomization, or sampling representativeness beyond the stated finite\nassignment mechanism. Its finite full-measure support set is\n$$S_\\theta:=\\{(z,Y_\\theta(z)):z\\in\\mathcal Z,\\ p(z)>0\\},$$\nsince $P_\\theta(S_\\theta)=\\sum_{z:p(z)>0}p(z)=1$. The record contains the\nassigned vector and every unit's response; missing or censored outcomes and\nrepeated visits require a separately declared observation mechanism. The\ninferential target is the assignment-invariance hypothesis for these $N$\nunits, not an estimand for a wider population.\n\nInference in this page holds $\\mathcal I$ and $\\theta$ fixed and averages\nover the declared law $p$; it does not condition on the realized assignment.\nThe status of the quantities is explicit: $\\theta$ and all\n$Y_i(z)$ are fixed, $Z$ is random, $(Z,Y_\\theta(Z))$ is observed, and\npotential responses under unassigned vectors are fixed but latent. The\nassignment set, weights, and implemented randomization protocol are\ndesign-controlled and should be checked against protocol records. Assignment\nlogs and response records are empirically assessable, but those checks do not\nprove that the declared law generated the data. Potential outcomes under\nunassigned vectors are fixed and latent. Their values are\n**substantively untestable** from the observed-data law; the\nassignment-invariance claim is a hypothesis tested by the theorem, not an\nempirical fact supplied by the design. These classifications do not make\nthe design or scientific model empirically true.",
+        "deps": [
+          "def-scientific-statistical-model-contract",
+          "def-finite-probability-space-and-event",
+          "def-statistical-experiment",
+          "def-random-element-and-real-random-variable",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measurable-space",
+          "def-sigma-algebra",
+          "def-law-or-distribution-of-a-random-element",
+          "lem-law-of-a-random-element-is-a-probability-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13, §§13.1–13.2 and §13.2.3",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            },
+            {
+              "title": "Susan Holmes and Wolfgang Huber, Modern Statistics for Modern Biology, Chapter 13, §§13.2 and 13.4",
+              "url": "https://www.huber.embl.de/msmb/13-chap.html"
+            },
+            {
+              "title": "Siva Balakrishnan, CMU 36-705 Lecture 28, §28.5 Fisher's Exact p-values",
+              "url": "https://www.stat.cmu.edu/~siva/teaching/705/lec28.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-fisher-sharp-null-and-predeclared-test-orderings",
+        "kind": "definition",
+        "title": "Fisher sharp null and predeclared test orderings",
+        "statement": "In the finite randomized treatment-assignment model\n[[def-finite-randomized-treatment-assignment-model]], a schedule satisfies\nthe **Fisher sharp null** when for each unit $i$ there is a value $y_i$ such that\n$Y_i(z)=y_i$ for every allowed assignment $z$. The full vector\n$y=(y_i)_{i\\in\\mathcal I}$ is then imputable under every assignment.\n\nA **predeclared ordering score** is a real-valued statistic\n$T:\\mathcal Z\\times\\mathbb R^{\\mathcal I}\\to\\mathbb R$\n([[def-statistic-and-estimator]]) fixed before the\nassignment and outcomes are inspected. Its upper-tail ordering includes ties:\nassignment $z'$ is at least as extreme as $z$ when $T(z',y)\\ge T(z,y)$.\nFor a signed score $S$ and fixed null center $s_0$, the corresponding\ntwo-sided ordering is explicitly $T(z,y)=|S(z,y)-s_0|$; for a no-effect\nsharp null the center is $s_0=0$. A lower-tail ordering is represented by\nusing $-S$ as the score. A statistic in this setting is a measurable map in\nthe sense of [[def-statistic-and-estimator]]; the full power-set data\nsigma-algebra makes every such real-valued map measurable.",
+        "deps": [
+          "def-finite-randomized-treatment-assignment-model",
+          "def-statistic-and-estimator"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13, §§13.1–13.2 and §13.2.3",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            },
+            {
+              "title": "Susan Holmes and Wolfgang Huber, Modern Statistics for Modern Biology, Chapter 13, §§13.2 and 13.4",
+              "url": "https://www.huber.embl.de/msmb/13-chap.html"
+            },
+            {
+              "title": "Siva Balakrishnan, CMU 36-705 Lecture 28, §28.5 Fisher's Exact p-values",
+              "url": "https://www.stat.cmu.edu/~siva/teaching/705/lec28.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-finite-population-average-treatment-effect-and-weak-null",
+        "kind": "definition",
+        "title": "Finite-population average treatment effect and weak null",
+        "statement": "Consider the no-interference binary-treatment submodel of\n[[def-finite-randomized-treatment-assignment-model]] in which the allowed\nassignment set is $\\{0,1\\}^{\\mathcal I}$ and unit $i$'s response under\nassignment vector $z$ is $Y_i(z)=Y_i(z_i)$ for fixed real potential responses\n$Y_i(0)$ and $Y_i(1)$. For the fixed units, define the\n**finite-population average treatment effect** by\n$$\\tau_F:=\\frac1N\\sum_{i\\in\\mathcal I}\\bigl(Y_i(1)-Y_i(0)\\bigr).$$\nThe **weak zero-average-effect null** is the hypothesis $\\tau_F=0$; it\nconstrains the average of the unit-level effects, not each effect separately.\nThe Fisher sharp null in this submodel, defined in\n[[def-fisher-sharp-null-and-predeclared-test-orderings]], requires\n$Y_i(1)=Y_i(0)$ for every unit. No probability distribution on the fixed\npotential responses is part of either definition.",
+        "deps": [
+          "def-finite-randomized-treatment-assignment-model",
+          "def-fisher-sharp-null-and-predeclared-test-orderings"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Siva Balakrishnan, CMU 36-705 Intermediate Statistics, Lecture 28, §§28.2–28.3",
+              "url": "https://www.stat.cmu.edu/~siva/teaching/705/lec28.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+        "kind": "theorem",
+        "title": "Fisher sharp-null randomization p-values are valid",
+        "statement": "In a finite randomized treatment-assignment model, fix any real-valued\npredeclared ordering score $T(z,y)$. For observed data $(z,y)$ define\n$$p_{\\rm rand}(z,y):=\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)\\ge T(z,y)\\}.$$\nOn an extension with an auxiliary $U$ independent of the assignment and\nuniform on $[0,1]$, define\n$$p^+(z,y,U):=\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)>T(z,y)\\}+U\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)=T(z,y)\\}.$$\nFor every schedule satisfying the Fisher sharp null and every\n$u\\in[0,1]$,\n$$P_\\theta\\!\\left(p_{\\rm rand}(Z,Y_\\theta(Z))\\le u\\right)\\le u,$$\nwhereas the added randomization gives\n$$P_\\theta\\!\\left(p^+(Z,Y_\\theta(Z),U)\\le u\\right)=u.$$\nThus $p_{\\rm rand}$ is a valid finite-sample p-value for the sharp null,\nand randomized ties give an exactly uniform p-value when the additional\nindependent uniform randomizer is used. For a two-sided test, take\n$T(z,y)=|S(z,y)-s_0|$ with its center $s_0$ fixed in advance. The result\nuses the actual, possibly unequal assignment probabilities; random\nassignment supplies no Gaussian error law, and this theorem makes no\nvalidity claim under the weak zero-average-effect null from\n[[def-finite-population-average-treatment-effect-and-weak-null]] unless it\nis also Fisher-sharp.",
+        "strategy": "Under a sharp schedule the observed response vector is the same under every assignment, so the observed-data formulas are the finite weighted rank transforms of one fixed assignment score list. Apply the locally proved weighted-tail lemma for each sharp-null schedule.",
+        "deps": [
+          "def-finite-randomized-treatment-assignment-model",
+          "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "lem-finite-weighted-upper-tail-pvalues-and-randomized-ties",
+          "def-statistic-and-estimator",
+          "def-p-value",
+          "def-finite-population-average-treatment-effect-and-weak-null"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13, §13.2.3",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            },
+            {
+              "title": "Susan Holmes and Wolfgang Huber, Modern Statistics for Modern Biology, Chapter 13, §§13.2 and 13.4",
+              "url": "https://www.huber.embl.de/msmb/13-chap.html"
+            },
+            {
+              "title": "Siva Balakrishnan, CMU 36-705 Lecture 28, §28.5 Fisher's Exact p-values",
+              "url": "https://www.stat.cmu.edu/~siva/teaching/705/lec28.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 1941,
+    "id": "randomized-treatment-assignment-and-sharp-null-tests-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Assignment randomization and sharp-null tests — Examples",
+    "companion": "randomized-treatment-assignment-and-sharp-null-tests",
+    "requires": [
+      "randomized-treatment-assignment-and-sharp-null-tests"
+    ],
+    "items": [
+      {
+        "id": "cex-zero-average-treatment-effect-does-not-imply-fisher-sharp-null",
+        "kind": "counterexample",
+        "title": "Zero average effect need not be a Fisher sharp null",
+        "statement": "In a binary no-interference treatment model, a zero finite-population\naverage treatment effect implies the Fisher sharp null.",
+        "strategy": "Give two units with individual treatment effects $+1$ and $-1$. Their average is zero, but each unit's potential outcome changes with treatment, violating the sharp null.",
+        "deps": [
+          "def-finite-randomized-treatment-assignment-model",
+          "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "def-finite-population-average-treatment-effect-and-weak-null"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-unequal-weighted-two-sided-randomization-test-with-ties",
+        "kind": "example",
+        "title": "A weighted two-sided randomization test with tied scores",
+        "statement": "Let three units have fixed outcomes $y=(0,1,2)$ under every assignment, and\nrandomize exactly one unit to treatment. The assignments select unit 1, 2,\nor 3 with probabilities $1/2$, $1/3$, and $1/6$, respectively. Use the\ntreatment-minus-control mean as signed score and its absolute value as the\npredeclared two-sided ordering about zero. The upper-tail p-value is $2/3$\nfor either outer assignment and $1$ for the middle assignment. It is\nsuperuniform despite the unequal assignment weights and the tied outer\nscores; an independent uniform tie randomizer gives an exactly uniform\np-value.",
+        "strategy": "Compute the three signed contrasts and their absolute scores, then sum the actual design weights at and above the observed score. For randomized ties, calculate the strict-tail and tied-atom masses and verify the two consecutive uniform intervals.",
+        "deps": [
+          "def-finite-randomized-treatment-assignment-model",
+          "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "thm-fisher-sharp-null-randomization-pvalues-are-valid"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      }
+    ]
+  }
+]

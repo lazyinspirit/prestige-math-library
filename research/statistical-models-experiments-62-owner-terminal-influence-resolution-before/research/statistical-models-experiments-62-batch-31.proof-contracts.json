@@ -1,0 +1,795 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-iid-terminal-influence-limit",
+    "thm-independent-groups-terminal-influence-limit",
+    "ex-bernoulli-terminal-influence-limit",
+    "ex-independent-groups-weighted-mean-limit",
+    "ex-uncontrolled-risk-set-denominator"
+  ],
+  "contracts": {
+    "thm-iid-terminal-influence-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-families-of-event-classes",
+          "source_section": "Definition",
+          "quote": "The family $(\\mathcal C_i)_{i\\in I}$ is **independent** when for every natural number $n\\ge1$, every choice of distinct indices $i_0,\\dots,i_{n-1}\\in I$, and every choice of events $A_k\\in\\mathcal C_{i_k}$, one has",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-asymptotically-linear-estimator-and-influence-function",
+          "source_section": "Definition",
+          "quote": "For a vector remainder $R_n$, $R_n=o_P(n^{-1/2})$ means $\\sqrt n R_n\\to0$ in $P$-probability.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Define the mean coordinatewise by $\\mu_j=\\mathbb E X_j$ and define the covariance matrix by $$\\Sigma:=\\mathbb E[(X-\\mu)(X-\\mu)^T],$$ where each entry is the expectation of the corresponding real random variable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "Write $X_n=o_P(1)$ if for every $\\varepsilon>0$, $$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-vector-slutsky",
+          "source_section": "Statement",
+          "quote": "If $X_n\\Rightarrow X$ and $Y_n-c=o_P(1)$, then $$ (X_n,Y_n)\\Rightarrow(X,c). $$ Consequently, for every continuous $h:\\mathbb R^{d+k}\\to\\mathbb R^m$, $h(X_n,Y_n)\\Rightarrow h(X,c)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "mapped-subject-influence",
+          "claim": "Measurable preimages preserve the common law and finite-family independence, so the subject influence vectors are IID.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "iid-vector-clt",
+          "claim": "The transformed IID vectors are centered with covariance Sigma, so the multivariate IID CLT gives the Gaussian limit for their normalized sum.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "add-expansion-remainder",
+          "claim": "The asymptotically linear remainder is oP(1); vector Slutsky with the continuous addition map gives the same Gaussian limit for the estimator.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F6",
+            "F7",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes d>=1 and a nonempty IID subject sequence; no empty sample sum is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The covariance may be zero; step 2.1 applies the singular-covariance CLT and step 3.1 does not divide by a covariance entry."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Dimension d=1 is included by the statement, and the same normalized-sum and remainder argument applies in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular covariance, including Sigma=0, is expressly allowed by the CLT in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter-space endpoint or ratio denominator appears in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No local choice from a nonempty family is made; AC is inherited from the stated CLT supplier and used in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way implication from an assumed expansion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from asymptotic normality to an influence expansion is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "thm-independent-groups-terminal-influence-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-families-of-event-classes",
+          "source_section": "Definition",
+          "quote": "The family $(\\mathcal C_i)_{i\\in I}$ is **independent** when for every natural number $n\\ge1$, every choice of distinct indices $i_0,\\dots,i_{n-1}\\in I$, and every choice of events $A_k\\in\\mathcal C_{i_k}$, one has",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Define the mean coordinatewise by $\\mu_j=\\mathbb E X_j$ and define the covariance matrix by $$\\Sigma:=\\mathbb E[(X-\\mu)(X-\\mu)^T],$$ where each entry is the expectation of the corresponding real random variable.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-vector-slutsky",
+          "source_section": "Statement",
+          "quote": "If $X_n\\Rightarrow X$ and $Y_n-c=o_P(1)$, then $$ (X_n,Y_n)\\Rightarrow(X,c). $$ Consequently, for every continuous $h:\\mathbb R^{d+k}\\to\\mathbb R^m$, $h(X_n,Y_n)\\Rightarrow h(X,c)$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-mapping-theorem",
+          "source_section": "Statement",
+          "quote": "Let S,T be metric spaces, $g:S\\to T$ measurable, and $\\mu_n\\Rightarrow\\mu$. If the discontinuity set $D_g$ is $\\mu$-null, then $g_*\\mu_n\\Rightarrow g_*\\mu$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-characteristic-function-of-a-real-random-variable",
+          "source_section": "Definition",
+          "quote": "For a real random variable $X$ on $(\\Omega,\\mathcal F,\\mathbb P)$, its **characteristic function** is",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-levy-continuity-theorem-forward-direction",
+          "source_section": "Statement",
+          "quote": "If Borel probability laws $\\mu_n\\Rightarrow\\mu$ on $\\mathbb R$, then $\\varphi_{\\mu_n}(t)\\to\\varphi_\\mu(t)$ for every real $t$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-characteristic-function-criterion-for-weak-convergence",
+          "source_section": "Statement",
+          "quote": "Assume AC. For Borel probability laws $\\mu_n$ and a specified Borel probability law $\\mu$ on $\\mathbb R$, $$\\mu_n\\Rightarrow\\mu\\quad\\Longleftrightarrow\\quad\\varphi_{\\mu_n}(t)\\to\\varphi_\\mu(t)\\ \\text{for every }t\\in\\mathbb R.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "Write $X_n=o_P(1)$ if for every $\\varepsilon>0$, $$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "group-clts",
+          "claim": "Measurable preimages preserve IID laws and cross-group independence; each group satisfies its multivariate IID CLT as n_g tends to infinity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "group-scaling",
+          "claim": "The deterministic scale factors tend to rho_g^{-1/2}; vector Slutsky and continuous projection give the scaled group limits, including zero projected variance.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "F12",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "independent-projection-sum",
+          "claim": "For every projection, independence factors the characteristic function; its limit is the characteristic function of the normal with variance sum rho_g^{-1} u^T Sigma_g u, so the scalar criterion gives projection convergence.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "cramer-wold-group-limit",
+          "claim": "The covariance sum is positive semidefinite, the specified multivariate normal exists, and Cramer-Wold gives convergence of the vector of group sums.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F13",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "group-expansion-remainder",
+          "claim": "The supplied vector remainder is oP(1), so vector Slutsky adds it without changing the group-sum limit.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F14",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes fixed finite G>=2, d>=1, and positive sample sizes n_g."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If some or all Sigma_g vanish, step 3.1 uses the zero-variance characteristic function and step 4.1 still obtains the possibly degenerate normal target."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A finite initial n_g may equal one, but step 1.1 proves n_g tends to infinity from rho_g>0; G=1 is excluded by the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The covariance sum may be singular or zero; steps 3.1–4.1 do not invert it."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The allocation limits rho_g=0 or rho_g=1 are excluded by the theorem's explicit interior-proportion hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No local selection from a nonempty family is made; AC is inherited by the normal-law, characteristic-criterion, CLT, and Cramer-Wold suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way implication from the assumed group expansion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from the Gaussian limit to the group expansion is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "ex-bernoulli-terminal-influence-limit": {
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-iid-terminal-influence-limit",
+          "source_section": "Statement",
+          "quote": "Then $$\\sqrt n(\\hat\\theta_n-\\theta)\\Rightarrow N_d(0,\\Sigma).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bernoulli-expansion",
+          "claim": "The centered Bernoulli contribution has variance p(1-p), and the sample mean has the exact influence expansion with zero remainder.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bernoulli-terminal-limit",
+          "claim": "The IID terminal influence theorem gives the normal limit, including the degenerate endpoint cases.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses n>=1 and a Bernoulli parameter p in the stated interval; an empty sample is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At p=0 or p=1 the variance is zero and step 2.1 gives the point-mass limit N(0,0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At p=1 each observation and the sample mean equal one; step 2.1 covers this deterministic endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At p in {0,1} the exact expansion in step 1.1 has a zero influence variance and step 2.1 remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both parameter endpoints p=0 and p=1 are explicitly included and verified in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example makes no selection from an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a direct implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "ex-independent-groups-weighted-mean-limit": {
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-families-of-event-classes",
+          "source_section": "Definition",
+          "quote": "The family $(\\mathcal C_i)_{i\\in I}$ is **independent** when for every natural number $n\\ge1$, every choice of distinct indices $i_0,\\dots,i_{n-1}\\in I$, and every choice of events $A_k\\in\\mathcal C_{i_k}$, one has",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-groups-terminal-influence-limit",
+          "source_section": "Statement",
+          "quote": "$$\\sqrt n(\\hat\\theta_n-\\theta)\\Rightarrow N_d\\!\\left(0,\\sum_{g=1}^G\\rho_g^{-1}\\Sigma_g\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "weighted-group-expansion",
+          "claim": "The two centered weighted group contributions have variances rho^2 p1(1-p1) and (1-rho)^2 p2(1-p2), and the estimator expansion is exact.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "weighted-group-covariance",
+          "claim": "Substituting the two influence variances into the independent-group theorem yields rho p1(1-p1)+(1-rho)p2(1-p2).",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes two groups, positive sample sizes, and an interior allocation fraction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If either Bernoulli parameter is zero or one, that group's variance term is zero in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Bernoulli endpoint p_g=1 is deterministic and is included by the variance calculation in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If both group variances vanish, the limit covariance is zero; step 2.1 retains this case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The allocation endpoints rho=0 and rho=1 are excluded; the theorem requires rho in (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from an arbitrary nonempty family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a direct terminal-limit implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "ex-uncontrolled-risk-set-denominator": {
+      "citations": [
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-families-of-event-classes",
+          "source_section": "Definition",
+          "quote": "The family $(\\mathcal C_i)_{i\\in I}$ is **independent** when for every natural number $n\\ge1$, every choice of distinct indices $i_0,\\dots,i_{n-1}\\in I$, and every choice of events $A_k\\in\\mathcal C_{i_k}$, one has",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "Write $X_n=o_P(1)$ if for every $\\varepsilon>0$, $$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-iid-terminal-influence-limit",
+          "source_section": "Statement",
+          "quote": "Then $$\\sqrt n(\\hat\\theta_n-\\theta)\\Rightarrow N_d(0,\\Sigma).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "empty-risk-probability",
+          "claim": "Uniformity and independence give P(K_n=0)=(2^{-1/n})^n=1/2, so the root-n error is zero or -sqrt(n) with equal probabilities.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "non-tight-root-error",
+          "claim": "For any fixed bound M the tail probability is 1/2 for all n>M^2, contradicting boundedness in probability and therefore any weak limit; the influence theorem consequently cannot apply.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty risk set K_n=0 is explicitly included in the estimator definition and handled in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "On K_n=0 the denominator is zero and the stated extension defines the estimator; step 1.1 computes this event's probability exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When K_n=1 the numerator and denominator are both one, so the ratio equals one as in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The root-n error has a two-point law with a mass one half escaping to -infinity; step 2.1 proves it is not tight."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "For n>=2 the threshold t_n=2^{-1/n} lies strictly between zero and one; endpoint thresholds are not part of this example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses no selection from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a one-way refutation of an unsupported root-n conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ]
+    }
+  }
+}

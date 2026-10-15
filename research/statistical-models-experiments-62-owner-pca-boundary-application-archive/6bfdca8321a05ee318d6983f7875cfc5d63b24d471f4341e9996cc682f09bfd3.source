@@ -1,0 +1,117 @@
+---
+id: thm-benjamini-hochberg-independent-fdr
+kind: theorem
+title: "Benjamini–Hochberg FDR under independence"
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 2
+deps:
+  - alg-benjamini-hochberg-step-up-procedure
+  - cor-expectation-linearity-monotonicity-and-modulus-bound
+  - cor-expectation-of-an-indicator-is-probability
+  - def-expectation-of-a-nonnegative-or-integrable-random-variable
+  - def-false-discovery-rate-and-familywise-error-rate
+  - def-independent-random-elements
+  - def-p-value
+  - lem-benjamini-hochberg-leave-one-out-identity
+  - thm-grouping-independent-sigma-algebras
+  - thm-independent-random-elements-have-product-joint-law
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "Yoav Benjamini and Yosef Hochberg, Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing, JRSS B 57(1) (1995), Theorem 1 and Appendix A"
+      url: "https://www.math.tau.ac.il/~yekutiel/eBayes/bh_1995.pdf"
+    - title: "Yoav Benjamini and Daniel Yekutieli, The Control of the False Discovery Rate in Multiple Testing under Dependency, The Annals of Statistics 29(4) (2001), §5, PDF pp. 16–17"
+      url: "https://projecteuclid.org/download/pdf_1/euclid.aos/1013699998"
+    - title: "STATS 200: Introduction to Statistical Inference, Lecture 11: Testing Multiple Hypotheses, Stanford University, PDF pp. 28–36"
+      url: "https://web.stanford.edu/class/archive/stats/stats200/stats200.1172/Lecture11.pdf"
+---
+
+## Statement
+
+Let $\mathsf E=((\mathcal X,\mathcal A),\Theta,(P_\theta)_{\theta\in\Theta})$
+be a statistical experiment, let $m\ge1$, and fix a prespecified family of
+nonempty null hypotheses $H_{01},\ldots,H_{0m}\subseteq\Theta$ with valid p-value
+statistics $p_i:\mathcal X\to[0,1]$. For each $\theta$, put
+
+$$I_0(\theta)=\{i:\theta\in H_{0i}\},\qquad m_0(\theta)=|I_0(\theta)|.$$
+
+Suppose that under every $P_\theta$ the $m$ p-values are mutually independent
+and that
+
+$$P_\theta\{p_i(X)\le u\}=u\qquad(i\in I_0(\theta),\ 0\le u\le1).$$
+
+False-null p-value laws may otherwise be arbitrary. For every $q\in(0,1)$,
+the BH rule in [[alg-benjamini-hochberg-step-up-procedure]] satisfies
+
+$$\operatorname{FDR}_\theta=\frac{m_0(\theta)}{m}q\le q.$$
+
+This is an FDR guarantee; no FWER bound is asserted.
+
+## Facts & Assumptions
+
+**Given:** The fixed finite family and statistical experiment in the
+Statement, $q\in(0,1)$, and the stated independence and exact-uniformity
+conditions under each $P_\theta$.
+
+[F1] [[def-false-discovery-rate-and-familywise-error-rate]]: for true-null
+index set $I_0$, $V$ counts rejected true nulls, $R$ is the number rejected,
+and $\operatorname{FDR}=\mathbb E[V/(R\vee1)]$.
+
+[F2] [[alg-benjamini-hochberg-step-up-procedure]]: for sorted values
+$p_{(k)}$, BH takes the largest $R$ with $p_{(R)}\le Rq/m$ and rejects the
+first $R$ ranks.
+
+[F3] [[def-p-value]]: a p-value statistic is a measurable statistic into
+$[0,1]$; validity requires $P_\theta(p_i\le u)\le u$ under every null law.
+
+[F4] [[def-independent-random-elements]]: random elements on one probability
+space are independent when their generated sigma-algebras are independent.
+
+[F5] [[thm-grouping-independent-sigma-algebras]]: disjoint groups of an
+independent family of sigma-algebras remain independent after taking the
+sigma-algebras they generate.
+
+[F6] [[thm-independent-random-elements-have-product-joint-law]]: a finite
+independent family of random elements has joint law equal to the finite
+product of its marginal laws.
+
+[F7] [[lem-benjamini-hochberg-leave-one-out-identity]]: for each $i$, the
+leave-one-out variable $S_i$ is measurable with respect to the other
+p-values, and $I_i/(R\vee1)=\mathbf 1\{p_i\le(S_i+1)q/m\}/(S_i+1)$.
+
+[F8] [[cor-expectation-of-an-indicator-is-probability]]: for every event $A$,
+$\mathbb E[\mathbf 1_A]=P(A)$.
+
+[F9] [[cor-expectation-linearity-monotonicity-and-modulus-bound]]: finite sums
+of integrable random variables have expectation equal to the sum of their
+expectations.
+
+[F10] [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]:
+expectation is the integral against the specified probability law.
+
+[A1] For every fixed $\theta$, the p-values are mutually independent under
+$P_\theta$, and each $i\in I_0(\theta)$ has the exact uniform law, so
+$P_\theta(p_i\le u)=u$ on $[0,1]$.
+
+## Proof
+
+1.1 Fix $\theta$ and write $P_i=p_i(X)$ under $P_\theta$. By [F3], each $P_i$ is a measurable $[0,1]$-valued random element. For each $k\in\{1,\ldots,m\}$, [F7]’s measurability argument shows that the rank event $\{P_{(k)}\le kq/m\}$ is measurable. Hence $R$, the finite maximum of the qualifying ranks and $0$, is measurable: each event $\{R=r\}$ is a finite Boolean combination of these rank events. For each $i\in[m]$, [F7]’s rejection-set characterization gives the rejection event $\{P_i\le Rq/m\}$, and it is measurable since $$\{P_i\le Rq/m\}=\bigcup_{r=0}^m\bigl(\{R=r\}\cap\{P_i\le rq/m\}\bigr).$$ Thus the BH rule is a measurable map into the finite set $2^{[m]}$ with its discrete sigma-algebra. Now fix $i\in I_0(\theta)$. [A1] and [F4] give independence, [F5] groups $p_i$ and the remaining p-values, and [F7] makes $S_i$ measurable with respect to the latter group. Then $p_i$ and $S_i$ are independent random elements, and [F6] gives their product joint law. [given, A1, F2, F3, F4, F5, F6, F7, choose]
+
+2.1 For $r\in\{0,\ldots,m-1\}$ put $t_r=(r+1)q/m\le q<1$. By [A1], $P_\theta(p_i\le t_r)=t_r$; independence from step 1.1 and the product law [F6] give $P_\theta(p_i\le t_r,\ S_i=r)=t_rP_\theta(S_i=r)$. [A1, F6, step 1.1, algebra]
+
+3.1 By [F7], partitioning on the finite-valued $S_i$ expresses $I_i/(R\vee1)$ as $\sum_{r=0}^{m-1}\mathbf 1\{p_i\le t_r,S_i=r\}/(r+1)$. Each summand is measurable and bounded, hence integrable under [F10]; [F8], [F9], and step 2.1 then give $\mathbb E_\theta[I_i/(R\vee1)]=\sum_{r=0}^{m-1}t_rP_\theta(S_i=r)/(r+1)=(q/m)\sum_{r=0}^{m-1}P_\theta(S_i=r)=q/m$. [F7, F8, F9, F10, step 2.1, algebra]
+
+4.1 The measurable BH rejection rule from step 1.1 lets us apply [F1] with $P=P_\theta$ and $I_0=I_0(\theta)$. Thus $V=\sum_{i\in I_0(\theta)}I_i$ and $\operatorname{FDR}_\theta=\mathbb E_\theta[V/(R\vee1)]$; repeated finite linearity [F9] and step 3.1 give $\operatorname{FDR}_\theta=\sum_{i\in I_0(\theta)}q/m=(m_0(\theta)/m)q\le q$, since $m_0(\theta)\le m$. This is the FDR defined in [F1], not an FWER conclusion. [F1, F9, step 1.1, step 3.1, algebra] ∎
+
+## Remarks
+
+No choice axiom is used: the family is finite, each leave-one-out index is
+fixed in the proof, and the product-law supplier is applied only to finite
+families.

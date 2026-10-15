@@ -1,0 +1,254 @@
+[
+  {
+    "order": 1966,
+    "id": "missingness-mechanisms-and-identification",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Missingness and nonidentification",
+    "companion": "missingness-mechanisms-and-identification-examples",
+    "requires": [
+      "statistical-experiments-models-and-identifiability",
+      "dominated-experiments-likelihood-and-sufficiency",
+      "conditional-distributions-and-regular-conditional-probability"
+    ],
+    "items": [
+      {
+        "id": "def-full-observed-and-missing-data",
+        "kind": "definition",
+        "title": "Full and observed data under a missingness pattern",
+        "deps": [
+          "def-measurable-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-random-element-and-real-random-variable",
+          "def-law-or-distribution-of-a-random-element"
+        ],
+        "statement": "Let $W=(W_1,\\ldots,W_k)$ be a finite vector of full-data components and let $R$ be a finite observation-pattern variable. For each pattern $r$, define the observed projection $W_{\\mathrm{obs}}(r)$ and the observed record $O=(R,W_{\\mathrm{obs}}(R))$ in the disjoint union of the pattern-specific observed spaces. Missing components remain components of $W$; they are not replaced by numeric zeros.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Mao, Missing Data: Foundations and Methods, Chapter 1, §§1.1–1.2",
+              "url": "https://lmaowisc.github.io/missing_data/chapter-1.html"
+            },
+            {
+              "title": "National Research Council, The Prevention and Treatment of Missing Data in Clinical Trials, Chapter 4, pp. 47–51",
+              "url": "https://www.nationalacademies.org/read/12955/chapter/6"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-mcar-mar-and-mnar",
+        "kind": "definition",
+        "title": "MCAR, MAR, and MNAR relative to an observation pattern",
+        "deps": [
+          "def-full-observed-and-missing-data",
+          "def-measure-kernel-and-probability-kernel",
+          "def-conditional-law-given-a-random-element"
+        ],
+        "statement": "For a supplied response kernel $g(r\\mid w)$, MCAR means each pattern probability is constant in the full data; MAR means each pattern probability depends on $w$ only through $W_{\\mathrm{obs}}(r)$; and MNAR means that MAR fails for at least one pattern relative to this declared full-data/observed-data partition. MCAR is a special case of MAR.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Mao, Missing Data: Foundations and Methods, Chapter 1, §§1.3–1.5",
+              "url": "https://lmaowisc.github.io/missing_data/chapter-1.html"
+            },
+            {
+              "title": "National Research Council, The Prevention and Treatment of Missing Data in Clinical Trials, Chapter 4, pp. 50–52",
+              "url": "https://www.nationalacademies.org/read/12955/chapter/6"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-observed-data-likelihood-under-response-model",
+        "kind": "lemma",
+        "title": "Observed-data likelihood under a response model",
+        "deps": [
+          "def-full-observed-and-missing-data",
+          "def-mcar-mar-and-mnar",
+          "def-parametric-statistical-model",
+          "def-dominated-statistical-experiment",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-likelihood-density",
+          "def-measure-kernel-and-probability-kernel",
+          "def-axiom-of-choice",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "statement": "Assume AC. Let $W=(W_1,\\ldots,W_k)$ have a full-data model dominated by a\ncommon sigma-finite positive measure $\\mu$ on the finite product measurable\nspace $\\mathcal W=\\prod_{j=1}^k\\mathcal W_j$, with selected finite-valued\ndensity representatives $p_\\theta$ as in\n[[def-dominated-statistical-experiment]] and [[def-likelihood-density]]. Let\n$\\mathcal R$ be a nonempty finite pattern set, let $I_r$ and $J_r$ be the\nobserved and missing coordinate sets for pattern $r$, and write\n$\\pi_r(w)=W_{\\mathrm{obs}}(r)$ for its measurable coordinate projection. Let\n$g_\\psi(r\\mid w)$ be a supplied response probability kernel as in\n[[def-mcar-mar-and-mnar]], and define the joint model by\n$$P_{\\theta,\\psi}(dw,\\{r\\})=g_\\psi(r\\mid w)P_\\theta(dw).$$\n\nFix a finite positive measure $\\rho$ equivalent to $\\mu$; such a measure\nexists for every sigma-finite $\\mu$. For each pattern put\n$$\\kappa_r(B)=\\rho(\\pi_r^{-1}(B))$$\nfor measurable $B\\subseteq\\mathcal W_{\\mathrm{obs}}(r)$, and define the finite\nmeasure on the observed disjoint union by\n$$\\lambda_O(A)=\\sum_{r\\in\\mathcal R}\\kappa_r(\\{x:(r,x)\\in A\\}).$$\nThe full-data marginal law of $W_{\\mathrm{obs}}(r)$ and the pattern-$r$\nobserved sublaw $B\\mapsto P_{\\theta,\\psi}(R=r,\\pi_r(W)\\in B)$ are absolutely\ncontinuous with respect to $\\kappa_r$. Choose finite-valued nonnegative\nRadon--Nikodym density representatives $q_{\\theta,r}$ and\n$\\ell_{\\theta,\\psi,r}$ for these measures. Then the observed record\n$O=(R,W_{\\mathrm{obs}}(R))$ is dominated by $\\lambda_O$ and has density\n$\\ell_{\\theta,\\psi}(r,x)=\\ell_{\\theta,\\psi,r}(x)$ at $(r,x)$.\n\nIn the product-reference special case where\n$\\mu=\\nu=\\bigotimes_{j=1}^k\\nu_j$, each $\\nu_j$ is sigma-finite, and the\ncoordinate reordering $w=(x,z)=(W_{\\mathrm{obs}}(r),W_{\\mathrm{mis}}(r))$\nidentifies $\\nu$ with\n$\\nu_r^{\\mathrm{obs}}\\times\\nu_r^{\\mathrm{mis}}$, where\n$\\nu_r^{\\mathrm{obs}}=\\bigotimes_{j\\in I_r}\\nu_j$ and\n$\\nu_r^{\\mathrm{mis}}=\\bigotimes_{j\\in J_r}\\nu_j$, one may instead use the\npattern reference $\\nu_r^{\\mathrm{obs}}$, with disjoint-union reference\n$\\lambda_O^{\\mathrm{prod}}(A)=\\sum_r\\nu_r^{\\mathrm{obs}}(\\{x:(r,x)\\in A\\})$.\nThe observed record is dominated by this sigma-finite measure, and Tonelli's\ntheorem gives the density versions\n$$\\bar q_{\\theta,r}(x)=\\int p_\\theta(x,z)\\,\\nu_r^{\\mathrm{mis}}(dz),\\qquad\n\\ell_{\\theta,\\psi,r}(x)=\\int p_\\theta(x,z)g_\\psi(r\\mid x,z)\\,\\nu_r^{\\mathrm{mis}}(dz).$$\nAn empty coordinate block is a one-point space with unit mass.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Mao, Missing Data: Foundations and Methods, Chapter 1, §1.2",
+              "url": "https://lmaowisc.github.io/missing_data/chapter-1.html"
+            },
+            {
+              "title": "National Research Council, The Prevention and Treatment of Missing Data in Clinical Trials, Chapter 4, pp. 60–61",
+              "url": "https://www.nationalacademies.org/read/12955/chapter/6"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-binary-outcome-mnar-nonidentification",
+        "kind": "theorem",
+        "title": "Exact binary-outcome bounds under unrestricted missingness",
+        "deps": [
+          "def-full-observed-and-missing-data",
+          "def-mcar-mar-and-mnar",
+          "def-measure-kernel-and-probability-kernel",
+          "def-parametric-statistical-model",
+          "def-law-or-distribution-of-a-random-element",
+          "def-observational-equivalence",
+          "def-estimand-on-a-statistical-model",
+          "def-identifiability-of-an-estimand"
+        ],
+        "statement": "Let $Y,R\\in\\{0,1\\}$, with $R=1$ meaning that $Y$ is observed, and encode the\nobserved record as $O=(R,RY)$. When $R=0$, the zero in the second recorded\ncoordinate is a placeholder and does not assign the missing full-data value\n$Y=0$. Put\n$$a=P(R=1),\\qquad b=P(R=1,Y=1),\\qquad 0\\le b\\le a\\le1.$$\nLet $\\Theta_{a,b}$ be the set of all joint laws $P$ of $(Y,R)$ with these\nvalues of $a$ and $b$, and let the statistical model map $P\\in\\Theta_{a,b}$\nto the law of $O$. For each individual $P$, use its finite conditional\nresponse kernel specified below when assessing the MAR clause; arbitrary\nnull-state values do not affect that classification. The full-data mean $m(P)=P(Y=1)$ is an estimand on this\nmodel. Its set of values over $\\Theta_{a,b}$ is exactly\n$$[b,b+1-a].$$\nConsequently, without a MAR restriction, the mean is not identifiable when\n$a<1$; it is identified as $b$ when $a=1$. If MAR also holds, then for $a>0$\nthe mean is $b/a$, while for $a=0$ it remains unidentified.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Mao, Missing Data: Foundations and Methods, Chapter 1, §§1.6–1.7",
+              "url": "https://lmaowisc.github.io/missing_data/chapter-1.html"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-mar-ignorable-likelihood-factorization",
+        "kind": "theorem",
+        "title": "MAR factorization and likelihood ignorability for the full-data parameter",
+        "deps": [
+          "def-mcar-mar-and-mnar",
+          "def-parametric-statistical-model",
+          "def-law-or-distribution-of-a-random-element",
+          "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-integration-against-a-radon-nikodym-derivative",
+          "def-likelihood-density",
+          "def-axiom-of-choice",
+          "lem-observed-data-likelihood-under-response-model"
+        ],
+        "statement": "Assume AC and the hypotheses and notation of\n[[lem-observed-data-likelihood-under-response-model]]. Suppose the full-data\nparameter and response-mechanism parameter range independently over the\nnonempty Cartesian product $\\Theta\\times\\Psi$, so the full-data law is\n$P_\\theta$ and the response kernel is $g_\\psi$. For each pattern let $m_r$\ndenote the pattern reference selected in the lemma: $m_r=\\kappa_r$ in\ngeneral, and one may take $m_r=\\nu_r^{\\mathrm{obs}}$ in the product-reference\nspecial case. Let $Q_{\\theta,r}$ be the law of $W_{\\mathrm{obs}}(r)$ under\n$P_\\theta$, and choose a finite-valued nonnegative density representative\n$q_{\\theta,r}=dQ_{\\theta,r}/dm_r$. Suppose MAR holds for every $\\psi$ and $r$\nwith one measurable factor $h_{\\psi,r}$ valid $P_\\theta$-almost surely for\nevery $\\theta$. Clipping this factor to $[0,1]$ preserves those\nalmost-sure identities, so take $0\\le h_{\\psi,r}(x)\\le1$ for every $x$. Then\n$$\\ell_{\\theta,\\psi}(r,x)=h_{\\psi,r}(x)q_{\\theta,r}(x)$$\nis a selected observed-record likelihood version relative to the disjoint\nunion reference $\\lambda_O(A)=\\sum_rm_r(\\{x:(r,x)\\in A\\})$. In the\nproduct-reference special case, the missing-coordinate integrals\n$$\\bar q_{\\theta,r}(x)=\\int p_\\theta(x,z)\\,\\nu_r^{\\mathrm{mis}}(dz),\\qquad\n\\ell_{\\theta,\\psi}(r,x)=\\int p_\\theta(x,z)g_\\psi(r\\mid x,z)\\,\\nu_r^{\\mathrm{mis}}(dz)$$\nare density versions, and may be chosen in the displayed factorized form\nafter selecting finite-valued representatives.\n\nFor a fixed response parameter, if $h_{\\psi,r}(x)>0$ and\n$q_{\\theta_2,r}(x)>0$, the factor cancels from the likelihood ratio in\n$\\theta$. Profiling over the same set $\\Psi$ for each $\\theta$ multiplies\n$q_{\\theta,r}(x)$ by the factor\n$\\sup_{\\psi\\in\\Psi}h_{\\psi,r}(x)$, which is independent of $\\theta$; when\nthis factor is zero the observed record has zero likelihood for every\n$\\theta$. This licenses omission of the response factor for likelihood\ninference about $\\theta$ on its support. It does not license omission when the\ntarget depends on $\\psi$, or when the allowed parameter pairs are not a\nCartesian product.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Mao, Missing Data: Foundations and Methods, Chapter 1, §1.4",
+              "url": "https://lmaowisc.github.io/missing_data/chapter-1.html"
+            },
+            {
+              "title": "National Research Council, The Prevention and Treatment of Missing Data in Clinical Trials, Chapter 4, pp. 60–61",
+              "url": "https://www.nationalacademies.org/read/12955/chapter/6"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 1967,
+    "id": "missingness-mechanisms-and-identification-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Missingness and nonidentification — Examples",
+    "companion": "missingness-mechanisms-and-identification",
+    "requires": [
+      "missingness-mechanisms-and-identification"
+    ],
+    "items": [
+      {
+        "id": "ex-death-is-not-missingness",
+        "kind": "example",
+        "title": "Death is not automatically a missing outcome",
+        "deps": [
+          "def-full-observed-and-missing-data",
+          "def-random-element-and-real-random-variable",
+          "def-estimand-on-a-statistical-model"
+        ],
+        "statement": "If a quality-of-life score at time $t$ is defined only for participants alive at $t$ and $P(D=1)>0$ for death before $t$, then after-death values are not merely unrecorded components of a full-data random variable. An unconditional mean of that score over all enrolled participants is undefined until a different, scientifically meaningful target is specified.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hernán and Robins, Causal Inference: What If, Chapter 8, §§8.4–8.5, and §12.6",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_19aug26.pdf"
+            },
+            {
+              "title": "National Research Council, The Prevention and Treatment of Missing Data in Clinical Trials, Chapter 4, pp. 47–49",
+              "url": "https://www.nationalacademies.org/read/12955/chapter/6"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-missingness-mechanisms-and-nonidentification",
+        "kind": "example",
+        "title": "MCAR, MAR, MNAR, and indistinguishable observed laws",
+        "deps": [
+          "def-full-observed-and-missing-data",
+          "def-mcar-mar-and-mnar",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-binary-outcome-mnar-nonidentification"
+        ],
+        "statement": "For independent fair binary full-data components $X,Y$, response probabilities constant in $(X,Y)$ give an MCAR mechanism, probabilities depending only on the observed $X$ give a MAR mechanism, and probabilities depending on the unobserved $Y$ give an MNAR mechanism. Two explicit MNAR full-data laws can share response rate $a=1/2$ and observed success mass $b=1/4$ while their population means are $1/4$ and $3/4$.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Mao, Missing Data: Foundations and Methods, Chapter 1, §§1.3–1.7",
+              "url": "https://lmaowisc.github.io/missing_data/chapter-1.html"
+            },
+            {
+              "title": "National Research Council, The Prevention and Treatment of Missing Data in Clinical Trials, Chapter 4, pp. 50–52",
+              "url": "https://www.nationalacademies.org/read/12955/chapter/6"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  }
+]

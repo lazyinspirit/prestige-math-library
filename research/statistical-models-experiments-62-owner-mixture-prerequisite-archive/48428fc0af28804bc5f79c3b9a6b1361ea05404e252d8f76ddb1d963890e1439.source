@@ -1,0 +1,57 @@
+---
+id: lem-gaussian-exponential-mixture-integral
+kind: lemma
+title: Closed form for a Gaussian exponential mixture
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 0
+deps:
+  - def-standard-normal-and-normal-laws
+  - lem-normal-density-has-total-mass-one
+  - thm-change-of-variables-for-expectation
+  - thm-substitution
+  - thm-monotone-convergence-for-the-integral
+  - def-axiom-of-choice
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon, Time-uniform, nonparametric, nonasymptotic confidence sequences, Proposition 5 and Appendix A.3
+      url: https://arxiv.org/pdf/1810.08240
+    - title: "Aaditya Ramdas, Martingales 1: Concentration Inequalities — Conjugate Mixtures, 36-771 lecture notes, Carnegie Mellon University, Fall 2018"
+      url: https://stat.cmu.edu/~aramdas/martingales18/L18-conjugate.pdf
+---
+
+## Statement
+
+Assume AC. For $\rho>0$, $v\ge0$, and $s\in\mathbb R$, let
+$\pi_\rho=N(0,1/\rho)$ under the normal-law convention of
+[[def-standard-normal-and-normal-laws]]. Then
+$$\int_{\mathbb R}\exp\!\left(\lambda s-\frac{v\lambda^2}{2}\right)\,\pi_\rho(d\lambda)=\sqrt{\frac{\rho}{v+\rho}}\exp\!\left(\frac{s^2}{2(v+\rho)}\right).$$
+
+## Facts & Assumptions
+
+**Given:** Assume AC, $\rho>0$, $v\ge0$, and $s\in\mathbb R$.
+
+[F1] [[def-standard-normal-and-normal-laws]]: $N(m,\sigma^2)$ is the law of the affine image $z\mapsto m+\sigma z$ of the standard normal law, whose density is $e^{-z^2/2}/\sqrt{2\pi}$.
+
+[F2] [[thm-change-of-variables-for-expectation]]: Integrating a nonnegative measurable function against a random element's law equals its expectation on the underlying space.
+
+[F3] [[lem-normal-density-has-total-mass-one]]: The standard normal density $e^{-z^2/2}/\sqrt{2\pi}$ integrates to one.
+
+[F4] [[thm-substitution]]: For a differentiable affine change of variable on a finite interval, the integral changes by its constant derivative factor.
+
+[F5] [[thm-monotone-convergence-for-the-integral]]: Increasing limits of nonnegative measurable functions pass through the integral.
+
+[A1] [[def-axiom-of-choice]]: AC is assumed by the normal-law and conditional-expectation conventions used in the subsequent mixture argument.
+
+## Proof
+
+1.1 Let $Z$ have the standard normal law. By [F1], $Z/\sqrt{\rho}$ has law $\pi_\rho$; [F2] and the density in [F1] give $I=\int_{\mathbb R}\exp\!\left(sz/\sqrt{\rho}-vz^2/(2\rho)\right)e^{-z^2/2}/\sqrt{2\pi}\,dz$, with a nonnegative measurable integrand. [given, F1, F2, A1]
+
+2.1 Completing the square in [step 1.1] gives exponent $s^2/[2(v+\rho)]-\frac{v+\rho}{2\rho}(z-s\sqrt{\rho}/(v+\rho))^2$. Set $y=\sqrt{(v+\rho)/\rho}(z-s\sqrt{\rho}/(v+\rho))$; [F4] justifies this affine substitution on finite intervals, and [F5] passes to the nonnegative integral over $\mathbb R$. Thus $I=e^{s^2/[2(v+\rho)]}\sqrt{\rho/(v+\rho)}\int_{\mathbb R}e^{-y^2/2}/\sqrt{2\pi}\,dy=\sqrt{\rho/(v+\rho)}e^{s^2/[2(v+\rho)]}$ by [F3]. [F3, F4, F5, step 1.1, algebra] ∎

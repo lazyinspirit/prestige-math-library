@@ -1,0 +1,175 @@
+[
+  {
+    "order": 1984,
+    "id": "cox-ph-and-partial-likelihood",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Cox PH and partial likelihood",
+    "companion": "cox-ph-and-partial-likelihood-examples",
+    "requires": [
+      "event-time-censoring-and-truncation",
+      "counting-process-compensators-and-integrals",
+      "independent-subject-terminal-influence-limits",
+      "statistical-experiments-models-and-identifiability",
+      "estimators-and-randomized-procedures",
+      "chaining-uniform-laws-and-empirical-process-limits",
+      "dominated-experiments-likelihood-and-sufficiency",
+      "likelihood-asymptotics-wald-score-and-likelihood-ratio",
+      "the-ito-integral-with-respect-to-brownian-motion"
+    ],
+    "items": [
+      {
+        "id": "def-cox-proportional-hazards-model-and-partial-likelihood",
+        "kind": "definition",
+        "title": "Cox proportional-hazards model and partial likelihood",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-continuous-time-filtration-and-all-pairs-martingale",
+          "def-event-time-observation-schemes",
+          "def-progressively-measurable-and-predictable-process"
+        ],
+        "dependency_level": 1,
+        "statement": "Fix a finite horizon $\\tau>0$ and a fixed dimension $p\\ge1$. Work on a probability space with an increasing filtration $(\\mathcal F_t)_{0\\le t\\le\\tau}$ as in [[def-continuous-time-filtration-and-all-pairs-martingale]]. For subject $i$, let $T_i$ be an event time, $C_i$ a censoring time, and $Z_i(t)\\in\\mathbb R^p$ a covariate process predictable relative to this filtration, in the sense of [[def-progressively-measurable-and-predictable-process]]. Use the right-censoring record convention of [[def-event-time-observation-schemes]]: $U_i=\\min(T_i,C_i)$ and $\\delta_i=1\\{T_i\\le C_i\\}$. For this vector covariate process, predictability means coordinatewise predictability: each real-valued coordinate is predictable in the sense of [[def-progressively-measurable-and-predictable-process]]. Define the history sigma-algebra $\\mathcal G_i:=\\sigma\\{Z_i(t):0\\le t\\le\\tau\\}$. The conditional-independence assumption is $T_i\\perp\\!\\!\\!\\perp C_i\\mid\\mathcal G_i$, meaning that for all bounded measurable real functions $a,b$, $E[a(T_i)b(C_i)\\mid\\mathcal G_i]=E[a(T_i)\\mid\\mathcal G_i]E[b(C_i)\\mid\\mathcal G_i]$ almost surely, as in [[def-conditional-independence-given-a-sigma-algebra]]. This conditional-independence relation is a model assumption, not an empirical conclusion. No conditional-kernel representation given the entire covariate path is assumed here.\n\nA Cox proportional-hazards specification fixes a coefficient $\\beta_0\\in\\mathbb R^p$ and a baseline hazard density $\\lambda_0:[0,\\tau]\\to[0,\\infty)$ that is measurable and integrable. Its baseline cumulative hazard is the absolutely continuous function\n$$ \\Lambda_0(t)=\\int_0^t\\lambda_0(u)\\,du. $$\nThe conditional event intensity at time $t$ for subject $i$, while that subject is at risk, is\n$$ Y_i(t)\\lambda_0(t)\\exp\\{\\beta_0^T Z_i(t)\\},\\qquad Y_i(t):=1\\{U_i\\ge t\\}. $$\nThese specify the conditional event-intensity component. The law of the covariate paths and the censoring law subject to the stated conditional-independence assumption remain nuisance components and are not fixed here. Thus this is a semiparametric model specification; $(\\beta_0,\\lambda_0)$ alone do not define a full parametric statistical experiment on the observed-data space.\nFor the counting-process arguments below, require $Y_i$ to be predictable as well; this is part of the stated observation model and is not inferred from the hazard formula alone.\nFor a constant covariate value $z$, the corresponding event survival function is\n$$ S(t\\mid z)=\\exp\\{-e^{\\beta_0^Tz}\\Lambda_0(t)\\}. $$\nFor fixed covariate values $z,z'\\in\\mathbb R^p$, at times with $\\lambda_0(t)>0$ the hazard ratio is\n$$ \\frac{\\lambda_0(t)e^{\\beta^Tz}}{\\lambda_0(t)e^{\\beta^Tz'}}=e^{\\beta^T(z-z')}. $$\nThe relative hazard factor is $e^{\\beta^T(z-z')}$ even at times when both baseline-scaled hazards vanish and their quotient is undefined. It is an instantaneous hazard ratio, not a ratio of cumulative event probabilities. For time-varying covariate paths $z(t),z'(t)$ the instantaneous relative hazard factor is $e^{\\beta^T(z(t)-z'(t))}$ and may vary with time.\n\nFor a sample of $n$ subjects, put $R(t)=\\{j:U_j\\ge t\\}$. When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is\n$$ L_p(\\beta)=\\prod_{i:\\,\\delta_i=1,\\ U_i\\le\\tau} \\frac{\\exp\\{\\beta^TZ_i(U_i)\\}}{\\sum_{j\\in R(U_i)}\\exp\\{\\beta^TZ_j(U_i)\\}}. $$\nAn empty product is $1$. This partial likelihood is built from risk-set contributions; it is not asserted to be the full likelihood of the censored observations.\n\nTied-event likelihoods require an explicit time-recording convention. Put $D(t)=\\{i:U_i=t,\\delta_i=1\\}$ and $d_t=|D(t)|$. If a discrete or grouped-time model conditions on exactly $d_t$ failures from $D(t)\\subseteq R(t)$ at recorded time $t$ with the risk set fixed for that time, additionally assume that, conditional on that risk set, its covariate weights, and $d_t=d$, the failure subset law assigns each size-$d$ set $A\\subseteq R(t)$ probability proportional to $\\prod_{j\\in A}w_j(t)$. Under this explicit subset-law assumption, its exact conditional tie contribution is\n$$ \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\sum_{\\substack{A\\subseteq R(t)\\\\|A|=d_t}}\\ \\prod_{j\\in A}w_j(t)}, \\qquad w_j(t):=\\exp\\{\\beta^TZ_j(t)\\}. $$\nFor the separate exact Cox tied-partial-likelihood convention obtained by coarsening a continuous-time ordering into one recorded tie interval, assume the risk set at the interval start is $R(t)$, its only within-interval departures are the $d_t$ failures in $D(t)$, and the covariates are fixed at the recorded time. Conditional on each successive failure, the next failure label is chosen from the remaining risk set with probability proportional to its weight. Summing these order contributions gives the ordered-risk-set conditional partial-likelihood contribution\n$$ \\sum_{\\pi\\in\\operatorname{Perm}(D(t))} \\prod_{k=1}^{d_t} \\frac{w_{\\pi_k}(t)} {\\sum_{j\\in R(t)}w_j(t)-\\sum_{\\ell<k}w_{\\pi_\\ell}(t)}. $$\nHere $\\operatorname{Perm}(D(t))$ is the set of bijections from $\\{1,\\ldots,d_t\\}$ to $D(t)$.\nThe discrete subset expression is exact under its explicit subset-law convention, and the permutation expression is exact for its stated partial-likelihood ordering convention; the latter is not generally the full likelihood of interval-coarsened censored observations. These conventions are not interchangeable without a model relating them. The Breslow and Efron tie formulas are approximations, respectively\n$$ L_B(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\left(\\sum_{j\\in R(t)}w_j(t)\\right)^{d_t}} $$\nand\n$$ L_E(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\prod_{k=0}^{d_t-1}\\left(\\sum_{j\\in R(t)}w_j(t)-\\frac{k}{d_t}\\sum_{i\\in D(t)}w_i(t)\\right)}. $$\nWith an absolutely continuous event hazard and independent subjects, exact event-time ties have probability zero; grouped-time tie formulas describe additional observation/model conventions.\n\nFor a discrete event-time law, the survival relation $S(t\\mid z)=S_0(t)^{e^{\\beta^Tz}}$ describes proportional integrated hazards and is not equivalent in general to a hazard-ratio model. The proportional-hazards and proportional-integrated-hazards formulations agree under the continuity condition on the baseline survival; the hazard-density model above uses the absolutely continuous convention.\n\nThe counting-process martingale property used for inference is a separate model-contract assumption in the estimator theorem below. The hazard formula by itself does not assert that a compensated event count is a martingale. The Axiom of Choice is inherited from the cited event-observation and predictability interfaces; this definition makes no further choice.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-cox-uniform-risk-set-convergence",
+        "kind": "lemma",
+        "title": "Integrated and conditional uniform convergence of Cox risk-set sums",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-empirical-process-and-rademacher-process",
+          "def-glivenko-cantelli-class",
+          "def-progressively-measurable-and-predictable-process",
+          "thm-gc-by-bracketing-entropy",
+          "thm-dominated-convergence",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $O_i=(T_i,C_i,Z_i(\\cdot))$, $i\\ge1$, be IID subject records with law $P$, with jointly measurable predictable covariates, $p<\\infty$, and $\\|Z_i(t)\\|_2\\le K$ for all $i,t$ outside one null event. Let $B\\subset\\mathbb R^p$ be compact and contain $\\beta_0$. With $Y_i(t)=1\\{U_i\\ge t\\}$, define, for $r=0,1,2$,\n$$ S_n^{(r)}(t,\\beta)=\\frac1n\\sum_{i=1}^nY_i(t)Z_i(t)^{\\otimes r}e^{\\beta^TZ_i(t)},\\qquad s^{(r)}(t,\\beta)=E_P[Y_i(t)Z_i(t)^{\\otimes r}e^{\\beta^TZ_i(t)}], $$\nwhere $Z^{\\otimes0}=1$, $Z^{\\otimes1}=Z$, and $Z^{\\otimes2}=ZZ^T$. Suppose $c_0:=\\inf_{t\\le\\tau}s^{(0)}(t,\\beta_0)>0$. For every finite deterministic measure $\\nu(dt)=w(t)\\,dt$ with nonnegative integrable density $w$, put\n$$ D_n(t)=\\max_{r=0,1,2}\\sup_{\\beta\\in B}\\|S_n^{(r)}(t,\\beta)-s^{(r)}(t,\\beta)\\|_{\\max}. $$\nThen for each fixed $t$, $E[D_n(t)^2]\\to0$, and\n$$ E\\int_0^\\tau D_n(t)^2\\,\\nu(dt)\\longrightarrow0. $$\nThere are measurable events $E_n$ with $P(E_n)\\to1$ and a constant $c>0$ such that on $E_n$,\n$$ S_n^{(0)}(t,\\beta)\\ge c\\qquad\\text{for every }t\\le\\tau,\\ \\beta\\in B. $$\nDefine $\\bar Z_n=S_n^{(1)}/S_n^{(0)}$ and $V_n=S_n^{(2)}/S_n^{(0)}-\\bar Z_n\\bar Z_n^T$, setting each to zero at a zero denominator, and define $\\bar z=s^{(1)}/s^{(0)}$, $V=s^{(2)}/s^{(0)}-\\bar z\\bar z^T$. Their fixed-time and integrated parameter-uniform errors satisfy\n$$ E\\sup_{\\beta\\in B}\\|\\bar Z_n(t,\\beta)-\\bar z(t,\\beta)\\|_2^2\\to0,\\qquad E\\sup_{\\beta\\in B}\\|V_n(t,\\beta)-V(t,\\beta)\\|_{\\max}^2\\to0, $$\n$$ E\\int_0^\\tau\\sup_{\\beta\\in B}\\!\\left\\{\\|\\bar Z_n-\\bar z\\|_2^2+\\|V_n-V\\|_{\\max}^2\\right\\}\\nu(dt)\\longrightarrow0. $$\nThese conclusions require no regularity of the time-indexed covariate class beyond bounded predictability. In particular take $\\nu(dt)=\\lambda_0(t)\\,dt$.\n\nThe stronger uniform-in-time conclusion remains valid under the following additional, sufficient condition: every scalar coordinate class $\\mathcal F_{r,k}=\\{O\\mapsto[Y(t)Z(t)^{\\otimes r}e^{\\beta^TZ(t)}]_k:t\\le\\tau,\\beta\\in B\\}$ is pointwise measurable and has finite $L^1(P)$ bracketing number at every positive width. Under that condition, $\\sup_tD_n(t)\\to_P0$, and both ratio errors converge uniformly on $[0,\\tau]\\times B$ in probability. This optional condition is not imposed by the Cox inference consumers.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-bounded-predictable-counting-integral-pathwise-identity",
+        "kind": "lemma",
+        "title": "Pathwise identity for bounded predictable counting-process integrals",
+        "statement": "Bounded predictable completed stochastic integrals equal their pathwise counting sum minus compensator integral, and predictable nonnegative integrands satisfy compensation.",
+        "deps": [
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-axiom-of-choice",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-elementary-predictable-counting-process-integral",
+          "def-progressively-measurable-and-predictable-process",
+          "lem-predictable-step-processes-dense-in-compensator-l2",
+          "thm-dynkin-pi-lambda",
+          "thm-l2-counting-process-integral-isometry",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_level": 6,
+        "justified_by": []
+      },
+      {
+        "id": "lem-cox-partial-likelihood-hessian-convergence",
+        "kind": "lemma",
+        "title": "Uniform Cox partial-likelihood Hessian convergence",
+        "deps": [
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-axiom-of-choice",
+          "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-op-and-little-op-stochastic-bounds",
+          "def-progressively-measurable-and-predictable-process",
+          "lem-bounded-predictable-counting-integral-pathwise-identity",
+          "lem-cox-uniform-risk-set-convergence",
+          "thm-compensated-counting-process-brackets",
+          "thm-l2-counting-process-integral-isometry"
+        ],
+        "dependency_level": 7,
+        "statement": "Integrated parameter-uniform risk-set laws and the counting-process contract imply uniform parameter convergence of the normalized partial-likelihood Hessian to the continuous deterministic information map J, with J(beta0)=I.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-cox-score-martingale-replacement",
+        "kind": "lemma",
+        "title": "Cox score martingale representation and random-risk-mean replacement",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-elementary-predictable-counting-process-integral",
+          "def-op-and-little-op-stochastic-bounds",
+          "def-progressively-measurable-and-predictable-process",
+          "lem-bounded-predictable-counting-integral-pathwise-identity",
+          "lem-cox-uniform-risk-set-convergence",
+          "thm-compensated-counting-process-brackets",
+          "thm-l2-counting-process-integral-isometry"
+        ],
+        "dependency_level": 7,
+        "statement": "The normalized Cox score equals an IID subject martingale sum with deterministic population risk mean plus an oP(1) replacement remainder; the influence vectors are centered with covariance I.",
+        "justified_by": []
+      },
+      {
+        "id": "thm-cox-score-limit-and-estimator-linearization",
+        "kind": "theorem",
+        "title": "Cox partial-likelihood score expansion and estimator linearization",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-op-and-little-op-stochastic-bounds",
+          "def-statistic-and-estimator",
+          "lem-cox-partial-likelihood-hessian-convergence",
+          "lem-cox-uniform-risk-set-convergence",
+          "lem-cox-score-martingale-replacement"
+        ],
+        "dependency_level": 8,
+        "statement": "A measurable consistent score root has the local asymptotic linear expansion I^{-1} n^{-1/2} sum_i integral (Z_i-bar z) dM_i plus oP(1).",
+        "justified_by": []
+      },
+      {
+        "id": "cor-cox-partial-likelihood-asymptotic-normality",
+        "kind": "corollary",
+        "title": "Asymptotic normality of the Cox partial-likelihood estimator",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-covariance-matrix-of-a-random-vector",
+          "def-statistic-and-estimator",
+          "lem-cox-score-martingale-replacement",
+          "thm-cox-score-limit-and-estimator-linearization",
+          "thm-iid-terminal-influence-limit"
+        ],
+        "dependency_level": 9,
+        "statement": "After the separately proved expansion, the IID terminal influence limit gives sqrt(n)(hat beta-beta0) converging to N_p(0,I^{-1}).",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 1985,
+    "id": "cox-ph-and-partial-likelihood-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Cox PH and partial likelihood — Examples",
+    "companion": "cox-ph-and-partial-likelihood",
+    "requires": [
+      "cox-ph-and-partial-likelihood"
+    ],
+    "items": [
+      {
+        "id": "ex-cox-risk-set-likelihood-and-model-checks",
+        "kind": "example",
+        "title": "Risk-set likelihood and time-varying hazard-ratio check",
+        "deps": [
+          "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "def-progressively-measurable-and-predictable-process"
+        ],
+        "dependency_level": 2,
+        "statement": "A finite risk-set contribution is e^beta/(1+e^beta+e^{2 beta}); a fixed hazard ratio differs from a cumulative risk ratio, and a time-varying covariate contrast makes the instantaneous hazard ratio time-varying.",
+        "justified_by": []
+      }
+    ]
+  }
+]

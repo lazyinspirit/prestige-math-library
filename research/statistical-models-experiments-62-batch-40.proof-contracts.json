@@ -1,0 +1,618 @@
+{
+  "version": 1,
+  "scope": [
+    "def-strict-and-weak-stationarity-for-time-series",
+    "def-autocovariance-and-sample-autocovariance",
+    "cor-ergodic-time-series-sample-mean-converges-a-s-and-l1",
+    "thm-sample-acvf-properties-and-summable-covariance-mean-consistency",
+    "ex-pairwise-uncorrelated-dependent-triple",
+    "cex-pair-count-normalized-sample-acvf-not-positive-semidefinite"
+  ],
+  "contracts": {
+    "def-strict-and-weak-stationarity-for-time-series": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes the index set to all integers; an empty time-indexed process is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The identically zero process satisfies both definitions: all finite-dimensional laws are shift-invariant, all second moments are finite, and every mean and covariance is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A deterministic constant process has the same one-point law at every time, so the definition includes the one-value distribution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition A process equal almost surely to a fixed constant at every time is both strictly and weakly stationary by the stated clauses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The time index is Z and has no first or last time; the definition quantifies over every integer shift."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition only tests supplied finite-dimensional laws and moments; it constructs no selections and assumes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item gives two definitions and states no equivalence between strict and weak stationarity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item gives two definitions and states no equivalence between strict and weak stationarity."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-40",
+        "notes": "Reviewed the current Definition and all five direct probability interfaces against empty findings in reader-40 and refute-40. Every finite tuple and integer shift is quantified; repeated times cause no typing problem. Strict stationarity has no moment implication, while weak stationarity explicitly requires square integrability, common mean and time-independent covariance. Constants including zero satisfy both; Z has no endpoints, no empty-process or equivalence assertion, and no selection or AC use. No defect found."
+      }
+    },
+    "def-autocovariance-and-sample-autocovariance": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition fixes n>=1 before defining the sample mean and the sample ACVF with denominator n. The pair-count denominator n-|h| is used only for |h|<n and hence is positive; an empty vector would make the mean undefined and lies outside this input.",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/sme_gate_boundary_measurement",
+            "reason": "Definition fixes n>=1 before defining the sample mean and the sample ACVF with denominator n. The pair-count denominator n-|h| is used only for |h|<n and hence is positive; an empty vector would make the mean undefined and lies outside this input."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition For a constant data vector every centered value and both defined ACVF sequences are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition When n=1 the sample mean is x1, the only defined lag is h=0, and both centered sample ACVFs equal zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition If all observations agree, centering makes every summand zero, including at every admissible lag."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At |h|=n−1 there is exactly one pair and the pair-count denominator is 1; at |h|≥n the definition sets both sequences to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition The finite sums and zero extension are explicit and make no selections; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition and asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "cor-ergodic-time-series-sample-mean-converges-a-s-and-l1": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.\n\nThe process is **strictly stationary** when for every integer $r\\ge1$, every\n$t_1,\\ldots,t_r\\in\\mathbb Z$, and every shift $m\\in\\mathbb Z$,\n$$\\mathcal L(X_{t_1+m},\\ldots,X_{t_r+m})=\\mathcal L(X_{t_1},\\ldots,X_{t_r}).$$\nThis condition concerns the full finite-dimensional laws and imposes no moment\ncondition by itself.\n\nThe process is **weakly stationary** when $E[|X_t|^2]<\\infty$ for every\n$t\\in\\mathbb Z$, its mean $\\mu:=E[X_t]$ is independent of $t$, and for every\n$h\\in\\mathbb Z$ the covariance\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t)$$\nis independent of $t$. Expectation, variance, and covariance have the meanings\nin [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and\n[[def-moments-variance-and-covariance]]. Strict stationarity alone therefore\ndoes not supply the moment hypotheses needed for covariance or sample-mean\nclaims.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stationary-process-and-canonical-shift",
+          "source_section": "Definition",
+          "quote": "Let $S\\in\\{\\mathbb R,\\mathbb C\\}$ with Borel sigma-algebra $\\mathcal E$, let $(\\Omega,\\mathcal F,\\mathbb P)$ be a\nprobability space, and let $Y=(Y_n)_{n\\ge0}$ be a stochastic process with each\n$Y_n:\\Omega\\to S$ a random element\n([[def-stochastic-process-and-finite-dimensional-distributions]]). The process\n$Y$ is **strictly stationary** when every finite-dimensional law is unchanged\nby a common nonnegative time shift: for every $r\\ge1$, every\n$0\\le n_1<\\cdots<n_r$ and every $m\\ge0$,\n\n$$\\mathcal L(Y_{m+n_1},\\ldots,Y_{m+n_r})=\\mathcal L(Y_{n_1},\\ldots,Y_{n_r}).$$\n\nThe **canonical path law** of $Y$ is the pushforward\n$\\mathbb P_Y=\\mathcal L(Y)$ of $\\mathbb P$ under the coordinate map\n$\\omega\\mapsto(Y_n(\\omega))_{n\\ge0}$, a probability measure on the product\nspace $S^{\\mathbb N_0}$ with its product sigma-algebra. The **left shift** is\n$\\theta(z)_n=z_{n+1}$ for $z=(z_n)_{n\\ge0}\\in S^{\\mathbb N_0}$.\n\nA strictly stationary process is called **ergodic** when the canonical shift $\\theta$ is ergodic\nfor $\\mathbb P_Y$ in the sense of\n[[def-ergodic-measure-preserving-system]]. The shift-invariance needed for that\ndefinition, namely that $\\theta$ is measure preserving for $\\mathbb P_Y$, is\nproved below for strictly stationary $Y$, so in that case\n$(S^{\\mathbb N_0},\\mathcal E^{\\otimes\\mathbb N_0},\\mathbb P_Y,\\theta)$ is a\nprobability measure-preserving system in the sense of\n[[def-measure-preserving-transformation-and-system]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ergodic-measure-preserving-system",
+          "source_section": "Definition",
+          "quote": "A measure-preserving system is **ergodic for $\\mu$** if each $E\\in\\mathcal I$ has $\\mu(E)=0$ or $\\mu(X\\setminus E)=0$, with $\\mathcal I$ as in [[def-strict-and-mod-null-invariant-sigma-algebras]]. For a probability system this means $\\mu(E)\\in\\{0,1\\}$. The definition is relative to the invariant measure; no probability assumption is implicit in the general null/conull formulation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-stationary-process-birkhoff-ergodic-limit",
+          "source_section": "Statement",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). Let $Y=(Y_n)_{n\\ge0}$ be a real-valued\nstrictly stationary process with $\\mathbb E|Y_0|<\\infty$\n([[def-stationary-process-and-canonical-shift]]), with canonical path law\n$\\mathbb P_Y$ and left shift $\\theta$. Let\n$\\mathcal I=\\{A:\\theta^{-1}A=A\\}$ be the strictly invariant sigma-algebra on\npath space ([[def-strict-and-mod-null-invariant-sigma-algebras]]). Then\n\n$$\\frac1n\\sum_{k=0}^{n-1}Y_k\\ \\longrightarrow\\ \\mathbb E_{\\mathbb P_Y}[z_0\\mid\\mathcal I]\\circ\\Phi \\qquad\\text{almost surely and in }L^1(\\mathbb P),$$\n\nwhere $\\Phi(\\omega)=(Y_n(\\omega))_{n\\ge0}$ and the conditional expectation is\nthat of [[def-conditional-expectation-given-a-sigma-algebra]]. If moreover the\ncanonical shift is ergodic ([[def-ergodic-measure-preserving-system]]), then\nthe limit is the constant $\\mathbb EY_0$. For complex-valued processes the\nassertions hold componentwise for real and imaginary parts.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $Y_k=X_{k+1}$ for $k\\ge0$. For any finite indices $0\\le k_1<\\cdots<k_r$ and shift $m\\ge0$, [F1] applied to the times $k_1+1,\\ldots,k_r+1$ gives $\\mathcal L(Y_{k_1+m},\\ldots,Y_{k_r+m})=\\mathcal L(Y_{k_1},\\ldots,Y_{k_r})$. Thus $Y$ is strictly stationary in the one-sided convention of [F2]. Taking $r=1$ shows $Y_0=X_1$ has the same law as $X_0$, so it is integrable; the canonical shift is ergodic by the given assumption.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3] the assumed ergodicity is exactly ergodicity of the canonical path shift required by [F4]. AC [A1], integrability from step 1.1, strict stationarity from step 1.1, and that ergodic shift satisfy the hypotheses of [F4]. Hence $n^{-1}\\sum_{k=0}^{n-1}Y_k$ converges almost surely and in $L^1$ to $\\mathbb E[Y_0]=\\mathbb E[X_0]$. Since this average is exactly $n^{-1}\\sum_{t=1}^nX_t=\\bar X_n$, the asserted convergence follows. The choice assumption is inherited through [F4]'s conditional-expectation identification; this proof adds no other choice use.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The averages are defined for n≥1 and the statement makes no n=0 average claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If E[X0]=0, the ergodic conclusion in step 2.1 is the constant zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a process constantly equal to c, each average equals c and step 2.1 gives the same limit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The deterministic constant-path case is included in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The conclusion is a limit as n tends to infinity and asserts no finite endpoint estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicitly assumed in A1 and used in step 2.1 only through the Birkhoff supplier; no additional choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is a one-way convergence result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The corollary is a one-way convergence result, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-40",
+        "notes": "Read the current Statement, F1-F4/A1 and both proof steps, all five direct carriers, and the complete stationary-process Birkhoff supplier proof. Y_k=X_(k+1) inherits every finite nonnegative shifted law; Y_0 has X_0 law, hence finite first absolute moment and the same expectation. The explicitly assumed canonical one-sided shift ergodicity is precisely the supplier convention. AC is assumed and declared, inherited only through its conditional-expectation identification. Exact equality of the two averages transfers both almost-sure and L1 convergence. n>=1; deterministic/zero-mean cases work; strict stationarity without ergodicity is not asserted to imply a constant limit. Reader/refuter findings empty. No defect found; this is used-interface review, not a transitive audit of all Birkhoff foundations."
+      }
+    },
+    "thm-sample-acvf-properties-and-summable-covariance-mean-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.\n\nThe process is **strictly stationary** when for every integer $r\\ge1$, every\n$t_1,\\ldots,t_r\\in\\mathbb Z$, and every shift $m\\in\\mathbb Z$,\n$$\\mathcal L(X_{t_1+m},\\ldots,X_{t_r+m})=\\mathcal L(X_{t_1},\\ldots,X_{t_r}).$$\nThis condition concerns the full finite-dimensional laws and imposes no moment\ncondition by itself.\n\nThe process is **weakly stationary** when $E[|X_t|^2]<\\infty$ for every\n$t\\in\\mathbb Z$, its mean $\\mu:=E[X_t]$ is independent of $t$, and for every\n$h\\in\\mathbb Z$ the covariance\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t)$$\nis independent of $t$. Expectation, variance, and covariance have the meanings\nin [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and\n[[def-moments-variance-and-covariance]]. Strict stationarity alone therefore\ndoes not supply the moment hypotheses needed for covariance or sample-mean\nclaims.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-autocovariance-and-sample-autocovariance",
+          "source_section": "Definition",
+          "quote": "For a weakly stationary real process $X=(X_t)_{t\\in\\mathbb Z}$, its\n**autocovariance function** (ACVF) is\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t),\\qquad h\\in\\mathbb Z,$$\nwhich is independent of $t$ by [[def-strict-and-weak-stationarity-for-time-series]].\n\nFor a finite data vector $x_1,\\ldots,x_n\\in\\mathbb R$, where $n\\ge1$, let\n$$\\bar x_n:=\\frac1n\\sum_{t=1}^n x_t.$$\nIts **biased sample ACVF** is the zero-extended sequence on $\\mathbb Z$ given by\n$$\\widehat\\gamma_n(h):=\\frac1n\\sum_{t=1}^{n-|h|}(x_{t+|h|}-\\bar x_n)(x_t-\\bar x_n),\\qquad |h|<n,$$\nand $\\widehat\\gamma_n(h):=0$ for $|h|\\ge n$. The absolute lag makes\n$\\widehat\\gamma_n(-h)=\\widehat\\gamma_n(h)$.\n\nFor comparison, define the **pair-count-normalized rescaling**\n$$\\widetilde\\gamma_n(h):=\\frac1{n-|h|}\\sum_{t=1}^{n-|h|}(x_{t+|h|}-\\bar x_n)(x_t-\\bar x_n),\\qquad |h|<n,$$\nand set it to zero for $|h|\\ge n$. Its denominator is positive on the stated\ndomain. The names specify the denominator convention; they assert no\nunbiasedness formula.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $X_t$ is integrable because $2|X_t|\\le1+X_t^2$ and the probability space has total mass one. Repeated application of [F3] gives $\\mathbb E[\\bar X_n]=\\mu$. By [F2] and its cited covariance-bilinearity supplier, $\\operatorname{Var}(\\bar X_n)=n^{-2}\\sum_{s=1}^n\\sum_{t=1}^n\\operatorname{Cov}(X_s,X_t)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a data vector $x_1,\\ldots,x_n$, let $y_t=x_t-\\bar x_n$ for $1\\le t\\le n$, and set $y_t=0$ otherwise. By [F4], for every $h\\in\\mathbb Z$, $\\widehat\\gamma_n(h)=n^{-1}\\sum_{t\\in\\mathbb Z}y_ty_{t+h}$. The sum is finite because $y$ has finite support. Replacing $t$ by $t-h$ and commuting the real factors shows $\\widehat\\gamma_n(-h)=\\widehat\\gamma_n(h)$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $s,t\\in\\{1,\\ldots,n\\}$, [F1] gives $\\operatorname{Cov}(X_s,X_t)=\\gamma(s-t)$. For each integer $h$ with $|h|<n$, exactly $n-|h|$ ordered pairs $(s,t)$ satisfy $s-t=h$, and no ordered pair has $|s-t|\\ge n$. Grouping the finite sum in step 1.1 by $h=s-t$ proves the variance identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under absolute covariance summability, every weight $n-|h|$ in the identity is between $0$ and $n$, so $0\\le\\operatorname{Var}(\\bar X_n)\\le n^{-2}\\sum_{|h|<n}(n-|h|)|\\gamma(h)|\\le n^{-1}\\sum_{h\\in\\mathbb Z}|\\gamma(h)|$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 1.1 gives $\\mathbb E[\\bar X_n]=\\mu$. Therefore $\\mathbb E[(\\bar X_n-\\mu)^2]=\\operatorname{Var}(\\bar X_n)$, and the bound in step 3.1 tends to zero as $n\\to\\infty$. This is precisely $L^2$ consistency for the mean.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $(a_j)_{j\\in J}$ be any finitely supported real coefficient family indexed by integers. Expanding the finite sums and using the evenness from step 1.2 gives $\\sum_{j,k\\in J}a_ja_k\\widehat\\gamma_n(j-k)=n^{-1}\\sum_{u\\in\\mathbb Z}(\\sum_{j\\in J}a_jy_{u+j})^2\\ge0$. Only finitely many terms on the right are nonzero, and every summand is a square. Thus every finite Toeplitz quadratic form of $\\widehat\\gamma_n$ is nonnegative.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires n≥1, as used in steps 1.1 and 3.1; it makes no empty-sample claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If all covariances vanish, step 3.1 gives zero variance; a constant data vector gives the zero quadratic form in step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=1, step 2.1 reduces to Var(X1)=γ(0), and step 1.2 centers the single datum to zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For X_t=c almost surely at every t, γ(h)=0 and the variance and sample ACVF conclusions in steps 2.1 and 5.1 hold with equality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the endpoint lags |h|=n−1 with one ordered pair; step 1.2 sets all |h|≥n to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The theorem statement and proof use finite sums and algebra only; no choice axiom or selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives a sample-mean variance identity, a sufficient absolute-covariance-summability condition for L2 consistency, and positivity of the biased sample ACVF. Proof 3.1–4.1 proves the sufficient bound; 5.1 proves the separate sum-of-squares claim. It does not characterize consistency by summability. The forward implication worksheet therefore has no asserted biconditional to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement gives a sample-mean variance identity, a sufficient absolute-covariance-summability condition for L2 consistency, and positivity of the biased sample ACVF. Proof 3.1–4.1 proves the sufficient bound; 5.1 proves the separate sum-of-squares claim. It does not characterize consistency by summability. The reverse implication worksheet therefore has no asserted biconditional to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-40",
+        "notes": "Read Statement, all facts and six proof steps, all six direct suppliers, complete covariance-bilinearity and expectation-linearity proofs, and Wang STAT720 PDF p.45 Lemma 2.3 including its full Gram-matrix proof. Square-integrability implies first moments and integrable pair products; finite linear combinations remain square-integrable. Each lag h=s-t has exactly n-|h| ordered pairs, including n=1 and |h|=n-1. Absolute summability bounds variance by S/n and common mean identifies variance with mean squared error; no necessity, mixing or CLT is claimed. Zero-extended centered data give the identity via t=u+j and evenness: sum_u y_(u+j)y_(u+k)=n gamma_hat(k-j). All sums have finite support; empty coefficient family and constant data give zero, |h|>=n is zero. No choice use. Reader/refuter findings empty. No defect found."
+      }
+    },
+    "ex-pairwise-uncorrelated-dependent-triple": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-independence-of-finite-random-variables",
+          "source_section": "Definition",
+          "quote": "A finite family of finite-valued random variables $(X_i)_{i\\in I}$ is **mutually independent** when for every nonempty $J\\subseteq I$ and every selection $x_j\\in X_j(\\Omega)$,\n$$\\mathbb P(X_j=x_j\\text{ for every }j\\in J)=\\prod_{j\\in J}\\mathbb P(X_j=x_j).$$\nIt is **pairwise independent** when this identity is required only for two distinct indices. The empty family is mutually independent vacuously, and a one-member family is mutually independent.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each coordinate takes the value $1$ twice and $-1$ twice. By [F1]–[F3], $\\mathbb E[X_i]=0$ and $\\mathbb E[X_i^2]=1$ for each $i\\in\\{1,2,3\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each of the three pairs, the four products $X_iX_j$ contain two $1$ values and two $-1$ values. Thus $\\mathbb E[X_iX_j]=0$; using the means from step 1.1 in [F4] gives $\\operatorname{Cov}(X_i,X_j)=0$ whenever $i\\ne j$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The event $\\{X_1=1,X_2=1,X_3=1\\}$ contains only the outcome $(1,1,1)$, so its probability is $1/4$. Each event $\\{X_i=1\\}$ has probability $1/2$ by step 1.1. Mutual independence would give joint probability $(1/2)^3=1/8$ by [F5], contradicting $1/4$. Therefore the variables are not mutually independent.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a nonempty four-outcome space and three coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Each coordinate takes only the values ±1; the calculation in step 1.1 shows no zero-valued coordinate."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example concerns exactly three variables and makes no one-variable claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Each coordinate takes both signs, as enumerated in step 1.1; none is degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or limiting endpoint in this finite example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.3 enumerate four outcomes explicitly and use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the four equally weighted sign triples, Verification 2.1 gives zero pair covariances, whereas 3.1 compares joint probability 1/4 with the independence product 1/8. This single counterexample refutes sufficiency of pairwise uncorrelatedness; it asserts no biconditional characterization of independence. The forward implication worksheet therefore has no asserted biconditional to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the four equally weighted sign triples, Verification 2.1 gives zero pair covariances, whereas 3.1 compares joint probability 1/4 with the independence product 1/8. This single counterexample refutes sufficiency of pairwise uncorrelatedness; it asserts no biconditional characterization of independence. The reverse implication worksheet therefore has no asserted biconditional to discharge."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-40",
+        "notes": "Reviewed Example and Verification 1.1, 2.1, 3.1 and all five exact finite-probability Definition suppliers. Four nonnegative weights sum to one; each sign appears twice in each coordinate and in each pair product, giving means zero, second moments one and covariance zero. The all-positive event has mass 1/4 while marginal product is 1/8, disproving mutual independence without any claim of pairwise dependence. Fixed finite witness has no limiting, empty, endpoint or choice issue. Reader and refuter have no findings. No defect found."
+      }
+    },
+    "cex-pair-count-normalized-sample-acvf-not-positive-semidefinite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-autocovariance-and-sample-autocovariance",
+          "source_section": "Definition",
+          "quote": "For a weakly stationary real process $X=(X_t)_{t\\in\\mathbb Z}$, its\n**autocovariance function** (ACVF) is\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t),\\qquad h\\in\\mathbb Z,$$\nwhich is independent of $t$ by [[def-strict-and-weak-stationarity-for-time-series]].\n\nFor a finite data vector $x_1,\\ldots,x_n\\in\\mathbb R$, where $n\\ge1$, let\n$$\\bar x_n:=\\frac1n\\sum_{t=1}^n x_t.$$\nIts **biased sample ACVF** is the zero-extended sequence on $\\mathbb Z$ given by\n$$\\widehat\\gamma_n(h):=\\frac1n\\sum_{t=1}^{n-|h|}(x_{t+|h|}-\\bar x_n)(x_t-\\bar x_n),\\qquad |h|<n,$$\nand $\\widehat\\gamma_n(h):=0$ for $|h|\\ge n$. The absolute lag makes\n$\\widehat\\gamma_n(-h)=\\widehat\\gamma_n(h)$.\n\nFor comparison, define the **pair-count-normalized rescaling**\n$$\\widetilde\\gamma_n(h):=\\frac1{n-|h|}\\sum_{t=1}^{n-|h|}(x_{t+|h|}-\\bar x_n)(x_t-\\bar x_n),\\qquad |h|<n,$$\nand set it to zero for $|h|\\ge n$. Its denominator is positive on the stated\ndomain. The names specify the denominator convention; they assert no\nunbiasedness formula.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take $n=3$ and data $(x_1,x_2,x_3)=(1,0,0)$. Its sample mean is $1/3$, so its centered values are $(2/3,-1/3,-1/3)$. By [F1], $\\widetilde\\gamma_3(0)=2/9$, $\\widetilde\\gamma_3(1)=-1/18$, and $\\widetilde\\gamma_3(2)=-2/9$; negative-lag values equal the corresponding positive-lag values.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the Toeplitz matrix on indices $0,1,2$, the diagonal entries are $2/9$, the first off-diagonal entries are $-1/18$, and the outer off-diagonal entries are $-2/9$ by step 1.1. For $v=(1,\\frac12,1)^T$, the quadratic form is $v^TTv=(2/9)(1+1/4+1)+2(-1/18)(1/2+1/2)+2(-2/9)=-1/18<0$. A positive-semidefinite Toeplitz form must be nonnegative on every real vector, so this data vector refutes the statement.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The counterexample uses a nonempty sample of size n=3 in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The vector includes two zero observations; the centered values and resulting negative form are explicitly computed in steps 1.1–1.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The universal false statement is refuted at n=3; no n=1 behavior is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The witness (1,0,0) is not constant, and its centered vector is given in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the maximal lag |h|=2=n−1, where the pair-count denominator is 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use exact finite arithmetic and no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted claim is universal, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted claim is universal, not an equivalence."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

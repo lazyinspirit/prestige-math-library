@@ -1,0 +1,100 @@
+[
+  {
+    "order": 1972,
+    "id": "event-time-censoring-and-truncation",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Event observation, censoring, truncation",
+    "companion": "event-time-censoring-and-truncation-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "statistical-experiments-models-and-identifiability",
+      "dominated-experiments-likelihood-and-sufficiency",
+      "lebesgue-stieltjes-measures-and-distribution-functions",
+      "markov-kernels-and-markov-chains",
+      "conditional-distributions-and-regular-conditional-probability"
+    ],
+    "items": [
+      {
+        "id": "def-event-time-observation-schemes",
+        "kind": "definition",
+        "deps": [
+          "def-standard-borel-space",
+          "def-measure-kernel-and-probability-kernel",
+          "def-conditional-law-given-a-random-element",
+          "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "title": "Event-time observation, censoring, and truncation schemes"
+      },
+      {
+        "id": "thm-likelihood-contributions-under-censoring-and-delayed-entry",
+        "kind": "theorem",
+        "deps": [
+          "def-event-time-observation-schemes",
+          "def-statistical-experiment",
+          "def-scientific-statistical-model-contract",
+          "def-parametric-statistical-model",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-standard-borel-space",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measure-kernel-and-probability-kernel",
+          "def-conditional-law-given-a-random-element",
+          "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "thm-rationals-countable",
+          "thm-product-of-countable",
+          "thm-seven-generators-of-the-borel-sigma-algebra-on-r",
+          "thm-dynkin-pi-lambda",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-distribution-function-of-a-borel-measure-on-r",
+          "thm-lebesgue-stieltjes-correspondence-with-distribution-functions",
+          "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "title": "Likelihood contributions under censoring, truncation, and delayed entry",
+        "statement": "Assume the Axiom of Choice and the Axiom of Countable Choice. Let $Z,T,C$ be random elements, with $Z$ taking values in a standard-Borel space ([[def-standard-borel-space]]) and $T,C$ taking values in $[0,\\infty)$ with its Borel sigma-algebra. Consider the conditional experiment given the observed covariate $Z=z$. For each $(\\theta,\\eta)$ in a product parameter space $\\Theta\\times H$, let $K^T_\\theta(z,\\cdot)$ and $K^C_\\eta(z,\\cdot)$ be the specified conditional event-time and censor-time laws. Assume $T\\perp\\!\\!\\!\\perp C\\mid\\sigma(Z)$ under each parameter pair. Assume $K^T_\\theta(z,dt)=f_\\theta(t\\mid z)\\,dt$ with a jointly measurable density in $(z,t)$, and that every $K^C_\\eta(z,\\cdot)$ is dominated by one fixed sigma-finite measure $\\nu$ with a jointly measurable density $g_\\eta(z,c)$. The event law depends only on $\\theta$ and the censor law only on $\\eta$. All displayed conditional identities hold for $P_{Z;\\theta,\\eta}$-almost every $z$ under each fixed parameter pair $(\\theta,\\eta)$, where $P_{Z;\\theta,\\eta}$ is the marginal law of $Z$ under that pair as in [[def-law-or-distribution-of-a-random-element]]. All density equalities are in their almost-everywhere versions for that pair; no common exceptional set over an uncountable parameter set is asserted.\n\nFor right-censored data $(U,\\delta)$, define the reference measure $\\rho$ on $[0,\\infty)\\times\\{0,1\\}$ by $\\rho(B\\times\\{1\\})=\\operatorname{Leb}(B)$ and $\\rho(B\\times\\{0\\})=\\nu(B)$. Put $S_\\theta(u\\mid z)=K^T_\\theta(z,(u,\\infty))$ and $G_\\eta(u\\mid z)=K^C_\\eta(z,[u,\\infty))$. In the scientific model contract of [[def-scientific-statistical-model-contract]], one analysis unit is one subject; the full-data random quantities are $T,C$, and the observation map records $(Z,U,\\delta)=(Z,\\min(T,C),1\\{T\\le C\\})$, so the record contains the minimum and status rather than both full times. This theorem conditions on observed $Z$ and asserts no target-population estimand or empirical adequacy. The conditional density of $(U,\\delta)$ with respect to $\\rho$ is\n\n$$h_{\\theta,\\eta}(u,1\\mid z)=f_\\theta(u\\mid z)G_\\eta(u\\mid z),\\qquad h_{\\theta,\\eta}(u,0\\mid z)=S_\\theta(u\\mid z)g_\\eta(z,u).$$\n\nConsequently, up to the censor-only factor, the event-model likelihood contribution is $f_\\theta(U\\mid Z)^\\delta S_\\theta(U\\mid Z)^{1-\\delta}$, where the two cases mean $f_\\theta(U\\mid Z)$ when $\\delta=1$ and $S_\\theta(U\\mid Z)$ when $\\delta=0$. This is a conditional likelihood given $Z$; a parameter-dependent marginal law of $Z$ would supply a separate factor.\n\nFor an arbitrary conditional event-time law $\\mu_{\\theta,z}$ on $[0,\\infty)$ with distribution function $F_\\theta(t\\mid z)=\\mu_{\\theta,z}((-\\infty,t])$, for $0\\le L\\le R<\\infty$,\n\n$$P(L<T\\le R\\mid Z=z)=F_\\theta(R\\mid z)-F_\\theta(L\\mid z),\\qquad P(T\\le L\\mid Z=z)=F_\\theta(L\\mid z),$$\n\nand $P(T=t\\mid Z=z)=F_\\theta(t\\mid z)-F_\\theta(t^-\\mid z)$. For fixed inspection endpoints, or endpoints conditionally independent of $T$ given $Z$ under a law with no event parameter $\\theta$, these are the event factors for interval and left-censored observations. In current-status observation at a fixed inspection time $c$, the event contribution is $F_\\theta(c\\mid z)^\\delta S_\\theta(c\\mid z)^{1-\\delta}$, with $S_\\theta(c\\mid z)=P(T>c\\mid Z=z)$ and $\\delta=1\\{T\\le c\\}$. An informative inspection process requires its own joint model.\n\nFor delayed entry at $L$, let $W$ denote all pre-entry covariates; take $Z=W$ when $L$ is fixed by design and $Z=(W,L)$ when random $L$ is observed. In the random-entry case, assume that before selection the conditional joint law of $(T,L)$ given $W=w$ factors as $K^T_\\theta(w,dt)Q_\\eta(w,d\\ell)$, where the entry kernel $Q_\\eta$ does not depend on the event parameter $\\theta$. Thus $L\\perp\\!\\!\\!\\perp T\\mid W$ under this parameter-distinct entry model, and the event law given $Z=(W,L)$ remains $K^T_\\theta(W,\\cdot)$. For each parameter pair, require $S_\\theta(L\\mid W)>0$ for almost every $(W,L)$ under its pre-selection law, select only units with $T>L$, and assume post-entry right censoring satisfies $T\\perp\\!\\!\\!\\perp C\\mid\\sigma(Z)$ with $C\\ge L$. Conditional on inclusion $T>L$, the event density and survivor terms are $f_\\theta(u\\mid W)/S_\\theta(L\\mid W)$ for an event and $S_\\theta(u\\mid W)/S_\\theta(L\\mid W)$ for censoring, for $u>L$. Thus the right-censored event contribution is divided by $S_\\theta(L\\mid W)$. An event branch has $u>L$, while a censoring branch may have $u=L$ when the censoring law has an atom at entry; the survivor ratio $S_\\theta(u\\mid W)/S_\\theta(L\\mid W)$ applies for every $u\\ge L$.\n\nFor right truncation at fixed $R$, or at an observed threshold conditionally independent of $T$ given $Z$ under a law with no event parameter $\\theta$, inclusion is conditional on $T<R$ with $P(T<R\\mid Z=z)>0$. Its conditional event-time law is $\\mu_{\\theta,z}(A\\cap(-\\infty,R))/P(T<R\\mid Z=z)$; in the continuous-density case the selected-sample density is $f_\\theta(t\\mid z)/F_\\theta(R^-\\mid z)$ for $t<R$. This selection likelihood is distinct from the right-censoring likelihood. Independence of censoring, inspection, or entry is a model assumption, not a theorem about an empirical study."
+      }
+    ]
+  },
+  {
+    "order": 1973,
+    "id": "event-time-censoring-and-truncation-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Event observation, censoring, truncation — Examples",
+    "companion": "event-time-censoring-and-truncation",
+    "requires": [
+      "event-time-censoring-and-truncation"
+    ],
+    "items": [
+      {
+        "id": "cex-informative-censoring-does-not-identify-event-law",
+        "kind": "counterexample",
+        "deps": [
+          "def-event-time-observation-schemes"
+        ],
+        "dependency_level": 1,
+        "title": "Informative censoring can hide distinct event-time laws"
+      },
+      {
+        "id": "ex-event-time-observation-likelihoods-and-delayed-entry",
+        "kind": "example",
+        "deps": [
+          "def-event-time-observation-schemes",
+          "thm-likelihood-contributions-under-censoring-and-delayed-entry"
+        ],
+        "dependency_level": 2,
+        "title": "Exponential event-time observations with censoring and delayed entry"
+      }
+    ]
+  }
+]

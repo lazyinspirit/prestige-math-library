@@ -1,0 +1,196 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "32",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+      "model": "gpt-6-luna",
+      "context_sha256": "3be276cd410176d4ac99926f0fc9ab6af08b03f5ebc908a40646d7d92b2bb77a",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Definition calls all three formulas statistics on the observed sample space, although Greenwood is undefined when n=1 and an event occurs by t: Y=Delta N=1 makes Y(Y-Delta N)=0. The cited statistic interface requires a total measurable map. Repaired by distinguishing the measurable Greenwood formula on its measurable positive-denominator domain from its explicitly defined zero extension on the whole sample space; the extension has no variance interpretation outside that domain.",
+      "uncertain": false,
+      "source_urls": [
+        "https://web.stanford.edu/~lutian/coursepdf/unit5.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+      "disposition": "repaired",
+      "post_sha256": "24f8321d3ee4eaae28a6b6b447d1810c2ceba82be1523ab3afc8b5f6243db900",
+      "review_context_sha256": "6b53232ccf7ffb7b94c31d08ceb27a2f2dfcd99a0882da3f4155bbaaace735c0",
+      "reason": "Reviewed right-censoring and statistic suppliers, owning page and contract, finite endpoint/tie/count conventions and direct consumer uses. At event times 1<=Delta N<=Y, so Nelson-Aalen and Kaplan-Meier have valid finite Borel formulas on every sample. Finite comparisons select one representative per tied event and test the Greenwood domain, so this domain is Borel and the zero extension is a total real-valued measurable statistic. Empty event sets give (Lambda,S,V)=(0,1,0); complete risk-set failure leaves the raw Greenwood formula undefined and its extension zero. No choice principle or new prerequisite is needed. This is the repair author's verification, not independent rejudgment.",
+      "uncertain": false,
+      "source_urls": [
+        "https://web.stanford.edu/~lutian/coursepdf/unit5.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-finite-support-risk-set-proportion-limits",
+    "thm-finite-support-nelson-aalen-kaplan-meier-consistency",
+    "lem-uniform-right-censoring-risk-set-convergence",
+    "thm-pointwise-nelson-aalen-kaplan-meier-greenwood-limit",
+    "ex-kaplan-meier-hand-risk-set-and-support-loss",
+    "ex-logrank-crossing-hazards-zero-score",
+    "alg-aalen-johansen-cumulative-incidence-estimator",
+    "ex-competing-event-risk-versus-cause-incidence"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+      "action": "record-confirmed-repaired-defect",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "locus": "definition",
+      "finding": "The original Definition calls all three formulas statistics on the observed sample space, although Greenwood is undefined when n=1 and an event occurs by t: Y=Delta N=1 makes Y(Y-Delta N)=0. The cited statistic interface requires a total measurable map. Repaired by distinguishing the measurable Greenwood formula on its measurable positive-denominator domain from its explicitly defined zero extension on the whole sample space; the extension has no variance interpretation outside that domain.",
+      "status": "fixed"
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no-update-required",
+      "reason": "Every direct item consumer found by the source dependency/reference scan is draft and belongs to the frozen frontier; the published statistic supplier is sound and unchanged. No published-consumer defect was found."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_paths": [
+      "items/def-nelson-aalen-kaplan-meier-greenwood-estimators.md"
+    ],
+    "interface_change": {
+      "section": "Definition",
+      "before": "For each fixed $t$, these are statistics of the observed sample in the sense of [[def-statistic-and-estimator]]. To express event-time sums and products as fixed finite operations, scan indices $i=1,\\ldots,n$ and include only the first event observation at each distinct time; each inclusion condition uses finitely many Borel equalities and inequalities among the observed $U_i$ and $\\delta_i$. Risk and event counts are finite Borel sums, and every division uses the stated positive-count branch. Greenwood is defined only on its positive-denominator domain.",
+      "after": "Nelson-Aalen and Kaplan-Meier are total statistics; Greenwood is measurable on D_n(t), and V_G^circ(t) is its total zero extension.",
+      "preserved": "All estimator formulas, endpoints, ties, positive-domain restriction, discrete/continuous targets, and absence of a finite-sample variance identity remain unchanged."
+    },
+    "source_evidence": [
+      {
+        "url": "https://web.stanford.edu/~lutian/coursepdf/unit5.pdf",
+        "locator": "STAT331 Unit 3, PDF pages 9-11, especially page 11",
+        "establishes": "The notes derive Greenwood as a delta-method approximation with denominator Y(v_i)(Y(v_i)-d_i); they supply no cancellation convention at zero denominators. The zero extension and its Borel measurability are checked directly here."
+      }
+    ],
+    "supplier_checks": [
+      "items/def-event-time-observation-schemes.md: nonnegative finite observed times, delta=1{T<=C}, including event/censor ties.",
+      "items/def-statistic-and-estimator.md: a statistic is a measurable map on the entire specified sample space."
+    ],
+    "metadata_checks": "The owning page does not assert a total raw Greenwood formula. The existing definition contract has no proof obligations; its n=1 boundary correctly says raw Greenwood is undefined. Neither requires editing.",
+    "consumer_checks": [
+      {
+        "id": "lem-finite-support-risk-set-proportion-limits",
+        "path": "items/lem-finite-support-risk-set-proportion-limits.md",
+        "location": "Facts F1 and Proof 1.1",
+        "affected_use": "Y_i(u)=1{U_i>=u}",
+        "disposition": "unaffected",
+        "reason": "Only the inclusive at-risk indicator is used to factor risk probabilities; its definition is unchanged.",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "thm-finite-support-nelson-aalen-kaplan-meier-consistency",
+        "path": "items/thm-finite-support-nelson-aalen-kaplan-meier-consistency.md",
+        "location": "Facts F2 and Proof 1.1-2.1",
+        "affected_use": "the Nelson-Aalen event sum and Kaplan-Meier finite product over [0,t]",
+        "disposition": "unaffected",
+        "reason": "Both finite formulas, zero-risk and empty-product conventions, and discrete hazard targets are unchanged; no Greenwood assertion is used.",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "lem-uniform-right-censoring-risk-set-convergence",
+        "path": "items/lem-uniform-right-censoring-risk-set-convergence.md",
+        "location": "Facts F1 and Proof 1.1",
+        "affected_use": "Y_i(u)=1{U_i>=u}",
+        "disposition": "unaffected",
+        "reason": "The proof rewrites the unchanged risk indicator as an empirical CDF and never invokes Greenwood.",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "thm-pointwise-nelson-aalen-kaplan-meier-greenwood-limit",
+        "path": "items/thm-pointwise-nelson-aalen-kaplan-meier-greenwood-limit.md",
+        "location": "Statement, Facts F2, Proof 5.1 and 6.1",
+        "affected_use": "V_G^circ equals Greenwood on the positive-denominator domain and zero elsewhere",
+        "disposition": "unaffected",
+        "reason": "The consumer already defines exactly this zero extension and denies variance interpretation outside the domain. On its high-probability E_n, no tied failures and Y_n>=nc/2>1 make all Greenwood denominators positive for large n. The supplier clarification leaves that argument intact.",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "ex-kaplan-meier-hand-risk-set-and-support-loss",
+        "path": "items/ex-kaplan-meier-hand-risk-set-and-support-loss.md",
+        "location": "Facts F2 and Verification 1.1-2.1",
+        "affected_use": "V_G(3)=(1/4)(1/(4*3)+1/(3*2))=1/16",
+        "disposition": "unaffected",
+        "reason": "The example evaluates the raw formula with positive denominators 12 and 6; the extension agrees there and all counts and product factors are unchanged.",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "ex-logrank-crossing-hazards-zero-score",
+        "path": "items/ex-logrank-crossing-hazards-zero-score.md",
+        "location": "Facts F2 and Proof 2.1",
+        "affected_use": "group products give S_1=3/4 and S_0=1/2 after their respective failures",
+        "disposition": "unaffected",
+        "reason": "Only the unchanged Kaplan-Meier product is used; event times are strictly positive and censorings add no factors.",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "alg-aalen-johansen-cumulative-incidence-estimator",
+        "path": "items/alg-aalen-johansen-cumulative-incidence-estimator.md",
+        "location": "Definition, equivalence paragraph following the procedure",
+        "affected_use": "the all-cause survival product agrees with the [0,t] product-limit convention",
+        "disposition": "unaffected",
+        "reason": "The algorithm uses inclusive risk sets, grouped event counts and the Kaplan-Meier product, all unchanged. It invokes no Greenwood variance property.",
+        "route": "frontier-owner",
+        "uncertain": false
+      },
+      {
+        "id": "ex-competing-event-risk-versus-cause-incidence",
+        "path": "items/ex-competing-event-risk-versus-cause-incidence.md",
+        "location": "Facts F4 and Verification 3.1",
+        "affected_use": "the cause-specific Kaplan-Meier products are (1-4/16)(1-2/8) and (1-4/16)(1-1/4)",
+        "disposition": "unaffected",
+        "reason": "Only the unchanged grouped-event Kaplan-Meier formula is used; both products remain 9/16 independently of the Greenwood clarification.",
+        "route": "frontier-owner",
+        "uncertain": false
+      }
+    ],
+    "outside_consumers": [],
+    "validation_status": "All focused checks exited 0: precheck not-applicable (one definition, zero proofs, zero failures); rendercheck checked one item with no errors or warnings; strict selected proof contract passed; final proof-layout checked one item, zero steps, zero defects.",
+    "unresolved_obligations": [],
+    "next_action": "Handoff to engine for independent rejudgment and ordinary frontier effect routing; no local mathematical repair remains.",
+    "validation_results": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-nelson-aalen-kaplan-meier-greenwood-estimators.md --json",
+        "exit_code": 0,
+        "output": "{\n  \"summary\": {\n    \"files\": 1,\n    \"checked\": 0,\n    \"failed\": 0\n  },\n  \"results\": [\n    {\n      \"file\": \"items/def-nelson-aalen-kaplan-meier-greenwood-estimators.md\",\n      \"item_id\": \"def-nelson-aalen-kaplan-meier-greenwood-estimators\",\n      \"status\": \"not-applicable\"\n    }\n  ]\n}\n"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-nelson-aalen-kaplan-meier-greenwood-estimators.md --json",
+        "exit_code": 0,
+        "output": "{\n  \"errors\": [],\n  \"warnings\": [],\n  \"checked\": 1\n}\n"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-32.proof-contracts.json --items def-nelson-aalen-kaplan-meier-greenwood-estimators --strict --json",
+        "exit_code": 0,
+        "output": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [],\n  \"scope\": [\n    \"def-nelson-aalen-kaplan-meier-greenwood-estimators\"\n  ],\n  \"checked\": [\n    \"def-nelson-aalen-kaplan-meier-greenwood-estimators\"\n  ]\n}\n"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-nelson-aalen-kaplan-meier-greenwood-estimators.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 0 steps, 0 defects\n"
+      }
+    ]
+  }
+}

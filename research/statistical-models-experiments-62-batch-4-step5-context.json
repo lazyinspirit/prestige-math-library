@@ -1,0 +1,342 @@
+{
+  "group": "b",
+  "batches": [
+    "4"
+  ],
+  "pages_read": [
+    "generalized-linear-models-and-fisher-scoring",
+    "generalized-linear-models-and-fisher-scoring-examples"
+  ],
+  "items_read": [
+    "def-glm-observation-family",
+    "lem-glm-mean-and-variance-identities",
+    "lem-glm-product-density",
+    "def-generalized-linear-model",
+    "def-nested-model-deviance",
+    "thm-canonical-glm-score-and-hessian",
+    "thm-glm-general-link-score-and-information",
+    "alg-fisher-scoring-irls",
+    "lem-fisher-scoring-irls-is-well-defined",
+    "lem-nested-model-deviance-nonnegative",
+    "thm-canonical-glm-strict-concavity",
+    "thm-irls-is-fisher-scoring-step",
+    "ex-poisson-overdispersion",
+    "ex-identity-link-bernoulli-boundary",
+    "ex-logistic-separation-no-finite-mle",
+    "ex-singular-fisher-information-nonunique-irls",
+    "ex-bernoulli-logit-glm-one-step",
+    "ex-poisson-log-glm-one-step"
+  ],
+  "conventions": [
+    {
+      "convention": "There are finitely many responses, indexed 1 through n with n ≥ 1. Their sampling law is the explicitly specified independent product law, dominated by the finite product of sigma-finite component measures.",
+      "fixed_by": "def-glm-observation-family",
+      "matters_for": [
+        "lem-glm-product-density",
+        "def-generalized-linear-model",
+        "thm-glm-general-link-score-and-information"
+      ]
+    },
+    {
+      "convention": "The natural-parameter domain J is an open interval and b is C². Support exceptions are contained in one parameter-independent null set. Mean and variance identities additionally require finite second moments and locally uniform integrable envelopes for the first two density derivatives.",
+      "fixed_by": "def-glm-observation-family",
+      "matters_for": [
+        "lem-glm-mean-and-variance-identities",
+        "thm-glm-general-link-score-and-information",
+        "thm-irls-is-fisher-scoring-step"
+      ]
+    },
+    {
+      "convention": "The design is fixed, or inference conditions on its realized value. The parameter domain is open; the inverse link and specified natural-parameter map must give admissible parameters. The canonical link means θ_i = η_i. Formulas using a(φ) impose a common positive component scale.",
+      "fixed_by": "def-generalized-linear-model",
+      "matters_for": [
+        "thm-canonical-glm-score-and-hessian",
+        "thm-glm-general-link-score-and-information",
+        "thm-canonical-glm-strict-concavity",
+        "alg-fisher-scoring-irls"
+      ]
+    },
+    {
+      "convention": "Information means the expected score outer product E[UUᵀ], when its entries are finite; it is not defined here by an expected negative Hessian.",
+      "fixed_by": "def-generalized-linear-model",
+      "matters_for": [
+        "thm-glm-general-link-score-and-information",
+        "thm-irls-is-fisher-scoring-step",
+        "ex-singular-fisher-information-nonunique-irls"
+      ]
+    },
+    {
+      "convention": "One IRLS step returns the minimum-Euclidean-norm weighted least-squares minimizer A⁺r. Rank deficiency is allowed. The output need not lie in Θ, and repeated-update convergence is not asserted.",
+      "fixed_by": "alg-fisher-scoring-irls",
+      "matters_for": [
+        "lem-fisher-scoring-irls-is-well-defined",
+        "thm-irls-is-fisher-scoring-step",
+        "ex-singular-fisher-information-nonunique-irls",
+        "ex-identity-link-bernoulli-boundary"
+      ]
+    },
+    {
+      "convention": "Deviance compares nonempty embedded nested parameter sets using a common likelihood and positive component densities throughout both sets. Both likelihood suprema must be finite real numbers; neither supremum must be attained.",
+      "fixed_by": "def-nested-model-deviance",
+      "matters_for": [
+        "lem-nested-model-deviance-nonnegative"
+      ]
+    },
+    {
+      "convention": "Strict concavity and stationary-point uniqueness require an open convex parameter domain, full column rank, common positive scale, positive cumulant curvature throughout the predictor image, and positive observed component densities throughout the domain. Existence of a finite maximizer is not asserted.",
+      "fixed_by": "thm-canonical-glm-strict-concavity",
+      "matters_for": [
+        "ex-logistic-separation-no-finite-mle"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-glm-observation-family",
+      "statement": "Specifies normalized exponential-family component densities on sigma-finite response spaces, fixed supports, and their independent finite product sampling law; mean and variance uses require finite second moments and local integrable derivative envelopes.",
+      "used_by": [
+        "lem-glm-product-density",
+        "lem-glm-mean-and-variance-identities",
+        "def-generalized-linear-model",
+        "thm-glm-general-link-score-and-information"
+      ]
+    },
+    {
+      "id": "def-generalized-linear-model",
+      "statement": "For a finite fixed design and open parameter domain, specifies η_i = x_iᵀβ, μ_i = g⁻¹(η_i), θ_i = τ(μ_i), with b′(τ(μ)) = μ; defines the product log likelihood, score, and expected score outer-product information.",
+      "used_by": [
+        "thm-canonical-glm-score-and-hessian",
+        "thm-glm-general-link-score-and-information",
+        "def-nested-model-deviance",
+        "alg-fisher-scoring-irls",
+        "lem-fisher-scoring-irls-is-well-defined",
+        "ex-poisson-overdispersion",
+        "ex-identity-link-bernoulli-boundary",
+        "ex-logistic-separation-no-finite-mle",
+        "ex-singular-fisher-information-nonunique-irls",
+        "ex-bernoulli-logit-glm-one-step",
+        "ex-poisson-log-glm-one-step"
+      ]
+    },
+    {
+      "id": "lem-glm-mean-and-variance-identities",
+      "statement": "Fix i and φ in def-glm-observation-family, and write a = a_i(φ). Under its fixed-support, twice differentiable density, local integrable derivative-envelope, and finite-second-moment hypotheses, E[Y_i] = b′(θ_i) and Var(Y_i) = a b″(θ_i).",
+      "used_by": [
+        "def-generalized-linear-model",
+        "thm-canonical-glm-score-and-hessian",
+        "thm-glm-general-link-score-and-information",
+        "ex-poisson-overdispersion",
+        "ex-poisson-log-glm-one-step"
+      ]
+    },
+    {
+      "id": "thm-glm-general-link-score-and-information",
+      "statement": "At an admissible finite common-scale GLM parameter, with differentiable natural-parameter and mean maps, nonzero mean derivatives, positive V_i = b″(θ_i), finite component score second moments and the stated response regularity, U = Xᵀ(μ̇_i(y_i−μ_i)/(aV_i))_i and I = Xᵀdiag(μ̇_i²/(aV_i))X. Full column rank makes I positive definite.",
+      "used_by": [
+        "alg-fisher-scoring-irls",
+        "thm-irls-is-fisher-scoring-step",
+        "ex-identity-link-bernoulli-boundary",
+        "ex-singular-fisher-information-nonunique-irls",
+        "ex-bernoulli-logit-glm-one-step",
+        "ex-poisson-log-glm-one-step"
+      ]
+    },
+    {
+      "id": "lem-glm-product-density",
+      "statement": "In the setup of def-glm-observation-family, the product sampling law has density q_θ(y) = ∏_i f_i(y_i;θ_i,φ) relative to the product base measure. Where every factor is positive, its logarithm is the sum of component log densities.",
+      "used_by": [
+        "def-generalized-linear-model",
+        "thm-canonical-glm-score-and-hessian",
+        "thm-glm-general-link-score-and-information",
+        "def-nested-model-deviance"
+      ]
+    },
+    {
+      "id": "lem-fisher-scoring-irls-is-well-defined",
+      "statement": "For every input satisfying the Definition of alg-fisher-scoring-irls, every intermediate quantity in its three instructions is uniquely determined and finite. Its output is the unique minimum-Euclidean-norm weighted least-squares minimizer for every design rank, including X = 0. The normal matrix is positive semidefinite with kernel equal to ker X.",
+      "used_by": [
+        "alg-fisher-scoring-irls"
+      ]
+    },
+    {
+      "id": "thm-canonical-glm-score-and-hessian",
+      "statement": "For a common-positive-scale canonical-link GLM and an observed vector with positive component densities, ∇ℓ = Xᵀ(y−μ)/a and ∇²ℓ = −Xᵀdiag(b″(η_i))X/a.",
+      "used_by": [
+        "thm-canonical-glm-strict-concavity",
+        "ex-logistic-separation-no-finite-mle",
+        "ex-bernoulli-logit-glm-one-step",
+        "ex-poisson-log-glm-one-step"
+      ]
+    },
+    {
+      "id": "thm-irls-is-fisher-scoring-step",
+      "statement": "Under the algorithm's admissibility conditions and the additional differentiability, moment, common-support and derivative-envelope hypotheses in the Statement, invertible I(β) = XᵀWX gives β_new = β + I(β)⁻¹U(β).",
+      "used_by": [
+        "ex-bernoulli-logit-glm-one-step",
+        "ex-poisson-log-glm-one-step"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-dominated-statistical-experiment",
+      "used_for": "The response-family dependency specifies domination by a supplied sigma-finite measure.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Interpreting component independence under the product response law.",
+      "opened": true
+    },
+    {
+      "id": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+      "used_for": "Product response spaces, measurable coordinate projections and rectangle generation.",
+      "opened": true
+    },
+    {
+      "id": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+      "used_for": "Constructing finite product base and sampling measures with their rectangle formulas.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Integrating the product density on measurable rectangles.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Constructing the measure associated with the proposed joint density.",
+      "opened": true
+    },
+    {
+      "id": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+      "used_for": "Identifying the density measure with the product sampling law.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of finite products of component density functions.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Bounding density difference quotients by derivative envelopes and deriving strict concavity from negative segment second derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Passing first and second parameter difference-quotient limits through density integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Integrating density derivatives and extracting the mean and variance identities.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "Interpreting response expectations as integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Absolute integrability and signed integration in the mean identity.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Identifying the centered second moment as variance.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Converting response moments to density integrals; signed uses explicitly pass through positive and negative parts.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Deriving first-moment integrability from a finite second moment.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Differentiating canonical and general-link component log likelihoods.",
+      "opened": true
+    },
+    {
+      "id": "prop-matrix-differentials-obey-sum-product-and-adjoint-rules",
+      "used_for": "Assembling the canonical gradient and Hessian in matrix form.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Showing distinct centered component scores have zero cross expectation.",
+      "opened": true
+    },
+    {
+      "id": "thm-of-square-roots",
+      "used_for": "Unique positive square roots of finite positive IRLS weights.",
+      "opened": true
+    },
+    {
+      "id": "def-moore-penrose-pseudoinverse",
+      "used_for": "The Penrose equations defining the IRLS selection convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+      "used_for": "Existence and uniqueness of the weighted-design pseudoinverse at every rank.",
+      "opened": true
+    },
+    {
+      "id": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+      "used_for": "Existence and uniqueness of the selected minimum-norm IRLS output.",
+      "opened": true
+    },
+    {
+      "id": "thm-least-squares-solutions-and-normal-equation",
+      "used_for": "The weighted normal equation used to prove Fisher-scoring equivalence.",
+      "opened": true
+    },
+    {
+      "id": "def-bernoulli-and-binomial-random-variables",
+      "used_for": "Bernoulli response laws, including the degenerate boundary law.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Bernoulli and Poisson cumulant and density derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Bernoulli cumulant and logit calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-real-exponential-function-and-e",
+      "used_for": "The exponential-series normalization of the Poisson masses.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Poisson normalization and exponential identities in the examples.",
+      "opened": true
+    },
+    {
+      "id": "def-factorial-and-falling-factorial",
+      "used_for": "Poisson masses and reindexing their moment series.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "generalized-linear-models-and-fisher-scoring",
+      "to": "scientific-statistical-model-contracts",
+      "faithful": true,
+      "note": "Checked the citing page and def-glm-observation-family against the supplier page and def-scientific-statistical-model-contract. Observation roles, measurable predictor/response maps, target, conditioning, support and adequacy requirements are preserved. The consumer correctly treats independence and common support as additional response-family assumptions; the supplier explicitly says its bookkeeping requirements imply neither. No converse implication is asserted."
+    }
+  ]
+}

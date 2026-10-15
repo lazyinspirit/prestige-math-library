@@ -1,0 +1,60 @@
+---
+id: ex-zero-variance-stratum-allocation-boundary
+kind: example
+title: A zero-variance stratum is outside the positive-variance allocation formula
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 8
+deps:
+  - def-stratified-sampling-design-and-estimator
+  - thm-stratified-total-unbiasedness-and-variance
+  - thm-neyman-allocation-minimizes-stratified-variance
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+sources:
+  references:
+    - title: "Shalabh, Sampling Theory, MTH 417 lecture notes, Chapter 4: Stratified Sampling, PDF pp. 8–9 and 16"
+      url: "https://home.iitk.ac.in/~shalab/sampling/chapter4-sampling-stratified-sampling.pdf"
+    - title: "Robin Arnold, STAT392 Sample Surveys, Chapter 8: Stratified Sampling, §§8.5 and 8.8"
+      url: "https://homepages.ecs.vuw.ac.nz/~rarnold/STAT392/SampleSurveysBook/_book/stratified-sampling"
+verification:
+  precheck: pass
+---
+
+## Example
+
+Let the first stratum have values $(5,5)$ and the second have values
+$(0,3,6)$. For total sample size three, the unqualified weights
+$N_hS_h$ assign no sample units to the first stratum, even though the
+stratified design requires at least one observation per stratum.
+
+## Facts & Assumptions
+
+**Given:** Two fixed strata with those values, independent within-stratum
+SRSWOR, and total sample size $n=3$.
+
+[F1] [[def-stratified-sampling-design-and-estimator]]: Each stratum sample
+size satisfies $1\le n_h\le N_h$; $S_h^2$ is defined for noncertainty
+strata with $N_h>1$.
+
+[F2] [[thm-neyman-allocation-minimizes-stratified-variance]]: The continuous
+Neyman formula requires positive variances in every variable noncertainty
+stratum.
+
+[F3] [[thm-stratified-total-unbiasedness-and-variance]]: For a valid
+allocation, the total estimator is unbiased and its design variance is the
+sum of the noncertainty stratum contributions.
+
+## Verification
+
+1.1 The first stratum has $N_1=2$, $\bar y_1=5$, and $S_1^2=0$. The second has $N_2=3$, $\bar y_2=3$, and $S_2^2=((-3)^2+0^2+3^2)/2=9$, so $S_2=3$ and the total is $19$. [given, choose, algebra]
+
+2.1 The unqualified proportionality weights would be $N_1S_1=2(0)=0$ and $N_2S_2=3(3)=9$, giving formal continuous allocation $(x_1,x_2)=(0,3)$. But $S_1=0$ violates [F2]'s positive-variance hypothesis, and $x_1=0$ violates [F1]'s $n_1\ge1$ condition. [F1, F2, step 1.1, algebra]
+
+3.1 The valid allocation $(n_1,n_2)=(1,2)$ has variance $2^2(1-1/2)0/1=0$ in the first stratum and $3^2(1-2/3)9/2=27/2$ in the second by [F3]. It is a valid design, whereas the formal zero allocation is not. [F1, F3, step 1.1, step 2.1, algebra] ∎

@@ -10,11 +10,8 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
+  repair: research/statistical-models-experiments-62-published-conditioning-null-event-repair.json
+  precheck: pass
 sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, 5th ed."
@@ -45,7 +42,7 @@ Assume AC for existence. For real $X\in L^1(P)$, if $X$ is $\mathcal G$-measurab
 
 1.1 If $X$ is $\mathcal G$-measurable it itself meets every condition for a version: integrability is assumed and every event equality is $\int_A X=\int_A X$. Hence uniqueness gives the first identity. [F1, F2]
 
-1.2 Fix $A\in\mathcal G$ under the independence hypothesis. For $h=\mathbf1_B$, $E[h(X)\mathbf1_A]=E[h(X)]P(A)$ is exactly that hypothesis. For nonnegative Borel simple $h=\sum_{j=1}^m c_j\mathbf1_{B_j}$, multiplication by $c_j$ and addition give the same equality. For any nonnegative Borel $h$, compose the increasing Borel simple approximations from [F3] with $X$ and use [F4] on both sides to obtain the equality, allowing infinite values. [given, F3, F4, F5]
+1.2 Fix $A\in\mathcal G$ under the independence hypothesis. For $h=\mathbf1_B$, $E[h(X)\mathbf1_A]=E[h(X)]P(A)$ is exactly that hypothesis. For nonnegative Borel simple $h=\sum_{j=1}^m c_j\mathbf1_{B_j}$, multiplication by $c_j$ and addition give the same equality. For a nonnegative Borel $h$ with $E[h(X)]<\infty$, compose the increasing Borel simple approximations $h_m\uparrow h$ from [F3] with $X$. Then $E[h_m(X)]\uparrow E[h(X)]<\infty$ and $E[h_m(X)\mathbf1_A]\uparrow E[h(X)\mathbf1_A]$ by [F4]. Passing to the limit in the finite equalities $E[h_m(X)\mathbf1_A]=P(A)E[h_m(X)]$ gives $E[h(X)\mathbf1_A]=P(A)E[h(X)]$. Every expectation here is finite, so multiplication by $P(A)=0$ is also defined. [given, F3, F4, F5]
 
 2.1 Apply step 1.2 to $h(t)=t^+$ and $h(t)=t^-$. Their expectations are finite because $X\in L^1$, so subtracting yields $\int_A X=EX\,P(A)$. The constant $EX$ is finite, $\mathcal G$-measurable and integrable, and its integral on $A$ is $EX\,P(A)$. Since $A$ was arbitrary, [F1]–[F2] identify it with $E[X\mid\mathcal G]$. [step 1.2, F1, F2, F5] ∎
 

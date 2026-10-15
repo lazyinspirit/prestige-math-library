@@ -1,0 +1,1503 @@
+{
+  "version": 1,
+  "scope": [
+    "def-logrank-risk-set-score-and-test",
+    "lem-logrank-risk-set-empirical-fractions-converge",
+    "thm-logrank-conditional-risk-set-moments",
+    "lem-logrank-risk-fraction-converges",
+    "cor-logrank-fisher-randomization-pvalue-valid",
+    "lem-logrank-score-martingale-expansion",
+    "lem-logrank-variance-estimator-consistency",
+    "thm-weighted-logrank-terminal-normal-limit",
+    "ex-logrank-crossing-hazards-zero-score",
+    "ex-logrank-fisher-randomization-with-unequal-weights"
+  ],
+  "contracts": {
+    "def-logrank-risk-set-score-and-test": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition makes all sums zero when there are no observed failures."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition specifies the empty-risk-set convention and variance zero at Y=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition gives V=0 when Y=1 and leaves the standardized statistic undefined if its variance is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition retains the unstandardized score when the variance is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition fixes U=min(T,C), delta=1{T≤C}, risk U≥t, and horizon τ."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition evaluates risk/event counts, finite failure-time sums and a predeclared weight rule on given records. It selects no witness from an arbitrary family; the conditional uniform-subset model is explicitly a separate premise, rather than a general existence construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies risk/event counts and their score/plug-in formulas under an expressly separate hypergeometric model. Its normal calibration is only approximate until terminal hypotheses hold; it does not identify a finite Fisher p-value with that normal statistic or equate survival-law equality with conditional uniform-subset allocation. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies risk/event counts and their score/plug-in formulas under an expressly separate hypergeometric model. Its normal calibration is only approximate until terminal hypotheses hold; it does not identify a finite Fisher p-value with that normal statistic or equate survival-law equality with conditional uniform-subset allocation. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-logrank-risk-set-empirical-fractions-converge": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "On an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-glivenko-cantelli-class",
+          "source_section": "Definition",
+          "quote": "Use the empirical-measure convention of [[def-empirical-process-and-rademacher-process]]: for iid observations $X_1,X_2,\\ldots$ with common law $P$, $P_nf=n^{-1}\\sum_{i=1}^n f(X_i)$ and $Pf=\\int f\\,dP$. Let $\\mathcal F$ be a nonempty class of measurable real-valued functions with a nonnegative measurable integrable envelope $F$, meaning $|f|\\le F$ $P$-almost surely for every $f\\in\\mathcal F$ and $PF<\\infty$. It is **pointwise measurable** if there is a countable subclass $\\mathcal F_0$ such that every $f\\in\\mathcal F$ is the pointwise limit of a sequence from $\\mathcal F_0$. For a pointwise-measurable class, dominated convergence [[thm-dominated-convergence]] gives $Pf_k\\to Pf$ along the approximating sequence, and finite empirical averages converge pointwise, so the supremum defining the uniform law is determined by $\\mathcal F_0$. The class is **$P$-Glivenko–Cantelli** if",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-covering-packing-bracketing-number-and-metric-entropy",
+          "source_section": "Definition",
+          "quote": "For measurable real endpoints $\\ell\\le u$ $Q$-almost everywhere, the bracket $[\\ell,u]$ is the set of measurable functions $f$ satisfying $\\ell\\le f\\le u$ $Q$-almost everywhere. Its $L^r(Q)$ width is $\\|u-\\ell\\|_{Q,r}$. The bracketing number $N_{[]} (\\epsilon,\\mathcal F,L^r(Q))$ is the least number of such brackets of width at most $\\epsilon$ that cover $\\mathcal F$, or $+\\infty$ if no finite cover exists; for the empty class set it equal to $1$. Centers of metric covers are in $\\mathcal F$; bracket endpoints need not be.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-gc-by-bracketing-entropy",
+          "source_section": "Statement",
+          "quote": "Let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal F$ be a nonempty pointwise-measurable class of measurable real functions with a nonnegative integrable envelope $F$. Suppose $N_{[]} (\\epsilon,\\mathcal F,L^1(P))<\\infty$ for every $\\epsilon>0$. Then $\\mathcal F$ is $P$-Glivenko–Cantelli: $\\sup_{f\\in\\mathcal F}|P_nf-Pf|\\to0$ in probability. If Countable Choice is assumed, then the stronger conclusion holds that this convergence is almost sure. The terms $P_n$, $P$, and the outer-probability convention are those of [[def-empirical-process-and-rademacher-process]], and the class notion is [[def-glivenko-cantelli-class]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "proof-step-1-1",
+          "claim": "Each $f_t$ is measurable. The subclass with rational thresholds in $[0,\\tau]$ is countable and pointwise dense: for $t>0$ choose rationals $q_k\\uparrow t$ with $0\\le q_k<t$, while for $t=0$ use the member $f_0$ itself. If $x\\ge t$, every $f_{q_k}(x)=1$; if $x<t$, then $q_k>x$ eventually and $f_{q_k}(x)=0$. Hence $f_{q_k}(x)\\to f_t(x)$ for every $x$. The envelope is the constant function $1$, which is measurable and has $P_g$-integral $1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "proof-step-1-2",
+          "claim": "Put $q(t):=P_g(X_{g1}\\ge t)$. For $s<t$, the indicators are nested and $P_g|f_s-f_t|=P_g(s\\le X_{g1}<t)=q(s)-q(t)$. The function $q$ is nonincreasing with range in $[0,1]$. Fix $\\epsilon>0$ and set $\\delta=\\epsilon/3$. Partition $[0,1]$ into finitely many intervals of length at most $\\delta$ and group thresholds whose $q$-values lie in the same interval. Each threshold class in one group is nested; its pointwise infimum and supremum are measurable threshold indicators (possibly their one-sided endpoint limits), and they bracket the group. The $L^1(P_g)$ width is the supremum of $P_g|f_s-f_t|$ over thresholds in that group, at most $\\delta$, by the displayed identity. Thus at most $\\lceil1/\\delta\\rceil+1$ brackets cover $\\mathcal F$, so $N_{[]}(\\epsilon,\\mathcal F,L^1(P_g))<\\infty$. This also handles atoms: a jump in $q$ larger than a bin width places the two threshold sides in different bins, while a smaller jump contributes at most the bin's total $q$-width.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "proof-step-2-1",
+          "claim": "Steps 1.1 and 1.2 verify pointwise measurability, the integrable envelope, and every finite-bracketing hypothesis in [F6]. Its convergence-in-probability conclusion gives $\\sup_{t\\in[0,\\tau]}|P_{g,n}f_t-P_gf_t|\\to_P0$. Since $P_{g,n}f_t=Y_{g,n}(t)/n_g$ and $P_gf_t=s_g(t)$ by their definitions, this is the asserted uniform risk-set convergence. No Countable Choice or strong Glivenko--Cantelli conclusion is used.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns n_g tending to infinity and does not claim convergence for an empty group.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/sme_terminal_influence_resolution",
+            "reason": "The Statement assumes deterministic group sizes n_g tending to infinity and defines empirical fractions divided by n_g. Step2.1 applies the IID probability GC theorem along those sizes; it asserts no convergence theorem for n_g=0. Thus an indexed sum does not invalidate exclusion of an empty group."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1–3.1 use the unit envelope and finite bracketing, including constant or zero-probability threshold ranges."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The bounded indicator envelope is integrable for every group law, and the limit is asymptotic as n_g→∞."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-variance, empty-sum, or tied-score boundary is identified in the Statement or proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The threshold class is restricted to the closed horizon [0,τ], and step 1.1 includes f_0 itself."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1 and 1.2 use rational threshold approximations and finitely many survival-mass bins to verify measurability and bracketing. Step 2.1 invokes the probability-only GC branch; F6 explicitly states that its separate Countable-Choice almost-sure branch is not used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement starts from within-group IID measurable times and deterministic n_g tending to infinity. Steps 1.1 and 1.2 verify pointwise measurability and finite bracketing; step2.1 invokes only the probability GC branch. Uniform risk convergence is not claimed to characterize independence or the common-law condition. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement starts from within-group IID measurable times and deterministic n_g tending to infinity. Steps 1.1 and 1.2 verify pointwise measurability and finite bracketing; step2.1 invokes only the probability GC branch. Uniform risk convergence is not claimed to characterize independence or the common-law condition. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read steps 1.1, 1.2, 2.1 and all six direct supplier statements. Rational thresholds increase to t (including f_0), so the supremum is countably determined even at atoms. Nested threshold bins of survival-mass diameter epsilon/3 have measurable one-sided threshold envelopes and L1 width at most that diameter. The probability GC branch needs no Countable Choice. Deterministic n_g tends to infinity; degenerate laws, t=0 and tau and atom endpoints are covered. No reader or refuter finding concerns this item; no defect found."
+      }
+    },
+    "thm-logrank-conditional-risk-set-moments": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-uniform-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega$ be a nonempty finite set. Its **uniform probability space** assigns every $\\omega\\in\\Omega$ the weight $1/|\\Omega|$. Thus every event $A\\subseteq\\Omega$ has\n$$\\mathbb P(A)=\\frac{|A|}{|\\Omega|}.$$\nNonemptiness is required so that the denominator is positive.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-indicator-random-variable",
+          "source_section": "Definition",
+          "quote": "For an event $A$ in a finite probability space, its **indicator random variable** is\n$$\\mathbf 1_A(\\omega):=\\begin{cases}1,&\\omega\\in A,\\\\0,&\\omega\\notin A.\\end{cases}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linearity-of-expectation",
+          "source_section": "Statement",
+          "quote": "For a finite family of real random variables $(X_i)_{i\\in I}$ on one finite probability space and real scalars $(a_i)_{i\\in I}$,\n$$\\mathbb E\\!\\left[\\sum_{i\\in I}a_iX_i\\right]=\\sum_{i\\in I}a_i\\mathbb E[X_i].$$\nNo independence hypothesis is required. For $I=\\varnothing$, both sides are $0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-indicator-expectation-and-products",
+          "source_section": "Statement",
+          "quote": "For every event $A$, $\\mathbb E[\\mathbf1_A]=\\mathbb P(A)$. For every finite family $(A_i)_{i\\in I}$,\n$$\\prod_{i\\in I}\\mathbf1_{A_i}=\\mathbf1_{\\cap_{i\\in I}A_i},$$\nand $\\sum_{i\\in I}\\mathbf1_{A_i}(\\omega)$ is the number of events $A_i$ that contain $\\omega$. The empty product is $1$ and the empty sum is $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-variance-and-covariance-identities",
+          "source_section": "Statement",
+          "quote": "For finite real random variables $X,Y$,\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nVariance is nonnegative, and every constant random variable has variance zero. Zero variance forces equality to the mean on every positive-weight outcome, but not necessarily on zero-weight outcomes.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-logrank-risk-set-score-and-test",
+          "source_section": "Definition",
+          "quote": "Fix a follow-up horizon $\\tau>0$ and a finite set of subjects\n$\\mathcal I=\\{1,\\ldots,n\\}$. A right-censored record for subject $i$ is a\npair $(U_i,\\delta_i)\\in[0,\\tau]\\times\\{0,1\\}$, where\n$U_i=\\min(T_i,C_i)$ is the observed time and\n$\\delta_i=1\\{T_i\\le C_i\\}$ records an event, including an event-censoring tie;\n$\\delta_i=0$ records right censoring. A two-group assignment is a map\n$z:\\mathcal I\\to\\{0,1\\}$. These conventions are the right-censoring\nobservation scheme; the score below uses the observed record and does not\ninfer event or censoring laws from it.\n\nLet $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}.$$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$E_j:=d_j\\frac{Y_{1j}}{Y_j}.$$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases}$$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].\n\nA **weight rule** assigns a real value $w_j$ using only the predeclared time\nand information available strictly before the failures at $t_j$; deterministic\nbounded time weights are a special case. If\n$\\sup_j|w_j|<\\infty$, define the weighted logrank score and its conditional\nvariance estimate by\n$$U_w(z;U,\\delta):=\\sum_{j=1}^K w_j(O_j-E_j),\\qquad \\widehat V_w(z;U,\\delta):=\\sum_{j=1}^K w_j^2V_j.$$\nWhen $\\widehat V_w>0$, set\n$Z_w:=U_w/\\sqrt{\\widehat V_w}$. If $\\widehat V_w=0$, this standardized\nstatistic is left undefined; the unstandardized score remains defined. The\nnormal calibration is only an approximation until the separate terminal\nlimit hypotheses are verified. It is not the finite-sample Fisher\nrandomization p-value.\n\nFor a fixed observed record, the displayed scores are statistics in the\nmeasurable-map sense of [[def-statistic-and-estimator]]: each risk count is a\nfinite sum of Borel indicator functions, and every denominator is positive\nat an observed event time. A weight rule is fixed before assignments or\noutcomes are inspected and is recomputed by the same rule for any candidate\nassignment.\n\nThe risk-set table concerns one predeclared event type. If simultaneous\nrecords contain distinct event causes that are not exchangeable, form\nseparate cause-specific counts $O_{jc}$ and $d_{jc}$ using the same\npre-event risk set; use the displayed hypergeometric variance only for a\ncause whose failures are conditionally exchangeable. This definition does\nnot pool different causes or add their variances without a specified\ncross-cause covariance model.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $Y=0$, then $d=0$, $O=0$, and both stated moments are zero. Suppose $Y\\ge1$. For each of the $Y_1$ group-1 subjects let $I_a$ indicate that subject $a$ is in the failing subset. Under [A1], when $d\\ge1$, $P(I_a=1)=\\binom{Y-1}{d-1}/\\binom{Y}{d}=d/Y$; for $d=0$, both sides are zero. Since $O=\\sum_{a=1}^{Y_1}I_a$, [F3] and [F4] give $\\mathbb E O=Y_1d/Y$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $Y=1$, then $d\\in\\{0,1\\}$ and the failing subset is deterministic: $O=dY_1$. Its expectation is $dY_1/Y$ and its variance is zero, as stipulated.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $Y>1$. For distinct group-1 subjects $a,b$, if $d\\ge2$ the same subset count gives $P(I_a=I_b=1)=\\binom{Y-2}{d-2}/\\binom{Y}{d}=d(d-1)/(Y(Y-1))$; for $d=0$ or $d=1$ the probability and the displayed ratio are both zero. Using [F5] and [F6], $ \\operatorname{Var}(I_a)=\\frac{d(Y-d)}{Y^2},\\qquad \\operatorname{Cov}(I_a,I_b)=-\\frac{d(Y-d)}{Y^2(Y-1)}. $ Thus [F3] and [F5] give $ \\operatorname{Var}(O) =Y_1\\frac{d(Y-d)}{Y^2} -Y_1(Y_1-1)\\frac{d(Y-d)}{Y^2(Y-1)} =\\frac{Y_1(Y-Y_1)d(Y-d)}{Y^2(Y-1)}. $ Since $Y-Y_1=Y_0$, this is the stated variance, including $d=0$, $d=Y$, $Y_1=0$, and $Y_1=Y$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the sequential model, step 1.1 and the $Y_j=0$ convention give $\\mathbb E[O_j-E_j\\mid\\mathcal H_{j-1}]=0$, and step 2.1 gives conditional variance $V_j$. Since $w_j$ is $\\mathcal H_{j-1}$-measurable, $D_j$ has conditional mean zero and conditional second moment $w_j^2V_j$. The stated integrability condition makes each $D_j$ square-integrable. If $k<j$, the filtration property and the revelation convention make $D_k$ $\\mathcal H_{j-1}$-measurable, so $\\mathbb E[D_kD_j]=\\mathbb E[D_k\\,\\mathbb E(D_j\\mid\\mathcal H_{j-1})]=0$. Expanding the finite sum's variance therefore yields both sequential identities.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles Y=0, d=0, the empty failure subset, and zero expectation and variance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1–2.1 include d=0 and d=Y and groups with Y_1=0 or Y_1=Y."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the deterministic Y=1 case and assigns variance zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers zero and full failures and one-group risk sets; the variance is then zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement allows 0≤d≤Y and the proof covers the finite risk-set extremes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 uses finite subset counting under the prescribed allocation law; step 3.1 integrates that given conditional law and expands a finite variance sum. The argument does not construct or select a family of conditional-probability versions or independent realizations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement assumes uniform failure-subset allocation conditional on known risk margins. Steps 1.1 and 2.1 count subset inclusion probabilities, and step3.1 obtains orthogonal martingale differences under predictable weights. The first two conditional moments alone are not asserted to identify that entire allocation law. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement assumes uniform failure-subset allocation conditional on known risk margins. Steps 1.1 and 2.1 count subset inclusion probabilities, and step3.1 obtains orthogonal martingale differences under predictable weights. The first two conditional moments alone are not asserted to identify that entire allocation law. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read all four steps and ten direct supplier statements. Uniform d-subset indicator probabilities are d/Y and d(d-1)/(Y(Y-1)); variance reduces to Y_1 Y_0 d(Y-d)/(Y^2(Y-1)). Checked Y=0,1, d=0,Y and either empty treatment group. The sequential result separately assumes measurable pre-reveal margins and conditional uniform allocation, so conditional finite-subset summation gives mean zero and second moment w_j^2 V_j even on a general filtered space. Expected total conditional variance ensures L2 and tower conditioning gives zero cross terms. No equal-hazard-to-hypergeometric inference, arbitrary choice or iff claim; no findings or defect."
+      }
+    },
+    "lem-logrank-risk-fraction-converges": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-logrank-risk-set-empirical-fractions-converge",
+          "source_section": "Statement",
+          "quote": "For $g\\in\\{0,1\\}$, let $X_{g1},X_{g2},\\ldots$ be IID measurable\n$[0,\\infty)$-valued observed times with law $P_g$. For deterministic\n$n_g\\to\\infty$, define\n$$Y_{g,n}(t):=\\sum_{i=1}^{n_g}1\\{X_{gi}\\ge t\\},\\qquad s_g(t):=P_g(X_{g1}\\ge t),\\qquad 0\\le t\\le\\tau.$$\nThen, for each group,\n$$\\sup_{0\\le t\\le\\tau}\\left| \\frac{Y_{g,n}(t)}{n_g}-s_g(t)\\right|\\longrightarrow_P0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-logrank-risk-set-score-and-test",
+          "source_section": "Definition",
+          "quote": "Fix a follow-up horizon $\\tau>0$ and a finite set of subjects\n$\\mathcal I=\\{1,\\ldots,n\\}$. A right-censored record for subject $i$ is a\npair $(U_i,\\delta_i)\\in[0,\\tau]\\times\\{0,1\\}$, where\n$U_i=\\min(T_i,C_i)$ is the observed time and\n$\\delta_i=1\\{T_i\\le C_i\\}$ records an event, including an event-censoring tie;\n$\\delta_i=0$ records right censoring. A two-group assignment is a map\n$z:\\mathcal I\\to\\{0,1\\}$. These conventions are the right-censoring\nobservation scheme; the score below uses the observed record and does not\ninfer event or censoring laws from it.\n\nLet $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}.$$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$E_j:=d_j\\frac{Y_{1j}}{Y_j}.$$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases}$$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].\n\nA **weight rule** assigns a real value $w_j$ using only the predeclared time\nand information available strictly before the failures at $t_j$; deterministic\nbounded time weights are a special case. If\n$\\sup_j|w_j|<\\infty$, define the weighted logrank score and its conditional\nvariance estimate by\n$$U_w(z;U,\\delta):=\\sum_{j=1}^K w_j(O_j-E_j),\\qquad \\widehat V_w(z;U,\\delta):=\\sum_{j=1}^K w_j^2V_j.$$\nWhen $\\widehat V_w>0$, set\n$Z_w:=U_w/\\sqrt{\\widehat V_w}$. If $\\widehat V_w=0$, this standardized\nstatistic is left undefined; the unstandardized score remains defined. The\nnormal calibration is only an approximation until the separate terminal\nlimit hypotheses are verified. It is not the finite-sample Fisher\nrandomization p-value.\n\nFor a fixed observed record, the displayed scores are statistics in the\nmeasurable-map sense of [[def-statistic-and-estimator]]: each risk count is a\nfinite sum of Borel indicator functions, and every denominator is positive\nat an observed event time. A weight rule is fixed before assignments or\noutcomes are inspected and is recomputed by the same rule for any candidate\nassignment.\n\nThe risk-set table concerns one predeclared event type. If simultaneous\nrecords contain distinct event causes that are not exchangeable, form\nseparate cause-specific counts $O_{jc}$ and $d_{jc}$ using the same\npre-event risk set; use the displayed hypergeometric variance only for a\ncause whose failures are conditionally exchangeable. This definition does\nnot pool different causes or add their variances without a specified\ncross-cause covariance model.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], for each $g$, $ \\sup_{t\\le\\tau}\\left|\\frac{Y_{g,n}(t)}n-y_g(t)\\right| \\le \\left|\\frac{n_g}n-\\rho_g\\right| \\sup_{t\\le\\tau}\\frac{Y_{g,n}(t)}{n_g} +\\rho_g\\sup_{t\\le\\tau}\\left|\\frac{Y_{g,n}(t)}{n_g}-s_g(t)\\right| \\longrightarrow_P0. $ The first term tends to zero deterministically, and the empirical fraction in the second term is at most one. Hence the pooled fraction $Y_n(t)/n$ converges uniformly in probability to $y(t)$ and the group-1 fraction $Y_{1,n}(t)/n$ converges uniformly to $y_1(t)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the event $\\inf_{t\\le\\tau}Y_n(t)/n\\ge m/2$, whose probability tends to one by [A1] and step 1.1, the denominator is positive for all $t\\le\\tau$. There, $ \\left|\\frac{Y_{1,n}(t)}{Y_n(t)}-\\frac{y_1(t)}{y(t)}\\right| \\le \\frac{2}{m}\\left|\\frac{Y_{1,n}(t)}n-y_1(t)\\right| +\\frac{2}{m}\\left|\\frac{Y_n(t)}n-y(t)\\right|, $ because $0\\le y_1(t)/y(t)\\le1$. Taking suprema and using step 1.1 proves convergence to zero in probability. The convention $p_n=0$ on an empty risk set is immaterial on this event.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition sets p_n=0 on an empty pooled risk set; step 2.1 shows that event is excluded uniformly with probability tending to one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-risk convention remains defined, while the positive pooled support m>0 justifies the limiting ratio in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Interior allocation fractions keep both groups represented asymptotically in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The bound m>0 prevents a zero limiting denominator; no groupwise positive-risk assumption is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Both uniform suprema include t=0 and t=τ as stated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 rescales the two given groupwise uniform limits by deterministic allocations, and step 2.1 uses the fixed positive constant m to bound a ratio. Both operations use existing processes and deterministic algebra, with no family of arbitrary witness selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement assumes positive limiting allocations and a positive pooled limiting risk curve. Steps 1.1 and 2.1 scale groupwise uniform risk limits and bound a ratio on the high-probability positive-denominator event. Ratio convergence does not conversely identify the two subject laws or independence assumptions. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement assumes positive limiting allocations and a positive pooled limiting risk curve. Steps 1.1 and 2.1 scale groupwise uniform risk limits and bound a ratio on the high-probability positive-denominator event. Ratio convergence does not conversely identify the two subject laws or independence assumptions. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read both steps and both suppliers. Scaling empirical group fractions by deterministic n_g/n gives both pooled limits without between-group independence. On the event inf Y_n/n >= m/2, the stated ratio bound follows from 0<=y_1/y<=1. Its complement tends to zero; empty empirical risk sets are handled by p_n=0. Positive allocation limits exclude empty asymptotic groups; positive pooled support is explicit. No iff or choice premise; no reader/refuter defect."
+      }
+    },
+    "cor-logrank-fisher-randomization-pvalue-valid": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, and let $\\mathcal I=\\{1,\\ldots,N\\}$ index the fixed\nexperimental units at the actual treatment-assignment level. Let\n$\\mathcal Z$ be a nonempty finite set of allowed assignments. If treatment\nis assigned to clusters, each cluster is one indexed unit; no separate\nprobability-sampling unit is present. The index $i$ identifies that unit,\nand no visit or repeated-measurement index is modeled here.\n\nA known assignment law is a function $p:\\mathcal Z\\to[0,1]$ satisfying\n$\\sum_{z\\in\\mathcal Z}p(z)=1$, so $(\\mathcal Z,p)$ is a finite probability\nspace ([[def-finite-probability-space-and-event]]); assignments of probability\nzero may remain in $\\mathcal Z$. A **potential-outcome schedule** is a function\n$\\theta:\\mathcal I\\times\\mathcal Z\\to\\mathbb R$, with\n$Y_i(z):=\\theta(i,z)$. The schedule and the units are fixed; the assignment\n$Z$ is the only randomness supplied by the design, and the observed response\nvector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$. The schedule is defined\nfor every allowed assignment, including zero-probability assignments, and\nmay depend on the full assignment vector, so no no-interference assumption is\nimplicit. The scientific statistical model contract\n[[def-scientific-statistical-model-contract]] requires the observation space,\nunits, quantity status, observation mechanism, support, conditioning\nconvention, and adequacy assumptions to be recorded; this model specifies\nthose fields as follows.\n\nTo express this as a statistical experiment, take the data space\n$\\mathcal X=\\mathcal Z\\times\\mathbb R^{\\mathcal I}$ with its full power-set\nsigma-algebra, which is a sigma-algebra by [[def-sigma-algebra]] and makes\n$\\mathcal X$ a measurable space ([[def-measurable-space]]), and parameter\nset $\\Theta=\\mathbb R^{\\mathcal I\\times\\mathcal Z}$. For each $\\theta\\in\\Theta$\nlet $P_\\theta$ be the law\n([[def-law-or-distribution-of-a-random-element]]) of the deterministic\nobservation map $O_\\theta(z)=(z,Y_\\theta(z))$ from $(\\mathcal Z,p)$. The map\nis measurable because its domain has the full power set, in the preimage\nsense of [[def-measurable-function-between-measurable-spaces]], and its law\nis a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]]. Thus\n$((\\mathcal X,2^{\\mathcal X}),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ is an\nexperiment in the sense of [[def-statistical-experiment]]. The assignment\nlaw asserts no response-error model, Gaussian law, superpopulation\nrandomization, or sampling representativeness beyond the stated finite\nassignment mechanism. Its finite full-measure support set is\n$$S_\\theta:=\\{(z,Y_\\theta(z)):z\\in\\mathcal Z,\\ p(z)>0\\},$$\nsince $P_\\theta(S_\\theta)=\\sum_{z:p(z)>0}p(z)=1$. The record contains the\nassigned vector and every unit's response; missing or censored outcomes and\nrepeated visits require a separately declared observation mechanism. The\ninferential target is the assignment-invariance hypothesis for these $N$\nunits, not an estimand for a wider population.\n\nInference in this page holds $\\mathcal I$ and $\\theta$ fixed and averages\nover the declared law $p$; it does not condition on the realized assignment.\nThe status of the quantities is explicit: $\\theta$ and all\n$Y_i(z)$ are fixed, $Z$ is random, $(Z,Y_\\theta(Z))$ is observed, and\npotential responses under unassigned vectors are fixed but latent. The\nassignment set, weights, and implemented randomization protocol are\ndesign-controlled and should be checked against protocol records. Assignment\nlogs and response records are empirically assessable, but those checks do not\nprove that the declared law generated the data. Potential outcomes under\nunassigned vectors are fixed and latent in the realized record. This does\nnot imply nonidentifiability from the observed-data law: for each $z$ with\n$p(z)>0$, the law assigns mass $p(z)$ to $(z,Y_\\theta(z))$, and therefore\ndetermines $Y_\\theta(z)$. Assignment invariance on this positive-probability\nset is **empirically assessable**, and the theorem tests the stronger\ninvariance hypothesis on all allowed assignments. Values at assignments\nwith $p(z)=0$, and restrictions on those values, are **substantively\nuntestable** from this law, since changing them leaves $P_\\theta$ unchanged.\nOne realized assignment does not reveal responses at other assignments.\nThese classifications do not make the design or scientific model\nempirically true.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "source_section": "Definition",
+          "quote": "In the finite randomized treatment-assignment model\n[[def-finite-randomized-treatment-assignment-model]], a schedule satisfies\nthe **Fisher sharp null** when for each unit $i$ there is a value $y_i$ such that\n$Y_i(z)=y_i$ for every allowed assignment $z$. The full vector\n$y=(y_i)_{i\\in\\mathcal I}$ is then imputable under every assignment.\n\nA **predeclared ordering score** is a real-valued statistic\n$T:\\mathcal Z\\times\\mathbb R^{\\mathcal I}\\to\\mathbb R$\n([[def-statistic-and-estimator]]) fixed before the\nassignment and outcomes are inspected. Its upper-tail ordering includes ties:\nassignment $z'$ is at least as extreme as $z$ when $T(z',y)\\ge T(z,y)$.\nFor a signed score $S$ and fixed null center $s_0$, the corresponding\ntwo-sided ordering is explicitly $T(z,y)=|S(z,y)-s_0|$. The center is part\nof the predeclared ordering; the sharp null alone does not force $s_0=0$\nfor an arbitrary signed score. A lower-tail ordering is represented by\nusing $-S$ as the score. A statistic in this setting is a measurable map in\nthe sense of [[def-statistic-and-estimator]]; the full power-set data\nsigma-algebra makes every such real-valued map measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-logrank-risk-set-score-and-test",
+          "source_section": "Definition",
+          "quote": "Fix a follow-up horizon $\\tau>0$ and a finite set of subjects\n$\\mathcal I=\\{1,\\ldots,n\\}$. A right-censored record for subject $i$ is a\npair $(U_i,\\delta_i)\\in[0,\\tau]\\times\\{0,1\\}$, where\n$U_i=\\min(T_i,C_i)$ is the observed time and\n$\\delta_i=1\\{T_i\\le C_i\\}$ records an event, including an event-censoring tie;\n$\\delta_i=0$ records right censoring. A two-group assignment is a map\n$z:\\mathcal I\\to\\{0,1\\}$. These conventions are the right-censoring\nobservation scheme; the score below uses the observed record and does not\ninfer event or censoring laws from it.\n\nLet $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}.$$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$E_j:=d_j\\frac{Y_{1j}}{Y_j}.$$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases}$$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].\n\nA **weight rule** assigns a real value $w_j$ using only the predeclared time\nand information available strictly before the failures at $t_j$; deterministic\nbounded time weights are a special case. If\n$\\sup_j|w_j|<\\infty$, define the weighted logrank score and its conditional\nvariance estimate by\n$$U_w(z;U,\\delta):=\\sum_{j=1}^K w_j(O_j-E_j),\\qquad \\widehat V_w(z;U,\\delta):=\\sum_{j=1}^K w_j^2V_j.$$\nWhen $\\widehat V_w>0$, set\n$Z_w:=U_w/\\sqrt{\\widehat V_w}$. If $\\widehat V_w=0$, this standardized\nstatistic is left undefined; the unstandardized score remains defined. The\nnormal calibration is only an approximation until the separate terminal\nlimit hypotheses are verified. It is not the finite-sample Fisher\nrandomization p-value.\n\nFor a fixed observed record, the displayed scores are statistics in the\nmeasurable-map sense of [[def-statistic-and-estimator]]: each risk count is a\nfinite sum of Borel indicator functions, and every denominator is positive\nat an observed event time. A weight rule is fixed before assignments or\noutcomes are inspected and is recomputed by the same rule for any candidate\nassignment.\n\nThe risk-set table concerns one predeclared event type. If simultaneous\nrecords contain distinct event causes that are not exchangeable, form\nseparate cause-specific counts $O_{jc}$ and $d_{jc}$ using the same\npre-event risk set; use the displayed hypergeometric variance only for a\ncause whose failures are conditionally exchangeable. This definition does\nnot pool different causes or add their variances without a specified\ncross-cause covariance model.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+          "source_section": "Statement",
+          "quote": "In a finite randomized treatment-assignment model, fix any real-valued\npredeclared ordering score $T(z,y)$. For observed data $(z,y)$ define\n$$p_{\\rm rand}(z,y):=\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)\\ge T(z,y)\\}.$$\nLet $\\lambda$ be the uniform probability measure on the Borel subsets of\n$[0,1]$. For each $\\theta$, equip $\\mathcal X\\times[0,1]$ with the product\nsigma-algebra $2^{\\mathcal X}\\otimes\\mathcal B([0,1])$ and define\n$$\\widetilde P_\\theta(E):=\\sum_{z\\in\\mathcal Z}p(z)\\,\\lambda\\bigl(\\{u\\in[0,1]:((z,Y_\\theta(z)),u)\\in E\\}\\bigr).$$\nLet $U$ be the $[0,1]$ coordinate on this extension. Define\n$$p^+(z,y,U):=\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)>T(z,y)\\}+U\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)=T(z,y)\\}.$$\nFor every schedule satisfying the Fisher sharp null and every\n$u\\in[0,1]$,\n$$P_\\theta\\!\\left(p_{\\rm rand}(Z,Y_\\theta(Z))\\le u\\right)\\le u,$$\nwhereas the added randomization gives\n$$\\widetilde P_\\theta\\!\\left(p^+(Z,Y_\\theta(Z),U)\\le u\\right)=u.$$\nThus $p_{\\rm rand}$ is a valid finite-sample p-value for the sharp null,\nand randomized ties give an exactly uniform p-value when the additional\nindependent uniform randomizer is used. For a two-sided test, take\n$T(z,y)=|S(z,y)-s_0|$ with its center $s_0$ fixed in advance. The result\nuses the actual, possibly unequal assignment probabilities; random\nassignment supplies no Gaussian error law, and this theorem makes no\nvalidity claim under the weak zero-average-effect null from\n[[def-finite-population-average-treatment-effect-and-weak-null]] unless it\nis also Fisher-sharp.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). A **p-value\nstatistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the\ntrace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).\n\nFor a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a\n**valid p-value for $\\Theta_0$** if it is superuniform under every null law:\n$$P_\\theta(\\{x:p(x)\\le u\\})\\le u\\qquad\\text{for every }\\theta\\in\\Theta_0\\text{ and }u\\in[0,1].$$\nThe variable $p(X)$ is the observed p-value when the data are $X$. The\nvalidity condition is distributional; measurability alone does not imply it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Encode each record by the real number $R_i(z)=U_i(z)+(\\tau+1)\\delta_i(z)$. The event-record range $[0,\\tau]$ and censor-record range $[\\tau+1,2\\tau+1]$ are disjoint, so this map is injective and Borel, with a Borel inverse on its image. Under the record sharp null, every encoded response $R_i(z)$ is constant over all assignments. Hence the scalar schedule $(R_i(z))_{i\\in\\mathcal I}$ satisfies the Fisher sharp null of [F2] within the finite assignment model [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On encoded response vectors whose coordinates lie in the image of the record encoding, decode the records and evaluate the fixed weighted logrank score using the candidate binary group map $\\gamma(z)$; define the score to be zero outside that image. This is a predeclared real-valued score on the finite assignment model. Its data space has the full power-set sigma-algebra, so every such map is measurable in the sense of [F4]. The absolute-score ordering includes ties and is fixed before assignment or records are inspected by [F2, F3].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F5] to this predeclared score and the actual finite assignment weights. Its inclusive tail is exactly the displayed $p_{\\rm rand}$, so for every $u\\in[0,1]$ its null probability of being at most $u$ is at most $u$. Under [A1], the strict-tail mass plus $V$ times the tied-score mass is exactly the randomized-tie p-value in [F5] and is uniform. By [F6], these bounds are precisely finite-sample p-value validity for the record sharp null. The proof uses no survival-law, censoring-independence, or Gaussian assumption; it makes no claim for a weaker null that does not fix every record.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The finite assignment model requires a nonempty allowed assignment set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The actual assignment law may assign zero probability to allowed assignments; the tail sums use those weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A singleton support or a constant score gives p_rand=1 and remains superuniform."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 applies to tied scores; the independent uniform tie randomizer gives the uniform boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The validity statement quantifies over every u in the closed interval [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1 and 2.1 explicitly encode each given finite record and recompute the same predeclared score for every allowed assignment. Step 3.1 uses a given independent uniform randomizer if requested. No arbitrary-family response imputation or selection of versions is performed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement fixes every full censored record across every assignment. Steps 1.1 and 2.1 encode that schedule and build the predeclared score; step3.1 invokes Fisher weighted-tail validity. Validity of one logrank ordering is not a converse test for full-record invariance or for an equal-hazard null. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement fixes every full censored record across every assignment. Steps 1.1 and 2.1 encode that schedule and build the predeclared score; step3.1 invokes Fisher weighted-tail validity. Validity of one logrank ordering is not a converse test for full-record invariance or for an equal-hazard null. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read steps 1.1-3.1, all six direct supplier statements and the Fisher supplier full proof. Encoding U+(tau+1)delta has disjoint compact ranges and a Borel inverse. The actual assignment-model full-power-set data space makes the predeclared extension measurable. The record sharp null makes all encoded potential outcomes fixed, so the current weighted-tail theorem applies to actual unequal weights, including zero-weight assignments and tied/constant scores; the auxiliary uniform variable is separately independent. Inclusive tails are superuniform at u=0,1; randomized ties are exactly uniform. No weak-null or equal-hazard validity is inferred; no AC use. CMU Lecture 28 section28.5 (PDF pp5-6) supports sharp-null imputability, while unequal weights and exact ties are supplied by the local theorem rather than its Monte Carlo sketch. No defect or routed finding."
+      }
+    },
+    "lem-logrank-score-martingale-expansion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a finite horizon\n$T>0$, a probability space $(\\Omega,\\mathcal F,P)$ and a continuous-time\nfiltration $(\\mathcal F_t)_{0\\le t\\le T}$ in the all-pairs convention of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nFor this model and every nonnegative predictable process $G$, define the\npathwise energy integral by\n$$\\int_0^tG_s\\,dA_s:=\\int_0^tG_sY_s\\lambda_s\\,ds,\\qquad t\\le T.$$\nThe **continuous intensity compensator contract** requires the defining\nintegral for $A$ to be finite pathwise, and requires $A$ to be continuous,\nadapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.\n\nThe displayed intensity density alone does **not** assert that $N-A$ is a\nmartingale, that such a process exists for a given $N$, or that the contract\nfollows from an empirical observation scheme. No general compensator-existence\ntheorem is included here. The Axiom of Choice is inherited from the\ncontinuous-time martingale and conditional-expectation interfaces; no further\nchoice is used to state the model contract.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-l2-counting-process-integral",
+          "source_section": "Definition",
+          "quote": "For the compensator contract on $[0,T]$, let $H$ be a predictable real\nprocess with\n$$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty.$$\nWhen the elementary integrals of a sequence of bounded predictable step\nprocesses converging to $H$ in this norm converge in $L^2(P)$, denote the\nresulting $L^2(P)$ class at time $t$ by\n$$\\int_0^t H_s\\,dM_s.$$\nThe definition is conditional on existence of the limit. The L²-extension\ntheorem below proves existence for every such predictable $H$, independence\nfrom the approximating sequence, the martingale property, and the isometry.\nThe Axiom of Choice is inherited through the conditional-expectation and\n$L^2$-completion interfaces used by that theorem.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "Under the finite-horizon contract of\n[[def-counting-process-intensity-and-compensator-contract]], the optional\nquadratic variation of $M=N-A$ is $[M]_t=N_t$, its continuous predictable\nbracket is $\\langle M\\rangle_t=A_t$, its self-cross predictable bracket is\n$\\langle M,M\\rangle_t=A_t$, and $M_t^2-A_t$ is a martingale on $[0,T]$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-l2-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "For every predictable $H$ on $[0,T]$ with\n$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty$, the limit in\n[[def-l2-counting-process-integral]] exists at each $t\\le T$, is independent\nof the approximating step sequence, and defines a square-integrable\nmartingale. It satisfies, for each $t\\le T$,\n$$\\mathbb E\\left(\\int_0^tH_s\\,dM_s\\right)^2=\\mathbb E\\int_0^tH_s^2\\,dA_s.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-logrank-risk-fraction-converges",
+          "source_section": "Statement",
+          "quote": "For each $g\\in\\{0,1\\}$, let $(U_{gi})_{i\\ge1}$ be IID measurable\n$[0,\\infty)$-valued observed times with law $P_g$; independence between\nthe two groups is not required. Along a sequence of deterministic positive\nsample sizes, let $n=n_0+n_1\\to\\infty$ and\n$n_g/n\\to\\rho_g\\in(0,1)$, where $\\rho_0+\\rho_1=1$. Set\n$s_g(t):=P_g(U_{g1}\\ge t)$, $y_g(t)=\\rho_gs_g(t)$, and\n$y(t)=y_0(t)+y_1(t)$. Assume $\\inf_{0\\le t\\le\\tau}y(t)>0$. Write\n$$Y_{g,n}(t)=\\sum_{i=1}^{n_g}1\\{U_{gi}\\ge t\\},\\qquad p_n(t)=\\begin{cases} Y_{1,n}(t)/(Y_{0,n}(t)+Y_{1,n}(t)),&Y_{0,n}(t)+Y_{1,n}(t)>0,\\\\ 0,&Y_{0,n}(t)+Y_{1,n}(t)=0. \\end{cases}$$\nThen, for $g=0,1$,\n$$\\sup_{t\\le\\tau}\\left|\\frac{Y_{g,n}(t)}n-y_g(t)\\right|\\longrightarrow_P0,$$\nand\n$$\\sup_{0\\le t\\le\\tau}\\left|p_n(t)-\\bar z(t)\\right|\\longrightarrow_P0, \\qquad \\bar z(t):=\\frac{y_1(t)}{y(t)}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-logrank-risk-set-score-and-test",
+          "source_section": "Definition",
+          "quote": "Fix a follow-up horizon $\\tau>0$ and a finite set of subjects\n$\\mathcal I=\\{1,\\ldots,n\\}$. A right-censored record for subject $i$ is a\npair $(U_i,\\delta_i)\\in[0,\\tau]\\times\\{0,1\\}$, where\n$U_i=\\min(T_i,C_i)$ is the observed time and\n$\\delta_i=1\\{T_i\\le C_i\\}$ records an event, including an event-censoring tie;\n$\\delta_i=0$ records right censoring. A two-group assignment is a map\n$z:\\mathcal I\\to\\{0,1\\}$. These conventions are the right-censoring\nobservation scheme; the score below uses the observed record and does not\ninfer event or censoring laws from it.\n\nLet $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}.$$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$E_j:=d_j\\frac{Y_{1j}}{Y_j}.$$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases}$$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].\n\nA **weight rule** assigns a real value $w_j$ using only the predeclared time\nand information available strictly before the failures at $t_j$; deterministic\nbounded time weights are a special case. If\n$\\sup_j|w_j|<\\infty$, define the weighted logrank score and its conditional\nvariance estimate by\n$$U_w(z;U,\\delta):=\\sum_{j=1}^K w_j(O_j-E_j),\\qquad \\widehat V_w(z;U,\\delta):=\\sum_{j=1}^K w_j^2V_j.$$\nWhen $\\widehat V_w>0$, set\n$Z_w:=U_w/\\sqrt{\\widehat V_w}$. If $\\widehat V_w=0$, this standardized\nstatistic is left undefined; the unstandardized score remains defined. The\nnormal calibration is only an approximation until the separate terminal\nlimit hypotheses are verified. It is not the finite-sample Fisher\nrandomization p-value.\n\nFor a fixed observed record, the displayed scores are statistics in the\nmeasurable-map sense of [[def-statistic-and-estimator]]: each risk count is a\nfinite sum of Borel indicator functions, and every denominator is positive\nat an observed event time. A weight rule is fixed before assignments or\noutcomes are inspected and is recomputed by the same rule for any candidate\nassignment.\n\nThe risk-set table concerns one predeclared event type. If simultaneous\nrecords contain distinct event causes that are not exchangeable, form\nseparate cause-specific counts $O_{jc}$ and $d_{jc}$ using the same\npre-event risk set; use the displayed hypergeometric variance only for a\ncause whose failures are conditionally exchangeable. This definition does\nnot pool different causes or add their variances without a specified\ncross-cause covariance model.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $Y_{gi}$ is predictable by assumption. Sums of these processes are predictable, and the ratio map $(a,b)\\mapsto a/b$ for $b>0$, extended by zero when $b=0$, is Borel; hence $p_n$ is predictable. At an event time $t_j$, the Stieltjes increment of $N_{1,n}$ is $O_j$ and that of $N_n$ is $d_j$. Therefore [F6] gives $ U_{n,w_n}=\\int_0^\\tau w_n(t)\\{dN_{1,n}(t)-p_n(t)dN_n(t)\\}. $ Using $dN_{gi}=dM_{gi}+Y_{gi}\\lambda(t)\\,dt$, the compensator part equals $w_n(t)\\{Y_{1,n}(t)-p_n(t)(Y_{0,n}(t)+Y_{1,n}(t))\\}\\lambda(t)\\,dt=0$. Thus, with $M_n=\\sum_{g,i}M_{gi}$, $ U_{n,w_n}=\\sum_{g,i}\\int_0^\\tau w_n(t)(g-p_n(t))\\,dM_{gi}(t). $",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "No simultaneous event jumps make $N_n=\\sum_{g,i}N_{gi}$ a simple unit-jump counting process. Its compensator is the continuous process $A_n=\\sum_{g,i}A_{gi}$, and $M_n=N_n-A_n=\\sum_{g,i}M_{gi}$ is a square-integrable martingale by finite summation. Also $A_n(\\tau)\\le n\\Lambda(\\tau)$ pathwise. By [F3], $M_n^2-A_n$ is a martingale; [F2]-[F4] apply to the common predictable integrand $H_n=w_n(p_n-\\bar z)$, whose compensator energy is finite. The isometry gives $ \\mathbb E\\left[ \\left\\{\\frac1{\\sqrt n}\\int_0^\\tau w_n(p_n-\\bar z)\\,dM_n\\right\\}^2 \\right] \\le C^2\\Lambda(\\tau)\\, \\mathbb E\\!\\left[\\sup_{t\\le\\tau}|p_n(t)-\\bar z(t)|^2\\right]\\longrightarrow0. $ The last expectation tends to zero because the supremum is bounded by one and converges to zero in probability by [F5]. Replacing $p_n$ by $\\bar z$ therefore changes $U_{n,w_n}/\\sqrt n$ by $o_P(1)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the remaining weight replacement, put $D_n=\\sum_{g,i}\\int_0^\\tau(w_n-w)(g-\\bar z)\\,dM_{gi}$. Since $g$ is constant within each group, $ D_n=\\int_0^\\tau(w_n-w)(1-\\bar z)\\,dM_{1,n} -\\int_0^\\tau(w_n-w)\\bar z\\,dM_{0,n}. $ Each group aggregate has a simple counting process, continuous compensator, and square-integrable martingale because there are no simultaneous event jumps within that group. Applying [F2]-[F4] to each aggregate and using $(a-b)^2\\le2a^2+2b^2$ yields $ \\mathbb E[(D_n/\\sqrt n)^2] \\le 2\\Lambda(\\tau)\\, \\mathbb E\\!\\left[\\sup_{t\\le\\tau}|w_n(t)-w(t)|^2\\right]\\longrightarrow0. $ Boundedness of $w_n$ and $w$ makes the squared supremum bounded, so its convergence in probability implies convergence of its expectation. Combining the risk-fraction replacement in step 2.1 with this weight replacement proves the stated expansion. No martingale process central limit theorem is used.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If there are no observed failures, step 1.1 and the zero martingale integrals give score zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes inf_{0<=t<=tau}(y_0+y_1)>0, including tau. Empirical empty risk sets use p_n=0; the ratio lemma makes their occurrence uniformly negligible. Steps 1.1-3.1 retain exact compensator cancellation and finite-energy bounds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The score identity uses the defined pre-event risk fraction even when the pooled risk set has one subject."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The algebraic expansion remains valid if all subject martingale integrals vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes inf_{0<=t<=tau}(y_0+y_1)>0, including tau. Empirical empty risk sets use p_n=0; the ratio lemma makes their occurrence uniformly negligible. Steps 1.1-3.1 retain exact compensator cancellation and finite-energy bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and A1 explicitly assume AC inherited from the counting-process integral interfaces. Steps 2.1 and 3.1 apply their finite-energy L2 completion/isometry to pooled and group martingales. Local risk and weight algebra makes no additional arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement separately assumes counting-process martingale contracts, no tied event jumps, uniform risk-fraction limits and bounded weight convergence. Steps 2.1 and 3.1 control the two integral replacement errors. An observed asymptotic expansion is not asserted to establish those compensator or sampling model assumptions in reverse. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement separately assumes counting-process martingale contracts, no tied event jumps, uniform risk-fraction limits and bounded weight convergence. Steps 2.1 and 3.1 control the two integral replacement errors. An observed asymptotic expansion is not asserted to establish those compensator or sampling model assumptions in reverse. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read all three steps, risk-fraction lemma and counting-process contract, bracket and isometry statements/full proofs. Confirmed refuter:33:1: the old Statement named a limiting fraction without expressly assuming the cited IID/allocation/support hypotheses; total early censoring left its ratio undefined. The repair imports those exact hypotheses, including inf y>0, so F5 now applies and bar z is a deterministic bounded Borel (hence predictable) ratio of left-continuous survival functions. At event times the finite score equals the integral; the compensator cancels even on an empty empirical risk set. No simultaneous jumps makes each aggregate simple, finite sums preserve L2 martingales, and its contract can use risk indicator identically one with intensity Y_n lambda. Energy bounds n Lambda(tau), bounded risk fractions and bounded weights turn uniform convergence in probability into vanishing mean-square replacement errors. AC is explicitly inherited from martingale/L2 interfaces. No process CLT is invoked. The terminal consumer already assumes every imported hypothesis; The full item/page reference scan found only the terminal theorem and owning A page as consumers; both already supply the imported hypotheses."
+      }
+    },
+    "lem-logrank-variance-estimator-consistency": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-logrank-risk-set-score-and-test",
+          "source_section": "Definition",
+          "quote": "Fix a follow-up horizon $\\tau>0$ and a finite set of subjects\n$\\mathcal I=\\{1,\\ldots,n\\}$. A right-censored record for subject $i$ is a\npair $(U_i,\\delta_i)\\in[0,\\tau]\\times\\{0,1\\}$, where\n$U_i=\\min(T_i,C_i)$ is the observed time and\n$\\delta_i=1\\{T_i\\le C_i\\}$ records an event, including an event-censoring tie;\n$\\delta_i=0$ records right censoring. A two-group assignment is a map\n$z:\\mathcal I\\to\\{0,1\\}$. These conventions are the right-censoring\nobservation scheme; the score below uses the observed record and does not\ninfer event or censoring laws from it.\n\nLet $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}.$$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$E_j:=d_j\\frac{Y_{1j}}{Y_j}.$$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases}$$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].\n\nA **weight rule** assigns a real value $w_j$ using only the predeclared time\nand information available strictly before the failures at $t_j$; deterministic\nbounded time weights are a special case. If\n$\\sup_j|w_j|<\\infty$, define the weighted logrank score and its conditional\nvariance estimate by\n$$U_w(z;U,\\delta):=\\sum_{j=1}^K w_j(O_j-E_j),\\qquad \\widehat V_w(z;U,\\delta):=\\sum_{j=1}^K w_j^2V_j.$$\nWhen $\\widehat V_w>0$, set\n$Z_w:=U_w/\\sqrt{\\widehat V_w}$. If $\\widehat V_w=0$, this standardized\nstatistic is left undefined; the unstandardized score remains defined. The\nnormal calibration is only an approximation until the separate terminal\nlimit hypotheses are verified. It is not the finite-sample Fisher\nrandomization p-value.\n\nFor a fixed observed record, the displayed scores are statistics in the\nmeasurable-map sense of [[def-statistic-and-estimator]]: each risk count is a\nfinite sum of Borel indicator functions, and every denominator is positive\nat an observed event time. A weight rule is fixed before assignments or\noutcomes are inspected and is recomputed by the same rule for any candidate\nassignment.\n\nThe risk-set table concerns one predeclared event type. If simultaneous\nrecords contain distinct event causes that are not exchangeable, form\nseparate cause-specific counts $O_{jc}$ and $d_{jc}$ using the same\npre-event risk set; use the displayed hypergeometric variance only for a\ncause whose failures are conditionally exchangeable. This definition does\nnot pool different causes or add their variances without a specified\ncross-cause covariance model.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-logrank-risk-set-score-and-test",
+          "source_section": "Definition",
+          "quote": "Fix a follow-up horizon $\\tau>0$ and a finite set of subjects\n$\\mathcal I=\\{1,\\ldots,n\\}$. A right-censored record for subject $i$ is a\npair $(U_i,\\delta_i)\\in[0,\\tau]\\times\\{0,1\\}$, where\n$U_i=\\min(T_i,C_i)$ is the observed time and\n$\\delta_i=1\\{T_i\\le C_i\\}$ records an event, including an event-censoring tie;\n$\\delta_i=0$ records right censoring. A two-group assignment is a map\n$z:\\mathcal I\\to\\{0,1\\}$. These conventions are the right-censoring\nobservation scheme; the score below uses the observed record and does not\ninfer event or censoring laws from it.\n\nLet $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}.$$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$E_j:=d_j\\frac{Y_{1j}}{Y_j}.$$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases}$$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].\n\nA **weight rule** assigns a real value $w_j$ using only the predeclared time\nand information available strictly before the failures at $t_j$; deterministic\nbounded time weights are a special case. If\n$\\sup_j|w_j|<\\infty$, define the weighted logrank score and its conditional\nvariance estimate by\n$$U_w(z;U,\\delta):=\\sum_{j=1}^K w_j(O_j-E_j),\\qquad \\widehat V_w(z;U,\\delta):=\\sum_{j=1}^K w_j^2V_j.$$\nWhen $\\widehat V_w>0$, set\n$Z_w:=U_w/\\sqrt{\\widehat V_w}$. If $\\widehat V_w=0$, this standardized\nstatistic is left undefined; the unstandardized score remains defined. The\nnormal calibration is only an approximation until the separate terminal\nlimit hypotheses are verified. It is not the finite-sample Fisher\nrandomization p-value.\n\nFor a fixed observed record, the displayed scores are statistics in the\nmeasurable-map sense of [[def-statistic-and-estimator]]: each risk count is a\nfinite sum of Borel indicator functions, and every denominator is positive\nat an observed event time. A weight rule is fixed before assignments or\noutcomes are inspected and is recomputed by the same rule for any candidate\nassignment.\n\nThe risk-set table concerns one predeclared event type. If simultaneous\nrecords contain distinct event causes that are not exchangeable, form\nseparate cause-specific counts $O_{jc}$ and $d_{jc}$ using the same\npre-event risk set; use the displayed hypergeometric variance only for a\ncause whose failures are conditionally exchangeable. This definition does\nnot pool different causes or add their variances without a specified\ncross-cause covariance model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-logrank-risk-fraction-converges",
+          "source_section": "Statement",
+          "quote": "For each $g\\in\\{0,1\\}$, let $(U_{gi})_{i\\ge1}$ be IID measurable\n$[0,\\infty)$-valued observed times with law $P_g$; independence between\nthe two groups is not required. Along a sequence of deterministic positive\nsample sizes, let $n=n_0+n_1\\to\\infty$ and\n$n_g/n\\to\\rho_g\\in(0,1)$, where $\\rho_0+\\rho_1=1$. Set\n$s_g(t):=P_g(U_{g1}\\ge t)$, $y_g(t)=\\rho_gs_g(t)$, and\n$y(t)=y_0(t)+y_1(t)$. Assume $\\inf_{0\\le t\\le\\tau}y(t)>0$. Write\n$$Y_{g,n}(t)=\\sum_{i=1}^{n_g}1\\{U_{gi}\\ge t\\},\\qquad p_n(t)=\\begin{cases} Y_{1,n}(t)/(Y_{0,n}(t)+Y_{1,n}(t)),&Y_{0,n}(t)+Y_{1,n}(t)>0,\\\\ 0,&Y_{0,n}(t)+Y_{1,n}(t)=0. \\end{cases}$$\nThen, for $g=0,1$,\n$$\\sup_{t\\le\\tau}\\left|\\frac{Y_{g,n}(t)}n-y_g(t)\\right|\\longrightarrow_P0,$$\nand\n$$\\sup_{0\\le t\\le\\tau}\\left|p_n(t)-\\bar z(t)\\right|\\longrightarrow_P0, \\qquad \\bar z(t):=\\frac{y_1(t)}{y(t)}.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a finite horizon\n$T>0$, a probability space $(\\Omega,\\mathcal F,P)$ and a continuous-time\nfiltration $(\\mathcal F_t)_{0\\le t\\le T}$ in the all-pairs convention of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nFor this model and every nonnegative predictable process $G$, define the\npathwise energy integral by\n$$\\int_0^tG_s\\,dA_s:=\\int_0^tG_sY_s\\lambda_s\\,ds,\\qquad t\\le T.$$\nThe **continuous intensity compensator contract** requires the defining\nintegral for $A$ to be finite pathwise, and requires $A$ to be continuous,\nadapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.\n\nThe displayed intensity density alone does **not** assert that $N-A$ is a\nmartingale, that such a process exists for a given $N$, or that the contract\nfollows from an empirical observation scheme. No general compensator-existence\ntheorem is included here. The Axiom of Choice is inherited from the\ncontinuous-time martingale and conditional-expectation interfaces; no further\nchoice is used to state the model contract.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "Under the finite-horizon contract of\n[[def-counting-process-intensity-and-compensator-contract]], the optional\nquadratic variation of $M=N-A$ is $[M]_t=N_t$, its continuous predictable\nbracket is $\\langle M\\rangle_t=A_t$, its self-cross predictable bracket is\n$\\langle M,M\\rangle_t=A_t$, and $M_t^2-A_t$ is a martingale on $[0,T]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-l2-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "For every predictable $H$ on $[0,T]$ with\n$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty$, the limit in\n[[def-l2-counting-process-integral]] exists at each $t\\le T$, is independent\nof the approximating step sequence, and defines a square-integrable\nmartingale. It satisfies, for each $t\\le T$,\n$$\\mathbb E\\left(\\int_0^tH_s\\,dM_s\\right)^2=\\mathbb E\\int_0^tH_s^2\\,dA_s.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $d_j=1$, the variance formula [F2] reduces to $V_j=Y_{1,n}(t_j)Y_{0,n}(t_j)/Y_n(t_j)^2 =p_n(t_j)(1-p_n(t_j))$ when $Y_n(t_j)>1$. If $Y_n(t_j)=1$, both groups' product is zero and [F1] assigns variance zero. Thus $ \\frac{\\widehat V_{n,w_n}}n =\\frac1n\\int_0^\\tau w_n(t)^2p_n(t)(1-p_n(t))\\,dN_n(t). $",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Uniform convergence of $w_n$ to $w$ and of $p_n$ to $\\bar z$, together with their uniform bounds, gives $\\sup_{t\\le\\tau}|w_n(t)^2p_n(t)(1-p_n(t))-w(t)^2\\bar z(t)(1-\\bar z(t))|\\to_P0$. Because $N_n(\\tau)\\le n$, replacing the integrand in step 1.1 by $h(t):=w(t)^2\\bar z(t)(1-\\bar z(t))$ changes the normalized integral by at most this supremum, hence by $o_P(1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The aggregate process $N_n$ is simple because no two subjects jump simultaneously, and $A_n(\\tau)\\le n\\Lambda(\\tau)$. The deterministic $h$ is bounded and predictable, so [F4]-[F6] give $ \\mathbb E\\left[\\left\\{\\frac1n\\int_0^\\tau h(t)\\,dM_n(t)\\right\\}^2\\right] =\\frac1{n^2}\\mathbb E\\int_0^\\tau h(t)^2\\,dA_n(t) \\le\\frac{\\|h\\|_\\infty^2\\Lambda(\\tau)}n\\longrightarrow0. $ Hence the martingale part of the normalized variance sum tends to zero in probability.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The compensator part of that sum is $ \\frac1n\\int_0^\\tau h(t)\\,dA_n(t) =\\int_0^\\tau h(t)\\frac{Y_n(t)}n\\lambda(t)\\,dt. $ Uniform convergence of $Y_n/n$ to $y$ and $\\int_0^\\tau\\lambda(t)\\,dt<\\infty$ make this converge in probability to $\\int_0^\\tau h(t)y(t)\\lambda(t)\\,dt$. Since $\\bar z=y_1/y$, the limit is $\\int_0^\\tau w(t)^2y_0(t)y_1(t)y(t)^{-1}\\lambda(t)\\,dt=\\sigma_w^2$. Combining this with steps 2.1 and 3.1 proves the assertion.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: With no failures the plug-in sum is zero; the theorem still applies when its limiting variance is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement now expressly assumes inf_{0<=t<=tau} y(t)>0 and nonnegative Borel limiting y_g, so bar z and sigma_w^2 are defined throughout the closed horizon. Steps 1.1-4.1 allow empty empirical risk sets and zero limiting variance without dividing by an empirical zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The event contribution is derived for Y_n>1 and the Y_n=1 contribution is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The convergence statement permits σ_w²=0 and divides by no limiting variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement now expressly assumes inf_{0<=t<=tau} y(t)>0 and nonnegative Borel limiting y_g, so bar z and sigma_w^2 are defined throughout the closed horizon. Steps 1.1-4.1 allow empty empirical risk sets and zero limiting variance without dividing by an empirical zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records the inherited AC of the stated counting-process martingale contract and L2 integral interfaces. Step 3.1 invokes that completed integral/isometry for the deterministic bounded integrand h; step 4.1 performs an ordinary compensator integral. No extra choice construction is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a common-hazard martingale model and the uniform risk and weight limits. Step1.1 reduces the one-failure plug-in term, and steps 3.1 and 4.1 separate martingale and compensator limits. Consistency of this plug-in sum is not asserted to characterize an exact finite-sample conditional variance law. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a common-hazard martingale model and the uniform risk and weight limits. Step1.1 reduces the one-failure plug-in term, and steps 3.1 and 4.1 separate martingale and compensator limits. Consistency of this plug-in sum is not asserted to characterize an exact finite-sample conditional variance law. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read steps 1.1-4.1 and all seven direct suppliers, including complete bracket/isometry proofs. Confirmed refuter:33:2: uniform convergence alone did not restrict y away from zero, and the Statement gave no meaning to y_1/y or y_0 y_1/y when all follow-up ends early. Added deterministic nonnegative Borel y_g and inf y>0; convergence assumptions remain direct premises and require no additional IID hypothesis. No simultaneous events yields d_j=1; Y=1 contributes p_n(1-p_n)=0, and an empty risk set carries no event. Bounded weights/fractions and N_n(tau)<=n give the uniform replacement bound. Aggregate simplicity, finite L2 sum, and risk indicator one with intensity Y_n lambda place the aggregate under the exact supplier contract. The deterministic bounded Borel integrand h has martingale energy at most ||h||^2 n Lambda(tau); division by n yields vanishing second moment. Uniform Y_n/n convergence and finite integrated hazard give the compensator limit, with the final algebra now defined everywhere. AC and finite Lambda are explicit in Facts. Zero limiting variance is allowed; no exact finite hypergeometric law or iff is asserted. The terminal theorem already supplies the new support condition."
+      }
+    },
+    "thm-weighted-logrank-terminal-normal-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-logrank-risk-fraction-converges",
+          "source_section": "Statement",
+          "quote": "For each $g\\in\\{0,1\\}$, let $(U_{gi})_{i\\ge1}$ be IID measurable\n$[0,\\infty)$-valued observed times with law $P_g$; independence between\nthe two groups is not required. Along a sequence of deterministic positive\nsample sizes, let $n=n_0+n_1\\to\\infty$ and\n$n_g/n\\to\\rho_g\\in(0,1)$, where $\\rho_0+\\rho_1=1$. Set\n$s_g(t):=P_g(U_{g1}\\ge t)$, $y_g(t)=\\rho_gs_g(t)$, and\n$y(t)=y_0(t)+y_1(t)$. Assume $\\inf_{0\\le t\\le\\tau}y(t)>0$. Write\n$$Y_{g,n}(t)=\\sum_{i=1}^{n_g}1\\{U_{gi}\\ge t\\},\\qquad p_n(t)=\\begin{cases} Y_{1,n}(t)/(Y_{0,n}(t)+Y_{1,n}(t)),&Y_{0,n}(t)+Y_{1,n}(t)>0,\\\\ 0,&Y_{0,n}(t)+Y_{1,n}(t)=0. \\end{cases}$$\nThen, for $g=0,1$,\n$$\\sup_{t\\le\\tau}\\left|\\frac{Y_{g,n}(t)}n-y_g(t)\\right|\\longrightarrow_P0,$$\nand\n$$\\sup_{0\\le t\\le\\tau}\\left|p_n(t)-\\bar z(t)\\right|\\longrightarrow_P0, \\qquad \\bar z(t):=\\frac{y_1(t)}{y(t)}.$$",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-families-of-event-classes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $I$ be an index\nset, and let $(\\mathcal C_i)_{i\\in I}$ be a family of classes of events\n$\\mathcal C_i\\subseteq\\mathcal F$.\n\nThe family $(\\mathcal C_i)_{i\\in I}$ is **independent** when for every natural\nnumber $n\\ge1$, every choice of distinct indices $i_0,\\dots,i_{n-1}\\in I$, and\nevery choice of events $A_k\\in\\mathcal C_{i_k}$, one has\n\n$$\\mathbb P\\left(\\bigcap_{k<n}A_k\\right)=\\prod_{k<n}\\mathbb P(A_k).$$\n\nThus independence is a finite-subfamily condition. In particular, the empty\nfamily and every one-member family are independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-logrank-risk-set-score-and-test",
+          "source_section": "Definition",
+          "quote": "Fix a follow-up horizon $\\tau>0$ and a finite set of subjects\n$\\mathcal I=\\{1,\\ldots,n\\}$. A right-censored record for subject $i$ is a\npair $(U_i,\\delta_i)\\in[0,\\tau]\\times\\{0,1\\}$, where\n$U_i=\\min(T_i,C_i)$ is the observed time and\n$\\delta_i=1\\{T_i\\le C_i\\}$ records an event, including an event-censoring tie;\n$\\delta_i=0$ records right censoring. A two-group assignment is a map\n$z:\\mathcal I\\to\\{0,1\\}$. These conventions are the right-censoring\nobservation scheme; the score below uses the observed record and does not\ninfer event or censoring laws from it.\n\nLet $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}.$$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$E_j:=d_j\\frac{Y_{1j}}{Y_j}.$$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases}$$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].\n\nA **weight rule** assigns a real value $w_j$ using only the predeclared time\nand information available strictly before the failures at $t_j$; deterministic\nbounded time weights are a special case. If\n$\\sup_j|w_j|<\\infty$, define the weighted logrank score and its conditional\nvariance estimate by\n$$U_w(z;U,\\delta):=\\sum_{j=1}^K w_j(O_j-E_j),\\qquad \\widehat V_w(z;U,\\delta):=\\sum_{j=1}^K w_j^2V_j.$$\nWhen $\\widehat V_w>0$, set\n$Z_w:=U_w/\\sqrt{\\widehat V_w}$. If $\\widehat V_w=0$, this standardized\nstatistic is left undefined; the unstandardized score remains defined. The\nnormal calibration is only an approximation until the separate terminal\nlimit hypotheses are verified. It is not the finite-sample Fisher\nrandomization p-value.\n\nFor a fixed observed record, the displayed scores are statistics in the\nmeasurable-map sense of [[def-statistic-and-estimator]]: each risk count is a\nfinite sum of Borel indicator functions, and every denominator is positive\nat an observed event time. A weight rule is fixed before assignments or\noutcomes are inspected and is recomputed by the same rule for any candidate\nassignment.\n\nThe risk-set table concerns one predeclared event type. If simultaneous\nrecords contain distinct event causes that are not exchangeable, form\nseparate cause-specific counts $O_{jc}$ and $d_{jc}$ using the same\npre-event risk set; use the displayed hypergeometric variance only for a\ncause whose failures are conditionally exchangeable. This definition does\nnot pool different causes or add their variances without a specified\ncross-cause covariance model.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-logrank-score-martingale-expansion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n_0,n_1$ be deterministic, $n=n_0+n_1$,\nand let $Z_i=g$ for subject $i$ in group $g\\in\\{0,1\\}$. On a common\nfinite-horizon filtration, each subject has the one-event process\n$$N_{gi}(t)=1\\{U_{gi}\\le t,\\ \\delta_{gi}=1\\},\\qquad Y_{gi}(t)=1\\{U_{gi}\\ge t\\},$$\nand satisfies the separate counting-process contract\n$$A_{gi}(t)=\\int_0^tY_{gi}(s)\\lambda(s)\\,ds,\\qquad M_{gi}=N_{gi}-A_{gi},$$\nwhere $\\lambda$ is a common deterministic nonnegative hazard density with\n$\\Lambda(\\tau):=\\int_0^\\tau\\lambda(s)\\,ds<\\infty$. Assume each $M_{gi}$ is\na square-integrable martingale under this contract, $Y_{gi}$ is predictable,\nand no two subjects have simultaneous event jumps. Write $N_{g,n}$ and\n$Y_{g,n}$ for the group sums, $N_n=N_{0,n}+N_{1,n}$, and\n$p_n(t)=Y_{1,n}(t)/(Y_{0,n}(t)+Y_{1,n}(t))$, with $p_n(t)=0$ on an empty\npooled risk set.\n\nAssume the observed-time and allocation hypotheses of\n[[lem-logrank-risk-fraction-converges]]: within each group the observed\ntimes are IID, $n\\to\\infty$, $n_g/n\\to\\rho_g\\in(0,1)$, and, with\n$y_g(t)=\\rho_gP(U_{g1}\\ge t)$ and $y=y_0+y_1$,\n$\\inf_{0\\le t\\le\\tau}y(t)>0$. Set $\\bar z(t)=y_1(t)/y(t)$. Let $w_n$ be a common predictable\nweight process with $|w_n(t)|\\le C$ and a measurable supremum satisfying\n$\\sup_{t\\le\\tau}|w_n(t)-w(t)|\\to_P0$ for a deterministic bounded predictable\nweight $w$. Then the weighted logrank score satisfies\n$$\\frac{U_{n,w_n}}{\\sqrt n} =\\frac1{\\sqrt n}\\sum_{g=0}^1\\sum_{i=1}^{n_g} \\int_0^\\tau w(t)\\bigl(g-\\bar z(t)\\bigr)\\,dM_{gi}(t)+o_P(1).$$\nIn particular, fixed deterministic bounded predictable weights are included\nby taking $w_n=w$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-logrank-variance-estimator-consistency",
+          "source_section": "Statement",
+          "quote": "Assume the two-group common-hazard model with finite-horizon predictable\nrisk processes and the explicit square-integrable martingale contracts\n$M_{gi}=N_{gi}-A_{gi}$, $A_{gi}(t)=\\int_0^tY_{gi}(s)\\lambda(s)\\,ds$; assume\nno simultaneous event jumps. Let $Y_{g,n}=\\sum_iY_{gi}$,\n$Y_n=Y_{0,n}+Y_{1,n}$, and assume the uniform risk-fraction convergence\n$Y_n/n\\to y$ and $p_n=Y_{1,n}/Y_n\\to\\bar z$ in probability on $[0,\\tau]$,\nwith $p_n=0$ on an empty risk set (as proved in\n[[lem-logrank-risk-fraction-converges]]). Let $w_n\\to w$ uniformly in\nprobability, where the predictable weights are uniformly bounded and $w$\nis deterministic. Suppose event times are continuous, so every observed\nfailure time has $d_j=1$ almost surely. Here $\\widehat V_{n,w_n}$ is the\nplug-in statistic defined in [[def-logrank-risk-set-score-and-test]]; the\nclaim is its asymptotic consistency and does not assert an exact finite-sample\nconditional variance law. Here $y_0,y_1$ are deterministic nonnegative Borel functions,\n$y=y_0+y_1$, $\\inf_{0\\le t\\le\\tau}y(t)>0$, and $\\bar z=y_1/y$. Define\n$$\\sigma_w^2:=\\int_0^\\tau w(t)^2\\frac{y_0(t)y_1(t)}{y(t)}\\lambda(t)\\,dt.$$\nThen the weighted plug-in variance sum from\n[[def-logrank-risk-set-score-and-test]] satisfies\n$$\\frac{\\widehat V_{n,w_n}}n\\longrightarrow_P\\sigma_w^2.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-independent-groups-terminal-influence-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix a finite $G\\ge2$ and $d\\ge1$. For each total sample size $n$, let $n_1,\\ldots,n_G$ be positive deterministic integers with $\\sum_{g=1}^G n_g=n$, and suppose $n_g/n\\to\\rho_g\\in(0,1)$ with $\\sum_{g=1}^G\\rho_g=1$. For group $g$, let $O_{g1},O_{g2},\\ldots$ be IID with law $P_g$ on a measurable space; assume the subject families in distinct groups are independent. Let $\\phi_g$ be measurable with $E_{P_g}\\phi_g=0$, $E_{P_g}\\|\\phi_g\\|_2^2<\\infty$, and $\\Sigma_g=E_{P_g}[\\phi_g\\phi_g^T]$. If a measurable estimator of fixed $\\theta\\in\\mathbb R^d$ has the separately established expansion, with remainder on the same sample probability space as its group sums,\n\n$$\\sqrt n(\\hat\\theta_n-\\theta)=\\sum_{g=1}^G\\sqrt{\\frac n{n_g}}\\frac1{\\sqrt{n_g}}\\sum_{i=1}^{n_g}\\phi_g(O_{gi})+R_n,\\qquad R_n=o_P(1),$$\n\nthen\n\n$$\\sqrt n(\\hat\\theta_n-\\theta)\\Rightarrow N_d\\!\\left(0,\\sum_{g=1}^G\\rho_g^{-1}\\Sigma_g\\right).$$\n\nThe group count $G$ is fixed; the laws $P_g$ may differ. The covariance may be singular. This is a terminal finite-dimensional result: it neither proves the estimator expansion nor supplies a continuous-time or functional martingale CLT.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a finite horizon\n$T>0$, a probability space $(\\Omega,\\mathcal F,P)$ and a continuous-time\nfiltration $(\\mathcal F_t)_{0\\le t\\le T}$ in the all-pairs convention of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nFor this model and every nonnegative predictable process $G$, define the\npathwise energy integral by\n$$\\int_0^tG_s\\,dA_s:=\\int_0^tG_sY_s\\lambda_s\\,ds,\\qquad t\\le T.$$\nThe **continuous intensity compensator contract** requires the defining\nintegral for $A$ to be finite pathwise, and requires $A$ to be continuous,\nadapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.\n\nThe displayed intensity density alone does **not** assert that $N-A$ is a\nmartingale, that such a process exists for a given $N$, or that the contract\nfollows from an empirical observation scheme. No general compensator-existence\ntheorem is included here. The Axiom of Choice is inherited from the\ncontinuous-time martingale and conditional-expectation interfaces; no further\nchoice is used to state the model contract.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-l2-counting-process-integral",
+          "source_section": "Definition",
+          "quote": "For the compensator contract on $[0,T]$, let $H$ be a predictable real\nprocess with\n$$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty.$$\nWhen the elementary integrals of a sequence of bounded predictable step\nprocesses converging to $H$ in this norm converge in $L^2(P)$, denote the\nresulting $L^2(P)$ class at time $t$ by\n$$\\int_0^t H_s\\,dM_s.$$\nThe definition is conditional on existence of the limit. The L²-extension\ntheorem below proves existence for every such predictable $H$, independence\nfrom the approximating sequence, the martingale property, and the isometry.\nThe Axiom of Choice is inherited through the conditional-expectation and\n$L^2$-completion interfaces used by that theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-l2-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "For every predictable $H$ on $[0,T]$ with\n$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty$, the limit in\n[[def-l2-counting-process-integral]] exists at each $t\\le T$, is independent\nof the approximating step sequence, and defines a square-integrable\nmartingale. It satisfies, for each $t\\le T$,\n$$\\mathbb E\\left(\\int_0^tH_s\\,dM_s\\right)^2=\\mathbb E\\int_0^tH_s^2\\,dA_s.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_1,\\ldots,X_p)$ be a measurable random vector in $\\mathbb R^p$,\nwhere $p\\ge1$ is finite, and assume $\\mathbb E\\|X\\|_2^2<\\infty$. Define\nthe mean coordinatewise by $\\mu_j=\\mathbb E X_j$ and define the covariance\nmatrix by\n$$\\Sigma:=\\mathbb E[(X-\\mu)(X-\\mu)^T],$$\nwhere each entry is the expectation of the corresponding real random\nvariable. Write $\\operatorname{tr}(\\Sigma)=\\sum_{j=1}^p\\Sigma_{jj}$.\n\nThe well-definedness lemma proves these expectations are finite,\n$\\Sigma$ is symmetric positive semidefinite, and\n$\\operatorname{tr}(\\Sigma)=\\mathbb E\\|X-\\mu\\|_2^2$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-variance-of-a-finite-sum",
+          "source_section": "Statement",
+          "quote": "For a finite family $(X_i)_{i\\in I}$ of square-integrable real random variables on one common probability space,\n$$\\operatorname{Var}\\!\\left(\\sum_{i\\in I}X_i\\right)=\\sum_{i\\in I}\\operatorname{Var}(X_i)+2\\sum_{\\{i,j\\}\\subseteq I}\\operatorname{Cov}(X_i,X_j).$$\nEquivalently, it is $\\sum_{i,j\\in I}\\operatorname{Cov}(X_i,X_j)$. The empty sum has variance zero, and the singleton formula is the identity.\nThe original finite-probability-space case is included, since every real random variable there is square-integrable and the covariance/variance definitions agree with the finite centered-product/square formulas.\nIn the first display, the second sum is over two-element subsets of $I$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-vector-slutsky",
+          "source_section": "Statement",
+          "quote": "Let $d,k,m\\ge1$ be fixed. For each $n$, let $X_n\\in\\mathbb R^d$ and $Y_n\\in\\mathbb R^k$ be random vectors on one probability space; the probability space may vary with $n$. Let $X\\in\\mathbb R^d$ be a random vector on any probability space, and let $c\\in\\mathbb R^k$ be constant. If $X_n\\Rightarrow X$ and $Y_n-c=o_P(1)$, then\n$$ (X_n,Y_n)\\Rightarrow(X,c). $$\nConsequently, for every continuous $h:\\mathbb R^{d+k}\\to\\mathbb R^m$, $h(X_n,Y_n)\\Rightarrow h(X,c)$. No independence between $X_n$ and $Y_n$ is required.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $h_g(t)=w(t)(g-\\bar z(t))$. For a subject record $(u,\\delta)$, define the real map $ \\phi_g(u,\\delta)=1\\{\\delta=1,\\ u\\le\\tau\\}h_g(u) -\\int_0^{u\\wedge\\tau}h_g(t)\\lambda(t)\\,dt. $ The deterministic integrand is bounded and Borel, so its indefinite integral is Borel and this map is measurable. From the definitions of $N_{gi}$, $Y_{gi}$ and $A_{gi}$, this is exactly $\\int_0^\\tau h_g(t)\\,dM_{gi}(t)$. Its energy is at most $\\|h_g\\|_\\infty^2\\Lambda(\\tau)$; [F8] and [F9] therefore make it square-integrable and centered. It is the same measurable function of each subject record within group $g$, so [F1] makes the transformed records IID within group and [F2] makes the two groups independent.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F7",
+            "F8",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F9] and [F11], $ \\mathbb E[\\phi_g^2] =\\int_0^\\tau w(t)^2(g-\\bar z(t))^2P(U_{g1}\\ge t)\\lambda(t)\\,dt. $ Multiplying by $\\rho_g$ and summing over $g=0,1$ gives $ \\sum_{g=0}^1\\rho_g\\mathbb E[\\phi_g^2] =\\int_0^\\tau w(t)^2\\{y_1(t)(1-\\bar z(t))^2+y_0(t)\\bar z(t)^2\\}\\lambda(t)\\,dt =\\sigma_w^2, $ where the last equality follows by substituting $\\bar z=y_1/(y_0+y_1)$. The integral is finite since $w$ is bounded, $0\\le y_g\\le1$, and $\\Lambda(\\tau)<\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "F9",
+            "F11",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $\\epsilon>0$. Since $n_g\\to\\infty$, the integrand $\\phi_g^2 1\\{|\\phi_g|>\\epsilon\\sqrt{n_g}\\}$ tends pointwise to zero and is bounded by the integrable $\\phi_g^2$. [F15] gives $ n_gP(|\\phi_g|>\\epsilon\\sqrt{n_g}) \\le\\epsilon^{-2}\\mathbb E[\\phi_g^2 1\\{|\\phi_g|>\\epsilon\\sqrt{n_g}\\}] \\longrightarrow0. $ Thus each group satisfies the finite-variance no-large-jump condition. Also, for $S_{g,n}=n_g^{-1/2}\\sum_{i=1}^{n_g}\\phi_g(U_{gi},\\delta_{gi})$, [F1] and [F12] make the cross covariances zero, and [F13] gives $\\mathbb E[S_{g,n}^2]=\\mathbb E[\\phi_g^2]$. Applying [F14] to $S_{g,n}^2$ yields $P(|S_{g,n}|>M)\\le\\mathbb E[\\phi_g^2]/M^2$; hence $S_{g,n}=O_P(1)$ by [F16].",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "F16",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [A2], the risk-fraction hypotheses used by [F4] hold. Let $\\widehat\\theta_n=U_{n,w_n}/n$ and set $\\theta=0$. By [F4], $ \\sqrt n(\\widehat\\theta_n-\\theta) =n^{-1/2}\\sum_{g=0}^1\\sum_{i=1}^{n_g}\\phi_g(U_{gi},\\delta_{gi})+o_P(1). $ Set $\\psi_g=\\rho_g\\phi_g$. The group-sum term in [F6] is $ S_n^*=\\sum_{g=0}^1\\sqrt{\\frac n{n_g}}\\, \\frac1{\\sqrt{n_g}}\\sum_{i=1}^{n_g}\\psi_g(U_{gi},\\delta_{gi}). $ Its difference from $n^{-1/2}\\sum_{g,i}\\phi_g(U_{gi},\\delta_{gi})$ equals $ \\sum_{g=0}^1\\sqrt{\\frac n{n_g}}\\left(\\rho_g-\\frac{n_g}n\\right)S_{g,n}=o_P(1), $ because $S_{g,n}=O_P(1)$ by step 2.2, $n_g/n\\to\\rho_g>0$, and there are only two groups. Thus the expansion required by [F6] is established with centered group influences $\\psi_g$.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F3",
+            "F4",
+            "F6",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each $\\psi_g$ is centered and square-integrable by step 1.1, and $\\operatorname{Var}(\\psi_g)=\\rho_g^2\\mathbb E[\\phi_g^2]$ by [F10]. The covariance in [F6] is therefore $ \\sum_{g=0}^1\\rho_g^{-1}\\operatorname{Var}(\\psi_g) =\\sum_{g=0}^1\\rho_g\\mathbb E[\\phi_g^2]=\\sigma_w^2 $ by step 2.1. Applying [F6] to the proved expansion in step 3.1 yields $U_{n,w_n}/\\sqrt n\\Rightarrow N(0,\\sigma_w^2)$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F6",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Suppose $\\sigma_w^2>0$ and put $V_n=\\widehat V_{n,w_n}/n$. By [A2] and [F5], $V_n\\to_P\\sigma_w^2$, so $P(V_n>\\sigma_w^2/2)\\to1$. The function $(x,v)\\mapsto x/\\sqrt{\\max(v,\\sigma_w^2/2)}$ is continuous everywhere. Apply [F18] and this map to the score limit and $V_n$; the result converges to $Z/\\sigma_w$ for $Z\\sim N(0,\\sigma_w^2)$, which has law $N(0,1)$ by [F17]. On $\\{V_n>\\sigma_w^2/2\\}$ this map equals the stated standardized statistic. Since the complement has probability tending to zero, changing the statistic there has no effect on weak convergence, including any fixed finite extension on the zero-denominator event. When $\\sigma_w^2=0$, step 4.1 gives the degenerate score law and no standardized conclusion.",
+          "step": "5.1",
+          "inputs": [
+            "A2",
+            "F5",
+            "F17",
+            "F18",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The degenerate score law is covered when σ_w²=0; the positive-variance studentization is stated separately."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 uses a positive-variance event only when σ_w²>0 and makes no standardized claim at zero variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Interior allocation fractions imply n_g→∞ for both groups, as used in steps 2.2 and 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 allows the singular scalar normal N(0,0), and step 5.1 avoids division when σ_w²=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The theorem uses fixed finite τ, finite Λ(τ), and risk positivity through the closed horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and A1 declare AC for the L2 integral and independent-group terminal-limit suppliers. Step 1.1 uses the finite-energy integral and step 4.1 uses the Gaussian group limit under that assumption. The finite two-group covariance and scaling manipulations select no new arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement assumes two independent IID groups, positive allocation/risk limits and explicit finite-energy martingale premises. Steps 3.1 and 4.1 invoke the already-proved subject expansion and group terminal CLT; step5.1 standardizes only at positive variance. A Gaussian score limit is not claimed to imply that entire common-hazard model. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement assumes two independent IID groups, positive allocation/risk limits and explicit finite-energy martingale premises. Steps 3.1 and 4.1 invoke the already-proved subject expansion and group terminal CLT; step5.1 standardizes only at positive variance. A Gaussian score limit is not claimed to imply that entire common-hazard model. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read all six proof steps, all 21 direct supplier statements and the complete independent-groups terminal theorem proof. The truncated record is a measurable transformation of each IID pair and preserves group independence. Positive pooled support and interior allocation limits explicitly supply both repaired lemmas; no terminal source change is needed. The deterministic bounded Borel subject influence is its event term minus its absolutely continuous compensator integral, hence is a measurable function of one record. Isometry gives centering and finite variance; Tonelli gives sum rho_g E(phi_g^2)=integral w^2 y_0 y_1/y lambda. Finite second moments justify the tail/DCT and Markov O_P(1) bounds. Scaling psi_g=rho_g phi_g reconciles the independent-groups theorem expansion: the allocation mismatch times tight group sums is o_P(1), and covariance is sum rho_g^{-1}Var(psi_g). Slutsky with max(v,sigma^2/2) handles positive variance and negligible zero-estimate events; zero sigma^2 gives only a degenerate score law. Horizon events are counted inclusively; the continuous-time contract excludes baseline events and simultaneous jumps. AC is explicitly inherited from L2 and Gaussian-limit suppliers; no process CLT, iff or extra censoring inference is used. No finding/defect."
+      }
+    },
+    "ex-logrank-crossing-hazards-zero-score": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-logrank-risk-set-score-and-test",
+          "source_section": "Definition",
+          "quote": "Fix a follow-up horizon $\\tau>0$ and a finite set of subjects\n$\\mathcal I=\\{1,\\ldots,n\\}$. A right-censored record for subject $i$ is a\npair $(U_i,\\delta_i)\\in[0,\\tau]\\times\\{0,1\\}$, where\n$U_i=\\min(T_i,C_i)$ is the observed time and\n$\\delta_i=1\\{T_i\\le C_i\\}$ records an event, including an event-censoring tie;\n$\\delta_i=0$ records right censoring. A two-group assignment is a map\n$z:\\mathcal I\\to\\{0,1\\}$. These conventions are the right-censoring\nobservation scheme; the score below uses the observed record and does not\ninfer event or censoring laws from it.\n\nLet $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}.$$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$E_j:=d_j\\frac{Y_{1j}}{Y_j}.$$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases}$$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].\n\nA **weight rule** assigns a real value $w_j$ using only the predeclared time\nand information available strictly before the failures at $t_j$; deterministic\nbounded time weights are a special case. If\n$\\sup_j|w_j|<\\infty$, define the weighted logrank score and its conditional\nvariance estimate by\n$$U_w(z;U,\\delta):=\\sum_{j=1}^K w_j(O_j-E_j),\\qquad \\widehat V_w(z;U,\\delta):=\\sum_{j=1}^K w_j^2V_j.$$\nWhen $\\widehat V_w>0$, set\n$Z_w:=U_w/\\sqrt{\\widehat V_w}$. If $\\widehat V_w=0$, this standardized\nstatistic is left undefined; the unstandardized score remains defined. The\nnormal calibration is only an approximation until the separate terminal\nlimit hypotheses are verified. It is not the finite-sample Fisher\nrandomization p-value.\n\nFor a fixed observed record, the displayed scores are statistics in the\nmeasurable-map sense of [[def-statistic-and-estimator]]: each risk count is a\nfinite sum of Borel indicator functions, and every denominator is positive\nat an observed event time. A weight rule is fixed before assignments or\noutcomes are inspected and is recomputed by the same rule for any candidate\nassignment.\n\nThe risk-set table concerns one predeclared event type. If simultaneous\nrecords contain distinct event causes that are not exchangeable, form\nseparate cause-specific counts $O_{jc}$ and $d_{jc}$ using the same\npre-event risk set; use the displayed hypergeometric variance only for a\ncause whose failures are conditionally exchangeable. This definition does\nnot pool different causes or add their variances without a specified\ncross-cause covariance model.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "The **Kaplan–Meier estimator** is $\\widehat S_n(t)=\\prod_{\\substack{0\\le u\\le t:\\,\\Delta N_n(u)>0}}\\left(1-\\frac{\\Delta N_n(u)}{Y_n(u)}\\right)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Integrating the hazards gives, for $t\\ge1$, $S_1(t)=e^{-(t+1)}$ and $S_0(t)=e^{-(2t-1)}$; for $0\\le t\\le1$, $S_1(t)=e^{-2t}$ and $S_0(t)=e^{-t}$. On $[0,1]$, $S_1(t)<S_0(t)$ for $t>0$. For $t\\ge1$ their ratio is $S_1(t)/S_0(t)=e^{t-2}$, so they meet at $t=2$ and reverse order after it. Each event-time interval $(0,1)$ and $(2,2.5)$ has positive probability, and the specified censor-time values have positive mass. For every subject required to be censored at $c\\in\\{1.5,2.5\\}$, $P(T>c)=S_g(c)>0$ under its group hazard. Mutual independence of all event and censoring times therefore makes the finite intersection defining the sample pattern have positive probability.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $t_1$, $(Y_{1},Y_{0},d,O)=(4,2,1,1)$, so the score contribution is $1-4/6=1/3$ and the plug-in variance contribution is $4\\cdot2/6^2=2/9$. The two censorings at $1.5$ leave one group-1 subject at risk. At $t_2$, $(Y_{1},Y_{0},d,O)=(1,2,1,0)$, so the score contribution is $0-1/3=-1/3$ and the plug-in variance contribution is $1\\cdot2/3^2=2/9$. Hence $U=0$ and $\\widehat V=4/9>0$, giving standardized score zero. By [F2], $\\widehat S_1(t)=1-1/4=3/4$ for $t_1\\le t\\le2.5$ because the only group-1 failure is at $t_1$; and $\\widehat S_0(t)=1$ for $t<t_2$, then $1-1/2=1/2$ for $t_2\\le t\\le2.5$. The censorings contribute no product factors. Thus the empirical curves reverse order at $t_2$. The cancellation of the score and the crossing population hazards show why this one sample statistic does not establish equality of the survival laws.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example specifies two observed events and a positive-probability sample pattern.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/sme_terminal_influence_resolution",
+            "reason": "The Example fixes group counts n1=4 and n0=2, one event in each group and four censored records. Step2.1 calculates the risk sets (4,2) then(1,2). The word family describes these six prescribed subjects, not an empty sample case, so the exclusion is faithful."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 shows score zero but plug-in variance 4/9, so the zero statistic is not a zero-risk degeneracy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At each event step the exact finite risk counts are displayed in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The score cancellation is contrasted with crossing hazards in step 1.1 and does not assert equal survival laws."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The horizon includes t_1 and t_2 before 2.5; censorings at 2.5 are not event increments."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Example gives six subjects, two specified hazard formulas and finite censoring masses. Step 1.1 evaluates the already-given independent laws and their positive-probability pattern; step 2.1 performs fixed risk-table arithmetic. There is no arbitrary index-family construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example prescribes crossing piecewise hazards and a six-subject positive-probability pattern. Steps 1.1 and 2.1 verify crossing populations, canceling score contributions and positive plug-in variance. A zero observed score is explicitly not a characterization of equal survival laws. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example prescribes crossing piecewise hazards and a six-subject positive-probability pattern. Steps 1.1 and 2.1 verify crossing populations, canceling score contributions and positive plug-in variance. A zero observed score is explicitly not a characterization of equal survival laws. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-33",
+        "notes": "Read both proof steps and both supplier definitions. Integrated hazards yield S_1/S_0=exp(t-2) after 1, crossing at 2. Each stipulated open event interval and censoring value has positive probability and each censored subject has positive survival through its censor time; mutual independence makes the pattern possible. Risk sets (4,2) then (1,2) give scores 1/3,-1/3 and variance 2/9+2/9; group product limits are 3/4 and 1/2. No baseline event, tied failure, empty denominator, choice or iff issue in this sample. No reader/refuter defect."
+      }
+    },
+    "ex-logrank-fisher-randomization-with-unequal-weights": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-logrank-risk-set-score-and-test",
+          "source_section": "Definition",
+          "quote": "Fix a follow-up horizon $\\tau>0$ and a finite set of subjects\n$\\mathcal I=\\{1,\\ldots,n\\}$. A right-censored record for subject $i$ is a\npair $(U_i,\\delta_i)\\in[0,\\tau]\\times\\{0,1\\}$, where\n$U_i=\\min(T_i,C_i)$ is the observed time and\n$\\delta_i=1\\{T_i\\le C_i\\}$ records an event, including an event-censoring tie;\n$\\delta_i=0$ records right censoring. A two-group assignment is a map\n$z:\\mathcal I\\to\\{0,1\\}$. These conventions are the right-censoring\nobservation scheme; the score below uses the observed record and does not\ninfer event or censoring laws from it.\n\nLet $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}.$$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$E_j:=d_j\\frac{Y_{1j}}{Y_j}.$$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases}$$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].\n\nA **weight rule** assigns a real value $w_j$ using only the predeclared time\nand information available strictly before the failures at $t_j$; deterministic\nbounded time weights are a special case. If\n$\\sup_j|w_j|<\\infty$, define the weighted logrank score and its conditional\nvariance estimate by\n$$U_w(z;U,\\delta):=\\sum_{j=1}^K w_j(O_j-E_j),\\qquad \\widehat V_w(z;U,\\delta):=\\sum_{j=1}^K w_j^2V_j.$$\nWhen $\\widehat V_w>0$, set\n$Z_w:=U_w/\\sqrt{\\widehat V_w}$. If $\\widehat V_w=0$, this standardized\nstatistic is left undefined; the unstandardized score remains defined. The\nnormal calibration is only an approximation until the separate terminal\nlimit hypotheses are verified. It is not the finite-sample Fisher\nrandomization p-value.\n\nFor a fixed observed record, the displayed scores are statistics in the\nmeasurable-map sense of [[def-statistic-and-estimator]]: each risk count is a\nfinite sum of Borel indicator functions, and every denominator is positive\nat an observed event time. A weight rule is fixed before assignments or\noutcomes are inspected and is recomputed by the same rule for any candidate\nassignment.\n\nThe risk-set table concerns one predeclared event type. If simultaneous\nrecords contain distinct event causes that are not exchangeable, form\nseparate cause-specific counts $O_{jc}$ and $d_{jc}$ using the same\npre-event risk set; use the displayed hypergeometric variance only for a\ncause whose failures are conditionally exchangeable. This definition does\nnot pool different causes or add their variances without a specified\ncross-cause covariance model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-logrank-fisher-randomization-pvalue-valid",
+          "source_section": "Statement",
+          "quote": "Fix a finite randomized treatment-assignment model with allowed assignments\n$\\mathcal Z$ and known law $p$, with unit set $\\mathcal I$ as in\n[[def-finite-randomized-treatment-assignment-model]]. Fix a map\n$\\gamma:\\mathcal Z\\to\\{0,1\\}^{\\mathcal I}$ assigning each allowed assignment\na binary logrank group map. For each subject $i$, let\n$(U_i(z),\\delta_i(z))\\in[0,\\tau]\\times\\{0,1\\}$ be the full right-censored\nrecord under assignment $z$. Assume the **record sharp null**: for every $i$,\nthe pair $(U_i(z),\\delta_i(z))$ is constant over all $z\\in\\mathcal Z$. Fix\nbefore observing assignment or records a bounded logrank weight rule and the\ntwo-sided ordering $T(z)=|U_w(\\gamma(z);U,\\delta)|$.\n\nThe inclusive assignment-tail p-value\n$$p_{\\rm rand}(z):=\\sum_{z'\\in\\mathcal Z}p(z') 1\\{|U_w(\\gamma(z');U,\\delta)|\\ge |U_w(\\gamma(z);U,\\delta)|\\}$$\nis superuniform under the assignment law, so it is a valid finite-sample\np-value for the record sharp null. If an auxiliary $V$ is independent of\nthe assignment and uniform on $[0,1]$, replacing the inclusive tail by the\nstrict-tail mass plus $V$ times the tied-score mass gives an exactly uniform\np-value. The result uses the actual assignment probabilities and asserts no\nvalidity under a weak average-effect null or under an equal-hazard null alone.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, and let $\\mathcal I=\\{1,\\ldots,N\\}$ index the fixed\nexperimental units at the actual treatment-assignment level. Let\n$\\mathcal Z$ be a nonempty finite set of allowed assignments. If treatment\nis assigned to clusters, each cluster is one indexed unit; no separate\nprobability-sampling unit is present. The index $i$ identifies that unit,\nand no visit or repeated-measurement index is modeled here.\n\nA known assignment law is a function $p:\\mathcal Z\\to[0,1]$ satisfying\n$\\sum_{z\\in\\mathcal Z}p(z)=1$, so $(\\mathcal Z,p)$ is a finite probability\nspace ([[def-finite-probability-space-and-event]]); assignments of probability\nzero may remain in $\\mathcal Z$. A **potential-outcome schedule** is a function\n$\\theta:\\mathcal I\\times\\mathcal Z\\to\\mathbb R$, with\n$Y_i(z):=\\theta(i,z)$. The schedule and the units are fixed; the assignment\n$Z$ is the only randomness supplied by the design, and the observed response\nvector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$. The schedule is defined\nfor every allowed assignment, including zero-probability assignments, and\nmay depend on the full assignment vector, so no no-interference assumption is\nimplicit. The scientific statistical model contract\n[[def-scientific-statistical-model-contract]] requires the observation space,\nunits, quantity status, observation mechanism, support, conditioning\nconvention, and adequacy assumptions to be recorded; this model specifies\nthose fields as follows.\n\nTo express this as a statistical experiment, take the data space\n$\\mathcal X=\\mathcal Z\\times\\mathbb R^{\\mathcal I}$ with its full power-set\nsigma-algebra, which is a sigma-algebra by [[def-sigma-algebra]] and makes\n$\\mathcal X$ a measurable space ([[def-measurable-space]]), and parameter\nset $\\Theta=\\mathbb R^{\\mathcal I\\times\\mathcal Z}$. For each $\\theta\\in\\Theta$\nlet $P_\\theta$ be the law\n([[def-law-or-distribution-of-a-random-element]]) of the deterministic\nobservation map $O_\\theta(z)=(z,Y_\\theta(z))$ from $(\\mathcal Z,p)$. The map\nis measurable because its domain has the full power set, in the preimage\nsense of [[def-measurable-function-between-measurable-spaces]], and its law\nis a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]]. Thus\n$((\\mathcal X,2^{\\mathcal X}),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ is an\nexperiment in the sense of [[def-statistical-experiment]]. The assignment\nlaw asserts no response-error model, Gaussian law, superpopulation\nrandomization, or sampling representativeness beyond the stated finite\nassignment mechanism. Its finite full-measure support set is\n$$S_\\theta:=\\{(z,Y_\\theta(z)):z\\in\\mathcal Z,\\ p(z)>0\\},$$\nsince $P_\\theta(S_\\theta)=\\sum_{z:p(z)>0}p(z)=1$. The record contains the\nassigned vector and every unit's response; missing or censored outcomes and\nrepeated visits require a separately declared observation mechanism. The\ninferential target is the assignment-invariance hypothesis for these $N$\nunits, not an estimand for a wider population.\n\nInference in this page holds $\\mathcal I$ and $\\theta$ fixed and averages\nover the declared law $p$; it does not condition on the realized assignment.\nThe status of the quantities is explicit: $\\theta$ and all\n$Y_i(z)$ are fixed, $Z$ is random, $(Z,Y_\\theta(Z))$ is observed, and\npotential responses under unassigned vectors are fixed but latent. The\nassignment set, weights, and implemented randomization protocol are\ndesign-controlled and should be checked against protocol records. Assignment\nlogs and response records are empirically assessable, but those checks do not\nprove that the declared law generated the data. Potential outcomes under\nunassigned vectors are fixed and latent in the realized record. This does\nnot imply nonidentifiability from the observed-data law: for each $z$ with\n$p(z)>0$, the law assigns mass $p(z)$ to $(z,Y_\\theta(z))$, and therefore\ndetermines $Y_\\theta(z)$. Assignment invariance on this positive-probability\nset is **empirically assessable**, and the theorem tests the stronger\ninvariance hypothesis on all allowed assignments. Values at assignments\nwith $p(z)=0$, and restrictions on those values, are **substantively\nuntestable** from this law, since changing them leaves $P_\\theta$ unchanged.\nOne realized assignment does not reveal responses at other assignments.\nThese classifications do not make the design or scientific model\nempirically true.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The prescribed full record for each subject is identical under all three allowed assignments, so the full-record sharp-null hypothesis in [F2] holds. Under the map $\\gamma(e_1)$, the event at time 1 contributes $1-1/3=2/3$ and the later risk sets contain no treated subject, so $U(\\gamma(e_1))=2/3$. Under $\\gamma(e_2)$, time 1 contributes $-1/3$, and time 2 contributes $1-1/2=1/2$, giving $U(\\gamma(e_2))=1/6$. Under $\\gamma(e_3)$, time 1 contributes $-1/3$, time 2 contributes $-1/2$, and time 3 contributes zero, giving $U(\\gamma(e_3))=-5/6$. These are the three distinct scores; their absolute values are $2/3,1/6,5/6$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The inclusive absolute-tail probability at $e_1$ is $1/2+1/6=2/3$, at $e_2$ it is $1$, and at $e_3$ it is $1/6$, because the absolute scores are distinct and the assignment weights are $1/2,1/3,1/6$. Therefore the p-value takes $2/3,1,1/6$ with respective probabilities $1/2,1/3,1/6$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Its distribution function is $0$ for $0\\le u<1/6$, $1/6$ for $1/6\\le u<2/3$, $2/3$ for $2/3\\le u<1$, and $1$ at $u=1$. On each interval this is at most $u$, including the endpoints. Thus the exact finite assignment calculation is superuniform under the declared unequal-weight law, as in [F2].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has exactly three allowed assignments with positive probability."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: All three assignment scores and tail masses are computed in steps 1.1–2.1; no score tie is omitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The exactly-one-treated constraint is part of the finite assignment set."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The absolute scores are distinct, while the general corollary covers ties."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the p-value distribution at the exact endpoints 0, 1/6, 2/3, and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Statement gives exactly three assignments, their rational weights and the full-record schedule explicitly. Steps 1.1 through 3.1 calculate three scores, tails and the complete CDF. No randomizer is added in this example and no witness or probability version is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement prescribes all-assignment records(1,1),(2,1),(3,1) and the weights1/2,1/3,1/6. Steps 1.1 through 3.1 enumerate a superuniform weighted-tail witness. This finite p-value distribution is not a characterization of all assignment designs or of record invariance. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement prescribes all-assignment records(1,1),(2,1),(3,1) and the weights1/2,1/3,1/6. Steps 1.1 through 3.1 enumerate a superuniform weighted-tail witness. This finite p-value distribution is not a characterization of all assignment designs or of record invariance. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    }
+  }
+}

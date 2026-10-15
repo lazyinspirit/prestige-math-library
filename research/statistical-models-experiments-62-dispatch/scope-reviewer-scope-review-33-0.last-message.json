@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "batch": "33",
+  "round": 0,
+  "reviewed_items": [
+    "def-logrank-risk-set-score-and-test",
+    "lem-logrank-risk-set-empirical-fractions-converge",
+    "thm-logrank-conditional-risk-set-moments",
+    "lem-logrank-risk-fraction-converges",
+    "cor-logrank-fisher-randomization-pvalue-valid",
+    "lem-logrank-score-martingale-expansion",
+    "lem-logrank-variance-estimator-consistency",
+    "thm-weighted-logrank-terminal-normal-limit",
+    "ex-logrank-crossing-hazards-zero-score",
+    "ex-logrank-fisher-randomization-with-unequal-weights"
+  ],
+  "reviewed_pages": [
+    "logrank-and-weighted-logrank",
+    "logrank-and-weighted-logrank-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch and its supplier arguments were reviewed. Local repairs can resolve the identified gaps within the assigned sources; no owner escalation is required.",
+  "findings": [
+    {
+      "id": "lem-logrank-risk-fraction-converges",
+      "type": "prerequisite",
+      "reason": "Its proof invokes the empirical-fractions lemma, which requires within-group IID observed times and deterministic sample sizes tending to infinity. The Statement gives allocation fractions but omits those conditions; dependent repeated observations can violate the conclusion."
+    },
+    {
+      "id": "thm-logrank-conditional-risk-set-moments",
+      "type": "prerequisite",
+      "reason": "The sequential claim needs a filtration so past increments are measurable at later histories, a nonempty event risk set or zero-risk conventions (E_j is undefined when Y_j=0), and integrability such as bounded weights or finite sum E[w_j^2 V_j]. H-measurability alone does not ensure these."
+    },
+    {
+      "id": "cor-logrank-fisher-randomization-pvalue-valid",
+      "type": "prerequisite",
+      "reason": "The assignment-model supplier allows arbitrary finite assignment sets, but the logrank score is defined only for binary group maps z:I→{0,1}. Require each allowed assignment to induce such a map."
+    },
+    {
+      "id": "ex-logrank-crossing-hazards-zero-score",
+      "type": "local",
+      "reason": "The stated censoring marginals and within-subject event/censoring independence do not determine the joint censoring law; dependence can make the claimed sample pattern have probability zero. Specify independence of censoring times across subjects and from event times, or state its joint probability."
+    },
+    {
+      "id": "ex-logrank-crossing-hazards-zero-score",
+      "type": "prerequisite",
+      "reason": "The product-limit curve values use the Kaplan–Meier product formula, but the item neither states it nor declares its supplier. State the formula and show the calculation locally; the existing estimator definition gives the required factors."
+    },
+    {
+      "id": "ex-logrank-fisher-randomization-with-unequal-weights",
+      "type": "prerequisite",
+      "reason": "The cited corollary applies under a full-record sharp null. Fixed observed event times do not state that each subject's record is unchanged across all allowed assignments; add that schedule assumption."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-logrank-score-martingale-expansion",
+      "decision": "accept",
+      "reason": "Its Given/F5 directly assumes the uniform risk-fraction limit used in the proof."
+    },
+    {
+      "id": "lem-logrank-variance-estimator-consistency",
+      "decision": "accept",
+      "reason": "Its Statement directly assumes uniform convergence of the pooled risk fraction and treatment fraction."
+    },
+    {
+      "id": "thm-weighted-logrank-terminal-normal-limit",
+      "decision": "accept",
+      "reason": "Its IID subject pairs, interior allocation proportions, and positive pooled risk support satisfy the risk-fraction lemma's conditions."
+    },
+    {
+      "id": "ex-logrank-fisher-randomization-with-unequal-weights",
+      "decision": "repair",
+      "reason": "Its one-treated assignments fit the binary score domain, but its Statement needs the full-record sharp-null condition identified above."
+    },
+    {
+      "id": "logrank-and-weighted-logrank",
+      "decision": "accept",
+      "reason": "The A-page summary remains consistent with the reviewed claims and already states the sharp-null condition for Fisher randomization."
+    },
+    {
+      "id": "logrank-and-weighted-logrank-examples",
+      "decision": "accept",
+      "reason": "The B-page summary remains accurate once the examples state their censoring and sharp-null assumptions and justify the product-limit calculation."
+    }
+  ]
+}

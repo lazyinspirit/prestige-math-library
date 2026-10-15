@@ -1,0 +1,2015 @@
+{
+  "version": 1,
+  "scope": [
+    "def-linear-process-and-arma-model",
+    "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+    "thm-arma-causality-and-invertibility-root-criteria",
+    "thm-stationary-arma-spectral-density",
+    "thm-stable-linear-process-sample-mean-clt",
+    "thm-fixed-order-autoregressive-ols-martingale-limit",
+    "cor-stable-ar-long-run-variance-plug-in-consistency",
+    "ex-arma-common-factor-cancellation-and-root-classification",
+    "ex-unit-root-precludes-nonzero-variance-stationary-ar1",
+    "ex-dependent-white-noise-is-not-iid"
+  ],
+  "contracts": {
+    "def-linear-process-and-arma-model": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: p=0 or q=0 is explicitly represented by the constant polynomial 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the coefficient sequence may be zero, giving the constant process X_t=mu; white-noise variance remains positive by definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the degree-one AR(1) and MA(1) cases are included by p=1 or q=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the imposed equation uses a normalized coprime pair. Cancelling common factors defines an associated reduced model; an unreduced solution need not solve the reduced equation, so root tests require the reduced equation itself."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A definition of integer-indexed processes and polynomial filters has no ordered interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition makes no selection from a family and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states conventions and representations, not a biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states conventions and representations, not a biconditional theorem."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-absolutely-summable-linear-filters-preserve-weak-stationarity": {
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-autocovariance-and-sample-autocovariance",
+          "source_section": "Definition",
+          "quote": "For a weakly stationary real process $X=(X_t)_{t\\in\\mathbb Z}$, its\n**autocovariance function** (ACVF) is\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t),\\qquad h\\in\\mathbb Z,$$\nwhich is independent of $t$ by [[def-strict-and-weak-stationarity-for-time-series]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-for-nonnegative-double-series",
+          "source_section": "Statement",
+          "quote": "For every double sequence $(a_{ij})_{i,j\\in\\mathbb N}$ in $[0,+\\infty]$,",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fatou-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(f_n)$ be nonnegative measurable functions. Then\n$$\\int \\liminf_{n\\to\\infty}f_n\\,d\\mu\\le\\liminf_{n\\to\\infty}\\int f_n\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Weak stationarity makes $\\mathbb E[Z_t^2]=\\gamma(0)$ for every $t$. Applying [F3] to $Z_t$ and the constant one gives $\\mathbb E|Z_t|\\le\\sqrt{\\gamma(0)}$, while applying it to the centered variables $Z_{t+h},Z_t$ gives $|\\gamma(h)|\\le\\gamma(0)$. Consequently $$\\sum_{j\\in\\mathbb Z}\\mathbb E\\bigl[|c_jZ_{t-j}|\\bigr] \\le \\sqrt{\\gamma(0)}\\sum_{j\\in\\mathbb Z}|c_j|<\\infty.$$ Tonelli [F5] on counting measure over $\\mathbb Z$ times the probability measure shows that the random series of absolute values has finite expectation, hence is finite almost surely. Thus $Y_t$ is defined by an absolutely convergent sum.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any finite $J\\subset\\mathbb Z$, the finite filter $Y_t^J=\\sum_{j\\in J}c_jZ_{t-j}$ satisfies, by [F4], $$\\mathbb E[(Y_t^J)^2]=\\sum_{j,k\\in J}c_jc_k\\gamma(k-j) \\le \\gamma(0)\\left(\\sum_{j\\in J}|c_j|\\right)^2.$$ The equality is a finite covariance expansion; the inequality follows from $|\\gamma(k-j)|\\le\\gamma(0)$ from step 1.1. Applying the same bound to a finite tail $J$ gives $\\|\\sum_{j\\in J}c_jZ_{t-j}\\|_2\\le\\sqrt{\\gamma(0)}\\sum_{j\\in J}|c_j|$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Enumerate $\\mathbb Z$ as $0,1,-1,2,-2,\\ldots$ and let $Y_t^N$ be the partial sum through the first $N$ terms. The absolute almost-sure convergence from step 1.1 gives $Y_t-Y_t^N=\\lim_{M\\to\\infty}(Y_t^M-Y_t^N)$ almost surely. Fatou [F7] and the finite-tail bound of step 2.1 therefore give $$\\mathbb E|Y_t-Y_t^N|^2 \\le \\gamma(0)\\left(\\sum_{j\\text{ omitted after }N}|c_j|\\right)^2 \\longrightarrow0.$$ Thus $Y_t^N\\to Y_t$ in $L^2$ and $Y_t$ is square-integrable.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each finite filter is centered. The $L^2$ convergence in step 3.1 implies $L^1$ convergence by [F3] applied to the difference and the constant one; hence $\\mathbb E[Y_t]=0$. For finite $J$, covariance bilinearity [F4] gives $$\\operatorname{Cov}(Y_{t+h}^J,Y_t^J) =\\sum_{j,k\\in J}c_jc_k\\gamma(h-j+k).$$ As $J$ increases through the enumeration, the left side converges to $\\operatorname{Cov}(Y_{t+h},Y_t)$ by $L^2$ convergence and [F3]. The right side converges absolutely because $$\\sum_{j,k\\in\\mathbb Z}|c_jc_k\\gamma(h-j+k)| \\le\\gamma(0)\\left(\\sum_j|c_j|\\right)^2<\\infty,$$ with order of summation justified by [F6]. Its limit is independent of $t$, so $Y$ is weakly stationary with the stated autocovariance.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $c,d\\in\\ell^1(\\mathbb Z)$. The triangle inequality and [F6] give $$\\sum_{m\\in\\mathbb Z}|(c*d)_m| \\le\\sum_{j,k\\in\\mathbb Z}|c_j||d_k| =\\left(\\sum_j|c_j|\\right)\\left(\\sum_k|d_k|\\right)<\\infty,$$ so $c*d\\in\\ell^1(\\mathbb Z)$. Tonelli [F5] and the uniform bound from step 1.1 give $$\\mathbb E\\!\\left[\\sum_{j,k\\in\\mathbb Z} |c_jd_kZ_{t-j-k}|\\right] =\\sum_{j,k\\in\\mathbb Z}|c_jd_k|\\mathbb E|Z_{t-j-k}| \\le\\sqrt{\\gamma(0)}\\left(\\sum_j|c_j|\\right)\\left(\\sum_k|d_k|\\right)<\\infty.$$ Hence this double random series is absolutely convergent almost surely. Reindexing the absolutely convergent terms by $m=j+k$ gives $$\\sum_jc_j\\left(\\sum_kd_kZ_{t-j-k}\\right) =\\sum_m\\left(\\sum_jc_jd_{m-j}\\right)Z_{t-m} =\\sum_m(c*d)_mZ_{t-m}.$$ Both sides are the filter limits defined in the Statement, and the equality holds almost surely and in $L^2$ by the bounds of steps 2.1 and 3.1. This proves the composition formula.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: if either filter is the zero sequence, its output and the convolution output are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1: when gamma(0)=0, the L2 bounds force every centered filtered output to vanish almost surely."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 include a singleton finite filter and recover its finite covariance formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles infinite support by an explicit enumeration of Z and vanishing l1 tails; no finite-support assumption is hidden."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Integer shifts have no interval endpoints; the proof treats all t,h in Z."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof explicitly uses the enumeration 0,1,-1,2,-2,... and states it uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The filter-preservation statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The filter-preservation statement is not an iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-42",
+        "notes": "Read all five current proof steps and exact F1–F7 supplier statements. Weak stationarity gives only E[Z_s²]=gamma(0), so Cauchy–Schwarz supplies the uniform E|Z_s|<=sqrt(gamma(0)) bound, not equality of absolute moments. Counting measure on Z and Z² is sigma-finite; Tonelli gives almost-sure absolute sums. Explicit enumeration and Fatou prove L² convergence without a completeness or choice shortcut. Finite bilinearity, Cauchy–Schwarz and absolute double-sum domination give gamma(h-j+k). Convolution is l¹ by nonnegative Tonelli; the corrected double-series expectation bound justifies regrouping, and applying the same filter bound to d(B)Z justifies L² composition. Checked zero process/coefficients and two-sided indices. Reader repair leaves the statement and consumer interface unchanged; accepted with confidence 1. No current defect."
+      }
+    },
+    "thm-arma-causality-and-invertibility-root-criteria": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-process-and-arma-model",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real process on one probability space.\nThe backshift is $(BX)_t:=X_{t-1}$, and for a polynomial\n$a(z)=\\sum_{j=0}^m a_jz^j$ set\n$a(B)X_t:=\\sum_{j=0}^m a_jX_{t-j}$. Weak stationarity and the covariance\nconvention are those of\n[[def-strict-and-weak-stationarity-for-time-series]] and\n[[def-moments-variance-and-covariance]].",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.",
+          "uses": [
+            "1.3",
+            "2.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+          "source_section": "Statement",
+          "quote": "Let $Z=(Z_t)_{t\\in\\mathbb Z}$ be a centered real weakly stationary process\nwith autocovariance $\\gamma$. For a real two-sided sequence\n$c=(c_j)_{j\\in\\mathbb Z}\\in\\ell^1(\\mathbb Z)$ define\n$c(B)Z_t:=\\sum_{j\\in\\mathbb Z}c_jZ_{t-j}$. Then this filter is well-defined\nalmost surely and in $L^2$, is centered and weakly stationary, and has\nautocovariance\n$$\\gamma_Y(h)=\\sum_{j,k\\in\\mathbb Z}c_jc_k\\gamma(h-j+k),\\qquad h\\in\\mathbb Z.$$\nFor $c,d\\in\\ell^1(\\mathbb Z)$ their filter composition is the",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-every-complex-polynomial-splits-into-linear-factors",
+          "source_section": "Statement",
+          "quote": "Every nonconstant polynomial in $\\mathbb C[x]$ splits over $\\mathbb C$.",
+          "uses": [
+            "1.2",
+            "2.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose a causal representation exists, with $\\Psi(z)=\\sum_{j\\ge0}\\psi_jz^j$ and $\\sum_j|\\psi_j|<\\infty$. Applying the finite polynomial $\\phi(B)$ and using the ARMA equation gives $$\\bigl(\\phi(B)\\Psi(B)-\\theta(B)\\bigr)\\epsilon_t=0.$$ The coefficient sequence $a$ of $\\phi\\Psi-\\theta$ is in $\\ell^1$ because $\\phi,\\theta$ are finite polynomials and $\\psi\\in\\ell^1$. By [F3], the variance of this zero random variable is $\\sigma^2\\sum_{j\\ge0}a_j^2$. Since $\\sigma^2>0$, every $a_j=0$, so $\\phi(z)\\Psi(z)=\\theta(z)$ on the closed unit disk; the series for $\\Psi$ converges uniformly there because $\\sum_j|\\psi_j|<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $\\phi$ has degree $m\\ge1$ and roots $r_1,\\ldots,r_m$ counted with multiplicity. None is zero because $\\phi(0)=1$. By [F4] and normalization, $$\\phi(z)=\\prod_{\\ell=1}^m(1-z/r_\\ell).$$ If every $|r_\\ell|>1$, then for $|z|\\le1$ each factor has the geometric expansion $$(1-z/r_\\ell)^{-1}=\\sum_{k\\ge0}r_\\ell^{-k}z^k.$$ The coefficient of $z^j$ in $1/\\phi(z)$ has absolute value at most $\\binom{j+m-1}{m-1}r_*^{-j}$, where $r_*=\\min_\\ell|r_\\ell|>1$, since there are $\\binom{j+m-1}{m-1}$ nonnegative $m$-tuples summing to $j$. Choose $1<r<r_*$. The polynomial factor $\\binom{j+m-1}{m-1}(r/r_*)^j$ is bounded in $j$, so these coefficients are bounded by $Cr^{-j}$. Multiplication by the finite polynomial $\\theta$ preserves an exponential bound. If $m=0$, $\\phi=1$ and $\\theta/\\phi$ is finite, which also has an exponential bound after enlarging $C$. Thus $\\eta(z):=1/\\phi(z)$ and $\\Psi(z):=\\eta(z)\\theta(z)=\\theta(z)/\\phi(z)$ have absolutely summable one-sided coefficients, and those of $\\Psi$ have the stated exponential decay.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Suppose an invertible representation exists, $\\epsilon_t=\\pi(B)(X_t-\\mu)$ with $\\pi\\in\\ell^1(\\mathbb N_0)$. Apply the finite filter $\\phi(B)$ and commute the absolutely summable and polynomial filters by [F3] on the weakly stationary process [F2]: $$\\phi(B)\\epsilon_t=\\phi(B)\\pi(B)(X_t-\\mu) =\\pi(B)\\phi(B)(X_t-\\mu)=\\pi(B)\\theta(B)\\epsilon_t.$$ The coefficient sequence of $\\phi-\\pi\\theta$ is in $\\ell^1$. Its filter of white noise is zero, so [F3] and $\\sigma^2>0$ imply every coefficient is zero. The absolutely summable series $\\Pi$ converges uniformly on the closed unit disk, so the coefficient identity yields $\\phi(z)=\\Pi(z)\\theta(z)$ for $|z|\\le1$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\phi(z_0)=0$ for some $|z_0|\\le1$, step 1.1 gives $\\theta(z_0)=\\phi(z_0)\\Psi(z_0)=0$. This is a common root, contrary to the coprime condition in [F1]. Therefore causality implies that $\\phi$ has no zero in the closed unit disk.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $\\eta(z)=1/\\phi(z)$ be the absolutely summable causal series from step 1.2. Apply the filter $\\eta(B)$ to the given equation. Since $X-\\mu$ is weakly stationary, [F2] and [F3] justify composition and $\\eta*\\phi$ is the constant coefficient sequence $1$. Therefore $$X_t-\\mu=\\eta(B)\\phi(B)(X_t-\\mu) =\\eta(B)\\theta(B)\\epsilon_t =\\Psi(B)\\epsilon_t.$$ This is the required causal representation of the given solution.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "If $\\theta(z_0)=0$ for some $|z_0|\\le1$, step 1.3 gives $\\phi(z_0)=\\Pi(z_0)\\theta(z_0)=0$, contradicting coprimality. Hence invertibility implies that $\\theta$ has no zero in the closed unit disk.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "If $\\theta$ has no zero in $|z|\\le1$, the same geometric-series argument as in step 1.2 applied to its roots gives an absolutely summable causal series $\\eta(z)=1/\\theta(z)$. Set $\\Pi(z)=\\eta(z)\\phi(z)$; its coefficients are absolutely summable. Applying $\\eta(B)$ to the ARMA equation and using filter composition [F3] on the weakly stationary process [F2] gives $$\\Pi(B)(X_t-\\mu)=\\eta(B)\\phi(B)(X_t-\\mu) =\\eta(B)\\theta(B)\\epsilon_t=\\epsilon_t.$$ Thus the model is invertible.",
+          "step": "2.4",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.1, 1.2, 2.1, and 2.2 prove both directions of the causal criterion and identify its coefficients; steps 1.3, 2.3, and 2.4 prove both directions of the invertibility criterion and identify its coefficients. The proof uses no choice axiom.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "step 1.3",
+            "step 2.3",
+            "step 2.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly handles degree m=0 by phi=1; the reciprocal transfer is then finite."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement requires sigma^2>0; steps 1.1 and 1.3 use it to force every white-noise filter coefficient to vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the root factorization and geometric expansion apply with multiplicities; the degree-one case is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Fact F1 requires common factors to be cancelled, and steps 2.1 and 2.3 use coprimality to exclude shared roots."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the closed disk condition includes roots with |z|=1; such a boundary root contradicts each representation criterion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–5.1 use coefficient algebra and a fixed enumeration-free finite factorization; no choice axiom is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, and 2.2 prove both necessity and sufficiency for the causal representation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.3, 2.3, and 2.4 prove both necessity and sufficiency for the invertible representation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-42",
+        "notes": "Reviewed all eight steps, the normalized-coprime definition, weak-stationarity interface, the accepted filter lemma and polynomial-splitting Statement. Necessity compares l¹ filter coefficients against positive-variance white noise, so every coefficient vanishes; uniform convergence allows boundary-root substitution. Invertible necessity commutes filters on the given weakly stationary X and does not assume causal X. Sufficiency applies the reciprocal filter to the given equation, avoiding a hidden uniqueness assumption. The repeated-root binomial coefficient bound is dominated by any exponential with 1<r<minimum root modulus; finite numerator multiplication preserves it. Constant polynomials and trailing zero coefficients are harmless. Real coefficients follow from conjugate root pairing or the normalized real recursion. Coefficients are unique from the constant-term-one recursion. Both iff directions, independent criteria, unit-circle endpoints and positive innovation variance checked; no choice used. Wang Theorems 3.1–3.2, printed pp. 49–51, were read with their proofs; local all-coefficient comparison avoids the source converse indexing typo. No defect; reader/refuter empty."
+      }
+    },
+    "thm-stationary-arma-spectral-density": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-process-and-arma-model",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real process on one probability space.\nThe backshift is $(BX)_t:=X_{t-1}$, and for a polynomial\n$a(z)=\\sum_{j=0}^m a_jz^j$ set\n$a(B)X_t:=\\sum_{j=0}^m a_jX_{t-j}$. Weak stationarity and the covariance\nconvention are those of\n[[def-strict-and-weak-stationarity-for-time-series]] and\n[[def-moments-variance-and-covariance]].\n\nA real process $\\epsilon=(\\epsilon_t)_{t\\in\\mathbb Z}$ is **white noise**\nwith variance $\\sigma^2$ when\n$\\mathbb E[\\epsilon_t]=0$, $0<\\sigma^2=\\mathbb E[\\epsilon_t^2]<\\infty$,\nand $\\operatorname{Cov}(\\epsilon_t,\\epsilon_s)=0$ for all $s\\ne t$.\nThis definition requires only zero covariance at distinct times; it does not\nrequire independence, identical distributions, or Gaussian laws.\n\nFor a real sequence $\\psi=(\\psi_j)_{j\\ge0}$ with\n$\\sum_{j\\ge0}|\\psi_j|<\\infty$, a **causal linear process** driven by white\nnoise is\n$$X_t-\\mu:=\\sum_{j=0}^{\\infty}\\psi_j\\epsilon_{t-j},\\qquad t\\in\\mathbb Z,$$\nwhere the series is its almost-sure and $L^2$ limit, established by\n[[lem-absolutely-summable-linear-filters-preserve-weak-stationarity]].\n\nAn **ARMA$(p,q)$ model**, for nonnegative integers $p,q$, is an equation\n$$\\phi(B)(X_t-\\mu)=\\theta(B)\\epsilon_t,\\qquad t\\in\\mathbb Z,$$\nwhere\n$$\\phi(z)=1-\\sum_{j=1}^p\\phi_jz^j,\\qquad \\theta(z)=1+\\sum_{j=1}^q\\theta_jz^j$$\nhave real coefficients and constant term one. If $p=0$ or $q=0$, the\ncorresponding polynomial is $1$. The displayed equation is imposed with a\n**coprime normalized pair**, meaning that the two polynomials have no common\ncomplex root and both have constant term one. Given an unreduced pair,\ncancel every common nonconstant factor in $\\mathbb C[z]$ and normalize\nboth remaining polynomials to have constant term one to define its associated\n**reduced model**. This is a model convention: a solution of the unreduced\nequation need not satisfy the reduced equation. Root criteria for the reduced\npair apply only to solutions of that reduced equation.\n\nFor an AR$(p)$ model ($q=0$), expansion gives the regression form\n$X_t=c+\\sum_{j=1}^p\\phi_jX_{t-j}+\\epsilon_t$ with\n$c=\\mu(1-\\sum_{j=1}^p\\phi_j)$. Thus a fixed intercept in the AR regression\nis the original mean parameter written in observation coordinates.\n\nA **causal representation** of this model is a representation\n$X_t-\\mu=\\sum_{j\\ge0}\\psi_j\\epsilon_{t-j}$ with\n$\\sum_j|\\psi_j|<\\infty$. An **invertible representation** is\n$\\epsilon_t=\\sum_{j\\ge0}\\pi_j(X_{t-j}-\\mu)$ with\n$\\sum_j|\\pi_j|<\\infty$. These are properties of the displayed relation\nbetween $X$ and $\\epsilon$, not claims that white noise is iid.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-time-series-spectral-measure-and-periodogram",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the angular Lebesgue\nmeasure clause below; under it $\\lambda_1$ is a measure and intervals have\ntheir usual lengths ([[thm-lebesgue-measure-is-a-complete-measure]],\n[[thm-lebesgue-measure-of-a-box-of-every-kind]]).\n\nLet $\\mathbb T:=\\{z\\in\\mathbb C:|z|=1\\}$ be the multiplicative unit circle\nwith its subspace topology from $\\mathbb C$\n([[lem-unit-circle-is-a-compact-metrizable-topological-group]]), identified\nwith angular frequencies by $z=e^{i\\lambda}$. Write $d\\lambda$ for\nthe finite angular Lebesgue Borel measure obtained from ordinary Lebesgue\nmeasure on $[-\\pi,\\pi)$; thus $d\\lambda(\\mathbb T)=2\\pi$, and the endpoints\n$-\\pi$ and $\\pi$ denote the same point. The characters of discrete additive\n$\\mathbb Z$ are $h\\mapsto e^{ih\\lambda}$ by\n[[thm-discrete-integers-have-circle-dual]].\n\nFor angular representatives $\\lambda,\\theta\\in\\mathbb R$, define their\ncircular distance by\n$$d_{\\mathbb T}(\\lambda,\\theta):=\\min_{k\\in\\mathbb Z}|\\lambda-\\theta+2\\pi k|.$$\nThe minimum exists because the displayed absolute values tend to infinity\nwith $|k|$, and changing either representative by $2\\pi$ leaves it unchanged.\n\nPrecisely, for Borel $B\\subseteq\\mathbb T$ put\n$$d\\lambda(B):=\\lambda_1\\{\\theta\\in[-\\pi,\\pi):e^{i\\theta}\\in B\\}.$$\nThe map $\\theta\\mapsto e^{i\\theta}$ is continuous by\n[[thm-complex-exponential-is-entire-with-derivative-itself]] and\n[[cor-complex-differentiability-implies-continuity]], so the preimage is\nBorel by [[thm-continuous-preimages-of-borel-sets-are-borel]]. Preimages\npreserve disjoint unions, so this is a finite Borel measure under the stated\nCountable Choice premise. Integrating a Borel function of the circle angle\nmeans integrating its periodic lift over this half-open interval.\n\nLet $X=(X_t)_{t\\in\\mathbb Z}$ be a real weakly stationary process with mean\n$\\mu$ and autocovariance $\\gamma(h)=\\operatorname{Cov}(X_{t+h},X_t)$\n([[def-strict-and-weak-stationarity-for-time-series]],\n[[def-autocovariance-and-sample-autocovariance]]). A **spectral measure** for\n$X$ is a finite positive Radon Borel measure $F$ on $\\mathbb T$\n([[def-radon-measure-on-an-lch-space]]) satisfying\n$$\\gamma(h)=\\int_{\\mathbb T}e^{ih\\lambda}\\,F(d\\lambda)\\qquad(h\\in\\mathbb Z).$$\nPutting $h=0$ gives $F(\\mathbb T)=\\gamma(0)$. A **spectral density** is a\nnonnegative measurable function $f$ with\n$$F(B)=\\int_B f(\\lambda)\\,d\\lambda$$\nfor every Borel set $B\\subseteq\\mathbb T$; it exists only when $F$ is\nabsolutely continuous with respect to $d\\lambda$ and is unique up to\n$d\\lambda$-null sets.\n\nFor a known mean $\\mu$ and integer $n\\ge1$, the **known-mean periodogram** is\nthe random function\n$$I_n(\\lambda):=\\frac1{2\\pi n}\\left|\\sum_{t=1}^n(X_t-\\mu)e^{-it\\lambda}\\right|^2,\\qquad\\lambda\\in\\mathbb T.$$\nThe centering uses the population mean, not the sample mean. The finite sum is\nsquare-integrable, so $I_n(\\lambda)$ has finite expectation: for\n$Y_t=X_t-\\mu$, the pointwise inequality\n$|\\sum_{t=1}^nY_te^{-it\\lambda}|^2\\le n\\sum_{t=1}^n|Y_t|^2$ bounds its\nexpectation by $n\\sum_{t=1}^n\\mathbb E[Y_t^2]<\\infty$\n([[def-moments-variance-and-covariance]]).\n\nDefine the normalized finite-sample Fejér kernel\n$$\\Phi_n(x):=\\frac1{2\\pi n}\\left|\\sum_{t=1}^ne^{-itx}\\right|^2,\\qquad x\\in\\mathbb T.$$\n\nFor smoothing, let $K:\\mathbb R\\to[0,\\infty)$ be continuous with compact\nsupport, $\\int_{\\mathbb R}K(u)\\,du=1$, and $K(0)>0$. For bandwidth $b>0$,\nperiodize it on the circle by\n$$K_b(x):=\\sum_{k\\in\\mathbb Z}\\frac1bK\\!\\left(\\frac{x+2\\pi k}{b}\\right).$$\nCompact support makes this a finite sum at each $x$, and changing variables\nover the intervals that tile $\\mathbb R$ gives\n$\\int_{\\mathbb T}K_b(x)\\,d\\lambda(x)=1$. Fix a sequence of bandwidths\n$(b_n)_{n\\ge1}$ with $b_n>0$. For the Fourier grid\n$\\lambda_{j,n}=2\\pi j/n$ ($0\\le j<n$) and target $\\lambda_0\\in\\mathbb T$, when\nthe denominator is positive define\n$$w_{n,j}(\\lambda_0):=\\frac{K_{b_n}(\\lambda_0-\\lambda_{j,n})}{\\sum_{\\ell=0}^{n-1}K_{b_n}(\\lambda_0-\\lambda_{\\ell,n})},\\qquad \\widetilde f_n(\\lambda_0):=\\sum_{j=0}^{n-1}w_{n,j}(\\lambda_0)I_n(\\lambda_{j,n}).$$\nThe weights are nonnegative and sum to one.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+          "source_section": "Statement",
+          "quote": "Let $Z=(Z_t)_{t\\in\\mathbb Z}$ be a centered real weakly stationary process\nwith autocovariance $\\gamma$. For a real two-sided sequence\n$c=(c_j)_{j\\in\\mathbb Z}\\in\\ell^1(\\mathbb Z)$ define\n$c(B)Z_t:=\\sum_{j\\in\\mathbb Z}c_jZ_{t-j}$. Then this filter is well-defined\nalmost surely and in $L^2$, is centered and weakly stationary, and has\nautocovariance\n$$\\gamma_Y(h)=\\sum_{j,k\\in\\mathbb Z}c_jc_k\\gamma(h-j+k),\\qquad h\\in\\mathbb Z.$$\nFor $c,d\\in\\ell^1(\\mathbb Z)$ their filter composition is the convolution\nfilter\n$$(c*d)_m:=\\sum_{j\\in\\mathbb Z}c_jd_{m-j},\\qquad c(B)\\bigl(d(B)Z\\bigr)=(c*d)(B)Z.$$\nAll sums are absolutely convergent in the senses justified below. This\nargument uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-radon-measure-on-an-lch-space",
+          "source_section": "Definition",
+          "quote": "For this page, a Borel measure $\\mu$ on a locally compact Hausdorff space is\n**Radon** when $\\mu(K)<\\infty$ for every compact $K$, and, for every Borel\n$E$ and every open $U$,\n$$\\mu(E)=\\inf_{E\\subseteq V\\text{ open}}\\mu(V),\\qquad \\mu(U)=\\sup_{K\\subseteq U\\text{ compact}}\\mu(K).$$\nCohn calls this convention regular. It does not assert compact inner\napproximation for arbitrary Borel $E$.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-for-nonnegative-double-series",
+          "source_section": "Statement",
+          "quote": "For every double sequence $(a_{ij})_{i,j\\in\\mathbb N}$ in $[0,+\\infty]$,\n\n$$\\sum_{i=0}^{\\infty}\\left(\\sum_{j=0}^{\\infty}a_{ij}\\right)=\\sup_{m,n\\in\\mathbb N}\\sum_{i<m}\\sum_{j<n}a_{ij}=\\sum_{j=0}^{\\infty}\\left(\\sum_{i=0}^{\\infty}a_{ij}\\right),$$\n\nwhere every sum is the nonnegative extended sum of [[def-nonnegative-extended-series]]. Thus the order of summation may be interchanged, even when the common value is $+\\infty$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-every-complex-polynomial-splits-into-linear-factors",
+          "source_section": "Statement",
+          "quote": "Every nonconstant polynomial in $\\mathbb C[x]$ splits over $\\mathbb C$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb T:=\\{z\\in\\mathbb C:|z|=1\\}$ carry the subspace topology of\n$\\mathbb C$ ([[def-subspace-topology-top]],\n[[def-complex-metric-convergence-and-continuity]]) and the multiplication of\n$\\mathbb C$, and let $\\varepsilon:\\mathbb R/\\mathbb Z\\to\\mathbb T$,\n$\\varepsilon([t]):=\\exp(2\\pi i t)$, for the published one-dimensional torus\n$\\mathbb R/\\mathbb Z$ ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]).\nThen $\\mathbb T$ is a compact metrizable topological abelian group\n([[def-topological-group]]), $\\varepsilon$ is an isomorphism of topological\ngroups, and\n$$|zw-z|=|w-1|,\\qquad |z^{-1}-w^{-1}|=|z-w|$$\nfor all $z,w\\in\\mathbb T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-compactness-agrees-with-metric-compactness",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $\\mathcal{T}_d$ be\nits metric topology ([[def-metric-topology]]), so that $(X, \\mathcal{T}_d)$ is a\ntopological space ([[def-topological-space]]) and is metrizable\n([[def-metrizable-space]]). Then:\n\n1. $(X,d)$ is a compact metric space ([[def-metric-compactness]]) **if and only\n   if** $(X, \\mathcal{T}_d)$ is a compact topological space\n   ([[def-compact-space]]).\n2. For every $A \\subseteq X$: $A$ is a compact subset of the metric space\n   $(X,d)$ if and only if $A$ is a compact subset of the topological space\n   $(X, \\mathcal{T}_d)$, the two readings of \"compact subset\" being the metric\n   subspace $(A, d_A)$ ([[def-isometry-and-metric-embedding]]) and the topological\n   subspace $(A, (\\mathcal{T}_d)_A)$ ([[def-subspace-topology-top]]).\n\n**Nothing here is a coincidence and nothing is transported.** The open-cover\ncondition of [[def-metric-compactness]] quantifies over families of subsets open\nin $(X,d)$, and by [[def-metric-topology]] those are exactly the members of\n$\\mathcal{T}_d$; so the two conditions are not merely equivalent, they are the\nsame condition written twice. No choice principle is used.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-compact-implies-complete-and-totally-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]). Then $(X,d)$ is totally bounded\n([[def-totally-bounded]]) and complete ([[def-complete-metric-space]]).\n\n**Both implications are theorems of ZF.** Completeness is obtained here from the\nfinite intersection characterisation ([[thm-compact-iff-finite-intersection-property]])\napplied to the closures of the tails of a Cauchy sequence, and not from the\nextraction of a convergent subsequence, which would route the argument through\nsequential compactness. What matters for the ledger is that the route taken below\nselects nothing at all; the first remark below says why the other route was not\ntaken.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-compact-metric-space-has-a-countable-dense-subset",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]). Let $(X,d)$\nbe a compact metric space ([[def-metric-compactness]], [[def-metric-space]]).\nThen there is an at most countable set $D \\subseteq X$ ([[def-countable]]) that\nis dense in $X$, that is $\\overline{D} = X$\n([[def-metric-interior-closure-boundary]]).\n\n**Where the axiom is spent.** Once at step 2.1, to fix a finite $1/(n+1)$-net for\nevery $n \\in \\mathbb{N}$ at the same time; the family of sets chosen from is\nwritten down before any selection and does not depend on the earlier ones. The\nappeal to [[thm-countable-union-of-countable]] at step 4.1 carries the same\nhypothesis $\\mathrm{AC}_\\omega$ and no more, so nothing further is spent there.\nAs always on this page the claim is an upper bound on the cost of this proof, not\nan assertion that $\\mathrm{AC}_\\omega$ is necessary.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-polish-space",
+          "source_section": "Definition",
+          "quote": "A topological space is **Polish** when it is separable ([[def-separable-space]]) and completely metrizable: its topology is induced by some complete metric ([[lem-complete-remetrisation]]). No particular compatible complete metric or countable dense subset is part of the structure.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. If $P$ is Polish and $\\mu$ is a Borel probability measure on $P$, then for every Borel $A\\subseteq P$ and $\\varepsilon>0$ there is a compact $K\\subseteq A$ with $\\mu(A\\setminus K)<\\varepsilon$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F6], factor $\\phi$ over $\\mathbb C$ as $\\phi(z)=\\prod_{\\ell=1}^m(1-z/r_\\ell)$, with multiplicities and $\\phi(0)=1$; if $m=0$, take the empty product $1$. None of the roots satisfies $|r_\\ell|=1$. For a root with $|r_\\ell|>1$ use $(1-z/r_\\ell)^{-1}=\\sum_{j\\ge0}r_\\ell^{-j}z^j$ on the unit circle. For a root with $|r_\\ell|<1$ use $(1-z/r_\\ell)^{-1}=-\\sum_{j\\ge1}r_\\ell^jz^{-j}$ there. Each coefficient sequence is in $\\ell^1(\\mathbb Z)$, so their finite convolution and multiplication by $\\theta$ give a two-sided sequence $h\\in\\ell^1(\\mathbb Z)$ with $$\\sum_{k\\in\\mathbb Z}h_kz^k=\\frac{\\theta(z)}{\\phi(z)},\\qquad |z|=1.$$ Conjugate roots occur in pairs for real $\\phi,\\theta$. For each conjugate pair the finite convolution coefficient is unchanged by complex conjugation after reversing its summation index; real roots have real coefficients. Multiplication by real $\\theta$ preserves reality.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The angular measure $d\\lambda$ is a finite Borel measure of total mass $2\\pi$ by [F2]. Normalize it to $P=d\\lambda/(2\\pi)$, a Borel probability by [F11]. By [F7], $\\mathbb T$ is Polish, so [F8] gives compact inner approximations for every Borel set under $P$; scaling by $2\\pi$ gives the same property for $d\\lambda$. For any Borel $E$, apply this inner approximation to $\\mathbb T\\setminus E$: for every $\\eta>0$ there is compact $K\\subseteq\\mathbb T\\setminus E$ with $d\\lambda((\\mathbb T\\setminus E)\\setminus K)<\\eta$. Then $U=\\mathbb T\\setminus K$ is open, contains $E$, and $d\\lambda(U\\setminus E)<\\eta$. Thus $d\\lambda$ is outer regular on Borel sets and inner regular on open sets; it is finite on compact sets because its total mass is finite. Hence $d\\lambda$ is Radon by [F4].",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F7",
+            "F8",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $a(z)=1/\\phi(z)$ for the two-sided absolutely convergent series constructed in step 1.1. Its product with $\\phi$ is the constant series $1$. Applying filter composition [F3] to the ARMA equation gives $$X_t-\\mu=a(B)\\phi(B)(X_t-\\mu)=a(B)\\theta(B)\\epsilon_t=\\sum_{k\\in\\mathbb Z}h_k\\epsilon_{t-k}.$$ Thus every weakly stationary solution under the stated root condition is the same two-sided filtered white-noise process.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Define $$f(\\lambda):=\\frac{\\sigma^2}{2\\pi}\\left|\\sum_{k\\in\\mathbb Z}h_ke^{-ik\\lambda}\\right|^2=\\frac{\\sigma^2}{2\\pi}\\frac{|\\theta(e^{-i\\lambda})|^2}{|\\phi(e^{-i\\lambda})|^2}.$$ The series is uniformly convergent because $h\\in\\ell^1$, so $f$ is continuous, periodic, and nonnegative. It is bounded on the compact circle; therefore $F(E):=\\int_Ef\\,d\\lambda$ is a finite positive Borel measure by [F9] and [F10]. For any Borel $E$ and $\\varepsilon>0$, outer regularity of $d\\lambda$ gives an open $U\\supset E$ with $d\\lambda(U\\setminus E)<\\varepsilon/(\\|f\\|_\\infty+1)$. Since $F(U)=F(E)+F(U\\setminus E)$ and $F(U\\setminus E)\\le\\|f\\|_\\infty d\\lambda(U\\setminus E)$, this proves outer regularity of $F$. For any open $O$, inner regularity of $d\\lambda$ gives a compact $K\\subset O$ with $d\\lambda(O\\setminus K)<\\varepsilon/(\\|f\\|_\\infty+1)$; the same bound on $F(O\\setminus K)$ proves inner regularity of $F$ on open sets. Thus $F$ is Radon by [F4].",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying the covariance formula in [F3] to the representation in step 2.1 and using $\\operatorname{Cov}(\\epsilon_s,\\epsilon_t)=\\sigma^2$ when $s=t$ and $0$ otherwise gives $$\\gamma(h)=\\sigma^2\\sum_{k\\in\\mathbb Z}h_{k+h}h_k.$$ The sum is absolutely convergent because $h\\in\\ell^1(\\mathbb Z)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $H_N(\\lambda):=\\sum_{|k|\\le N}h_ke^{-ik\\lambda}$. Since $h\\in\\ell^1$, $H_N$ converges uniformly to $H(\\lambda):=\\sum_kh_ke^{-ik\\lambda}$. The sequence $H_N$ is uniformly bounded, so $|H_N|^2$ converges uniformly to $|H|^2$. Expanding each finite square gives $|H_N(\\lambda)|^2=\\sum_{|j|,|k|\\le N}h_jh_ke^{-i(j-k)\\lambda}$, and [F5] gives $\\sum_{j,k}|h_jh_k|=(\\sum_k|h_k|)^2<\\infty$. Hence the finite squares also converge uniformly to the full double series. Integration against $e^{ih\\lambda}$ preserves this uniform limit because the circle has finite measure. For each integer $h$, $$\\int_{\\mathbb T}e^{ih\\lambda}f(\\lambda)\\,d\\lambda=\\sigma^2\\sum_{j,k}h_jh_k\\frac1{2\\pi}\\int_{-\\pi}^{\\pi}e^{i(h-j+k)\\lambda}\\,d\\lambda=\\sigma^2\\sum_kh_{k+h}h_k=\\gamma(h),$$ where the middle integral is $1$ when $h-j+k=0$ and $0$ otherwise, and the last equality is step 3.1. Hence $F$ represents the autocovariance and $f$ is a spectral density under [F2].",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats degree m=0 with the empty product 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the density is nonnegative; zeros of theta on the unit circle are explicitly permitted, while sigma^2>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the case phi=theta=1 reduces in the displayed formula to white-noise density sigma^2/(2pi)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: phi has no zero on the circle, while numerator zeros are allowed; steps 2.1–4.1 still construct a finite density."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the formula is periodic on the circle, so lambda=-pi and lambda=pi represent the same point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–3.1 use finite polynomial factorization, absolutely summable filters, and direct integration; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The density theorem is an implication, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The density theorem is an implication, not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-42",
+        "notes": "Read all six steps and all sixteen cited supplier interfaces. Roots outside the circle give nonnegative-index geometric filters; inside roots give -sum_(j>=1) r^j z^(-j), both l¹. Finite convolution and conjugate pairing give real coefficients; the reciprocal-polynomial identity gives the identity convolution (coefficient extraction by integration also verifies this). Composition applies to the centered weakly stationary solution without requiring causality or invertibility. Countable Choice is explicitly carried from angular measure, separability and Polish regularity. Finite angular measure normalized to a probability is inner regular; complements give outer regularity. Continuous bounded density transfers both Radon properties. White-noise covariance gives sigma² sum_k h_(k+h)h_k; integrating exp(i h lambda) against the uniform double series selects j=k+h and the factor 1/(2pi) exactly. Checked constant polynomials, mixed/repeated roots, unit-circle exclusion for phi, allowed theta zeros, and -pi/pi identification. No Herglotz shortcut or independence assumption. Wang Theorem 4.4 and proof, printed p. 62, supports the exact noncausal/noninvertible scope. Reader/refuter empty; no defect."
+      }
+    },
+    "thm-stable-linear-process-sample-mean-clt": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-process-and-arma-model",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real process on one probability space.\nThe backshift is $(BX)_t:=X_{t-1}$, and for a polynomial\n$a(z)=\\sum_{j=0}^m a_jz^j$ set\n$a(B)X_t:=\\sum_{j=0}^m a_jX_{t-j}$. Weak stationarity and the covariance\nconvention are those of\n[[def-strict-and-weak-stationarity-for-time-series]] and\n[[def-moments-variance-and-covariance]].\n\nA real process $\\epsilon=(\\epsilon_t)_{t\\in\\mathbb Z}$ is **white noise**\nwith variance $\\sigma^2$ when\n$\\mathbb E[\\epsilon_t]=0$, $0<\\sigma^2=\\mathbb E[\\epsilon_t^2]<\\infty$,\nand $\\operatorname{Cov}(\\epsilon_t,\\epsilon_s)=0$ for all $s\\ne t$.\nThis definition requires only zero covariance at distinct times; it does not\nrequire independence, identical distributions, or Gaussian laws.\n\nFor a real sequence $\\psi=(\\psi_j)_{j\\ge0}$ with\n$\\sum_{j\\ge0}|\\psi_j|<\\infty$, a **causal linear process** driven by white\nnoise is\n$$X_t-\\mu:=\\sum_{j=0}^{\\infty}\\psi_j\\epsilon_{t-j},\\qquad t\\in\\mathbb Z,$$\nwhere the series is its almost-sure and $L^2$ limit, established by\n[[lem-absolutely-summable-linear-filters-preserve-weak-stationarity]].\n\nAn **ARMA$(p,q)$ model**, for nonnegative integers $p,q$, is an equation\n$$\\phi(B)(X_t-\\mu)=\\theta(B)\\epsilon_t,\\qquad t\\in\\mathbb Z,$$\nwhere\n$$\\phi(z)=1-\\sum_{j=1}^p\\phi_jz^j,\\qquad \\theta(z)=1+\\sum_{j=1}^q\\theta_jz^j$$\nhave real coefficients and constant term one. If $p=0$ or $q=0$, the\ncorresponding polynomial is $1$. The displayed equation is imposed with a\n**coprime normalized pair**, meaning that the two polynomials have no common\ncomplex root and both have constant term one. Given an unreduced pair,\ncancel every common nonconstant factor in $\\mathbb C[z]$ and normalize\nboth remaining polynomials to have constant term one to define its associated\n**reduced model**. This is a model convention: a solution of the unreduced\nequation need not satisfy the reduced equation. Root criteria for the reduced\npair apply only to solutions of that reduced equation.\n\nFor an AR$(p)$ model ($q=0$), expansion gives the regression form\n$X_t=c+\\sum_{j=1}^p\\phi_jX_{t-j}+\\epsilon_t$ with\n$c=\\mu(1-\\sum_{j=1}^p\\phi_j)$. Thus a fixed intercept in the AR regression\nis the original mean parameter written in observation coordinates.\n\nA **causal representation** of this model is a representation\n$X_t-\\mu=\\sum_{j\\ge0}\\psi_j\\epsilon_{t-j}$ with\n$\\sum_j|\\psi_j|<\\infty$. An **invertible representation** is\n$\\epsilon_t=\\sum_{j\\ge0}\\pi_j(X_{t-j}-\\mu)$ with\n$\\sum_j|\\pi_j|<\\infty$. These are properties of the displayed relation\nbetween $X$ and $\\epsilon$, not claims that white noise is iid.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+          "source_section": "Statement",
+          "quote": "Let $Z=(Z_t)_{t\\in\\mathbb Z}$ be a centered real weakly stationary process\nwith autocovariance $\\gamma$. For a real two-sided sequence\n$c=(c_j)_{j\\in\\mathbb Z}\\in\\ell^1(\\mathbb Z)$ define\n$c(B)Z_t:=\\sum_{j\\in\\mathbb Z}c_jZ_{t-j}$. Then this filter is well-defined\nalmost surely and in $L^2$, is centered and weakly stationary, and has\nautocovariance\n$$\\gamma_Y(h)=\\sum_{j,k\\in\\mathbb Z}c_jc_k\\gamma(h-j+k),\\qquad h\\in\\mathbb Z.$$\nFor $c,d\\in\\ell^1(\\mathbb Z)$ their filter composition is the convolution\nfilter\n$$(c*d)_m:=\\sum_{j\\in\\mathbb Z}c_jd_{m-j},\\qquad c(B)\\bigl(d(B)Z\\bigr)=(c*d)(B)Z.$$\nAll sums are absolutely convergent in the senses justified below. This\nargument uses no choice axiom.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-arma-causality-and-invertibility-root-criteria",
+          "source_section": "Statement",
+          "quote": "Let $X$ be weakly stationary and let $(X_t,\\epsilon_t)$ satisfy the\nnormalized coprime ARMA$(p,q)$ equation\nof [[def-linear-process-and-arma-model]], with centered white noise of\nvariance $\\sigma^2>0$. A **causal representation** with absolutely summable\none-sided coefficients exists if and only if $\\phi(z)\\ne0$ for every\n$|z|\\le1$. In that case its coefficients are uniquely determined by\n$$\\Psi(z):=\\sum_{j\\ge0}\\psi_jz^j=\\frac{\\theta(z)}{\\phi(z)},\\qquad |z|\\le1,$$\nand there are constants $C<\\infty$ and $r>1$ with\n$|\\psi_j|\\le Cr^{-j}$.\n\nAn **invertible representation** with absolutely summable one-sided\ncoefficients exists if and only if $\\theta(z)\\ne0$ for every $|z|\\le1$. Its\ncoefficients are uniquely determined by\n$$\\Pi(z):=\\sum_{j\\ge0}\\pi_jz^j=\\frac{\\phi(z)}{\\theta(z)},\\qquad |z|\\le1.$$\nThe two criteria are separate: neither condition assumes the other.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-lindeberg-levy-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_k)_{k\\ge1}$ be iid real random variables with mean $m$ and variance $0<\\sigma^2<\\infty$. Then $$\\frac{\\sum_{k=1}^nX_k-nm}{\\sigma\\sqrt n}\\ \\Rightarrow\\ N(0,1).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-vector-slutsky",
+          "source_section": "Statement",
+          "quote": "Let $d,k,m\\ge1$ be fixed. For each $n$, let $X_n\\in\\mathbb R^d$ and $Y_n\\in\\mathbb R^k$ be random vectors on one probability space; the probability space may vary with $n$. Let $X\\in\\mathbb R^d$ be a random vector on any probability space, and let $c\\in\\mathbb R^k$ be constant. If $X_n\\Rightarrow X$ and $Y_n-c=o_P(1)$, then\n$$ (X_n,Y_n)\\Rightarrow(X,c). $$\nConsequently, for every continuous $h:\\mathbb R^{d+k}\\to\\mathbb R^m$, $h(X_n,Y_n)\\Rightarrow h(X,c)$. No independence between $X_n$ and $Y_n$ is required.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuous-maps-preserve-convergence-in-probability",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^d\\to\\mathbb R^k$ be continuous, and suppose that, for every\n$\\varepsilon>0$,\n$$\\mathbb P(\\|Z_n-Z\\|>\\varepsilon)\\longrightarrow0.$$\nThen, for every $\\varepsilon>0$,\n$$\\mathbb P(\\|f(Z_n)-f(Z)\\|>\\varepsilon)\\longrightarrow0.$$\nIn particular, coordinate pairing gives stability under sums and products; it\ngives quotients whenever the limiting denominator is nonzero almost surely,\ndefining the quotient arbitrarily where the approximating denominator is zero.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-portmanteau-theorem",
+          "source_section": "Statement",
+          "quote": "For Borel probabilities $\\mu_n,\\mu$ on a metric space S, the following are equivalent: (i) $\\mu_n\\Rightarrow\\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\\limsup_n\\mu_n(F)\\le\\mu(F)$ for every closed F; (iv) $\\liminf_n\\mu_n(G)\\ge\\mu(G)$ for every open G; (v) $\\mu_n(A)\\to\\mu(A)$ for every Borel A with $\\mu(\\partial A)=0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-fatou-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(f_n)$ be nonnegative measurable functions. Then\n$$\\int \\liminf_{n\\to\\infty}f_n\\,d\\mu\\le\\liminf_{n\\to\\infty}\\int f_n\\,d\\mu.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The weighted summability implies $\\sum_j|\\psi_j|<\\infty$. By [F2], the series defining $X_t-\\mu$ is well-defined almost surely and in $L^2$, and the filtered process is weakly stationary. Thus for a causal ARMA the weak-stationarity premise of [F4] is met, and [F4] gives $|\\psi_j|\\le Cr^{-j}$ for some $C<\\infty$ and $r>1$. The ratio of consecutive terms $\\sqrt{j+2}\\,r^{-(j+1)}/(\\sqrt{j+1}\\,r^{-j})$ tends to $1/r<1$, so $\\sum_j\\sqrt{j+1}|\\psi_j|<\\infty$ as required. Absolute summability also makes $\\Psi$ finite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $j\\ge0$ let $D_{n,j}:=\\sum_{t=1}^n\\epsilon_{t-j}-\\sum_{t=1}^n\\epsilon_t$, so $D_{n,0}=0$. For finite $J$, summing the first $J$ filter coefficients over $t=1,\\ldots,n$ gives $$\\sum_{t=1}^n\\sum_{j=0}^J\\psi_j\\epsilon_{t-j} =\\left(\\sum_{j=0}^J\\psi_j\\right)\\sum_{t=1}^n\\epsilon_t +\\sum_{j=0}^J\\psi_jD_{n,j}.$$ As $J\\to\\infty$, the left side converges in $L^2$ to $\\sum_{t=1}^n(X_t-\\mu)$ by [F2], and the first term on the right converges in $L^2$ because $\\sum_j|\\psi_j|<\\infty$. We pass the finite identity to its limit once the remainder convergence has been established.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $1\\le j\\le n$, the two sums defining $D_{n,j}$ cancel on their overlap and leave $j$ distinct positive-sign and $j$ distinct negative-sign innovations. For $j>n$, they leave $n$ of each. These innovations are centered, mutually independent, and have variance $\\sigma^2$, so $$\\|D_{n,j}\\|_2=\\sigma\\sqrt{2\\min(j,n)}\\le\\sigma\\sqrt{2j}.$$ The variance calculation uses the zero covariance of distinct innovations from the white-noise condition in [F1] (also implied by iid in [F3]). For finite sums, expanding the square and using Cauchy–Schwarz [F10] gives the $L^2$ triangle bound. Therefore $\\sum_j\\mathbb E|\\psi_jD_{n,j}| \\le\\sigma\\sqrt2\\sum_j|\\psi_j|\\sqrt j<\\infty$; Tonelli [F10] defines an almost-surely absolutely convergent remainder $R_n:=\\sum_{j\\ge0}\\psi_jD_{n,j}$. Applying the finite-sum $L^2$ bound to each tail and Fatou [F10] gives $$\\|R_n\\|_2\\le\\sigma\\sum_{j\\ge0}|\\psi_j|\\sqrt{2j}<\\infty,$$ uniformly in $n$, and the same bound for tails tends to zero. Thus the partial remainders converge to $R_n$ in $L^2$. The uniform bound follows from the given weighted summability.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F3",
+            "F10",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Passing to the $L^2$ limit in step 1.2 yields $$\\sum_{t=1}^n(X_t-\\mu)=\\Psi\\sum_{t=1}^n\\epsilon_t+R_n.$$ Step 1.3 gives $\\mathbb E[R_n^2]/n\\to0$. For every $\\delta>0$, [F11] applied to $R_n^2$ gives $\\mathbb P(|R_n|/\\sqrt n\\ge\\delta) \\le\\mathbb E[R_n^2]/(n\\delta^2)\\to0$. Thus $R_n/\\sqrt n\\to_{\\mathbb P}0$.",
+          "step": "2.1",
+          "inputs": [
+            "F11",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5], $(\\sigma\\sqrt n)^{-1}\\sum_{t=1}^n\\epsilon_t\\Rightarrow N(0,1)$; multiplying by $\\sigma$ gives $n^{-1/2}\\sum_{t=1}^n\\epsilon_t\\Rightarrow N(0,\\sigma^2)$. Multiplying by $\\Psi$ (also when $\\Psi=0$) and adjoining the remainder $R_n/\\sqrt n\\to_{\\mathbb P}0$ from step 2.1, [F6] gives $$\\sqrt n(\\bar X_n-\\mu)\\Rightarrow N(0,\\sigma^2\\Psi^2).$$ This also covers $\\Psi=0$, where the limit is the point mass $N(0,0)$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Now assume $\\tau=\\sigma|\\Psi|>0$ and $\\widehat\\tau_n^2\\to_{\\mathbb P}\\tau^2$. By [F7], $\\widehat\\tau_n=\\sqrt{\\widehat\\tau_n^2}\\to_{\\mathbb P}\\tau$. The map $g(x,s):=x/\\max(s,\\tau/2)$ is continuous everywhere; by [F6] and step 3.1, $g(\\sqrt n(\\bar X_n-\\mu),\\widehat\\tau_n)\\Rightarrow N(0,1)$. The event $\\widehat\\tau_n<\\tau/2$ has probability tending to zero by convergence in probability to $\\tau$. On its complement this transformed variable equals $T_n$, so $T_n\\Rightarrow N(0,1)$.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 3.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For fixed $c>0$, on $\\{\\widehat\\tau_n>0\\}$ membership of $\\mu$ in the stated interval is equivalent to $|T_n|\\le c$. The complementary event has probability tending to zero by step 4.1. The boundary $\\{-c,c\\}$ has $N(0,1)$ probability zero by [F8], so [F9] gives limiting coverage $\\mathbb P(|N(0,1)|\\le c)$. The conclusion is conditional on the separately proved consistency of $\\widehat\\tau_n^2$; it does not assert that naming an estimator makes it consistent.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F8",
+            "F9",
+            "step 4.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 1.3, 2.1, and 3.1 allow every psi_j=0; then Psi=0 and the limit is the point mass N(0,0)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The unstudentized theorem permits tau^2=0; steps 4.1 and 5.1 separately require tau^2>0 for studentization and interval coverage."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the coefficient condition includes psi_0 alone and n is a positive sample size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles Psi=0; the variance-estimate conclusion is stated only for positive long-run variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 uses fixed c>0 and the continuous N(0,1) law gives zero mass to the two interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit in the Statement and A1; its supplier branches are used at steps 3.1 and 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The CLT and studentization claims are implications, not iff statements."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The CLT and studentization claims are implications, not iff statements."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-42",
+        "notes": "Read all seven current steps and all fourteen cited dependency interfaces. Weighted summability implies l¹, so the accepted filter lemma supplies almost-sure/L² existence. Checked finite endpoint identity and exact norm sigma sqrt(2 min(j,n)), including j=0, j=n and j>n. Tonelli and Fatou with sum sqrt(j)|psi_j| finite give L² remainder convergence and a bound uniform in n. Thus R_n/sqrt(n) tends to zero in probability by Markov; iid CLT and Slutsky give the claimed normal law including Psi=0 as a point mass. Root exponential decay implies the weighted condition for stable causal ARMA. Studentization separately requires a nonnegative estimator consistent for strictly positive tau²; square root on its nonnegative domain is continuous (or its continuous real extension sqrt(max(s,0)) suffices). The truncated denominator and vanishing exceptional event justify any measurable finite zero convention. Fixed interval endpoints have zero normal mass, so Portmanteau gives coverage. AC is carried from iid CLT and normal-law suppliers. No white-noise-only or automatic estimator consistency claim; reader/refuter empty; no defect."
+      }
+    },
+    "thm-fixed-order-autoregressive-ols-martingale-limit": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.3",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-stationary-process-and-canonical-shift",
+          "source_section": "Definition",
+          "quote": "Let $S\\in\\{\\mathbb R,\\mathbb C\\}$ with Borel sigma-algebra $\\mathcal E$, let $(\\Omega,\\mathcal F,\\mathbb P)$ be a\nprobability space, and let $Y=(Y_n)_{n\\ge0}$ be a stochastic process with each\n$Y_n:\\Omega\\to S$ a random element\n([[def-stochastic-process-and-finite-dimensional-distributions]]). The process\n$Y$ is **strictly stationary** when every finite-dimensional law is unchanged\nby a common nonnegative time shift: for every $r\\ge1$, every\n$0\\le n_1<\\cdots<n_r$ and every $m\\ge0$,\n\n$$\\mathcal L(Y_{m+n_1},\\ldots,Y_{m+n_r})=\\mathcal L(Y_{n_1},\\ldots,Y_{n_r}).$$\n\nThe **canonical path law** of $Y$ is the pushforward\n$\\mathbb P_Y=\\mathcal L(Y)$ of $\\mathbb P$ under the coordinate map\n$\\omega\\mapsto(Y_n(\\omega))_{n\\ge0}$, a probability measure on the product\nspace $S^{\\mathbb N_0}$ with its product sigma-algebra. The **left shift** is\n$\\theta(z)_n=z_{n+1}$ for $z=(z_n)_{n\\ge0}\\in S^{\\mathbb N_0}$.\n\nA strictly stationary process is called **ergodic** when the canonical shift $\\theta$ is ergodic\nfor $\\mathbb P_Y$ in the sense of\n[[def-ergodic-measure-preserving-system]]. The shift-invariance needed for that\ndefinition, namely that $\\theta$ is measure preserving for $\\mathbb P_Y$, is\nproved below for strictly stationary $Y$, so in that case\n$(S^{\\mathbb N_0},\\mathcal E^{\\otimes\\mathbb N_0},\\mathbb P_Y,\\theta)$ is a\nprobability measure-preserving system in the sense of\n[[def-measure-preserving-transformation-and-system]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ergodic-measure-preserving-system",
+          "source_section": "Definition",
+          "quote": "A measure-preserving system is **ergodic for $\\mu$** if each $E\\in\\mathcal I$ has $\\mu(E)=0$ or $\\mu(X\\setminus E)=0$, with $\\mathcal I$ as in [[def-strict-and-mod-null-invariant-sigma-algebras]]. For a probability system this means $\\mu(E)\\in\\{0,1\\}$. The definition is relative to the invariant measure; no probability assumption is implicit in the general null/conull formulation.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stationary-process-birkhoff-ergodic-limit",
+          "source_section": "Statement",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). Let $Y=(Y_n)_{n\\ge0}$ be a real-valued\nstrictly stationary process with $\\mathbb E|Y_0|<\\infty$\n([[def-stationary-process-and-canonical-shift]]), with canonical path law\n$\\mathbb P_Y$ and left shift $\\theta$. Let\n$\\mathcal I=\\{A:\\theta^{-1}A=A\\}$ be the strictly invariant sigma-algebra on\npath space ([[def-strict-and-mod-null-invariant-sigma-algebras]]). Then\n\n$$\\frac1n\\sum_{k=0}^{n-1}Y_k\\ \\longrightarrow\\ \\mathbb E_{\\mathbb P_Y}[z_0\\mid\\mathcal I]\\circ\\Phi \\qquad\\text{almost surely and in }L^1(\\mathbb P),$$\n\nwhere $\\Phi(\\omega)=(Y_n(\\omega))_{n\\ge0}$ and the conditional expectation is\nthat of [[def-conditional-expectation-given-a-sigma-algebra]]. If moreover the\ncanonical shift is ergodic ([[def-ergodic-measure-preserving-system]]), then\nthe limit is the constant $\\mathbb EY_0$. For complex-valued processes the\nassertions hold componentwise for real and imaginary parts.",
+          "uses": [
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-square-integrable-martingale-difference-array-and-variance-clock",
+          "source_section": "Definition",
+          "quote": "Assume AC on a fixed probability space $(\\Omega,\\mathcal F,P)$. A **rowwise square-integrable martingale-difference array** consists of families $(\\mathcal F_{n,k})_{n\\ge1,k\\ge0}$ and $(Z_{n,k})_{n,k\\ge1}$ such that for each $n$ the $\\mathcal F_{n,k}$ form an increasing filtration of sub-$\\sigma$-algebras of $\\mathcal F$, $Z_{n,k}\\in L^2$ is $\\mathcal F_{n,k}$-measurable, and\n$$\\mathbb E[Z_{n,k}\\mid\\mathcal F_{n,k-1}]=0\\quad\\text{a.s.}$$\nDefine\n$$M_{n,m}=\\sum_{k=1}^mZ_{n,k},\\qquad v_{n,k}=\\mathbb E[Z_{n,k}^2\\mid\\mathcal F_{n,k-1}],\\qquad \\Gamma_{n,m}=\\sum_{k=1}^m v_{n,k}.$$\nEach $v_{n,k}$ is nonnegative, integrable, and $\\mathcal F_{n,k-1}$-measurable; hence $\\Gamma_{n,m}$ is an increasing predictable **variance clock**, while $M_{n,m}$ is a rowwise $L^2$ martingale. A finite triangular row is included by putting $Z_{n,k}=0$ and holding the filtration fixed after its last column. This preserves both limiting sums. AC is used only through conditional-moment existence and countable representative selection.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\nA family $(\\mathcal F_i)_{i\\in I}$ of sub-sigma-algebras of $\\mathcal F$ is\n**independent** when it is independent as a family of event classes in the\nsense of [[def-independent-families-of-event-classes]].\n\nA family $(A_i)_{i\\in I}$ of events is **independent** when the singleton event\nclasses $\\bigl(\\{A_i\\}\\bigr)_{i\\in I}$ are independent. Equivalently, for every\nfinite choice of distinct indices $i_0,\\dots,i_{n-1}$,\n\n$$\\mathbb P\\left(\\bigcap_{k<n}A_{i_k}\\right)=\\prod_{k<n}\\mathbb P(A_{i_k}).$$\n\nFor two events this reduces to the familiar identity\n$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-martingale-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(Z_{n,k},\\mathcal F_{n,k})$ be a square-integrable martingale-difference array such that, for every $n$, $M_{n,m}$ and $\\Gamma_{n,m}$ converge almost surely as $m\\to\\infty$ to finite limits $M_{n,\\infty}$ and $\\Gamma_{n,\\infty}$. If\n$$\\Gamma_{n,\\infty}\\longrightarrow1\\quad\\text{in probability}$$\nand, for every $\\varepsilon>0$,\n$$L_n(\\varepsilon):=\\sum_{k\\ge1}\\mathbb E[Z_{n,k}^2 1_{\\{|Z_{n,k}|>\\varepsilon\\}}]\\longrightarrow0,$$\nthen $M_{n,\\infty}\\Rightarrow N(0,1)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $d\\ge1$ be a finite integer and $p_\\theta(x)=\\theta\\cdot x$ for $\\theta\\in\\mathbb R^d$. Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$. Moreover, if $(p_\\theta)_*\\mu_n\\Rightarrow(p_\\theta)_*\\mu$ for every $\\theta$ and a specified Borel probability law $\\mu$, then $\\mu_n\\Rightarrow\\mu$. If dimension zero is admitted, interpret $\\mathbb R^0$ as the singleton empty tuple; both conclusions then hold as well.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-vector-slutsky",
+          "source_section": "Statement",
+          "quote": "Let $d,k,m\\ge1$ be fixed. For each $n$, let $X_n\\in\\mathbb R^d$ and $Y_n\\in\\mathbb R^k$ be random vectors on one probability space; the probability space may vary with $n$. Let $X\\in\\mathbb R^d$ be a random vector on any probability space, and let $c\\in\\mathbb R^k$ be constant. If $X_n\\Rightarrow X$ and $Y_n-c=o_P(1)$, then\n$$ (X_n,Y_n)\\Rightarrow(X,c). $$\nConsequently, for every continuous $h:\\mathbb R^{d+k}\\to\\mathbb R^m$, $h(X_n,Y_n)\\Rightarrow h(X,c)$. No independence between $X_n$ and $Y_n$ is required.",
+          "uses": [
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:\n\n1. If $U_n=o_P(1)$ and $V_n=o_P(1)$, then $U_n+V_n=o_P(1)$. If $U_n=O_P(1)$ and $V_n=O_P(1)$, then $U_n+V_n=O_P(1)$.\n2. For positive integers $p,q,r$, let $B:\\mathbb R^p\\times\\mathbb R^q\\to\\mathbb R^r$ be a fixed map for which there is a constant $C\\ge0$ with $\\|B(u,v)\\|_2\\le C\\|u\\|_2\\|v\\|_2$ for all $u,v$. Assume in each application that $B(U_n,V_n)$ is a random vector on the same probability space as $U_n,V_n$, for every $n$. If $U_n=o_P(1)$ and $V_n=O_P(1)$, or conversely, then $B(U_n,V_n)=o_P(1)$. If both are $O_P(1)$, then $B(U_n,V_n)=O_P(1)$.\n3. If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.\n\nThe last conclusion is finite-dimensional boundedness in probability. No independence or Axiom of Choice is assumed.",
+          "uses": [
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-kolmogorov-iid-l1-strong-law",
+          "source_section": "Statement",
+          "quote": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-convergence-in-distribution-of-random-elements",
+          "source_section": "Definition",
+          "quote": "Random elements $X_n,X$ with values in the same metric space **converge in distribution**, written $X_n\\Rightarrow X$, if their laws from [[def-law-or-distribution-of-a-random-element]] satisfy $P_{X_n}\\Rightarrow P_X$ in [[def-weak-convergence-of-borel-probability-measures]]. They may be defined on different probability spaces. The definition specifies only their marginal laws.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-convergence-in-probability",
+          "source_section": "Definition",
+          "quote": "For real random variables $(X_n)$ and $X$ on one probability space, write\n$X_n\\to X$ **in probability** when, for every $\\varepsilon>0$,\n$$\\mathbb P(|X_n-X|>\\varepsilon)\\longrightarrow0.$$\nThis is precisely [[def-convergence-in-measure]] for the probability measure.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $a\\in\\mathbb R^d$ and $t\\ge1$. For any $A\\in\\mathcal F_{t-1}$, the variables $a^TZ_t\\,1_A$ and $(a^TZ_t)^2\\,1_A$ are $\\mathcal F_{t-1}$-measurable. Past-independence, [F5], and $\\mathbb E[\\epsilon_t]=0$ give $\\mathbb E[a^TZ_t\\epsilon_t1_A]=0$; past-independence, [F5], and $\\mathbb E[\\epsilon_t^2]=\\sigma^2$ give $\\mathbb E[(a^TZ_t)^2\\epsilon_t^2 1_A] =\\sigma^2\\mathbb E[(a^TZ_t)^2 1_A]$. By [F4] these event-integral identities say $$\\mathbb E[a^TZ_t\\epsilon_t\\mid\\mathcal F_{t-1}]=0,\\qquad \\mathbb E[(a^TZ_t\\epsilon_t)^2\\mid\\mathcal F_{t-1}] =\\sigma^2(a^TZ_t)^2.$$ Factorization also gives $\\mathbb E[(a^TZ_t\\epsilon_t)^2]=\\sigma^2a^T\\Gamma a<\\infty$, so each score increment is square-integrable.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each coordinate pair $(i,j)$, the sequence $V_k^{ij}:=Z_{k,i}Z_{k,j}$, $k\\ge1$, is an integrable measurable function of the finite block $(X_{k-p},\\ldots,X_{k-1})$. Cauchy–Schwarz gives $\\mathbb E|V_k^{ij}|\\le (\\mathbb E Z_{k,i}^2)^{1/2}(\\mathbb E Z_{k,j}^2)^{1/2}<\\infty$. The one-sided process $W_m:=X_{m+1-p}$, $m\\ge0$, has the same canonical path law as the one-sided restriction of $X$, by strict stationarity. Each lag block $(X_{k-p},\\ldots,X_{k-1})$ is a fixed finite-block function of $W_{k-1},\\ldots,W_{k+p-2}$. A shift-invariant event for this factor pulls back to a shift-invariant event for $W$, so the block process is ergodic. Applying [F2] componentwise gives $G_n\\to\\Gamma$ almost surely, since there are finitely many entries.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F15], the positive eigenvalues of $\\Gamma$ have positive product, so $\\det\\Gamma>0$. The determinant and cofactors are polynomials in the matrix entries, hence $\\det G_n\\to\\det\\Gamma$ almost surely. Therefore $\\mathbb P(G_n\\text{ is singular})\\to0$. On the invertible event, the adjugate formula $G_n^{-1}=\\operatorname{adj}(G_n)/\\det G_n$ gives inverse convergence on the invertible event. Define $H_n=G_n^{-1}$ there and $H_n=\\Gamma^{-1}$ otherwise; then $H_n\\to\\Gamma^{-1}$ in probability. The OLS fallback is measurable because $G_n$ and $\\det G_n$ are measurable, and inversion is continuous on the invertible matrices.",
+          "step": "2.1",
+          "inputs": [
+            "F14",
+            "F15",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $a\\ne0$ and put $\\lambda_a:=\\sigma^2a^T\\Gamma a>0$. For each $n$, define $$D_{n,k}:=\\frac{a^TZ_k\\epsilon_k}{\\sqrt{n\\lambda_a}} \\quad(1\\le k\\le n),\\qquad D_{n,k}:=0\\quad(k>n),$$ with filtration $\\mathcal F_k$. By step 1.1 the nonzero terms are square-integrable martingale differences; the padded terms preserve that property.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "By step 1.1, the terminal predictable variance of this row is $$\\Gamma_{n,\\infty} =\\frac1{na^T\\Gamma a}\\sum_{k=1}^n(a^TZ_k)^2.$$ The squared projection is integrable, stationary and ergodic as a measurable function of the lag block by step 1.2. Birkhoff [F2] makes this average converge almost surely to $\\mathbb E[(a^TZ_t)^2]/(a^T\\Gamma a)=1$.",
+          "step": "2.3",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "Let $W_k:=a^TZ_k\\epsilon_k$. The AR equation makes $W_k$ the same finite-block measurable function of the strictly stationary process $X$ at each time, so the $W_k$ are identically distributed; step 1.1 gives $\\mathbb E[W_1^2]=\\lambda_a<\\infty$. For every $\\delta>0$, the unconditional Lindeberg sum is $$\\sum_{k=1}^n\\mathbb E[D_{n,k}^2 1_{\\{|D_{n,k}|>\\delta\\}}] =\\frac1{\\lambda_a}\\mathbb E\\!\\left[ W_1^2 1_{\\{|W_1|>\\delta\\sqrt{n\\lambda_a}\\}}\\right]\\longrightarrow0$$ by dominated convergence [F12], since the indicators decrease pointwise to zero and $W_1^2$ is integrable.",
+          "step": "2.4",
+          "inputs": [
+            "F6",
+            "F12",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.2, 2.3, and 2.4 verify the square-integrable array, variance-clock, and unconditional Lindeberg hypotheses of [F7]. Thus $a^TS_n/\\sqrt{\\lambda_a}\\Rightarrow N(0,1)$ for $S_n:=n^{-1/2}\\sum_{k=1}^n Z_k\\epsilon_k$. This holds for every nonzero $a$; $a=0$ is immediate. Applying [F8] to the specified normal law gives $S_n\\Rightarrow N_d(0,\\sigma^2\\Gamma)$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F7",
+            "F8",
+            "F14",
+            "step 2.2",
+            "step 2.3",
+            "step 2.4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On the event that $G_n$ is invertible, the normal equations give $$\\sqrt n(\\widehat\\beta_n-\\beta)=G_n^{-1}S_n=H_nS_n.$$ By step 2.1, $H_n\\to_{\\mathbb P}\\Gamma^{-1}$; by step 3.1 the score converges in distribution. The bilinear map $(A,x)\\mapsto Ax$ is continuous, so [F9] gives the limit $\\Gamma^{-1}N_d(0,\\sigma^2\\Gamma)=N_d(0,\\sigma^2\\Gamma^{-1})$. The OLS fallback differs from $H_nS_n$ only on an event whose probability tends to zero by step 2.1, so bounded-continuous test expectations have the same limit.",
+          "step": "4.1",
+          "inputs": [
+            "F9",
+            "F14",
+            "step 2.1",
+            "step 3.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "By [F9] and step 3.1, $S_n=O_{\\mathbb P}(1)$; step 2.1 also gives $H_n=O_{\\mathbb P}(1)$. Consequently $\\widehat\\beta_n-\\beta=O_{\\mathbb P}(n^{-1/2})$. On the invertible event, expanding the residual square and using the normal equations gives $$\\widehat\\sigma_n^2 =\\frac1n\\sum_{k=1}^n\\epsilon_k^2 -\\frac1n S_n^TG_n^{-1}S_n.$$ The second term is $O_{\\mathbb P}(n^{-1})$. By [F10], the first term converges almost surely to $\\sigma^2$, because $\\epsilon_t^2$ are iid and integrable. The singular-event probability tends to zero by step 2.1, so $\\widehat\\sigma_n^2\\to_{\\mathbb P}\\sigma^2$.",
+          "step": "4.2",
+          "inputs": [
+            "F9",
+            "F10",
+            "F13",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The event that $G_n$ is singular or $\\widehat\\sigma_n^2\\le\\sigma^2/2$ has probability tending to zero by steps 2.1 and 4.2. The map $h(x,A,s):=x^TAx/\\max(s,\\sigma^2/2)$ is continuous everywhere and agrees with the Wald formula on the complement of that event. By steps 1.2, 4.1, and 4.2, the joint limit of the vector, matrix, and scalar arguments of $h$ is $(Z,\\Gamma,\\sigma^2)$ with $Z\\sim N_d(0,\\sigma^2\\Gamma^{-1})$. [F9] gives the limit $\\sigma^{-2}Z^T\\Gamma Z$. By [F15], let $\\Gamma^{1/2}$ be the positive square root. The definition of the multivariate normal law in [F11] gives $U=\\Gamma^{1/2}Z/\\sigma\\sim N_d(0,I_d)$, so [F11] identifies $\\sigma^{-2}Z^T\\Gamma Z=\\|U\\|^2\\sim\\chi_d^2$. The statistic's arbitrary zero convention on the vanishing-probability exceptional event does not change this limit.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F9",
+            "F11",
+            "F14",
+            "F15",
+            "step 1.2",
+            "step 2.1",
+            "step 4.1",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the theorem uses n observations with n>=1 and fixed p>=1; no empty regression sample is included."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the coefficient vector may be zero, but sigma^2>0 and the population Gram matrix is positive definite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the dimensions d=p and d=p+1, including the fixed-intercept branch, are both stated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The population Gram matrix is required positive definite; step 2.1 supplies the finite-sample singular fallback and proves its probability vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The asymptotic result uses t=1,...,n from a two-sided process; the time index has no boundary endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit in the Statement and A1; inherited AC branches are used at steps 1.1, 1.2, 2.3, 3.1, and 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The OLS limit theorem is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The OLS limit theorem is not an iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-42",
+        "notes": "Independently read all ten current steps and every F1–F15/A1 supplier interface. Event-integral factorization gives the conditional score mean and variance and finite score second moment. Finite-block factors of the shifted one-sided canonical law are ergodic; hence each Gram entry and projected predictable variance obey Birkhoff. The AR equation makes scores identically distributed even without asserting joint innovation-process ergodicity; dominated convergence proves unconditional Lindeberg with only second moments. Finite padded rows meet the martingale-CLT terminal-limit hypotheses, and Cramér–Wold includes the zero projection. Positive definite Gamma excludes zero directional variance; determinant continuity controls the singular fallback. Checked the residual identity with its 1/n score quadratic factor, iid square SLLN, continuous truncated Wald denominator, and normal quadratic-form chi-square law. Fixed p>=1, both intercept branches, finite moments and AC are explicit; no order-selection inference is claimed. Reader and refuter report no finding. No defect."
+      }
+    },
+    "cor-stable-ar-long-run-variance-plug-in-consistency": {
+      "risk": "medium",
+      "kind": "corollary",
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-arma-causality-and-invertibility-root-criteria",
+          "source_section": "Statement",
+          "quote": "Let $X$ be weakly stationary and let $(X_t,\\epsilon_t)$ satisfy the\nnormalized coprime ARMA$(p,q)$ equation\nof [[def-linear-process-and-arma-model]], with centered white noise of\nvariance $\\sigma^2>0$. A **causal representation** with absolutely summable\none-sided coefficients exists if and only if $\\phi(z)\\ne0$ for every\n$|z|\\le1$. In that case its coefficients are uniquely determined by\n$$\\Psi(z):=\\sum_{j\\ge0}\\psi_jz^j=\\frac{\\theta(z)}{\\phi(z)},\\qquad |z|\\le1,$$\nand there are constants $C<\\infty$ and $r>1$ with\n$|\\psi_j|\\le Cr^{-j}$.\n\nAn **invertible representation** with absolutely summable one-sided\ncoefficients exists if and only if $\\theta(z)\\ne0$ for every $|z|\\le1$. Its\ncoefficients are uniquely determined by\n$$\\Pi(z):=\\sum_{j\\ge0}\\pi_jz^j=\\frac{\\phi(z)}{\\theta(z)},\\qquad |z|\\le1.$$\nThe two criteria are separate: neither condition assumes the other.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.\n\nThe process is **strictly stationary** when for every integer $r\\ge1$, every\n$t_1,\\ldots,t_r\\in\\mathbb Z$, and every shift $m\\in\\mathbb Z$,\n$$\\mathcal L(X_{t_1+m},\\ldots,X_{t_r+m})=\\mathcal L(X_{t_1},\\ldots,X_{t_r}).$$\nThis condition concerns the full finite-dimensional laws and imposes no moment\ncondition by itself.\n\nThe process is **weakly stationary** when $E[|X_t|^2]<\\infty$ for every\n$t\\in\\mathbb Z$, its mean $\\mu:=E[X_t]$ is independent of $t$, and for every\n$h\\in\\mathbb Z$ the covariance\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t)$$\nis independent of $t$. Expectation, variance, and covariance have the meanings\nin [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and\n[[def-moments-variance-and-covariance]]. Strict stationarity alone therefore\ndoes not supply the moment hypotheses needed for covariance or sample-mean\nclaims.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fixed-order-autoregressive-ols-martingale-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix $p\\ge1$, put\n$\\phi=(\\phi_1,\\ldots,\\phi_p)^T$, and let\n$Y_t=(X_{t-1},\\ldots,X_{t-p})^T$. Either take $Z_t=Y_t$ and\n$X_t=\\beta^TZ_t+\\epsilon_t$ with $d=p$ and $\\beta=\\phi$, or take\n$Z_t=(1,Y_t^T)^T$ and $X_t=\\beta^TZ_t+\\epsilon_t$ with $d=p+1$ to include\na fixed intercept. Let $X$ be a strictly stationary process whose canonical\none-sided shift is ergodic, and suppose the displayed AR($p$) equation holds.\nAssume the innovations $(\\epsilon_t)_{t\\in\\mathbb Z}$ are iid, centered, have\n$0<\\sigma^2=\\mathbb E[\\epsilon_0^2]<\\infty$, and are independent of the past:\nfor the filtration\n$$\\mathcal F_t:=\\sigma(X_s,\\epsilon_s:s\\le t),\\qquad t\\in\\mathbb N_0,$$\n$Z_t$ is $\\mathcal F_{t-1}$-measurable and $\\epsilon_t$ is independent of\n$\\mathcal F_{t-1}$ for each $t\\ge1$. Assume\n$$\\Gamma:=\\mathbb E[Z_tZ_t^T]$$\nis finite and positive definite, meaning $a^T\\Gamma a>0$ for every\n$a\\ne0$.\n\nFor observations at $t=1,\\ldots,n$, set\n$$G_n:=\\frac1n\\sum_{t=1}^{n}Z_tZ_t^T,\\qquad b_n:=\\frac1n\\sum_{t=1}^{n}Z_tX_t.$$\nDefine the measurable OLS fallback by $\\widehat\\beta_n=G_n^{-1}b_n$ when\n$G_n$ is invertible and $\\widehat\\beta_n=0$ otherwise, and define\n$$\\widehat\\sigma_n^2:=\\frac1n\\sum_{t=1}^{n} (X_t-\\widehat\\beta_n^TZ_t)^2.$$\nThen\n$$\\sqrt n(\\widehat\\beta_n-\\beta)\\Rightarrow N_d(0,\\sigma^2\\Gamma^{-1}),\\qquad \\widehat\\sigma_n^2\\longrightarrow_{\\mathbb P}\\sigma^2.$$\nIf $W_n$ is the fixed-order Wald statistic\n$$W_n:=\\frac{n}{\\widehat\\sigma_n^2} (\\widehat\\beta_n-\\beta)^TG_n(\\widehat\\beta_n-\\beta)$$\nwhen $G_n$ is invertible and $\\widehat\\sigma_n^2>0$, and is set to $0$\notherwise, then $W_n\\Rightarrow\\chi_d^2$. These statements use fixed $p$;\nthey do not assert validity after data-selected order.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-maps-preserve-convergence-in-probability",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^d\\to\\mathbb R^k$ be continuous, and suppose that, for every\n$\\varepsilon>0$,\n$$\\mathbb P(\\|Z_n-Z\\|>\\varepsilon)\\longrightarrow0.$$\nThen, for every $\\varepsilon>0$,\n$$\\mathbb P(\\|f(Z_n)-f(Z)\\|>\\varepsilon)\\longrightarrow0.$$\nIn particular, coordinate pairing gives stability under sums and products; it\ngives quotients whenever the limiting denominator is nonzero almost surely,\ndefining the quotient arbitrarily where the approximating denominator is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-stable-linear-process-sample-mean-clt",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let\n$$X_t-\\mu=\\sum_{j\\ge0}\\psi_j\\epsilon_{t-j},\\qquad t\\in\\mathbb Z,$$\nbe a causal linear process with real coefficients satisfying\n$\\sum_{j\\ge0}\\sqrt{j+1}\\,|\\psi_j|<\\infty$. Suppose the two-sided innovation\nsequence $(\\epsilon_t)_{t\\in\\mathbb Z}$ is iid, centered, and has\n$0<\\sigma^2=\\mathbb E[\\epsilon_0^2]<\\infty$. Put\n$\\Psi:=\\sum_{j\\ge0}\\psi_j$ and\n$\\bar X_n:=n^{-1}\\sum_{t=1}^nX_t$. Then\n$$\\sqrt n(\\bar X_n-\\mu)\\Rightarrow N(0,\\sigma^2\\Psi^2).$$\nFor a causal ARMA model with no zero of $\\phi$ in $|z|\\le1$, the root\ncriterion theorem implies that its coefficients satisfy the weighted\nsummability condition. The limiting variance may be zero when $\\Psi=0$.\nIf $\\tau^2:=\\sigma^2\\Psi^2>0$ and a nonnegative variance estimate\n$\\widehat\\tau_n^2$ separately satisfies\n$\\widehat\\tau_n^2\\longrightarrow_{\\mathbb P}\\tau^2$, then\n$T_n:=\\sqrt n(\\bar X_n-\\mu)/\\widehat\\tau_n$,\nwith $\\widehat\\tau_n=\\sqrt{\\widehat\\tau_n^2}$ and any finite convention\nwhen $\\widehat\\tau_n=0$, converges to $N(0,1)$. For each fixed $c>0$, the\nsymmetric interval\n$$\\left[\\bar X_n-\\frac{c\\widehat\\tau_n}{\\sqrt n}, \\bar X_n+\\frac{c\\widehat\\tau_n}{\\sqrt n}\\right]$$\ntherefore has limiting coverage $\\mathbb P(|N(0,1)|\\le c)$. No consistency\nis attributed to a variance estimator unless it is separately proved.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:\n\n1. If $U_n=o_P(1)$ and $V_n=o_P(1)$, then $U_n+V_n=o_P(1)$. If $U_n=O_P(1)$ and $V_n=O_P(1)$, then $U_n+V_n=O_P(1)$.\n2. For positive integers $p,q,r$, let $B:\\mathbb R^p\\times\\mathbb R^q\\to\\mathbb R^r$ be a fixed map for which there is a constant $C\\ge0$ with $\\|B(u,v)\\|_2\\le C\\|u\\|_2\\|v\\|_2$ for all $u,v$. Assume in each application that $B(U_n,V_n)$ is a random vector on the same probability space as $U_n,V_n$, for every $n$. If $U_n=o_P(1)$ and $V_n=O_P(1)$, or conversely, then $B(U_n,V_n)=o_P(1)$. If both are $O_P(1)$, then $B(U_n,V_n)=O_P(1)$.\n3. If $X_n\\Rightarrow X$ in $\\mathbb R^d$, then $X_n=O_P(1)$.\n\nThe last conclusion is finite-dimensional boundedness in probability. No independence or Axiom of Choice is assumed.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Stability means that $\\phi$ has no zero in $|z|\\le1$. In particular $\\phi(1)=1-\\sum_j\\phi_j\\ne0$. The finite augmented Gram matrix gives a finite second moment for each lagged coordinate, and strict stationarity gives the same finite second moment and mean at every time. Strict stationarity also makes the bivariate laws shift-invariant, so the covariance depends only on lag. Thus [F5] gives weak stationarity and verifies the solution premise of [F1]. The causal AR coefficients are then the Taylor coefficients of $1/\\phi(z)$ and decay exponentially. Their sum converges absolutely; evaluating the power-series identity $\\phi(z)\\Psi(z)=1$ at $z=1$ gives $\\Psi=1/\\phi(1)=1/(1-\\sum_j\\phi_j)$. Since $\\sigma^2>0$ and $\\phi(1)$ is finite and nonzero, $\\sigma^2\\Psi^2>0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2], $U_n:=\\sqrt n(\\widehat\\beta_n-\\beta)$ converges in distribution to a finite-dimensional normal law, so [F6] makes $U_n$ bounded in probability. Fix $\\delta,\\eta>0$ and choose $M>0$ with $\\limsup_n\\mathbb P(\\|U_n\\|_2>M)\\le\\eta$. For all sufficiently large $n$, $\\sqrt n\\delta>M$, so $\\mathbb P(\\|\\widehat\\beta_n-\\beta\\|_2>\\delta)\\le\\mathbb P(\\|U_n\\|_2>M)$. Its limiting upper probability is at most $\\eta$; letting $\\eta\\downarrow0$ proves $\\widehat\\beta_n\\to_{\\mathbb P}\\beta$, and hence $\\widehat\\phi_n\\to_{\\mathbb P}\\phi$ because the slope subvector norm is at most the full-vector norm. Supplier [F2] also gives $\\widehat\\sigma_n^2\\to_{\\mathbb P}\\sigma^2$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F6",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $d_0:=1-\\sum_j\\phi_j\\ne0$ and $d_n:=1-\\sum_j\\widehat\\phi_{n,j}$. Step 1.2 and finite coordinate pairing in [F3] give $(\\widehat\\sigma_n^2,\\widehat\\phi_n)\\to_{\\mathbb P}(\\sigma^2,\\phi)$ and $d_n\\to_{\\mathbb P}d_0$. The everywhere-continuous map $g(s,v):=s/\\max\\{(1-\\sum_jv_j)^2,d_0^2/4\\}$ therefore satisfies $g(\\widehat\\sigma_n^2,\\widehat\\phi_n)\\to_{\\mathbb P}\\sigma^2/d_0^2$ by [F3]. On $\\{|d_n|\\ge|d_0|/2\\}$ this map equals the displayed estimator $\\widehat\\tau_n^2$. The complement has probability at most $\\mathbb P(|d_n-d_0|\\ge|d_0|/2)\\to0$. For every $\\varepsilon>0$, the estimator's deviation probability is bounded by that complement probability plus $\\mathbb P(|g(\\widehat\\sigma_n^2,\\widehat\\phi_n)-\\sigma^2/d_0^2|>\\varepsilon)$, so it tends to zero. This proves consistency including the zero-denominator fallback.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By step 1.1, the limiting long-run variance is $\\sigma^2\\Psi^2>0$; step 2.1 proves that $\\widehat\\tau_n^2$ is a nonnegative consistent estimate of it. The exponential coefficient bound in step 1.1 gives $\\sum_j\\sqrt{j+1}|\\psi_j|<\\infty$, so all additional hypotheses of [F4] hold; its AC branch is supplied by [A1]. The stable linear-process CLT gives the stated standardized mean limit and interval coverage. This uses the fitted OLS innovation variance and fixed-order slope estimate; it makes no claim for a data-selected order or an unspecified HAC estimator.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes p>=1 and imports a fixed-order OLS theorem with regressor (1,X_{t-1},...,X_{t-p}); the slope sum in the plug-in denominator is over those p coefficients. This corollary does not claim the order-zero fit, even though one could formulate a separate mean-only model.",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/sme_gate_boundary_measurement",
+            "reason": "Statement fixes p>=1 and imports a fixed-order OLS theorem with regressor (1,X_{t-1},...,X_{t-p}); the slope sum in the plug-in denominator is over those p coefficients. This corollary does not claim the order-zero fit, even though one could formulate a separate mean-only model."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, and 3.1 prove the limiting variance is strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the fixed-intercept regression and denominator formula apply when p=1 as well as higher fixed orders."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the zero fallback when the estimated denominator vanishes is stated; step 2.1 proves its event probability tends to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: a root at z=1 is excluded by stability, so the long-run transfer denominator cannot be zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit and inherited from the OLS and iid CLT suppliers; step 3.1 applies that branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The plug-in consistency result is an implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The plug-in consistency result is an implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step5-v2-initial-r1-u42",
+        "notes": "Local repair review, not independent acceptance of this repair: finite augmented Gram and strict stationarity give weak stationarity; the stable AR pair (phi,1) is coprime. The root theorem supplies exponential coefficients and Psi=1/phi(1). OLS supplies the full coefficient normal limit and residual variance consistency under the explicit AC, fixed-order, ergodicity and past-independence hypotheses. The accurately cited stochastic-order theorem gives tightness, and the explicit tail bound proves coefficient consistency. Joint probability convergence and an everywhere-continuous denominator truncation give the plug-in limit; its disagreement event with the actual estimator tends to zero. Exponential coefficients meet the weighted CLT hypothesis and the nonnegative consistent scale meets studentization. No additional choice or new prerequisite is needed."
+      }
+    },
+    "ex-arma-common-factor-cancellation-and-root-classification": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-process-and-arma-model",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real process on one probability space.\nThe backshift is $(BX)_t:=X_{t-1}$, and for a polynomial\n$a(z)=\\sum_{j=0}^m a_jz^j$ set\n$a(B)X_t:=\\sum_{j=0}^m a_jX_{t-j}$. Weak stationarity and the covariance\nconvention are those of\n[[def-strict-and-weak-stationarity-for-time-series]] and\n[[def-moments-variance-and-covariance]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-arma-causality-and-invertibility-root-criteria",
+          "source_section": "Statement",
+          "quote": "Let $X$ be weakly stationary and let $(X_t,\\epsilon_t)$ satisfy the\nnormalized coprime ARMA$(p,q)$ equation\nof [[def-linear-process-and-arma-model]], with centered white noise of\nvariance $\\sigma^2>0$. A **causal representation** with absolutely summable\none-sided coefficients exists if and only if $\\phi(z)\\ne0$ for every\n$|z|\\le1$. In that case its coefficients are uniquely determined by\n$$\\Psi(z):=\\sum_{j\\ge0}\\psi_jz^j=\\frac{\\theta(z)}{\\phi(z)},\\qquad |z|\\le1,$$\nand there are constants",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Both polynomials $1-2z$ have constant term one and the common factor $1-2z$ has root $z=1/2$, so the unreduced pair is not coprime. Cancelling it leaves $(\\phi,\\theta)=(1,1)$, whose AR polynomial has no root.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With $X_t=\\epsilon_t$, the reduced equation $X_t=\\epsilon_t$ holds and has the causal representation $\\psi_0=1$, $\\psi_j=0$ for $j\\ge1$. By [F2] the reduced pair is causal. Multiplying both sides by the same finite filter $1-2B$ gives $(1-2B)X_t=(1-2B)\\epsilon_t$, so the unreduced pair also displays the same process.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The unreduced $\\phi$ has a zero in $|z|\\le1$, but [F2] applies only after common-factor cancellation. Thus this raw root is not a valid classification of the process and explains the normalization clause.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the reduced pair (1,1) is the order-zero boundary case and is causal."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the example fixes positive white-noise variance; the cancellation calculation itself is deterministic."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the unreduced factors are degree one and their common root is explicitly computed as 1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and steps 1.1–3.1: the witness is precisely the common-factor degeneracy; cancellation gives the canonical coprime pair."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The witness root is 1/2, not a parameter endpoint; the root theorem’s closed-disk boundary is separately recorded there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The verification is finite polynomial algebra and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example illustrates the theorem’s domain restriction but makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example illustrates the theorem’s domain restriction but makes no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-unit-root-precludes-nonzero-variance-stationary-ar1": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-process-and-arma-model",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real process on one probability space.\nThe backshift is $(BX)_t:=X_{t-1}$, and for a polynomial\n$a(z)=\\sum_{j=0}^m a_jz^j$ set\n$a(B)X_t:=\\sum_{j=0}^m a_jX_{t-j}$. Weak stationarity and the covariance\nconvention are those of\n[[def-strict-and-weak-stationarity-for-time-series]] and\n[[def-moments-variance-and-covariance]].\n\nA real process $\\epsilon=(\\epsilon_t)_{t\\in\\mathbb Z}$ is **white noise**\nwith variance $\\sigma^2$ when\n$\\mathbb E[\\epsilon_t]=0$, $0<\\sigma^2=\\mathbb E[\\epsilon_t^2]<\\infty$,\nand $\\operatorname{Cov}(\\epsilon_t,\\epsilon_s)=0$ for all $s\\ne t$.\nThis definition requires only zero covariance at distinct times; it does not\nrequire independence, identical distributions, or Gaussian laws.\n\nFor a real sequence $\\psi=(\\psi_j)_{j\\ge0}$ with\n$\\sum_{j\\ge0}|\\psi_j|<\\infty$, a **causal linear process** driven by white\nnoise is\n$$X_t-\\mu:=\\sum_{j=0}^{\\infty}\\psi_j\\epsilon_{t-j},\\qquad t\\in\\mathbb Z,$$\nwhere the series is its almost-sure and $L^2$ limit, established by\n[[lem-absolutely-summable-linear-filters-preserve-weak-stationarity]].\n\nAn **ARMA$(p,q)$ model**, for nonnegative integers $p,q$, is an equation\n$$\\phi(B)(X_t-\\mu)=\\theta(B)\\epsilon_t,\\qquad t\\in\\mathbb Z,$$\nwhere\n$$\\phi(z)=1-\\sum_{j=1}^p\\phi_jz^j,\\qquad \\theta(z)=1+\\sum_{j=1}^q\\theta_jz^j$$\nhave real coefficients and constant term one. If $p=0$ or $q=0$, the\ncorresponding polynomial is $1$. The displayed equation is imposed with a\n**coprime normalized pair**, meaning that the two polynomials have no common\ncomplex root and both have constant term one. Given an unreduced pair,\ncancel every common nonconstant factor in $\\mathbb C[z]$ and normalize\nboth remaining polynomials to have constant term one to define its associated\n**reduced model**. This is a model convention: a solution of the unreduced\nequation need not satisfy the reduced equation. Root criteria for the reduced\npair apply only to solutions of that reduced equation.\n\nFor an AR$(p)$ model ($q=0$), expansion gives the regression form\n$X_t=c+\\sum_{j=1}^p\\phi_jX_{t-j}+\\epsilon_t$ with\n$c=\\mu(1-\\sum_{j=1}^p\\phi_j)$. Thus a fixed intercept in the AR regression\nis the original mean parameter written in observation coordinates.\n\nA **causal representation** of this model is a representation\n$X_t-\\mu=\\sum_{j\\ge0}\\psi_j\\epsilon_{t-j}$ with\n$\\sum_j|\\psi_j|<\\infty$. An **invertible representation** is\n$\\epsilon_t=\\sum_{j\\ge0}\\pi_j(X_{t-j}-\\mu)$ with\n$\\sum_j|\\pi_j|<\\infty$. These are properties of the displayed relation\nbetween $X$ and $\\epsilon$, not claims that white noise is iid.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.\n\nThe process is **strictly stationary** when for every integer $r\\ge1$, every\n$t_1,\\ldots,t_r\\in\\mathbb Z$, and every shift $m\\in\\mathbb Z$,\n$$\\mathcal L(X_{t_1+m},\\ldots,X_{t_r+m})=\\mathcal L(X_{t_1},\\ldots,X_{t_r}).$$\nThis condition concerns the full finite-dimensional laws and imposes no moment\ncondition by itself.\n\nThe process is **weakly stationary** when $E[|X_t|^2]<\\infty$ for every\n$t\\in\\mathbb Z$, its mean $\\mu:=E[X_t]$ is independent of $t$, and for every\n$h\\in\\mathbb Z$ the covariance\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t)$$\nis independent of $t$. Expectation, variance, and covariance have the meanings\nin [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and\n[[def-moments-variance-and-covariance]]. Strict stationarity alone therefore\ndoes not supply the moment hypotheses needed for covariance or sample-mean\nclaims.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-autocovariance-and-sample-autocovariance",
+          "source_section": "Definition",
+          "quote": "For a weakly stationary real process $X=(X_t)_{t\\in\\mathbb Z}$, its\n**autocovariance function** (ACVF) is\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t),\\qquad h\\in\\mathbb Z,$$\nwhich is independent of $t$ by [[def-strict-and-weak-stationarity-for-time-series]].\n\nFor a finite data vector $x_1,\\ldots,x_n\\in\\mathbb R$, where $n\\ge1$, let\n$$\\bar x_n:=\\frac1n\\sum_{t=1}^n x_t.$$\nIts **biased sample ACVF** is the zero-extended sequence on $\\mathbb Z$ given by\n$$\\widehat\\gamma_n(h):=\\frac1n\\sum_{t=1}^{n-|h|}(x_{t+|h|}-\\bar x_n)(x_t-\\bar x_n),\\qquad |h|<n,$$\nand $\\widehat\\gamma_n(h):=0$ for $|h|\\ge n$. The absolute lag makes\n$\\widehat\\gamma_n(-h)=\\widehat\\gamma_n(h)$.\n\nFor comparison, define the **pair-count-normalized rescaling**\n$$\\widetilde\\gamma_n(h):=\\frac1{n-|h|}\\sum_{t=1}^{n-|h|}(x_{t+|h|}-\\bar x_n)(x_t-\\bar x_n),\\qquad |h|<n,$$\nand set it to zero for $|h|\\ge n$. Its denominator is positive on the stated\ndomain. The names specify the denominator convention; they assert no\nunbiasedness formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-arma-causality-and-invertibility-root-criteria",
+          "source_section": "Statement",
+          "quote": "Let $X$ be weakly stationary and let $(X_t,\\epsilon_t)$ satisfy the\nnormalized coprime ARMA$(p,q)$ equation\nof [[def-linear-process-and-arma-model]], with centered white noise of\nvariance $\\sigma^2>0$. A **causal representation** with absolutely summable\none-sided coefficients exists if and only if $\\phi(z)\\ne0$ for every\n$|z|\\le1$. In that case its coefficients are uniquely determined by\n$$\\Psi(z):=\\sum_{j\\ge0}\\psi_jz^j=\\frac{\\theta(z)}{\\phi(z)},\\qquad |z|\\le1,$$\nand there are constants $C<\\infty$ and $r>1$ with\n$|\\psi_j|\\le Cr^{-j}$.\n\nAn **invertible representation** with absolutely summable one-sided\ncoefficients exists if and only if $\\theta(z)\\ne0$ for every $|z|\\le1$. Its\ncoefficients are uniquely determined by\n$$\\Pi(z):=\\sum_{j\\ge0}\\pi_jz^j=\\frac{\\phi(z)}{\\theta(z)},\\qquad |z|\\le1.$$\nThe two criteria are separate: neither condition assumes the other.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-stationary-arma-spectral-density",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]).\n\nLet $X_t-\\mu$ be a real weakly stationary solution of the normalized coprime\nARMA$(p,q)$ equation\n$$\\phi(B)(X_t-\\mu)=\\theta(B)\\epsilon_t,$$\nwhere $\\epsilon$ is centered white noise with variance $\\sigma^2>0$. If\n$\\phi(z)\\ne0$ for every $|z|=1$, then $X$ has a spectral density, under the\nconvention\n$\\gamma(h)=\\int_{\\mathbb T}e^{ih\\lambda}F(d\\lambda)$ and angular Lebesgue\nmeasure $d\\lambda$ of total mass $2\\pi$, given by\n$$f(\\lambda)=\\frac{\\sigma^2}{2\\pi}\\frac{|\\theta(e^{-i\\lambda})|^2}{|\\phi(e^{-i\\lambda})|^2},\\qquad -\\pi\\le\\lambda\\le\\pi.$$\nNo causal or invertible root condition is required; zeros of $\\theta$ on the\nunit circle are permitted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose a weakly stationary solution exists and write its autocovariance as $\\gamma$. For every integer $h\\ge1$, white-noise covariance gives $0=\\operatorname{Cov}(\\epsilon_{t+h},\\epsilon_t)$. Substituting $\\epsilon_s=X_s-X_{s-1}$ and expanding the four covariances using [F2] yields $$0=2\\gamma(h)-\\gamma(h-1)-\\gamma(h+1).$$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The recurrence in step 1.1 says $\\gamma(h+1)-\\gamma(h)=\\gamma(h)-\\gamma(h-1)$ for every $h\\ge1$. Induction makes these first differences constant, so $\\gamma(h)=\\gamma(0)+h\\,d$ for $h\\ge0$, where $d=\\gamma(1)-\\gamma(0)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], $|\\gamma(h)|\\le\\gamma(0)$ for every $h$. The affine sequence in step 2.1 is bounded only if $d=0$, hence $\\gamma(1)=\\gamma(0)$. Then $$\\sigma^2=\\operatorname{Var}(X_t-X_{t-1}) =2\\gamma(0)-2\\gamma(1)=0,$$ contradicting the given $\\sigma^2>0$. No weakly stationary solution exists. The polynomial root is $z=1$ by direct substitution, on the unit circle excluded by [F4]'s spectral-density premise under [A1]. Since the contradiction rules out a stationary solution, this only illustrates the boundary of that premise and does not establish its essentiality.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes an AR(1) equation, so the empty-order case is outside its statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the contradiction uses sigma^2>0; if it were zero, this proof would not exclude a constant solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the example is exactly the order-one recurrence phi(z)=1-z."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1: the proof rules out every weakly stationary covariance sequence under positive innovation variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: the AR root z=1 lies exactly on the unit-circle boundary excluded by the spectral-density theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The covariance recurrence and boundedness argument use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves nonexistence and is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves nonexistence and is not an iff statement."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-42",
+        "notes": "Read Example, contextual Facts and all three verification steps with every dependency interface, already reviewed in lower levels. Expanding Cov(X_(t+h)-X_(t+h-1), X_t-X_(t-1)) gives 2 gamma(h)-gamma(h-1)-gamma(h+1) for every h>=1, including h=1. Therefore gamma on nonnegative lags is affine; Cauchy–Schwarz boundedness forces zero slope and Var(epsilon_t)=2gamma(0)-2gamma(1)=0, contradicting positive variance. The zero-innovation case would allow a constant solution and is explicitly excluded. The root is exactly 1; neither criterion is applied to a nonexistent stationary solution. Countable Choice is only the contextual spectral premise. Current Example correctly disclaims proof of essentiality. The owning manifest retained the older essentiality wording, so its description alone was normalized to the existing current carrier caveat. No current proof defect; reader/refuter empty."
+      }
+    },
+    "ex-dependent-white-noise-is-not-iid": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-autocovariance-and-sample-autocovariance",
+          "source_section": "Definition",
+          "quote": "For a weakly stationary real process $X=(X_t)_{t\\in\\mathbb Z}$, its\n**autocovariance function** (ACVF) is\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t),\\qquad h\\in\\mathbb Z,$$\nwhich is independent of $t$ by [[def-strict-and-weak-stationarity-for-time-series]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-process-and-arma-model",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real process on one probability space.\nThe backshift is $(BX)_t:=X_{t-1}$, and for a polynomial\n$a(z)=\\sum_{j=0}^m a_jz^j$ set\n$a(B)X_t:=\\sum_{j=0}^m a_jX_{t-j}$. Weak stationarity and the covariance\nconvention are those of\n[[def-strict-and-weak-stationarity-for-time-series]] and\n[[def-moments-variance-and-covariance]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every finite tuple of $X$ values is the same coordinatewise measurable function of a finite tuple of iid $U$ values. By [F1]–[F2], shifting all indices leaves the latter tuple's law unchanged, so the finite-dimensional laws of $X$ are shift invariant. Thus $X$ is strictly stationary.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Independence and [F3] give $\\mathbb E[X_t]=\\mathbb E[U_{t-1}]\\mathbb E[1+U_t]=0$ and $\\mathbb E[X_t^2]=\\mathbb E[U_{t-1}^2]\\mathbb E[(1+U_t)^2]=2$. For lag one, $\\mathbb E[X_tX_{t+1}] =\\mathbb E[U_{t-1}(1+U_t)U_t(1+U_{t+1})]=0$ because $U_{t-1}$ is independent of the remaining factors and has mean zero. For lag $h\\ge2$, $X_t$ and $X_{t+h}$ use disjoint iid coordinates, so they are independent and centered and their covariance is zero. Negative lags have the same covariance by symmetry. Hence $X$ is weakly stationary and is white noise with variance $2$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $A=\\{X_t=0\\}$ and $B=\\{X_{t+1}=2\\}$. Since $U_{t-1}\\in\\{-1,1\\}$, $A=\\{U_t=-1\\}$ and $\\mathbb P(A)=1/2$. The event $B$ requires $U_t=U_{t+1}=1$, so $\\mathbb P(B)=1/4$ while $A\\cap B=\\varnothing$. Therefore $\\mathbb P(B\\mid A)=0\\ne\\mathbb P(B)$, proving that adjacent observations are dependent.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a two-sided iid Rademacher family and does not concern an empty sequence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the displayed process is centered; each marginal has positive variance 2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the adjacent pair (X_t,X_{t+1}) is the first lag and witnesses dependence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1: the finite Rademacher support makes the event and covariance calculations exact and nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The process is indexed by Z and has no interval parameter or endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite-dimensional iid product laws and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a counterexample, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a counterexample, not an iff claim."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-42",
+        "notes": "Read Example and Verification 1.1–3.1 with all seven dependency interfaces. Finite iid product laws (including repeated indices handled as functions of distinct coordinates) are invariant under shifts. Calculated mean 0 and variance 2; lag-one product has the independent mean-zero U_(t-1) factor, lags >=2 use disjoint coordinates, and negative lags follow symmetry. Exact dependence witness: {X_t=0}={U_t=-1} has probability 1/2; {X_(t+1)=2} requires U_t=U_(t+1)=1 and has probability 1/4; intersection empty. Thus weak white noise with positive variance need not be iid. No additional choice or limiting argument; no defect, reader/refuter findings empty."
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "group": "l",
+  "batches": ["36"],
+  "pages_read": [
+    "measurement-calibration-and-uncertainty",
+    "measurement-calibration-and-uncertainty-examples"
+  ],
+  "items_read": [
+    "def-measurand-calibration-and-measurement-uncertainty",
+    "thm-first-order-measurement-uncertainty-propagation",
+    "ex-calibration-curve-reference-uncertainty-and-batch-drift"
+  ],
+  "conventions": [
+    {
+      "convention": "Input quantities are square-integrable coordinates of one random element on a common probability space, their means equal the input estimates, and independence is not assumed.",
+      "fixed_by": "def-measurand-calibration-and-measurement-uncertainty",
+      "matters_for": [
+        "thm-first-order-measurement-uncertainty-propagation",
+        "ex-calibration-curve-reference-uncertainty-and-batch-drift"
+      ]
+    },
+    {
+      "convention": "Combined first-order standard uncertainty is the standard deviation of Q_lin = f(x̂) + ∇f(x̂)ᵀ(X − x̂). Its covariance formula is exact for this linearization and supplies no interval coverage claim.",
+      "fixed_by": "def-measurand-calibration-and-measurement-uncertainty",
+      "matters_for": [
+        "thm-first-order-measurement-uncertainty-propagation",
+        "ex-calibration-curve-reference-uncertainty-and-batch-drift"
+      ]
+    },
+    {
+      "convention": "Using nonlinear f(X) requires a measurable output, a measurable definition on any exceptional null event, and square integrability when its variance is used. Almost-sure membership in the model domain alone does not ensure measurability.",
+      "fixed_by": "def-measurand-calibration-and-measurement-uncertainty",
+      "matters_for": [
+        "thm-first-order-measurement-uncertainty-propagation",
+        "ex-calibration-curve-reference-uncertainty-and-batch-drift"
+      ]
+    },
+    {
+      "convention": "Type A and Type B classify evaluation methods, separately from random and systematic effects. A measurement batch labels an occasion or configuration and by itself implies no random-effect assumption or stability.",
+      "fixed_by": "def-measurand-calibration-and-measurement-uncertainty",
+      "matters_for": [
+        "ex-calibration-curve-reference-uncertainty-and-batch-drift",
+        "def-batch-and-measurement-process-variation"
+      ]
+    },
+    {
+      "convention": "The example uses input order (R1, R2, Y), exact calibration responses 1 and 21, and a uniform eight-point sign model. Its pooled curve is equal-weight response-on-quantity least squares with a free intercept over four nominal points.",
+      "fixed_by": "ex-calibration-curve-reference-uncertainty-and-batch-drift",
+      "matters_for": [
+        "ex-calibration-curve-reference-uncertainty-and-batch-drift"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-measurand-calibration-and-measurement-uncertainty",
+      "statement": "When f is differentiable at x̂, define Q_lin = f(x̂) + ∇f(x̂)ᵀ(X − x̂). The first-order combined standard uncertainty is u_c = √Var(Q_lin). Its use as an approximation to uncertainty of the nonlinear output requires an adequate first-order model; it implies no coverage probability or confidence level.",
+      "used_by": [
+        "thm-first-order-measurement-uncertainty-propagation",
+        "ex-calibration-curve-reference-uncertainty-and-batch-drift",
+        "def-batch-and-measurement-process-variation"
+      ]
+    },
+    {
+      "id": "thm-first-order-measurement-uncertainty-propagation",
+      "statement": "For d ≥ 1, an open U ⊆ ℝᵈ, x̂ ∈ U, f: U → ℝ differentiable at x̂, and a random element X with square-integrable coordinates, E[X_i] = x̂_i and X ∈ U almost surely, put Σ_ij = Cov(X_i,X_j), g = ∇f(x̂), and Q_lin = f(x̂) + gᵀ(X − x̂). Then u_c² = Var(Q_lin) = gᵀΣg = Σ_i g_i²Σ_ii + 2Σ_{i<j}g_i g_jΣ_ij.",
+      "used_by": [
+        "ex-calibration-curve-reference-uncertainty-and-batch-drift"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "The measurable-map meaning of the vector input and its real coordinate variables.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Finite means, variances, and centered-product covariances in the definition, theorem, and finite calibration example.",
+      "opened": true
+    },
+    {
+      "id": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+      "used_for": "The pointwise first-order remainder after identifying ℝᵈ with real column matrices using the Euclidean/Frobenius norm.",
+      "opened": true
+    },
+    {
+      "id": "thm-covariance-bilinearity-and-symmetry",
+      "used_for": "Expanding the variance of a finite affine combination and pairing symmetric off-diagonal covariance terms; its statement explicitly includes constant summands.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "measurement-calibration-and-uncertainty",
+      "to": "scientific-statistical-model-contracts",
+      "faithful": true,
+      "note": "Read the supplier page and scientific-contract definition against the calibration definition's Remarks. Observation law, units and indices, target, mechanism, measurable full-probability support, conditioning, and adequacy classifications are faithfully summarized. The consumer preserves the disclaimer that the contract establishes no physical applicability."
+    },
+    {
+      "from": "measurement-batch-and-process-variation",
+      "to": "measurement-calibration-and-uncertainty",
+      "faithful": true,
+      "note": "Read the downstream page, batch-variation definition, and nested covariance theorem against the calibration definition. The downstream definition explicitly preserves the occasion/configuration meaning of batch and calibration terminology, separately introduces its independence and random-effect assumptions, and makes no inference of empirical stability from the supplier."
+    }
+  ]
+}

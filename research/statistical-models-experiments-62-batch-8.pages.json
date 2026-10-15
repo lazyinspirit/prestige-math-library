@@ -1,0 +1,160 @@
+[
+  {
+    "order": 1932,
+    "id": "finite-populations-and-sampling-designs",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Finite populations and design probability",
+    "companion": "finite-populations-and-sampling-designs-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "fixed-design-linear-regression-and-estimability",
+      "statistical-experiments-models-and-identifiability",
+      "estimators-and-randomized-procedures",
+      "probability-spaces-random-variables-and-expectation",
+      "finite-probability-spaces-and-random-variables",
+      "finite-sample-point-estimation-and-unbiased-optimality"
+    ],
+    "items": [
+      {
+        "id": "def-finite-population-and-sampling-design",
+        "kind": "definition",
+        "title": "Finite populations and sampling designs",
+        "statement": "Defines a nonempty finite population with fixed real values, its total and mean, a probability mass function on sampled subsets, design expectation, first- and second-order inclusion probabilities, the observed-record experiment, and the distinction from a superpopulation model.",
+        "strategy": "Definition: state the finite index set, fixed values, sample support and weights, targets, inclusion events, design expectation, common observed-record space and induced laws; use the required unit and fixed/random conventions.",
+        "deps": [
+          "def-scientific-statistical-model-contract",
+          "def-fixed-design-linear-regression-model",
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space",
+          "def-measurable-space",
+          "def-probability-measure",
+          "def-statistical-experiment",
+          "def-parametric-statistical-model",
+          "def-estimand-on-a-statistical-model"
+        ],
+        "justified_by": [
+          "lem-finite-population-design-law-is-a-probability-measure"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-finite-population-design-law-is-a-probability-measure",
+        "kind": "lemma",
+        "title": "A finite-population design induces probability laws on observed records",
+        "statement": "For each fixed population-value function y, the observed-record set function induced by a finite sampling design is a probability measure on the common full-power-set record space.",
+        "strategy": "Direct: verify the full power set is a sigma-algebra, the induced set function has total mass one, and finite support makes it countably additive.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "def-measurable-space",
+          "def-sigma-algebra",
+          "def-measure",
+          "def-probability-measure"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-horvitz-thompson-total-is-design-unbiased",
+        "kind": "theorem",
+        "title": "The Horvitz–Thompson total and mean are design-unbiased under positive inclusion probabilities",
+        "statement": "For a fixed finite population and a declared finite sampling design with pi_i>0 for every unit, the estimator sum over sampled units of y_i/pi_i is unbiased for the total; division by the population size gives an unbiased estimator of the finite-population mean.",
+        "strategy": "Direct: apply finite expectation linearity to the finite sum of inclusion indicators and use the indicator-expectation identity.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "lem-finite-population-design-law-is-a-probability-measure",
+          "def-statistic-and-estimator",
+          "def-unbiased-estimator-and-umvu",
+          "def-borel-sigma-algebra",
+          "def-indicator-random-variable",
+          "def-expectation-on-a-finite-probability-space",
+          "thm-linearity-of-expectation",
+          "lem-indicator-expectation-and-products"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-zero-inclusion-probability-precludes-identification-and-universal-unbiasedness",
+        "kind": "theorem",
+        "title": "A zero inclusion probability prevents total identification and universal unbiased estimation",
+        "statement": "If some unit has zero first-order inclusion probability, two finite populations differing only at that unit have the same observed-data law and different totals. Thus the total is not identifiable, and no estimator based only on the observed sample can be unbiased for every finite population.",
+        "strategy": "Direct: change one never-observed population value, compare the observed records pointwise, then use equal estimator expectations to contradict unbiasedness for both totals.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "lem-finite-population-design-law-is-a-probability-measure",
+          "def-parametric-statistical-model",
+          "def-estimand-on-a-statistical-model",
+          "def-identifiability-of-an-estimand",
+          "def-statistic-and-estimator",
+          "def-unbiased-estimator-and-umvu",
+          "def-borel-sigma-algebra",
+          "def-expectation-on-a-finite-probability-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 1933,
+    "id": "finite-populations-and-sampling-designs-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Finite populations and design probability — Examples",
+    "companion": "finite-populations-and-sampling-designs",
+    "requires": [
+      "finite-populations-and-sampling-designs"
+    ],
+    "items": [
+      {
+        "id": "ex-srswor-inclusion-probabilities-and-negative-covariance",
+        "kind": "example",
+        "title": "SRSWOR inclusion probabilities, pairwise nonpositive indicator covariance, and the sample mean",
+        "statement": "For uniform sampling of n-subsets from N fixed units with N>=2 and 1<=n<=N, computes first- and second-order inclusion probabilities, the covariance of distinct inclusion indicators, and the Horvitz–Thompson mean as the usual sample mean.",
+        "strategy": "Count unit/sample incidences and ordered-pair/sample incidences by symmetry; expand the covariance from its definition and specialize the Horvitz–Thompson estimator.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "thm-horvitz-thompson-total-is-design-unbiased",
+          "def-variance-and-covariance",
+          "thm-linearity-of-expectation",
+          "lem-indicator-expectation-and-products",
+          "def-indicator-random-variable",
+          "def-expectation-on-a-finite-probability-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-census-and-certainty-units-under-ht",
+        "kind": "example",
+        "title": "A certainty unit and a census under Horvitz–Thompson estimation",
+        "statement": "A three-unit design that always samples one unit gives its Horvitz–Thompson contribution without expansion; a census makes every inclusion probability one and the Horvitz–Thompson total and mean exact.",
+        "strategy": "Compute the inclusion probabilities and estimator for the two-sample certainty-unit design, then evaluate the single-outcome census design.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "thm-horvitz-thompson-total-is-design-unbiased",
+          "def-unbiased-estimator-and-umvu",
+          "def-expectation-on-a-finite-probability-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-zero-inclusion-probability-and-unobserved-unit",
+        "kind": "example",
+        "title": "An unobserved unit prevents universal unbiased estimation",
+        "statement": "When the design always samples unit 1 from a two-unit population, two populations with different totals produce the same observed record, so every observed-sample estimator has the same expectation under both.",
+        "strategy": "Write the degenerate design law and two population schedules explicitly; compare their inclusion probabilities, records, totals, and estimator expectations.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "thm-zero-inclusion-probability-precludes-identification-and-universal-unbiasedness",
+          "def-statistic-and-estimator",
+          "def-unbiased-estimator-and-umvu"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

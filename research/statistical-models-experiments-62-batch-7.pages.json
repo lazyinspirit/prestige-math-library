@@ -1,0 +1,793 @@
+[
+  {
+    "order": 1930,
+    "id": "mixed-effects-and-longitudinal-models",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Mixed effects and longitudinal models",
+    "companion": "mixed-effects-and-longitudinal-models-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "fixed-design-linear-regression-and-estimability",
+      "statistical-experiments-models-and-identifiability",
+      "estimators-and-randomized-procedures",
+      "dominated-experiments-likelihood-and-sufficiency",
+      "losses-risk-and-decision-rules",
+      "central-limit-theorems",
+      "probability-spaces-random-variables-and-expectation",
+      "inner-product-spaces-and-orthogonality",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "direct-matrix-factorisations-lu-cholesky-and-qr"
+    ],
+    "items": [
+      {
+        "id": "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent",
+        "kind": "lemma",
+        "title": "Jointly Gaussian blocks with zero cross-covariance are independent, including singular blocks",
+        "statement": "Assume AC. Let $(U_1,U_2)$ be a jointly multivariate-normal vector with mean $(m_1,m_2)$ and covariance",
+        "strategy": "direct",
+        "deps": [
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "cor-countable-independent-copies-exist",
+          "thm-grouping-independent-sigma-algebras",
+          "lem-measurable-functions-preserve-independence",
+          "def-independent-random-elements",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 4: Maximum Likelihood Estimation and Inference for the Hierarchical Normal Model, PDF p. 3",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec4-MLE-HNM.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.3 and Appendix D",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+        "kind": "theorem",
+        "title": "A positive-definite multivariate normal law has its Gaussian density",
+        "statement": "Assume AC. Let $d\\ge1$, $m\\in\\mathbb R^d$, and let $\\Sigma$ be a real symmetric positive-definite $d\\times d$ matrix. If $X\\sim N_d(m,\\Sigma)$, then its law has Lebesgue density",
+        "strategy": "direct",
+        "deps": [
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "cor-countable-independent-copies-exist",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-characteristic-function-of-a-normal-law",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-determinant-of-transpose",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 4: Maximum Likelihood Estimation and Inference for the Hierarchical Normal Model, PDF p. 2",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec4-MLE-HNM.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.2",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": ""
+        }
+      },
+      {
+        "id": "def-error-contrast-matrix",
+        "kind": "definition",
+        "title": "Error-contrast matrix for a full-rank fixed design",
+        "statement": "For full-column-rank X\u2208R^{n\u00d7p} with p<n, an error-contrast matrix is K\u2208R^{n\u00d7(n-p)} of full column rank with X^T K=0 and columns spanning col(X)^\u22a5.",
+        "strategy": "State a dimensionally consistent column-basis convention for the error-contrast coordinates K^T Y.",
+        "deps": [
+          "def-fixed-design-linear-regression-model",
+          "def-orthogonal-complement"
+        ],
+        "justified_by": [
+          "lem-error-contrast-matrix-exists"
+        ],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 4: Maximum Likelihood Estimation and Inference for the Hierarchical Normal Model, PDF pp. 4-5",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec4-MLE-HNM.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.2",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-known-covariance-generalized-least-squares-estimator",
+        "kind": "definition",
+        "title": "Generalized least-squares estimator for known covariance",
+        "statement": "For a fixed-design first-moment model with full-column-rank X and known positive-definite covariance V, define \u03b2hat_GLS=(X^T V^{-1}X)^{-1}X^T V^{-1}Y as the Borel-measurable estimator of \u03b2.",
+        "strategy": "Define the known-covariance statistic and identify the positive-definite information matrix whose inverse makes its formula well defined.",
+        "deps": [
+          "def-fixed-design-linear-regression-model",
+          "def-statistic-and-estimator",
+          "def-estimand-on-a-statistical-model",
+          "def-moments-variance-and-covariance",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "thm-continuous-preimages-of-borel-sets-are-borel"
+        ],
+        "justified_by": [
+          "lem-gls-information-matrix-is-positive-definite"
+        ],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 2: Two Solutions\u2014GLS and Cluster-Robust Standard Errors, PDF pp. 1-2",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lecture2_GLS_and_ClusterRobustSE.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.5.1",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-linear-mixed-model",
+        "kind": "definition",
+        "title": "Finite-dimensional linear mixed model with explicit longitudinal roles",
+        "statement": "On a declared probability space, let fixed matrices X and Z define Y=X\u03b2+Zb+\u03b5, with finite second moments, Eb=E\u03b5=0, Cov(b)=G, Cov(\u03b5)=R, and b independent of \u03b5. Specify subject and visit roles, observed visit sets, and the separately declared missingness mechanism. No Gaussian or ignorability assumption is included.",
+        "strategy": "Define the finite-dimensional moment model and its scientific record; keep visit indexing and the observation mechanism explicit.",
+        "deps": [
+          "def-scientific-statistical-model-contract",
+          "def-fixed-design-linear-regression-model",
+          "def-random-element-and-real-random-variable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-independent-random-elements"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 6: Linear Mixed-Effects Models, PDF pp. 4-5",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec6-LME.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a7\u00a72.3.1-2.3.3",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            },
+            {
+              "title": "Fan Li, STA610 Lecture 7: The Longitudinal Linear Mixed Model, PDF pp. 2-5",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec7-LLME.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-gaussian-linear-mixed-model",
+        "kind": "definition",
+        "title": "Gaussian branch of the linear mixed model",
+        "statement": "The Gaussian branch assumes AC and that the concatenated latent and residual vector (b, \u03b5) is multivariate normal with mean zero and covariance diag(G,R); it is an explicit additional assumption, separate from the moment-only mixed model.",
+        "strategy": "Declare the joint Gaussian submodel and its inherited AC assumption without imposing Gaussianity on the moment-only branch.",
+        "deps": [
+          "def-linear-mixed-model",
+          "def-multivariate-normal-law",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 6: Linear Mixed-Effects Models, PDF pp. 4-5",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec6-LME.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a7\u00a72.3.3-2.4.2",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-longitudinal-missingness-mechanisms",
+        "kind": "definition",
+        "title": "Longitudinal observation patterns and missingness mechanisms",
+        "statement": "A longitudinal missingness mechanism assigns each finite observation pattern a nonnegative probability summing to one at every full-response and covariate state, with each pattern probability measurable. MCAR is outcome-independent, MAR depends on outcomes only through observed coordinates, and MNAR is failure of MAR on declared support. Monotone dropout observes an initial segment of visits.",
+        "strategy": "Define full and observed response records, pattern indicators, and MCAR/MAR/MNAR relative to a declared observation kernel.",
+        "deps": [
+          "def-linear-mixed-model",
+          "def-scientific-statistical-model-contract"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 7: The Longitudinal Linear Mixed Model, PDF pp. 16-18",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec7-LLME.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.3",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-error-contrast-matrix-exists",
+        "kind": "lemma",
+        "title": "A full-rank error-contrast matrix exists when n exceeds p",
+        "statement": "For every full-column-rank $X\\in\\mathbb R^{n\\times p}$ with $p<n$, there exists an error-contrast matrix $K\\in\\mathbb R^{n\\times(n-p)}$ as defined in [[def-error-contrast-matrix]].",
+        "strategy": "direct",
+        "deps": [
+          "def-error-contrast-matrix",
+          "cor-double-orthogonal-complement-and-dimension",
+          "def-fixed-design-linear-regression-model",
+          "def-linear-basis",
+          "def-dimension"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 4: Maximum Likelihood Estimation and Inference for the Hierarchical Normal Model, PDF pp. 4-5",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec4-MLE-HNM.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.2",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-gls-information-matrix-is-positive-definite",
+        "kind": "lemma",
+        "title": "The GLS information matrix is positive definite",
+        "statement": "If $X\\in\\mathbb R^{n\\times p}$ has full column rank and $V\\in\\mathbb R^{n\\times n}$ is symmetric positive definite, then $X^TV^{-1}X$ is symmetric positive definite. In particular it is invertible.",
+        "strategy": "direct",
+        "deps": [
+          "def-known-covariance-generalized-least-squares-estimator",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 2: Two Solutions\u2014GLS and Cluster-Robust Standard Errors, PDF p. 2",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lecture2_GLS_and_ClusterRobustSE.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.5.1",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-marginal-covariance-of-linear-mixed-model",
+        "kind": "lemma",
+        "title": "Marginal covariance of the linear mixed model",
+        "statement": "For the moment model $Y=X\\beta+Zb+\\varepsilon$ of [[def-linear-mixed-model]], the marginal covariance is",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-mixed-model",
+          "def-moments-variance-and-covariance",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-covariance-bilinearity-and-symmetry",
+          "lem-measurable-functions-preserve-independence",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 6: Linear Mixed-Effects Models, PDF pp. 8-9",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec6-LME.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.1",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-reml-error-contrast-covariance-is-positive-definite",
+        "kind": "lemma",
+        "title": "The REML error-contrast covariance is positive definite",
+        "statement": "Let $X\\in\\mathbb R^{n\\times p}$ have full column rank with $p<n$, let $K\\in\\mathbb R^{n\\times(n-p)}$ be an error-contrast matrix for $X$, and let $V\\in\\mathbb R^{n\\times n}$ be symmetric positive definite. Then $K^TVK$ is symmetric positive definite. No Gaussian assumption is needed for this matrix claim.",
+        "strategy": "direct",
+        "deps": [
+          "def-error-contrast-matrix"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 4: Maximum Likelihood Estimation and Inference for the Hierarchical Normal Model, PDF pp. 4-5",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec4-MLE-HNM.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.2",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-gaussian-error-contrast-is-multivariate-normal",
+        "kind": "lemma",
+        "title": "A Gaussian error contrast has the induced multivariate-normal law",
+        "statement": "Assume AC and the Gaussian branch of the finite-dimensional mixed model. Let $X\\in\\mathbb R^{n\\times p}$ have full column rank with $p<n$, let $K\\in\\mathbb R^{n\\times(n-p)}$ be an error-contrast matrix, and let $V=ZGZ^T+R=\\operatorname{Cov}(Y)$. Then",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-mixed-model",
+          "def-gaussian-linear-mixed-model",
+          "def-error-contrast-matrix",
+          "def-multivariate-normal-law",
+          "def-moments-variance-and-covariance",
+          "lem-marginal-covariance-of-linear-mixed-model",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-covariance-bilinearity-and-symmetry",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 4: Maximum Likelihood Estimation and Inference for the Hierarchical Normal Model, PDF pp. 4\u20135",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec4-MLE-HNM.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.2",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-gaussian-conditional-law-of-random-effects",
+        "kind": "theorem",
+        "title": "Conditional Gaussian law of random effects",
+        "statement": "Assume AC and the Gaussian branch of the finite-dimensional mixed model. Let $V=ZGZ^T+R$ be positive definite. With conditional expectation taken componentwise given $\\sigma(Y)$, and conditional covariance defined entrywise by conditional expectations of centered products, one has",
+        "strategy": "direct",
+        "deps": [
+          "def-gaussian-linear-mixed-model",
+          "def-linear-mixed-model",
+          "def-multivariate-normal-law",
+          "lem-marginal-covariance-of-linear-mixed-model",
+          "def-moments-variance-and-covariance",
+          "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-independent-random-elements",
+          "thm-covariance-bilinearity-and-symmetry",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "lem-measurable-functions-preserve-independence",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 6: Linear Mixed-Effects Models, PDF pp. 11-12",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec6-LME.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.3 and Appendix D",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-variance-component-identifiability-iff-covariance-map-injective",
+        "kind": "theorem",
+        "title": "Gaussian variance-component identifiability is covariance-map injectivity",
+        "statement": "Assume AC. Let $\\Theta$ be a nonempty parameter set and let $\\theta\\mapsto(G_\\theta,R_\\theta)$ be a declared covariance-component parameterization of the Gaussian mixed model, with",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-mixed-model",
+          "def-gaussian-linear-mixed-model",
+          "def-parametric-statistical-model",
+          "def-identifiability-of-an-estimand",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "def-moments-variance-and-covariance",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 6: Linear Mixed-Effects Models, PDF pp. 10-11",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec6-LME.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a7\u00a72.3.3-2.4.2",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-restricted-maximum-likelihood-error-contrasts",
+        "kind": "definition",
+        "title": "Restricted maximum likelihood from error contrasts",
+        "statement": "Under the Gaussian mixed model and full-rank fixed design with p<n, fix an error-contrast matrix K and define the restricted likelihood as the density of K^T Y, whose mean is zero and covariance is K^T V(\u03b8)K; the likelihood depends on covariance parameters and not \u03b2.",
+        "strategy": "Use the corrected column-basis convention, the local existence result, and the positive-definite contrast covariance to define the Gaussian density.",
+        "deps": [
+          "def-gaussian-linear-mixed-model",
+          "def-linear-mixed-model",
+          "def-fixed-design-linear-regression-model",
+          "def-error-contrast-matrix",
+          "lem-error-contrast-matrix-exists",
+          "lem-gaussian-error-contrast-is-multivariate-normal",
+          "lem-reml-error-contrast-covariance-is-positive-definite",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 4: Maximum Likelihood Estimation and Inference for the Hierarchical Normal Model, PDF pp. 4-5",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec4-MLE-HNM.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.2",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-known-covariance-gls-is-blue",
+        "kind": "theorem",
+        "title": "Known-covariance GLS is BLUE",
+        "statement": "Let the linear mixed model have fixed design $X\\in\\mathbb R^{n\\times p}$ of full column rank and known marginal covariance $V=\\operatorname{Cov}(Y)\\succ0$. Then",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-mixed-model",
+          "lem-marginal-covariance-of-linear-mixed-model",
+          "def-fixed-design-linear-regression-model",
+          "def-known-covariance-generalized-least-squares-estimator",
+          "thm-gauss-markov-for-fixed-design-regression",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-covariance-bilinearity-and-symmetry"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 2: Two Solutions\u2014GLS and Cluster-Robust Standard Errors, PDF pp. 1-2",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lecture2_GLS_and_ClusterRobustSE.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.5.1",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-reml-error-contrast-basis-change-is-parameter-free",
+        "kind": "lemma",
+        "title": "Changing an error-contrast basis changes the REML likelihood by a constant",
+        "statement": "Let $X\\in\\mathbb R^{n\\times p}$ have full column rank with $p<n$, and let $K,K'\\in\\mathbb R^{n\\times(n-p)}$ be two error-contrast matrices for $X$. For every covariance parameter $\\theta$ in [[def-restricted-maximum-likelihood-error-contrasts]], there is an invertible matrix $A\\in\\mathbb R^{(n-p)\\times(n-p)}$, independent of $\\theta$, such that $K'=KA$ and",
+        "strategy": "direct",
+        "deps": [
+          "def-error-contrast-matrix",
+          "def-restricted-maximum-likelihood-error-contrasts",
+          "thm-rank-nullity",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-transpose",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 4: Maximum Likelihood Estimation and Inference for the Hierarchical Normal Model, PDF pp. 4\u20135",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec4-MLE-HNM.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.2",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": ""
+        }
+      },
+      {
+        "id": "thm-known-covariance-blup-for-random-effects",
+        "kind": "theorem",
+        "title": "Known-covariance BLUP and its prediction-error covariance",
+        "statement": "In the moment-only linear mixed model, suppose $X$ has full column rank and the known marginal covariance $V=ZGZ^T+R$ is positive definite. Define",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-mixed-model",
+          "lem-marginal-covariance-of-linear-mixed-model",
+          "def-known-covariance-generalized-least-squares-estimator",
+          "thm-known-covariance-gls-is-blue",
+          "thm-normal-equations-for-best-affine-l2-prediction",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "lem-measurable-functions-preserve-independence",
+          "thm-factorization-of-expectations-for-independent-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 5: Estimation of Group Effects, PDF pp. 8-10",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec5-GroupEffects.pdf"
+            },
+            {
+              "title": "Fan Li, STA610 Lecture 6: Linear Mixed-Effects Models, PDF pp. 11-12",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec6-LME.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a72.4.3",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 1931,
+    "id": "mixed-effects-and-longitudinal-models-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Mixed effects and longitudinal models \u2014 Examples",
+    "companion": "mixed-effects-and-longitudinal-models",
+    "requires": [
+      "mixed-effects-and-longitudinal-models"
+    ],
+    "items": [
+      {
+        "id": "cex-linear-mixed-model-covariance-does-not-imply-ignorable-dropout",
+        "kind": "counterexample",
+        "title": "A mixed-model covariance does not imply MAR dropout",
+        "statement": "It is false that a correct random-intercept covariance model for a complete two-visit response vector implies dropout after the first visit is missing at random (MAR).",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-mixed-model",
+          "lem-marginal-covariance-of-linear-mixed-model",
+          "def-longitudinal-missingness-mechanisms",
+          "def-scientific-statistical-model-contract",
+          "def-moments-variance-and-covariance"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 7: The Longitudinal Linear Mixed Model, PDF pp. 16-18",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec7-LLME.pdf"
+            },
+            {
+              "title": "Fan Li, STA610 Lecture 1: The Problem of Correlated Data, PDF pp. 4-6",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lecture1_ProblemOfCorrelatedData.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-random-intercept-intraclass-correlation",
+        "kind": "example",
+        "title": "Random-intercept covariance and intraclass correlation",
+        "statement": "For independent mean-zero random intercept b_j and residuals \u03b5_ij with variances \u03c4\u00b2 and \u03c3\u00b2, two observations from the same subject have covariance \u03c4\u00b2, marginal variance \u03c4\u00b2+\u03c3\u00b2, and correlation \u03c4\u00b2/(\u03c4\u00b2+\u03c3\u00b2) when the denominator is positive.",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-mixed-model",
+          "lem-marginal-covariance-of-linear-mixed-model",
+          "def-moments-variance-and-covariance"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 1: The Problem of Correlated Data, PDF pp. 4-8",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lecture1_ProblemOfCorrelatedData.pdf"
+            },
+            {
+              "title": "Duchateau, Janssen, and Rowlands, Linear Mixed Models, Chapter 2 \u00a7\u00a72.3.1-2.4.1",
+              "url": "https://biometrics.ilri.org/Publication/Full%20Text/Linear_Mixed_Models/Chapter2_2_1to2_2.htm"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-two-visits-alias-random-slope-and-residual-variance",
+        "kind": "counterexample",
+        "title": "Two visits can alias random-slope and residual variance components",
+        "statement": "It is false that two visits at times $0$ and $1$, together with a full-rank fixed design, always identify the random-intercept/random-slope covariance matrix and the residual variance in a Gaussian longitudinal mixed model.",
+        "strategy": "direct",
+        "deps": [
+          "def-linear-mixed-model",
+          "def-gaussian-linear-mixed-model",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "def-axiom-of-choice",
+          "lem-marginal-covariance-of-linear-mixed-model",
+          "thm-variance-component-identifiability-iff-covariance-map-injective"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Fan Li, STA610 Lecture 6: Linear Mixed-Effects Models, PDF pp. 13-14",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec6-LME.pdf"
+            },
+            {
+              "title": "Fan Li, STA610 Lecture 7: The Longitudinal Linear Mixed Model, PDF pp. 6-8",
+              "url": "https://stat.duke.edu/~fl35/teaching/610-26F/Lec7-LLME.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

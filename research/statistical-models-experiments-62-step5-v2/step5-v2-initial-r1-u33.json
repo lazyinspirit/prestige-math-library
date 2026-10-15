@@ -1,0 +1,91 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "33",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "ex-logrank-crossing-hazards-zero-score",
+      "model": "gpt-6-luna",
+      "context_sha256": "99e88fe6f2fc9f79a9ed3b979184e7c2417807ca7e26effd7d247e973b392054",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 excluded u=0 although its Kaplan–Meier supplier includes baseline failures. Replaced 0<u by 0≤u. Both observed failures are strictly positive, so all products and the conclusion were already correct.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-logrank-fisher-randomization-with-unequal-weights",
+      "model": "gpt-6-luna",
+      "context_sha256": "9af8e211e03be4c57dea870a3f73e0fa9d6ea768f60e7883360a0cec3c985db3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 omitted the total event count d_j from the general logrank contribution. Restored O_j−d_jY_1j/Y_j and explicitly noted that d_j=1 here. The three distinct failure times make the original numerical calculations and superuniformity conclusion correct.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-logrank-crossing-hazards-zero-score",
+      "disposition": "repaired",
+      "post_sha256": "9a341dcb2f69d93ffbc2c78d37984f9a6d191866264dbfe7568c24fbaa269c47",
+      "review_context_sha256": "294d4bdd64928c60b9ae7f1244ae5dd57bb6fa581256273849dab960fd6d57b4",
+      "reason": "Checked both supplier Definitions, both proof steps, the owning contract and both page interfaces. Integrated hazards give survival ratio exp(t−2) after 1 and crossing at 2. Independence and positive interval probabilities and survival tails give the sample pattern positive probability. Risk sets (4,2) then (1,2) give score 1/3−1/3=0 and variance 2/9+2/9=4/9. Product limits 3/4 and 1/2 reverse order at t2. Corrected only F2 to include zero; Statement, proof, dependencies, contract and page claims remain sound. The supplier later clarified Greenwood measurability without changing its product formula; examined that exact delta and verified it has no effect on step 2.1. Under the shared-write lock, shortened the stale F2 contract quotation to the exact current Kaplan–Meier formula and captured a fresh review context.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-logrank-fisher-randomization-with-unequal-weights",
+      "disposition": "repaired",
+      "post_sha256": "cf7f824710a6174426cde45426116f7dfdc324da9d52cd63e4a89413a447b5ee",
+      "review_context_sha256": "88873f79b6dc86db7c60cf9a4784ae05b805080160d0e2eff1ecc09d7e0ba66c",
+      "reason": "Checked all three supplier interfaces, the corollary argument, all example proof steps, its contract and both owning pages. The schedule fixes all records under all assignments and unit weights are predeclared. Direct calculation gives scores 2/3, 1/6, −5/6; inclusive absolute tails are 2/3, 1, 1/6 under weights 1/2, 1/3, 1/6. The displayed CDF is bounded by u at and between every breakpoint. Restored the general d_j factor in F1; every actual d_j equals one. Statement, proof, dependencies, contract and pages need no changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "subject": "ex-logrank-crossing-hazards-zero-score",
+      "location": "facts-block",
+      "fact": "F2",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "reason": "F2 excluded u=0 although its Kaplan–Meier supplier includes baseline failures. Replaced 0<u by 0≤u. Both observed failures are strictly positive, so all products and the conclusion were already correct.",
+      "evidence": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u33.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "subject": "ex-logrank-fisher-randomization-with-unequal-weights",
+      "location": "facts-block",
+      "fact": "F1",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "reason": "F1 omitted the total event count d_j from the general logrank contribution. Restored O_j−d_jY_1j/Y_j and explicitly noted that d_j=1 here. The three distinct failure times make the original numerical calculations and superuniformity conclusion correct.",
+      "evidence": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u33.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed all two assigned tuples in increasing dependency order. Corrected crossing-hazards F2 to use 0≤u≤t and unequal-weight F1 to use O_j−d_jY_1j/Y_j, explicitly noting d_j=1 here. No numbered step or Statement changed; exact frozen Statement hashes match for both items. No downstream work or new prerequisites. No arbitrary choice is used. No independent review of these repairs is claimed.",
+    "Local sources actually consulted: items/def-nelson-aalen-kaplan-meier-greenwood-estimators.md, Definition (inclusive product, baseline-event convention, continuous survival/hazard identity); items/def-logrank-risk-set-score-and-test.md, complete Definition (risk counts, score and variance); items/cor-logrank-fisher-randomization-pvalue-valid.md, Statement and complete Proof (fixed records, binary group map, actual assignment weights and inclusive tails); items/def-finite-randomized-treatment-assignment-model.md, complete Definition (finite law and fixed schedule). Familiar elementary finite calculations; no external source-reading claim.",
+    "Owning metadata examined: both entries in research/statistical-models-experiments-62-batch-33.proof-contracts.json and research/statistical-models-experiments-62-batch-33.pages.json; library/statistical-models-and-experiments/logrank-and-weighted-logrank.md and logrank-and-weighted-logrank-examples.md. Derivations and page claims remain sound. The first strict contract check failed only citation-quote-mismatch in crossing F2 after the supplier changed its final measurability paragraph during this review. Examined the full textual delta: it clarifies Greenwood domain/zero-extension measurability and leaves the Kaplan–Meier formula and this example use unchanged. Acquired/reread/edited/checked/released the shared lock, shortened only that citation quote to the exact product formula, then captured a fresh crossing review context. No supplier was edited.",
+    "Review hashes were captured immediately after each mathematical review. The initial crossing context b789be6403375108575e37f7afe2e0076fc4192bc00c534cfa916d5ff5ea206a was superseded only after examining the supplier delta and fixing the stale contract quotation; the final context is recorded in its review. The unequal-weight item has no dependency on the Kaplan–Meier supplier.",
+    "Actual focused checks: node tools/tsx-run.mjs tools/precheck.mts items/ex-logrank-crossing-hazards-zero-score.md items/ex-logrank-fisher-randomization-with-unequal-weights.md --json: exit 0, 2 checked, 0 failed. node tools/rendercheck.mjs on those same two paths with --json: exit 0, 2 checked, no errors or warnings. node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-33.proof-contracts.json --strict --items ex-logrank-crossing-hazards-zero-score,ex-logrank-fisher-randomization-with-unequal-weights --json: initial exit 1 for stale supplier quote, repaired as described, rerun exit 0 with ok:true and no errors or warnings.",
+    "After the final item edits, ran once: node tools/proof-layout.mjs items/ex-logrank-crossing-hazards-zero-score.md items/ex-logrank-fisher-randomization-with-unequal-weights.md: exit 0, 2 items, 5 steps, 0 defects. A separate exact-rational computation confirmed both risk-set score/variance calculations, all three assignment scores and tail probabilities, and the CDF inequality at every breakpoint.",
+    "No assigned gate diagnostics; gate_resolutions is empty. No published item was edited or newly found defective, so no update is proposed to research/published-consumer-supplier-ledger.md. The digest’s separate weight-rule measurability concern belongs to the owner of def-logrank-risk-set-score-and-test and does not affect these two unit-weight examples. No unresolved mathematics remains in this assignment."
+  ]
+}

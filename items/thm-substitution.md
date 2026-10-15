@@ -15,19 +15,14 @@ landmark: true
 short: "substitution"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
+  repair: research/statistical-models-experiments-62-published-bibliography-thm-substitution-repair.json
   precheck: pass
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
     - title: "Integration by substitution (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Integration_by_substitution"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
-      url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "Carnegie Mellon 21-269, Riemann integration notes"
       url: "https://www.math.cmu.edu/~gautam/c/2026-269/notes/rint.html"
     - title: "J. Lebl, Basic Analysis I, Fundamental theorem of calculus"

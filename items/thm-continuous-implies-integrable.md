@@ -14,12 +14,8 @@ landmark: true
 short: "continuous $\\Rightarrow$ integrable"
 proof_strategy: direct
 verification:
-  audited: 2026-07-28
+  repair: research/statistical-models-experiments-62-published-bibliography-thm-continuous-implies-integrable-repair.json
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
 sources:
   scraped: []
   references:
@@ -28,7 +24,6 @@ sources:
     - title: "Heine-Cantor theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Heine%E2%80%93Cantor_theorem"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 6"
-      url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, The Riemann Integral"
       url: "https://www.jirka.org/ra/html/sec_rint.html"
     - title: "J. Hunter, Chapter 11: The Riemann Integral"

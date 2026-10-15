@@ -1,0 +1,292 @@
+{
+  "version": 1,
+  "apply_by": "root-only",
+  "id": "thm-poisson-point-process-existence",
+  "base_contract_raw_sha256": "ef1eb42976df7e4e332ae559b2a5d4fc702d454395be55e3d657006ad296f7c5",
+  "replacement_contract": {
+    "citations": [
+      {
+        "fact": "F1",
+        "source": "lem-locally-compact-second-countable-spaces-have-compact-exhaustions",
+        "source_section": "Statement",
+        "quote": "Let $S$ be locally compact, second countable, and Hausdorff. There is an\nincreasing sequence of compact subsets $K_n$ such that $\\bigcup_{n\\ge1}K_n=S$\nand every compact subset of $S$ is contained in some $K_n$.",
+        "uses": [
+          "1.1",
+          "3.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "thm-finite-intensity-poisson-process-existence-and-mixed-binomial-law",
+        "source_section": "Statement",
+        "quote": "Let $\\nu$ be a finite Borel measure on $S$\n([[def-finite-sigma-finite-and-semifinite-measures]]) and put $\\lambda=\\nu(S)$. A\nPoisson point process of intensity $\\nu$ exists. If $\\lambda=0$ it is the zero\nprocess. If $\\lambda>0$, its law is the push-forward of\n$$\\sum_{n=0}^\\infty e^{-\\lambda}\\frac{\\lambda^n}{n!}\\left(\\frac{\\nu}{\\lambda}\\right)^{\\otimes n}$$\non the disjoint union $\\coprod_{n\\ge0}S^n$ under\n$(x_1,\\ldots,x_n)\\mapsto\\sum_{i=1}^n\\delta_{x_i}$. Every Poisson point\nprocess of finite total intensity has this same law. This is the\n**mixed-binomial representation**: the total count is Poisson and, in the\nconstruction, the $n$ locations in component $S^n$ have product law\n$(\\nu/\\lambda)^{\\otimes n}$.",
+        "uses": [
+          "2.1",
+          "3.1",
+          "3.2"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "thm-countable-product-of-probability-spaces",
+        "source_section": "Statement",
+        "quote": "Assume countable choice and dependent choice. For probability spaces\n$(E_n,\\mathcal E_n,\\mu_n)_{n\\in\\mathbb N}$ there is a unique probability measure\n$\\mu$ on $\\mathcal C_{\\mathbb N}$ such that, for every finite $F$, its\n$F$-coordinate marginal is $\\bigotimes_{n\\in F}\\mu_n$.",
+        "uses": [
+          "2.1",
+          "3.2"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "thm-nonnegative-weighted-sums-of-measures",
+        "source_section": "Statement",
+        "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+        "uses": [
+          "1.1",
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "thm-monotone-convergence-for-the-integral",
+        "source_section": "Statement",
+        "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+        "uses": [
+          "1.1",
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "def-measure",
+        "source_section": "Definition",
+        "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+        "uses": [
+          "1.1",
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F5",
+        "source": "def-scalar-poisson-count-law",
+        "source_section": "Definition",
+        "quote": "For a finite parameter $\\lambda\\ge0$, the **Poisson count law**\n$\\operatorname{Pois}(\\lambda)$ is the probability measure on\n$\\mathbb N_0=\\{0,1,2,\\ldots\\}$ whose masses are\n$$\\operatorname{Pois}(\\lambda)\\{k\\}=e^{-\\lambda}\\frac{\\lambda^k}{k!},\\qquad k\\in\\mathbb N_0,$$\nwhen $\\lambda>0$, and is the point mass at $0$ when $\\lambda=0$. The\nnormalization and the moment and generating-function identities used below are\nproved in [[lem-poisson-count-law-normalization-and-moments]]. The separate\nextended convention for a point-process count on a Borel set of infinite\nintensity is that the count equals $+\\infty$ almost surely; it is not a finite\nPoisson probability law.",
+        "uses": [
+          "3.2",
+          "4.1",
+          "5.1"
+        ]
+      },
+      {
+        "fact": "F5",
+        "source": "lem-poisson-count-law-normalization-and-moments",
+        "source_section": "Statement",
+        "quote": "For finite $\\lambda\\ge0$, the masses in\n[[def-scalar-poisson-count-law]] sum to one. If $N\\sim\\operatorname{Pois}(\\lambda)$,\nthen\n$$\\mathbb E[N]=\\lambda,\\qquad \\mathbb E[N(N-1)]=\\lambda^2,\\qquad \\mathbb E[N^2]=\\lambda^2+\\lambda,\\qquad \\operatorname{Var}(N)=\\lambda,$$\nand $\\mathbb E[s^N]=\\exp(\\lambda(s-1))$ for $0\\le s\\le1$.",
+        "uses": [
+          "3.2",
+          "4.1",
+          "5.1"
+        ]
+      },
+      {
+        "fact": "F6",
+        "source": "def-compact-space",
+        "source_section": "Definition",
+        "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]).\n\n- An **open cover** of $(X,\\mathcal{T})$ is a family\n  $\\mathcal{U} \\subseteq \\mathcal{T}$ of open sets with $X = \\bigcup \\mathcal{U}$,\n  where $\\bigcup \\mathcal{U} = \\{\\, x \\in X : x \\in U \\text{ for some } U \\in \\mathcal{U} \\,\\}$.\n- A **subcover** of $\\mathcal{U}$ is a subfamily $\\mathcal{V} \\subseteq \\mathcal{U}$\n  that is itself an open cover.\n- A family $\\mathcal{V}$ of sets is **finite** when $\\mathcal{V} = \\varnothing$ or\n  there are $n \\in \\mathbb{N}$ and sets $V_0, \\dots, V_n$ with\n  $\\mathcal{V} = \\{V_0, \\dots, V_n\\}$; repetitions in the list are allowed and\n  harmless.\n- $(X,\\mathcal{T})$ is **compact** when every open cover of it has a finite\n  subcover: for every open cover $\\mathcal{U}$, either $X = \\varnothing$ and the\n  empty subfamily covers it, or there are $n \\in \\mathbb{N}$ and\n  $U_0, \\dots, U_n \\in \\mathcal{U}$ with\n  $$X = U_0 \\cup \\dots \\cup U_n .$$\n- A subset $A \\subseteq X$ is a **compact subset** of $X$ when the subspace\n  $(A, \\mathcal{T}_A)$ is a compact topological space, $\\mathcal{T}_A$ being the\n  subspace topology ([[def-subspace-topology-top]]).\n\n**Compactness of a subset is defined intrinsically, and only intrinsically.**\nThe last clause speaks about the subspace $(A, \\mathcal{T}_A)$ and its own open\nsets, not about families of open subsets of the ambient $X$. The two readings do\nagree, but that is a theorem and not a convention: it is\n[[lem-compactness-of-a-subspace-is-ambient]], and no item of this library may use\nthe ambient reading without citing it. Taking the intrinsic reading makes\ncompactness a property of the topological space $(A, \\mathcal{T}_A)$ alone.\nHence it is preserved when $A$ is embedded homeomorphically as a subspace, or\nwhen another ambient space induces the same topology on $A$; it need not be\npreserved if the induced topology changes. This is exactly the convention already fixed for\nmetric spaces by [[def-metric-compactness]], and the agreement of that\ndefinition with this one is [[thm-compactness-agrees-with-metric-compactness]].\n\n**The empty space is compact**, since the empty subfamily of any family covers\nit; this is the reason the clause above is written with the two cases. Every\nspace listed as $\\{x_0, \\dots, x_n\\}$ is compact too: given a cover, each $x_i$\nlies in some member, and finitely many members named in this way already cover.\nSo every finite space is compact, whatever its topology, and in particular the\ndiscrete topology on a finite set is compact while the discrete topology on an\ninfinite set is not ([[def-standard-topologies]]).\n\n**The finiteness convention.** \"Finite\" above is the listing form. It agrees with\nthe definition of finiteness by equinumerosity with a natural number\n([[def-countable]]), in both directions, and the agreement is the one already\ndischarged in [[def-metric-compactness]]: a nonempty set equinumerous with\n$m \\ge 1$ is listable, and a set listed as $\\{a_0, \\dots, a_n\\}$ injects into\n$\\sigma(n)$ by sending $x$ to the least $i \\le n$ with $a_i = x$. Neither\ndirection uses a choice principle; the second selects nothing, taking a least\nindex instead.\n\n**Quasicompact is not used here.** Some authors, following Bourbaki, reserve\n*compact* for a space that is both compact in the above sense and Hausdorff, and\ncall the open-cover condition alone *quasicompact*. This library follows the more\nwidely adopted convention: **compact** means the open-cover condition and nothing\nmore, and a Hausdorff hypothesis is always written out. The fork is recorded in\n[[rem-compactness-conventions-and-choice-ledger]].",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F6",
+        "source": "def-hausdorff-space",
+        "source_section": "Definition",
+        "quote": "A topological space $(X, \\mathcal{T})$ ([[def-topological-space]]) is\n**Hausdorff** when any two distinct points are separated by disjoint open sets:\nfor all $x, y \\in X$ with $x \\ne y$ there are $U, V \\in \\mathcal{T}$ with\n\n$$x \\in U, \\qquad y \\in V, \\qquad U \\cap V = \\varnothing .$$\n\nSince an open set containing a point is an open neighbourhood of it\n([[def-neighbourhood-top]]), the condition reads: distinct points have disjoint\nopen neighbourhoods. Nothing is asserted about points that are equal, and the\ncondition is vacuous for a space with at most one point, so every such space is\nHausdorff.\n\n**Every metrizable space is Hausdorff.** This is not proved here, because it is\nalready discharged: [[def-metrizable-space]] records it among the two things\nevery metrizable space has, deriving it from\n[[thm-metric-hausdorff-separation]], which separates $p \\ne q$ in a metric space\nby the disjoint open balls $B(p,r)$ and $B(q,r)$ with $r = d(p,q)/2 > 0$. In\nparticular $\\mathbb{R}$ with its usual topology, every $\\mathbb{R}^n$, and every\nsubspace of a metrizable space are Hausdorff.\n\n**Not every space is Hausdorff.** The indiscrete topology\n$\\mathcal{T}_{\\mathrm{ind}} = \\{\\varnothing, X\\}$ on a set $X = \\{a,b\\}$ with\n$a \\ne b$ ([[def-standard-topologies]]) is not: the only open set containing $a$\nis $X$, the only one containing $b$ is $X$, and $X \\cap X = X \\ne \\varnothing$.\nThis is the same two-point space that [[def-metrizable-space]] uses to exhibit a\ntopology induced by no metric, and the reason is the same one: failure of the\nHausdorff condition is an obstruction to metrizability.\n\n**Being Hausdorff is a topological property** ([[def-homeomorphism-and-open-maps]]).\nIf $h : X \\to Z$ is a homeomorphism and $X$ is Hausdorff, then for $z \\ne z'$ in\n$Z$ the points $h^{-1}(z)$ and $h^{-1}(z')$ are distinct, so they have disjoint\nopen $U, V$; the images $h[U]$ and $h[V]$ are open, disjoint, and contain $z$ and\n$z'$ respectively, a homeomorphism carrying the open sets of one space\nbijectively onto those of the other. So no space homeomorphic to a Hausdorff\nspace fails the condition.\n\n**Scope of this item.** Only the definition, the metrizable case and the\ntwo-point failure are recorded here, because that is all this page uses. The\nHausdorff condition is one of a graded family of separation axioms; that family,\nits ordering, and the questions of which of its members are hereditary or\npreserved by products, are not available at this point in the reading order and\nnothing here anticipates them. What this page does use is a single negative\nresult: a quotient of a Hausdorff space need not be Hausdorff, which is recorded\nbelow as a false statement and witnessed on the companion page.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F6",
+        "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+        "source_section": "Statement",
+        "quote": "Let $(X, \\mathcal{T})$ be a Hausdorff topological space\n([[def-hausdorff-space]], [[def-topological-space]]), with compact subsets as in\n[[def-compact-space]]. Then:\n\n1. **A point and a disjoint compact set are separated.** If $K \\subseteq X$ is\n   compact and $x \\in X \\setminus K$, there are $U, V \\in \\mathcal{T}$ with\n   $$x \\in U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$\n2. **Two disjoint compact sets are separated.** If $K, L \\subseteq X$ are compact\n   and $K \\cap L = \\varnothing$, there are $U, V \\in \\mathcal{T}$ with\n   $$L \\subseteq U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$\n3. **Compact implies closed.** Every compact subset of $X$ is closed in $X$.\n4. **In a compact Hausdorff space the two classes coincide.** If in addition\n   $(X, \\mathcal{T})$ is compact, then a subset of $X$ is compact if and only if\n   it is closed.\n\n**The proof is written choice-free, and that is not a stylistic preference.** The\ntextbook argument says \"for each $y \\in K$ choose disjoint open $U_y, V_y$\",\nwhich is a selection over an arbitrary index set and therefore an appeal to the\nfull Axiom of Choice. What is done below instead is to take the family of **all**\nopen $V$ that admit some open $U \\ni x$ disjoint from them \u2014 a family cut out by\na formula, with nothing selected \u2014 extract a finite subcover from it, and only\nthen make finitely many selections, which [[lem-finite-choice]] supplies as a\ntheorem of ZF.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "A1",
+        "source": "def-countable-choice",
+        "source_section": "Definition",
+        "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+        "uses": [
+          "2.1",
+          "3.2",
+          "6.1"
+        ]
+      },
+      {
+        "fact": "A2",
+        "source": "def-dependent-choice",
+        "source_section": "Definition",
+        "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ \u2014 for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ \u2014 is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+        "uses": [
+          "2.1",
+          "3.2",
+          "6.1"
+        ]
+      }
+    ],
+    "derivations": [
+      {
+        "id": "derive-1-1",
+        "claim": "Put $K_0=\\varnothing$, $A_1=K_1$, and $A_i=K_i\\setminus K_{i-1}$ for $i\\ge2$. By [F6], each $K_i$ is closed, so the disjoint sets $A_i$ are Borel and cover $S$. Since $A_i\\subseteq K_i$, countable additivity of the measure gives $\\nu(A_i)\\le\\nu(K_i)<\\infty$, hence $\\nu_i(B):=\\nu(B\\cap A_i)$ is finite. If $i>m$, then $A_i\\cap K_m=\\varnothing$.",
+        "step": "1.1",
+        "inputs": [
+          "given",
+          "F1",
+          "F4",
+          "F6",
+          "construct"
+        ]
+      },
+      {
+        "id": "derive-2-1",
+        "claim": "For each $i$, let $\\Omega_i$ be the explicit finite-intensity mixed-binomial space from [F2] for $\\nu_i$ (a one-point space when $\\nu_i=0$), with law $P_i$ and coordinate counting measure $\\eta_i$. The countable product theorem [F3], under [A1]-[A2], supplies a probability space on which all these coordinates are independent. Each $\\eta_i$ is supported on $A_i$ almost surely: its count on $S\\setminus A_i$ is Poisson with mean zero by [F2], hence zero almost surely.",
+        "step": "2.1",
+        "inputs": [
+          "given",
+          "step 1.1",
+          "F2",
+          "F3",
+          "A1",
+          "A2",
+          "construct"
+        ]
+      },
+      {
+        "id": "derive-3-1",
+        "claim": "Let $E=\\bigcap_{i\\ge1}\\{\\eta_i(S\\setminus A_i)=0\\}$. Each event in this intersection is measurable by the coordinate evaluation maps and has probability one by step 2.1; countable subadditivity applied to their null complements gives $\\mathbb P(E)=1$. For Borel $B$, define $\\eta(B)=\\sum_{i\\ge1}\\eta_i(B)$ on $E$ and $\\eta(B)=0$ off $E$. On $E$ the countable sum is a measure by [F4], while off $E$ it is the zero measure; its evaluations are measurable as the restriction to the measurable event $E$ of increasing limits of finite sums. On $E$ it is a counting measure because the coordinate construction lists finitely many point locations per cell and the countable union of those lists is countable; off $E$ the empty configuration is a counting measure. On $E$, if $C$ is compact, [F1] gives $C\\subseteq K_m$ for some $m$; then $\\eta(C)=\\sum_{i=1}^m\\eta_i(C)<\\infty$, because later cells avoid $K_m$ and each of the first $m$ coordinates contains finitely many points. Off $E$ all compact counts are zero. Thus $\\eta$ is a measurable point process with locally finite realizations everywhere, and agrees almost surely with the unmodified superposition, preserving all its count laws.",
+        "step": "3.1",
+        "inputs": [
+          "given",
+          "F1",
+          "F2",
+          "F4",
+          "step 1.1",
+          "step 2.1",
+          "construct"
+        ]
+      },
+      {
+        "id": "derive-3-2",
+        "claim": "Fix pairwise-disjoint Borel sets $B_1,\\ldots,B_r$ and write $N_{ij}=\\eta_i(B_j)$ and $a_{ij}=\\nu_i(B_j)$. By [F2], within each row $i$ the $N_{ij}$ are independent Poisson variables of means $a_{ij}$; rows are independent by [F3] and [A1]-[A2], so all finitely many variables in the first $n$ rows are independent. For independent $X\\sim\\operatorname{Pois}(a)$ and $Y\\sim\\operatorname{Pois}(b)$, direct convolution gives $\\mathbb P(X+Y=k)=e^{-(a+b)}\\sum_{l=0}^k a^lb^{k-l}/(l!(k-l)!)=e^{-(a+b)}(a+b)^k/k!$ by the binomial theorem. Iterating this identity shows that $N_j^{(n)}=\\sum_{i=1}^nN_{ij}$ are independent across $j$ with laws $\\operatorname{Pois}(a_j^{(n)})$, where $a_j^{(n)}=\\sum_{i=1}^na_{ij}$.",
+        "step": "3.2",
+        "inputs": [
+          "given",
+          "F2",
+          "F3",
+          "F5",
+          "A1",
+          "A2",
+          "step 2.1",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derive-4-1",
+        "claim": "On the probability-one event $E$ from step 3.1, the counts $N_j^{(n)}$ increase to $N_j=\\eta(B_j)$ and $a_j^{(n)}\\uparrow a_j:=\\nu(B_j)$. For finite $a_j$, the events $\\{N_j^{(n)}\\le k_j\\text{ for every }j\\}$ decrease to $\\{N_j\\le k_j\\text{ for every }j\\}$; continuity from above follows by applying [F4] to their complementary increasing indicators. Their probabilities, computed from step 3.2, converge to $\\prod_j\\sum_{k=0}^{k_j}e^{-a_j}a_j^k/k!$. Inclusion-exclusion over the finitely many lower rectangles then gives the product of Poisson point masses for every count vector, proving independence and the desired laws when all $a_j<\\infty$.",
+        "step": "4.1",
+        "inputs": [
+          "step 3.1",
+          "step 3.2",
+          "F4",
+          "F5",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derive-5-1",
+        "claim": "If $a_j=\\infty$, then for each integer $M\\ge0$, continuity from above gives $\\mathbb P(N_j\\le M)=\\lim_n e^{-a_j^{(n)}}\\sum_{k=0}^M(a_j^{(n)})^k/k!=0$. The limit is zero because $e^{-t}t^k\\to0$ for each fixed $k$, as follows from $e^t\\ge t^{k+1}/(k+1)!$. Hence $N_j=\\infty$ almost surely. Applying the finite-coordinate argument of step 4.1 to the coordinates with finite $a_j$, while the infinite-mean coordinates are almost surely constant at $+\\infty$, gives the required extended independent-count convention for the whole family.",
+        "step": "5.1",
+        "inputs": [
+          "step 3.2",
+          "step 4.1",
+          "F5",
+          "algebra"
+        ]
+      },
+      {
+        "id": "derive-6-1",
+        "claim": "Steps 3.1, 3.2, 4.1, and 5.1 prove local finiteness and the independent Poisson count laws. The only choice principles used are [A1]-[A2] for the countable product in step 2.1.",
+        "step": "6.1",
+        "inputs": [
+          "step 2.1",
+          "step 3.1",
+          "step 3.2",
+          "step 4.1",
+          "step 5.1",
+          "A1",
+          "A2"
+        ]
+      }
+    ],
+    "routine_steps": [],
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "checked",
+        "evidence": "The empty space has the empty compact exhaustion; steps 1.1\u20132.1 then construct only zero cells."
+      },
+      {
+        "case": "zero",
+        "status": "checked",
+        "evidence": "Steps 2.1 and 3.1 include zero-intensity cells and zero Poisson counts."
+      },
+      {
+        "case": "one",
+        "status": "checked",
+        "evidence": "The finite-cell construction in step 2.1 permits intensity one."
+      },
+      {
+        "case": "degenerate",
+        "status": "checked",
+        "evidence": "All-zero cells in steps 2.1 and 3.1 give the deterministic zero process."
+      },
+      {
+        "case": "endpoints",
+        "status": "not_applicable",
+        "reason": "The statement has no ordered interval or endpoint parameter."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "checked",
+        "evidence": "Theorem statement and step 2.1 identify Countable Choice and Dependent Choice as the only product axioms."
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "reason": "The statement makes no biconditional claim."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "The statement makes no biconditional claim."
+      }
+    ],
+    "finite_smoke": [],
+    "risk_review": {
+      "status": "complete",
+      "evidence": "Countable Choice and Dependent Choice are isolated to the countable product; no full AC is claimed.",
+      "finite_checks": [
+        "The disjoint partition covers S; each compact K subset K_m meets only the first m cells.",
+        "The finite Poisson convolution identity is displayed in step 3.1; increasing count limits establish finite and infinite mean cases."
+      ]
+    }
+  },
+  "boundary_replacements_apply_after_this_projection": "boundary-contract-proposal.json"
+}

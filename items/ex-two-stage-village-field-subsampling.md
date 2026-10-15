@@ -1,0 +1,72 @@
+---
+id: ex-two-stage-village-field-subsampling
+kind: example
+title: "A two-stage village-and-field sample"
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 5
+deps:
+  - def-two-stage-cluster-sampling-and-expansion-estimator
+  - def-moments-variance-and-covariance
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+sources:
+  references:
+    - title: "Shalabh, Sampling Theory, Chapter 10: Two Stage Sampling (Subsampling), PDF pp. 1–7, IIT Kanpur"
+      url: "https://home.iitk.ac.in/~shalab/sampling/chapter10-sampling-two-stage-sampling.pdf"
+    - title: "Sharon L. Lohr, Sampling: Design and Analysis, 2nd ed., §5.3 and §6.6, printed pp. 145–150 and 204–210"
+      url: "https://drive.uqu.edu.sa/_/maatia/files/Sampling.pdf"
+    - title: "Susan Holmes and Wolfgang Huber, Modern Statistics for Modern Biology, Chapter 13, §§13.2, 13.3.2 and 13.4.5"
+      url: "https://www.huber.embl.de/msmb/13-chap.html"
+---
+
+## Example
+
+Two villages are the PSUs, and the four fields in each village are its SSUs.
+Their fixed values are
+$$y_{1\cdot}=(2,4,6,8),\qquad y_{2\cdot}=(1,3,5,7).$$
+Select one village uniformly, then select two of its four fields uniformly
+without replacement. The two-stage expansion estimator has mean $36$, the
+fixed total over all eight fields, and exact design variance $368/3$.
+
+## Facts & Assumptions
+
+**Given:** The displayed fixed field values; first-stage SRSWOR of one village
+from two; second-stage SRSWOR of two fields from the selected village.
+
+[F1] [[def-two-stage-cluster-sampling-and-expansion-estimator]]: The joint
+sample mass is the first-stage mass times the selected PSUs' second-stage
+masses, and $\widehat T=\sum_{i\in S_1}\widehat T_i/\pi_i^{(1)}$ with
+$\widehat T_i=\sum_{j\in S_i}y_{ij}/\pi_{j\mid i}^{(2)}$.
+
+[F2] [[def-moments-variance-and-covariance]]: Variance is the expectation of
+the centered square.
+
+[A1] Each stage uses the uniform SRSWOR law just stated; hence each of the six
+field pairs in a selected village has conditional probability $1/6$ and each
+of the twelve joint outcomes has probability $1/12$.
+
+## Verification
+
+1.1 The village totals are $T_1=20$ and $T_2=16$, $\pi_1^{(1)}=\pi_2^{(1)}=1/2$, and every second-stage field inclusion probability is $1/2$; hence a selected pair with value sum $s$ gives $\widehat T_i=2s$ and $\widehat T=4s$. [given, F1, A1, algebra]
+
+2.1 Enumerating the six pairs in village 1 gives expansion estimates $(24,32,40,40,48,56)$ and in village 2 $(16,24,32,32,40,48)$; their combined sum is $432$, so the mean of the twelve equally likely outcomes is $432/12=36=T_1+T_2$. [F1, A1, step 1.1, algebra]
+
+3.1 The twelve estimates in step 2.1 have squared deviations from $36$ summing to $1472$; by [F2] and their common probability $1/12$, the exact design variance is $1472/12=368/3$, by direct finite enumeration without an AC-dependent conditional-variance theorem. [F2, A1, step 2.1, algebra] ∎
+
+## Remarks
+
+This finite enumeration is an independent check of one two-stage design; it
+does not replace the general variance proof on the A page. Holmes–Huber’s
+chapter supplies the experimental-design caution that repeated observations
+within one group do not create additional independent units; it does not prove
+the design-based expansion or variance formulas used here.

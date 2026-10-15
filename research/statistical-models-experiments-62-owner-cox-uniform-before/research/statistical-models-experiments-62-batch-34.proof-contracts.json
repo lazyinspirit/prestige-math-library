@@ -1,0 +1,1007 @@
+{
+  "version": 1,
+  "scope": [
+    "def-cox-proportional-hazards-model-and-partial-likelihood",
+    "lem-cox-uniform-risk-set-convergence",
+    "lem-cox-partial-likelihood-hessian-convergence",
+    "lem-cox-score-martingale-replacement",
+    "thm-cox-score-limit-and-estimator-linearization",
+    "cor-cox-partial-likelihood-asymptotic-normality",
+    "ex-cox-risk-set-likelihood-and-model-checks"
+  ],
+  "contracts": {
+    "def-cox-proportional-hazards-model-and-partial-likelihood": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the untied partial likelihood is the empty product 1 when no event is observed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the baseline cumulative hazard starts at zero and the relative hazard factor remains defined when the baseline hazard vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: with one subject at risk and an untied failure, the risk-set contribution is its weight divided by itself."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a model and likelihood convention, not an estimator or an information property for degenerate data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: right censoring uses T≤C; Y(t)=1{U≥t} includes a subject at its recorded event time; the horizon is [0,τ]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the Axiom of Choice is explicitly inherited from the observation and predictability interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        }
+      ]
+    },
+    "lem-cox-uniform-risk-set-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "For subject $i$, let $T_i$ be an event time, $C_i$ a censoring time, and $Z_i(t)\\in\\mathbb R^p$ a covariate process predictable relative to this filtration",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-covering-packing-bracketing-number-and-metric-entropy",
+          "source_section": "Definition",
+          "quote": "The bracketing number $N_{[]} (\\epsilon,\\mathcal F,L^r(Q))$ is the least number of such brackets of width at most $\\epsilon$ that cover $\\mathcal F",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-glivenko-cantelli-class",
+          "source_section": "Definition",
+          "quote": "It is **pointwise measurable** if there is a countable subclass $\\mathcal F_0$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gc-by-bracketing-entropy",
+          "source_section": "Statement",
+          "quote": "Then $\\mathcal F$ is $P$-Glivenko–Cantelli:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "A deterministic function $h$ of time defines a predictable process exactly when $h$ is Borel measurable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Then $x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "envelope-and-risk-classes",
+          "claim": "Bounded covariates and compact B give an integrable envelope and the stated coordinate classes satisfy the bracketing hypotheses.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F1",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "coordinatewise-uniform-law",
+          "claim": "The bracketing Glivenko--Cantelli theorem gives simultaneous uniform convergence for the finitely many risk-sum coordinates.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "population-and-sample-denominator",
+          "claim": "The positive risk denominator at β0 yields a uniform positive lower bound for s0(t,β) and, with high probability, S_n0(t,β).",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "uniform-positive-denominator",
+          "claim": "The positive population denominator at beta0 and uniform risk-sum convergence give a uniform positive lower bound for both population and empirical denominators on B.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "uniform-risk-mean-ratio",
+          "claim": "Ratio algebra and the uniform risk-sum law imply uniform convergence of the empirical weighted risk mean.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a positive sample size and makes no assertion about a zero-subject empirical process."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly shows the positive denominator lower bound; if the population risk denominator were zero, the stated hypothesis would fail."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: p is any fixed finite dimension ≥1; the finite coordinate union proof also covers p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a uniformly positive population risk denominator, excluding a risk-set-degenerate limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 use the full compact time interval [0,τ] and establish uniform bounds including its endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 carries the model's AC interface; step 2.1 uses only the convergence-in-probability branch, not Countable Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        }
+      ]
+    },
+    "lem-cox-partial-likelihood-hessian-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "This partial likelihood is built from risk-set contributions",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cox-uniform-risk-set-convergence",
+          "source_section": "Statement",
+          "quote": "with probability tending to one $S_n^{(0)}$ is uniformly bounded below on $[0,\\tau]\\times B",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "The model contract is the additional hypothesis that",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "its continuous predictable bracket is $\\langle M\\rangle_t=A_t$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-l2-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "and defines a square-integrable martingale.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "Write $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "A deterministic function $h$ of time defines a predictable process exactly when $h$ is Borel measurable",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "score-and-hessian-calculus",
+          "claim": "Differentiating the finite risk-set likelihood gives the score and the negative risk-set covariance Hessian.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "risk-covariance-limit-and-count-bound",
+          "claim": "Uniform risk-sum convergence controls V_n−V, and integrability of the compensator gives N_total/n=O_P(1).",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L1",
+            "L2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "aggregate-martingale-control",
+          "claim": "The no-tie aggregate count is simple, has compensator A_total, and its bounded deterministic integrals satisfy the L2 isometry.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "uniform-beta-martingale-law",
+          "claim": "Finite epsilon nets and the uniform Lipschitz bound extend the deterministic-integrand martingale convergence to all beta in B.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "F3",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "hessian-limit",
+          "claim": "The risk covariance, compensator, and martingale components combine to give the uniform Hessian limit and I at beta0.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an asymptotic limit for n subjects, not a zero-subject Hessian claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 5.1 allow zero information in this lemma; the matrix limit remains meaningful without inversion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 differentiates the finite risk-set likelihood for any fixed p≥1, including p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 5.1 allow zero information in this lemma; the matrix limit remains meaningful without inversion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–5.1 integrate over [0,τ] and use Y(t)=1{U≥t}, including the event-time endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 explicitly use the AC-dependent counting-process contract and L2 integral interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        }
+      ]
+    },
+    "lem-cox-score-martingale-replacement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cox-uniform-risk-set-convergence",
+          "source_section": "Statement",
+          "quote": "Define $\\bar Z_n(t,\\beta)=",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "The model contract is the additional hypothesis that",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-elementary-predictable-counting-process-integral",
+          "source_section": "Definition",
+          "quote": "For this chosen step representation define, for $0\\le t\\le T$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "$M_t^2-A_t$ is a martingale",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-l2-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "and defines a square-integrable martingale.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "Write $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "A deterministic function $h$ of time defines a predictable process exactly when $h$ is Borel measurable",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "partial-score-compensator-cancellation",
+          "claim": "The partial-likelihood score has a compensator term that cancels identically in each risk set.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "random-risk-mean-decomposition",
+          "claim": "Linearity of the elementary integral and its L2 completion split the score into the deterministic-mean influence sum and an aggregate correction.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "L1",
+            "L2",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "negligible-aggregate-correction",
+          "claim": "The uniform risk-mean law and bounded compensator density make the aggregate correction's normalized L2 energy tend to zero.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "L4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "iid-influence-covariance-and-tightness",
+          "claim": "The subject influence integrals are IID with covariance I, so their normalized sum is bounded in probability and the score representation follows.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L3",
+            "L4",
+            "L5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns n IID subjects with n tending to infinity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 computes the covariance as I; if I is zero the influence vectors are the zero L2 class and the O_P(1) conclusion still holds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the vector integrals and covariance calculations are coordinatewise and include the scalar case p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 4.1 permit I=0; no invertibility is used, and zero covariance gives the zero L2 influence class."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 keep the event count on [0,τ] and use the at-risk convention U≥t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 carry AC through the explicit counting-process martingale and integral suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        }
+      ]
+    },
+    "thm-cox-score-limit-and-estimator-linearization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "a statistic $\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cox-partial-likelihood-hessian-convergence",
+          "source_section": "Statement",
+          "quote": "n^{-1}H_n(\\beta)+J(\\beta)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cox-score-martingale-replacement",
+          "source_section": "Statement",
+          "quote": "n^{-1/2}U_n(\\beta_0)=n^{-1/2}\\sum_{i=1}^n\\xi_i+o_P(1)",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "Write $X_n=o_P(1)$ if for every $\\varepsilon>0$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "hessian-on-consistent-segment",
+          "claim": "Uniform Hessian convergence and continuity of J imply the integrated normalized Hessian along the consistent root segment converges to −I.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "inverse-hessian",
+          "claim": "Positive definiteness of I and continuity of matrix inversion give an invertible integrated Hessian with inverse converging to −I^{-1}.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "score-equation-taylor",
+          "claim": "The score equation and the integral Taylor formula express the estimator error as the inverse integrated Hessian times the score.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "influence-expansion",
+          "claim": "Substituting the score representation and using tightness yields the asserted estimator influence expansion.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is an n→∞ estimator result, not a finite-sample empty-data assertion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The positive-definite information hypothesis excludes zero information."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits every fixed p≥1, including the scalar case p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "I is required to be positive definite so the inverse in the conclusion exists."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the model and all score/martingale integrals are restricted to the fixed horizon [0,τ]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC, inherited through the explicitly cited observation, predictability, and martingale interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        }
+      ]
+    },
+    "cor-cox-partial-likelihood-asymptotic-normality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-cox-score-martingale-replacement",
+          "source_section": "Statement",
+          "quote": "The $\\xi_i$ are IID, centered, square-integrable vectors with covariance matrix $I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cox-score-limit-and-estimator-linearization",
+          "source_section": "Statement",
+          "quote": "The proof establishes the partial-likelihood score representation locally",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-iid-terminal-influence-limit",
+          "source_section": "Statement",
+          "quote": "\\sqrt n(\\hat\\theta_n-\\theta)\\Rightarrow N_d(0,\\Sigma)",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "and define the covariance matrix by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "influence-covariance",
+          "claim": "The transformed single-subject influence function is centered, square-integrable, and has covariance I^{-1}.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "terminal-iid-limit",
+          "claim": "The already established linear expansion matches the IID terminal influence theorem's hypotheses and gives N_p(0,I^{-1}).",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary concerns the terminal limit as the IID subject count tends to infinity."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Positive-definite I is required by the estimator expansion and inverse covariance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits any finite p≥1; the covariance calculation also holds for p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The information matrix is assumed positive definite, so singular information is outside this normal-limit claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the influence integral and source estimator theorem use the same fixed horizon [0,τ]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit in the Statement and is required by the terminal IID influence theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        }
+      ]
+    },
+    "ex-cox-risk-set-likelihood-and-model-checks": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "at times with $\\lambda_0(t)>0$ the hazard ratio is",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "For a constant covariate value $z$, the corresponding event survival function is",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "A deterministic function $h$ of time defines a predictable process exactly when $h$ is Borel measurable",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "risk-set-term",
+          "claim": "Substituting the three weights into the one-event risk-set formula gives the stated contribution.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hazard-risk-contrast",
+          "claim": "Integrating the fixed-covariate hazards gives event risks whose ratio is 1+e^{-1}, strictly below the hazard ratio 2.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "time-varying-contrast",
+          "claim": "The deterministic predictable covariate paths have instantaneous relative hazard 2^t, which changes between the two endpoints.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This worked calculation is for a specified risk set with three members, not an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 uses a positive baseline hazard; the definition separately specifies the relative factor when the baseline hazard is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a single event contribution and shows its denominator directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes a nonempty risk set and makes no estimator or information claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the time-varying hazard ratio at t=0 and t=1, the endpoints of the example horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite risk-set calculation and deterministic-path substitutions make no nonempty selection and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff claim."
+        }
+      ]
+    }
+  }
+}

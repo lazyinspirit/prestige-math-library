@@ -1,0 +1,110 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "60",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "lem-gaussian-exponential-mixture-integral",
+      "model": "gpt-6-luna",
+      "context_sha256": "d315f25cb71332d53516669f495220e6e91ad7869ba583e175287143b0f172ba",
+      "outcome": "confirmed_nonfatal",
+      "reason": "A1 incorrectly attributes normal-law and conditional-expectation conventions to def-axiom-of-choice, whose Definition only states AC and its equivalent product formulation. This is nonfatal: AC is explicitly assumed, the actual normal-law Definition and normalization Statement assume AC, and def-countable-choice proves AC implies countable choice. Neither proof step uses conditional expectation. Replaced A1 with the actual axiom and its explicit assumption; the integral calculation and all hypotheses remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-gaussian-exponential-mixture-integral",
+      "disposition": "repaired",
+      "post_sha256": "2549afae298f5aa578709036735acd5be11a86374d11273acd8f1ffdb44fc976",
+      "review_context_sha256": "bf71a239a3119c966ef8f38c98cffb0909d31f1ce47b0bb170ba92ca988ce2f8",
+      "reason": "Reviewed the complete lemma, its owning proof contract, both page interfaces, and all nine direct suppliers. Step 1.1 correctly represents N(0,1/rho) by Z/sqrt(rho) and integrates a nonnegative continuous function against the normal density without presupposing integrability. Step 2.1 has a=(v+rho)/rho>0, c=s sqrt(rho)/(v+rho), constant s^2/(2(v+rho)), and affine Jacobian 1/sqrt(a); normalization gives exactly the claimed finite expression. AC supplies the normal-law and normalization assumptions and implies countable choice for F4 and F5. The endpoint v=0 and s=0 require no separate argument. Corrected only A1's inaccurate attribution. Statement, numbered proof steps, dependencies, and contract remain unchanged, so no consumer propagation is triggered. This is the repair author's review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "statistical-models-experiments-62-step5-initial-r1-u60-a1-attribution",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:28:57Z",
+        "class": "accuracy",
+        "subclass": "citation-inflated",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "lem-gaussian-exponential-mixture-integral",
+        "caught_at_stage": "4-judge",
+        "caught_by_role": "unknown",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "adjudication_ref": [
+          {
+            "id": "lem-gaussian-exponential-mixture-integral",
+            "model": "gpt-6-luna",
+            "context_sha256": "d315f25cb71332d53516669f495220e6e91ad7869ba583e175287143b0f172ba",
+            "item_sha256": "8e00d1e92cf72384593c62d6e8eba11fbabd5fd4043ac78c262f1351d27dbc25",
+            "judge_item_sha256": "65a17d73025c5f4c9297a06542cb0e590d1fa48cd9efd32af8889b911bfd4e20"
+          }
+        ],
+        "evidence": [
+          {
+            "path": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u60.json",
+            "note": "A1 claimed conventions absent from def-axiom-of-choice. Replaced it with the axiom's actual content; actual normal-law AC assumptions and the Gaussian integral proof remain supported. The detecting model is gpt-6-luna; no matching dedicated role enum is available."
+          }
+        ]
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_files": [
+      "items/lem-gaussian-exponential-mixture-integral.md"
+    ],
+    "claim_and_conventions": "AC; rho>0, v>=0, s real; the prior is N(0,1/rho), with rho its precision. Its exponential mixture equals sqrt(rho/(v+rho)) exp(s^2/(2(v+rho))). No conditional expectation is used in this lemma.",
+    "source_evidence": "Local Definition sections of def-standard-normal-and-normal-laws, def-axiom-of-choice, and def-countable-choice (including Remarks: AC implies countable choice); local Statements and complete proofs of lem-normal-density-has-total-mass-one, thm-change-of-variables-for-expectation, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, cor-continuous-functions-are-borel-measurable, thm-borel-sets-are-lebesgue-measurable, and thm-of-square-roots. External sources were not consulted; the elementary calculation and these interfaces are familiar.",
+    "contract_evidence": "research/statistical-models-experiments-62-batch-60.proof-contracts.json, contracts.lem-gaussian-exponential-mixture-integral: the existing A1 citation already quotes the actual AC Definition, and both derivations remain exact. No contract edit is necessary.",
+    "page_evidence": "library/statistical-models-and-experiments/subgaussian-mixture-confidence-sequences.md and its examples companion preserve the centered-normal precision convention and assert no extra obligation for this integral lemma.",
+    "statement_comparison": "Reversing only the A1 replacement and the added terminal newline reproduces both the frozen before itemHashGuard 8e00d1e92cf72384593c62d6e8eba11fbabd5fd4043ac78c262f1351d27dbc25 and the rejected judge item hash 65a17d73025c5f4c9297a06542cb0e590d1fa48cd9efd32af8889b911bfd4e20. Direct extraction confirms the entire original/current Statement sections are byte-identical. No interface propagation is required.",
+    "published_ledger": "No published defect or potentially defective published consumer was discovered; no update to research/published-consumer-supplier-ledger.md is proposed.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts --json items/lem-gaussian-exponential-mixture-integral.md",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failures; direct proof passes."
+      },
+      {
+        "command": "node tools/rendercheck.mjs --json items/lem-gaussian-exponential-mixture-integral.md",
+        "exit_code": 0,
+        "result": "1 item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-60.proof-contracts.json --strict --items lem-gaussian-exponential-mixture-integral --json",
+        "exit_code": 0,
+        "result": "ok: true; assigned item checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-gaussian-exponential-mixture-integral.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects; run after the final item edit."
+      },
+      {
+        "check": "Frozen-preimage and Statement byte comparison",
+        "initial_exit_code": 1,
+        "exit_code": 0,
+        "result": "Initial reversal omitted the patch-added terminal newline. Accounting for that newline exactly reproduces both frozen before hashes. Statement bytes are unchanged, input digest and current review guard match, and A1 plus the terminal newline are the only edits."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Handoff to the controller for independent rejudgment and evidence collection; no judgment, stamp, certificate, shared ledger, or round state was written."
+  }
+}

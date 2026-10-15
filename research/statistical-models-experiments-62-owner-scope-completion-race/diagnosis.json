@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "owner_task": "preventive-same-tick-scope-collection-race",
+  "diagnosis": "A native Step-2 worker can finish after onProgress skips it as active but before sleep(0) and stalemate evaluation; genuine native collection accepts its report on the next tick. Preserve strict failure on a persistent missing derivative after that collection opportunity.",
+  "actual_evidence": {
+    "native_completed_batch": "11",
+    "dispatch_completed_at": "2026-10-14T19:57:18.945Z",
+    "false_owner_hold_at": "2026-10-14T19:57:19.229Z",
+    "genuine_acceptance_state": "research/statistical-models-experiments-62-scope-review/batch-11/state.json",
+    "genuine_acceptance_result": "research/statistical-models-experiments-62-dispatch/tool-scope-accepted-11.result.json"
+  },
+  "beforeimages": [
+    {
+      "path": "tools/autopilot/src/executor.mts",
+      "original": {
+        "path": "research/statistical-models-experiments-62-owner-scope-completion-race/executor.mts.before",
+        "sha256": "6e50287bf4d186501fa4aa75e7fb600c985f33fb8ecdacbf6559b36b95d4a904"
+      }
+    },
+    {
+      "path": "WORKFLOW.md",
+      "original": {
+        "path": "research/statistical-models-experiments-62-owner-scope-completion-race/WORKFLOW.md.before",
+        "sha256": "66391211082e87181d145d0da188b1a9e3dd368538e00c0459ce918bb9f889bd"
+      }
+    }
+  ],
+  "tests_run": false,
+  "native_state_modified": false,
+  "native_receipts_modified": false,
+  "proposed_patch": {
+    "policy": "same-tick-in-memory-step2-collection-grace",
+    "only_stage": "2-scope-review",
+    "effect": "Exclude only same-tick onProgress-boundary active units from synthetic stalemate candidate list; next tick has fresh set and strict native collection/detection. Actual active/cohort sets, coverage, counters, gates and owner holds unchanged.",
+    "after_files": [
+      {
+        "path": "tools/autopilot/src/executor.mts",
+        "sha256": "04e9b67cae58ee0babad4e9efd4e850b383736c0696724a22c422bbac08b777f"
+      },
+      {
+        "path": "WORKFLOW.md",
+        "sha256": "a2ed49ceeb59dd9073aa6cc927430dcce9ef008ba04e7992fa8314904d21ab3b"
+      }
+    ],
+    "review_status": "Root reviewed exact targeted diff and committed code+WORKFLOW",
+    "verification": "Scoped diff --check clean; no tests or native execution performed."
+  },
+  "root_review": {
+    "by": "/root",
+    "at": "2026-10-14T20:06:37.505Z",
+    "administrative_commit": "a179299e30",
+    "validation": "Exactdiffinspection plus successful native start validation; no optionaltests",
+    "controller_restart": {
+      "old_pid": 780354,
+      "signal": "SIGTERM",
+      "old_process_exited": true,
+      "new_pid": 949810,
+      "workers_preserved": true
+    }
+  }
+}

@@ -1,0 +1,118 @@
+[
+  {
+    "order": 1980,
+    "id": "nelson-aalen-kaplan-meier-greenwood",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Nelson–Aalen, Kaplan–Meier, Greenwood",
+    "companion": "nelson-aalen-kaplan-meier-greenwood-examples",
+    "requires": [
+      "event-time-censoring-and-truncation",
+      "counting-process-compensators-and-integrals",
+      "independent-subject-terminal-influence-limits",
+      "estimators-and-randomized-procedures",
+      "delta-method-and-asymptotic-normality",
+      "conditional-expectation"
+    ],
+    "items": [
+      {
+        "id": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+        "kind": "definition",
+        "title": "Nelson–Aalen, Kaplan–Meier, and Greenwood estimators",
+        "statement": "For right-censored observations (U_i,δ_i), define the subject counting and at-risk processes, pooled risk/event counts, the Nelson–Aalen estimator, Kaplan–Meier product limit, and Greenwood variance estimate with explicit endpoint, tie, zero-risk, and positive-denominator conventions.",
+        "strategy": "Give the finite-sample statistic definitions under the event-observation and estimator interfaces; distinguish the discrete-support cumulative event hazard from the continuous cumulative hazard and label Greenwood as first-order asymptotic variance estimation.",
+        "deps": [
+          "def-event-time-observation-schemes",
+          "def-statistic-and-estimator"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-finite-support-risk-set-proportion-limits",
+        "kind": "lemma",
+        "title": "Finite-support risk-set proportion limits",
+        "statement": "For IID right-censored subjects with T independent of C, finite event support a_1<...<a_m, and positive event and censoring survival through a_j, the pooled at-risk proportion at a_j converges in probability to P(T≥a_j)P(C≥a_j)>0 and the event proportion converges to P(T=a_j)P(C≥a_j); their ratio converges to q_j=P(T=a_j|T≥a_j).",
+        "strategy": "Apply Chebyshev's inequality to the bounded IID risk and observed-event indicators at each of finitely many support points, then use independent censoring and positivity to take the ratio.",
+        "deps": [
+          "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "def-event-time-observation-schemes",
+          "def-identically-distributed-and-iid-random-variables"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-finite-support-nelson-aalen-kaplan-meier-consistency",
+        "kind": "theorem",
+        "title": "Finite-support consistency of Nelson–Aalen and Kaplan–Meier",
+        "statement": "For IID right-censored subjects with T independent of C and finite event-time support, at every fixed horizon t through which P(T>t)>0 and P(C≥t)>0, the Kaplan–Meier estimator converges in probability to S(t)=P(T>t), while the Nelson–Aalen estimator converges to the discrete cumulative hazard sum Σ_{a_j≤t}q_j, where q_j=P(T=a_j|T≥a_j).",
+        "strategy": "Use the proved event-to-risk ratio limits at the finitely many support points and induct on ordered event times to obtain the product limit and the discrete cumulative-hazard sum; explicitly retain the censoring-support boundary.",
+        "deps": [
+          "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "def-event-time-observation-schemes",
+          "lem-finite-support-risk-set-proportion-limits"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-uniform-right-censoring-risk-set-convergence",
+        "kind": "lemma",
+        "title": "Uniform convergence of the empirical right-censoring risk set",
+        "statement": "For IID observed event/censoring pairs, the empirical at-risk fraction n^{-1}Σ_i 1{U_i≥u} converges uniformly in probability on every compact horizon to s_0(u)=P(U_i≥u), and the expected squared uniform error tends to zero.",
+        "strategy": "Use finite partitions of the one-dimensional distribution of U, Chebyshev convergence at partition points, monotonicity between points, and bounded convergence in probability.",
+        "deps": [
+          "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "def-identically-distributed-and-iid-random-variables"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-pointwise-nelson-aalen-kaplan-meier-greenwood-limit",
+        "kind": "theorem",
+        "title": "Pointwise influence limit and Greenwood variance consistency",
+        "statement": "For IID right-censored subjects with continuous event-time law, independent censoring, a continuous-hazard compensator contract, positive event and censoring survival on [0,t], and ∫_0^t λ(u)/s_0(u)du<∞, prove the pointwise expansion √n(Ŝ_n(t)−S(t))=n^{-1/2}Σ_i φ_i(t)+o_P(1), where φ_i(t)=−S(t)∫_0^t s_0(u)^{-1}dM_i(u), s_0(u)=E[Y_i(u)]>0; prove the terminal normal limit and that n times a zero extension of Greenwood's formula converges to Var(φ_i(t)). No process-level convergence or confidence bands are asserted.",
+        "strategy": "Prove uniform risk-set convergence and square integrability, replace the random Nelson–Aalen denominator by s_0 in L² using the counting-process isometry, apply the IID terminal influence theorem, bound the log-product remainder, use the pointwise delta method, and prove Greenwood consistency by compensator decomposition.",
+        "deps": [
+          "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "def-event-time-observation-schemes",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-progressively-measurable-and-predictable-process",
+          "thm-compensated-counting-process-brackets",
+          "def-l2-counting-process-integral",
+          "thm-l2-counting-process-integral-isometry",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-uniform-right-censoring-risk-set-convergence",
+          "thm-iid-terminal-influence-limit",
+          "thm-first-and-second-order-delta-method-for-random-vectors",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 1981,
+    "id": "nelson-aalen-kaplan-meier-greenwood-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Nelson–Aalen, Kaplan–Meier, Greenwood — Examples",
+    "companion": "nelson-aalen-kaplan-meier-greenwood",
+    "requires": [
+      "nelson-aalen-kaplan-meier-greenwood"
+    ],
+    "items": [
+      {
+        "id": "ex-kaplan-meier-hand-risk-set-and-support-loss",
+        "kind": "example",
+        "title": "A hand Kaplan–Meier calculation and loss of tail support",
+        "statement": "For four right-censored observations with failures at 1 and 2 and two censorings at 3, compute the pooled risk counts, Nelson–Aalen estimate, Kaplan–Meier estimate, and Greenwood estimate through time 3; show that a fixed censoring horizon makes survival beyond 3 nonidentifiable by exhibiting two event-time laws with the same observed-data law but different tails.",
+        "strategy": "Compute each failure increment from its risk set, substitute into the three estimator definitions, then compare the induced observed records under two latent event-time laws that agree through the censoring horizon and differ after it.",
+        "deps": [
+          "def-event-time-observation-schemes",
+          "def-nelson-aalen-kaplan-meier-greenwood-estimators"
+        ],
+        "dependency_level": 2
+      }
+    ]
+  }
+]

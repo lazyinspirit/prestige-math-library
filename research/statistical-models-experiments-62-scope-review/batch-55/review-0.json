@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "batch": "55",
+  "round": 0,
+  "reviewed_items": [
+    "alg-benjamini-yekutieli-step-up-procedure",
+    "lem-unit-interval-is-standard-borel",
+    "lem-step-up-leave-one-out-rejection-partition",
+    "def-prds-on-true-null-coordinates",
+    "thm-by-fdr-control-under-arbitrary-dependence",
+    "lem-bh-prds-null-contribution-bound",
+    "thm-bh-fdr-control-under-prds",
+    "cex-pairwise-positive-correlation-does-not-imply-prds",
+    "ex-by-bh-threshold-comparison-under-independent-null-pvalues"
+  ],
+  "reviewed_pages": [
+    "fdr-control-under-dependence",
+    "fdr-control-under-dependence-examples"
+  ],
+  "decision": "repair",
+  "reason": "The full batch, page suppliers, and actual prerequisite claims and proofs were reviewed. The BY bound and BH bound are supported in their stated scope, but three locally fixable source issues remain; no significant gap requires owner escalation.",
+  "findings": [
+    {
+      "id": "lem-step-up-leave-one-out-rejection-partition",
+      "type": "local",
+      "reason": "Statement 1 is ambiguous and can be read to claim R=k whenever p_i≤c_k. The proof and consumers need the event identity {I_i=1,R=k}={p_i≤c_k}∩{p_{-i}∈C_{i,k}}. State it explicitly. Also make the remaining-coordinate product Borel structure explicit: the order-statistic measurability proof uses coordinate cylinders, but the item does not state that structure."
+    },
+    {
+      "id": "lem-bh-prds-null-contribution-bound",
+      "type": "local",
+      "reason": "Step 1.2 compares conditional averages using monotonicity only on supp(μ_i), while integrating over {P_i≤c_k}. Add the local fact that μ_i(supp(μ_i))=1 (from a countable base of [0,1]) before making that comparison."
+    },
+    {
+      "id": "ex-by-bh-threshold-comparison-under-independent-null-pvalues",
+      "type": "local",
+      "reason": "The finite model does not explicitly give Ω=S^4 its sample sigma-algebra. State the power-set sigma-algebra (equivalently, the finite product of the discrete sigma-algebras) so the experiment and coordinate measurability are explicit."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-by-fdr-control-under-arbitrary-dependence",
+      "decision": "accept",
+      "reason": "Its proof uses the event identity established by the partition proof; the BY decomposition and summation-by-parts argument are sound once Statement 1 is made explicit."
+    },
+    {
+      "id": "lem-bh-prds-null-contribution-bound",
+      "decision": "repair",
+      "reason": "Its use of the partition identity is sound, but its own Step 1.2 needs the local support-full-measure fact identified above."
+    },
+    {
+      "id": "thm-bh-fdr-control-under-prds",
+      "decision": "accept",
+      "reason": "The finite sum of true-null contributions follows from the stated lemma bound; no separate consumer edit is needed after the lemma proof repair."
+    },
+    {
+      "id": "ex-by-bh-threshold-comparison-under-independent-null-pvalues",
+      "decision": "repair",
+      "reason": "Its BY and BH theorem applications and threshold calculations are sound; make the finite sample sigma-algebra explicit."
+    },
+    {
+      "id": "fdr-control-under-dependence",
+      "decision": "accept",
+      "reason": "Its BY and BH summary claims match the reviewed theorem statements and premises."
+    },
+    {
+      "id": "fdr-control-under-dependence-examples",
+      "decision": "repair",
+      "reason": "Its independent discrete example relies on the finite model; the example item should state the sample sigma-algebra explicitly."
+    }
+  ]
+}

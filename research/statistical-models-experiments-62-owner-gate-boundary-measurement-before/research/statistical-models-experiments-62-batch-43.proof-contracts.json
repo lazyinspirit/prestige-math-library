@@ -1,0 +1,1267 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+    "def-best-linear-forecast-from-a-finite-history",
+    "thm-finite-history-best-linear-predictor-exists-uniquely",
+    "alg-durbin-levinson-forecast-recursion",
+    "thm-forecast-normal-equations-and-error",
+    "thm-gaussian-best-linear-forecast-equals-conditional-expectation",
+    "thm-durbin-levinson-solves-the-prediction-equations",
+    "ex-ar1-one-step-and-multistep-forecast",
+    "ex-singular-history-covariance-unique-predictor-class",
+    "ex-nongaussian-conditional-mean-not-best-affine-predictor"
+  ],
+  "contracts": {
+    "lem-uncorrelated-jointly-gaussian-blocks-are-independent": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. Then the following are\nequivalent:\n\n1. the family $(X_i)_{i\\in I}$ is independent;\n2. for every natural number $n\\ge1$, every choice of distinct indices\n   $i_0,\\dots,i_{n-1}\\in I$, and every choice of measurable sets\n   $B_k\\in\\Sigma_{i_k}$,\n   $$\\mathbb P\\bigl(X_{i_0}\\in B_0,\\dots,X_{i_{n-1}}\\in B_{n-1}\\bigr)=\\prod_{k<n}\\mathbb P(X_{i_k}\\in B_k).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write the mean and covariance of $(U,V)$ in block form as $(m_U,m_V)$ and $\\Sigma=\\operatorname{diag}(\\Sigma_U,\\Sigma_V)$; the off-diagonal blocks vanish by hypothesis and each diagonal block is positive semidefinite as a principal block of $\\Sigma$. Let $A_U,A_V$ be their positive-semidefinite square roots and put $A=\\operatorname{diag}(A_U,A_V)$. Then $A$ is positive semidefinite, $A^2=\\Sigma$, and [F2] identifies it with the unique positive-semidefinite square root of $\\Sigma$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the joint law has a realization $(m_U+A_UW_U,m_V+A_VW_V)$ with independent standard-normal coordinates in $W_U,W_V$. By [F3] the full coordinate vector has product law, so rectangles in the two coordinate blocks factor into their block marginals; [F6] gives block independence. Applying [F4] to the separate block-affine maps preserves independence.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The realization in step 2.1 and the original vector have the same multivariate-normal law by [F5]. Their joint and marginal rectangle probabilities therefore agree; the factorization established in step 2.1 transfers to the original pair, and [F6] gives independence. AC is used only through the Gaussian-law construction and uniqueness suppliers.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement explicitly requires positive block dimensions p,q≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof allows zero covariance blocks and point-mass Gaussian coordinates; the rectangle factorization still applies. See steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar case p=q=1 is covered by the same block-diagonal square-root argument in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular joint covariance is explicitly allowed, and step 1.1 uses a positive-semidefinite root without inversion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no time, interval, or limiting endpoint in this finite-dimensional statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes AC and step 2.1 identifies its exact use in the Gaussian realization and uniqueness route."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states an implication, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "def-best-linear-forecast-from-a-finite-history": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires integers n,h≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the zero process has the zero predictor class, as the affine L2 projection theorem supplies a unique minimizing class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n=1 is included by the stated condition n≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: deterministic constant histories remain within the stated affine subspace and have a unique minimizing class."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The horizon is any positive integer and no terminal time or limiting endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the affine L2 projection supplier is choice-free; this item states no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-forecast-normal-equations-and-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-finite-history-best-linear-predictor-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a weakly stationary real process and let\n$n,h\\ge1$. The affine $L^2$ minimization defining the finite-history best\nlinear forecast of $X_{n+h}$ from $X_1,\\ldots,X_n$ has a unique minimizing\nalmost-sure class, even when the history covariance matrix is singular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-normal-equations-for-best-affine-l2-prediction",
+          "source_section": "Statement",
+          "quote": "Let $X,Y_1,\\dots,Y_n$ be square-integrable real random variables on one\nprobability space, and write\n$$W:=\\operatorname{span}\\big([1],[Y_1],\\dots,[Y_n]\\big)\\subseteq L^2(\\mathbb P),$$\nwhere $[\\cdot]$ denotes the almost-everywhere class from\n[[def-l-p-space-as-a-quotient-by-null-functions]].\n\nThen there is a unique class $[Z_*]\\in W$ minimizing $\\|[X]-[Z]\\|_2$ over\n$[Z]\\in W$. This minimizing class has an affine representative\n$Z_*=a_0+\\sum_{j=1}^n a_jY_j$, and its coefficients satisfy\n$$a_0=\\mathbb E[X]-\\sum_{j=1}^n a_j\\mathbb E[Y_j],$$\n$$\\sum_{j=1}^n \\operatorname{Cov}(Y_i,Y_j)a_j=\\operatorname{Cov}(X,Y_i)\\qquad(1\\le i\\le n).$$\n\nThe class $[Z_*]$ is unique. If the covariance matrix\n$\\Gamma=(\\operatorname{Cov}(Y_i,Y_j))_{i,j}$ is singular, the coefficient vector\nneed not be uniquely determined by the normal equations, but any two solutions\nyield the same predictor almost surely.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.\n\nThe process is **strictly stationary** when for every integer $r\\ge1$, every\n$t_1,\\ldots,t_r\\in\\mathbb Z$, and every shift $m\\in\\mathbb Z$,\n$$\\mathcal L(X_{t_1+m},\\ldots,X_{t_r+m})=\\mathcal L(X_{t_1},\\ldots,X_{t_r}).$$\nThis condition concerns the full finite-dimensional laws and imposes no moment\ncondition by itself.\n\nThe process is **weakly stationary** when $E[|X_t|^2]<\\infty$ for every\n$t\\in\\mathbb Z$, its mean $\\mu:=E[X_t]$ is independent of $t$, and for every\n$h\\in\\mathbb Z$ the covariance\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t)$$\nis independent of $t$. Expectation, variance, and covariance have the meanings\nin [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and\n[[def-moments-variance-and-covariance]]. Strict stationarity alone therefore\ndoes not supply the moment hypotheses needed for covariance or sample-mean\nclaims.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-autocovariance-and-sample-autocovariance",
+          "source_section": "Definition",
+          "quote": "For a weakly stationary real process $X=(X_t)_{t\\in\\mathbb Z}$, its\n**autocovariance function** (ACVF) is\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t),\\qquad h\\in\\mathbb Z,$$\nwhich is independent of $t$ by [[def-strict-and-weak-stationarity-for-time-series]].\n\nFor a finite data vector $x_1,\\ldots,x_n\\in\\mathbb R$, where $n\\ge1$, let\n$$\\bar x_n:=\\frac1n\\sum_{t=1}^n x_t.$$\nIts **biased sample ACVF** is the zero-extended sequence on $\\mathbb Z$ given by\n$$\\widehat\\gamma_n(h):=\\frac1n\\sum_{t=1}^{n-|h|}(x_{t+|h|}-\\bar x_n)(x_t-\\bar x_n),\\qquad |h|<n,$$\nand $\\widehat\\gamma_n(h):=0$ for $|h|\\ge n$. The absolute lag makes\n$\\widehat\\gamma_n(-h)=\\widehat\\gamma_n(h)$.\n\nFor comparison, define the **pair-count-normalized rescaling**\n$$\\widetilde\\gamma_n(h):=\\frac1{n-|h|}\\sum_{t=1}^{n-|h|}(x_{t+|h|}-\\bar x_n)(x_t-\\bar x_n),\\qquad |h|<n,$$\nand set it to zero for $|h|\\ge n$. Its denominator is positive on the stated\ndomain. The names specify the denominator convention; they assert no\nunbiasedness formula.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since weak stationarity gives $X_{n+h},Y_1,\\ldots,Y_n\\in L^2$, [F1] supplies a unique minimizing class and [F2] an affine representative with coefficients satisfying the normal equations. Every variable has mean $\\mu$ by [F3], so the intercept is $a_0=\\mu(1-\\sum_i a_i)$ and the representative is $\\mu+\\sum_i a_i(Y_i-\\mu)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $i,j$, the lag difference between $Y_i$ and $Y_j$ is $j-i$; covariance symmetry in [F5] gives $\\gamma(j-i)=\\gamma(i-j)$, so $\\operatorname{Cov}(Y_i,Y_j)=\\Gamma_{ij}$. The lag from $Y_i=X_{n+1-i}$ to $X_{n+h}$ is $h+i-1$, so $\\operatorname{Cov}(X_{n+h},Y_i)=\\gamma(h+i-1)$. Rewriting step 1.1's equations gives $\\Gamma a=\\gamma_h$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under the statement's nonsingularity hypothesis, $\\Gamma a=\\gamma_h$ has the unique solution $a=\\Gamma^{-1}\\gamma_h$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $U=X_{n+h}-\\mu$ and $Z_i=Y_i-\\mu$; the intercept equation makes the error mean zero, and stationarity gives $\\mathbb E[UZ_i]=\\gamma(h+i-1)$ and $\\mathbb E[Z_iZ_j]=\\Gamma_{ij}$. Expanding gives $\\mathbb E[(U-a^TZ)^2]=\\gamma(0)-2a^T\\gamma_h+a^T\\Gamma a=\\gamma(0)-a^T\\gamma_h$ because $\\Gamma a=\\gamma_h$. By [F6] this is the error variance.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires n,h≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement assumes nonsingular Gamma, excluding the zero centered covariance case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 with gamma(0)>0, the scalar equation and error expansion follow from steps 2.1–4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Singular history covariance is outside this formula theorem; the unique predictor class is stated separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At h=1, step 2.1 gives gamma_h beginning with gamma(1), the smallest positive forecast horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The affine projection supplier and all local covariance algebra are choice-free; see steps 1.1–4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states formulas and uniqueness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states formulas and uniqueness, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "alg-durbin-levinson-forecast-recursion": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The procedure requires m≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A zero covariance sequence violates positive definiteness of Γ1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Algorithm definition: m=1 uses exactly the stated initialization and has no recursive loop."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Algorithm definition: a final prediction-error variance may be zero; no division by that final value is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Algorithm definition: the loop stops at k=m and the m=1 endpoint is initialized separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Algorithm definition: the procedure uses finite arithmetic on supplied covariance lags and assumes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm is a procedure, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm is a procedure, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-gaussian-best-linear-forecast-equals-conditional-expectation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-finite-history-best-linear-predictor-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a weakly stationary real process and let\n$n,h\\ge1$. The affine $L^2$ minimization defining the finite-history best\nlinear forecast of $X_{n+h}$ from $X_1,\\ldots,X_n$ has a unique minimizing\nalmost-sure class, even when the history covariance matrix is singular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-normal-equations-for-best-affine-l2-prediction",
+          "source_section": "Statement",
+          "quote": "Let $X,Y_1,\\dots,Y_n$ be square-integrable real random variables on one\nprobability space, and write\n$$W:=\\operatorname{span}\\big([1],[Y_1],\\dots,[Y_n]\\big)\\subseteq L^2(\\mathbb P),$$\nwhere $[\\cdot]$ denotes the almost-everywhere class from\n[[def-l-p-space-as-a-quotient-by-null-functions]].\n\nThen there is a unique class $[Z_*]\\in W$ minimizing $\\|[X]-[Z]\\|_2$ over\n$[Z]\\in W$. This minimizing class has an affine representative\n$Z_*=a_0+\\sum_{j=1}^n a_jY_j$, and its coefficients satisfy\n$$a_0=\\mathbb E[X]-\\sum_{j=1}^n a_j\\mathbb E[Y_j],$$\n$$\\sum_{j=1}^n \\operatorname{Cov}(Y_i,Y_j)a_j=\\operatorname{Cov}(X,Y_i)\\qquad(1\\le i\\le n).$$\n\nThe class $[Z_*]$ is unique. If the covariance matrix\n$\\Gamma=(\\operatorname{Cov}(Y_i,Y_j))_{i,j}$ is singular, the coefficient vector\nneed not be uniquely determined by the normal equations, but any two solutions\nyield the same predictor almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(U,V)$ be a jointly multivariate-normal real\nvector with finite-dimensional blocks $U\\in\\mathbb R^p$ and\n$V\\in\\mathbb R^q$, where $p,q\\ge1$. If $\\operatorname{Cov}(U_i,V_j)=0$ for every\n$1\\le i\\le p$ and $1\\le j\\le q$, then $U$ and $V$ are independent. The\ncovariance matrix may be singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-conditional-expectation-is-unique-almost-surely",
+          "source_section": "Statement",
+          "quote": "If $Y,Z$ are conditional-expectation versions of the same real integrable $X$ given $\\mathcal G$, then $Y=Z$ almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $Y=(X_n,\\ldots,X_1)$ and choose an affine representative $\\widehat X_{n+h}$ of the unique class in [F1]. Put $R=X_{n+h}-\\widehat X_{n+h}$. By [F2], its mean is zero by the intercept equation, and each normal equation gives $\\operatorname{Cov}(X_{n+h},Y_i)=\\operatorname{Cov}(\\widehat X_{n+h},Y_i)$, hence $\\operatorname{Cov}(R,Y_i)=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The vector $(R,Y)$ is an affine linear image of $(X_{n+h},Y)$, so every scalar linear projection is normal by [F3] and $(R,Y)$ is jointly multivariate normal. Step 1.1 gives zero cross-covariance between $R$ and each coordinate of $Y$, so [F4] makes $R$ independent of $Y$ and therefore of $\\mathcal G:=\\sigma(Y)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The forecast $\\widehat X_{n+h}$ is an affine function of $Y$, hence $\\mathcal G$-measurable and integrable. By [F5], $\\mathbb E[R\\mid\\mathcal G]=\\mathbb E[R]=0$ and $\\mathbb E[\\widehat X_{n+h}\\mid\\mathcal G]=\\widehat X_{n+h}$. Since $X_{n+h}=R+\\widehat X_{n+h}$, [F6] makes the forecast a version of $\\mathbb E[X_{n+h}\\mid\\mathcal G]$ under [F7]; uniqueness in [F6] gives the almost-sure equality. AC is used only through the Gaussian and conditional-expectation branches.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires n,h≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero or constant Gaussian vector is allowed; the residual and conditional-expectation identities remain valid by steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=h=1 case is included in the same residual orthogonality and block-independence proof in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular history covariance is allowed because the normal-equations theorem gives a unique predictor class and the Gaussian block lemma permits singular laws; see steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The smallest forecast horizon h=1 is included in the arbitrary n,h≥1 argument of steps 1.1–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit in the statement; step 2.1 and the closing sentence of step 3.1 identify its inherited Gaussian and conditional-expectation uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a sufficient Gaussian condition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a sufficient Gaussian condition, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-durbin-levinson-solves-the-prediction-equations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-durbin-levinson-forecast-recursion",
+          "source_section": "Definition",
+          "quote": "**Input:** An integer $m\\ge1$ and the lags $\\gamma(0),\\ldots,\\gamma(m)$ of\nthe autocovariance function of a weakly stationary real process. Set\n$\\gamma(-r)=\\gamma(r)$. Require every leading covariance matrix\n$\\Gamma_k=(\\gamma(i-j))_{i,j=1}^k$ to be positive definite for $1\\le k\\le m$.\n\n**Output:** Coefficient vectors $\\phi_k=(\\phi_{k,1},\\ldots,\\phi_{k,k})^T$\nand error-variance values $\\nu_k$ for $1\\le k\\le m$.\n\n**Instructions:** Set $\\nu_0=\\gamma(0)$,\n$\\kappa_1=\\gamma(1)/\\nu_0$, $\\phi_{1,1}=\\kappa_1$, and\n$\\nu_1=\\nu_0(1-\\kappa_1^2)$. For each $k=2,\\ldots,m$, set\n$\\kappa_k=[\\gamma(k)-\\sum_{j=1}^{k-1}\\phi_{k-1,j}\\gamma(k-j)]/\\nu_{k-1}$,\n$\\phi_{k,j}=\\phi_{k-1,j}-\\kappa_k\\phi_{k-1,k-j}$ for $1\\le j<k$,\n$\\phi_{k,k}=\\kappa_k$, and $\\nu_k=\\nu_{k-1}(1-\\kappa_k^2)$.\nReturn all vectors and variances. The positive-definite leading-block\nassumption makes each division well-defined; this is proved in\n[[thm-durbin-levinson-solves-the-prediction-equations]]. The procedure operates\non covariance input and makes no Gaussian or conditional-expectation claim.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-forecast-normal-equations-and-error",
+          "source_section": "Statement",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a weakly stationary real process with mean\n$\\mu$ and autocovariance $\\gamma$, and let $n,h\\ge1$. Define\n$Y_i:=X_{n+1-i}$, $\\Gamma_{ij}:=\\gamma(i-j)$, and\n$\\gamma_h:=(\\gamma(h),\\gamma(h+1),\\ldots,\\gamma(h+n-1))^T$. If $\\Gamma$ is\nnonsingular, the unique forecast coefficients satisfy $a=\\Gamma^{-1}\\gamma_h$,\nthe best linear forecast is $\\widehat X_{n+h}=\\mu+\\sum_{i=1}^n a_i(Y_i-\\mu)$,\nand its error variance is $\\operatorname{Var}(X_{n+h}-\\widehat X_{n+h})=\\gamma(0)-a^T\\gamma_h$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-autocovariance-and-sample-autocovariance",
+          "source_section": "Definition",
+          "quote": "For a weakly stationary real process $X=(X_t)_{t\\in\\mathbb Z}$, its\n**autocovariance function** (ACVF) is\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t),\\qquad h\\in\\mathbb Z,$$\nwhich is independent of $t$ by [[def-strict-and-weak-stationarity-for-time-series]].\n\nFor a finite data vector $x_1,\\ldots,x_n\\in\\mathbb R$, where $n\\ge1$, let\n$$\\bar x_n:=\\frac1n\\sum_{t=1}^n x_t.$$\nIts **biased sample ACVF** is the zero-extended sequence on $\\mathbb Z$ given by\n$$\\widehat\\gamma_n(h):=\\frac1n\\sum_{t=1}^{n-|h|}(x_{t+|h|}-\\bar x_n)(x_t-\\bar x_n),\\qquad |h|<n,$$\nand $\\widehat\\gamma_n(h):=0$ for $|h|\\ge n$. The absolute lag makes\n$\\widehat\\gamma_n(-h)=\\widehat\\gamma_n(h)$.\n\nFor comparison, define the **pair-count-normalized rescaling**\n$$\\widetilde\\gamma_n(h):=\\frac1{n-|h|}\\sum_{t=1}^{n-|h|}(x_{t+|h|}-\\bar x_n)(x_t-\\bar x_n),\\qquad |h|<n,$$\nand set it to zero for $|h|\\ge n$. Its denominator is positive on the stated\ndomain. The names specify the denominator convention; they assert no\nunbiasedness formula.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $k=1$, positive definiteness of $\\Gamma_1=[\\gamma(0)]$ gives $\\gamma(0)>0$. The algorithm sets $\\phi_{1,1}=\\gamma(1)/\\gamma(0)$, so $\\Gamma_1\\phi_1=r_1$, and [F2] gives error variance $\\gamma(0)-\\gamma(1)^2/\\gamma(0)=\\nu_1$, including the zero-error case.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the induction step fix $2\\le k\\le m$ and assume the claim at order $k-1$. Write $r=(\\gamma(1),\\ldots,\\gamma(k-1))^T$; covariance symmetry gives $\\Gamma_k=\\begin{pmatrix}\\gamma(0)&r^T\\\\r&\\Gamma_{k-1}\\end{pmatrix}$. The induction hypothesis gives $\\phi_{k-1}=\\Gamma_{k-1}^{-1}r$ and $\\nu_{k-1}=\\gamma(0)-r^T\\Gamma_{k-1}^{-1}r$. The positive quadratic form of $\\Gamma_k$ at $(1,-\\Gamma_{k-1}^{-1}r)^T$ equals this value, so $\\nu_{k-1}>0$ and the order-$k$ division is valid.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $T=\\sum_{j=1}^{k-1}\\phi_{k-1,j}\\gamma(k-j)$ and $\\kappa_k=(\\gamma(k)-T)/\\nu_{k-1}$. For $i<k$, the new coefficient rule gives $(\\Gamma_k\\phi_k)_i=\\sum_{j=1}^{k-1}\\gamma(i-j)\\phi_{k-1,j}-\\kappa_k\\sum_{j=1}^{k-1}\\gamma(i-j)\\phi_{k-1,k-j}+\\kappa_k\\gamma(i-k)$. The first sum is $\\gamma(i)$ by the old system; reindexing the second by $\\ell=k-j$ gives its row $k-i$, namely $\\gamma(k-i)$. Since $\\gamma(i-k)=\\gamma(k-i)$, these last terms cancel and $(\\Gamma_k\\phi_k)_i=\\gamma(i)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $S=r^T\\phi_{k-1}=\\gamma(0)-\\nu_{k-1}$. Reindexing the last row gives $\\sum_{j=1}^{k-1}\\gamma(k-j)\\phi_{k-1,j}-\\kappa_k\\sum_{j=1}^{k-1}\\gamma(k-j)\\phi_{k-1,k-j}+\\kappa_k\\gamma(0)=T+\\kappa_k(\\gamma(0)-S)=T+\\kappa_k\\nu_{k-1}=\\gamma(k)$. Thus $\\Gamma_k\\phi_k=r_k$, and positive definiteness makes the solution unique.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Reindexing the new vector gives $r_k^T\\phi_k=S-\\kappa_kT+\\kappa_k\\gamma(k)=S+\\kappa_k^2\\nu_{k-1}$ by the definition of $\\kappa_k$. Therefore $\\gamma(0)-r_k^T\\phi_k=\\nu_{k-1}(1-\\kappa_k^2)=\\nu_k$. The forecast theorem [F2] identifies this with the one-step projection-error variance, completing the induction through $k=m$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires m≥1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A zero covariance sequence violates the positive-definite leading-block hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The base case k=1 is computed directly in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A final error variance ν_m may vanish while the theorem remains valid; steps 1.1 and 4.1 identify it with the actual projection-error variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The proof treats the initial order k=1 and every update through the final order k=m; see steps 1.1–4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The induction, finite matrix algebra and covariance identities are choice-free; steps 1.1–4.1 use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states correctness of a procedure, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states correctness of a procedure, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-singular-history-covariance-unique-predictor-class": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.\n\nThe process is **strictly stationary** when for every integer $r\\ge1$, every\n$t_1,\\ldots,t_r\\in\\mathbb Z$, and every shift $m\\in\\mathbb Z$,\n$$\\mathcal L(X_{t_1+m},\\ldots,X_{t_r+m})=\\mathcal L(X_{t_1},\\ldots,X_{t_r}).$$\nThis condition concerns the full finite-dimensional laws and imposes no moment\ncondition by itself.\n\nThe process is **weakly stationary** when $E[|X_t|^2]<\\infty$ for every\n$t\\in\\mathbb Z$, its mean $\\mu:=E[X_t]$ is independent of $t$, and for every\n$h\\in\\mathbb Z$ the covariance\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t)$$\nis independent of $t$. Expectation, variance, and covariance have the meanings\nin [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and\n[[def-moments-variance-and-covariance]]. Strict stationarity alone therefore\ndoes not supply the moment hypotheses needed for covariance or sample-mean\nclaims.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-normal-equations-for-best-affine-l2-prediction",
+          "source_section": "Statement",
+          "quote": "Let $X,Y_1,\\dots,Y_n$ be square-integrable real random variables on one\nprobability space, and write\n$$W:=\\operatorname{span}\\big([1],[Y_1],\\dots,[Y_n]\\big)\\subseteq L^2(\\mathbb P),$$\nwhere $[\\cdot]$ denotes the almost-everywhere class from\n[[def-l-p-space-as-a-quotient-by-null-functions]].\n\nThen there is a unique class $[Z_*]\\in W$ minimizing $\\|[X]-[Z]\\|_2$ over\n$[Z]\\in W$. This minimizing class has an affine representative\n$Z_*=a_0+\\sum_{j=1}^n a_jY_j$, and its coefficients satisfy\n$$a_0=\\mathbb E[X]-\\sum_{j=1}^n a_j\\mathbb E[Y_j],$$\n$$\\sum_{j=1}^n \\operatorname{Cov}(Y_i,Y_j)a_j=\\operatorname{Cov}(X,Y_i)\\qquad(1\\le i\\le n).$$\n\nThe class $[Z_*]$ is unique. If the covariance matrix\n$\\Gamma=(\\operatorname{Cov}(Y_i,Y_j))_{i,j}$ is singular, the coefficient vector\nneed not be uniquely determined by the normal equations, but any two solutions\nyield the same predictor almost surely.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each outcome has weight $1/2$, so [F1] gives $\\mathbb E[Z]=0$ and $\\mathbb E[Z^2]=1$. Every $X_t=Z$ is square-integrable with mean zero, and every finite-dimensional law is shift-invariant because each coordinate is the same $Z$; hence $X$ is weakly stationary.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The reversed history is $(Y_1,Y_2)=(X_2,X_1)=(Z,Z)$ and the target is $X_3=Z$. Direct covariance calculation gives $\\Gamma=\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}$ and $\\gamma_h=(1,1)^T$; by [F4] the normal equations reduce to $a_1+a_2=1$, so the matrix is singular and has solutions $(1,0)^T$ and $(0,1)^T$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The intercept is zero because every variable has mean zero; either displayed solution gives forecast $a_1Z+a_2Z=Z$ and zero error, so they represent the same unique minimizing class by [F4].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-outcome probability space and a two-variable history."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The prediction error is exactly zero for every solution, as computed in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes n=2 and makes no one-variable-history claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The history covariance is singular and the distinct solutions give the same predictor class; see steps 2.1–3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses h=1 and computes the target X3 from X1,X2 in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two outcomes and all expectations are enumerated directly in steps 1.1–3.1; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [
+        {
+          "check": "symmetric-rademacher-covariance",
+          "asserts": "Let $\\Omega=\\{-1,1\\}$ have equal probability, let $Z(\\omega)=\\omega$"
+        }
+      ]
+    },
+    "ex-nongaussian-conditional-mean-not-best-affine-predictor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.\n\nThe process is **strictly stationary** when for every integer $r\\ge1$, every\n$t_1,\\ldots,t_r\\in\\mathbb Z$, and every shift $m\\in\\mathbb Z$,\n$$\\mathcal L(X_{t_1+m},\\ldots,X_{t_r+m})=\\mathcal L(X_{t_1},\\ldots,X_{t_r}).$$\nThis condition concerns the full finite-dimensional laws and imposes no moment\ncondition by itself.\n\nThe process is **weakly stationary** when $E[|X_t|^2]<\\infty$ for every\n$t\\in\\mathbb Z$, its mean $\\mu:=E[X_t]$ is independent of $t$, and for every\n$h\\in\\mathbb Z$ the covariance\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t)$$\nis independent of $t$. Expectation, variance, and covariance have the meanings\nin [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and\n[[def-moments-variance-and-covariance]]. Strict stationarity alone therefore\ndoes not supply the moment hypotheses needed for covariance or sample-mean\nclaims.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-forecast-normal-equations-and-error",
+          "source_section": "Statement",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a weakly stationary real process with mean\n$\\mu$ and autocovariance $\\gamma$, and let $n,h\\ge1$. Define\n$Y_i:=X_{n+1-i}$, $\\Gamma_{ij}:=\\gamma(i-j)$, and\n$\\gamma_h:=(\\gamma(h),\\gamma(h+1),\\ldots,\\gamma(h+n-1))^T$. If $\\Gamma$ is\nnonsingular, the unique forecast coefficients satisfy $a=\\Gamma^{-1}\\gamma_h$,\nthe best linear forecast is $\\widehat X_{n+h}=\\mu+\\sum_{i=1}^n a_i(Y_i-\\mu)$,\nand its error variance is $\\operatorname{Var}(X_{n+h}-\\widehat X_{n+h})=\\gamma(0)-a^T\\gamma_h$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A common shift $s$ changes phase $\\omega$ to $(\\omega+s)\\bmod3$, a permutation of the equally weighted outcomes, so every shifted finite coordinate vector has the original law. One-coordinate laws give a common mean, pair laws at each lag give covariance independent of $t$, and boundedness gives finite moments; hence the process is weakly stationary by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The values of $(X_1,X_2)$ at $\\omega=0,1,2$ are $(-1,0),(0,1),(1,-1)$; hence both means are zero, $\\operatorname{Var}(X_1)=2/3$, and $\\operatorname{Cov}(X_2,X_1)=-1/3$. By [F4], the unique best affine forecast from this one-variable history is $(-1/3)/(2/3)X_1=-X_1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $X_1:\\Omega\\to\\{-1,0,1\\}$ is bijective, $\\sigma(X_1)$ is the full event sigma-algebra and $X_2$ is measurable with respect to it. The conditional-expectation definition and known-variable property give $\\mathbb E[X_2\\mid\\sigma(X_1)]=X_2$, whose values $(0,1,-1)$ differ from the affine forecast values $(1/2,0,-1/2)$ at every outcome.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=h=1 on a three-outcome space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The outcome with X1=0 is included; step 3.1 verifies the conditional mean and affine forecast differ there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example explicitly computes the n=h=1 forecast in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "X1 and X2 each take three values, so neither variable is constant; step 2.1 gives positive variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example uses the smallest positive history and horizon, n=h=1; see steps 2.1–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All three outcomes are listed and evaluated directly in steps 1.1–3.1; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-ar1-one-step-and-multistep-forecast": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.\n\nThe process is **strictly stationary** when for every integer $r\\ge1$, every\n$t_1,\\ldots,t_r\\in\\mathbb Z$, and every shift $m\\in\\mathbb Z$,\n$$\\mathcal L(X_{t_1+m},\\ldots,X_{t_r+m})=\\mathcal L(X_{t_1},\\ldots,X_{t_r}).$$\nThis condition concerns the full finite-dimensional laws and imposes no moment\ncondition by itself.\n\nThe process is **weakly stationary** when $E[|X_t|^2]<\\infty$ for every\n$t\\in\\mathbb Z$, its mean $\\mu:=E[X_t]$ is independent of $t$, and for every\n$h\\in\\mathbb Z$ the covariance\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t)$$\nis independent of $t$. Expectation, variance, and covariance have the meanings\nin [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and\n[[def-moments-variance-and-covariance]]. Strict stationarity alone therefore\ndoes not supply the moment hypotheses needed for covariance or sample-mean\nclaims.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-best-linear-forecast-from-a-finite-history",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a weakly stationary real process on one\nprobability space, with common mean $\\mu$, and let $n,h\\ge1$ be integers. Its\n**finite-history best linear forecast** of $X_{n+h}$ from $X_1,\\ldots,X_n$ is\nthe unique almost-sure class minimizing squared $L^2$ error over the affine\nsubspace $M_n:=\\{[a_0+a_1X_1+\\cdots+a_nX_n]:a_0,\\ldots,a_n\\in\\mathbb R\\}\\subseteq L^2(\\mathbb P)$.\nHere $[Z]$ denotes the almost-sure equivalence class of a square-integrable\nrandom variable, as in [[def-l-p-space-as-a-quotient-by-null-functions]], and\nthe finite linear span uses [[def-linear-combination-and-span]]. Weak\nstationarity and its moment conditions are those of\n[[def-strict-and-weak-stationarity-for-time-series]]. Existence and uniqueness\nof the minimizing class are established by\n[[thm-finite-history-best-linear-predictor-exists-uniquely]]. The term *best linear* refers to\nthis affine $L^2$ projection; it does not assert equality with a conditional\nexpectation without additional hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Reindexing the convergent causal series gives $X_t-\\mu=\\phi(X_{t-1}-\\mu)+\\epsilon_t$; repeating this identity gives $X_{n+h}-\\mu=\\phi^h(X_n-\\mu)+R_h$, where $R_h=\\sum_{r=0}^{h-1}\\phi^r\\epsilon_{n+h-r}$. Every innovation in $R_h$ has index greater than $n$, while the causal series for each $X_j-\\mu$, $1\\le j\\le n$, uses only indices at most $j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $j\\le n$, every finite partial sum for $X_j-\\mu$ uses innovation indices at most $j$, so its covariance with each future term of $R_h$ is zero by the uncorrelated-noise assumption; [F4] passes this covariance identity to the $L^2$ limit. Thus $\\operatorname{Cov}(R_h,X_j)=0$ and $\\mathbb E[R_h]=0$, making the residual orthogonal to the constant and every history variable.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $H=\\mu+\\phi^h(X_n-\\mu)$ and let any competing affine forecast $Z$ be in the history span; then $D:=H-Z$ is also in that span. Step 2.1 gives $\\mathbb E[R_h]=0$ and $\\operatorname{Cov}(R_h,X_j)=0$ for every $j$; bilinearity [F3] gives $\\operatorname{Cov}(R_h,D)=0$, hence $\\mathbb E[R_hD]=0$. Since $X_{n+h}-Z=R_h+D$, expansion yields $\\mathbb E[(X_{n+h}-Z)^2]=\\mathbb E[R_h^2]+\\mathbb E[D^2]\\ge\\mathbb E[R_h^2]$, with equality exactly when $D=0$ as an $L^2$ class. Thus $H$ is the unique best class by [F2]. The innovations in $R_h$ are pairwise uncorrelated, so [F3] gives $\\operatorname{Var}(R_h)=\\sigma^2\\sum_{r=0}^{h-1}\\phi^{2r}$. This proves both formulas without Gaussian or independent innovations.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example requires n,h≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For φ=0 the forecast reduces to μ and the error variance reduces to σ²; steps 1.1 and 3.1 still apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For h=1 the forecast is μ+φ(X_n−μ) and the variance sum has its single σ² term; see steps 1.1 and 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes σ²>0, so every finite-horizon error variance is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lower horizon h=1 is included in the expansion and finite innovation sum of steps 1.1–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example uses finite sums and L2 limits under the stated representation and invokes no choice axiom; see steps 1.1–3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states formulas, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states formulas, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-finite-history-best-linear-predictor-exists-uniquely": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-strict-and-weak-stationarity-for-time-series",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a real-valued stochastic process on one\nprobability space, so each $X_t$ is a real random variable and each finite\ntuple has its pushforward law\n([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-random-element-and-real-random-variable]],\n[[def-law-or-distribution-of-a-random-element]]).\nWe call $X$ a **time series** here because its index set is $\\mathbb Z$.\n\nThe process is **strictly stationary** when for every integer $r\\ge1$, every\n$t_1,\\ldots,t_r\\in\\mathbb Z$, and every shift $m\\in\\mathbb Z$,\n$$\\mathcal L(X_{t_1+m},\\ldots,X_{t_r+m})=\\mathcal L(X_{t_1},\\ldots,X_{t_r}).$$\nThis condition concerns the full finite-dimensional laws and imposes no moment\ncondition by itself.\n\nThe process is **weakly stationary** when $E[|X_t|^2]<\\infty$ for every\n$t\\in\\mathbb Z$, its mean $\\mu:=E[X_t]$ is independent of $t$, and for every\n$h\\in\\mathbb Z$ the covariance\n$$\\gamma(h):=\\operatorname{Cov}(X_{t+h},X_t)$$\nis independent of $t$. Expectation, variance, and covariance have the meanings\nin [[def-expectation-of-a-nonnegative-or-integrable-random-variable]] and\n[[def-moments-variance-and-covariance]]. Strict stationarity alone therefore\ndoes not supply the moment hypotheses needed for covariance or sample-mean\nclaims.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-normal-equations-for-best-affine-l2-prediction",
+          "source_section": "Statement",
+          "quote": "Let $X,Y_1,\\dots,Y_n$ be square-integrable real random variables on one\nprobability space, and write\n$$W:=\\operatorname{span}\\big([1],[Y_1],\\dots,[Y_n]\\big)\\subseteq L^2(\\mathbb P),$$\nwhere $[\\cdot]$ denotes the almost-everywhere class from\n[[def-l-p-space-as-a-quotient-by-null-functions]].\n\nThen there is a unique class $[Z_*]\\in W$ minimizing $\\|[X]-[Z]\\|_2$ over\n$[Z]\\in W$. This minimizing class has an affine representative\n$Z_*=a_0+\\sum_{j=1}^n a_jY_j$, and its coefficients satisfy\n$$a_0=\\mathbb E[X]-\\sum_{j=1}^n a_j\\mathbb E[Y_j],$$\n$$\\sum_{j=1}^n \\operatorname{Cov}(Y_i,Y_j)a_j=\\operatorname{Cov}(X,Y_i)\\qquad(1\\le i\\le n).$$\n\nThe class $[Z_*]$ is unique. If the covariance matrix\n$\\Gamma=(\\operatorname{Cov}(Y_i,Y_j))_{i,j}$ is singular, the coefficient vector\nneed not be uniquely determined by the normal equations, but any two solutions\nyield the same predictor almost surely.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-best-linear-forecast-from-a-finite-history",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be a weakly stationary real process on one\nprobability space, with common mean $\\mu$, and let $n,h\\ge1$ be integers. Its\n**finite-history best linear forecast** of $X_{n+h}$ from $X_1,\\ldots,X_n$ is\nthe unique almost-sure class minimizing squared $L^2$ error over the affine\nsubspace $M_n:=\\{[a_0+a_1X_1+\\cdots+a_nX_n]:a_0,\\ldots,a_n\\in\\mathbb R\\}\\subseteq L^2(\\mathbb P)$.\nHere $[Z]$ denotes the almost-sure equivalence class of a square-integrable\nrandom variable, as in [[def-l-p-space-as-a-quotient-by-null-functions]], and\nthe finite linear span uses [[def-linear-combination-and-span]]. Weak\nstationarity and its moment conditions are those of\n[[def-strict-and-weak-stationarity-for-time-series]]. Existence and uniqueness\nof the minimizing class are established by\n[[thm-finite-history-best-linear-predictor-exists-uniquely]]. The term *best linear* refers to\nthis affine $L^2$ projection; it does not assert equality with a conditional\nexpectation without additional hypotheses.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $n,h\\ge1$ and take target $X_{n+h}$ with regressors $X_1,\\ldots,X_n$. By [F1] these variables are square-integrable, so [F2] supplies a unique minimizing almost-sure class in their affine span.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], the affine span used in [F2] is exactly $M_n$, so the unique minimizing class from step 1.1 is the finite-history forecast. The uniqueness asserted is of the $L^2$ class, not necessarily of its coefficients; this remains true when the history covariance is singular by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires integers n,h≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero process has the zero affine minimizer and unique class; the supplier argument applies in steps 1.1–1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=1,h=1 case is included in the square-integrable finite affine projection of steps 1.1–1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The theorem states uniqueness of the almost-sure class even if history covariance is singular; see steps 1.1–1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The smallest positive history and horizon are included by n,h≥1 in steps 1.1–1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The specialization uses the published finite affine projection theorem and finite-index substitutions only; steps 1.1–1.2 use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states existence and uniqueness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states existence and uniqueness, not an equivalence."
+        }
+      ]
+    }
+  }
+}

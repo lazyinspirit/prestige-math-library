@@ -1,0 +1,554 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62",
+  "scope": [
+    "def-two-level-full-factorial-design",
+    "thm-full-two-level-factorial-contrast-orthogonality",
+    "thm-full-factorial-estimator-and-effect-variances",
+    "ex-unbalanced-full-factorial-loses-orthogonality",
+    "ex-two-factor-interaction-and-scale-dependence"
+  ],
+  "contracts": {
+    "def-two-level-full-factorial-design": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes k≥1, so its run set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the empty factor subset has the explicitly defined empty product x_∅=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for k=1, the run set has two sign vectors and the formula defines both the intercept and one factor column."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition accepts any real response table and asserts no nondegeneracy condition on its values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter or endpoint condition is defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the factor set, run set, and subset index set are finite and explicitly given; a fixed ordering is allowed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines a design and coefficient function; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines a design and coefficient function; it states no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-full-two-level-factorial-contrast-orthogonality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-level-full-factorial-design",
+          "source_section": "Definition",
+          "quote": "For a run $x\\in\\mathcal X_k$ and a subset $A\\subseteq[k]$, define its sign column by $$x_A=\\prod_{j\\in A}x_j,$$ where the empty product is $x_\\varnothing=1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "source_section": "Definition",
+          "quote": "Vectors $u,v$ in an inner product space ([[def-inner-product-space]]) are **orthogonal**, written $u\\perp v$, if $\\langle u,v\\rangle=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For A,B⊆[k], each shared coordinate occurs twice in x_Ax_B and has square 1, so x_Ax_B is the product over A△B. The standard coordinate inner product therefore sums that monomial over every run.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "When A=B the product is the empty product and sums to 2^k. When A≠B, flipping a chosen coordinate in A△B is a fixed-point-free involution that reverses the summand, so the terms cancel.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Each Gram-matrix entry is the inner product of the corresponding columns. The preceding cases give XᵀX=2^kI, its scaled identity, and pairwise orthogonality.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes k≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The off-diagonal Gram entries are zero by the cancellation in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The diagonal and off-diagonal cases in step 2.1 include k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers both equal and distinct subset indices, including the empty subset."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued variable or endpoint is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses one coordinate from the explicitly nonempty finite set A△B; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a Gram identity and no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a Gram identity and no iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-full-factorial-estimator-and-effect-variances": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-level-full-factorial-design",
+          "source_section": "Definition",
+          "quote": "For a real response table $y=(y_x)_{x\\in\\mathcal X_k}$, define its normalized factorial coefficient by $$\\widehat\\beta_A(y)=2^{-k}\\sum_{x\\in\\mathcal X_k}x_Ay_x.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-full-two-level-factorial-contrast-orthogonality",
+          "source_section": "Statement",
+          "quote": "Then $$\\langle c_A,c_B\\rangle=\\begin{cases}2^k,&A=B,\\\\0,&A\\ne B.\\end{cases}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "When $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from [[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent in the sense of [[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the extended-valued integral $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Moreover, covariance is symmetric and bilinear on finite linear combinations.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-variance-adds-for-pairwise-independent-random-variables",
+          "source_section": "Statement",
+          "quote": "If $(X_i)_{i\\in I}$ is a finite pairwise-independent family of square-integrable real random variables on a common probability space, then $$\\operatorname{Var}\\!\\left(\\sum_{i\\in I}X_i\\right)=\\sum_{i\\in I}\\operatorname{Var}(X_i).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Substitution into the normalized contrast gives a coefficient sum plus the signed-error sum. The Gram identity isolates β_A, leaving β̂_A−β_A=(r2^k)^{-1}Σ_{x,s}x_Aε_{x,s}.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Multiplication of each error by its sign x_A preserves its generated sigma-algebra and independence. The variables have finite second moment, and variance bilinearity gives each variance σ².",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "There are r2^k signed errors. Pairwise-independent variance addition gives variance r2^kσ² for their sum; scaling by (r2^k)^{-1} yields σ²/(r2^k).",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Flipping a selected coordinate in nonempty A bijects the positive and negative sign groups, each of size 2^{k−1}. Their mean difference equals 2β̂_A, so its variance is four times the coefficient variance.",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The design assumes k≥1 and the error model assumes r≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When σ²=0, steps 1.2 and 2.1 give zero variance for every coefficient and effect."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The formulas in the Statement cover k=1 and r=1 without a separate limiting argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement's formulas and steps 1.2 and 2.1 apply also when σ²=0; no Gaussian or zero-interaction restriction is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter is defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 selects a coordinate from each nonempty finite subset A; the argument uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states variance identities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states variance identities, not an equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-unbalanced-full-factorial-loses-orthogonality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-level-full-factorial-design",
+          "source_section": "Definition",
+          "quote": "The design matrix $X$ has one row for each run, one column for each subset of factors, and entry $X_{x,A}=x_A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "source_section": "Definition",
+          "quote": "Vectors $u,v$ in an inner product space ([[def-inner-product-space]]) are **orthogonal**, written $u\\perp v$, if $\\langle u,v\\rangle=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-full-two-level-factorial-contrast-orthogonality",
+          "source_section": "Statement",
+          "quote": "Thus the columns are pairwise orthogonal and $$X^{\\mathsf T}X=2^kI_{2^k},\\qquad 2^{-k}X^{\\mathsf T}X=I_{2^k}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The intercept column is all ones and the first-factor column has signs −1,−1,+1,−1,+1. The standard inner product is therefore −1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Orthogonal columns must have zero inner product, so step 1.1 proves this pair is not orthogonal. The original four distinct full-factorial rows remain present, so any vector in the five-row kernel also lies in the four-row kernel.",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The four-row Gram identity implies that a vector in its kernel has squared norm zero and hence is zero. Thus the five-row matrix remains full column rank.",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses k=2 and four nonempty cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the relevant inner product as −1, so it is not zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has two factors and four treatment combinations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 show the replicated design loses orthogonality but retains full column rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued quantity is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All four distinct rows and their five multiplicities are listed in the Given statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves no iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-two-factor-interaction-and-scale-dependence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-level-full-factorial-design",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge1$ and write $[k]=\\{1,\\ldots,k\\}$. A **two-level full factorial design** has run set\n$$\\mathcal X_k=\\{-1,+1\\}^{[k]},$$\nso every one of the $2^k$ sign combinations occurs once. For a run $x\\in\\mathcal X_k$ and a subset $A\\subseteq[k]$, define its sign column by\n$$x_A=\\prod_{j\\in A}x_j,$$\nwhere the empty product is $x_\\varnothing=1$. The design matrix $X$ has one row for each run, one column for each subset of factors, and entry $X_{x,A}=x_A$. Any fixed ordering of the runs and subsets may be used.\n\nThe run set and subset index set both have $2^k$ elements: a subset $A$ corresponds to the sign vector whose $j$th coordinate is $+1$ exactly when $j\\in A$. Thus $X$ is a square $2^k\\times2^k$ matrix.\n\nFor a real response table $y=(y_x)_{x\\in\\mathcal X_k}$, define its normalized factorial coefficient by\n$$\\widehat\\beta_A(y)=2^{-k}\\sum_{x\\in\\mathcal X_k}x_Ay_x.$$\nFor nonempty $A$, put $G_{A,+}=\\{x:x_A=+1\\}$ and $G_{A,-}=\\{x:x_A=-1\\}$. Both sets are nonempty: the all-positive run lies in $G_{A,+}$, and flipping any coordinate in $A$ gives a run in $G_{A,-}$. Define the factorial effect on this response scale as\n$$\\widehat\\tau_A(y)=\\frac{1}{|G_{A,+}|}\\sum_{x\\in G_{A,+}}y_x-\\frac{1}{|G_{A,-}|}\\sum_{x\\in G_{A,-}}y_x.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $x_{\\{1,2\\}}=x_1x_2$ is $+1$ on runs $--$ and $++$, and $-1$ on runs $+-$ and $-+$. By [F1], the raw-scale $AB$ effect is $\\frac{1+6}{2}-\\frac{2+3}{2}=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The log-transformed responses remain indexed by these same four runs, so [F1] uses the same two sign groups. The log-scale $AB$ effect is $\\frac{\\log 1+\\log 6}{2}-\\frac{\\log 2+\\log 3}{2}=0$, using $\\log 1=0$ and $\\log 6=\\log 2+\\log 3$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The raw-scale interaction effect is nonzero while the log-scale interaction effect is zero, so this table's interaction depends on the declared response scale. The run set alone specifies no response additivity or physical mechanism.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two factors and four runs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the log-scale interaction contrast to be zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses a two-factor design."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 exhibit a nonzero raw-scale effect and a zero log-scale effect."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: the four positive cell responses are explicitly enumerated, so the logarithms exist."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves no iff."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

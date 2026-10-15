@@ -1,0 +1,102 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "4",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "ex-poisson-overdispersion",
+      "model": "gpt-6-luna",
+      "context_sha256": "1c4a5eaf0c8bfd581f2a9b55a7d93f4af5af192f7e9aec76576363f3858e5e36",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 suppresses the density arguments in both derivative multipliers, making f(k-exp(theta)) look like a function evaluation. This is a nonfatal notation defect: direct differentiation of the supplied mass gives f(k;theta)(k-exp(theta)) and f(k;theta)((k-exp(theta))^2-exp(theta)); the existing envelope bounds both absolute derivatives and has successive-term ratio tending to zero. Both multipliers are now explicit; normalization, finite second moment and the mean/variance conclusion are sound.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-poisson-overdispersion",
+      "disposition": "repaired",
+      "post_sha256": "e3abc13f7918ab46511cd5f12f9e84c504e408f8e06246e5a88d0aa4c779a25a",
+      "review_context_sha256": "2da3ae9b89f25f04291c0bad8532ac4bb60bfa73b69e88d3ca63d0faf5b4755c",
+      "reason": "Reviewed the complete example, its owning contract and both GLM page interfaces, the response-family definition and the full mean/variance lemma. Explicit parameter derivatives remove the F3 ambiguity. For theta in [u,v], f<=exp(vk)/k! and exp(theta)<=exp(v), giving the stated summable envelope. Reindexing k^2=k(k-1)+k in the normalized exponential series gives E[Y^2]=lambda^2+lambda. Thus every hypothesis of the moment lemma holds, Poisson(10) has mean and variance 10, and the two-point law has mean 10 and variance 100. This is a local repair review, not independent acceptance of my edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "statistical-models-experiments-62-step5-initial-r1-u4-poisson-derivative-notation",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:26:39.249001+00:00",
+        "class": "accuracy",
+        "subclass": "undefined-notation",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "ex-poisson-overdispersion",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "4",
+        "source": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u4.json",
+        "description": "F3 omitted the arguments of f in two density-derivative multipliers. Explicit f(k;theta) factors now distinguish multiplication from function evaluation; direct differentiation verifies both expressions and the existing envelope.",
+        "repair_cost": "inline-fix",
+        "item_sha256": "e3abc13f7918ab46511cd5f12f9e84c504e408f8e06246e5a88d0aa4c779a25a"
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_change",
+      "reason": "The assigned carrier is draft, only its F3 derivative notation changed, and no Statement/Definition interface changed. No potentially defective published supplier or consumer was found in the examined uses."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_files": [
+      "items/ex-poisson-overdispersion.md"
+    ],
+    "change": "Only the two derivative expressions in Facts & Assumptions F3 changed; the Example and all Statement/Definition interfaces are unchanged. No consumer propagation, new prerequisite, choice assumption, contract change or page change is needed.",
+    "evidence_paths": [
+      "items/def-glm-observation-family.md#Definition",
+      "items/lem-glm-mean-and-variance-identities.md#Statement",
+      "items/lem-glm-mean-and-variance-identities.md#Proof",
+      "items/def-generalized-linear-model.md#Definition",
+      "research/statistical-models-experiments-62-batch-4.proof-contracts.json:ex-poisson-overdispersion",
+      "library/statistical-models-and-experiments/generalized-linear-models-and-fisher-scoring-examples.md"
+    ],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-poisson-overdispersion.md --json",
+        "exit_code": 0,
+        "result": "1 file, 1 proof checked, 0 failed; pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/ex-poisson-overdispersion.md --json",
+        "exit_code": 0,
+        "result": "1 file checked, 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-4.proof-contracts.json --strict --items ex-poisson-overdispersion --json",
+        "exit_code": 0,
+        "result": "Assigned item passed strict contract validation; 0 errors, 0 warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/ex-poisson-overdispersion.md",
+        "exit_code": 0,
+        "result": "1 item, 2 steps, 0 defects; run after the final item edit."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Handoff to the controller for its ordinary evidence collection and any required independent rejudgment; no judge, stamp, gate battery or cycle was launched.",
+    "input_identity": "Verified compact JSON SHA-256 of the frozen initial-1.json equals the exact task input_sha256."
+  }
+}

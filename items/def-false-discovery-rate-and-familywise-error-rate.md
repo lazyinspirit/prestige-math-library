@@ -1,0 +1,53 @@
+---
+id: def-false-discovery-rate-and-familywise-error-rate
+kind: definition
+title: "False discovery proportion, FDR, and FWER"
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 0
+deps:
+  - def-expectation-of-a-nonnegative-or-integrable-random-variable
+  - def-probability-measure
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+verification:
+  precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+sources:
+  references:
+    - title: "Yoav Benjamini and Yosef Hochberg, Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing, JRSS B 57(1) (1995), §2 and §3.1"
+      url: "https://www.math.tau.ac.il/~yekutiel/eBayes/bh_1995.pdf"
+---
+
+## Definition
+
+Let $m\ge1$ be a finite number of hypotheses and write
+$[m]=\{1,\ldots,m\}$. Fix a probability law $P$ and a set
+$I_0\subseteq[m]$ of indices whose null hypotheses are true under $P$. A
+measurable rejection rule is a measurable map
+$\mathcal R:\Omega\to2^{[m]}$, where the finite set $2^{[m]}$ has its discrete
+sigma-algebra. Set
+
+$$R=|\mathcal R|,\qquad V=|\mathcal R\cap I_0|.$$
+
+The **false discovery proportion** is
+
+$$\operatorname{FDP}:=\frac{V}{R\vee1},\qquad R\vee1:=\max(R,1),$$
+
+and the **false discovery rate** is
+
+$$\operatorname{FDR}:=\mathbb E_P\!\left[\frac{V}{R\vee1}\right].$$
+
+The **family-wise error rate** is
+
+$$\operatorname{FWER}:=P(V\ge1).$$
+
+Since $V\le R$ whenever $R>0$ and $V=0$ when $R=0$, the FDP is a measurable
+random variable in $[0,1]$ and its expectation is finite. These definitions
+use the fixed true-null set for the specified law; they do not assert that FDR
+and FWER are equal except in the global-null case.

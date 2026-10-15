@@ -1,0 +1,39 @@
+# Batch 9 notes — HT variance and SRSWOR
+
+## Plan comparison and inventory
+
+- Read the owner authoring direction, the complete SME-09 design contract, the generated batch task, the current batch dependency-level input, the batch-9 scaffold, the relevant plan-spec rows, and the live run status. The owner direction and track plan control the assigned content.
+- Plan-spec orders 1934–1935 match the task and track plan in page IDs, category, titles, companion, and page prerequisites. The plan-spec item arrays are empty, so they impose no conflicting item inventory. No plan-spec conflict was found.
+- The A inventory contains two definitions followed by the HT variance/pair-inclusion theorem, fixed-size Sen–Yates–Grundy theorem, and SRSWOR variance theorem. The B inventory contains four worked examples. The A/B page identities and existing page prerequisites remain unchanged.
+- Item levels in the authored manifest are 3, 3, 4, 5, 5, then 6, 5, 6, 6 for the B examples. The recomputed full-run graph reports these same levels for every batch-9 item and no batch-9 cycle or level error.
+
+## Supplier inspection and mathematical decisions
+
+- Inspected the actual batch-8 def-finite-population-and-sampling-design definition and its lem-finite-population-design-law-is-a-probability-measure proof. The supplier fixes the population values, finite sample support and design law, defines the inclusion indicators and both inclusion probabilities, and adopts pi_ii=pi_i. The local definitions and results use those conventions. The dependency record does not claim batch-8 worker acceptance or gate approval.
+- Read the required probability page and the actual published moment, indicator-expectation, finite-sum variance, covariance-bilinearity, two-variable expectation-linearity, and statistic/estimator suppliers. Finite-sum expectation linearity is proved by induction in the local arguments, so the carriers stay within the declared page prerequisites. The proofs use a single finite design law and no independence or choice axiom.
+- The final item deps use the indicator-expectation and two-variable-linearity corollaries homed on the declared probability page; finite-sum linearity is proved locally by induction. The draft's older finite-probability-page helpers were removed from these two theorem dependencies, so no additional page prerequisite is required.
+- The track plan's phrase that the SYG expression is “nonnegative only when” every distinct-pair Delta is nonpositive is treated as a sufficient sign guarantee for the sample estimator's summands, not as a necessary condition for a true variance to be nonnegative. The true variance is always nonnegative by definition. The four-unit example exhibits positive pair differences with nonnegative estimates for one schedule and a negative unbiased estimate for another. No shared plan was changed.
+- The zero-pair example keeps the distinction between an undefined all-pairs inverse coefficient and a different formula that omits unsupported pairs. It also proves, for the two-unit singleton design, that no observed-record estimator can be unbiased for the HT variance for every population.
+- SRSWOR calculations include n=1 and census n=N; the population variance convention requires N>1. No exact normal or t calibration is inferred from the finite design variance.
+
+## Source reading and resolution
+
+- Read the complete 32-page Shalabh Chapter 7 and complete 23-page Chapter 2, the complete nine-page Borkowski Lecture 6 (printed pp. 138–146), and Oehlert Chapter 7 in the author-distributed book. The two independent sampling treatments are Shalabh and Borkowski. Oehlert's chapter addresses model-based confidence-interval width and ANOVA power, not the assigned design-based variance formulas; its result is recorded as deferred to SME-17.
+- Inspected the Chapter 2 p. 14 page image. Its printed covariance for distinct SRSWOR indicators has a positive-sign typo, contradicting its own inclusion probabilities; the local proof derives the negative sign from pi_ij-pi_i pi_j. Chapter 2's later normal/t discussion is not used as design-based inference.
+- The assigned source dossier flags arithmetic errors in Borkowski's printed p. 145 with-replacement PPS example. That calculation is explicitly not used. The with-replacement PPS and Hansen–Hurwitz material in Chapter 7 is also not used.
+- The original Chapter 7 URL omitted the final -sampling filename suffix and returned HTTP 404 on the initial fetch and five recorded retries. Search found the corrected official IIT Kanpur PDF URL. The corrected 32-page PDF fetched as 683,221 bytes with hash prefix 1ea07e0ceabbd1e9, matching the complete cached source. The old URL is retained in coverage with a certain, documented drop and item-specific alternative arguments; the corrected source remains active. source-fetch-check --stamp resolved 5/5 records (4 fetched, 1 documented dead-URL drop).
+- research/statistical-models-experiments-62-batch-9.coverage.json records URLs, locators, the items supported, and each used, deferred, or excluded result.
+
+## Scoped checks
+
+- node tools/tsx-run.mjs tools/precheck.mts on the nine assigned items: 7 proof-bearing items passed; 2 definitions were not applicable.
+- node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-9.proof-contracts.json --strict: 9/9 items, 0 errors, 0 warnings.
+- node tools/proof-layout.mjs on the nine assigned items: 9 items, 25 steps, 0 defects.
+- node tools/rendercheck.mjs on the nine items and two pages: 11 files passed YAML and real KaTeX checks.
+- node tools/content-policy.mjs research/statistical-models-experiments-62-batch-9.pages.json: 9 items, 0 errors, 0 warnings.
+- node tools/depcheck.mjs --items-file on the batch-9 item IDs: focused item/page and prerequisite-cycle checks passed with 0 errors and 0 warnings.
+- Manifest-to-carrier consistency check: all 9 item dependency arrays and dependency_level labels match exactly.
+- step1-decisions records were created as ready for all 9 items (owner=false) and their hashes rechecked against the current items and dependency closure.
+- node tools/item-dependency-levels.mjs check --run statistical-models-experiments-62 remains blocked outside this assignment by 10 empty scaffold inventories (response surfaces, power/sample size, competing risks, spatial field summaries, and kriging, including their B pages) and 14 existing level mismatches: thm-standardization-identifies-a-causal-mean, thm-inverse-probability-weighting-identifies-a-causal-mean, ex-standardization-and-ipw-two-strata-calculation, ex-extreme-ipw-weights-under-poor-overlap, ex-weight-truncation-changes-the-ipw-target, ex-logrank-crossing-hazards-zero-score, thm-durbin-levinson-solves-the-prediction-equations, ex-nongaussian-conditional-mean-not-best-affine-predictor, def-random-field-stationarity-covariance-and-variogram, lem-random-field-covariance-kernel-is-positive-semidefinite, thm-gaussian-random-field-existence-from-a-positive-semidefinite-kernel, thm-order-two-field-variogram-is-conditionally-negative-definite, thm-continuous-stationary-field-covariance-has-bochner-measure, and ex-covariance-kernel-and-intrinsic-variogram-checks. No batch-9 item is among those errors.
+- The first active-run status read showed Step 1 held on an owner-repair blocker and batch-8's formal artifact missing, although its actual supplier body and proof were present. This batch did not change engine state, verdicts, shared plans, or other pairs.
+- step1-decisions.mjs records are ready for all 9 items with explicit direct dependencies, owner=false, and evidence reasons. After the final dependency change, seven stale records were refreshed and the tool preserved the two unchanged definition records; a focused hash check confirms all 9 are current. These are authoring-readiness records, not independent approval or gate results.

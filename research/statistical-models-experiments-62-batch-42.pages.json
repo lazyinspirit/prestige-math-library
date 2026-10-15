@@ -1,0 +1,406 @@
+[
+  {
+    "order": 2000,
+    "id": "arma-causality-invertibility-and-spectra",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "ARMA roots, spectra and inference",
+    "companion": "arma-causality-invertibility-and-spectra-examples",
+    "requires": [
+      "stationary-time-series-moments-and-autocovariance",
+      "spectral-measures-and-periodogram-bias",
+      "asymptotic-convergence-consistency-and-identification",
+      "central-limit-theorems",
+      "martingale-inequalities-and-convergence",
+      "characteristic-functions-inversion-and-continuity",
+      "stationary-markov-chains-and-ergodic-limits",
+      "strong-laws-of-large-numbers",
+      "discrete-time-martingales",
+      "modes-of-convergence-for-random-variables",
+      "matrix-differentiation-and-first-order-spectral-perturbation",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "gaussian-orthogonal-decomposition-and-quadratic-forms"
+    ],
+    "items": [
+      {
+        "id": "def-linear-process-and-arma-model",
+        "kind": "definition",
+        "title": "Linear processes, white noise, and ARMA models",
+        "statement": "For integer-indexed real processes, define the backshift, centered finite-positive-variance white noise by zero nonzero-lag covariance (not iid), causal absolutely summable linear filters, and normalized coprime real ARMA(p,q) equations. Cancelling common factors defines an associated reduced model, whose equation is imposed separately and need not preserve all unreduced solutions.",
+        "deps": [
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-moments-variance-and-covariance"
+        ],
+        "justified_by": [
+          "lem-absolutely-summable-linear-filters-preserve-weak-stationarity"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Section 3.1 and Theorems 3.1–3.2",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Sections 2.1–2.5",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+        "kind": "lemma",
+        "title": "Absolutely summable linear filters preserve weak stationarity",
+        "statement": "For a centered real weakly stationary process Z with autocovariance gamma and real two-sided ℓ¹ coefficient sequences c,d, the filter c(B)Z_t:=Σ_{j∈Z}c_jZ_{t−j} is well-defined almost surely and in L², is centered and weakly stationary, has covariance Σ_{j,k∈Z}c_jc_k gamma(h−j+k), and absolutely summable filters compose by convolution.",
+        "deps": [
+          "def-linear-process-and-arma-model",
+          "def-autocovariance-and-sample-autocovariance",
+          "def-moments-variance-and-covariance",
+          "cor-cauchy-schwarz-for-random-variables",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-tonelli-for-nonnegative-double-series",
+          "thm-fatou-lemma"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Sections 4.3–4.4",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Section 2.6",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-arma-causality-and-invertibility-root-criteria",
+        "kind": "theorem",
+        "title": "ARMA causality and invertibility root criteria",
+        "statement": "For a weakly stationary solution of a normalized coprime ARMA(p,q) model with centered white noise of variance σ²>0, an absolutely summable causal representation exists iff phi has no zero in |z|≤1, and an absolutely summable inverse representation of epsilon by X−mu exists iff theta has no zero there. The generating functions are theta/phi and phi/theta; causal coefficients decay exponentially in the stable case.",
+        "deps": [
+          "def-linear-process-and-arma-model",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+          "cor-every-complex-polynomial-splits-into-linear-factors"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Theorems 3.1–3.2",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Sections 2.1–2.5",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-stationary-arma-spectral-density",
+        "kind": "theorem",
+        "title": "Spectral density of a stationary ARMA solution",
+        "statement": "Assume Countable Choice ([[def-countable-choice]]).\n\nLet $X_t-\\mu$ be a real weakly stationary solution of the normalized coprime\nARMA$(p,q)$ equation\n$$\\phi(B)(X_t-\\mu)=\\theta(B)\\epsilon_t,$$\nwhere $\\epsilon$ is centered white noise with variance $\\sigma^2>0$. If\n$\\phi(z)\\ne0$ for every $|z|=1$, then $X$ has a spectral density, under the\nconvention\n$\\gamma(h)=\\int_{\\mathbb T}e^{ih\\lambda}F(d\\lambda)$ and angular Lebesgue\nmeasure $d\\lambda$ of total mass $2\\pi$, given by\n$$f(\\lambda)=\\frac{\\sigma^2}{2\\pi}\\frac{|\\theta(e^{-i\\lambda})|^2}{|\\phi(e^{-i\\lambda})|^2},\\qquad -\\pi\\le\\lambda\\le\\pi.$$\nNo causal or invertible root condition is required; zeros of $\\theta$ on the\nunit circle are permitted.",
+        "deps": [
+          "def-linear-process-and-arma-model",
+          "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+          "def-time-series-spectral-measure-and-periodogram",
+          "def-radon-measure-on-an-lch-space",
+          "cor-every-complex-polynomial-splits-into-linear-factors",
+          "thm-tonelli-for-nonnegative-double-series",
+          "def-countable-choice",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "thm-compactness-agrees-with-metric-compactness",
+          "thm-compact-implies-complete-and-totally-bounded",
+          "lem-compact-metric-space-has-a-countable-dense-subset",
+          "def-polish-space",
+          "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
+          "def-probability-measure",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Theorem 4.4",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, spectral representation sections",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-stable-linear-process-sample-mean-clt",
+        "kind": "theorem",
+        "title": "Sample-mean CLT for stable linear processes",
+        "statement": "For X_t−mu=Σ_{j≥0}psi_j epsilon_{t−j} with two-sided iid centered innovations of variance 0<sigma²<∞ and Σ√(j+1)|psi_j|<∞, the sample mean has limit N(0,sigma² Psi²). Stable causal ARMA coefficients meet the summability condition; studentization and fixed-normal-interval coverage follow only from a separately consistent positive variance estimate.",
+        "deps": [
+          "def-linear-process-and-arma-model",
+          "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+          "thm-arma-causality-and-invertibility-root-criteria",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-axiom-of-choice",
+          "thm-lindeberg-levy-iid-central-limit-theorem",
+          "thm-vector-slutsky",
+          "thm-continuous-maps-preserve-convergence-in-probability",
+          "thm-portmanteau-theorem",
+          "cor-cauchy-schwarz-for-random-variables",
+          "cor-markov-inequality-for-random-variables",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fatou-lemma",
+          "def-standard-normal-and-normal-laws"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Sections 2.2 and 3.1–3.2",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Sections 2.1–2.5",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "axiom_use": "AC is inherited from the iid CLT at step 3.1 and the standard-normal-law supplier at step 5.1; there is no AC use in the endpoint remainder estimate."
+      },
+      {
+        "id": "thm-fixed-order-autoregressive-ols-martingale-limit",
+        "kind": "theorem",
+        "title": "Fixed-order autoregressive OLS martingale limit",
+        "statement": "For fixed p, a strictly stationary ergodic AR(p) regression with iid centered innovations independent of the past, positive finite innovation variance, and finite positive-definite regressor Gram matrix has a root-n normal fixed-order OLS limit, consistent residual mean square, and chi-square Wald limit, with a measurable fallback on singular sample Gram matrices; a fixed intercept is allowed.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-stationary-process-and-canonical-shift",
+          "def-ergodic-measure-preserving-system",
+          "thm-stationary-process-birkhoff-ergodic-limit",
+          "thm-kolmogorov-iid-l1-strong-law",
+          "def-filtration-and-filtered-probability-space",
+          "def-square-integrable-martingale-difference-array-and-variance-clock",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-independent-sigma-algebras-and-events",
+          "lem-measurable-functions-preserve-independence",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "def-moments-variance-and-covariance",
+          "cor-cauchy-schwarz-for-random-variables",
+          "thm-dominated-convergence",
+          "thm-martingale-central-limit-theorem",
+          "thm-cramer-wold-device",
+          "thm-vector-slutsky",
+          "thm-vector-stochastic-order-calculus",
+          "def-convergence-in-distribution-of-random-elements",
+          "def-convergence-in-probability",
+          "def-multivariate-normal-law",
+          "def-chi-square-law",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Sections 2.3 and 6.1",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Sections 2.1–2.3",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "axiom_use": "AC is inherited through the conditional-expectation, Birkhoff, martingale-CLT, Cramér–Wold, and multivariate-normal/chi-square suppliers; the proof uses those branches at steps 1.1, 1.2, 2.3, 3.1, and 5.1."
+      },
+      {
+        "id": "cor-stable-ar-long-run-variance-plug-in-consistency",
+        "kind": "corollary",
+        "title": "Plug-in long-run variance for a stable AR mean",
+        "statement": "Assume AC and fix $p\\ge1$. Let $X$ be a stable AR$(p)$, meaning that its\nautoregressive polynomial $\\phi(z)=1-\\sum_{j=1}^p\\phi_jz^j$ has no zero in\n$|z|\\le1$, with unknown mean $\\mu$,\n$$X_t-\\mu=\\sum_{j=1}^p\\phi_j(X_{t-j}-\\mu)+\\epsilon_t,$$\nwith iid centered innovations of variance $0<\\sigma^2<\\infty$. Assume the\nstrict stationarity, ergodicity, past independence, and positive-definite\naugmented Gram hypotheses of\n[[thm-fixed-order-autoregressive-ols-martingale-limit]], using its\nfixed-intercept regressor $Z_t=(1,X_{t-1},\\ldots,X_{t-p})^T$ and coefficient\nvector $(c,\\phi_1,\\ldots,\\phi_p)^T$ with\n$c=\\mu(1-\\sum_{j=1}^p\\phi_j)$. Write $\\widehat\\phi_n$ for the OLS slope\nvector and $\\widehat\\sigma_n^2$ for its residual mean square. Define\n$$\\widehat\\tau_n^2:= \\begin{cases} \\widehat\\sigma_n^2/(1-\\sum_{j=1}^p\\widehat\\phi_{n,j})^2, &1-\\sum_j\\widehat\\phi_{n,j}\\ne0,\\\\ 0,&1-\\sum_j\\widehat\\phi_{n,j}=0. \\end{cases}$$\nThen\n$$\\widehat\\tau_n^2\\longrightarrow_{\\mathbb P} \\frac{\\sigma^2}{(1-\\sum_{j=1}^p\\phi_j)^2} =\\sigma^2\\Psi^2>0,$$\nwhere $\\Psi$ is the coefficient sum of the causal AR$(p)$ representation.\nConsequently $\\widehat\\tau_n^2$ supplies the consistent positive variance\nscale required by\n[[thm-stable-linear-process-sample-mean-clt]] for the sample-mean interval.",
+        "deps": [
+          "thm-stable-linear-process-sample-mean-clt",
+          "thm-fixed-order-autoregressive-ols-martingale-limit",
+          "thm-arma-causality-and-invertibility-root-criteria",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-axiom-of-choice",
+          "thm-vector-stochastic-order-calculus",
+          "thm-continuous-maps-preserve-convergence-in-probability"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Theorems 3.1 and Section 6.1",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Sections 2.1–2.3",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 5,
+        "axiom_use": "AC is inherited through the fixed-order OLS and linear-process CLT suppliers; no additional choice is used in the continuity argument."
+      }
+    ]
+  },
+  {
+    "order": 2001,
+    "id": "arma-causality-invertibility-and-spectra-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "ARMA roots, spectra and inference — Examples",
+    "companion": "arma-causality-invertibility-and-spectra",
+    "requires": [
+      "arma-causality-invertibility-and-spectra"
+    ],
+    "items": [
+      {
+        "id": "ex-arma-common-factor-cancellation-and-root-classification",
+        "kind": "example",
+        "title": "A common factor can reverse an unreduced root classification",
+        "statement": "For white noise ε, X_t=ε_t satisfies both the canceled (1,1) ARMA equation and (1−2B)X_t=(1−2B)ε_t. The unreduced pair is not coprime and has an AR zero at 1/2, while the reduced pair is causal; this shows why common factors must be cancelled before root tests.",
+        "deps": [
+          "def-linear-process-and-arma-model",
+          "thm-arma-causality-and-invertibility-root-criteria"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Theorems 3.1–3.2",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Section 2.5",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-unit-root-precludes-nonzero-variance-stationary-ar1",
+        "kind": "example",
+        "title": "A unit-root AR(1) has no weakly stationary solution with nonzero white noise",
+        "statement": "If X_t−X_{t−1}=ε_t and ε is centered white noise with variance σ²>0, then no weakly stationary solution exists. The AR polynomial φ(z)=1−z has its zero on the unit circle. Under Countable Choice this illustrates the spectral-density theorem’s unit-circle-root boundary, without proving the premise essential because no stationary solution exists.",
+        "deps": [
+          "def-linear-process-and-arma-model",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "thm-arma-causality-and-invertibility-root-criteria",
+          "thm-stationary-arma-spectral-density",
+          "def-autocovariance-and-sample-autocovariance",
+          "def-moments-variance-and-covariance",
+          "cor-cauchy-schwarz-for-random-variables",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Theorems 3.1 and 4.4",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Section 2.3",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-dependent-white-noise-is-not-iid",
+        "kind": "example",
+        "title": "Uncorrelated white noise need not be iid",
+        "statement": "For iid Rademacher U_t, the process X_t=U_{t−1}(1+U_t) is strictly stationary, centered, has variance 2 and zero covariance at every nonzero lag, but X_t and X_{t+1} are dependent.",
+        "deps": [
+          "def-linear-process-and-arma-model",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-autocovariance-and-sample-autocovariance",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "def-moments-variance-and-covariance"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Section 2.1 and Theorem 3.1",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Sections 2.1–2.2",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      }
+    ]
+  }
+]

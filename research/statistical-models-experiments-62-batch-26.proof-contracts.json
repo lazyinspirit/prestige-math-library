@@ -1,0 +1,689 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-response-probability-weighting",
+    "lem-missing-at-random-integrable-factorization",
+    "thm-missing-at-random-weighting-identity",
+    "def-pattern-mixture-sensitivity-parameter",
+    "ex-ipw-instability-and-mnar-sensitivity-curve"
+  ],
+  "contracts": {
+    "alg-response-probability-weighting": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: n>=1 excludes an empty record list. An empty respondent subset is allowed: then all r_i=0 and encoded z_i=0, so every z_i/pi(x_i) and the returned sum are zero; the algorithm divides by n, not by the number of respondents."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a nonrespondent receives weight zero and contributes zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for n=1 the returned average is z1/pi(x1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: if all recorded z_i are zero, every summand and the output are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: pi(x_i) lies in (0,1], so the upper endpoint is allowed and division by zero is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies the record mask, positive known pi, and unnormalized weighted-mean procedure; it asserts no characterization of MAR or estimator validity. There is no asserted if-and-only-if conclusion requiring a forward-direction boundary proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies the record mask, positive known pi, and unnormalized weighted-mean procedure; it asserts no characterization of MAR or estimator validity. No converse infers these hypotheses from the displayed outcome or calculation."
+        }
+      ]
+    },
+    "lem-missing-at-random-integrable-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $m\\ge1$, put $Z_m=\\max(-m,\\min(Z,m))$. The functions $z\\mapsto\\max(-m,\\min(\\varphi(z),m))$ and $r\\mapsto r$ are bounded and measurable, so [F1] gives $E[RZ_m\\mid\\mathcal G]=E[R\\mid\\mathcal G]E[Z_m\\mid\\mathcal G]$, with the conditional-expectation versions interpreted by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The truncations satisfy $Z_m\\to Z$ in $L^1$: $|Z-Z_m|\\le |Z|\\mathbf1_{\\{|Z|>m\\}}$, and [F4] applied to $|Z|\\mathbf1_{\\{|Z|\\le m\\}}\\uparrow|Z|$ makes the tail integrals tend to zero, using integrability [F5] and expectation as integral [F6]. By [F3], conditional expectation is an $L^1$ contraction; since $0\\le E[R\\mid\\mathcal G]\\le1$, both sides of the identity in step 1.1 converge in $L^1$ to the corresponding sides for $Z$. Uniqueness of the $L^1$ limit proves the claimed equality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A probability space has total mass one and cannot be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the identity when the bounded truncation is identically zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the endpoint R=1; its bounded conditional-independence identity applies to that constant response."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes Z=0, for which every truncation and both conditional expectations are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 takes the truncation limit m to infinity and includes finite positive and negative endpoint truncations."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Step 1.1 explicitly assume AC for the conditional-expectation classes."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement extends the bounded conditional-independence product identity to each integrable Borel transform by truncation. There is no asserted if-and-only-if conclusion requiring a forward-direction boundary proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement extends the bounded conditional-independence product identity to each integrable Borel transform by truncation. No converse infers these hypotheses from the displayed outcome or calculation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read both current proof steps and every declared dependency statement/definition. Bounded conditional independence applies on the {0,1} response space; clipping the Borel transform is bounded. MCT gives vanishing integrable tails, |R|<=1 gives convergence of RZ_m, CE linearity/order/absolute-value inequality gives L1 contraction, and 0<=E[R|G]<=1 controls the product. L1 uniqueness yields the asserted a.s. identity for each transform, without a simultaneous uncountable null-set assertion. R=0, R=1 and zero transforms are covered; AC is explicitly inherited for CE classes. No defect; reader/refuter evidence agrees. Chewi Definition 9.1 is the bounded premise, not a supplier of the integrable extension."
+      }
+    },
+    "thm-missing-at-random-weighting-identity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-missing-at-random-integrable-factorization",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\Omega,\\mathcal F,P)$ be a probability space, let $\\mathcal G\\subseteq\\mathcal F$ be a sub-sigma-algebra, let $R$ be a random variable taking values in $\\{0,1\\}$, and let $Y$ be a real integrable random variable. If $R$ and $Y$ are conditionally independent given $\\mathcal G$, then for every Borel function $\\varphi:\\mathbb R\\to\\mathbb R$ such that $\\varphi(Y)$ is integrable,\n$$E[R\\varphi(Y)\\mid\\mathcal G]=E[R\\mid\\mathcal G]E[\\varphi(Y)\\mid\\mathcal G]\\quad\\text{almost surely}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $G=\\sigma(X)$ and choose the stated version $\\pi=E[R\\mid G]$. By [F2], $0\\le\\pi\\le1$ almost surely, so replacing it by $\\min(1,\\max(0,\\pi))$ gives a $G$-measurable version with $0\\le\\pi\\le1$ everywhere. For each nonnegative $S\\in\\{|Y|,Y^+,Y^-\\}$, choose a $G$-measurable version $U_S$ of $E[S\\mid G]$, replace it by $\\max(U_S,0)$, and set it equal to zero on $\\{\\pi=0\\}$. Positivity [F2] and $\\pi>0$ almost surely show these changes are on $G$-measurable null sets, so each $U_S$ remains a version by [F1]; it is pointwise nonnegative and vanishes on $\\{\\pi=0\\}$. On $\\{\\pi>0\\}$ set $q_m=\\min(m,1/\\pi)$ and set $q_m=0$ on $\\{\\pi=0\\}$. For fixed $m$, the bounded $G$-measurable functions $q_{m,n}=2^{-n}\\lfloor 2^nq_m\\rfloor$ are simple, nonnegative, and increase to $q_m$. For any such $S$, [F1] gives $E[q_{m,n}RS]=E[q_{m,n}E[RS\\mid G]]$ by summing the event-integral identities over the level sets of $q_{m,n}$. Applying [L1] with $\\varphi(y)=|y|$, $y^+$, or $y^-$, then using [F4] on the increasing nonnegative products as $n\\to\\infty$, yields $E[q_mRS]=E[q_m\\pi U_S]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "As $m\\to\\infty$, $q_mRS\\uparrow RS/\\pi$ under the stated zero convention. On $\\{\\pi>0\\}$, $q_m\\pi U_S=\\min(m\\pi,1)U_S\\uparrow U_S$; on $\\{\\pi=0\\}$ both sides are zero by the representative chosen in step 1.1. Thus $q_m\\pi U_S\\uparrow U_S$ pointwise. By [F4], the equalities in step 1.1 pass to these limits. The tower property [F3] with $H=\\{\\varnothing,\\Omega\\}$ gives $E[U_S\\mid H]=E[S\\mid H]$; by the defining event-integral property [F1], conditioning on this trivial sigma-algebra yields the constant unconditional expectation. Thus $E[U_S]=E[S]$, with [F5] identifying these finite expectations with their integrals. This holds for each of $S=|Y|,Y^+,Y^-$. In particular $E|RY/\\pi|=E|Y|<\\infty$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Subtracting the finite identities for $Y^+$ and $Y^-$ from step 2.1 is legitimate by the absolute-integrability conclusion there. Since $Y=Y^+-Y^-$, this gives $E[RY/\\pi]=E[Y]$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The probability-space premise has total mass one, so no empty probability space is in scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines the quotient on {pi=0}; the Statement assumes this event is null."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses 0<=pi<=1, so pi=1 is included without a singular weight."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero for S=|Y|,Y+,Y- when Y=0, hence the identity holds in the degenerate outcome case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 allow pi=1, exclude non-null pi=0 by the strict positivity premise, and implement the zero convention on the null event {pi=0}."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC, and Step 1.1 chooses the stated conditional-expectation version pi."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The phrase R=1 exactly when Y is observed in the Statement only fixes the response-mask convention. The mathematical assertion is the one-way implication from conditional independence, Y integrable, and pi>0 almost surely to E[RY/pi]=E[Y]; it does not characterize MAR or positivity from that identity.",
+          "reviewed": {
+            "upheld": true,
+            "by": "sme_gate_boundary_models",
+            "reason": "The phrase R=1 exactly when Y is observed in the Statement only fixes the response-mask convention. The mathematical assertion is the one-way implication from conditional independence, Y integrable, and pi>0 almost surely to E[RY/pi]=E[Y]; it does not characterize MAR or positivity from that identity."
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The phrase R=1 exactly when Y is observed in the Statement only fixes the response-mask convention. The mathematical assertion is the one-way implication from conditional independence, Y integrable, and pi>0 almost surely to E[RY/pi]=E[Y]; it does not characterize MAR or positivity from that identity.",
+          "reviewed": {
+            "upheld": true,
+            "by": "sme_gate_boundary_models",
+            "reason": "The phrase R=1 exactly when Y is observed in the Statement only fixes the response-mask convention. The mathematical assertion is the one-way implication from conditional independence, Y integrable, and pi>0 almost surely to E[RY/pi]=E[Y]; it does not characterize MAR or positivity from that identity."
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read all three current steps and all fourteen dependency interfaces, including the reviewed integrable factorization lemma and tower statement. Normalization changes CE versions only on measurable null sets; dyadic simple approximations of bounded q_m give the pullout identity directly from event integrals. MCT first in n and then m is applied to nonnegative products, with zero representatives on {pi=0}. The |Y| case proves absolute integrability before signed subtraction. No positive lower bound on pi or fitted-weight inference is asserted. pi=1, Y=0, and null pi=0 cases are covered; AC is declared. Reader/refuter mathematical assessments agree. Contract endpoints had a further stale step 1.2 reference; replaced with actual steps 1.1 and 2.1, a nonfatal evidence correction."
+      }
+    },
+    "def-pattern-mixture-sensitivity-parameter": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: P(R=1)>0 and P(R=0)>0 exclude an empty response group. The sensitivity-function family itself is nonempty because the measurable function Delta=0 gives the probability kernel K_0^0=K_1; an empty Borel event B yields K_0^Delta(x,B)=0 by the displayed integral. Absence of nonrespondents is explicitly outside the modeled two-pattern case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Delta=0 makes respondent and nonrespondent conditional laws equal."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a constant Delta=1 is a permitted measurable real-valued shift."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: translating a point-mass respondent kernel still gives a probability kernel."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Delta ranges over measurable real functions and the Definition specifies no bounded parameter interval or endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition assumes AC and uses standard-Borel disintegration to select the respondent conditional law."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition stipulates a translated nonrespondent conditional law K_0^Delta while keeping K_1 fixed, and explicitly denies that equal means characterize MAR. There is no asserted if-and-only-if conclusion requiring a forward-direction boundary proof."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition stipulates a translated nonrespondent conditional law K_0^Delta while keeping K_1 fixed, and explicitly denies that equal means characterize MAR. No converse infers these hypotheses from the displayed outcome or calculation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read the full current Definition and all eleven dependency interfaces. Positive response-group masses allow conditioning; standard-Borel X and real Y meet AC disintegration hypotheses, in the correct Y-given-X direction. Q0<<Q1 transfers the single exceptional kernel-version null set. Measurable translation gives probability sections, and finite-kernel integration applies to the product-measurable indicator. Zero and constant shifts, empty B, and point masses are valid. No assertion equates mean equality with MAR; finite means separately require integrability. NRC Ch.5 pp.86-89 supports model-indexed mean shifts, with the stronger distribution translation explicitly a stipulation. No defect."
+      }
+    },
+    "ex-ipw-instability-and-mnar-sensitivity-curve": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-observational-equivalence",
+          "source_section": "Definition",
+          "quote": "In a parametric model $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$,\ntwo parameter values $\\theta,\\eta\\in\\Theta$ are **observationally\nequivalent**, written $\\theta\\sim\\eta$, if and only if\n$$\nP_\\theta=P_\\eta,\n$$\nthat is, $P_\\theta(A)=P_\\eta(A)$ for every $A\\in\\mathcal A$\n([[def-parametric-statistical-model]]). Equivalent parameter values therefore\ngive exactly the same sampling law. No distinctness of $\\theta$ and $\\eta$ is\nrequired.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-pattern-mixture-sensitivity-parameter",
+          "source_section": "Definition",
+          "quote": "Assume AC. Let $X$ take values in a standard-Borel space $\\mathcal X$, let $Y$ be real-valued, and let $R\\in\\{0,1\\}$ indicate response in the one-outcome full/observed-data setup of [[def-full-observed-and-missing-data]]. Suppose $P(R=1)>0$, $P(R=0)>0$, and the covariate laws overlap in this direction: for every measurable $A\\subseteq\\mathcal X$, $P(X\\in A\\mid R=1)=0$ implies $P(X\\in A\\mid R=0)=0$. Under the respondent law $P(\\cdot\\mid R=1)$, choose a conditional law $K_1(x,\\cdot)$ of $Y$ given $X=x$; standard-Borel disintegration supplies such a probability kernel under AC ([[thm-disintegration-of-a-joint-law-on-standard-borel-spaces]], [[def-conditional-law-given-a-random-element]]). The overlap condition makes the respondent version relevant almost surely under the nonrespondent covariate law.\n\nA **location-shift pattern-mixture sensitivity function** is a measurable $\\Delta:\\mathcal X\\to\\mathbb R$ for which the nonrespondent conditional law is specified by\n$$K_0^\\Delta(x,B)=\\int_{\\mathbb R}\\mathbf1_B(y+\\Delta(x))K_1(x,dy)$$\nfor every Borel set $B\\subseteq\\mathbb R$, on the covariate support of nonrespondents. This is the full conditional distribution restriction $Y\\mid(X=x,R=0)\\stackrel d=Y_1+\\Delta(x)$ for $Y_1\\sim K_1(x,\\cdot)$, not merely a restriction on conditional means. For each $x$, $K_0^\\Delta(x,\\cdot)$ is the pushforward of $K_1(x,\\cdot)$ under the measurable translation $y\\mapsto y+\\Delta(x)$, hence is a probability measure; its evaluations are measurable in $x$ by kernel integration because $(x,y)\\mapsto\\mathbf1_B(y+\\Delta(x))$ is measurable ([[def-measure-kernel-and-probability-kernel]], [[thm-measurability-of-integration-against-a-kernel]]). The relation specifies the missing conditional law while leaving the respondent conditional law fixed. A finite mean target additionally requires integrability under the resulting full-data law; the definition alone does not assert that moment condition.\n\nIn this specified family, $\\Delta=0$ gives equality of the respondent and nonrespondent conditional laws. This does not make equality of conditional means alone equivalent to MAR in a general full-data model; equality of means need not imply equality of distributions. Values where no respondents occur are outside the definition because $K_1$ is unavailable there, and a pattern with no nonrespondents requires no sensitivity function.\n\nThe formal one-outcome MCAR/MAR/MNAR taxonomy for this pair is supplied by [[def-mcar-mar-and-mnar]]. The location-shift relation above is the selected sensitivity model within that taxonomy; it does not claim that all MNAR laws are location shifts.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-mcar-mar-and-mnar",
+          "source_section": "Definition",
+          "quote": "Fix the full-data/observed-data partition of\n[[def-full-observed-and-missing-data]]. A **response mechanism** is a\nspecified conditional law $g(r\\mid w)$ of the pattern $R$ given full data\n$W=w$, represented by a probability kernel from the full-data space to the\nfinite pattern space\n([[def-conditional-law-given-a-random-element]],\n[[def-measure-kernel-and-probability-kernel]]). In a parameterized model, write\nthe response kernel as $g_\\psi$; it must be a probability distribution over\npatterns for each full-data value.\n\nRelative to a specified full-data law, the mechanism is **missing completely\nat random (MCAR)** when, for every pattern $r$, $g(r\\mid w)$ is constant in\n$w$ almost surely. It is **missing at random (MAR)** when, for every pattern\n$r$, there is a measurable function $h_r$ on that pattern's observed-data\nspace such that\n$$g(r\\mid w)=h_r(W_{\\mathrm{obs}}(r))\\quad\\text{almost surely}.$$\nFor a family of full-data laws, the condition is required under each law with\nthe same response mechanism and observed-coordinate function. It is\n**missing not at random (MNAR)** when MAR fails for at least one pattern, for\nthe declared full-data and observed-data partition. MCAR is a special case of\nMAR, since a constant is a function of the observed coordinates.\n\nThese conditions concern a supplied version of the conditional law; values\noff the full-data model's support do not affect the classification. This\ndefinition does not assert that a response mechanism is empirically true or\nthat every joint law comes with a selected conditional kernel.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The near-positivity law has atom weights $1/2$ at $(X,R,Y)=(0,1,0)$, $\\varepsilon/2$ at $(1,1,1)$, and $(1-\\varepsilon)/2$ at $(1,0,1)$. By [A1] and [F2], these are nonnegative and sum to one. Given either value $X=x$, $Y=x$ is constant, so for bounded measurable $f(R)$ and $g(Y)$, $E[f(R)g(Y)\\mid X=x]=g(x)E[f(R)\\mid X=x]=E[f(R)\\mid X=x]E[g(Y)\\mid X=x]$. Thus this construction is MAR under the assigned conditional-independence formulation [F9]. Hence $V$ equals $1/\\varepsilon$ on the responding $X=1$ atom, of probability $\\varepsilon/2$, and is zero on the other atoms.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F9",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $\\theta\\in\\{0,1\\}$, the full-data law assigns probability $1/2$ to $(X,R,Y)=(0,1,0)$ and $1/2$ to $(1,0,\\theta)$. Mapping these atoms to $O=(X,R,RY)$ gives the same two observed atoms for both values of $\\theta$, while [F1] gives $\\psi(\\theta)=E_\\theta[Y]=\\theta/2$. Thus the observed sampling laws agree but the estimand values are $0$ and $1/2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For each $\\Delta\\in[0,1/2]$, assign observed-pattern masses $0.3$ to $(R,Y)=(1,0)$, $0.2$ to $(1,1)$, and missing-pattern masses $0.3$ to $(0,\\Delta)$, $0.2$ to $(0,1+\\Delta)$. These masses sum to one by [F2]. Conditional on $R=1$, the outcome is Bernoulli$(0.4)$; conditional on $R=0$, it has the law of that Bernoulli variable translated by $\\Delta$, as required by [F7]. The observed record $(R,RY)$ has masses $0.3,0.2,0.5$ at $(1,0),(1,1),(0,0)$ for every $\\Delta$.",
+          "step": "1.3",
+          "inputs": [
+            "A2",
+            "F2",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $E[V]=(\\varepsilon/2)(1/\\varepsilon)=1/2$ and $E[(V-EV)^2]=(\\varepsilon/2)(1/\\varepsilon-1/2)^2+(1-\\varepsilon/2)(1/2)^2=1/(2\\varepsilon)-1/4$. This diverges as $\\varepsilon\\downarrow0$, although $\\pi(X)>0$ for each fixed $\\varepsilon>0$. At $\\varepsilon=0$, $\\pi(1)=0$, so positivity fails on an $X$ stratum of probability $1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F5], the two parameters are observationally equivalent; by [F6], the different values of $\\psi$ therefore show that the full-data mean is not identifiable from this observed-data model. The response probability is zero at $X=1$, exactly the stratum on which the two full-data laws differ.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "By [F1], the target mean is $0.2(1)+0.3\\Delta+0.2(1+\\Delta)=0.4+0.5\\Delta$. At $\\Delta=0$ it is $0.4$, and at $\\Delta=1/2$ it is $0.65$, while step 1.3 shows that the observed sampling law is unchanged. Thus the target is not identified across this sensitivity family; the interval $[0.4,0.65]$ is only the set of means induced by the stipulated $\\Delta$ range and carries no repeated-sampling coverage assertion.",
+          "step": "2.3",
+          "inputs": [
+            "A2",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\Delta>0$, then $P(R=0\\mid Y=0)=0$ whereas $P(R=0\\mid Y=\\Delta)=1$: both conditioning events have positive probability, and $\\Delta\\in(0,1/2]$ keeps $\\Delta$ distinct from respondent support $\\{0,1\\}$. With no always-observed covariate, the missing pattern has an empty observed-coordinate vector, so [F8] requires this response probability to be constant in $Y$ for MAR; it is not, hence this member is MNAR. At $\\Delta=0$, both response groups have the same Bernoulli$(0.4)$ law and $R$ is independent of $Y$, so the response probability is constant and the member is MAR.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "F8",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All three examples specify nonempty finite supports with atom weights summing to one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies epsilon=0 as positivity failure; step 1.2 constructs the two laws at that boundary. Steps 2.3 and 3.1 give the Delta=0 mean and its MAR classification."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include epsilon=1, with E[V]=1/2 and Var(V)=1/4. Steps 1.3 and 2.3 include Delta=1/2, with mean 0.65."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.2 include theta=0; steps 1.3 and 3.1 include the zero-shift MAR member."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover epsilon=1 and the epsilon=0 positivity boundary. Steps 1.3, 2.3 and 3.1 cover Delta=0 and Delta=1/2, their means, and their MAR/MNAR classifications."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The argument makes no nonempty-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Facts F5 and steps 1.2, 2.2: the two theta values have equal observed sampling laws and hence are observationally equivalent by the supplied definition. Step 1.3 likewise gives the same observed law for every Delta; this is the only equivalence used, while identification failure follows from differing means."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Fact F5 defines observational equivalence by equality of sampling laws, so observational equivalence entails equal observed laws. Steps 1.2 and 1.3 display those laws explicitly for both finite constructions; the Example makes no claim that equal means characterize MAR."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Read the entire Example, facts and all seven steps and every declared dependency interface. All three finite atom laws have mass one; R masks placeholder zero. Direct summation gives EV=1/2, Var(V)=1/(2epsilon)-1/4 for epsilon>0; epsilon=1 gives 1/4, and epsilon=0 violates positivity on a half-mass stratum. Both theta laws have identical observed atoms but distinct means. Response-group masses in the shift family are 1/2, X is constant so overlap holds, and the mean is 0.4+0.5Delta. For 0<Delta<=1/2 the respondent and nonrespondent supports are disjoint, so conditional nonresponse probabilities at Y=0 and Y=Delta are 0 and 1; at Delta=0 independence gives MAR. Both directions of observational equivalence use equality of sampling laws; equal means are not asserted equivalent to MAR. The sensitivity range is not a confidence interval. Reader finding confirmed nonfatal: zero/one/degenerate/endpoints contract evidence was stale and is now rebound to existing steps. No mathematical content defect or outside supplier defect found."
+      }
+    }
+  }
+}

@@ -1,0 +1,564 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-selected-sample-size-conditionally-superuniform-pvalue",
+    "thm-conditional-error-budget-two-stage-adaptation",
+    "cor-conditionally-superuniform-stage-two-pvalue",
+    "ex-two-stage-conditional-error-sample-size-and-weight-adaptation"
+  ],
+  "contracts": {
+    "lem-selected-sample-size-conditionally-superuniform-pvalue": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). A **p-value\nstatistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the\ntrace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).\n\nFor a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a\n**valid p-value for $\\Theta_0$** if it is superuniform under every null law:\n$$P_\\theta(\\{x:p(x)\\le u\\})\\le u\\qquad\\text{for every }\\theta\\in\\Theta_0\\text{ and }u\\in[0,1].$$\nThe variable $p(X)$ is the observed p-value when the data are $X$. The\nvalidity condition is distributional; measurability alone does not imply it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $A\\in\\mathcal F$.\nThen the indicator $\\mathbf 1_A$ satisfies\n$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $u\\in[0,1]$ and $H\\in\\mathcal F_1$. The event $\\{p_N\\le u\\}$ is measurable by the p-value statistic definition [F2]. The events $D_m$, $m\\in M$, are pairwise disjoint and partition $\\Omega$. Countable additivity [F3] gives $P_0(H\\cap\\{p_N\\le u\\})=\\sum_{m\\in M}P_0(H\\cap D_m\\cap\\{p_N\\le u\\})$ and $P_0(H)=\\sum_{m\\in M}P_0(H\\cap D_m)$. Summing the assumed stratum inequalities over the increasing enumeration of $M$ (equivalently, taking finite partial sums and then their limits) yields $P_0(H\\cap\\{p_N\\le u\\})\\le uP_0(H)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $Y_u$ be a version of $E_0[\\mathbf1_{\\{p_N\\le u\\}}\\mid\\mathcal F_1]$, which exists by [A1] and [F1]. The event identities in [F1] and [F4] turn step 1.1 into $\\int_HY_u\\,dP_0\\le uP_0(H)$ for every $H\\in\\mathcal F_1$. Also $Y_u\\ge0$ almost surely by [F5]. If $P_0(Y_u>u)>0$, then for some integer $k\\ge1$ the set $H_k=\\{Y_u\\ge u+1/k\\}\\in\\mathcal F_1$ has positive probability, because $\\{Y_u>u\\}=\\bigcup_{k\\ge1}H_k$. Monotonicity [F6] gives $\\int_{H_k}Y_u\\,dP_0\\ge(u+1/k)P_0(H_k)>uP_0(H_k)$, contradicting the preceding event-integral bound. Thus $Y_u\\le u$ almost surely. The argument is for each fixed $u$ and does not assert a common exceptional set over uncountably many thresholds.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "M is stipulated nonempty in the positive integers; step 1.1 partitions by every member."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At u=0 the stratum inequalities in step 1.1 force zero conditional rejection probability in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At u=1 the probability is bounded by one; steps 1.1 and 2.1 include this endpoint."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If M has one element, the finite partition in step 1.1 has one stratum and step 2.1 proves its conditional bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both u=0 and u=1 are included in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "M is a given subset of the positive integers and is summed in its canonical increasing order in step 1.1; AC is used only for the conditional-expectation class in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is one implication, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is one implication, not an iff."
+        }
+      ]
+    },
+    "thm-conditional-error-budget-two-stage-adaptation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $A\\in\\mathcal F$.\nThen the indicator $\\mathbf 1_A$ satisfies\n$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1] and [F1], both conditional-expectation classes exist. Since $0\\le\\mathbf1_{R_j}\\le1$ for $j=0,1$, order preservation and the constant rule in [F2] give $0\\le A,Q\\le1$ almost surely. All representatives of either class agree almost surely by [F1], so the rejection probabilities do not depend on the chosen versions.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\mathcal F_0=\\{\\varnothing,\\Omega\\}$. By [F3], $E_0[A\\mid\\mathcal F_0]=E_0[\\mathbf1_{R_0}\\mid\\mathcal F_0]$. Each side is constant almost surely because it is $\\mathcal F_0$-measurable; testing its defining event identity at $\\Omega$ shows its constant is its ordinary expectation. Thus [F4] gives $E_0A=E_0\\mathbf1_{R_0}=P_0(R_0)\\le\\alpha$. The same argument gives $E_0Q=P_0(R_1)$. Order preservation [F2], applied to $Q\\le A$ with conditioning sigma-algebra $\\mathcal F_0$, gives $E_0[Q\\mid\\mathcal F_0]\\le E_0[A\\mid\\mathcal F_0]$; these constants are $E_0Q$ and $E_0A$, so $P_0(R_1)=E_0Q\\le E_0A\\le\\alpha$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If either rejection event is empty its conditional indicator and rejection probability are zero; step 2.1 still applies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof permits alpha=0; step 2.1 forces the adapted rejection probability to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The proof permits alpha=1; step 2.1 yields the probability bound by one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The argument also applies when R0=R1 or F1 is trivial; steps 1.1–2.1 require no nondegeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint values alpha=0 and alpha=1 are included in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is declared for conditional-expectation existence in step 1.1; no additional choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication, not an iff."
+        }
+      ]
+    },
+    "cor-conditionally-superuniform-stage-two-pvalue": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). A **p-value\nstatistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the\ntrace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).\n\nFor a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a\n**valid p-value for $\\Theta_0$** if it is superuniform under every null law:\n$$P_\\theta(\\{x:p(x)\\le u\\})\\le u\\qquad\\text{for every }\\theta\\in\\Theta_0\\text{ and }u\\in[0,1].$$\nThe variable $p(X)$ is the observed p-value when the data are $X$. The\nvalidity condition is distributional; measurability alone does not imply it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-conditional-monotone-convergence",
+          "source_section": "Statement",
+          "quote": "Assume AC. For nonnegative measurable $X$ (possibly infinite), $E[X\\mid\\mathcal G]$ is the unique almost-sure class of nonnegative $\\mathcal G$-measurable $Y$ satisfying $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. If $0\\le X_n\\uparrow X$ almost surely, then $E[X_n\\mid\\mathcal G]\\uparrow E[X\\mid\\mathcal G]$ almost surely. Every increasing integrable nonnegative approximation to $X$ gives the same class. For integrable real $V_n\\downarrow V$ almost surely with $V_0,V\\in L^1$, $E[V_n\\mid\\mathcal G]\\downarrow E[V\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-conditional-error-budget-two-stage-adaptation",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $P_0$ be one fixed null probability law on $(\\Omega,\\mathcal F)$,\nand let $\\mathcal F_1\\subseteq\\mathcal F$ be the interim sigma-algebra. Let\n$R_0\\in\\mathcal F$ be the original design's rejection event, and let\n$R_1\\in\\mathcal F$ be the adapted design's event of any eventual rejection,\nincluding early and final decisions. Choose versions\n$$A=E_0[\\mathbf1_{R_0}\\mid\\mathcal F_1],\\qquad Q=E_0[\\mathbf1_{R_1}\\mid\\mathcal F_1].$$\nFor $\\alpha\\in[0,1]$, if $P_0(R_0)\\le\\alpha$ and $Q\\le A$ almost surely,\nthen $P_0(R_1)\\le\\alpha$. The original conditional error $A$ is an\nalmost-sure class; changing its version does not change any rejection\nprobability.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each integer $n\\ge1$, define $A_n=2^{-n}\\lceil2^nA\\rceil$. Its level sets are $\\{A_n=0\\}=\\{A=0\\}$ and $\\{A_n=k2^{-n}\\}=\\{(k-1)2^{-n}<A\\le k2^{-n}\\}$ for $1\\le k\\le2^n$, so they are in $\\mathcal F_1$. The inequality $\\lceil2x\\rceil\\le2\\lceil x\\rceil$ shows $A_{n+1}\\le A_n$, and $0\\le A_n-A<2^{-n}$, hence $A_n$ is finite-valued and $A_n\\downarrow A$. Write its values as $t_{n,k}=k2^{-n}$, $k=0,\\ldots,2^n$, and put $S_{n,k}=\\{A_n=t_{n,k}\\}$. By [F2], the events $\\{p_2\\le t_{n,k}\\}$ are measurable. Let $Q_n=E_0[\\mathbf1_{\\{p_2\\le A_n\\}}\\mid\\mathcal F_1]$. The disjoint partition by $S_{n,k}$, linearity [F5], and taking out the bounded known indicator [F3] give $Q_n=\\sum_{k=0}^{2^n}\\mathbf1_{S_{n,k}}E_0[\\mathbf1_{\\{p_2\\le t_{n,k}\\}}\\mid\\mathcal F_1]\\le\\sum_{k=0}^{2^n}t_{n,k}\\mathbf1_{S_{n,k}}=A_n$ almost surely. For all $n$ these inequalities hold on one probability-one set, because only countably many fixed dyadic thresholds occur.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The events $B_n=\\{p_2\\le A_n\\}$ decrease to $B=\\{p_2\\le A\\}$. Their complement indicators are bounded and hence integrable, and increase to $\\mathbf1_{B^c}$. Thus [F4] gives $E_0[\\mathbf1_{B_n^c}\\mid\\mathcal F_1]\\uparrow E_0[\\mathbf1_{B^c}\\mid\\mathcal F_1]$ almost surely. By linearity and the constant rule [F5], this is equivalent to $Q_n\\downarrow Q:=E_0[\\mathbf1_B\\mid\\mathcal F_1]$. Taking limits in step 1.1 and using $A_n\\downarrow A$ yields $Q\\le A$ almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F6] to $R_2=B$: its conditional rejection probability is the $Q$ of step 2.1 and is at most $A$, while the original conditional-error budget has expectation at most $\\alpha$. Therefore $P_0(R_2)\\le\\alpha$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At A=0 the threshold event is {p2<=0}; the fixed-threshold hypothesis at u=0 and steps 1.1–2.1 give conditional probability zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The u=0 endpoint is included in the threshold hypothesis and dyadic grid in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At A=1, p2<=A holds surely because p2 takes values in [0,1]; step 1.1 includes the u=1 bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For constant A the finite-valued threshold argument in step 1.1 reduces to the fixed-threshold condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The grid in step 1.1 includes 0 and 1, and step 2.1 passes to A in [0,1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is used only for conditional-expectation classes; step 1.1 uses a countable dyadic family of thresholds."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an implication, not an iff."
+        }
+      ]
+    },
+    "ex-two-stage-conditional-error-sample-size-and-weight-adaptation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-selected-sample-size-conditionally-superuniform-pvalue",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\Omega,\\mathcal F,P_0)$ be a probability space, let\n$\\mathcal F_1\\subseteq\\mathcal F$ be the interim sigma-algebra, let\n$N$ be an $\\mathcal F_1$-measurable sample size taking values in a nonempty\nset $M\\subseteq\\mathbb N_{>0}$, and let $p_N$ be the selected stage-2 p-value. For\n$m\\in M$, put $D_m=\\{N=m\\}$. Suppose that for every $m\\in M$, every fixed\n$u\\in[0,1]$, and every $H\\in\\mathcal F_1$,\n$$P_0(H\\cap D_m\\cap\\{p_N\\le u\\})\\le uP_0(H\\cap D_m).$$\nThen for every fixed $u\\in[0,1]$,\n$$E_0[\\mathbf1_{\\{p_N\\le u\\}}\\mid\\mathcal F_1]\\le u\\quad\\text{almost surely}.$$\nThus conditional validity within each selected-size stratum implies\nconditional superuniformity after an interim-measurable finite sample size is\nselected, even when the set of allowed sample sizes is countably infinite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-conditionally-superuniform-stage-two-pvalue",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses and notation of\n[[thm-conditional-error-budget-two-stage-adaptation]], let $p_2$ be a\nmeasurable stage-2 p-value with values in $[0,1]$. Suppose that for every\nfixed $u\\in[0,1]$,\n$$E_0[\\mathbf1_{\\{p_2\\le u\\}}\\mid\\mathcal F_1]\\le u\\quad\\text{almost surely}.$$\nThen the adapted rejection event $R_2=\\{p_2\\le A\\}$ satisfies\n$$E_0[\\mathbf1_{R_2}\\mid\\mathcal F_1]\\le A\\quad\\text{almost surely},$$\nand hence $P_0(R_2)\\le\\alpha$. The conditional p-value inequality is assumed\nseparately for each fixed $u$; no common exceptional set over all\n$u\\in[0,1]$ is required.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). A **p-value\nstatistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the\ntrace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).\n\nFor a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a\n**valid p-value for $\\Theta_0$** if it is superuniform under every null law:\n$$P_\\theta(\\{x:p(x)\\le u\\})\\le u\\qquad\\text{for every }\\theta\\in\\Theta_0\\text{ and }u\\in[0,1].$$\nThe variable $p(X)$ is the observed p-value when the data are $X$. The\nvalidity condition is distributional; measurability alone does not imply it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\Omega=\\{0,1\\}^4$ with the uniform law and let $I,B_0,B_2,B_3$ be the independent fair-bit coordinates. Define $p_j=1/2$ when $B_j=0$ and $p_j=1$ when $B_j=1$, for $j\\in\\{0,2,3\\}$. Each $p_j$ is measurable with values in $[0,1]$, and its null CDF is $0$ for $u<1/2$, $1/2$ for $1/2\\le u<1$, and $1$ at $u=1$, so each is a valid p-value by [F3]. Let $\\mathcal F_1=\\sigma(I)$, select $N=2$ on $I=0$ and $N=3$ on $I=1$, and take the original rejection event $R_0=\\{p_0\\le1/2\\}$. Independence and [A1, F4] give its conditional error $A=E_0[\\mathbf1_{R_0}\\mid\\mathcal F_1]=1/2$ almost surely; [F5] makes the resulting event probabilities version-independent. For each $m\\in\\{2,3\\}$ and $H\\in\\mathcal F_1$, independence of $B_m$ from $I$ gives $P_0(H\\cap\\{N=m\\}\\cap\\{p_N\\le u\\})=c(u)P_0(H\\cap\\{N=m\\})$, where $c(u)=0$ for $u<1/2$, $1/2$ for $1/2\\le u<1$, and $1$ for $u=1$; in every case $c(u)\\le u$. Thus [F1] makes $p_N$ conditionally superuniform. Rejection at $A=1/2$ is exactly the event that the selected bit is zero. Since $P_0(R_0)=P_0(B_0=0)=1/2$, set $\\alpha=1/2$ in the overall conclusion of [F2] to obtain $P_0(p_N\\le A)\\le1/2$; the selected bit is fair, so equality holds and the original budget is attained.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The positive density makes $\\Phi$ continuous and strictly increasing. Define the one-sided stage p-values $p_i=1-\\Phi(Z_i)$, so $Z_i=\\Phi^{-1}(1-p_i)$; for $0<u<1$, $P_0(p_i\\le u)=P_0(Z_i\\ge\\Phi^{-1}(1-u))=u$, and the endpoint inequalities are immediate, so they are valid by [F3]. Fix $c>0$ and set $\\alpha=\\int_c^\\infty\\phi(t)\\,dt$, with $0<\\alpha<1/2$ by positivity and evenness. Under the fixed equal-weight inverse-normal rule, reject when $W=(Z_1+Z_2)/\\sqrt2\\ge c$. The orthogonal change of variables $w=(z_1+z_2)/\\sqrt2$, $v=(z_1-z_2)/\\sqrt2$ has absolute Jacobian $1$ and satisfies $z_1^2+z_2^2=w^2+v^2$, so the joint density transforms to $\\phi(w)\\phi(v)$ and integration over $w\\ge c$ gives the fixed-rule null rejection probability $\\alpha$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose $N_2=1$ when $Z_1\\ge0$ and $N_2=2$ when $Z_1<0$. Without recalibrating $c$, use weights $w(N_2)=(1,0)$ in the first case and $(0,1)$ in the second; each has squared norm one. Since $c>0$, the adapted rejection event is the disjoint union $\\{Z_1\\ge c\\}\\cup\\{Z_1<0,Z_2\\ge c\\}$, whose probability by independence is $\\alpha+(1/2)\\alpha=3\\alpha/2>\\alpha$. Thus unit-norm weights selected with the stage-2 size do not by themselves preserve the fixed-rule error probability.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite model has 16 outcomes by construction in step 1.1, so its sample space is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The finite p-value CDF in step 1.1 is zero below 1/2, including u=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite p-value CDF in step 1.1 equals one at u=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The selected-size lemma covers a singleton size set; the example itself selects sizes 2 and 3 in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "P-value endpoints are checked in step 1.1; the normal counterexample uses c>0 and alpha strictly between 0 and 1/2 in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite null model is explicitly enumerated in step 1.1; AC is inherited for the conditional-expectation statement in the same step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts two calculations and contains no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts two calculations and contains no iff claim."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

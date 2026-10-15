@@ -1,0 +1,108 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-3-1",
+  "inventory": {
+    "pages": [
+      "exact-gaussian-linear-regression-inference",
+      "exact-gaussian-linear-regression-inference-examples"
+    ],
+    "items": [
+      "lem-full-column-rank-matrix-has-economy-qr",
+      "thm-exact-gaussian-linear-regression-inference",
+      "thm-gaussian-regression-confidence-and-prediction-intervals",
+      "cex-rademacher-errors-do-not-give-exact-regression-t",
+      "ex-gaussian-regression-mean-and-prediction-intervals"
+    ],
+    "pairs": [
+      "exact-gaussian-linear-regression-inference"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/lem-full-column-rank-matrix-has-economy-qr.md",
+    "items/thm-exact-gaussian-linear-regression-inference.md",
+    "items/thm-gaussian-regression-confidence-and-prediction-intervals.md",
+    "items/cex-rademacher-errors-do-not-give-exact-regression-t.md",
+    "items/ex-gaussian-regression-mean-and-prediction-intervals.md",
+    "library/statistical-models-and-experiments/exact-gaussian-linear-regression-inference.md",
+    "library/statistical-models-and-experiments/exact-gaussian-linear-regression-inference-examples.md"
+  ],
+  "write_batches": [
+    "3"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-gaussian-regression-mean-and-prediction-intervals",
+      "path": [
+        "lem-full-column-rank-matrix-has-economy-qr",
+        "thm-exact-gaussian-linear-regression-inference",
+        "thm-gaussian-regression-confidence-and-prediction-intervals",
+        "ex-gaussian-regression-mean-and-prediction-intervals"
+      ],
+      "paths": [
+        [
+          "lem-full-column-rank-matrix-has-economy-qr",
+          "thm-exact-gaussian-linear-regression-inference",
+          "thm-gaussian-regression-confidence-and-prediction-intervals",
+          "ex-gaussian-regression-mean-and-prediction-intervals"
+        ],
+        [
+          "thm-exact-gaussian-linear-regression-inference",
+          "thm-gaussian-regression-confidence-and-prediction-intervals",
+          "ex-gaussian-regression-mean-and-prediction-intervals"
+        ],
+        [
+          "thm-gaussian-regression-confidence-and-prediction-intervals",
+          "ex-gaussian-regression-mean-and-prediction-intervals"
+        ]
+      ]
+    },
+    {
+      "id": "thm-exact-gaussian-linear-regression-inference",
+      "path": [
+        "lem-full-column-rank-matrix-has-economy-qr",
+        "thm-exact-gaussian-linear-regression-inference"
+      ],
+      "paths": [
+        [
+          "lem-full-column-rank-matrix-has-economy-qr",
+          "thm-exact-gaussian-linear-regression-inference"
+        ]
+      ]
+    },
+    {
+      "id": "thm-gaussian-regression-confidence-and-prediction-intervals",
+      "path": [
+        "lem-full-column-rank-matrix-has-economy-qr",
+        "thm-exact-gaussian-linear-regression-inference",
+        "thm-gaussian-regression-confidence-and-prediction-intervals"
+      ],
+      "paths": [
+        [
+          "lem-full-column-rank-matrix-has-economy-qr",
+          "thm-exact-gaussian-linear-regression-inference",
+          "thm-gaussian-regression-confidence-and-prediction-intervals"
+        ],
+        [
+          "thm-exact-gaussian-linear-regression-inference",
+          "thm-gaussian-regression-confidence-and-prediction-intervals"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "lem-full-column-rank-matrix-has-economy-qr": [
+      "## Statement\n\nLet $n>p\\ge1$ and let $X\\in\\mathbb R^{n\\times p}$ have full column rank. Then there are matrices $Q\\in\\mathbb R^{n\\times p}$ and $R\\in\\mathbb R^{p\\times p}$ such that\n\n$$X=QR,$$\n\nwhere $Q^TQ=I_p$ and $R$ is upper triangular with positive diagonal. The columns of $Q$ can be completed to an orthonormal basis $[Q\\ Q_0]$ of $\\mathbb R^n$, with $Q_0\\in\\mathbb R^{n\\times(n-p)}$. For $P_X:=X(X^TX)^{-1}X^T$, one has $P_X=QQ^T$."
+    ],
+    "thm-exact-gaussian-linear-regression-inference": [
+      "## Statement\n\nAssume the Axiom of Choice. Fix a deterministic full-column-rank matrix $X\\in\\mathbb R^{n\\times p}$ with $1\\le p<n$, a parameter $\\beta\\in\\mathbb R^p$, and $\\sigma^2>0$. Observe $Y=X\\beta+\\epsilon$, where the coordinates of $\\epsilon$ are independent with law $N(0,\\sigma^2)$. This is the fixed-design Gaussian experiment on $\\mathbb R^n$ indexed by $(\\beta,\\sigma^2)\\in\\mathbb R^p\\times(0,\\infty)$.\n\nLet $\\widehat\\beta=(X^TX)^{-1}X^TY$, let $P_X$ be the orthogonal projection onto $\\operatorname{col}X$, and define\n$$RSS_F=\\|(I_n-P_X)Y\\|^2,\\qquad \\nu=n-p,\\qquad s^2=RSS_F/\\nu,\\qquad s=\\sqrt{s^2}.$$\nFor $c\\in\\mathbb R^p\\setminus\\{0\\}$, set\n$$T_c=\\begin{cases}\\dfrac{c^T\\widehat\\beta-c^T\\beta}{s\\sqrt{c^T(X^TX)^{-1}c}},&s>0,\\\\0,&s=0.\\end{cases}$$\nThen $\\widehat\\beta\\sim N_p(\\beta,\\sigma^2(X^TX)^{-1})$, $\\widehat\\beta$ is independent of $RSS_F$, $RSS_F/\\sigma^2\\sim\\chi^2_\\nu$, $s>0$ almost surely, and $T_c\\sim t_\\nu$.\n\nFor a fixed reduced design $X_R\\in\\mathbb R^{n\\times(p-q)}$ with $\\operatorname{rank}X_R=p-q$, $\\operatorname{col}X_R\\subseteq\\operatorname{col}X$, and $1\\le q\\le p$, put $W_R=\\operatorname{col}X_R$ and\n$$RSS_R=\\|Y-P_{W_R}Y\\|^2.$$\nUnder the null hypothesis $X\\beta\\in W_R$, the statistic\n$$F=\\begin{cases}\\dfrac{(RSS_R-RSS_F)/q}{RSS_F/\\nu},&RSS_F>0,\\\\0,&RSS_F=0\\end{cases}$$\nhas law $F_{q,\\nu}$. Both denominator degrees of freedom are positive; the empty reduced design space is allowed when $q=p$.\n\nFor a null value $\\theta_0$, define $T_{c,\\theta_0}$ by replacing $c^T\\beta$ in the numerator of $T_c$ by $\\theta_0$, with the same zero-denominator convention. For $0<\\alpha<1$, the two-sided test of $H_0:c^T\\beta=\\theta_0$ that rejects when $|T_{c,\\theta_0}|>t_{\\nu,1-\\alpha/2}$ has size exactly $\\alpha$. The partial F test that rejects when $F>F^{-1}_{q,\\nu}(1-\\alpha)$ also has size exactly $\\alpha$ under its stated null. The joint Gaussian maximum-likelihood estimate is $\\widehat\\beta$ together with $\\widehat\\sigma^2_{\\rm ML}=RSS_F/n$ almost surely, distinct from $s^2=RSS_F/(n-p)$. If an observed vector has $RSS_F=0$, the likelihood has no maximizer over $\\sigma^2>0$; this event has probability zero in the stated model."
+    ],
+    "thm-gaussian-regression-confidence-and-prediction-intervals": [
+      "## Statement\n\nUse the fixed full-column-rank Gaussian regression model and notation of [[thm-exact-gaussian-linear-regression-inference]], with $\\nu=n-p$. Let $0<\\alpha<1$, let $t^*=t_{\\nu,1-\\alpha/2}$ be the unique $(1-\\alpha/2)$ quantile of $t_\\nu$, and put $v_c=c^T(X^TX)^{-1}c$ for $c\\ne0$. Then\n$$C_c(Y)=\\left[c^T\\widehat\\beta-t^*s\\sqrt{v_c},\\ c^T\\widehat\\beta+t^*s\\sqrt{v_c}\\right]$$\nhas exact coverage $1-\\alpha$ for $c^T\\beta$.\n\nFor any $x_0\\in\\mathbb R^p$, put $h_0=x_0^T(X^TX)^{-1}x_0$. The mean-response interval\n$$C_{\\rm mean}(Y;x_0)=\\left[x_0^T\\widehat\\beta-t^*s\\sqrt{h_0},\\ x_0^T\\widehat\\beta+t^*s\\sqrt{h_0}\\right]$$\nhas exact coverage $1-\\alpha$ for $x_0^T\\beta$ when $x_0\\ne0$. If $x_0=0$, it is the singleton $\\{0\\}$ and has coverage $1$.\n\nIf $Y_0^*=x_0^T\\beta+\\epsilon_0^*$ is one future response with $\\epsilon_0^*\\sim N(0,\\sigma^2)$ independent of the training data, then\n$$C_{\\rm pred}(Y;x_0)=\\left[x_0^T\\widehat\\beta-t^*s\\sqrt{1+h_0},\\ x_0^T\\widehat\\beta+t^*s\\sqrt{1+h_0}\\right]$$\nsatisfies $\\mathbb P_{\\beta,\\sigma^2}\\{Y_0^*\\in C_{\\rm pred}(Y;x_0)\\}=1-\\alpha$. The added $1$ is the variance contribution of the future response's own error."
+    ],
+    "cex-rademacher-errors-do-not-give-exact-regression-t": [],
+    "ex-gaussian-regression-mean-and-prediction-intervals": []
+  }
+}

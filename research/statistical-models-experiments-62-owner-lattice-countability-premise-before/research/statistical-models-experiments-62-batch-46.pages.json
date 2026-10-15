@@ -1,0 +1,350 @@
+[
+  {
+    "order": 2008,
+    "id": "spatial-field-summary-estimators",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Spatial summary estimators",
+    "companion": "spatial-field-summary-estimators-examples",
+    "requires": [
+      "random-fields-covariance-and-variograms",
+      "probability-spaces-random-variables-and-expectation",
+      "bochner-inversion-and-plancherel-on-lca-groups",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "lebesgue-measure-on-euclidean-space",
+      "radon-measures-and-the-riesz-markov-kakutani-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-van-hove-window-sequence",
+        "kind": "definition",
+        "title": "Van Hove sequences of spatial windows",
+        "statement": "Fix an integer $d\\ge1$ and assume the Axiom of Countable Choice\n$\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). By\n[[thm-borel-sets-are-lebesgue-measurable]], every Borel subset of $\\mathbb R^d$\nis Lebesgue measurable under this assumption; by\n[[thm-lebesgue-measure-is-a-complete-measure]], $|\\cdot|$ is the resulting\ncomplete Lebesgue measure. A **Van Hove sequence of spatial windows** is a\nsequence $(W_n)_{n\\ge1}$ of bounded Borel sets\n([[def-borel-sigma-algebra]]) in $\\mathbb R^d$ with\n$0<|W_n|<\\infty$ for every $n$, $|W_n|\\to\\infty$, and\n$$\\frac{|(W_n+K)\\setminus W_n|}{|W_n|}\\longrightarrow0 \\quad\\text{for every compact }K\\subseteq\\mathbb R^d.$$\nHere $|E|$ is Lebesgue measure when $E$ is Lebesgue measurable, and\n$W_n+K:=\\{x+y:x\\in W_n,\\ y\\in K\\}$. As part of the condition, each boundary\nexcess $(W_n+K)\\setminus W_n$ in the display is required to be Lebesgue\nmeasurable. Thus the window volume diverges while every fixed compact spatial\nenlargement adds a negligible relative volume.",
+        "strategy": "Define the window domain, Lebesgue volume, Minkowski enlargement and the exact Van Hove boundary-ratio condition.",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-spatial-window-average",
+        "kind": "definition",
+        "title": "Spatial window average",
+        "statement": "Let $(W_n)$ be a Van Hove sequence in $\\mathbb R^d$ as in\n[[def-van-hove-window-sequence]], under its $\\mathrm{AC}_\\omega$ assumption.\nThe Borel-measurability result makes each $W_n$ Lebesgue measurable, and the\ncomplete-measure result supplies the Lebesgue measure used below. On a\nprobability space\n$(\\Omega,\\mathcal F,\\mathbb P)$ ([[def-probability-measure]]), let\n$(X(s))_{s\\in\\mathbb R^d}$ be a real random field in the coordinatewise\nsense of [[def-random-field-stationarity-covariance-and-variogram]]; its\ncoordinates are real random variables\n([[def-random-element-and-real-random-variable]]) such that the map\n$(s,\\omega)\\mapsto X(s,\\omega)$ is measurable for\n$\\mathcal B(\\mathbb R^d)\\otimes\\mathcal F$\n([[def-borel-sigma-algebra]]). For $W_n$, assume that\n$\\int_{W_n}|X(s,\\omega)|\\,ds<\\infty$ for almost every $\\omega$. Define the\n**spatial window average** on that full-measure event by\n$$\\bar X_{W_n}(\\omega):=\\frac1{|W_n|}\\int_{W_n}X(s,\\omega)\\,ds,$$\nand set it to $0$ on the measurable exceptional null set. Here $|W_n|$ and\nthe integral use $d$-dimensional Lebesgue measure, and a sample path means the\nfunction $s\\mapsto X(s,\\omega)$. The theorem\n[[thm-van-hove-window-average-l2-consistency]] establishes this integrability\nand measurability from its stated second-moment hypotheses.",
+        "strategy": "State the joint-measurability and path-integrability domain and define the normalized Lebesgue integral.",
+        "deps": [
+          "def-van-hove-window-sequence",
+          "def-borel-sigma-algebra",
+          "def-countable-choice",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-random-field-stationarity-covariance-and-variogram"
+        ],
+        "justified_by": [
+          "thm-van-hove-window-average-l2-consistency"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-van-hove-window-average-l2-consistency",
+        "kind": "theorem",
+        "title": "Unbiasedness and L2 consistency of the spatial window average",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$, as required by\n[[def-van-hove-window-sequence]]. Let $X(s)$, $s\\in\\mathbb R^d$, be a jointly measurable real random field on a\nprobability space, with constant mean $\\mu$ and finite second moments. Assume\nit is wide-sense stationary in the explicit sense that\n$$\\operatorname{Cov}(X(s+h),X(s))=C(h)$$\nfor all $s,h\\in\\mathbb R^d$, and that $C\\in L^1(\\mathbb R^d)$. Let $(W_n)$ be\na Van Hove sequence from [[def-van-hove-window-sequence]]. Then each spatial\nwindow average from [[def-spatial-window-average]] is well-defined, satisfies\n$$\\mathbb E[\\bar X_{W_n}]=\\mu,$$\nand\n$$\\mathbb E\\bigl[|\\bar X_{W_n}-\\mu|^2\\bigr]\\longrightarrow0.$$\nThus these averages are unbiased and converge to the mean in $L^2$. No\nvariance consistency for any other estimator, weak consistency, or central\nlimit theorem is asserted.",
+        "strategy": "Use Tonelli and Fubini to establish the path integral, expectation and covariance double-integral formula; convert that formula to an overlap integral, apply the Van Hove boundary limit and dominated convergence.",
+        "deps": [
+          "def-van-hove-window-sequence",
+          "def-spatial-window-average",
+          "def-countable-choice",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-borel-sigma-algebra",
+          "def-random-element-and-real-random-variable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-sections-of-product-measurable-functions-are-measurable",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "cor-cauchy-schwarz-for-random-variables",
+          "def-convergence-in-lp-for-random-variables",
+          "thm-dominated-convergence",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-random-field-stationarity-covariance-and-variogram"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-lattice-covariance-and-variogram-estimators",
+        "kind": "definition",
+        "title": "Lagged lattice covariance and variogram estimators",
+        "statement": "For a finite lattice observation window V_n and fixed lag h with at least one available pair, define the pair-count-normalized covariance estimator as the average raw lagged product minus the squared sample mean, and define the empirical semivariogram as one half the average squared lag difference.",
+        "strategy": "Specify the finite lattice index sets, pair count, mean convention, covariance estimator and increment-based semivariogram separately.",
+        "deps": [
+          "def-integers",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-convergence-in-lp-for-random-variables",
+          "def-random-field-stationarity-covariance-and-variogram"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-lattice-covariance-estimator-asymptotically-unbiased",
+        "kind": "theorem",
+        "title": "Asymptotic unbiasedness of lattice covariance and variogram estimators",
+        "statement": "For a wide-sense stationary lattice field and a fixed lag, the pair-count-normalized raw-product covariance estimator minus the squared mean estimate is asymptotically unbiased when the mean estimate is L2-consistent; for a field with stationary increments, the increment-based semivariogram estimator is exactly unbiased at every admissible finite window.",
+        "strategy": "Evaluate the finite-pair raw-product expectation, use L2 convergence to pass the squared estimated mean to the squared population mean, and evaluate each increment-square expectation from stationary increments.",
+        "deps": [
+          "def-lattice-covariance-and-variogram-estimators",
+          "def-moments-variance-and-covariance",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-cauchy-schwarz-for-random-variables",
+          "def-convergence-in-lp-for-random-variables"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-integers-lattice-is-discrete-lca-group",
+        "kind": "lemma",
+        "title": "The integer lattice is a discrete locally compact abelian group",
+        "statement": "For d≥1, Z^d with coordinatewise addition and the discrete topology is a locally compact Hausdorff abelian topological group, and every function from it to a topological space is continuous.",
+        "strategy": "Verify coordinatewise group laws, separate points by open singletons, use compact singleton neighborhoods, and check continuity from the discrete domain.",
+        "deps": [
+          "thm-int-comm-ring",
+          "def-group",
+          "def-standard-topologies",
+          "def-product-topology",
+          "def-continuous-map-top",
+          "def-topological-group",
+          "def-hausdorff-space",
+          "def-compact-space",
+          "def-locally-compact-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-dual-of-zd-is-torus",
+        "kind": "lemma",
+        "title": "The Pontryagin dual of the integer lattice is the torus",
+        "statement": "With Z^d discrete and T^d the product of d unit circles, the map sending z to the character k -> product_r z_r^{k_r} is a topological group isomorphism T^d -> Zhat^d.",
+        "strategy": "Construct the character from its values on the standard basis, prove every character is recovered from those values, and verify continuity in both directions using pointwise convergence on a discrete domain.",
+        "deps": [
+          "def-pontryagin-dual-and-compact-open-topology",
+          "lem-integers-lattice-is-discrete-lca-group",
+          "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "def-integers",
+          "def-standard-topologies",
+          "def-group-homomorphism",
+          "def-topological-group",
+          "def-complex-integer-powers",
+          "lem-group-power-laws",
+          "def-product-topology",
+          "thm-product-universal-property",
+          "def-homeomorphism-and-open-maps"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-transport-lattice-spectral-measure-to-torus",
+        "kind": "lemma",
+        "title": "Transport of a lattice spectral measure to torus coordinates",
+        "statement": "A finite positive Radon measure on the dual of Z^d transports through the character-coordinate homeomorphism to a finite positive Radon measure on T^d, with integrals preserved under composition.",
+        "strategy": "Define the transported measure on Borel sets, transfer finiteness and Radon regularity through the homeomorphism, then prove the integral identity first for indicators and simple functions and extend by monotone convergence.",
+        "deps": [
+          "lem-dual-of-zd-is-torus",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "def-radon-measure-on-an-lch-space",
+          "def-borel-sigma-algebra",
+          "thm-finite-products-of-compact-spaces",
+          "lem-products-preserve-t0-t1-and-hausdorff",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-regular-grid-periodogram-and-smoother",
+        "kind": "definition",
+        "title": "Regular-grid spatial periodogram and smoothed estimator",
+        "statement": "For a centered or known-mean-centered stationary lattice sample on {0,...,n-1}^d, define the rectangular-grid Fourier periodogram and its kernel-weighted average over the Fourier grid using a periodized nonnegative compactly supported kernel.",
+        "strategy": "Specify the lattice box, Fourier grid, DFT normalization, torus convention, periodized kernel, normalized frequency weights and domain where the smoother is defined.",
+        "deps": [
+          "def-lattice-covariance-and-variogram-estimators",
+          "lem-dual-of-zd-is-torus",
+          "def-product-measure-on-sigma-finite-spaces"
+        ],
+        "justified_by": [
+          "thm-regular-grid-smoothed-periodogram-bias-vanishes"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-regular-grid-periodogram-fejer-expectation",
+        "kind": "theorem",
+        "title": "Fejer convolution formula for the lattice periodogram",
+        "statement": "Under AC and DC, the covariance sequence of a real wide-sense stationary Z^d field has a finite positive spectral measure on T^d; the expectation of the rectangular-grid periodogram is its convolution with the product Fejer kernel.",
+        "strategy": "Prove covariance positive definiteness by a finite variance calculation, apply LCA Bochner on the discrete lattice and identify its dual with the torus; expand the finite squared DFT and interchange only finite sums with the spectral integral.",
+        "deps": [
+          "def-regular-grid-periodogram-and-smoother",
+          "lem-dual-of-zd-is-torus",
+          "lem-transport-lattice-spectral-measure-to-torus",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-countable-choice",
+          "lem-angular-fourier-orthogonality",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-positive-definite-function-on-an-abelian-group",
+          "thm-bochner-theorem-for-lca-groups",
+          "def-integers",
+          "lem-integers-lattice-is-discrete-lca-group",
+          "def-standard-topologies",
+          "def-topological-group",
+          "def-moments-variance-and-covariance",
+          "cor-cauchy-schwarz-for-random-variables",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-fixed-grid-sampling-spectral-alias-identity",
+        "kind": "lemma",
+        "title": "Spectral alias identity for fixed regular-grid sampling",
+        "statement": "For a fixed regular-grid spacing delta>0 and an integrable nonnegative continuous-space spectral density, the sampled torus density is delta^-d times the sum over reciprocal-grid translates, and both torus and continuous-frequency Fejer integrals give the exact finite expectation.",
+        "deps": [
+          "def-random-field-stationarity-covariance-and-variogram",
+          "def-borel-sigma-algebra",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-regular-grid-periodogram-fejer-expectation",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "thm-finite-products-of-compact-spaces",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "ex-integers-are-countably-infinite",
+          "lem-finite-powers-of-countable-sets-are-countable",
+          "lem-countable-iff-surjection-from-n",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "def-nonnegative-lebesgue-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-regular-grid-smoothed-periodogram-bias-vanishes",
+        "kind": "theorem",
+        "title": "Vanishing bias of a smoothed regular-grid spatial periodogram",
+        "statement": "For a bounded lattice spectral density continuous at the chosen target, nonnegative continuous compactly supported smoothing kernel positive near zero, and b_n→0 with n b_n→infinity, both raw and smoothed expected periodograms converge to the target density value, and smoothing denominators are eventually positive.",
+        "strategy": "Show the product Fejer kernels are normalized approximate identities with vanishing mass outside each neighborhood; then use the shrinking support of the normalized Fourier-grid weights and the bandwidth condition to pass the expected ordinates to the target density.",
+        "deps": [
+          "def-regular-grid-periodogram-and-smoother",
+          "thm-regular-grid-periodogram-fejer-expectation",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "cor-fixed-grid-unaliased-spectral-bias-under-no-alias-condition",
+        "kind": "corollary",
+        "title": "Unaliased fixed-grid spectral bias under the exact no-alias condition",
+        "statement": "Raw and smoothed periodograms with physical delta^d normalization have the alias-sum expectation limit when that density is bounded and continuous at the target; vanishing bias for the unaliased density is equivalent to zero noncentral aliases. A continuous spectrum supported compactly inside the Nyquist cube is a sufficient case.",
+        "deps": [
+          "lem-fixed-grid-sampling-spectral-alias-identity",
+          "thm-regular-grid-smoothed-periodogram-bias-vanishes",
+          "def-regular-grid-periodogram-and-smoother",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 2009,
+    "id": "spatial-field-summary-estimators-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Spatial summary estimators — Examples",
+    "companion": "spatial-field-summary-estimators",
+    "requires": [
+      "spatial-field-summary-estimators"
+    ],
+    "items": [
+      {
+        "id": "ex-boundary-dominated-windows-are-not-van-hove",
+        "kind": "example",
+        "title": "Boundary-dominated windows fail the Van Hove condition",
+        "statement": "The rectangles W_n=[0,n] x [0,1] have volume tending to infinity but fail the Van Hove boundary-ratio condition for K=[-1,1]^2.",
+        "strategy": "Compute the Minkowski enlargement and its excess area exactly, then take the ratio limit.",
+        "deps": [
+          "def-van-hove-window-sequence",
+          "def-countable-choice",
+          "def-measure",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "cex-lattice-sample-covariance-not-positive-definite",
+        "kind": "counterexample",
+        "title": "A pair-count lattice sample covariance need not be positive definite",
+        "statement": "The pair-count-normalized lattice sample covariance estimator minus the squared sample mean need not have positive-semidefinite Toeplitz forms.",
+        "strategy": "Use a three-point scalar data vector and exhibit two lattice sites whose 2-by-2 estimated covariance matrix has a negative quadratic form.",
+        "deps": [
+          "def-lattice-covariance-and-variogram-estimators",
+          "def-positive-definite-function-on-an-abelian-group"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      }
+    ]
+  }
+]

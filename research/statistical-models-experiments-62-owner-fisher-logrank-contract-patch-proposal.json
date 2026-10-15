@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "kind": "root-apply-contract-and-statement-proposal",
+  "run": "statistical-models-experiments-62",
+  "contract_target": "research/statistical-models-experiments-62-batch-33.proof-contracts.json",
+  "contract_input_raw_sha256": "edee431f1e42e256dfc3a861a6c3f570e51f628e733c12a375a1c160e6d58a87",
+  "contract_patch": [
+    {
+      "op": "test",
+      "path": "/contracts/ex-logrank-fisher-randomization-with-unequal-weights",
+      "value": {
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "def-logrank-risk-set-score-and-test",
+            "source_section": "Definition",
+            "quote": "Let $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$ Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}. $$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$ E_j:=d_j\\frac{Y_{1j}}{Y_j}. $$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$ V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases} $$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "cor-logrank-fisher-randomization-pvalue-valid",
+            "source_section": "Statement",
+            "quote": "The inclusive assignment-tail p-value\n$$ p_{\\rm rand}(z):=\\sum_{z'\\in\\mathcal Z}p(z') 1\\{|U_w(z';U,\\delta)|\\ge |U_w(z;U,\\delta)|\\} $$\nis superuniform under the assignment law, so it is a valid finite-sample\np-value for the record sharp null. If an auxiliary $V$ is independent of\nthe assignment and uniform on $[0,1]$, replacing the inclusive tail by the\nstrict-tail mass plus $V$ times the tied-score mass gives an exactly uniform\np-value. The result uses the actual assignment probabilities and asserts no\nvalidity under a weak average-effect null or under an equal-hazard null alone.",
+            "uses": [
+              "2.1",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "def-finite-randomized-treatment-assignment-model",
+            "source_section": "Definition",
+            "quote": "Let $N\\ge1$, and let $\\mathcal I=\\{1,\\ldots,N\\}$ index the fixed\nexperimental units at the actual treatment-assignment level. Let\n$\\mathcal Z$ be a nonempty finite set of allowed assignments. If treatment\nis assigned to clusters, each cluster is one indexed unit; no separate\nprobability-sampling unit is present. The index $i$ identifies that unit,\nand no visit or repeated-measurement index is modeled here.",
+            "uses": [
+              "2.1",
+              "3.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "proof-step-1-1",
+            "claim": "Under $e_1$, the event at time 1 contributes $1-1/3=2/3$ and the later risk sets contain no treated subject, so $U(e_1)=2/3$. Under $e_2$, time 1 contributes $-1/3$, and time 2 contributes $1-1/2=1/2$, giving $U(e_2)=1/6$. Under $e_3$, time 1 contributes $-1/3$, time 2 contributes $-1/2$, and time 3 contributes zero, giving $U(e_3)=-5/6$. These are the three distinct scores; their absolute values are $2/3,1/6,5/6$.",
+            "step": "1.1",
+            "inputs": [
+              "F1",
+              "given",
+              "algebra"
+            ]
+          },
+          {
+            "id": "proof-step-2-1",
+            "claim": "The inclusive absolute-tail probability at $e_1$ is $1/2+1/6=2/3$, at $e_2$ it is $1$, and at $e_3$ it is $1/6$, because the absolute scores are distinct and the assignment weights are $1/2,1/3,1/6$. Therefore the p-value takes $2/3,1,1/6$ with respective probabilities $1/2,1/3,1/6$.",
+            "step": "2.1",
+            "inputs": [
+              "F2",
+              "F3",
+              "step 1.1",
+              "algebra"
+            ]
+          },
+          {
+            "id": "proof-step-3-1",
+            "claim": "Its distribution function is $0$ for $0\\le u<1/6$, $1/6$ for $1/6\\le u<2/3$, $2/3$ for $2/3\\le u<1$, and $1$ at $u=1$. On each interval this is at most $u$, including the endpoints. Thus the exact finite assignment calculation is superuniform under the declared unequal-weight law, as in [F2].",
+            "step": "3.1",
+            "inputs": [
+              "F2",
+              "F3",
+              "step 2.1",
+              "algebra"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "not_applicable",
+            "reason": "The example has exactly three allowed assignments with positive probability."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Statement: All three assignment scores and tail masses are computed in steps 1.1\u20132.1; no score tie is omitted."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Statement: The exactly-one-treated constraint is part of the finite assignment set."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Statement: The absolute scores are distinct, while the general corollary covers ties."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "Step 3.1 checks the p-value distribution at the exact endpoints 0, 1/6, 2/3, and 1."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "not_applicable",
+            "reason": "The proof makes no choice from an arbitrary nonempty family; inherited AC is recorded separately where applicable."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "The item states a one-way result and no biconditional."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "No converse is asserted."
+          }
+        ],
+        "finite_checks": [],
+        "axioms_used": []
+      }
+    },
+    {
+      "op": "replace",
+      "path": "/contracts/ex-logrank-fisher-randomization-with-unequal-weights",
+      "value": {
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "def-logrank-risk-set-score-and-test",
+            "source_section": "Definition",
+            "quote": "Let $t_1<\\cdots<t_K$ be the distinct observed failure times in $[0,\\tau]$.\nFor $g\\in\\{0,1\\}$ define the risk count and event count at $t_j$ by\n$$ Y_{gj}(z):=\\#\\{i:z_i=g,\\ U_i\\ge t_j\\},\\qquad d_{gj}(z):=\\#\\{i:z_i=g,\\ U_i=t_j,\\ \\delta_i=1\\}. $$\nWrite $Y_j=Y_{0j}+Y_{1j}$, $d_j=d_{0j}+d_{1j}>0$, and\n$O_j=d_{1j}$. Since $t_j$ is an observed failure time,\n$1\\le d_j\\le Y_j$. The expected group-1 count under the conditional\nhypergeometric model is\n$$ E_j:=d_j\\frac{Y_{1j}}{Y_j}. $$\nUnder that model the $d_j$ failing subjects are a uniform $d_j$-subset of the\n$Y_j$ subjects at risk, conditional on the risk-set and event-count margins.\nThe corresponding conditional variance is\n$$ V_j:= \\begin{cases} \\displaystyle\\frac{Y_{1j}Y_{0j}d_j(Y_j-d_j)} {Y_j^2(Y_j-1)},&Y_j>1,\\\\[6pt] 0,&Y_j=1. \\end{cases} $$\nIf the study has no observed failures, all sums below are empty and equal zero.\nThe conditional hypergeometric model is an explicit finite risk-set\nassumption; equality of survival laws with arbitrary censoring or subject\nheterogeneity does not by itself assert this conditional allocation law.\nThe uniform law on the finite set of $d_j$-subsets is the uniform finite\nprobability space of [[def-uniform-finite-probability-space]].",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "cor-logrank-fisher-randomization-pvalue-valid",
+            "source_section": "Statement",
+            "quote": "The inclusive assignment-tail p-value\n$$ p_{\\rm rand}(z):=\\sum_{z'\\in\\mathcal Z}p(z') 1\\{|U_w(z';U,\\delta)|\\ge |U_w(z;U,\\delta)|\\} $$\nis superuniform under the assignment law, so it is a valid finite-sample\np-value for the record sharp null. If an auxiliary $V$ is independent of\nthe assignment and uniform on $[0,1]$, replacing the inclusive tail by the\nstrict-tail mass plus $V$ times the tied-score mass gives an exactly uniform\np-value. The result uses the actual assignment probabilities and asserts no\nvalidity under a weak average-effect null or under an equal-hazard null alone.",
+            "uses": [
+              "1.1",
+              "2.1",
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "def-finite-randomized-treatment-assignment-model",
+            "source_section": "Definition",
+            "quote": "Let $N\\ge1$, and let $\\mathcal I=\\{1,\\ldots,N\\}$ index the fixed\nexperimental units at the actual treatment-assignment level. Let\n$\\mathcal Z$ be a nonempty finite set of allowed assignments. If treatment\nis assigned to clusters, each cluster is one indexed unit; no separate\nprobability-sampling unit is present. The index $i$ identifies that unit,\nand no visit or repeated-measurement index is modeled here.",
+            "uses": [
+              "2.1",
+              "3.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "proof-step-1-1",
+            "claim": "The full records (U_i(z),delta_i(z))=(i,1) are invariant under all allowed assignments, satisfying the record sharp null; the unit-weight logrank signed scores are2/3,1/6,-5/6 and absolute scores2/3,1/6,5/6.",
+            "step": "1.1",
+            "inputs": [
+              "F1",
+              "given",
+              "algebra",
+              "F2"
+            ]
+          },
+          {
+            "id": "proof-step-2-1",
+            "claim": "The inclusive absolute-tail probability at $e_1$ is $1/2+1/6=2/3$, at $e_2$ it is $1$, and at $e_3$ it is $1/6$, because the absolute scores are distinct and the assignment weights are $1/2,1/3,1/6$. Therefore the p-value takes $2/3,1,1/6$ with respective probabilities $1/2,1/3,1/6$.",
+            "step": "2.1",
+            "inputs": [
+              "F2",
+              "F3",
+              "step 1.1",
+              "algebra"
+            ]
+          },
+          {
+            "id": "proof-step-3-1",
+            "claim": "Its distribution function is $0$ for $0\\le u<1/6$, $1/6$ for $1/6\\le u<2/3$, $2/3$ for $2/3\\le u<1$, and $1$ at $u=1$. On each interval this is at most $u$, including the endpoints. Thus the exact finite assignment calculation is superuniform under the declared unequal-weight law, as in [F2].",
+            "step": "3.1",
+            "inputs": [
+              "F2",
+              "F3",
+              "step 2.1",
+              "algebra"
+            ]
+          }
+        ],
+        "routine_steps": [],
+        "boundaries": [
+          {
+            "case": "empty",
+            "status": "not_applicable",
+            "reason": "The example has exactly three allowed assignments with positive probability."
+          },
+          {
+            "case": "zero",
+            "status": "checked",
+            "evidence": "Statement: All three assignment scores and tail masses are computed in steps 1.1\u20132.1; no score tie is omitted."
+          },
+          {
+            "case": "one",
+            "status": "checked",
+            "evidence": "Statement: The exactly-one-treated constraint is part of the finite assignment set."
+          },
+          {
+            "case": "degenerate",
+            "status": "checked",
+            "evidence": "Statement: The absolute scores are distinct, while the general corollary covers ties."
+          },
+          {
+            "case": "endpoints",
+            "status": "checked",
+            "evidence": "Step 3.1 checks the p-value distribution at the exact endpoints 0, 1/6, 2/3, and 1."
+          },
+          {
+            "case": "nonempty-choice",
+            "status": "not_applicable",
+            "reason": "The proof makes no choice from an arbitrary nonempty family; inherited AC is recorded separately where applicable."
+          },
+          {
+            "case": "iff-forward",
+            "status": "not_applicable",
+            "reason": "The item states a one-way result and no biconditional."
+          },
+          {
+            "case": "iff-reverse",
+            "status": "not_applicable",
+            "reason": "No converse is asserted."
+          }
+        ],
+        "finite_checks": [],
+        "axioms_used": []
+      }
+    }
+  ],
+  "manifest_subject": "ex-logrank-fisher-randomization-with-unequal-weights",
+  "current_statement": "Fix a follow-up horizon $\\tau=3$ and three subjects. For every allowed\nassignment $z\\in\\{e_1,e_2,e_3\\}$, prescribe the full records\n$(U_i(z),\\delta_i(z))=(i,1)$ for $i=1,2,3$. Thus the subjects have\nuncensored event times $1,2,3$ under every assignment, satisfying the\nfull-record sharp null. Exactly one subject is treated. The allowed assignments $e_1,e_2,e_3$ treat subject\n1, 2, or 3, respectively, with probabilities $1/2,1/3,1/6$. Predeclare unit\nweight and the two-sided absolute unweighted logrank score before observing\nthe assignment. Enumerate all\nscores and inclusive assignment-tail p-values and verify superuniformity\nunder this unequal assignment law.",
+  "preservation": "All original valid worksheet evidence unchanged except expanded step1.1 claim, F2 citation use and input; no actual contract or manifest application by reviewer."
+}

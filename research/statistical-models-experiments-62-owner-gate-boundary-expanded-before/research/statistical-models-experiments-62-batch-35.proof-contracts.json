@@ -1,0 +1,645 @@
+{
+  "version": 1,
+  "scope": [
+    "def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence",
+    "thm-cause-specific-cumulative-incidence-decomposition",
+    "alg-aalen-johansen-cumulative-incidence-estimator",
+    "lem-aalen-johansen-fixed-time-output-is-a-statistic",
+    "cex-observed-first-cause-does-not-identify-latent-failure-times",
+    "ex-competing-event-risk-versus-cause-incidence"
+  ],
+  "contracts": {
+    "def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition applies to every Borel set, including the empty set, for which the event subdistribution is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition states that events at time zero are permitted and fixes S(0-)=1, so the hazard weight at a baseline event is defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition permits K=1; then the single cause is the all-cause event and its subdistribution is the law of T."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Atoms are permitted in the event-time law, and the definitions of S(u-), nu_k, F_k, and the hazard weight remain meaningful at an atom."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The definition's CIF uses [0,t], includes a possible event at zero and at t, and defines S(0-)=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition uses the finite cause labels and the almost-surely unique minimizing cause; it makes no representative or witness selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts no equivalence."
+        }
+      ]
+    },
+    "alg-aalen-johansen-cumulative-incidence-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algorithm assumes a finite sample with n>=1 and a finite cause set with K>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The algorithm statement initializes the output as (1,0,...,0); with no observed event through t, its event-time list is empty and returns that vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The algorithm statement defines Y(u) as the number with U_i>=u; with one subject at an observed event, Y(u)>=Delta N(u)>0, so the update denominator is positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The algorithm statement updates survival by 1-Delta N(u)/Y(u); if every at-risk subject fails at a tied time then Y(u)=Delta N(u), the survival update is zero, and the cause increments are defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The algorithm statement lists event times in [0,t], including a possible baseline event and an event at the fixed horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure sorts a finite set of observed event times and performs finite updates; it makes no choice of an element from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm states no equivalence."
+        }
+      ]
+    },
+    "thm-cause-specific-cumulative-incidence-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence",
+          "source_section": "Definition",
+          "quote": "Fix a finite number $K\\ge1$ of causes on a probability space. Let\n$T_1,\\ldots,T_K$ be measurable event times with values in $[0,\\infty)$, and\nassume that the minimum is attained by a unique cause almost surely. The\n**observed first failure time** and its **cause** are\n$$T:=\\min_{1\\le j\\le K}T_j,\\qquad D:=\\min\\{j:T_j=T\\}\\in\\{1,\\ldots,K\\},$$\nso $D$ is the smallest label attaining the minimum. For each $k$,\n$$\\{D=k\\}=\\bigcap_{j<k}\\{T_k<T_j\\}\\cap\\bigcap_{j>k}\\{T_k\\le T_j\\},$$\nwhich is measurable; the assumed almost-sure uniqueness makes the tie-break\nirrelevant except on a null set.\nNo independence among the latent times $T_j$ is assumed. When an external\nright-censoring time $C$ is present, the observation is\n$(U,\\delta,D^{\\mathrm{obs}})$, where $U=\\min(T,C)$ and\n$\\delta=\\mathbf 1\\{T\\le C\\}$ as in\n[[def-event-time-observation-schemes]], and $D^{\\mathrm{obs}}=D$ when\n$\\delta=1$; the cause label is absent when $\\delta=0$. Thus an event tied with\ncensoring is recorded as an event.\n\nThe **all-cause survival function** is $S(t):=\\mathbb P(T>t)$ for $t\\ge0$.\nFor $u>0$, write $S(u-):=\\mathbb P(T\\ge u)$; this is the left limit of $S$\nby continuity from above for measures\n([[thm-continuity-from-above-for-measures]]). Set $S(0-):=1$.\n\nFor each cause $k$, its **event subdistribution measure** and\n**cause-specific cumulative-incidence function** are\n$$\\nu_k(B):=\\mathbb P(T\\in B,D=k),\\qquad F_k(t):=\\nu_k([0,t])=\\mathbb P(T\\le t,D=k).$$\nfor Borel $B\\subseteq[0,\\infty)$ and $t\\ge0$. The **cause-specific hazard\nmeasure** is the measure with density\n$$w(u):=\\begin{cases}1/S(u-),&S(u-)>0,\\\\0,&S(u-)=0\\end{cases}$$\nrelative to $\\nu_k$:\n$$\\Lambda_k(B):=\\int_B w(u)\\,\\nu_k(du),\\qquad d\\Lambda_k(u)=w(u)\\,\\nu_k(du).$$\nThe extension of $u\\mapsto S(u-)$ by the constant $1$ for $u<0$ is\nnonincreasing on $\\mathbb R$ and therefore Borel measurable\n([[thm-monotone-real-functions-are-borel-measurable]]), so $w$ is a\nnonnegative Borel function and this measure is defined by\n[[def-measure-with-density]]. It may have infinite total mass; no finite-horizon\nintegrability is assumed in this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-real-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every monotone function $f : \\mathbb{R} \\to \\mathbb{R}$ in the sense of\n[[def-monotone-function]] is Borel measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set function $\\nu_k(B)=\\mathbb P(T\\in B,D=k)$ is a finite measure: it is the restriction of the law of $(T,D)$ to the measurable cause slice $D=k$, so disjoint Borel sets have disjoint preimages and probability countable additivity applies.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function $s(u):=S(u-)=\\mathbb P(T\\ge u)$ is nonincreasing, hence Borel by [F4]. Thus $R:=\\{u:s(u)>0\\}$ is Borel and $w=s^{-1}\\mathbf 1_R$ is nonnegative Borel.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The set $R^c$ is an upper interval. If $R^c=[a,\\infty)$, then $\\nu_k(R^c)\\le\\mathbb P(T\\ge a)=s(a)=0$. If $R^c=(a,\\infty)$, then $\\{T>a\\}=\\bigcup_{m\\ge1}\\{T\\ge a+1/m\\}$ and each event on the right has probability $s(a+1/m)=0$; hence again $\\nu_k(R^c)=0$. The empty case is immediate.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "By [F2], $\\Lambda_k=w\\,\\nu_k$ is a measure.",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Applying [F3] with $g(u)=\\mathbf 1_{[0,t]}(u)s(u)$ gives $\\int_{[0,t]}s(u)\\,d\\Lambda_k(u)=\\int_{[0,t]}s(u)w(u)\\,d\\nu_k(u)=\\int_{[0,t]}\\mathbf 1_R(u)\\,d\\nu_k(u)=\\nu_k([0,t])=F_k(t)$. The penultimate equality uses step 3.1, so this proves the measure-valued identity, including atoms and $t=0$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Suppose $\\nu_k(du)=f_k(u)\\,du$ and $S(u)>0$ for every $u\\in(0,t]$. For each integer $m\\ge1$, the set $A_m:=\\{u\\in(0,t]:\\mathbb P(T=u)\\ge1/m\\}$ has at most $m$ points, since distinct singleton events are disjoint and their probabilities sum to at most $1$. Every positive atom belongs to some $A_m$, so $A:=\\bigcup_{m\\ge1}A_m$ is countable and therefore Lebesgue-null. For $0<u\\le t$, the definitions $s(u)=\\mathbb P(T\\ge u)$ and $S(u)=\\mathbb P(T>u)$ give $s(u)-S(u)=\\mathbb P(T=u)$; hence $s(u)=S(u)$ outside $A$. Also $s(u)\\ge S(u)>0$, so $w(u)=1/s(u)$ on $(0,t]$. Since $d\\nu_k=f_k\\,du$, [F1, F3] give $d\\Lambda_k=w f_k\\,du$, whose density agrees with $f_k/S=\\lambda_k$ Lebesgue-a.e. on $(0,t]$. Finally, $\\nu_k(\\{0\\})=0$ because $\\nu_k$ has a Lebesgue density, so the point $0$ contributes nothing to either side of step 4.1; substituting the density on $(0,t]$ into that identity gives the stated formula, including $t=0$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a cause k in a nonempty finite cause set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles times with zero pre-event risk; their cause-event mass is zero, and the weight is defined as zero there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Theorem Statement permits K=1, and step 4.1 is unchanged; the sole subdistribution is the ordinary event-time law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 allows atoms; a point mass at u contributes S(u-) times its conditional hazard mass at u."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 integrates over [0,t], including an atom at zero and an event at t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses measure weighting and countable additivity only; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a decomposition identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse identification statement is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-aalen-johansen-fixed-time-output-is-a-statistic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-aalen-johansen-cumulative-incidence-estimator",
+          "source_section": "Definition",
+          "quote": "For each event time $u\\in[0,t]$, define the risk count and cause-specific event counts by",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "A **statistic** with target measurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "A function $f : X \\to Y$ is **measurable** when $$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "if $f+g$ is pointwise defined, then $f+g$ is measurable;",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "risk-and-event-counts-are-borel",
+          "claim": "Finite equality, order, and cause-status predicates are Borel; their finite sums give measurable counts and event-time denominators are positive.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "fixed-time-output-is-measurable",
+          "claim": "The event-time ordering, representative indicators, finite-range ratios, and finite updates are Borel, so the output vector is a statistic.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma assumes n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 has an empty event-time list when no event occurs by t and returns (1,0,...,0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 shows that with one observed event its risk count is at least 1, so the denominator is positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives Y=Delta N>0 when all at-risk subjects fail at one tied time; the update remains defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use U_i<=t and U_i>=u, so events at t and baseline u=0 are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The sample and cause sets are finite and all updates are deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts measurability, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "cex-observed-first-cause-does-not-identify-latent-failure-times": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence",
+          "source_section": "Definition",
+          "quote": "The **observed first failure time** and its **cause** are $$T:=\\min_{1\\le j\\le K}T_j,\\qquad D:=\\min\\{j:T_j=T\\}\\in\\{1,\\ldots,K\\},$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "Its **parametric statistical model** is the parameter map",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-observational-equivalence",
+          "source_section": "Definition",
+          "quote": "Equivalent parameter values therefore give exactly the same sampling law.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "is a specified function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "or equivalently when $\\psi$ is constant on each set of parameter values with the same sampling law",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "distinct-latent-law-targets",
+          "claim": "The two parameter values give different full joint laws, so the full latent law is a nonconstant estimand.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "same-observed-first-event-law",
+          "claim": "Both latent laws push forward to the same two-point law on (T,D), making the parameter values observationally equivalent.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "identifiability-fails",
+          "claim": "Equal observed sampling laws with distinct latent-law targets violate the defining identifiability implication.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness has two nonempty parameter points."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All latent event times are strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness uses two competing causes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Counterexample steps 1.1–1.2 use finite two-atom probability laws with distinct support points."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No censoring horizon or limiting endpoint occurs in the counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both parameter laws and all support points are explicit; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes identifiability; no equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-law-observed-pushforward",
+          "claim": "Both latent laws put probability 1/2 on each of (T,D)=(1,1) and (T,D)=(1,2), with no other observed pairs.",
+          "result": "The pushforward laws are equal, while P_0(T_2=2)=1/2 and P_1(T_2=2)=0."
+        }
+      ],
+      "axioms_used": []
+    },
+    "ex-competing-event-risk-versus-cause-incidence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence",
+          "source_section": "Definition",
+          "quote": "For each cause $k$, its **event subdistribution measure** and **cause-specific cumulative-incidence function** are",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-aalen-johansen-cumulative-incidence-estimator",
+          "source_section": "Definition",
+          "quote": "At each listed $u$, set $$\\widehat F_k(u)=\\widehat F_k(u-)+\\widehat S(u-)\\frac{\\Delta N_k(u)}{Y(u)},\\qquad \\widehat S(u)=\\widehat S(u-)\\left(1-\\frac{\\Delta N(u)}{Y(u)}\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "Under **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "The **Kaplan–Meier estimator** is $\\widehat S_n(t)=\\prod_{\\substack{0<u\\le t:\\,\\Delta N_n(u)>0}}\\left(1-\\frac{\\Delta N_n(u)}{Y_n(u)}\\right)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "first-time-updates-at-one",
+          "claim": "At time 1 the cause-1 increment is 1/4 in both groups, while all-cause survival becomes 1/2 and 1/4 respectively.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cause-cifs-at-two",
+          "claim": "The time-2 risk sets give cumulative incidences 3/8 and 5/16, lower in the group with more competing mortality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cause-specific-km-net-risk",
+          "claim": "Treating cause-2 events as censorings yields the same cause-1 product 9/16 and complement 7/16 in both groups, distinct from both observed CIF values.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes 16 subjects in each group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.1 starts with no increments before time 1, so the product is 1 and both CIFs are 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Verification step 1.1 evaluates the grouped update once at the first event time."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both groups have positive risk counts and nonzero cause-1 event counts at each displayed time."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification steps 1.1 and 2.1 include events at times 1 and 2; subjects censored at 2 remain in Y(2) by the U>=u convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite counts are explicit and no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes a finite comparison, not an equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "exact-aj-risk-set-arithmetic",
+          "claim": "At t=2 the low-CV and high-CV cause-1 Aalen–Johansen values are computed from the two stated risk sets.",
+          "result": "The exact values are 4/16+(1/2)(2/8)=3/8 and 4/16+(1/4)(1/4)=5/16."
+        },
+        {
+          "id": "cause-specific-net-risk-arithmetic",
+          "claim": "The cause-1 Kaplan–Meier products after recoding cause-2 failures as censorings are computed for both groups.",
+          "result": "Both products are (3/4)^2=9/16 and both complements are 7/16."
+        }
+      ],
+      "axioms_used": []
+    }
+  }
+}

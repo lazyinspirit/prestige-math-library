@@ -1,0 +1,68 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-39-1",
+  "inventory": {
+    "pages": [
+      "measurement-batch-and-process-variation",
+      "measurement-batch-and-process-variation-examples"
+    ],
+    "items": [
+      "def-batch-and-measurement-process-variation",
+      "thm-nested-batch-repeatability-covariance-and-mean-variance",
+      "ex-day-specific-calibration-slope-drift-and-check-standards"
+    ],
+    "pairs": [
+      "measurement-batch-and-process-variation"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-batch-and-measurement-process-variation.md",
+    "items/thm-nested-batch-repeatability-covariance-and-mean-variance.md",
+    "items/ex-day-specific-calibration-slope-drift-and-check-standards.md",
+    "library/statistical-models-and-experiments/measurement-batch-and-process-variation.md",
+    "library/statistical-models-and-experiments/measurement-batch-and-process-variation-examples.md"
+  ],
+  "write_batches": [
+    "39"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-day-specific-calibration-slope-drift-and-check-standards",
+      "path": [
+        "def-batch-and-measurement-process-variation",
+        "ex-day-specific-calibration-slope-drift-and-check-standards"
+      ],
+      "paths": [
+        [
+          "def-batch-and-measurement-process-variation",
+          "ex-day-specific-calibration-slope-drift-and-check-standards"
+        ]
+      ]
+    },
+    {
+      "id": "thm-nested-batch-repeatability-covariance-and-mean-variance",
+      "path": [
+        "def-batch-and-measurement-process-variation",
+        "thm-nested-batch-repeatability-covariance-and-mean-variance"
+      ],
+      "paths": [
+        [
+          "def-batch-and-measurement-process-variation",
+          "thm-nested-batch-repeatability-covariance-and-mean-variance"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-batch-and-measurement-process-variation": [
+      "## Definition\n\nFix nonempty finite index sets $I$ and $J_i$ for $i\\in I$, and positive\nintegers $m_{ij}$ for $i\\in I$ and $j\\in J_i$. The index $i$ names a fixed\nprocess condition, such as a fixed instrument configuration or an operator\nheld fixed by design. The index $j$ names a batch nested within that condition\n(for example, a day, or a specified day–operator combination); $k\\in\\{1,\\ldots,m_{ij}\\}$ names a repeat reading within that batch. If days and\noperators are crossed, or their separate contributions are needed, the model\nmust use additional indices and terms: this nested model does not separate\nsuch effects.\n\nOn one probability space, let the real random variables $B_{ij}$ and\n$\\epsilon_{ijk}$ be jointly independent and square-integrable, with\n$$\\mathbb E[B_{ij}]=0,\\qquad \\operatorname{Var}(B_{ij})=\\sigma_B^2<\\infty,\\qquad \\mathbb E[\\epsilon_{ijk}]=0,\\qquad \\operatorname{Var}(\\epsilon_{ijk})=\\sigma_\\epsilon^2<\\infty.$$\nThe variances are common over the indicated indices and may be zero. Let\n$\\mu$ and each $\\tau_i$ be fixed real constants. The **nested batch\nmeasurement model** is\n$$Y_{ijk}=\\mu+\\tau_i+B_{ij}+\\epsilon_{ijk}.$$\nHere $\\tau_i$ represents the fixed process-condition offset, $B_{ij}$ is the\nrandom batch offset, and $\\epsilon_{ijk}$ is the repeat error. The replicate\nmean is $\\bar Y_{ij\\cdot}=m_{ij}^{-1}\\sum_{k=1}^{m_{ij}}Y_{ijk}$. This is a\nscalar random-intercept specialization of the finite-moment mixed-model form\nin [[def-linear-mixed-model]]; it adds mutual independence across the finite\nbatch and repeat families and assumes a common repeat-error variance.\n\nIn this article, **repeatability** means variation among readings made under\nthe same stated short-term conditions, represented by the repeat-error term\nin this model. **Reproducibility** means variation across the explicitly\nnamed conditions being compared, such as days or operators; the parameter\n$\\sigma_B^2$ describes only the random batch factor represented by $j$ and\nonly when those batches are sampled from the stated target population.\n**Stability** means constancy over the stated time interval of the measurement\nprocess law, including its calibration relation and relevant error behavior.\nThese words are used with these declared scopes; terminology in measurement\nstandards can vary.\n\nWhether the batch term is random is determined by the target and sampling\ndesign. Treat $B_{ij}$ as random when the observed batches represent draws\nfrom a named population of possible batches and the target includes variation\nover that population. If the selected batches themselves are the entire\ntarget, represent their offsets as fixed batch parameters; the random-effect\nvariance formula below then does not describe extrapolation to unobserved\nbatches. Pool calibration curves only under an explicit common-curve or\nequivalence model over the stated calibration range. Without that model,\nreport batch-specific calibration descriptions. This definition and its\nvariance consequences assert no empirical adequacy or stability of a\nparticular measurement process. The measurement occasion called a batch and\nthe calibration-curve terminology agree with\n[[def-measurand-calibration-and-measurement-uncertainty]]."
+    ],
+    "thm-nested-batch-repeatability-covariance-and-mean-variance": [
+      "## Statement\n\nLet $I$ and each $J_i$ be nonempty finite sets, and let $m_{ij}\\ge1$ be an\ninteger for each $i\\in I$ and $j\\in J_i$. On one probability space, suppose\nthe real random variables $B_{ij}$ and $\\epsilon_{ijk}$, for\n$1\\le k\\le m_{ij}$, are jointly independent and square-integrable, with\n$$\\mathbb E[B_{ij}]=0,\\quad \\operatorname{Var}(B_{ij})=\\sigma_B^2<\\infty,\\quad \\mathbb E[\\epsilon_{ijk}]=0,\\quad \\operatorname{Var}(\\epsilon_{ijk})=\\sigma_\\epsilon^2<\\infty,$$\nwhere these two variances are common over their indices. For fixed real\nconstants $\\mu$ and $\\tau_i$, set\n$$Y_{ijk}=\\mu+\\tau_i+B_{ij}+\\epsilon_{ijk},\\qquad \\bar Y_{ij\\cdot}=\\frac{1}{m_{ij}}\\sum_{k=1}^{m_{ij}}Y_{ijk}.$$\nThen for every $i,j$ and distinct $k,\\ell\\in\\{1,\\ldots,m_{ij}\\}$,\n$$\\operatorname{Cov}(Y_{ijk},Y_{ij\\ell})=\\sigma_B^2,$$\nand for every $i,j$,\n$$\\operatorname{Var}(\\bar Y_{ij\\cdot})=\\sigma_B^2+\\frac{\\sigma_\\epsilon^2}{m_{ij}}.$$\nNo Gaussian assumption is needed."
+    ],
+    "ex-day-specific-calibration-slope-drift-and-check-standards": []
+  }
+}

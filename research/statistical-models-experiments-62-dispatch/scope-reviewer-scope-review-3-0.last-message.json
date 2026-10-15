@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "batch": "3",
+  "round": 0,
+  "reviewed_items": [
+    "lem-full-column-rank-matrix-has-economy-qr",
+    "thm-exact-gaussian-linear-regression-inference",
+    "thm-gaussian-regression-confidence-and-prediction-intervals",
+    "cex-rademacher-errors-do-not-give-exact-regression-t",
+    "ex-gaussian-regression-mean-and-prediction-intervals"
+  ],
+  "reviewed_pages": [
+    "exact-gaussian-linear-regression-inference",
+    "exact-gaussian-linear-regression-inference-examples"
+  ],
+  "decision": "repair",
+  "reason": "Both pages and all five items match the approved finite-sample scope; the Gaussian pivot, nested-model F law, interval arguments, counterexample, and numerical calculations check out. Request the single local repair for implicit dimension arguments in the QR and exact-inference proofs, plus an unshown projection identity.",
+  "findings": [
+    {
+      "id": "lem-full-column-rank-matrix-has-economy-qr:dimension",
+      "type": "prerequisite",
+      "reason": "Step 1.1 chooses an orthonormal basis of W^perp indexed by p+1,...,n without establishing dim(W^perp)=n-p. The cited orthogonal-decomposition result gives a direct sum and the orthonormal-basis result gives a basis, but neither cited statement gives its cardinality. Supply the finite-dimensional direct-sum dimension argument locally, including finiteness of W^perp (for example, use thm-dimension-of-a-linear-subspace and cor-dimension-of-a-direct-sum)."
+    },
+    {
+      "id": "thm-exact-gaussian-linear-regression-inference:dimension",
+      "type": "prerequisite",
+      "reason": "Step 1.2 asserts dim(A)=q and dim(B)=nu from orthogonal decompositions without a dimension-additivity prerequisite. Also, rank(X_R)=p-q must be connected to dim(col X_R): the library defines matrix rank as row rank. Make these uses explicit with a direct-sum dimension result and the matrix-rank definition and row-rank/column-rank theorem, or give equivalent local arguments."
+    },
+    {
+      "id": "thm-exact-gaussian-linear-regression-inference:projection",
+      "type": "local",
+      "reason": "Step 1.2 asserts P_U=P_WR+P_A, I-P_WR=P_A+P_B, and I-P_U=P_B without showing the projection components. Add a brief derivation from the three-way orthogonal decomposition and the definition of orthogonal projection."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-exact-gaussian-linear-regression-inference",
+      "decision": "repair",
+      "reason": "It consumes the QR lemma and independently uses the unsupported dimension counts in step 1.2; repair both arguments while preserving their statements."
+    },
+    {
+      "id": "thm-gaussian-regression-confidence-and-prediction-intervals",
+      "decision": "accept",
+      "reason": "Its use of the exact theorem's t pivot and coefficient-residual independence is valid; the requested repairs leave the supplier statement and hypotheses unchanged."
+    },
+    {
+      "id": "ex-gaussian-regression-mean-and-prediction-intervals",
+      "decision": "accept",
+      "reason": "The example correctly applies the interval formulas and its matrix, residual, variance, and width calculations are correct."
+    }
+  ]
+}

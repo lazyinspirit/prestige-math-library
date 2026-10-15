@@ -1,0 +1,839 @@
+{
+  "version": 1,
+  "scope": [
+    "def-simple-ordinary-and-universal-kriging",
+    "thm-kriging-systems-and-l2-optimality",
+    "thm-gaussian-simple-kriging-equals-conditional-mean",
+    "ex-singular-covariance-simple-kriging",
+    "ex-rank-deficient-universal-kriging-design",
+    "ex-ordinary-kriging-larger-error-than-simple"
+  ],
+  "contracts": {
+    "def-simple-ordinary-and-universal-kriging": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite model has at least one observation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition permits zero means and defines rules directly from the finite field vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition applies to n=1 and its vectors reduce to scalars."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition explicitly withholds the inverse formula when Sigma is singular."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limit is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition is choice-free and selects no family of weights."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-kriging-systems-and-l2-optimality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "a **simple-kriging linear predictor**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "The model means are",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-normal-equations-for-best-affine-l2-prediction",
+          "source_section": "Statement",
+          "quote": "Then there is a unique class",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "their **covariance** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "covariance is symmetric and bilinear",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Expand the centered squared error by covariance bilinearity to obtain Q(lambda)=v0-2 lambda^T c0+lambda^T Sigma lambda.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Trend bias vanishes for every beta exactly when P^T lambda=p0.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "A null vector of the augmented matrix has x orthogonal to P; positive definiteness forces x=0 and full column rank forces y=0.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The affine L2 normal equations give Sigma lambda=c0; positive definiteness yields the unique simple weight and its error formula.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The augmented solution is feasible and each feasible perturbation changes Q by h^T Sigma h, proving unique constrained optimality.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking the inner product of the first block equation with lambda and using P^T lambda=p0 gives the error formula.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite model has at least one observation."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Positive-definite Sigma excludes zero observation covariance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar simple case follows from steps 1.1–2.1; for q=1 and P=[p] with p≠0, the augmented determinant is -p², consistent with steps 1.3 and 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Singular Sigma and rank-deficient P are outside the theorem hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limit is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use finite covariance and matrix algebra only; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 shows P^T lambda=p0 makes the bias vanish for every beta."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 tests coordinate-vector beta values to show zero bias for all beta forces P^T lambda=p0."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "ordinary-is-universal-q1",
+          "claim": "Setting q=1, P=1_n, and p0=1 reduces the universal system to the ordinary system.",
+          "result": "The block matrix and right-hand side reduce exactly to the displayed ordinary equations."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-gaussian-simple-kriging-equals-conditional-mean": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-process",
+          "source_section": "Definition",
+          "quote": "a **Gaussian process** if",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "source_section": "Statement",
+          "quote": "then $U$ and $V$ are independent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent**",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "A family $(\\mathcal F_i)_{i\\in I}$ of sub-sigma-algebras",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kriging-systems-and-l2-optimality",
+          "source_section": "Statement",
+          "quote": "the unique mean-square minimizing weight vector",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "A **conditional-expectation version",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-conditional-expectation-is-unique-almost-surely",
+          "source_section": "Statement",
+          "quote": "then $Y=Z$ almost surely.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Form the simple residual; Gaussian closure makes it jointly Gaussian with Z, and Sigma lambda=c0 makes its mean and cross-covariance zero.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The zero-cross-covariance Gaussian block theorem implies that the residual is independent of Z.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Independence of the residual and observation sigma-algebra meets the conditional-mean lemma hypothesis and gives residual conditional mean zero.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The predictor is observation-measurable and has the target event integrals; uniqueness identifies it with the conditional mean.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite model has at least one observation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If c0=0, step 1.1 gives lambda=0 and steps 3.1–4.1 yield conditional mean m0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The residual covariance argument in step 1.1 is scalar when n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The joint covariance may be singular; step 2.1 uses the supplier result that allows singular covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limit is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states AC and steps 1.1–3.1 identify its Gaussian and conditional-expectation uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "ex-singular-covariance-simple-kriging": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "a **simple-kriging linear predictor**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation**",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Two-point summation gives mean zero and second moment one; the observation covariance has determinant zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitution gives squared error (1-lambda1-lambda2)^2, whose zero set is lambda1+lambda2=1.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite model has at least one observation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies all zero-error weights by lambda1+lambda2=1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes more than one observation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes a singular matrix and step 2.1 gives distinct coefficients for the same predictor."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limit is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two outcomes are enumerated in steps 1.1–2.1; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 shows lambda1+lambda2=1 gives zero error."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 shows zero error forces lambda1+lambda2=1."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-point-singular-simple-kriging",
+          "claim": "Sigma=[[1,1],[1,1]] and error=(1-lambda1-lambda2)^2.",
+          "result": "The determinant is zero and the error vanishes exactly when lambda1+lambda2=1."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "symmetric-rademacher-covariance",
+          "asserts": "Let $\\Omega=\\{-1,1\\}$ have equal probability and let $U(\\omega)=\\omega$."
+        }
+      ]
+    },
+    "ex-rank-deficient-universal-kriging-design": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "The model means are",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Finite sign enumeration gives centered unit variances and zero cross-covariances, hence observation covariance I2.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The image of P^T consists of vectors whose last two coordinates agree, so it cannot contain target vector (1,2,4).",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite model has at least one observation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the nonsingular covariance I2, isolating design rank as the obstruction."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes more than one observation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 exhibits a rank-two three-column design with no feasible target constraint."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limit is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The eight sign outcomes are enumerated in step 1.1; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "quadratic-trend-two-site-design",
+          "claim": "P=[[1,0,0],[1,1,1]] has rank two and p0=(1,2,4).",
+          "result": "P^T lambda=(lambda1+lambda2,lambda2,lambda2), so p0 is not in the image."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-ordinary-kriging-larger-error-than-simple": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "a **simple-kriging linear predictor**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "For an **ordinary-kriging model**",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kriging-systems-and-l2-optimality",
+          "source_section": "Statement",
+          "quote": "the unique mean-square minimizing weight vector",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kriging-systems-and-l2-optimality",
+          "source_section": "Statement",
+          "quote": "For ordinary kriging",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Enumerating sign coordinates gives zero means, unit variances, and zero cross moments, hence Sigma=I2, c0=0, and v0=1.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The simple formula gives known-mean weight zero and error one; the ordinary unbiased weights sum to one.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Expanding ordinary error gives 1+lambda1^2+lambda2^2; completing the square under the sum constraint yields unique minimum 3/2.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated finite model has at least one observation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes c0=0 and v0=1; steps 2.1–3.1 give both errors."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes more than one observation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the nondegenerate observation covariance I2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limit is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All eight equally weighted outcomes are directly enumerated in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "three-rademacher-error-comparison",
+          "claim": "Simple error is 1; ordinary error is 1+lambda1^2+lambda2^2 when lambda1+lambda2=1.",
+          "result": "The ordinary expression has minimum 3/2 at equal weights, above the simple error."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

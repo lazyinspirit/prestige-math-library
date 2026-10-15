@@ -1,0 +1,898 @@
+{
+  "version": 1,
+  "scope": [
+    "def-random-field-stationarity-covariance-and-variogram",
+    "lem-random-field-covariance-kernel-is-positive-semidefinite",
+    "thm-gaussian-random-field-existence-from-a-positive-semidefinite-kernel",
+    "thm-order-two-field-variogram-is-conditionally-negative-definite",
+    "thm-continuous-stationary-field-covariance-has-bochner-measure",
+    "ex-covariance-kernel-and-intrinsic-variogram-checks"
+  ],
+  "contracts": {
+    "def-random-field-stationarity-covariance-and-variogram": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item defines fields indexed by a specified T and makes no empty-index construction claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The identically zero field satisfies all stated finite-moment clauses and has zero covariance and variogram."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For a single site, the definitions reduce to a real random variable, its mean/variance, and the vacuous shift comparisons available in T."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: A constant field is strictly and wide stationary; all increments and its variogram are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No time horizon or limiting endpoint is part of the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The definition introduces no selection or existence construction and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-random-field-covariance-kernel-is-positive-semidefinite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-random-field-stationarity-covariance-and-variogram",
+          "source_section": "Definition",
+          "quote": "A **real random field** indexed by $T$ is a family $X=(X(s))_{s\\in T}$ of real random variables $X(s):\\Omega\\to\\mathbb R$ on that space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Moreover, covariance is symmetric and bilinear on finite linear combinations.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-linear-combination-is-square-integrable",
+          "claim": "A finite linear combination of square-integrable field coordinates is square-integrable, so its variance exists.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "covariance-form-is-a-variance",
+          "claim": "Covariance bilinearity identifies the finite kernel quadratic form with the variance of the same linear combination.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over n≥1 and makes no empty-site-list claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If all coefficients vanish, the quadratic form and variance are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For n=1 the quadratic form is a_1^2 Var(X(s_1)), which is nonnegative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If all field coordinates in the finite list are almost surely constant, every covariance and the quadratic form are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no sequence limit or endpoint in this finite statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses a finite sum and variance only; no choice axiom is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "thm-gaussian-random-field-existence-from-a-positive-semidefinite-kernel": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-second-countable-lch-spaces-are-standard-borel",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every second-countable locally compact Hausdorff space is Polish,\nhence standard Borel. Consequently, if $G$ is a second-countable locally\ncompact Hausdorff topological group and $H\\le G$ is a closed subgroup, then\nthe homogeneous space $G/H$ with its quotient topology is Polish and the\nquotient Borel structure together with the left action\n$G\\times G/H\\to G/H$ is a standard Borel $G$-space with Borel action.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-second-countable-space",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **second countable** when its topology has a basis $\\mathcal B$ that is at most countable ([[def-topology-basis-subbasis]], [[def-countable]]). Thus every open set is a union of members of one at most countable family $\\mathcal B$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-locally-compact-space",
+          "source_section": "Definition",
+          "quote": "A topological space $(X, \\mathcal{T})$ ([[def-topological-space]]) is **locally\ncompact** when\n\n> every point of $X$ has a compact neighbourhood:\n\nthat is, for every $x \\in X$ there is a neighbourhood $N$ of $x$\n([[def-neighbourhood-top]]) that is a compact subset of $X$\n([[def-compact-space]], [[def-subspace-topology-top]]).\n\n**A neighbourhood need not be open here**, and that is what makes the condition\nthe weak one it is meant to be: $N$ is required only to contain some open set\ncontaining $x$. Writing \"compact **open** neighbourhood\" instead would define a\nstrictly stronger property, satisfied by no space in which a point has no compact\nopen neighbourhood, $\\mathbb{R}$ among them; and requiring the compact set merely\nto *contain* $x$ would define a property so weak that every space with a\nsingleton has it, singletons being compact.\n\n**Every compact space is locally compact**, since $X$ itself is a neighbourhood\nof each of its points and is a compact subset of itself. The converse fails, and\n$\\mathbb{R}^n$ is the standard witness.\n\n**What the condition says in a metric space.** Let $(X,d)$ be a metric space\ncarrying its metric topology ([[def-metric-topology]], [[def-metrizable-space]]),\nwith balls as in [[def-metric-ball]], and let $x \\in X$. Then\n\n> $x$ has a compact neighbourhood **if and only if** there are a real $r > 0$ and\n> a compact $K \\subseteq X$ with $B(x,r) \\subseteq K$.\n\n*Both directions are immediate and are discharged here.* If $N$ is a compact\nneighbourhood of $x$, fix an open $U$ with $x \\in U \\subseteq N$; by\n[[def-metric-topology]] there is $r > 0$ with $B(x,r) \\subseteq U \\subseteq N$, so\n$K := N$ serves. Conversely, if $B(x,r) \\subseteq K$ with $K$ compact, then $K$\ncontains the open set $B(x,r)$, which contains $x$, so $K$ is a neighbourhood of\n$x$ and is compact. Compactness of a subset of $(X,d)$ means the same thing read\nmetrically and read topologically\n([[thm-compactness-agrees-with-metric-compactness]]), so the criterion may be\napplied with either development's theorems.\n\n**$\\mathbb{R}^n$ is locally compact for every $n \\ge 1$.** Give $\\mathbb{R}^n$\nthe product topology, which is the metric topology of the Euclidean metric $d_2$\n([[lem-metrics-on-rn]], [[cor-heine-borel-in-the-product-topology]]). For\n$p \\in \\mathbb{R}^n$ the set\n\n$$Q_p \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : d_2(x,p) \\le 1 \\,\\}$$\n\nis closed, being the complement of the union of the open balls $B(y, d_2(y,p) - 1)$\nover the points $y$ with $d_2(y,p) > 1$, and it is bounded\n([[def-metric-bounded-diameter]]), lying inside $B(p, 2)$; so $Q_p$ is compact by\n[[cor-heine-borel-in-the-product-topology]]. It contains the open ball $B(p,1)$,\nwhich contains $p$, so it is a compact neighbourhood of $p$. The space\n$\\mathbb{R}^n$ is not compact, so local compactness is strictly weaker than\ncompactness.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   ([[def-interval]], [[def-metric-ball]])\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   ([[def-metric-bounded-diameter]]): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-product-of-countable",
+          "source_section": "Statement",
+          "quote": "If $A$ and $B$ are at most countable ([[def-countable]]) then so is\n$A \\times B$.\n\n**No choice principle is used**: the two enumerations are given, and the\nenumeration of the product is written down from them.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-consistent-family-of-finite-dimensional-distributions",
+          "source_section": "Definition",
+          "quote": "Let $(E_i,\\mathcal E_i)_{i\\in I}$ be measurable spaces. A family\n$(\\mu_F)_{F\\Subset I}$, indexed by all finite subsets of $I$, is a **consistent family of finite-dimensional\ndistributions** when each $\\mu_F$ is a probability measure on\n$\\bigotimes_{i\\in F}\\mathcal E_i$, with the finite unordered product\nsigma-algebra of [[def-coordinate-maps-and-cylinder-sigma-algebra]], and for\nevery pair of finite sets $F\\subseteq G\\subseteq I$ the pushforward of\n$\\mu_G$ under the restriction $p_{G,F}(x)=x|_F$ equals $\\mu_F$; equivalently,\n$\\mu_G(p_{G,F}^{-1}(A))=\\mu_F(A)$ for every\n$A\\in\\bigotimes_{i\\in F}\\mathcal E_i$. The restriction is measurable since\ninverse images of coordinate generators are coordinate generators. The empty\nsupport carries the unique probability measure on the singleton empty product.\n\nReordering means choosing a different enumeration of the **same** finite set\n$F$. If $e:[n]\\to F$ is an enumeration, its displayed ordered law is the\npushforward of $\\mu_F$ under $r_e(x)=(x_{e(0)},\\ldots,x_{e(n-1)})$.\nFor another enumeration $e'$, the coordinate permutation $r_{e'}\\circ r_e^{-1}$\npushes this ordered law to the one displayed using $e'$. This is automatic\nfrom these definitions and does not require equal laws on different subsets\nof $I$, or invariance under permutations of a fixed ordered product.\nIn particular, consistency is data about\nevery finite joint law, not merely the one-coordinate marginals.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-coordinate-maps-and-cylinder-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "For measurable spaces $(E_i,\\mathcal E_i)_{i\\in I}$, put\n$E=\\prod_{i\\in I}E_i$. For finite $F\\subseteq I$, let\n$\\pi_F:E\\to\\prod_{i\\in F}E_i$ be restriction to $F$ (the singleton empty\nproduct when $F=\\varnothing$). On $\\prod_{i\\in F}E_i$, write $q_i$ for the\n$i$th coordinate map and define\n\n$$\\bigotimes_{i\\in F}\\mathcal E_i:=\\sigma\\{q_i^{-1}(A):i\\in F,\\ A\\in\\mathcal E_i\\}.$$\n\nFor $F=\\varnothing$ this is the two-set sigma-algebra on the singleton. If\n$e:[n]\\to F$ is any enumeration, coordinate relabelling identifies this\nsigma-algebra with the recursively defined finite product sigma-algebra of\n[[def-product-sigma-algebra-and-finite-product-sigma-algebras]]: both are\ngenerated by the same coordinate inverse images. Thus the notation is\nindependent of the enumeration.\n\nA **finite-coordinate cylinder** is $\\pi_F^{-1}(A)$ for\n$A\\in\\bigotimes_{i\\in F}\\mathcal E_i$. The **cylinder sigma-algebra** is\n\n$$\\mathcal C_I:=\\sigma\\{\\pi_F^{-1}(A):F\\subseteq I\\text{ finite},\\ A\\in\\bigotimes_{i\\in F}\\mathcal E_i\\}.$$\n\nThis is the product sigma-algebra on the arbitrary product; the empty-support cylinder is either $\\varnothing$ or $E$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For any set $I$, standard-Borel coordinate spaces $(E_i,\\mathcal E_i)$, and consistent finite-dimensional laws $(\\mu_F)_{F\\Subset I}$, there is a unique probability measure $\\mu$ on $\\mathcal C_I$ whose $F$-coordinate marginal is $\\mu_F$ for each finite $F$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-gaussian-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A real stochastic process\n$X=(X_t)_{t\\in I}$ [[def-stochastic-process-and-finite-dimensional-distributions]]\nis a **Gaussian process** if, for every integer $n\\ge 1$, every time list\n$t_1,\\ldots,t_n\\in I$, and every $a_1,\\ldots,a_n\\in\\mathbb R$, the random\nvariable\n$$\n\\sum_{j=1}^n a_jX_{t_j}\n$$\nhas a normal law $N(m,\\sigma^2)$ for some $m\\in\\mathbb R$ and\n$\\sigma\\ge0$. Variance zero is allowed, so constant linear combinations are\nincluded.\n\nEquivalently, for every such time list the evaluation vector\n$(X_{t_1},\\ldots,X_{t_n})$ has a possibly singular multivariate normal law in\nthe sense of [[def-multivariate-normal-law]]. Indeed, that definition says\nexactly that every scalar projection of the vector is normal. This also covers\nrepeated times, zero coefficients, and singular covariance matrices; no\ndistinct-time convention is needed for this definition.\n\nChoice is declared because the library's scalar and multivariate normal-law\ninterfaces construct their probability laws and independent standard-normal\nrealizations under AC. The equivalence itself is only an unpacking of the\nfinite-dimensional projection definition and makes no further selection.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-random-field-stationarity-covariance-and-variogram",
+          "source_section": "Definition",
+          "quote": "Let $T\\subseteq\\mathbb R^d$, $d\\ge1$, have its relative Borel sigma-algebra, and\nlet $(\\Omega,\\mathcal F,\\mathbb P)$ be one probability space. A **real random\nfield** indexed by $T$ is a family $X=(X(s))_{s\\in T}$ of real random variables\n$X(s):\\Omega\\to\\mathbb R$ on that space. This is coordinate measurability:\neach map $(s,\\omega)\\mapsto X(s,\\omega)$ with $s$ fixed is measurable in\n$\\omega$. The field is **jointly measurable** when the map\n$(s,\\omega)\\mapsto X(s,\\omega)$ from\n$(T\\times\\Omega,\\mathcal B(T)\\otimes\\mathcal F)$ to\n$(\\mathbb R,\\mathcal B(\\mathbb R))$ is measurable. Joint measurability is an\nadditional hypothesis when a spatial Lebesgue integral is used; it is not part\nof coordinate measurability.\n\nWrite $\\mathcal L(X(s_1),\\ldots,X(s_n))$ for the pushforward law of a finite\ncoordinate tuple ([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-law-or-distribution-of-a-random-element]]). The field is **strictly stationary** on $T$ when, for every\nfinite tuple $s_1,\\ldots,s_n\\in T$ and every $u\\in\\mathbb R^d$ for which\n$s_i+u\\in T$ for all $i$, these joint laws are invariant under the common\ntranslation $s_i\\mapsto s_i+u$. This extends the integer-shift convention for\ntime series in [[def-strict-and-weak-stationarity-for-time-series]] to spatial\nindices.\n\nWrite $T-T:=\\{t-s:s,t\\in T\\}$ for the set of displacements realized by pairs\nof sites.\n\nThe field is **wide stationary** when every $X(s)$ is square-integrable, its\nmean is one constant $m$, and there is a function $C:T-T\\to\\mathbb R$ such\nthat\n$$\\operatorname{Cov}(X(s),X(t))=C(t-s)\\qquad(s,t\\in T).$$\nFor a wide-stationary field on all of $\\mathbb R^d$, it is **wide isotropic**\nwhen $C(h)$ depends only on the Euclidean norm $\\|h\\|$.\n\nFor $h\\in T-T$ and any $s$ with $s,s+h\\in T$, put\n$\\Delta_hX(s):=X(s+h)-X(s)$. The field is **intrinsically stationary of order\ntwo** when for each $h\\in T-T$ the first and second raw moments of\n$\\Delta_hX(s)$ are finite and independent of the admissible starting site\n$s$. Here these moments are $\\mathbb E[\\Delta_hX(s)]$ and\n$\\mathbb E[(\\Delta_hX(s))^2]$. The common second moment defines the\n**variogram**\n$$\\gamma(h):=\\frac12\\mathbb E[(\\Delta_hX(s))^2].$$\nThe mean increment may depend on $h$ and need not be zero; no finite second\nmoment of the field levels themselves is required by this definition.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each nonempty finite $F\\subseteq T$, use AC to choose an enumeration $e_F:\\{1,\\ldots,n_F\\}\\to F$. Put $t_i=e_F(i)$, $m_F=(m(t_i))_{i=1}^{n_F}$, and $K_F=[K(t_i,t_j)]_{i,j=1}^{n_F}$. Let $r_F:\\mathbb R^{n_F}\\to\\mathbb R^F$ relabel coordinates by $r_F(x)(e_F(i))=x_i$. The matrix $K_F$ is symmetric positive semidefinite by the hypothesis on $K$, so [F1] supplies $N_{n_F}(m_F,K_F)$; define the probability measure on the actual coordinate space by $\\mu_F:=(r_F)_\\#N_{n_F}(m_F,K_F)$. If $F=\\varnothing$, use the unique probability law on the singleton empty product. Changing the enumeration permutes $m_F$ and both indices of $K_F$ by the same permutation. The characteristic-function formula in [F2] shows that the corresponding permutation of $\\mathbb R^{n_F}$ carries one Gaussian law to the other; after relabelling, the resulting measure on $\\mathbb R^F$ is unchanged. Thus $\\mu_F$ is independent of the chosen enumeration.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The intervals $(p,q)$ with rational endpoints form a countable family by the countability of $\\mathbb Q$ and [F4]. They form a base: if $U$ is open and $x\\in U$, choose $r>0$ with $(x-r,x+r)\\subseteq U$; rational density supplies $p,q\\in\\mathbb Q$ with $x-r<p<x<q<x+r$, so $x\\in(p,q)\\subseteq U$. Thus $\\mathbb R$ is second-countable by [F4]. If $x\\ne y$, the open balls about $x$ and $y$ of radius $|x-y|/3$ are disjoint: a point in both would give $|x-y|<2|x-y|/3$ by the triangle inequality. Hence the metric topology is Hausdorff. It is locally compact since each $x$ has the compact interval $[x-1,x+1]$ as a neighborhood by [F4]. Therefore [F3] makes $(\\mathbb R,\\mathcal B(\\mathbb R))$ standard Borel.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $F\\subseteq H$ be finite and nonempty, and use the enumerations fixed in step 1.1. Write $\\pi_{H,F}:\\mathbb R^H\\to\\mathbb R^F$ for restriction. For $u\\in\\mathbb R^F$, define $\\widetilde u\\in\\mathbb R^{n_H}$ by $\\widetilde u_j=u(e_H(j))$ when $e_H(j)\\in F$, and $\\widetilde u_j=0$ otherwise. Under the coordinate relabelling $r_H$, the characteristic function of $(\\pi_{H,F})_\\#\\mu_H$ at $u$ is the characteristic function of $N_{n_H}(m_H,K_H)$ at $\\widetilde u$. By [F2] this is $$\\exp\\!\\left(i\\sum_{t\\in F}u(t)m(t)-\\frac12\\sum_{s,t\\in F}u(s)u(t)K(s,t)\\right).$$ This is also the characteristic function of $\\mu_F=(r_F)_\\#N_{n_F}(m_F,K_F)$ at $u$, by [F2]. Identifying $\\mathbb R^F$ with $\\mathbb R^{n_F}$ through $r_F$, uniqueness of characteristic functions in [F2] gives $(\\pi_{H,F})_\\#\\mu_H=\\mu_F$. Empty sets give the unique singleton marginal. Hence the family is consistent in the sense of [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The consistent family from step 2.1 now satisfies the standard-Borel hypotheses of [F7]. Kolmogorov extension gives a unique probability measure $\\mu$ on $\\mathcal C_T$ with the specified finite-coordinate marginals.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F7",
+            "step 1.2",
+            "construct",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On $(\\mathbb R^T,\\mathcal C_T,\\mu)$ define $X(t)(\\omega):=\\omega(t)$. Each coordinate is measurable by [F6], and for every finite set $F$ its joint law is $\\mu_F$ by [F7]. The means and covariances are therefore $m(t)$ and $K(s,t)$ by [F1]. For any finite list $t_1,\\ldots,t_n$, possibly with repeated sites, and coefficients $a_1,\\ldots,a_n$, collect the distinct sites in $F=\\{t_1,\\ldots,t_n\\}$ and put $b_t:=\\sum_{j:t_j=t}a_j$. Then $\\sum_j a_jX(t_j)=\\sum_{t\\in F}b_tX(t)$ is a linear projection of the $F$-coordinate Gaussian vector, so it has a normal law by [F1]. This is the Gaussian-process condition [F8], and the coordinates form a real field by [F9]. The extension supplies only the cylinder sigma-algebra; no continuity or joint-measurability conclusion was used.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The empty support carries its unique singleton probability law and creates no coordinate condition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If K is the zero kernel, all finite Gaussian marginals are point masses at the specified means; no invertibility is needed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For a one-point index set the construction is the ordinary scalar normal law, including zero variance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Singular finite covariance matrices are included in the multivariate-normal definition and characteristic-function consistency proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No temporal horizon or path endpoint is specified; T is an arbitrary index set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: AC is used by finite multivariate-normal construction and by Kolmogorov extension; DC is not assumed or used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "thm-order-two-field-variogram-is-conditionally-negative-definite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-random-field-stationarity-covariance-and-variogram",
+          "source_section": "Definition",
+          "quote": "Let $T\\subseteq\\mathbb R^d$, $d\\ge1$, have its relative Borel sigma-algebra, and\nlet $(\\Omega,\\mathcal F,\\mathbb P)$ be one probability space. A **real random\nfield** indexed by $T$ is a family $X=(X(s))_{s\\in T}$ of real random variables\n$X(s):\\Omega\\to\\mathbb R$ on that space. This is coordinate measurability:\neach map $(s,\\omega)\\mapsto X(s,\\omega)$ with $s$ fixed is measurable in\n$\\omega$. The field is **jointly measurable** when the map\n$(s,\\omega)\\mapsto X(s,\\omega)$ from\n$(T\\times\\Omega,\\mathcal B(T)\\otimes\\mathcal F)$ to\n$(\\mathbb R,\\mathcal B(\\mathbb R))$ is measurable. Joint measurability is an\nadditional hypothesis when a spatial Lebesgue integral is used; it is not part\nof coordinate measurability.\n\nWrite $\\mathcal L(X(s_1),\\ldots,X(s_n))$ for the pushforward law of a finite\ncoordinate tuple ([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-law-or-distribution-of-a-random-element]]). The field is **strictly stationary** on $T$ when, for every\nfinite tuple $s_1,\\ldots,s_n\\in T$ and every $u\\in\\mathbb R^d$ for which\n$s_i+u\\in T$ for all $i$, these joint laws are invariant under the common\ntranslation $s_i\\mapsto s_i+u$. This extends the integer-shift convention for\ntime series in [[def-strict-and-weak-stationarity-for-time-series]] to spatial\nindices.\n\nWrite $T-T:=\\{t-s:s,t\\in T\\}$ for the set of displacements realized by pairs\nof sites.\n\nThe field is **wide stationary** when every $X(s)$ is square-integrable, its\nmean is one constant $m$, and there is a function $C:T-T\\to\\mathbb R$ such\nthat\n$$\\operatorname{Cov}(X(s),X(t))=C(t-s)\\qquad(s,t\\in T).$$\nFor a wide-stationary field on all of $\\mathbb R^d$, it is **wide isotropic**\nwhen $C(h)$ depends only on the Euclidean norm $\\|h\\|$.\n\nFor $h\\in T-T$ and any $s$ with $s,s+h\\in T$, put\n$\\Delta_hX(s):=X(s+h)-X(s)$. The field is **intrinsically stationary of order\ntwo** when for each $h\\in T-T$ the first and second raw moments of\n$\\Delta_hX(s)$ are finite and independent of the admissible starting site\n$s$. Here these moments are $\\mathbb E[\\Delta_hX(s)]$ and\n$\\mathbb E[(\\Delta_hX(s))^2]$. The common second moment defines the\n**variogram**\n$$\\gamma(h):=\\frac12\\mathbb E[(\\Delta_hX(s))^2].$$\nThe mean increment may depend on $h$ and need not be zero; no finite second\nmoment of the field levels themselves is required by this definition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose first that $X$ is wide stationary. For every $s,h$, its increments have mean zero because the field mean is constant. Wide stationarity gives $C(h)=\\operatorname{Cov}(X(s),X(s+h))$ and $C(-h)=\\operatorname{Cov}(X(s+h),X(s))$; covariance symmetry [F3] therefore gives $C(-h)=C(h)$. Both level variances equal $C(0)$, and the cross-covariance in the increment variance is $C(-h)=C(h)$. Thus $$\\mathbb E[(X(s+h)-X(s))^2]=\\operatorname{Var}(X(s+h)-X(s))=2C(0)-2C(h).$$ Dividing by two gives $\\gamma(h)=C(0)-C(h)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For arbitrary sites $s_1,\\ldots,s_n$, set $Y_i:=X(s_i)-X(0)$. Each $Y_i$ is square-integrable by order-two intrinsic stationarity, since it is an increment from $0$ to $s_i$. Moreover, $Y_i-Y_j=X(s_i)-X(s_j)$, so [F1] gives $$2\\gamma(s_i-s_j)=\\mathbb E[(Y_i-Y_j)^2].$$ All cross products are integrable because $2|Y_iY_j|\\le Y_i^2+Y_j^2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expanding the finite sum from step 1.2 and using $\\sum_i a_i=0$ yields $$ \\begin{aligned} \\sum_{i,j}a_i a_j\\gamma(s_i-s_j) &=\\frac12\\sum_{i,j}a_i a_j\\mathbb E[Y_i^2+Y_j^2-2Y_iY_j]\\\\ &=-\\mathbb E\\!\\left[\\left(\\sum_i a_iY_i\\right)^2\\right]\\le0. \\end{aligned} $$ The two sums containing $Y_i^2$ or $Y_j^2$ vanish because each contains the factor $\\sum_i a_i$; the remaining term is the negative expectation of a square. No choice principle is used.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires n≥1 and makes no empty family claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: For h=0, gamma(0)=0; if all coefficients are zero, the CND form is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For n=1 the zero-sum hypothesis forces a_1=0, so the inequality is equality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If all increments vanish almost surely, gamma is zero and every quadratic form is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no sequence limit or endpoint in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses a fixed basepoint, finite sums, and nonnegative expectations; it is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "thm-continuous-stationary-field-covariance-has-bochner-measure": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-random-field-stationarity-covariance-and-variogram",
+          "source_section": "Definition",
+          "quote": "The field is **wide stationary** when every $X(s)$ is square-integrable, its mean is one constant $m$, and there is a function $C:T-T\\to\\mathbb R$ such that",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-random-field-covariance-kernel-is-positive-semidefinite",
+          "source_section": "Statement",
+          "quote": "Then $K$ is symmetric and positive semidefinite:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-positive-definite-function-on-an-abelian-group",
+          "source_section": "Definition",
+          "quote": "Then $\\phi$ is **positive definite** when for every integer $n\\ge0$, every finite family",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-fourier-transform-on-an-lca-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a locally compact Hausdorff abelian group, written additively",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-pontryagin-dual-and-compact-open-topology",
+          "source_section": "Definition",
+          "quote": "A **character** of $G$ is a continuous group homomorphism $\\gamma:G\\to\\mathbb T$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-bochner-theorem-for-lca-groups",
+          "source_section": "Statement",
+          "quote": "A continuous function $\\phi:G\\to\\mathbb C$ is positive definite if and only if there is a unique finite positive Radon measure $\\mu$ on $\\widehat G$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "stationary-covariance-is-even-and-positive",
+          "claim": "The covariance function is even and its finite lag matrices are covariance matrices, hence real positive semidefinite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "complex-positive-definiteness",
+          "claim": "For a real symmetric positive-semidefinite matrix, the complex Hermitian form is the sum of its real and imaginary quadratic forms.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "bochner-measure",
+          "claim": "Continuity, LCA structure, complex positive definiteness, and AC+DC meet the exact Bochner hypotheses and give the unique measure and mass.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F4",
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain dimension satisfies d≥1 and the theorem concerns the full Euclidean group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If C(0)=0, Bochner gives a positive measure of mass zero, hence the zero measure; the theorem does not require positive variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The one-dimensional case is included as R^1 with its usual LCA topology."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Degenerate fields and the identically zero covariance are allowed; no inverse or density is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no limiting endpoint; continuity is required on all of R^d."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: This spectral item assumes AC+DC solely through the Bochner supplier. The CND proof is a separate choice-free item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC",
+        "DC"
+      ]
+    },
+    "ex-covariance-kernel-and-intrinsic-variogram-checks": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-random-field-stationarity-covariance-and-variogram",
+          "source_section": "Definition",
+          "quote": "Let $T\\subseteq\\mathbb R^d$, $d\\ge1$, have its relative Borel sigma-algebra, and\nlet $(\\Omega,\\mathcal F,\\mathbb P)$ be one probability space. A **real random\nfield** indexed by $T$ is a family $X=(X(s))_{s\\in T}$ of real random variables\n$X(s):\\Omega\\to\\mathbb R$ on that space. This is coordinate measurability:\neach map $(s,\\omega)\\mapsto X(s,\\omega)$ with $s$ fixed is measurable in\n$\\omega$. The field is **jointly measurable** when the map\n$(s,\\omega)\\mapsto X(s,\\omega)$ from\n$(T\\times\\Omega,\\mathcal B(T)\\otimes\\mathcal F)$ to\n$(\\mathbb R,\\mathcal B(\\mathbb R))$ is measurable. Joint measurability is an\nadditional hypothesis when a spatial Lebesgue integral is used; it is not part\nof coordinate measurability.\n\nWrite $\\mathcal L(X(s_1),\\ldots,X(s_n))$ for the pushforward law of a finite\ncoordinate tuple ([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-law-or-distribution-of-a-random-element]]). The field is **strictly stationary** on $T$ when, for every\nfinite tuple $s_1,\\ldots,s_n\\in T$ and every $u\\in\\mathbb R^d$ for which\n$s_i+u\\in T$ for all $i$, these joint laws are invariant under the common\ntranslation $s_i\\mapsto s_i+u$. This extends the integer-shift convention for\ntime series in [[def-strict-and-weak-stationarity-for-time-series]] to spatial\nindices.\n\nWrite $T-T:=\\{t-s:s,t\\in T\\}$ for the set of displacements realized by pairs\nof sites.\n\nThe field is **wide stationary** when every $X(s)$ is square-integrable, its\nmean is one constant $m$, and there is a function $C:T-T\\to\\mathbb R$ such\nthat\n$$\\operatorname{Cov}(X(s),X(t))=C(t-s)\\qquad(s,t\\in T).$$\nFor a wide-stationary field on all of $\\mathbb R^d$, it is **wide isotropic**\nwhen $C(h)$ depends only on the Euclidean norm $\\|h\\|$.\n\nFor $h\\in T-T$ and any $s$ with $s,s+h\\in T$, put\n$\\Delta_hX(s):=X(s+h)-X(s)$. The field is **intrinsically stationary of order\ntwo** when for each $h\\in T-T$ the first and second raw moments of\n$\\Delta_hX(s)$ are finite and independent of the admissible starting site\n$s$. Here these moments are $\\mathbb E[\\Delta_hX(s)]$ and\n$\\mathbb E[(\\Delta_hX(s))^2]$. The common second moment defines the\n**variogram**\n$$\\gamma(h):=\\frac12\\mathbb E[(\\Delta_hX(s))^2].$$\nThe mean increment may depend on $h$ and need not be zero; no finite second\nmoment of the field levels themselves is required by this definition.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-random-field-covariance-kernel-is-positive-semidefinite",
+          "source_section": "Statement",
+          "quote": "Let $X=(X(s))_{s\\in T}$ be a real random field on one probability space, with\n$X(s)\\in L^2$ for every $s\\in T$, and put\n$K(s,t):=\\operatorname{Cov}(X(s),X(t))$. Then $K$ is symmetric and positive\nsemidefinite: for every $n\\ge1$, sites $s_1,\\ldots,s_n\\in T$, and real\n$a_1,\\ldots,a_n$,\n$$\\sum_{i=1}^n\\sum_{j=1}^n a_i a_j K(s_i,s_j)\\ge0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-order-two-field-variogram-is-conditionally-negative-definite",
+          "source_section": "Statement",
+          "quote": "Let $X=(X(t))_{t\\in\\mathbb R^d}$ be order-two intrinsically stationary in the\nsense of [[def-random-field-stationarity-covariance-and-variogram]], with\nvariogram $\\gamma(h)=\\tfrac12\\mathbb E[(X(t+h)-X(t))^2]$. Then for every\n$n\\ge1$, sites $s_1,\\ldots,s_n\\in\\mathbb R^d$, and real coefficients\n$a_1,\\ldots,a_n$ with $\\sum_i a_i=0$,\n$$\\sum_{i=1}^n\\sum_{j=1}^n a_i a_j\\gamma(s_i-s_j)\\le0.$$\nThis is conditional negative definiteness over real coefficients. If $X$ is\nalso wide stationary with covariance function $C$, then\n$$\\gamma(h)=C(0)-C(h)\\qquad(h\\in\\mathbb R^d).$$\nThe proof is choice-free.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $C$ were a stationary covariance, its matrix at the two sites $0$ and $1$ would be $$M=\\begin{pmatrix}C(0)&C(-1)\\\\C(1)&C(0)\\end{pmatrix}=\\begin{pmatrix}1&2\\\\2&1\\end{pmatrix}.$$ The covariance-kernel lemma [F2] would make this matrix positive semidefinite, but for $v=(1,-1)^T$, $v^TMv=-2<0$. Hence $C(h)=1+h^2$ is not a stationary covariance.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any real $a_1,\\ldots,a_n$ with $\\sum_i a_i=0$ and sites $s_1,\\ldots,s_n$, $$\\sum_{i,j}a_i a_j(s_i-s_j)^2=-2\\left(\\sum_i a_i s_i\\right)^2\\le0.$$ This directly verifies the zero-sum CND inequality for $\\gamma(h)=h^2$ and is consistent with [F3].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Define $Z(\\omega):=\\sqrt2\\,\\omega$ on $\\Omega=\\{-1,+1\\}$. By the finite space and expectation definitions [F4]–[F6], $$\\mathbb E[Z]=\\tfrac12\\sqrt2-\\tfrac12\\sqrt2=0,\\qquad\\mathbb E[Z^2]=\\tfrac12(2)+\\tfrac12(2)=2.$$",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $X(t):=tZ$, so every coordinate has finite range and is square-integrable. For any admissible $t,h$, $X(t+h)-X(t)=hZ$, and $$\\frac12\\mathbb E[(X(t+h)-X(t))^2]=\\frac12h^2\\mathbb E[Z^2]=h^2,$$ independent of $t$. Its increment mean is also zero, so the stated intrinsic stationarity and variogram claim hold by [F1].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The field mean is zero and $\\operatorname{Var}(X(t))=2t^2$ by [F6]–[F7], so its variance is not constant in $t$. Thus this intrinsically stationary field is not wide stationary, as claimed.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "F7",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty two-outcome probability space and does not discuss an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: At h=0 the increment and variogram are zero; with all coefficients zero the CND quadratic form is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: For one CND site the zero-sum condition forces its coefficient to be zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: Z is nondegenerate with two distinct values; the quadratic variogram is not the zero function."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting parameter or endpoint is part of either calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The witness is an explicit two-point finite space and the matrix/algebra checks use finite operations only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is stated."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-site-covariance-refutation",
+          "claim": "At sites 0 and 1, the candidate covariance has matrix [[1,2],[2,1]].",
+          "result": "For v=(1,-1), v^T M v=-2<0 in step 1.1, so the candidate is not positive semidefinite."
+        },
+        {
+          "id": "two-point-witness-moments",
+          "claim": "The equal-weight values Z=±sqrt(2) have mean 0 and second moment 2.",
+          "result": "The two weighted sums in step 1.3 evaluate to 0 and 2, respectively."
+        },
+        {
+          "id": "zero-sum-quadratic",
+          "claim": "For any finite real coefficients with sum zero, the h^2 quadratic form is -2(Σ_i a_i s_i)^2.",
+          "result": "The expression in step 1.2 is nonpositive for every finite site list and coefficient vector satisfying the zero-sum condition."
+        }
+      ],
+      "axioms_used": []
+    }
+  }
+}

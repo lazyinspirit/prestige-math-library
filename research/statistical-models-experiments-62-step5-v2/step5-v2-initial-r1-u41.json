@@ -1,0 +1,146 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "41",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "def-time-series-spectral-measure-and-periodogram",
+      "model": "gpt-6-luna",
+      "context_sha256": "729c64eaafe442d08bffcf2869c5dcea97080e70ddf10573089d0c791ce92395",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The standalone Definition declared only b>0 for K_b, then used undeclared b_n in both normalized weights and the estimator. This is an undefined input, rather than an invalid proof inference or citation. Repaired by supplying an arbitrary sequence (b_n)_{n>=1} with every b_n>0; the positive-denominator condition remains. No asymptotic condition is needed to define these finite estimators.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-time-series-spectral-measure-and-periodogram",
+      "disposition": "repaired",
+      "post_sha256": "85306ee57b70d6734f178931673af65402f63502f3a26b7153140d873450350d",
+      "review_context_sha256": "d1eed4f39f417ec77313ed367556cb0cca64471be52c9a89aabf5e005614ffc0",
+      "reason": "Reviewed the Definition, prerequisite statements, contract and page convention. Positive b_n makes K_{b_n} defined; compact support gives finite periodization, and a positive finite denominator gives nonnegative weights summing to one. n>=1 excludes sample division by zero. The exponential Borel pushforward under Countable Choice retains angular mass 2pi; the supplied spectral measure has mass gamma(0), and finite second moments plus the displayed square identity bound periodogram expectation. Spectral and normalization clauses are unchanged. Corrected the contract boundary that incorrectly denied the explicit angular Countable Choice premise. This is repair verification, not an independent review of my own edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-angular-fourier-orthogonality",
+    "thm-herglotz-spectrum-and-spectral-density",
+    "thm-periodogram-fejer-expectation-and-smoothing-bias",
+    "ex-atomic-spectrum-versus-continuous-spectral-density",
+    "thm-stationary-arma-spectral-density"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-time-series-spectral-measure-and-periodogram",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "other",
+      "locus": "definition",
+      "finding": "Undefined bandwidth-sequence input in w_{n,j} and tilde f_n. Added a supplied positive sequence before the Fourier-grid definitions.",
+      "evidence": "items/def-time-series-spectral-measure-and-periodogram.md, Definition, smoothing paragraph; original b>0 did not bind b_n."
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "id": "def-time-series-spectral-measure-and-periodogram",
+      "status": "fixed",
+      "severity": "nonfatal",
+      "locus": "proof-contract",
+      "finding": "The nonempty-choice boundary incorrectly said the item assumes no choice axiom. It now distinguishes explicit Countable Choice for angular measure from choice-free finite formulas and a supplied bandwidth sequence.",
+      "evidence": "research/statistical-models-experiments-62-batch-41.proof-contracts.json, contracts.def-time-series-spectral-measure-and-periodogram.boundaries[nonempty-choice]."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "interface_change": "Only the Definition gained: Fix a sequence of bandwidths (b_n)_{n>=1} with b_n>0. No claim was weakened, no dependency changed, and no new supplier was required.",
+    "prerequisites": "Opened current stationarity and autocovariance definitions and all other listed supplier Statement/Definition sections. The existing measure, topology, exponential and finite-moment conventions suffice for the assigned repair. External source URLs in item metadata were not consulted; the parameter-binding repair and finite identities are familiar.",
+    "page_review": {
+      "path": "library/statistical-models-and-experiments/spectral-measures-and-periodogram-bias.md",
+      "affected_use": "Page promises asymptotic unbiasedness under the stated bandwidth and grid conditions. The theorem continues to impose b_n->0 and nb_n->infinity; declaring the sequence leaves this promise sound.",
+      "disposition": "unchanged_sound"
+    },
+    "consumer_reviews": [
+      {
+        "id": "lem-angular-fourier-orthogonality",
+        "path": "items/lem-angular-fourier-orthogonality.md",
+        "affected_use": "Statement and Facts F1 use angular Lebesgue measure of total mass 2pi; the proof integrates its periodic lift over one period.",
+        "disposition": "unchanged_sound",
+        "reason": "The measure clause is byte-for-byte unchanged; no smoothing sequence is used."
+      },
+      {
+        "id": "thm-herglotz-spectrum-and-spectral-density",
+        "path": "items/thm-herglotz-spectrum-and-spectral-density.md",
+        "affected_use": "Statement identifies its Fourier-representing Radon measure as the defined spectral measure; F10 and Proof 3.1 use the angular Borel measure and its mass.",
+        "disposition": "unchanged_sound_for_interface",
+        "reason": "The spectral measure and angular measure clauses are unchanged. Separate pre-existing presentation issue is routed below."
+      },
+      {
+        "id": "thm-periodogram-fejer-expectation-and-smoothing-bias",
+        "path": "items/thm-periodogram-fejer-expectation-and-smoothing-bias.md",
+        "affected_use": "Statement smoothing branch and F6 use the normalized Fourier-grid weights; Proof 1.2 uses K(0)>0 and nb_n->infinity for denominator positivity, and Proof 5.1 averages g_n with those weights.",
+        "disposition": "unchanged_sound",
+        "reason": "Its own hypotheses already supply b_n>0, b_n->0 and nb_n->infinity. They instantiate the corrected arbitrary positive sequence. Nearest grid distance pi/n is eventually within the kernel positive neighborhood; positive weights lie within R b_n of the target, as required by the bias proof."
+      },
+      {
+        "id": "ex-atomic-spectrum-versus-continuous-spectral-density",
+        "path": "items/ex-atomic-spectrum-versus-continuous-spectral-density.md",
+        "affected_use": "F11 and Verification 2.1 use the Fourier-representing spectral measure; Verification 5.1 uses the unchanged raw periodogram and Fejer kernel for atomic and continuous spectra.",
+        "disposition": "unchanged_sound",
+        "reason": "No bandwidth sequence or smoother is used. Spectral measure, raw periodogram and Fejer definitions retain their original formulas."
+      },
+      {
+        "id": "thm-stationary-arma-spectral-density",
+        "path": "items/thm-stationary-arma-spectral-density.md",
+        "affected_use": "Facts F2, Proof 1.2 and Proof 4.1 use positive-phase spectral representation and angular mass 2pi to construct a spectral density.",
+        "disposition": "unchanged_sound_for_interface",
+        "reason": "These clauses are unchanged and no smoother is used. The independent undeclared orthogonality dependency is routed below."
+      }
+    ],
+    "owner_routes": [
+      {
+        "id": "thm-herglotz-spectrum-and-spectral-density",
+        "route": "frontier_owner",
+        "finding": "Verified Step-4 presentation concern: Proof 3.1 contains four doubled-backslash setminus commands in angular-measure and nu bounds for U minus E and O minus K.",
+        "minimality": "Replace each doubled-backslash setminus with the ordinary single-backslash command. The set-difference regularity argument remains valid; no Statement change is necessary. Unassigned item was not edited."
+      },
+      {
+        "id": "thm-stationary-arma-spectral-density",
+        "route": "frontier_owner",
+        "finding": "Verified Step-4 alert: Proof 4.1 evaluates (2pi)^(-1) integral exp(i(h-j+k)lambda) as the Kronecker delta. F5 supplies double-series summation, not Fourier orthogonality. lem-angular-fourier-orthogonality proves the exact identity under the consumer’s Countable Choice premise but is absent from deps and Facts.",
+        "minimality": "Declare lem-angular-fourier-orthogonality in deps, cite its exact identity in Facts and Proof 4.1, and reconcile owning manifest/contract metadata. No Statement change is needed; no item outside this assignment was edited."
+      }
+    ],
+    "published_consumer_ledger": "No published direct consumer or new published defect was found; no update to research/published-consumer-supplier-ledger.md is proposed.",
+    "checks": [
+      {
+        "command": "node tools/rendercheck.mjs items/def-time-series-spectral-measure-and-periodogram.md --json",
+        "exit_code": 0,
+        "result": "1 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-time-series-spectral-measure-and-periodogram.md --json",
+        "exit_code": 0,
+        "result": "1 file; not-applicable, 0 proof sections, 0 failures."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-41.proof-contracts.json --strict --items def-time-series-spectral-measure-and-periodogram --json",
+        "exit_code": 0,
+        "result": "Assigned contract passes with no errors or warnings. An initial boundary-evidence-unanchored failure was corrected by naming the Definition explicitly."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-time-series-spectral-measure-and-periodogram.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects; run after the final item edit."
+      }
+    ],
+    "unresolved_obligations": []
+  }
+}

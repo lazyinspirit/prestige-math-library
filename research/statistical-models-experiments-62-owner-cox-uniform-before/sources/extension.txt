@@ -1,0 +1,628 @@
+
+PAGE 1
+STAT331
+Cox’s Model: Extensions
+In this unit we consider several extensions of the usual Cox PH model that
+are both useful in practice and establish links with variations of the logrank
+test. Large-sample properties of the extensions will be covered in later units.
+The extensions considered are:
+• extending Cox’s model to include strata
+• Cox’s model for comparing P+1 groups; trend tests
+• allowing time-varying covariates
+• estimating the underlying cumulative hazard H0(t)
+• some words on informative censoring
+9.1 Stratiﬁed Cox Model:
+Suppose ﬁrst that Z and W are binary covariates.
+e.g.,
+Z = treatment group =
+ 0
+group 0
+1
+group 1
+and
+W
+= gender =
+ 0
+female
+1
+male,
+and we want to assess the association between Z and survival while control-
+ling for W. One way to do this is to ﬁt Z and W as covariates in a multivariate
+Cox’s model, and then test that the regression coeﬃcient corresponding to Z
+is zero. That is, ﬁt the model
+h(t|Z, W) = h0(t)eβ1Z+β2W ,
+1
+
+
+PAGE 2
+and then test the hypothesis that β1 = 0. Note that with this model:
+trmt HR = h(t|Z = 1, W)
+h(t|Z = 0, W) = eβ1
+and
+gender HR = h(t|Z, W = 1)
+h(t|Z, W = 0) = eβ2
+Thus, hazard functions of the 4 types of individuals are proportional.
+Alternatively, consider the following model:
+Females (W = 0):
+h(t|Z, W = 0) = h0(t)eβ1Z
+Males (W = 1):
+h(t|Z, W = 1) = h1(t)eβ1Z
+(9.1)
+−→
+treatment has same (eβ1) hazard ratio within each level of W, but the
+underlying hazards for females (h0(·)) and males (h1(·)) are arbitrary.
+We can also write this model as:
+h(t|Z, W) = hW(t)eβZ ,
+for Z = 0, 1,
+W = 0, 1.
+Let’s generalize: suppose that:
+Z = any covariate (vector or scalar)
+W = some categorical covariate with L levels (1,. . ., L),
+and consider the model:
+h(t|Z, W) = hW(t)eβZ.
+That is,
+h(t | Z, W = l) = hl(t)eβZ
+l = 1, . . . , L.
+2
+
+
+PAGE 3
+This is called a stratiﬁed Cox proportional hazards model. The L levels
+of W can have arbitrary underlying hazards, yet within each the treatment
+relative risk is eβ.
+How do we make an inference about β for this model? Consider the following:
+For the subset of persons with W = l, form the usual PL, say L(l)
+1 (β). Then
+form an overall partial likelihood function as:
+Lstrat (β) =
+L
+Y
+l=1
+L(l)
+1 (β).
+• Note the simple form of this stratiﬁed partial likelihood function.
+• When Z = binary, the resulting partial likelihood score test of β = 0
+reduces to stratiﬁed logrank test (Exercise 1).
+• The model is more general than h0(t)eβ1Z+β2W (in what way?).
+• We study the asymptotic properties of this approach in a later unit.
+• The number of strata may increase as the sample size n. For example,
+if we study the eﬀect of smoking on survival time among L twin pairs,
+each consists of one smoker and one non-smoker, then the W is the twin
+pair and the number of strata (twin pairs) is half of the total sample
+size.
+9.2 Cox Model for Comparing P + 1 Groups:
+Suppose that W is a categorical covariate with P + 1 levels (say, W =
+0, 1, · · · , P).
+One way to compare the survival distributions of the P + 1
+groups is by a logrank test, yielding a test statistics that has an approximate
+3
+
+
+PAGE 4
+chi-square distribution with P df under the null hypothesis. Alternatively,
+deﬁne the P binary covariates Z1, · · · , ZP by
+Zj = 1[W = j]
+for
+j = 1, 2, · · · , P .
+Consider ﬁtting a Cox model with covariates Z1, · · · , ZP, and then testing the
+hypothesis (say, using the partial likelihood score test) that the P regression
+coeﬃcients are simultaneously zero; that is, β1 = · · · = βP = 0.
+This test is equivalent to the logrank test for comparing the P + 1 groups.
+To verify this, compute the P × 1 partial likelihood score vector of partial
+derivatives of the log partial likelihood with respect to the P regression coef-
+ﬁcients, and then evaluate it at β1 = · · · = βP = 0. The score test is based on
+the quadratic form resulting from this vector and the observed information
+matrix evaluated at β1 = · · · = βP = 0. This will be seen to be the same as
+the logrank test for P + 1 groups. By making this “connection” between a
+likelihood-based test and the logrank test, we can infer that the logrank test
+for P +1 groups is oriented towards alternatives where the P +1 groups have
+proportional hazard functions. Another advantage of making this connection
+is that the Cox model provides a way of generalizing the logrank test to ad-
+just for other covariates.
+Trend Test: Next suppose the categories of W(= 0, 1, 2, · · · , P) are ordinal,
+such as increasing doses of the same drug, and let Z∗be the scalar covariate
+deﬁned by:
+Z∗= cj
+if
+W = j, j = 0, 1, ..., P ,
+where c0 = 0 and c1, · · · , cP are some constants. Suppose we ﬁt a Cox pro-
+portional hazards model with the scalar covariate Z∗and denote the corre-
+sponding regression coeﬃcient by β∗. Then it can be shown that the partial
+likelihood score test of β∗= 0 is equivalent to the logrank trend test using
+weights c1, · · · , cP. For example, choosing cj = j gives the most commonly
+used version of the logrank trend test (and the default value in STATA), and
+corresponds to a proportional hazards model where the regression coeﬃcient
+β represents the log hazard ratio between consecutive values of the ordinal
+covariate. That is,
+h(t | W = j + 1)
+h(t | W = j)
+= eβ
+for
+j = 0, 1, · · · , P −1 .
+4
+
+
+PAGE 5
+This connection shows that the logrank trend test is oriented towards the al-
+ternatives given by this proportional hazards model. We return to the choice
+of cj in a later unit. However, it is worth noting that another nice feature
+of this connection between the logrank test and inferences from Cox’s model
+is that we can now easily extend the logrank trend test to adjust for other
+covariates by simplying adding these to the Cox proportional hazards model.
+5
+
+
+PAGE 6
+Let’s illustrate some of these methods with an example using the AZT-ddI
+data set. As before, we focus on the subjects receiving AZT (rx=0) or 500
+mg ddI (rx=1), and who have not yet develop AIDS at the time of enrollment
+(as-ar-a<2). However, to intentionally ’skew’ the data, we only consider those
+ddI patients with a cd4 count of at least 30. This gives a total of 209 AZT
+patients and 190 ddI patients. Consider the binary covariate W denoting
+grouped cd4 count:
+W
+=
+Grouped cd4
+(“gcd4”)
+=
+ 0
+cd4 ≤100
+1
+cd4 > 100.
+Of the 209 subjects that received AZT, 96 had a cd4 ≤100 and 113 had a
+cd4 > 100. Of the 190 subjects receiving ddI, 67 had a cd4 ≤100 and 123
+had a cd4 > 100. We consider several diﬀerent ways of testing the hypothesis
+of no diﬀerence between the AZT and ddI groups. Here, failure is taken to
+be time until the development of AIDS or death, represented by the variables
+Tad and ad. For each method, we present the resulting chi-square statistic
+(say Q) and p-value.
+1. Ordinary logrank test: Q = 15.18, P = .0001
+2. Cox model with covariate rx; Wald test: Q = 14.44, P = .0001
+3. Cox model with covariate rx; LR test: Q = 15.46, P = .0001
+4. Stratiﬁed (by W) logrank test: Q = 8.46, P = .0036
+5. Stratiﬁed (by W) Cox model with covariate rx; Wald test: Q = 8.20, P =
+.004
+6. Stratiﬁed (by W) Cox model with covariate rx: LR test: Q = 8.66, P =
+.0033
+7. Cox model with covariates rx and W; Wald test: Q = 8.41, P = .004
+8. Cox model with covariates rx and W; LR test: Q = 8.89, P = .003
+Note that tests 1-3, which do not adjust for cd4, are asymptotically equiva-
+lent. Tests 4-6 do adjust for cd4 and are asymptotically equivalent. Tests 7-8
+also adjust for cd4, but in a diﬀerent way, and are asymptotically equivalent.
+6
+
+
+PAGE 7
+Given the imbalance between the AZT and ddI groups, one would tend to
+place greater trust in tests 4-8. Of these, tests 4-6 make fewer assumptions.
+However, in this example, one gets similar results with tests 4-6 as with tests
+7-8.
+Now let’s consider the covariate W ∗which represents grouped age, with
+W ∗= 0, 1, 2 if the patient’s age is 30 or less, 31-40, or over 40, respectively.
+Also, deﬁne W ∗
+1 = 1[W ∗= 1] and W ∗
+2 = 1[W ∗= 2]. Consider testing the
+hypothesis that grouped age is not associated with time until AIDS or death
+in the AZT-ddI dataset, but without creating the imbalance by leaving out
+some patients randomized to ddI. Below we report the resulting chi-square
+statistics and p-values.
+1. Logrank test for W ∗: Q(2df) = 4.16, P = .125
+2. Cox model with covariates W ∗
+1 , W ∗
+2 : (LR test) Q(2df) = 4.69, P = .0957
+3. Logrank trend test for W ∗: Q(1df) = 3.04, P = .081
+4. Cox model with covariate W ∗; Wald test: Q(1df) = 3.03, P = .082
+5. Cox model with covariate W ∗, LR test: Q(1df) = 3.07, P = .080
+Note that tests 1 and 2 are asymptotically equivalent, and that tests 3-5 are
+asymptotically equivalent. Tests 3-5 can be expected to be more powerful if
+there is a trend in the age-response relationship. They are directed towards
+alternatives where there is a trend. We return to the relative properties of
+these types of tests later in the course.
+7
+
+
+PAGE 8
+9.3 Time-Varying (or Time-Dependent) Covariates
+In some settings, we want to assess association between a time-
+varying covariate, say Z(t) and survival:
+Example 9.1
+Z(t) = air pollution level at time t
+T = time until asthma attack
+h(t|z(t)) = h0(t)eβ·Z(t)
+−→on a given day (t), the hazard function for an asthma attack is
+h0(t)
+|
+{z
+} · eβ·(pollution level on that day).
+baseline hazard
+8
+
+
+PAGE 9
+Example 9.2: T = time to death,
+Z(t) =
+ 0
+if no opportunistic infection (OI) by time t
+1
+if an opportunistic infection occurs on/before t
+(9.2)
+h(t|Z(t)) = h0(t)eβZ(t) =
+(
+h0(t)
+if Z(t) = 0
+h0(t)eβ
+if Z(t) = 1
+−→
+for a particular patient, his or her hazard function begins as
+h0(t) but “jumps” to h0(t)eβ at the random time he or she has an
+opportunistic infection
+−→
+diﬀerent patients will “jump” at diﬀerent times, but all will
+begin with h0(t) and, when they jump, jump to h0(t)eβ
+9
+
+
+PAGE 10
+Example 9.3
+Z1 = treatment
+group
+=
+(
+0
+treatment group 0
+1
+treatment group 1
+Z2(t)
+def= Z1 · ln t
+h (t | Z1, Z2(t)) = h0 (t) eβ1Z1+β2Z2(t)
+=
+(
+h0(t)
+treatment group 0
+h0(t)eβ1+β2·ln t
+treatment group 1.
+Treatment hazard ratio
+=
+eβ1+β2·ln t.
+−→
+Note that Z2(t) is not really a new covariate but a way to allow
+for a nonproportional hazards relationship between the 2 levels of Z1.
+NOTE:
+•
+β2 = 0
+↔
+h(t|treatment 1)
+h(t|treatment 0) = ind. of t (i.e., PH)
+• β1 = 0 | β2 = 0 ⇐⇒no treatment diﬀerence, given PH
+•
+β1 = β2 = 0
+⇐⇒no treatment diﬀerence.
+10
+
+
+PAGE 11
+Inference with time-dependent Cox proportional haz-
+ards model: Computationally, inference for time-dependent co-
+variates proceeds just as with ﬁxed covariates, except that at each
+risk set, we evaluate the value of the time-dependent covariate for a
+subject at that time point. Properties of time-dependent Cox models
+can be more complex, as we will see later.
+Model Checking
+The time-dependent covariates can be used to check the PH as-
+sumptions. For example, if one wants to test the PH assumption for
+the regression model
+h(t|Z) = h0(t)eβZ,
+then one may consider a bigger regression model with time-dependent
+covariates
+h(t|Z) = h0(t)eβZ+γZ(t)
+where Z(t) = g(Z) × B(t) where the g(·) and B(·) are selected a
+priori to reﬂect the hypothesized departure from the PH assumption.
+It is obvious that γ = 0 is equivalent to the PH assumption in the
+original model. Thus, one may test H0 : γ = 0 to evaluate the
+plausibility of the PH assumption.
+11
+
+
+PAGE 12
+9.4
+Estimating H0(·):
+• Until now, and in most applied settings, the focus is on making
+inferences about the regression coeﬃcient β, as this describes as-
+sociation between Z and T.
+• However, we sometimes are also interested in estimating H0(t).
+Why?
+– learn about its shape (e.g., does h0(t) ↑with t?)
+– Prediction:
+S(t|Z) = e−eβZH0(t).
+To estimate this, also need an estimate of
+H0(t) =
+Z t
+0
+h0(u) du.
+– Model testing (more later).
+No unique correct way to estimate h0(t).
+12
+
+
+PAGE 13
+Most popular (proposed by Breslow):
+bH0(t) =
+X
+τj≤t
+d
+∆H0(τj),
+where
+d
+∆H0(τj) =
+dj
+X
+lϵRj
+e
+bβZl.
+NOTE: This is a discrete estimator.
+NOTE: When bβ = 0 it reduces to dj/Y (τj), as in the Nelson-Aalen
+estimator of H0(·).
+Heuristic Justiﬁcation:
+Consider risk set, Rj, at τj.
+For lϵRj, conditional probability of failing at τj (given not failed
+before) is
+h0(τj)eβZl.
+The “average” probability of failing at τj for the Y (τj) persons at
+risk is
+1
+Y (τj)
+X
+lϵRj
+h0(τj)eβZl = h0(τj) ·
+X
+lϵRj
+eβZl
+Y (τj) .
+Observed proportion failing = dj/Y (τj). Equating these and equat-
+ing h0(τj) to d
+∆H0(τj) gives:
+13
+
+
+PAGE 14
+d
+∆H0(τj) ≈dj
+,X
+lϵRj
+eβZl .
+Example:
+n = 5
+i
+: 1 2
+3
+4 5
+Ui : 2 8 13 5 1
+δi : 1 1
+1
+0 1
+Zi : 0 0
+1
+1 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+τ1 = 1
+R1 = {1, 2, 3, 4, 5}
+τ2 = 2
+R2 = {1, 2, 3, 4}
+τ3 = 8
+R3 = {2, 3}
+τ4 = 13
+R4 = {3}
+bβ = −.834
+ebβZ =
+(
+1
+z = 0
+d1 = d2 = d3 = d4 = 1.
+.43
+z = 1
+Thus,
+d
+∆H0(τ1) =
+1
+2(1) + 3(.43) =
+.3
+d
+∆H0(τ2) =
+1
+2(1) + 2(.43) =
+.35
+d
+∆H0(τ3) =
+1
+1 + .43
+=
+.70
+d
+∆H0(τ4) =
+1
+.43
+= 2.33
+14
+
+
+PAGE 15
+=⇒
+bH0(t) =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0
+t < 1
+.3
+1 ≤t < 2
+.65
+2 ≤t < 8
+1.35
+8 ≤t < 13
+3.68
+13 ≤t.
+NOTE:
+bH0(t), and thus bS(t|Z), is a step function.
+15
+
+
+PAGE 16
+9.5
+Informative censoring
+In the presence of informative censoring, the standard methods to ﬁt
+a Cox proportional hazards model can be biased. There exist meth-
+ods that lead to consistent, asymptotically normal estimation of the
+parameters in a Cox proportional hazards model in the presence of
+informative censoring.
+However, these methods are not routinely
+used. The methods are described in Robins (1993), Robins and Rot-
+nitzky (1992) and Robins and Finkelstein (2000). The key element
+of these methods is in the use of time-dependent surrogate marker
+data. Their main assumption is that given the surrogate marker data
+up to a certain time point and the baseline covariates Z, censoring
+in the next small time interval is independent of the survival time
+T. This is called Missing At Random (MAR). In the case of non-
+informative censoring, these methods can be more eﬃcient than the
+standard methods covered in this and the following units. We may
+come back to that later in the course.
+16
+
+
+PAGE 17
+Exercises
+1. Verify that the stratiﬁed logrank test statistic essentially arises
+as a score test from Cox’s stratiﬁed PL.
+2. Suppose you wished to modify (9.1) on page 2 to allow the treat-
+ment eﬀect to be diﬀerent among men than among women.
+• Suggest a model to do this.
+• In your model, what hypothesis corresponds to no treatment
+eﬀect?
+• What hypothesis corresponds to an equal treatment HR in
+men and women?
+3. Consider the second example of a time-varying covariate (page
+8). How might you modify the model (9.2) to allow the size of
+the jump to depend on the time until the opportunistic infection
+occurs?
+4. Compute and plot bS(t|Z = 0) and bS(t|Z = 1) for the example
+on pages 11–12.
+5. Consider a set of censored survival data from a randomized clini-
+cal trial for which we have information on 2 covariates: Z1=treatment
+group (=0 or 1) and Z2= disease stage at the time of random-
+ization (=1, 2, or 3). We wish to compare the treatment groups.
+Three possible tests of treatment group equality are (i) the or-
+dinary logrank test; (ii) the stratiﬁed (by disease stage) logrank
+17
+
+
+PAGE 18
+test; and (iii) the Wald test of β1 = 0 resulting from ﬁtting a PH
+model with covariates Z1 and Z2.
+For each test, brieﬂy indicate the types of situations where you
+might expect it to have better power than the other 2 tests.
+6. Consider the same data setting as in the preceding problem, and
+let h(t | Z1, Z2) denote the hazard function for someone with
+covariate values Z1 and Z2.
+(a) Propose a model for h(t | Z1, Z2) which allows the magnitude
+of the treatment eﬀect to vary with disease stage but which, for
+given Z1, is unrestrictive about the hazards for levels of Z2.
+(b) Given your model, describe a test for the hypothesis that
+the magnitude of the treatment eﬀect does not vary with disease
+stage. (You need not give details.)
+7. Suppose you are studying elderly married couples and wish to
+know whether health outcomes in a wife might aﬀect the mor-
+tality risk of her husband. Suppose your data set arises from the
+prospective follow-up of couples from the age of 65 onwards who
+are generally healthy at the start of follow-up. For any given
+couple, let T denote the time (from start of follow-up) until the
+husband dies, and suppose T can be right- censored, so that you
+really observe the pair (U, δ) instead of T. During follow-up
+the wife could be hospitalized and/or die, and we wish to assess
+whether and how either of these events might be associated with
+T. Suppose that Z1(·) denotes a covariate process for which
+Z1(t) equals zero if the wife is not hospitalized before time t and
+equals 1 if she is hospitalized on or before time t, where time is
+deﬁned from the start of follow-up. Similarly, suppose that Z2(·)
+denotes the process for which Z2(t) equals zero if the wife is alive
+18
+
+
+PAGE 19
+at time t and equals 1 if she dies on/before time t. Thus, at any
+time point t, the wife will be in one of 4 states: alive with no prior
+hospitalization, alive with a prior hospitalization, dead without
+a prior hospitalization, or dead with a prior hospitalization.
+(a) Propose a model that allows the husband’s hazard of death to
+depend on the wife’s hospitalization/survival status. Clearly
+indicate how your assumed hazard function at an arbitrary
+time t depends on the history of the covariate processes Z1(·)
+and Z2(·) up to time t.
+(b) In your proposed model, how would you express the situa-
+tion that a wife’s hospitalization is not associated with the
+husband’s risk of death, but her death is associated with the
+husband’s risk of death?
+(c) Ignore, for the moment, the wife’s hospitalization status and
+consider only the possible association between her death (that
+is, Z2(·)) and the husband’s risk of death. Using 2x2 contin-
+gency table methods, as we did when introducing the logrank
+test, propose a statistical testing procedure (a statistic and a
+criteria for computing a p- value on the basis of this statistic)
+for assessing the association between Z2(·) and T. Do not
+try to formally justify the test, but say in words why you
+think it would be reasonable.
+(d) Next suppose that you again wanted to assess the association
+between a wife’s death and the husband’s risk of death, but
+that now you wanted to adjust for whether the wife was or
+was not hospitalized (as this might also be associated with
+the husband’s failure). Describe how you might modify the
+approach in part (c) to do this.
+19
+
+
+PAGE 20
+References
+The following references can be found on
+http://www.hsph.harvard.edu/causal/publications.htm.
+Robins, J.M. (1993). Information recovery and bias adjustment in
+proportional hazards regression analysis of randomized trials using
+surrogate markers. Proceedings of the Biopharmaceutical Section,
+American Statistical Association: 24-33.
+Robins, J.M. and Finkelstein, D.M. (2000). Correcting for noncom-
+pliance and dependent censoring in an AIDS clinical trial with inverse
+probability of censoring weighted (IPCW) log-rank tests. Biometrics
+56: 779-788.
+Robins, J.M. and Rotnitzky, A. (1992). Recovery of information and
+adjustment for dependent censoring using surrogate markers.
+In:
+AIDS Epidemiology - Methodological Issues: 297-331. Eds: Jewell
+N, Dietz K, Farewell V. Birkhauser: Boston, MA.
+20

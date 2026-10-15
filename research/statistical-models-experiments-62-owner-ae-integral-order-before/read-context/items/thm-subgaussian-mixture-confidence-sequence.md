@@ -1,0 +1,64 @@
+---
+id: thm-subgaussian-mixture-confidence-sequence
+kind: theorem
+title: A Gaussian mixture confidence sequence for conditional sub-Gaussian means
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 3
+deps:
+  - def-conditional-subgaussian-increments
+  - def-gaussian-mixture-confidence-sequence-boundary
+  - lem-gaussian-mixture-boundary-crossing-equivalence
+  - thm-gaussian-mixture-test-supermartingale
+  - thm-discrete-ville-inequality
+  - def-confidence-sequence
+  - def-axiom-of-choice
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon, Time-uniform, nonparametric, nonasymptotic confidence sequences, Lemma 2, Proposition 5, and Appendix A.3
+      url: https://arxiv.org/pdf/1810.08240
+    - title: Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon, Time-uniform Chernoff bounds via nonnegative supermartingales, Theorem 1 and §2.3
+      url: https://arxiv.org/pdf/1808.03204
+    - title: "Aaditya Ramdas, Martingales 1: Concentration Inequalities — Conjugate Mixtures, 36-771 lecture notes, Carnegie Mellon University, Fall 2018"
+      url: https://stat.cmu.edu/~aramdas/martingales18/L18-conjugate.pdf
+---
+
+## Statement
+
+Assume AC. Let $\Theta\subseteq\mathbb R$, let $(\Omega,\mathcal F,(\mathcal F_t)_{t\in\mathbb N_0})$ be a common discrete filtered measurable space, and let $(P_\theta)_{\theta\in\Theta}$ be a family of probability laws on it. Let $(X_t)_{t\ge1}$ be a common real-valued process that is adapted under each $P_\theta$, and suppose that for every $\theta\in\Theta$ its increments are conditionally sub-Gaussian around $\theta$ with the same known proxy $\sigma^2>0$ under $P_\theta$ in the sense of
+[[def-conditional-subgaussian-increments]]. Fix $\rho>0$ and $\alpha\in(0,1)$. For $t\ge1$, set
+$$\bar X_t:=\frac1t\sum_{i=1}^tX_i,\qquad C_t:=\Theta\cap\left[\bar X_t-\frac{u_\alpha(t\sigma^2)}{t},\,\bar X_t+\frac{u_\alpha(t\sigma^2)}{t}\right],$$
+where $u_\alpha$ is from [[def-gaussian-mixture-confidence-sequence-boundary]], and set $C_0:=\Theta$. Then $(C_t)_{t\ge0}$ is a $(1-\alpha)$ confidence sequence for $\theta$:
+$$P_\theta\bigl(\theta\in C_t\text{ for every }t\ge0\bigr)\ge1-\alpha\quad(\theta\in\Theta).$$
+The claim is pointwise in $\theta$ and requires no measurable structure on $\Theta$, independence, or identical distribution of the observations.
+
+## Facts & Assumptions
+
+**Given:** Assume AC and all data, law, filtration, proxy, and tuning hypotheses in the Statement.
+
+[F1] [[def-conditional-subgaussian-increments]]: for each fixed $\theta$, time $t\ge1$, and $\lambda\in\mathbb R$, the conditional mgf of $X_t-\theta$ given $\mathcal F_{t-1}$ is at most $e^{\lambda^2\sigma^2/2}$ almost surely.
+
+[F2] [[thm-gaussian-mixture-test-supermartingale]]: under each $P_\theta$, $M_t(\theta)=\sqrt{\rho/(t\sigma^2+\rho)}\exp(S_t(\theta)^2/[2(t\sigma^2+\rho)])$ is a nonnegative test supermartingale with $M_0(\theta)=1$.
+
+[F3] [[lem-gaussian-mixture-boundary-crossing-equivalence]]: $M_t(\theta)\ge1/\alpha$ exactly when $|S_t(\theta)|\ge u_\alpha(t\sigma^2)$.
+
+[F4] [[thm-discrete-ville-inequality]]: under AC, for every null law and each $\alpha\in(0,1)$, a nonnegative test supermartingale has $P(\sup_{t\ge0}M_t\ge1/\alpha)\le\alpha$.
+
+[F5] [[def-confidence-sequence]]: a $(1-\alpha)$ confidence sequence has $\mathcal F_t$-measurable membership events and covers each true parameter at all integer times with probability at least $1-\alpha$.
+
+[A1] [[def-axiom-of-choice]]: AC supplies the conditional-expectation and test-supermartingale conventions used in [F2] and [F4].
+
+## Proof
+
+1.1 Fix $\theta\in\Theta$. The process is adapted under $P_\theta$, so each $X_i$ for $i\le t$ and hence $\bar X_t$ is $\mathcal F_t$-measurable. Therefore $\{\theta\in C_t\}$ is $\mathcal F_t$-measurable for every $t\ge1$, and it is the whole space at $t=0$. [given, F1, F5]
+
+2.1 For $t\ge1$, if $\theta\notin C_t$, the interval in the Statement has closed endpoints, so $|S_t(\theta)|>u_\alpha(t\sigma^2)$. By [F3], this implies $M_t(\theta)\ge1/\alpha$. Consequently the event that $\theta$ is ever excluded from $C_t$ is contained in $\{\sup_{t\ge0}M_t(\theta)\ge1/\alpha\}$. [given, F3, step 1.1]
+
+3.1 By [F2] and Ville's inequality [F4], the latter event has $P_\theta$-probability at most $\alpha$. Its complement therefore has probability at least $1-\alpha$ and is contained in $\{\theta\in C_t\text{ for all }t\ge0\}$. Since [F5] requires exactly these membership and coverage clauses, $(C_t)$ is a confidence sequence. [F2, F4, F5, A1, step 2.1] ∎

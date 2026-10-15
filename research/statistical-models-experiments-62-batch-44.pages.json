@@ -1,0 +1,179 @@
+[
+  {
+    "order": 2004,
+    "id": "state-space-models-as-probability-laws",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "State-space model laws",
+    "companion": "state-space-models-as-probability-laws-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "stationary-time-series-moments-and-autocovariance",
+      "statistical-experiments-models-and-identifiability",
+      "infinite-product-measures-and-kolmogorov-extension",
+      "conditional-distributions-and-regular-conditional-probability",
+      "markov-kernels-and-markov-chains",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "central-limit-theorems",
+      "characteristic-functions-inversion-and-continuity"
+    ],
+    "items": [
+      {
+        "id": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+        "kind": "lemma",
+        "title": "A finite stack of independent Gaussian vectors is jointly Gaussian",
+        "statement": "A finite stack of mutually independent multivariate normal vectors has a multivariate normal law with block diagonal covariance, including singular blocks.",
+        "strategy": "Compute every scalar projection characteristic function, identify its normal law, then apply Cramer–Wold.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-cramer-wold-device"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-general-state-space-model-by-kernels",
+        "kind": "definition",
+        "title": "General finite-horizon state-space models by kernels",
+        "statement": "Finite-horizon standard-Borel state and observation spaces, an initial probability law, transition and observation probability kernels, and the exact joint law given by their ordered iterated kernel integral.",
+        "strategy": "Define all spaces, kernels, observed and latent coordinates, product-law convention, and the finite-horizon scope; cite the local construction theorem for well-definedness.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-scientific-statistical-model-contract",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-standard-borel-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain"
+        ],
+        "justified_by": [
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely"
+        ],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+        "kind": "theorem",
+        "title": "Finite-horizon state-space kernel law exists and is unique",
+        "statement": "Under AC, each finite-horizon family of standard-Borel spaces, an initial law, and transition and observation probability kernels determines the unique finite-prefix marginal of the corresponding Ionescu–Tulcea path law, with the stated kernel factorization.",
+        "strategy": "Lift each transition and observation kernel along the appropriate history-coordinate projection, append singleton tails, apply Ionescu–Tulcea, and identify the finite-prefix law.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-general-state-space-model-by-kernels",
+          "def-standard-borel-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "def-linear-gaussian-state-space-model-with-independent-noises",
+        "kind": "definition",
+        "title": "Linear-Gaussian state-space models with independent noises",
+        "statement": "The finite-horizon subclass with Gaussian initial state and centered Gaussian process and observation noises, mutually independent across times and from the initial state, with positive-semidefinite covariance matrices and linear state and observation equations.",
+        "strategy": "Specify all dimensions, matrices, laws, independence conditions, and covariance domains as a subclass of the general kernel model.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-general-state-space-model-by-kernels",
+          "def-independent-random-elements",
+          "def-multivariate-normal-law"
+        ],
+        "justified_by": [
+          "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian",
+        "kind": "theorem",
+        "title": "The finite linear-Gaussian state-space path is jointly Gaussian",
+        "statement": "Under the independent-noise contract, a canonical finite independent-noise realization exists, its path law is exactly the general kernel-product law, and the finite state-observation path is multivariate normal with covariance allowed to be singular.",
+        "strategy": "Construct the finite product noise space, verify the translated Gaussian kernels are measurable, derive the exact kernel factorization by iterated integration, then prove Gaussian closure by characteristic functions and affine maps.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-general-state-space-model-by-kernels",
+          "def-independent-random-elements",
+          "def-linear-gaussian-state-space-model-with-independent-noises",
+          "def-measure-kernel-and-probability-kernel",
+          "def-multivariate-normal-law",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 2005,
+    "id": "state-space-models-as-probability-laws-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "State-space model laws — Examples",
+    "companion": "state-space-models-as-probability-laws",
+    "requires": [
+      "state-space-models-as-probability-laws"
+    ],
+    "items": [
+      {
+        "id": "ex-state-space-model-same-dynamics-distinct-observation-kernels",
+        "kind": "example",
+        "title": "Same state dynamics with distinct observation kernels",
+        "statement": "Two scalar models share the same initial law and deterministic state transition but have different Gaussian observation kernels and different joint state-observation laws.",
+        "strategy": "Compute the two cross-covariances under the exact finite-horizon laws and use their inequality to distinguish the joint laws.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-general-state-space-model-by-kernels",
+          "def-independent-random-elements",
+          "def-linear-gaussian-state-space-model-with-independent-noises",
+          "def-moments-variance-and-covariance",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+          "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-linear-gaussian-singular-state-covariance-positive-innovation-covariance",
+        "kind": "example",
+        "title": "Singular state covariance with positive innovation covariance",
+        "statement": "A one-step scalar model has zero state prediction covariance and a positive innovation covariance.",
+        "strategy": "Substitute the degenerate state and nondegenerate observation noise into the stated equations and compute both covariance values.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-linear-gaussian-state-space-model-with-independent-noises",
+          "def-moments-variance-and-covariance",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+          "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      }
+    ]
+  }
+]

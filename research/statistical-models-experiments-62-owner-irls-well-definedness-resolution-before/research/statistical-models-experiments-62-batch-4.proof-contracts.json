@@ -1,0 +1,1700 @@
+{
+  "version": 1,
+  "scope": [
+    "def-glm-observation-family",
+    "lem-glm-product-density",
+    "lem-glm-mean-and-variance-identities",
+    "def-generalized-linear-model",
+    "thm-canonical-glm-score-and-hessian",
+    "thm-glm-general-link-score-and-information",
+    "def-nested-model-deviance",
+    "alg-fisher-scoring-irls",
+    "thm-canonical-glm-strict-concavity",
+    "lem-nested-model-deviance-nonnegative",
+    "thm-irls-is-fisher-scoring-step",
+    "ex-poisson-overdispersion",
+    "ex-logistic-separation-no-finite-mle",
+    "ex-identity-link-bernoulli-boundary",
+    "ex-singular-fisher-information-nonunique-irls",
+    "ex-bernoulli-logit-glm-one-step",
+    "ex-poisson-log-glm-one-step"
+  ],
+  "contracts": {
+    "def-glm-observation-family": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires n>=1 and introduces no empty product model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Definition: a zero-valued response is allowed whenever zero belongs to the supplied component support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Definition: n=1 is allowed and its product law is just the single component law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Definition: a degenerate law is allowed only if it has the supplied normalized density and derivative envelopes; positive variance is not asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Definition: each theta_i lies in the open interval J; its boundary points are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Definition: component densities and the finite product law are supplied explicitly, so no density representative is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-glm-product-density": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-glm-observation-family",
+          "source_section": "Definition",
+          "quote": "the **product sampling law** is the finite product $\\bigotimes_{i=1}^n P_{i,\\theta_i,\\phi}$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Their **product sigma-algebra** is",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B)",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "the pointwise product $fg$ is measurable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "(f\\,d\\mu)(A):=\\int_A f\\,d\\mu",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "source_section": "Statement",
+          "quote": "Then $\\mu=\\nu$ on $\\mathcal A$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Coordinate projections are measurable from the rectangle-generated product sigma algebra; multiplying the pulled-back component densities preserves measurability.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Repeated product measure and Tonelli formulas show that the product density integrates to one and agrees with the product law on every rectangle.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The density measure and product law are probability measures agreeing on the generating rectangle pi-system; the constant whole-space exhaustion permits uniqueness, and logarithms add on the common positive support.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n>=1; no empty product law is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 permits zero density values off the component supports, and the product density is then zero there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 reduces by induction to a single normalized component density when n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: degenerate component laws are covered if they admit the stipulated sigma-finite-base densities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the result holds for every parameter vector in J^n; endpoints outside J are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 1.1-3.1 use supplied densities and finite products only; no representative selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-glm-mean-and-variance-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-glm-observation-family",
+          "source_section": "Definition",
+          "quote": "$f_i(y_i;\\theta_i,\\phi)=\\exp\\!\\left\\{\\frac{y_i\\theta_i-b(\\theta_i)}{a_i(\\phi)}+c_i(y_i,\\phi)\\right\\}.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "and hence $$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "For an integrable real random variable, $$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the explicit density once and twice on the fixed support to obtain its score and second derivative.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every vanishing parameter increment, the first derivative envelope and the mean value theorem allow dominated convergence through the normalized density integral; the resulting score integral gives the mean.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the same envelope argument to the first density derivative, then use the second derivative formula and the mean identity to obtain the variance.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes one component i and assumes its probability density is supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 has no zero-parameter exception; the identities hold whenever theta_i=0 is in J."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: a mean of one is covered whenever it lies in the specified family parameter range."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: b'' may be zero and then the proved variance is zero; strict positivity is not asserted here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: theta_i lies in the open interval J, so endpoint limits are not included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses the explicit density formula and sequential limits; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "bernoulli-at-zero",
+          "claim": "For the Bernoulli cumulant b(theta)=log(1+exp(theta)) with a=1 and theta=0, the identities give mean 1/2 and variance 1/4.",
+          "result": "Direct differentiation gives b'(0)=1/2 and b''(0)=1/4."
+        },
+        {
+          "id": "poisson-at-log-ten",
+          "claim": "For the Poisson cumulant b(theta)=exp(theta), a=1 and theta=log(10), both mean and variance are 10.",
+          "result": "b'(log(10))=b''(log(10))=10."
+        }
+      ]
+    },
+    "def-generalized-linear-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires n>=1 and a specified finite response vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Definition: eta_i=0 is admissible exactly when it lies in the stated link image."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Definition: p=1 and n=1 are permitted when the parameter and response setup is supplied."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Definition: no rank or positive-curvature condition is imposed until a result explicitly assumes it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Definition: beta lies in the stated open domain and mu_i lies in the specified link domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The definition uses supplied probability laws and explicit densities; it selects no representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-canonical-glm-score-and-hessian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-linear-model",
+          "source_section": "Definition",
+          "quote": "The **canonical link** is the choice $g=\\tau$, equivalently $\\theta_i=\\eta_i$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-glm-product-density",
+          "source_section": "Statement",
+          "quote": "Then the joint sampling law has density",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-glm-mean-and-variance-identities",
+          "source_section": "Statement",
+          "quote": "$$\\mathbb E_{\\theta_i,\\phi}[Y_i]=b'(\\theta_i),\\qquad \\operatorname{Var}_{\\theta_i,\\phi}(Y_i)=a\\,b''(\\theta_i).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-matrix-differentials-obey-sum-product-and-adjoint-rules",
+          "source_section": "Statement",
+          "quote": "Equivalently, differential notation gives $d(A+B)=dA+dB$, $d(AB)=dA\\,B+A\\,dB",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The component log likelihoods sum; coordinatewise differentiation gives X^T(y-mu)/a(phi).",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A second coordinatewise differentiation gives the stated Hessian, whose entries assemble by the matrix product rule.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a finite response vector with n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 covers zero predictors whenever they are in the admissible link range."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the derivative identities also apply to a one-coordinate response and one parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: these derivative formulas remain valid for rank-deficient X; strict concavity is a separate theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: derivatives are asserted only at admissible beta in the model domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 1.1-2.1 differentiate explicit component densities and use no selection principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-canonical-glm-strict-concavity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-canonical-glm-score-and-hessian",
+          "source_section": "Statement",
+          "quote": "\\operatorname{diag}(b''(\\eta_i))",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Hessian restricted to any nonconstant segment is strictly negative; the mean value theorem compares adjacent secant slopes and proves strict concavity.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Strictly decreasing directional derivatives exclude two stationary points and make any existing stationary point the unique global maximizer.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns a nonempty convex parameter domain and nonconstant segments."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: if beta=0 is admissible, positive b'' gives the same strict curvature there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the one-dimensional parameter case follows from the same line restriction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement requires full column rank; rank-deficient designs are excluded and separately exemplified."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The conclusion is on the open convex domain only; a boundary maximizer is not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 1.1-2.1 use finite-dimensional line restrictions and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-glm-general-link-score-and-information": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-linear-model",
+          "source_section": "Definition",
+          "quote": "When its entries have finite second moments, the **expected score outer-product information** is $I(\\beta,\\phi):=\\mathbb E_{\\beta,\\phi}[U U^\\mathsf T]$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-glm-observation-family",
+          "source_section": "Definition",
+          "quote": "The coordinate responses are independent in the sense of [[def-independent-random-elements]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-glm-mean-and-variance-identities",
+          "source_section": "Statement",
+          "quote": "$$\\mathbb E_{\\theta_i,\\phi}[Y_i]=b'(\\theta_i),\\qquad \\operatorname{Var}_{\\theta_i,\\phi}(Y_i)=a\\,b''(\\theta_i).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the relation mu_i=b'(theta_i) and the component log density to obtain the general-link score and then sum over the fixed design rows.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The component scores have mean zero and the stated second moments; independence factors cross terms to yield X^T W X and the full-rank positivity condition.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a finite response vector with n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: a zero score coordinate is allowed; only zero link derivatives or zero variance are excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: n=1 is covered and the information formula is a single weighted outer product."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: rank-deficient X is allowed but may give singular information; positive definiteness is claimed only under full rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Statement applies only at admissible finite beta where the support and derivative conditions hold."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof steps 1.1-2.1 use the explicitly supplied finite product law; no arbitrary density selection or AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "alg-fisher-scoring-irls": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires n>=1 and finite input matrices and vectors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Definition: zero responses are allowed when they are in the component support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Definition: for one response the same formula gives a scalar weighted least-squares problem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Definition: rank-deficient X is allowed; the Moore-Penrose convention returns the unique minimum-norm minimizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Definition: inputs require a finite admissible current beta; the output is not promised to remain in the model domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Definition uses the unique Moore-Penrose pseudoinverse and unique minimum-norm convention, not a choice among minimizers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-irls-is-fisher-scoring-step": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-glm-general-link-score-and-information",
+          "source_section": "Statement",
+          "quote": "$$w_i=\\frac{\\dot\\mu_i^2}{a(\\phi)V_i},\\qquad z_i=\\eta_i+\\frac{y_i-\\mu_i}{\\dot\\mu_i}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-fisher-scoring-irls",
+          "source_section": "Definition",
+          "quote": "Return $\\beta_{\\mathrm{new}}=A^+r$, the unique minimum-Euclidean-norm member of the nonempty weighted least-squares minimizer set",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-least-squares-solutions-and-normal-equation",
+          "source_section": "Statement",
+          "quote": "A vector $x\\in V$ minimises $\\lVert Tx-b\\rVert$ if and only if\n\n$$T^*(Tx-b)=0,$$\n\nequivalently $T^*Tx=T^*b$. Minimisers exist, and if $x_0$ is one minimiser, then the full set of minimisers is $x_0+\\ker T$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The weighted working-response residual is exactly the general-link score contribution.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The weighted least-squares normal equation gives I(beta)(beta_new-beta)=U; the assumed invertibility yields the Fisher-scoring formula.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes n>=1 and the algorithm's finite inputs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 has no zero-response exception when zero lies in the support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the identity covers the one-dimensional scalar case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement assumes invertible I; the singular case is excluded and has a separate example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The identity is asserted only at an admissible finite current beta."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The algorithm's Moore-Penrose output is unique; invertibility makes it the unique ordinary least-squares minimizer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-nested-model-deviance": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition requires both nested parameter sets to be nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Definition: a zero log-likelihood difference gives D=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Definition: a one-parameter nested model is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Definition: equal fitted and saturated model sets are permitted when both finite suprema agree."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The parameter sets are supplied as stated; no endpoint maximization rule is added."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite suprema are real values; no maximizing parameter is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-nested-model-deviance-nonnegative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nested-model-deviance",
+          "source_section": "Definition",
+          "quote": "The **likelihood deviance** is $$D(y)=2\\left\\{\\sup_{\\beta\\in\\Theta_{\\mathrm{sat}}}\\ell(\\beta;y)-\\sup_{\\beta\\in\\Theta_{\\mathrm{fit}}}\\ell(\\beta;y)\\right\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The fitted likelihood values are a subset of the saturated-model likelihood values, so their supremum is no larger.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Finite real suprema preserve order under subtraction, and multiplication by two proves nonnegativity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes nonempty parameter sets and finite suprema."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: equal suprema give the boundary value D=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: inclusion of a one-element fitted family is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 allows equal model families, where the result is equality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The result uses supplied nested sets and makes no endpoint regularity claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Proof compares real suprema and selects no maximizer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-bernoulli-logit-glm-one-step": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-linear-model",
+          "source_section": "Definition",
+          "quote": "The **canonical link** is the choice $g=\\tau$, equivalently $\\theta_i=\\eta_i$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-canonical-glm-score-and-hessian",
+          "source_section": "Statement",
+          "quote": "$$\\nabla_\\beta\\ell(\\beta;y,\\phi)=\\frac{X^\\mathsf T(y-\\mu)}{a(\\phi)},\\qquad",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-glm-general-link-score-and-information",
+          "source_section": "Statement",
+          "quote": "$$w_i=\\frac{\\dot\\mu_i^2}{a(\\phi)V_i},",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-fisher-scoring-irls",
+          "source_section": "Definition",
+          "quote": "$$z_i=\\eta_i+\\frac{y_i-\\mu_i}{\\dot\\mu_i},\\qquad w_i=\\frac{\\dot\\mu_i^2}{a(\\phi)V_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-irls-is-fisher-scoring-step",
+          "source_section": "Statement",
+          "quote": "$$\\beta_{\\mathrm{new}}=\\beta+I(\\beta)^{-1}U(\\beta).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Evaluate the Bernoulli cumulant derivatives at zero and substitute them into the canonical score and general information formulas.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compute the working response and weighted least-squares minimizer, then evaluate and compare the Fisher-scoring update.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses n=1 and has no empty-sample case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 explicitly uses beta=0 and shows all score and information quantities are finite there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The Example is the one-observation, one-parameter boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The Bernoulli mean is 1/2, so the response law is nondegenerate and information is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Beta=0 is interior to the real canonical-link parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The two-point response law is explicit and all calculations are finite; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "scalar-logit-update",
+          "claim": "For n=p=1, x=y=1 and beta=0, U=1/2, I=w=1/4, z=2, and the IRLS and Fisher-scoring updates equal 2.",
+          "result": "The weighted objective is (1/4)(2-gamma)^2; its unique minimizer and beta+I^{-1}U are both 2."
+        }
+      ]
+    },
+    "ex-poisson-log-glm-one-step": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-linear-model",
+          "source_section": "Definition",
+          "quote": "The **canonical link** is the choice $g=\\tau$, equivalently $\\theta_i=\\eta_i$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-glm-mean-and-variance-identities",
+          "source_section": "Statement",
+          "quote": "$$\\mathbb E_{\\theta_i,\\phi}[Y_i]=b'(\\theta_i),\\qquad \\operatorname{Var}_{\\theta_i,\\phi}(Y_i)=a\\,b''(\\theta_i).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-glm-general-link-score-and-information",
+          "source_section": "Statement",
+          "quote": "$$w_i=\\frac{\\dot\\mu_i^2}{a(\\phi)V_i},",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-fisher-scoring-irls",
+          "source_section": "Definition",
+          "quote": "$$z_i=\\eta_i+\\frac{y_i-\\mu_i}{\\dot\\mu_i},\\qquad w_i=\\frac{\\dot\\mu_i^2}{a(\\phi)V_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-irls-is-fisher-scoring-step",
+          "source_section": "Statement",
+          "quote": "$$\\beta_{\\mathrm{new}}=\\beta+I(\\beta)^{-1}U(\\beta).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Evaluate the Poisson cumulant derivatives at zero and compute the score and information.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compute the working response, weighted least-squares minimizer, and matching Fisher-scoring update.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses n=1 and excludes an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The response value in the Example is y=2; the formula has no zero-parameter singularity at beta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The Example explicitly treats one observation and one parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The Poisson mean is one, so the law is nondegenerate and the information is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The current beta=0 is finite and interior to the canonical log-link domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The response family is explicit and all calculations use scalar arithmetic only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "scalar-poisson-update",
+          "claim": "For n=p=1, x=1, y=2 and beta=0, U=I=w=1 and z=1.",
+          "result": "The weighted objective is (1-gamma)^2; its unique minimizer and beta+I^{-1}U are both 1."
+        }
+      ]
+    },
+    "ex-logistic-separation-no-finite-mle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-linear-model",
+          "source_section": "Definition",
+          "quote": "The **canonical link** is the choice $g=\\tau$, equivalently $\\theta_i=\\eta_i$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-canonical-glm-score-and-hessian",
+          "source_section": "Statement",
+          "quote": "$$\\nabla_\\beta\\ell(\\beta;y,\\phi)=\\frac{X^\\mathsf T(y-\\mu)}{a(\\phi)},",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-canonical-glm-strict-concavity",
+          "source_section": "Statement",
+          "quote": "Then $\\ell(\\,\\cdot\\,;y,\\phi)$ is strictly concave on $\\Theta$. It has at most one stationary point; if a stationary point exists, it is the unique global maximizer.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The design has full column rank and logistic b'' is positive, so the strict-concavity theorem applies.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The two Bernoulli likelihood factors give the displayed log likelihood and the canonical score gives its positive derivative.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The finite log likelihood remains below zero while tending to zero only as beta diverges, so the supremum is not attained.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example requires its two specified response observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.2 includes a response equal to zero and the likelihood remains finite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The example has a response equal to one, and both response values are computed explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 verifies full design rank and strict curvature; separation affects attainment, not concavity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 checks the limit beta->+infinity and shows it is not a finite parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite two-observation likelihood is explicit and no representative is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "separated-log-likelihood",
+          "claim": "For x=(-1,1), y=(0,1), ell(beta)=-2 log(1+exp(-beta)) is strictly increasing at every finite beta and has supremum 0.",
+          "result": "ell'(beta)=2/(1+exp(beta))>0 for finite beta, while ell(beta) tends to 0 as beta tends to positive infinity; no finite beta attains that limit."
+        }
+      ]
+    },
+    "ex-poisson-overdispersion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-linear-model",
+          "source_section": "Definition",
+          "quote": "The **canonical link** is the choice $g=\\tau$, equivalently $\\theta_i=\\eta_i$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-glm-mean-and-variance-identities",
+          "source_section": "Statement",
+          "quote": "$$\\mathbb E_{\\theta_i,\\phi}[Y_i]=b'(\\theta_i),\\qquad \\operatorname{Var}_{\\theta_i,\\phi}(Y_i)=a\\,b''(\\theta_i).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Compute the first two moments of the two-point count law and subtract the squared mean.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Evaluate the Poisson cumulant derivatives at theta=log(10) and compare its variance with the constructed law.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example specifies a nonempty two-point probability law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 includes the zero-count atom with probability one half."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The comparison mean is ten; one is not an endpoint or exceptional parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The constructed law has two atoms of positive probability and is not degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: No parameter endpoint or limiting fit is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All probabilities and moments are explicit finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-point-versus-poisson",
+          "claim": "The law with masses 1/2 at 0 and 20 has mean 10 and variance 100, whereas Poisson(10) has variance 10.",
+          "result": "E[Y]=10, E[Y^2]=200, Var(Y)=200-100=100; the Poisson cumulant has b'(log(10))=b''(log(10))=10."
+        }
+      ]
+    },
+    "ex-identity-link-bernoulli-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-generalized-linear-model",
+          "source_section": "Definition",
+          "quote": "\\mu_i=g^{-1}(\\eta_i)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-glm-general-link-score-and-information",
+          "source_section": "Statement",
+          "quote": "$$w_i=\\frac{\\dot\\mu_i^2}{a(\\phi)V_i},",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-fisher-scoring-irls",
+          "source_section": "Definition",
+          "quote": "Require each $\\dot\\mu_i=d\\mu_i/d\\eta_i$ to be finite and nonzero and each $V_i=b''(\\theta_i)$ to be finite and positive.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Invert the Bernoulli mean map and show that the identity-link boundary corresponds to an infinite natural parameter.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The identity derivative is one and the Bernoulli variance is mu(1-mu), so the scoring weight diverges at the boundary and violates finite-weight admissibility.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes one Bernoulli response and has no empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1-2.1 explicitly analyze the boundary mean mu=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The same boundary analysis holds symmetrically at mu=1, where the Bernoulli natural parameter diverges to positive infinity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At mu=0 the limiting Bernoulli law is degenerate, but it is outside the finite-natural-parameter model interior."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1-2.1 explicitly show the identity-link endpoints are excluded and the weight diverges."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The one-response distribution and limiting parameter map are explicit; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "interior-and-boundary-weight",
+          "claim": "At mu=1/4 the identity-link Bernoulli natural parameter is -log(3) and the weight is 16/3; the weight diverges as mu decreases to 0.",
+          "result": "theta=log(mu/(1-mu)); V=mu(1-mu) and dot(mu)=1, so w=1/(mu(1-mu)); substitution at 1/4 gives 16/3 and the denominator tends to 0 positively."
+        }
+      ]
+    },
+    "ex-singular-fisher-information-nonunique-irls": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-glm-general-link-score-and-information",
+          "source_section": "Statement",
+          "quote": "$$U(\\beta;y,\\phi)=X^\\mathsf T\\left(\\frac{\\dot\\mu_i(y_i-\\mu_i)}{a(\\phi)V_i}\\right)_{i=1}^n,\\qquad I(\\beta,\\phi)=X^\\mathsf T\\operatorname{diag}(w_i)X.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-fisher-scoring-irls",
+          "source_section": "Definition",
+          "quote": "The Moore--Penrose convention makes the procedure single-valued even when $X$ is rank deficient; the underlying least-squares minimizer need not then be unique.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Compute the positive weights, rank-one information matrix, and score for the specified duplicate-column design.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Reduce the weighted objective to a scalar quadratic in the column sum; identify its line of minimizers and the unique minimum-norm selection.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example uses two specified independent response coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The responses include zero and the canonical score remains finite at beta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The example has two response coordinates; no one-observation case is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 explicitly computes rank-one information and step 2.1 exhibits the entire minimizer line."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The current beta=0 is finite and interior to the logit parameter domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The Moore-Penrose convention uniquely specifies one update while the full minimizer set is computed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "duplicate-column-design",
+          "claim": "For the stated design, W=diag(1/4,1/4), I=(5/4)[[1,1],[1,1]], U=(1/2,1/2), and the weighted least-squares minimizers satisfy gamma_1+gamma_2=2/5.",
+          "result": "The working responses are (-2,2); differentiating J(s)=(1/4){(-2-s)^2+(2-2s)^2} gives J'(s)=(5s-2)/2, and the minimum-norm point is (1/5,1/5)."
+        }
+      ]
+    }
+  }
+}

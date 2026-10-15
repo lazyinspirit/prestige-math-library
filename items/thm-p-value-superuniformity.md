@@ -22,9 +22,21 @@ provenance:
 proof_strategy: direct
 verification:
   judge:
-    model: "gpt-6-luna"
+    model: gpt-6-luna
     verdict: pass
     date: 2026-10-14
+  precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-14
+    scope: "Genuine new delegated audit of whole current item: complete Statement,
+      Given, Facts F1-F5, proof steps1.1 and2.1, all eight direct supplier
+      contracts and citation matches, endpoints, null/alternative hypotheses;
+      focused direct Bonferroni consumer. Not historical audit, local
+      mathematical repair or new publication."
+    delegated_by: /root
+    evidence: research/statistical-models-experiments-62-owner-pvalue-delegated-audit.json
 sources:
   references:
     - title: "Karl B. Gregory, USC STAT 713 Lecture 10: Tests of Hypotheses, Size, Power, and p-values, PDF pp. 17–20"

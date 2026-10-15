@@ -1,0 +1,186 @@
+{
+  "group": "l",
+  "batches": ["35"],
+  "pages_read": [
+    "competing-risks-and-cumulative-incidence",
+    "competing-risks-and-cumulative-incidence-examples"
+  ],
+  "items_read": [
+    "def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence",
+    "thm-cause-specific-cumulative-incidence-decomposition",
+    "alg-aalen-johansen-cumulative-incidence-estimator",
+    "lem-aalen-johansen-fixed-time-output-is-a-statistic",
+    "cex-observed-first-cause-does-not-identify-latent-failure-times",
+    "ex-competing-event-risk-versus-cause-incidence"
+  ],
+  "conventions": [
+    {
+      "convention": "There are finitely many causes K ≥ 1 and finite nonnegative latent event times. The minimum is unique almost surely; the smallest minimizing label defines the cause everywhere. Latent times need not be independent.",
+      "fixed_by": "def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence",
+      "matters_for": [
+        "thm-cause-specific-cumulative-incidence-decomposition",
+        "alg-aalen-johansen-cumulative-incidence-estimator",
+        "cex-observed-first-cause-does-not-identify-latent-failure-times"
+      ]
+    },
+    {
+      "convention": "S(t)=P(T>t), S(u−)=P(T≥u) for u>0, and S(0−)=1. Incidence and hazard integrals include [0,t]. The hazard density relative to the event subdistribution is 1/S(u−) when positive and zero otherwise; its total mass may be infinite.",
+      "fixed_by": "def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence",
+      "matters_for": [
+        "thm-cause-specific-cumulative-incidence-decomposition",
+        "alg-aalen-johansen-cumulative-incidence-estimator"
+      ]
+    },
+    {
+      "convention": "An event tied with censoring is recorded as an event. Risk counts include U_i=u, all causes at a shared event time are grouped, and incidence increments use survival before the shared update. Baseline events are included, with initial survival 1 and initial incidences 0.",
+      "fixed_by": "alg-aalen-johansen-cumulative-incidence-estimator",
+      "matters_for": [
+        "lem-aalen-johansen-fixed-time-output-is-a-statistic",
+        "ex-competing-event-risk-versus-cause-incidence"
+      ]
+    },
+    {
+      "convention": "Fixed-time measurability uses the Borel observation space ([0,∞) × {0,1,…,K})^n, with status 0 denoting censoring and status k denoting a cause-k event, and the Borel target R^(K+1).",
+      "fixed_by": "lem-aalen-johansen-fixed-time-output-is-a-statistic",
+      "matters_for": [
+        "lem-aalen-johansen-fixed-time-output-is-a-statistic"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-competing-risk-data-cause-specific-hazards-and-cumulative-incidence",
+      "statement": "F_k(t)=P(T≤t,D=k), S(t)=P(T>t), and Λ_k(B)=∫_B w(u) ν_k(du), where w(u)=1/S(u−) when S(u−)>0 and w(u)=0 otherwise.",
+      "used_by": [
+        "thm-cause-specific-cumulative-incidence-decomposition",
+        "alg-aalen-johansen-cumulative-incidence-estimator",
+        "cex-observed-first-cause-does-not-identify-latent-failure-times",
+        "ex-competing-event-risk-versus-cause-incidence"
+      ]
+    },
+    {
+      "id": "alg-aalen-johansen-cumulative-incidence-estimator",
+      "statement": "For n≥1 records and horizon t≥0, process distinct observed event times in increasing order, grouping causes. Update F̂_k(u)=F̂_k(u−)+Ŝ(u−)ΔN_k(u)/Y(u) and Ŝ(u)=Ŝ(u−)(1−ΔN(u)/Y(u)); keep estimates constant between event times and return their values at t.",
+      "used_by": [
+        "lem-aalen-johansen-fixed-time-output-is-a-statistic",
+        "ex-competing-event-risk-versus-cause-incidence"
+      ]
+    },
+    {
+      "id": "lem-aalen-johansen-fixed-time-output-is-a-statistic",
+      "statement": "For fixed n≥1, finite K, and t≥0, the algorithm's output is a measurable map from the stated Borel observation space to R^(K+1), hence a statistic in any experiment on that space. Every event-time denominator Y(u) is positive.",
+      "used_by": [
+        "alg-aalen-johansen-cumulative-incidence-estimator"
+      ]
+    },
+    {
+      "id": "thm-cause-specific-cumulative-incidence-decomposition",
+      "statement": "For every cause k and every t≥0, F_k(t)=∫_[0,t] S(u−) dΛ_k(u). If ν_k has Lebesgue density f_k and S(u)>0 for every u∈(0,t], then Λ_k has density λ_k=f_k/S almost everywhere on (0,t], and F_k(t)=∫_0^t S(u)λ_k(u) du.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-law-or-distribution-of-a-random-element",
+      "used_for": "Pushforward laws and the event subdistribution construction.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Definition of the cause-specific hazard measure.",
+      "opened": true
+    },
+    {
+      "id": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+      "used_for": "Well-definedness of the density measure, allowing infinite mass.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "The survival left-limit identity S(u−)=P(T≥u).",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-real-functions-are-borel-measurable",
+      "used_for": "Borel measurability of the survival left-limit function.",
+      "opened": true
+    },
+    {
+      "id": "thm-integration-against-a-density",
+      "used_for": "Converting hazard-measure integrals to event-subdistribution integrals and then to Lebesgue integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "The explicitly stated independent-censoring model assumption.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "The contextual IID sampling assumption, without asserting consistency.",
+      "opened": true
+    },
+    {
+      "id": "def-statistical-experiment",
+      "used_for": "The experiment interface underlying the statistic lemma and latent-law counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-statistic-and-estimator",
+      "used_for": "Interpreting the measurable fixed-time output as a statistic and specifying its estimand target.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "The fixed-time measurability criterion.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Finite measurable sums and products in the fixed-time output proof; ratios are handled separately through finite count-level sets.",
+      "opened": true
+    },
+    {
+      "id": "def-parametric-statistical-model",
+      "used_for": "The two-parameter sampling-law map in the nonidentifiability counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-estimand-on-a-statistical-model",
+      "used_for": "Taking the full latent joint law as the parameter target.",
+      "opened": true
+    },
+    {
+      "id": "def-observational-equivalence",
+      "used_for": "Equality of the two observed first-time/cause sampling laws.",
+      "opened": true
+    },
+    {
+      "id": "def-identifiability-of-an-estimand",
+      "used_for": "Refuting identifiability by equal observed laws and unequal latent-law targets.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "competing-risks-and-cumulative-incidence",
+      "to": "event-time-censoring-and-truncation",
+      "faithful": true,
+      "note": "The observation definition and its uses preserve U=min(T,C), δ=1{T≤C}, and event precedence at censoring ties. No likelihood or conditional-law result is imported."
+    },
+    {
+      "from": "competing-risks-and-cumulative-incidence",
+      "to": "counting-process-compensators-and-integrals",
+      "faithful": true,
+      "note": "This is contextual prerequisite placement. The algorithm explicitly invokes no compensator, bracket, or process-limit result. Its grouped ties and baseline events are not claimed to satisfy the supplier's unit-jump, N_0=0 continuous-compensator contract."
+    },
+    {
+      "from": "competing-risks-and-cumulative-incidence",
+      "to": "nelson-aalen-kaplan-meier-greenwood",
+      "faithful": true,
+      "note": "The product-limit definition, inclusive endpoints, grouped event counts, and risk-set convention agree. The example faithfully applies the single-event product after recoding competing events as censorings; no consistency, variance, or asymptotic result is imported."
+    }
+  ]
+}

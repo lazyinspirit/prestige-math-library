@@ -1,0 +1,172 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "12",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "def-fisher-sharp-null-and-predeclared-test-orderings",
+      "model": "gpt-6-luna",
+      "context_sha256": "78b344267ce71a8a929267fd30449fc64c91528a75f3ddb30549a02ce281d700",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The sharp null fixes Y_i(z), not the location of an arbitrary score: S(z,y)=1 on every assignment has null expectation and every null value equal to 1, not 0. Replaced the forced-zero clause by an explicit predeclared center, preserving all scores and the sharp-null criterion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-fisher-sharp-null-and-predeclared-test-orderings",
+      "disposition": "repaired",
+      "post_sha256": "58f4d5f3b3ab582b094a31176e7f3cec0ff4906a25c07803be7e25a4b6229502",
+      "review_context_sha256": "ccc0929514abd2154899a22ed96af0f1f42a77c2fa4183d999bb59e171fd4b31",
+      "reason": "The sharp null fixes Y_i(z), not the location of an arbitrary score: S(z,y)=1 on every assignment has null expectation and every null value equal to 1, not 0. Replaced the forced-zero clause by an explicit predeclared center, preserving all scores and the sharp-null criterion. Checked the actual assignment-model and statistic suppliers, full-power-set measurability, zero-weight and singleton assignments, and the owning contract/page. No new premise or choice axiom is needed. This is repair verification, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-finite-population-average-treatment-effect-and-weak-null",
+    "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+    "cex-zero-average-treatment-effect-does-not-imply-fisher-sharp-null",
+    "ex-unequal-weighted-two-sided-randomization-test-with-ties",
+    "cor-logrank-fisher-randomization-pvalue-valid"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "propose_append",
+      "row": {
+        "defect_id": "statistical-models-experiments-62-step5-initial-r1-u12-score-center",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:25:22.720396+00:00",
+        "class": "accuracy",
+        "subclass": "false-or-overstrong-statement",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "def-fisher-sharp-null-and-predeclared-test-orderings",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "source": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u12.json",
+        "evidence": "The sharp null fixes Y_i(z), not the location of an arbitrary score: S(z,y)=1 on every assignment has null expectation and every null value equal to 1, not 0. Replaced the forced-zero clause by an explicit predeclared center, preserving all scores and the sharp-null criterion.",
+        "adjudication_ref": [
+          {
+            "id": "def-fisher-sharp-null-and-predeclared-test-orderings",
+            "model": "gpt-6-luna",
+            "context_sha256": "78b344267ce71a8a929267fd30449fc64c91528a75f3ddb30549a02ce281d700"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_update",
+      "reason": "All five direct item consumers are draft frontier items, and their relevant uses remain sound; no potentially defective published consumer or outside consumer was found."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "definition_change": {
+      "before": "two-sided ordering is explicitly T(z,y)=|S(z,y)-s_0|; for a no-effect sharp null the center is s_0=0.",
+      "after": "two-sided ordering is explicitly T(z,y)=|S(z,y)-s_0|. The center is part of the predeclared ordering; the sharp null alone does not force s_0=0 for an arbitrary signed score.",
+      "comparison": "Literal Definition section changed; Statement section is absent. Only this Definition clause was edited; dependencies and contract are unchanged."
+    },
+    "contract": "research/statistical-models-experiments-62-batch-12.proof-contracts.json: existing boundaries concern assignment invariance and remain accurate; no proof worksheet exists or is needed for this definition.",
+    "page_use": {
+      "path": "library/statistical-models-and-experiments/randomized-treatment-assignment-and-sharp-null-tests.md",
+      "snippet": "Two-sided orderings are fixed in advance by comparing an absolute score to a declared null center.",
+      "disposition": "unaffected",
+      "reason": "The page already declares a center and makes no forced-zero claim."
+    },
+    "consumer_examinations": [
+      {
+        "id": "def-finite-population-average-treatment-effect-and-weak-null",
+        "path": "items/def-finite-population-average-treatment-effect-and-weak-null.md",
+        "affected_use": "Definition: The Fisher sharp null in this submodel ... requires Y_i(1)=Y_i(0) for every unit.",
+        "invalidated_claim": "None: this consumer does not assert the removed forced-zero rule.",
+        "disposition": "unaffected",
+        "reason": "Uses only assignment invariance, which is unchanged; no score center is inferred.",
+        "minimality": "No consumer change is necessary; its Statement/Definition is unchanged, so no further hop is triggered.",
+        "route": "frontier-owner",
+        "in_frozen_frontier": true
+      },
+      {
+        "id": "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+        "path": "items/thm-fisher-sharp-null-randomization-pvalues-are-valid.md",
+        "affected_use": "Statement: For a two-sided test, take T(z,y)=|S(z,y)-s_0| with its center s_0 fixed in advance; F2 and proof steps 1.1, 3.1 use the common response vector.",
+        "invalidated_claim": "None: this consumer does not assert the removed forced-zero rule.",
+        "disposition": "unaffected",
+        "reason": "Already keeps s_0 explicit. The weighted-rank proof applies to any fixed real score and never assumes null centering.",
+        "minimality": "No consumer change is necessary; its Statement/Definition is unchanged, so no further hop is triggered.",
+        "route": "frontier-owner",
+        "in_frozen_frontier": true
+      },
+      {
+        "id": "cex-zero-average-treatment-effect-does-not-imply-fisher-sharp-null",
+        "path": "items/cex-zero-average-treatment-effect-does-not-imply-fisher-sharp-null.md",
+        "affected_use": "F3 and Counterexample step 2.1: the sharp null requires every unit response to be invariant, violated by the +1 and -1 unit effects.",
+        "invalidated_claim": "None: this consumer does not assert the removed forced-zero rule.",
+        "disposition": "unaffected",
+        "reason": "The response-invariance condition is unchanged; score centers play no role.",
+        "minimality": "No consumer change is necessary; its Statement/Definition is unchanged, so no further hop is triggered.",
+        "route": "frontier-owner",
+        "in_frozen_frontier": true
+      },
+      {
+        "id": "ex-unequal-weighted-two-sided-randomization-test-with-ties",
+        "path": "items/ex-unequal-weighted-two-sided-randomization-test-with-ties.md",
+        "affected_use": "Example declares absolute treatment-minus-control mean about zero; F2 says a two-sided ordering about null center zero uses T(z,y)=|S(z,y)|; step 2.1 computes scores 3/2,0,3/2.",
+        "invalidated_claim": "None: this consumer does not assert the removed forced-zero rule.",
+        "disposition": "unaffected",
+        "reason": "Zero is explicitly chosen in the example, not derived from sharp-null invariance. Its signed mean is -1/2 under the unequal design, but the predeclared absolute ordering and weighted-rank validity remain sound.",
+        "minimality": "No consumer change is necessary; its Statement/Definition is unchanged, so no further hop is triggered.",
+        "route": "frontier-owner",
+        "in_frozen_frontier": true
+      },
+      {
+        "id": "cor-logrank-fisher-randomization-pvalue-valid",
+        "path": "items/cor-logrank-fisher-randomization-pvalue-valid.md",
+        "affected_use": "F2 and proof step 1.1 use record invariance to get a scalar sharp null; step 2.1 declares the absolute weighted logrank ordering before inspecting records.",
+        "invalidated_claim": "None: this consumer does not assert the removed forced-zero rule.",
+        "disposition": "unaffected",
+        "reason": "Uses the unchanged invariance criterion and an explicitly chosen absolute-score ordering; no assertion about its assignment-law expectation or a forced null center is needed.",
+        "minimality": "No consumer change is necessary; its Statement/Definition is unchanged, so no further hop is triggered.",
+        "route": "frontier-owner",
+        "in_frozen_frontier": true
+      }
+    ],
+    "sources_consulted": [],
+    "unresolved_obligations": [],
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-fisher-sharp-null-and-predeclared-test-orderings.md --json",
+        "exit_code": 0,
+        "result": "not-applicable: one definition, zero checked proofs, zero failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-fisher-sharp-null-and-predeclared-test-orderings.md --json",
+        "exit_code": 0,
+        "result": "one item checked; zero errors and warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-12.proof-contracts.json --items def-fisher-sharp-null-and-predeclared-test-orderings --strict --json",
+        "exit_code": 0,
+        "result": "selected owning contract passes; zero errors and warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-fisher-sharp-null-and-predeclared-test-orderings.md",
+        "exit_code": 0,
+        "result": "1 items, 0 steps, 0 defects"
+      }
+    ],
+    "next_action": "Handoff to engine for independent rejudgment and ordinary frontier impact routing; no unresolved mathematical obligation remains in this assignment.",
+    "graph_check": "Alias-aware discoverDownstream returned exactly the five reported direct consumers, all draft. All five are in the frozen frontier; no outside maintenance target was found. Canonical JSON input hash equals the task hash."
+  }
+}

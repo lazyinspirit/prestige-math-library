@@ -1,0 +1,127 @@
+[
+  {
+    "order": 1936,
+    "id": "stratified-sampling-and-allocation",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Stratification and allocation",
+    "companion": "stratified-sampling-and-allocation-examples",
+    "requires": [
+      "finite-populations-and-sampling-designs",
+      "horvitz-thompson-variance-and-srswor",
+      "probability-spaces-random-variables-and-expectation"
+    ],
+    "items": [
+      {
+        "id": "def-stratified-sampling-design-and-estimator",
+        "kind": "definition",
+        "title": "Stratified sampling designs and the stratified total estimator",
+        "statement": "Defines a finite-population partition, independent within-stratum SRSWOR samples, stratum sizes and finite-population variances, certainty strata, and the weighted total estimator.",
+        "strategy": "Definition: specify the finite partition, integer sample-size domains, product design law, fixed-value convention, stratum means and variances only for noncertainty strata, and the weighted estimator.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "def-simple-random-sampling-without-replacement"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-stratified-total-unbiasedness-and-variance",
+        "kind": "theorem",
+        "title": "Unbiasedness and variance of the stratified total estimator",
+        "statement": "For independent within-stratum SRSWOR with every stratum sampled at least once, the weighted total estimator is design-unbiased and has variance equal to the sum of the noncertainty stratum SRSWOR variance contributions.",
+        "strategy": "Direct: identify the stratified design as a finite design, express the estimator as the Horvitz–Thompson total for the stratum-specific inclusion probabilities, apply the SRSWOR variance formula within each stratum, and factor the product law to show cross-stratum covariances vanish.",
+        "deps": [
+          "def-stratified-sampling-design-and-estimator",
+          "def-finite-population-and-sampling-design",
+          "thm-horvitz-thompson-total-is-design-unbiased",
+          "thm-srswor-mean-variance-and-finite-population-correction",
+          "def-moments-variance-and-covariance",
+          "thm-variance-of-a-finite-sum"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-neyman-allocation-minimizes-stratified-variance",
+        "kind": "theorem",
+        "title": "Continuous fixed-size Neyman allocation minimizes stratified variance",
+        "statement": "When all variable noncertainty strata have positive within-stratum variances, the uncapped continuous relaxation of the stratified variance at a fixed variable sample-size total is uniquely minimized by allocations proportional to stratum size times within-stratum standard deviation.",
+        "strategy": "Direct: rewrite the variance objective as a sum of a_h squared over x_h plus a constant, then prove the finite Cauchy–Schwarz identity by a sum of pairwise squares and characterize its equality case.",
+        "deps": [
+          "def-stratified-sampling-design-and-estimator",
+          "thm-stratified-total-unbiasedness-and-variance"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-cost-optimal-stratified-allocation",
+        "kind": "theorem",
+        "title": "Continuous cost-optimal stratified allocation",
+        "statement": "Use the notation of [[def-stratified-sampling-design-and-estimator]] and\n[[thm-stratified-total-unbiasedness-and-variance]]. Let $J$ be a nonempty set\nof variable noncertainty strata with $S_h>0$, and hold all other allocations\nfixed. Assign each $h\\in J$ a positive per-unit cost $c_h$. For a fixed\npositive residual cost budget $C^\\star$, the uncapped continuous relaxation\nof the stratified variance expression, minimized over positive real\nallocations $x_h>0$ for every $h\\in J$ subject to\n$\\sum_{h\\in J}c_hx_h=C^\\star$, has the unique minimizer\n$$x_h=C^\\star\\frac{N_hS_h/\\sqrt{c_h}}{\\sum_{k\\in J}N_kS_k\\sqrt{c_k}}\\qquad(h\\in J).$$\nThus $x_h\\propto N_hS_h/\\sqrt{c_h}$. As in the fixed-size result, this\ncontinuous formula does not enforce integer, capacity, lower-bound, or\nminimum-sample constraints.",
+        "strategy": "Direct: rewrite the variance objective as a sum of a_h squared over x_h plus a constant, apply the finite pairwise-square identity with factors incorporating cost, and characterize the equality case under the cost constraint.",
+        "deps": [
+          "def-stratified-sampling-design-and-estimator",
+          "thm-stratified-total-unbiasedness-and-variance"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 1937,
+    "id": "stratified-sampling-and-allocation-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Stratification and allocation — Examples",
+    "companion": "stratified-sampling-and-allocation",
+    "requires": [
+      "stratified-sampling-and-allocation"
+    ],
+    "items": [
+      {
+        "id": "ex-proportional-and-disproportionate-stratified-allocation",
+        "kind": "example",
+        "title": "Proportional and disproportionate stratified allocations",
+        "statement": "A two-stratum finite population compares proportional allocation (2,1) with disproportionate allocation (1,2), verifies both weighted estimators are unbiased, and computes their distinct design variances.",
+        "strategy": "Verification: enumerate the fixed stratum means and variances, substitute both valid integer allocations into the estimator and variance formula, and check the weighted expectations and variance values.",
+        "deps": [
+          "def-stratified-sampling-design-and-estimator",
+          "thm-stratified-total-unbiasedness-and-variance"
+        ],
+        "justified_by": [],
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-zero-variance-stratum-allocation-boundary",
+        "kind": "example",
+        "title": "A zero-variance stratum is outside the positive-variance allocation formula",
+        "statement": "A finite population with one constant and one variable stratum shows that the unqualified Neyman proportionality assigns zero units to the constant stratum, violating the stratified design's positive sample-size requirement.",
+        "strategy": "Verification: compute the stratum sizes, means and variances, evaluate the formal Neyman weights, identify the resulting zero allocation, and compute the variance for the smallest admissible positive allocation.",
+        "deps": [
+          "def-stratified-sampling-design-and-estimator",
+          "thm-stratified-total-unbiasedness-and-variance",
+          "thm-neyman-allocation-minimizes-stratified-variance"
+        ],
+        "justified_by": [],
+        "dependency_level": 8
+      },
+      {
+        "id": "ex-rounding-neyman-allocation-to-integer-sample-sizes",
+        "kind": "example",
+        "title": "Continuous Neyman allocation may require constrained rounding",
+        "statement": "A two-stratum example computes a fractional continuous Neyman allocation whose nearest-integer rounding assigns zero units to a stratum, so the continuous optimum does not itself specify an admissible stratified SRSWOR design.",
+        "strategy": "Verification: construct finite strata with the stated sizes and variances, calculate the continuous allocation and nearest integers, check the design-domain violation, and evaluate the variance of an admissible minimum-sample allocation.",
+        "deps": [
+          "def-stratified-sampling-design-and-estimator",
+          "thm-stratified-total-unbiasedness-and-variance",
+          "thm-neyman-allocation-minimizes-stratified-variance"
+        ],
+        "justified_by": [],
+        "dependency_level": 8
+      }
+    ]
+  }
+]

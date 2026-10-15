@@ -1,0 +1,77 @@
+---
+id: thm-full-factorial-estimator-and-effect-variances
+kind: theorem
+title: "Coefficient and factorial-effect variances under equal replication"
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 2
+deps:
+  - def-two-level-full-factorial-design
+  - thm-full-two-level-factorial-contrast-orthogonality
+  - def-random-element-and-real-random-variable
+  - def-independent-random-elements
+  - def-expectation-of-a-nonnegative-or-integrable-random-variable
+  - def-moments-variance-and-covariance
+  - lem-variance-and-covariance-identities-for-random-variables
+  - cor-variance-adds-for-pairwise-independent-random-variables
+justified_by: []
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 8, §§8.5–8.6"
+      url: "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+    - title: "NIST/SEMATECH e-Handbook of Statistical Methods, §5.3.3.3.2, Full factorial example"
+      url: "https://www.itl.nist.gov/div898/handbook/pri/section3/pri3332.htm"
+---
+
+## Statement
+
+Let $r\ge1$ be an integer. For every run $x\in\mathcal X_k$ and replicate $s\in\{1,\ldots,r\}$, suppose
+$$Y_{x,s}=\sum_{B\subseteq[k]}\beta_Bx_B+\epsilon_{x,s},$$
+where the coefficients $\beta_B$ are fixed and the errors are mutually independent real random variables on one probability space, with $\mathbb E[\epsilon_{x,s}^2]<\infty$ and common variance $\sigma^2<\infty$. Define $\overline Y_x=r^{-1}\sum_{s=1}^rY_{x,s}$ and
+$$\widehat\beta_A=2^{-k}\sum_{x\in\mathcal X_k}x_A\overline Y_x.$$
+Then for every $A\subseteq[k]$,
+$$\operatorname{Var}(\widehat\beta_A)=\frac{\sigma^2}{r2^k}.$$
+For nonempty $A$, define $\widehat\tau_A$ as the difference of the mean run responses $\overline Y_x$ over $G_{A,+}$ and $G_{A,-}$ from [[def-two-level-full-factorial-design]]. Then
+$$\widehat\tau_A=2\widehat\beta_A,\qquad \operatorname{Var}(\widehat\tau_A)=\frac{4\sigma^2}{r2^k}.$$
+
+The variance calculation assumes equal replication at every run and independence across all run-replicate errors. It requires neither Gaussian errors nor zero interactions. A zero-mean assumption is additionally needed if $\beta_B$ is to denote coefficients of the mean response; it is not needed for these variance identities.
+
+## Facts & Assumptions
+
+**Given:** The full factorial design and coefficient convention in [[def-two-level-full-factorial-design]], the model and error hypotheses in the Statement, and the contrast identity in [[thm-full-two-level-factorial-contrast-orthogonality]].
+
+[F1] [[def-two-level-full-factorial-design]]: each column is $x_A=\prod_{j\in A}x_j$, and the normalized coefficient of a response table $y$ is $2^{-k}\sum_xx_Ay_x$; for nonempty $A$, the factorial effect is the difference of the two $x_A$ group means.
+
+[F2] [[thm-full-two-level-factorial-contrast-orthogonality]]: $2^{-k}\sum_xx_Ax_B=1$ when $A=B$ and $0$ otherwise.
+
+[F3] [[def-random-element-and-real-random-variable]]: a real random variable is a measurable map from a probability space to $\mathbb R$ with its Borel sigma-algebra.
+
+[F4] [[def-independent-random-elements]]: a family of random elements on one probability space is independent when their generated sigma-algebras are independent.
+
+[F5] [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]: for a nonnegative measurable random variable $U$, $\mathbb E[U]=\int U\,d\mathbb P$.
+
+[F6] [[def-moments-variance-and-covariance]]: for a square-integrable real random variable $Z$, $\operatorname{Var}(Z)=\mathbb E[(Z-\mathbb E Z)^2]$.
+
+[F7] [[lem-variance-and-covariance-identities-for-random-variables]]: covariance is symmetric and bilinear on finite linear combinations of square-integrable real random variables.
+
+[F8] [[cor-variance-adds-for-pairwise-independent-random-variables]]: the variance of a finite sum of pairwise-independent square-integrable real random variables is the sum of their variances.
+
+## Proof
+
+**Proof technique:** isolate each coefficient by the contrast Gram identity, then add the variances of the signed independent errors.
+
+1.1 Substitute the model and the run averages into the definition of $\widehat\beta_A$. This gives $$\widehat\beta_A=\sum_{B\subseteq[k]}\beta_B\left(2^{-k}\sum_{x\in\mathcal X_k}x_Ax_B\right)+\frac{1}{r2^k}\sum_{x\in\mathcal X_k}\sum_{s=1}^r x_A\epsilon_{x,s}.$$ By [F2], the parenthesized factor is $1$ for $B=A$ and $0$ otherwise. Thus $\widehat\beta_A-\beta_A=(r2^k)^{-1}\sum_{x,s}x_A\epsilon_{x,s}$. [given, F1, F2, algebra]
+
+1.2 Fix $A$ and put $Z_{x,s}=x_A\epsilon_{x,s}$. Each $x_A$ is $+1$ or $-1$, so multiplication by $x_A$ is a Borel bijection whose inverse is itself; consequently $\sigma(Z_{x,s})=\sigma(\epsilon_{x,s})$. By [F3] and [F4] these variables remain mutually, hence pairwise, independent. Their second moments are finite by the hypothesis, and $2|z|\le1+z^2$ gives $\mathbb E|Z_{x,s}|<\infty$, so their variances are defined. By [F6], variance is covariance with both arguments equal; then [F7] gives $\operatorname{Var}(Z_{x,s})=x_A^2\operatorname{Var}(\epsilon_{x,s})=\sigma^2$. [given, F3, F4, F5, F6, F7, algebra]
+
+2.1 There are $r2^k$ variables $Z_{x,s}$. By [F8], their sum has variance $r2^k\sigma^2$. Applying the scalar rule from [F7] to step 1.1 yields $\operatorname{Var}(\widehat\beta_A)=(r2^k)^{-2}r2^k\sigma^2=\sigma^2/(r2^k)$. [F7, F8, step 1.1, step 1.2, algebra]
+
+3.1 For nonempty $A$, choose $j\in A$. Reversing coordinate $x_j$ bijects $G_{A,+}$ with $G_{A,-}$, so each group has $2^{k-1}$ runs. The difference of their run-average means is therefore $2^{1-k}\sum_xx_A\overline Y_x=2\widehat\beta_A$ by [F1]. Its variance is four times the coefficient variance from step 2.1, giving $4\sigma^2/(r2^k)$. [F1, F7, step 2.1, choose, algebra] ∎
+

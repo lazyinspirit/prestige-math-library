@@ -1,0 +1,204 @@
+[
+  {
+    "order": 2034,
+    "id": "sequential-likelihood-ratio-tests",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Sequential likelihood-ratio tests",
+    "companion": "sequential-likelihood-ratio-tests-examples",
+    "requires": [
+      "dominated-experiments-likelihood-and-sufficiency",
+      "sequential-testing-and-anytime-valid-inference",
+      "stopping-times-and-optional-stopping",
+      "strong-laws-of-large-numbers",
+      "conditional-expectation"
+    ],
+    "items": [
+      {
+        "id": "alg-sequential-likelihood-ratio-test",
+        "kind": "algorithm",
+        "title": "Sequential likelihood-ratio test",
+        "statement": "Assume the [[def-axiom-of-choice|Axiom of Choice]], which states that every family of nonempty sets has a choice function. Let $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge0})$ be a discrete filtration on a common measurable space and let $P_0,P_1$ be probability measures on it. Assume that for every $t\\ge0$, the restrictions $P_0|_{\\mathcal F_t}$ and $P_1|_{\\mathcal F_t}$ are mutually absolutely continuous: each restriction assigns measure zero to exactly the same $\\mathcal F_t$ events as the other. For each $t$, choose a nonnegative $\\mathcal F_t$-measurable representative $L_t$ of the likelihood-ratio density $d(P_1|_{\\mathcal F_t})/d(P_0|_{\\mathcal F_t})$ [[def-likelihood-ratio-as-rn-derivative]]. The filtration and stopping-time conventions are those of [[def-filtration-and-filtered-probability-space]] and [[def-discrete-stopping-time]].\n\nInput thresholds $\\alpha,\\beta\\in(0,1)$. At times $t=1,2,\\ldots$, compute $L_t$ and apply these instructions:\n\n1. If $L_t\\ge1/\\alpha$, stop and decide $H_1$.\n2. Otherwise, if $L_t\\le\\beta$, stop and decide $H_0$.\n3. Otherwise continue to the next observation.\n\nThe two boundaries are disjoint because $\\beta<1<1/\\alpha$. The output time is\n$$\\tau=\\inf\\{t\\ge1:L_t\\ge1/\\alpha\\text{ or }L_t\\le\\beta\\},\\qquad \\inf\\varnothing=\\infty.$$\nIf $\\tau=\\infty$, the procedure has no finite terminal decision. It does not itself assert that a crossing occurs.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-discrete-stopping-time",
+          "def-filtration-and-filtered-probability-space",
+          "def-likelihood-ratio-as-rn-derivative",
+          "def-probability-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert L. Wolpert, Introduction to Martingales, STA 711 course notes, §1.2, PDF pp. 4–5",
+              "url": "https://www2.stat.duke.edu/courses/Fall18/sta711/lec/topics/mg.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-iid-sequential-likelihood-ratio-factorization",
+        "kind": "lemma",
+        "title": "Finite-sample likelihood ratio for iid observations",
+        "statement": "Assume AC. Let $P_0,P_1$ be probability measures on a common measurable space and let $(X_i)_{i\\ge1}$ be random elements of $(S,\\Sigma)$ that are IID under each $P_j$, with one-coordinate law $Q_j$. Suppose $Q_1\\ll Q_0$, let $\\lambda=dQ_1/dQ_0$ be a nonnegative representative, and put $\\mathcal F_t=\\sigma(X_1,\\ldots,X_t)$. For every $t\\ge1$,\n$$L_t:=\\prod_{i=1}^t\\lambda(X_i)$$\nis a version of $d(P_1|_{\\mathcal F_t})/d(P_0|_{\\mathcal F_t})$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measurable-rectangle",
+          "def-pi-system",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-likelihood-ratio-as-rn-derivative",
+          "lem-law-of-a-random-element-is-a-probability-measure",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-likelihood-ratio-change-of-measure",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert L. Wolpert, Introduction to Martingales, STA 711 course notes, §1.2, PDF p. 4",
+              "url": "https://www2.stat.duke.edu/courses/Fall18/sta711/lec/topics/mg.pdf"
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed., §2.1.2, Theorem 2.1.11, printed p. 48",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-sequential-likelihood-ratio-test-error-bounds",
+        "kind": "theorem",
+        "title": "Terminal error bounds for a sequential likelihood-ratio test",
+        "statement": "Assume AC. Under the hypotheses of [[alg-sequential-likelihood-ratio-test]], the boundary rule $\\tau$ is a stopping time and, for the specified decisions,\n$$P_0(\\tau<\\infty,\\ L_\\tau\\ge1/\\alpha)\\le\\alpha,\\qquad P_1(\\tau<\\infty,\\ L_\\tau\\le\\beta)\\le\\beta.$$\nThese bounds concern terminal errors and do not assume that $\\tau$ is finite almost surely.",
+        "deps": [
+          "alg-sequential-likelihood-ratio-test",
+          "def-axiom-of-choice",
+          "def-adapted-and-integrable-stochastic-process",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-discrete-stopping-time",
+          "def-filtration-and-filtered-probability-space",
+          "def-likelihood-ratio-as-rn-derivative",
+          "def-martingale-submartingale-and-supermartingale",
+          "def-nonnegative-test-supermartingale",
+          "def-probability-measure",
+          "lem-conditional-expectation-is-unique-almost-surely",
+          "thm-conditional-expectation-exists-by-radon-nikodym",
+          "thm-likelihood-ratio-change-of-measure",
+          "thm-villes-inequality"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert L. Wolpert, Introduction to Martingales, STA 711 course notes, §1.2, PDF pp. 4–5",
+              "url": "https://www2.stat.duke.edu/courses/Fall18/sta711/lec/topics/mg.pdf"
+            },
+            {
+              "title": "Steven R. Howard, Aaditya Ramdas, Jon McAuliffe and Jasjeet Sekhon, Time-uniform Chernoff bounds via nonnegative supermartingales, Probability Surveys 17 (2020), Lemma 1 and proof, PDF pp. 15 and 45",
+              "url": "https://arxiv.org/pdf/1808.03204"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-sequential-likelihood-ratio-test-terminates-under-drift",
+        "kind": "theorem",
+        "title": "Iid drift conditions imply almost-sure test termination",
+        "statement": "Assume AC. Let $(X_i)_{i\\ge1}$ be IID under each of two probability measures $P_j$, with one-coordinate law $Q_j$, and suppose $Q_0$ and $Q_1$ are equivalent. Choose a finite strictly positive representative $\\lambda=dQ_1/dQ_0$ and set $Z=\\log\\lambda$. If\n$$\\mathbb E_{Q_0}|Z|,\\mathbb E_{Q_1}|Z|<\\infty,\\qquad \\mathbb E_{Q_0}Z<0<\\mathbb E_{Q_1}Z,$$\nthen for every $\\alpha,\\beta\\in(0,1)$ the algorithm [[alg-sequential-likelihood-ratio-test]], with $\\mathcal F_0=\\{\\varnothing,\\Omega\\}$ and $\\mathcal F_t=\\sigma(X_1,\\ldots,X_t)$, satisfies\n$$P_0(\\tau<\\infty)=P_1(\\tau<\\infty)=1.$$",
+        "deps": [
+          "alg-sequential-likelihood-ratio-test",
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-law-or-distribution-of-a-random-element",
+          "def-likelihood-ratio-as-rn-derivative",
+          "def-probability-measure",
+          "lem-iid-sequential-likelihood-ratio-factorization",
+          "lem-measurable-functions-preserve-independence",
+          "thm-kolmogorov-iid-l1-strong-law",
+          "thm-likelihood-ratio-change-of-measure"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Robert L. Wolpert, Introduction to Martingales, STA 711 course notes, §1.2, PDF p. 4",
+              "url": "https://www2.stat.duke.edu/courses/Fall18/sta711/lec/topics/mg.pdf"
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed., §2.4, Theorem 2.4.1 and proof, printed pp. 76–77",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      }
+    ]
+  },
+  {
+    "order": 2035,
+    "id": "sequential-likelihood-ratio-tests-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Sequential likelihood-ratio tests — Examples",
+    "companion": "sequential-likelihood-ratio-tests",
+    "requires": [
+      "sequential-likelihood-ratio-tests"
+    ],
+    "items": [
+      {
+        "id": "ex-bernoulli-sequential-likelihood-ratio-crossings",
+        "kind": "example",
+        "title": "Exact Bernoulli crossings in a sequential likelihood-ratio test",
+        "statement": "Assume AC. Consider IID observations $X_i\\in\\{0,1\\}$. Under $H_0$, let $P_0(X_i=1)=1/4$; under $H_1$, let $P_1(X_i=1)=3/4$. Use the procedure [[alg-sequential-likelihood-ratio-test]] with $\\alpha=\\beta=1/4$. A type-I error means deciding $H_1$ when $P_0$ governs the observations; a type-II error means deciding $H_0$ when $P_1$ governs them. The terminal type-I and type-II error probabilities are each $1/10$, and the test stops almost surely under either law.",
+        "deps": [
+          "alg-sequential-likelihood-ratio-test",
+          "def-axiom-of-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-probability-measure",
+          "lem-iid-sequential-likelihood-ratio-factorization",
+          "thm-sequential-likelihood-ratio-test-error-bounds",
+          "thm-sequential-likelihood-ratio-test-terminates-under-drift"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": []
+        },
+        "dependency_level": 2
+      }
+    ]
+  }
+]

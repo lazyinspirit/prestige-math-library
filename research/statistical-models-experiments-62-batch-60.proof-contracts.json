@@ -1,0 +1,1121 @@
+{
+  "version": 1,
+  "scope": [
+    "def-conditional-subgaussian-increments",
+    "def-gaussian-mixture-confidence-sequence-boundary",
+    "lem-gaussian-exponential-mixture-integral",
+    "lem-conditional-subgaussian-exponential-process",
+    "lem-gaussian-mixture-boundary-crossing-equivalence",
+    "thm-gaussian-mixture-test-supermartingale",
+    "thm-subgaussian-mixture-confidence-sequence",
+    "cex-marginal-subgaussianity-does-not-justify-mixture-confidence-sequence",
+    "ex-independent-gaussian-increments-subgaussian-mixture-confidence-sequence"
+  ],
+  "contracts": {
+    "def-conditional-subgaussian-increments": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a single-process definition, not a parameter-indexed conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition explicitly assumes sigma squared is strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits proxy sigma squared equal to one and imposes the same mgf inequality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows deterministic increments whenever the stated conditional mgf condition holds."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proxy is restricted to sigma squared greater than zero; lambda ranges over all real numbers without endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies mu and conditional-expectation versions; no parameter or representative is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines a conditional mgf property and claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines a conditional mgf property and claims no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-60",
+        "notes": "Reviewed Definition and all five prerequisite interfaces. The t>=1, fixed real lambda quantifiers explicitly allow separate null sets; the integrable exponential premise makes the conditional L1 class legitimate without a simultaneous version. Adaptation is relative to the supplied filtration; mu is fixed, sigma^2>0. The lambda=+/-1 bounds imply integrability of centered X by |x|<=exp(x)+exp(-x). No independence or identical-law premise is smuggled in. AC is inherited from conditional-expectation existence; empty index and zero-proxy cases are excluded by the stated domains. Reader/refuter report no definition defect."
+      }
+    },
+    "def-gaussian-mixture-confidence-sequence-boundary": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly sets C0=R before defining empirical-mean intervals only for t>=1. With no observations the confidence set is the whole real line, so the rule performs no division by zero or undefined empty-data sample mean."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits v=0; the logarithm argument is greater than one because alpha is strictly between zero and one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition accepts proxy sigma squared equal to one and all terms remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits a constant data sequence; the interval formula remains defined at every time."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires rho>0 and alpha in (0,1), so the denominator and logarithm argument are defined throughout v>=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition constructs intervals directly and chooses no element from a set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition asserts no characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts no characterization."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-gaussian-exponential-mixture-integral": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $Z$ have the standard normal law. By [F1] and [F6], $Z/\\sqrt{\\rho}$ has law $\\pi_\\rho$; [F2] and the density in [F1] give $$I=\\int_{\\mathbb R}\\exp\\!\\left(sz/\\sqrt{\\rho}-vz^2/(2\\rho)\\right)\\frac{e^{-z^2/2}}{\\sqrt{2\\pi}}\\,dz,$$ with a continuous nonnegative integrand, which [F5] makes Lebesgue measurable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $a=(v+\\rho)/\\rho>0$ and $c=s\\sqrt{\\rho}/(v+\\rho)$. Completing the square in [step 1.1] gives $$I=e^{s^2/[2(v+\\rho)]}\\int_{\\mathbb R}\\frac{e^{-a(z-c)^2/2}}{\\sqrt{2\\pi}}\\,dz.$$ The map $T(y)=c+y/\\sqrt a$ has the $C^1$ inverse $T^{-1}(z)=\\sqrt a(z-c)$, so it is a diffeomorphism from $\\mathbb R$ to $\\mathbb R$, and $|T'(y)|=1/\\sqrt a$. The function $g(z)=e^{-a(z-c)^2/2}/\\sqrt{2\\pi}$ is continuous and nonnegative, hence Lebesgue measurable by [F5]. By [A2], AC supplies the countable-choice hypothesis of [F4]; applying [F4] to $g$ and $T$ gives $$\\int_{\\mathbb R}g(z)\\,dz=\\frac1{\\sqrt a}\\int_{\\mathbb R}\\frac{e^{-y^2/2}}{\\sqrt{2\\pi}}\\,dy=\\frac1{\\sqrt a}$$ by [F3]. Therefore $I=\\sqrt{\\rho/(v+\\rho)}e^{s^2/[2(v+\\rho)]}$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The integral identity is stated for a fixed real s and nonnegative v."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies at v=0 and yields the finite factor one times exp(s squared over 2 rho)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes v=1, where v+rho is strictly positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At s=0 the square-completion formula in step 2.1 remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The allowed endpoint v=0 is handled in step 2.1; rho remains strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof evaluates a supplied Gaussian law and makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves an integral identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves an integral identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-60",
+        "notes": "Checked both steps and all F1-F6/A1-A2 against current normal-law, normalization, law-integration, C1 substitution, measurability, square-root and choice interfaces. With a=(v+rho)/rho>0 and c=s sqrt(rho)/(v+rho), completing the square leaves exp(s^2/(2(v+rho))); affine substitution has Jacobian 1/sqrt(a). Normalization then yields the exact claimed factor. Integrands are continuous nonnegative, so no prior integrability is presumed. v=0 gives the normal mgf, s=0 gives sqrt(rho/(v+rho)), rho>0 excludes division by zero. AC covers normal convention and implies countable choice for substitution/measurability. Source Howard et al. Appendix A.3 Proposition 5 and Ramdas Proposition 1 agree; no findings on this carrier."
+      }
+    },
+    "lem-conditional-subgaussian-exponential-process": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conditional-subgaussian-increments",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice (AC) [[def-axiom-of-choice]] for the conditional-expectation existence convention. Let\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0},P)$ be a discrete filtered probability space\n[[def-filtration-and-filtered-probability-space]], and let $(X_t)_{t\\ge1}$ be a real-valued adapted process\n[[def-adapted-and-integrable-stochastic-process]]. Fix $\\mu\\in\\mathbb R$ and a proxy $\\sigma^2>0$.\nThe increments are **conditionally sub-Gaussian around $\\mu$ with proxy $\\sigma^2$** when, for every\ninteger $t\\ge1$ and every fixed $\\lambda\\in\\mathbb R$, $e^{\\lambda(X_t-\\mu)}$ is integrable and\n$$\\mathbb E_P[e^{\\lambda(X_t-\\mu)}\\mid\\mathcal F_{t-1}]\\le e^{\\lambda^2\\sigma^2/2}\\quad P\\text{-almost surely},$$\nwhere conditional expectation means the class of integrable versions of\n[[def-conditional-expectation-as-an-ae-class]] represented as in\n[[def-conditional-expectation-given-a-sigma-algebra]]. The exceptional null set may depend on $t$ and\n$\\lambda$; no common null set over the uncountable set $\\mathbb R$ is assumed.\n\nThe integrability of $X_t$ follows from the two cases $\\lambda=1$ and $\\lambda=-1$: conditional\nexpectation preserves the integral, so both $e^{X_t-\\mu}$ and $e^{-(X_t-\\mu)}$ have finite expectation,\nand $|X_t-\\mu|\\le e^{X_t-\\mu}+e^{-(X_t-\\mu)}$. The proxy is an upper bound in the conditional\nmoment-generating-function inequality; it is not asserted to be a variance. Independence and identical\ndistribution of the increments are not part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-martingale-submartingale-and-supermartingale",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]]. An integrable adapted real process $X$ [[def-adapted-and-integrable-stochastic-process]] is a **martingale**, **submartingale**, or **supermartingale** when, respectively, for every $n\\ge0$,\n$$E[X_{n+1}\\mid\\mathcal F_n]=X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\ge X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\le X_n\\quad\\text{almost surely}.$$\nThese are three separate conditions, with the convention that a submartingale has conditional future mean at least its present value. The conditional expectations are the almost-sure classes of [[def-conditional-expectation-as-an-ae-class]]; that supplier inherits AC from its Radon\u2013Nikodym existence proof. The definition itself selects no representative and assumes no completed filtration.\n\nThe condition is imposed at each adjacent pair of times. An all-pairs formulation requires a proof. No boundedness or independence is part of this definition, and no trivial or deterministic initial value is imposed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nonnegative-test-supermartingale",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice (AC) [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0})$ be a discrete filtration\non a measurable space, and let $\\mathcal P_0$ be a family of probability laws\non $(\\Omega,\\mathcal F)$. A real-valued process $E=(E_t)_{t\\in\\mathbb N_0}$ is\na **nonnegative test supermartingale for $\\mathcal P_0$** if, for every\n$P\\in\\mathcal P_0$, it is adapted and integrable under $P$\n[[def-filtration-and-filtered-probability-space]]\n[[def-martingale-submartingale-and-supermartingale]], satisfies\n$P(E_t\\ge0)=1$ for every $t$, and has $\\mathbb E_P E_0\\le1$.\n\nThe same process must satisfy the supermartingale condition under every law\nin the null family; that is what makes the definition uniform over a composite\nnull. The initial value may be random and need not be bounded by one\npointwise. Time starts at zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $t\\ge1$, put $Y_t:=\\exp\\!\\left(\\lambda(X_t-\\mu)-\\lambda^2\\sigma^2/2\\right)$ and $Q_t:=\\mathbb E[Y_t\\mid\\mathcal F_{t-1}]$. By [F1], $Y_t$ is integrable and $0\\le Q_t\\le1$. Starting from $L_0^\\lambda(\\mu)=1$, suppose $L_{t-1}^\\lambda(\\mu)$ is integrable and let $Z_n:=L_{t-1}^\\lambda(\\mu)\\wedge n$. The bounded-factor clause of [F2] gives $\\mathbb E[Z_nY_t]=\\mathbb E[Z_nQ_t]\\le\\mathbb E Z_n\\le\\mathbb E L_{t-1}^\\lambda(\\mu)$. Since $Z_nY_t\\uparrow L_t^\\lambda(\\mu)$, [F3] shows $L_t^\\lambda(\\mu)$ is integrable and $\\mathbb E L_t^\\lambda(\\mu)\\le\\mathbb E L_{t-1}^\\lambda(\\mu)$. Thus induction establishes integrability at every time.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The process is adapted and nonnegative by its definition. Since $L_{t-1}^\\lambda(\\mu)Y_t=L_t^\\lambda(\\mu)$ and both products are integrable by step 1.1, the unbounded-factor clause of [F2] gives $\\mathbb E[L_t^\\lambda(\\mu)\\mid\\mathcal F_{t-1}]=L_{t-1}^\\lambda(\\mu)Q_t\\le L_{t-1}^\\lambda(\\mu)$. Also $\\mathbb E L_0^\\lambda(\\mu)=1$. Therefore [F4] and [F5] give the asserted test-supermartingale property.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "A1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement sets S0(mu)=0, the empty increment sum, and consequently L0^lambda(mu)=exp(0)=1. Proof 1.1 starts its integrability induction at that value and 2.1 verifies initial expectation one before the adjacent-time inequalities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The lambda=0 process is constantly one, as follows from the Statement and step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the initial expectation exactly equals one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 allow deterministic increments if they satisfy the conditional mgf premise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 cover every fixed real lambda, including lambda zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC explicitly; the proof does not choose a parameter or representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves a sufficient supermartingale condition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves a sufficient supermartingale condition, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-60",
+        "notes": "Read both proof steps and exact F1-F5/A1 suppliers. Fixing lambda before choosing conditional classes avoids uncountable-null-set claims. Bounded Z_n=L_(t-1) wedge n is past-measurable; Y_t is integrable. Taking out bounded Z_n and testing the full event gives E[Z_n Y_t]<=E L_(t-1). MCT applies to pointwise increasing nonnegative products, establishing integrability inductively from L0=1 before unbounded factor removal. L_(t-1) Q_t is integrable since 0<=Q_t<=1 a.s.; hence the finite-factor supplier is licensed and gives the adjacent supermartingale inequality. Adaptation and strict positivity are immediate from finite sums and exponential. lambda=0 gives the constant process, t=0 is initialization, no independence is assumed. AC is inherited exactly from conditional expectation. Reader/refuter raise no finding here."
+      }
+    },
+    "lem-gaussian-mixture-boundary-crossing-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gaussian-mixture-confidence-sequence-boundary",
+          "source_section": "Definition",
+          "quote": "Let $\\sigma^2>0$ be a supplied scale, let $\\rho>0$ be a tuning parameter, and let $\\alpha\\in(0,1)$.\nFor $v\\ge0$ define\n$$u_\\alpha(v):=\\sqrt{(v+\\rho)\\log\\!\\left(\\frac{v+\\rho}{\\alpha^2\\rho}\\right)}.$$\nThe expression is real because $(v+\\rho)/(\\alpha^2\\rho)>1$. For a real data sequence\n$x_1,x_2,\\ldots$, set $\\bar x_t=t^{-1}\\sum_{i=1}^t x_i$ and define\n$$C_0:=\\mathbb R,\\qquad C_t:=\\left[\\bar x_t-\\frac{u_\\alpha(t\\sigma^2)}{t},\\,\\bar x_t+\\frac{u_\\alpha(t\\sigma^2)}{t}\\right]\\quad(t\\ge1).$$\nThe endpoints are included. This definition specifies an interval rule only; it makes no coverage or\ntime-uniform validity assertion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $M(v,s)>0$, applying the strictly increasing logarithm [F2] shows $M(v,s)\\ge1/\\alpha$ iff $s^2/[2(v+\\rho)]-\\frac12\\log((v+\\rho)/\\rho)\\ge\\log(1/\\alpha)$. Multiplying by $2(v+\\rho)>0$ and combining logarithms gives $s^2\\ge(v+\\rho)\\log((v+\\rho)/(\\alpha^2\\rho))$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The ratio $(v+\\rho)/(\\alpha^2\\rho)$ exceeds $1$, so its logarithm is positive and [F3] supplies the nonnegative root in [F1]. Thus the last inequality in step 1.1 is exactly $|s|\\ge u_\\alpha(v)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma is a scalar algebraic equivalence with no parameter set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At s=0, step 1.1 gives a positive threshold while step 2.1 yields the equivalent false inequality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes v=1 in its domain, and step 1.1 remains valid there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case s=0 is covered in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint v=0 is allowed, and alpha and rho stay in their strict domains in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a nonempty set occurs in this algebraic lemma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 derives the squared inequality from M(v,s)>=1/alpha; step 2.1 takes its nonnegative square root."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 shows |s|>=u_alpha(v) implies the squared inequality, and step 1.1 reverses the algebra to the mixture threshold."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-60",
+        "notes": "Read both steps and boundary, logarithm definition/laws and square-root supplier. M(v,s)>0 and v+rho>0 permit applying increasing log and multiplying without reversing inequality. Twice the log threshold simplifies exactly to log((v+rho)/(alpha^2 rho)); its argument exceeds 1 even at v=0 because alpha<1. The nonnegative square root gives both directions of s^2>=u^2 iff |s|>=u, including s=+/-u and s=0. rho=0 and alpha endpoints excluded explicitly. No choice or probabilistic premise introduced. Source Proposition 5 agrees with the expression; no reader/refuter finding."
+      }
+    },
+    "thm-gaussian-mixture-test-supermartingale": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-conditional-subgaussian-exponential-process",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0},P)$, $(X_t)_{t\\ge1}$, $\\mu\\in\\mathbb R$, and $\\sigma^2>0$ satisfy\n[[def-conditional-subgaussian-increments]]. For each fixed $\\lambda\\in\\mathbb R$, set\n$$S_0(\\mu):=0,\\qquad S_t(\\mu):=\\sum_{i=1}^t(X_i-\\mu),\\qquad L_t^\\lambda(\\mu):=\\exp\\!\\left(\\lambda S_t(\\mu)-\\frac{\\lambda^2t\\sigma^2}{2}\\right).$$\nThen $(L_t^\\lambda(\\mu))_{t\\ge0}$ is a nonnegative test supermartingale for the singleton null family $\\{P\\}$, with $L_0^\\lambda(\\mu)=1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-mixture-of-null-supermartingales",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\Lambda,\\mathcal A,\\pi)$ be a probability space and let\n$\\mathcal P_0$ be a family of laws on a common discrete filtered measurable\nspace $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge0})$. For each\n$\\lambda\\in\\Lambda$, let $E^\\lambda=(E_t^\\lambda)_{t\\ge0}$ be a nonnegative\ntest supermartingale for $\\mathcal P_0$. Suppose that, for every $t$, the map\n$(\\lambda,\\omega)\\mapsto E_t^\\lambda(\\omega)$ is measurable with respect to\n$\\mathcal A\\otimes\\mathcal F_t$. Before mixing, take its pointwise\nnonnegative version $E_t^{\\lambda,+}(\\omega)=\\max\\{E_t^\\lambda(\\omega),0\\}$,\nand define\n$$\\overline E_t(\\omega)=\\int_\\Lambda E_t^{\\lambda,+}(\\omega)\\,\\pi(d\\lambda),\\qquad \\widetilde E_t(\\omega)=\\begin{cases}\\overline E_t(\\omega),&\\overline E_t(\\omega)<\\infty,\\\\0,&\\overline E_t(\\omega)=\\infty.\\end{cases}$$\nThen $\\widetilde E=(\\widetilde E_t)_{t\\ge0}$ is a nonnegative test\nsupermartingale for $\\mathcal P_0$. The modification on the infinite-integral\nset makes a real-valued version common to all null laws.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gaussian-exponential-mixture-integral",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $\\rho>0$, $v\\ge0$, and $s\\in\\mathbb R$, let\n$\\pi_\\rho=N(0,1/\\rho)$ under the normal-law convention of\n[[def-standard-normal-and-normal-laws]]. Then\n$$\\int_{\\mathbb R}\\exp\\!\\left(\\lambda s-\\frac{v\\lambda^2}{2}\\right)\\,\\pi_\\rho(d\\lambda)=\\sqrt{\\frac{\\rho}{v+\\rho}}\\exp\\!\\left(\\frac{s^2}{2(v+\\rho)}\\right).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed $\\lambda$, [F1] supplies the component process $L_t^\\lambda(\\mu)$. At fixed $t$, $S_t(\\mu)$ is $\\mathcal F_t$-measurable, so $(\\lambda,\\omega)\\mapsto\\exp(\\lambda S_t(\\mu)(\\omega)-\\lambda^2t\\sigma^2/2)$ is measurable on $\\mathcal B(\\mathbb R)\\otimes\\mathcal F_t$: it is the composition of the measurable coordinate maps with continuous arithmetic and exponential operations. Each component is nonnegative.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Mix these components using the probability law $N(0,1/\\rho)$ from [F5]. Both this prior and $P$ are probability measures, hence sigma-finite. The product-measurability in step 1.1 and the component conditions in [F1] meet [F2]; [F3] gives the needed measurable nonnegative section integrals. Therefore the mixture process is a nonnegative test supermartingale. By [F4] its value is the displayed finite formula for every finite $S_t(\\mu)$, so the mixture theorem's infinite-integral modification is never applied. At $t=0$ the formula gives $M_0(\\mu)=1$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "A1",
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement sets S0(mu)=0 and V0=0, so the displayed formula gives M0=sqrt(rho/rho)exp(0)=1. Proof 2.1 explicitly checks this initial value; rho>0 keeps its denominator valid with no observations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At t=0, V_0=S_0=0 and step 2.1 gives M_0=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The initial expectation is exactly one by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The closed Gaussian integral is finite for every finite S_t, including S_t=0, by F4 and step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement uses sigma squared>0 and rho>0, and F4 allows v=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC explicitly; the fixed law and parameter are supplied, not selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a test-supermartingale property, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves a test-supermartingale property, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-60",
+        "notes": "Reviewed both steps and all current F1-F5/A1 interfaces, including the complete published mixture proof. Coordinates lambda and finite adapted S_t give product measurability before integrating. The normal prior is a probability on the Borel line, and P is probability; Tonelli sigma-finiteness is met. Components are pointwise positive and singleton-null test supermartingales for each fixed lambda, so no common uncountable exceptional set is needed: the mixture supplier tests event integrals and applies Tonelli. Its positive-part replacement has no effect here. The Gaussian integral yields a finite real value for every outcome because rho>0 and V_t>=0, so infinite-integral modification is unused. At t=0, V=S=0 gives M0=1. AC inherited from normal and conditional conventions. Howard Appendix A.3 product measurability and Proposition 5 checked; no reader/refuter finding."
+      }
+    },
+    "thm-subgaussian-mixture-confidence-sequence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conditional-subgaussian-increments",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice (AC) [[def-axiom-of-choice]] for the conditional-expectation existence convention. Let\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0},P)$ be a discrete filtered probability space\n[[def-filtration-and-filtered-probability-space]], and let $(X_t)_{t\\ge1}$ be a real-valued adapted process\n[[def-adapted-and-integrable-stochastic-process]]. Fix $\\mu\\in\\mathbb R$ and a proxy $\\sigma^2>0$.\nThe increments are **conditionally sub-Gaussian around $\\mu$ with proxy $\\sigma^2$** when, for every\ninteger $t\\ge1$ and every fixed $\\lambda\\in\\mathbb R$, $e^{\\lambda(X_t-\\mu)}$ is integrable and\n$$\\mathbb E_P[e^{\\lambda(X_t-\\mu)}\\mid\\mathcal F_{t-1}]\\le e^{\\lambda^2\\sigma^2/2}\\quad P\\text{-almost surely},$$\nwhere conditional expectation means the class of integrable versions of\n[[def-conditional-expectation-as-an-ae-class]] represented as in\n[[def-conditional-expectation-given-a-sigma-algebra]]. The exceptional null set may depend on $t$ and\n$\\lambda$; no common null set over the uncountable set $\\mathbb R$ is assumed.\n\nThe integrability of $X_t$ follows from the two cases $\\lambda=1$ and $\\lambda=-1$: conditional\nexpectation preserves the integral, so both $e^{X_t-\\mu}$ and $e^{-(X_t-\\mu)}$ have finite expectation,\nand $|X_t-\\mu|\\le e^{X_t-\\mu}+e^{-(X_t-\\mu)}$. The proxy is an upper bound in the conditional\nmoment-generating-function inequality; it is not asserted to be a variance. Independence and identical\ndistribution of the increments are not part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gaussian-mixture-test-supermartingale",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0},P)$ and $(X_t)_{t\\ge1}$ satisfy\n[[def-conditional-subgaussian-increments]] for $\\mu\\in\\mathbb R$ with known proxy $\\sigma^2>0$.\nFix $\\rho>0$. Define $S_0(\\mu)=0$, $S_t(\\mu)=\\sum_{i=1}^t(X_i-\\mu)$, $V_t=t\\sigma^2$, and\n$$M_t(\\mu):=\\sqrt{\\frac{\\rho}{V_t+\\rho}}\\exp\\!\\left(\\frac{S_t(\\mu)^2}{2(V_t+\\rho)}\\right)\\quad(t\\in\\mathbb N_0).$$\nThen $M(\\mu)$ is a nonnegative test supermartingale for $\\{P\\}$, with $M_0(\\mu)=1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-gaussian-mixture-boundary-crossing-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha\\in(0,1)$, $\\rho>0$, $v\\ge0$, and $s\\in\\mathbb R$. Define\n$$M(v,s):=\\sqrt{\\frac{\\rho}{v+\\rho}}\\exp\\!\\left(\\frac{s^2}{2(v+\\rho)}\\right).$$\nFor $u_\\alpha$ from [[def-gaussian-mixture-confidence-sequence-boundary]],\n$$M(v,s)\\ge\\frac1\\alpha\\quad\\Longleftrightarrow\\quad |s|\\ge u_\\alpha(v).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-discrete-ville-inequality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\mathcal P_0$ be a family of probability laws and let\n$M=(M_t)_{t\\in\\mathbb N_0}$ be a nonnegative test supermartingale for\n$\\mathcal P_0$. For every $P\\in\\mathcal P_0$ and $\\alpha\\in(0,1)$, define\n$$\\tau_\\alpha=\\inf\\{t\\ge0:M_t\\ge1/\\alpha\\},\\qquad\\inf\\varnothing=\\infty.$$\nThen\n$$P\\!\\left(\\sup_{t\\ge0}M_t\\ge\\frac1\\alpha\\right)\\le\\alpha,\\qquad P(\\tau_\\alpha<\\infty)\\le\\alpha.$$\nMoreover, for every discrete stopping time $\\sigma$,\n$$P(\\sigma<\\infty,\\ M_\\sigma\\ge1/\\alpha)\\le\\alpha,$$\nwhere the event involving $M_\\sigma$ is restricted to $\\{\\sigma<\\infty\\}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-confidence-sequence",
+          "source_section": "Definition",
+          "quote": "Let $\\Theta$ be a parameter set and $(P_\\theta)_{\\theta\\in\\Theta}$ a family of\nprobability laws on a common discrete filtered measurable space\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge0})$\n[[def-filtration-and-filtered-probability-space]]. For\n$\\alpha\\in(0,1)$, a **$(1-\\alpha)$ confidence sequence** is a sequence of\nset-valued rules $C_t(\\omega)\\subseteq\\Theta$ such that, for each fixed\n$\\theta\\in\\Theta$, the membership event $\\{\\theta\\in C_t\\}$ belongs to\n$\\mathcal F_t$ for every $t$ and\n$$P_\\theta(\\theta\\in C_t\\text{ for every }t\\ge0)\\ge1-\\alpha.$$\n\nThe coverage is simultaneous over all discrete times. The definition makes no\nclaim of conditional-on-covariates coverage or validity under a changed\nsampling law.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\theta\\in\\Theta$. The process is adapted under $P_\\theta$, so each $X_i$ for $i\\le t$ and hence $\\bar X_t$ is $\\mathcal F_t$-measurable. Therefore $\\{\\theta\\in C_t\\}$ is $\\mathcal F_t$-measurable for every $t\\ge1$, and it is the whole space at $t=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $t\\ge1$, if $\\theta\\notin C_t$, the interval in the Statement has closed endpoints, so $|S_t(\\theta)|>u_\\alpha(t\\sigma^2)$. By [F3], this implies $M_t(\\theta)\\ge1/\\alpha$. Consequently the event that $\\theta$ is ever excluded from $C_t$ is contained in $\\{\\sup_{t\\ge0}M_t(\\theta)\\ge1/\\alpha\\}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F2] and Ville's inequality [F4], the latter event has $P_\\theta$-probability at most $\\alpha$. Its complement therefore has probability at least $1-\\alpha$ and is contained in $\\{\\theta\\in C_t\\text{ for all }t\\ge0\\}$. Since [F5] requires exactly these membership and coverage clauses, $(C_t)$ is a confidence sequence.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Theta may be empty; the quantified coverage statement is vacuous and C_t=Theta for every t."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a strictly positive proxy sigma squared."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When Theta is a singleton, the fixed-parameter coverage argument in steps 1.1\u20133.1 still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No independence or nondegeneracy is assumed; every law satisfying the conditional premise is covered by step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Alpha and rho are restricted to (0,1) and (0,infinity); t=0 is handled by C_0=Theta and step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes an arbitrary theta and the proof never selects a representative from Theta."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves a sufficient confidence-sequence guarantee, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves a sufficient confidence-sequence guarantee, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-60",
+        "notes": "Read all three proof steps and every exact prerequisite interface, including full current batch-58 Ville proof and finite-horizon proof. For each fixed theta, membership is a scalar F_t event; no measurable structure on Theta or simultaneous exceptional set in theta is required. Closed-interval exclusion gives strict |S_t|>u, contained in the >= threshold event by the verified equivalence. The mixture is a test supermartingale with M0=1. Ville handles even a nonattained supremum by lower thresholds; its finite-horizon truncation event test is an immediate nonfatal omitted calculation, independently closed in this review and routed read-only. Countable time union yields coverage and C0=Theta; empty Theta is vacuous. alpha in (0,1), rho>0 and sigma^2>0 exclude singular endpoints. AC explicit and inherited. Historical expectation-order proof omission is corrected in current supplier; its new malformed citation is separately routed, with the exact triangle-inequality interface independently read. No substantial unmet prerequisite or consumer repair."
+      }
+    },
+    "cex-marginal-subgaussianity-does-not-justify-mixture-confidence-sequence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $D\\in L^1$ satisfy $\\mathbb E[D\\mid\\mathcal G]=0$ almost surely. Let $A,B$ be finite $\\mathcal G$-measurable random variables such that $A\\le D\\le B$ and $B-A\\le c$ almost surely for a deterministic $c\\ge0$. Then for every $\\lambda\\in\\mathbb R$,\n$$\\mathbb E[e^{\\lambda D}\\mid\\mathcal G]\\le e^{\\lambda^2c^2/8}\\quad\\text{a.s.}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-subgaussian-variable-and-vector",
+          "source_section": "Definition",
+          "quote": "Use the real random variable convention of [[def-random-element-and-real-random-variable]] and the expectation convention of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. A real random variable $X$ is **centered** when it is integrable and $\\mathbb E X=0$. A vector random element $Z=(Z_1,\\ldots,Z_d)$ in $\\mathbb R^d$, for an integer $d\\ge1$, is centered when each coordinate is integrable and $\\mathbb E Z_j=0$. For $u,z\\in\\mathbb R^d$, write $\\langle u,z\\rangle=\\sum_{j=1}^d u_jz_j$ and $\\|u\\|_2=(\\sum_{j=1}^d u_j^2)^{1/2}$, using the Euclidean convention in [[def-euclidean-spheres-and-closed-balls]].\n\nFor $\\sigma^2\\ge0$, a centered real random variable $X$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\sigma^2/2}\\qquad\\text{for every }\\lambda\\in\\mathbb R.$$\nA centered vector random element $Z\\in\\mathbb R^d$ is **sub-Gaussian with proxy $\\sigma^2$** if\n$$\\mathbb E e^{\\lambda\\langle u,Z\\rangle}\\le e^{\\sigma^2\\lambda^2\\|u\\|_2^2/2}\\qquad\\text{for every }u\\in\\mathbb R^d\\text{ and }\\lambda\\in\\mathbb R.$$\n\nFor $\\nu^2\\ge0$ and $b>0$, a centered real random variable $X$ is **sub-exponential with parameters $(\\nu^2,b)$** if\n$$\\mathbb E e^{\\lambda X}\\le e^{\\lambda^2\\nu^2/2}\\qquad\\text{whenever }|\\lambda|\\le1/b.$$\n\nThe parameters $\\sigma^2$ and $\\nu^2$ are moment-generating-function upper-bound proxies; they are not asserted to equal the variance. The vector condition controls every one-dimensional projection and does not assert independence of coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditional-expectation-is-unique-almost-surely",
+          "source_section": "Statement",
+          "quote": "If $Y,Z$ are conditional-expectation versions of the same real integrable $X$ given $\\mathcal G$, then $Y=Z$ almost surely.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-subgaussian-increments",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice (AC) [[def-axiom-of-choice]] for the conditional-expectation existence convention. Let\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0},P)$ be a discrete filtered probability space\n[[def-filtration-and-filtered-probability-space]], and let $(X_t)_{t\\ge1}$ be a real-valued adapted process\n[[def-adapted-and-integrable-stochastic-process]]. Fix $\\mu\\in\\mathbb R$ and a proxy $\\sigma^2>0$.\nThe increments are **conditionally sub-Gaussian around $\\mu$ with proxy $\\sigma^2$** when, for every\ninteger $t\\ge1$ and every fixed $\\lambda\\in\\mathbb R$, $e^{\\lambda(X_t-\\mu)}$ is integrable and\n$$\\mathbb E_P[e^{\\lambda(X_t-\\mu)}\\mid\\mathcal F_{t-1}]\\le e^{\\lambda^2\\sigma^2/2}\\quad P\\text{-almost surely},$$\nwhere conditional expectation means the class of integrable versions of\n[[def-conditional-expectation-as-an-ae-class]] represented as in\n[[def-conditional-expectation-given-a-sigma-algebra]]. The exceptional null set may depend on $t$ and\n$\\lambda$; no common null set over the uncountable set $\\mathbb R$ is assumed.\n\nThe integrability of $X_t$ follows from the two cases $\\lambda=1$ and $\\lambda=-1$: conditional\nexpectation preserves the integral, so both $e^{X_t-\\mu}$ and $e^{-(X_t-\\mu)}$ have finite expectation,\nand $|X_t-\\mu|\\le e^{X_t-\\mu}+e^{-(X_t-\\mu)}$. The proxy is an upper bound in the conditional\nmoment-generating-function inequality; it is not asserted to be a variance. Independence and identical\ndistribution of the increments are not part of this definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-gaussian-mixture-confidence-sequence-boundary",
+          "source_section": "Definition",
+          "quote": "Let $\\sigma^2>0$ be a supplied scale, let $\\rho>0$ be a tuning parameter, and let $\\alpha\\in(0,1)$.\nFor $v\\ge0$ define\n$$u_\\alpha(v):=\\sqrt{(v+\\rho)\\log\\!\\left(\\frac{v+\\rho}{\\alpha^2\\rho}\\right)}.$$\nThe expression is real because $(v+\\rho)/(\\alpha^2\\rho)>1$. For a real data sequence\n$x_1,x_2,\\ldots$, set $\\bar x_t=t^{-1}\\sum_{i=1}^t x_i$ and define\n$$C_0:=\\mathbb R,\\qquad C_t:=\\left[\\bar x_t-\\frac{u_\\alpha(t\\sigma^2)}{t},\\,\\bar x_t+\\frac{u_\\alpha(t\\sigma^2)}{t}\\right]\\quad(t\\ge1).$$\nThe endpoints are included. This definition specifies an interval rule only; it makes no coverage or\ntime-uniform validity assertion.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We have $\\mathbb E Z=0$ and $-1\\le Z\\le1$. Since $\\mathcal F_0$ is trivial, [F3] gives $\\mathbb E[Z\\mid\\mathcal F_0]=0$ and, for every $\\lambda$, $\\mathbb E[e^{\\lambda Z}\\mid\\mathcal F_0]=\\mathbb E e^{\\lambda Z}$; the latter variable is integrable because $Z$ has finite support. Apply [F1] with $D=Z$, $A=-1$, $B=1$, and $c=2$ to get $\\mathbb E[e^{\\lambda Z}\\mid\\mathcal F_0]\\le e^{\\lambda^2/2}$, hence $\\mathbb E e^{\\lambda Z}\\le e^{\\lambda^2/2}$ for every $\\lambda\\in\\mathbb R$. Thus every marginal $X_t=Z$ is centered and sub-Gaussian with proxy $1$ by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At time $t=2$, $X_2=Z$ is $\\mathcal F_1$-measurable. Its own version satisfies [F4], so [F5] gives $\\mathbb E[e^{X_2}\\mid\\mathcal F_1]=e^Z$ almost surely. On the event $\\{Z=1\\}$, which has probability $1/2$, this equals $e>e^{1/2}$. Hence the conditional sub-Gaussian premise [F6] with proxy $1$ fails at $t=2$ and $\\lambda=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Every sample mean is $\\bar X_t=Z$. For all sufficiently large $t$, $(t+\\rho)/(\\alpha^2\\rho)\\ge1$; using [F8] and $u^{-1}\\le u^{-3/4}$ for $u\\ge1$ gives $(u_\\alpha(t)/t)^2\\le4(t+\\rho)^{5/4}/((\\alpha^2\\rho)^{1/4}t^2)=4t^{-3/4}(1+\\rho/t)^{5/4}/(\\alpha^2\\rho)^{1/4}\\to0$. Thus the radius is eventually less than $1$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $|\\bar X_t|=|Z|=1$, step 1.3 implies that $0$ is outside every boundary interval for all sufficiently large $t$, on both outcomes. Therefore $\\mathbb P(0\\in C_t\\text{ for all }t\\ge1)=0<1-\\alpha$, refuting the statement.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.3",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses an explicit nonempty two-point probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proxy is sigma squared equal to one and the radius calculation in step 1.3 uses its positive value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The witness values are exactly Z=-1 and Z=1 in steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The process is perfectly repeated across time; steps 1.2 and 2.1 verify the dependence failure and resulting exclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The argument holds for every alpha in (0,1) and rho>0, with the domains used in step 1.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement uses an explicit two-point space and the proof selects no representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal marginal-only claim and proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal marginal-only claim and proves no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-60",
+        "notes": "Independently read all four counterexample steps and nine actual prerequisite interfaces, plus current conditioning and conditional Hoeffding proofs and Hoeffding published suppliers. Trivial F0 makes every finite-support exponential independent and integrable, so conditional Hoeffding with width 2 yields the unconditional proxy 1 bound. The reader conversion is accepted: current raw hash exactly equals reader-post and differs from pre. At t=2, lambda=1, e^Z is the known-variable conditional expectation and exceeds e^(1/2) on the positive atom. Log integral bound log x<=4 x^(1/4) for x>=1 makes squared radius <=constant*t^(-3/4)*(1+rho/t)^(5/4), tending to zero. Both outcomes then exclude mean zero eventually, so all-time coverage is zero for every alpha in (0,1), rho>0. AC inherited through conditional Hoeffding; no uncountable selection or independence across times. Historical endpoint/a.e.-representative supplier omissions are nonfatal and currently corrected; malformed current expectation-supplier citation is routed separately and does not invalidate its correct interface."
+      }
+    },
+    "ex-independent-gaussian-increments-subgaussian-mixture-confidence-sequence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gaussian-exponential-mixture-integral",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $\\rho>0$, $v\\ge0$, and $s\\in\\mathbb R$, let\n$\\pi_\\rho=N(0,1/\\rho)$ under the normal-law convention of\n[[def-standard-normal-and-normal-laws]]. Then\n$$\\int_{\\mathbb R}\\exp\\!\\left(\\lambda s-\\frac{v\\lambda^2}{2}\\right)\\,\\pi_\\rho(d\\lambda)=\\sqrt{\\frac{\\rho}{v+\\rho}}\\exp\\!\\left(\\frac{s^2}{2(v+\\rho)}\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-subgaussian-increments",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice (AC) [[def-axiom-of-choice]] for the conditional-expectation existence convention. Let\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0},P)$ be a discrete filtered probability space\n[[def-filtration-and-filtered-probability-space]], and let $(X_t)_{t\\ge1}$ be a real-valued adapted process\n[[def-adapted-and-integrable-stochastic-process]]. Fix $\\mu\\in\\mathbb R$ and a proxy $\\sigma^2>0$.\nThe increments are **conditionally sub-Gaussian around $\\mu$ with proxy $\\sigma^2$** when, for every\ninteger $t\\ge1$ and every fixed $\\lambda\\in\\mathbb R$, $e^{\\lambda(X_t-\\mu)}$ is integrable and\n$$\\mathbb E_P[e^{\\lambda(X_t-\\mu)}\\mid\\mathcal F_{t-1}]\\le e^{\\lambda^2\\sigma^2/2}\\quad P\\text{-almost surely},$$\nwhere conditional expectation means the class of integrable versions of\n[[def-conditional-expectation-as-an-ae-class]] represented as in\n[[def-conditional-expectation-given-a-sigma-algebra]]. The exceptional null set may depend on $t$ and\n$\\lambda$; no common null set over the uncountable set $\\mathbb R$ is assumed.\n\nThe integrability of $X_t$ follows from the two cases $\\lambda=1$ and $\\lambda=-1$: conditional\nexpectation preserves the integral, so both $e^{X_t-\\mu}$ and $e^{-(X_t-\\mu)}$ have finite expectation,\nand $|X_t-\\mu|\\le e^{X_t-\\mu}+e^{-(X_t-\\mu)}$. The proxy is an upper bound in the conditional\nmoment-generating-function inequality; it is not asserted to be a variance. Independence and identical\ndistribution of the increments are not part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-subgaussian-mixture-confidence-sequence",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\Theta\\subseteq\\mathbb R$, let $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0})$ be a common discrete filtered measurable space, and let $(P_\\theta)_{\\theta\\in\\Theta}$ be a family of probability laws on it. Let $(X_t)_{t\\ge1}$ be a common real-valued process that is adapted under each $P_\\theta$, and suppose that for every $\\theta\\in\\Theta$ its increments are conditionally sub-Gaussian around $\\theta$ with the same known proxy $\\sigma^2>0$ under $P_\\theta$ in the sense of\n[[def-conditional-subgaussian-increments]]. Fix $\\rho>0$ and $\\alpha\\in(0,1)$. For $t\\ge1$, set\n$$\\bar X_t:=\\frac1t\\sum_{i=1}^tX_i,\\qquad C_t:=\\Theta\\cap\\left[\\bar X_t-\\frac{u_\\alpha(t\\sigma^2)}{t},\\,\\bar X_t+\\frac{u_\\alpha(t\\sigma^2)}{t}\\right],$$\nwhere $u_\\alpha$ is from [[def-gaussian-mixture-confidence-sequence-boundary]], and set $C_0:=\\Theta$. Then $(C_t)_{t\\ge0}$ is a $(1-\\alpha)$ confidence sequence for $\\theta$:\n$$P_\\theta\\bigl(\\theta\\in C_t\\text{ for every }t\\ge0\\bigr)\\ge1-\\alpha\\quad(\\theta\\in\\Theta).$$\nThe claim is pointwise in $\\theta$ and requires no measurable structure on $\\Theta$, independence, or identical distribution of the observations.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $\\Theta=\\varnothing$ the conclusion is vacuous. Otherwise fix $\\theta\\in\\Theta$, $t\\ge1$, and $\\lambda\\in\\mathbb R$, and write $Y_t=Y_t^{(\\theta)}$. Apply [F2] with $\\rho'=1/\\tau^2$, $v=0$, and $s=\\lambda$. Since $N(0,\\tau^2)=N(0,1/\\rho')$ by [F1], this gives $\\mathbb E e^{\\lambda Y_t}=e^{\\lambda^2\\tau^2/2}$ under $P_\\theta$, finite for every real $\\lambda$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the fixed $\\theta,t,\\lambda$, the map $y\\mapsto e^{\\lambda y}$ is Borel, so for each Borel $D\\subseteq\\mathbb R$ its preimage is Borel; the stated factorization for $Y_t^{(\\theta)}$ therefore gives the same factorization for $e^{\\lambda Y_t}$. This variable is integrable by step 1.1, so [F3] yields $\\mathbb E[e^{\\lambda Y_t}\\mid\\mathcal F_{t-1}]=\\mathbb E[e^{\\lambda Y_t}]$ under $P_\\theta$. Since $X_t-\\theta=Y_t$, step 1.1 now gives $$\\mathbb E_{P_\\theta}[e^{\\lambda(X_t-\\theta)}\\mid\\mathcal F_{t-1}]=e^{\\lambda^2\\tau^2/2}\\le e^{\\lambda^2\\sigma^2/2}$$ almost surely. As $t$ and $\\lambda$ were arbitrary, [F4] applies for each $\\theta$, time, and fixed tuning value.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $\\theta$, the common filtered model and adapted process together with the conditional proxy verified in step 2.1 and [A1] meet the hypotheses of [F5]. Therefore the intervals have simultaneous coverage at least $1-\\alpha$ under each $P_\\theta$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example permits Theta empty, in which case the conclusion is vacuous; for a true parameter the argument in steps 2.1\u20133.1 applies."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes tau squared is positive and sigma squared is at least tau squared."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case sigma squared equals tau squared is allowed and the inequality in step 2.1 becomes equality."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes a nondegenerate Gaussian innovation with tau squared greater than zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Alpha and rho are in their strict domains; the variance proxy endpoint sigma squared=tau squared is included in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement is pointwise in theta and the proof selects no element from Theta."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a worked example, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a worked example, not an equivalence theorem."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-60",
+        "notes": "Reviewed Example, Given, all three verification steps and all six prerequisite interfaces. Reader repair supplies a common filtered measurable space, common adapted X and law-indexed residuals plus exact independence from the full past; this meets the confidence-sequence theorem. Taking rho-prime=1/tau^2, v=0, s=lambda in the Gaussian integral gives finite mgf exp(lambda^2 tau^2/2). Borel preimages transfer the residual independence identity to its exponential, so the conditioning lemma applies to an integrable variable. sigma^2>=tau^2 then gives the required bound for every fixed theta,t,lambda, with no shared exceptional set assertion. Empty Theta is explicitly vacuous, lambda=0 and proxy equality give equality, tau^2=0 is excluded, rho/alpha domains are correct. Given explicitly assumes AC and A1 identifies normal/conditional/coverage uses. Current raw hash equals reader-post and differs from pre; accept repair without further edits. No new defect."
+      }
+    }
+  }
+}

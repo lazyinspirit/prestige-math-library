@@ -14,19 +14,14 @@ landmark: true
 short: "intermediate value theorem"
 proof_strategy: constructive
 verification:
+  repair: research/statistical-models-experiments-62-published-bibliography-thm-intermediate-value-repair.json
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
 sources:
   scraped: []
   references:
     - title: "Intermediate value theorem (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Intermediate_value_theorem"
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 4 (Thm 4.23)"
-      url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "J. Lebl, Basic Analysis I, §3.3"
       url: "https://www.jirka.org/ra/"
     - title: "E. Zakon, Mathematical Analysis, §4.9: The Intermediate Value Property"

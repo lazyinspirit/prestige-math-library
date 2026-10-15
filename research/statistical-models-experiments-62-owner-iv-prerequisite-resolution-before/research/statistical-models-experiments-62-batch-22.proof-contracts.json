@@ -1,0 +1,1493 @@
+{
+  "version": 1,
+  "scope": [
+    "def-instrumental-variable-potential-outcomes",
+    "def-principal-strata-and-late",
+    "def-wald-ratio",
+    "lem-iv-observed-contrasts-equal-potential-outcome-contrasts",
+    "lem-binary-monotonicity-excludes-defiers",
+    "lem-iv-first-stage-is-complier-proportion",
+    "lem-iv-reduced-form-is-complier-effect",
+    "thm-wald-identifies-a-homogeneous-effect",
+    "thm-wald-identifies-the-complier-average-effect",
+    "ex-randomized-encouragement-late-calculation",
+    "ex-weak-first-stage-wald-ratio-sensitivity",
+    "ex-exclusion-violation-distorts-wald-ratio",
+    "ex-defiers-break-the-late-ratio",
+    "ex-heterogeneous-effects-late-differs-from-ate",
+    "cex-valid-iv-does-not-identify-ate-without-further-restrictions"
+  ],
+  "contracts": {
+    "def-instrumental-variable-potential-outcomes": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The event-conditioned mean is defined only for positive-probability events; the setup itself makes no zero-mass conditional-mean claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition explicitly states the relevant domain condition and the defined object."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition explicitly states the relevant domain condition and the defined object."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition explicitly states the relevant domain condition and the defined object."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "def-principal-strata-and-late": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The event-conditioned mean is defined only for positive-probability events; the setup itself makes no zero-mass conditional-mean claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition explicitly states the relevant domain condition and the defined object."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition explicitly states the relevant domain condition and the defined object."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition explicitly states the relevant domain condition and the defined object."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "def-wald-ratio": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The event-conditioned mean is defined only for positive-probability events; the setup itself makes no zero-mass conditional-mean claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition explicitly states the relevant domain condition and the defined object."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition explicitly states the relevant domain condition and the defined object."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition explicitly states the relevant domain condition and the defined object."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-iv-observed-contrasts-equal-potential-outcome-contrasts": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-instrumental-variable-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space for a target population of\nunits. A real random variable is a measurable map to $\\mathbb R$ with its Borel\nsigma-algebra ([[def-random-element-and-real-random-variable]]); expectations\nare integrals with respect to $P$\n([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]). A unit's\npotential outcomes depend only on that unit's treatment receipt and instrument\nassignment; this is the no-interference and single-treatment-version scope used\nhere.\n\nAn **IV potential-outcome setup** consists of binary random variables\n$Z,A:\\Omega\\to\\{0,1\\}$, an outcome $Y:\\Omega\\to\\mathbb R$, binary potential\ntreatments $A(z):\\Omega\\to\\{0,1\\}$ for $z\\in\\{0,1\\}$, and real potential\noutcomes $Y(a,z):\\Omega\\to\\mathbb R$ for $a,z\\in\\{0,1\\}$. Each potential\noutcome is integrable. The instrument has positive assignment probability at\nboth levels, $0<P(Z=1)<1$.\n\n**Consistency** means $A=A(Z)$ and $Y=Y(A,Z)$ almost surely. The **exclusion\nrestriction** means $Y(a,1)=Y(a,0)$ almost surely for each $a$; under this\ncondition write the common value as $Y(a)$. **Joint instrument independence**\nmeans that $Z$ is independent of the random element\n$(A(0),A(1),Y(0),Y(1))$, using the independence definition in\n[[def-independent-random-elements]]. **Relevance** means\n$$\\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0]\\ne0.$$\n**Monotonicity** means $A(1)\\ge A(0)$ almost surely. These are distinct model\nconditions: a setup need not satisfy all of them.\n\nFor an integrable real random variable $X$ and a measurable event $B$ with\n$P(B)>0$, define its **event-conditioned mean** by\n$$E[X\\mid B]:=\\frac{E[\\mathbf1_BX]}{P(B)}.$$\nIn particular $E[X\\mid Z=z]$ means $E[X\\mid\\{Z=z\\}]$. This is the\nfinite-atom conditional mean used throughout this pair. The indicator is\n$\\mathbf1_B(\\omega)=1$ on $B$ and $0$ off $B$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-instrumental-variable-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space for a target population of\nunits. A real random variable is a measurable map to $\\mathbb R$ with its Borel\nsigma-algebra ([[def-random-element-and-real-random-variable]]); expectations\nare integrals with respect to $P$\n([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]). A unit's\npotential outcomes depend only on that unit's treatment receipt and instrument\nassignment; this is the no-interference and single-treatment-version scope used\nhere.\n\nAn **IV potential-outcome setup** consists of binary random variables\n$Z,A:\\Omega\\to\\{0,1\\}$, an outcome $Y:\\Omega\\to\\mathbb R$, binary potential\ntreatments $A(z):\\Omega\\to\\{0,1\\}$ for $z\\in\\{0,1\\}$, and real potential\noutcomes $Y(a,z):\\Omega\\to\\mathbb R$ for $a,z\\in\\{0,1\\}$. Each potential\noutcome is integrable. The instrument has positive assignment probability at\nboth levels, $0<P(Z=1)<1$.\n\n**Consistency** means $A=A(Z)$ and $Y=Y(A,Z)$ almost surely. The **exclusion\nrestriction** means $Y(a,1)=Y(a,0)$ almost surely for each $a$; under this\ncondition write the common value as $Y(a)$. **Joint instrument independence**\nmeans that $Z$ is independent of the random element\n$(A(0),A(1),Y(0),Y(1))$, using the independence definition in\n[[def-independent-random-elements]]. **Relevance** means\n$$\\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0]\\ne0.$$\n**Monotonicity** means $A(1)\\ge A(0)$ almost surely. These are distinct model\nconditions: a setup need not satisfy all of them.\n\nFor an integrable real random variable $X$ and a measurable event $B$ with\n$P(B)>0$, define its **event-conditioned mean** by\n$$E[X\\mid B]:=\\frac{E[\\mathbf1_BX]}{P(B)}.$$\nIn particular $E[X\\mid Z=z]$ means $E[X\\mid\\{Z=z\\}]$. This is the\nfinite-atom conditional mean used throughout this pair. The indicator is\n$\\mathbf1_B(\\omega)=1$ on $B$ and $0$ off $B$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $W=(A(0),A(1),Y(0),Y(1))$ and $I_z=\\mathbf1_{\\{Z=z\\}}$. The functions $A(z)$ and $Y(0)+A(z)(Y(1)-Y(0))$ are measurable functions of $W$ by [F3], and are integrable because $A(z)$ is binary and $Y(0),Y(1)$ are integrable. Independence in [A2] and [F1] make each such function independent of $Z$.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F2], for each of these integrable functions $H(W)$ we have $E[I_zH(W)]=E[I_z]E[H(W)]=P(Z=z)E[H(W)]$. Dividing by the positive $P(Z=z)$ and using the event-conditioned mean in [A1] gives $E[H(W)\\mid Z=z]=E[H(W)]$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "On $\\{Z=z\\}$, consistency and exclusion in [A2] give $A=A(z)$ and $Y=Y(A(z))=Y(0)+A(z)(Y(1)-Y(0))$. Thus step 2.1 yields $E[A\\mid Z=z]=E[A(z)]$ and $E[Y\\mid Z=z]=E[Y(0)+A(z)\\tau]$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Subtracting the $z=0$ identities from the $z=1$ identities in step 3.1, and using [F4], gives $E[A(1)-A(0)]$ and $E[(A(1)-A(0))\\tau]$, respectively.",
+          "inputs": [
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-binary-monotonicity-excludes-defiers": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-instrumental-variable-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space for a target population of\nunits. A real random variable is a measurable map to $\\mathbb R$ with its Borel\nsigma-algebra ([[def-random-element-and-real-random-variable]]); expectations\nare integrals with respect to $P$\n([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]). A unit's\npotential outcomes depend only on that unit's treatment receipt and instrument\nassignment; this is the no-interference and single-treatment-version scope used\nhere.\n\nAn **IV potential-outcome setup** consists of binary random variables\n$Z,A:\\Omega\\to\\{0,1\\}$, an outcome $Y:\\Omega\\to\\mathbb R$, binary potential\ntreatments $A(z):\\Omega\\to\\{0,1\\}$ for $z\\in\\{0,1\\}$, and real potential\noutcomes $Y(a,z):\\Omega\\to\\mathbb R$ for $a,z\\in\\{0,1\\}$. Each potential\noutcome is integrable. The instrument has positive assignment probability at\nboth levels, $0<P(Z=1)<1$.\n\n**Consistency** means $A=A(Z)$ and $Y=Y(A,Z)$ almost surely. The **exclusion\nrestriction** means $Y(a,1)=Y(a,0)$ almost surely for each $a$; under this\ncondition write the common value as $Y(a)$. **Joint instrument independence**\nmeans that $Z$ is independent of the random element\n$(A(0),A(1),Y(0),Y(1))$, using the independence definition in\n[[def-independent-random-elements]]. **Relevance** means\n$$\\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0]\\ne0.$$\n**Monotonicity** means $A(1)\\ge A(0)$ almost surely. These are distinct model\nconditions: a setup need not satisfy all of them.\n\nFor an integrable real random variable $X$ and a measurable event $B$ with\n$P(B)>0$, define its **event-conditioned mean** by\n$$E[X\\mid B]:=\\frac{E[\\mathbf1_BX]}{P(B)}.$$\nIn particular $E[X\\mid Z=z]$ means $E[X\\mid\\{Z=z\\}]$. This is the\nfinite-atom conditional mean used throughout this pair. The indicator is\n$\\mathbf1_B(\\omega)=1$ on $B$ and $0$ off $B$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-principal-strata-and-late",
+          "source_section": "Definition",
+          "quote": "In the setup of [[def-instrumental-variable-potential-outcomes]], the four\npossible joint values of $(A(0),A(1))$ define the following **principal\nstrata** (subsets of the target population):\n\n- **Always-takers:** $A(0)=A(1)=1$.\n- **Never-takers:** $A(0)=A(1)=0$.\n- **Compliers:** $A(0)=0$ and $A(1)=1$; write this event as\n  $C=\\{A(1)>A(0)\\}$.\n- **Defiers:** $A(0)=1$ and $A(1)=0$.\n\nWhen the outcomes $Y(0),Y(1)$ are integrable, the **average treatment effect**\nis $\\operatorname{ATE}:=E[Y(1)-Y(0)]$. If $P(C)>0$, the **local average\ntreatment effect** (**LATE**) is\n$$\\tau_C:=E[Y(1)-Y(0)\\mid C].$$\nComplier status depends on the joint pair of potential treatments and is not\ndefined by the single treatment value observed for a unit. Monotonicity excludes\ndefiers; it does not assert that the LATE equals the population ATE.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since each coordinate is either $0$ or $1$, the pair $(A(0),A(1))$ has only the four values $(0,0),(0,1),(1,0),(1,1)$. Monotonicity in [A1] excludes $(1,0)$ outside a null set. By [F1], the remaining three events are exactly the never-taker, complier and always-taker events.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Distinct ordered pairs define disjoint events, and every pair outside the null exceptional set belongs to one of the three remaining events. Therefore these three strata form a partition up to a null set and the defier event is null.",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-iv-first-stage-is-complier-proportion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-instrumental-variable-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space for a target population of\nunits. A real random variable is a measurable map to $\\mathbb R$ with its Borel\nsigma-algebra ([[def-random-element-and-real-random-variable]]); expectations\nare integrals with respect to $P$\n([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]). A unit's\npotential outcomes depend only on that unit's treatment receipt and instrument\nassignment; this is the no-interference and single-treatment-version scope used\nhere.\n\nAn **IV potential-outcome setup** consists of binary random variables\n$Z,A:\\Omega\\to\\{0,1\\}$, an outcome $Y:\\Omega\\to\\mathbb R$, binary potential\ntreatments $A(z):\\Omega\\to\\{0,1\\}$ for $z\\in\\{0,1\\}$, and real potential\noutcomes $Y(a,z):\\Omega\\to\\mathbb R$ for $a,z\\in\\{0,1\\}$. Each potential\noutcome is integrable. The instrument has positive assignment probability at\nboth levels, $0<P(Z=1)<1$.\n\n**Consistency** means $A=A(Z)$ and $Y=Y(A,Z)$ almost surely. The **exclusion\nrestriction** means $Y(a,1)=Y(a,0)$ almost surely for each $a$; under this\ncondition write the common value as $Y(a)$. **Joint instrument independence**\nmeans that $Z$ is independent of the random element\n$(A(0),A(1),Y(0),Y(1))$, using the independence definition in\n[[def-independent-random-elements]]. **Relevance** means\n$$\\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0]\\ne0.$$\n**Monotonicity** means $A(1)\\ge A(0)$ almost surely. These are distinct model\nconditions: a setup need not satisfy all of them.\n\nFor an integrable real random variable $X$ and a measurable event $B$ with\n$P(B)>0$, define its **event-conditioned mean** by\n$$E[X\\mid B]:=\\frac{E[\\mathbf1_BX]}{P(B)}.$$\nIn particular $E[X\\mid Z=z]$ means $E[X\\mid\\{Z=z\\}]$. This is the\nfinite-atom conditional mean used throughout this pair. The indicator is\n$\\mathbf1_B(\\omega)=1$ on $B$ and $0$ off $B$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-iv-observed-contrasts-equal-potential-outcome-contrasts",
+          "source_section": "Statement",
+          "quote": "In an IV setup satisfying consistency, exclusion, and joint instrument\nindependence, let $\\tau=Y(1)-Y(0)$. Then\n$$E[A\\mid Z=1]-E[A\\mid Z=0]=E[A(1)-A(0)]$$\nand $E[Y\\mid Z=1]-E[Y\\mid Z=0]=E[(A(1)-A(0))\\tau]$.\nNo monotonicity or relevance condition is needed for these equalities; positivity\nof both instrument atoms and integrability are part of the setup.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-binary-monotonicity-excludes-defiers",
+          "source_section": "Statement",
+          "quote": "In the binary setup of [[def-principal-strata-and-late]], assume monotonicity\n$A(1)\\ge A(0)$ almost surely. Then the always-taker, never-taker and complier\nevents are pairwise disjoint and cover $\\Omega$ up to a null set; the defier\nevent has probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-principal-strata-and-late",
+          "source_section": "Definition",
+          "quote": "In the setup of [[def-instrumental-variable-potential-outcomes]], the four\npossible joint values of $(A(0),A(1))$ define the following **principal\nstrata** (subsets of the target population):\n\n- **Always-takers:** $A(0)=A(1)=1$.\n- **Never-takers:** $A(0)=A(1)=0$.\n- **Compliers:** $A(0)=0$ and $A(1)=1$; write this event as\n  $C=\\{A(1)>A(0)\\}$.\n- **Defiers:** $A(0)=1$ and $A(1)=0$.\n\nWhen the outcomes $Y(0),Y(1)$ are integrable, the **average treatment effect**\nis $\\operatorname{ATE}:=E[Y(1)-Y(0)]$. If $P(C)>0$, the **local average\ntreatment effect** (**LATE**) is\n$$\\tau_C:=E[Y(1)-Y(0)\\mid C].$$\nComplier status depends on the joint pair of potential treatments and is not\ndefined by the single treatment value observed for a unit. Monotonicity excludes\ndefiers; it does not assert that the LATE equals the population ATE.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On the complier event $C$, $(A(0),A(1))=(0,1)$, so $A(1)-A(0)=1$; on the always-taker and never-taker events the difference is $0$. The defier event is null by [F2]. Hence $A(1)-A(0)=\\mathbf1_C$ almost surely.",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Taking expectations in step 1.1 gives $E[A(1)-A(0)]=E[\\mathbf1_C]=P(C)$. The first identity in [F1] therefore gives the claimed observed first-stage formula.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Relevance [A1] says this first-stage contrast is nonzero. Since $P(C)$ is nonnegative, step 2.1 implies $P(C)>0$, so the event-conditioned LATE is well-defined.",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-iv-reduced-form-is-complier-effect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-iv-observed-contrasts-equal-potential-outcome-contrasts",
+          "source_section": "Statement",
+          "quote": "In an IV setup satisfying consistency, exclusion, and joint instrument\nindependence, let $\\tau=Y(1)-Y(0)$. Then\n$$E[A\\mid Z=1]-E[A\\mid Z=0]=E[A(1)-A(0)]$$\nand $E[Y\\mid Z=1]-E[Y\\mid Z=0]=E[(A(1)-A(0))\\tau]$.\nNo monotonicity or relevance condition is needed for these equalities; positivity\nof both instrument atoms and integrability are part of the setup.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-binary-monotonicity-excludes-defiers",
+          "source_section": "Statement",
+          "quote": "In the binary setup of [[def-principal-strata-and-late]], assume monotonicity\n$A(1)\\ge A(0)$ almost surely. Then the always-taker, never-taker and complier\nevents are pairwise disjoint and cover $\\Omega$ up to a null set; the defier\nevent has probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-instrumental-variable-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space for a target population of\nunits. A real random variable is a measurable map to $\\mathbb R$ with its Borel\nsigma-algebra ([[def-random-element-and-real-random-variable]]); expectations\nare integrals with respect to $P$\n([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]). A unit's\npotential outcomes depend only on that unit's treatment receipt and instrument\nassignment; this is the no-interference and single-treatment-version scope used\nhere.\n\nAn **IV potential-outcome setup** consists of binary random variables\n$Z,A:\\Omega\\to\\{0,1\\}$, an outcome $Y:\\Omega\\to\\mathbb R$, binary potential\ntreatments $A(z):\\Omega\\to\\{0,1\\}$ for $z\\in\\{0,1\\}$, and real potential\noutcomes $Y(a,z):\\Omega\\to\\mathbb R$ for $a,z\\in\\{0,1\\}$. Each potential\noutcome is integrable. The instrument has positive assignment probability at\nboth levels, $0<P(Z=1)<1$.\n\n**Consistency** means $A=A(Z)$ and $Y=Y(A,Z)$ almost surely. The **exclusion\nrestriction** means $Y(a,1)=Y(a,0)$ almost surely for each $a$; under this\ncondition write the common value as $Y(a)$. **Joint instrument independence**\nmeans that $Z$ is independent of the random element\n$(A(0),A(1),Y(0),Y(1))$, using the independence definition in\n[[def-independent-random-elements]]. **Relevance** means\n$$\\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0]\\ne0.$$\n**Monotonicity** means $A(1)\\ge A(0)$ almost surely. These are distinct model\nconditions: a setup need not satisfy all of them.\n\nFor an integrable real random variable $X$ and a measurable event $B$ with\n$P(B)>0$, define its **event-conditioned mean** by\n$$E[X\\mid B]:=\\frac{E[\\mathbf1_BX]}{P(B)}.$$\nIn particular $E[X\\mid Z=z]$ means $E[X\\mid\\{Z=z\\}]$. This is the\nfinite-atom conditional mean used throughout this pair. The indicator is\n$\\mathbf1_B(\\omega)=1$ on $B$ and $0$ off $B$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], the observed reduced-form contrast is $E[(A(1)-A(0))\\tau]$. By [F2], replacing the treatment contrast by $\\mathbf1_C$ almost surely gives $E[\\mathbf1_C\\tau]$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $P(C)>0$, the definition in [F3] rearranges to $E[\\mathbf1_C\\tau]=P(C)E[\\tau\\mid C]$. If $P(C)=0$, then $\\mathbf1_C=0$ almost surely, so both sides of the first identity in the Statement are $0$; the conditional mean is simply not asserted in that case.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "thm-wald-identifies-a-homogeneous-effect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-iv-observed-contrasts-equal-potential-outcome-contrasts",
+          "source_section": "Statement",
+          "quote": "In an IV setup satisfying consistency, exclusion, and joint instrument\nindependence, let $\\tau=Y(1)-Y(0)$. Then\n$$E[A\\mid Z=1]-E[A\\mid Z=0]=E[A(1)-A(0)]$$\nand $E[Y\\mid Z=1]-E[Y\\mid Z=0]=E[(A(1)-A(0))\\tau]$.\nNo monotonicity or relevance condition is needed for these equalities; positivity\nof both instrument atoms and integrability are part of the setup.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wald-ratio",
+          "source_section": "Definition",
+          "quote": "For the setup of [[def-instrumental-variable-potential-outcomes]], define the\nreduced-form outcome contrast and first-stage treatment contrast by\n$$\\Delta_Y:=E[Y\\mid Z=1]-E[Y\\mid Z=0],\\qquad \\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0].$$\nWhenever $\\Delta_A\\ne0$, the **Wald ratio** is the observed-data functional\n$$\\psi_W:=\\frac{\\Delta_Y}{\\Delta_A}.$$\nThis definition alone does not assert that the ratio equals a treatment effect.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], the reduced-form contrast is $E[(A(1)-A(0))\\tau]$ and the first-stage contrast is $E[A(1)-A(0)]$. No monotonicity condition is used in these identities.",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [A1] and linearity of expectation [F5], $E[(A(1)-A(0))\\tau]=\\tau_0E[A(1)-A(0)]$.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Relevance makes $E[A(1)-A(0)]\\ne0$, so division in [F2] gives $\\psi_W=\\tau_0$. Also $E[Y(1)-Y(0)]=E[\\tau_0]=\\tau_0$, proving the displayed ATE equality.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For any $\\theta,\\eta\\in\\Theta$ with $P_\\theta=P_\\eta$, the observed contrasts and hence the observed-data functional $\\psi_W$ agree. Step 3.1 identifies each ATE with that same ratio, so $\\psi_{\\rm ATE}(\\theta)=\\psi_{\\rm ATE}(\\eta)$. By [F3] and [F4], this is identifiability of the ATE on the induced observed-data model.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "thm-wald-identifies-the-complier-average-effect": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-iv-first-stage-is-complier-proportion",
+          "source_section": "Statement",
+          "quote": "Under consistency, joint instrument independence and monotonicity in the binary\nIV setup,\n$$E[A\\mid Z=1]-E[A\\mid Z=0]=P(C),$$\nwhere $C=\\{A(1)>A(0)\\}$ is the complier event. If the instrument is relevant,\nthen $P(C)>0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-iv-reduced-form-is-complier-effect",
+          "source_section": "Statement",
+          "quote": "Under consistency, exclusion, joint instrument independence and monotonicity\nin the binary IV setup, with $\\tau=Y(1)-Y(0)$ and $C=\\{A(1)>A(0)\\}$,\n$$E[Y\\mid Z=1]-E[Y\\mid Z=0]=E[\\mathbf1_C\\tau].$$\nIf $P(C)>0$, the right-hand side is $P(C)E[\\tau\\mid C]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-wald-ratio",
+          "source_section": "Definition",
+          "quote": "For the setup of [[def-instrumental-variable-potential-outcomes]], define the\nreduced-form outcome contrast and first-stage treatment contrast by\n$$\\Delta_Y:=E[Y\\mid Z=1]-E[Y\\mid Z=0],\\qquad \\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0].$$\nWhenever $\\Delta_A\\ne0$, the **Wald ratio** is the observed-data functional\n$$\\psi_W:=\\frac{\\Delta_Y}{\\Delta_A}.$$\nThis definition alone does not assert that the ratio equals a treatment effect.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], $\\Delta_A=P(C)>0$. By [F2], $\\Delta_Y=P(C)E[Y(1)-Y(0)\\mid C]$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Dividing the second identity in step 1.1 by the positive first identity gives $\\Delta_Y/\\Delta_A=E[Y(1)-Y(0)\\mid C]$. By [F3], this quotient is the Wald ratio, so it equals the LATE.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $P_\\theta=P_\\eta$, then both observed contrasts, and therefore their ratio, are equal for $\\theta$ and $\\eta$. Step 2.1 identifies each LATE with that common ratio, so $\\psi_C(\\theta)=\\psi_C(\\eta)$. By [F4] and [F5], the LATE is identifiable in this observed-data model.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement explicitly specifies this boundary; the complete displayed proof covers the stated case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "ex-randomized-encouragement-late-calculation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-instrumental-variable-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space for a target population of\nunits. A real random variable is a measurable map to $\\mathbb R$ with its Borel\nsigma-algebra ([[def-random-element-and-real-random-variable]]); expectations\nare integrals with respect to $P$\n([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]). A unit's\npotential outcomes depend only on that unit's treatment receipt and instrument\nassignment; this is the no-interference and single-treatment-version scope used\nhere.\n\nAn **IV potential-outcome setup** consists of binary random variables\n$Z,A:\\Omega\\to\\{0,1\\}$, an outcome $Y:\\Omega\\to\\mathbb R$, binary potential\ntreatments $A(z):\\Omega\\to\\{0,1\\}$ for $z\\in\\{0,1\\}$, and real potential\noutcomes $Y(a,z):\\Omega\\to\\mathbb R$ for $a,z\\in\\{0,1\\}$. Each potential\noutcome is integrable. The instrument has positive assignment probability at\nboth levels, $0<P(Z=1)<1$.\n\n**Consistency** means $A=A(Z)$ and $Y=Y(A,Z)$ almost surely. The **exclusion\nrestriction** means $Y(a,1)=Y(a,0)$ almost surely for each $a$; under this\ncondition write the common value as $Y(a)$. **Joint instrument independence**\nmeans that $Z$ is independent of the random element\n$(A(0),A(1),Y(0),Y(1))$, using the independence definition in\n[[def-independent-random-elements]]. **Relevance** means\n$$\\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0]\\ne0.$$\n**Monotonicity** means $A(1)\\ge A(0)$ almost surely. These are distinct model\nconditions: a setup need not satisfy all of them.\n\nFor an integrable real random variable $X$ and a measurable event $B$ with\n$P(B)>0$, define its **event-conditioned mean** by\n$$E[X\\mid B]:=\\frac{E[\\mathbf1_BX]}{P(B)}.$$\nIn particular $E[X\\mid Z=z]$ means $E[X\\mid\\{Z=z\\}]$. This is the\nfinite-atom conditional mean used throughout this pair. The indicator is\n$\\mathbf1_B(\\omega)=1$ on $B$ and $0$ off $B$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-principal-strata-and-late",
+          "source_section": "Definition",
+          "quote": "In the setup of [[def-instrumental-variable-potential-outcomes]], the four\npossible joint values of $(A(0),A(1))$ define the following **principal\nstrata** (subsets of the target population):\n\n- **Always-takers:** $A(0)=A(1)=1$.\n- **Never-takers:** $A(0)=A(1)=0$.\n- **Compliers:** $A(0)=0$ and $A(1)=1$; write this event as\n  $C=\\{A(1)>A(0)\\}$.\n- **Defiers:** $A(0)=1$ and $A(1)=0$.\n\nWhen the outcomes $Y(0),Y(1)$ are integrable, the **average treatment effect**\nis $\\operatorname{ATE}:=E[Y(1)-Y(0)]$. If $P(C)>0$, the **local average\ntreatment effect** (**LATE**) is\n$$\\tau_C:=E[Y(1)-Y(0)\\mid C].$$\nComplier status depends on the joint pair of potential treatments and is not\ndefined by the single treatment value observed for a unit. Monotonicity excludes\ndefiers; it does not assert that the LATE equals the population ATE.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-wald-identifies-the-complier-average-effect",
+          "source_section": "Statement",
+          "quote": "Let $\\Theta$ be a nonempty class of full-data laws satisfying the binary IV\nsetup, consistency, exclusion, joint instrument independence, relevance and\nmonotonicity. Each $\\theta\\in\\Theta$ induces the observed-data law $P_\\theta$\nof $(Z,A,Y)$. Define the estimand\n$\\psi_C(\\theta)=E_\\theta[Y(1)-Y(0)\\mid C]$, where\n$C=\\{A(1)>A(0)\\}$. Then the Wald ratio is defined and\n$$\\psi_W(P_\\theta)=\\frac{E_\\theta[Y\\mid Z=1]-E_\\theta[Y\\mid Z=0]}{E_\\theta[A\\mid Z=1]-E_\\theta[A\\mid Z=0]}=\\psi_C(\\theta).$$\nThus the LATE is identifiable in the induced observed-data model. This does\nnot assert that the LATE equals the population ATE.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On the product of the four equally likely types and the fair assignment, $Z$ is independent of the potential values. The two compliers have effects $1$ and $3$, while the always-taker and never-taker both have treatment effect $4$; thus $P(C)=1/2$, $\\operatorname{LATE}=(1+3)/2=2$, and $\\operatorname{ATE}=(4+4+1+3)/4=3$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The treatment rate is $3/4$ under $Z=1$ and $1/4$ under $Z=0$, so $\\Delta_A=1/2$. The outcome mean is $2$ under $Z=1$ and $1$ under $Z=0$, so $\\Delta_Y=1$. Therefore $\\psi_W=1/(1/2)=2$, agreeing with the LATE in [F2] and differing from the ATE.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example fixes its finite type mixture and makes no universal claim about degenerate mixtures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "ex-weak-first-stage-wald-ratio-sensitivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-wald-ratio",
+          "source_section": "Definition",
+          "quote": "For the setup of [[def-instrumental-variable-potential-outcomes]], define the\nreduced-form outcome contrast and first-stage treatment contrast by\n$$\\Delta_Y:=E[Y\\mid Z=1]-E[Y\\mid Z=0],\\qquad \\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0].$$\nWhenever $\\Delta_A\\ne0$, the **Wald ratio** is the observed-data functional\n$$\\psi_W:=\\frac{\\Delta_Y}{\\Delta_A}.$$\nThis definition alone does not assert that the ratio equals a treatment effect.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $0.02\\ne0$, the two ratios are defined by [F1] and equal $0.06/0.02=3$ and $0.07/0.02=3.5$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Their difference is $0.5$, exactly the reduced-form change $0.01$ divided by the common first stage $0.02$. The calculation is a property of the ratio only and implies no sampling or causal conclusion.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example fixes a nonzero first-stage contrast of 0.02; at zero, the Wald ratio is undefined by its definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example fixes its finite type mixture and makes no universal claim about degenerate mixtures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "ex-exclusion-violation-distorts-wald-ratio": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-instrumental-variable-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space for a target population of\nunits. A real random variable is a measurable map to $\\mathbb R$ with its Borel\nsigma-algebra ([[def-random-element-and-real-random-variable]]); expectations\nare integrals with respect to $P$\n([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]). A unit's\npotential outcomes depend only on that unit's treatment receipt and instrument\nassignment; this is the no-interference and single-treatment-version scope used\nhere.\n\nAn **IV potential-outcome setup** consists of binary random variables\n$Z,A:\\Omega\\to\\{0,1\\}$, an outcome $Y:\\Omega\\to\\mathbb R$, binary potential\ntreatments $A(z):\\Omega\\to\\{0,1\\}$ for $z\\in\\{0,1\\}$, and real potential\noutcomes $Y(a,z):\\Omega\\to\\mathbb R$ for $a,z\\in\\{0,1\\}$. Each potential\noutcome is integrable. The instrument has positive assignment probability at\nboth levels, $0<P(Z=1)<1$.\n\n**Consistency** means $A=A(Z)$ and $Y=Y(A,Z)$ almost surely. The **exclusion\nrestriction** means $Y(a,1)=Y(a,0)$ almost surely for each $a$; under this\ncondition write the common value as $Y(a)$. **Joint instrument independence**\nmeans that $Z$ is independent of the random element\n$(A(0),A(1),Y(0),Y(1))$, using the independence definition in\n[[def-independent-random-elements]]. **Relevance** means\n$$\\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0]\\ne0.$$\n**Monotonicity** means $A(1)\\ge A(0)$ almost surely. These are distinct model\nconditions: a setup need not satisfy all of them.\n\nFor an integrable real random variable $X$ and a measurable event $B$ with\n$P(B)>0$, define its **event-conditioned mean** by\n$$E[X\\mid B]:=\\frac{E[\\mathbf1_BX]}{P(B)}.$$\nIn particular $E[X\\mid Z=z]$ means $E[X\\mid\\{Z=z\\}]$. This is the\nfinite-atom conditional mean used throughout this pair. The indicator is\n$\\mathbf1_B(\\omega)=1$ on $B$ and $0$ off $B$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wald-ratio",
+          "source_section": "Definition",
+          "quote": "For the setup of [[def-instrumental-variable-potential-outcomes]], define the\nreduced-form outcome contrast and first-stage treatment contrast by\n$$\\Delta_Y:=E[Y\\mid Z=1]-E[Y\\mid Z=0],\\qquad \\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0].$$\nWhenever $\\Delta_A\\ne0$, the **Wald ratio** is the observed-data functional\n$$\\psi_W:=\\frac{\\Delta_Y}{\\Delta_A}.$$\nThis definition alone does not assert that the ratio equals a treatment effect.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The product assignment makes $Z$ independent of the type and hence of all potential values; consistency holds by construction. Under $Z=1$, half the population has $A=1$ and the mean outcome is $(3+1)/2=2$; under $Z=0$, $A=0$ for both types and the outcome mean is $0$. Thus $\\Delta_A=1/2$ and $\\Delta_Y=2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F2], the Wald ratio is $2/(1/2)=4$, although the treatment contrast $Y(1,z)-Y(0,z)$ equals $2$ for every unit and each fixed $z$. The discrepancy comes from the violated exclusion restriction, not treatment-effect heterogeneity.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example fixes its finite type mixture and makes no universal claim about degenerate mixtures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "ex-defiers-break-the-late-ratio": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-instrumental-variable-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space for a target population of\nunits. A real random variable is a measurable map to $\\mathbb R$ with its Borel\nsigma-algebra ([[def-random-element-and-real-random-variable]]); expectations\nare integrals with respect to $P$\n([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]). A unit's\npotential outcomes depend only on that unit's treatment receipt and instrument\nassignment; this is the no-interference and single-treatment-version scope used\nhere.\n\nAn **IV potential-outcome setup** consists of binary random variables\n$Z,A:\\Omega\\to\\{0,1\\}$, an outcome $Y:\\Omega\\to\\mathbb R$, binary potential\ntreatments $A(z):\\Omega\\to\\{0,1\\}$ for $z\\in\\{0,1\\}$, and real potential\noutcomes $Y(a,z):\\Omega\\to\\mathbb R$ for $a,z\\in\\{0,1\\}$. Each potential\noutcome is integrable. The instrument has positive assignment probability at\nboth levels, $0<P(Z=1)<1$.\n\n**Consistency** means $A=A(Z)$ and $Y=Y(A,Z)$ almost surely. The **exclusion\nrestriction** means $Y(a,1)=Y(a,0)$ almost surely for each $a$; under this\ncondition write the common value as $Y(a)$. **Joint instrument independence**\nmeans that $Z$ is independent of the random element\n$(A(0),A(1),Y(0),Y(1))$, using the independence definition in\n[[def-independent-random-elements]]. **Relevance** means\n$$\\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0]\\ne0.$$\n**Monotonicity** means $A(1)\\ge A(0)$ almost surely. These are distinct model\nconditions: a setup need not satisfy all of them.\n\nFor an integrable real random variable $X$ and a measurable event $B$ with\n$P(B)>0$, define its **event-conditioned mean** by\n$$E[X\\mid B]:=\\frac{E[\\mathbf1_BX]}{P(B)}.$$\nIn particular $E[X\\mid Z=z]$ means $E[X\\mid\\{Z=z\\}]$. This is the\nfinite-atom conditional mean used throughout this pair. The indicator is\n$\\mathbf1_B(\\omega)=1$ on $B$ and $0$ off $B$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-principal-strata-and-late",
+          "source_section": "Definition",
+          "quote": "In the setup of [[def-instrumental-variable-potential-outcomes]], the four\npossible joint values of $(A(0),A(1))$ define the following **principal\nstrata** (subsets of the target population):\n\n- **Always-takers:** $A(0)=A(1)=1$.\n- **Never-takers:** $A(0)=A(1)=0$.\n- **Compliers:** $A(0)=0$ and $A(1)=1$; write this event as\n  $C=\\{A(1)>A(0)\\}$.\n- **Defiers:** $A(0)=1$ and $A(1)=0$.\n\nWhen the outcomes $Y(0),Y(1)$ are integrable, the **average treatment effect**\nis $\\operatorname{ATE}:=E[Y(1)-Y(0)]$. If $P(C)>0$, the **local average\ntreatment effect** (**LATE**) is\n$$\\tau_C:=E[Y(1)-Y(0)\\mid C].$$\nComplier status depends on the joint pair of potential treatments and is not\ndefined by the single treatment value observed for a unit. Monotonicity excludes\ndefiers; it does not assert that the LATE equals the population ATE.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-iv-observed-contrasts-equal-potential-outcome-contrasts",
+          "source_section": "Statement",
+          "quote": "In an IV setup satisfying consistency, exclusion, and joint instrument\nindependence, let $\\tau=Y(1)-Y(0)$. Then\n$$E[A\\mid Z=1]-E[A\\mid Z=0]=E[A(1)-A(0)]$$\nand $E[Y\\mid Z=1]-E[Y\\mid Z=0]=E[(A(1)-A(0))\\tau]$.\nNo monotonicity or relevance condition is needed for these equalities; positivity\nof both instrument atoms and integrability are part of the setup.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-wald-ratio",
+          "source_section": "Definition",
+          "quote": "For the setup of [[def-instrumental-variable-potential-outcomes]], define the\nreduced-form outcome contrast and first-stage treatment contrast by\n$$\\Delta_Y:=E[Y\\mid Z=1]-E[Y\\mid Z=0],\\qquad \\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0].$$\nWhenever $\\Delta_A\\ne0$, the **Wald ratio** is the observed-data functional\n$$\\psi_W:=\\frac{\\Delta_Y}{\\Delta_A}.$$\nThis definition alone does not assert that the ratio equals a treatment effect.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The first-stage contrast is $P(C)-P(D)=0.4-0.1=0.3$. By [F2], the outcome contrast is $E[(A(1)-A(0))(Y(1)-Y(0))]=0.4\\cdot1-0.1\\cdot3=0.1$; always-takers and never-takers contribute zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The Wald ratio is $0.1/0.3=1/3$ by [F3]. The complier effect is $1$, whereas the defier contribution enters the numerator with a negative sign. Thus the LATE conclusion cannot be used without monotonicity.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example fixes its finite type mixture and makes no universal claim about degenerate mixtures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "ex-heterogeneous-effects-late-differs-from-ate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-principal-strata-and-late",
+          "source_section": "Definition",
+          "quote": "In the setup of [[def-instrumental-variable-potential-outcomes]], the four\npossible joint values of $(A(0),A(1))$ define the following **principal\nstrata** (subsets of the target population):\n\n- **Always-takers:** $A(0)=A(1)=1$.\n- **Never-takers:** $A(0)=A(1)=0$.\n- **Compliers:** $A(0)=0$ and $A(1)=1$; write this event as\n  $C=\\{A(1)>A(0)\\}$.\n- **Defiers:** $A(0)=1$ and $A(1)=0$.\n\nWhen the outcomes $Y(0),Y(1)$ are integrable, the **average treatment effect**\nis $\\operatorname{ATE}:=E[Y(1)-Y(0)]$. If $P(C)>0$, the **local average\ntreatment effect** (**LATE**) is\n$$\\tau_C:=E[Y(1)-Y(0)\\mid C].$$\nComplier status depends on the joint pair of potential treatments and is not\ndefined by the single treatment value observed for a unit. Monotonicity excludes\ndefiers; it does not assert that the LATE equals the population ATE.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-wald-identifies-the-complier-average-effect",
+          "source_section": "Statement",
+          "quote": "Let $\\Theta$ be a nonempty class of full-data laws satisfying the binary IV\nsetup, consistency, exclusion, joint instrument independence, relevance and\nmonotonicity. Each $\\theta\\in\\Theta$ induces the observed-data law $P_\\theta$\nof $(Z,A,Y)$. Define the estimand\n$\\psi_C(\\theta)=E_\\theta[Y(1)-Y(0)\\mid C]$, where\n$C=\\{A(1)>A(0)\\}$. Then the Wald ratio is defined and\n$$\\psi_W(P_\\theta)=\\frac{E_\\theta[Y\\mid Z=1]-E_\\theta[Y\\mid Z=0]}{E_\\theta[A\\mid Z=1]-E_\\theta[A\\mid Z=0]}=\\psi_C(\\theta).$$\nThus the LATE is identifiable in the induced observed-data model. This does\nnot assert that the LATE equals the population ATE.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The complier event has probability $1/2$ and its two effects are $1$ and $3$, so $\\operatorname{LATE}=2$. Averaging all four effects gives $\\operatorname{ATE}=(4+4+1+3)/4=3$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The always-taker and never-taker outcomes do not change across instrument arms. The two compliers each have probability $1/4$, so their treatment effects give reduced-form contrast $\\tfrac14\\cdot1+\\tfrac14\\cdot3=1$; the first-stage contrast is $1/2$. The Wald ratio is therefore $2$, equal to the LATE by [F2] but not to the population ATE.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example fixes its finite type mixture and makes no universal claim about degenerate mixtures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example explicitly computes this boundary for its stated finite law."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "cex-valid-iv-does-not-identify-ate-without-further-restrictions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-instrumental-variable-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space for a target population of\nunits. A real random variable is a measurable map to $\\mathbb R$ with its Borel\nsigma-algebra ([[def-random-element-and-real-random-variable]]); expectations\nare integrals with respect to $P$\n([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]). A unit's\npotential outcomes depend only on that unit's treatment receipt and instrument\nassignment; this is the no-interference and single-treatment-version scope used\nhere.\n\nAn **IV potential-outcome setup** consists of binary random variables\n$Z,A:\\Omega\\to\\{0,1\\}$, an outcome $Y:\\Omega\\to\\mathbb R$, binary potential\ntreatments $A(z):\\Omega\\to\\{0,1\\}$ for $z\\in\\{0,1\\}$, and real potential\noutcomes $Y(a,z):\\Omega\\to\\mathbb R$ for $a,z\\in\\{0,1\\}$. Each potential\noutcome is integrable. The instrument has positive assignment probability at\nboth levels, $0<P(Z=1)<1$.\n\n**Consistency** means $A=A(Z)$ and $Y=Y(A,Z)$ almost surely. The **exclusion\nrestriction** means $Y(a,1)=Y(a,0)$ almost surely for each $a$; under this\ncondition write the common value as $Y(a)$. **Joint instrument independence**\nmeans that $Z$ is independent of the random element\n$(A(0),A(1),Y(0),Y(1))$, using the independence definition in\n[[def-independent-random-elements]]. **Relevance** means\n$$\\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0]\\ne0.$$\n**Monotonicity** means $A(1)\\ge A(0)$ almost surely. These are distinct model\nconditions: a setup need not satisfy all of them.\n\nFor an integrable real random variable $X$ and a measurable event $B$ with\n$P(B)>0$, define its **event-conditioned mean** by\n$$E[X\\mid B]:=\\frac{E[\\mathbf1_BX]}{P(B)}.$$\nIn particular $E[X\\mid Z=z]$ means $E[X\\mid\\{Z=z\\}]$. This is the\nfinite-atom conditional mean used throughout this pair. The indicator is\n$\\mathbf1_B(\\omega)=1$ on $B$ and $0$ off $B$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-principal-strata-and-late",
+          "source_section": "Definition",
+          "quote": "In the setup of [[def-instrumental-variable-potential-outcomes]], the four\npossible joint values of $(A(0),A(1))$ define the following **principal\nstrata** (subsets of the target population):\n\n- **Always-takers:** $A(0)=A(1)=1$.\n- **Never-takers:** $A(0)=A(1)=0$.\n- **Compliers:** $A(0)=0$ and $A(1)=1$; write this event as\n  $C=\\{A(1)>A(0)\\}$.\n- **Defiers:** $A(0)=1$ and $A(1)=0$.\n\nWhen the outcomes $Y(0),Y(1)$ are integrable, the **average treatment effect**\nis $\\operatorname{ATE}:=E[Y(1)-Y(0)]$. If $P(C)>0$, the **local average\ntreatment effect** (**LATE**) is\n$$\\tau_C:=E[Y(1)-Y(0)\\mid C].$$\nComplier status depends on the joint pair of potential treatments and is not\ndefined by the single treatment value observed for a unit. Monotonicity excludes\ndefiers; it does not assert that the LATE equals the population ATE.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-wald-ratio",
+          "source_section": "Definition",
+          "quote": "For the setup of [[def-instrumental-variable-potential-outcomes]], define the\nreduced-form outcome contrast and first-stage treatment contrast by\n$$\\Delta_Y:=E[Y\\mid Z=1]-E[Y\\mid Z=0],\\qquad \\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0].$$\nWhenever $\\Delta_A\\ne0$, the **Wald ratio** is the observed-data functional\n$$\\psi_W:=\\frac{\\Delta_Y}{\\Delta_A}.$$\nThis definition alone does not assert that the ratio equals a treatment effect.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In the product law, $Z$ is independent of all type-specific potential values, and both assignment atoms have positive probability. The observed treatment and outcome satisfy consistency by construction; $Y(a,z)=Y(a)$ is exclusion. The first-stage contrast is $E[A\\mid Z=1]-E[A\\mid Z=0]=(0.2+0.4)-(0.2+0.1)=0.3\\ne0$, so relevance holds in both models.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $Z=0$, both models give the same observed pairs: always-takers have $(A,Y)=(1,5)$, never-takers and compliers have $(0,0)$, and defiers have $(1,3)$. For $Z=1$, both give $(1,5)$ to always-takers, $(0,0)$ to never-takers and defiers, and $(1,1)$ to compliers. Since type probabilities and the law of $Z$ also agree, the entire observed laws of $(Z,A,Y)$ agree.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The reduced-form contrast in either model is $\\Delta_Y=(0.2\\cdot5+0.4\\cdot1)-(0.2\\cdot5+0.1\\cdot3)=0.1$. Thus the common Wald ratio is $0.1/0.3=1/3$ by [F4]. However, $\\operatorname{ATE}(M_0)=0.2\\cdot5+0.3\\cdot0+0.4\\cdot1+0.1\\cdot3=1.7$, whereas $\\operatorname{ATE}(M_1)=0.2\\cdot(-5)+0.3\\cdot10+0.4\\cdot1+0.1\\cdot3=2.7$. Therefore [F2] has different values at two parameters with the same observed law, and [F3] shows the ATE is not identifiable under only these core conditions.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every carrier concerns a probability law of total mass one; an empty probability space is outside the stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Counterexample explicitly verifies this boundary in both finite laws."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Counterexample explicitly verifies this boundary in both finite laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example fixes its finite type mixture and makes no universal claim about degenerate mixtures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Counterexample explicitly verifies this boundary in both finite laws."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No item selects an element from a family of nonempty sets or asserts a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item does not state an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    }
+  }
+}

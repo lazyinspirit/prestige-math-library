@@ -1,0 +1,7868 @@
+
+PAGE 1
+Spatial Statistics
+Lecture Notes
+Prof. Dr. Evgeny Spodarev
+Ulm
+2024
+
+
+PAGE 2
+Contents
+1
+Basics of random ﬁelds
+2
+1.1
+Random Fields with invariance properties . . . . . . . . . . . . . . . . . . . . .
+2
+1.2
+Elements of correlation theory . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3
+1.3
+Examples of random ﬁelds . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+1.3.1
+Boolean random ﬁelds . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+1.3.2
+Gaussian random ﬁelds
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+1.3.3
+Max-stable random ﬁelds
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+1.3.4
+α-stable random ﬁelds . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+11
+2
+Elementary statistical inference for square-integrable random ﬁelds
+14
+2.1
+Estimation of the mean
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+2.2
+Estimation of the covariance function . . . . . . . . . . . . . . . . . . . . . . . .
+17
+2.3
+Spectral density estimation
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+18
+3
+Prediction of stationary random ﬁelds
+24
+3.1
+L2-optimal prediction as a conditional expectancy
+. . . . . . . . . . . . . . . .
+24
+3.1.1
+Linear regression for Gaussian random ﬁelds
+. . . . . . . . . . . . . . .
+25
+3.1.2
+Linear regression for α-stable random ﬁelds . . . . . . . . . . . . . . . .
+27
+3.2
+Kriging methods
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+30
+3.2.1
+Simple Kriging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+31
+3.2.2
+Ordinary Kriging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+36
+3.2.3
+Universal Kriging . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+42
+3.3
+Geoadditive regression models . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+46
+3.4
+Quantile regression . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+54
+3.5
+Prediction via level sets
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+58
+3.5.1
+Gaussian level set prediction
+. . . . . . . . . . . . . . . . . . . . . . . .
+61
+3.5.2
+Excursion metric projections
+. . . . . . . . . . . . . . . . . . . . . . . .
+67
+3.5.3
+Copulas . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+67
+3.5.4
+Excursion metric and its properties . . . . . . . . . . . . . . . . . . . . .
+70
+3.5.5
+Forecasting via excursion metric
+. . . . . . . . . . . . . . . . . . . . . .
+73
+3.5.6
+Excursion-based prediction of stationary random ﬁelds . . . . . . . . . .
+79
+3.5.7
+Stochastic approximation and gradient descent . . . . . . . . . . . . . .
+80
+3.5.8
+Excursion-based prediction of max-stable random ﬁelds
+. . . . . . . . .
+83
+3.6
+Conditional simulation of stationary Gaussian random ﬁelds . . . . . . . . . . .
+90
+Contents
+90
+Index
+98
+i
+
+
+PAGE 3
+Introduction
+Generally speaking, the ﬁeld of spatial statistics deals with the statistical inference of random
+objects that are embedded into the Euclidean space Rd such as random closed sets, mosaics,
+geometric point processes and graphs, shapes, ﬁelds etc. Here, the space Rd can as well be
+understood as a space-time continuum if we separate some dimension of Rd to be a time line.
+Modern spatial statistics is a huge area which can not be covered in one lecture course. The
+ﬁeld’s practical applications range from engineering to medicine and social sciences, and are too
+numerous to mention them all. To give a feeling of how powerful its methods can be, consider
+just two speciﬁc subareas of spatial statistics:
+First, the subarea concerned with random sections of random closed sets is called stereology
+with main applications in medicine and biology, in particular pathology analysis. The second
+subarea, which deals by applications in geosciences, is named geostatistics. Here, the main
+objects of study are random surfaces, which might be evolving in time. We refer to these surfaces
+as random ﬁelds. These ﬁelds may model gas, ore, crude oil or coal deposits in geology, rough
+surfaces of metals or composites in materials science, regression forecast surfaces in climate
+research and environmental contexts as well as in georeferenced economics and insurance.
+The latter area, dealing with statistical inference of random ﬁelds, is the subject of these
+lecture notes. It will include the estimation of the mean, covariance, spectral density, variogram
+as well as various prediction methods for (space-time-)random surfaces.
+In the context of
+prediction, we will review diﬀerent regression, Kriging and metric projection-type methods.
+1
+
+
+PAGE 4
+1 Basics of random ﬁelds
+We start with a short overview of the basic notions of the theory of random ﬁelds. Let BRd
+denote the Borel σ-algebra of subsets of Rd, d ≥1. We equip the Euclidean space Rd with a
+norm ∥· ∥, e.g. the Euclidean norm ∥x∥2 =
+p
+⟨x, x⟩, x ∈R2, where ⟨·, ·⟩is the scalar product
+in R2. Denote by R+ the set of non-negative real numbers, i.e. R+ = [0, ∞). Furthermore, let
+(Ω, F, P) be an arbitrary probability space.
+Deﬁnition 1.1 A random ﬁeld X = {X(t), t ∈T} is a random function on (Ω, F, P) indexed
+by the elements of some subset T ⊂Rd, where d ≥1 is an arbitrary integer, i.e.
+X is a
+measurable mapping X : Ω× Rd →R.
+That is, for all Borel sets B ∈BR it holds that
+X−1(t)(B) = {ω ∈Ω: X(t) ∈B} ∈F for all t ∈T.
+For an introduction into the theory of random ﬁelds see lecture notes “Random Fields“ [43].
+1.1 Random Fields with invariance properties
+Deﬁnition 1.2 A random ﬁeld X = {X(t), t ∈T} whose ﬁnite-dimensional distributions are
+invariant with respect to the action of a group G of transformations of T is called G-invariant
+in the strict sense. That is, for all t1, . . . , tn ∈T, n ∈N, and g ∈G it holds that
+(X(gt1), . . . , X(gtn)) d= (X(t1), . . . , X(tn)),
+where d= denotes equality in distribution and gt = g(t) for all t ∈T.
+In case the invariance is given only for the ﬁrst two moments of the ﬁeld, which are assumed
+to be ﬁnite, we speak of G-invariance in wide sense.
+Deﬁnition 1.3 A random ﬁeld X = {X(t), t ∈T} is G-invariant in wide sense if it is square-
+integrable, i.e. E[X2(t)] < ∞for all t ∈T, and the mean value function µ(t) := E[X(t)], t ∈T,
+as well as the covariance function C(s, t) := cov(X(s), X(t)) s, t ∈T, satisfy
+µ(gt) = µ(t)
+and
+C(gs, gt) = C(s, t)
+for all s, t ∈T and g ∈G.
+It is easy to see that any random ﬁeld X which is G-invariant in strict sense, is also G-
+invariant in wide sense provided that E[X2(t)] < ∞for all t ∈T.
+Remark 1.4 Let G be
+(a) the group of translation of T, i.e., g(t) = t + hg for some translation vector hg ∈Rd.
+Then, the G-invariant random ﬁeld X is called stationary (in the respective sense).
+(b) the group of rotations of T, SOd. Then, the G-invariant random ﬁeld X is called isotropic
+(in the respective sense).
+2
+
+
+PAGE 5
+1 Basics of random ﬁelds
+3
+(c) the group of all rigid motions of T. Then, the G-invariant random ﬁeld X is called motion
+invariant (in the respective sense). This is equivalent to X being stationary and isotropic.
+If X is square integrable, then properties (a)-(c) imply
+(a) µ(t) ≡const, C(s, t) = C0(s −t), s, t ∈T, where C0 : Rd →R is a covariance function,
+(b) µ(t) = µ(∥t∥), C(s, t) = C(∥s∥, ∥t∥), s, t ∈T, where ∥· ∥is a norm in Rd,
+(c) µ(t) ≡const, C(s, t) = C1(∥s−t∥), s, t ∈T, where C1 : R+ →R is a covariance function.
+The same notions of G-invariance can be applied to the increments Xh = {Xh(t) := X(t +
+h) −X(t), t ∈T}, h ∈T, of a random ﬁeld X. In this case, the stationary property is called
+intrinsic. The intrinsic stationarity in the wide sense is called intrinsic stationarity of order
+two. It holds that
+E [Xh(t)] ≡f(h)
+and
+E
+h
+X2
+h(t)
+i
+= 2γ(h)
+do not depend on t ∈T. The function γ is called the variogram. It is deﬁned by
+γ(h) := 1
+2E
+h
+(X(t + h) −X(t))2i
+for all h ∈T.
+Exercise 1.5 Show that the mean value function (if it exists) of any process (d = 1) with
+stationary increments is a linear function, i.e., EX(t) = at + c for all t ∈R, where a ∈R and
+c ∈R are some constants.
+Lastly, we say that a random ﬁeld X = {X(t), t ∈T} is centered if its mean value function
+µ(t) exists and µ(t) ≡0 for all t ∈T.
+1.2 Elements of correlation theory
+Let X = {X(t), t ∈T}, T ⊂Rd be a square-integrable random ﬁeld which is wide-sense
+stationary with covariance function C(s−t) = cov(X(s), X(t)), s, t ∈T. Then, the covariance
+function C is positive semi-deﬁnite, which is a consequence of the following result.
+Proposition 1.6 A function G : Rd×Rd →R is a covariance function of some square-integrable
+random ﬁeld if and only if it is positive semi-deﬁnite.
+Exercise 1.7 Prove Proposition 1.6.
+Hint: Calculate the variance of the linear combination Pn
+i=1 xiX(ti) for arbitrary n ∈N, ti ∈
+Rd, xi ∈R.
+An important aspect of correlation theory is the so-called spectral representation of X. By
+the Bochner-Kchinchin theorem, see lecture notes “Random Fields“ [43, Theorem 2.1.1], any
+positive semi-deﬁnite function f : Rd →R, which is continuous at the origin, is a Fourier
+transform of some symmetric ﬁnite measure µf on Rd. Thus, for a wide-sense stationary and
+mean-square continuous ﬁeld X we have
+cov(X(s)), X(t)) = C(s −t) =
+Z
+Rd ei⟨x,s−t⟩µC(dx).
+
+
+PAGE 6
+4
+1 Basics of random ﬁelds
+Here, ⟨·, ·⟩denotes the Euclidean scalar product in Rd. The ﬁnite measure µC on BRd is called
+a spectral measure of X. If µC is absolutely continuous with respect to the Lebesque measure,
+then its density fC is called a spectral density, i.e. µC(dx) = fC(x)dx.
+It holds that the spectral density fC : Rd →R+ is integrable on Rd, since
+Z
+Rd fC(x)dx =
+Z
+Rd µC(dx) = C(0) = var(X(t)) < ∞.
+Together with the covariance function C, the spectral density measures the stochastic depen-
+dence between X(s) and X(t) for s, t ∈T. In particular, the behaviour of fC at the origin
+0 ∈Rd (e.g. whether fC(0) < ∞or fC(x) ↑∞, x →0) can tell whether the ﬁeld X has short
+memory, i.e.
+Z
+Rd |C(x)|dx < ∞
+or long memory, i.e.
+Z
+Rd |C(x)|dx = ∞.
+Sometimes, the terms short and long range dependence are used, instead.
+1.3 Examples of random ﬁelds
+1.3.1 Boolean random ﬁelds
+Let {Xl(t), t ∈Rd}l∈R be a family of stochastically independent, a.s.
+continuous random
+functions with subgraphs having a.s. compact sections. Furthermore, let Π = {(Yi, Ti)}∞
+i=1 be
+a Poisson point process in Rd ×R with intensity measure vd ⊗θ, where vd denotes the Lebesgue
+measure on Rd and θ is a σ-ﬁnite measure on R. The random function X = {X(t), t ∈Rd}
+with
+X(t) =
+sup
+(Yk,Tk)∈Π
+XTk(t −Yk),
+t ∈Rd,
+is called a Boolean random ﬁeld. The functions Xl are referred to as primary functions. Boolean
+random ﬁelds are often used for modeling purposes in geo- and materials science.
+Fig. 1.1: X(t) at “simulation time“ step T4.
+
+
+PAGE 7
+1 Basics of random ﬁelds
+5
+Fig. 1.2: Examples of realizations of a Boolean random function with cone primary functions
+(left) and built from Poisson lines (right) [38, p. 149].
+1.3.2 Gaussian random ﬁelds
+A widely known and one of the most important class of random ﬁelds is the class of Gaussian
+ﬁelds.
+Deﬁnition 1.8 A random ﬁeld X = {X(t), t ∈Rd} is called Gaussian if its ﬁnite-dimensional
+distributions are Gaussian.
+The popularity of Gaussian ﬁelds for modeling purposes in applications can be explained
+mainly by the simplicity of their construction and analytic tractability combined with the
+normal distributions of marginals, which describe many real phenomena due to the central
+limit theorem.
+By Kolmogorov’s theorem, the probability law (or distribution) of a Gaussian random ﬁeld
+is uniquely deﬁned by its mean value and covariance function, see lecture “Random ﬁelds“ [43,
+Theorem 1.1.2.].
+Exercise 1.9 Show that for Gaussian random ﬁelds stationarity (isotropy, motion invariance)
+in the strict sense and stationarity (isotropy, motion invariance) in the wide sense are equivalent.
+In this case we call a Gaussian ﬁeld just stationary (isotropic, motion invariant)
+In the following, consider two particular cases of Gaussian random ﬁelds:
+(a) An Ornstein-Uhlenbeck random ﬁeld is a centered, i.e. E[X(t)] = 0 for all t ∈R, Gaussian
+random ﬁeld X = {X(t), t ∈R} with covariance function
+E [X(s)X(t)] = exp {−|s −t|/2} ,
+s, t ∈Rd.
+It is clearly stationary and isotropic, hence motion invariant.
+(b) A fractional Brownian ﬁeld X = {X(t), t ∈Rd} is a centered Gaussian ﬁeld with covari-
+ance function
+E [X(s)X(t)] = 1
+2∥s∥2H + ∥t∥2H −∥s −t∥2H,
+s, t ∈Rd,
+
+
+PAGE 8
+6
+1 Basics of random ﬁelds
+Fig. 1.3: Fractional Brownian ﬁelds with diﬀerent roughness parameter H [38, p.398].
+for some H ∈(0, 1], where ∥·∥is the Euclidean norm in Rd. The process is often denoted
+by XH to emphasize its dependence on H.
+The parameter H, often referred to as Hurst index, is responsible for the regularity of the
+paths of X, i.e. the greater H the smoother the paths of X. In the one-dimensional case
+the process X is called the fractional Brownian motion, including the two-sided Wiener
+process (deﬁned on the whole real line R) where H = 1
+2. In the case d > 1, X is called
+the Brownian Lévy ﬁeld if H = 1
+2.
+It is easy to check that X is intrinsically stationary of order two and isotropic.
+Its
+variogram γ(h) = 1
+2 · ∥h∥2H is clearly motion invariant. However, this ﬁeld is not wide-
+sense stationary as its variance is not constant.
+Exercise 1.10 Show that a fractional Brownian ﬁeld X
+(a) has stationary increments, which are positively correlated for H ∈(1
+2, 1) and nega-
+tively correlated for H ∈(0, 1
+2),
+(b) is H-self-similar, i.e. X(λt) d= |λ|HX(t) for all λ ∈R and t ∈Rd,
+(c) has a version with a.s. Hölder-continuous paths of any order β ∈(0, H),
+(d) has nowhere diﬀerentiable paths for any H ∈(0, 1),
+(e) is a linear process for d = H = 1, i.e. X(t) d= tZ, for all t ∈R and some random
+variable Z ∼N(0, 1).
+1.3.3 Max-stable random ﬁelds
+Max-stable random ﬁelds are used to model extremal events such as highest ﬂoods, maximal
+temperature and precipitation, etc.
+Deﬁnition 1.11 A random ﬁeld X = {X(t), t ∈T} is called max-stable if for any n ∈N there
+exist constants αn > 0, βn ∈R such that
+X d=
+
+
+
+max
+j=1,...,n Xj(t) −βn
+αn
+, t ∈T
+
+
+,
+where {Xj(t), t ∈T} are i.i.d. copies of X. In particular, if T = {t0}, t0 ∈Rd, then X is
+
+
+PAGE 9
+1 Basics of random ﬁelds
+7
+called a max-stable random variable. On the other hand, if T = {t1, . . . , tn} ⊂Rd , then X is
+a max-stable random vector.
+By the theorem of Fisher-Tippett-Gnedenko [7] any max-stable random variable (and hence
+any marginal distribution of a max-stable random ﬁeld X) has one of the three possible extreme
+value distributions: Weibull, Gumbel or Fréchet.
+Among these distributions, only the Fréchet distribution does not have a ﬁnite variance. We
+say that a random variable Y is Fréchet-distributed is its cumulative distribution function is
+given by
+P(Y ≤x) = exp
+(
+−
+x −µ
+σ
+−α)
+,
+x > µ.
+We use the notation Y ∼Fréchet(α, µ, σ), and for Fréchet(α, 0, 1) = Fréchet(α). Fréchet(1) is
+called standard Fréchet distribution.
+Exercise 1.12 Show that for Y1 ∼Fréchet(α) it holds that E|[Y1|] < ∞if and only if α > 1.
+Moreover, E[|Y1|k] < ∞holds if and only if α > k, k ∈N. For α > 1, check that E[Y1] =
+Γ(1 −1
+α).
+Every max-stable random ﬁeld X can be suitably transformed via a transform Ψ such
+that the marginals of Ψ(X) have either Weibull, Fréchet or Gumbel distribution.
+A suit-
+able transformation of X(t) can be chosen as follows. For the cumulative distribution function
+FX(t) = P(X(t) ≤x), x ∈R, deﬁne
+Ψ(x) = −
+1
+log FX(t)(x),
+x ∈R.
+Then, it is not diﬃcult to see that Y (t) = Ψ(X(t)) ∼Fréchet(1). Consequently, it is suﬃcient
+to consider random ﬁelds with marginals standardized to Fréchet(1).
+Exercise 1.13 Prove the above.
+The stochastic dependence in max-stable random vectors is described by the so-called tail
+dependence function. Consider the (n −1)-dimensional unit simplex
+Sn = {(x1, ..., xn) = x ∈Rn
++ :
+n
+X
+j=1
+xj = 1}
+for n ≥2. The tail dependence function ln is introduced in the following result.
+Theorem 1.14 Let Y = (Y1, ..., Yn) be a max-stable random vector. The following are equiv-
+alent.
+(a) Yj ∼Fréchet(α) for some α > 0, j = 1, . . . , n.
+(b) There exists a function ln : R+ →R+ such that
+P (Y1 ≤x1, . . . , Yn ≤xn) = exp
+n
+−ln(x−α
+1 , . . . , x−α
+n )
+o
+,
+x1, . . . , xn > 0.
+where
+ln(x1, . . . , xn) =
+Z
+Sn
+max
+j=1,...,n{xjqj} dµ(q1, . . . , qn).
+
+
+PAGE 10
+8
+1 Basics of random ﬁelds
+The ﬁnite measure µ on Sn satisﬁes the constraint
+Z
+Sn
+qj dµ(q1, . . . , qn) = 1,
+j = 1, . . . , n,
+see [34] for a proof. The function ln is called tail dependence function of the vector Y .
+Theorem 1.15 The tail dependence function ln
+(a) is convex,
+(b) is homogeneous of order 1, i.e. ln(λx1, . . . , λxn) = λ · ln(x1, . . . , xn) for all λ > 0 and
+x1, . . . , xn > 0,
+(c) satisﬁes
+∥x∥max ≤ln(x1, . . . , xn) ≤
+n
+X
+j=1
+xj = ∥x∥1
+for all vectors x = (x1, . . . , xn) ∈Rn, where ∥x∥max = maxj=1...n |xj| is the maximum
+norm of x and ∥x∥1 = Pn
+j=1 |xj| the l1-norm.
+Exercise 1.16 Prove Theorem 1.15.
+Exercise 1.17 Let ln be the tail-dependence function of a max-stable random vector Y =
+(Y1, . . . , Yn). Show:
+(a) ln(x) = ∥x∥max if and only if Y1 = · · · = Yn a.s., i.e. complete dependence holds.
+(b) ln(x) = ∥x∥1 if and only if Y1, . . . , Yn are stochastically independent.
+Recall that the Fréchet distribution has inﬁnite variance. For n = 2, the quantity θ = l2(1, 1)
+is called (pairwise) extremal coeﬃcient. It serves as an analogue to the covariance for heavy-
+tailed random variables Y1, Y2 ∼Fréchet.
+Example 1.18 Let us now give some examples of max-stable random ﬁelds.
+(i) The Brown-Resnick random ﬁeld is deﬁned as follows.
+Let Y = {Y (t), t ∈T} be a
+centered Gaussian random ﬁeld with stationary increments and σ2(t) := var(Y (t)), t ∈T.
+Let Π = {ζj} be a Poisson process on R, independent of Y , with intensity measure
+∆(dx) = e−xdx. Then, the Brown-Resnick random ﬁeld is given by
+R(t) := max
+j∈N
+(
+ζj + Yj(t) −σ2(t)
+2
+)
+,
+t ∈T,
+where ρj = {Yj(t), t ∈T} are independent copies of Y . It is stationary and has standard
+Gumbel margins P(R(t) ≤x) = exp(−e−x), x ∈R.
+Exercise 1.19 Show that the transformation B(t) := eR(t) has Fréchet(1) margins.
+The ﬁnite-dimensional distributions of {R(t), t ∈T} as well as the tail dependence
+function ln are given in the following.
+Theorem 1.20 For any t1, . . . , tn ∈T it holds that
+
+
+PAGE 11
+1 Basics of random ﬁelds
+9
+(a) P(R(T1) ≤y1, . . . R(tn) ≤yn) = exp
+
+−E
+
+exp
+
+max
+j=1,...,n(Y (tj) −σ2(tj
+2
+−Yj)
+
+.
+(b) the tail dependence function ln of (B(t1), . . . , B(tn)) is given by
+ln(x1, . . . , xn) =
+Z +∞
+0
+"
+1 −FΣn
+ 
+log
+ y
+x1
+
++ σ2(t1)
+2
+, . . . , log
+ y
+xn
+
++ σ2(tn)
+2
+!#
+dy,
+where Σn is the covariance matrix of (Y (t1), . . . , Y (tn)), x1, . . . , xn > 0, and FΣn is
+the multivariate cumulative distribution function of N(0, Σn).
+(ii) The Smith random ﬁeld S = {S(t), t ∈T} is deﬁned by
+S(t) := max
+j∈N {ζjfΣ(t −ϵj)} ,
+t ∈T ⊂Rd,
+where Σ is a positive deﬁnite matrix with dimensions d × d, fΣ is the probability density
+function of N(0, Σ) and ˜Π = {(ζj, εj)}j∈N is a Poisson point process on (0, ∞) × Rd with
+intensity measure ˜Λ(dx, dy) = x−2dxdy.
+Similarly to Theorem 1.20, we may formulate:
+Theorem 1.21 For any t1, . . . , tn ∈T it holds that
+(a) S(tj) ∼Fréchet(1),
+(b) P(S(t1) ≤y1, . . . , S(tn) ≤yn) = exp
+
+−
+R
+Rd max
+j=1,...,n
+fΣ(tj−s)
+yj
+ds
+
+, y1, . . . , yn > 0,
+(c) the tail dependence function ln of (S(t1), . . . , S(tn)) is given by
+ln(x1, . . . , xn) =
+Z
+Rd max
+j=1,...,n {xjfΣ(tj −s)} ds.
+(iii) The extremal Gaussian random ﬁeld G = {G(t), t ∈T} is given by
+G(t) := max
+j∈N ζj(max{Yj(t), 0}),
+t ∈T ⊂Rd,
+where {Yj(t), t ∈T} are independent copies of a stationary centered Gaussian random
+ﬁeld Y = {Y (t), t ∈T}, and ˜˜Π = {ζj}j∈N is an independent Poisson process on R+ with
+intensity measure ˜˜Λ(dx) =
+√
+2πx−2dx.
+Theorem 1.22 For any t1, . . . , tn ∈T it holds that
+a) G(tj) ∼Fréchet(1),
+b) P(G(t1) ≤y1, . . . , G(tn) ≤yn) = exp
+n
+−E
+h
+maxj=1,...,n
+fΣ(tj−s)
+yj
+io
+, y1, . . . , yn > 0,
+c) the tail dependence function ln of (G(t1), . . . , G(tn)) is given by
+ln(x1, . . . , xn) =
+Z ∞
+0
+
+1 −Fσn
+ y
+x1
+, . . . , y
+xn
+
+dy,
+x1, . . . , xn > 0,
+where Fσn is chosen as in Theorem 1.20.
+Exercise 1.23 Show that for n = 2, the tail dependence function in Theorem 1.22 (c)
+simpliﬁes to
+l2(x1, x2) = 1
+2
+
+x1 + x2 +
+q
+x2
+1 −ρx1x2 + x2
+2
+
+,
+where ρ = corr(Y (t1), Y (t2)).
+
+
+PAGE 12
+10
+1 Basics of random ﬁelds
+Fig. 1.4: Simulated realizations of Brown-Resnick, Smith and extremal Gaussian random ﬁelds
+in d = 2 [9].
+
+
+PAGE 13
+1 Basics of random ﬁelds
+11
+1.3.4 α-stable random ﬁelds
+The class of α-stable random ﬁelds models heavy-tailed phenomena, where the variance (and
+possibly even the mean) is inﬁnite. Such events are common in insurance and ﬁnance, where
+high volatility and dangerous risks in extreme scenarios are common.
+First, we introduce
+α-stable random vectors.
+Deﬁnition 1.24 A random vector Y = (Y1, . . . , Yn) : Ω7→Rn is called stable if for all m ≥2
+there exist c = c(m) > 0, k = k(m) ∈Rn such that
+Y (1) + Y (2) + · · · + Y (m) d= cY + k,
+where {Y (j)}m
+j=1 are independent copies of Y .
+It can be shown that c = m1/α, where α ∈(0, 2] is called stability index or index of stability
+[37, Theorem 2.1.2].
+Exercise 1.25 Show that for k = k(m) from Deﬁnition 1.24 it holds that k(m) = µ(m−m1/α),
+where µ is the shift parameter of Sα(µ, Γ).
+Hint: First, show that Pm
+j=1 Y (j) ∼Sα(mµ, mΓ) and m1/αY + k(m) ∼Sα(m1/αµ + k(m), mΓ).
+An equivalent deﬁnition of stable random vectors is given in terms of their characteristic
+function.
+Deﬁnition 1.26 A random vector Y = (Y1, . . . , Yn) : Ω7→Rn is called stable if its character-
+istic function ϕY (s) = E
+h
+ei⟨Y,s⟩i
+, s ∈Rn, is of the form
+ϕY (s) =
+
+
+
+exp
+−
+R
+Sn−1 |⟨s, x⟩|α  1 −i · sgn(⟨s, x⟩) tan
+  πα
+2
+ Γ(dx) + i⟨s, µ⟩
+	 ,
+α ̸= 1,
+exp
+n
+−
+R
+Sn−1 |⟨s, x⟩|
+
+1 + i 2
+πsgn(⟨s, x⟩) log |⟨s, x⟩|
+
+Γ(dx) + i⟨s, µ⟩
+o
+,
+α = 1,
+where Γ(·) is a ﬁnite measure on the unit sphere Sn−1 ⊂Rn and µ ∈Rn.
+For α ∈(0, 2) the pair (µ, Γ) yields a unique parametrization of the distribution of a stable
+random vector Y. We say Y is α-stable with shift parameter µ and spectral measure Γ and write
+Y ∼Sα(µ, Γ). The spectral measure Γ contains all information about the interdependence of
+the coordinates Yj, j = 1, . . . , n.
+In the case α = 2, the characteristic function in Deﬁnition 1.26 deﬁnes a Gaussian random
+vector Y with
+ϕY (s) = E
+h
+ei⟨s,Y ⟩i
+= exp
+
+i⟨s, µ⟩−1
+2sT Σs
+
+,
+s ∈Rn,
+with a positive semi-deﬁnite (n × n)- covariance matrix Σ = (σjk)n
+j,k=1, σjk = cov(Yj, Yk) and
+µ = E[Y ] ∈Rn. In the Gaussian case, the spectral measure Γ(·) is not unique, see Exercise
+1.27 below.
+Exercise 1.27 Consider the measures Γ1, Γ2 on S0 with
+Γ1(dx) = δ{1/
+√
+2,1/
+√
+2}(dx) + δ{−1/
+√
+2,−1/
+√
+2}(dx),
+Γ2(dx) = 2δ{1/
+√
+2,1/
+√
+2}(dx).
+Show that Γ1, Γ2 yield the same characteristic function of a Gaussian random vector Y =
+(Y1, Y2) with mean µ ∈R2 and covariance matrix Σ =
+ 
+2
+2
+2
+2
+!
+.
+
+
+PAGE 14
+12
+1 Basics of random ﬁelds
+A random vector Y is called symmetric if Y
+d= −Y . For symmetric α-stable random vectors,
+we will use the notation Y ∼SαS.
+Lemma 1.28 A random vector Y ∼Sα(µ, Γ) is SαS if and only if µ = 0 and Γ is symmetric
+on Sn−1.
+The proof of the above lemma is given in [37, Theorem 2.4.3]. For n = 1, Deﬁnition 1.24
+yields an α-stable random variable Y . We will reparametrize its distribution using 4 parameters
+α, σ, β and µ, as seen in the following representation of the characteristic function of Y . For
+all s ∈R we have
+ϕY (s) = E
+h
+eisY i
+=
+
+
+
+exp
+−σα|s|α(1 −iβ · sgn(s) tan(πα
+2 )) + iµs
+	 ,
+α ̸= 1,
+exp
+n
+−σ |s| (1 + iβ · 2
+πsgn(s) log(|s|) + iµs
+o
+,
+α = 1.
+In the univariate case, we use the notation Y ∼Sα(σ, β, µ).
+Exercise 1.29 Show that the spectral measure Γ of Y ∼Sα(σ, β, µ) is given by
+Γ(dx) = σα
+2 (1 + β)δ{1}(dx) + σα
+2 (1 −β)δ{−1}(ds)
+such that
+σα = Γ({1}) + Γ({−1})
+and
+β = Γ({1}) −Γ({−1})
+Γ({1}) + Γ({−1})
+Stable distributions are absolutely continuous. However, their densities are not known ex-
+plicitly except for the cases α = 1
+2 (Lévy distribution), α = 1 (Cauchy distribution), and α = 2
+(normal distribution).
+Exercise 1.30 Show:
+(a) For Y ∼SαS it holds that Y ∼Sα(σ, 0, 0) with characteristic function
+ϕY (s) = eσα|s|α,
+s ∈R.
+(b) For Y ∼S2(σ, 0, µ) it holds that Y ∼N(µ, 2σ2).
+Theorem 1.31 Sα is heavy-tailed, i.e. for Y ∼Sα(σ, β, µ) with α ∈(0, 2)
+P(|Y | > x) ∼c
+xα
+as x →∞holds for some c > 0.
+Consequently, we have
+E|Y |p =
+Z ∞
+0
+P(|Y | > x1/p) dx ≤c1 ·
+Z ∞
+0
+x−α/p dx
+(
+< ∞,
+p ∈(0, α)
+= ∞,
+p ≥α.
+In contrast to this, the normal distribution shows the following short tail behavior. For X ∼
+N(0, 1) it holds that
+P(X < −x) = P(X > x) ∼
+1
+√
+2πxe−x2/s
+as x →∞and all moments are therefore ﬁnite.
+
+
+PAGE 15
+1 Basics of random ﬁelds
+13
+Fig. 1.5: Realizations of S0.8S- moving averages with diﬀerent kernels [38, p.344].
+Deﬁnition 1.32 A non-Gaussian random ﬁeld X = {X(t), t ∈T} is called α-stable with
+index of stability α ∈(0, 2) if all its ﬁnite-dimensional distributions are α-stable (in the sense
+of Deﬁnition 1.24).
+An important example for an α-stable random ﬁeld is given by X = {X(t) : t ∈T} with
+X(t) : d=
+√
+A · Y (t), where A and Y independent with
+A ∼Sα/2((cos(πα/4))2/α, 1, 0)
+and Y = {Y (t), t ∈T} being a centered Gaussian random ﬁeld with a positive deﬁnite covari-
+ance function. The random ﬁeld X is called subgaussian. Its α-stable distribution follows from
+Exercise 1.33.
+Exercise 1.33 Show that for a stable random variable A as above and Y0 ∼N(2σ2), with A
+and Y0 independent, it holds that X0 :=
+√
+A · Y0 ∼Sα(σ, 0, 0).
+Hint: Compute the conditional characteristic function E
+h
+eisX0 | A
+i
+.
+If the underlying Gaussian random ﬁeld Y of a subgaussian random ﬁeld X is stationary,
+then X is stationary in the strict sense.
+
+
+PAGE 16
+2 Elementary statistical inference for
+square-integrable random ﬁelds
+Let X = {X(t), t ∈T}, T ⊂Rd be a wide-sense stationary, measurable random ﬁeld with mean
+µ = E[X(0)], covariance function C(t) = cov(X(0), X(t)) and spectral density fC(t), t ∈T. In
+this chapter, we describe some non-parametric statistical inference methods for the estimation
+of µ, C and fC. We also analyze their asymptotic properties as the number of observations
+grows to inﬁnity.
+We assume that one single realisation of X is available and can be observed on an observation
+window W ⊂T, which is assumed to be non-empty bounded Borel subset of Rd. The values
+{X(t), t ∈W} will be called observations of X. Sometimes, we will assume W = {t1, . . . , tn}
+to be a ﬁnite set. For asymptotic inference, we will consider a sequence of observation windows
+{Wn} ⊂T growing in the Van Hove-sense, i.e.
+lim
+n→∞|Wn| = ∞
+(2.1)
+and
+lim
+n→∞
+|∂Wn ⊕Br(0)|
+|Wn|
+= 0 for any r > 0,
+(2.2)
+where | · | is the volume (d-dimensional Lebesgue measure) in Rd, ∂W is the boundary of
+W, Br(0) = {x ∈Rd : ∥x∥2 ≤r} is the spherical neighbourhood of the origin with radius
+r. Additionally, the ⊕-operation is the so-called Minkowski addition of two sets being their
+pointwise sum, i.e. A ⊕B = {x + y : x ∈A, y ∈B} for A, B ⊂Rd.
+Requirement (2.1) is understood in the sense that the growth of Wn is unbounded as n →∞,
+whereas (2.2) indicates that the boundary of Wn can be neglected in the subsequent asymptotic
+analysis.
+2.1 Estimation of the mean
+We consider the estimator
+ˆµn :=
+Z
+Wn
+X(t)G(Wn, t)dt,
+n ∈N,
+of µ, where G : BRd × T 7→R+ is a weight functional satisfying G(W, t) = 0, t ∈T\W, and
+Z
+T
+G(W, t)dt = 1
+(2.3)
+for any bounded Borel window W ∈BRd.
+14
+
+
+PAGE 17
+2 Elementary statistical inference for square-integrable random ﬁelds
+15
+Example 2.1 (Uniform weights): The simplest weight functional is uniform on W, i.e. G
+is given by
+G(W, t) = I(t ∈W)
+|W|
+,
+t ∈T.
+Then, the estimator ˆµn becomes
+ˆµn =
+1
+|Wn|
+Z
+Wn
+X(t)dt,
+which is the well-known sample mean in statistics. Its practical interpretation is based on the
+discretization of the integral. If the only observed sample of X at the points t1, . . . , tN ∈Wn
+is (X(t1, ) . . . , X(tN)), then ˆµn ≈1
+N
+PN
+j=1 X(tj).
+Lemma 2.2 (Unbiasedness): The estimator ˆµn is unbiased, i.e. E[ˆµn] = µ.
+Proof Applying Fubini’s theorem as well as the stationarity of X and Equation (2.3) yields
+E [ˆµn] = E
+
+
+Z
+Wn
+X(t)G(Wn, t)dt
+
+
+Fubini
+=
+Z
+Wn
+E [X(t)]
+|
+{z
+}
+=µ
+G(Wn, t)dt = µ ·
+Z
+Wn
+G(Wn, t)dt
+|
+{z
+}
+=1
+= µ.
+Consider the function Γn(t) :=
+R
+T
+G(Wn, t)G(Wn, y + t)dy for t ∈T. Note that Γn(t) = 0 if
+t /∈Wn ⊕ˇWn, where ˇK := −K for any set K.
+Lemma 2.3 For any n ∈N, it holds that
+var(ˆµn) =
+Z
+T
+C(t) · Γn(t)dt.
+Exercise 2.4 Proof Lemma 2.3.
+Next, we examine the asymptotic behaviour of ˆµn.
+We take a look at its mean-square
+consistency and asymptotic normality.
+Theorem 2.5 (L2-consistency): For a Van Hove sequence {Wn}n∈N of observation windows,
+assume that there exist constants c0, θ > 0 such that
+sup
+t∈T
+G(Wn, t) ≤
+c0
+|Wn|, n ∈N,
+and
+lim
+n→∞|Wn| · Γn(t) = θ.
+If the covariance function C is integrable over T, i.e.
+R
+T |C(t)|dt < ∞, then
+lim
+n→∞|Wn|var(ˆµn) = θ
+Z
+T
+C(t)dt,
+and consequently E
+|ˆµn −µ|2 →0 as n →∞.
+Proof The unbiasedness of ˆµ in Lemma 2.2 and Lebesgue’s dominated convergence theorem
+yield
+lim
+n→∞|Wn|var(ˆµ) = lim
+n→∞|Wn|
+Z
+T
+C(t)Γn(t)dt =
+Z
+T
+C(t) lim
+n→∞|Wn|Γn(t)
+|
+{z
+}
+=θ
+dt = θ
+Z
+T
+C(t)dt := c1.
+
+
+PAGE 18
+16
+2 Elementary statistical inference for square-integrable random ﬁelds
+Thus, var(ˆµn) ∼
+c1
+|Wn| →0 as n →∞. The unbiasedness of ˆµn then implies E
+|ˆµn −µ|2 =
+var(ˆµn) →0 as n →∞.
+Under certain mixing and integrability assumptions, the asymptotic normality of ˆµn can be
+proven, i.e.
+q
+|Wn| · (ˆµn −µ) d→N(0, σ2),
+where σ2 := θ ·
+R
+T
+C(t)dt > 0. Let us give an example of such assumptions [20, Theorem 1.7.4],
+see also [3, Chapter 3].
+(I) Assumptions of Theorem 2.5 hold true.
+(II) There exists a constant δ > 0 such that E
+h
+|X(0)|2+δi
+< ∞.
+(III) It holds that σ2 > 0.
+(IV) There exist β, ε > 0 such that
+α(r) ≤β · r−d·ε
+for ε · δ > 2d and arbitrary r →∞, where α(r) is the so-called α-mixing rate of X.
+To give a formal deﬁnition of the α-mixing rate we introduce the following quantity.
+Deﬁnition 2.6 The Rosenblatt dependence rate of two σ-algebras F1, F2 ⊂F is deﬁned by
+α(F1, F2) =
+sup
+A∈F1,B∈F2
+|P(A ∩B) −P(A) · P(B)|.
+It is a measure of stochastic dependence between F1 and F2. This can be easily seen from
+the following lemma.
+Lemma 2.7 Let Yj be Fj-measurable random variables and pj > 1, j = 1, 2, such that
+E [|Yj|pj] < ∞. Then,
+|cov(Y1, Y2)| ≤10 · ∥Y1∥p1 · ∥Y1∥p2(α(F1, F2))
+1
+q ,
+where q > 1 satisﬁes
+1
+p1 + 1
+p2 + 1
+q = 1 and ∥Yj∥pj = (E[|Yj|pj])1/pj is the Lpj-norm of Yj.
+Proof A proof can be found in [20, Lemma 1.0.2]
+Now, for any Borel window W ∈BRd introduce FX(W) = σ({X(t), t ∈W}), i.e. the σ-algebra
+generated by the random ﬁeld X within the observation window W. Finally, the α-mixing rate
+α(r) is deﬁned as
+α(r) =
+sup
+∆(B1,B2)≥r
+B1,B2∈BRd
+α(FX(B1), FX(B2)),
+r > 0,
+where the supremum above is taken over all σ-algebras generated by X on observation windows
+B1, B2 that have a minimum distance of r to another, see the following for an illustration.
+∆(B1, B2) := inf
+x∈B1
+y∈B2
+∥x −y∥2
+The mixing conditions (I)-(IV) can be varied in many ways, see e.g. [10].
+
+
+PAGE 19
+2 Elementary statistical inference for square-integrable random ﬁelds
+17
+2.2 Estimation of the covariance function
+The covariance function C(h) of a wide-sense stationary, measurable random ﬁeld X = {X(t)), t ∈
+T} observed within a Van-Hove sequence of observation windows {Wn} can be estimated by
+ˆCn(h) :=
+1
+|Wn ∩(Wn −h)|
+Z
+Wn∩(Wn−h)
+X(t)X(t + h)dt −ˆµ2
+n,
+h ∈W,
+for any Borel observation window W. Alternatively, one might apply
+˜Cn(h) :=
+1
+|Wn|
+Z
+Wn
+X(t)X(t + h)dt −ˆµ2
+n,
+h ∈Wn ∪(Wn ⊕W),
+for which the random ﬁeld X needs to be observed in a larger area Wn ∪(Wn ⊕W). For
+practical calculations based on a ﬁnite sample {X(tj), j = 1, . . . , N}, a discretization of ˆCn and
+˜Cn is given by
+¯CN(h) := 1
+Nn
+N
+X
+j,k=1:
+tj−tk≈h
+X(tj)X(tk) −¯µ2
+N,
+where Nh := #{(tj, tk), j, k = 1, . . . , N : tj −tk ≈h} > 0, h ∈W and ¯µN := 1
+N
+N
+P
+j=1
+X(tj).
+Lemma 2.8 (Asymptotic unbiasedness): Under the assumption of Theorem 2.5 both ˆCn(h)
+and ˜Cn(h) are asymptotically unbiased, i.e. it holds that
+E
+h ˆCn(h)
+i
+→C(h)
+and
+E
+h ˜Cn(h)
+i
+→C(h),
+n →∞.
+Proof By the stationarity of X and Fubini’s theorem, we have
+E
+h ˆCn(h)
+i
+:=
+1
+|Wn ∩(Wn −h)|
+Z
+Wn∩(Wn−h)
+E [X(t) · X(t + h)]
+|
+{z
+}
+=C(h)
+dt + µ2 −E
+h
+ˆµ2
+n
+i
+= C(h) −
+var(ˆµn)
+|
+{z
+}
+→0 by Thm. 2.5
+→C(h)
+as n →∞. The proof for ˜Cn(h) is analogous.
+Under some additional mixing and integrability conditions similar to (I)-(IV), one can show
+that the estimators ˆCn and ˜Cn are strongly consistent (uniformly in h ∈W) and asymptotically
+normally distributed [20, chapter 4].
+Returning to their computational version ¯CN, note that the number Nh may be often very
+small or even zero when the sample points {t1, . . . , tn} are not lying on a regular grid within W ⊂
+T. This is for example the case for large lags h, where ∥h∥2 ≈diam(W) := supx,y∈W ∥x −y∥2.
+The estimator ¯CN becomes unreliable at such lags h.
+In addition, ¯CN(·) is not positively
+semi-deﬁnite (contrary to C(·)).
+Similarly to ˆCn and ˜Cn, estimates of the variogram γ(·) for an intrinsically stationary mea-
+surable random ﬁeld X of order two are commonly used in geostatistics. An estimator for γ is
+given by
+ˆγ(h) :=
+1
+2|Wn ∩(Wn −h)| −
+Z
+Wn∩(Wn−h)
+[X(t) −X(t + h)]2 dt,
+h ∈W,
+
+
+PAGE 20
+18
+2 Elementary statistical inference for square-integrable random ﬁelds
+and a discretization is given by
+¯γ(h) := 1
+Nh
+−
+N
+X
+j,k=1
+tj−tk∼h
+[X(tj) −X(tk)]2 dt,
+h ∈W.
+Their asymptotic properties are very similar to those of ˆCn and ¯Cn, respectively, due to the
+well-known relation γ(h) = C(0) −C(h) when X is mean-square integrable.
+2.3 Spectral density estimation
+Let fC be the spectral density of the wide-sense stationary centered random ﬁeld X = {X(t), t ∈
+R} with covariance function C, i.e.
+fC(x) =
+1
+(2π)d
+Z
+Rd
+ei⟨x,t⟩C(t)dt,
+x ∈Rd
+by means of the Fourier inversion formula, if C is continuous at the origin and
+R
+Rd |C(t)|dt < ∞.
+The so-called periodogram allows us to estimate fC.
+Deﬁnition 2.9
+(a) The periodogram ˆfC of X observed within a window Wn is given by
+ˆfC(h) :=
+1
+(2π)d|Wn|
+
+Z
+Wn
+exp{−i⟨t, h⟩}X(t)dt
+
+2
+,
+h ∈W,
+where W and {Wn}∞
+n=1 are observation windows.
+(b) For a random ﬁeld X = {X(t), t ∈T} observed only by a ﬁnite sample (X(t1), . . . , X(tN)),
+N ∈N, the empirical periodogram ¯fN is deﬁned by
+¯fN(h) :=
+1
+(2π)dN
+
+N
+X
+j=1
+exp{−i⟨tj, h⟩}X(tj)dt
+
+2
+, h ∈W.
+Assume that {t1, . . . , tN} = {0, 1, . . . , M −1}d · δ, δ > 0, lie on a regular grid with N = M.
+Lemma 2.10 If fC ∈C(T), i.e. if fC is a continuous function on T, then the estimators ˆfC
+and ¯fN are asymptotically unbiased almost everywhere on W, i.e.
+E
+h ˆfC(h)
+i
+→fC(h),
+n →∞,
+and
+E
+h ¯fN(h)
+i
+→fC(h),
+N →∞,
+for almost all h ∈W.
+Proof
+(a) It holds that |z|2 = z · ¯z for all z ∈C, where ¯z is the complex conjugate of z.
+
+
+PAGE 21
+2 Elementary statistical inference for square-integrable random ﬁelds
+19
+Fubini’s theorem yields
+E
+h ˆfC(h)
+i
+=
+1
+(2π)d|Wn|
+Z
+Wn
+Z
+Wn
+exp {−i⟨t, h⟩+ i⟨s, h⟩} E[X(s)X(t)]
+|
+{z
+}
+=C(t−s)
+dsdt
+=
+1
+(2π)d|Wn| ·
+Z
+Rd
+Z
+Rd e−i⟨h,t−s⟩C(t −s) · 1(s ∈Wn, t −s
+| {z }
+=y
+∈Wn ⊕˜Wn)dsdt
+t7→y
+=
+1
+(2π)d ·
+Z
+Wn
+ds
+|Wn|
+|
+{z
+}
+=1
+·
+Z
+Wn⊕˜
+Wn
+e−i⟨h,y⟩C(y)dy
+→
+1
+(2π)d ·
+Z
+Rd e−i⟨h,y⟩C(y)dy = fC(h),
+h ∈T,
+as n →∞, since Wn ⊕ˇ
+Wn →Rd for any Van-Hove-sequence {Wn} and the Fourier
+inversion formula holds.
+(b) To prove the statement for E[ ¯fN(h)], consider for simplicity d = 1 and tj = j, j =
+0, . . . , N −1. Then, similar to (a), it holds that
+E
+h ¯fN(h)
+i
+=
+1
+2πN
+N−1
+X
+j,k=0
+e−i(tj−tk)h E[X(tj)X(tk)]
+|
+{z
+}
+C(tj−tk
+=
+1
+2πN
+N−1
+X
+j,k=0
+e−i(tj−tk)h ·
+Z
+R
+ei(tj−tk)tfC(t)dt
+=
+Z
+R
+1
+2π −N
+
+N−1
+X
+j=0
+eij(t−h)
+
+2
+fC(t)dt
+=
+Z
+R
+ϕN(t −h)fC(t)dt→fC(h)
+as N →∞, where
+ϕN(λ) =
+1
+2πN
+
+N−1
+X
+j=0
+eiλj
+
+2
+=
+1
+2πN
+
+sin(λ
+2N)
+sin(λ
+2)
+
+2
+is the so-called Fejér kernel. The convergence above holds for almost all h ∈W (with
+respect to the Lebesgue measure on R) by the properties of the Fejér kernel.
+However, the variance of ˆfC or ¯fN, respectively, does not vanish with increasing n or N,
+which makes it a bad estimator of fC. Indeed, it holds that var( ˆfC(h)) →f2
+C(h) as n →∞[36,
+p. 129], since consistency is not given. In order to correct this estimate, we consider smoothed
+versions of ˆfC and ¯fN, which are deﬁned by
+ˆf∗
+C(h) :=
+Z
+Rd Gm(h −t) ˆfC(t)dt,
+h ∈W,
+
+
+PAGE 22
+20
+2 Elementary statistical inference for square-integrable random ﬁelds
+Fig. 2.1: Bartlett’s kernel
+and
+¯f∗
+N(h) :=
+Z
+Rd Gm(h −t) ¯fN(t)dt,
+t ∈W,
+where Gm : Rd →R+ is a square-integrable smoothing kernel, which approximates the Dirac
+delta function as m →∞and
+R
+Rd Gm(t)dt = 1 for all m ∈N, i.e. Gm(t) →δ0(t), t ∈T, as
+m →∞and
+R
+Rd G2
+m(t)dt < ∞for all m ∈N.
+Remark 2.11 The asymptotic unbiasedness does not hold for ¯fN(h) if the sampling locations
+t1, . . . , tn are irregularly spaced [8, Section 3.2].
+Example 2.12 Let {am}m∈N be a sequence with am →∞and am
+m →0 as m →∞. For d = 1
+consider the following examples for smoothing kernel functions.
+(a) Bartlett’s kernel: Gm(t) = am · B(am · t),
+B(λ) = 1
+2π ·
+ 
+sin(λ
+2)
+λ
+2
+!2
+.
+(b) Parzen’s kernel: Gm(t) = ad
+m · P(am · t), d ∈{1, 2, 3},
+P(λ) = 3
+8π ·
+ 
+sin(λ
+4)
+λ
+4
+!4
+.
+(c) Zhurbenko’s kernel: Gm(t) = am · Z(am · t),
+Z(λ) = α + 1
+2α
+· (1 −|λ|α) · 1(|λ| ≤1),
+α(0, 2].
+
+
+PAGE 23
+2 Elementary statistical inference for square-integrable random ﬁelds
+21
+Fig. 2.2: Parzen’s kernel
+Fig. 2.3: Zhurbenko’s kernel
+
+
+PAGE 24
+22
+2 Elementary statistical inference for square-integrable random ﬁelds
+All of these functions are even and have a pronounced peak (sharp maximum) at λ = 0, see
+Figures 2.1 - 2.3. The kernel Z(λ) has compact support [−1, 1], whereas the support of B(λ)
+and P(λ) is the whole real line.
+As seen above, we may put Gm(t) = ad
+m ·H(am ·t) for any d ≥1, where H is an even function
+H which integrates to 1, i.e.
+R
+Rd H(t)dt = 1. For instance, one might choose
+H(t) = pd ·
+sin(∥t∥d/4)
+∥t∥d/4
+4
+with
+pd =
+ 
+wd · 4d
+Z ∞
+0
+sin4(λ)
+λs−d
+!−1
+,
+d = 2, 3,
+where wd ∈{2π, 4π} is the surface area of the unit sphere Sd−1 in Rd and ∥·∥d is the Euclidean
+norm in Rd d = 2, 3.
+Exercise 2.13 Compute the normalizing constant zd of
+H(t) = zd(1 −∥t∥α
+2 )1(∥t∥2 ≤1),
+α ∈(0, 2],
+for d > 1.
+The smoothed periodograms ˆf∗
+C, ¯f∗
+N are asymptotically unbiased as well:
+Lemma 2.14 Let Gm(t) = ad
+m · H(am · t), t ∈T, m ∈N, where H : Rd →R+ is an even
+bounded function with
+R
+Rd H(t)dt = 1 and am →∞as m →∞. Under the assumptions of
+Lemma 2.10, it holds that
+lim
+m→∞lim
+n→∞E
+h ˆf∗
+C(h)
+i
+= fC(h),
+lim
+m→∞lim
+N→∞E
+h ¯f∗
+N(h)
+i
+= fC(h)
+for h ∈W.
+Proof We proof the assertion only for ˆf∗
+C. Fubini’s theorem yields
+E
+h ˆf∗
+C(h)
+i
+=
+Z
+Rd Gm(h −t) · E
+h ˆfC(h)
+i
+dt →
+Z
+Rd Gm(h −t)fC(t)dt, h ∈W,
+as n →∞, where the convergence is a result of Lemma 2.10 and Lebesgue’s dominated con-
+vergence theorem. Then,
+Z
+Rd Gm(h −t)fC(t)dt =
+Z
+Rd ad
+m · H(am(h −t)) · fC(t)dt
+y=am(t−h)
+=
+Z
+Rd H(−y)
+| {z }
+=H(y)
+fC(h + y
+am
+)dy
+→fC(h) ·
+Z
+Rd H(y)dy
+|
+{z
+}
+=1
+= fC(h),
+h ∈W,
+as m →∞.
+
+
+PAGE 25
+2 Elementary statistical inference for square-integrable random ﬁelds
+23
+In contrast to ˆfC(·) and ¯fN(·), the variance of the smoothed estimators ˆf∗
+C(·) and ¯f∗
+N(·) tends
+to zero as N →∞for any ﬁxed m ∈N. Indeed, we have
+var
+ ¯f∗
+N(h)
+
+= o
+ 
+f2
+C(h)
+N
+Z
+Rd G2
+m(t)dt
+!
+,
+see [36, p. 134], and thus ˆf∗
+C and ¯f∗
+N are weakly consistent estimators for the spectral density
+fC by means of Chebyshev’s inequality, since for all h ∈W it holds that
+P
+ ¯f∗
+N(h) −fC(h)
+ > ε
+
+≤P
+ ¯f∗
+N(h) −E
+h ¯f∗
+N(h)
+i > ε
+2
+
++ P
+E
+h ¯f∗
+N(h)
+i
+−fC(h)
+ > ε
+2
+
+≤
+var
+ ¯f∗
+N(h)
+
+ε2/4
+→0,
+as am →∞and the function H(·) is chosen in a way such that 1
+N
+R
+Rd G2
+m(t)dt →0 as m, N →∞.
+In general, it holds that
+R
+Rd G2
+m(t)dt →∞as m →∞, hence its convergence to inﬁnity must
+be slower than N.
+Remark 2.15
+(a) The selection ot the bandwidth am is studied in [23, 31, 24].
+(b) Asymptotic normality of ˆf∗
+C(·) and ¯f∗
+N(·) can be shown as in [36, Theorem 7, p.118]; see
+also [19] and [44].
+In the literature, one can ﬁnd further (parametric and non-parametric) spectral density
+estimates such as the Whittle likelihood [53, 12, 32, 48] and Kernel density estimators [8]. See
+also [15] and references therein. For a Bayesian approach we refer to [54, 46] and for other
+methods see [25, 1, 2, 5, 6, 18, 28, 47, 52].
+
+
+PAGE 26
+3 Prediction of stationary random ﬁelds
+Let X = {X(t), t ∈T} be a square-integrable and stationary (in a sense to be speciﬁed later)
+random ﬁeld, T ⊂Rd. Assume that the sample {X(tj), j = 1, . . . , N} is observable.
+Problem:
+How can we predict the value of X(t) for t /∈{t1, . . . , tN} based on this sample?
+Denote by Ft1,...,tN = σ({X(tj), j = 1, . . . , n}) the σ-algebra generated by {X(tj), j =
+1, . . . , n}. Evidently, the predictor ˆX(t) of X(t) has to be Ft1,...,tN -measurable, and also optimal
+in some particular sense. A list of desirable properties of ˆX(t) is given in the following.
+(i) Exactness: ˆX(t) = X(t) a.s. if t = tj, j = 1, . . . , N.
+(ii) Unbiasedness: E[ ˆX(t)] = E[X(t)], t ∈T.
+(iii) Continuity: Almost every path realization of ˆX(t) is a continuous function in t ∈T.
+(iv) Consistency: ˆX(t) →X(t) as N →∞, where this convergence may be understood in the
+a.s., weakly or quadratic-mean sense.
+(v) Exactness in distribution: ˆX(t) d= X(t), t ∈W.
+Later on, several criteria of optimality will be considered. One of the most common ones is
+E
+h
+| ˆX(t) −X(t)|pi
+=
+min
+Y ∈Lp(Ω,Ft1,...,tN ,P) E [|Y −X(t)|p]
+for some p ∈N, e.g. p = 1, 2, where Lp(Ω, Ft1,...,tN , P) is the space of all Ft1,...,tN -measurable
+random variables Y with E[|Y |p] < ∞. Let us consider the case p = 2 in more detail.
+3.1 L2-optimal prediction as a conditional expectancy
+It is well known that
+ˆX(t) := E [X(t) | Ft1,...,tN ] =
+argmin
+Y ∈Lp(Ω,Ft1,...,tN ,p)
+E
+h
+(X(t) −Y )2i
+,
+(3.1)
+compare [41, Theorem 1.4.7]. It holds that there exists a Borel-measurable function ϕ such
+that ˆX(t) = ϕ(X(t1), . . . , X(tN)) [41, Lemma 1.4.11]. However, the function ϕ is usually not
+explicitly known. In very few cases, it is known to be linear, as for instance in the case of
+Gaussian or some α-stable random ﬁelds
+ϕ(X(t1), . . . , X(tN)) = λ1 · X(t1) + · · · + λN · X(tN)
+Here, the procedure of ﬁnding weights λj = λj(t1, . . . , tN, t), j = 1, . . . , N, satisfying (3.1) is
+called linear regression.
+24
+
+
+PAGE 27
+3 Prediction of stationary random ﬁelds
+25
+3.1.1 Linear regression for Gaussian random ﬁelds
+We consider linear regression in the Gaussian case and begin with N = 1. The goal is to
+ﬁnd E[X(t) | X(t1)], if the stationary random ﬁeld is Gaussian with the mean E[X(t)] = µ and
+covariance function C(t) = cov(X(0), X(t)), which is positive deﬁnite. In this case, the random
+vector (X(t), X(t1)) has a bivariate normal distribution with probability density function
+fX(t),X(t1)(x, y) =
+1
+2πσ2p
+1 −ρ2 exp
+
+−
+1
+2(1 −ρ2)σ2
+h
+(x −µ)2 −2ρ(x −µ)(y −µ) + (y −µ)2i
+for x, y ∈R, where ρ = corr(X(t), X(t1)) ∈(−1, 1) and σ2 = C(0) = var(0) > 0.
+The
+conditional density fX(t)|X(t1)(x | y) of X(t) given X(t1) = y is equal to
+fX(t)|X(t1)(x | y) = fX(t),X(t1)(x, y)
+fX(t1)(y)
+=
+1
+p
+2πσ2(1 −ρ2) exp
+(
+−1
+2(1 −ρ2)σ2
+
+(x −µ)2 −2ρ(x −µ)(y −µ) + (y −µ)2
++ 1 −ρ2(y −µ)2
+2σ(1 −ρ2)
+)
+=
+1
+p
+2π(1 −ρ2)σ exp
+
+−
+1
+2σ2(1 −ρ2)
+
+(x −µ)2 −2ρ(x −µ)(y −µ) + ρ2(y −µ)2
+=
+1
+p
+2π(1 −ρ2)σ exp
+
+
+
+
+
+−
+1
+2σ2(1 −ρ2)
+ 
+x −(µ + ρ(y −µ)
+|
+{z
+}
+=:µ(y)
+)
+!2
+
+
+
+
+,
+which is equal to the probability density function of a N(µ(y), (1 −ρ2)σ2) distributed random
+variable. The following equations are well-known. It holds that
+E[X(t) | X(t1) = y] =
+Z
+R
+x · fX(t)|X(t1)(x | y)dx = µ(y) = µ + ρ(y −µ)
+(3.2)
+and
+var(X(t) | X(t1) = y) =
+Z
+R
+(x −µ(y))2 · fX(t)|X(t1)(x | y)dx = σ2(1 −ρ2).
+(3.3)
+The conditional variance above does not depend on y and represents the minimal variance in
+(3.2). Hence, the following lemma holds.
+Lemma 3.1 Let X = {X(t), t ∈T} be a stationary Gaussian random ﬁeld with mean
+E[X(t)] = µ, positive deﬁnite covariance function C(t) = cov(X(0), X(t)) and σ2 = C(0) > 0.
+Then,
+ˆX(t) = E[X(t) | X(t1)] = µ + C(t −t1)
+σ2
+(X(t1) −µ)
+with
+E
+h
+( ˆX(t) −X(t))2i
+= σ2 −C2(t −t1)
+σ2
+.
+Proof Follows from (3.2) and (3.3) with ρ = C(t−t1)
+σ2
+.
+Let IN be the (N × N)-dimensional identity matrix. We can now formulate and prove the
+following more general result.
+
+
+PAGE 28
+26
+3 Prediction of stationary random ﬁelds
+Theorem 3.2 Let X be as in Lemma 3.1. Then,
+ˆX(t) = E[X(t) | X(t1), . . . , X(tN)] = µ + Σt,t1,...,tN · Σ−1
+t1,...,tN
+(3.4)
+and
+E
+h
+( ˆX(t) −X(t))2i
+= σ2 −Σt,t1,...,tN · Σ−1
+t1,...,tN · Σ⊺
+t,t1,...,tN ,
+(3.5)
+where Σt,t1,...,tN = (C(t −t1), . . . , C(t −tN)) and Σt1,...,tN = (C(tj −tk))N
+j,k=1.
+Proof Consider a random variable
+Y = X(t) −µ −Σt,t1,...,tN · Σ−1
+t1,...,tN · ˜X,
+where ˜X = (X(t1) −µ, . . . , X(tN) −µ)⊺. It holds that
+E[Y · ˜X⊺] = E[(X(t) −µ) · ˜X⊺]
+|
+{z
+}
+=Σt,t1,...,tN
+−Σt,t1,...,tN · Σ−1
+t1,...,tN · E[ ˜X · ˜X⊺]
+|
+{z
+}
+=Σt1,...,tN
+= 0.
+Hence, Y and ˜X are uncorrelated, and therefore also stochastically independent, since they are
+jointly Gaussian. It follows that
+E[Y | (X(t1), . . . , X(tN)]
+|
+{z
+}
+= ˜
+X+µ(1,...,1)
+) = E[Y ] = 0,
+and consequently
+E[Y | (X(t1), . . . , X(tN))] = E[X(t) −µ | X(t1), . . . , X(tN)] −Σt,t1,...,tN · Σ−1
+t1,...,tN · ˜X.
+We can conclude that
+E[X(t) | X(t1), . . . , X(tN)] = µ + Σt,t1,...,tN · Σ−1
+t1,...,tN · ˜X,
+which proves (3.4).
+To show that (3.5) holds, note that Y = X(t) −E[X(t) | X(t1), . . . , X(tN)], and Y and
+(X(t1), . . . , X(tN))⊺are stochastically independent. We can compute
+var(X(t) | X(t1), . . . , X(tN))
+:= E
+"
+(X(t) −
+= ˆ
+X(t)
+z
+}|
+{
+E[X(t) | X(t1), . . . , X(tN)])2
+|
+{z
+}
+=Y 2
+| X(t1), . . . , X(tN)
+#
+= E[Y 2 | X(t1), . . . , X(tN)]
+= E[Y 2]
+= E
+
+X(t) −µ −Σt,t1,...,tN · Σ−1
+t1,...,tN · ˜X
+2
+= E
+h
+(X(t) −µ)2i
+|
+{z
+}
+=σ2
+−2Σt,t1,...,tN Σ−1
+t1,...,tN Σ⊺
+t,t1,...,tN + Σt,t1,...,tN Σ−1
+t1,...,tN E[ ˜X ˜X⊺]
+|
+{z
+}
+=Σt1,...,tN
+|
+{z
+}
+=IN
+Σ−1
+t1,...,tN Σ⊺
+t,t1,...,tN
+= σ2 −Σt,t1,...,tN Σ−1
+t1,...,tN Σ⊺
+t,t1,...,tN ,
+
+
+PAGE 29
+3 Prediction of stationary random ﬁelds
+27
+which is deterministic. Thus,
+E
+h
+( ˆX(t) −X(t))2i
+= E
+h
+E[Y 2 | X(t1), . . . , X(tN)]
+i
+= σ2 −Σt,t1,...,tN · Σ−1
+t1,...,tN · Σ⊺
+t,t1,...,tN ,
+which coincides with (3.5).
+Remark 3.3 Lemma 3.1 and Theorem 3.2 hold (with obvious modiﬁcations µ 7→µ(t), C(t −
+s) 7→C(s, t), σ2 7→C(t, t)) also for non-stationary random ﬁelds.
+Corollary 3.4 Let X(t1), . . . , X(tN) be stochastically independent, and X be as in Lemma
+3.1. Then,
+ˆX(t) = µ + 1
+σ2 ·
+N
+X
+j=1
+C(t −tj) · (X(tj) −µ),
+(3.6)
+E
+h
+( ˆX(t) −X(t))2i
+= σ2 −1
+σ2 ·
+N
+X
+j=1
+C2(t −tj).
+(3.7)
+Proof Use Equations (3.4) and (3.5) with Σt1,...,tN = σ2 · IN.
+Notice that Equations (3.6) - (3.7) are a direct generalization of Lemma 3.1.
+3.1.2 Linear regression for α-stable random ﬁelds
+Let X = {X(t), t ∈T} be a strictly stationary α-stable random ﬁeld with index of stability
+α ∈(1, 2), so that E[|X(t)|] < ∞for all t ∈T, which is necessary for conditional expectations
+to exist. Assume for simplicity that X(t) is symmetric α-stable (write X(t) ∼SαS), i.e.
+ϕX(t)(s) = E[eisX(t)] = e−σα|s|α,
+s ∈R.
+Note that X is centered, i.e. E[X(t)] ≡0 for all t ∈T.
+Problem: When does
+E[X(t) | X(t1), . . . , X(tN)] = λ1 · X(t1) + · · · + λN · X(tN)
+a.s.
+(3.8)
+hold?
+First, we mention a very general result on characteristic functions.
+Theorem 3.5 Let Z = (Z0, Z1, . . . , ZN) be a random vector with E[|Zj|] < ∞, j = 0, . . . , N,
+and joint characteristic function ϕZ(s) = E[ei⟨s,Z⟩], s = (s0, s1, . . . , sN) ∈RN+1. Then,
+E[Z0 | Z1, . . . , ZN] =
+N
+X
+j=0
+λjZj
+a.s.
+⇐⇒∂
+∂s0
+ϕZ(s0, s1, . . . , sN)
+
+s0=0 = λ1
+∂
+∂s1
+ϕZ(s0, s1, . . . , sN) + · · · +
+∂
+∂sN
+ϕZ(s0, s1, . . . , sN).
+(3.9)
+Proof See [29, Theorem 3.1]
+
+
+PAGE 30
+28
+3 Prediction of stationary random ﬁelds
+A random ﬁeld X = {X(t), t ∈T} is a SαS stationary Subgaussian random ﬁeld, α ∈(1, 2)
+if
+X(t) d=
+√
+A · Y (t),
+where Y = {Y (t), t ∈T} is a centered Gaussian random ﬁeld with positive-deﬁnite covariance
+function C(·), independent of A ∼Sα/2((cos(πα
+4 ))2/α, 1, 0).
+Corollary 3.6 Let X = {X(t), t ∈T} be a SαS stationary Subgaussian random ﬁeld. Then,
+the regression (3.8) is always linear and coincides with (3.3) for µ = 0, i.e.
+E [X(t0) | X(t1), . . . , X(tN)] = Σt0,t1,...,tN · Σ−1
+t1,...,tN (X(t1), . . . , X(tN))⊺.
+Proof Check the validity of condition (3.9) for Z = (X(t0), . . . , X(tN)) with characteristic
+function ϕZ(s) = exp{−(s⊺Σs)α/2}, where Σ = (C(tj −tk))N
+j,k=0.
+Exercise 3.7 Proof Corollary 3.6.
+Corollary 3.8 Let X = {X(t), t ∈T} be a SαS random ﬁeld, α ∈(1, 2), and let Γ be the
+spectral measure on SN of the SαS random vector (X(t0), . . . , X(tN))⊺. Then,
+E [X(t0) | X(t1), . . . , X(tN)] = λ1X(t1) + · · · + λNX(tN)
+a.s.
+⇐⇒
+Z
+SN
+(x −λ1x1 −· · · −λNxN)(s1x1 + · · · + sNxN)⟨α−1⟩Γ(dx) = 0
+(3.10)
+for all s1, . . . sn, . . . , sn ∈R, where a⟨p⟩:= |a|p·sgn(a)SN+1 for a, p ∈R and dx = dx0dx1 . . . dxN.
+Note that, condition (3.10) is always satisﬁed for N = 1.
+Proposition 3.9 Under the conditions of Corollary 3.7, it holds that E[X(t0) | X(t1)] =
+λ1 · X(t1) a.s., where
+λ1 = [X(t0), X(t1)]α
+σα
+with scale parameter σ of X(t1) ∼SαS(σ) and covariation
+[X(t0), X(t1)]α =
+Z
+S1 x1 · x⟨α−1⟩
+2
+Γ(dx1, dx2)
+of X(t0), X(t1) and Γ being the spectral measure of the vector (X(t0), X(t1))⊺.
+Proof Write (3.10) for N = 1 in the form
+s⟨α−1⟩
+1
+Z
+S2
+xo · x⟨α−1⟩
+1
+Γ(dx)
+|
+{z
+}
+=[X(t0),X(t1)]α
+= λ1 · s⟨α−1⟩
+1
+Z
+S2
+=|x1|α
+z
+}|
+{
+x1 · x⟨α−1⟩
+1
+Γ(dx)
+|
+{z
+}
+=σ2
+,
+where dx = dx1dx2. After canceling s⟨α−1⟩
+1
+out, we get λ1 = [X(t0),X(t1)]α
+σα
+.
+
+
+PAGE 31
+3 Prediction of stationary random ﬁelds
+29
+Remark 3.10 (Properties of the covariation): The covariation is a dependence measure
+between jointly SαS random variables, α ∈(1, 2], which may be considered a generalization of
+covariance for α = 2. Indeed, for (Y1, Y2) ∼S2S = N(0, Σ), with covariance matrix
+Σ =
+ 
+σ2
+1
+ρσ1σ2
+ρσ1σ2
+σ2
+2
+!
+and spectral measure Γ it holds that[Y1, Y2]2 =
+1
+2cov(Y1, Y2), as the following comparison
+between ϕ(Y1,Y2)(s) of a Gaussian and a SαS random vector shows:
+ϕ(Y1,Y2)(s) = E
+h
+ei(s1Y1+s2Y2)i
+= exp
+
+−
+Z
+S2(s1x1 + s2x2)2Γ(dx)
+
+= exp
+
+−
+
+s2
+1
+Z
+S2 x2
+1Γ(dx) + 2s1s2[Y1, Y2]2 + s2
+2
+Z
+S2 x2
+2Γ(dx)
+
+= exp
+
+−1
+2
+
+s2
+1 · varY1 + 2s1s2 · cov(Y1, Y2) + s2
+2 · var(Y2)
+
+Setting s1 = 0 or s2 = 0 yields
+var(Yj) = 2
+Z
+S2 x2
+jΓ(dx),
+j = 1, 2,
+hence
+[Y1, Y2]2 = 1
+2cov(Y1, Y2).
+However, in the case α ∈(1, 2) the covariation [X(t0), X(t1)]α of a SαS random vector
+(Y1, Y2) is not a symmetric function of Y1, Y2, and it is linear only with respect to its ﬁrst
+argument.
+The following proposition shows necessary conditions for Equation (3.8) to hold for any
+N ≥1 that are much simpler than condition (3.10):
+Proposition 3.11 Under the assumptions of Corollary 3.7, if
+E[X(t0) | X(t1), . . . , X(tN)] =
+N
+X
+j=1
+λjX(tj)
+a.s.
+(3.11)
+then the coeﬃcients λ1, . . . , λN must satisfy the following system of linear equations:
+N
+X
+j=1
+λj[X(tj), X(tk)]α = [X(t0), X(tk)]α,
+k = 1, . . . , N.
+(3.12)
+Proof Set cjk = [X(tj), X(tk)]α, j, k = 0, . . . , N. It holds that cjj = σα
+j , see the proof of
+Proposition 3.8. Using its result, we infer for j = 1, . . . , N
+c0j
+σα
+j
+· X(tj) = E [X(t0) | X(tj)] = E
+"
+E
+"
+X(t0) |
+N
+X
+k=1
+X(tk)
+#
+| X(tj)
+#
+Eq. (3.11)
+=
+E
+" N
+X
+k=1
+λkX(tk) | X(tj)
+#
+= λjX(tj) +
+X
+k̸=j
+λkE[X(tk) | X(tj)]
+Prop. 3.9
+=
+λjX(tj) +
+X
+k̸=j
+λk
+ckj
+σα
+j
+X(tj) =
+ 
+1
+σα
+j
+N
+X
+k=1
+λkckj
+!
+X(tj).
+
+
+PAGE 32
+30
+3 Prediction of stationary random ﬁelds
+This leads to c0j = PN
+k=1 λkckj, j = 1, . . . , N, which ultimately yields (3.12).
+Since [Y1, Y2]α is not linear in its second argument, we can easily construct an example of a
+non-linear regression, where the necessary condition (3.11) does not hold.
+Example 3.12 Let Y1, Y2, Y3 be stochastically independent SαS random variables, α ∈(1, 2).
+Consider the SαS random vector X = (X0, X1, X2)⊺with X0 = Y1, X1 = Y1+Y2, X2 = Y1+Y3.
+Then,
+E[X0 | X1, X2] ̸= λ1X1 + λ2X2
+a.s.
+Exercise 3.13 Check that condition (3.11) in Example 3.12 is not satisﬁed.
+Hint: Consider [X0, X1 + θX2]α and E[X0 | X1 + θX2] as a function of θ > 0.
+Finally, we state the following positive result about regression:
+Theorem 3.14 Let X = {X(t), t ∈T} be a SαS random ﬁeld, α ∈(1, 2), and let locations
+t0, t1, . . . , tN ∈T, N ≥1, be chosen such that X(t1), . . . , X(tN) are stochastically independent.
+Then,
+E [X(t0)|X(t1), . . . , X(tN)] =
+N
+X
+j=1
+λjX(tj)
+a.s.
+where
+λj = [X(t0), X(tj)]α
+σα
+j
+and σ2 is the scale parameter of X(tj), j = 1, . . . , N.
+Proof See [37, Corollary 4.1.5].
+3.2 Kriging methods
+The previous section, in particular Section 3.1.2, illustrated how prediction as a conditional
+mean does not always lead to feasible computable forecasts, since the regression E[X(t) |
+X(t1), . . . , X(tn)] may not be linear.
+From an application’s point of view however, linear
+forecast methods are very easy to use and thus desirable to have. Hence, the need for linear L2-
+theory of prediction for square-integrable random functions arose. After pioneering publications
+[21, 39], where the linear predictor
+ˆX(t) =
+N
+X
+j=1
+λjX(tj) + λ0,
+t ∈W,
+(3.13)
+was used with weights λ1, . . . , λN, which solve the minimization problem
+E
+ ˆX(t) −X(t)
+2
+→
+min
+λ1,...,λN,
+(3.14)
+the German geologist D.G. Krige was ﬁrst to apply these predictors for gold ore mining predic-
+tion in South Africa (1951). These linear prediction methods, further developed by the French
+school of mathematical geology(1960s, G. Mathéron), were subsequently called linear inter- or
+extrapolation, or Kriging, some of which we explore in the sequel. More detailed accounts on
+Kriging methods can be found in the books [45, 51, 4, 22].
+
+
+PAGE 33
+3 Prediction of stationary random ﬁelds
+31
+3.2.1 Simple Kriging
+Let X = {X(t), t ∈T} be a (possibly non-stationary) square-integrable random ﬁeld, i.e.
+E[X2(t)] < ∞, t ∈T, with known covariance function C(s, t) = cov(X(s), X(t)), s, t ∈T, and
+mean function µ(t) = E[X(t)], t ∈T.
+Goal: Find a linear forecast (3.13) such that the prediction error E
+ ˆX(t) −X(t)
+2
+is mini-
+mal.
+It is easily seen that
+E
+ ˆX(t) −X(t)
+2
+= var
+ ˆX(t) −X(t)
+
++
+
+E
+h ˆX(t) −X(t)
+i2 →
+min
+λ1,...,λN
+if E[ ˆX(t)−X(t)] ≡0, i.e. the predictor ˆX(t) is unbiased and E[ ˆX(t)] = E[X(t)] = µ(t), t ∈W.
+Plugging in the linear form of ˆX(t) from Equation (3.13) into this relation yields µ(t) =
+PN
+j=1 λjµ(tj) + λ0, hence, equivalently λ0 = µ(t) −PN
+j=1 λjµ(tj), which allows for
+ˆX(t) = µ(t) +
+N
+X
+j=1
+(X(tj) −µ(tj)),
+t ∈W.
+The latter expression implies that if µ(t) is explicitly known, then X(t) can be centered by
+subtracting its mean in the forecast ˆX(t).
+Let t = t0 and consider
+Ψ(λ) = var( ˆX(t0) −X(t0)) = E
+
+
+
+
+N
+X
+j=0
+λj(X(tj) −µ(tj))
+
+
+2
+
+with λ0 = −1 as the target function to be minimized with respect to λ = (λ1, . . . , λN) ∈RN.
+Note that we used the fact that E
+hPN
+j=0 λj(X(tj) −µ(tj))
+i
+= 0 for all λ1, . . . , λN in the above.
+The necessary conditions of an extremum are ∂Ψ(λ)
+∂λj
+= 0, j = 1, . . . , N. Since
+Ψ(λ) =
+N
+X
+j,k=0
+λjλk cov(X(tj), X(tk))
+|
+{z
+}
+:=C(tj,tk)
+(3.15)
+by linearity of the expectation, we get
+∂Ψ(λ)
+∂λj
+= 2
+N
+X
+k=0
+k̸=i
+λkC(tj, tk) + 2λjC(tj, tj) = 0,
+j = 1, . . . , N,
+which, together with λ0 = −1, yields the system of linear equations
+N
+X
+k=1
+λj · C(tj, tk) = C(t0, tj),
+j = 1, . . . , N,
+or, in matrix form,
+Σλ = c0,
+(3.16)
+where Σ = (C(tj, tk))N
+k,j=1, λ = (λ1, . . . , λN)⊺∈RN and c0 = (C(to, t1), . . . , C(t0, tk))⊺.
+
+
+PAGE 34
+32
+3 Prediction of stationary random ﬁelds
+Theorem 3.15 Let X = {X(t), t ∈T} be a square-integrable random ﬁeld with known mean
+function µ(t), t ∈T, and positive deﬁnite covariance function C(s, t), s, t ∈T. Then, the
+simple Kriging method yields the unique predictor
+ˆX(t) = µ(t) +
+N
+X
+j=1
+λj(X(tj) −µ(tj))
+with λ = (λ1, . . . , λN)⊺= Σ−1 · c0.
+Proof The quadratic function Ψ(λ) has a unique minimum if Σ is invertible, since it is a
+paraboloid function with Ψ(λ) ≥0 for all λ. Then, the vector λ, which satisﬁes
+∂Ψ
+∂λj = 0,
+j = 1, . . . , N, coincides with the unique solution of Equation (3.16).
+Let us investigate the properties of simple Kriging forecast.
+Theorem 3.16 (Properties of simple Kriging): Under the assumptions of Theorem 3.15,
+the following holds.
+(i) Exactness: ˆX(tj) = X(tj), j = 1, . . . , N.
+(ii) Smoothness: If µ, C are Ck-smooth, k ∈N0, then so is ˆX(·).
+(iii) Shrinkage: var( ˆX(t0)) ≤var(X(t0)), t ∈W.
+(iv) Orthogonality: E
+h
+( ˆX(t0) −X(t0))Y
+i
+= 0 for all Y ∈LN, where LN is the linear span of
+X(tj), j = 1, . . . , N, i.e. LN = span{X(t1), . . . , X(tN)}
+(v) If X is Gaussian, then the simple Kriging predictor coincides with Gaussian linear re-
+gression, i.e.
+ˆX(t) = E [X(t0) | X(t1), . . . , X(tN)]
+a.s.,
+t0 ∈W.
+Proof
+(i) It is easy to see that for t0 = tj, the vector λ = (0, . . . , 0, 1
+j, . . . , 0) is the unique
+solution of the system of linear equations in Equation (3.16).
+(ii) The smoothness of
+ˆX(t0) = µ(t0) +
+N
+X
+j=1
+λj · (X(tj) −µ(tj)) = µ(t0) + ¯X · Σ−1c0
+with ¯X = (X(t1)−µ(t1), . . . , X(tN)−µ(tN)) with respect to t0 ∈W is evidently controlled
+by the corresponding smoothness of functions µ(·), C(·, tj).
+(iii) One can easily see from Equation (3.16) that
+E
+ ˆX(t0) −X(t0)
+2
+= var(X(t0)) −var( ˆX(t0)) ≥0,
+hence
+var(X(t0)) ≥var( ˆX(t0)), t0 ∈W.
+Indeed, Equations (3.16) and (3.15) together with λ0 = −1 imply that
+Ψ(λ) = λ⊺Σλ −2λ⊺· Σλ
+|{z}
+=c0
++ C(t0, t0)
+|
+{z
+}
+=var(X(t0))
+= var(X(t0)) −
+λ⊺Σλ
+| {z }
+=var( ˆ
+X(t0))
+.
+
+
+PAGE 35
+3 Prediction of stationary random ﬁelds
+33
+(iv) For any Y ∈LN, there exist γ1, . . . γN ∈R such that Y = PN
+j=1 γjX(tj). Then,
+E
+h
+Y ·
+ ˆX(t0) −X(t0)
+i
+= E
+
+
+N
+X
+j=1
+γj · X(tj) ·
+N
+X
+j=0
+λj(X(tj) −µ(tj))
+
+
+=
+N
+X
+j=1
+N
+X
+k=0
+γjλkE [X(tj) · (X(tk) −µ(tk))]
+=
+N
+X
+j=1
+N
+X
+k=0
+γjλk
+
+E [X((tj) −µ(tj)) · (X(tk) −µ(tk))]
+|
+{z
+}
+=C(tj,tk)
++µ(tj) · E [X(tk) −µ(tk)]
+|
+{z
+}
+=0
+
+=
+N
+X
+j=1
+γj
+ N
+X
+k=1
+λkC(tj, tk) −C(t0, tk)
+!
+= γ⊺Σλ
+|{z}
+=c0
+−γ⊺· c0 = 0,
+where γ = (γ1, . . . , γN)⊺.
+(v) The assertion follows from Equation (3.4), which evidently holds also for non-stationary
+Gaussian random ﬁelds, see Remark 3.3.
+Remark 3.17
+(a) The shrinkage property (iii) in Theorem 3.16 means that the simple Krig-
+ing estimate is less dispersed than the original random ﬁeld. The simple Kriging predictor
+ˆX thus provides a linear smoothing procedure which does not perfectly imitate the path
+properties of the original ﬁeld X. In particular, we have ˆX(t)
+d
+̸= X(t), t ∈W.
+Other prediction methods which yield forecasts that are equal in marginal distribution
+to X are e.g. conditional simulation and excursion metric prediction , see later sections
+of Chapter 3.
+(b) Property (iv) has the following geometric interpretation. The simple Kriging predictor
+ˆX(t0) = ProjLN X(t0) is the orthogonal projection of the unobserved random variable
+X(t0) onto the linear subspace LN formed by available observations X(tj), j = 1, . . . , N,
+i.e.
+ProjLN X(t0) = argmin
+Y ∈LN
+⟨X(t0) −Y, X(t0)⟩,
+where ⟨ξ, η⟩= E [ξ · η] for square-integrable random variables ξ, η.
+(c) For Gaussian random ﬁelds X, the property
+E
+ ˆX(t0) −X(t0)
+2 | X(t1), . . . , X(tN)
+
+= E
+ ˆX(t0) −X(t0)
+2
+a.s.,
+t0 ∈W,
+shown in the proof of Theorem 3.2, Equation (3.7) is called homoscedasticity.
+(d) Another property of Gaussian simple Kriging is the conditional unbiasedness, i.e.
+E
+h
+X(t0) | ˆX(t0)
+i
+= ˆX(t0)
+a.s.,
+t0 ∈W.
+
+
+PAGE 36
+34
+3 Prediction of stationary random ﬁelds
+Indeed,
+E
+h
+X(t0) | ˆX(t0)
+i
+= E
+h
+E[X(t0) | ˆX(t0)] | X(t1, . . . , X(tN)
+i
+= E
+ E[X(t0) | X(t1), . . . , X(tN)]
+|
+{z
+}
+= ˆ
+X(t0)
+| ˆX(t0)
+ = ˆX(t0)
+by properties of the conditional expectation, since σ( ˆX(t0)) ⊂σ(X(t1), . . . , X(tN)), where
+σ(L) denotes the σ-algebra generated by a family of random variables L.
+Remark 3.18 The practical application of the simple Kriging estimates to spatial data is
+tampered by the prerequisite to have an explicit knowledge of the mean value function µ(t)
+(also called drift) and the covariance function C(s, t). Since both are in general unknown, they
+have to be inferred statistically from the available spatial data.
+Estimation of the drift
+It is assumed that the unobserved mean function µ(·) can be decomposed into a series
+µ(t) =
+X
+j∈N
+µjΨj(t),
+t ∈T,
+with respect to some orthonormal basis {Ψj}j∈N in L2(T). Then, this series can be truncated
+at some detail level M ∈N and the coeﬃcients
+µj = ⟨µ, Ψj⟩2 =
+Z
+Rd
+µ(t)Ψj(t)dt,
+j = 1, . . . , M
+are estimated from the data. Ideally, many paths of X have to be observed for drift estimation,
+since the estimation of a non-constant mean value function based on only one single path is
+highly unreliable.
+Denoting the estimates of µj by ˆµj, we get
+ˆµ(t) =
+M
+X
+j=1
+ˆµjΨj(t).
+The squared estimation error
+∥µ(t) −ˆµ(t)∥2
+2 = ∥
+M
+X
+j=1
+(µj −ˆµj)Ψ(t) +
+∞
+X
+j=N+1
+µjΨj(t)∥2
+2
+(∗)
+=
+M
+X
+j=1
+(µj −ˆµj)2 +
+∞
+X
+j=M+1
+µ2
+j,
+where (∗) follows from Parceval’s identity, has to be kept minimal, thus a trade-oﬀbetween the
+number of basis functions M and the quality of estimates ˆµj, j = 1, . . . , M, has to be accepted.
+Common examples of bases in use include the Fourier basis, Wavelets, B-splines, etc. How-
+ever, a simple Kriging based on an esimated drift ˆµ is prone to large errors. A way out would
+be the use of other non-stationary methods of geostatistics such as e.g. universal Kriging [51,
+Chapter 38].
+
+
+PAGE 37
+3 Prediction of stationary random ﬁelds
+35
+Kriging with estimated covariance function
+Since also the covariance function C(s, t), s, t ∈T, is unknown, an estimate from spatial
+data using inference methods from Section 2.2 is needed. However, the estimation result ˆC is
+not positively semi-deﬁnite, so that its immediate use in the linear system of simple Kriging
+equations, see (3.16), is not recommended. The matrix ˆΣ := ( ˆC(tj, tk))N
+j,k=1 is often singular
+or ill-conditioned. To avoid the issue of numerical instability, a parametric covariance model
+Cθ, θ ∈Θ ∈R is ﬁtted to the estimator ˆC such that the mean square error between ˆΣ and
+Σθ = (Cθ(tj, tk))N
+j,k=1 is kept minimal, i.e.
+ˆθ = argmin
+θ∈Θ
+N
+X
+j,k=1
+(Cθ(tj, tk) −ˆC(tj, tk))2 · wjk,
+(3.17)
+where weights wjk ≥0 with PN
+j,k=1 wjk = 1 are often taken to be uniform, i.e. wjk = N−2.
+Then, the matrix Σˆθ =
+ Cˆθ(tj, tk)
+N
+j,k=1 and the vector ˆc0 =
+ Cˆθ(t0, t1), . . . , Cˆθ(t0, tN)
+⊺are
+used in (3.16) to compute the vector of simple Kriging weights
+λ = Σ−1
+ˆθ
+· ˆc0.
+The choice of the parametric model Cθ is usually made after a visual inspection of the
+estimate ˆC based on statistical experience [42, Section 2.1.4].
+Since the estimate ˆC often
+exhibits discontinuities at the origin, one might suggest to use a family of models displaying
+the so-called nugget eﬀect σ2
+t as well as geometric anisotropy.
+Remark 3.19 (Nugget eﬀect and geometric anisotropy): Let
+Cθ(s, t) = σ2
+t · I(s = t) + C0(
+q
+(s −t)⊺Q(s −t)),
+s, t ∈T,
+where σ2 > 0, t ∈T, C0(·) is a covariance function of a motion invariant random ﬁeld on Rd,
+and Q is a positive deﬁnite (d×d)-matrix responsible for anisotropy. This matrix can be chosen
+as
+Q = RΛR⊺,
+where Λ = diag(λ1, . . . , λd) is a diagonal matrix with diagonal entries λ1, . . . , λd > 0, and R is
+a rotation matrix in Rd parametrized by Euler angles θ1, . . . , θd−1.
+If we assume for simplicity σ2
+t ≡σ2
+0 > 0, then the parameter vector θ with include σ2,
+θ1, . . . , θd−1, λ1, . . . , λd as well as parameters of C0.
+Example 3.20 (Exponential model): Choose d = 2, c0 : R+ →R+ with c0(x) = a · e−|x|
+and
+Q =
+ 
+cos(θ1)
+−sin(θ1)
+sin(θ1)
+cos(θ1)
+!
+·
+ 
+η1
+0
+0
+η2
+!
+·
+ 
+cos(θ1)
+sin(θ1)
+−sin(θ1)
+cos(θ1)
+!
+.
+We get Cθ(s, t) = C1
+θ(s −t), where Cθ(y) = σ2
+0 · I(y = 0) + a exp
+−√y⊺Qy
+	 , y ∈R2, with
+θ = (σ2
+0, a, θ1, λ1, λ2).
+Remark 3.21 Since the covariance estimates are non-reliable for high values of ∥s −t∥2, see
+Figure 3.1 and exhibit large oscillation artefacts (due to the simple fact that the number of
+pairs (tj, tk), j, k = 1, . . . , N with ∥tj −tk∥2 ≈diag(W) := max
+s,t∈W∥s −t∥is rather small), it may
+be reasonable to punish these artefacts in (3.17) by taking non-uniform weigths wjk that are
+nearly zero for such lags (j, k) of C1
+θ(y), y = (y1, y2)⊺∈R2 from Example 3.20.
+
+
+PAGE 38
+36
+3 Prediction of stationary random ﬁelds
+Fig. 3.1: An empirical isotropic covariance function ˆC(∥t∥).
+Fig. 3.2: Contour lines {y ∈R2 : C1
+θ(y) = const} of C1
+θ(y), y = (y1, y2)⊺∈R2, from Example
+3.20.
+3.2.2 Ordinary Kriging
+Assume that X = {X(t), t ∈T}, T ⊂Rd, is a wide-sense stationary random ﬁeld with mean
+µ = E[X(0)] and covariance function C(t) = cov(X(0), X(t)), t ∈T, where the value of µ is
+unknown. Assuming the linear form of the forecast ˆX(t) as in (3.13) and the minimization of
+the mean-square error (3.14), one sees that the unbiasedness of ˆX(t) leads to
+µ = E[X(t)] = λ0 +
+N
+X
+j=1
+λj E[X(tj)]
+|
+{z
+}
+=µ
+= λ0 + µ
+N
+X
+j=1
+λj,
+
+
+PAGE 39
+3 Prediction of stationary random ﬁelds
+37
+which yields
+µ
+
+1 −
+N
+X
+j=0
+λj
+
+= λ0.
+Since the explicit form of ˆX(t) must not depend on µ, we conclude that λ0 = 0, PN
+j=1 λj = 1
+is the only possible choice.
+Consequently, the ordinary Kriging estimate ˆX(t0) = PN
+j=1 λjX(tj), t0 ∈W should satisfy
+Ψ(λ) = var
+ ˆX(t0) −X(t0)
+
+= E
+h
+( ˆX(t0) −X(t0))2i
+→
+min
+λ=(λ1,...,λN)⊺
+such that PN
+j=1 λj = 1, where the function Ψ(λ) is given by Equation (3.15), i.e.
+Ψ(λ) =
+N
+X
+j,k=1
+λjλkC(tj −tk) −2
+N
+X
+j=1
+λj · C(t0 −tj) + C(0)
+| {z }
+=σ2
+= λ⊺Σλ −2λ⊺C0 + σ2.
+The quantities Σ, c0 are deﬁned in Section 3.2.1.
+Consider the Lagrange function of the constraint minimization problem
+
+
+
+λ⊺Σλ −2λ⊺c0 + σ2 →min
+λ∈RN,
+λ⊺· e = 1,
+(3.18)
+where e = (1, . . . , 1) ∈RN. Then,
+L(λ, γ) = λ⊺Σλ −2λ⊺· c0 + σ2 + 2β(λ⊺· e −1),
+β ∈R,
+is the so-called Lagrange multiplier.
+Taking partial derivates of L(λ, γ) with respect to λj, β and setting them equal to zero, we
+obtain the following system of linear equations in λ, β,
+
+
+
+∂L
+∂λj = PN
+k=1 C(tj −tk) + β −C(t0 −tj) = 0,
+j = 1, . . . , N,
+∂L
+∂γ = PN
+j=1 λ −1 = 0,
+(3.19)
+or in matrix form
+(
+Σλ = c0 −β · e,
+λ⊺· e = 1.
+(3.20)
+The relation γ(t) = C(0) −C(t) connects the covariance C to the variogram γ of X. One can
+easily rewrite (3.19) and(3.20) in a form, which is common in geostatistical literature, i.e.
+(PN
+k=1 λkγ(tj −tk) −β = γ(t0 −tj),
+j = 1, . . . , N,
+PN
+j=1 λj = 1,
+(3.21)
+or in matrix form
+(
+Γ · λ = β · e + Γ0,
+λ⊺· e = 1,
+(3.22)
+where Γ = (γ(tj −tk))N
+j,k=1 and Γ0 = (γ(t0 −t1), . . . , γ(t0 −tN))⊺.
+
+
+PAGE 40
+38
+3 Prediction of stationary random ﬁelds
+Theorem 3.22 If the matrix Σ (or Γ) is non-singular, then the constrained optimization
+problem (3.18) has the unique solution
+λ = Γ−1(β · e + Γ0),
+(3.23)
+where
+β = 1 −e⊺Γ−1Γ0
+e⊺Γ−1e
+.
+(3.24)
+The corresponding mean square error of the ordinary Kriging is given by
+σ2
+OK := E
+ ˆX(t0) −X(t0)
+2
+= λ⊺Γ0 −β
+(3.25)
+with λ, β as above in (3.23) and (3.24).
+Proof Relation (3.24) is evident. To show (3.23) multiply λ in (3.24) with e and set it equal
+to 1, i.e.
+1 = e⊺λ = βe⊺Γ−1e + e⊺Γ−1Γ0,
+hence
+β = 1 −e⊺Γ−1Γ0
+e⊺Γ−1e
+,
+which proves (3.24). To show (3.25) rewrite Ψ(λ) in terms of Γ. It follows
+σ2
+OK = Ψ(λ) = −λ⊺Γλ + 2C(0) −2λ⊺c0 = −λ⊺Γλ + 2λ⊺Γ0.
+Here, we used the relations λ⊺e = 1 and γ(t) = C(0) −C(t). Plugging (3.22) into the above
+yields
+σ2
+OK = −λ⊺(βe + Γ0)
+|
+{z
+}
+=Γλ
++2λ⊺Γ0 = −β λ⊺e
+|{z}
+=1
+−λ⊺Γ0 + 2λ⊺· Γ0 = λ⊺Γ0 −β.
+We may also give σ2
+OK explicitly
+σ2
+OK = Γ⊺
+0 · λ −β
+= Γ⊺
+0 · Γ−1 · Γ0 + β
+
+Γ⊺
+0 · Γ−1 · e −1
+
+= Γ⊺
+0 · Γ−1 · Γ0 −β
+
+1 −e⊺· Γ−1 · Γ0
+
+= Γ⊺
+0 · Γ−1 · Γ0 −(1 −e⊺· Γ−1 · Γ0)2
+e⊺Γ−1e
+.
+Remark 3.23 An advantage of expressing the ordinary Kriging system as in (3.22) is that it
+is also applicable to intrinsically stationary random ﬁelds X of order 2, i.e., ﬁelds that may not
+possess a ﬁnite variance, but have wide-sense stationary increments.
+Theorem 3.24 (Properties of ordinary Kriging): For an intrinsically stationary random
+ﬁeld X = {X(t), t ∈T} with observations X(tj), j = 1, . . . , N and variogram γ(·) such that the
+matrix Γ = (γ(tk −tj))N
+k,j=1 is invertible, the oridinary Kriging predictor ˆX(t) = PN
+j=1 λj ·X(tj)
+with λ = (λ1, . . . , λN)⊺satisfying (3.23) possesses the following properties.
+(i) Exactness: ˆX(tj) = X(tj) a.s., j = 1, . . . , N.
+
+
+PAGE 41
+3 Prediction of stationary random ﬁelds
+39
+(ii) Orthogonality:
+For any Y ∈
+nPN
+j=1 ajX(tj) : PN
+j=1 aj = 0
+o
+= ˜LN it holds ⟨ˆX(t0) −
+X(t0), Y ⟩2 = 0 for all t0 ∈W.
+(iii) Conditional bias reduction: For all t0 ∈W it holds that
+E
+
+E
+h
+X(t0) | ˆX(t0)
+i
+−ˆX(t0)
+2
+= E
+ ˆX(t0) −X(t0)
+2
+−E
+h
+var
+
+X(t0) | ˆX(t0)
+i
+.
+(3.26)
+Proof
+(1) Set t0 = tj for some j ∈{1, . . . , N} and show that λ = (0, . . . , 0,
+j
+1, 0, . . . , 0) is a
+solution of (3.22), where β = 0 and
+Γ0 = (γ(tj −t1), . . . , γ(tj −tj)
+|
+{z
+}
+=γ(0)=0
+, . . . , γ(tj −tN))⊺.
+Indeed, we have β = 0 by (3.24) since e⊺Γ−1Γ0 = e⊺(0, . . . , 0, 1, 0, . . . , 0) = 1 by deﬁnition
+of the inverse matrix Γ−1, while Γ0 is the j-th column of Γ. Then, the system (3.22)
+reduces to Γ · λ = Γ0, which holds evidently by the explicit form of Γ, λ and Γ0.
+(2) Let Y ∈˜LN, i.e. Y = PN
+j=1 aj · X(tj) with PN
+j=1 aj = 0. Then, with λ0 = −1 we have
+E
+h
+Y ·
+ ˆX(t0) −X(t0)
+i
+= E
+
+
+N
+X
+j=1
+ajX(tj) ·
+N
+X
+k=0
+λkX(tk)
+
+=
+N
+X
+j=1
+N
+X
+k=0
+ajλk · E[X(tj)X(tk)]
+=
+N
+X
+j,k=1
+ajλk ·
+
+E[X(tj)X(tk)] −µ2
+|
+{z
+}
+=C(tj−tk)
++µ2 · 0 −
+N
+X
+j=1
+aj E[X(t0)X(tj)] −µ2
+|
+{z
+}
+=C(t0−tj)
+−µ2 · 0
+=
+N
+X
+j=1
+aj
+ N
+X
+k=1
+λk · C(tj −tk) −C(t0 −tj)
+|
+{z
+}
+=−β by (3.19)
+!
+= −β
+N
+X
+j=1
+aj
+| {z }
+=0
+= 0.
+due to
+N
+P
+j=1
+aj = 0 and
+N
+P
+j=1
+λj = 1
+(3) To prove relation (3.26), we apply the law of total variance
+var(Y ) = var(E [Y | Z]) + E [var(Y | Z)]
+(3.27)
+for any square-integrable random variables Y, Z.
+We may write for Z = ˆX(t0), Y =
+
+
+PAGE 42
+40
+3 Prediction of stationary random ﬁelds
+ˆX(t0) −X(t0) that
+E
+ ˆX(t0) −X(t0)
+2
+(∗)
+= var( ˆX(t0) −X(t0))
+= E
+h
+var( ˆX(t0) −X(t0) | ˆX(t0)
+i
++
+var
+
+E
+h ˆX(t0) −X(t0) | ˆX(t0)
+i
+|
+{z
+}
+=E[( ˆ
+X(t0)−E[X(t0)| ˆ
+X(t0))2]−
+
+E[ ˆX(t0)]
+|
+{z
+}
+=µ
+−E[E[X(t0) | ˆX(t0)]]
+|
+{z
+}
+=EX(t0)=µ
+2
+= E
+h
+E
+h
+X(t0) | ˆX(t0)
+i
+−ˆX(t0)
+i2 + E
+"
+E
+h
+[ ˆX(t0) −X(t0) −E( ˆX(t0) −X(t0) | ˆX(t0)]2 | ˆX(t0)
+i
+|
+{z
+}
+=var(X(t0)| ˆ
+X(t0)
+#
+= E
+
+E[X(t0) | ˆX(t0)] −ˆX(t0)
+2
++ E
+h
+var(X(t0) | ˆX(t0)
+i
+,
+where (∗) follows from E[ ˆX(t0)] = E[X(t0)] = µ.
+Remark 3.25
+(a) The shrinkage property var(X(t0)) ≥var( ˆX(t0)) of simple Kriging does
+in general not hold for ordinary Kriging anymore. Indeed, we have
+0 ≤Ψ(λ) = E
+ ˆX(t0) −X(t0)
+2
+(3.17)
+=
+λ⊺Σλ
+| {z }
+=var( ˆ
+X(t0))
+−2λ⊺c0 +
+σ2
+=var(X(t0))
+(3.20)
+=
+λ⊺Σλ(t0) −2λ⊺Σλ −2β λ⊺e
+|{z}
+=1
++σ2
+= σ2 −λ⊺Σλ −2β
+hence
+var(X(t0)) ≥var( ˆX(t0)) + 2β,
+whereas the β given in (3.24) belongs to R, i.e. it can be ≥0 as well as < 0. It follows
+that var(X(t0)) ≥var( ˆX(t0)) if β ≥0.
+(b) The smoothness property holds for ordinary Kriging as follows. If C ∈Ck(T) or γ ∈
+Ck(T), k ∈N0, then so is ˆX ∈Ck(T) a.s. This can be seen from Equations (3.23)-(3.26).
+It holds that
+λ = λ(t0) = β · Γ−1e + Γ−1Γ0 = (1 −e⊺· Γ−1 · Γ0)
+e⊺Γ−1e
+Γ−1e + Γ−1Γ0,
+where only the term Γ0 depends on t0, and so λ inherits the smoothness of γ.
+(c) The remarks about Kriging with estimated covariance function hold for ordinary Kriging
+as well. However, it is more common to estimate the variogram γ of X, ﬁt a valid para-
+metric model γθ to ˆγ via weighted least squares and solve the system of linear equations
+(3.22) as
+(
+Γˆθ · λ = βe + Γˆθ,0,
+λ⊺e = 1,
+
+
+PAGE 43
+3 Prediction of stationary random ﬁelds
+41
+Fig. 3.3: Realization of an anisotropic Gaussian random ﬁeld with the corresponding empirical
+and theoretical variogram from Example 3.26.
+where Γˆθ = (γˆθ(tj −tk))N
+j,k=1, Γˆθ,0 = (γˆθ(t0 −t1), . . . , γˆθ(t0 −tN))⊺, and {γθ, θ ∈Θ} is a
+parametric family of conditionally negative-deﬁnite functions [42, Proposition 2.2.1] with
+ˆθ = argmin
+θ∈Θ
+N
+X
+j,k=1
+wjk(ˆγ(tj −tk) −γθ(tj −tk))2.
+In the construction of γθ, a nugget eﬀect and geometric anisotropy can be transferred
+from the covariance functions via the relation γ(h) = C(0) −C(h), accordingly.
+Example 3.26 Let X = {X(t), t ∈R2} be a stationary anisotropic Gaussian random ﬁeld
+(d = 2) with variogram
+γ(t) = γ1(t) + γ2(t),
+t ∈R2,
+where
+γ1(t) = 1 −e−∥t∥2
+and
+γ2(t) = 1 −exp −
+√t⊺Qt
+5
+,
+and the matrix Q is given as in Example 3.20 with θ1 = 114, 59◦, η1 = 5, η2 = 1. A simulated
+realization of X, an estimate ˆγ of γ as well as γ itself are given in Figure 3.3.
+Example 3.27 Let X = {X(t), t ∈R2} be a centered motion invariant Gaussian random ﬁeld
+observed in a window W = [0, 10]2 on the grid {(3j, 2k), j, k ∈[0, 3] ∩N0}. Let X have the
+
+
+PAGE 44
+42
+3 Prediction of stationary random ﬁelds
+Fig. 3.4: Microscopic steel image (left) and its empirical variogram estimated in diﬀerent direc-
+tions (right).
+Whittle-Matern-type covariance function with nugget eﬀect, i.e. we have
+cov(X(0), X(t)) = C(t) = 2 · 1(t = 0) + 2κ1(2∥t∥2) · ∥t∥2 · 1(t ̸= 0),
+t ∈R2,
+where
+κn(x) = lim
+ν→n
+π
+2 sin(πν)
+
+ei π
+2 ν · J−ν(xei π
+2 ) −e−i π
+2 ν · Jν(xe−i π
+2 )
+
+,
+x ∈R,
+n ∈N,
+is the modiﬁed Bessel function of the third kind, and
+Jν(x) =
+∞
+X
+r=0
+(−1)r(x
+2)2r+ν
+Γ(ν + r + 1)r!,
+x ∈C,
+ν ∈R,
+is the Bessel function of the ﬁrst kind of order ν.
+After estimating the variogram of X, see Section 2.2, by ˆγ from a realisation of X given in
+Figure 3.5(a), a Whittle-Matern-type family of variogram models
+γθ(t) = 1(t ̸= 0)
+h
+σ2 + b −b · 21−ν(a∥t∥2)νκν(a∥t∥2)
+i
+,
+t ∈R2,
+with θ = (b, ν, a, b) is ﬁtted to ˆγ by ordinary least squares, see Figure 3.5(c) (true variogram γ
+is in red, ˆγ in green, and γˆθ in black with the estimate ˆθ = (0.933, 1, 1.967, 1.067)). Then, the
+ordinary Kriging is performed with γˆθ, its result being shown in Figure 3.5(b). As it is seen,
+the Kriging result ˆX smooths out the rough surface of X.
+3.2.3 Universal Kriging
+Assume that X = {X(t), t ∈T}, T ⊂Rd is a non-stationary random ﬁeld with drift µ(t) =
+E[X(t)], t ∈T, where
+µ(t) =
+M
+X
+j=0
+µjΨj(t)
+
+
+PAGE 45
+3 Prediction of stationary random ﬁelds
+43
+Fig. 3.5: Application of ordinary Kriging to simulated data from Example 3.27
+is a ﬁnite sum of orthonormal basis functions {Ψj, j ∈N0}, Ψ0(t) ≡1 as in Remark 3.18. Let
+the random ﬁeld Y = {Y (t) = X(t) −µ(t), t ∈T} of residuals be wide-sense stationary with
+covariance function C(t) = cov(Y (0), Y (t)), t ∈T.
+As in Sections 3.2.1 and 3.2.2, we are looking for a linear predictor of the form
+ˆX(t0) =
+N
+X
+j=1
+λjX(tj)
+for t0 /∈{t1, . . . , tN}, where X(tj), j = 1, . . . , N, are a sample of observed values, subject to
+E[ ˆX(t0)] = E [X(t0)] = µ(t0). It follows that
+M
+X
+k=0
+µkΨk(t0) = µ(t0) =
+N
+X
+j=1
+λjµ(tj) =
+M
+X
+k=0
+µkΨk(t),
+which yields
+M
+X
+k=0
+µk
+
+Ψk(t0) −
+N
+X
+j=1
+λjΨk(tj)
+
+= 0.
+Since µk are non-zero, the above equation is a source of the so-called universality constraints
+N
+X
+j=1
+λjΨk(tj) = Ψk(t0),
+k = 0, . . . , M.
+(3.28)
+For k = 0 the condition PN
+j=1 λj = 1 known for ordinary Kriging appears. Minimizing the
+target function
+Ψ(λ) = E
+
+X(t0) −ˆX(t0)
+2
+subject to the universality constraints with respect to λ = (λ1, . . . , λN) via the Lagrange func-
+tion
+L(λ, β) = Ψ(λ) +
+M
+X
+k=0
+βk
+
+
+N
+X
+j=1
+λjΨk(tj) −Ψk(t0)
+
+
+
+
+PAGE 46
+44
+3 Prediction of stationary random ﬁelds
+with the Lagrange multipliers β0, . . . , βM leads to the system of linear equations for universal
+Kriging (compare (3.19) - (3.20))
+(PN
+j=1 λjC(ti −tj) −PM
+k=0 βkΨk(ti) = C(ti −t0),
+i = 1, . . . , N,
+PN
+j=1 λjΨk(tj) = Ψk(t0),
+k = 0, . . . , M,
+or, in matrix form,
+ 
+Σ
+¯Ψ
+¯Ψ⊺
+¯0
+!  
+λ
+−β
+!
+=
+ 
+c0
+Ψ0
+!
+,
+(3.29)
+where
+Σ = (C(ti −tj))N
+i,j=1,
+¯Ψ = (Ψk(ti))N
+M
+i=1 k=0,
+c0 = (C(t1 −t0), . . . , C(tN −t0))⊺,
+Ψ0 = (Ψ0(t0), . . . , ΨM(t0))⊺.
+Lemma 3.28 If C is positive deﬁnite, then there exists a unique solution for the system of
+linear equations (3.29).
+Proof Since is Σ is invertible, the whole matrix
+ 
+Σ
+¯Ψ
+¯Ψ⊺
+¯0
+!
+is invertible if the matrix ¯Ψ has full
+rank, i.e. if its columns (Ψk(t1), . . . , Ψk(tN))⊺, k = 0, . . . , N, are linearly independent. This is
+true since {Ψk}∞
+k=0 is an orthonormal basis.
+Remark 3.29 To solve the system (3.29), we assumed that C and function Ψj are ex-
+plicitly known.
+However, in practice the function C has to be estimated from the data
+X(t1), . . . , X(tN), which is e.g.
+possible by inferring the covariance of estimated residuals
+Y ∗(tj) = X(tj) −ˆµ(tj), where ˆµ(·) is the estimated drift. This is a source of additional bias to
+the universal Kriging [51, p.303-307].
+Remark 3.30 The drift estimation previously mentioned in Remark 3.18 can be practically
+exercised using an approach very similar to (3.29). In the expression µ(t) = PM
+k=0 µkΨk(t),
+assume that µk themselves are realizations of random variables Mk and estimated via
+ˆµk =
+N
+X
+j=1
+α(k)
+j X(tj),
+k = 0, . . . , M.
+The unbiasedness of the estimator, i.e. E[ˆµk] = E[Mk], k = 0, . . . , M, yields the constraints
+N
+X
+j=1
+α(k)
+j Ψl(tj) = δkl,
+k, l = 0, . . . , M.
+(3.30)
+Indeed, similar to (3.28), we may write
+µk = E [ˆµk] =
+N
+X
+j=1
+α(k)
+j E[X(tj)] =
+N
+X
+j=1
+α(k)
+j µ(tj) =
+N
+X
+j=1
+α(k)
+j
+M
+X
+l=0
+µlΨl(tj) =
+M
+X
+l=0
+N
+X
+j=1
+α(k)
+j Ψl(tj)µl,
+
+
+PAGE 47
+3 Prediction of stationary random ﬁelds
+45
+where
+δkl =
+(
+1,
+k = l,
+0,
+k ̸= l.
+Solving the minimization problem
+E
+h
+(ˆµk −µk)2i
+→
+min
+α(k)
+1
+,...,α(k)
+N
+,
+k = 0, . . . , M,
+subject to the constraints (3.30) via the Lagrange formalism leads to the system of linear
+equations
+
+
+
+
+
+
+
+
+
+N
+P
+j=1
+α(k)
+j C(ti −tj) −
+N
+P
+j=1
+α(k)
+j Ψl(tj) = 0,
+i = 1, . . . , N, k = 0, . . . , M,
+N
+P
+j=1
+α(k)
+j Ψl(tj) = δkl,
+l = 0, . . . , M, k = 0, . . . , M,
+(3.31)
+where β(k)
+l
+, k, l = 0, . . . , M are the Lagrange multipliers, see Equation (3.29), which can be
+shown to be
+β(k)
+l
+= cov(ˆµk, ˆµl),
+k, l = 0, . . . , M.
+Exercise 3.31 Check the above.
+The estimated drift is then given by
+ˆµ(t0) =
+M
+X
+k=0
+ˆµkΨk(t0) =
+M
+X
+k=0
+N
+X
+j=1
+α(k)
+j X(tj)Ψk(t0).
+However, the uncertainty of estimating C as mentioned in Remark 3.29 is still present. It can
+be also shown that the drift estimation variance equals
+E
+h
+(ˆµ(t0) −µ(t0))2i
+= Ψ0⊺·
+ˆΨ⊺· Σ−1 · ˆΨ
+−1 · Ψ0
+using the same notation as in (3.29). More on drift estimation can be found in [4, Section 3.4.5,
+3.4.6].
+Remark 3.32
+(a) The variance of universal Kriging is equal to
+σ2
+UK = E
+ ˆX(t0) −X(t0)
+2
+= C(0) −λ⊺· c0 + β⊺· Ψ0,
+where (λ, −β) is the solution of the system (3.29).
+(b) Similarly to ordinary Kriging , see Equation (3.22), one can rewrite the system of linear
+equations in (3.29) in terms of the variogram γ(t) = 1
+2E[Y (0) −Y (t)]2 of the residual
+random ﬁeld Y . Formally, the values C(ti −tj), i, j = 0, . . . , N, sould be replaced there
+by −γ(ti −tj).
+(c) Additivity property: The universal Kriging predictor ˆX(t0) = PN
+j=1 λjX(tj) can be de-
+composed into
+ˆX(t0) = ˆXSK(t0) + ˆX∗(t0),
+(3.32)
+where
+
+
+PAGE 48
+46
+3 Prediction of stationary random ﬁelds
+(i) ˆXSK(t0) = PN
+j=1 λSK
+j
+X(tj) is the simple Kriging predictor of X(t0) as if X were
+centered, i.e. after the substraction of the “known“ mean from the data, i.e. λSK =
+(λSK
+1
+, . . . , λSK
+N )⊺= Σ−1c0, compare (3.16).
+(ii) The term
+ˆX∗(t0) = ˆµ(t0) −
+N
+X
+j=1
+λSK
+j
+ˆµ(tj)
+(3.33)
+is the drift correction, where the estimated drift ˆµ is given in Remark 3.30.
+Combining (i) and (ii) yields
+ˆX(t0) = ˆµ(t0) +
+N
+X
+j=1
+(X(tj) −ˆµ(tj)).
+Indeed, substracting ΣλSK = c0 from the system Σλ −¯Ψβ = c0 out of (3.29) yields
+Σ(λ −λSK) −¯Ψβ = 0.
+Let λD := λ−λSK. Then ,the above relation together with the second equation ¯Ψ⊺λ = Ψ0
+of (3.29) rewrites as
+(
+Σ · λD −¯Ψ · β = 0,
+¯Ψ⊺· λ = Ψ0 −¯Ψ⊺· λSK,
+where the ﬁrst equation coincides with the ﬁrst one from (3.31) and both give birth to
+the correction term ˆX∗(t0).
+Remark 3.33 (Further properties of universal Kriging): Similar to Theorem 3.24, the
+properties of exactness, orthogonality and conditional bias reduction hold for universal kriging
+as follows.
+(a) ˆX(tj) = X(tj) a.s., since λ = (0, . . . , 0, 1, 0, . . . , 0) and β = (0, . . . , 0) yield σ2
+UK = 0,
+compare Remark 3.32.
+(b) For any
+Y ∈
+
+
+
+N
+X
+j=1
+ajX(tj) :
+N
+X
+j=1
+ajΨk(tj) = 0, k = 0, 1, . . . , M
+
+
+
+it holds that
+D ˆX(t0) −X(t0), Y
+E
+2 = 0,
+t0 ∈W.
+(c) Equation (3.26) is still valid, which means that λ = (λ1, . . . , λN) minimizing E[( ˆX(t0) −
+X(t0))2] also reduces the conditional bias E[X(t0) | ˆX(t0)] −ˆX(t0).
+3.3 Geoadditive regression models
+Prediction of spatial phenomena can occur, beyond random ﬁelds, also in the context of classical
+(non)-linear regression. For that, consider the following setting. Let Yi be absolutely continuous
+target or response random variables. Assume the regression model
+Yi =
+k
+X
+j=0
+βjxij +
+m
+X
+j=1
+gj(zij) + fgeo(ti) + εi,
+i = 1, . . . , n,
+(3.34)
+
+
+PAGE 49
+3 Prediction of stationary random ﬁelds
+47
+where
+(i) β⊺xi = Pk
+j=0 βjxij with parameter β = (β0, β1, . . . , βk)⊺and covariates xi = (1, xi1, . . . , xik)⊺,
+where xi0 = 1 is the linear part and β, xi ∈Rk+1, i = 1, . . . , k.
+(ii) zi1, . . . , zim, i = 1, . . . , n are continuous covariates, and the unknown functions g1, . . . , gm
+are smooth enough and all together form the non-linear additive part.
+(iii) The unknown smooth function fgeo : Rd →R contains georeferenced information provided
+at spatial locations ti ∈Rd, i = 1, . . . , n
+(iv) The random variable εi is the regression error with Eεi = 0 and Eε2
+i = σ2 > 0. It is
+usually assumed that εi are uncorrelated or even stochastically independent. Sometimes,
+Gaussian errors are common, i.e. εi ∼N(0, σ2).
+The regression model in Equation (3.34) is called geoadditive.
+Its purpose is to yield esti-
+mates for β, gj, fgeo given the data Y = (Y1, . . . , Yn), Z = (zij)n
+m
+i=1 j=1, X = (xij)n
+k
+i=1 j=1, t =
+(t1, . . . , tn)⊺∈Rn×d.
+The spatial locations ti can either attain a ﬁnite number of values, e.g. postal code centers
+of a region, and are thus naturally modeled as vertices of a ﬁnite spatial graph. Alternatively,
+they may have an uncountable range of values.
+Similarly to the drift µ(·) in universal Kriging, we assume
+fgeo(t) =
+M
+X
+j=1
+γj · Ψj(t),
+M ∈N,
+(3.35)
+where Ψ = {Ψj}∞
+j=1 is an orthonormal basis of functions in a certain functional space. For
+smoothing procedures, the basis functions Ψj may be assumed to have a certain degree of
+smoothness, such as tensor products of univariate splines or Fourier basis. In higher dimensions
+d ≫2, the additive structure
+fgeo(t) =
+d
+X
+l=1
+fl(tl),
+t = (t1, . . . , td)⊺∈Rd,
+is often used to diminish the eﬀect of the curse of dimensionality.
+Here, fl : R →R are
+univariate functions which may themselves have a structure as in (3.35). The goal is to estimate
+the regression coeﬃcients γ1, . . . , γM in (3.35).
+Similarly, functions gj are assumed to have the form
+gj(z) =
+N
+X
+l=1
+αjl · ϕl(z),
+j = 1, . . . , M,
+(3.36)
+where ϕ = {ϕl}∞
+l=1 is another orthonormal basis in a certain functional space. The regression
+coeﬃcients α1l, . . . , αNl, l = 1, . . . , N, have to be estimated from the data.
+Example 3.34 (Basis functions):
+(a) Tensor product bases: Let d = 2, t = (t1, t2)⊺∈R2.
+For an orthonormal basis in L2(R) consisting of functions {Ψ1
+j}j∈N, we may form
+Ψj1j2(t) = Ψ1
+j1(t1) · Ψ1
+j2(t2),
+j1, j2 ∈N,
+
+
+PAGE 50
+48
+3 Prediction of stationary random ﬁelds
+thus yielding
+fgeo(t) =
+M1
+X
+j1=1
+M2
+X
+j2=1
+γj1j2Ψj1j2,
+t ∈R2.
+Similarly, the construction can be easily adapted to any dimension d > 2.
+(b) B-Splines: As an example of univariate bases {Ψ1
+j}j∈N consider B-Splines on an interval
+(a, b] ⊂R. Their construction is iterative. Without loss of generality set a = 0, b = 1 and
+let 0 ≤c1 < c2 < · · · < cp = 1 be a decomposition of [0, 1] into disjoint intervals [cj, cj+1)
+for j = 1, . . . , p −1.
+For any z ∈[0, 1] consider l = 0 ﬁrst and set
+B0
+j (z) = 1(z ∈[cj, cj+1)),
+j = 1, . . . , p −1,
+and for higher orders l ≥1 proceed with
+Bl
+j(z) = z −cj−l
+cj −cj−l
+Bl−1
+j−1(z) +
+cj+1 −z
+cj+1 −cj+1−l
+Bl−1
+j
+(z),
+j = 1, . . . , p −1.
+For this calculation, we need 2l outer knots c1−l, . . . , c0, . . . , cp+1, . . . , cl lying outside of
+the interval [0, 1].
+For simplicity, cj can be often chosen equidistantly over [0, 1] and
+beyond.
+B-Splines have many interesting properties:
+(i) Local basis: It holds that Bl
+j(z) > 0 only on (cj−l, cj+1−l) and Bl
+j(z) = 0, elsewhere
+on [0, 1]. Vice versa, at any z ∈[0, 1], only l + 1 functions Bl
+j are positive. If cj are
+chosen equidistantly, then all Bl
+j have the same shape and are only shifted along the
+z-axis.
+(ii) Unity decomposition: Pp
+j=1 Bl
+j(z) = 1 for all z ∈[0, 1], l ∈N0.
+(iii) Uniformly bounded: 0 ≤Bl
+j(z) ≤1 for all z ∈[0, 1], j = 1, . . . , p −1, l ∈N0.
+(iv) Derivates:
+∂Bl
+j(z)
+∂z
+= l
+ Bl−1
+j−1(z)
+cj −cj−1
+−
+Bl−1
+j
+(z)
+cj+1 −cj+1−l
+!
+,
+which yields
+∂
+∂z
+
+
+p
+X
+j=1
+γjBl
+j(z)
+
+= l ·
+p
+X
+j=1
+γj −γj−1
+cj −cj−l
+Bl−1
+j−1(z),
+z ∈[0, 1],
+for any ﬁxed l ≥1 and any coeﬃcients γ0, γ1, . . . , γp ∈R, γ0 = 0.
+(c) Splines and the truncated power series: Another example of {Ψ1
+j}j∈N is given by
+Ψ1
+1(z) ≡1, Ψ1
+2(z) = z, . . . , Ψ1
+l+1(z) = zl, Ψl+j(z) = (z −cj)+,
+j = 2, . . . , p,
+where l is chosen large enough, and the points {cj}p
+j=1 are as in Example (b). The sum
+l+1
+X
+j=1
+γjzj +
+p
+X
+j=2
+γl+j(z −cj)l
++
+
+
+PAGE 51
+3 Prediction of stationary random ﬁelds
+49
+is called a polynomial spline with truncated power series. Here,
+a+ =
+(
+a,
+a ≥0,
+0,
+a < 0,
+denotes the non-negative part of a ∈R. The second sum of truncated monomials (z−cj)l
++
+is designed to catch sudden changes of slope in the functional data.
+We now return our focus to the geoadditive regression model in (3.34). Using the assumptions
+on fgeo and gj in (3.35) and (3.36) we can state the regression model as
+Yi =
+K
+X
+j=0
+βjXij +
+m
+X
+j=1
+N
+X
+l=1
+αjlϕl(zij) +
+M
+X
+j=1
+γjΨj(ti) + εi,
+i = 1, . . . , n,
+(3.37)
+or in matrix form
+Y = Xβ +
+N
+X
+l=1
+ϕl(Z)αl + Ψtγ + ε,
+where
+Y = (Y1, . . . , Yn)⊺,
+X = (xij)i=1,...,n, j=1,...,k,
+β = (β0, β1, . . . , βk)⊺,
+αl = (αjl)m
+j=1,
+ϕl(Z) = (ϕl(zij))i=1,...,n, j=1,...,m,
+l = 1, . . . , N,
+Ψt = (Ψj(ti))j=1,...,m, i=1,...,n,
+γ = (γ1, . . . , γM)⊺,
+ε = (ε1 . . . , εn)⊺.
+We may combine everything in one single matrix ˜X, i.e.
+˜X =
+
+
+
+
+...
+...
+...
+...
+X
+ϕ1(Z)
+· · ·
+ϕN(Z)
+Ψt
+...
+...
+...
+...
+
+
+
+
+
+
+
+
+
+
+
+|
+{z
+}
+k+1+m·N+M
+n,
+˜β =
+
+
+
+
+
+
+
+
+β
+α1
+...
+αN
+γ
+
+
+
+
+
+
+
+
+Summarizing, the linear model (3.37) is given by
+Y = ˜X · ˜β + ε.
+(3.38)
+The parameter vector ˜β can be estimated using the ordinary least squares procedure, i.e.
+ˆ˜β =
+argmin
+˜β∈Rk+1+mN+M
+∥Y −˜X ˜β∥2
+2
+(3.39)
+Theorem 3.35 Let the matrix X have full rank K, and let n > k +1+mN +M. If {ϕl}l and
+{Ψj}j are linearly independent, then there exists a unique solution solution of (3.39), which is
+given by
+ˆ˜β =
+ ˜X⊺˜X
+−1 ˜X⊺Y.
+
+
+PAGE 52
+50
+3 Prediction of stationary random ﬁelds
+Proof Since all the matrices X, ϕl(Z), l = 1, . . . , N, and Ψt have full rank, the matrix ˜X has
+full rank equal to k + 1 + mN + M. It follows that ˜X⊺˜X is invertible. Hence, we can compute
+the partial derivatives of ∥Y −˜X ˜β∥2
+2 and set them equal to zero. The solution is then given by
+(3.39) It is unique since the target function represents a paraboloid.
+Sometimes, it is also desirable to control the smoothness of the solution of the regression
+equations. For that, a penalized regression is usually performed, which minimizes the energy
+of functional basis approximation given by the integral of its second derivative. For instance,
+if the j-th non-linear part is given by gj(z) = PN
+l=1 αjl · ϕl(z), we deﬁne its energy by
+E(gj) :=
+Z
+R
+
+g′′
+j (z)
+2 dz =
+N
+X
+i,l=1
+αjlαji ·
+Z
+R
+ϕ′′
+l (z)ϕ′′
+i (z)dz
+|
+{z
+}
+Kil
+= α⊺
+jKαj,
+where K = (Kil)i,l=1,...,N and αj = (αj1, . . . , αjN)⊺. Similarly, doing so for any gj, j = 1, . . . , m,
+and the geoadditive part fgeo with
+E(fgeo) :=
+Z
+Rd
+△fgeo(t)dt,
+where △= Pd
+j=1
+∂2
+∂tj2 is the Laplace operator, we may come to the penalized regression:
+∥Y −˜X ˜β∥2
+2 + λ · ˜β⊺˜K ˜β →
+min
+˜β∈Rk+1+mN+M,
+(3.40)
+where the penalty factor λ ≥0 is chosen experimentally.
+The matrix ˜K is a block matrix (similar to ˜X):
+˜K =
+
+
+
+
+...
+...
+...
+...
+0
+Kϕ1
+· · ·
+KϕN
+KΨt
+...
+...
+...
+...
+
+
+
+.
+Analogously to Theorem 3.35, the solution of (3.40) is given by
+ˆ˜β =
+ ˜X⊺˜X + λ ˜K
+−1 ˜X⊺Y
+for all λ ≥0 such that ˜X⊺˜X + λ ˜K is invertible.
+Example 3.36 (Penalization):
+(a) Penalization with B-Splines: If for any ﬁxed degree l
+and j0 = 1, . . . , m we have
+gj0(z) =
+p
+X
+j=1
+αj0j · Bl
+j(z),
+where Bl
+j(·) are B-Splines, then using property (iv) in Example 3.34 (b) we may write
+g′
+j0(Z) = l ·
+p
+X
+j=1
+αj0j −αj0j−1
+cj −cj−l
+|
+{z
+}
+=dj−1
+Bl−1
+j−1(z),
+
+
+PAGE 53
+3 Prediction of stationary random ﬁelds
+51
+g′′
+j0(Z) = l(l −1) ·
+p
+X
+j=1
+dj−1 −dj−2
+cj −cj−l
+|
+{z
+}
+=ej−2
+Bl−2
+j−2(z),
+which yields
+E(gj0) = α⊺
+j0Kαj0 = (l(l −1))2
+p
+X
+j=1
+ei−2ej−2 ·
+Z
+R
+Bl−2
+i−2(z)Bl−2
+j−2(z)dz.
+An alternative (easier) way to write the penalization with B-Splines is to get rid of the
+energy and replace it by a quadratic form α⊺
+j0Krαj0, where Kr := D⊺
+rDr, and Dr =
+D1Dr−1 is the recursively deﬁned matrix of diﬀerences of order r, i.e.
+D1 =
+
+
+
+
+
+
+
+
+
+
+
+
+−1
+1
+0
+. . .
+. . .
+. . .
+0
+0
+−1
+1
+0
+. . .
+. . .
+0
+0
+0
+−1
+1
+...
+...
+...
+...
+...
+...
+0
+0
+. . .
+. . .
+. . .
+0
+−1
+1
+
+
+
+
+
+
+
+
+
+
+
+
+is a ((d −1) × d)-matrix diﬀerences of ﬁrst order with
+D1αj0 =
+
+
+
+αj02 −αj01
+...
+αj0p −αj0p−1
+
+
+,
+and
+D2 =
+
+
+
+
+
+
+
+
+
+
+
+
+1
+−2
+1
+0
+. . .
+. . .
+. . .
+0
+0
+1
+−2
+1
+0
+. . .
+. . .
+0
+0
+0
+−1
+1
+...
+...
+...
+...
+...
+...
+0
+0
+. . .
+. . .
+0
+1
+−2
+1
+
+
+
+
+
+
+
+
+
+
+
+
+is a ((d −2) × d)-matrix of diﬀerences of second order. Ultimately, we get
+λα⊺
+j0Krαj0 = λ · α⊺
+j0D⊺
+rDrαj0 = λ · ∥Drαj0∥2
+2 = λ
+X
+j=r+1
+(Λrαj0j)2,
+where Λr = ΛΛr−1 is the diﬀerence of order r ≥2, Λαj0j = αj0j −αj0j−1.
+(b) Truncated power series: For a regression as in Example 3.34 (c), the most popular form
+of penalization is to keep the sum of coeﬃcients of truncated powers
+λ ·
+p
+X
+j=l+2
+γ2
+j = λ · γ⊺· Kγ
+with γ = (γ1, . . . , γl+p)⊺, K = diag(0, . . . , 0
+|
+{z
+}
+l+1
+, 1, . . . , 1
+|
+{z
+}
+p−1
+) minimal.
+
+
+PAGE 54
+52
+3 Prediction of stationary random ﬁelds
+Example 3.37 (Radial basis functions and thin plate splines): Another way to construct
+the basis {Ψj}∞
+j=1 in the geoadditive part of the regression model is via the so-called radial
+functions, which are deﬁned by
+ΨX(t) = B(∥x −t∥2),
+where the function B : R+ 7→R depends only on the distance between an observation point
+t ∈Rd and a knot x ∈Rd. Hence, instead of counting Ψj with j ∈N, this functional system
+is parameterized via a ﬁnite system of knots xj ∈W, j = 1, . . . , M, where W is our spatial
+obervation window, see Figure 3.6. This kind of basis is advisable for isotropic spatial eﬀects.
+x1
+xM
+W
+Fig. 3.6: Finite system of knots x1, . . . , xM in a window W ⊂R2.
+As an example for the function B, consider the so-called thin plate spline given by B(r) =
+r2 · log(r), r > 0. As a georeferenced penalization criterion, the penalization
+E(fgeo) =
+Z
+Rd
+
+d2fgeo(t)
+2 dt
+is often used instead of
+E(fgeo) :=
+Z
+Rd
+
+Λ2fgeo(t)
+2 dt,
+where d2fgeo is the second diﬀerential of fgeo, i.e.
+d2fgeo(t) =
+
+
+d
+X
+j=1
+∂2
+∂tj2 + 2
+X
+i<j
+∂
+∂ti
+∂
+∂tj
+
+fgeo(t).
+Other common examples of radial functions B are B(r) = rl with l odd, B(r) =
+√
+r2 + c2, c > 0
+constant, or B(r) originating from a covariance function of an isotropic random ﬁeld, i.e.
+C(s, t) = B(∥s −t∥2), s, t ∈Rd. This random ﬁeld may represent spatial eﬀects in regression
+model (3.34) giving rise to the part fgeo.
+Example 3.38 (Markov random ﬁelds): Sometimes, the spatial location variable t may be
+discrete, attaining a ﬁnite number of values, e.g. as in the case of postal codes. We assume that
+t ∈V , where Γ = (V, E) is a ﬁnite non-oriented geometric graph with a ﬁnite set of vertices
+V = t1, . . . , tM ⊂Rd and edges E. We say that the vertices ti, tj are neighbors (write ti ∼tj)
+
+
+PAGE 55
+3 Prediction of stationary random ﬁelds
+53
+if they are connected by an edge (ti, tj) ∈E. For instance, the set of vertices V may be a ﬁnite
+regular grid of locations within an observation window W ⊂Rd with an intuitive neighboring
+relation, compare Figure 3.7.
+t
+s
+(a) Regular square grid with a 4-
+or 8-neighbourhood relation
+t
+(b) Regular
+triangulation
+of
+plane
+with
+a
+6-
+neighbourhood relation
+t
+(c) Regular hexagonal lattice in
+R2 with a 3-neighbourhood
+relation
+Fig. 3.7: Planar regular grids with corresponding neighbourhood relation
+In this case, the georeferenced part is piecewise constant: fgeo(t) = γt, t ∈V . A reasonable
+penalization criterion is that values of γt for neighboring vertices t do not diﬀer too much, i.e.
+E(fgeo) =
+X
+(s,t)∈E
+(γs −γt)2.
+In matrix form this can be expressed as
+E(fgeo) = γ⊺Kγ,
+with γ = (γt)t∈V , K = (Kst)s,t∈V is the adjacency matrix of the graph Γ, i.e. for s, t ∈V we
+have
+Kst =
+
+
+
+
+
+
+
+deg(s),
+s = t,
+−1,
+s ̸= t, s ∼t,
+0,
+s ̸= t, s ̸∼t,
+where deg(s) is the degree of a vertex s ∈V , i.e., the number of all neighbors of s, i.e.
+deg(s) = #{t ∈V : t ∼s}.
+However, the order of vertices in V is important for the particular structure of K. It is desirable
+to numerate t ∈V so that all non-zero elements of K are located close to the main diagonal to
+produce a band matrix with a small band width.
+A popular model used in econometrics is the so-called spatial autoregressive process, which
+is deﬁned by
+Ys = X⊺
+s β + α
+X
+t∼s
+wstYt + εs,
+s ∈V,
+where Xs = (1, Xs1, . . . , Xsk)⊺, β = (β0, β1, . . . , βk)⊺represents the linear part (see (3.29),
+(3.31)), the constant α ∈[0, 1) is an autoregressive parameter, wst = wts are symmetric weights
+such that wss = 0, s ∈V , and the errors εd ∼N(0, σ2) are i.i.d., s ∈V . Then, the ﬁeld
+{Ys, s ∈V } is called a Markov random ﬁeld.
+
+
+PAGE 56
+54
+3 Prediction of stationary random ﬁelds
+3.4 Quantile regression
+A drawback of geoadditive regression is the consideration of means of target variables, i.e.
+E[Y ] =
+˜X ˜β in terms of (3.37), since E[ε] = 0.
+Here, E[Y ] = (E[Y1], . . . , E[Yn])⊺, E[ε] =
+(E[ε1], . . . , E[εn])⊺. In addition, the method of least squares imposes the assumption E[Y 2
+i ] < ∞,
+i = 1, . . . , n, which excludes heavy tailed regression errors εi with E[ε2
+i ] = ∞.
+The goal of this Section is to construct a regression model which is not based on the (condi-
+tional) means but on the (conditional) quantiles of Y , allowing for a more general structure of
+the error vector ε. For a random variable Z, its quantile of order α ∈(0, 1) is given by
+F −
+Z (α) = inf x ∈R : FZ(x) ≥α := qα,
+(3.41)
+where FZ(x) = P(Z ≤x), x ∈R, is the cumulative distribution function of Z. It has the
+property
+F −
+Z (α) = argmin
+x∈R
+E [wα(Z, x) · |Z −x|] ,
+(3.42)
+where
+wα(Z, x) =
+
+
+
+
+
+
+
+1 −α,
+Z < x,
+0,
+Z = x,
+α,
+Z > x.
+For α = 1
+2, the quantile q1/2(Z) is called median of Z. Here, w1/2(Z, x) = 1
+2 · 1(Z ̸= x).
+Exercise 3.39 Show relation (3.42).
+If a sample of i.i.d. realizations (Z1, . . . , Zn) of Z is given, the empirical quantile ˆqα(Z) of Z
+of order α ∈(0, 1) is deﬁned similarly to (3.41) as
+1
+n
+X
+1(Zi ≤ˆqα) ≥α,
+1
+n
+X
+1(Zi ≥ˆqα) ≥1 −α,
+or equivalently similar to (3.42) as
+ˆqα(Z) = argmin
+x
+n
+X
+i=1
+(wα(Zi, x) · |Z −x|) .
+(3.43)
+The linear α-quantile regression is given by
+Y = X⊺β + ε,
+where X⊺β is the linear part with X = (1, x1, . . . , xk)⊺, β = (β0, β1, . . . , βk)⊺, and the regression
+error random variable ε satisﬁes Fε(0) = α, where Fε(x) = P(ε ≤x), x ∈R. This implies
+α = Fε(0) = P(ε ≤0) = P(X⊺β + ε
+|
+{z
+}
+=Y
+≤X⊺β) = FY (X⊺β).
+Hence, the α-quantile of the target random variable Y is given by X⊺β, i.e.
+qα(Y ) = X⊺β,
+α ∈(0, 1).
+(3.44)
+For instance, α = 1
+2 yields the median regression.
+
+
+PAGE 57
+3 Prediction of stationary random ﬁelds
+55
+Now, the α-quantile linear regression model, α ∈(0, 1), given by
+Yi = X⊺
+i β + εi, i = 1, . . . , n,
+where Y = (Y1, . . . , Yn)⊺is the vector of the target random variables Yi, i = 1, . . . , n, ε =
+(ε1, . . . , εn)⊺is the vector of regression error random variables subject to assumptions that
+ε1, . . . , εn are independent and Fεi(0) = α, i = 1, . . . , n. The matrix X = (xij)i=1,...,n, j=0,...,k
+is the design matrix with rows Xi = (1, xi1, . . . , xik), i = 1 . . . n and β = (β0, . . . , βk)⊺is the
+vector of regression coeﬃcients. The estimation of β is based on relation (3.43), i.e.
+ˆβ = argmin
+β∈Rk+1
+n
+X
+i=1
+wα (Yi, X⊺
+i β) |Yi −X⊺
+i β|
+(3.45)
+The above minimization problem is usually solved numerically via linear programming or func-
+tional gradient descent boosting. Let us explain the ﬁrst of these two methods.
+To minimize the target functional in (3.45), rewrite the regression errors as
+Yi −X⊺
+i β = εi = (εi)+ −(−εi)+,
+i = 1 . . . n,
+with a+ = a · 1(a ≥0) such that
+n
+X
+i=1
+wα ((Yi, X⊺
+i β)|Yi −X⊺
+i β|) = α
+n
+X
+i=1
+ui + (1 −α)
+n
+X
+i=1
+vi = αe⊺u + (1 −α)e⊺v,
+where
+ui := (εi)+ = (Yi −X⊺
+i β)+,
+vi := (−εi)+ = (X⊺
+i β −Yi)+,
+with u = (u1, . . . , un)⊺, v = (v1, . . . , vn)⊺, e = (1, . . . , 1)⊺∈Rn. Then, the quantile regression
+is given in total by the equation
+Yi = X⊺
+i β + ui −vi,
+i = 1 . . . n,
+or in matrix form
+Y = Xβ + u −v.
+(3.46)
+In terms of constraint minimization (3.45), this can be rewritten as
+
+
+
+αe⊺u + (1 −α)e⊺v →min
+β,u,v,
+Xβ + u −v = Y,
+which is a linear programming problem with polyhedral constraints.
+Theorem 3.40 (Properties of quantile regression):
+(a) Invariance under monotone transforms: If Ti : R 7→R is a monotone transformation of
+the data, then the α-quantile regression (3.45) based on Yi, X⊺
+i β and Ti(Yi), Ti(X⊺
+i β)
+yield the same results.
+(b) Asymptotic normality: If εi, i = 1, . . . , n, are i.i.d with probability density function fε,
+then
+X⊺X · (ˆβ −β) d→N
+
+0, α(1 −α)
+f2ε (δ)
+· Ik+1
+
+,
+(3.47)
+where Ik+1 is the ((k + 1) × (k + 1))-dimensional unity matrix.
+
+
+PAGE 58
+56
+3 Prediction of stationary random ﬁelds
+Remark 3.41 Although we will not prove the above theorem, let us comment on its assertions.
+(a) The invariance property is clear since the quantiles are kept under monotonic transforms
+Ti, i.e. qα(Ti(Yi)) = Ti(X⊺
+i β), i = 1 . . . n, for any α ∈(0, 1).
+(b) Although the asymptotic variance in (3.47) is seemingly minimal if α →0 or α →1, the
+requirement Fε(0) = α suggests that fε(0) →0 as well in such cases, which will dominate
+the quantity α(1−α)
+f2ε (0)
+letting it diverge to ∞. This observation is in line with the fact that
+estimating extremal quantiles qα(Yi), i.e. for α →0 or α →1, is diﬃcult. Hence, the
+the regression with α ≈1
+2, e.g. the median regression, will yield a smaller asymptotic
+variance.
+Using Equation (3.45), we can propose a similar framework for a non-linear α-quantile
+regression
+Yi = g(Zi) + εi,
+i = 1, . . . , n,
+where the non-linear part g : [a, b] 7→R, g ∈C1[a, b], a < b, is approximated by a
+truncated expansion, i.e.
+g(x) ≈
+N
+X
+l=1
+αlϕl(x)
+with respect to some function basis {ϕl}∞
+l=1 ⊂L2[a, b], and Fεi(0) = α ∈(0, 1), i =
+1, . . . , n. Under the notation ⃗α = (α1, . . . , αN)⊺, one looks for the α-quantile regression
+estimate ˆ⃗α of ⃗α as
+ˆ⃗α = argmin
+ˆα∈RN
+n
+X
+i=1
+wα
+ 
+(Yi,
+N
+X
+l=1
+αlϕl(Zi)) · |Yi −
+N
+X
+l=1
+αlϕl(Zi)| + λ · V (g′)
+!
+,
+(3.48)
+where λ ≥0 is the penalization factor. Here, thepenalty is the total variation of the ﬁrst
+derivate of g, i.e.
+V (g′) =
+sup
+{xj}⊂[a,b]
+n
+X
+j=1
+|f′(xx+1) −f′(xj)|.
+(3.49)
+The supremum is taken over all partitions of [a, b] into disjoint intervals (xj, xj+1] with
+a ≤x1 < x2 < · · · < xn−1 < xn ≤b.
+If we additionally assume g ∈C2[a, b], we may write the penalty as
+V (g′) =
+Z b
+a
+|g′′(x)|dx.
+(3.50)
+This is similar to the penalty of the usual (geo-)additive linear regression, which was given
+by
+R b
+a(g′′(x))2dx. The use of the L1-norm of g′′ instead of the L2-norm allows for the use
+of linear programming methods for the minimization of the target functional in (3.48).
+Since we approximate g(x) ≈PN
+l=1 αlϕl(x), it follows that g′(x) ≈PN
+l=1 αlϕ′
+l(x) and
+V (g′) =
+sup
+{xj}⊂[a,b]
+n
+X
+j=1
+
+N
+X
+l=1
+αl(ϕ′
+l(xj+1) −ϕ′
+l(xj))
+
+or
+V (g′) =
+Z b
+a
+
+N
+X
+l=1
+αlϕ′′
+l (x)
+ dx,
+
+
+PAGE 59
+3 Prediction of stationary random ﬁelds
+57
+respectively. For practical purposes, we may use xi = Z(i), i = 1, . . . , n, which yields
+V (g′) ≈
+n
+X
+i=1
+
+N
+X
+l=1
+αl(ϕ′
+l(Z(i+1)) −ϕ′
+l(Z(i)))
+ .
+Similar to (3.34) and (3.48), the geo-additive α-quantile regression can be computed by
+qα(Yi) = X⊺
+i β +
+m
+X
+j=1
+gj(zij) + fgeo(ti),
+i = 1, . . . , n.
+Using the truncated series expansions gj(z) = PN
+l=1 αjlϕl(z) and fgeo(t) = PM
+j=1 γj · Ψ(t)
+leads to qα(Y ) = ˜X ˜β, compare (3.38).
+The α-quantile estimate of ˜β is given by
+ˆ˜β =
+argmin
+˜β∈RK+1+m·N+M
+" n
+X
+i=1
+wα
+
+(Yi, ( ˜X · ˜β)i) · |Yi −( ˜X · ˜β)|
+
++ λ · p˜β
+#
+,
+where the penalty is
+p˜β =
+m
+X
+j=1
+V (g′
+j) + V (∇ggeo)
+with
+V (g′) =
+n
+X
+i=1
+|
+N
+X
+l=1
+αjl(ϕ′
+l(Z(i+1)j) −ϕ′
+l(Z(i)j))|,
+j = 1, . . . , m,
+as well as
+V (∇fgeo) =
+Z
+Rd |∆fgeo(t)|dt
+or
+V (∇fgeo) = |∂2fgeo(t)|dt.
+Here, the penalty factor is λ ≥0 and ( ˜X · ˜β)i is the i-th coordinate of the vector ˜X · ˜β.
+Remark 3.42 (Formulation via a loss function): The α-quantile regression (3.45) can be
+reformulated as follows. For any strictly increasing real function G, deﬁne the “tick“ function
+for any α ∈(0, 1) by
+ρα(x) = (α −1(x ≤0))x,
+x ∈R.
+Let
+L(x, y) = ρα(G(x) −f(y)),
+x, y ∈R,
+be the loss function with the property L(x, y) ≥0 and L(x, y) = 0 if and only if x = y. Then,
+the α-quantile regression estimate is
+ˆβ = argmin
+β∈Rk+1 E [L(Y, X⊺β)]
+for the regression (3.44), or, in a data setting,
+ˆβ = argmin
+β∈Rk+1
+n
+X
+i=1
+L(Yi, X⊺
+i β).
+
+
+PAGE 60
+58
+3 Prediction of stationary random ﬁelds
+Analogously, the unpenalized non-linear α-quantile regression Y = g(Z) + ε is given by
+ˆg = argmin
+g
+E [L(Y, g(Z))]
+or
+ˆg = argmin
+g
+n
+X
+i=1
+L(Yi, g(Zi)),
+respectively, where g(Z) can be further linearized as in (3.48).
+3.5 Prediction via level sets
+Let (Ω, F, P) be a complete probability space and X = {X(t), t ∈T}, T ⊂Rd be a strictly
+stationary real-valued measure random ﬁeld on (Ω, F, P) with marginal distribution FX(x) =
+P(X(s) ≤x), x ∈R. Assume that X is observed at locations t1, . . . , tN ∈W, where W ⊂Rd
+is a compact non-empty observation window. For t /∈{t1, . . . , tN}, we predict the value X(t)
+by the linear predictor
+ˆX(t) =
+N
+X
+j=1
+λjX(tj)
+such that weights λ1, . . . , λN are chosen to minimize a certain mean error criterion subject to
+the additional constraint
+ˆX(t) d= X(t),
+t ∈W,
+i.e., P( ˆX(t) ≤x) = P(X(t) ≤x), x ∈R. Compared to Kriging, which does not keep the
+marginal distribution of X, this property is sometimes very desirable and is attained most of
+the time by the so-called conditional simulation. However, to be able to mimic the law of X(t)
+by a linear predictor ˆX(t), it is necessary that X belongs to the so-called inﬁnitely divisible
+class.
+Deﬁnition 3.43
+(a) The probability law of a random vector Y : Ω→Rm is called inﬁnitely
+divisible if for all n ∈N there exist i.i.d. random vectors Yn1, . . . , Ynn such that
+Y
+d=
+n
+X
+j=1
+Ynj.
+(b) A random ﬁeld X = {X(t), t ∈T} is called inﬁnitely divisible if all its ﬁnite dimensional
+distributions are inﬁnitely divisible.
+Examples of inﬁnitely divisible random functions are Lévy processes and α-stable random
+ﬁelds.
+Under the assumption that X is inﬁnitely divisible it is guaranteed that the linear
+combination PN
+j=1 λjX(tj) may have a distribution of the same type as X(t).
+Apart from the mean-square error E[(X(t) −ˆX(t))2], which is used to compute Kriging
+predictors, other error criteria, which do not impose the restriction of square-integrability onto
+the ﬁeld X, i.e. E[X2(t)] < ∞, t ∈T, are possible. One of them is based on the comparison of
+the so-called level sets or excursion sets of X and ˆX.
+Deﬁnition 3.44 The excursion set of a random ﬁeld X at a level u ∈R observed on a window
+W is given by
+AX(u) := {t ∈W : X(t) > u}.
+
+
+PAGE 61
+3 Prediction of stationary random ﬁelds
+59
+Since X is measurable, the set AX(u) is Borel for any ω ∈Ω, and thus its volume |AX(u)|
+exists and is a random variable bounded a.s. by |AX(u)| ≤|W|, where
+|AX(u)| =
+Z
+W
+1(X(t) > u)dt.
+The error criterion measuring the prediction error of X by ˆX is given as an error-in-measure
+E
+|AX(u)∆A ˆ
+X(u)|
+
+at an excursion level u ∈R, where A ˆ
+X(u) = {t ∈W : ˆX(t) > u} and the symmetric diﬀerence
+is deﬁned by
+AX(u)∆A ˆ
+X(u) :=
+ AX(u)\A ˆ
+X(u)
+ ∪
+ A ˆ
+X(u)\AX(u)
+ .
+Choosing an excursion level u according to a ﬁnite non-zero measure ν on (R, BR) allows us to
+give the overall mean extrapolation error as
+Z
+R
+E
+|AX(u)∆A ˆ
+X(u)|
+ ν(du).
+The measure ν can be chosen to be discrete, i.e. ν(·) = Pk
+j=1 δuj(·) with ν being concentrated
+at atoms uj. Alternatively, it can be an absolutely continuous probability measure. Later on,
+a choice ν(·) = PX(0)(·) is proven to be quite reasonable, since it provides meaningful levels u
+such that AX(u) ̸= ∅with positive probability.
+To compute the weights λ1, . . . , λN for the linear predictor ˆX(t) we need to solve the mini-
+mization problem
+
+
+
+R
+R E
+|AX(u)∆A ˆ
+X(u)|
+ ν(du) →
+min
+λ1,...,λN,
+ˆX(t) d= X(t), t ∈W.
+(3.51)
+The target functional above does not depend on t ∈W, since it provides an average over all
+t ∈W. However, it would be desirable to let λ1, . . . , λN depend on the point t ∈W. In order
+to do so, we modify (3.51) as follows.
+Theorem 3.45 The minimization problem in (3.51) is equivalent to the maximization problem
+
+
+
+R
+W
+R
+R P
+ t ∈AX(u)∆A ˆ
+X(u)
+ ν(du)dt →
+max
+λ1,...,λN,
+ˆX(t) d= X(t), t ∈W.
+Proof First, rewrite
+1(AX(u)∆A ˆ
+X(u)) = 1(X(t) > u) + 1( ˆX(t) > u) −21(X(t) > u)1( ˆX(t) > u).
+
+
+PAGE 62
+60
+3 Prediction of stationary random ﬁelds
+Then, applying Fubini’s theorem yields
+E
+h
+|AX(u)∆A ˆ
+X(u)|
+i
+= E
+
+
+Z
+W
+1(AX(u)∆A ˆ
+X(u))dt
+
+
+=
+Z
+W
+P
+
+t ∈AX(u)∆A ˆ
+X(u)
+
+dt
+=
+Z
+W
+h
+P (X(t) > u) + P
+ ˆX(t) > u
+
+−2P
+
+X(t) > u, ˆX(t) > u
+i
+dt
+= 2|W|P(X(0) > u) −2
+Z
+W
+P
+
+X(t) > u, ˆX(t) > u
+
+dt,
+where the last equality is due to the constraint in (3.51), i.e.
+ˆX(t) d= X(t) d= X(0), and the
+stationarity of X, i.e.
+Z
+W
+P(X(t) > u)dt = P(X(t) > u) ·
+Z
+W
+dt = |W| · P(X(0) > u),
+Z
+W
+P( ˆX(t) > u)dt =
+Z
+W
+P(X(0) > u)dt = |W| · P(X(0) > u).
+Hence, the target functional in (3.51) can be rewritten as
+Z
+R
+E
+h
+|AX(u)∆A ˆ
+X(u)|
+i
+ν(du) = 2|W|
+Z
+R
+(1 −FX(u))ν(du) −2
+Z
+R
+Z
+W
+P(X(t) > u, ˆX(t) > u)dtν(du).
+Since the ﬁrst term on the right-hand side does not depend on λ1, . . . , λN, the above expression
+is minimal when
+Z
+W
+Z
+R
+P
+
+X(t) > u, ˆX < u
+
+ν(du)dt
+(3.52)
+is maximal.
+In view of Theorem 3.45, we omit the integration over W with respect to t, and modify our
+prediction problem as
+
+
+
+
+
+R
+R
+P(X(t) > u, ˆX(t) > u)ν(du) →
+max
+λ1,...,λN,
+ˆX(t) d= X(0),
+
+
+
+
+
+for any t ∈W,
+(3.53)
+since the integral in (3.52) is maximal if its integrand is maximal for all t ∈W. Thus, the
+problem (3.51) yields a geometric motivation to the ﬁnal formulation (3.52), see Figure 3.8
+To solve the maximization problem (3.53) for each t ∈W, knowledge of the uni- and bivariate
+probability law of X is required. The advantage of the criterion (3.53) is that no integrability
+assumptions on X are needed. Thus, extrapolation of heavy-tailed random ﬁelds such as α-
+stable random ﬁelds is possible. However, the choice of the measure ν may heavily inﬂuence the
+results, and its optimality is still an open problem. Nonetheless, for Gaussian random ﬁelds,
+the choice of ν is irrelevant, as we will see in the next section.
+
+
+PAGE 63
+3 Prediction of stationary random ﬁelds
+61
+u
+t
+W
+X(t)
+ˆX(t)
+Fig. 3.8: The symmetric diﬀerence AX(u)∆A ˆ
+X(u) is shown in red for a process X = {X(t), t ∈
+R} and its linear predictor ˆX(t), t ∈R (d = 1). The overall length of these intervals
+is minimized to get a better ﬁt of the path of ˆX to the path of X.
+3.5.1 Gaussian level set prediction
+Let X = {X(t), t ∈T}, T ⊂Rd, be a stationary measurable random ﬁeld with mean E[X] = µ,
+covariance function C(t) = cov(X(0), X(t)), t ∈T, and variance σ2 = C(0) = var(X(0)) > 0.
+In order to solve the maximization problem (3.53), we ﬁrst reformulate the constraint ˆX(t) d=
+X(0) in terms of λ = (λ1, . . . , λN).
+For ease of notation, we will omit the dependence of
+λj = λj(t) on the location t ∈W, j = 1, . . . , N, in the following.
+Note that, since X is Gaussian, the constraint ˆX(t) d= X(0) is equivalent to
+(
+E[ ˆX(t)] = µ
+var( ˆX(t)) = σ2
+⇒
+(PN
+j=1 λjµ = µ
+PN
+i,j=1 λiλjC(ti −tj) = σ2
+⇒
+(
+λ⊺e = 1
+λ⊺Σλ = σ2
+,
+where e = (1, . . . , 1)⊺, Σ = (C(ti −tj))N
+i,j=1. We refer to λ⊺e = 1 as the simplex constraint
+and to λ⊺Σλ = σ2 as an ellipsoid constraint. In general, then mean µ ̸= 0 is unknown. In the
+case that µ = 0 is known, the simplex constraint would not be needed and hence could just be
+omitted.
+Recall the usual notation ct = (C(t −t1), . . . , C(t −tN))⊺.
+Lemma 3.46 The maximization problem (3.53) for stationary measurable Gaussian random
+ﬁelds X with unknown mean µ is given by
+
+
+
+
+
+
+
+
+
+c⊺
+t λ →max
+λ∈RN,
+λ⊺Σλ = σ2,
+λ⊺e = 1.
+(3.54)
+if ν ̸≡0.
+
+
+PAGE 64
+62
+3 Prediction of stationary random ﬁelds
+Proof We use the following representation of the Gaussian bivariate law [13, p.9]. Since the
+bivariate vector (X(t), ˆX(t)) is jointly Gaussian, it holds that
+P(X(t) > u, ˆX(t) > u) = ¯φ2
+µ,σ(u) + 1
+2π
+sin−1(ρt)
+Z
+0
+exp
+(
+−(u −µ)2
+δ2
+· 1 −sin θ
+cos2 θ
+)
+dθ,
+where ρt = corr(X(t), ˆX(t)), the function ϕµ,σ(x) =
+1
+√
+2πσ
+xR
+−∞
+e
+(y−µ)2
+2σ2 dy, x ∈R, is the cumula-
+tive distribution function of N(µ, σ2) and ¯φµ,σ(x) = 1−ϕµ,σ(x) is the tail probability function.
+Then, using Fubini’s theorem, the target function in (3.53) simpliﬁes to
+F(λ, t) :=
+Z
+R
+P(X(t) > u, ˆX(t) > u)ν(du)
+=
+Z
+R
+¯φµ,σ(u)ν(du) + 1
+2π
+Z sin−1(ρt)
+0
+Z
+R
+exp
+(
+−(u −µ)2
+σ2
+· 1 −sin θ
+cos2 θ
+)
+ν(du)
+|
+{z
+}
+=g(θ)
+dθ.
+It follows that
+ρt = σ−2 ·
+N
+X
+j=1
+cov(X(t), X(tj)) = σ−2 · c⊺
+t · λ.
+Since g(θ) > 0 for all θ ∈[0, π/2), we get
+sin−1(ρt)
+Z
+0
+g(θ)dθ →max
+λ∈RN
+⇐⇒
+sin−1(ρt) →max
+λ∈RN,
+which is equivalent to
+ρt →max
+λ∈RN,
+since sin−1 is a monotonically increasing function.
+Since |λ⊺· ct| = ∥Prctλ∥2 · ∥ct∥2, where Prctλ is the orthogonal projection of λ onto ct, it
+follows ∥Prctλ∥2 →max
+λ . The geometric interpretation of maximization problem (3.54) is given
+in Figure 3.9.
+The problem (3.54) as a linear programming problem with a linear and a quadratic constraint
+appears to be the special case of second order cone programming (SOCP) or quadratically
+constrained quadratic problem (QCQP). We solve it again via the Lagrangian formalism (as in
+the universal Kriging case).
+Introduce numbers b0 := c⊺
+t Σ−1c+, b1 := e⊺Σ−1ct, b2 := e⊺Σ−1e if Σ is non-degenerate. Now
+we are ready to formulate and prove the following existence and uniqueness result.
+Theorem 3.47 For an unknown µ ̸= 0, assume that there exists no β ∈R such that ct = βe,
+i.e. ct and e are not parallel to each other, and let Σ be positive deﬁnite. Then, there exists a
+unique solution to (3.54) given by
+λ = Σ−1
+ s
+σ2b2 −1
+b0b2 −b2
+1
+(ct −b1
+b2
+e) + 1
+b2
+e
+!
+.
+(3.55)
+
+
+PAGE 65
+3 Prediction of stationary random ﬁelds
+63
+ct
+λ
+λ1
+λ2
+1
+1
+α
+Fig. 3.9: The SOCP problem (3.54) for N = 2. Here, c⊺
+t λ = ∥ct∥2∥λ∥2 cos(α) →maxλ.
+Proof Let K := {λ ∈Rn : λ⊺e = 1, λ⊺Σλ = σ2} be the set of weights that satisfy the
+constraints in (3.54). For the vectors ej = (0, . . . , 0, 1, 0 . . . , 0)⊺, j = 1, . . . , N, it obviouly holds
+ej ∈K. Since the function λ⊺ct is linear, it is continuous on the compact set K and thus
+attains its maximal value on K.
+The Lagrange function for the problem (3.54) is given by
+L(λ, γ, δ) = c⊺
+t λ + γ(λ⊺Σλ −σ2) + δ(e⊺λ −1),
+where γ, δ ∈R are the Lagrange multipliers. Denote ∇λL :=
+
+∂L
+∂λ1 , . . . , ∂L
+∂λN
+
+. Computing ∇λL
+and setting
+∇λL(λ, γ, δ) = ct + 2γΣλ + δe = 0
+in order to ﬁnd extreme points λ yields
+2γλ = −Σ−1(ct + δe).
+(3.56)
+Since ct ̸= δe by assumption, it follows that γ ̸= 0. Multiply (3.56) from the left by e⊺and use
+λ⊺e = e⊺λ = 1 yields
+2γ = e⊺Σ−1(ct + δe) = e⊺Σ−1ct
+|
+{z
+}
+=b1
++δ e⊺Σ−1e
+|
+{z
+}
+=b2
+= b1 + δb2,
+(3.57)
+and combining (3.56) and (3.57) we get
+λ =
+Σ−1(ct + δe)
+e⊺Σ−1(ct + δe).
+We compute δ by plugging the above expression for λ into λ⊺Σλ = σ2, i.e.
+(c⊺
+t + δe⊺) Σ−1ΣΣ−1
+|
+{z
+}
+=Σ−1
+(ct + δe) = σ2(e⊺Σ−1ct + δe⊺Σ−1e)2,
+
+
+PAGE 66
+64
+3 Prediction of stationary random ﬁelds
+or, in short form,
+b2(σ2b2 −1)δ2 + 2b1(σ2b2 −1) + δ2b2
+1 = b0,
+which results in
+(b2δ + b1)2 = b0b2 −b12
+σ2b2 −1 .
+(3.58)
+It can be shown that σ2b2 > 1 and b0b2 ≥b2
+1 due to positive deﬁniteness of Σ. Moreover,
+b0b2 = b2
+1 holds if and only if ct = βe for some β ∈R, which is prohibited by assumption.
+Hence, equation (3.58) has two distinct soultions given by
+δ1,2 = −b1
+b2
+± 1
+b2
+s
+b0b2 −b2
+1
+σ2b2 −1 .
+The corresponding values of λ1,2 can be calculated accordingly such that
+c⊺
+t λ1 = b1
+b2
++ 1
+b2
+q
+(b0b2 −b2
+1)(σ2b2 −1) ≥c⊺
+t λ2 = b1
+b2
+−1
+b2
+q
+(b0b2 −b2
+1)(σ2b2 −1),
+hence λ1 maximizes c⊺
+t λ, leading to the unique solution
+λ =
+s
+σ2b2 −1
+b0b2 −b2
+1
+Σ−1(ct −b1
+b2
+e) + 1
+b2
+Σ−1e
+if and only if b0b2 −b2
+1 ̸= 0, i.e. if and only if there exists no β ∈R such that ct = βe.
+Remark 3.48
+(a) In Equation (3.55), the vectors ct −b1
+b2 e and e are orthogonal. Indeed, it
+holds that
+e⊺(ct −b1
+b2
+e) = b2e⊺ct −b1
+=N
+z}|{
+e⊺e
+b2
+= b−1
+2 (e⊺Σ−1ee⊺ct −Ne⊺Σ−1ct)
+= b−1
+2 (e⊺e
+|{z}
+=N
+e⊺Σ−1ct −Ne⊺Σ−1ct) = 0,
+since Σ−1 and ee⊺commute because Σ−1 is symmetric and ee⊺=
+
+
+
+1
+. . .
+1
+...
+...
+...
+1
+. . .
+1
+
+
+.
+(b) If ct and e are parallel, i.e. there exists a β ∈R such that ct = βe, then c⊺
+t ≡const for
+all λ ∈K. Indeed, ct = βe implies c⊺
+t λ = β e⊺λ
+|{z}
+1
+= β for some β ∈R. Then, all λ ∈K are
+solutions to the problem (3.54), e.g. λ = ej, j = 1, . . . , N, are solutions as well.
+(c) The linear predictor ˆX(t) = PN
+j=1 λjX(tj) is exact in the sense that ˆX(t) = X(tj), j =
+1, . . . , n. Indeed, here it follows from ct = Σej that
+b0 = e⊺
+jΣ Σ−1Σ
+| {z }
+=In
+ej = e⊺
+jej = C(tj −tj) = σ2,
+b1 = e⊺Σ−1Σ
+| {z }
+=In
+ej = e⊺ej = 1,
+
+
+PAGE 67
+3 Prediction of stationary random ﬁelds
+65
+hence by (3.55) we have weights
+λ = Σ−1
+
+
+s
+σ2b2 −1
+σ2b2 −1(ctj −1
+b2
+) + 1
+b2
+e
+
+= Σ−1ctj = ej.
+We can conclude that
+ˆX(tj) = e⊺
+j(X(t1), . . . , X(tN))⊺= X(tj),
+j = 1, . . . , N.
+Example 3.49 Consider the case N = 2 and compute weights λ = (λ1, λ2)⊺in (3.55). Here,
+ˆX(t) = λ1X(t1) + λ2X(t2), K = {(1, 0), (0, 1)} is an intersection of an ellipsoid λ⊺Σλ = σ2
+with the line λ1 + λ2 = 1. Hence, by (3.55) λ is of the form
+λ =
+
+
+
+
+
+
+
+(1, 0),
+C(t −t1) > C(t −t2),
+(0, 1),
+C(t −t1) < C(t −t2),
+(1, 0) or (0, 1),
+C(t −t1) = C(t −t2),
+which yields
+ˆX(t) =
+
+
+
+
+
+
+
+X(t1),
+C(t −t1) > C(t −t2),
+X(t2),
+C(t −t1) < C(t −t2),
+X(t1) or X(t2),
+C(t −t1) = C(t −t2),
+since the target functional to maximize over K is given by
+λ⊺ct = λ1C(t −t1) + λ2C(t −t2).
+Remark 3.50
+(a) If µ is known, we may set µ = 0 without loss of generality and solve (3.53)
+ignoring the constraint λ⊺e = 1. This leads to the solution
+λ = σ
+Σ−1ct
+q
+c⊺
+t Σ−1ct
+.
+(3.59)
+(b) We may compute the square extrapolation error given by
+E
+
+X(t) −ˆX(t)
+2
+=
+
+
+
+2(σ2 −b1
+b2 −1
+b2
+q
+(b0b2 −b2
+1)(σ2b2 −1)),
+µ unknown,
+2σ(σ −
+q
+c⊺
+t Σ−1ct),
+µ = 0 known.
+This can be done using the explicit form of λ from (3.54) or (3.59) and
+E
+
+X(t) −ˆX(t)
+2
+= λ⊺Σλ
+| {z }
+=σ2
+−2c⊺
+t λ + σ2 = 2(σ2 −c⊺
+t λ).
+Another important property of the prediction method (3.53) is its L2 and a.s. consistency,
+which states that ˆX(t) →X(t) as N →∞in the following sense.
+Theorem 3.51 Let the covariance function C be positive deﬁnite, and assume there exists no
+β ∈R such that ct = βe, e = (1, . . . , 1)⊺.
+
+
+PAGE 68
+66
+3 Prediction of stationary random ﬁelds
+(a) Assume that C is continuous, and let
+min
+j=1,...,N∥tj −t∥2 →0 as N →∞.
+Then, it holds that
+E
+ ˆX(t) −X(t)
+2
+→0,
+N →∞.
+(b) Let C be Hölder-continuous at zero with Hölder-index α > 0. Assume that {t1, . . . , tN} ⊂
+TN := (hNZd) ∩W for some compact observation window W such that P∞
+N=1 hα
+N < ∞.
+Then, it holds that
+ˆX(t) a.s.
+→X(t),
+N →∞.
+Proof
+(a) Since λ = ej ∈K, we have
+e⊺
+jct = C(t −tj) ≤λ⊺ct,
+j = 1, . . . , N.
+Taking jN := argmin
+j=1,...,N
+∥tj −t∥2, we can bound the mean-square error by
+E[ ˆX(t) −X(t)]2 = 2(σ2 −c⊺
+t λ) ≤2(σ2 −C(t −tjN )) →0,
+N →∞,
+(3.60)
+since C is continuous by assumption.
+(b) Since the points tj lie in the set TN for all j = 1, . . . , N, it holds that ∥tjN −t∥2 ≤
+√
+dhN.
+Furthermore, the Hölder-continuity of C implies that there exist constants C1, C2 > 0
+such that
+|C(0) −C(t)| ≤C1∥t∥α
+2
+for all t with ∥t∥2 ≤C2.
+Then,
+∞
+X
+N=1
+E
+ ˆX(t) −X(t)
+2 (3.60)
+≤
+2
+∞
+X
+N=1
+|C(δ) −C(t −tj)|
+≤2C1
+∞
+X
+N=1
+∥(t −tj∥2 ≤2dα/2c1
+∞
+X
+N=1
+hα
+N < ∞.
+By the Tschebyschew inequality it follows that
+∞
+X
+N=1
+P(| ˆX(t) −X(t)| > ε) ≤1
+ε2
+∞
+X
+N=1
+E
+ ˆX(t) −X(t)
+2
+< ∞
+for all ε > 0, and thus ˆX(t) →X(t) a.s. as N →∞by the lemma of Borel-Cantelli.
+Remark 3.52 It follows from the proof of Theorem 3.51 (b) that
+E
+ ˆX(t) −X(t)
+2
+≤2C1 min
+j=1,...,N∥t −tj∥α
+2 .
+That is, the speed of convergence of ˆX(t) to X(t) as N →∞depends on the roughness of the
+paths of X, which is encoded in a larger constant C1 or smaller index α > 0.
+
+
+PAGE 69
+3 Prediction of stationary random ﬁelds
+67
+In Figure 3.10 we consider a Gaussian process X with exponential covariance function C(t) =
+e−|t| and compare prediction results ˆX for observation points tj = j, j = 1, . . . , 100, in Figure
+3.10a and for tj = 0.2j, j = 1, . . . , 500, see Figure 3.10b. Figure 3.11 compares results of our
+level set predictor ˆX for a Gaussian process X with Gaussian covariance C(t) = e−t2/2 and
+known mean µ = 0 as well as the case of an unknown mean. The results are additionally
+compared to simple Kriging and ordinary Kriging.
+3.5.2 Excursion metric projections
+In the minimization problem (3.51) the target function was rewritten in the proof of Theorem
+3.45 as
+Z
+R
+E
+|AX(u)∆A ˆ
+X(u)|
+ ν(du) =
+Z
+W
+Z
+R
+P
+ t ∈AX(u)∆A ˆ
+X(u)
+
+|
+{z
+}
+=∆X, ˆ
+X(u)
+ν(du)dt,
+where ∆X, ˆ
+X(u) = P({X(t) > u}∆{ ˆX(t) > u}). The inner integral can be seen as a measure of
+distance between the random variables X(t) and ˆX(t), which leads to the following deﬁnition.
+Deﬁnition 3.53 For a ﬁnite measure ν on R and random variables Y1, Y2 : Ω→R, we call
+Eν(Y1, Y2) :=
+Z
+R
+P ({Y1 > u}∆{Y2 > u}) ν(du)
+the excursion pseudo-metric.
+Without loss of generality, assume ν to be a probability measure in the sequel. Let L0(Ω, F, P)
+be the space of all random variables on the probability space (Ω, F, P). The fact that Eν is a
+pseudo-metric can be seen from
+(i) Eν : L0(Ω, F, P)2 →[0, 1] is symmetric,
+(ii) It satisﬁes the triangle inequality Eν(Y1, Y2) ≤Eν(Y1, Y3)+Eν(Y3, Y2) for any Y1, Y2, Y3 ∈
+L0(Ω, F, P).
+Since Eν(Y1, Y2) = 0 does not imply that Y1 = Y2 a.s., Eν fails to be a metric.
+Let us rewrite our prediction problem in terms of metric projections with respect to Eν. For
+that, we will need further properties of Eν, which involve the notion of a copulas.
+3.5.3 Copulas
+Deﬁnition 3.54 A fuction C : [0, 1]2 →[0, 1] is a (bivariate) copula if it is a cumulative
+distribution function of a random vector (U1, U2), where U1, U2 ∼U[0, 1].
+Copulas measure the dependence between random variables, which ﬁnds its reﬂections in the
+following result.
+Theorem 3.55 (Sular, 1959): Let Y = (Y1, Y2) be a random vector on (Ω, F, P) with joint
+distribution function FY (x1, x2) = P(Y1 ≤x1, Y2 ≤x2), x1, x2 ∈R, and marginal distribution
+functions FYj(x) = P(Yj ≤x), j = 1, 2. Then, there exists a copula C such that
+FY (x1, x2) = C(FY1(x1), FY2(x2)),
+x1, x2 ∈R.
+This copula is unique on the set FY1(¯R) × FY2(¯R), where FYj(¯R) is the image of ¯R = R ∪{±∞}
+under the mapping FY1 : ¯R →[0, 1], j = 1, 2.
+
+
+PAGE 70
+68
+3 Prediction of stationary random ﬁelds
+0
+20
+40
+60
+80
+100
+−2
+−1
+0
+1
+2
+3
+(a) X with exponential covariance C(t) = e−|t|, observed at tj = j, j = 1, . . . , 100.
+0
+20
+40
+60
+80
+100
+−2
+−1
+0
+1
+2
+3
+(b) X with exponential covariance C(t) = e−|t|, observed at tj = 0.2j, j = 1, . . . , 500.
+Fig. 3.10: Comparison of trajectories of Gaussian process X with exponential covariance (blue)
+and its predictor ˆX with unknown mean (green) observed at tj = j, j = 1, . . . , 100
+(3.10a) and tj = 0.2j, j = 1, . . . , 500 (3.10b).
+
+
+PAGE 71
+3 Prediction of stationary random ﬁelds
+69
+0
+20
+40
+60
+80
+100
+−2
+−1
+0
+1
+2
+3
+Fig. 3.11: A path of a Gaussian process X (blue) with gaussian covariance function C(t) =
+e−t2/2 is compared to our new linear predictor ˆX with known mean µ = 0 (orange),
+with unkonwn mean (green), simple kriging (red) and ordinary kriging (yellow).
+Remark 3.56 Note that, if the marginal distribution functions FYj are continuous on R, then
+FYj(¯R) ⊂[0, 1] and hence the copula C in Theorem 3.55 is unique.
+Example 3.57 Let U = (U1, U2) be a random vector with its joint distribution function being
+a copula C and Uj ∼U([0, 1]), j = 1, 2.
+(a) Independence copula: If U1, U2 are stochastically independent, then
+C(x1, x2) = x1x2,
+x1, x2 ∈[0, 1].
+(b) Comonotonicity copula: If U1 = U2 = U0 a.s., then
+C(x1, x2) = P(U0 ≤x1, U0 ≤x2) = P(U0 ≤min{x1, x2}) = min{x1, x2},
+x1, x2 ∈[0, 1].
+Notation: M2(x, y) = min{x, y}, x, y ∈[0, 1].
+(c) Linear dependence copula: If U1 = U0, U2 = 1 −U0, U0 ∼U([0, 1]), then
+C(x1, x2) = P(U0 ≤x1, 1 −U0 ≤x2)
+= P(1 −x2 ≤U0 ≤x1) = max{0, x1 + x2 −1},
+x1, x2 ∈[0, 1].
+Notation: W2(x, y) := max{0, x + y −1}, x, y ∈[0, 1].
+Theorem 3.58 (Hoeﬀding-Fréchet bounds (1940, 1951)): For any copula C : [0, 1]2 →
+[0, 1], it holds that
+W2(x, y) ≤C(x, y) ≤M2(x, y),
+x, y ∈[0, 1].
+
+
+PAGE 72
+70
+3 Prediction of stationary random ﬁelds
+Proof
+(i) We ﬁrst show the upper bound. Using the monotonicity of probability measures,
+it follows that
+C(x, y) = P ({U1 ≤x} ∩{U2 ≤y}) ≤min P(U1 ≤x)
+|
+{z
+}
+=x
+, P(U2 ≤x)
+|
+{z
+}
+=y
+= min{x, y} = M2(x, y),
+x, y ∈[0, 1],
+where C(·, ·) is a joint distribution function of (U1, U2), Uj ∼U([0, 1]), j = 1, 2.
+(ii) For the lower bound, write
+C(x, y) = 1 −P({U1 > x} ∪{U2 > y}) ≥1 −P(U1 > x) −P(U2 > y)
+= 1 −(1 −x) −(1 −y) = x + y −1,
+x, y ∈[0, 1].
+Since C(x, y) ≥0 as it is a cumulative distribution function, we have C(x, y) ≥W2(x, y).
+3.5.4 Excursion metric and its properties
+For any Y1, Y2 ∈C0(Ω, F, P) we introduce the notation
+Y1 ∧Y2 := min{Y1, Y2},
+Y1 ∨Y2 := max{Y1, Y2}.
+Then, ∆Y1,Y2(u) = P({Y1 > u}∆{Y2 > u}) rewrites as
+∆Y1,Y2(u) = P(Y1 > u) + P(Y2 > u) −2P(Y1 > u, Y2 > u)
+= P(Y1 ≤u) + P(Y2 ≤u) −2P(Y1 ≤u, Y2 ≤u)
+= FY1(u) + FY2(u) −2C(FY1(u), FY2(u))
+by Theorem 3.55, where FYj, j = 1, 2, are the marginal distribution functions of (Y1, Y2) and
+C is a copula. Moreover, note that
+∆Y1,Y2(u) = P(Y1 ∨Y2 > u) −P(Y1 ∧Y2 > u) = P(Y1 ∧Y2 ≤u) −P(Y1 ∨Y2 ≤u),
+(3.61)
+which leads to the following result.
+Lemma 3.59 Let ν be a probability law of a random variable U : Ω→R representing the
+random choice of an excursion level. Then it holds for any Y1, Y2 ∈L0(Ω, F, P) that
+(a) Eν(Y1, Y2) = E [|FU(Y2−) −FU(Y1−)|], where FU is the cumulative distribution function
+of U and FU(x−) =
+lim
+y→x−0FU(y) for any x ∈R.
+(b) Eν(Y1, Y2) = P(Y1 ∧Y2 ≤U ≤Y1 ∨Y2).
+Proof
+(a) Applying Equation (3.61) yields
+Eν(Y1, Y2) =
+Z
+R
+E [1(u < Y1 ∨Y2) −1(u < Y1 ∧Y2)] ν(du)
+= E [FU(Y1 ∨Y2−) −FU(Y1 ∧Y2−)] = E [|FU(Y2−) −FU(Y1−)|] .
+(3.62)
+
+
+PAGE 73
+3 Prediction of stationary random ﬁelds
+71
+(b) Equivalently, (3.62) can be rewritten as Eν(Y1, Y2) = P(Y1 ∧Y2 ≤U ≤Y1 ∨Y2).
+Note that in part (b), the random level U separates Y1 and Y2, which motivated M. Taylor
+(1984) to call Eν(Y1, Y2) a separation pseudo-metric.
+Furthermore, if FU is continuous, it
+follows that FU(x−) = FU(x) for all x ∈R leading to Eν(Y1, Y2) = E[|FU(Y1)−FU(Y2)|], which
+is called FU-madogram in geostatistics.
+Denote by XS ⊆L0(Ω, F, P) the subspace of random variables with support S ⊂R.
+Theorem 3.60 If FU is strictly increasing on S, then Eν is a metric on XS × XS.
+Proof
+(i) The symmetry of Eν is trivial.
+(ii) For the triangle inequality, we compute
+Eν(Y1, Y2)
+(∗)
+= E [|FU(Y1−) −FU(Y2−)|]
+≤E [|FU(Y1−) −FU(Y3−)|] + E [|FU(Y2−) −FU(Y3−)|]
+= Eν(Y1, Y3) + Eν(Y2, Y3)
+for any Y1, Y2, Y3 ∈XS, where the equality (∗) follows from Lemma 3.59.
+(iii) Let Eν(Y1, Y2) = 0 for some Y1, Y2 ∈XS. By Lemma 3.59, we have FU(Y1−) = FU(Y2−)
+a.s., and since FU is monotonically increasing on S, it follows that P(Y1 = Y2) = 1, i.e.
+Y1 = Y2 a.s. Ultimately, it holds that Eν is a metric on XS × XS.
+Question: Which choice of U or ν(·) is preferable from the practical point of view for the
+prediction of random variables?
+Consider Y1, Y2 ∈XS. If supp(U) ∩S = ∅, then
+FU(Y1 ∨Y2−) = FU(Y1 ∧Y1−) = 0,
+which leads to a degenerate metric.
+Thus, we may require supp(U) ∩S = ∅, or, ideally,
+supp(U) = S. This allows for the choices FU = FY1 or FU = FY2. Without loss of generality,
+assume FU = FY1 in the sequel. Then, relation (3.62) can be stated as
+Eν(Y1, Y2) = E[FY1(Y1 ∨Y2)] −E[FY1(Y1 ∧Y2)]
+= 2E[FY1(Y1 ∨Y2)] −E[FY1(Y1)] −E[FY1(Y2)]
+= 2E[FY1(Y1 ∨Y2)] −1
+2 −E[FY1(Y2)],
+(3.63)
+since FY1(Y1) ∼U([0, 1]) and therefore E[FY1(Y1)] = 1
+2 in the above.
+Now consider the case Y1
+d= Y2, where FY1(x) := F1(x) is strictly increasing, e.g. if Y1 is
+absolutely continuous on S. Then, Equation (3.63) simpliﬁes to Eν(Y1, Y2) = 2EF1(Y1∨Y2)−1.
+By Theorem 3.60, it is a metric on the space {Y ∈XS : P(Y ≤x) = F1(x)} ⊂L0(Ω, F, P).
+
+
+PAGE 74
+72
+3 Prediction of stationary random ﬁelds
+Lemma 3.61 Let Y1, Y2 ∈L0(Ω, F, P) have an absolutely continuous cumulative distribution
+function F1. Then, the excursion metric Eν with ν ∼F1, i.e. ν = dF1, has the representation
+Eν(Y1, Y2) = 1 −2
+Z 1
+0
+C(x, x)dx,
+where C is a copula of (Y1, Y2).
+Proof We know that
+∆Y1,Y2(u) = 2(F1(u) −C(F1(u), F1(u))),
+u ∈R.
+Substituting x = F1(u) leads to
+Eν(Y1, Y2) = 2
+Z
+R
+(F1(u) −C(F1(u), F1(u))) dF1(u) = 2
+1
+Z
+0
+(x −C(x, x))dx = 1 −2
+1
+Z
+0
+C(x, x)dx.
+We arrive at the following deﬁnition.
+Deﬁnition 3.62 Let Y1, Y2 ∈LF1, where LF1 is the space of random variables with absolutely
+continuous cumulative distribution function F1. The excursion metric G = Eν with ν ∼F1
+given by
+G(Y1, Y2) = 1 −2
+Z 1
+0
+C(x, x)dx
+is called Gini metric. Here, the function C is the copula of the random vector (Y1, Y2).
+If the set {C(x, x), x ∈[0, 1]} were convex, the term 2
+R 1
+0 (x −C(x, x))dx equals to the Gini
+coeﬃcient of the Lorenz curve {(x, C(x, x)), x ∈[0, 1]} used in econometrics for example to
+measure the concentration of wealth in the society. Hence, the name “Gini metric“.
+Remark 3.63 Taking into account that x = min{x, x} = M2(x, x), we can rewrite G(Y1, Y2)
+as
+G(Y1, Y2) = 2
+1
+Z
+0
+(x −C(x, x))dx = 2∥M2(x, x) −C(x, x)∥L1[0,1],
+where ∥h∥L1[0,1] =
+R 1
+0 |h(x)|dx is the L1-norm of h. Hence, G(Y1, Y2) can be interpreted as the
+L1-distance between the diagonal of the complete dependence copula to the diagonal of the
+copula of (Y1, Y2).
+Lemma 3.64 For any Y1, Y2 ∈LF1, it holds that G(Y1, Y2) ∈
+h
+0, 1
+2
+i
+. Furthermore, G(Y1, Y2) =
+1
+2 implies Y2 = f(Y1) a.s., where f is a decreasing function such that F1(x) = 1 −F1(f−1(x)),
+x ∈R.
+Proof By Theorem 3.58, we have
+1
+4 =
+Z 1
+0
+max{0, 2x −1}dx
+|
+{z
+}
+=R 1
+1/2(2x−1)dx
+=
+Z 1
+0
+W2(x, x)dx =
+Z 1
+0
+C(x, x)dx
+≤
+Z 1
+0
+M2(x, x)dx =
+Z 1
+0
+xdx = 1
+2,
+
+
+PAGE 75
+3 Prediction of stationary random ﬁelds
+73
+which yields
+0 = 1 −21
+2 ≤G(Y1, Y2) = 1 −2
+1
+Z
+0
+C(x, x)dx ≤1 −21
+4 = 1
+2.
+The upper bound is attained whenever Y2 = f(Y1) for a decreasing function f, which means
+that
+F1(x) = P(Y1 ≤x) = P(f(Y2) ≤x) = P(Y2 ≥f−1(x)) = 1 −P(Y2 < f−1(x)) = 1 −F1(f−1(x)),
+since Y1
+d= Y2 and Y2 has an absolutely continuous distribution.
+Example 3.65
+(a) Assume that the distribution F1 is symmetric around µ ∈R, i.e. F1(x) =
+1 −F1(µ −x),
+x ∈R. Then, it holds that G(Y1, Y2) = 1
+2 if Y1 + Y2 = µ a.s. with
+f(x) = µ −x, x ∈R.
+(b) If Y1, Y2 are stochastically independent, then G(Y1, Y2) = 1 −2
+R 1
+0 x2dx =
+1
+3, since
+C(x, y) = x · y for x, y ∈[0, 1].
+3.5.5 Forecasting via excursion metric
+Let X be a random variable which has to be predicted based on “observations“ X1, . . . , XN
+such that Xj
+d= X, j = 1, . . . , N. Assume that X has a continuous distribution function FX.
+We consider the predictor ˆXλ of X to be of the form
+ˆXλ = g(X1, . . . , Xn, λ),
+where g : RN × RN 7→R is a Borel-measurable function of the sample X1, . . . , XN and
+(λ1, . . . , λN) = λ ∈Λ ⊂R are the prediction parameters. Here, Λ is the set of admissible
+parameter values, i.e.
+Λ = Λg :=
+n
+λ ∈RN : ˆXλ
+d= X
+o
+.
+Since FX ∈C(R), we may rewrite the condition ˆXλ
+d= X as FX( ˆXλ) d= FX(X) ∼U([0, 1]).
+The main idea of an excursion-based forecast is to look for ˆXλ = g(X1, . . . , XN, ˆλ), where
+ˆλ = arginf
+λ∈Λ
+EFX(X, ˆXλ).
+Let us give some examples of g and Λg depending on the distribution class of FX. The function
+g has to be chosen such that Λg ̸= ∅.
+Example 3.66
+(a) If (X, X1, . . . , XN) is inﬁnitely divisible, then
+g(X1, . . . , XN, λ) =
+N
+X
+j=1
+λjXj.
+(3.64)
+(b) If (X, X1, . . . , XN) is max-stable, then
+g(X1, . . . , XN, λ) =
+max
+j=1,...,Nλj.
+(3.65)
+
+
+PAGE 76
+74
+3 Prediction of stationary random ﬁelds
+Example 3.67
+(a) Let (X, X1, . . . , XN) be Gaussian with marginal distribution N(µ, σ2)
+and Σ = (cov(Xi, Xj))N
+i,j=1 and let g be as in (3.64). Then,
+Λg = {λ ∈RN : λ⊺Σλ = σ2, λ⊺e = 1}
+is an ellipsoid of dimension N −1, see also Section 3.5.1.
+(b) Let (X, X1, . . . , XN) be a subgaussian random vector with stability index α ∈(0, 2) and
+underlying i.i.d. standard Gaussian components. Moreover, let g be as in (3.64). Then,
+Λg = {λ ∈RN : ∥λ∥2 = 1} = Sn−1.
+(c) Let (X, X1, . . . , XN) be a SαS random vector with stability index α ∈(0, 2), spectral
+measure Γ of (X1, . . . , XN) and scale parameter 1 for the marginal distributions. For g
+as in (3.64), we have
+Λg =
+
+
+
+
+
+λ ∈RN :
+Z
+SN−1
+|⟨s, λ⟩|αΓ(ds) = 1
+
+
+
+
+
+,
+which is a closed subset of RN by the dominated convergence theorem. However, the
+structure of this set may be quite complex.
+(d) Let (X,X1, . . . , XN) be a max-stable random vector with Fréchet(α)-marginals and tail
+dependence function lN of (X1, . . . , XN). For g as in (3.65), it holds that
+Λg = {λ ∈RN
++ : lN(λα
+1 , . . . , λα
+N) = 1}.
+This is true, since
+P( max
+j=1,...,NλjXj ≤x) = exp
+−x−αlN(λα
+1 , . . . , λα
+N)
+	 ,
+λ1, . . . , λN ≥0.
+The prediction problem EFX(X, ˆXλ) →inf
+λ∈Λ can be rewritten in terms of the Gini metric, i.e.
+G(X, ˆXλ) = 1 −2
+1
+Z
+0
+CX, ˆ
+Xλ(x, x)dx →inf
+λ∈Λg,
+where CX, ˆ
+Xλ(·, ·) is the copula of (X, ˆXλ). Consequently, this yields
+ˆλ = argsup
+λ∈Λg
+Z 1
+0
+CX, ˆ
+Xλ(x, x)dx.
+(3.66)
+Example 3.68
+(a) Let (X, X1, . . . , XN) be Gaussian as in Example 3.67 (a) with mean
+µ = 0 and variance σ2 = 1. In view of Section 3.5.1, the copula diagonal CX, ˆ
+Xλ(x, x) is
+equal to
+CX, ˆ
+Xλ(x, x) = x2 + 1
+2π
+sin−1(cλ)
+Z
+0
+exp
+
+−(ϕ−1(x))2 1 −sin θ
+cos2 θ
+
+dθ,
+where ϕ−1(x) is the quantile function of N(0, 1) and
+cλ = corr(X, ˆXλ) =
+N
+X
+j=1
+λjcov(X, Xj).
+
+
+PAGE 77
+3 Prediction of stationary random ﬁelds
+75
+(b) Let (X, X1, . . . , XN) be max-stable as in example 3.67 (d). Then, CX, ˆ
+X is an extreme-
+value copula with diagonal given by
+CX, ˆ
+X(x, x) = xθλ,
+x ∈[0, 1],
+where θλ is the extremal coeﬃcient of (X, ˆXλ), i.e. θλ = l2(1, 1) with l2 being the tail
+dependence function of (X, ˆXλ). It follows that
+1
+Z
+0
+CX, ˆ
+Xλ(x, x)dx =
+1
+Z
+0
+xθλdx =
+1
+θλ + 1,
+hence the maximization problem
+Z 1
+0
+CX, ˆ
+Xλ(x, x)dx →sup
+λ∈Λg
+is equivalent to the minimization problem
+θλ →inf
+λ∈Λg.
+As it was seen in Example 3.67, the structure of the admissible parameter set Λg may be quite
+complex leading to non-linear non-convex optimization for ﬁnding ˆλ in Equation (3.66), which is
+diﬃcult to solve. A possible way out would be to replace the rigid condition FX( ˆXλ) ∼U([0, 1])
+in the deﬁnition of Λg by an “approximate“ condition
+ρ
+
+P(FX( ˆXλ) ≤·), FU[0,1](·)
+
+≤ε
+for a small ﬁxed ε > 0, where ρ(·, ·) is any handy metric on the space of cumulative distribution
+functions on R.
+For simplicity, we consider the 2-Wasserstein distance in place of ρ, which is deﬁned as
+follows.
+Deﬁnition 3.69 Let Y1, Y2 be random variables with quantile functions F −1
+1
+and F −1
+2 . For
+p ≥1, the p-Wasserstein distance of Y1, Y2 is deﬁned as
+Wp(Y1, Y2) :=
+Z 1
+0
+F −1
+1 (x) −F −1
+2 (x)
+
+p dx
+1/p
+.
+Note that, the Wasserstein distance acts on the space of distributions of random variables
+rather than on L0(Ω, F, P) itself. For p = 2 and Y2 ∼U([0, 1]), we may rewrite
+W 2
+2 (Y1, Y2) =
+Z 1
+0
+
+F −1
+1 (x) −x
+2 dx
+=
+Z 1
+0
+F −1
+1 (x)2dx −2
+Z 1
+0
+xF −1
+1 (x)dx +
+Z 1
+0
+x2dx
+|
+{z
+}
+=1/3
+(∗)
+=
+Z 1
+0
+y2dF1(y) −
+Z 1
+0
+ydF 2
+1 (y) + 1
+3
+= 1
+3 + EY 2
+1 −E(Y1 ∨Y ),
+(3.67)
+
+
+PAGE 78
+76
+3 Prediction of stationary random ﬁelds
+where P(Y1 ∨Y ≤y) = F 2
+1 (y) and Y is an independent copy of Y1, and for the equality (∗) we
+substituted y = F −1
+1 (x). Integration by parts then yields
+W 2
+2 (Y1, Y2) = 1
+3 +
+Z 1
+0
+F1(y)(F1(y) −2y)dy.
+(3.68)
+This allows us to rewrite the prediction problem (3.66) using the form of (3.63) of the excursion
+metric and the approximative constraint W 2
+2 (X, ˆX) ≤ε as
+ˆλ = arginf
+λ∈Λ
+n
+2E
+h
+FX(X ∨ˆXλ)
+i
+−E
+h
+FX( ˆXλ)
+i
++ γW 2
+2 (X, ˆXλ)
+o
+,
+(3.69)
+where −1
+2 in (3.63) is ommited and the Wasserstein distance W 2
+2 (·, ·) is of the form (3.67) or
+(3.68), where the set Λ ⊂RN does not depend on g(., .) (it may be RN, [−M, M]N or RN
++).
+The factor γ ≥0 weighs the signiﬁcance of how close FX has to be to F ˆ
+Xλ. Under certain
+conditions, which are to be speciﬁed later, the inﬁmum in (3.69) is attained, thus turning
+arginf
+λ∈Λ
+to an argmin
+λ∈Λ
+. It follows that
+W 2
+2 (X, ˆXλ) =
+
+
+
+E
+h
+F 2
+X( ˆXλ)
+i
+−E
+h
+FX( ˆXλ ∨Y )
+i
++ 1
+3,
+R 1
+0 FFX( ˆ
+Xλ)(y)
+
+FFX( ˆ
+Xλ)(y) −2y
+
+dy + 1
+3,
+where Y is an independent copy of FX( ˆXλ) and FFX( ˆ
+Xλ) is the cumulative distribution function
+of FX( ˆXλ).
+Let us examine the existence of a solution to (3.69).
+Theorem 3.70 Let the joint distribution of (X, X1, . . . , XN) be absolutely continous. If the
+following conditions are met
+(I) Λ is compact in RN,
+(II) CX, ˆ
+Xλ(x, x) is uniformly continuous on λ ∈Λ,
+(III) for each λ ∈Λ, the distribution of ˆXλ is absolutely continuous with probability density
+function f ˆ
+Xλ such that f ˆ
+Xλ : Λ →L1(R) is continuous on Λ with respect to the L1-norm,
+then there exists a solution to minimization problem (3.69).
+Proof Using Lemma 3.61, the target functional in (3.69) can be rewritten as
+¯φ(λ) := 2 −2
+Z 1
+0
+CX, ˆ
+Xλ(x, x)dx −E(Zλ) −γ
+Z 1
+0
+FZλ(y)dy,
+λ ∈Λ,
+(3.70)
+where Zλ := FX( ˆXλ) and E[Zλ] =
+R 1
+0 P(Zλ>y)dy = 1 −
+R 1
+0 F ˆ
+Xλ(F −1
+X (y))dy. As an integral with
+parameter λ, i.e λ 7→
+R 1
+0 CX, ˆ
+Xλ(x, x)dx, continuity on Λ follows from condition (II).
+Furthermore, for any sequence {λk} ⊂Λ with λk →λ0 ∈Λ as k →∞, we have
+sup
+x∈R
+F ˆ
+Xλk(x) −F ˆ
+Xλ0(x)
+ = sup
+x∈R
+
+x
+Z
+−∞
+f ˆ
+Xλk(y) −f ˆ
+Xλ0(y)dy
+
+≤
+Z
+R
+f ˆ
+Xλk(y) −F ˆ
+Xλ0(y)
+ dy →0,
+
+
+PAGE 79
+3 Prediction of stationary random ﬁelds
+77
+as k →∞by condition (III). Therefore, F ˆ
+Xλk(F −1
+X (y)) is uniformly continuous on Λ with
+respect to y ∈[0, 1]. Applying the theorem on the continuity of integrals with parameters
+proves the continuity of E[Zλ] on Λ.
+Similarly, the term FZλ(y)(2y−FZλ(y)) is uniformly continuous on Λ with respect to y ∈[0, 1],
+so that also the third term in (3.70) is lies in C(Λ). Hence, the target functional ¯φ ∈C(Λ)
+attains its minimum on the compact set Λ.
+Remark 3.71 The L1- continuity of f ˆ
+Xλ in condition (III) means that
+f ˆ
+Xλk −f ˆ
+Xλ0
+
+1
+=
+Z
+R
+f ˆ
+Xλk(y) −f ˆ
+Xλ0(y)
+ dy →0,
+k →∞,
+for any sequence {λk} ⊂Λ with λk →λ0 as k →∞. However, due to
+1
+2
+Z
+R
+f ˆ
+Xλk(y) −f ˆ
+Xλ0(y)
+ dy = dTV ( ˆXλk, ˆXλ0),
+where dTV is the total variation distance, we see that this is equivalent to ˆXλk
+TV
+→
+ˆXλ0 as
+k →∞.
+Example 3.72 In the following we show that Theorem 3.70 holds true for any Gaussian
+random vector (X, X1, . . . , XN) with N(0, 1)-distributed marginals. Since Λg in Example 3.67
+(a) is an ellipsoid in RN−1, it is suﬃcient to consider Λ = [−M, M]N ⊃Λg for M > 0 large
+enough. Using the exact form of the copula diagonal CX, ˆ
+Xλ(x, x) form Example 3.68, we may
+see that
+CX, ˆ
+Xλ1(x, x) −CX, ˆ
+Xλ2(x, x)
+ ≤1
+2σ
+sin−1(cλ1) −sin−1(cλ2)
+
+uniformly on x ∈[0, 1] due to the inequality
+exp
+
+−
+
+ϕ−1(x)
+2 1 −sin(θ)
+cos2(θ)
+
+≤1.
+This shows condition (II) of Theorem 3.70.
+To show the validity of condition (III), assume the covariance matrix Σ of (X1, . . . , XN) to
+be positive deﬁnite such that ˆXλ ∼N(0, λ⊺Σλ) has a density for all λ ̸= 0. This density is
+obviously continuous on RN\{0} with respect to the L1-norm.
+In the next result, we show that it is often suﬃcient to consider bounded spaces Λ only, e.g.
+Λ =
+n
+λ ∈RN : ∥λ∥2 ≤µ
+o
+with µ > 0.
+Lemma 3.73 Assume that there exists a λ0 ∈Λ such that ¯φ(λ0) < 1 + γ
+3. Let ˆXλk
+p→∞as
+k →∞for any sequence {λk} ⊂Λ with∥λk∥2 →∞as k →∞. Then, there exists a constant
+M > 0 such that
+min
+λ∈Λ
+¯φ(λ) =
+min
+λ∈Λ:∥λ∥2≤M
+¯φ(λ).
+Proof Consider the target functional ¯φ in its form
+¯φ(λ) = 2E
+h
+FX(X ∨ˆXλ)
+i
+−E
+h
+FX( ˆXλ)
+i
++ γ
+
+E
+h
+F 2
+X( ˆXλ)
+i
+−E
+h
+FX( ˆXλ ∨Y )
+i
++ 1
+2
+
+,
+
+
+PAGE 80
+78
+3 Prediction of stationary random ﬁelds
+where Y is an independent copy of ˆXλ. The sequences {FX( ˆXλ)}, {F 2
+X( ˆXλ)}, {FX(X ˆXλ)} and
+{FX( ˆXλ ∨Y )} are uniformly integrable since they are a.s. bounded by 0 and 1. Hence, their
+expectations tent to 1 as λk →∞, k →∞, while ˆXλk
+p→∞, k →∞, and since FX(y) →1,
+y →∞. Then, it follows that
+¯φ(λk) →1 + γ
+3,
+k →∞.
+Choosing M > 0 such that ¯φ(λk) > ¯φ(λ0) for all k ∈N such that ∥λk∥2 > M concludes the
+proof of this lemma.
+Example 3.74 Assume there exists a λ0 ∈Λ such that
+(a) ˆXλ0 = X a.s. This may happen for some prediction function g, if X = Xj0 for some
+j0 ∈{1, . . . , N}. Then,
+¯φ(λ0) = 21
+2 −1
+2 + γ
+1
+3 −1
+2 + 1
+3
+
+= 1
+2 + γ 1
+6 < 1 + γ
+3
+for all γ ≥0.
+(b) ˆXλ0 and X are stochastically independent. Then,
+P
+
+FX(X ∨ˆXλ0) ≤x
+
+= P
+
+FX(x) ∨FX( ˆXλ0)
+|
+{z
+}
+=Y1
+≤x
+
+= P (FX(X) ≤x) P (Y1 ≤x) = xFY1(x)
+and
+2E
+h
+FX(X ∨ˆXλ0)
+i
+−E [Y1] = 2
+1
+Z
+0
+xd(xFY1(x)) −
+1
+Z
+0
+xdFY1(x)
+= 2
+
+1 −
+1
+Z
+0
+xFY1(x)dx
+
+−1 +
+1
+Z
+0
+dFY1(x)
+= 1 +
+1
+Z
+0
+FY1(x)(1 −2x)dx
+= 1 +
+1
+Z
+0
+
+FY1(x) −FY1
+1
+2
+
+(1 −2x)
+|
+{z
+}
+≤0
+dx < 1
+by integration by parts, since FY1(1
+2)
+R 1
+0 (1 −2x)dx = 0. Since
+E
+h
+F 2
+X( ˆXλ0)
+i
+−E
+h
+FX( ˆXλ0) ∨Y
+i
+< 0,
+we get ¯φ(λ0) < 1 + γ
+3 for all γ ≥0.
+Example 3.75 The condition ˆXλk
+p→∞as k →∞with ∥λ∥→∞, λk = (λk(1), . . . , λk(N))
+is satisﬁed for Λ = R+
+n and
+ˆXλ =
+N
+X
+j=1
+λk(j)Xj
+
+
+PAGE 81
+3 Prediction of stationary random ﬁelds
+79
+or
+ˆXλ =
+max
+j=1,...,N λk(j)Xj
+if Xj ≥0 a.s.
+3.5.6 Excursion-based prediction of stationary random ﬁelds
+Let X = {X(t), t ∈Rd} be a strictly stationary measurable random ﬁeld with marginal distri-
+bution Fθ0 ∈{Fθ, θ ∈Θ}, where {Fθ, θ ∈Θ} is a parametric family of absolutely continuous
+distributions and Θ ⊂Rk is its parameter space. The distribution Fθ may be heavy-tailed with
+no ﬁnite moments at all.
+Let X be observed on a set of locations T0 = W0 ∩Zn, where W0 ⊂Rd is a compact set and
+Zh = h1Z × · · · × hdZ is a d-dimensional grid with mesh sizes h = (h1, . . . , hd) ∈(0, ∞)d. We
+denote the observation of X on T0 by XT0 = {X(t), t ∈T0}.
+For a location t ∈Zn, t ∈W0, the goal is to predict X(t) from the so-called forecast sample
+XTf = {X(t1), . . . , X(tN)}, Tf = {t1, . . . , tN} ⊂Zh. As before, we are looking for a predictor
+ˆXλ of X(t) of the form ˆXλ = g(λ, XTf ), λ ∈Λ ⊂RN, such that
+ˆλ = argmin
+λ∈Λ
+n
+=EFθ0(X(t), ˆ
+Xλ)
+z
+}|
+{
+2E
+h
+Fθ0(X(t) ∨ˆXλ)
+i
+−E
+h
+Fθ0( ˆXλ)
+|
+{z
+}
+=Zλ
+i
+−1
+2 +γW 2
+2 (FZλ, FU)
+o
+,
+(3.71)
+where FU is the cumulative distribution function of U ∼U([0, 1]). Furthermore, in the above
+we have
+W 2
+2 (FZλ, FU) =
+
+
+
+
+
+E
+Z2
+λ
+ −E [Zλ ∨Y ] + 1
+3
+1R
+0
+FZλ(y)(FZλ(y) −2y)dy + 1
+3
+,
+(3.72)
+where Y is an independent copy of Zλ with cumulative distribution function FZλ.
+Theorem 3.76 (Weak consistency): Let the random ﬁeld X be absolutely continuous.
+Assume that there exists a ˜λk ∈Λ such that ˆX˜λk = X(tk) a.s. for all k = 1, . . . , N, and
+min
+j=1,...,N∥tj −t∥2 →0 as N →∞. Then,
+ˆXλ(t)
+p→X(t)
+as N →∞.
+Proof Let ˜tN = argmin
+j=1,...,N
+∥tj −t∥2 and ˜λ ∈Λ such that ˆX˜λ = X(˜tN) a.s. Then,
+EFθ0
+
+X(t), ˆXˆλ
+
++ γW 2
+2
+
+FZˆλ, Fn
+
+≤EFθ0
+
+X(t), ˆX˜λ
+
++ γW 2
+2
+
+FZ˜λ, Fn
+
+= EFθ0
+ X(t), X(˜tN))
+ + γ · 0 →0
+as N →∞, since the left-hand side is a minimum of all λ ∈Λ and ˆX˜λ = X(˜tN) d= X(t) due to
+stationarity implies that W 2
+2 (FZ˜λ, Fn) = 0. The last convergence holds since
+EFθ0
+ X(t), X(˜tN)
+ = E
+Fθ0(X(t))) −Fθ0(X(˜tN))
+
+
+
+PAGE 82
+80
+3 Prediction of stationary random ﬁelds
+and
+Fθ0(X(˜tN))
+p→Fθ0(X(t))
+due to (X(˜tN))
+p→(X(t)) as N →∞and Fθ0 ∈C(R). The L1-convergence of Fθ0(X(˜tN))
+to Fθ0(X(t)) holds since
+Fθ0(X(˜tN)) −Fθ0(X(t))
+	
+N≥1 is uniformly integrable due to its a.s.
+boundedness.
+In order to compute the forecast ˆX˜λ numerically, we ﬁrst estimate θ0 by a statistic ˆθ, and
+then use Fˆθ as a plug-in estimate of Fθ. Next, we discretize all expectations and integrals in
+(3.71) to minimize the functional
+¯φ(λ) = 1
+n
+n
+X
+j=1
+Qj →min
+λ∈Λ,
+(3.73)
+where
+Qj(λ) = 2Fˆθ
+
+X(t + sj) ∨g(λ, XTf+sj)
+
+−Fˆθ
+
+g(λ, XTf+sj)
+
++ γ
+
+F 2
+ˆθ
+
+g(λ, XTf+sj)
+
+−Fˆθ
+
+g(λ, XTf+sj)
+
+∨Yj
+
+,
+(3.74)
+for j = 1, . . . , n, γ ≥0. Here, it holds that {s1, . . . , sn} = {s ∈Zn : s + Tf ∪{t} ⊂T0}, and the
+sets Tf + sj are called learning samples, j = 1, . . . , n, see Figure 3.12.
+The random variables Yj are independent copies of Fˆθ
+
+g(λ, XTf+sj)
+
+. In practice, the sample
+Y1, . . . , Yn may be obtained from
+
+Fˆθ
+
+g(λ, XTf+s1), . . . , Fˆθ
+
+g(λ, XTf+sn)
+
+by resampling, e.g. bootstrapping. Note that in (3.74), we used the ﬁrst variant of the 2-
+Wasserstein distance from (3.72). Alternatively, the second variant can be used as well, dis-
+cretizing the integral
+1R
+0
+. . . dy therein by a sum.
+To guarantee that
+1
+n
+n
+X
+j=1
+Qj(λ) →EFθ0(X(t), ˆXλ) + γ · W 2
+2 (FZλ, Fn)
+a.s.
+as n →∞, we require the ergodicity of X together with strong consistency of ˆθ, i.e. ˆθ →θ0 a.s.
+as n →∞. The minimization problem in (3.73) may be solved using the stochastic subgradient
+descent method.
+3.5.7 Stochastic approximation and gradient descent
+Our functional ¯φ(λ) = 1
+n
+Pn
+j=1 Qj(λ) in Equation (3.73) can be seen as ¯φ(λ) = EQξ(λ), where
+λ ∈Λ, ξ ∼U({1, . . . , n}). The procedures of stochastic optimization (the so-called procedures
+of Robbins-Monro [35]) seek a solution to this problem as
+λ(l+1) = ΠΛ
+h
+λ(l) −ηl · ϕ(jl, λ(l))
+i
+,
+l ∈N0,
+(3.75)
+
+
+PAGE 83
+3 Prediction of stationary random ﬁelds
+81
+t1 + s1, . . . , tN + s1
+t1 + s2, . . . , tN + s2
+. . .
+t1 + sn, . . . , tN + sn
+t1, . . . , tN
+XTf+s1
+XTf+s2
+. . .
+XTf+sn
+XTf
+sample 1
+sample 2
+sample n
+sample
+Learning
+Learning
+Learning
+Prediction
+Fig. 3.12: Prediction and learning samples XTf+sj
+= {X(t1 + sj), . . . , X(tN + sj)}, j =
+0, 1, . . . , n (s0 = 0 for d = 1).
+where ΠΛ [·] is a metric (back) projection onto the space Λ, ηl > 0 is a step length factor such
+that
+∞
+X
+l=1
+ηl = ∞
+and
+∞
+X
+l=1
+η2
+l < ∞,
+(3.76)
+jl is an independent realization of ξ, i.e., a member chosen randomly from {1, . . . , n}, and (for
+the case of stochastic (sub-)gradient of Qj(.)) ϕ(j, λ) = ∇∗Qj(λ) is the (sub-)gradient of Qj(·)
+with respect to λ ∈Λ ⊂RN. The diﬀerence to the classical batch (sub-)gradient descent lies in
+the use of φ(j, λ) = ¯φ(λ) in the classical case, which does not depend on a realization j of ξ.
+Note that a sequence {ηl} satisfying the conditions (3.76) can be for example ηl = 1
+l . The
+iterations in (3.75) stop whenever |λ(l∗+1) −λ(l∗)| < δ for some small threshold δ > 0. Then,
+the solution ˆλ to the minimization problem (3.73) may be chosen to be either
+ˆλ = argmin
+l=0,...,l∗
+¯φ(λ(l))
+or
+ˆλ =
+1
+l∗−l0
+l∗−1
+X
+l=l0
+λ(l),
+the so-called Polyak-Ruppert averaging, which excludes the burn-in period of length l0.
+It is well known that the convergence of all gradient-like descent methods heavily depends
+on the right choice of the initial value λ(0). Hence, we recommend to choose λ(0) to be the
+outcome of another optimization procedure of the minimization problem
+¯φ(λ) →min
+λ∈Λ,
+e.g.
+simulated annealing genetic search, etc.
+In order to avoid the back-projection ΠΛ for
+Λ = RN
++, it is reasonable to use λ(l) =
+
+(λ(l)
+1 )2 . . . (λ(l)
+N )2
+in the computation of the gradients.
+Let us consider the convergence of stochastic (sub-)gradient descent.
+Theorem 3.77 Let Λ ⊂RN be compact. Assume that Qj, j = 1, . . . , n, are piecewise C2(Λ)
+and bounded on Λ, ¯φ(λ) ≥0 almost everywhere on Λ, and there exists a unique λ∗∈Λ such
+that ∇¯φ(λ∗) = 0, ¯φ(λ∗) = ¯φ(λ), λ ∈Λ. Assume that for i, j ∈{1, . . . , N} it holds that
+⟨∇Qi(λ), ∇Qj(λ)⟩≥0
+(3.77)
+almost everywhere on Λ and that this inequality is strict for at least one pair (i, j) ∈{1, . . . , n}2.
+Then, the stochastic gradient descent
+λ(l+1) −λ(l) = −ηl∇Qξ(λ(l)),
+ξ ∼U({1, . . . , n})
+(3.78)
+
+
+PAGE 84
+82
+3 Prediction of stationary random ﬁelds
+with a sequence {ηl} satisfying (3.76) converges a.s., i.e.
+λ(l) →λ∗
+a.s.,
+as l →∞.
+Proof For ¯φ ∈C2(Λ) a.e. on Λ its Taylor expansion is given by
+¯φ
+
+λ(l+1)
+−φ
+
+λ(l)
+=
+D
+∇¯φ
+
+λ(l)
+, λ(l+1) −λ(l)E
++ 1
+2
+
+λ(l+1) −λ(l)⊺H ¯φ
+
+λ(l) 
+λ(l+1) −λ(l)
+,
+where ⟨·, ·⟩denotes the Euclidean scalar product in RN and ˜λ(l) = λ(l) + δ(λ(l+1) −λ(l)),
+δ ∈(0, 1). Furthermore, H ¯φ(˜λ(l)) = 1
+n
+Pn
+j=1 HQj(˜λ(l)) is the Hessian matrix of ¯φ at ˜λ(l).
+Then, the above in combination with (3.78) yields
+¯φ
+
+λ(l+1)
+−φ
+
+λ(l)
+= 1
+n
+n
+X
+j=1
+ηl
+
+−
+D
+∇Qj
+
+λ(l)
+, ∇Qξ
+
+λ(l)E
++ ηl
+2 ∇Qξ
+
+λ(l)
+H∇Qj
+˜λ(l)
+∇Qξ
+
+λ(l)
+.
+(3.79)
+Due to the condition P∞
+l=1 η2
+l < ∞we have ηl →0 as l →∞. Additionally, since Qj ∈C2(Λ)
+piecewise, the gradient and Hessian matrix of Qj, i.e. ∇Qj and HQj, are bounded on the
+compact set Λ for all j = 1, . . . , n.
+From Equation (3.77) we get
+¯φ
+
+λ(l+1)
+−¯φ
+
+λ(l)
+≤0
+as l →∞. Since ¯φ(λ) ≥0 a.e. on Λ, it follows that there exists an a.s. limit, which we denote
+by liml→∞¯φ(λ(l)) := ¯φ∞a.s.
+It remains to show that
+¯φ∞= min
+λ∈Λ φ(λ).
+Since ξ ∈U{1, . . . , n}, it holds that ¯φ∞is a random variable with E[¯φ∞] < ∞by boundness
+on Λ. Thus,
+E
+h¯φ∞
+i
+=
+∞
+X
+l=0
+E
+h ¯φ(λ(l+1)) −¯φ(λ(l))
+|
+{z
+}
+≤0 for suﬃciently large l
+i
++ ¯φ
+
+λ(0)
+,
+which implies
+∞
+X
+l=0
+E
+h¯φ
+
+λ(l)
+−¯φ
+
+λ(l+1)i
+< ∞.
+Plugging-in (3.79) and dissolving the expectation with respect to ξ yields
+∞
+X
+l=0
+E
+h¯φ
+
+λ(l)
+−φ
+
+λ(l+1)i
+= 1
+n2
+∞
+X
+l=0
+n
+X
+i,j=1
+ 
+ηl
+D
+∇Qi
+
+λ(l)
+, ∇Qj
+
+λ(l)E
+−η2
+l
+2 ∇Qj
+
+λ(l)⊺HQi
+˜λ(l)
+∇Qj
+
+λ(l)!
+=
+∞
+X
+l=0
+ 
+ηl
+∇¯φ
+
+λ(l)
+2
+2 −η2
+l
+2 ∇¯φ
+
+λ(l)⊺H ¯φ
+˜λ(l)
+∇¯φ
+
+λ(l)!
+.
+
+
+PAGE 85
+3 Prediction of stationary random ﬁelds
+83
+Since ∇¯φ and H ¯φ are bounded on Λ and P∞
+l=1 η2
+l < ∞, the second term in the sum is bounded
+a.s. Hence, also the ﬁrst term has to be bounded a.s., and since P∞
+l=1 ηl = ∞, it has to hold
+∥∇¯φ(λ(l))∥2 →0
+a.s.
+as l →∞.
+It follows that λ∗= liml→∞λ(l) is a point of extremum of ¯φ. Since ¯φ(λ(l)) ↓¯φ∞and there
+exists a unique minimum of ¯φ by assumption, we have ¯φ∞= min
+λ∈Λ
+¯φ(λ).
+Now let us turn to the computation of the forecast ˆXλ. Assume that the marginal distribution
+Fθ has a density fθ, and that the random vectors (X(t + sj), X(t1 + sj), . . . , X(tN + sj)) , j =
+1, . . . , n have joint densities. Then, it is reasonable to assume
+P(X(t + sj) = g(λ, XTf+sj)) = 0
+and
+P(Yj = fˆθg(λ, XTf+sj)) = 0
+for j = 1, . . . , n, as well as
+P(g(λ, X(t + si)) = g(λ, XTf+sj)) = 0
+for i, j = 1, . . . , n.
+As a consequence, it becomes easy to calculate the sub-gradient ∇∗Qj, i.e.
+∇∗Qj =
+
+2 · 1(X(t + sj) < g(λ, XTf+sj)) −1
+
+fˆθ(g(λ, XTf+sj)) · ∇∗g(λ, XTf+sj)
++ γ
+
+2Fˆθ(g(λ, XTf+sj)) −1(g(λ, YTf+sj) < g(λ, XTf+sj))
+
+· fˆθ(g(λ, XTf+sj))∇∗g(λ, XTf+sj)
+−γ · 1(g(λ, YTf+sj) ≥g(λ, XTf+sj))fˆθ(g(λ, YTf+sj))∇∗g(λ, YTf+sj),
+where YTf+sj is an independent copy of XTf+sj) for all j = 1, . . . , n. The subgradients ∇∗g
+depend on the form of g, i.e. we have ∇∗g(λ, XTf+sj) = XTf+sj for g(λ, XTf ) = PN
+i=1 λiX(ti)
+and
+∇∗g(λ, XTf+sj) =
+
+X(ti + sj)1(λiX(ti + sj) = max
+k=1...NλkX(tk + sj)), i = 1, . . . , N
+
+for g(λ, XTf ) =
+max
+i=1,...,N λiX(ti).
+3.5.8 Excursion-based prediction of max-stable random ﬁelds
+Let us apply the above theory to the extrapolation of stationary max-stable random ﬁelds from
+Section 1.3. Let X = {X(t), t ∈Rd} be a stationary ergodic max-stable random ﬁeld with
+Fréchet(α)-marginal distributions, α > 0. Let
+ˆX =
+max
+j=1,...,N λjX(tj)
+be the predictor of X(t) with λ1, . . . , λN ≥0.
+Lemma 3.78 The pairwise extremal coeﬃcient θλ of (X(t), ˆX(t)) is given by
+θλ = lN+1(1, λα
+1 , . . . , λα
+N),
+where lN+1(·) is the tail dependence function of (X(t), X(t1), . . . , X(tN)).
+
+
+PAGE 86
+84
+3 Prediction of stationary random ﬁelds
+30
+31
+32
+33
+34
+35
+-2.5
+-2.0
+-1.5
+-1.0
+-0.5
+(a) Interpolation of a moving average X1 with Cauchy distributed marginals: True trajectory
+X1(t) (black), predicted trajectories ˆX1,u (red) and ˆX1,c (blue)
+30
+31
+32
+33
+34
+35
+-1.0
+-0.5
+(b) Extrapolation of a moving average X1 with Cauchy distributed marginals: True trajectory
+X1(t) (black), predicted trajectories ˆX1,u (red) and ˆX1,c (blue)
+30
+31
+32
+33
+34
+35
+2
+4
+6
+8
+10
+(c) Interpolation of a moving average X1 with Lévy distributed marginals: True trajectory
+X0.5(t) (black), predicted trajectories ˆX0.5,u (red) and ˆX0.5,c (blue)
+30
+31
+32
+33
+34
+35
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+(d) Extrapolation of a moving average X1 with Lévy distributed marginals: True trajectory
+X0.5(t) (black), predicted trajectories ˆX0.5,u (red) and ˆX0.5,c (blue)
+Fig. 3.13: Excursion based interpolation and extrapolation.
+
+
+PAGE 87
+3 Prediction of stationary random ﬁelds
+85
+Proof It is known that
+lim
+x→∞P
+ ˆX(t) > x | X(t) > x
+
+= 2 −θλ.
+Since P(X(t) > x) = 1 −e−x−α, x ∈R and
+P
+ ˆX(t) > x, X(t) > x
+
+= 1 −P( ˆX(t) ≤x) −P(X(t) ≤x) + P( ˆX(t) ≤x, X(t) ≤x)
+= 1 −2e−x−α + e−lN+1(1,λα
+1 ,...,λα
+N)x−α,
+we have
+2 −θλ = lim
+x→∞
+P( ˆX(t) > x, X(t) > x)
+P(X(t) > x)
+= lim
+x→∞
+1 −2e−x−α + e−lN+1(1,λα
+1 ,...,λα
+N)x−α
+1 −e−x−α
+(∗)
+= lim
+x→∞
+e−x−α 
+2 −lN+1(1, λα
+1 , . . . , λα
+N)e−(lN+1(1,λα
+1 ,...,λα
+N)−1)x−α
+e−x−α
+= 2 −lN+1(1, λα
+1 , . . . , λα
+N)
+where the equality (∗) follows from l’Hopital’s rule. The assertion follows immediately.
+Denote by lN the tail-dependence function of (X(t1), . . . , X(tN)).
+Corollary 3.79 Let Λg = {λ ∈RN
++ : lN(λα
+1 ), . . . , λα
+N) = 1}, see Example 3.67. Then, the
+optimization problem θλ →inf
+λ∈Λg from Example 3.68 reads
+lN+1(1, x) →
+min
+x∈RN
++ : lN+1(0,x)=1,
+(3.80)
+where x = (x1, . . . , xN) with xi = λα
+i , i = 1, . . . , N.
+Proof It is clear that lN(x) = lN+1(0, x) for all x ∈Rd. The constraint lN(x) = 1 is equivalent
+to ˆX(t) d= X(t). The remaining part is trivial.
+For α > 1 the above result can be interpreted geometrically. To do so, the so-called D-norm
+needs to be introduced.
+Deﬁnition 3.80 Let (Y1, . . . , YN) be a random vector with components Yj ≥0 a.s.
+and
+E[Yj] = 1, j = 1, . . . , N. Then,
+∥x∥D := E
+
+max
+j=1,...,n |xj|Yj
+
+,
+x ∈RN,
+deﬁnes the so-called D-norm with a generator (Y1, . . . , YN).
+Exercise Show that ∥· ∥D is a norm on the space RN.
+For Y1, . . . , YN ∼Fréchet(α), α > 1, the D-norm with generator (E[Y1])−1(Y1, . . . , YN) is
+given by
+∥x∥D = E
+"
+max
+j=1,...,Nxj
+Yj
+E(Yj)
+#
+= Γ−1
+
+1 −1
+α
+
+E [x1Y1 ∨· · · ∨xNYN] .
+
+
+PAGE 88
+86
+3 Prediction of stationary random ﬁelds
+Lemma 3.81 Let (Y1, . . . , YN) be a max-stable random vector such that Yj = X(tj), j =
+1, . . . , N, generating the above D-norm. For all λ = (λ1, . . . , λN) ∈RN
++, it holds that
+(a) ∥λ∥D = l1/α
+N (λα
+1 , . . . , λα
+N)
+(b) ∥.∥D is convex.
+(c) If X(t1), . . . , X(tN) are stochastically independent, then ∥λ∥D = ∥λ∥α =
+PN
+j=1 λα
+j
+1/α.
+Proof
+(a) By homogeneity of lN, it holds that
+P(λ1Y1 ∨· · · ∨λNYN) = P(λ1Y1 ≤x, . . . , λNYN ≤x) = exp{−x−αln(λα
+1 , . . . , λα
+N)},
+i.e.
+max
+j=1,...,NλjYj ∼Fréchet(α, 0, lN(λα
+1 , . . . , λα
+N)).
+Then,
+∥λ∥D = Γ
+
+1 −1
+α
+−1
+E [λ1Y1 ∨· · · ∨λNYN] = l1/α
+N (λα
+1 , . . . , λα
+N).
+(b) This follows from convexity of lN, see Proposition 1.6.
+(c) This follows from Exercise 1.7.
+Remark 3.82 For λ ∈RN
++, let ˜λ = (1, λ) ∈RN+1
++
+. If α > 1, then the minimization problem
+(3.80) rewrites as
+∥˜λ∥D →
+min
+λ∈RN
++ :∥(0,λ)∥D=1,
+which means that the D-norm on RN+1 generated by (X(t), X(t1), . . . , X(tN)) is minimized on
+the positive part of N-dimensional unit ball ∥(0, λ)∥D = 1.
+In this case the predictor (3.71) can be rewritten as
+ˆλ = argmin
+λ∈RN
++
+
+2E
+h
+e−(X(t)∨ˆ
+X(t))−αi
+−E
+h
+e−ˆ
+X(t)−αi
++ γ
+1
+3 −E
+h
+e−ˆ
+X(t)−αi
++ E
+h
+e−2 ˆ
+X(t)−αi
+−1
+2
+
+,
+with γ ≥0, where Y is an independent copy of e−ˆ
+X(t)−α. Taking the Wasserstein metric from
+Equation (3.72) into account, it follows that
+ˆλ = argmin
+λ∈RN
++
+
+2E
+h
+e−(X(t)∨ˆ
+X(t))−αi
+−E
+h
+e−ˆ
+X(t)−αi
+−1
+2 + γ
+1
+3 +
+Z 1
+0
+FZλ(u)(FZ(u) −2u)du
+
+,
+(3.81)
+where Zλ = e−( ˆ
+X(t))−α. Using a substitution xj = λα
+j , j = 1, . . . , N, again, we may conclude
+with the following lemma.
+Lemma 3.83 The minimization problem in (3.81) is equivalent to
+2lN+1(1, x)
+lN+1(1, x) + 1 −
+lN+1(0, x)
+lN+1(0, x) + 1 + γ
+3
+(lN+1(0, x) −1)2
+(lN+1(0, x) + 1/2)(lN+1(0, x) + 2) →min
+x∈RN
++
+,
+where x = (x1, . . . , xN) and lN+1 is the tail dependence function of (X(t), X(t1), . . . , X(tN)).
+
+
+PAGE 89
+3 Prediction of stationary random ﬁelds
+87
+Proof Set t0 = t and λ0 = 1. Then, clearly it holds that
+X(t) ∨ˆX(t) =
+max
+j=0,...,N λjX(tj).
+Computing the cumulative distribution function of Zλ yields
+FZλ(u) = P
+
+e−X(t)−α ≤u
+
+= P
+ ˆX(t) ≤(−log u)−1/α
+= ulN(λα
+1 ,...,λα
+N),
+u ∈[0, 1].
+Similarly, we have
+P
+
+e−(X(t)∨ˆ
+X(t))−α ≤u
+
+= ulN+1(1,λα
+1 ,...,λα
+N),
+u ∈[0, 1].
+As a consequence
+E
+h
+e−(X(t)∨ˆ
+X(t))−αi
+=
+1
+Z
+0
+
+1 −ulN+1(1,
+=x
+z
+}|
+{
+x1, . . . , xN )
+du =
+lN+1(1, x)
+lN+1(1, x) + 1,
+and similarly
+E
+h
+e−ˆ
+Xα
+λ
+i
+=
+lN+1(0, x)
+lN+1(0, x) + 1.
+The squared W2-distance rewrites as
+W 2
+2 (FZλ, Fu) = 1
+3 +
+1
+Z
+0
+
+u2lN+1(0,x) −2ulN+1(0,x)+1
+du
+(∗)
+= 1
+3 +
+1
+2lN+1(0, x) + 1 −
+2
+lN+1(0, x) + 2
+= 1
+3
+(lN+1(0, x) −1)2
+(lN+1(0, x) + 1/2)(lN+1(0, x) + 2),
+where the equality (∗) follows from U ∼U([0, 1]).
+Let us show the existence of the forecast ˆλ from Equation (3.81).
+Theorem 3.84 The minimization problem (3.81) has a solution.
+Proof The random vector (X(t0), X(t1), . . . , X(tN)) is max-stable with Fréchet(α)-marginals,
+and hence absolutely continuously distributed. Since lim
+x→0e−x−α = 0 and
+lim
+∥λ∥2→0
+ˆX(t) = 0 a.s.,
+there exists a λ0 ∈RN
++ such that
+Ψ(λ) = 2E
+h
+e−(X(t)∨ˆ
+X(t))−αi
+−E
+h
+e−ˆ
+X(t)−αi
++ γ
+1
+3 + E
+h
+e−(2 ˆ
+X(t))−αi
+−E
+h
+e−( ˆ
+X(t))−α ∨Y
+i
+< 1 + γ
+3
+holds.
+Together with the a.s. divergence
+lim
+∥λ∥2→∞
+ˆX(t) = ∞a.s. and Lemma 3.73, the existence
+of M > 0 follows, i.e.
+min
+λ∈RN
++
+Ψ(λ) =
+min
+λ∈[0,M]NΨ(λ), and thus condition (I) of Theorem 3.70 is
+satisﬁed.
+
+
+PAGE 90
+88
+3 Prediction of stationary random ﬁelds
+Since
+ˆX(t) ∼Fréchet(α, 0, l1/α
+N (λ1/α
+1
+, . . . , λ1/α
+N )
+|
+{z
+}
+=σ(λ,α)
+),
+its density is given by
+f ˆ
+X(t)(x) = ασα(λ, α)
+xα+1
+exp
+
+−
+σ(λ, α)
+x
+α
+.
+Note that f ˆ
+X(t) is bounded from above uniformly in λ ∈[0, M]N.
+By the dominated convergence theorem, we get (denoting ˆXλ := ˆX(t))
+lim
+∥h∥2→0
+f ˆ
+Xλ −f ˆ
+Xλ+h
+
+L1 =
+lim
+∥h∥2→0
+Z
+R
+f ˆ
+Xλ −f ˆ
+Xλ+h
+ dx =
+Z
+R
+lim
+∥h∥2→0
+f ˆ
+Xλ −f ˆ
+Xλ+h
+ = 0.
+Since the tail dependence function lN(·) is convex, it is also continuous, and consequently f ˆ
+Xλ
+is continuous in λ. Thus, condition (III) of Theorem 3.70 is satisﬁed.
+Since the copula CX(t), ˆ
+X(t)(x, x) = xθλ, where θλ = l2(1, 1) is the pairwise extremal coef-
+ﬁcient of (X(t), ˆX(t)), θλ is continuous on [0, M]N because of the continuity of l2.
+Hence,
+1R
+0
+CX(t), ˆ
+X(t)(x, x)dx =
+1
+θλ+1 is continuous as well, and the application of Theorem 3.70 resumes
+this proof.
+Now let us discretize the expectations in Ψ(λ) and write the functional ¯φ(λ) = 1
+n
+nP
+j=1
+Qj(λ)
+with
+Qj(λ) := 2 exp{−(X(t + sj) ∨g(λ, XTf+sj))−α} −exp{−g−α(λ, XTf+sj)}
++ γ
+1
+3 −exp{−g−α(λ, XTf+sj)} ∨Yj + exp{−2g−α(λ, XTf+sj)}
+
+,
+j = 1, . . . , n,
+where Yj is an independent copy of exp{−g−α(λ, XTf+sj)}. To implement the stochastic sub-
+gradient descent, we also need the subgradients
+∇∗Qj(λ) =
+
+∇q(l)
+j (λ) −∇p(l)
+j (λ), l = 1, . . . , N
+⊺,
+where
+∇q(l)
+j (λ) =
+ 
+2 · 1 (X(t + sj) < λlX(tl + sj)) −1
+−γ · 1
+
+max
+i=1,...,N λi ˜X(ti + sj) <
+max
+i=1,...,N λiX(ti + sj)
+
++ 2γ exp{−(λl ˜X(tl + sj))}
+!
+× f(λl ˜X(tl + sj)) · X(tl + sj) · 1
+
+λl ˜X(tl + sj) =
+max
+i=1,...,N λiX(ti + sj)
+
+
+
+PAGE 91
+3 Prediction of stationary random ﬁelds
+89
+and
+∇p(l)
+j (λ) = γ · 1
+
+max
+i=1,...,N λi ˜X(ti + sj) >
+max
+i=1,...,N λiX(ti + sj)
+
+× f(λl ˜X(tl + sj)) · 1
+
+λl ˜X(tl + sj) =
+max
+i=1,...,N λi ˜X(ti + sj)
+
+for j = 1, . . . , n, l = 1, . . . , N, where ( ˜X(t1 + sj), . . . , ˜X(tN + sj)) is an independent copy of
+(X(t1 + sj), . . . , X(tN + sj)) for all j = 1, . . . , n and
+f(x) = αx−1−αe−x−α,
+x > 0,
+is the probability density function of the Fréchet(α) distribution.
+
+
+PAGE 92
+90
+3 Prediction of stationary random ﬁelds
+3.6 Conditional simulation of stationary Gaussian random ﬁelds
+Let X = {X(t), t ∈T}, T ⊂Rd, be a stationary Gaussian random ﬁeld with mean zero,
+var(X(t)) ≡1 and covariance function C(t) = cov(X(s), X(t)). Our goal is to simulate X(t)
+at locations t /∈{t1, . . . , tN} ⊂W, where W is a compact observation window, provided that
+observations X(t1) = y1, . . . , X(tN) = yN are given.
+Let ˆX = { ˆX(t), t ∈W} be the simple Kriging prediction of X in W, compare Section 3.2.1.
+By theorem 3.16 (iv), the random ﬁelds ˆX and X −ˆX are stochastically independent. Indeed,
+in the Gaussian case the orthogonality of ˆX(t) and X(t) −ˆX(t) means independence, for any
+t ∈W, since ˆX(t) and X(t) −ˆX(t) are jointly Gaussian as linear combinations of observations
+X(tj), j = 1, . . . , N. The same reasoning can be applied to arbitrary linear combinations of
+values of ˆX(t) and X(t) −ˆX(t), t ∈W.
+Therefore, it holds that X(t) = (X(t)−ˆX(t))+ ˆX(t), where both components are independent
+and Gaussian. This leads to the following algorithm to simulate X(t) conditional on X(tj) = yj,
+j = 1, . . . , N:
+1. Simulate a Gaussian random ﬁeld with mean 0 and covariance function C(·) at locations
+t ∈W. Denote the resulting ﬁeld by {X∗(t), t ∈W}.
+2. Compute the simple Kriging estimates of {X∗(t), t ∈W} on the sample {X∗(tj), j =
+1, . . . , N}. Denote the resulting ﬁeld by
+n ˆX∗(t) = PN
+j=1 λ∗
+jX∗(tj), t ∈W
+o
+.
+3. Return ˜X(t) = ˆX(t) + X∗(t) −ˆX∗(t), t ∈W.
+The ﬁeld { ˜X(t), t ∈W} is a conditional simulation of X provided that X(tj) = yj. Indeed,
+since simple Kriging is exact, it holds that ˆX∗(tj) = X∗(t) and ˆX(tj) = X(tj) = yj for all
+j = 1, . . . , N.
+Moreover, ˜X is obviously Gaussian as a sum of two independent Gaussian
+components ˆX and X∗−ˆX∗.
+Remark 3.85 For points t lying far away from t1, . . . , tN one can expect ˜X(t) ≈X∗(t), i.e.,
+the simulation becomes uncondiditonal. Indeed, if C(t) →0 as ∥t∥2 →∞, the simple Kriging
+weights λj in ˆX(t) = PN
+j=1 λjYj and λ∗
+j of ˆX∗(t) = PN
+j=1 λ∗
+jX∗(tj) are very small, which yields
+ˆX(t) ≈0 and ˆX∗(t) ≈0.
+
+
+PAGE 93
+3 Prediction of stationary random ﬁelds
+91
+950
+960
+970
+980
+990
+1000
+1010
+1020
+1030
+1040
+1050
+5
+6
+7
+8
+9
+10
+0.02
+0.025
+0.03
+0.035
+0.04
+0.045
+0.05
+(a) A 50 time steps’ forecast (dashed blue line), together with its corresponding excursion metric (red
+line), of a Brown-Resnick process (blue line). After observing 110 values of B, the predictor ˆB used
+ten learning samples of size eleven. Step-sizes for the stochastic gradient descent were given by the
+harmonic series {1/n}n∈N. The underlying process Y of the Brown-Resnick process was a standard
+Brownian motion.
+950
+960
+970
+980
+990
+1000
+1010
+1020
+1030
+1040
+1050
+0.8
+1
+1.2
+1.4
+1.6
+0.05
+0.06
+0.07
+0.08
+0.09
+0.1
+(b) A 50 time steps’ forecast (dashed blue line), together with its corresponding excursion metric (red
+line), of an extremal Gaussian process (blue line). After observing 110 values of G, the predictor ˆG
+used ten learning samples of size eleven. Step-sizes for the stochastic gradient descent were given by
+the harmonic series {1/n}n∈N. The underlying process Y of G was a Gaussian process with Cauchy
+covariance function C(t) = exp(−|t|0.01).
+Fig. 3.14: Forecast of a Brown-Resnick and extremal Gaussian process
+
+
+PAGE 94
+92
+3 Prediction of stationary random ﬁelds
+20
+0
+0
+20
+20
+25
+40
+40
+Brown-Resnick
+60
+60
+30
+35
+0
+0
+0
+20
+20
+40
+40
+Smith
+20
+60
+60
+40
+0
+0
+0
+20
+20
+40
+1
+40
+Extremal Gaussian
+60
+60
+2
+Fig. 3.15: A ten steps’ forecast of random ﬁelds of each type in both directions t1 and t2. After
+observing true values of the random ﬁelds at locations t ∈{1, . . . , 50} × {1, . . . , 50},
+the predictor extended the random surfaces to t ∈{1, . . . , 60} × {1, . . . , 60}.
+Step-sizes for the stochastic gradient descent were given by the harmonic series
+{1/n}n∈N.
+
+
+PAGE 95
+3 Prediction of stationary random ﬁelds
+93
+1880
+1900
+1920
+1940
+1960
+1980
+2000
+2020
+Year
+0
+500
+1000
+1500
+Annual Daily Maximum Rainfall (mm)
+0
+200
+400
+600
+800
+1000
+x
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+CDF
+(a) The left plot shows the yearly maximum of daily rainfall in Munich, Germany from 1879 to 2022.
+The right plot shows the corresponding empirical c.d.f.
+¯F (blue line) and the ML-estimated
+Fréchet(ˆα, ˆµ, ˆσ) c.d.f. (red line) with ˆα = 7.7551, ˆµ = −545.0173 and ˆσ = 959.8184,
+2002
+2004
+2006
+2008
+2010
+2012
+2014
+2016
+2018
+2020
+2022
+t
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+2000
+Annual Daily Maximum Rainfall (mm)
+(b) Forecasts for the annual daily rainfall maxima from 2013 to 2022. All data from 1883-2012 was used
+in learning samples. The real data is shown by the blue line. The red lines mark the maximum and
+minimum of 100 forecasts using the max-stable predictor with bootstrap. The green line yields the
+forecast using the alternative formulation. For every extrapolation 12 learning samples of size 10
+containing data from 1883-2002 and a forecast sample containing data from 2003-2012 were used.
+Fig. 3.16: Forecast of Munich daily maximums of rainfall
+
+
+PAGE 96
+Bibliography
+[1] S Bandyopadhyay and S. Lahiri. Asymptotic properties of discrete fourier transforms for
+spatial data. Sankhya, 71:221 – 259, 2009.
+[2] S Bandyopadhyay, S.N. Lahiri, and D.J. Nordman. A frequency domain empirical likeli-
+hood method for irregularly spaced spatial data. Ann. Statist., 43:519 – 545, 2015.
+[3] A. V. Bulinski and A. P. Shashkin. Limit theorems for associated random ﬁelds and related
+systems. World Scientiﬁc, 2007.
+[4] J. P. Chilès and P. Delﬁner. Geostatistics: Modeling Spatial Uncertainty. Wiley, 2 edition,
+2012.
+[5] Y.-S. Chow and U. Grenander. A sieve method for the spectral density. Ann. Statist.,
+13:998–1010, 1985.
+[6] R. Dahlhaus and H. Künsch. Edge eﬀects and eﬃcient parameter estimation for stationary
+random ﬁelds. Biometrika, 74:877 – 882, 1987.
+[7] L. De Haan and A. Ferreira.
+Extreme value theory: an introduction.
+Springer-Verlag
+GmbH, New York, 2006.
+[8] S. Deb, M. Pourahmadi, and W. B. Wu. An asymptotic theory for spectral analysis of
+random ﬁelds. Electron. J. Statist., 11:4297 –4322, 2017.
+[9] T. Donhauser, V. Makogin, and E. Spodarev. Extrapolation of max-stable random ﬁelds
+with Fréchet margins. Preprint, 2023.
+[10] P. Doukhan. Mixing: properties and examples. Springer-Verlag GmbH, 1994.
+[11] M. Fuentes. Spectral methods for nonstationary spatial processes. Biometrika, 89:197–210,
+2002.
+[12] M. Fuentes. Approximate likelihood for large irregular spaced spatial data. J. Am. Statist.
+Assoc., 102:321 – 331, 2007.
+[13] A. Genz and F. Bretz.
+Computation of multivariate normal and t probabilities.
+LNS.
+Springer-Verlag GmbH, Berlin, 2009.
+[14] T. Gneiting and A. E. Raftery. Strictly proper scoring rules, prediction, and estimation.
+J. Am. Statist. Assoc., 102:359 – 378, 2007.
+[15] J. Guiness.
+Spectral density estimation for random ﬁelds via periodic embeddings.
+Biometrika, 106(2):p.267–286, 2019.
+[16] J. Guiness and M. Fuentes. Circulant embedding of approximate covariances for inference
+from gaussian data on large lattices. J. Comp. Graph. Statist., 26:88 – 97, 2017.
+94
+
+
+PAGE 97
+Bibliography
+95
+[17] J. Guinness. Permutation and grouping methods for sharpening gaussian process approx-
+imations. Techno-metrics, 60:415 – 429, 2018.
+[18] X. Guyon.
+Parameter estimation for a stationary process on a d-dimensional lattice.
+Biometrika, 69:95 – 105, 1982.
+[19] C. C. Heyde and R. Gay. Smoothed periodogram asymptotics and estimation for processes
+and ﬁelds with possible long-range dependence. Stochastic Processes and their Applica-
+tions, 45(1):169–182, March 1993.
+[20] A.V. Ivanov and N.N. Leonenko. Statistical Analysis of Random Fields. Kluwer Academic
+Publishers, 1989.
+[21] A. N. Kolmogorow. On the problem of the goodness of empirical statistical forecast for-
+mulae. J. Geophys., 3:p.78–82, 1933.
+[22] C. Lantuéjoul. Geostatistical Simulation: Models and Algorithms. Springer-Verlag GmbH,
+2002.
+[23] T. C. Lee. A simple span selector for periodofram smoothing. Biometrika, 84:965 – 969,
+1997.
+[24] T. C. Lee. A stabilized bandwidth selection method for kernel smooting of the periodogram.
+Sig. Proces., 81:419 – 430, 2001.
+[25] T. C. Lee and Z. Zhu. Nonparametric spectral density estimation with missing observa-
+tions. International Conference of Acoustics, Speech and Signal Processing, 2009.
+[26] C. Y. Lim and M. Stein.
+Properties of spatial cross-periodograms using ﬁxed-domain
+asymptotics. J. Mult. Anal., 99:1962–1984, 2008.
+[27] R. J. Little and D. B. Rubin. Statistical Analysis with Missing Data. John Wiley & Sons,
+Hoboken, New Jersey, 2014.
+[28] Y. Matsuda and Y. Yajima. Fourier analysis of irregularly spaced data on r. J. R. Statist.
+Soc. B, 71:191–217, 2009.
+[29] G. Miller. Properties of certain symmetric stable distributions. Journal of multivariate
+analysis, 8:p.346–360, 1978.
+[30] D. Nychka, S. Bandyopadhyay, D. Hammerling, F. Lidgren, and S. Sain. A multiresolution
+gaussian process model for the analysis of large spatial datasets. J. Comp. Graph. Statist.,
+24:579–599, 2015.
+[31] H. C. Ombao, J. A. Raz, R. L. Strawderman, and R. Von Sachs. A simple generalised
+crossvalidation method. Biometrika, 88:1186–1192, 2001.
+[32] Y. Pawitan and F. O’Sullivan. Nonparametric spectral density estimation using penelized
+whittle likelihood. J. Am. Statist. Assoc., 69:600–610, 1994.
+[33] Dimitris N. Politis and Joseph P. Romano. Bias-corrected nonparametric spectral estima-
+tion. Journal of Time Series Analysis, 16(1):67–103, 1995.
+
+
+PAGE 98
+96
+Bibliography
+[34] S. Resnick. Extreme values, Regular variation and point processes. Springer- Verlag GmbH,
+1987.
+[35] H. Robbins and S. Monroe. A stochastic spproximation method. Ann. Math. Stat., 22:400
+– 407, 1951.
+[36] M. Rosenblatt. Stationary sequences and random ﬁelds. Birkhäuser Boston, 1985.
+[37] G. Samorodnitsky and M.S. Taqqu. Stable non-Gaussian random processes. Chapmann
+& Hall, 1994.
+[38] V. Schmidt. Stochastic geometry, spatial statistics and random ﬁelds. Models and algo-
+rithms, volume 2120 of Lecture Notes of Mathematics. Springer-Verlag GmbH, 2015.
+[39] A. N. Shiryayev. Interpolation and Extrapolation of Stationary Random Sequences, pages
+272–280. Springer Netherlands, Dordrecht, 1992.
+[40] E. Spodarev. Stochastic geometry, spatial statistics and random ﬁelds. Asymptotic methods,
+volume 2068 of Lecture Notes of Mathematics. Springer-Verlag GmbH, 2013.
+[41] E. Spodarev. Wahrscheinlichkeitstheorie und stochastische Prozesse. Lecture Notes. Ulm
+University, 2020.
+[42] E. Spodarev. Random ﬁelds. Lecture Notes. Ulm University, 2022.
+[43] Evgeny Spodarev. Random Fields. 2022.
+[44] M. L. Stein. Fixed-domain asymptotics for spatial periodograms. J. Am. Statist. Assoc.,
+90:1277–1288, 1995.
+[45] M. L. Stein. Interpolation of Spatial Data: Some Theory for Kriging. Springer-Verlag
+GmbH, New York, 1999.
+[46] J. R. Stroud, M. L. Stein, and S. Lysen. Bayesian and maximum likelihood estimation for
+gaussian processes on an incomplete lattice. J. Comp. Graph. Statist., 26:108–120, 2017.
+[47] S. Subba Rao. Statistical inference for spatial statistics deﬁned in the fourier domain.
+Ann. Statist., 46:466–469, 2018.
+[48] A. M. Sykulski, S. C. Olhede, A. P. Guillaumin, J. M. Lilly, and Early; J. J. The debiased
+whittle likelihood. Biometrika, 106:251–266, 2019.
+[49] M. A. Tanner and W. H. Wong. The calculation of posterior distributions by data aug-
+mentation. J. Am. Statist., 82:528–540, 1987.
+[50] A. V. Vecchia. Estimation and model identiﬁcation for continuous spatial processes. J. R.
+Statist. Soc. B, 50:297–312, 1988.
+[51] H. Wackernagel. Multivariate Geostatistics. An Introduction with Applications. Springer-
+Verlag GmbH, 3 edition, 2003.
+[52] G. Wahba. Automatic smoothing of the log periodogram. J. Am. Statist. Assoc., 75:122–
+132, 1980.
+
+
+PAGE 99
+Bibliography
+97
+[53] P. Whittle. On stationary processes in the plane. Biometrika, 41:434–449, 1954.
+[54] Y. Zheng, J. Zhu, and A Roy. Nonparametric bayesian inference for the spectral density
+function of a random ﬁeld. Biometrika, 97:238–245, 2009.
+
+
+PAGE 100
+Index
+D-norm, 85
+G-invariant
+in the strict sense, 2
+in wide sense, 2
+α-mixing rate, 16
+α-quantile regression estimate, 56
+α-stable
+random ﬁeld, 13
+adjacency matrix, 53
+asymptotic normal, 15
+B-Splines, 48
+Bessel function
+of the ﬁrst kind of order ν, 42
+Brown-Resnick random ﬁeld, 8
+Brownian Lévy ﬁeld, 6
+Cauchy distribution, 12
+centered, 3
+classical batch (sub-)gradient descent, 81
+complete dependence, 8
+conditional bias reduction
+universal Kriging, 46
+conditional unbiasedness, 33
+copula, 67
+degree of a vertex, 53
+drift, 34
+estimation, 45
+estimation variance, 45
+drift correction, 46
+ellipsoid constraint, 61
+empirical quantile, 54
+energy, 50
+exactness
+universal Kriging, 46
+excursion pseudo metric, 67
+excursion set, 58
+extremal coeﬃcient, 8
+Extremal Gaussian random ﬁeld, 9
+extreme value distribution, 7
+Fejér kernel, 19
+Fisher-Tippett-Gnedenko, 7
+forecast
+excursion-based, 73
+fractional Brownian ﬁeld, 5
+fractional Brownian motion, 6
+Fréchet distribution, 7
+Fréchet(α), 7
+standard, 7
+geoadditive regression, 47
+geometric anisotropy, 35
+geostatistics, 1
+Gini metric, 72
+group of
+all rigid motions, 3
+rotations SOd, 2
+translations, 2
+Gumbel distribution, 7
+homogeneous of order 1, 8
+homoscedasticity, 33
+Hurst index, 6
+increments, 3
+inﬁnitely divisible, 58
+inﬁnitely divisible class, 58
+intrinsic stationarity, 3
+of order two, 3
+isotropic, 2
+Gaussian ﬁelds, 5
+Kriging, 30
+Lagrange function, 43
+Lagrange multiplier, 37
+law of total variance, 39
+learning samples, 80
+98
+
+
+PAGE 101
+Bibliography
+99
+level set, 58
+linear regression, 24
+Gaussian, 32
+long memory, 4
+Lorenz curve, 72
+loss function, 57
+Lévy distribution, 12
+madogram, 71
+Markov random ﬁeld, 52
+max-stable, 6
+mean-square consistent, 15
+median, 54
+median regression, 54
+modiﬁed Bessel function
+of the third kind, 42
+motion invariant, 3
+Gaussian ﬁelds, 5
+normal distribution, 12
+nugget eﬀect, 35
+observations, 14
+ordinary Kriging estimate, 37
+orthogonality
+universal Kriging, 46
+p-Wasserstein distance, 75
+penalization factor, 56
+penalized regression, 50
+penalty, 56
+penalty factor, 50
+periodogram, 18
+Polyak-Ruppert averaging, 81
+polynomial spline, 49
+primary function, 4
+quadratically constrained quadratic problem,
+62
+radial functions, 52
+random ﬁeld, 2
+Boolean, 4
+Gaussian, 5
+Ornstein-Uhlenbeck, 5
+subgaussian, 13
+random surfaces, 1
+range dependence, 4
+response, 46
+Rosenblatt dependence rate, 16
+second order cone programming, 62
+separation pseudo-metric, 71
+shift parameter, 11
+short memory, 4
+simplex constraint, 61
+Smith random ﬁeld, 9
+smoothing kernel, 20
+space-time continuum, 1
+spatial autoregressive process, 53
+spectral
+measure, 11
+representation, 3
+stability index, 11
+stable
+α, 11
+random vector, 11
+stationary, 2
+Gaussian ﬁelds, 5
+in the strict sense, 13
+step length factor, 81
+stereology, 1
+stochastic subgradient descent method, 80
+Subgaussian, 28
+symmetric distribution, 12
+tail dependence function, 7, 8
+target, 46
+linear part, 47
+non-linear additive part, 47
+regression error, 47
+Tensor product bases, 47
+tick function, 57
+time line, 1
+truncated power series, 49
+unit simplex Sn, 7
+universal Kriging
+variance, 45
+universality constraints, 43
+variogram, 3
+volume, 14
+Weibull distribution, 7
+Whittle-Matern-type
+covariance function, 42
+family of variogram models, 42
+Wiener process, two-sided, 6

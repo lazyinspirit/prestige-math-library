@@ -1,0 +1,136 @@
+[
+  {
+    "order": 1938,
+    "id": "cluster-and-two-stage-sampling",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Cluster and two-stage sampling",
+    "companion": "cluster-and-two-stage-sampling-examples",
+    "requires": [
+      "finite-populations-and-sampling-designs",
+      "probability-spaces-random-variables-and-expectation",
+      "conditional-expectation"
+    ],
+    "items": [
+      {
+        "id": "def-cluster-sampling-design-and-cluster-totals",
+        "kind": "definition",
+        "title": "Cluster sampling units, cluster totals, and one-stage SRSWOR",
+        "statement": "Defines a finite population partitioned into primary sampling units (PSUs), the secondary sampling units (SSUs) within each PSU, fixed PSU totals, one-stage cluster sampling, and the exact uniform SRSWOR law for selecting a fixed number of PSUs.",
+        "strategy": "Definition: partition the finite SSU population into nonempty finite clusters; state the PSU and SSU roles, fixed values and totals, target, general one-stage design law, and the uniform fixed-size SRSWOR specialization.",
+        "deps": [
+          "def-finite-population-and-sampling-design"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-two-stage-cluster-sampling-and-expansion-estimator",
+        "kind": "definition",
+        "title": "Two-stage sampling laws and the expansion estimator",
+        "statement": "Defines a first-stage probability design on PSUs and independent conditional second-stage designs on each selected PSU, all stage-specific first- and second-order inclusion probabilities, the within-PSU Horvitz–Thompson total, and the two-stage expansion estimator under positive first-order inclusion probabilities.",
+        "strategy": "Definition: give the joint law as the first-stage mass times the product of the selected PSUs' second-stage masses; define each stage's inclusion probabilities and state the positivity needed for both expansion divisions.",
+        "deps": [
+          "def-cluster-sampling-design-and-cluster-totals",
+          "def-finite-population-and-sampling-design",
+          "def-moments-variance-and-covariance"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-srswor-cluster-total-estimator-unbiased-and-variance",
+        "kind": "theorem",
+        "title": "Unbiasedness and variance of the SRSWOR cluster-total estimator",
+        "statement": "For a fixed finite population partitioned into M≥2 PSUs with fixed totals T_i, a uniform SRSWOR sample of m PSUs, 1≤m≤M, gives the unbiased estimator M times the sample mean of the PSU totals, with design variance M²(1−m/M)S_T²/m, where S_T² is the finite-population variance of the M PSU totals.",
+        "strategy": "Direct: count first- and second-order inclusion probabilities, derive the indicator covariance, use the fixed-size centering identity, and expand the estimator variance as a finite sum.",
+        "deps": [
+          "def-cluster-sampling-design-and-cluster-totals",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "thm-variance-of-a-finite-sum"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-equal-cluster-size-design-effect",
+        "kind": "theorem",
+        "title": "Equal-size cluster design effect under exchangeable within-cluster covariance",
+        "statement": "For independent equal-size cluster vectors of size m_c≥2, common marginal variance σ²>0, common within-cluster correlation ρ, and a negligible finite-population correction, the variance ratio of the mean from k sampled whole clusters to an element SRS of the same nominal size km_c is 1+(m_c−1)ρ. In this model ρ=0 means no ICC inflation; the sampling variance remains σ²/(km_c)>0.",
+        "strategy": "Direct: expand the variance of a cluster mean using the m_c diagonal variances and m_c(m_c−1) within-cluster covariances, use independence across sampled PSUs, compare with the no-FPC element-SRS variance, and divide.",
+        "deps": [
+          "def-cluster-sampling-design-and-cluster-totals",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "thm-variance-of-a-finite-sum"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-two-stage-expansion-total-unbiasedness-and-variance",
+        "kind": "theorem",
+        "title": "Unbiasedness and variance decomposition for the two-stage expansion total",
+        "statement": "Assume AC. Under the product two-stage sampling law, positive first-order inclusion probabilities at both stages, and a fixed finite population, the expansion estimator is design-unbiased for the total and its variance is the first-stage HT variance of the true PSU totals plus the expected within-PSU sampling variance. The formula uses the stage-specific first- and second-order inclusion probabilities and does not require positive pair-inclusion probabilities.",
+        "strategy": "Direct: establish the second-stage conditional mean and variance for each PSU, apply the published conditional-variance decomposition under its AC hypothesis, use conditional independence across selected PSUs, and expand each stage's finite covariance sum.",
+        "deps": [
+          "def-two-stage-cluster-sampling-and-expansion-estimator",
+          "def-sigma-algebra",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-axiom-of-choice",
+          "def-conditional-expectation-as-an-ae-class",
+          "def-conditional-variance",
+          "cor-conditional-variance-decomposition",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "thm-variance-of-a-finite-sum"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 1939,
+    "id": "cluster-and-two-stage-sampling-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Cluster and two-stage sampling — Examples",
+    "companion": "cluster-and-two-stage-sampling",
+    "requires": [
+      "cluster-and-two-stage-sampling"
+    ],
+    "items": [
+      {
+        "id": "ex-two-stage-village-field-subsampling",
+        "kind": "example",
+        "title": "A two-stage village-and-field sample",
+        "statement": "For two villages with four fixed field values each, samples one village by SRSWOR and then two fields within it by SRSWOR; enumerates the twelve two-stage outcomes, expansion estimates, unbiased mean, and exact design variance.",
+        "strategy": "Direct finite enumeration: write both stage laws and all twelve joint outcomes, compute each expansion estimate, then calculate the exact finite weighted mean and variance.",
+        "deps": [
+          "def-two-stage-cluster-sampling-and-expansion-estimator",
+          "def-moments-variance-and-covariance"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-average-cluster-size-does-not-determine-unequal-size-design-effect",
+        "kind": "counterexample",
+        "title": "Average cluster size does not determine the unequal-size design effect",
+        "statement": "Refutes the proposed extension that the equal-size formula 1+(m_c−1)ρ remains valid after substituting the arithmetic mean cluster size when cluster sizes are unequal; half the clusters of size 1 and half of size 3 with a common random intercept give an ICC of 1, average size 2, but model-averaged finite-design variance ratio tending to 5/2 rather than 2.",
+        "strategy": "Counterexample by exact model-averaged design variances: compute the between-PSU total variance and element-level finite-population variance for independent random intercepts, apply the two SRSWOR variance formulas at the same nominal sample size, and take the large-M, negligible-FPC limit.",
+        "deps": [
+          "def-cluster-sampling-design-and-cluster-totals",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "thm-variance-of-a-finite-sum",
+          "thm-srswor-cluster-total-estimator-unbiased-and-variance"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

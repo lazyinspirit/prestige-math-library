@@ -1,0 +1,404 @@
+[
+  {
+    "order": 1928,
+    "id": "principal-components-and-eigenspace-stability",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "PCA and eigengap stability",
+    "companion": "principal-components-and-eigenspace-stability-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "fixed-design-linear-regression-and-estimability",
+      "statistical-experiments-models-and-identifiability",
+      "estimators-and-randomized-procedures",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "probability-spaces-random-variables-and-expectation",
+      "robust-covariance-and-high-dimensional-stability"
+    ],
+    "items": [
+      {
+        "id": "thm-local-leading-eigenvector-stability-under-eigengap",
+        "kind": "theorem",
+        "title": "Local leading-eigenvector stability under a spectral gap",
+        "deps": [
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-courant-fischer-min-max-principle",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "statement": "For symmetric A with simple leading gap g>0 and symmetric E with operator norm epsilon<g/2, the perturbed top eigenvalue is simple, its eigenvalue changes by at most epsilon, and the sign-free leading line angle is at most epsilon/(g-epsilon).",
+        "strategy": "Use Courant-Fischer for the two top eigenvalues, then project the perturbed eigen-equation onto the orthogonal complement of the original leading eigenvector.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)",
+              "url": "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf",
+              "locator": "Full 24-page note inspected; PDF pp. 8–12 give centered-data PCA/SVD and projection-variance context. The local eigengap perturbation proof is supplied in this item, not attributed to the note."
+            },
+            {
+              "title": "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis",
+              "url": "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf",
+              "locator": "Complete 4-page PCA lecture note inspected; PDF pp. 2–4 provide the eigenvalue/eigenvector PCA convention. The local eigengap perturbation proof is supplied in this item, not attributed to the note."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-sample-centered-covariance-root-n-frobenius",
+        "kind": "theorem",
+        "title": "Finite-fourth-moment root-n consistency of sample-centered covariance",
+        "deps": [
+          "def-covariance-matrix-of-a-random-vector",
+          "def-sample-covariance-and-operator-norm-loss",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-measurable-functions-preserve-independence",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "cor-covariance-vanishes-under-independence",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-markov-inequality-for-random-variables",
+          "def-op-and-little-op-stochastic-bounds",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "justified_by": [],
+        "statement": "For fixed p and iid vectors with E||X||^4<infinity, the sample-centered covariance with divisor n satisfies ||SigmaHat-Sigma||_F=O_P(n^(-1/2)); no Gaussian assumption is used.",
+        "strategy": "Bound the Frobenius second moment of the oracle-centered covariance entrywise, then show the sample-mean outer-product correction is o_P(n^(-1/2)).",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)",
+              "url": "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf",
+              "locator": "Full 24-page note inspected; PDF pp. 8–12 cover empirical covariance and finite-higher-moment Chebyshev consistency context. The exact Frobenius root-n bound and centering correction are proved in this item."
+            },
+            {
+              "title": "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis",
+              "url": "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf",
+              "locator": "Complete 4-page PCA lecture note inspected; PDF pp. 2–4 provide the sample-covariance convention. The finite-fourth-moment Frobenius rate and centering correction are proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-covariance-and-correlation-principal-component-analysis",
+        "kind": "definition",
+        "title": "Covariance and correlation principal component analysis",
+        "deps": [
+          "def-scientific-statistical-model-contract",
+          "def-parametric-statistical-model",
+          "def-estimand-on-a-statistical-model",
+          "def-statistic-and-estimator",
+          "def-covariance-matrix-of-a-random-vector",
+          "lem-finite-second-moment-covariance-matrix-is-well-defined",
+          "def-sample-covariance-and-operator-norm-loss",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "lem-pca-sample-covariance-is-a-measurable-estimator"
+        ],
+        "justified_by": [],
+        "statement": "Covariance-PCA orders the eigenspaces of the population covariance target; correlation-PCA orders the eigenspaces after centering and dividing each coordinate by its positive standard deviation. The sample convention uses the sample-centered covariance with divisor n.",
+        "strategy": "State the population covariance estimand, its ordered eigenspaces, the positive-standard-deviation correlation transform, and the sample-centered divisor convention.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)",
+              "url": "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf",
+              "locator": "Full 24-page note inspected; PDF pp. 8–12 cover centered-data PCA/SVD, projection variance, and empirical covariance conventions. The correlation scaling convention is cross-checked with Mukherjee Lecture 8."
+            },
+            {
+              "title": "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis",
+              "url": "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf",
+              "locator": "Complete 4-page PCA lecture note inspected; PDF pp. 2–4 cover leading variance maximization, sample PCA, and covariance-versus-correlation scaling."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-pca-sample-covariance-is-a-measurable-estimator",
+        "kind": "lemma",
+        "title": "Sample-centered covariance is a measurable statistic and estimator",
+        "deps": [
+          "def-statistical-experiment",
+          "def-parametric-statistical-model",
+          "def-estimand-on-a-statistical-model",
+          "def-statistic-and-estimator",
+          "def-sample-covariance-and-operator-norm-loss",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-covariance-matrix-of-a-random-vector",
+          "lem-finite-second-moment-covariance-matrix-is-well-defined",
+          "thm-continuous-preimages-of-borel-sets-are-borel"
+        ],
+        "justified_by": [],
+        "statement": "Let $(P_\\theta)_{\\theta\\in\\Theta}$ be a family of Borel probability laws on\n$\\mathbb R^p$ with $\\mathbb E_\\theta\\|X\\|_2^2<\\infty$. For each $n\\ge1$,\nobserve an iid sample $X_1,\\ldots,X_n$ with common law $P_\\theta$ and sample\nlaw $P_\\theta^{\\otimes n}$ on the Borel data space $(\\mathbb R^p)^n$. Put\n$\\Sigma_\\theta=\\operatorname{Cov}_\\theta(X)$ and let\n$\\psi(\\theta)=\\Sigma_\\theta$ be the covariance-matrix estimand with target\nthe Borel space $\\mathbb S^p$ of real symmetric $p\\times p$ matrices. The\nsample-centered covariance map\n$$ T_n(x_1,\\ldots,x_n):=\\frac1n\\sum_{i=1}^n(x_i-\\bar x)(x_i-\\bar x)^{\\mathsf T},\\qquad \\bar x=\\frac1n\\sum_{i=1}^nx_i, $$\nis a statistic with target the Borel space $\\mathbb S^p$, and hence is an\nestimator of $\\psi$ in the sense of [[def-statistic-and-estimator]]. This\nstatement asserts measurability and target type only; it asserts no\nunbiasedness or consistency.",
+        "strategy": "Show each matrix coordinate is polynomial in the sample coordinates, then apply the statistic and estimator definitions.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)",
+              "url": "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf",
+              "locator": "Full 24-page note inspected; PDF pp. 8–12 show the empirical covariance convention. Polynomial continuity and measurability are proved locally in this item."
+            },
+            {
+              "title": "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis",
+              "url": "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf",
+              "locator": "Complete 4-page PCA lecture note inspected; PDF pp. 2–4 provide the sample-covariance convention. Polynomial continuity and estimator measurability are proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-pca-leading-direction-maximizes-variance",
+        "kind": "theorem",
+        "title": "The leading PCA eigenspace maximizes projected variance",
+        "deps": [
+          "def-covariance-and-correlation-principal-component-analysis",
+          "def-covariance-matrix-of-a-random-vector",
+          "def-moments-variance-and-covariance",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-courant-fischer-min-max-principle"
+        ],
+        "justified_by": [],
+        "statement": "For a unit direction a, Var(a^T X)=a^T Sigma a; the maximum projected variance is the leading eigenvalue and its maximizing unit vectors are exactly the leading eigenspace.",
+        "strategy": "Expand the centered quadratic form, then use an orthonormal eigenbasis and the Rayleigh quotient maximum characterization.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)",
+              "url": "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf",
+              "locator": "Full 24-page note inspected; PDF pp. 8–12 discuss centered-data PCA/SVD and projection variance. The finite-dimensional quadratic-form and equality proof is supplied here."
+            },
+            {
+              "title": "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis",
+              "url": "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf",
+              "locator": "Complete 4-page PCA lecture note inspected; PDF pp. 2–4 cover first-component variance maximization and the eigenvector formulation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-repeated-leading-eigenvalue-identifies-subspace",
+        "kind": "theorem",
+        "title": "A repeated leading PCA eigenvalue identifies a subspace, not a vector",
+        "deps": [
+          "def-covariance-and-correlation-principal-component-analysis",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-pca-leading-direction-maximizes-variance"
+        ],
+        "justified_by": [],
+        "statement": "If the top two covariance eigenvalues are equal, the leading eigenspace has dimension at least two; every unit vector in it is leading, so no distinguished unit vector is determined.",
+        "strategy": "Use the spectral theorem to identify the full top eigenspace, then use the variance-maximizer characterization.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)",
+              "url": "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf",
+              "locator": "Full 24-page note inspected; PDF pp. 8–12 provide PCA eigenvalue/eigenvector context. The multiplicity-to-full-eigenspace argument is proved locally."
+            },
+            {
+              "title": "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis",
+              "url": "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf",
+              "locator": "Complete 4-page PCA lecture note inspected; PDF pp. 2–4 provide the eigenvalue/eigenvector convention. The repeated-eigenvalue subspace conclusion is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-pca-sample-leading-eigenspace-root-n-consistency",
+        "kind": "corollary",
+        "title": "A simple population eigengap gives root-n sample PCA eigenspace consistency",
+        "deps": [
+          "def-covariance-and-correlation-principal-component-analysis",
+          "lem-pca-sample-covariance-is-a-measurable-estimator",
+          "thm-local-leading-eigenvector-stability-under-eigengap",
+          "thm-sample-centered-covariance-root-n-frobenius",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-op-and-little-op-stochastic-bounds"
+        ],
+        "justified_by": [],
+        "statement": "For iid observations with finite fourth moment and a simple positive population eigengap, the sample leading eigenvalue is simple with probability tending to one and its sign-free eigenspace angle is O_P(n^(-1/2)).",
+        "strategy": "Dominate operator norm by Frobenius norm, apply the local perturbation bound on the high-probability small-error event, and deduce convergence in probability.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)",
+              "url": "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf",
+              "locator": "Full 24-page note inspected; PDF pp. 8–12 provide sample-PCA context. This exact local root-n eigenspace result is derived from the locally proved covariance rate and gap bound."
+            },
+            {
+              "title": "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis",
+              "url": "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf",
+              "locator": "Complete 4-page PCA lecture note inspected; PDF pp. 2–4 provide sample-PCA eigenvector context. The local root-n eigenspace conclusion is derived from the displayed proved results."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "direct-corollary"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 1929,
+    "id": "principal-components-and-eigenspace-stability-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "PCA and eigengap stability — Examples",
+    "companion": "principal-components-and-eigenspace-stability",
+    "requires": [
+      "principal-components-and-eigenspace-stability"
+    ],
+    "items": [
+      {
+        "id": "cex-small-eigengap-allows-fixed-angle-rotation",
+        "kind": "counterexample",
+        "title": "A vanishing eigengap allows a fixed eigenvector rotation",
+        "deps": [
+          "thm-local-leading-eigenvector-stability-under-eigengap",
+          "def-operator-norm-on-a-finite-dimensional-inner-product-space"
+        ],
+        "justified_by": [],
+        "statement": "There is no uniform leading-line perturbation bound tending to zero with absolute operator-norm perturbation alone when the underlying eigengap is allowed to vanish.",
+        "strategy": "Use a two-by-two diagonal matrix with gap delta and an off-diagonal symmetric perturbation of norm delta/4, and compute the perturbed eigenvector exactly.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)",
+              "url": "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf",
+              "locator": "Full 24-page note inspected; PDF pp. 8–12 provide PCA eigenspace context. The exact two-by-two perturbation family and angle are constructed and verified locally."
+            },
+            {
+              "title": "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis",
+              "url": "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf",
+              "locator": "Complete 4-page PCA lecture note inspected; PDF pp. 2–4 provide eigenvector convention. The exact small-gap perturbation family is constructed and verified locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-covariance-and-correlation-pca-differ-after-rescaling",
+        "kind": "example",
+        "title": "Rescaling can change covariance-PCA directions",
+        "deps": [
+          "def-covariance-and-correlation-principal-component-analysis",
+          "def-covariance-matrix-of-a-random-vector",
+          "thm-pca-leading-direction-maximizes-variance"
+        ],
+        "justified_by": [],
+        "statement": "For a four-point centered model, the covariance matrix has leading line different from that of the correlation matrix obtained by positive coordinate standardization.",
+        "strategy": "Compute the exact two-by-two covariance and correlation matrices and compare their leading eigenspaces.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)",
+              "url": "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf",
+              "locator": "Full 24-page note inspected; PDF pp. 8–12 provide general PCA context. Mukherjee Lecture 8 supports the scale-invariance warning; the exact four-point calculation is local."
+            },
+            {
+              "title": "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis",
+              "url": "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf",
+              "locator": "Complete 4-page PCA lecture note inspected; PDF pp. 2–4 discuss scale non-invariance and correlation-matrix PCA. The exact four-point calculation is local."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-pca-tied-eigenvalues-and-sign-ambiguity",
+        "kind": "example",
+        "title": "Tied PCA eigenvalues and sign ambiguity",
+        "deps": [
+          "def-covariance-and-correlation-principal-component-analysis",
+          "thm-repeated-leading-eigenvalue-identifies-subspace",
+          "thm-pca-leading-direction-maximizes-variance",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "justified_by": [],
+        "statement": "For identity covariance I2, the full leading PCA eigenspace is R2 and every unit vector (and its line) maximizes projected variance1. For diag(2,1), the leading eigenspace is the unique line span(e1), with unit representatives +/-e1.",
+        "strategy": "Diagonalize the two displayed covariance matrices and check their leading eigenspaces and signs.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)",
+              "url": "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf",
+              "locator": "Full 24-page note inspected; PDF pp. 8–12 provide PCA eigenvector context. The exact tied and simple matrices are analyzed locally."
+            },
+            {
+              "title": "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis",
+              "url": "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf",
+              "locator": "Complete 4-page PCA lecture note inspected; PDF pp. 2–4 provide the PCA eigenvector convention. The exact tied and simple matrices are analyzed locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

@@ -1,0 +1,647 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62",
+  "scope": [
+    "def-finite-randomized-treatment-assignment-model",
+    "lem-finite-weighted-upper-tail-pvalues-and-randomized-ties",
+    "def-fisher-sharp-null-and-predeclared-test-orderings",
+    "def-finite-population-average-treatment-effect-and-weak-null",
+    "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+    "cex-zero-average-treatment-effect-does-not-imply-fisher-sharp-null",
+    "ex-unequal-weighted-two-sided-randomization-test-with-ties"
+  ],
+  "contracts": {
+    "def-finite-randomized-treatment-assignment-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The definition requires a nonempty assignment space; otherwise no normalized assignment law exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero-probability assignments are explicitly allowed and retain a fully defined outcome schedule; later formulas multiply their contributions by zero and never divide by their weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For a singleton assignment space, its sole weight is one and the pushforward data law remains a probability measure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The schedule may be constant across assignments; no injectivity or treatment-effect condition is imposed by the model definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter is defined. Assignment weights zero and one are covered directly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite assignment set and probability law are supplied as input. The pushforward uses a finite domain and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states the assignment model; it claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states the assignment model; it claims no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-finite-weighted-upper-tail-pvalues-and-randomized-ties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The positive-weight support is nonempty by [F1]. List its finitely many distinct score values in decreasing order as $t_1>\\cdots>t_m$, let $d_j=\\sum_{T(\\omega)=t_j}w(\\omega)>0$, and put $a_0=0$ and $a_j=\\sum_{k=1}^j d_k$. These cumulative masses satisfy $0=a_0<a_1<\\cdots<a_m=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $T(Z)=t_j$, then $q(Z)=a_j$. For $u<1$, the indices with $a_j\\le u$ form an initial segment; if its last index is $j_0$, then $\\Pr(q(Z)\\le u)=\\sum_{j\\le j_0}d_j=a_{j_0}\\le u$, while an empty segment has probability zero. At $u=1$ the probability is one. Thus $q(Z)$ is superuniform.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On the score level $t_j$, the strict-tail mass is $a_{j-1}$ and the tied mass is $d_j$, so $q^+(Z,U)=a_{j-1}+Ud_j$. By [A1], conditional on this score level its probability of being at most $u$ is zero for $u\\le a_{j-1}$, $(u-a_{j-1})/d_j$ for $a_{j-1}<u<a_j$, and one for $u\\ge a_j$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiplying these conditional probabilities by $d_j$ gives the lengths of $[a_{j-1},a_j]\\cap[0,u]$. These consecutive intervals partition $[0,1]$, so their lengths sum to $u$. Therefore $\\Pr(q^+(Z,U)\\le u)=u$ for every $u\\in[0,1]$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The finite probability space has nonempty positive-weight support because the weights sum to one; no conclusion is claimed for an empty space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 orders only positive-mass score levels. Zero-weight assignments contribute nothing to either tail sum and cause no division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: With a single positive-mass score level, $a_1=d_1=1$, so $q(Z)=1$ and $q^+(Z,U)=U$; the stated bounds hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If all positive-mass outcomes have the same score, there is one score level and the preceding one-level calculation applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: step 2.1 treats u=1 explicitly; step 3.1 covers u=0 and u=1 in the partition-of-[0,1] calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof orders finitely many real score values and uses finite sums only; it uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts two distributional bounds and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts two distributional bounds and no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-fisher-sharp-null-and-predeclared-test-orderings": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supplier assignment model requires a nonempty assignment set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The sharp null quantifies over every allowed assignment, including zero-probability assignments; the definition does not silently replace the assignment set by its positive support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: On a singleton assignment set every schedule is assignment-invariant, so the sharp-null condition is vacuous beyond the sole value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A schedule constant over assignments satisfies the sharp null, including schedules with distinct fixed outcomes across units."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter appears in this definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The definition quantifies over finite unit and assignment sets and selects no additional objects; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-fisher-sharp-null-randomization-pvalues-are-valid": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, and let $\\mathcal I=\\{1,\\ldots,N\\}$ index the fixed\nexperimental units at the actual treatment-assignment level. Let\n$\\mathcal Z$ be a nonempty finite set of allowed assignments. If treatment\nis assigned to clusters, each cluster is one indexed unit; no separate\nprobability-sampling unit is present. The index $i$ identifies that unit,\nand no visit or repeated-measurement index is modeled here.\n\nA known assignment law is a function $p:\\mathcal Z\\to[0,1]$ satisfying\n$\\sum_{z\\in\\mathcal Z}p(z)=1$, so $(\\mathcal Z,p)$ is a finite probability\nspace ([[def-finite-probability-space-and-event]]); assignments of probability\nzero may remain in $\\mathcal Z$. A **potential-outcome schedule** is a function\n$\\theta:\\mathcal I\\times\\mathcal Z\\to\\mathbb R$, with\n$Y_i(z):=\\theta(i,z)$. The schedule and the units are fixed; the assignment\n$Z$ is the only randomness supplied by the design, and the observed response\nvector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$. The schedule is defined\nfor every allowed assignment, including zero-probability assignments, and\nmay depend on the full assignment vector, so no no-interference assumption is\nimplicit. The scientific statistical model contract\n[[def-scientific-statistical-model-contract]] requires the observation space,\nunits, quantity status, observation mechanism, support, conditioning\nconvention, and adequacy assumptions to be recorded; this model specifies\nthose fields as follows.\n\nTo express this as a statistical experiment, take the data space\n$\\mathcal X=\\mathcal Z\\times\\mathbb R^{\\mathcal I}$ with its full power-set\nsigma-algebra, which is a sigma-algebra by [[def-sigma-algebra]] and makes\n$\\mathcal X$ a measurable space ([[def-measurable-space]]), and parameter\nset $\\Theta=\\mathbb R^{\\mathcal I\\times\\mathcal Z}$. For each $\\theta\\in\\Theta$\nlet $P_\\theta$ be the law\n([[def-law-or-distribution-of-a-random-element]]) of the deterministic\nobservation map $O_\\theta(z)=(z,Y_\\theta(z))$ from $(\\mathcal Z,p)$. The map\nis measurable because its domain has the full power set, in the preimage\nsense of [[def-measurable-function-between-measurable-spaces]], and its law\nis a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]]. Thus\n$((\\mathcal X,2^{\\mathcal X}),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ is an\nexperiment in the sense of [[def-statistical-experiment]]. The assignment\nlaw asserts no response-error model, Gaussian law, superpopulation\nrandomization, or sampling representativeness beyond the stated finite\nassignment mechanism. Its finite full-measure support set is\n$$S_\\theta:=\\{(z,Y_\\theta(z)):z\\in\\mathcal Z,\\ p(z)>0\\},$$\nsince $P_\\theta(S_\\theta)=\\sum_{z:p(z)>0}p(z)=1$. The record contains the\nassigned vector and every unit's response; missing or censored outcomes and\nrepeated visits require a separately declared observation mechanism. The\ninferential target is the assignment-invariance hypothesis for these $N$\nunits, not an estimand for a wider population.\n\nInference in this page holds $\\mathcal I$ and $\\theta$ fixed and averages\nover the declared law $p$; it does not condition on the realized assignment.\nThe status of the quantities is explicit: $\\theta$ and all\n$Y_i(z)$ are fixed, $Z$ is random, $(Z,Y_\\theta(Z))$ is observed, and\npotential responses under unassigned vectors are fixed but latent. The\nassignment set, weights, and implemented randomization protocol are\ndesign-controlled and should be checked against protocol records. Assignment\nlogs and response records are empirically assessable, but those checks do not\nprove that the declared law generated the data. Potential outcomes under\nunassigned vectors are fixed and latent. Their values are\n**substantively untestable** from the observed-data law; the\nassignment-invariance claim is a hypothesis tested by the theorem, not an\nempirical fact supplied by the design. These classifications do not make\nthe design or scientific model empirically true.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "source_section": "Definition",
+          "quote": "In the finite randomized treatment-assignment model\n[[def-finite-randomized-treatment-assignment-model]], a schedule satisfies\nthe **Fisher sharp null** when for each unit $i$ there is a value $y_i$ such that\n$Y_i(z)=y_i$ for every allowed assignment $z$. The full vector\n$y=(y_i)_{i\\in\\mathcal I}$ is then imputable under every assignment.\n\nA **predeclared ordering score** is a real-valued statistic\n$T:\\mathcal Z\\times\\mathbb R^{\\mathcal I}\\to\\mathbb R$\n([[def-statistic-and-estimator]]) fixed before the\nassignment and outcomes are inspected. Its upper-tail ordering includes ties:\nassignment $z'$ is at least as extreme as $z$ when $T(z',y)\\ge T(z,y)$.\nFor a signed score $S$ and fixed null center $s_0$, the corresponding\ntwo-sided ordering is explicitly $T(z,y)=|S(z,y)-s_0|$; for a no-effect\nsharp null the center is $s_0=0$. A lower-tail ordering is represented by\nusing $-S$ as the score. A statistic in this setting is a measurable map in\nthe sense of [[def-statistic-and-estimator]]; the full power-set data\nsigma-algebra makes every such real-valued map measurable.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-weighted-upper-tail-pvalues-and-randomized-ties",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space, let $T:\\Omega\\to\\mathbb R$,\nand let $Z$ have law $w$. Define\n$$q(z):=\\sum_{\\omega\\in\\Omega}w(\\omega)1\\{T(\\omega)\\ge T(z)\\}.$$\nThen $\\Pr(q(Z)\\le u)\\le u$ for every $u\\in[0,1]$. If an auxiliary random\nvariable $U$ is independent of $Z$ and uniform on $[0,1]$, define\n$$q^+(Z,U):=\\sum_{\\omega\\in\\Omega}w(\\omega)1\\{T(\\omega)>T(Z)\\}+U\\sum_{\\omega\\in\\Omega}w(\\omega)1\\{T(\\omega)=T(Z)\\}.$$\nThen $\\Pr(q^+(Z,U)\\le u)=u$ for every $u\\in[0,1]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-p-value",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). A **p-value\nstatistic** is a statistic $p:\\mathcal X\\to[0,1]$, where $[0,1]$ carries the\ntrace of the Borel sigma-algebra, meaning\n$\\{B\\cap[0,1]:B\\in\\mathcal B(\\mathbb R)\\}$\n([[def-statistic-and-estimator]],\n[[def-measurable-function-between-measurable-spaces]]).\n\nFor a nonempty null hypothesis $\\Theta_0\\subseteq\\Theta$, the statistic is a\n**valid p-value for $\\Theta_0$** if it is superuniform under every null law:\n$$P_\\theta(\\{x:p(x)\\le u\\})\\le u\\qquad\\text{for every }\\theta\\in\\Theta_0\\text{ and }u\\in[0,1].$$\nThe variable $p(X)$ is the observed p-value when the data are $X$. The\nvalidity condition is distributional; measurability alone does not imply it.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-finite-population-average-treatment-effect-and-weak-null",
+          "source_section": "Definition",
+          "quote": "Consider the no-interference binary-treatment submodel of\n[[def-finite-randomized-treatment-assignment-model]] in which the allowed\nassignment set is $\\{0,1\\}^{\\mathcal I}$ and unit $i$'s response under\nassignment vector $z$ is $Y_i(z)=Y_i(z_i)$ for fixed real potential responses\n$Y_i(0)$ and $Y_i(1)$. For the fixed units, define the\n**finite-population average treatment effect** by\n$$\\tau_F:=\\frac1N\\sum_{i\\in\\mathcal I}\\bigl(Y_i(1)-Y_i(0)\\bigr).$$\nThe **weak zero-average-effect null** is the hypothesis $\\tau_F=0$; it\nconstrains the average of the unit-level effects, not each effect separately.\nThe Fisher sharp null in this submodel, defined in\n[[def-fisher-sharp-null-and-predeclared-test-orderings]], requires\n$Y_i(1)=Y_i(0)$ for every unit. No probability distribution on the fixed\npotential responses is part of either definition.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The schedule with $Y_i(z)=0$ for every unit and assignment belongs to the Fisher sharp null, so its null class is nonempty as required by [F4]. Fix any sharp-null schedule $\\theta$ and choose its common response vector $y$ by [F2]. For every realized assignment $Z$, the observed vector $Y_\\theta(Z)$ equals $y$, and every assignment score $T(z,y)$ is therefore imputable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The formula $p_{\\rm rand}(z,y)$ is a finite sum of selected nonnegative assignment weights, so it lies in $[0,1]$. It is a statistic because the data space has its full power-set sigma-algebra, so every preimage is measurable by [F5]. On the product extension with law $\\widetilde P_\\theta=P_\\theta\\otimes\\lambda$, $p^+$ is a finite combination of score comparisons on the finite assignment space and the measurable coordinate $U$, so it is measurable and its value lies between zero and the total assignment mass one.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On this fixed schedule set $T_y(z)=T(z,y)$. Substituting $Y_\\theta(Z)=y$ from step 1.1 into the two displayed formulas identifies $p_{\\rm rand}(Z,Y_\\theta(Z))$ and $p^+(Z,Y_\\theta(Z),U)$ with the two finite weighted rank transforms of [F3] on $(\\mathcal Z,p)$, using [A1] for the tie-randomized transform. Hence $P_\\theta(p_{\\rm rand}(Z,Y_\\theta(Z))\\le u)\\le u$ and $\\widetilde P_\\theta(p^+(Z,Y_\\theta(Z),U)\\le u)=u$ for every $u\\in[0,1]$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "A1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since the bound holds for every schedule in the sharp null, [F4] makes $p_{\\rm rand}$ a valid p-value for that null. The randomized value is uniform under each extended law $\\widetilde P_\\theta$, and therefore is also superuniform there; its threshold rule has null rejection probability at most its threshold. No step uses an error distribution. By [F2] and [F6], the argument covers a weak average-effect schedule only when it also satisfies the sharp null.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The model requires a nonempty assignment space, and the sharp-null parameter class is nonempty because constant outcome schedules exist."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero-weight assignments are permitted by the model, appear with zero contribution in the weighted sums, and require no division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A singleton assignment law reduces to the one-score case of [F3], giving $p_{\\rm rand}=1$ and $p^+=U$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If all positive-probability assignments have the same score, the inclusive p-value is one and randomized ties give the supplied uniform variable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The theorem and [F3] include $u=0$ and $u=1$; the inclusive p-value bound holds at both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The reduction uses only the finite assignment space, fixed schedule, and finite weighted-tail lemma. It assumes no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        }
+      ],
+      "finite_checks": []
+    },
+    "cex-zero-average-treatment-effect-does-not-imply-fisher-sharp-null": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, and let $\\mathcal I=\\{1,\\ldots,N\\}$ index the fixed\nexperimental units at the actual treatment-assignment level. Let\n$\\mathcal Z$ be a nonempty finite set of allowed assignments. If treatment\nis assigned to clusters, each cluster is one indexed unit; no separate\nprobability-sampling unit is present. The index $i$ identifies that unit,\nand no visit or repeated-measurement index is modeled here.\n\nA known assignment law is a function $p:\\mathcal Z\\to[0,1]$ satisfying\n$\\sum_{z\\in\\mathcal Z}p(z)=1$, so $(\\mathcal Z,p)$ is a finite probability\nspace ([[def-finite-probability-space-and-event]]); assignments of probability\nzero may remain in $\\mathcal Z$. A **potential-outcome schedule** is a function\n$\\theta:\\mathcal I\\times\\mathcal Z\\to\\mathbb R$, with\n$Y_i(z):=\\theta(i,z)$. The schedule and the units are fixed; the assignment\n$Z$ is the only randomness supplied by the design, and the observed response\nvector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$. The schedule is defined\nfor every allowed assignment, including zero-probability assignments, and\nmay depend on the full assignment vector, so no no-interference assumption is\nimplicit. The scientific statistical model contract\n[[def-scientific-statistical-model-contract]] requires the observation space,\nunits, quantity status, observation mechanism, support, conditioning\nconvention, and adequacy assumptions to be recorded; this model specifies\nthose fields as follows.\n\nTo express this as a statistical experiment, take the data space\n$\\mathcal X=\\mathcal Z\\times\\mathbb R^{\\mathcal I}$ with its full power-set\nsigma-algebra, which is a sigma-algebra by [[def-sigma-algebra]] and makes\n$\\mathcal X$ a measurable space ([[def-measurable-space]]), and parameter\nset $\\Theta=\\mathbb R^{\\mathcal I\\times\\mathcal Z}$. For each $\\theta\\in\\Theta$\nlet $P_\\theta$ be the law\n([[def-law-or-distribution-of-a-random-element]]) of the deterministic\nobservation map $O_\\theta(z)=(z,Y_\\theta(z))$ from $(\\mathcal Z,p)$. The map\nis measurable because its domain has the full power set, in the preimage\nsense of [[def-measurable-function-between-measurable-spaces]], and its law\nis a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]]. Thus\n$((\\mathcal X,2^{\\mathcal X}),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ is an\nexperiment in the sense of [[def-statistical-experiment]]. The assignment\nlaw asserts no response-error model, Gaussian law, superpopulation\nrandomization, or sampling representativeness beyond the stated finite\nassignment mechanism. Its finite full-measure support set is\n$$S_\\theta:=\\{(z,Y_\\theta(z)):z\\in\\mathcal Z,\\ p(z)>0\\},$$\nsince $P_\\theta(S_\\theta)=\\sum_{z:p(z)>0}p(z)=1$. The record contains the\nassigned vector and every unit's response; missing or censored outcomes and\nrepeated visits require a separately declared observation mechanism. The\ninferential target is the assignment-invariance hypothesis for these $N$\nunits, not an estimand for a wider population.\n\nInference in this page holds $\\mathcal I$ and $\\theta$ fixed and averages\nover the declared law $p$; it does not condition on the realized assignment.\nThe status of the quantities is explicit: $\\theta$ and all\n$Y_i(z)$ are fixed, $Z$ is random, $(Z,Y_\\theta(Z))$ is observed, and\npotential responses under unassigned vectors are fixed but latent. The\nassignment set, weights, and implemented randomization protocol are\ndesign-controlled and should be checked against protocol records. Assignment\nlogs and response records are empirically assessable, but those checks do not\nprove that the declared law generated the data. Potential outcomes under\nunassigned vectors are fixed and latent. Their values are\n**substantively untestable** from the observed-data law; the\nassignment-invariance claim is a hypothesis tested by the theorem, not an\nempirical fact supplied by the design. These classifications do not make\nthe design or scientific model empirically true.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-population-average-treatment-effect-and-weak-null",
+          "source_section": "Definition",
+          "quote": "Consider the no-interference binary-treatment submodel of\n[[def-finite-randomized-treatment-assignment-model]] in which the allowed\nassignment set is $\\{0,1\\}^{\\mathcal I}$ and unit $i$'s response under\nassignment vector $z$ is $Y_i(z)=Y_i(z_i)$ for fixed real potential responses\n$Y_i(0)$ and $Y_i(1)$. For the fixed units, define the\n**finite-population average treatment effect** by\n$$\\tau_F:=\\frac1N\\sum_{i\\in\\mathcal I}\\bigl(Y_i(1)-Y_i(0)\\bigr).$$\nThe **weak zero-average-effect null** is the hypothesis $\\tau_F=0$; it\nconstrains the average of the unit-level effects, not each effect separately.\nThe Fisher sharp null in this submodel, defined in\n[[def-fisher-sharp-null-and-predeclared-test-orderings]], requires\n$Y_i(1)=Y_i(0)$ for every unit. No probability distribution on the fixed\npotential responses is part of either definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "source_section": "Definition",
+          "quote": "In the finite randomized treatment-assignment model\n[[def-finite-randomized-treatment-assignment-model]], a schedule satisfies\nthe **Fisher sharp null** when for each unit $i$ there is a value $y_i$ such that\n$Y_i(z)=y_i$ for every allowed assignment $z$. The full vector\n$y=(y_i)_{i\\in\\mathcal I}$ is then imputable under every assignment.\n\nA **predeclared ordering score** is a real-valued statistic\n$T:\\mathcal Z\\times\\mathbb R^{\\mathcal I}\\to\\mathbb R$\n([[def-statistic-and-estimator]]) fixed before the\nassignment and outcomes are inspected. Its upper-tail ordering includes ties:\nassignment $z'$ is at least as extreme as $z$ when $T(z',y)\\ge T(z,y)$.\nFor a signed score $S$ and fixed null center $s_0$, the corresponding\ntwo-sided ordering is explicitly $T(z,y)=|S(z,y)-s_0|$; for a no-effect\nsharp null the center is $s_0=0$. A lower-tail ordering is represented by\nusing $-S$ as the score. A statistic in this setting is a measurable map in\nthe sense of [[def-statistic-and-estimator]]; the full power-set data\nsigma-algebra makes every such real-valued map measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the stated no-interference schedule, unit 1's treatment effect is $Y_1(1)-Y_1(0)=1$, while unit 2's is $Y_2(1)-Y_2(0)=-1$. Their finite-population average from [F2] is $(1+(-1))/2=0$. The four assignment weights are nonnegative and sum to one, so they define a valid finite assignment law.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "But $Y_1(0,0)=0\\ne1=Y_1(1,0)$ and $Y_2(0,0)=0\\ne-1=Y_2(0,1)$. Thus both units' responses vary across allowed assignments, contrary to [F3]. The average-effect null [F2] does not imply the Fisher sharp null.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses four nonempty assignment states."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All four displayed assignment weights are positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample uses two units and four assignments."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The schedule is nonconstant in each unit's treatment coordinate, which is exactly why it violates the sharp null despite zero average effect."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval parameter occurs in the finite counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All outcomes and assignments are explicitly listed; the witness uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes an implication, not an equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-unequal-weighted-two-sided-randomization-test-with-ties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-randomized-treatment-assignment-model",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$, and let $\\mathcal I=\\{1,\\ldots,N\\}$ index the fixed\nexperimental units at the actual treatment-assignment level. Let\n$\\mathcal Z$ be a nonempty finite set of allowed assignments. If treatment\nis assigned to clusters, each cluster is one indexed unit; no separate\nprobability-sampling unit is present. The index $i$ identifies that unit,\nand no visit or repeated-measurement index is modeled here.\n\nA known assignment law is a function $p:\\mathcal Z\\to[0,1]$ satisfying\n$\\sum_{z\\in\\mathcal Z}p(z)=1$, so $(\\mathcal Z,p)$ is a finite probability\nspace ([[def-finite-probability-space-and-event]]); assignments of probability\nzero may remain in $\\mathcal Z$. A **potential-outcome schedule** is a function\n$\\theta:\\mathcal I\\times\\mathcal Z\\to\\mathbb R$, with\n$Y_i(z):=\\theta(i,z)$. The schedule and the units are fixed; the assignment\n$Z$ is the only randomness supplied by the design, and the observed response\nvector is $Y_\\theta(Z)=(Y_i(Z))_{i\\in\\mathcal I}$. The schedule is defined\nfor every allowed assignment, including zero-probability assignments, and\nmay depend on the full assignment vector, so no no-interference assumption is\nimplicit. The scientific statistical model contract\n[[def-scientific-statistical-model-contract]] requires the observation space,\nunits, quantity status, observation mechanism, support, conditioning\nconvention, and adequacy assumptions to be recorded; this model specifies\nthose fields as follows.\n\nTo express this as a statistical experiment, take the data space\n$\\mathcal X=\\mathcal Z\\times\\mathbb R^{\\mathcal I}$ with its full power-set\nsigma-algebra, which is a sigma-algebra by [[def-sigma-algebra]] and makes\n$\\mathcal X$ a measurable space ([[def-measurable-space]]), and parameter\nset $\\Theta=\\mathbb R^{\\mathcal I\\times\\mathcal Z}$. For each $\\theta\\in\\Theta$\nlet $P_\\theta$ be the law\n([[def-law-or-distribution-of-a-random-element]]) of the deterministic\nobservation map $O_\\theta(z)=(z,Y_\\theta(z))$ from $(\\mathcal Z,p)$. The map\nis measurable because its domain has the full power set, in the preimage\nsense of [[def-measurable-function-between-measurable-spaces]], and its law\nis a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]]. Thus\n$((\\mathcal X,2^{\\mathcal X}),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ is an\nexperiment in the sense of [[def-statistical-experiment]]. The assignment\nlaw asserts no response-error model, Gaussian law, superpopulation\nrandomization, or sampling representativeness beyond the stated finite\nassignment mechanism. Its finite full-measure support set is\n$$S_\\theta:=\\{(z,Y_\\theta(z)):z\\in\\mathcal Z,\\ p(z)>0\\},$$\nsince $P_\\theta(S_\\theta)=\\sum_{z:p(z)>0}p(z)=1$. The record contains the\nassigned vector and every unit's response; missing or censored outcomes and\nrepeated visits require a separately declared observation mechanism. The\ninferential target is the assignment-invariance hypothesis for these $N$\nunits, not an estimand for a wider population.\n\nInference in this page holds $\\mathcal I$ and $\\theta$ fixed and averages\nover the declared law $p$; it does not condition on the realized assignment.\nThe status of the quantities is explicit: $\\theta$ and all\n$Y_i(z)$ are fixed, $Z$ is random, $(Z,Y_\\theta(Z))$ is observed, and\npotential responses under unassigned vectors are fixed but latent. The\nassignment set, weights, and implemented randomization protocol are\ndesign-controlled and should be checked against protocol records. Assignment\nlogs and response records are empirically assessable, but those checks do not\nprove that the declared law generated the data. Potential outcomes under\nunassigned vectors are fixed and latent. Their values are\n**substantively untestable** from the observed-data law; the\nassignment-invariance claim is a hypothesis tested by the theorem, not an\nempirical fact supplied by the design. These classifications do not make\nthe design or scientific model empirically true.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "source_section": "Definition",
+          "quote": "In the finite randomized treatment-assignment model\n[[def-finite-randomized-treatment-assignment-model]], a schedule satisfies\nthe **Fisher sharp null** when for each unit $i$ there is a value $y_i$ such that\n$Y_i(z)=y_i$ for every allowed assignment $z$. The full vector\n$y=(y_i)_{i\\in\\mathcal I}$ is then imputable under every assignment.\n\nA **predeclared ordering score** is a real-valued statistic\n$T:\\mathcal Z\\times\\mathbb R^{\\mathcal I}\\to\\mathbb R$\n([[def-statistic-and-estimator]]) fixed before the\nassignment and outcomes are inspected. Its upper-tail ordering includes ties:\nassignment $z'$ is at least as extreme as $z$ when $T(z',y)\\ge T(z,y)$.\nFor a signed score $S$ and fixed null center $s_0$, the corresponding\ntwo-sided ordering is explicitly $T(z,y)=|S(z,y)-s_0|$; for a no-effect\nsharp null the center is $s_0=0$. A lower-tail ordering is represented by\nusing $-S$ as the score. A statistic in this setting is a measurable map in\nthe sense of [[def-statistic-and-estimator]]; the full power-set data\nsigma-algebra makes every such real-valued map measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+          "source_section": "Statement",
+          "quote": "In a finite randomized treatment-assignment model, fix any real-valued\npredeclared ordering score $T(z,y)$. For observed data $(z,y)$ define\n$$p_{\\rm rand}(z,y):=\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)\\ge T(z,y)\\}.$$\nLet $\\lambda$ be the uniform probability measure on $[0,1]$. For each\n$\\theta$, use the product extension of the data experiment with law\n$\\widetilde P_\\theta:=P_\\theta\\otimes\\lambda$, and let $U$ be its\n$[0,1]$ coordinate. Define\n$$p^+(z,y,U):=\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)>T(z,y)\\}+U\\sum_{z'\\in\\mathcal Z}p(z')1\\{T(z',y)=T(z,y)\\}.$$\nFor every schedule satisfying the Fisher sharp null and every\n$u\\in[0,1]$,\n$$P_\\theta\\!\\left(p_{\\rm rand}(Z,Y_\\theta(Z))\\le u\\right)\\le u,$$\nwhereas the added randomization gives\n$$\\widetilde P_\\theta\\!\\left(p^+(Z,Y_\\theta(Z),U)\\le u\\right)=u.$$\nThus $p_{\\rm rand}$ is a valid finite-sample p-value for the sharp null,\nand randomized ties give an exactly uniform p-value when the additional\nindependent uniform randomizer is used. For a two-sided test, take\n$T(z,y)=|S(z,y)-s_0|$ with its center $s_0$ fixed in advance. The result\nuses the actual, possibly unequal assignment probabilities; random\nassignment supplies no Gaussian error law, and this theorem makes no\nvalidity claim under the weak zero-average-effect null from\n[[def-finite-population-average-treatment-effect-and-weak-null]] unless it\nis also Fisher-sharp.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The assignment weights are nonnegative and sum to one, and each unit's outcome is the same under all three assignments, so this is a finite assignment law satisfying the Fisher sharp null.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If unit 1, 2, or 3 is treated, the signed differences are respectively $0-(1+2)/2=-3/2$, $1-(0+2)/2=0$, and $2-(0+1)/2=3/2$. The two-sided scores are therefore $3/2,0,3/2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each outer assignment has inclusive upper-tail mass $1/2+1/6=2/3$; the middle score is the minimum, so its inclusive upper-tail mass is $1$. The nonrandomized p-value therefore equals $2/3$ with probability $2/3$ and $1$ with probability $1/3$. Its distribution function is $0$ below $2/3$, $2/3$ on $[2/3,1)$, and $1$ at $1$, which is at most its argument throughout $[0,1]$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "At either outer assignment the strict-tail mass is zero and the tied mass is $2/3$, so $p^+=(2/3)U$. At the middle assignment the strict-tail mass is $2/3$ and the tied mass is $1/3$, so $p^+=2/3+U/3$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $0\\le u\\le2/3$, the outer assignments contribute $(2/3)P(U\\le 3u/2)=u$. For $2/3\\le u\\le1$, they contribute $2/3$ and the middle assignment contributes $(1/3)P(U\\le3u-2)=u-2/3$; hence $P(p^+\\le u)=u$ on the entire unit interval. Together with step 3.1, this verifies the theorem's superuniform and uniform conclusions for this assignment law.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has three nonempty assignment states."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All assignment probabilities are strictly positive in this example."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses three units and three assignment states."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: step 3.2 computes the tied outer-score atom mass and its randomized interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 covers $u=0$, $u=2/3$, and $u=1$ in the exact CDF calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All three scores and assignment weights are explicitly enumerated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies numerical values, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies numerical values, not an equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-finite-population-average-treatment-effect-and-weak-null": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero individual effects satisfy both the weak average null and the Fisher sharp null."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: When N=1, the zero average effect condition is exactly the zero individual effect condition in the full binary assignment submodel."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A constant outcome schedule has zero average effect and satisfies the sharp null."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter is defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite sum defining the target is over the explicitly given finite unit set; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

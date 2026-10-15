@@ -1,0 +1,448 @@
+{
+  "group": "c",
+  "batches": [
+    "7"
+  ],
+  "pages_read": [
+    "mixed-effects-and-longitudinal-models",
+    "mixed-effects-and-longitudinal-models-examples"
+  ],
+  "items_read": [
+    "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent",
+    "thm-nondegenerate-multivariate-normal-law-has-density",
+    "def-error-contrast-matrix",
+    "def-known-covariance-generalized-least-squares-estimator",
+    "def-linear-mixed-model",
+    "def-gaussian-linear-mixed-model",
+    "def-longitudinal-missingness-mechanisms",
+    "lem-error-contrast-matrix-exists",
+    "lem-gls-information-matrix-is-positive-definite",
+    "lem-marginal-covariance-of-linear-mixed-model",
+    "lem-reml-error-contrast-covariance-is-positive-definite",
+    "lem-gaussian-error-contrast-is-multivariate-normal",
+    "thm-gaussian-conditional-law-of-random-effects",
+    "thm-variance-component-identifiability-iff-covariance-map-injective",
+    "def-restricted-maximum-likelihood-error-contrasts",
+    "thm-known-covariance-gls-is-blue",
+    "lem-reml-error-contrast-basis-change-is-parameter-free",
+    "thm-known-covariance-blup-for-random-effects",
+    "cex-linear-mixed-model-covariance-does-not-imply-ignorable-dropout",
+    "ex-random-intercept-intraclass-correlation",
+    "cex-two-visits-alias-random-slope-and-residual-variance"
+  ],
+  "conventions": [
+    {
+      "convention": "The moment-only mixed model has fixed X, Z, and β; centered square-integrable b and ε are independent random elements. G and R may be singular, and Gaussianity is an additional assumption.",
+      "fixed_by": "def-linear-mixed-model",
+      "matters_for": [
+        "lem-marginal-covariance-of-linear-mixed-model",
+        "thm-known-covariance-gls-is-blue",
+        "thm-known-covariance-blup-for-random-effects",
+        "ex-random-intercept-intraclass-correlation",
+        "cex-linear-mixed-model-covariance-does-not-imply-ignorable-dropout"
+      ]
+    },
+    {
+      "convention": "The Gaussian branch assumes AC and joint multivariate normality of the concatenated vector (b, ε), with covariance diag(G, R); singular component covariances remain admissible.",
+      "fixed_by": "def-gaussian-linear-mixed-model",
+      "matters_for": [
+        "lem-gaussian-error-contrast-is-multivariate-normal",
+        "thm-gaussian-conditional-law-of-random-effects",
+        "thm-variance-component-identifiability-iff-covariance-map-injective",
+        "def-restricted-maximum-likelihood-error-contrasts",
+        "cex-two-visits-alias-random-slope-and-residual-variance"
+      ]
+    },
+    {
+      "convention": "Error contrasts use an n by (n−p) column-basis matrix K spanning col(X)⊥, with full-column-rank X and p<n; the contrast vector is KᵀY.",
+      "fixed_by": "def-error-contrast-matrix",
+      "matters_for": [
+        "lem-error-contrast-matrix-exists",
+        "lem-reml-error-contrast-covariance-is-positive-definite",
+        "lem-gaussian-error-contrast-is-multivariate-normal",
+        "def-restricted-maximum-likelihood-error-contrasts",
+        "lem-reml-error-contrast-basis-change-is-parameter-free"
+      ]
+    },
+    {
+      "convention": "Known-covariance GLS uses the same fixed positive-definite covariance V under every Pβ. Its exact guarantees do not extend automatically to estimated V.",
+      "fixed_by": "def-known-covariance-generalized-least-squares-estimator",
+      "matters_for": [
+        "lem-gls-information-matrix-is-positive-definite",
+        "thm-known-covariance-gls-is-blue",
+        "thm-known-covariance-blup-for-random-effects"
+      ]
+    },
+    {
+      "convention": "REML fixes X and a contrast basis K independently of θ, requires Vθ positive definite, and compares covariance parameters only within that fixed design.",
+      "fixed_by": "def-restricted-maximum-likelihood-error-contrasts",
+      "matters_for": [
+        "lem-reml-error-contrast-basis-change-is-parameter-free"
+      ]
+    },
+    {
+      "convention": "Missingness is specified by a measurable finite-pattern kernel separately from the response law. MCAR means no dependence on the full responses, permitting dependence on declared covariates; MAR is pattern-specific dependence only through that pattern's observed responses and covariates.",
+      "fixed_by": "def-longitudinal-missingness-mechanisms",
+      "matters_for": [
+        "cex-linear-mixed-model-covariance-does-not-imply-ignorable-dropout"
+      ]
+    },
+    {
+      "convention": "BLUP optimality compares affine predictors with fixed coefficients that are unbiased for E[b]=0 for every fixed β; prediction-error covariance is minimized in positive-semidefinite order.",
+      "fixed_by": "thm-known-covariance-blup-for-random-effects",
+      "matters_for": [
+        "thm-known-covariance-blup-for-random-effects"
+      ]
+    },
+    {
+      "convention": "Variance-component identifiability concerns the target ψ(β,θ)=θ in the full family with β ranging over Rᵖ; it does not require identifiability of β or full rank of X.",
+      "fixed_by": "thm-variance-component-identifiability-iff-covariance-map-injective",
+      "matters_for": [
+        "cex-two-visits-alias-random-slope-and-residual-variance"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-linear-mixed-model",
+      "statement": "A finite-dimensional linear mixed model has Y=Xβ+Zb+ε, fixed X, Z, β, centered square-integrable b and ε, Cov(b)=G, Cov(ε)=R, and independence of b and ε. G and R are symmetric positive semidefinite.",
+      "used_by": [
+        "def-gaussian-linear-mixed-model",
+        "def-longitudinal-missingness-mechanisms",
+        "lem-marginal-covariance-of-linear-mixed-model",
+        "thm-known-covariance-gls-is-blue",
+        "thm-known-covariance-blup-for-random-effects",
+        "ex-random-intercept-intraclass-correlation",
+        "cex-linear-mixed-model-covariance-does-not-imply-ignorable-dropout",
+        "def-biological-and-technical-replication-model",
+        "def-batch-and-measurement-process-variation"
+      ]
+    },
+    {
+      "id": "lem-marginal-covariance-of-linear-mixed-model",
+      "statement": "For the moment model Y=Xβ+Zb+ε of def-linear-mixed-model, the marginal covariance is Cov(Y)=V:=ZGZᵀ+R. This identity uses only the stated means, covariances, and independence; it does not require Gaussianity.",
+      "used_by": [
+        "lem-gaussian-error-contrast-is-multivariate-normal",
+        "thm-gaussian-conditional-law-of-random-effects",
+        "thm-known-covariance-gls-is-blue",
+        "thm-known-covariance-blup-for-random-effects",
+        "ex-random-intercept-intraclass-correlation",
+        "cex-two-visits-alias-random-slope-and-residual-variance",
+        "cex-linear-mixed-model-covariance-does-not-imply-ignorable-dropout"
+      ]
+    },
+    {
+      "id": "def-gaussian-linear-mixed-model",
+      "statement": "The Gaussian branch of def-linear-mixed-model adds the assumption that, under AC, the concatenated vector (b, ε) has law N_{q+n}(0,diag(G,R)).",
+      "used_by": [
+        "lem-gaussian-error-contrast-is-multivariate-normal",
+        "thm-gaussian-conditional-law-of-random-effects",
+        "thm-variance-component-identifiability-iff-covariance-map-injective",
+        "def-restricted-maximum-likelihood-error-contrasts",
+        "cex-two-visits-alias-random-slope-and-residual-variance"
+      ]
+    },
+    {
+      "id": "def-error-contrast-matrix",
+      "statement": "For full-column-rank X∈R^{n×p} with p<n, an error-contrast matrix K∈R^{n×(n−p)} has columns forming a basis of col(X)⊥. Thus K has full column rank and XᵀK=0.",
+      "used_by": [
+        "lem-error-contrast-matrix-exists",
+        "lem-reml-error-contrast-covariance-is-positive-definite",
+        "lem-gaussian-error-contrast-is-multivariate-normal",
+        "def-restricted-maximum-likelihood-error-contrasts",
+        "lem-reml-error-contrast-basis-change-is-parameter-free"
+      ]
+    },
+    {
+      "id": "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent",
+      "statement": "Assume AC. Let (U₁,U₂) be jointly multivariate normal with mean (m₁,m₂) and covariance diag(S,T), where S and T may be singular positive-semidefinite matrices. Then U₁ and U₂ are independent.",
+      "used_by": [
+        "thm-gaussian-conditional-law-of-random-effects"
+      ]
+    },
+    {
+      "id": "thm-known-covariance-gls-is-blue",
+      "statement": "For a linear mixed model with full-column-rank fixed X and known V=Cov(Y) positive definite, β̂_GLS=(XᵀV⁻¹X)⁻¹XᵀV⁻¹Y is unbiased, has covariance (XᵀV⁻¹X)⁻¹, and has no larger variance in any contrast than any other linear unbiased estimator. Gaussianity is not assumed.",
+      "used_by": [
+        "thm-known-covariance-blup-for-random-effects"
+      ]
+    },
+    {
+      "id": "lem-gaussian-error-contrast-is-multivariate-normal",
+      "statement": "Assume AC and the Gaussian mixed model. For full-column-rank X with p<n and an error-contrast matrix K, KᵀY has law N_{n−p}(0,KᵀVK), independent of β. KᵀVK may be singular.",
+      "used_by": [
+        "def-restricted-maximum-likelihood-error-contrasts"
+      ]
+    },
+    {
+      "id": "thm-nondegenerate-multivariate-normal-law-has-density",
+      "statement": "Assume AC. For d≥1 and symmetric positive-definite Σ, N_d(m,Σ) has Lebesgue density (2π)^(−d/2)det(Σ)^(−1/2)exp(−(x−m)ᵀΣ⁻¹(x−m)/2).",
+      "used_by": [
+        "def-restricted-maximum-likelihood-error-contrasts"
+      ]
+    },
+    {
+      "id": "thm-variance-component-identifiability-iff-covariance-map-injective",
+      "statement": "Assume AC, nonempty Θ, and a declared Gaussian covariance-component parameterization with Vθ=ZGθZᵀ+Rθ positive semidefinite. In P_{β,θ}=N_n(Xβ,Vθ), the target ψ(β,θ)=θ is identifiable if and only if θ↦Vθ is injective on Θ.",
+      "used_by": [
+        "cex-two-visits-alias-random-slope-and-residual-variance"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-cauchy-schwarz-inequality-for-l-two",
+      "used_for": "Integrability of residual products in the conditional-covariance proof.",
+      "opened": true
+    },
+    {
+      "id": "cor-countable-independent-copies-exist",
+      "used_for": "Realization of independent standard-normal coordinates under countable and dependent choice.",
+      "opened": true
+    },
+    {
+      "id": "cor-double-orthogonal-complement-and-dimension",
+      "used_for": "Dimension n−p of the error-contrast space.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited assumption for the Gaussian branch and Gaussian suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Event-integral verification of conditional mean and covariance versions.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Choice hypothesis of independent-copy and Lebesgue change-of-variables suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-dependent-choice",
+      "used_for": "Choice hypothesis of the independent-copy construction.",
+      "opened": true
+    },
+    {
+      "id": "def-dimension",
+      "used_for": "Finite-basis interpretation in error-contrast existence.",
+      "opened": true
+    },
+    {
+      "id": "def-estimand-on-a-statistical-model",
+      "used_for": "GLS as an estimator of the identity target β.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "First-moment and centered-effect conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-identifiability-of-an-estimand",
+      "used_for": "Both directions of the covariance-map identifiability criterion.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Independence of latent and residual vectors and their generated sigma-algebras.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-basis",
+      "used_for": "Construction of a column basis for the contrast space.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Finite-second-moment covariance definitions throughout the batch; checked against the ICC example's F2 citation.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Projection definition, existence, moments, and singular-inclusive Gaussian realization.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonal-complement",
+      "used_for": "Definition of col(X)⊥ and annihilation of the fixed design.",
+      "opened": true
+    },
+    {
+      "id": "def-parametric-statistical-model",
+      "used_for": "Parameter-map formulation of variance-component identifiability.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurable-vector conventions in the mixed model.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Standard Gaussian density and affine scalar normal laws.",
+      "opened": true
+    },
+    {
+      "id": "def-statistic-and-estimator",
+      "used_for": "Borel measurability and target requirements for GLS.",
+      "opened": true
+    },
+    {
+      "id": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+      "used_for": "Explicit implication from AC to the countable and dependent choices needed by Gaussian constructions.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-multivariate-normal-law",
+      "used_for": "Gaussian-law uniqueness, singular blocks, error contrasts, and covariance aliases.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-normal-law",
+      "used_for": "Scalar normal transforms and moments in Gaussian density and projection arguments.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+      "used_for": "Transforms of finite independent Gaussian linear combinations.",
+      "opened": true
+    },
+    {
+      "id": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+      "used_for": "Continuity and measurability of estimators, contrasts, and residual transformations.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Coordinate independence, transformed Gaussian blocks, and product-moment factorization.",
+      "opened": true
+    },
+    {
+      "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+      "used_for": "Transport of the independent standard-normal density through an invertible affine map.",
+      "opened": true
+    },
+    {
+      "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+      "used_for": "Gaussian density construction, GLS information positivity, and whitening.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Borel measurability of fixed linear and affine maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-covariance-bilinearity-and-symmetry",
+      "used_for": "Marginal, conditional, GLS, BLUP, and contrast covariance calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-multiplicative",
+      "used_for": "Gaussian-density normalization and REML basis-change factor.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-a-triangular-matrix",
+      "used_for": "Positive determinant of the Cholesky factor.",
+      "opened": true
+    },
+    {
+      "id": "thm-determinant-of-transpose",
+      "used_for": "Determinant identities in Gaussian density and REML basis changes.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Vanishing latent–residual cross-covariances and conditional event-integral identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-grouping-independent-sigma-algebras",
+      "used_for": "Independence of disjoint groups of standard-normal coordinates.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Product law of independent standard-normal coordinates.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+      "used_for": "Identification of the product Gaussian density with a Euclidean Lebesgue density.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Finite expectation calculations and centering throughout the batch.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Block-diagonal covariance square root, including singular blocks.",
+      "opened": true
+    },
+    {
+      "id": "thm-normal-equations-for-best-affine-l2-prediction",
+      "used_for": "Known-β affine prediction step in the BLUP proof; the all-β unbiased comparison is proved separately.",
+      "opened": true
+    },
+    {
+      "id": "thm-rank-nullity",
+      "used_for": "Invertibility of the square contrast-basis change matrix.",
+      "opened": true
+    },
+    {
+      "id": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+      "used_for": "Nonzero determinant of the contrast-basis change and full rank of the two-visit witness design.",
+      "opened": true
+    },
+    {
+      "id": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+      "used_for": "Product-density integration for independent normal coordinates.",
+      "opened": true
+    },
+    {
+      "id": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+      "used_for": "Identification of scalar Gaussian projection laws.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "ex-random-intercept-intraclass-correlation",
+      "concern": "Facts & Assumptions F2 states that 'correlation is covariance divided by the product of the positive standard deviations' and cites def-moments-variance-and-covariance. The opened supplier defines absolute moments, mean, variance, and covariance, but contains no definition of correlation. Verification 2.1 uses this additional convention. The ICC calculation and its zero-variance caveats are sound; the citation attributes a definition absent from its supplier.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "mixed-effects-and-longitudinal-models",
+      "to": "scientific-statistical-model-contracts",
+      "faithful": true,
+      "note": "The actual contract requires explicit scientific roles and a separately specified observation mechanism without implying independence, missingness, or adequacy. The mixed-model and missingness definitions preserve these requirements; the dropout counterexample specifies its kernel separately."
+    },
+    {
+      "from": "mixed-effects-and-longitudinal-models",
+      "to": "fixed-design-linear-regression-and-estimability",
+      "faithful": true,
+      "note": "The supplier fixes X and supplies EβY=Xβ without covariance or Gaussian assumptions. Batch 7 adds rank and covariance hypotheses explicitly. GLS whitening produces a full-rank design and covariance I, satisfying the actual Gauss–Markov theorem with σ²=1; competing linear estimators remain linear after whitening."
+    },
+    {
+      "from": "biological-and-technical-replication",
+      "to": "mixed-effects-and-longitudinal-models",
+      "faithful": true,
+      "note": "The replication definition's fixed-treatment model is a random-intercept specialization of the moment-only LMM. It explicitly adds mutual independence, common variances, and balanced measurements. Its assignment-averaged branch separately retains treatment variance and cross-covariances."
+    },
+    {
+      "from": "measurement-batch-and-process-variation",
+      "to": "mixed-effects-and-longitudinal-models",
+      "faithful": true,
+      "note": "The nested batch definition uses the finite-moment random-intercept form with fixed process offsets and explicitly adds mutual independence and common variances. Its covariance and mean-variance theorem requires no Gaussianity and handles singleton batches and zero component variances."
+    }
+  ]
+}

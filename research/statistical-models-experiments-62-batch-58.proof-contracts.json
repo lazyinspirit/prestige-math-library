@@ -1,0 +1,699 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-finite-horizon-test-supermartingale-crossing-bound",
+    "thm-discrete-ville-inequality",
+    "ex-independent-uniform-repeated-peeking-inflates-global-null-error",
+    "cex-test-supermartingale-supremum-threshold-need-not-be-attained"
+  ],
+  "contracts": {
+    "lem-finite-horizon-test-supermartingale-crossing-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonnegative-test-supermartingale",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice (AC) [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0})$ be a discrete filtration\non a measurable space, and let $\\mathcal P_0$ be a family of probability laws\non $(\\Omega,\\mathcal F)$. A real-valued process $E=(E_t)_{t\\in\\mathbb N_0}$ is\na **nonnegative test supermartingale for $\\mathcal P_0$** if, for every\n$P\\in\\mathcal P_0$, it is adapted and integrable under $P$\n[[def-filtration-and-filtered-probability-space]]\n[[def-martingale-submartingale-and-supermartingale]], satisfies\n$P(E_t\\ge0)=1$ for every $t$, and has $\\mathbb E_P E_0\\le1$.\n\nThe same process must satisfy the supermartingale condition under every law\nin the null family; that is what makes the definition uniform over a composite\nnull. The initial value may be random and need not be bounded by one\npointwise. Time starts at zero.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time",
+          "source_section": "Statement",
+          "quote": "If $X$ is adapted and $B\\subseteq\\mathbb R$ is Borel, then\n$$\\tau=\\inf\\{n\\ge0:X_n\\in B\\},\\qquad \\inf\\varnothing=\\infty,$$\nis a stopping time.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-stopping-time",
+          "source_section": "Definition",
+          "quote": "For a filtration $(\\mathcal F_n)_{n\\ge0}$, a map\n$$\\tau:\\Omega\\longrightarrow\\mathbb N_0\\cup\\{\\infty\\}$$\nis a **stopping time** if $\\{\\tau\\le n\\}\\in\\mathcal F_n$ for every $n\\ge0$. It is **bounded** if some deterministic $N$ satisfies $\\tau\\le N$ almost surely, and **finite** if $P(\\tau<\\infty)=1$. These notions are distinct: finite does not mean bounded.\n\nThe event condition is literal, not merely modulo null sets; no completion of the filtration is assumed. Measurability as an extended-integer-valued random variable follows from the equivalent event tests below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-optional-sampling-for-bounded-stopping-times",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $M$ is a martingale and $\\sigma\\le\\tau$ are stopping times bounded by a deterministic $N$, then\n$$\\mathbb E[M_\\tau\\mid\\mathcal F_\\sigma]=M_\\sigma\\quad\\text{a.s.},$$\nso $\\mathbb EM_\\tau=\\mathbb EM_\\sigma$. For a submartingale $X$ the conditional and expectation inequalities point upward; for a supermartingale they point downward.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $A\\in\\mathcal F$.\nThen the indicator $\\mathbf 1_A$ satisfies\n$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\tau_a=\\inf\\{t\\ge0:M_t\\ge a\\}$, with $\\inf\\varnothing=\\infty$, and $A_N=\\{\\tau_a\\le N\\}=\\{\\max_{0\\le t\\le N}M_t\\ge a\\}$. By [F1], $M$ is adapted; applying [F2] with the Borel set $[a,\\infty)$ makes $\\tau_a$ a stopping time. Thus $\\tau_a\\wedge N$ and the constant time $0$ are bounded stopping times, with $0\\le\\tau_a\\wedge N$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F4] to $0\\le\\tau_a\\wedge N$ to get $\\mathbb E_PM_{\\tau_a\\wedge N}\\le\\mathbb E_PM_0\\le1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On $A_N$, $\\tau_a\\wedge N=\\tau_a$ and $M_{\\tau_a}\\ge a$; on $A_N^c$, $\\tau_a\\wedge N=N$ and $M_N\\ge0$ almost surely by [F1]. Hence $M_{\\tau_a\\wedge N}\\ge a\\mathbf1_{A_N}$ almost surely.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F5] and step 2.1, $aP(A_N)=\\mathbb E_P[a\\mathbf1_{A_N}]\\le\\mathbb E_PM_{\\tau_a\\wedge N}\\le\\mathbb E_PM_0\\le1$. Dividing by $a>0$ proves both bounds.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement is vacuous when the null family is empty because there is no P in the quantified family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and step 3.1 remain valid when E_P[M_0]=0; the right-hand probability bound is then zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows N=0 and every a>0; step 1.1 includes time zero in the finite maximum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers a process that never reaches a, with tau_a=infinity and A_N empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The only threshold assumption is a>0; there is no endpoint parameter in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 identify AC's uses through the test-supermartingale and bounded optional-sampling suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way probability inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way probability inequality, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Independently checked all four proof steps against F1\u2013F5 and A1. First hitting [a,infinity) is a stopping time; its truncation and 0 are bounded by N, so the published optional-sampling supermartingale inequality applies with AC. The stopped value is integrable (finite sum of integrable M_t), at least a on A_N, and nonnegative a.s. off A_N. Indicator expectation and monotonicity give the sharper E_P M_0/a bound, including N=0 and zero initial mean. Empty null family is vacuous; a=0 is excluded. No infinite-horizon stopping or attained supremum is assumed. Reader and refuter evidence reveal no defect in this lemma; no new choice use."
+      }
+    },
+    "thm-discrete-ville-inequality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-horizon-test-supermartingale-crossing-bound",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\mathcal P_0$ be a family of probability laws and let\n$M=(M_t)_{t\\in\\mathbb N_0}$ be a nonnegative test supermartingale for\n$\\mathcal P_0$. For every $P\\in\\mathcal P_0$, every $a>0$, and every\n$N\\in\\mathbb N_0$,\n$$P\\!\\left(\\max_{0\\le t\\le N}M_t\\ge a\\right)\\le \\frac{\\mathbb E_PM_0}{a}\\le\\frac1a.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-nonnegative-test-supermartingale",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice (AC) [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0})$ be a discrete filtration\non a measurable space, and let $\\mathcal P_0$ be a family of probability laws\non $(\\Omega,\\mathcal F)$. A real-valued process $E=(E_t)_{t\\in\\mathbb N_0}$ is\na **nonnegative test supermartingale for $\\mathcal P_0$** if, for every\n$P\\in\\mathcal P_0$, it is adapted and integrable under $P$\n[[def-filtration-and-filtered-probability-space]]\n[[def-martingale-submartingale-and-supermartingale]], satisfies\n$P(E_t\\ge0)=1$ for every $t$, and has $\\mathbb E_P E_0\\le1$.\n\nThe same process must satisfy the supermartingale condition under every law\nin the null family; that is what makes the definition uniform over a composite\nnull. The initial value may be random and need not be bounded by one\npointwise. Time starts at zero.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-discrete-stopping-time",
+          "source_section": "Definition",
+          "quote": "For a filtration $(\\mathcal F_n)_{n\\ge0}$, a map\n$$\\tau:\\Omega\\longrightarrow\\mathbb N_0\\cup\\{\\infty\\}$$\nis a **stopping time** if $\\{\\tau\\le n\\}\\in\\mathcal F_n$ for every $n\\ge0$. It is **bounded** if some deterministic $N$ satisfies $\\tau\\le N$ almost surely, and **finite** if $P(\\tau<\\infty)=1$. These notions are distinct: finite does not mean bounded.\n\nThe event condition is literal, not merely modulo null sets; no completion of the filtration is assumed. Measurability as an extended-integer-valued random variable follows from the equivalent event tests below.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any $\\gamma\\in(0,1)$, set $\\tau_\\gamma=\\inf\\{t\\ge0:M_t\\ge1/\\gamma\\}$ and $A_N=\\{\\tau_\\gamma\\le N\\}=\\{\\max_{0\\le t\\le N}M_t\\ge1/\\gamma\\}$. The events $A_N$ increase and their union is $\\{\\tau_\\gamma<\\infty\\}=\\{\\exists t\\ge0:M_t\\ge1/\\gamma\\}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $P(A_N)\\le\\gamma$ for each $N$; [F2] gives $P(\\tau_\\gamma<\\infty)=\\lim_NP(A_N)\\le\\gamma$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $\\gamma_n=\\alpha+(1-\\alpha)/(n+1)$ for $n\\ge1$. Then $\\gamma_n\\downarrow\\alpha$ and $1/\\gamma_n<1/\\alpha$. The countable-supremum event $H=\\{\\sup_{t\\ge0}M_t\\ge1/\\alpha\\}$ equals $\\bigcap_{n\\ge1}\\{\\tau_{\\gamma_n}<\\infty\\}$: if the supremum is at least $1/\\alpha$, each strictly lower threshold $1/\\gamma_n$ is exceeded by some process value; conversely, crossing every such threshold forces the supremum to be at least their limit $1/\\alpha$. Thus $H$ is measurable and, by step 2.1, $P(H)\\le\\gamma_n$ for every $n$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Letting $n\\to\\infty$ in step 3.1 gives $P(H)\\le\\alpha$. Taking $\\gamma=\\alpha$ in step 2.1 also gives $P(\\tau_\\alpha<\\infty)\\le\\alpha$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For a discrete stopping time $\\sigma$, $\\{\\sigma<\\infty,M_\\sigma\\ge1/\\alpha\\}=\\bigcup_{t\\ge0}(\\{\\sigma=t\\}\\cap\\{M_t\\ge1/\\alpha\\})\\subseteq\\{\\tau_\\alpha<\\infty\\}$. The event is measurable by [F3]\u2013[F4], and step 4.1 bounds its probability by $\\alpha$.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement is vacuous for an empty null family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The finite-horizon supplier in steps 1.1\u20132.1 covers zero initial expectation and yields zero crossing probability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes time zero, so a threshold already crossed at time zero is counted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 cover the no-crossing case tau_gamma=infinity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The threshold level is restricted to alpha in (0,1); endpoint values are not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 carries AC only through the test-supermartingale and bounded optional-sampling route."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states upper bounds, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states upper bounds, not an if-and-only-if claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked all five steps and exact current F1\u2013F4/A1 statements. Finite maxima are measurable and increase to the first-crossing event, allowing continuity from below. For alpha in (0,1), gamma_n=alpha+(1-alpha)/(n+1) stays in (alpha,1); the supremum event equals the intersection of crossings of the strictly lower thresholds 1/gamma_n, in both directions, without attainment. P(H)<=gamma_n for every n suffices to pass the numerical bound to alpha. The stopped-value event is a countable union restricted to finite times, measurable and contained in first crossing, so no value at infinity or unbounded optional sampling is used. Empty family, zero initial mean, time zero and no crossing cause no exception. AC inherited through F1/F3. Reader and refuter reports checked; no finding applies. Howard et al. Lemma 1 p.14 and complete \u00a76.1 p.44, and Wolpert \u00a71 p.1 and \u00a75 Theorem 4 pp.11\u201312 were read: local proof independently supplies the supermartingale and nonattainment details."
+      }
+    },
+    "ex-independent-uniform-repeated-peeking-inflates-global-null-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-stopping-time",
+          "source_section": "Definition",
+          "quote": "For a filtration $(\\mathcal F_n)_{n\\ge0}$, a map\n$$\\tau:\\Omega\\longrightarrow\\mathbb N_0\\cup\\{\\infty\\}$$\nis a **stopping time** if $\\{\\tau\\le n\\}\\in\\mathcal F_n$ for every $n\\ge0$. It is **bounded** if some deterministic $N$ satisfies $\\tau\\le N$ almost surely, and **finite** if $P(\\tau<\\infty)=1$. These notions are distinct: finite does not mean bounded.\n\nThe event condition is literal, not merely modulo null sets; no completion of the filtration is assumed. Measurability as an extended-integer-valued random variable follows from the equivalent event tests below.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-discrete-ville-inequality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\mathcal P_0$ be a family of probability laws and let\n$M=(M_t)_{t\\in\\mathbb N_0}$ be a nonnegative test supermartingale for\n$\\mathcal P_0$. For every $P\\in\\mathcal P_0$ and $\\alpha\\in(0,1)$, define\n$$\\tau_\\alpha=\\inf\\{t\\ge0:M_t\\ge1/\\alpha\\},\\qquad\\inf\\varnothing=\\infty.$$\nThen\n$$P\\!\\left(\\sup_{t\\ge0}M_t\\ge\\frac1\\alpha\\right)\\le\\alpha,\\qquad P(\\tau_\\alpha<\\infty)\\le\\alpha.$$\nMoreover, for every discrete stopping time $\\sigma$,\n$$P(\\sigma<\\infty,\\ M_\\sigma\\ge1/\\alpha)\\le\\alpha,$$\nwhere the event involving $M_\\sigma$ is restricted to $\\{\\sigma<\\infty\\}$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $i$, the uniform-law assumption gives $P_0(P_i>\\alpha)=1-\\alpha$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Define $\\sigma=\\inf\\{1\\le i\\le K:P_i\\le\\alpha\\}$, with $\\inf\\varnothing=\\infty$. For every $k\\ge0$, $\\{\\sigma\\le k\\}=\\bigcup_{i=1}^{\\min(k,K)}\\{P_i\\le\\alpha\\}\\in\\mathcal F_k$, where the union is empty for $k=0$. Thus [F3] makes $\\sigma$ a stopping time, and the rejection event by look $K$ is $\\{\\sigma\\le K\\}$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1]\u2013[F2], the probability that every look misses is the product of the marginal probabilities, so $P_0(\\bigcap_{i=1}^K\\{P_i>\\alpha\\})=(1-\\alpha)^K$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The event of at least one rejection is the complement of the event in step 2.1. Therefore its probability is $1-(1-\\alpha)^K$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $0<1-\\alpha<1$ and $K\\ge2$, $(1-\\alpha)^K<1-\\alpha$, so step 3.1 is strictly greater than $\\alpha$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "[F4] controls arbitrary threshold stopping only when its nonnegative test-supermartingale hypotheses hold. The calculation above concerns repeated fixed-look uniform p-values and does not assume such a process, so the excess rejection probability is not a violation of Ville's inequality.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "A1",
+            "step 1.2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes an integer K>=2 and includes at least two looks."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The level alpha is restricted to (0,1), excluding zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement requires K>=2; step 3.1's formula would equal alpha for the excluded one-look boundary K=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "reason": "Every look has a continuous uniform null law; no degenerate p-value law is assumed.",
+          "evidence": "Step 1.2 uses inf(empty)=infinity, has an empty stopping-time event at k=0, and freezes the union and filtration for k>=K, including paths with no rejection."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The level alpha is restricted to (0,1), excluding both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 uses AC only for the comparison with the A-page theorem; steps 1.1\u20134.1 are the exact choice-free computation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a probability formula and strict inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a probability formula and strict inequality, not an equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Checked all six Verification steps and all five direct suppliers, including the actual product-law proof and prior reviewed Ville theorem. Refuter:58:1 is a real nonfatal notation/domain gap: only K variables exist, whereas the stopping-time definition requires all k>=0. Repaired by using min(k,K) in the filtration and event union and restricting the infimum to 1<=i<=K. The event at 0 is empty; for k>=K it is constant, including the never-reject case sigma=infinity. Finite mutual independence and the product rectangle law give (1-alpha)^K for no rejection; taking the complement gives exactly 1-(1-alpha)^K>alpha for K>=2 and 0<alpha<1. K=1 and alpha=0,1 would give equality and are correctly excluded from the strict claim. AC is inherited only in the contextual Ville comparison, not the calculation or explicit stopping rule. No statement consumer requires repair; B-page prose uses the same unchanged formula. No material proof rewrite or existing judge stamp."
+      }
+    },
+    "cex-test-supermartingale-supremum-threshold-need-not-be-attained": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-martingale-submartingale-and-supermartingale",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]]. An integrable adapted real process $X$ [[def-adapted-and-integrable-stochastic-process]] is a **martingale**, **submartingale**, or **supermartingale** when, respectively, for every $n\\ge0$,\n$$E[X_{n+1}\\mid\\mathcal F_n]=X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\ge X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\le X_n\\quad\\text{almost surely}.$$\nThese are three separate conditions, with the convention that a submartingale has conditional future mean at least its present value. The conditional expectations are the almost-sure classes of [[def-conditional-expectation-as-an-ae-class]]; that supplier inherits AC from its Radon\u2013Nikodym existence proof. The definition itself selects no representative and assumes no completed filtration.\n\nThe condition is imposed at each adjacent pair of times. An all-pairs formulation requires a proof. No boundedness or independence is part of this definition, and no trivial or deterministic initial value is imposed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nonnegative-test-supermartingale",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice (AC) [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0})$ be a discrete filtration\non a measurable space, and let $\\mathcal P_0$ be a family of probability laws\non $(\\Omega,\\mathcal F)$. A real-valued process $E=(E_t)_{t\\in\\mathbb N_0}$ is\na **nonnegative test supermartingale for $\\mathcal P_0$** if, for every\n$P\\in\\mathcal P_0$, it is adapted and integrable under $P$\n[[def-filtration-and-filtered-probability-space]]\n[[def-martingale-submartingale-and-supermartingale]], satisfies\n$P(E_t\\ge0)=1$ for every $t$, and has $\\mathbb E_P E_0\\le1$.\n\nThe same process must satisfy the supermartingale condition under every law\nin the null family; that is what makes the definition uniform over a composite\nnull. The initial value may be random and need not be bounded by one\npointwise. Time starts at zero.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-discrete-ville-inequality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\mathcal P_0$ be a family of probability laws and let\n$M=(M_t)_{t\\in\\mathbb N_0}$ be a nonnegative test supermartingale for\n$\\mathcal P_0$. For every $P\\in\\mathcal P_0$ and $\\alpha\\in(0,1)$, define\n$$\\tau_\\alpha=\\inf\\{t\\ge0:M_t\\ge1/\\alpha\\},\\qquad\\inf\\varnothing=\\infty.$$\nThen\n$$P\\!\\left(\\sup_{t\\ge0}M_t\\ge\\frac1\\alpha\\right)\\le\\alpha,\\qquad P(\\tau_\\alpha<\\infty)\\le\\alpha.$$\nMoreover, for every discrete stopping time $\\sigma$,\n$$P(\\sigma<\\infty,\\ M_\\sigma\\ge1/\\alpha)\\le\\alpha,$$\nwhere the event involving $M_\\sigma$ is restricted to $\\{\\sigma<\\infty\\}$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $p=1/4$, $c=2$, and $\\Omega=\\{a\\}\\cup\\{b_k:k\\ge1\\}$ with $\\mathcal F=2^\\Omega$, $P(\\{a\\})=p$, and $P(\\{b_k\\})=(1-p)2^{-k}$. The geometric series makes $P$ a probability measure. For $n\\ge0$, let $T_n=\\{a\\}\\cup\\{b_k:k>n\\}$, let $\\mathcal F_n$ be generated by the partition $\\{\\{b_1\\},\\ldots,\\{b_n\\},T_n\\}$ (at $n=0$ this is the trivial partition), and put $m_n=P(T_n)=p+(1-p)2^{-n}$. These partitions refine as $n$ increases, so $(\\mathcal F_n)$ is a filtration.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $M_n=0$ on each singleton $\\{b_j\\}$ with $j\\le n$, and set $M_n=cp/m_n$ on $T_n$. This is $\\mathcal F_n$-measurable and satisfies $0\\le M_n<c$. By [F1], [F4], and [F5], $\\mathbb E_PM_n\\le cP(\\Omega)=c<\\infty$, so it is integrable.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On every revealed singleton $\\{b_j\\}$, $j\\le n$, both $M_n$ and $M_{n+1}$ are zero. The remaining atom $T_n$ splits into $\\{b_{n+1}\\}$, of mass $(1-p)2^{-(n+1)}$, and $T_{n+1}$, of mass $m_{n+1}$. The conditional mean of $M_{n+1}$ on $T_n$ is $$\\frac{m_{n+1}(cp/m_{n+1})+(1-p)2^{-(n+1)}\\cdot0}{m_n}=\\frac{cp}{m_n}=M_n,$$ since the two parts' masses sum to $m_n$. These equalities on the finitely many atoms of $\\mathcal F_n$ give a conditional-expectation version by [F2]; [F3] gives its almost-sure class, and [F6] makes $M$ a martingale.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "$M_0=cp=1/2$, so $\\mathbb E_PM_0=cpP(\\Omega)=1/2\\le1$. With step 2.1 and step 3.1, [F7] shows that $M$ is a nonnegative test supermartingale for the singleton null family $\\{P\\}$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F7",
+            "A1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Step 2.1 shows $M_n<c=2$ at every finite time, so $\\tau_{1/2}=\\infty$ everywhere. On $a$, $M_n=cp/[p+(1-p)2^{-n}]\\to c$, so $\\sup_nM_n=c$; on each $b_k$, $M_n=0$ for $n\\ge k$ and the finitely many earlier values are all below $c$. Hence $\\{\\sup_nM_n\\ge2\\}=\\{a\\}$, with probability $1/4$, whereas $P(\\tau_{1/2}<\\infty)=0$. Both are at most $\\alpha=1/2$, as [F8] requires, but they are not equal.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F8",
+            "A1",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The construction has a nonempty countable sample space and singleton null family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Counterexample 1.1 fixes p=1/4 and m_n=P(T_n)=1/4+(3/4)2^-n, hence m_n>1/4 for every finite n and m_{n+1}>0. These actual atom masses exclude zero for every denominator in 2.1 and 3.1; the initial expectation alone is not the needed exclusion.",
+          "reviewed": {
+            "upheld": true,
+            "by": "sme_gate_boundary_sequential",
+            "reason": "The detector identifies division by m_n, but Counterexample 1.1 explicitly computes that mass and its strictly positive lower bound. Every conditional-atom division in 3.1 has a positive mass, independently of the value of the initial expectation."
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional sample or one-look parameter occurs in the construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 distinguishes the limiting path at a from every finite-time value and the other atoms b_k."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The corrected Statement asserts the identity for every alpha in (0,1); step 5.1 refutes it at the interior value alpha=1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 3.1\u20135.1 declare the inherited AC convention; the atomic construction and conditional means are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The corrected Statement asserts universal equality; step 5.1 gives one test supermartingale and alpha=1/2 with supremum-event probability 1/4 and first-crossing probability 0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 gives a witness with strictly positive supremum-event probability and zero first-crossing probability, so reversing the asserted equality also fails."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-58",
+        "notes": "Independently checked steps 1.1\u20135.1 and all ten cited dependencies, with reader and refuter evidence. The atomic masses sum to one, refining finite partitions define an uncompleted filtration, and m_n=1/4+(3/4)2^-n>1/4 makes every division valid. On each finite partition atom the event-integral definition gives the displayed conditional mean; finite unions give all conditioning events. M_n is bounded, adapted, nonnegative, a martingale, and M_0=1/2. On a it tends strictly upward to 2; on each b_k only finitely many nonzero values occur, each below 2. Thus supremum probability is 1/4 and finite crossing probability zero at alpha=1/2. This one witness refutes the corrected universal equality. AC is explicitly inherited; no implicit choice or completion. Exact archived pre-reader bytes match a6a88903..., current bytes match post f04b873e...; accept reader repair. No item consumer uses the changed statement; the B-page describes the same sound witness."
+      }
+    }
+  }
+}

@@ -1,0 +1,435 @@
+[
+  {
+    "order": 1920,
+    "id": "fixed-design-linear-regression-and-estimability",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Fixed-design regression, estimability, and Gauss–Markov",
+    "companion": "fixed-design-linear-regression-and-estimability-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "statistical-experiments-models-and-identifiability",
+      "estimators-and-randomized-procedures",
+      "inner-product-spaces-and-orthogonality",
+      "linear-maps-rank-nullity-and-quotient-spaces",
+      "probability-spaces-random-variables-and-expectation"
+    ],
+    "items": [
+      {
+        "id": "def-fixed-design-linear-regression-model",
+        "kind": "definition",
+        "title": "Fixed-design linear regression model",
+        "deps": [
+          "def-scientific-statistical-model-contract",
+          "def-statistical-experiment",
+          "def-parametric-statistical-model",
+          "def-measurable-space",
+          "def-borel-sigma-algebra",
+          "def-random-element-and-real-random-variable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "justified_by": [],
+        "statement": "A fixed-design first-moment regression model has fixed X in R^{n x p}, parameter beta in R^p, observation space R^n with its Borel sigma-algebra, and response Y with finite coordinate means E_beta[Y]=X beta. It imposes no covariance, independence, or Gaussian assumption.",
+        "strategy": "Define the regression experiment as a parametric family of laws on the response space and state fixed-design conditioning and first-moment scope.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 1-2: fixed-design matrix model and full-rank scope; Gaussian assumptions are not imported into this first-moment definition."
+            },
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF pp. 2-4: response, predictor matrix, and fixed-design model notation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-linear-contrast-statistics-are-borel-measurable",
+        "kind": "lemma",
+        "title": "Linear statistics on Euclidean data are Borel-measurable",
+        "deps": [
+          "def-euclidean-linear-map",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "lem-metrics-on-rn",
+          "def-metric-topology",
+          "def-borel-sigma-algebra",
+          "def-lipschitz-holder-contraction",
+          "thm-metric-regularity-hierarchy",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "def-measurable-function-between-measurable-spaces"
+        ],
+        "justified_by": [],
+        "statement": "For n >= 1 and a in R^n, the map y -> a^T y from Euclidean R^n to Borel R is measurable.",
+        "strategy": "Bound the linear functional to obtain a Lipschitz map, then use continuity to pull Borel sets back to Borel sets.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF pp. 2-6: linear statistics and their use as estimators."
+            },
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 1-2: linear data maps and least-squares coefficient maps."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-least-squares-solution-set",
+        "kind": "definition",
+        "title": "Least-squares solution set",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-euclidean-linear-map"
+        ],
+        "justified_by": [
+          "thm-least-squares-fitted-vector-and-solution-set"
+        ],
+        "statement": "For X in R^{n x p} and y in R^n, define B_LS(y)=argmin_{b in R^p} ||y-Xb||_2^2. This is a set-valued definition and does not select a coefficient vector.",
+        "strategy": "Define the full minimizer set using the Euclidean norm; the following theorem proves it is nonempty and describes its fitted vector.",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 1-2: least-squares objective and normal equations."
+            },
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF pp. 3-4: squared-error minimization and projection interpretation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-least-squares-fitted-vector-and-solution-set",
+        "kind": "theorem",
+        "title": "Least-squares fits and residuals are unique",
+        "deps": [
+          "def-least-squares-solution-set",
+          "def-euclidean-inner-product",
+          "def-euclidean-linear-map",
+          "thm-least-squares-solutions-and-normal-equation",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "def-orthogonal-projection",
+          "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "thm-rank-nullity"
+        ],
+        "justified_by": [],
+        "statement": "For every finite design X and response y, the least-squares solution set is nonempty, its elements satisfy X^T(Xb-y)=0 and form b_0+ker X, its fitted vector is uniquely P_col(X)y, its residual is uniquely y-P_col(X)y, and the solution set has dimension p-rank(X).",
+        "strategy": "Apply the published least-squares normal-equation theorem, identify the image minimizer by orthogonal projection, and use rank-nullity for the affine solution dimension.",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 1-4: normal equations, fitted projection, and residual projection."
+            },
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF pp. 3-4: least-squares projection and normal equations."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-linear-estimability-in-fixed-design",
+        "kind": "definition",
+        "title": "Linearly estimable contrast",
+        "deps": [
+          "def-fixed-design-linear-regression-model",
+          "def-estimand-on-a-statistical-model",
+          "def-statistic-and-estimator",
+          "lem-linear-contrast-statistics-are-borel-measurable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "justified_by": [],
+        "statement": "For c in R^p, the contrast beta -> c^T beta is linearly estimable if there is a fixed a in R^n such that a^T Y is an unbiased measurable estimator of c^T beta for every beta.",
+        "strategy": "Specialize the estimand and estimator definitions to a fixed-design regression experiment; require a deterministic linear statistic and unbiasedness for every parameter.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF p. 5: definition of an estimable linear function by a linear unbiased estimator."
+            },
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 5-6: linear contrasts and estimators under the full-rank Gaussian model."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-linear-estimability-iff-row-space",
+        "kind": "theorem",
+        "title": "Linear estimability is equivalent to row-space membership",
+        "deps": [
+          "def-fixed-design-linear-regression-model",
+          "def-linear-estimability-in-fixed-design",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "justified_by": [],
+        "statement": "Under the fixed-design first-moment model, c^T beta is linearly estimable if and only if c is in row(X)=im(X^T), equivalently X^T a=c for some a in R^n; then a^T Y is unbiased.",
+        "strategy": "Compute E_beta[a^T Y]=(X^T a)^T beta and use equality for every beta to identify the coefficient vector.",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF p. 5: estimability definition and row-space condition."
+            },
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 5-6: linear contrast notation and full-rank consequence."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-ols-unbiasedness-and-covariance-full-rank",
+        "kind": "theorem",
+        "title": "Full-rank OLS is unbiased with its classical covariance",
+        "deps": [
+          "def-fixed-design-linear-regression-model",
+          "thm-least-squares-fitted-vector-and-solution-set",
+          "thm-rank-nullity",
+          "def-moments-variance-and-covariance",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "thm-covariance-bilinearity-and-symmetry"
+        ],
+        "justified_by": [],
+        "statement": "If X has full column rank and E_beta epsilon=0 with Cov_beta(epsilon)=sigma^2 I_n for sigma^2>0, then the unique OLS estimator is (X^T X)^{-1}X^T Y, is unbiased for beta, and has covariance sigma^2(X^T X)^{-1}. No Gaussian assumption is required.",
+        "strategy": "Use the normal equation, prove X^T X is invertible, and apply the first- and second-moment identities to the resulting linear estimator.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF pp. 4-5: normal equations, OLS formula, and first/second-moment formulas."
+            },
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 1-3: full-rank formula and coefficient covariance derivation; Gaussianity is not used for the moment result."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-gauss-markov-for-fixed-design-regression",
+        "kind": "theorem",
+        "title": "Gauss–Markov theorem for estimable contrasts",
+        "deps": [
+          "def-fixed-design-linear-regression-model",
+          "def-linear-estimability-in-fixed-design",
+          "thm-linear-estimability-iff-row-space",
+          "thm-ols-unbiasedness-and-covariance-full-rank",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry"
+        ],
+        "justified_by": [],
+        "statement": "For fixed full-column-rank X, E_beta epsilon=0, and Cov_beta(epsilon)=sigma^2 I_n with sigma^2>0, OLS estimates every contrast c^T beta with minimum variance among all linear unbiased estimators; Gaussianity is not required.",
+        "strategy": "Represent any competing estimator as a^T Y with X^T a=c, subtract the OLS coefficient vector, and use orthogonality to cancel the covariance cross-term.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF p. 6: complete Gauss–Markov competitor decomposition and variance comparison."
+            },
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 1-4: fixed-design normal equations and full-rank OLS representative."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 1921,
+    "id": "fixed-design-linear-regression-and-estimability-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Fixed-design regression, estimability, and Gauss–Markov — Examples",
+    "companion": "fixed-design-linear-regression-and-estimability",
+    "requires": [
+      "fixed-design-linear-regression-and-estimability"
+    ],
+    "items": [
+      {
+        "id": "ex-collinear-fixed-design-estimability",
+        "kind": "example",
+        "title": "Collinear predictors can leave a contrast estimable",
+        "deps": [
+          "def-fixed-design-linear-regression-model",
+          "def-least-squares-solution-set",
+          "thm-least-squares-fitted-vector-and-solution-set",
+          "def-linear-estimability-in-fixed-design",
+          "thm-linear-estimability-iff-row-space"
+        ],
+        "justified_by": [],
+        "statement": "For X with two identical columns, the least-squares fitted vector is unique while the coefficient vector is not; the sum contrast is linearly estimable and either single coefficient is not.",
+        "strategy": "Compute the minimizer set and row space for the two-row design with identical columns.",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF pp. 4-5: collinearity, least-squares fitting, and estimability."
+            },
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 1-2 and 8-11: rank deficiency and collinear design interpretation."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-heteroskedasticity-invalidates-ols-blue",
+        "kind": "counterexample",
+        "title": "Unequal error variances can make OLS fail to be BLUE",
+        "deps": [
+          "def-fixed-design-linear-regression-model",
+          "def-linear-estimability-in-fixed-design",
+          "thm-linear-estimability-iff-row-space",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "thm-ols-unbiasedness-and-covariance-full-rank",
+          "thm-gauss-markov-for-fixed-design-regression",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "def-probability-measure",
+          "cor-expectation-agrees-with-the-finite-weighted-sum"
+        ],
+        "justified_by": [],
+        "statement": "The claim that OLS is BLUE for every mean-zero error law under a full-rank fixed design is false.",
+        "strategy": "Use a two-observation intercept-only design with finite errors of unequal variances and exhibit a lower-variance unbiased linear estimator.",
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF p. 6: the Gauss–Markov covariance premise and competitor proof."
+            },
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 1-4: classical fixed-design and full-rank conventions."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-high-leverage-is-a-design-feature",
+        "kind": "example",
+        "title": "Leverage is determined by the design",
+        "deps": [
+          "def-least-squares-solution-set",
+          "thm-least-squares-fitted-vector-and-solution-set",
+          "def-orthogonal-projection"
+        ],
+        "justified_by": [],
+        "statement": "For a full-rank simple-regression design, the diagonal of the projection onto the design column space can be close to one at an extreme predictor value; this leverage value depends only on X.",
+        "strategy": "Decompose the design column space into its orthogonal intercept and centered-predictor directions and calculate the final projection diagonal.",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Statistics: Lecture Three — Linear Models",
+              "url": "https://www.stat.berkeley.edu/~rice/Stat230A/statiii.pdf",
+              "locator": "PDF pp. 8, 11-12, and 17: residual and leverage diagnostics and the caution that diagnostics are workflow checks."
+            },
+            {
+              "title": "Statistics for Applications, Section 15: Multiple Linear Regression",
+              "url": "https://ocw.mit.edu/courses/18-443-statistics-for-applications-fall-2006/dbc17cbfdac61daaff75056992d0af9a_section15.pdf",
+              "locator": "PDF pp. 8-11: design collinearity and regression examples; the leverage calculation is local."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

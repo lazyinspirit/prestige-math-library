@@ -1,0 +1,1672 @@
+{
+  "version": 1,
+  "scope": [
+    "def-parametric-survival-and-reliability",
+    "thm-exponential-and-weibull-survival-laws",
+    "thm-survival-cumulative-hazard-identity",
+    "thm-jump-hazard-survival-product",
+    "thm-censored-exponential-likelihood-and-mle",
+    "ex-exponential-weibull-hazards-and-censored-likelihood",
+    "ex-zero-exposure-censored-mle-boundary"
+  ],
+  "contracts": {
+    "def-parametric-survival-and-reliability": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition specifies event-time objects and model functions without a sample-size assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition distinguishes S_T(0)=1 from a possible event at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition applies to a single nonnegative lifetime T."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition allows atoms through q_T(t) and limits density hazards to laws with a density."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition fixes T>t survival and T\u2265t pre-event survival."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition requires no representative selection or other choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition gives S_T(0)=P(T>0)=1-P(T=0) because T is nonnegative. If S_T(0)=1, subtracting from1 gives P(T=0)=0; this checks the forward direction of its explicit exactly-when clause."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Definition gives S_T(0)=1-P(T=0) for a nonnegative event time. If P(T=0)=0, substituting gives S_T(0)=1; this checks the reverse direction of the stated exactly-when clause, including possible atom-at-zero laws."
+        }
+      ]
+    },
+    "thm-exponential-and-weibull-survival-laws": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice** ([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-integral-logarithm-is-unbounded",
+          "source_section": "Statement",
+          "quote": "For every $M\\in\\mathbb R$ there are $a,b>0$ such that\n\n$$L(a)<M<L(b).$$\n\nIn particular, $L$ is unbounded both below and above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x)\\to+\\infty\\quad(x\\to+\\infty),\\qquad \\exp(x)\\to0\\quad(x\\to-\\infty),$$\nand the range of $\\exp$ is contained in $(0,\\infty)$ and is unbounded above with infimum $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable \u2014 then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) \u2014 and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-probability-law-and-distribution-function-correspondence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\n1. Let $X$ be a real random variable, let $\\mathbb P_X$ be its law, and let\n   $F_X(x)=\\mathbb P(X\\le x)$. Then $F_X$ is nondecreasing and right-continuous,\n   satisfies\n   $$\\lim_{x\\to-\\infty}F_X(x)=0,\\qquad \\lim_{x\\to+\\infty}F_X(x)=1,$$\n   and obeys\n   $$\\mathbb P_X((a,b])=F_X(b)-F_X(a)\\qquad(a<b).$$\n2. Conversely, if $F:\\mathbb R\\to\\mathbb R$ is nondecreasing and\n   right-continuous with\n   $$\\lim_{x\\to-\\infty}F(x)=0,\\qquad \\lim_{x\\to+\\infty}F(x)=1,$$\n   then there is a unique Borel probability measure $\\mu$ on $\\mathbb R$ such\n   that\n   $$\\mu((a,b])=F(b)-F(a)\\qquad(a<b),$$\n   equivalently\n   $$F(x)=\\mu((-\\infty,x])\\qquad(x\\in\\mathbb R).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarath\u00e9odory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice** ([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $F_\\lambda(t)=0$ for $t<0$ and $F_\\lambda(t)=1-e^{-\\lambda t}$ for $t\\ge0$; define $F_{k,\\eta}(t)=0$ for $t<0$ and $F_{k,\\eta}(t)=1-e^{-(t/\\eta)^k}$ for $t\\ge0$. Both are continuous at $0$ by [F2], [F4], and [F5]. On $t>0$ their derivatives are the displayed densities and are positive by [F2]. The piecewise densities are Borel measurable: on $(0,\\infty)$ they are products of continuous functions, and on $(-\\infty,0]$ they vanish; both domains are Borel by [F11]. The mean value theorem in [F3] makes each increasing on $(0,\\infty)$. For $t>0$, both $a=\\lambda t$ and $a=(t/\\eta)^k$ are positive, so strict increase of the exponential gives $e^{-a}<e^0=1$; hence both candidate CDFs are positive there; thus their value $0$ at $0$ is consistent with monotonicity. Their limits are $0$ at $-\\infty$ and $1$ at $+\\infty$, so each is a CDF on $\\mathbb R$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F11",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $0<a<b$. Each CDF is differentiable on $[a,b]$ with the continuous derivative $f$ from the Statement. By [F6] its Riemann integral is $F(b)-F(a)$; by [F7] this equals its Lebesgue integral with respect to the measure in [F10]. Letting $a=1/n\\downarrow0$ for integers $n$ large enough that $1/n<b$, [F8] and continuity at $0$ give $$\\int_{(0,b]}f(u)\\,du=F(b).$$ This applies separately to the exponential and Weibull formulas.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For either displayed nonnegative density $f$, [F1] defines the measure $\\nu_f=f\\,dt$ on Lebesgue-measurable sets. By [F12], its restriction to Borel sets is a measure. Step 2.1 gives $\\nu_f((0,t])=F(t)$ for every $t>0$. Since $f=0$ on $(-\\infty,0]$, this part has $\\nu_f$-measure zero, so $\\nu_f((-\\infty,t])=F(t)$; for $t\\le0$ both sides are $0$. Also $$\\nu_f(\\mathbb R)=\\lim_{n\\to\\infty}\\nu_f((-\\infty,n])=\\lim_{n\\to\\infty}F(n)=1$$ by [F8] and step 1.1. Thus $\\nu_f$ is a probability law with CDF $F$, and [F9] identifies it with the unique law specified by the survival formula. Consequently $f$ is the stated density.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "F12"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Dividing the exponential density by its positive survival gives hazard $\\lambda$. Dividing the Weibull density by its positive survival gives $\\dfrac{k}{\\eta}(t/\\eta)^{k-1}$ for $t>0$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 1.1, 2.1, 3.1, and 4.1 establish CDF validity, density-law existence, survival formulas, uniqueness, and the density hazards for both parameter families.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement treats each positive parameter choice as one law; no empty parameter family is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 handle t=0 and the zero endpoint of the density."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 constructs the law for each fixed parameter choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 proves total mass one for the displayed density measures."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 establish the limits and CDF values at zero and infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 state and use Countable Choice through A1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement constructs and normalizes the displayed positive-parameter exponential/Weibull densities, identifies their survival laws uniquely and calculates density hazards in step4.1. This is a density-law construction and uniqueness result, not an assertion that an arbitrary hazard pattern is equivalent to membership in either family. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement constructs and normalizes the displayed positive-parameter exponential/Weibull densities, identifies their survival laws uniquely and calculates density hazards in step4.1. This is a density-law construction and uniqueness result, not an assertion that an arbitrary hazard pattern is equivalent to membership in either family. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Independently read all five proof steps and all 23 direct supplier Statement/Definition sections. Positive parameters give positive continuous densities on (0,infinity); powers tend to zero at zero and infinity at infinity. Compact FTC plus Riemann/Lebesgue equality and monotone convergence handles the k<1 endpoint singularity without claiming boundedness at zero. Borel measurability and Lebesgue restriction are supplied explicitly under Countable Choice; probability mass is one, CDF uniqueness applies, and hazards are asserted only at t>0. Confirmed refuter:29:1 as nonfatal incorrect exponent wording and replaced it with exp(-a)<exp(0)=1. Reader measure/Borel repairs retained. No changed Statement or consumer premise."
+      }
+    },
+    "thm-survival-cumulative-hazard-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarath\u00e9odory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-parametric-survival-and-reliability",
+          "source_section": "Definition",
+          "quote": "Let $T$ be a nonnegative event time as in [[def-event-time-observation-schemes]],\nwith law $P_T$. Its cumulative distribution function is\n$F_T(t)=P(T\\le t)$ ([[def-cumulative-distribution-function-of-a-random-variable]]).\nThe **survival function** is\n$$S_T(t):=P(T>t)=1-F_T(t),\\qquad t\\ge0.$$\nWrite $S_T(t^-):=P(T\\ge t)$ for the pre-event survival. In particular,\n$S_T(0)=1$ exactly when $P(T=0)=0$.\n\nFor a **nonrepairable** unit, meaning that a failed unit is permanently removed\nfrom the population, its **reliability function** is\n$R_T(t):=P(T>t)=S_T(t)$. This is a single first-failure lifetime model. A\nrepairable system can fail repeatedly; its cumulative failure count and rate of\noccurrence of failures are not summarized by this one-lifetime survival\nfunction.\n\nWhen the law of $T$ has a specified density $f$ relative to Lebesgue measure,\nmeaning $P_T(A)=\\int_A f(u)\\,du$ for each Borel set $A$, and $S_T(t)>0$, its\n**density hazard** is the chosen-version function\n$$\\lambda_T(t):=\\frac{f(t)}{S_T(t)}.$$\nValues can change on a Lebesgue-null set when the density representative\nchanges. Where this hazard is integrable, the **cumulative hazard** is\n$$\\Lambda_T(t):=\\int_0^t\\lambda_T(u)\\,du.$$\nFor a law that may have an atom at $t$, its **jump hazard** is\n$$q_T(t):=\\frac{P(T=t)}{P(T\\ge t)}$$\nwhen $P(T\\ge t)>0$. The jump hazard is a conditional event probability, rather\nthan a density per unit time.\n\nFor parameters $\\lambda>0$, the **exponential survival specification** is\n$S_T(t)=e^{-\\lambda t}$ for $t\\ge0$; the family of laws is denoted\n$T\\sim\\mathrm{Exp}(\\lambda)$. For shape $k>0$ and scale $\\eta>0$, the\n**Weibull survival specification** is\n$S_T(t)=e^{-(t/\\eta)^k}$ for $t\\ge0$. These are parameter-indexed families of\nsampling laws in the sense of [[def-parametric-statistical-model]]; their\nexistence and densities are established in\n[[thm-exponential-and-weibull-survival-laws]].\n\nThe density-hazard identity for absolutely continuous event-time laws and the\njump relation for atoms are separate results. An empirical pattern such as a\ndecreasing-then-increasing \u201cbathtub\u201d hazard is not a consequence of these\ndefinitions or of either parametric family.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-measure-monotonicity",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure on $(X,\\mathcal A)$. If $A,B\\in\\mathcal A$ and $A\\subseteq B$, then $\\mu(A)\\le\\mu(B)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $a<b$ and let $f\\in L^1([a,b])$. Define\n$$F(x):=\\int_a^x f(t)\\,dt\\qquad(a\\le x\\le b).$$\nThen $F$ is differentiable for almost every $x\\in(a,b)$ and\n$$F'(x)=f(x)$$\nat every such point.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "source_section": "Statement",
+          "quote": "For $f\\in L^1[a,b]$, the function $I_f(x)=\\int_a^x f$ is absolutely continuous.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-integral-logarithm-is-unbounded",
+          "source_section": "Statement",
+          "quote": "For every $M\\in\\mathbb R$ there are $a,b>0$ such that\n\n$$L(a)<M<L(b).$$\n\nIn particular, $L$ is unbounded both below and above.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axioms of Countable Choice and Dependent Choice. For $F:[a,b]\\to\\mathbb R$, the following are equivalent:\n\n1. $F$ is absolutely continuous.\n2. $F'$ exists almost everywhere, $F'\\in L^1[a,b]$, and\n$$F(x)-F(a)=\\int_a^xF'(t)\\,dt\\quad\\text{for every }x\\in[a,b].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-c1-lipschitz-ac-bv-hierarchy",
+          "source_section": "Statement",
+          "quote": "Let $f:[a,b]\\to\\mathbb R$.\n\n1. If $f$ is continuous on $[a,b]$, differentiable on $(a,b)$, and $f'$ extends\n   continuously to $[a,b]$, then $f$ is Lipschitz.\n2. Every Lipschitz $f$ is absolutely continuous.\n3. Every absolutely continuous $f$ is continuous and has bounded variation.\n\nThus, with $C^1$ understood in the endpoint-extension sense of claim 1,\n$C^1\\subseteq\\mathrm{Lipschitz}\\subseteq AC\\subseteq C\\cap BV$ on a compact\ninterval.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate \u2014 the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates \u2014 and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ \u2014 for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ \u2014 is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Then $R^{\\circ}$ is open and $\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every** set $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue measurable with",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $T\\ge0$ and $S_T(0)=1$, $P_T(T=0)=0$. The density law gives $P_T(T\\le x)=\\int_{[0,x]}f(u)\\,du$; [F8] makes both endpoint integrals zero, so this equals $\\int_0^x f(u)\\,du$. Therefore $S_T(x)=1-\\int_0^x f(u)\\,du$ for every $x\\ge0$. This integral is at most $1$, so $f\\in L^1[0,x]$ for each $x>0$; [F3] then makes $S_T$ absolutely continuous on each compact interval.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The identity is immediate at $t=0$, so fix $0<t<\\tau_*$. The survival function is nonincreasing and positive on $[0,t]$, so $S_T(u)\\ge S_T(t)>0$ there. For every $a\\in\\mathbb R$, the set $\\{u\\in[0,t]:S_T(u)>a\\}$ is downward closed in $[0,t]$, hence is empty, all of $[0,t]$, or an interval with one endpoint at $0$; each is Lebesgue measurable by [F9]. Since the upper rays generate the Borel sigma-algebra, $S_T$ is Lebesgue measurable on $[0,t]$. The reciprocal map is continuous on $[S_T(t),1]$, so its inverse images of Borel sets are Borel; the preimage identity then makes $1/S_T$ measurable. [F10] gives measurability of the product $f/S_T$. Consequently $$\\int_0^t\\frac{f(u)}{S_T(u)}\\,du\\le\\frac{1}{S_T(t)}\\int_0^t f(u)\\,du<\\infty.$$ Thus $\\Lambda_T(x):=\\int_0^x f(u)/S_T(u)\\,du$ is absolutely continuous on $[0,t]$ by [F3].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2] and step 1.1, $S_T'=-f$ almost everywhere on $[0,t]$. For $x,y\\in[S_T(t),1]$, [F4] gives $$|\\log x-\\log y|\\le\\frac{|x-y|}{S_T(t)}.$$ This Lipschitz bound and absolute continuity of $S_T$ show directly from the finite disjoint-interval definition that $\\log\\circ S_T$ is absolutely continuous. Applying [F2] to the integrable function $f/S_T$ gives $\\Lambda_T'=f/S_T$ almost everywhere. At almost every point where $S_T'$ exists, [F5] yields $(\\log S_T)'=S_T'/S_T=-f/S_T=-\\Lambda_T'$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [F6] to $\\log\\circ S_T$ on $[0,t]$ gives $$\\log S_T(t)-\\log S_T(0)=-\\int_0^t\\frac{f(u)}{S_T(u)}\\,du.$$ Since $S_T(0)=1$ and [F11] gives $\\log 1=0$, exponentiating and using [F11] yields the identity for $0<t<\\tau_*$; the case $t=0$ was handled in step 1.2.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F6",
+            "step 1.2",
+            "step 2.1",
+            "algebra",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $\\tau_*<\\infty$, continuity from [F7] makes the zero set $Z:=\\{t\\ge0:S_T(t)=0\\}$ closed. Since $Z$ is nonempty and bounded below, $\\tau_*:=\\inf Z$ belongs to $Z$: for every $n\\in\\mathbb N$ choose $z_n\\in Z$ with $\\tau_*\\le z_n<\\tau_*+1/(n+1)$, so $z_n\\to\\tau_*$ and continuity gives $S_T(\\tau_*)=0$. Nonincreasing survival [F1] then gives $S_T(t)=0$ for $t\\ge\\tau_*$. Step 3.1 gives $\\Lambda_T(t)=-\\log S_T(t)$ for $t<\\tau_*$. Since $S_T(t)\\to0$ by continuity at $\\tau_*$ and [F4], this tends to $+\\infty$ as $t\\uparrow\\tau_*$. The stated extended convention therefore gives $S_T(t)=e^{-\\Lambda_T(t)}$ also for $t\\ge\\tau_*$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F7",
+            "given",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The identity holds throughout the positive-survival interval and at a finite terminal endpoint under the stated extended convention.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 gives S_T(0)=1 and an empty cumulative-hazard integral at t=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 treats the finite terminal zero of survival."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, and 3.1 prove the identity for one event time."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the density law, which has no point masses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 handle t=0 and a finite terminal endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1, and 4.1 use Countable Choice; step 3.1 also uses Dependent Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonnegative absolutely continuous event law, initial survival1 and the declared choice assumptions. Steps 2.1 and 3.1 derive survival as the exponential of the integrated density hazard, and step4.1 treats support loss. The equality alone is not asserted to characterize those density and normalization hypotheses. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonnegative absolutely continuous event law, initial survival1 and the declared choice assumptions. Steps 2.1 and 3.1 derive survival as the exponential of the integrated density hazard, and step4.1 treats support loss. The equality alone is not asserted to characterize those density and normalization hypotheses. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all six current steps and every direct supplier statement/definition, including Countable Choice for a.e. FTC and singleton nullity, and DC plus Countable Choice for AC FTC. Unit probability mass makes f locally L1. Monotonicity keeps S>=S(t)>0 on each pre-terminal compact interval, hence measurable f/S is L1; log is Lipschitz on the survival range, so its composition is AC and the chain rule applies a.e. FTC plus S(0)=1 and exp/log inverses gives the identity. At t=0 the integral is zero. Continuity ensures the finite first zero is positive and belongs to the zero set; monotonicity gives zero thereafter and log divergence gives the infinite extended hazard. No density division at/after that zero. Reader integrability/measurability/normalisation repairs are sound; current raw item exactly equals frozen post-reader source."
+      }
+    },
+    "thm-jump-hazard-survival-product": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-parametric-survival-and-reliability",
+          "source_section": "Definition",
+          "quote": "Let $T$ be a nonnegative event time as in [[def-event-time-observation-schemes]],\nwith law $P_T$. Its cumulative distribution function is\n$F_T(t)=P(T\\le t)$ ([[def-cumulative-distribution-function-of-a-random-variable]]).\nThe **survival function** is\n$$S_T(t):=P(T>t)=1-F_T(t),\\qquad t\\ge0.$$\nWrite $S_T(t^-):=P(T\\ge t)$ for the pre-event survival. In particular,\n$S_T(0)=1$ exactly when $P(T=0)=0$.\n\nFor a **nonrepairable** unit, meaning that a failed unit is permanently removed\nfrom the population, its **reliability function** is\n$R_T(t):=P(T>t)=S_T(t)$. This is a single first-failure lifetime model. A\nrepairable system can fail repeatedly; its cumulative failure count and rate of\noccurrence of failures are not summarized by this one-lifetime survival\nfunction.\n\nWhen the law of $T$ has a specified density $f$ relative to Lebesgue measure,\nmeaning $P_T(A)=\\int_A f(u)\\,du$ for each Borel set $A$, and $S_T(t)>0$, its\n**density hazard** is the chosen-version function\n$$\\lambda_T(t):=\\frac{f(t)}{S_T(t)}.$$\nValues can change on a Lebesgue-null set when the density representative\nchanges. Where this hazard is integrable, the **cumulative hazard** is\n$$\\Lambda_T(t):=\\int_0^t\\lambda_T(u)\\,du.$$\nFor a law that may have an atom at $t$, its **jump hazard** is\n$$q_T(t):=\\frac{P(T=t)}{P(T\\ge t)}$$\nwhen $P(T\\ge t)>0$. The jump hazard is a conditional event probability, rather\nthan a density per unit time.\n\nFor parameters $\\lambda>0$, the **exponential survival specification** is\n$S_T(t)=e^{-\\lambda t}$ for $t\\ge0$; the family of laws is denoted\n$T\\sim\\mathrm{Exp}(\\lambda)$. For shape $k>0$ and scale $\\eta>0$, the\n**Weibull survival specification** is\n$S_T(t)=e^{-(t/\\eta)^k}$ for $t\\ge0$. These are parameter-indexed families of\nsampling laws in the sense of [[def-parametric-statistical-model]]; their\nexistence and densities are established in\n[[thm-exponential-and-weibull-survival-laws]].\n\nThe density-hazard identity for absolutely continuous event-time laws and the\njump relation for atoms are separate results. An empirical pattern such as a\ndecreasing-then-increasing \u201cbathtub\u201d hazard is not a consequence of these\ndefinitions or of either parametric family.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-probability-law-and-distribution-function-correspondence",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\n1. Let $X$ be a real random variable, let $\\mathbb P_X$ be its law, and let\n   $F_X(x)=\\mathbb P(X\\le x)$. Then $F_X$ is nondecreasing and right-continuous,\n   satisfies\n   $$\\lim_{x\\to-\\infty}F_X(x)=0,\\qquad \\lim_{x\\to+\\infty}F_X(x)=1,$$\n   and obeys\n   $$\\mathbb P_X((a,b])=F_X(b)-F_X(a)\\qquad(a<b).$$\n2. Conversely, if $F:\\mathbb R\\to\\mathbb R$ is nondecreasing and\n   right-continuous with\n   $$\\lim_{x\\to-\\infty}F(x)=0,\\qquad \\lim_{x\\to+\\infty}F(x)=1,$$\n   then there is a unique Borel probability measure $\\mu$ on $\\mathbb R$ such\n   that\n   $$\\mu((a,b])=F(b)-F(a)\\qquad(a<b),$$\n   equivalently\n   $$F(x)=\\mu((-\\infty,x])\\qquad(x\\in\\mathbb R).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let\n$F : \\mathbb{R} \\to \\mathbb{R}$ be nondecreasing and right-continuous, and let\n$\\mu_F$ be its Lebesgue-Stieltjes measure. Then for every $a < b$,\n\n$$\\mu_F((a,b)) = F(b^-) - F(a),$$\n\n$$\\mu_F([a,b]) = F(b) - F(a^-),$$\n\n$$\\mu_F([a,b)) = F(b^-) - F(a^-),$$\n\nand\n\n$$\\mu_F(\\{a\\}) = F(a) - F(a^-).$$\n\nConsequently $a$ is an atom of $\\mu_F$ in the sense of\n[[def-atom-of-a-measure-on-r]] if and only if $F(a) > F(a^-)$, and the set of\natoms of $\\mu_F$ is at most countable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $P(T=t)=F_T(t)-F_T(t^-)$. Also $P(T\\ge t)=P(T>t)+P(T=t)$, so [F1] gives $$S_T(t^-)=1-F_T(t^-),\\qquad P(T=t)=S_T(t^-)-S_T(t).$$",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Divide the identity in step 1.1 by the positive quantity $S_T(t^-)$. Using the definition of $q_T(t)$ gives $$q_T(t)=1-\\frac{S_T(t)}{S_T(t^-)},$$ which is equivalent to $S_T(t)=S_T(t^-)(1-q_T(t))$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the finite-support case, $S_T(t_1^-)=1$, since $T\\ge t_1$. For $j>1$, no probability mass lies in $(t_{j-1},t_j)$, so $S_T(t_j^-)=P(T\\ge t_j)=P(T>t_{j-1})=S_T(t_{j-1})$. Applying step 2.1 successively yields $$S_T(t_j)=S_T(t_{j-1})(1-q_j)=\\prod_{r=1}^{j}(1-q_r),$$ where the initial factor is $S_T(t_1^-)=1$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Step 2.1 proves the jump identity for every atom with positive pre-jump survival, and step 3.1 proves the finite atomic product formula.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires m\u22651 for its finite-support product clause; the general jump identity is independent of a sample size."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers t=0 under the stated pre-event survival condition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 with j=1 gives the single-atom product case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 gives q_1=1 and survival zero at the sole support time for a point mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include atoms at the support endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses Countable Choice through A1 for the law-to-CDF and atom formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonnegative event law and positive pre-jump survival, then derives the jump identity and a finite atomic-support product. Steps 2.1 and 3.1 do not assert that such a product characterizes continuous decrease between atoms or any continuous hazard model. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonnegative event law and positive pre-jump survival, then derives the jump identity and a finite atomic-support product. Steps 2.1 and 3.1 do not assert that such a product characterizes continuous decrease between atoms or any continuous hazard model. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Independently read all four steps and exact CDF, survival, Countable Choice and Stieltjes atom suppliers. Event partition gives S(t-)=S(t)+P(T=t) even at zero; division requires the stated positive pre-event survival. Finite support with positive mass ensures every denominator positive, first pre-survival one, and each subsequent pre-survival equals prior post-survival. For m=1 the sole q=1 yields zero survival; final q_m=1 is allowed. Mixed laws retain only pointwise identity, not continuous-part product. No repair or refuter finding."
+      }
+    },
+    "thm-censored-exponential-likelihood-and-mle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "An **event time** is a measurable real-valued map $T$ with values in $[0,\\infty)$. A **covariate** is a measurable map $Z$ into a specified standard-Borel space $(\\mathcal Z,\\mathcal B)$, where standard Borel means measurably isomorphic to a Polish space ([[def-standard-borel-space]]). A **censoring or inspection time** is a measurable real-valued map $C$ with values in $[0,\\infty)$. When conditional laws are used, they are probability kernels $K_T(z,\\cdot)$ and $K_C(z,\\cdot)$ in the sense of [[def-conditional-law-given-a-random-element]] and [[def-measure-kernel-and-probability-kernel]]. They are part of the specified model; their existence for real-valued targets and factorization through standard-Borel $Z$ follow under [[def-axiom-of-choice]] from [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]] and [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]].\n\nThe notation $T\\perp\\!\\!\\!\\perp C\\mid\\sigma(Z)$ has the meaning in [[def-conditional-independence-given-a-sigma-algebra]]: for bounded measurable $a,b$, $\\mathbb E[a(T)b(C)\\mid\\sigma(Z)]=\\mathbb E[a(T)\\mid\\sigma(Z)]\\mathbb E[b(C)\\mid\\sigma(Z)]$ almost surely. It is a model assumption about the conditional observation law, not a consequence of adjusting for $Z$ and not an empirical conclusion.\n\nUnder **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$. Thus $\\delta=1$ records an event at $U=T$, including a tie, while $\\delta=0$ records censoring at $U=C$ and implies $T>C$. **Left censoring** at a known threshold $L$ records only $T\\le L$. **Interval censoring** at known endpoints $L<R$ records $L<T\\le R$. **Current-status observation** at an inspection time $C$ records only $\\delta_C=1\\{T\\le C\\}$.\n\n**Left truncation**, also called delayed entry at $L$, selects a unit into the sample only when $T>L$; observation begins after that selection. **Right truncation** at $R$ selects a unit only when $T<R$. These are selection rules before the observed sample is formed, whereas censoring coarsens an event time after sampling. The strict and weak inequalities in these definitions fix the endpoint conventions. A random observation endpoint is called noninformative here only when it is fixed by design or is generated independently of $T$ conditional on the stated covariates under a parameter-distinct law; otherwise its joint observation law must be modeled.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-and-weibull-survival-laws",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For $\\lambda>0$, the density\n$$f_\\lambda(t)=\\begin{cases}\\lambda e^{-\\lambda t},&t>0,\\\\0,&t\\le0\\end{cases}$$\ndefines a probability law on $\\mathbb R$ with survival\n$S(t)=e^{-\\lambda t}$ for $t\\ge0$. For $k,\\eta>0$, the density\n$$f_{k,\\eta}(t)=\\begin{cases}\\dfrac{k}{\\eta}(t/\\eta)^{k-1}e^{-(t/\\eta)^k},&t>0,\\\\0,&t\\le0\\end{cases}$$\ndefines a probability law with survival $S(t)=e^{-(t/\\eta)^k}$ for $t\\ge0$.\nEach law is unique among probability laws on $[0,\\infty)$ with that survival.\nThe density hazards are respectively $\\lambda$ and\n$\\dfrac{k}{\\eta}(t/\\eta)^{k-1}$ for $t>0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon\u2013Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-monotone-real-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Every monotone function $f : \\mathbb{R} \\to \\mathbb{R}$ in the sense of\n[[def-monotone-function]] is Borel measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarath\u00e9odory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "2.1",
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate \u2014 the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates \u2014 and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1",
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-integration-against-a-density",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int g\\,d(f\\,d\\mu)=\\int gf\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.3"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any Borel $B\\subseteq[0,\\infty)$, the event branch satisfies $$P(U\\in B,\\delta=1)=\\int\\!\\int 1\\{t\\in B,\\ t\\le c\\}\\,\\lambda e^{-\\lambda t}\\,dt\\,G_\\psi(dc)=\\int_B\\lambda e^{-\\lambda u}G_\\psi([u,\\infty))\\,du.$$ Here we use the event-density version $\\lambda e^{-\\lambda t}$ for $t\\ge0$, which differs from [F2] only at the Lebesgue-null singleton $\\{0\\}$ by [F11]. The indicator is product measurable because $B$ is Borel and $\\{(t,c):t\\le c\\}$ is closed. The factor $\\lambda e^{-\\lambda t}$ is continuous, so [F17] makes the full integrand product measurable. The first equality uses the product law from [A3], [F2], and [F3]; the second integrates the nonnegative indicator in the censor coordinate by Tonelli.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "A4",
+            "F1",
+            "F2",
+            "F3",
+            "F15",
+            "F17",
+            "F11",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On the censor branch, $U=C$ and $T>C$, so $$P(U\\in B,\\delta=0)=\\int_B P(T>u)\\,G_\\psi(du)=\\int_B e^{-\\lambda u}g_\\psi(u)\\,\\nu(du).$$ This uses the survival in [F2], independence, and the specified density of $G_\\psi$; [F12] changes integration against $G_\\psi=g_\\psi\\nu$ into integration against $g_\\psi\\,d\\nu$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A3",
+            "A4",
+            "F1",
+            "F2",
+            "F3",
+            "F12",
+            "F17"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The formal survival boundary $S_0(t)=1$ cannot be a probability law of a finite-valued event time: for every integer $m$, it would give $P(T\\le m)=0$, while $[0,\\infty)=\\bigcup_m[0,m]$ and [F7] would then give $P(T\\in[0,\\infty))=0$. Thus the boundary value is a likelihood extension unless the event-time model is enlarged to admit $T=\\infty$.",
+          "step": "1.3",
+          "inputs": [
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Extend $u\\mapsto\\bar G_\\psi(u)$ to $u<0$ by the constant $G_\\psi([0,\\infty))=1$. This extension is nonincreasing by inclusion of the tail sets, so [F9] makes it Borel measurable. The event branch is sigma-finite because [F11] gives the finite exhaustion $[0,n]$; the censor branch uses a countable finite-measure exhaustion of $\\nu$. Their union across the disjoint branches makes $\\rho$ sigma-finite. Steps 1.1 and 1.2 then show that the one-subject observation law is dominated by $\\rho$ with the displayed density $h_{\\lambda,\\psi}$.",
+          "step": "2.1",
+          "inputs": [
+            "A4",
+            "F9",
+            "F11",
+            "F15",
+            "step 1.1",
+            "step 1.2",
+            "F4",
+            "F17"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $i$, $(T_i,C_i)$ is a measurable map into the product space by [F3]. The map $(t,c)\\mapsto(\\min(t,c),1\\{t\\le c\\})$ is Borel: minimum is continuous and $\\{(t,c):t\\le c\\}$ is closed. Thus [F10] makes each observed pair measurable under the convention [F1]; taking the finite tuple is measurable since rectangle preimages are finite intersections. Let $D(\\mathbf u,\\boldsymbol\\delta):=\\prod_{i=1}^n h_{\\lambda,\\psi}(u_i,\\delta_i)$ and let $Q$ be its density measure relative to $\\rho^{\\otimes n}$, which exists by [F16]. By step 2.1, each one-subject density integrates to one. Repeated Tonelli integration therefore makes $Q$ a probability measure and gives, for every measurable rectangle $R=\\prod_{i=1}^n B_i$, $$Q(R)=\\prod_{i=1}^n\\int_{B_i}h_{\\lambda,\\psi}\\,d\\rho.$$ Independence of the subject pairs and [F3] give the same rectangle probabilities for their joint observation law. Measurable rectangles form a generating $\\pi$-system, and the whole product space is a finite-measure exhaustion for both probability measures. The uniqueness clause of [F3], iterated over the $n$ factors, now identifies $Q$ with the joint observation law. Hence $D$ is the asserted density version.",
+          "step": "3.1",
+          "inputs": [
+            "A3",
+            "A4",
+            "F1",
+            "F3",
+            "F10",
+            "F15",
+            "F16",
+            "step 2.1",
+            "F17"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Substituting the two branch formulas from step 2.1 into the product density of step 3.1 gives $$L(\\lambda,\\psi;\\mathbf u,\\boldsymbol\\delta)=\\lambda^{\\sum_i\\delta_i}e^{-\\lambda\\sum_i u_i}\\prod_{i:\\delta_i=1}\\bar G_\\psi(u_i)\\prod_{i:\\delta_i=0}g_\\psi(u_i).$$ By [F5], the experiment and parameter map give the sampling-law context; under the parameter-distinct model [A2], this is the asserted factorization. The density representatives are explicit model inputs, so no arbitrary simultaneous selection of Radon\u2013Nikodym versions is used; the equality is stated separately almost everywhere for each fixed parameter pair.",
+          "step": "4.1",
+          "inputs": [
+            "A2",
+            "A4",
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Fix $\\psi$ with $C_\\psi>0$. For $d>0$ and $E>0$, the log likelihood up to an additive constant is $\\ell(\\lambda)=d\\log\\lambda-E\\lambda$. Its derivative is $d/\\lambda-E$, which is positive for $0<\\lambda<d/E$ and negative for $\\lambda>d/E$. By [F13] it is strictly increasing before $d/E$ and strictly decreasing after it, so its unique global maximum is at $\\widehat\\lambda=d/E$.",
+          "step": "5.1",
+          "inputs": [
+            "F6",
+            "F13",
+            "given",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "If $d=0$ and $E>0$, then the event factor is $e^{-\\lambda E}$, strictly decreasing on $(0,\\infty)$ by [F14], and tends to $1$ as $\\lambda\\downarrow0$ by [F8]. The supremum is therefore not attained in the ordinary parameter space. If the likelihood alone is extended to include $\\lambda=0$, it is attained there.",
+          "step": "5.2",
+          "inputs": [
+            "F8",
+            "F14",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-3",
+          "claim": "If $d=0$ and $E=0$, the event factor is identically $1$, so every $\\lambda>0$ maximizes it. If $d>0$ and $E=0$, some event has $U_i=T_i=0$; but the exponential law has $P(T_i=0)=0$, so such observations form a probability-zero boundary set.",
+          "step": "5.3",
+          "inputs": [
+            "A4",
+            "F2",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Steps 1.1, 1.2, 2.1, 3.1, and 4.1 prove the dominated likelihood factorization, and steps 5.1\u20135.3 establish all stated interior, boundary, and zero-exposure cases.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 5.2",
+            "step 5.3",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires n\u22651 and therefore excludes an empty subject sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 5.2 and 5.3 give the zero-exposure cases; step 1.3 rules out a proper finite-time zero-rate law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 2.1 give the observation law for one subject, the base case for the product argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The censor law may be atomic; the explicit branch dominator and density allow that case in steps 1.1, 1.2, and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use T\u2264C for events and T>C for censoring, including the tie convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, 3.1, 4.1, and 5.3 use Countable Choice without selecting arbitrary simultaneous RN representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement fixes iid exponential event times, a parameter-distinct dominated censor law and positive censor factor. Steps 5.1 through 5.3 establish the interior maximum and the two zero-failure exposure branches. Observing an optimum or a boundary supremum does not conversely establish independent censoring or an exponential lifetime law. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement fixes iid exponential event times, a parameter-distinct dominated censor law and positive censor factor. Steps 5.1 through 5.3 establish the interior maximum and the two zero-failure exposure branches. Observing an optimum or a boundary supremum does not conversely establish independent censoring or an exponential lifetime law. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all ten steps, exact 25 supplier Statement/Definition sections and batch-28 right-censoring convention. The closed event region t<=c and strict censor branch T>c give G([u,infinity)) versus exp(-lambda u), including atom censoring/ties. Tonelli applies to nonnegative product-measurable integrands and sigma-finite factors. Event density may be lambda at zero because its Lebesgue singleton is null. Specified Borel g and monotone censor tail yield finite measurable branch densities and a fixed sigma-finite disjoint-branch dominator; finite independence/product uniqueness gives joint density and exact factorization. Explicit versions avoid arbitrary AC selection or a common exceptional set claim. Product parameter space and positive C_psi justify profiling lambda. d/E has positive derivative before and negative after when d,E>0; d=0,E>0 gives only a boundary supremum, d=E=0 gives constant likelihood, d>0,E=0 is model-null, C_psi=0 excluded. Lambda=0 cannot give a finite-time probability law. Reader measurable-space and null-version repairs retained, source exactly matches frozen post-reader hash. No current Statement edit."
+      }
+    },
+    "ex-exponential-weibull-hazards-and-censored-likelihood": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-exponential-and-weibull-survival-laws",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For $\\lambda>0$, the density\n$$f_\\lambda(t)=\\begin{cases}\\lambda e^{-\\lambda t},&t>0,\\\\0,&t\\le0\\end{cases}$$\ndefines a probability law on $\\mathbb R$ with survival\n$S(t)=e^{-\\lambda t}$ for $t\\ge0$. For $k,\\eta>0$, the density\n$$f_{k,\\eta}(t)=\\begin{cases}\\dfrac{k}{\\eta}(t/\\eta)^{k-1}e^{-(t/\\eta)^k},&t>0,\\\\0,&t\\le0\\end{cases}$$\ndefines a probability law with survival $S(t)=e^{-(t/\\eta)^k}$ for $t\\ge0$.\nEach law is unique among probability laws on $[0,\\infty)$ with that survival.\nThe density hazards are respectively $\\lambda$ and\n$\\dfrac{k}{\\eta}(t/\\eta)^{k-1}$ for $t>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-jump-hazard-survival-product",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $T\\ge0$ have CDF $F_T(t)=P(T\\le t)$ and\nsurvival $S_T(t)=P(T>t)$. For any $t\\ge0$ with $S_T(t^-)=P(T\\ge t)>0$, define\nthe atomic hazard\n$$q_T(t):=\\frac{P(T=t)}{P(T\\ge t)}.$$\nThen\n$$S_T(t)=S_T(t^-)(1-q_T(t)).$$\n\nIn particular, if $m\\ge1$ and the law is supported on a finite set of distinct times\n$0\\le t_1<\\cdots<t_m$ and each listed point has positive mass, put\n$q_j:=q_T(t_j)$. Then\n$$S_T(t_j)=\\prod_{r=1}^{j}(1-q_r),\\qquad 1\\le j\\le m.$$\nFor laws with both continuous and atomic parts, the pointwise jump identity\nstill holds at every atom; this finite-support product is not a formula for the\ncontinuous decrease between atoms.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-censored-exponential-likelihood-and-mle",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.\n\nLet $\\lambda>0$ be an event-rate parameter and let $\\psi\\in\\Psi$ index a\ncensoring-law family $G_\\psi$ on $[0,\\infty)$. For every $\\psi$, assume\n$G_\\psi$ is a Borel probability measure with a specified finite-valued\nBorel-measurable density $g_\\psi$ relative to one fixed sigma-finite Borel\nmeasure $\\nu$ on $[0,\\infty)$, where $\\nu$ does not depend on $\\lambda$ or\n$\\psi$.\nAssume the parameter space is the product $(0,\\infty)\\times\\Psi$: the event\nlaw depends only on $\\lambda$, the censor law only on $\\psi$, and for each\nsubject $T_i\\sim\\mathrm{Exp}(\\lambda)$ is independent of $C_i\\sim G_\\psi$.\nThe subject pairs are iid. Observe\n$$U_i=\\min(T_i,C_i),\\qquad \\delta_i=1\\{T_i\\le C_i\\},$$\nas in [[def-event-time-observation-schemes]]. Write\n$\\bar G_\\psi(u):=G_\\psi([u,\\infty))$.\n\nOn the one-subject observation space $[0,\\infty)\\times\\{0,1\\}$ with the\nproduct of the Borel sigma-algebra and the discrete sigma-algebra, let $\\rho$\nequal Lebesgue measure on the $\\delta=1$ branch and $\\nu$ on the $\\delta=0$\nbranch; explicitly,\n$$\\rho(A)=\\operatorname{Leb}\\{u:(u,1)\\in A\\}+\\nu\\{u:(u,0)\\in A\\}$$\nfor measurable $A$. Then the observation law has the explicitly specified $\\rho$-density\n$$h_{\\lambda,\\psi}(u,1)=\\lambda e^{-\\lambda u}\\bar G_\\psi(u),\\qquad h_{\\lambda,\\psi}(u,0)=e^{-\\lambda u}g_\\psi(u).$$\nFor $n\\ge1$ subjects, set $d:=\\sum_{i=1}^n\\delta_i$ and\n$E:=\\sum_{i=1}^n U_i$. For each fixed $(\\lambda,\\psi)$ and its displayed\ndensity versions, the likelihood is, $\\rho^{\\otimes n}$-almost everywhere,\n$$L(\\lambda,\\psi;\\mathbf u,\\boldsymbol\\delta)=\\lambda^d e^{-\\lambda E}C_\\psi(\\mathbf u,\\boldsymbol\\delta),$$\nwhere\n$$C_\\psi(\\mathbf u,\\boldsymbol\\delta):=\\prod_{i:\\delta_i=1}\\bar G_\\psi(u_i)\\prod_{i:\\delta_i=0}g_\\psi(u_i).$$\nThus, for fixed $\\psi$ with $C_\\psi>0$, the event-rate likelihood is\nproportional to $\\lambda^d e^{-\\lambda E}$.\n\nFor such data: if $d>0$ and $E>0$, the unique maximum over $\\lambda>0$ is\n$\\widehat\\lambda=d/E$; if $d=0$ and $E>0$, the likelihood is strictly\ndecreasing, with supremum as $\\lambda\\downarrow0$ and no maximizer in\n$(0,\\infty)$. A formal likelihood extension to the boundary $\\lambda=0$\nattains that supremum there, but $\\lambda=0$ is not a proper exponential law\nfor finite event times. If $d=0$ and $E=0$, the likelihood is constant in\n$\\lambda$. Under the model, $d>0,E=0$ occurs with probability zero. If\n$C_\\psi=0$, the likelihood version is zero for every $\\lambda$ at that fixed\n$\\psi$, so the stated maximizing claims do not apply to that parameter value.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon\u2013Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "An **event time** is a measurable real-valued map $T$ with values in $[0,\\infty)$. A **covariate** is a measurable map $Z$ into a specified standard-Borel space $(\\mathcal Z,\\mathcal B)$, where standard Borel means measurably isomorphic to a Polish space ([[def-standard-borel-space]]). A **censoring or inspection time** is a measurable real-valued map $C$ with values in $[0,\\infty)$. When conditional laws are used, they are probability kernels $K_T(z,\\cdot)$ and $K_C(z,\\cdot)$ in the sense of [[def-conditional-law-given-a-random-element]] and [[def-measure-kernel-and-probability-kernel]]. They are part of the specified model; their existence for real-valued targets and factorization through standard-Borel $Z$ follow under [[def-axiom-of-choice]] from [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]] and [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]].\n\nThe notation $T\\perp\\!\\!\\!\\perp C\\mid\\sigma(Z)$ has the meaning in [[def-conditional-independence-given-a-sigma-algebra]]: for bounded measurable $a,b$, $\\mathbb E[a(T)b(C)\\mid\\sigma(Z)]=\\mathbb E[a(T)\\mid\\sigma(Z)]\\mathbb E[b(C)\\mid\\sigma(Z)]$ almost surely. It is a model assumption about the conditional observation law, not a consequence of adjusting for $Z$ and not an empirical conclusion.\n\nUnder **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$. Thus $\\delta=1$ records an event at $U=T$, including a tie, while $\\delta=0$ records censoring at $U=C$ and implies $T>C$. **Left censoring** at a known threshold $L$ records only $T\\le L$. **Interval censoring** at known endpoints $L<R$ records $L<T\\le R$. **Current-status observation** at an inspection time $C$ records only $\\delta_C=1\\{T\\le C\\}$.\n\n**Left truncation**, also called delayed entry at $L$, selects a unit into the sample only when $T>L$; observation begins after that selection. **Right truncation** at $R$ selects a unit only when $T<R$. These are selection rules before the observed sample is formed, whereas censoring coarsens an event time after sampling. The strict and weak inequalities in these definitions fix the endpoint conventions. A random observation endpoint is called noninformative here only when it is fixed by design or is generated independently of $T$ conditional on the stated covariates under a parameter-distinct law; otherwise its joint observation law must be modeled.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-parametric-survival-and-reliability",
+          "source_section": "Definition",
+          "quote": "Let $T$ be a nonnegative event time as in [[def-event-time-observation-schemes]],\nwith law $P_T$. Its cumulative distribution function is\n$F_T(t)=P(T\\le t)$ ([[def-cumulative-distribution-function-of-a-random-variable]]).\nThe **survival function** is\n$$S_T(t):=P(T>t)=1-F_T(t),\\qquad t\\ge0.$$\nWrite $S_T(t^-):=P(T\\ge t)$ for the pre-event survival. In particular,\n$S_T(0)=1$ exactly when $P(T=0)=0$.\n\nFor a **nonrepairable** unit, meaning that a failed unit is permanently removed\nfrom the population, its **reliability function** is\n$R_T(t):=P(T>t)=S_T(t)$. This is a single first-failure lifetime model. A\nrepairable system can fail repeatedly; its cumulative failure count and rate of\noccurrence of failures are not summarized by this one-lifetime survival\nfunction.\n\nWhen the law of $T$ has a specified density $f$ relative to Lebesgue measure,\nmeaning $P_T(A)=\\int_A f(u)\\,du$ for each Borel set $A$, and $S_T(t)>0$, its\n**density hazard** is the chosen-version function\n$$\\lambda_T(t):=\\frac{f(t)}{S_T(t)}.$$\nValues can change on a Lebesgue-null set when the density representative\nchanges. Where this hazard is integrable, the **cumulative hazard** is\n$$\\Lambda_T(t):=\\int_0^t\\lambda_T(u)\\,du.$$\nFor a law that may have an atom at $t$, its **jump hazard** is\n$$q_T(t):=\\frac{P(T=t)}{P(T\\ge t)}$$\nwhen $P(T\\ge t)>0$. The jump hazard is a conditional event probability, rather\nthan a density per unit time.\n\nFor parameters $\\lambda>0$, the **exponential survival specification** is\n$S_T(t)=e^{-\\lambda t}$ for $t\\ge0$; the family of laws is denoted\n$T\\sim\\mathrm{Exp}(\\lambda)$. For shape $k>0$ and scale $\\eta>0$, the\n**Weibull survival specification** is\n$S_T(t)=e^{-(t/\\eta)^k}$ for $t\\ge0$. These are parameter-indexed families of\nsampling laws in the sense of [[def-parametric-statistical-model]]; their\nexistence and densities are established in\n[[thm-exponential-and-weibull-survival-laws]].\n\nThe density-hazard identity for absolutely continuous event-time laws and the\njump relation for atoms are separate results. An empirical pattern such as a\ndecreasing-then-increasing \u201cbathtub\u201d hazard is not a consequence of these\ndefinitions or of either parametric family.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $\\lambda=0.2$, [F1] gives constant hazard $0.2$; its integral is $\\Lambda(t)=0.2t$, and the family survival is $S(3)=e^{-0.6}$. For $k=2,\\eta=3$, the density hazard is $2t/9$, which is increasing on $t>0$, and $S(3)=e^{-1}$.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the two-point lifetime law, $q(1)=0.4/1=0.4$ and $q(3)=0.6/0.6=1$. Thus the jump-product formula gives $S(1)=1(1-0.4)=0.6$ and $S(3)=0.6(1-1)=0$, matching the probabilities $P(T>1)$ and $P(T>3)$.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For the fixed censoring design, $\\bar G(2)=\\bar G(3)=1$ and the censor-only factor for the censored record at $5$ is $1$. Therefore $d=2$, $E=2+5+3=10$, and [F3] gives $L(\\lambda)\\propto\\lambda^2e^{-10\\lambda}$ with unique maximum $\\widehat\\lambda=2/10=0.2$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "The single-lifetime hazards above do not summarize repeated failures after repair.",
+          "step": "1.4",
+          "inputs": [
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The event observations at $2$ and $3$ are evaluated through their Lebesgue density values. Accordingly, [F4] makes the likelihood a density evaluation, not the point probability of observing either exact time.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Earlier steps 1.1, 1.2, 1.3, 1.4, and 2.1 verify the continuous hazard, atomic jump, censored exposure calculation, recurrent-event qualification, and density interpretation under their stated models.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes a three-subject sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The computed example times are positive; the zero-exposure case is handled separately on the companion example."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example is a three-subject calculation and makes no singleton-sample claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 uses the point-mass censor law \u03b4_5."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3 uses the right-censoring event and censor branches for the listed records."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.3 inherit Countable Choice through A2 and select no arbitrary density versions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example prescribes rate0.2, Weibull shape2/scale3 and three right-censored records. Verification steps 1.1 and 1.3 compute hazards, survival and the rate maximum0.2; these calculations do not characterize all lifetime laws producing those finite observed records. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example prescribes rate0.2, Weibull shape2/scale3 and three right-censored records. Verification steps 1.1 and 1.3 compute hazards, survival and the rate maximum0.2; these calculations do not characterize all lifetime laws producing those finite observed records. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all six verification steps and exact eight direct suppliers. With lambda=.2, k=2 eta=3, hazards are .2 and 2t/9; survivals at 3 are exp(-.6) and exp(-1). Atomic .4,.6 law has q(1)=.4, q(3)=1 and survival .6,0. Deterministic delta_5 censor law is independent, Borel and dominated by itself with g(5)=1, so censor factor is one; records give d=2,E=10 and unique rate .2. Exact event observations are density evaluations, not positive point probabilities. No recurrent-failure assertion. New likelihood Borel/product-space qualifications are met, with no consumer repair needed."
+      }
+    },
+    "ex-zero-exposure-censored-mle-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-censored-exponential-likelihood-and-mle",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.\n\nLet $\\lambda>0$ be an event-rate parameter and let $\\psi\\in\\Psi$ index a\ncensoring-law family $G_\\psi$ on $[0,\\infty)$. For every $\\psi$, assume\n$G_\\psi$ is a Borel probability measure with a specified finite-valued\nBorel-measurable density $g_\\psi$ relative to one fixed sigma-finite Borel\nmeasure $\\nu$ on $[0,\\infty)$, where $\\nu$ does not depend on $\\lambda$ or\n$\\psi$.\nAssume the parameter space is the product $(0,\\infty)\\times\\Psi$: the event\nlaw depends only on $\\lambda$, the censor law only on $\\psi$, and for each\nsubject $T_i\\sim\\mathrm{Exp}(\\lambda)$ is independent of $C_i\\sim G_\\psi$.\nThe subject pairs are iid. Observe\n$$U_i=\\min(T_i,C_i),\\qquad \\delta_i=1\\{T_i\\le C_i\\},$$\nas in [[def-event-time-observation-schemes]]. Write\n$\\bar G_\\psi(u):=G_\\psi([u,\\infty))$.\n\nOn the one-subject observation space $[0,\\infty)\\times\\{0,1\\}$ with the\nproduct of the Borel sigma-algebra and the discrete sigma-algebra, let $\\rho$\nequal Lebesgue measure on the $\\delta=1$ branch and $\\nu$ on the $\\delta=0$\nbranch; explicitly,\n$$\\rho(A)=\\operatorname{Leb}\\{u:(u,1)\\in A\\}+\\nu\\{u:(u,0)\\in A\\}$$\nfor measurable $A$. Then the observation law has the explicitly specified $\\rho$-density\n$$h_{\\lambda,\\psi}(u,1)=\\lambda e^{-\\lambda u}\\bar G_\\psi(u),\\qquad h_{\\lambda,\\psi}(u,0)=e^{-\\lambda u}g_\\psi(u).$$\nFor $n\\ge1$ subjects, set $d:=\\sum_{i=1}^n\\delta_i$ and\n$E:=\\sum_{i=1}^n U_i$. For each fixed $(\\lambda,\\psi)$ and its displayed\ndensity versions, the likelihood is, $\\rho^{\\otimes n}$-almost everywhere,\n$$L(\\lambda,\\psi;\\mathbf u,\\boldsymbol\\delta)=\\lambda^d e^{-\\lambda E}C_\\psi(\\mathbf u,\\boldsymbol\\delta),$$\nwhere\n$$C_\\psi(\\mathbf u,\\boldsymbol\\delta):=\\prod_{i:\\delta_i=1}\\bar G_\\psi(u_i)\\prod_{i:\\delta_i=0}g_\\psi(u_i).$$\nThus, for fixed $\\psi$ with $C_\\psi>0$, the event-rate likelihood is\nproportional to $\\lambda^d e^{-\\lambda E}$.\n\nFor such data: if $d>0$ and $E>0$, the unique maximum over $\\lambda>0$ is\n$\\widehat\\lambda=d/E$; if $d=0$ and $E>0$, the likelihood is strictly\ndecreasing, with supremum as $\\lambda\\downarrow0$ and no maximizer in\n$(0,\\infty)$. A formal likelihood extension to the boundary $\\lambda=0$\nattains that supremum there, but $\\lambda=0$ is not a proper exponential law\nfor finite event times. If $d=0$ and $E=0$, the likelihood is constant in\n$\\lambda$. Under the model, $d>0,E=0$ occurs with probability zero. If\n$C_\\psi=0$, the likelihood version is zero for every $\\lambda$ at that fixed\n$\\psi$, so the stated maximizing claims do not apply to that parameter value.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-and-weibull-survival-laws",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For $\\lambda>0$, the density\n$$f_\\lambda(t)=\\begin{cases}\\lambda e^{-\\lambda t},&t>0,\\\\0,&t\\le0\\end{cases}$$\ndefines a probability law on $\\mathbb R$ with survival\n$S(t)=e^{-\\lambda t}$ for $t\\ge0$. For $k,\\eta>0$, the density\n$$f_{k,\\eta}(t)=\\begin{cases}\\dfrac{k}{\\eta}(t/\\eta)^{k-1}e^{-(t/\\eta)^k},&t>0,\\\\0,&t\\le0\\end{cases}$$\ndefines a probability law with survival $S(t)=e^{-(t/\\eta)^k}$ for $t\\ge0$.\nEach law is unique among probability laws on $[0,\\infty)$ with that survival.\nThe density hazards are respectively $\\lambda$ and\n$\\dfrac{k}{\\eta}(t/\\eta)^{k-1}$ for $t>0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "An **event time** is a measurable real-valued map $T$ with values in $[0,\\infty)$. A **covariate** is a measurable map $Z$ into a specified standard-Borel space $(\\mathcal Z,\\mathcal B)$, where standard Borel means measurably isomorphic to a Polish space ([[def-standard-borel-space]]). A **censoring or inspection time** is a measurable real-valued map $C$ with values in $[0,\\infty)$. When conditional laws are used, they are probability kernels $K_T(z,\\cdot)$ and $K_C(z,\\cdot)$ in the sense of [[def-conditional-law-given-a-random-element]] and [[def-measure-kernel-and-probability-kernel]]. They are part of the specified model; their existence for real-valued targets and factorization through standard-Borel $Z$ follow under [[def-axiom-of-choice]] from [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]] and [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]].\n\nThe notation $T\\perp\\!\\!\\!\\perp C\\mid\\sigma(Z)$ has the meaning in [[def-conditional-independence-given-a-sigma-algebra]]: for bounded measurable $a,b$, $\\mathbb E[a(T)b(C)\\mid\\sigma(Z)]=\\mathbb E[a(T)\\mid\\sigma(Z)]\\mathbb E[b(C)\\mid\\sigma(Z)]$ almost surely. It is a model assumption about the conditional observation law, not a consequence of adjusting for $Z$ and not an empirical conclusion.\n\nUnder **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$. Thus $\\delta=1$ records an event at $U=T$, including a tie, while $\\delta=0$ records censoring at $U=C$ and implies $T>C$. **Left censoring** at a known threshold $L$ records only $T\\le L$. **Interval censoring** at known endpoints $L<R$ records $L<T\\le R$. **Current-status observation** at an inspection time $C$ records only $\\delta_C=1\\{T\\le C\\}$.\n\n**Left truncation**, also called delayed entry at $L$, selects a unit into the sample only when $T>L$; observation begins after that selection. **Right truncation** at $R$ selects a unit only when $T<R$. These are selection rules before the observed sample is formed, whereas censoring coarsens an event time after sampling. The strict and weak inequalities in these definitions fix the endpoint conventions. A random observation endpoint is called noninformative here only when it is fixed by design or is generated independently of $T$ conditional on the stated covariates under a parameter-distinct law; otherwise its joint observation law must be modeled.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In scenario one the records are $(U_i,\\delta_i)=(5,0)$ for both subjects, so $d=0$, $E=10$, and $C_5=g_5(5)^2=1$. By [F1], the event likelihood factor is $e^{-10\\lambda}$, whose supremum $1$ is approached only as $\\lambda\\downarrow0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In scenario two, [F2] gives $T_i>0$ almost surely, while $C_i=0$. Thus $U_i=0$ and $\\delta_i=0$ almost surely for both subjects, so $d=0$, $E=0$, and $C_0=g_0(0)^2=1$. By [F1], the event likelihood factor is $1$ for every $\\lambda>0$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The value $\\lambda=0$ is only a formal likelihood boundary for the finite-time exponential model; including it as an actual law requires an extended event-time model that admits $T=\\infty$.",
+          "step": "1.3",
+          "inputs": [
+            "A2",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "These samples have the same failure count but different likelihood maximizers: positive exposure gives only a boundary supremum, whereas zero exposure gives every positive rate as a maximizer. Thus the no-failure boundary claim requires $E>0$, in agreement with the full case distinction in [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Earlier steps 1.1, 1.2, and 1.3 establish the two boundary cases and the required positive exposure condition.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example uses two subjects in each scenario."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly computes the immediate-censoring case with E=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Both scenarios use two subjects; no one-subject calculation is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use deterministic censoring times 5 and 0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the observation endpoint C=0 and its right-censoring record."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 inherit Countable Choice through A2 without any additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example fixes two exponential samples censored at5 or immediately at0. Verification steps 1.1 and 1.2 give a boundary supremum at positive exposure versus a constant likelihood at zero exposure. It does not claim the same failure count characterizes equivalent censoring designs or likelihoods. The forward boundary therefore concerns the stated conditional calculation, not a two-way characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example fixes two exponential samples censored at5 or immediately at0. Verification steps 1.1 and 1.2 give a boundary supremum at positive exposure versus a constant likelihood at zero exposure. It does not claim the same failure count characterizes equivalent censoring designs or likelihoods. The reverse boundary would require inferring the model premises from that conclusion, which this item does not claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all five verification steps and exact five direct suppliers. Both deterministic censor laws delta_0,delta_5 have specified Borel indicators under fixed finite nu=delta_0+delta_5, so strengthened likelihood hypotheses hold. First records give d=0,E=10,C=1 and exp(-10 lambda), positive-exposure boundary supremum only. Immediate censoring gives U=0,delta=0 a.s. because Exp has no mass at zero, hence d=E=0 and constant factor one. Lambda=0 would require infinite event times. No common-null-set or positive point-probability claim, no extra choice. No consumer repair needed."
+      }
+    }
+  }
+}

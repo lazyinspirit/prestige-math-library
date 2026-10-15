@@ -1,0 +1,136 @@
+{
+  "group": "r",
+  "batches": ["53"],
+  "pages_read": [
+    "holm-step-down-familywise-error-control",
+    "holm-step-down-familywise-error-control-examples"
+  ],
+  "items_read": [
+    "alg-holm-step-down-procedure",
+    "lem-holm-rejection-events-are-measurable",
+    "thm-holm-stepdown-strong-fwer",
+    "ex-holm-step-down-versus-bonferroni"
+  ],
+  "conventions": [
+    {
+      "convention": "The finite hypothesis family is fixed before observing the data; each p-value is valid under its corresponding null. No independence assumption is imposed.",
+      "fixed_by": "alg-holm-step-down-procedure",
+      "matters_for": [
+        "thm-holm-stepdown-strong-fwer",
+        "ex-holm-step-down-versus-bonferroni"
+      ]
+    },
+    {
+      "convention": "Order pairs (p_i(x), i) lexicographically, breaking ties by increasing index. Rank j passes when p_(j) ≤ α/(m−j+1); stop at the first failure and reject only preceding ranks.",
+      "fixed_by": "alg-holm-step-down-procedure",
+      "matters_for": [
+        "lem-holm-rejection-events-are-measurable",
+        "thm-holm-stepdown-strong-fwer",
+        "ex-holm-step-down-versus-bonferroni"
+      ]
+    },
+    {
+      "convention": "The level α belongs to [0,1]. For m=0 the procedure returns the empty rejected set; the measurability lemma and strong FWER theorem state m≥1.",
+      "fixed_by": "alg-holm-step-down-procedure",
+      "matters_for": [
+        "lem-holm-rejection-events-are-measurable",
+        "thm-holm-stepdown-strong-fwer"
+      ]
+    },
+    {
+      "convention": "The worked vector specifies observed decisions only; validity and error probabilities require distributional hypotheses beyond that vector.",
+      "fixed_by": "ex-holm-step-down-versus-bonferroni",
+      "matters_for": [
+        "ex-holm-step-down-versus-bonferroni"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "alg-holm-step-down-procedure",
+      "statement": "For a fixed finite family and α∈[0,1], order indices lexicographically by (p_i(x),i), and reject the maximal initial prefix for which p_(j)(x)≤α/(m−j+1) at every included rank.",
+      "used_by": [
+        "lem-holm-rejection-events-are-measurable",
+        "thm-holm-stepdown-strong-fwer",
+        "ex-holm-step-down-versus-bonferroni"
+      ]
+    },
+    {
+      "id": "lem-holm-rejection-events-are-measurable",
+      "statement": "Let m≥1, let p_1,…,p_m be p-value statistics on a measurable data space, and fix α∈[0,1]. Each Holm rejection event D_i(α) belongs to the data sigma-algebra.",
+      "used_by": [
+        "thm-holm-stepdown-strong-fwer"
+      ]
+    },
+    {
+      "id": "thm-holm-stepdown-strong-fwer",
+      "statement": "For m≥1, a fixed finite family of null hypotheses with valid p-value statistics, and α∈[0,1], Holm has FWER_θ≤α for every θ∈Θ, with no independence or other restriction on the joint distribution of the p-values.",
+      "used_by": [
+        "ex-holm-step-down-versus-bonferroni"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-p-value",
+      "used_for": "Borel-trace measurability of p-value statistics and the precise null-superuniformity convention.",
+      "opened": true
+    },
+    {
+      "id": "def-statistic-and-estimator",
+      "used_for": "A statistic is a measurable map into its specified target measurable space.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurability of comparison and threshold events by inverse images of Borel sets.",
+      "opened": true
+    },
+    {
+      "id": "def-sigma-algebra",
+      "used_for": "Finite intersections and unions in the permutation-cell proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+      "used_for": "Measurability of the finite real-valued differences p_a−p_b.",
+      "opened": true
+    },
+    {
+      "id": "def-statistical-experiment",
+      "used_for": "The common measurable data space and parameter-indexed sampling laws used by the multiple-testing supplier.",
+      "opened": true
+    },
+    {
+      "id": "thm-p-value-superuniformity",
+      "used_for": "Checking the Bonferroni supplier's cited pointwise null-probability bound, which requires no alternative hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "lem-probability-measure-basic-identities",
+      "used_for": "Checking the Bonferroni supplier's finite union bound, including an empty true-null family.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "The expectation convention underlying FDR in the multiple-testing definition.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "thm-bonferroni-familywise-error-control",
+      "finding": "The Statement ends: “This is strong FWER control; it is not an FDR guarantee.” The latter clause is misleading as written: pointwise V_θ/(R∨1)≤1_{V_θ≥1}, so the proved FWER bound also guarantees FDR≤α. The proof and FWER claim remain sound.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "holm-step-down-familywise-error-control",
+      "to": "valid-p-values-bonferroni-and-simultaneous-coverage",
+      "faithful": true,
+      "note": "Checked the supplier definitions and Bonferroni theorem against the algorithm and Holm theorem's Facts and proof. Fixed-family null-validity, arbitrary dependence, inclusive thresholds, and α∈[0,1] are preserved. For fixed θ with m₀≥1, the true-null subfamily is fixed independently of observations and satisfies Bonferroni's hypotheses at cutoff α/m₀; m₀=0 is handled separately. Holm claims no simultaneous-confidence-set conclusion."
+    }
+  ]
+}

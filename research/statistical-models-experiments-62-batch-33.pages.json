@@ -1,0 +1,355 @@
+[
+  {
+    "order": 1982,
+    "id": "logrank-and-weighted-logrank",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Logrank and weighted logrank",
+    "companion": "logrank-and-weighted-logrank-examples",
+    "requires": [
+      "randomized-treatment-assignment-and-sharp-null-tests",
+      "event-time-censoring-and-truncation",
+      "counting-process-compensators-and-integrals",
+      "independent-subject-terminal-influence-limits",
+      "estimators-and-randomized-procedures",
+      "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "chaining-uniform-laws-and-empirical-process-limits",
+      "finite-probability-spaces-and-random-variables"
+    ],
+    "items": [
+      {
+        "id": "def-logrank-risk-set-score-and-test",
+        "kind": "definition",
+        "title": "Two-group logrank and weighted logrank scores",
+        "statement": "For two groups, define the risk-set event counts, pooled risk-set expectation, conditional hypergeometric variance, weighted score, variance estimate, normal-calibrated statistic, and the distinct exact randomization ordering. State tie and null-model conventions.",
+        "deps": [
+          "def-statistic-and-estimator",
+          "def-uniform-finite-probability-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 6: Logrank Test, PDF pp. 1-13",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/unit6.pdf"
+            },
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 1-12",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, \u00a75.3-5.4, PDF pp. 59-62",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "lem-logrank-risk-set-empirical-fractions-converge",
+        "kind": "lemma",
+        "title": "Uniform convergence of empirical risk-set fractions",
+        "statement": "For iid observed times in each of two groups, the empirical fractions at risk converge uniformly on a fixed finite horizon to their population risk probabilities. Verify pointwise measurability, the unit envelope, and finite L1 bracketing entropy for the threshold class.",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-random-element-and-real-random-variable",
+          "def-empirical-process-and-rademacher-process",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-glivenko-cantelli-class",
+          "thm-gc-by-bracketing-entropy"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 1-12",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, \u00a75.4, PDF pp. 61-62",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "thm-logrank-conditional-risk-set-moments",
+        "kind": "theorem",
+        "title": "Conditional hypergeometric moments for a logrank risk set",
+        "statement": "Fix a risk set with $Y_1$ group-1 subjects, $Y_0$ group-0 subjects, and\n$Y=Y_1+Y_0$. Conditional on the margins, suppose the $d$ failing subjects\nare a uniform $d$-subset of these $Y$ subjects, where $0\\le d\\le Y$. Let\n$O$ be the number of failures in group 1. If $Y>1$, then\n$$ \\mathbb E[O]=d\\frac{Y_1}{Y},\\qquad \\operatorname{Var}(O)=\\frac{Y_1Y_0d(Y-d)}{Y^2(Y-1)}. $$\nIf $Y=0$ or $Y=1$, set the contribution to the variance to zero; the\nexpectation remains $dY_1/Y$ when $Y>0$, and is zero when $Y=0$.\n\nFor the sequential assertion, take a finite sequence $j=1,\\ldots,J$ on a\nprobability space with a filtration\n$\\mathcal H_0\\subseteq\\mathcal H_1\\subseteq\\cdots\\subseteq\\mathcal H_J$.\nBefore the failures at step $j$ are revealed, the current risk-set subjects,\ntheir group counts $Y_{1j},Y_{0j}$, and the total $d_j$ are\n$\\mathcal H_{j-1}$-measurable, with $0\\le d_j\\le Y_j:=Y_{1j}+Y_{0j}$.\nConditionally on $\\mathcal H_{j-1}$, the failing subjects are a uniform\n$d_j$-subset of the current $Y_j$ subjects; their identities are revealed\nin $\\mathcal H_j$. If $Y_j=0$, necessarily $d_j=0$ and the failing subset is\nempty. Put $E_j=d_jY_{1j}/Y_j$ when $Y_j>0$ and $E_j=0$ when $Y_j=0$;\nlet $V_j$ be the displayed risk-set variance when $Y_j>1$ and zero when\n$Y_j\\le1$. Suppose each real weight $w_j$ is $\\mathcal H_{j-1}$-measurable\nand\n$$\\mathbb E\\!\\left[\\sum_{j=1}^Jw_j^2V_j\\right]<\\infty.$$\nThen $D_j=w_j(O_j-E_j)$ are square-integrable martingale differences and\n$$ \\mathbb E\\!\\left[\\sum_jD_j\\right]=0,\\qquad \\operatorname{Var}\\!\\left(\\sum_jD_j\\right) =\\mathbb E\\!\\left[\\sum_jw_j^2V_j\\right], $$\nwhere the nonempty-risk-set variance contribution is the one in\n[[def-logrank-risk-set-score-and-test]].",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "def-finite-probability-space-and-event",
+          "def-uniform-finite-probability-space",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space",
+          "def-indicator-random-variable",
+          "def-variance-and-covariance",
+          "thm-linearity-of-expectation",
+          "lem-indicator-expectation-and-products",
+          "lem-variance-and-covariance-identities"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 6: Logrank Test, PDF pp. 3-4",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/unit6.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, \u00a75.3, PDF pp. 59-60",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "lem-logrank-risk-fraction-converges",
+        "kind": "lemma",
+        "title": "Uniform convergence of the risk-set treatment fraction",
+        "statement": "For each $g\\in\\{0,1\\}$, let $(U_{gi})_{i\\ge1}$ be IID measurable\n$[0,\\infty)$-valued observed times with law $P_g$; independence between\nthe two groups is not required. Along a sequence of deterministic positive\nsample sizes, let $n=n_0+n_1\\to\\infty$ and\n$n_g/n\\to\\rho_g\\in(0,1)$, where $\\rho_0+\\rho_1=1$. Set\n$s_g(t):=P_g(U_{g1}\\ge t)$, $y_g(t)=\\rho_gs_g(t)$, and\n$y(t)=y_0(t)+y_1(t)$. Assume $\\inf_{0\\le t\\le\\tau}y(t)>0$. Write\n$$ Y_{g,n}(t)=\\sum_{i=1}^{n_g}1\\{U_{gi}\\ge t\\},\\qquad p_n(t)=\\begin{cases} Y_{1,n}(t)/(Y_{0,n}(t)+Y_{1,n}(t)),&Y_{0,n}(t)+Y_{1,n}(t)>0,\\\\ 0,&Y_{0,n}(t)+Y_{1,n}(t)=0. \\end{cases} $$\nThen, for $g=0,1$,\n$$ \\sup_{t\\le\\tau}\\left|\\frac{Y_{g,n}(t)}n-y_g(t)\\right|\\longrightarrow_P0, $$\nand\n$$ \\sup_{0\\le t\\le\\tau}\\left|p_n(t)-\\bar z(t)\\right|\\longrightarrow_P0, \\qquad \\bar z(t):=\\frac{y_1(t)}{y(t)}. $$",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "lem-logrank-risk-set-empirical-fractions-converge"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 1-6",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, \u00a75.4, PDF pp. 61-62",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "cor-logrank-fisher-randomization-pvalue-valid",
+        "kind": "corollary",
+        "title": "The logrank ordering gives a valid Fisher randomization p-value",
+        "statement": "Fix a finite randomized treatment-assignment model with allowed assignments\n$\\mathcal Z$ and known law $p$, with unit set $\\mathcal I$ as in\n[[def-finite-randomized-treatment-assignment-model]]. Fix a map\n$\\gamma:\\mathcal Z\\to\\{0,1\\}^{\\mathcal I}$ assigning each allowed assignment\na binary logrank group map. For each subject $i$, let\n$(U_i(z),\\delta_i(z))\\in[0,\\tau]\\times\\{0,1\\}$ be the full right-censored\nrecord under assignment $z$. Assume the **record sharp null**: for every $i$,\nthe pair $(U_i(z),\\delta_i(z))$ is constant over all $z\\in\\mathcal Z$. Fix\nbefore observing assignment or records a bounded logrank weight rule and the\ntwo-sided ordering $T(z)=|U_w(\\gamma(z);U,\\delta)|$.\n\nThe inclusive assignment-tail p-value\n$$ p_{\\rm rand}(z):=\\sum_{z'\\in\\mathcal Z}p(z') 1\\{|U_w(\\gamma(z');U,\\delta)|\\ge |U_w(\\gamma(z);U,\\delta)|\\} $$\nis superuniform under the assignment law, so it is a valid finite-sample\np-value for the record sharp null. If an auxiliary $V$ is independent of\nthe assignment and uniform on $[0,1]$, replacing the inclusive tail by the\nstrict-tail mass plus $V$ times the tied-score mass gives an exactly uniform\np-value. The result uses the actual assignment probabilities and asserts no\nvalidity under a weak average-effect null or under an equal-hazard null alone.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "def-finite-randomized-treatment-assignment-model",
+          "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "def-statistic-and-estimator",
+          "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+          "def-p-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Siva Balakrishnan, CMU 36-705 Lecture 28: Fisher's Exact p-values, \u00a728.5, PDF pp. 4-6",
+              "url": "https://www.stat.cmu.edu/~siva/teaching/705/lec28.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "justified_by": []
+      },
+      {
+        "id": "lem-logrank-score-martingale-expansion",
+        "kind": "lemma",
+        "title": "Weighted logrank score expansion under a common-hazard model",
+        "statement": "Assume the Axiom of Choice. Let $n_0,n_1$ be deterministic, $n=n_0+n_1$,\nand let $Z_i=g$ for subject $i$ in group $g\\in\\{0,1\\}$. On a common\nfinite-horizon filtration, each subject has the one-event process\n$$N_{gi}(t)=1\\{U_{gi}\\le t,\\ \\delta_{gi}=1\\},\\qquad Y_{gi}(t)=1\\{U_{gi}\\ge t\\},$$\nand satisfies the separate counting-process contract\n$$A_{gi}(t)=\\int_0^tY_{gi}(s)\\lambda(s)\\,ds,\\qquad M_{gi}=N_{gi}-A_{gi},$$\nwhere $\\lambda$ is a common deterministic nonnegative hazard density with\n$\\Lambda(\\tau):=\\int_0^\\tau\\lambda(s)\\,ds<\\infty$. Assume each $M_{gi}$ is\na square-integrable martingale under this contract, $Y_{gi}$ is predictable,\nand no two subjects have simultaneous event jumps. Write $N_{g,n}$ and\n$Y_{g,n}$ for the group sums, $N_n=N_{0,n}+N_{1,n}$, and\n$p_n(t)=Y_{1,n}(t)/(Y_{0,n}(t)+Y_{1,n}(t))$, with $p_n(t)=0$ on an empty\npooled risk set.\n\nAssume the observed-time and allocation hypotheses of\n[[lem-logrank-risk-fraction-converges]]: within each group the observed\ntimes are IID, $n\\to\\infty$, $n_g/n\\to\\rho_g\\in(0,1)$, and, with\n$y_g(t)=\\rho_gP(U_{g1}\\ge t)$ and $y=y_0+y_1$,\n$\\inf_{0\\le t\\le\\tau}y(t)>0$. Set $\\bar z(t)=y_1(t)/y(t)$. Let $w_n$ be a common predictable\nweight process with $|w_n(t)|\\le C$ and a measurable supremum satisfying\n$\\sup_{t\\le\\tau}|w_n(t)-w(t)|\\to_P0$ for a deterministic bounded predictable\nweight $w$. Then the weighted logrank score satisfies\n$$\\frac{U_{n,w_n}}{\\sqrt n} =\\frac1{\\sqrt n}\\sum_{g=0}^1\\sum_{i=1}^{n_g} \\int_0^\\tau w(t)\\bigl(g-\\bar z(t)\\bigr)\\,dM_{gi}(t)+o_P(1).$$\nIn particular, fixed deterministic bounded predictable weights are included\nby taking $w_n=w$.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "lem-logrank-risk-fraction-converges",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-l2-counting-process-integral",
+          "thm-compensated-counting-process-brackets",
+          "thm-l2-counting-process-integral-isometry",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 2-7",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, \u00a75.3, PDF pp. 59-60",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": []
+      },
+      {
+        "id": "lem-logrank-variance-estimator-consistency",
+        "kind": "lemma",
+        "title": "Consistency of the weighted logrank variance estimate",
+        "statement": "Assume the two-group common-hazard model with finite-horizon predictable\nrisk processes and the explicit square-integrable martingale contracts\n$M_{gi}=N_{gi}-A_{gi}$, $A_{gi}(t)=\\int_0^tY_{gi}(s)\\lambda(s)\\,ds$; assume\nno simultaneous event jumps. Let $Y_{g,n}=\\sum_iY_{gi}$,\n$Y_n=Y_{0,n}+Y_{1,n}$, and assume the uniform risk-fraction convergence\n$Y_n/n\\to y$ and $p_n=Y_{1,n}/Y_n\\to\\bar z$ in probability on $[0,\\tau]$,\nwith $p_n=0$ on an empty risk set (as proved in\n[[lem-logrank-risk-fraction-converges]]). Let $w_n\\to w$ uniformly in\nprobability, where the predictable weights are uniformly bounded and $w$\nis deterministic. Suppose event times are continuous, so every observed\nfailure time has $d_j=1$ almost surely. Here $\\widehat V_{n,w_n}$ is the\nplug-in statistic defined in [[def-logrank-risk-set-score-and-test]]; the\nclaim is its asymptotic consistency and does not assert an exact finite-sample\nconditional variance law. Here $y_0,y_1$ are deterministic nonnegative Borel functions,\n$y=y_0+y_1$, $\\inf_{0\\le t\\le\\tau}y(t)>0$, and $\\bar z=y_1/y$. Define\n$$\\sigma_w^2:=\\int_0^\\tau w(t)^2\\frac{y_0(t)y_1(t)}{y(t)}\\lambda(t)\\,dt.$$\nThen the weighted plug-in variance sum from\n[[def-logrank-risk-set-score-and-test]] satisfies\n$$\\frac{\\widehat V_{n,w_n}}n\\longrightarrow_P\\sigma_w^2.$$",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "lem-logrank-risk-fraction-converges",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-l2-counting-process-integral",
+          "thm-compensated-counting-process-brackets",
+          "thm-l2-counting-process-integral-isometry",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 4-7",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, \u00a75.3-5.4, PDF pp. 59-62",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "justified_by": []
+      },
+      {
+        "id": "thm-weighted-logrank-terminal-normal-limit",
+        "kind": "theorem",
+        "title": "Terminal normal limit for weighted logrank scores",
+        "statement": "Assume the Axiom of Choice. For $g\\in\\{0,1\\}$, let\n$(T_{gi},C_{gi})_{i\\ge1}$ be IID within group, with\n$T_{gi},C_{gi}\\in[0,\\infty)$ almost surely and the two group families\nindependent. Assume conditional independent censoring\n$T_{gi}\\perp C_{gi}\\mid g$, and a common absolutely continuous event-time\nlaw with hazard density $\\lambda$ on $[0,\\tau]$, where\n$\\Lambda(\\tau)=\\int_0^\\tau\\lambda(t)\\,dt<\\infty$. Censoring distributions\nmay differ between groups. Use the horizon-truncated record\n$U_{gi}:=\\min(T_{gi},C_{gi},\\tau)$ and\n$\\delta_{gi}:=1\\{T_{gi}\\le C_{gi},\\ T_{gi}\\le\\tau\\}$, which lies in\n$[0,\\tau]\\times\\{0,1\\}$ as required by\n[[def-logrank-risk-set-score-and-test]].\n\nFor deterministic positive sample sizes $n_g$ along a sequence with\n$n=n_0+n_1\\to\\infty$ and $n_1/n\\to\\rho\\in(0,1)$, set\n$\\rho_1=\\rho$, $\\rho_0=1-\\rho$,\n$y_g(t)=\\rho_gP(U_{g1}\\ge t)$, $y(t)=y_0(t)+y_1(t)$, and\n$\\bar z(t)=y_1(t)/y(t)$. Assume $\\inf_{t\\le\\tau}y(t)>0$. For each\nsubject define $N_{gi}(t)=1\\{U_{gi}\\le t,\\delta_{gi}=1\\}$ and\n$Y_{gi}(t)=1\\{U_{gi}\\ge t\\}$. Under one common filtration, assume $Y_{gi}$\nis predictable and, separately, that\n$$ A_{gi}(t)=\\int_0^tY_{gi}(s)\\lambda(s)\\,ds,\\qquad M_{gi}=N_{gi}-A_{gi} $$\nsatisfies the finite-horizon square-integrable martingale contract of\n[[def-counting-process-intensity-and-compensator-contract]]. Assume no two\nsubjects have simultaneous event jumps. Conditional independent censoring\nand the displayed hazard are scientific model premises; they are not used\nas substitutes for the explicit martingale contract.\n\nUse $U_{n,w_n}$ and $\\widehat V_{n,w_n}$ as defined in\n[[def-logrank-risk-set-score-and-test]]. Let $w_n$ be a common predictable\nweight sequence with $|w_n|\\le C$ and a measurable supremum satisfying\n$\\sup_{t\\le\\tau}|w_n(t)-w(t)|\\to_P0$ for a deterministic bounded Borel\npredictable weight $w$. Define\n$$ \\sigma_w^2:=\\int_0^\\tau w(t)^2\\frac{y_0(t)y_1(t)}{y_0(t)+y_1(t)}\\lambda(t)\\,dt. $$\nThen\n$$ \\frac{U_{n,w_n}}{\\sqrt n}\\Rightarrow N(0,\\sigma_w^2). $$\nIf $\\sigma_w^2>0$, define the standardized statistic as\n$U_{n,w_n}/\\sqrt{\\widehat V_{n,w_n}}$ when the denominator is positive and\nassign any fixed finite value on the event that it is zero. Every such\nextension converges to $N(0,1)$. If $\\sigma_w^2=0$, only the degenerate\nscore limit is asserted. For a fixed deterministic weight, take $w_n=w$.\nThis is a terminal finite-dimensional limit; it asserts no process central\nlimit theorem.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "lem-logrank-risk-fraction-converges",
+          "lem-logrank-score-martingale-expansion",
+          "lem-logrank-variance-estimator-consistency",
+          "thm-independent-groups-terminal-influence-limit",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-l2-counting-process-integral",
+          "thm-l2-counting-process-integral-isometry",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-families-of-event-classes",
+          "def-random-element-and-real-random-variable",
+          "def-covariance-matrix-of-a-random-vector",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-variance-of-a-finite-sum",
+          "cor-markov-inequality-for-random-variables",
+          "thm-dominated-convergence",
+          "def-op-and-little-op-stochastic-bounds",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-standard-normal-and-normal-laws",
+          "thm-vector-slutsky",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 1-12",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, \u00a75.4, PDF pp. 61-62",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 1983,
+    "id": "logrank-and-weighted-logrank-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Logrank and weighted logrank \u2014 Examples",
+    "companion": "logrank-and-weighted-logrank",
+    "requires": [
+      "logrank-and-weighted-logrank",
+      "nelson-aalen-kaplan-meier-greenwood"
+    ],
+    "items": [
+      {
+        "id": "ex-logrank-crossing-hazards-zero-score",
+        "kind": "example",
+        "title": "Crossing hazards with a zero observed logrank score",
+        "statement": "Use follow-up horizon $\\tau=2.5$. Let the event times be mutually\nindependent, with group hazards\n$$ \\lambda_1(t)=\\begin{cases}2,&0\\le t\\le1,\\\\1,&t>1,\\end{cases} \\qquad \\lambda_0(t)=\\begin{cases}1,&0\\le t\\le1,\\\\2,&t>1.\\end{cases} $$\nLet all censoring times be mutually independent and independent of the\nentire event-time family. In group 1, let each censoring time equal $1.5$\nwith probability $2/3$ and $2.5$ with probability $1/3$; in group 0 let it\nequal $2.5$. Observe each subject through\n$U_i=\\min(T_i,C_i)$ and $\\delta_i=1\\{T_i\\le C_i\\}$, using the event-censor\ntie convention in [[def-logrank-risk-set-score-and-test]]. Since every\n$C_i\\le\\tau$, these records lie in $[0,\\tau]\\times\\{0,1\\}$. A possible\nsample has\n$n_1=4$: one event at $t_1\\in(0,1)$, two subjects censored at $1.5$, and\none subject censored at $2.5$. It has $n_0=2$: one event at\n$t_2\\in(2,2.5)$ and one subject censored at $2.5$. Compute the unweighted\nlogrank score, its plug-in variance, and the empirical product-limit\ncurves. Verify that this sample pattern has positive probability and that\nthe population survival curves cross even though the observed score is zero.",
+        "strategy": "Compute both survival functions and all nonzero risk-set contributions. Verify that the event/censoring ordering has positive probability and that the score cancellation does not establish equality of the survival laws.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "def-nelson-aalen-kaplan-meier-greenwood-estimators"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2,
+        "justified_by": []
+      },
+      {
+        "id": "ex-logrank-fisher-randomization-with-unequal-weights",
+        "kind": "example",
+        "title": "An exact logrank randomization p-value with unequal assignment weights",
+        "statement": "Fix a follow-up horizon $\\tau=3$ and three subjects. For every allowed\nassignment $z\\in\\{e_1,e_2,e_3\\}$, where\n$\\gamma(e_k)_i=1\\{i=k\\}$ is the binary group map that treats subject $k$,\nprescribe the full records\n$(U_i(z),\\delta_i(z))=(i,1)$ for $i=1,2,3$. Thus the subjects have\nuncensored event times $1,2,3$ under every assignment, satisfying the\nfull-record sharp null. Exactly one subject is treated. The allowed assignments $e_1,e_2,e_3$ treat subject\n1, 2, or 3, respectively, with probabilities $1/2,1/3,1/6$. Predeclare unit\nweight and the two-sided absolute unweighted logrank score before observing\nthe assignment. Enumerate all\nscores and inclusive assignment-tail p-values and verify superuniformity\nunder this unequal assignment law.",
+        "strategy": "Recompute the risk sets, score, tail mass, and p-value at all three assignments, then check the exact finite weighted distribution at every threshold.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "cor-logrank-fisher-randomization-pvalue-valid",
+          "def-finite-randomized-treatment-assignment-model"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 6,
+        "justified_by": []
+      }
+    ]
+  }
+]

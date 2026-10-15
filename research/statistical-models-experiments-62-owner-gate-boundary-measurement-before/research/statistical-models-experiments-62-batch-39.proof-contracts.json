@@ -1,0 +1,365 @@
+{
+  "version": 1,
+  "scope": [
+    "def-batch-and-measurement-process-variation",
+    "thm-nested-batch-repeatability-covariance-and-mean-variance",
+    "ex-day-specific-calibration-slope-drift-and-check-standards"
+  ],
+  "contracts": {
+    "def-batch-and-measurement-process-variation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes nonempty finite condition and nested-batch index sets and at least one repeat per batch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: both variance components are permitted to be zero; the model remains defined and uses no division by a variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a batch with m_ij=1 is permitted; its replicate mean is its single observation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No covariance matrix inverse or positive-definiteness condition is part of the model definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The model is indexed by finite sets and has no continuous domain endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite index sets are explicitly assumed nonempty and no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts no converse."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-nested-batch-repeatability-covariance-and-mean-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-batch-and-measurement-process-variation",
+          "source_section": "Definition",
+          "quote": "On one probability space, let the real random variables $B_{ij}$ and $\\epsilon_{ijk}$ be jointly independent and square-integrable, with",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ and $Y$ are square-integrable real random variables on the same probability space, their **covariance** is",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "its **expectation** is again $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-nested-observations-are-square-integrable",
+          "step": "1.1",
+          "claim": "The variables are integrable, finite sums remain square-integrable, and every finite product in the later expansions is integrable, so expectation linearity and centered moments apply.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "distinct-replicates-share-only-the-batch-effect",
+          "step": "2.1",
+          "claim": "Centered-product covariance and expectation linearity expand the distinct-repeat covariance; finite independence factorization zeroes each cross product, leaving the batch second moment sigma_B^2.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "replicate-averaging-scales-only-the-repeat-variance",
+          "step": "3.1",
+          "claim": "Expanding the centered replicate-mean square leaves the batch second moment plus m diagonal repeat second moments scaled by m^-2; expectation linearity and independence zero all cross terms.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes nonempty finite condition and batch sets and m_ij>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: if either or both variance components vanish, the same covariance expansion gives zero for the corresponding term; no division by a variance occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: for m_ij=1 the replicate-mean formula becomes Var(Y_ij1)=sigma_B^2+sigma_epsilon^2; the distinct-repeat covariance clause has no pair to which it applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: singular or zero covariance components are allowed; only finite bilinearity and the stated variances are used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no continuous parameter domain or endpoint in this finite-index theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All index families and sums are finite; the proof uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts two formulas, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no converse or identifiability claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "single-repeat-mean-variance",
+          "claim": "For m_ij=1, the replicate mean has variance sigma_B^2+sigma_epsilon^2.",
+          "result": "The average contains one batch term and one repeat term, so the two independent variances add."
+        },
+        {
+          "id": "two-repeat-covariance",
+          "claim": "For two distinct repeats in one batch, their covariance is sigma_B^2.",
+          "result": "Both observations contain the same B_ij; every distinct repeat-error cross covariance is zero."
+        },
+        {
+          "id": "zero-component-boundary",
+          "claim": "If sigma_B^2=0 and sigma_epsilon^2=0, both asserted variances and covariances are zero.",
+          "result": "Substitution in the two formulas gives zero without a limiting argument."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-day-specific-calibration-slope-drift-and-check-standards": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurand-calibration-and-measurement-uncertainty",
+          "source_section": "Definition",
+          "quote": "A **calibration curve** is the specified relation between a reference quantity and an instrument response used to convert a later response into an estimate of the measurand.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-batch-and-measurement-process-variation",
+          "source_section": "Definition",
+          "quote": "Pool calibration curves only under an explicit common-curve or equivalence model over the stated calibration range. Without that model, report batch-specific calibration descriptions.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "recover-the-day-specific-calibration-lines",
+          "step": "1.1",
+          "claim": "The table gives day-specific intercept 1 and slopes 2 and 2.2, and the middle check standard has responses 11 and 12.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "calculate-the-centered-reference-response-sums",
+          "step": "1.2",
+          "claim": "The six reference values have mean 5 and the six responses have mean 11.5; the centered sums are S_qq=100 and S_qr=210.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "minimize-the-six-point-pooled-line-squares",
+          "step": "2.1",
+          "claim": "Expanding the least-squares objective separates the intercept square and completes the slope square; since S_qq=100, the unique pooled line is 1+2.1q.",
+          "inputs": [
+            "given",
+            "A2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compare-pooled-and-day-specific-check-standard-readings",
+          "step": "3.1",
+          "claim": "The pooled line has residuals -0.5 and 0.5 at q=5 and inverses 100/21 and 110/21, while the day-specific lines invert their own responses to 5.",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example explicitly has three reference standards and two days."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "All responses are stipulated deterministic values; the example makes no random-error variance or uncertainty calculation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example does not use a single standard or a single day."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No covariance matrix or variance-component inverse appears."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The three reference values 0, 5, and 10 include both endpoints of the declared calibration range [0,10]; all stated line slopes, including pooled slope 2.1, are positive, so the displayed inverse calculations are defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The complete finite table is displayed and no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no converse."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "day-specific-slope-arithmetic",
+          "claim": "The endpoint differences give slopes 2 and 2.2.",
+          "result": "(21-1)/(10-0)=2 and (23-1)/(10-0)=2.2."
+        },
+        {
+          "id": "pooled-line-center-sums",
+          "claim": "The equally weighted six-point line has S_qq=100, S_qr=210, slope 2.1, and intercept 1.",
+          "result": "The centered contributions are 50+50 for S_qq and 105+0+105 for S_qr; 210/100=2.1 and 11.5-2.1(5)=1."
+        },
+        {
+          "id": "pooled-check-standard-inverse",
+          "claim": "At the standard q=5, the pooled inverse values are 100/21 and 110/21.",
+          "result": "The responses 11 and 12 invert through r=1+2.1q to (11-1)/2.1=100/21 and (12-1)/2.1=110/21."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

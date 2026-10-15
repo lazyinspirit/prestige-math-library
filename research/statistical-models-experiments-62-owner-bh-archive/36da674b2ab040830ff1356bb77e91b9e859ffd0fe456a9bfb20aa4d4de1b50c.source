@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "batch": "54",
+  "batch_dependency_level": 1,
+  "scheduling_input_sha256": "be0b7aca66787065a1de6e365a80730a6752b56b03a5c15b6c6abcb95603d30d",
+  "prerequisite_batches": [
+    {
+      "batch": "52",
+      "dependency_level": 0,
+      "page": "valid-p-values-bonferroni-and-simultaneous-coverage",
+      "manifest_observed": "research/statistical-models-experiments-62-batch-52.pages.json",
+      "manifest_items_at-initial-inspection": [],
+      "status": "declared-page-prerequisite; no authored item interface available at inspection",
+      "unresolved_item_supplier_ids": [],
+      "reason_no_item_ids": "The current batch-52 scaffold manifest had an empty items array. No item ID or supplier body was declared, so this batch records the exact required page ID and does not invent an item ID.",
+      "required_interface_from_design": [
+        "finite family of hypotheses",
+        "true-null index set I_0(theta)",
+        "valid p-value convention P_theta(p_i <= u) <= u",
+        "FDR and FWER definitions"
+      ],
+      "affected_claims": [
+        {
+          "item": "thm-benjamini-hochberg-independent-fdr",
+          "claim": "For a fixed finite family, exact-uniform true-null p-values, mutually independent p-values, and q in (0,1), BH has FDR=(m_0/m)q<=q.",
+          "required_hypotheses": [
+            "m>=1 and a prespecified finite family",
+            "I_0(theta) is fixed under each evaluated law P_theta",
+            "all m p-values are mutually independent under P_theta",
+            "each true-null p-value is exactly Uniform[0,1] under P_theta",
+            "q in (0,1); false-null p-value laws are otherwise arbitrary"
+          ],
+          "local_draft_work": "A local definition of FDP/FDR/FWER and a complete theorem proof are authored so work can proceed; canonical SME-52 item linkage remains unresolved."
+        },
+        {
+          "item": "ex-benjamini-hochberg-fdr-versus-fwer",
+          "claim": "The two-test example has FDR=1/4 and FWER=1/2 and attains the BH FDR bound.",
+          "required_hypotheses": [
+            "the canonical SME-52 FDP/FDR/FWER convention",
+            "the theorem's mutual-independence and exact true-null uniformity hypotheses"
+          ],
+          "local_draft_work": "A self-contained example verifies the calculation using the local FDR/FWER definition and theorem."
+        }
+      ]
+    }
+  ],
+  "page_requirements": {
+    "benjamini-hochberg-independent-fdr-control": [
+      "valid-p-values-bonferroni-and-simultaneous-coverage",
+      "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "independence-borel-cantelli-and-zero-one-laws"
+    ],
+    "benjamini-hochberg-independent-fdr-control-examples": [
+      "benjamini-hochberg-independent-fdr-control"
+    ]
+  },
+  "design_to_plan_spec": {
+    "status": "aligned",
+    "mapping": {
+      "SME-52": "valid-p-values-bonferroni-and-simultaneous-coverage",
+      "MSF-08": "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "published mutual-independence/product-law supplier": "independence-borel-cantelli-and-zero-one-laws"
+    },
+    "plan_spec_requires_match": true,
+    "plan_locations": [
+      "research/plan-statistical-models-experiments-track.md:304–305",
+      "research/plan-spec.json pages 2024–2025"
+    ],
+    "notes": "The plan's three concrete A-page requirements implement the design's SME-52, MSF-08, and probability product-law interfaces. No substantive design/plan conflict was found."
+  },
+  "proof_route_reconciliation": {
+    "status": "documented-local-variation",
+    "planned_route": "SME-54 asks for the BH95 leave-one-out/induction lemma conditioning on false-null values.",
+    "authored_route": "The A page proves a deterministic pointwise leave-one-out identity, then uses mutual independence of all p-values to average each true-null contribution directly.",
+    "claims_and_hypotheses_preserved": true,
+    "result_strength": "The local proof obtains FDR=(m0/m)q, hence the planned bound.",
+    "owner_reconciliation_needed": true,
+    "evidence": "The source BH95 Theorem 1 and Appendix A induction proof were inspected in PDF pp. 6 and 12–13, with the appendix formulas visually checked. The alternative proof and its complete local lemma are in the current theorem and proof contract."
+  },
+  "item_dependency_levels": [
+    {
+      "item": "def-false-discovery-rate-and-familywise-error-rate",
+      "level": 0,
+      "in_batch_deps": []
+    },
+    {
+      "item": "alg-benjamini-hochberg-step-up-procedure",
+      "level": 0,
+      "in_batch_deps": []
+    },
+    {
+      "item": "lem-benjamini-hochberg-leave-one-out-identity",
+      "level": 1,
+      "in_batch_deps": ["alg-benjamini-hochberg-step-up-procedure"]
+    },
+    {
+      "item": "thm-benjamini-hochberg-independent-fdr",
+      "level": 2,
+      "in_batch_deps": [
+        "def-false-discovery-rate-and-familywise-error-rate",
+        "alg-benjamini-hochberg-step-up-procedure",
+        "lem-benjamini-hochberg-leave-one-out-identity"
+      ]
+    },
+    {
+      "item": "ex-benjamini-hochberg-fdr-versus-fwer",
+      "level": 3,
+      "in_batch_deps": [
+        "def-false-discovery-rate-and-familywise-error-rate",
+        "alg-benjamini-hochberg-step-up-procedure",
+        "thm-benjamini-hochberg-independent-fdr"
+      ]
+    }
+  ],
+  "external_item_suppliers_examined": [
+    {
+      "id": "def-p-value",
+      "home": "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "use": "Defines measurable [0,1]-valued p-value statistics and validity; used for the theorem's p-value setup."
+    },
+    {
+      "id": "thm-p-value-superuniformity",
+      "home": "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "use": "Statement and proof were inspected. It is not a logical input to the BH bound because the theorem assumes exact Uniform[0,1] true-null laws, which directly imply superuniformity."
+    },
+    {
+      "id": "def-independent-random-elements",
+      "home": "independence-borel-cantelli-and-zero-one-laws",
+      "use": "Defines mutual independence by independence of generated sigma-algebras."
+    },
+    {
+      "id": "thm-grouping-independent-sigma-algebras",
+      "home": "independence-borel-cantelli-and-zero-one-laws",
+      "use": "Groups the tested coordinate and its complement to obtain independence from the leave-one-out statistic."
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "home": "independence-borel-cantelli-and-zero-one-laws",
+      "use": "Supplies the finite product joint law used to factor the null threshold event; its actual proof uses finite products and no choice axiom."
+    }
+  ],
+  "downstream_page_context": [
+    {
+      "page": "fdr-control-under-dependence",
+      "batch": "55",
+      "relationship": "The current plan lists the BH page as a prerequisite. This batch does not edit or certify the downstream page."
+    }
+  ],
+  "axioms": [],
+  "choice_note": "No choice axiom is used by the local finite-family proof. The finite product-law supplier is applied only to finite families."
+}

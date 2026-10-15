@@ -1,0 +1,640 @@
+{
+  "version": 1,
+  "scope": [
+    "def-method-agreement-and-limits",
+    "thm-normal-difference-agreement-limits",
+    "ex-correlation-without-agreement",
+    "ex-repeated-method-differences-have-random-intercept-covariance"
+  ],
+  "contracts": {
+    "def-method-agreement-and-limits": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires n>=2 for the iid paired-difference sample. Its sample mean contains 1/n and its sample standard deviation contains 1/(n-1); the displayed sums therefore concern a nonempty sample of at least two pairs, not an empty measurement family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/sme_gate_boundary_measurement",
+            "reason": "Definition requires n>=2 for the iid paired-difference sample. Its sample mean contains 1/n and its sample standard deviation contains 1/(n-1); the displayed sums therefore concern a nonempty sample of at least two pairs, not an empty measurement family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits D=0, giving zero bias, zero spread, and coincident conventional limits."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The population definitions remain meaningful for one target; the sample plug-in spread is explicitly restricted to n>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits sigma_D=0; its rounded endpoints then coincide at mu_D. The elementary bound |D|<=(D^2+1)/2 gives E|D|<infinity. The centered square is measurable by the arithmetic-measurability result, bounded by 2D^2+2(E D)^2, and has finite nonnegative integral; the real square-root theorem supplies the finite standard deviation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the sample plug-in spread denominator is n-1 and the domain condition n>=2 is explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice or selection is made in this definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Independently read the entire current definition and all nine direct dependencies. |D| <= (D^2+1)/2 establishes the finite mean; (D-mu)^2 <= 2D^2+2mu^2 establishes a finite measurable centered-square integral, with nonnegative square-root existence including zero. The n>=2 sample restriction excludes zero denominators; zero/constant differences have coincident limits. Only D has moment assumptions, so the added when-defined correlation caveat is necessary. No AC is used. Checked square-root supremum proof and Colorado Theorem 1.6, PDF pp.11-12 (zero extension on p.12). Reader enrichment is sound; owned consumers remain valid."
+      }
+    },
+    "thm-normal-difference-agreement-limits": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate \u2014 the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates \u2014 and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-definition-equivalence",
+          "source_section": "Statement",
+          "quote": "The following descriptions give the same function $\\mathbb R\\to(0,\\infty)$: the power series $\\sum x^n/\\iota(n!)$; the product limit $\\lim_n(1+x/\\iota(n))^n$; the normalized solution of $y'=y,\\ y(0)=1$; the normalized continuous multiplicative function; and the compact-uniform limit of the Picard iterates.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "2.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-substitution",
+          "source_section": "Statement",
+          "quote": "Let $c < d$ be reals and let $\\varphi : [c,d] \\to \\mathbb{R}$ be differentiable\nat every point of $[c,d]$ as a function on $[c,d]$ ([[def-derivative]]), with\n$\\varphi'$ integrable on $[c,d]$ ([[def-darboux-integral]]). Let\n$J \\subseteq \\mathbb{R}$ be order-convex with at least two elements\n([[def-interval]]) with $\\varphi[\\,[c,d]\\,] \\subseteq J$, and let $f : J \\to\n\\mathbb{R}$ be continuous on $J$ ([[def-continuity-real]]).\n\nThen $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of [[def-oriented-integral]].\n\n**Neither injectivity nor monotonicity of $\\varphi$ is assumed**, and that is\nexactly why the left-hand side is written with oriented limits: $\\varphi(d)$ may\nlie below $\\varphi(c)$, and $\\varphi$ may return to the same value many times.\nThe proof runs through a primitive of $f$ and the chain rule, and no inverse\nfunction is ever formed.\n\n**Continuity of $f$ is a hypothesis and cannot be weakened to integrability.**\nWith $f$ merely integrable the composite $f \\circ \\varphi$ need not be\nintegrable at all, so the right-hand side need not exist; that is\nthe false statement that weakens it on the companion page.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-method-agreement-and-limits",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be the declared probability model for a\npre-specified target population of measurement conditions. Let $A$ and $B$ be\nreal random variables giving quantitative measurements of the same target\nunder the same stated conditions. The choice of target population and the\nscientific applicability of its probability law are model assumptions; this\ndefinition does not verify them.\n\nAssume the paired difference $D:=A-B$ is square-integrable. It is measurable\nbecause measurable real functions are closed under finite sums and scalar\nmultiples ([[prop-closure-properties-of-measurable-functions-used-by-the-integral]]).\nSince $0\\le(|D|-1)^2$, we have $|D|\\le(D^2+1)/2$. Monotonicity,\nhomogeneity, and additivity of the nonnegative integral, together with\n$\\mathbb P(\\Omega)=1$, give\n$$\\mathbb E[|D|]\\le\\tfrac12\\mathbb E[D^2]+\\tfrac12<\\infty$$\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]],\n[[cor-additivity-of-the-nonnegative-lebesgue-integral]]). Thus define the finite\npopulation bias $\\mu_D:=\\mathbb E[D]$. Put $H:=D-\\mu_D$, which is measurable by\nthe same closure result. Its square $H^2$ is measurable by\n[[thm-arithmetic-and-lattice-operations-preserve-measurability]]. Since\n$$H^2\\le 2D^2+2\\mu_D^2,$$\nmonotonicity, homogeneity, and additivity of the nonnegative integral give\n$$\\mathbb E[H^2]\\le 2\\mathbb E[D^2]+2\\mu_D^2<\\infty$$\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]],\n[[cor-additivity-of-the-nonnegative-lebesgue-integral]]). Therefore\n$$\\sigma_D:=\\sqrt{\\operatorname{Var}(D)}=\\sqrt{\\mathbb E[H^2]}$$\nis a finite real standard deviation, since $\\operatorname{Var}(D)=\\mathbb E[H^2]$\nby [[def-moments-variance-and-covariance]] and every nonnegative real has a\nsquare root by [[thm-of-square-roots]].\nThe sign convention is $D=A-B$, so positive bias means that $A$ reads larger\nthan $B$ on average. The conventional rounded normal-reference limits of\nagreement are $\\mu_D-1.96\\sigma_D$ and $\\mu_D+1.96\\sigma_D$.\n\nFor an iid sample $D_1,\\ldots,D_n$ of paired differences from the declared\ntarget population, with $n\\ge2$ and observed values $d_1,\\ldots,d_n$, define\n$$\\bar d:=\\frac1n\\sum_{i=1}^n d_i,\\qquad s_D:=\\sqrt{\\frac1{n-1}\\sum_{i=1}^n(d_i-\\bar d)^2}.$$\nThe sample plug-in limits are $\\bar d\\pm1.96s_D$: they substitute the sample\nmean and sample standard deviation into the conventional population formula.\nThey are point estimates; no unbiasedness, consistency, confidence coverage,\nor exact finite-sample coverage for either endpoint is asserted here.\n\nRepeated measurements on one target are not iid merely because there are many\nrecorded pairs. Their within-target dependence must be stated and modeled, for\nexample with a covariance or random-effects model. When defined, correlation\nmeasures linear association and does not by itself establish agreement. Limits\nof agreement describe the distribution of differences; they do not decide\nwhether those differences are acceptable for a particular use or whether\neither method is calibrated to a known truth.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] \u2014 hence the least-upper-bound property \u2014 that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $a<b$ and let $f:[a,b]\\to\\mathbb R$ be\nbounded and Riemann integrable. Then $f$ is Lebesgue measurable on $[a,b]$ and\nis integrable there, and its Lebesgue integral equals its Riemann integral:\n$$\\int_{[a,b]} f\\,d\\lambda_1=\\int_a^b f(x)\\,dx.$$\n\nThis is the point at which the completeness of Lebesgue measure is used\nessentially: the proof obtains a Borel function equal to $f$ almost everywhere,\nand measurability of $f$ itself is then a completeness statement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "AC in [A1] applies to the normal-law construction [F1]. It also supplies countable choice: for any sequence of nonempty sets, apply AC to the family of its values and compose the resulting choice function with the sequence, which is the property in [F3]. Thus the countable-choice hypothesis in [F4] is available. Taking the one-dimensional box with equal endpoints $x=x$ in [F4] gives $\\lambda(\\{x\\})=0$; the density in [F1] is nonnegative measurable by [F2], so [F5] gives $N(0,1)(\\{x\\})=0$. Thus the standard normal law has no atoms.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $x<y$, probability subtraction and the density definition give $\\Phi(y)-\\Phi(x)=N(0,1)((x,y])=\\int_{(x,y]}\\phi\\,d\\lambda$. Let $M=\\max\\{|x|,|y|\\}$. Positivity [F6], derivative [F7], and the mean value theorem [F8] show that the exponential is increasing. Hence on $[x,y]$, $\\alpha:=e^{-M^2/2}/\\sqrt{2\\pi}\\le\\phi(t)\\le\\beta:=1/\\sqrt{2\\pi}$, with $\\alpha>0$. By [F4, F13], $0<\\alpha(y-x)\\le\\Phi(y)-\\Phi(x)\\le\\beta(y-x)$. Therefore $\\Phi$ is strictly increasing and continuous.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F9], $\\Phi(n)\\to1$ and $\\Phi(-n)\\to0$ as $n\\to\\infty$. The density is continuous by [F7] and even. On each compact interval below, [F14, F15] identify its Riemann and Lebesgue integrals, using countable choice from step 1.1. For $n>|x|$, substitution $u=-t$ in [F10] gives $\\int_{-n}^{-x}\\phi(t)\\,dt=\\int_x^n\\phi(u)\\,du$. Passing to the tail limits gives $\\Phi(-x)=\\mathbb P(Z\\ge x)$ for $Z\\sim N(0,1)$. By the no-atom result in step 1.1, $\\mathbb P(Z\\ge x)=1-\\Phi(x)$, so $\\Phi(-x)=1-\\Phi(x)$ and $\\Phi(0)=1/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "F9",
+            "F10",
+            "F14",
+            "F15",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By step 2.1, choose an integer $b>0$ with $\\Phi(b)>.975$, while $\\Phi(0)=1/2<.975$. Step 1.2 makes $\\Phi$ continuous on the finite closed interval $[0,b]$, so [F12] gives $z\\in(0,b)$ with $\\Phi(z)=.975$. Strict increase from step 1.2 makes $z$ unique, and step 2.1 gives $\\Phi(-z)=.025$. Strict increase makes these the unique lower quantiles at those levels, so $z=z_{.975}$, the set $\\{x:\\Phi(x)\\ge.975\\}$ has infimum $z$, and the set $\\{x:\\Phi(x)\\ge.025\\}$ has infimum $-z$.",
+          "step": "3.1",
+          "inputs": [
+            "F12",
+            "step 1.2",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $\\sigma_D>0$, [F1] gives $F_D(x)=\\Phi((x-\\mu_D)/\\sigma_D)$, since $\\mu_D+\\sigma_D t\\le x$ exactly when $t\\le(x-\\mu_D)/\\sigma_D$. The increasing affine change of variable carries the quantiles from step 3.1 to $\\mu_D-z_{.975}\\sigma_D$ and $\\mu_D+z_{.975}\\sigma_D$. By [F1] and step 1.1, this affine image of the standard normal law has no atoms. The endpoint CDF values are $.025$ and $.975$, so the closed interval between them has probability $.975-.025=.95$, as stated.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F11",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $\\sigma_D=0$, [F1] gives $N(\\mu_D,0)=\\delta_{\\mu_D}$. Its distribution function is $0$ below $\\mu_D$ and $1$ at or above $\\mu_D$, so both lower quantiles are $\\mu_D$ and the singleton has probability $1$. This is exactly the formula in the Statement with $\\sigma_D=0$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F11",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Theorem assumes a probability law D and quantile levels strictly between zero and one; no empty sample is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 explicitly covers sigma_D=0 and the point-mass law."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No sample statistic or sample-size condition appears in the theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 treats the degenerate normal law N(mu_D,0) separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 establishes both lower quantiles, and step 4.1 maps them and uses the atomless affine normal law to give probability .95 to the closed interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 records the exact AC use required by the normal-law supplier and the countable-choice box supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states quantile equalities and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states quantile equalities and contains no biconditional."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Read every current step, all fourteen original direct dependencies, both added compact-integral suppliers and the reader/refuter evidence. AC supplies CC for null singletons, Lebesgue boxes and the integral bridge. Density positivity and the alpha/beta interval bounds give strict increase and Lipschitz continuity. The compact reflection has derivative -1 and a continuous integrand; F14/F15 now explicitly transfer Riemann substitution to Lebesgue integrals. Finite probability continuity justifies both tails. IVT on [0,b] gives the unique positive root; strict increase identifies both lower-quantile infima. Positive affine scale preserves ordering and atomlessness, giving .95 on the closed interval. Scale zero instead gives a point mass with singleton probability 1. Rounded 1.96 is only a convention, consistent with Bland\u2013Altman PDF p.4. No normality or population applicability is inferred from data. Five published bibliography URL findings are nonfatal and leave these local proofs applicable."
+      }
+    },
+    "ex-correlation-without-agreement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-method-agreement-and-limits",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be the declared probability model for a\npre-specified target population of measurement conditions. Let $A$ and $B$ be\nreal random variables giving quantitative measurements of the same target\nunder the same stated conditions. The choice of target population and the\nscientific applicability of its probability law are model assumptions; this\ndefinition does not verify them.\n\nAssume the paired difference $D:=A-B$ is square-integrable. It is measurable\nbecause measurable real functions are closed under finite sums and scalar\nmultiples ([[prop-closure-properties-of-measurable-functions-used-by-the-integral]]).\nSince $0\\le(|D|-1)^2$, we have $|D|\\le(D^2+1)/2$. Monotonicity,\nhomogeneity, and additivity of the nonnegative integral, together with\n$\\mathbb P(\\Omega)=1$, give\n$$\\mathbb E[|D|]\\le\\tfrac12\\mathbb E[D^2]+\\tfrac12<\\infty$$\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]],\n[[cor-additivity-of-the-nonnegative-lebesgue-integral]]). Thus define the finite\npopulation bias $\\mu_D:=\\mathbb E[D]$. Put $H:=D-\\mu_D$, which is measurable by\nthe same closure result. Its square $H^2$ is measurable by\n[[thm-arithmetic-and-lattice-operations-preserve-measurability]]. Since\n$$H^2\\le 2D^2+2\\mu_D^2,$$\nmonotonicity, homogeneity, and additivity of the nonnegative integral give\n$$\\mathbb E[H^2]\\le 2\\mathbb E[D^2]+2\\mu_D^2<\\infty$$\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]],\n[[cor-additivity-of-the-nonnegative-lebesgue-integral]]). Therefore\n$$\\sigma_D:=\\sqrt{\\operatorname{Var}(D)}=\\sqrt{\\mathbb E[H^2]}$$\nis a finite real standard deviation, since $\\operatorname{Var}(D)=\\mathbb E[H^2]$\nby [[def-moments-variance-and-covariance]] and every nonnegative real has a\nsquare root by [[thm-of-square-roots]].\nThe sign convention is $D=A-B$, so positive bias means that $A$ reads larger\nthan $B$ on average. The conventional rounded normal-reference limits of\nagreement are $\\mu_D-1.96\\sigma_D$ and $\\mu_D+1.96\\sigma_D$.\n\nFor an iid sample $D_1,\\ldots,D_n$ of paired differences from the declared\ntarget population, with $n\\ge2$ and observed values $d_1,\\ldots,d_n$, define\n$$\\bar d:=\\frac1n\\sum_{i=1}^n d_i,\\qquad s_D:=\\sqrt{\\frac1{n-1}\\sum_{i=1}^n(d_i-\\bar d)^2}.$$\nThe sample plug-in limits are $\\bar d\\pm1.96s_D$: they substitute the sample\nmean and sample standard deviation into the conventional population formula.\nThey are point estimates; no unbiasedness, consistency, confidence coverage,\nor exact finite-sample coverage for either endpoint is asserted here.\n\nRepeated measurements on one target are not iid merely because there are many\nrecorded pairs. Their within-target dependence must be stated and modeled, for\nexample with a covariance or random-effects model. When defined, correlation\nmeasures linear association and does not by itself establish agreement. Limits\nof agreement describe the distribution of differences; they do not decide\nwhether those differences are acceptable for a particular use or whether\neither method is calibrated to a known truth.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and let $X:\\Omega\\to\\mathbb R$.\nAfter identifying $(\\Omega,w)$ with the full-power-set probability space of\n[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],\nthe expectation defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with\nthe published finite formulas:\n$$\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)=\\sum_{x\\in X(\\Omega)}x\\,\\mathbb P(X=x).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], $\\mathbb E[A]=1/2$ and $\\mathbb E[B]=1/2+c$. Directly summing the two centered squares gives $\\operatorname{Var}(A)=\\operatorname{Var}(B)=1/4$. By [F4], $\\operatorname{Cov}(A,B)=\\operatorname{Cov}(A,A+c)=\\operatorname{Var}(A)+\\operatorname{Cov}(A,c)=1/4$, since covariance with a constant is zero. Thus the denominator in the definition of correlation is $1/4$ and $\\operatorname{Corr}(A,B)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At both points $D=A-B=-c$, so by [F2] and [F3], $\\mathbb E[D]=-c$ and $\\operatorname{Var}(D)=0$. Hence its conventional limits are $-c\\pm1.96\\cdot0=(-c,-c)$, while its bias is nonzero.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore perfect correlation does not imply zero bias or interchangeable measurements; any practical tolerance must be supplied for the intended use.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes a nonempty two-point probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: c>0 excludes zero offset; if c=0 the two methods agree exactly, so the strict inequality is essential to this witness."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no sample-size parameter; both atoms are enumerated."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly computes the constant difference and its zero variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 enumerates both points 0 and 1 of the two-point space."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: both outcomes and their weights are explicitly listed; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example is a one-way counterexample to correlation implying agreement, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example is a one-way counterexample to correlation implying agreement, not an iff."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Read all three verification steps and four direct suppliers. On the two equally likely atoms, A has mean 1/2, both variances equal 1/4, covariance equals 1/4, and the correlation denominator is positive. D=-c has mean -c and variance zero, so limits coincide at -c. c>0 makes this a nonzero-bias witness; no tolerance or empirical interchangeability follows. All moments exist on the finite full-power-set space, and no choice or normal approximation is used. Updated F1 contract quote to current reviewed supplier; proof unchanged."
+      }
+    },
+    "ex-repeated-method-differences-have-random-intercept-covariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and let $X:\\Omega\\to\\mathbb R$.\nAfter identifying $(\\Omega,w)$ with the full-power-set probability space of\n[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],\nthe expectation defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with\nthe published finite formulas:\n$$\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)=\\sum_{x\\in X(\\Omega)}x\\,\\mathbb P(X=x).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-covariance-vanishes-under-independence",
+          "source_section": "Statement",
+          "quote": "If $X$ and $Y$ are independent square-integrable real random variables, then\n$$\\operatorname{Cov}(X,Y)=0.$$\n\nThus independence implies zero covariance. The converse is false in general.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each triple has mass $1/8=(1/2)^3$, so for arbitrary subsets $S_1,S_2,S_3\\subseteq\\{-1,1\\}$, $\\mathbb P(U\\in S_1,\\epsilon_1\\in S_2,\\epsilon_2\\in S_3)=\\prod_{j=1}^3 |S_j|/2$. Thus [F1] makes the coordinates independent. Each coordinate has mean $0$ and variance $1$ by the finite weighted sum [F3] and centered-square definition [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5] and [F6], $\\mathbb E[D_j]=0$, $\\operatorname{Var}(D_j)=\\operatorname{Var}(U)+\\operatorname{Var}(\\epsilon_j)+2\\operatorname{Cov}(U,\\epsilon_j)=2$, and $\\operatorname{Cov}(D_1,D_2)=\\operatorname{Var}(U)=1$; all cross terms vanish because they are covariances of distinct independent coordinates.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The event $D_1=D_2=2$ requires the single triple $(1,1,1)$, so its probability is $1/8$. Each event $D_j=2$ requires $U=1$ and $\\epsilon_j=1$ and has probability $1/4$, making the product of marginal probabilities $1/16$. The factorization required for independence therefore fails; by [F2] the two differences are not iid.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example uses the explicitly nonempty eight-point space {-1,1}^3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes zero means and positive variance 2 and covariance 1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example contains exactly two repeat occasions; no one-occasion estimator is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 computes positive variance 2 for each repeated difference and covariance 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 enumerates the joint extreme event and both marginal events."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: the eight sign triples and uniform weights are explicitly specified; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example establishes dependence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example establishes dependence, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-38",
+        "notes": "Read all three verification steps and all seven direct suppliers. The eight equal-weight sign triples factor for arbitrary coordinate subsets, establishing mutual independence, with coordinate mean zero and variance one. Finite covariance bilinearity gives Var(Dj)=2 and Cov(D1,D2)=1. Exactly one triple makes both differences 2, giving 1/8, versus marginal product 1/16; this explicitly refutes independence even though their common law is the same. Positive variances, zero means and the extreme-event counts were checked directly. No infinite family, choice or normality is used; the random-intercept model is a declared assumption."
+      }
+    }
+  }
+}

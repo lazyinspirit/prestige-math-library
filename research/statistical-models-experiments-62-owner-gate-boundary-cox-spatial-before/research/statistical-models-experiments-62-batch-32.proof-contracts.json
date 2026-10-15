@@ -1,0 +1,800 @@
+{
+  "version": 1,
+  "scope": [
+    "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+    "lem-finite-support-risk-set-proportion-limits",
+    "thm-finite-support-nelson-aalen-kaplan-meier-consistency",
+    "lem-uniform-right-censoring-risk-set-convergence",
+    "thm-pointwise-nelson-aalen-kaplan-meier-greenwood-limit",
+    "ex-kaplan-meier-hand-risk-set-and-support-loss"
+  ],
+  "contracts": {
+    "def-nelson-aalen-kaplan-meier-greenwood-estimators": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition states a positive integer n and its finite sums and products therefore have a nonempty subject index set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition assigns zero to the Nelson–Aalen integrand when Y_n=0 and restricts integration to (0,t]."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits n=1 and makes Greenwood undefined when its event denominator is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition sets the empty event product to 1 and the empty Greenwood sum to 0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition fixes T≤C, U_i≥t in the risk set, and event increments on (0,t]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-sample formulas make no selection from a nonempty family and invoke no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-finite-support-risk-set-proportion-limits": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "Under **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "The subject counting process and at-risk process are $N_i(t)=\\mathbf 1\\{U_i\\le t,\\ \\delta_i=1\\}$ and $Y_i(t)=\\mathbf 1\\{U_i\\ge t\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "risk-and-event-indicator-means",
+          "claim": "The at-risk and observed-event indicators have expectations P(T≥a_j)P(C≥a_j) and P(T=a_j)P(C≥a_j), respectively.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "indicator-proportion-convergence",
+          "claim": "Bounded IID indicator sample means converge in probability to their expectations jointly over the finite support.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "risk-ratio-limit",
+          "claim": "Positive limiting risk probability permits division and gives the discrete hazard ratio limit.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires a positive integer n; the zero sample is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 retains the zero-denominator convention and proves its probability tends to zero because r_j>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The bounded-indicator variance bound in step 2.1 also holds at n=1; the claim concerns n tending to infinity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 remains valid for q_j=0 or q_j=1 because only r_j>0 is needed to divide."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 counts T=C as an event and includes that subject in Y_i(a_j)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finitely many IID indicators are summed directly; no arbitrary-family choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states one-way convergence and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from the ratio limit to independent censoring is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "thm-finite-support-nelson-aalen-kaplan-meier-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "Under **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "For $t\\ge0$, the **Nelson–Aalen estimator** is $\\widehat\\Lambda_n(t)=\\int_{(0,t]}\\frac{\\mathbf 1\\{Y_n(u)>0\\}}{Y_n(u)}\\,dN_n(u)$,",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-support-risk-set-proportion-limits",
+          "source_section": "Statement",
+          "quote": "Then $Y_n(a_j)/n\\to_P r_j=P(T\\ge a_j)P(C\\ge a_j)>0$, $dN_n(a_j)/n\\to_P P(T=a_j)P(C\\ge a_j)$, and the ratio $dN_n(a_j)/Y_n(a_j)$, set to zero when its denominator is zero, converges in probability to $q_j$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "support-points-and-base-case",
+          "claim": "Only finitely many event support points occur through t; positivity permits the ratio limits and the pre-first-event estimates match their targets.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "inductive-event-update",
+          "claim": "At each support point the product limit is multiplied by one minus the empirical hazard and the cumulative estimate is incremented by that hazard.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-induction-to-horizon",
+          "claim": "Finite induction gives survival consistency and convergence to the sum of discrete hazards at t.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 sets k=0 before the first support point and gives the empty product 1 and empty hazard sum 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The positive-survival hypotheses in step 1.1 keep every limiting risk probability through t positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 starts at a_1 from the base case and applies the event update once."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The theorem statement allows q_j=0 and excludes q_j=1 through t by requiring S(t)>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include a failure at t because all support sums use a_j≤t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses a finite induction over the ordered support and makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a conditional consistency conclusion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from consistency to censoring independence or positive support is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-uniform-right-censoring-risk-set-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "The subject counting process and at-risk process are $N_i(t)=\\mathbf 1\\{U_i\\le t,\\ \\delta_i=1\\}$ and $Y_i(t)=\\mathbf 1\\{U_i\\ge t\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-grid-uniform-cdf-convergence",
+          "claim": "The supremum over R is measurable from rational points, and the restricted supremum over [-t,0] uses rational interior points plus right endpoint0 (singleton0 for t=0). A finite quantile partition with isolated atoms, one-sided endpoint convergence, and monotonicity yields uniform empirical-CDF and risk-set convergence.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bounded-uniform-error-l2",
+          "claim": "The uniform risk-set error is bounded by one, so convergence in probability implies convergence of its expected square.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement defines empirical risk fractions only for positive integer n, excluding the empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 controls both F_n(x_j) and its left limit, so censor-time atoms are retained."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses bounded indicator means and its convergence claim is asymptotic, including finite n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If U_i is constant, the empirical and population risk indicators agree exactly as covered by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step1.1 transforms U_i≥u into -U_i≤-u and preserves the weak endpoint. For the compact restricted interval [-t,0], right continuity gives a countable supremum over (Q intersect [-t,0)) union {0}; t=0 is the singleton {0}."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite quantile construction is deterministic and uses no arbitrary-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts convergence and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from empirical convergence to an IID law is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "thm-pointwise-nelson-aalen-kaplan-meier-greenwood-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "Under **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "On a horizon where every event contribution has $Y_n(u)-\\Delta N_n(u)>0$, the **Greenwood variance estimate** is $\\widehat V_G(t)=\\widehat S_n(t)^2\\sum_{0<u\\le t:\\,\\Delta N_n(u)>0}\\frac{\\Delta N_n(u)}{Y_n(u)\\{Y_n(u)-\\Delta N_n(u)\\}}$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "The model contract is the additional hypothesis that $M$ is a square-integrable martingale relative to the stated filtration.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "its continuous predictable bracket is $\\langle M\\rangle_t=A_t$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-l2-counting-process-integral",
+          "source_section": "Definition",
+          "quote": "For the compensator contract on $[0,T]$, let $H$ be a predictable real process with $$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty.$$",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-l2-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "It satisfies, for each $t\\le T$, $$\\mathbb E\\left(\\int_0^tH_s\\,dM_s\\right)^2=\\mathbb E\\int_0^tH_s^2\\,dA_s.$$",
+          "uses": [
+            "1.3",
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-uniform-right-censoring-risk-set-convergence",
+          "source_section": "Statement",
+          "quote": "For every finite $t\\ge0$, $$ \\sup_{0\\le u\\le t}|\\bar Y_n(u)-s_0(u)|\\to_P0,\\qquad E\\left[\\sup_{0\\le u\\le t}|\\bar Y_n(u)-s_0(u)|^2\\right]\\to0. $$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-iid-terminal-influence-limit",
+          "source_section": "Statement",
+          "quote": "Then $$\\sqrt n(\\hat\\theta_n-\\theta)\\Rightarrow N_d(0,\\Sigma).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-first-and-second-order-delta-method-for-random-vectors",
+          "source_section": "Statement",
+          "quote": "then $$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "A process $H=(H_t)_{t\\ge0}$ is **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is $\\mathcal P$-measurable.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "hazard-survival-positive-risk",
+          "claim": "Independent censoring yields s_0=SG bounded below; integration of the hazard gives Lambda=-log S and a finite variance clock.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pooled-counting-process-contract",
+          "claim": "Subject independence and absolute continuity on [0,t] exclude simultaneous failure jumps on that horizon; the pooled process satisfies the contract after recoding its binary active-risk indicator and intensity density.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bounded-left-continuous-integral-identification",
+          "claim": "For the bounded predictable left-continuous reciprocal integrands actually used, deterministic left-step approximants converge in finite compensator energy and pathwise against the finite variation measure of M; L2-isometry and uniqueness in probability identify the completed integral with integral H dN minus integral H dA at the fixed terminal time.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F11",
+            "F13",
+            "step 1.1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "bounded-random-risk-reciprocal",
+          "claim": "Uniform risk-set convergence makes the floored random reciprocal predictable and close to 1/s_0 in expected squared sup norm.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F8",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nelson-aalen-denominator-replacement",
+          "claim": "Finite compensator energy and the L2 isometry make the random-denominator integral remainder o_P(1) and yield the subject-sum expansion.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra",
+            "F11",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "iid-influence-and-terminal-limit",
+          "claim": "Each subject influence is a measurable centered L2 function of its record with variance integral lambda/s_0; the separately proved expansion permits the IID terminal theorem.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "F9",
+            "step 3.1",
+            "algebra",
+            "F12",
+            "F11",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "kaplan-meier-log-product-and-delta",
+          "claim": "The log-product remainder is O(1/n), and Taylor expansion plus the scalar delta theorem yield the KM influence expansion and normal limit.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F10",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "greenwood-variance-limit",
+          "claim": "The Greenwood sum decomposes into a compensator integral and an isometric martingale remainder, giving the subject influence variance.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F7",
+            "F8",
+            "F11",
+            "step 1.1",
+            "step 1.2",
+            "step 4.1",
+            "step 5.1",
+            "algebra",
+            "F3",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement quantifies over positive integer sample sizes and an IID subject sequence, not an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If lambda=0 almost everywhere, steps 4.1 and 6.1 give zero influence variance and zero scaled Greenwood limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1 uses the zero extension on samples with a zero Greenwood denominator; the bad-domain probability tends to zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 permits sigma^2(t)=0, and the terminal-limit supplier includes a degenerate normal target."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 5.1–6.1 include a failure at t; F1 fixes T=C as an event and F2 uses U_i≥u in the risk set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement carries AC through the L2 completion and IID terminal suppliers; steps 1.2 and 4.1 make no further arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives one-way expansions and limits, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from asymptotic normality or Greenwood consistency to the model assumptions is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "ex-kaplan-meier-hand-risk-set-and-support-loss": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "Under **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "On a horizon where every event contribution has $Y_n(u)-\\Delta N_n(u)>0$, the **Greenwood variance estimate** is $\\widehat V_G(t)=\\widehat S_n(t)^2\\sum_{0<u\\le t:\\,\\Delta N_n(u)>0}\\frac{\\Delta N_n(u)}{Y_n(u)\\{Y_n(u)-\\Delta N_n(u)\\}}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "hand-risk-set-estimates",
+          "claim": "Risk counts 4 and 3 give cumulative hazard 7/12, product-limit survival 1/2, and Greenwood value 1/16.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "no-failure-at-censor-time",
+          "claim": "Censorings at time 3 add no event increment, leaving all three estimates unchanged.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "equal-observed-laws-different-tails",
+          "claim": "Deterministic censoring maps all T>3 to (U,delta)=(3,0), but the two laws have different survival at 4.5.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four observed subjects and has no empty-sample branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the zero event increment at censoring time 3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 calculates one failure at each of times 1 and 2 and verifies both risk-set counts."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 allows the deterministic censoring law C=3 and compares two distinct event-time tails."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include event times 1 and 2 and the censoring endpoint 3 under T≤C."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both event-time laws and the four observed records are explicit; no choice operation is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves observational nonidentifiability in one direction and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse identification claim appears in the example."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    }
+  }
+}

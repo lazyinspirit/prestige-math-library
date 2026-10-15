@@ -1,0 +1,338 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "22",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "def-instrumental-variable-potential-outcomes",
+      "model": "gpt-6-luna",
+      "context_sha256": "999de05178433e1eddf94c243e87774c8433f91d5788fa6a481aeb57abc5ac9b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "The setup permits arbitrary binary maps A(z), so their strata need not be measurable and the displayed joint tuple need not be a random element. This is an ill-defined domain, classified as other, rather than an inference or citation defect. Added explicit measurability of every observed and potential variable with discrete/Borel target sigma-algebras; no moment or causal condition is strengthened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-wald-identifies-the-complier-average-effect",
+      "model": "gpt-6-luna",
+      "context_sha256": "63ae0c28774c37b830aeb5aec08acec402ed79e6b0e9b4115f301236cf8cfb9d",
+      "outcome": "false_positive",
+      "reason": "Consistency implies |Y| <= sum over a,z of |Y(a,z)| almost surely. Every potential outcome is integrable, so observed Y is integrable; no additional moment assumption is missing. Exclusion also gives |Y| <= |Y(0)|+|Y(1)|. F1 supplies Delta_A=P(C)>0 and F2 supplies the finite reduced-form identity, meeting the Wald definition prerequisites before division in step 2.1. F3 is used under these already-satisfied hypotheses.",
+      "uncertain": false,
+      "source_urls": [
+        "https://pages.cs.wisc.edu/~hyunseung/stat992_sp25/IV.html"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-instrumental-variable-potential-outcomes",
+      "disposition": "repaired",
+      "post_sha256": "fc97d0972e9451eb9b4182f9f4fcdec98184e27c2541c6fcf040fb66ed8eb86f",
+      "review_context_sha256": "023406765284c47ca3e79f793f48a4ec8e0c6bd70c309bb2e75fadbada23bdb2",
+      "reason": "Explicit measurable observed and potential variables make principal-stratum events, consistency, monotonicity and the joint-independence tuple well-defined. Checked the three local definition suppliers; integrable potentials, positive assignment atoms and the positive-event conditional-mean convention are preserved. Exclusion gives an almost-sure duplication of the collapsed tuple, so the independence equivalence remains correct. No choice is used.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-wald-identifies-the-complier-average-effect",
+      "disposition": "unaffected",
+      "post_sha256": "7def1f4fd992cde549428d680ac6ac96578d1df5de41ec3bc9fcf73f773b3bc7",
+      "review_context_sha256": "7790feaf656c7279ff3811607f512e380e8214e6d10fe9a9a8c06945f757e36a",
+      "reason": "Reviewed all three proof steps, all seven direct suppliers and the batch contract. Consistency and integrable potentials imply integrable Y by |Y| <= sum over a,z of |Y(a,z)| a.s.; the setup repair explicitly guarantees measurability of Y and every potential value. First-stage and reduced-form lemmas apply with their actual hypotheses, prove P(C)>0 and Delta_Y=P(C)E[tau|C], and justify cancellation. Equal observed laws determine the same finite conditional means on positive instrument atoms and hence the same LATE. P(C)=1 and zero treatment effects remain allowed; no ATE equality, Choice or conditional-version selection is asserted. Item and its contract row are unchanged.",
+      "uncertain": false,
+      "source_urls": [
+        "https://pages.cs.wisc.edu/~hyunseung/stat992_sp25/IV.html"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-principal-strata-and-late",
+    "def-wald-ratio",
+    "lem-iv-observed-contrasts-equal-potential-outcome-contrasts",
+    "lem-binary-monotonicity-excludes-defiers",
+    "lem-iv-first-stage-is-complier-proportion",
+    "lem-iv-reduced-form-is-complier-effect",
+    "thm-wald-identifies-a-homogeneous-effect",
+    "thm-wald-identifies-the-complier-average-effect",
+    "ex-exclusion-violation-distorts-wald-ratio",
+    "ex-defiers-break-the-late-ratio",
+    "cex-valid-iv-does-not-identify-ate-without-further-restrictions",
+    "ex-randomized-encouragement-late-calculation",
+    "ex-heterogeneous-effects-late-differs-from-ate"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "entry": {
+        "defect_id": "statistical-models-experiments-62-step5-initial-r1-u22-measurability",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:28:36.365695+00:00",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "def-instrumental-variable-potential-outcomes",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "source": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u22.json",
+        "evidence": [
+          {
+            "path": "items/def-instrumental-variable-potential-outcomes.md",
+            "note": "Explicit discrete/Borel measurability now excludes nonmeasurable potential-treatment maps and guarantees the displayed joint tuple and stratum probabilities are well-defined."
+          }
+        ],
+        "note": "Actual current definition-domain defect; fatal type other. Supplier Definition changed; all 13 direct consumers remain sound. This repair report claims no independent review of its own repair."
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "record_false_positive",
+      "subject": "thm-wald-identifies-the-complier-average-effect",
+      "model": "gpt-6-luna",
+      "context_sha256": "63ae0c28774c37b830aeb5aec08acec402ed79e6b0e9b4115f301236cf8cfb9d",
+      "reason": "Consistency implies |Y| <= sum over a,z of |Y(a,z)| almost surely. Every potential outcome is integrable, so observed Y is integrable; no additional moment assumption is missing. Exclusion also gives |Y| <= |Y(0)|+|Y(1)|. F1 supplies Delta_A=P(C)>0 and F2 supplies the finite reduced-form identity, meeting the Wald definition prerequisites before division in step 2.1. F3 is used under these already-satisfied hypotheses.",
+      "source": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u22.json",
+      "uncertain": false,
+      "source_urls": [
+        "https://pages.cs.wisc.edu/~hyunseung/stat992_sp25/IV.html"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_change",
+      "reason": "The changed draft setup has 13 direct item consumers, all draft frontier members. No published or outside consumer use was found, and no published item was edited or adjudicated.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "checkpoint": "Complete: repaired missing setup measurability; unchanged theorem integrability rejection is false positive; both review contexts captured in dependency order; 13 direct consumers and page uses examined; locked metadata mirrors synchronized; focused checks pass. No new items, published/outside consumer findings, unresolved mathematics or remaining action within this dispatch. Rejudgment and certification remain engine-owned.",
+    "consumer_examinations": [
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "def-principal-strata-and-late",
+        "path": "items/def-principal-strata-and-late.md",
+        "affected_use": "Definition, four principal-stratum events and LATE conditional on C",
+        "disposition": "sound_unchanged",
+        "reason": "Measurable binary A(0),A(1) make each of the four strata measurable; positive-mass C and integrable outcome difference still define the same LATE.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "def-wald-ratio",
+        "path": "items/def-wald-ratio.md",
+        "affected_use": "Definition, reduced-form and first-stage conditional means and ratio",
+        "disposition": "sound_unchanged",
+        "reason": "The definition retains its explicit integrable-Y and nonzero-first-stage conditions; measurable Y, A and Z make both arm means well-defined.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "lem-iv-observed-contrasts-equal-potential-outcome-contrasts",
+        "path": "items/lem-iv-observed-contrasts-equal-potential-outcome-contrasts.md",
+        "affected_use": "Facts A1/A2; proof steps 1.1-3.1, W and binary-selected H(W)",
+        "disposition": "sound_unchanged",
+        "reason": "Explicit measurable potential treatments validate W and the measurable selection H(W); consistency and integrable potentials give integrable observed Y. Independence factorization and subtraction are unchanged.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "lem-binary-monotonicity-excludes-defiers",
+        "path": "items/lem-binary-monotonicity-excludes-defiers.md",
+        "affected_use": "Fact A1 and proof steps 1.1-2.1, stratum partition outside the monotonicity null event",
+        "disposition": "sound_unchanged",
+        "reason": "Every pair preimage is now explicitly an event; binary enumeration still gives three disjoint strata and a null defier event under monotonicity.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "lem-iv-first-stage-is-complier-proportion",
+        "path": "items/lem-iv-first-stage-is-complier-proportion.md",
+        "affected_use": "Fact A1; proof step 2.1, event {A(z)=1} in the potential-tuple sigma-algebra, and step 3.1 relevance",
+        "disposition": "sound_unchanged",
+        "reason": "Measurability justifies the exact event used for independence factorization; consistency gives arm means and monotonicity gives A(1)-A(0)=1_C. Relevance still forces positive C mass.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "lem-iv-reduced-form-is-complier-effect",
+        "path": "items/lem-iv-reduced-form-is-complier-effect.md",
+        "affected_use": "Fact F3 and proof steps 1.1-2.1, E[1_C tau] and event-conditioned mean",
+        "disposition": "sound_unchanged",
+        "reason": "C is measurable and tau integrable, so its restricted expectation and the positive-mass conditional mean remain defined. Replacing A(1)-A(0) by 1_C is unchanged.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "thm-wald-identifies-a-homogeneous-effect",
+        "path": "items/thm-wald-identifies-a-homogeneous-effect.md",
+        "affected_use": "Statement/Given use the binary IV setup; steps 1.1-4.1 use finite contrasts and relevant Wald ratio",
+        "disposition": "sound_unchanged",
+        "reason": "Measurability supplies valid random elements; consistency supplies integrable Y. The existing observed-contrast lemma and constant-effect linearity still justify the quotient without monotonicity.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "thm-wald-identifies-the-complier-average-effect",
+        "path": "items/thm-wald-identifies-the-complier-average-effect.md",
+        "affected_use": "Statement/Given, full-data IV laws; proof steps 1.1-3.1 use complier mass, finite reduced form and observed-law ratio",
+        "disposition": "sound_unchanged",
+        "reason": "All setup variables are now explicitly measurable. Consistency implies integrable observed Y, and the same first-stage and reduced-form identities prove the unchanged theorem; recorded as the assigned unaffected review.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "ex-exclusion-violation-distorts-wald-ratio",
+        "path": "items/ex-exclusion-violation-distorts-wald-ratio.md",
+        "affected_use": "Example, two-type independent assignment with Y(a,z)=2a+z; Fact F1 and step 1.1",
+        "disposition": "sound_unchanged",
+        "reason": "All variables are functions on a finite discrete product space and hence measurable and integrable. The same example still violates exclusion and gives first stage 1/2, reduced form 2, ratio 4.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "ex-defiers-break-the-late-ratio",
+        "path": "items/ex-defiers-break-the-late-ratio.md",
+        "affected_use": "Example finite four-stratum law; Fact F1 and steps 1.1-2.1",
+        "disposition": "sound_unchanged",
+        "reason": "Finite type-specific treatment and outcome schedules satisfy explicit measurability. The defier mass 0.1 still breaks monotonicity and yields Delta_A=0.3, Delta_Y=0.1, Wald=1/3 versus LATE=1.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "cex-valid-iv-does-not-identify-ate-without-further-restrictions",
+        "path": "items/cex-valid-iv-does-not-identify-ate-without-further-restrictions.md",
+        "affected_use": "Counterexample product of four-type law and fair Z; Fact F1 and steps 1.1-3.1",
+        "disposition": "sound_unchanged",
+        "reason": "Both full-data laws are finite measurable schedules and still satisfy consistency, exclusion, relevance and independence. Only unobserved always/never potentials differ; observed laws agree but ATEs are 1.7 and 2.7.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "ex-randomized-encouragement-late-calculation",
+        "path": "items/ex-randomized-encouragement-late-calculation.md",
+        "affected_use": "Example finite four-type/fair-Z product; Fact F1 and verification steps 1.1-2.1",
+        "disposition": "sound_unchanged",
+        "reason": "All observed and potential variables are finite measurable functions, so the clarified setup applies. Existing calculations give first stage 1/2, reduced form 1, LATE 2 and ATE 3.",
+        "frontier": true,
+        "uncertain": false
+      },
+      {
+        "supplier": "def-instrumental-variable-potential-outcomes",
+        "id": "ex-heterogeneous-effects-late-differs-from-ate",
+        "path": "items/ex-heterogeneous-effects-late-differs-from-ate.md",
+        "affected_use": "Example four equally likely types and independent fair assignment; verification steps 1.1-2.1",
+        "disposition": "sound_unchanged",
+        "reason": "The finite schedule is measurable, integrable, consistent and monotone. Existing first stage 1/2 and reduced form 1 still give LATE 2, while averaging four effects gives ATE 3.",
+        "frontier": true,
+        "uncertain": false
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/statistical-models-and-experiments/instrumental-variables-and-late.md",
+        "affected_use": "The page lists the setup and explains potential-value contrasts and the observed-law Wald/LATE interface.",
+        "disposition": "sound_unchanged",
+        "reason": "Explicit random-variable measurability supports all stated means, and consistency supplies integrable observed Y under the theorem hypotheses."
+      },
+      {
+        "path": "library/statistical-models-and-experiments/instrumental-variables-and-late-examples.md",
+        "affected_use": "The companion page describes finite IV examples and the equal-observed-law/different-ATE counterexample.",
+        "disposition": "sound_unchanged",
+        "reason": "Every used potential-value schedule is finite and measurable, so the added measurability clause invalidates no example."
+      }
+    ],
+    "statement_comparison": {
+      "changed": [
+        "def-instrumental-variable-potential-outcomes: Definition gains only an explicit measurability clause for all observed and potential variables."
+      ],
+      "unchanged": [
+        "thm-wald-identifies-the-complier-average-effect: Statement and entire source unchanged."
+      ],
+      "propagation": "All 13 direct dependency/reference consumers inspected; their own statements/definitions remain unchanged, so no second hop is triggered. All are draft frontier items; no outside or published consumer finding."
+    },
+    "source_consultation": {
+      "familiar": true,
+      "url": "https://pages.cs.wisc.edu/~hyunseung/stat992_sp25/IV.html",
+      "sections": "Randomized Encouragement Designs: Counterfactuals and Assumptions; Monotonicity-Based IV Assumptions; Compliance Types; complete Proof of Identification of the LATE with (IV1)-(IV6), lines 368-379.",
+      "establishes": "With consistency, joint independence, positive instrument atoms, relevance, exclusion and monotonicity, the outcome contrast is complier mass times complier effect and the first stage is complier mass; their quotient identifies LATE.",
+      "caveat": "Its intermediate defier-indicator expansion has a plus sign where a minus sign is required before monotonicity removes that null event. The local observed-contrast and monotonicity proofs retain the correct product identity. The source does not supply the missing measurability or L1 justification; these were checked directly using local definitions and finite-selection domination."
+    },
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-instrumental-variable-potential-outcomes.md items/thm-wald-identifies-the-complier-average-effect.md --json",
+        "exit_code": 0,
+        "result": "2 files, 1 checked proof, 0 failures; definition not-applicable, theorem pass."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-instrumental-variable-potential-outcomes.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-wald-identifies-the-complier-average-effect.md --json",
+        "exit_code": 0,
+        "result": "1 checked, no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-22.proof-contracts.json --strict --items def-instrumental-variable-potential-outcomes,thm-wald-identifies-the-complier-average-effect --json",
+        "exit_code": 0,
+        "result": "Both assigned contracts pass with no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-instrumental-variable-potential-outcomes.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects; run after the final item edit."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-22.proof-contracts.json --strict --items def-instrumental-variable-potential-outcomes,thm-wald-identifies-the-complier-average-effect,lem-iv-observed-contrasts-equal-potential-outcome-contrasts,lem-binary-monotonicity-excludes-defiers,lem-iv-first-stage-is-complier-proportion,lem-iv-reduced-form-is-complier-effect,ex-randomized-encouragement-late-calculation,ex-exclusion-violation-distorts-wald-ratio,ex-defiers-break-the-late-ratio,cex-valid-iv-does-not-identify-ate-without-further-restrictions --json",
+        "exit_code": 0,
+        "result": "After metadata synchronization: 10 selected contracts checked; no errors or warnings."
+      },
+      {
+        "command": "Read-only JSON assertions against initial-1.json assignment and its canonical JSON digest",
+        "exit_code": 0,
+        "result": "Exact identity/input hash, 2 rejected tuples, 2 required reviews, evidence fields and 13 unique direct consumers verified."
+      }
+    ],
+    "missing_measurability_witness": "Take Omega={0,1}x{0,1} with F generated only by the first coordinate and P(Z=0)=P(Z=1)=1/2 for Z the first coordinate. Set A=0, Y=0, all potential outcomes 0, A(1)=0 and A(0)=the second coordinate. The original bare-map setup allows this, although A(0) is nonmeasurable and the monotonicity set {A(1)>=A(0)} is not in F. The explicit measurability clause excludes precisely this domain defect.",
+    "metadata": {
+      "lock_owner": "step5-v2-initial-r1-u22",
+      "sequence": "acquire, reread, edit, check exact mirrors, strict contract check, release",
+      "manifest": "research/statistical-models-experiments-62-batch-22.pages.json",
+      "manifest_change": "Only the assigned definition statement mirror is synchronized.",
+      "contracts": "research/statistical-models-experiments-62-batch-22.proof-contracts.json",
+      "contract_change": "Nine existing citations of this Definition now quote its exact current text. No derivation, boundary, review claim or theorem contract row was changed."
+    }
+  },
+  "supporting_evidence": {
+    "research/statistical-models-experiments-62-batch-22.pages.json": "828cb5b699568def87724f36e92f22f2ba3d8842bf9a97899df5ac2c1cd6838a",
+    "research/statistical-models-experiments-62-batch-22.proof-contracts.json": "c5483fb955a93fc1e0e11015bcadb9ff338d63d020747eb6698e0f5b19a406ba"
+  }
+}

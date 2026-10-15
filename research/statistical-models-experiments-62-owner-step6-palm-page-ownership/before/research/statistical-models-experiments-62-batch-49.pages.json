@@ -1,0 +1,740 @@
+[
+  {
+    "order": 2014,
+    "id": "spatial-point-process-summaries-and-palm-laws",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Spatial summaries and Palm laws",
+    "companion": "spatial-point-process-summaries-and-palm-laws-examples",
+    "requires": [
+      "poisson-and-cox-point-process-models",
+      "measures-and-their-basic-properties",
+      "stationary-markov-chains-and-ergodic-limits"
+    ],
+    "items": [
+      {
+        "id": "lem-convex-windows-admit-rectangle-approximations-and-are-folner",
+        "kind": "lemma",
+        "title": "Compact convex windows admit rectangle approximations and have negligible translated boundary",
+        "deps": [
+          "def-countable-choice",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-invertible-linear-images-scale-lebesgue-measure-by-a-constant",
+          "thm-continuity-from-below-for-measures",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. If W is compact and convex in R^d with nonempty interior, then for every epsilon>0 it contains a finite disjoint union R of half-open rectangles with |W\\R|<epsilon; |aW|=a^d|W|; and for every fixed x, |(aW+x) triangle aW|/|aW| tends to zero as a tends to infinity.",
+        "strategy": "Complete local convex-body argument using an inscribed ball, homothetic inner sets, grid rectangles, and translation continuity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "Countable Choice is used through the Borel Lebesgue measure and box-scaling suppliers. No AC or DC is used.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-translation-invariant-locally-finite-borel-measure-on-rd",
+        "kind": "lemma",
+        "title": "A locally finite translation-invariant Borel measure on $\\mathbb R^d$ is a multiple of Lebesgue measure",
+        "deps": [
+          "def-countable-choice",
+          "def-measure",
+          "thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. If m is a locally finite translation-invariant Borel measure on R^d, then m(B)=m([0,1)^d) times the d-dimensional Lebesgue measure of B for every Borel B. The proof fixes the normalization on the half-open unit cube, tiles rational boxes, approximates real boxes from below, and applies sigma-finite pi-system uniqueness.",
+        "strategy": "Choice-strength-explicit local proof by rational box tilings, continuity from below, and uniqueness on a generating pi-system.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "Countable Choice is used only through the cited construction and box-value properties of Borel Lebesgue measure; no full Axiom of Choice or dependent choice is used.",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-choice-free-l1-mean-limit-for-stationary-sequences",
+        "kind": "theorem",
+        "title": "An integrable stationary sequence has an L1 Cesaro limit",
+        "deps": [
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-stationary-process-and-canonical-shift",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable"
+        ],
+        "justified_by": [],
+        "statement": "For a real integrable stationary sequence (X_n)_{n>=1}, the averages n^{-1} sum_{j=1}^n X_j converge in L1 to an integrable random variable. No independence or ergodicity is assumed. The result is choice-free.",
+        "strategy": "Complete proof by truncation and the bounded stationary-sequence block argument.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "None. The proof uses only finite block comparisons, stationarity, dominated convergence, and monotone convergence.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-spatial-recentering-action",
+        "kind": "definition",
+        "title": "Recentering a point configuration at a spatial location",
+        "deps": [
+          "def-random-measure-and-locally-finite-point-process",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [
+          "lem-joint-measurability-of-spatial-recentering"
+        ],
+        "statement": "For x in R^d and a locally finite counting measure mu on R^d (d>=1), define (theta_x mu)(B)=mu(B+x) for every Borel B. Thus an atom at x is moved to the origin, theta_{x+y}=theta_x composed with theta_y, and if mu=sum_i delta_{X_i}, then theta_x mu=sum_i delta_{X_i-x}.",
+        "strategy": "Definition fixes the sign convention used in every Palm and displacement formula.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-stationary-point-process-and-intensity",
+        "kind": "definition",
+        "title": "Stationarity, finite intensity, and spatial ergodicity",
+        "deps": [
+          "def-random-measure-and-locally-finite-point-process",
+          "def-spatial-recentering-action",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "A point process eta on R^d is stationary if its law is invariant under theta_x for every x in R^d. With Q=[0,1)^d, its intensity is rho=E eta(Q); finite positive intensity means 0<rho<infinity. Ergodicity means that the sigma-algebra of events invariant modulo null sets under every theta_x is trivial.",
+        "strategy": "Definition states the group action, unit-volume reference cube, intensity convention, and full-translation ergodicity convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-joint-measurability-of-spatial-recentering",
+        "kind": "lemma",
+        "title": "The spatial recentering action is jointly measurable",
+        "deps": [
+          "def-spatial-recentering-action",
+          "def-random-measure-and-locally-finite-point-process",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-borel-sigma-algebra",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "The map (x,mu) -> theta_x mu from R^d times the evaluation-measurable space of locally finite counting measures to that space is measurable.",
+        "strategy": "Complete evaluation-map proof by writing mu(B+x)=integral 1_B(y-x) mu(dy) and applying the measurable-kernel integration theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-full-palm-distribution",
+        "kind": "definition",
+        "title": "The full Palm distribution defined by the refined Campbell identity",
+        "deps": [
+          "def-stationary-point-process-and-intensity",
+          "def-spatial-recentering-action",
+          "lem-joint-measurability-of-spatial-recentering",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [
+          "thm-refined-campbell-formula-and-palm-law-existence"
+        ],
+        "statement": "Assume Countable Choice. For a stationary locally finite point process on R^d with finite positive intensity rho, the full Palm distribution P^0 is the unique probability measure on the configuration space satisfying E integral h(x,theta_x eta) eta(dx)=rho integral_Rd integral h(x,mu) P^0(dmu) dx for every nonnegative jointly measurable h. It is not conditioning on the null event of an atom at zero; the law retains the distinguished occurrence at the origin.",
+        "strategy": "Definition is justified by the following local existence-and-uniqueness theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process/Palm supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 3
+      },
+      {
+        "id": "def-second-factorial-and-reduced-moment-measures",
+        "kind": "definition",
+        "title": "Second factorial and reduced second factorial moment measures",
+        "deps": [
+          "def-stationary-point-process-and-intensity",
+          "def-random-measure-and-locally-finite-point-process",
+          "def-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [
+          "thm-second-factorial-and-reduced-measures-are-locally-finite"
+        ],
+        "statement": "A stationary point process eta is locally square integrable if E[eta(K)^2]<infinity for every compact K. If eta=sum_i delta_{X_i} with occurrences indexed separately, its second factorial measure counts ordered pairs with i!=j; alpha^(2)(C)=E sum_{i!=j}1_C(X_i,X_j). For Q=[0,1)^d, define alpha_red^(2)(D)=E sum_{i!=j}1_Q(X_i)1_D(X_j-X_i). Distinct occurrence indices retain multiplicities.",
+        "strategy": "Definition specifies ordered distinct occurrences, the unit-cube anchor convention, and local square integrability.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-poisson-mecke-identity",
+        "kind": "theorem",
+        "title": "Mecke identity for locally finite Poisson point processes",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dirac-measure",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-nonnegative-extended-series",
+          "def-poisson-and-cox-point-process",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-random-measure-and-locally-finite-point-process",
+          "def-scalar-poisson-count-law",
+          "lem-deletion-of-one-point-is-measurable",
+          "lem-law-of-a-random-element-is-a-probability-measure",
+          "lem-poisson-count-law-normalization-and-moments",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-dynkin-pi-lambda",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "justified_by": [],
+        "statement": "Let eta be a Poisson point process on R^d with locally finite sigma-finite intensity measure nu. For every nonnegative product-measurable h(x,mu), E[integral h(x,eta-delta_x) eta(dx)]=integral E[h(x,eta)] nu(dx). The deletion removes exactly one occurrence at each counted atom, including when atoms coincide. Equivalently, E[integral h(x,eta) eta(dx)]=integral E[h(x,eta+delta_x)] nu(dx).",
+        "strategy": "Prove the finite-intensity identity from the explicit mixed-binomial law and reindex its nonnegative series; partition R^d into explicit finite-intensity cells and sum the independent-cell identities for sigma-finite intensity; obtain deletion form by one-occurrence deletion.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf",
+            "locator": "Chapter 4, Theorem 4.4 and its complete finite-intensity and sigma-finite Mecke proof; Chapters 8–9 and Appendix B.2 as applicable."
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf",
+            "locator": "Lecture 3, Palm distribution and Campbell–Mecke formula, PDF pp.43–56; introductory cross-check, with the local identity proved in the item."
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process supplier dependency closure; the local argument adds no DC. Its finite and sigma-finite Mecke proof uses no choice operation itself.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-stationary-point-process-intensity-measure-is-rho-lebesgue",
+        "kind": "theorem",
+        "title": "A stationary point process of finite intensity has mean measure rho times Lebesgue measure",
+        "deps": [
+          "def-stationary-point-process-and-intensity",
+          "lem-translation-invariant-locally-finite-borel-measure-on-rd",
+          "lem-mean-measure-and-integrals-of-a-random-point-process",
+          "def-measure",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. If eta is stationary with rho=E eta([0,1)^d)<infinity, then E eta(B)=rho |B| for every Borel B in R^d. In particular the mean measure is locally finite and sigma-finite.",
+        "strategy": "Derive translation invariance and local finiteness of the mean measure, then apply the local invariant-measure lemma.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process/Palm supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-refined-campbell-formula-and-palm-law-existence",
+        "kind": "theorem",
+        "title": "Existence and uniqueness of the full Palm law and the refined Campbell identity",
+        "deps": [
+          "def-random-measure-and-locally-finite-point-process",
+          "def-full-palm-distribution",
+          "def-stationary-point-process-and-intensity",
+          "thm-stationary-point-process-intensity-measure-is-rho-lebesgue",
+          "def-spatial-recentering-action",
+          "lem-joint-measurability-of-spatial-recentering",
+          "lem-translation-invariant-locally-finite-borel-measure-on-rd",
+          "lem-mean-measure-and-integrals-of-a-random-point-process",
+          "def-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-monotone-convergence-for-the-integral",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. For every stationary locally finite point process eta on R^d with finite positive intensity rho, there is a unique probability law P^0 satisfying the refined Campbell identity for every nonnegative jointly measurable h. Moreover P^0-almost every configuration has at least one occurrence at the origin.",
+        "strategy": "Construct P^0 by normalizing the point-centered Campbell measure over Q, prove translation invariance of its location marginals, and extend the rectangle identity to all nonnegative product-measurable integrands.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process/Palm supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-second-factorial-and-reduced-measures-are-locally-finite",
+        "kind": "theorem",
+        "title": "Factorial and reduced factorial moment measures are well-defined and locally finite",
+        "deps": [
+          "def-second-factorial-and-reduced-moment-measures",
+          "def-stationary-point-process-and-intensity",
+          "def-random-measure-and-locally-finite-point-process",
+          "def-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "For a locally square-integrable stationary point process, the pathwise second factorial measure, its mean measure alpha^(2), and the reduced measure alpha_red^(2) are measurable countably additive Borel measures; alpha^(2) and alpha_red^(2) are finite on bounded sets.",
+        "strategy": "Construct the factorial measure as eta tensor eta minus one diagonal occurrence, prove measurability by kernel integration on a compact exhaustion, then use E eta(K)^2 to bound bounded product sets.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-stationary-point-process-counts-converge-to-spatial-intensity",
+        "kind": "theorem",
+        "title": "Spatial ergodic limit for counts in dilates of a convex window",
+        "deps": [
+          "def-stationary-point-process-and-intensity",
+          "def-spatial-recentering-action",
+          "thm-stationary-point-process-intensity-measure-is-rho-lebesgue",
+          "lem-joint-measurability-of-spatial-recentering",
+          "thm-choice-free-l1-mean-limit-for-stationary-sequences",
+          "lem-convex-windows-admit-rectangle-approximations-and-are-folner",
+          "lem-translation-invariant-locally-finite-borel-measure-on-rd",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-measure-preserving-transformation-and-system",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. Let eta be stationary with 0<rho<infinity, let W be compact convex with nonempty interior, and let a_n>0 tend to infinity. With Q=[0,1)^d and I_eta the events invariant modulo null sets under every spatial translation, eta(a_n W)/|a_n W| converges in L1 to a conditional-expectation version of E[eta(Q)|I_eta]. If the translation action is ergodic, the limit is rho. No rate or CLT is asserted.",
+        "strategy": "Complete proof: apply the choice-free stationary-sequence mean lemma in coordinate directions, pass from grid rectangles to convex windows, prove full-translation invariance in L1 by a boundary estimate, then identify the conditional expectation by invariant-event integrals.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process/Palm supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-reduced-second-factorial-moment-palm-identity",
+        "kind": "theorem",
+        "title": "The reduced second factorial moment measure is the Palm expectation after one-occurrence deletion",
+        "deps": [
+          "def-stationary-point-process-and-intensity",
+          "thm-stationary-point-process-intensity-measure-is-rho-lebesgue",
+          "def-spatial-recentering-action",
+          "lem-joint-measurability-of-spatial-recentering",
+          "def-full-palm-distribution",
+          "thm-refined-campbell-formula-and-palm-law-existence",
+          "def-second-factorial-and-reduced-moment-measures",
+          "thm-second-factorial-and-reduced-measures-are-locally-finite",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Assume Countable Choice. For a stationary locally square-integrable point process eta on R^d with intensity rho in (0,infinity), alpha_red^(2)(D)=rho integral (mu-delta_0)(D) P^0(dmu) for every Borel D. The deletion removes one distinguished occurrence; any co-located occurrences remain.",
+        "strategy": "Rewrite the occurrence-indexed pair sum in recentered coordinates and apply the refined Campbell identity to a nonnegative measurable integrand.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process/Palm supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 5
+      },
+      {
+        "id": "def-pair-correlation-and-ripleys-k-function",
+        "kind": "definition",
+        "title": "Pair-correlation density and Ripley K-function",
+        "deps": [
+          "def-stationary-point-process-and-intensity",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-stationary-point-process-intensity-measure-is-rho-lebesgue",
+          "def-full-palm-distribution",
+          "thm-refined-campbell-formula-and-palm-law-existence",
+          "def-second-factorial-and-reduced-moment-measures",
+          "thm-reduced-second-factorial-moment-palm-identity",
+          "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "For a stationary locally square-integrable point process with intensity rho>0, a pair-correlation density is a measurable g>=0 satisfying alpha_red^(2)(du)=rho^2 g(u) du, when such a density exists. For r>=0 use the closed Euclidean ball B[0,r] and define K(r)=rho^{-1} E^0[(mu-delta_0)(B[0,r])]. This removes one distinguished occurrence and retains co-located atoms.",
+        "strategy": "Definitions are conditional on absolute continuity for g and use the full Palm law for K; no density-existence claim is made.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process/Palm supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 6
+      },
+      {
+        "id": "alg-border-corrected-ripleys-k-estimator",
+        "kind": "algorithm",
+        "title": "Border-corrected estimator for Ripley K",
+        "deps": [
+          "def-pair-correlation-and-ripleys-k-function",
+          "def-random-measure-and-locally-finite-point-process",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Input a bounded Borel observation window W with 0<|W|<infinity, a finite observed counting measure xi on W, and r>=0. Put W_{-r}={x in W: the closed ball B[x,r] is contained in W}, N(A)=xi(A), and rhohat=N(W)/|W|. When rhohat>0 and N(W_{-r})>0, output [rhohat N(W_{-r})]^{-1} sum over ordered distinct occurrences x in xi restricted to W_{-r} and y in xi of 1{||y-x||<=r}; otherwise return not-defined. The anchor correction weight is 1 on W_{-r} and 0 on W\\W_{-r}. This procedure makes no unbiasedness, consistency, or asymptotic claim.",
+        "strategy": "Definition-like finite-data procedure; the erosion guarantees that every radius-r neighborhood of an eligible anchor lies inside the observation window.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-homogeneous-poisson-ripleys-k-is-ball-volume",
+        "kind": "theorem",
+        "title": "Ripley K for a homogeneous Poisson process is Euclidean ball volume",
+        "deps": [
+          "def-pair-correlation-and-ripleys-k-function",
+          "def-full-palm-distribution",
+          "thm-refined-campbell-formula-and-palm-law-existence",
+          "def-spatial-recentering-action",
+          "lem-joint-measurability-of-spatial-recentering",
+          "def-stationary-point-process-and-intensity",
+          "thm-stationary-point-process-intensity-measure-is-rho-lebesgue",
+          "def-poisson-and-cox-point-process",
+          "thm-poisson-mecke-identity",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-poisson-count-law-normalization-and-moments"
+        ],
+        "justified_by": [],
+        "statement": "Assume AC and Countable Choice. If eta is a homogeneous Poisson point process on R^d with intensity rho dx, rho>0, then its full Palm law is the law of eta+delta_0 and K(r)=|B[0,r]| for every r>=0. Adding and deleting the distinguished atom means one occurrence, so no simplicity assumption is used.",
+        "strategy": "Apply the deletion-form Mecke identity to identify the full Palm law, then remove its distinguished occurrence and use the intensity measure on the closed ball.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process/Palm supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-pair-correlation-integrates-to-ripleys-k",
+        "kind": "theorem",
+        "title": "A pair-correlation density integrates to Ripley K",
+        "deps": [
+          "def-pair-correlation-and-ripleys-k-function",
+          "def-random-measure-and-locally-finite-point-process",
+          "thm-reduced-second-factorial-moment-palm-identity",
+          "def-second-factorial-and-reduced-moment-measures",
+          "thm-refined-campbell-formula-and-palm-law-existence",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "Under the pair-correlation density hypothesis, K(r)=integral_{B[0,r]} g(u) du for every r>=0. If eta is simple, K(r)=rho^{-1}E^0[mu(B[0,r]\\{0})].",
+        "strategy": "Substitute the reduced Palm identity into the K definition, then use the density formula; in the simple case Palm configurations have exactly one origin occurrence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process/Palm supplier dependency closure; the local argument adds no DC.",
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 2015,
+    "id": "spatial-point-process-summaries-and-palm-laws-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Spatial summaries and Palm laws — Examples",
+    "companion": "spatial-point-process-summaries-and-palm-laws",
+    "requires": [
+      "spatial-point-process-summaries-and-palm-laws"
+    ],
+    "items": [
+      {
+        "id": "ex-uniformly-translated-lattice-palm-and-multiplicities",
+        "kind": "example",
+        "title": "A translated lattice exposes recentering, atomic pair measures, and one-occurrence deletion",
+        "deps": [
+          "def-random-measure-and-locally-finite-point-process",
+          "def-stationary-point-process-and-intensity",
+          "thm-stationary-point-process-intensity-measure-is-rho-lebesgue",
+          "def-spatial-recentering-action",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "def-full-palm-distribution",
+          "thm-refined-campbell-formula-and-palm-law-existence",
+          "def-second-factorial-and-reduced-moment-measures",
+          "thm-second-factorial-and-reduced-measures-are-locally-finite",
+          "thm-reduced-second-factorial-moment-palm-identity",
+          "def-pair-correlation-and-ripleys-k-function",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "For U uniform on [0,1), eta_U=sum_{k in Z}delta_{k+U} is a stationary simple point process of intensity 1. Its full Palm law is the unit lattice sum_{k in Z}delta_k, and alpha_red^(2) has unit atoms at nonzero integers, so no pair-correlation density exists. For the multiplicity-bearing process 2 eta_U, the Palm configuration has multiplicity 2 at every lattice site; deleting one distinguished origin occurrence leaves one at zero, alpha_red^(2)({0})=2, and K(0)=1/2.",
+        "strategy": "Finite window and lattice sums are evaluated explicitly; stationarity, Palm law, atomic reduced measure, and K(0) are each verified.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process/Palm supplier dependency closure; the local argument adds no DC.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-window-edge-border-estimator",
+        "kind": "example",
+        "title": "A finite window makes the border correction weight visible",
+        "deps": [
+          "alg-border-corrected-ripleys-k-estimator",
+          "def-pair-correlation-and-ripleys-k-function",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "statement": "For W=[0,1] in R and r=1/4, the eroded window is W_{-r}=[1/4,3/4]. An observed anchor at 1/10 has correction weight 0; an anchor at 1/2 has weight 1, and its complete closed r-neighborhood lies in W. The example illustrates observability and the estimator procedure only; it asserts no finite-sample unbiasedness.",
+        "strategy": "Direct substitution into the border-estimator inputs and window erosion.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Günter Last and Mathew Penrose, Lectures on the Poisson Process (2017 author-hosted version)",
+            "url": "https://stoch.math.kit.edu/img/Last/lastpenrose2017.pdf"
+          },
+          {
+            "title": "Adrian Baddeley, Spatial Point Processes and their Applications (complete lecture notes)",
+            "url": "https://leman.stat.vt.edu/VTCourses/BaddeleyPointProcesses.pdf"
+          }
+        ],
+        "axiom_use": "AC and Countable Choice are carried by the point-process/Palm supplier dependency closure; the local argument adds no DC.",
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 8
+      }
+    ]
+  }
+]

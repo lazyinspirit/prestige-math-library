@@ -1,0 +1,342 @@
+[
+  {
+    "order": 1982,
+    "id": "logrank-and-weighted-logrank",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Logrank and weighted logrank",
+    "companion": "logrank-and-weighted-logrank-examples",
+    "requires": [
+      "randomized-treatment-assignment-and-sharp-null-tests",
+      "event-time-censoring-and-truncation",
+      "counting-process-compensators-and-integrals",
+      "independent-subject-terminal-influence-limits",
+      "estimators-and-randomized-procedures",
+      "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "chaining-uniform-laws-and-empirical-process-limits",
+      "finite-probability-spaces-and-random-variables"
+    ],
+    "items": [
+      {
+        "id": "def-logrank-risk-set-score-and-test",
+        "kind": "definition",
+        "title": "Two-group logrank and weighted logrank scores",
+        "statement": "For two groups, define the risk-set event counts, pooled risk-set expectation, conditional hypergeometric variance, weighted score, variance estimate, normal-calibrated statistic, and the distinct exact randomization ordering. State tie and null-model conventions.",
+        "deps": [
+          "def-statistic-and-estimator",
+          "def-uniform-finite-probability-space"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 6: Logrank Test, PDF pp. 1-13",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/unit6.pdf"
+            },
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 1-12",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, §5.3-5.4, PDF pp. 59-62",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-logrank-risk-set-empirical-fractions-converge",
+        "kind": "lemma",
+        "title": "Uniform convergence of empirical risk-set fractions",
+        "statement": "For iid observed times in each of two groups, the empirical fractions at risk converge uniformly on a fixed finite horizon to their population risk probabilities. Verify pointwise measurability, the unit envelope, and finite L1 bracketing entropy for the threshold class.",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-random-element-and-real-random-variable",
+          "def-empirical-process-and-rademacher-process",
+          "def-covering-packing-bracketing-number-and-metric-entropy",
+          "def-glivenko-cantelli-class",
+          "thm-gc-by-bracketing-entropy"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 1-12",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, §5.4, PDF pp. 61-62",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-logrank-conditional-risk-set-moments",
+        "kind": "theorem",
+        "title": "Conditional hypergeometric moments for a logrank risk set",
+        "statement": "When, conditional on risk-set margins, the d failures are a uniform d-subset of the Y at-risk subjects, O has mean dY1/Y and variance Y1Y0 d(Y-d)/(Y^2(Y-1)); define the variance as zero for Y=0 or Y=1. Predictable weighted increments are orthogonal under the sequential conditional model.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "def-finite-probability-space-and-event",
+          "def-uniform-finite-probability-space",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space",
+          "def-indicator-random-variable",
+          "def-variance-and-covariance",
+          "thm-linearity-of-expectation",
+          "lem-indicator-expectation-and-products",
+          "lem-variance-and-covariance-identities"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 6: Logrank Test, PDF pp. 3-4",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/unit6.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, §5.3, PDF pp. 59-60",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-logrank-risk-fraction-converges",
+        "kind": "lemma",
+        "title": "Uniform convergence of the risk-set treatment fraction",
+        "statement": "If n_g/n tends to an interior allocation fraction and the pooled limiting risk fraction is bounded away from zero on [0,tau], then Y1,n/(Y0,n+Y1,n), set to zero on an empty risk set, converges uniformly in probability to y1/(y0+y1).",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "lem-logrank-risk-set-empirical-fractions-converge"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 1-6",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, §5.4, PDF pp. 61-62",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "cor-logrank-fisher-randomization-pvalue-valid",
+        "kind": "corollary",
+        "title": "The logrank ordering gives a valid Fisher randomization p-value",
+        "statement": "Under a finite randomized assignment law, if every unit's full right-censored event-time record is fixed under every allowed assignment, the inclusive assignment-tail p-value for the predeclared absolute weighted logrank score is superuniform. Independent continuous randomization within score ties makes it uniform.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "def-finite-randomized-treatment-assignment-model",
+          "def-fisher-sharp-null-and-predeclared-test-orderings",
+          "def-statistic-and-estimator",
+          "thm-fisher-sharp-null-randomization-pvalues-are-valid",
+          "def-p-value"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Siva Balakrishnan, CMU 36-705 Lecture 28: Fisher's Exact p-values, §28.5, PDF pp. 4-6",
+              "url": "https://www.stat.cmu.edu/~siva/teaching/705/lec28.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-logrank-score-martingale-expansion",
+        "kind": "lemma",
+        "title": "Weighted logrank score expansion under a common-hazard model",
+        "statement": "Under the separate finite-horizon counting-process model contracts, common event hazard, no simultaneous event jumps, uniform risk-set convergence, and bounded predictable weights converging uniformly in probability to a deterministic limit, the weighted score has the centered subject-martingale expansion with the limiting risk-set treatment fraction.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "lem-logrank-risk-fraction-converges",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-l2-counting-process-integral",
+          "thm-compensated-counting-process-brackets",
+          "thm-l2-counting-process-integral-isometry",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 2-7",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, §5.3, PDF pp. 59-60",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-logrank-variance-estimator-consistency",
+        "kind": "lemma",
+        "title": "Consistency of the weighted logrank variance estimate",
+        "statement": "Under the explicit common-hazard counting-process contract, no simultaneous event jumps, uniform risk-set convergence, continuous event times, and bounded predictable weights with a deterministic uniform limit, the conventional weighted risk-set plug-in variance sum divided by n converges in probability to the score influence variance; no exact finite-sample hypergeometric law is asserted.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "lem-logrank-risk-fraction-converges",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-l2-counting-process-integral",
+          "thm-compensated-counting-process-brackets",
+          "thm-l2-counting-process-integral-isometry",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 4-7",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, §5.3-5.4, PDF pp. 59-62",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-weighted-logrank-terminal-normal-limit",
+        "kind": "theorem",
+        "title": "Terminal normal limit for weighted logrank scores",
+        "statement": "For two independent iid right-censored subject groups with equal continuous event hazard, conditionally independent censoring, deterministic interior allocation fractions, positive pooled risk support, the separately assumed square-integrable common-hazard martingale contracts, and bounded predictable weights converging uniformly in probability to a deterministic limit, the score divided by sqrt(n) converges to N(0, sigma_w^2), with sigma_w^2 equal to the integral of w(t)^2 y0(t)y1(t)/(y0(t)+y1(t)) against lambda(t)dt. If sigma_w^2>0, any fixed finite extension of the standardized statistic on a zero-denominator event converges to N(0,1); the result is terminal only.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "lem-logrank-score-martingale-expansion",
+          "lem-logrank-variance-estimator-consistency",
+          "thm-independent-groups-terminal-influence-limit",
+          "def-counting-process-intensity-and-compensator-contract",
+          "def-l2-counting-process-integral",
+          "thm-l2-counting-process-integral-isometry",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-families-of-event-classes",
+          "def-random-element-and-real-random-variable",
+          "def-covariance-matrix-of-a-random-vector",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-variance-of-a-finite-sum",
+          "cor-markov-inequality-for-random-variables",
+          "thm-dominated-convergence",
+          "def-op-and-little-op-stochastic-bounds",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-standard-normal-and-normal-laws",
+          "thm-vector-slutsky",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Lu Tian, STAT331 Unit 13: Large Sample Theory for 2-Sample Tests, PDF pp. 1-12",
+              "url": "https://web.stanford.edu/~lutian/coursepdf/stat331-twosample.pdf"
+            },
+            {
+              "title": "Michal Kulich, NMST531 Censored Data Analysis: Extended Course Notes, §5.4, PDF pp. 61-62",
+              "url": "https://www.karlin.mff.cuni.cz/~kulich/vyuka/cens/doc/cens_notes_ext_220102.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 1983,
+    "id": "logrank-and-weighted-logrank-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Logrank and weighted logrank — Examples",
+    "companion": "logrank-and-weighted-logrank",
+    "requires": [
+      "logrank-and-weighted-logrank"
+    ],
+    "items": [
+      {
+        "id": "ex-logrank-crossing-hazards-zero-score",
+        "kind": "example",
+        "title": "Crossing hazards with a zero observed logrank score",
+        "statement": "A piecewise-exponential two-group alternative has crossing hazards and survival curves. A possible independently censored sample path has crossing Kaplan-Meier curves but logrank score zero and positive estimated variance.",
+        "strategy": "Compute both survival functions and all nonzero risk-set contributions. Verify that the event/censoring ordering has positive probability and that the score cancellation does not establish equality of the survival laws.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "ex-logrank-fisher-randomization-with-unequal-weights",
+        "kind": "example",
+        "title": "An exact logrank randomization p-value with unequal assignment weights",
+        "statement": "Three fixed event records and an unequal one-treated assignment law produce three distinct absolute logrank scores and inclusive randomization p-values whose weighted distribution is superuniform.",
+        "strategy": "Recompute the risk sets, score, tail mass, and p-value at all three assignments, then check the exact finite weighted distribution at every threshold.",
+        "deps": [
+          "def-logrank-risk-set-score-and-test",
+          "cor-logrank-fisher-randomization-pvalue-valid",
+          "def-finite-randomized-treatment-assignment-model"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      }
+    ]
+  }
+]

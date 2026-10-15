@@ -1,0 +1,74 @@
+[
+  {
+    "order": 1988,
+    "id": "measurement-calibration-and-uncertainty",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Calibration and measurement uncertainty",
+    "companion": "measurement-calibration-and-uncertainty-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "delta-method-and-asymptotic-normality",
+      "probability-spaces-random-variables-and-expectation",
+      "mixed-partials-taylor-and-extrema"
+    ],
+    "items": [
+      {
+        "id": "def-measurand-calibration-and-measurement-uncertainty",
+        "kind": "definition",
+        "title": "Measurands, calibration, and measurement uncertainty",
+        "deps": [
+          "def-scientific-statistical-model-contract",
+          "def-random-element-and-real-random-variable",
+          "def-moments-variance-and-covariance",
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces"
+        ],
+        "dependency_level": 1,
+        "statement": "A **measurand** is the specified quantity intended to be measured, including\nthe conditions needed to make its value sufficiently well-defined for the\nstated accuracy. A **measurement model** for a scalar measurand $q$ is a\nspecified function\n$$q=f(x_1,\\ldots,x_d)$$\nwhere $f:U\\to\\mathbb R$ is defined on an open set $U\\subseteq\\mathbb R^d$ and\nthe $x_i$ are the input quantities that contribute to the reported result.\nFor the uncertainty model below, assume $\\hat x\\in U$. To treat the nonlinear\noutput $f(X)$ as a random output, either require $X\\in U$ almost surely and\nrequire $\\omega\\mapsto f(X(\\omega))$ to be measurable on the event $\\{X\\in U\\}$,\ndefining it measurably on the null complement, or specify a measurable\nextension of the model to the input values outside $U$. The almost-sure domain\ncondition alone does not ensure measurability. If the variance of $f(X)$ is\nused, also require the resulting output to be square-integrable. The input\nlist includes each significant correction, correction factor, calibration\nquantity, reference value, and other influence quantity used by the model.\nThe estimate based on input estimates\n$\\hat x=(\\hat x_1,\\ldots,\\hat x_d)$ is $\\hat q=f(\\hat x)$.\n\nFor uncertainty evaluation, represent the possible input values by an\n$\\mathbb R^d$-valued random element $X=(X_1,\\ldots,X_d)$ on one probability\nspace, with square-integrable real coordinate variables. Their means are the\ninput estimates, $\\mathbb E[X_i]=\\hat x_i$, and their **input covariance matrix** is\n$$\\Sigma_{ij}=\\operatorname{Cov}(X_i,X_j),\\qquad 1\\le i,j\\le d.$$\nThis probability model represents the evaluated uncertainty of the inputs; it\ndoes not assert that every input varies physically at random. No independence\nof the inputs is assumed.\n\nA **systematic effect** is an identified influence whose estimated\ncontribution can be corrected. A **random effect** is an influence that\nappears as variation across repeated observations under the declared\nconditions. These descriptions concern how an effect enters the measurement\nmodel; they are separate from the Type A/Type B evaluation labels. A\n**correction** is an estimated signed value added algebraically to an\nuncorrected result to compensate for a recognized systematic effect. A\ncorrection factor changes a result multiplicatively according to the stated\nmodel. Applying a correction does not remove uncertainty: uncertainty in the\ncorrection and in its reference values remains an input contribution unless\nits contribution is shown negligible for the stated result. A **reference\nstandard** is a stated reference artifact or realization used to compare or\ncalibrate a measurement system; its assigned value and uncertainty, including\ncovariance with other shared reference inputs, belong in the measurement\nmodel. A **calibration curve** is the specified relation between a reference\nquantity and an instrument response used to convert a later response into an\nestimate of the measurand.\n\n**Type A evaluation** means evaluating an uncertainty component by statistical\nanalysis of a series of observations. **Type B evaluation** means evaluating\nit by other information or methods. These labels describe how a component is\nevaluated, not whether its cause is random or systematic. A **repeatability\ncomponent** describes variation in repeated readings under stated, comparable\nconditions. A later reading of a calibrated instrument can therefore add a\nnew repeatability component; include its covariance with other inputs when\nthe model does not justify treating them as uncorrelated.\n\nA **standard uncertainty** is an uncertainty measure expressed as a standard\ndeviation. The combined standard uncertainty below is the standard deviation\nof a linearized output, not an interval statement.\n\nWhen $f$ is differentiable at $\\hat x$, write\n$g=\\nabla f(\\hat x)$ and define the **first-order linearized output** by\n$$Q_{\\mathrm{lin}}=f(\\hat x)+g^T(X-\\hat x).$$\nThe **first-order combined standard uncertainty** is\n$u_c=\\sqrt{\\operatorname{Var}(Q_{\\mathrm{lin}})}$, the standard deviation of\nthis Taylor-linearized output. The next theorem gives its covariance formula.\nIts use as an approximation to the uncertainty of the nonlinear output\nrequires the first-order model to be adequate for the stated measurement.\nThis standard uncertainty is not itself an interval and implies no coverage\nprobability or confidence level.\n\nA **measurement batch** in the example on the companion page is a declared\nmeasurement occasion or configuration, such as one day of operation. It is a\nlabel for a process condition; it is not a random-effect assumption by itself.\nWhether a calibration relation remains stable across batches is an empirical\nquestion about the stated process and study.",
+        "justified_by": []
+      },
+      {
+        "id": "thm-first-order-measurement-uncertainty-propagation",
+        "kind": "theorem",
+        "title": "First-order propagation of measurement uncertainty",
+        "deps": [
+          "def-measurand-calibration-and-measurement-uncertainty",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "def-real-frechet-derivative-on-real-and-complex-matrix-spaces"
+        ],
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "statement": "Let $d\\ge1$, let $\\hat x\\in U$ for an open set $U\\subseteq\\mathbb R^d$, and\nlet $f:U\\to\\mathbb R$ be differentiable at $\\hat x$. Let $X$ be an\n$\\mathbb R^d$-valued random element on one probability space with\nsquare-integrable coordinate variables $X_i$, means $\\mathbb E[X_i]=\\hat x_i$,\nand $X\\in U$ almost surely. Let\n$\\Sigma_{ij}=\\operatorname{Cov}(X_i,X_j)$, set\n$g=\\nabla f(\\hat x)$, and define\n$$Q_{\\mathrm{lin}}=f(\\hat x)+g^T(X-\\hat x),\\qquad u_c^2=\\operatorname{Var}(Q_{\\mathrm{lin}}).$$\nThen\n$$u_c^2=g^T\\Sigma g=\\sum_{i=1}^d g_i^2\\Sigma_{ii}+2\\sum_{1\\le i<j\\le d}g_i g_j\\Sigma_{ij}.$$\nThe equality is exact for the first-order linearized output. To interpret it\nas an approximation to uncertainty in the nonlinear output $f(X)$, require\n$f(X)$ to be a measurable, square-integrable random output (including a\nmeasurable definition on any null event where $X\\notin U$) and require the\nfirst-order model to be adequate. This interpretation is not an assertion of\nexact finite-sample variance or interval coverage.",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 1989,
+    "id": "measurement-calibration-and-uncertainty-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Calibration and measurement uncertainty — Examples",
+    "companion": "measurement-calibration-and-uncertainty",
+    "requires": [
+      "measurement-calibration-and-uncertainty"
+    ],
+    "items": [
+      {
+        "id": "ex-calibration-curve-reference-uncertainty-and-batch-drift",
+        "kind": "example",
+        "title": "Calibration curve with uncertain reference standards and batch drift",
+        "deps": [
+          "def-measurand-calibration-and-measurement-uncertainty",
+          "thm-first-order-measurement-uncertainty-propagation",
+          "def-moments-variance-and-covariance"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "statement": "Work a two-standard linear calibration with correlated reference-standard uncertainty and a separate repeatability term for a future reading; compare batch-specific calibration slopes to show a stipulated pooled-curve discrepancy.",
+        "justified_by": []
+      }
+    ]
+  }
+]

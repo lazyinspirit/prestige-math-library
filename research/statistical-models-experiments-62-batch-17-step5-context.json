@@ -1,0 +1,379 @@
+{
+  "group": "f",
+  "batches": [
+    "17"
+  ],
+  "pages_read": [
+    "power-and-sample-size-planning",
+    "power-and-sample-size-planning-examples"
+  ],
+  "items_read": [
+    "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+    "lem-iid-normal-sample-mean-law",
+    "lem-least-feasible-sample-size-exists",
+    "lem-ceiling-and-least-positive-integer-threshold",
+    "def-power-and-sample-size-planning-specification",
+    "prop-known-variance-normal-two-sided-z-test-power",
+    "alg-finite-candidate-power-sample-size-search",
+    "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+    "thm-finite-candidate-power-sample-size-search-correctness",
+    "alg-positive-integer-power-sample-size-search",
+    "thm-positive-integer-power-sample-size-search-correctness",
+    "ex-two-sided-normal-z-power-includes-both-tails",
+    "ex-known-variance-normal-z-sample-size-and-sensitivity",
+    "cex-no-finite-query-universal-sample-size-infeasibility-detector"
+  ],
+  "conventions": [
+    {
+      "convention": "Normal-law results assume AC. N(m,σ²) is the affine image m+σZ of the standard normal with σ≥0; standardization requires σ>0.",
+      "fixed_by": "lem-iid-normal-sample-mean-law",
+      "matters_for": [
+        "prop-known-variance-normal-two-sided-z-test-power",
+        "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+        "ex-two-sided-normal-z-power-includes-both-tails",
+        "ex-known-variance-normal-z-sample-size-and-sensitivity"
+      ]
+    },
+    {
+      "convention": "Φ(x)=P(Z≤x), and z_q is the unique real satisfying Φ(z_q)=q for q∈(0,1). Normal laws have no atoms, and z_(1-q)=-z_q.",
+      "fixed_by": "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+      "matters_for": [
+        "prop-known-variance-normal-two-sided-z-test-power",
+        "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+        "ex-two-sided-normal-z-power-includes-both-tails",
+        "ex-known-variance-normal-z-sample-size-and-sensitivity"
+      ]
+    },
+    {
+      "convention": "Plans have positive integer total sample size; allocation components may be zero if the declared candidate set permits them. Feasibility includes every selected test, precision, allocation, and resource condition.",
+      "fixed_by": "def-power-and-sample-size-planning-specification",
+      "matters_for": [
+        "alg-finite-candidate-power-sample-size-search",
+        "alg-positive-integer-power-sample-size-search",
+        "thm-finite-candidate-power-sample-size-search-correctness",
+        "thm-positive-integer-power-sample-size-search-correctness",
+        "cex-no-finite-query-universal-sample-size-infeasibility-detector"
+      ]
+    },
+    {
+      "convention": "The finite search uses a supplied list ordered by nondecreasing total size, preserves its tie order, and certifies none only within that list. Its exact evaluator must terminate on each entry.",
+      "fixed_by": "alg-finite-candidate-power-sample-size-search",
+      "matters_for": [
+        "thm-finite-candidate-power-sample-size-search-correctness"
+      ]
+    },
+    {
+      "convention": "The all-size evaluator terminates at every positive integer and decides whether any feasible plan exists at that size. Unbounded search never returns none; full-domain none requires a valid completeness or infeasibility certificate. The output is a size, not an allocation witness.",
+      "fixed_by": "alg-positive-integer-power-sample-size-search",
+      "matters_for": [
+        "thm-positive-integer-power-sample-size-search-correctness"
+      ]
+    },
+    {
+      "convention": "The one-sided test rejects strictly above z_(1-α), has composite null μ≤μ₀, and targets the positive shift δ>0. The two-sided test rejects |Z_n|>z_(1-α/2) under the singleton null μ=μ₀.",
+      "fixed_by": "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+      "matters_for": [
+        "ex-known-variance-normal-z-sample-size-and-sensitivity",
+        "prop-known-variance-normal-two-sided-z-test-power",
+        "ex-two-sided-normal-z-power-includes-both-tails"
+      ]
+    },
+    {
+      "convention": "The oracle impossibility claim concerns deterministic procedures with only individual-size Boolean queries and no additional information distinguishing the oracles; it includes nondecreasing oracles.",
+      "fixed_by": "cex-no-finite-query-universal-sample-size-infeasibility-detector",
+      "matters_for": [
+        "cex-no-finite-query-universal-sample-size-infeasibility-detector"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-power-and-sample-size-planning-specification",
+      "statement": "Let F⊆D be the plans meeting all selected test, precision, allocation, and resource conditions. The planned sample size is none if F is empty, and otherwise is the least integer in {n(d):d∈F}.",
+      "used_by": [
+        "alg-finite-candidate-power-sample-size-search",
+        "alg-positive-integer-power-sample-size-search",
+        "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+        "thm-finite-candidate-power-sample-size-search-correctness",
+        "thm-positive-integer-power-sample-size-search-correctness",
+        "cex-no-finite-query-universal-sample-size-infeasibility-detector"
+      ]
+    },
+    {
+      "id": "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+      "statement": "Assume AC. For Z∼N(0,1), Φ(x)=P(Z≤x) is continuous and strictly increasing with limits 0 and 1 at the two infinite endpoints, P(Z=x)=0, and Φ(-x)=1-Φ(x). Each q∈(0,1) has a unique z_q with Φ(z_q)=q, and z_(1-q)=-z_q.",
+      "used_by": [
+        "prop-known-variance-normal-two-sided-z-test-power",
+        "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+        "ex-two-sided-normal-z-power-includes-both-tails",
+        "ex-known-variance-normal-z-sample-size-and-sensitivity"
+      ]
+    },
+    {
+      "id": "lem-iid-normal-sample-mean-law",
+      "statement": "Assume AC. For a positive integer n and mutually independent real random variables with common law N(μ,σ²), σ≥0, the sample mean has law N(μ,σ²/n). If σ>0, √n( X̄_n-μ₀)/σ has law N(√n(μ-μ₀)/σ,1).",
+      "used_by": [
+        "prop-known-variance-normal-two-sided-z-test-power",
+        "thm-known-variance-normal-z-test-power-and-minimum-sample-size"
+      ]
+    },
+    {
+      "id": "lem-least-feasible-sample-size-exists",
+      "statement": "Let S⊆N_{≥1} be nonempty. Then there is a unique n_*∈S such that n_*≤n for every n∈S.",
+      "used_by": [
+        "def-power-and-sample-size-planning-specification",
+        "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+        "thm-positive-integer-power-sample-size-search-correctness"
+      ]
+    },
+    {
+      "id": "lem-ceiling-and-least-positive-integer-threshold",
+      "statement": "For every real x, ⌈x⌉=-⌊-x⌋ is an integer with x≤⌈x⌉ and, for m∈Z, ⌈x⌉≤m iff x≤m. For a≥0, the least positive integer n with n≥a is max{1,⌈a⌉}.",
+      "used_by": [
+        "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+        "ex-known-variance-normal-z-sample-size-and-sensitivity"
+      ]
+    },
+    {
+      "id": "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+      "statement": "Under AC and the stated independent known-σ normal model, with α,β_II∈(0,1) and δ>0, the upper-tail z-test has size α and power Φ(√n(μ-μ₀)/σ-z_(1-α)). Its least positive size attaining power 1-β_II at μ₀+δ is max{1,⌈(σ/δ)² max{0,z_(1-α)+z_(1-β_II)}²⌉}.",
+      "used_by": [
+        "ex-known-variance-normal-z-sample-size-and-sensitivity"
+      ]
+    },
+    {
+      "id": "prop-known-variance-normal-two-sided-z-test-power",
+      "statement": "Under AC and the stated independent known-variance normal model, rejecting |Z_n|>c_α with c_α=z_(1-α/2) has size α. At μ=μ₀+δ, δ∈R, its rejection probability is 1-Φ(c_α-λ)+Φ(-c_α-λ), where λ=√n δ/σ.",
+      "used_by": [
+        "ex-two-sided-normal-z-power-includes-both-tails"
+      ]
+    },
+    {
+      "id": "alg-positive-integer-power-sample-size-search",
+      "statement": "Given the planning specification and an exact terminating feasibility evaluator at every positive size, either search positive integers in ascending order, search through a supplied valid finite completeness bound, or return none using a supplied valid all-size infeasibility proof.",
+      "used_by": [
+        "thm-positive-integer-power-sample-size-search-correctness"
+      ]
+    },
+    {
+      "id": "alg-finite-candidate-power-sample-size-search",
+      "statement": "Inspect the supplied finite candidate list in nondecreasing size order using its exact terminating evaluator; return the first feasible plan with its size, or none if every entry fails, including immediate none for an empty list.",
+      "used_by": [
+        "thm-finite-candidate-power-sample-size-search-correctness"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit choice assumption inherited by normal-law calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Countable-choice premises for Lebesgue boxes and Borel measurability.",
+      "opened": true
+    },
+    {
+      "id": "lem-axiom-of-choice-implies-countable-choice",
+      "used_for": "Discharging countable-choice premises from AC.",
+      "opened": true
+    },
+    {
+      "id": "def-standard-normal-and-normal-laws",
+      "used_for": "Density construction and affine normal-law convention, including zero variance.",
+      "opened": true
+    },
+    {
+      "id": "lem-normal-density-has-total-mass-one",
+      "used_for": "Positive Borel normal density with integral one.",
+      "opened": true
+    },
+    {
+      "id": "def-cumulative-distribution-function-of-a-random-variable",
+      "used_for": "The closed lower-tail CDF convention.",
+      "opened": true
+    },
+    {
+      "id": "lem-probability-measure-basic-identities",
+      "used_for": "CDF increments, complements, and finite probability identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Continuity of the normal density.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of density expressions and affine test statistics.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-of-continuous-functions",
+      "used_for": "Continuity of the exponential quadratic composition.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-r",
+      "used_for": "Positive minima and finite maxima of the density on compact intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-below-for-measures",
+      "used_for": "The upper-end CDF limit.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuity-from-above-for-measures",
+      "used_for": "The lower-end CDF limit under finite probability measure.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "Existence of normal quantiles.",
+      "opened": true
+    },
+    {
+      "id": "thm-substitution-for-improper-integrals",
+      "used_for": "Reflection substitution in the normal-tail symmetry argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-measure-of-a-box-of-every-kind",
+      "used_for": "Singletons have zero Lebesgue measure under countable choice.",
+      "opened": true
+    },
+    {
+      "id": "cor-integral-over-a-null-set-vanishes",
+      "used_for": "Normal singleton probabilities vanish.",
+      "opened": true
+    },
+    {
+      "id": "def-independent-random-elements",
+      "used_for": "Mutual independence of the finite normal sample.",
+      "opened": true
+    },
+    {
+      "id": "def-characteristic-function-of-a-real-random-variable",
+      "used_for": "Characteristic-function definition in the sample-mean proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-normal-law",
+      "used_for": "Exact normal characteristic function, including zero variance.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+      "used_for": "Finite independent-sum and affine characteristic-function identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+      "used_for": "Identification of the sample-mean normal law under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-exponential-addition-and-real-extension",
+      "used_for": "Combining the finite product of normal characteristic functions.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-numbers",
+      "used_for": "Natural-number convention and positive-size domain.",
+      "opened": true
+    },
+    {
+      "id": "thm-well-ordering-principle",
+      "used_for": "Existence of the least feasible positive integer.",
+      "opened": true
+    },
+    {
+      "id": "lem-integer-part",
+      "used_for": "Floor existence and inequalities defining ceilings.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-embeds-int",
+      "used_for": "Identification of nonnegative integers with naturals.",
+      "opened": true
+    },
+    {
+      "id": "lem-nat-discrete",
+      "used_for": "Positive-integer discreteness in the ceiling proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-int-ordered-ring",
+      "used_for": "Integer arithmetic and order in ceiling inequalities.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-add-order",
+      "used_for": "Translation and negation of real-order inequalities.",
+      "opened": true
+    },
+    {
+      "id": "def-ordered-field",
+      "used_for": "Real-order conventions in the ceiling proof.",
+      "opened": true
+    },
+    {
+      "id": "def-statistical-experiment",
+      "used_for": "Plan-indexed experiments, normal observations, and oracle-realization experiments.",
+      "opened": true
+    },
+    {
+      "id": "def-randomized-test",
+      "used_for": "Measurable rejection functions with action 1 meaning reject.",
+      "opened": true
+    },
+    {
+      "id": "def-test-size-and-power",
+      "used_for": "Power as rejection probability and size as the supremum over a nonempty null.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Measurability of test functions and precision endpoints.",
+      "opened": true
+    },
+    {
+      "id": "cor-continuous-functions-are-borel-measurable",
+      "used_for": "Borel measurability of affine normal-test statistics under countable choice.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-rejection-function-defines-randomized-test",
+      "used_for": "Converting measurable rejection functions into binary probability kernels.",
+      "opened": true
+    },
+    {
+      "id": "def-dirac-measure",
+      "used_for": "Point-mass laws realizing the Boolean feasibility oracles.",
+      "opened": true
+    },
+    {
+      "id": "prop-dirac-measure-is-a-probability-measure",
+      "used_for": "Validity of the point-mass statistical experiments in the counterexample.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "power-and-sample-size-planning",
+      "to": "finite-populations-and-sampling-designs",
+      "faithful": true,
+      "note": "Checked the planning prose against the supplier page and finite-population definition. Both keep unit values fixed and randomize sampled subsets; the planning page correctly treats this as design context and derives no Gaussian law from it. No reverse logical citation was found."
+    },
+    {
+      "from": "power-and-sample-size-planning",
+      "to": "randomized-treatment-assignment-and-sharp-null-tests",
+      "faithful": true,
+      "note": "Checked the planning prose against the supplier page, assignment-model definition, and sharp-null ordering definition. Assignment randomness holds the units and potential-outcome schedule fixed and supplies no Gaussian response law. The planning page preserves that distinction and predeclared sidedness; no reverse logical citation was found."
+    }
+  ]
+}

@@ -1,0 +1,493 @@
+
+PAGE 1
+STAT331
+Revisiting Cox’s PH Model: Asymptotic Theory
+Earlier we sketched how the Martingale CLT can be applied to
+the score function arising from Cox’s proportional hazards model.
+This section shows this in greater detail and then sketches why the
+”MPLE” from Cox’s partial likelihood function is consistent and
+asymptotically normal.
+Consider the usual setting in which the survival time and covari-
+ate value for the ith of n subjects are denoted Ti and Zi, where the
+potential censoring time is denoted Ci, and where we assume nonin-
+formative censoring; i.e.,
+Ti ⊥Ci | Zi .
+Assume that the random variables corresponding to diﬀerent subjects
+are independent, and that the Zi are bounded. The observation for
+the ith subject consists of (Ui, δi, Zi), where
+Ui = min (Ti, Ci), δi = 1(Ti ≤Ci).
+The hazard function for a subject with covariate value z is the usual
+Cox proportional hazards model
+h(t|Z = z) = λ0(t)eβz.
+We assume that there exists a τ such that Ci ≤τ with probability 1,
+and that P(Yi(τ) = 1) > 0. Thus, τ is the largest possible observed
+time.
+Suppose ﬁrst that Z is a scalar which is bounded, and recall that the
+partial likelihood can be expressed as
+1
+
+
+PAGE 2
+L1(β) =
+∏
+j
+eβZ(j)
+∑
+l∈Rj eβZl ,
+where the subscript j indexes the observed failure times, or equiva-
+lently as
+L1(β) =
+n
+∏
+i=1
+∫∞
+0
+eβZi
+∑n
+l=1 Yl(s) eβZldNi(s).
+The partial likelihood score function is given by (see Unit 12 page 9)
+U(β) = ∂lnL1
+∂β
+=
+n
+∑
+i=1
+∫∞
+0
+(
+Zi −
+∑
+l Zl eβZl Yl(s)
+∑
+l eβZl Yl(s)
+)
+dNi(s).
+If we deﬁne
+S(j)(β, t) = 1
+n
+n
+∑
+i=1
+Yi(t) Zj
+i eβZi
+for j = 0, 1, 2 and
+E(β, t) = S(1)(β, t)
+S(0)(β, t),
+we can write
+U(β) =
+n
+∑
+i=1
+∫∞
+0
+(Zi −E(β, s)) dNi(s).
+Earlier, this led us to consider the process
+U(β, t) = n−1
+2
+n
+∑
+i=1
+∫t
+0
+(Zi −E(β, s)) dNi(s),
+which turned out to be the same as (see Unit 12 page 10)
+2
+
+
+PAGE 3
+n−1
+2
+n
+∑
+i=1
+∫t
+0
+(Zi −E(β, s)) dMi(s),
+where
+Mi(s) = Ni(s) −Ai(s)
+and
+Ai(s) =
+∫s
+0
+λ0(u) eβZi Yi(u)du.
+We then invoked the Martingale Central Limit Theorem to argue
+that
+U(β, ·)
+L
+−→W
+(
+σ2(·)
+)
+as n →∞,
+where W(·) is a Wiener process (Brownian motion) and σ2(t) is the
+probability limit of
+n
+∑
+i=1
+∫t
+0
+(
+n−1
+2 (Zi −E(β, s))
+)2
+dAi(s) = 1
+n
+n
+∑
+i=1
+∫t
+0
+(Zi −E(β, s))2 Yi(s)λ0(s)eβZids. (21.1)
+Since L1(β) is not necessarily a likelihood function, it doesn’t neces-
+sarily follow that the probability limit of the sample information ob-
+tained from L1(β), which we use to standardize the partial likelihood
+score function, is equal to the variance of the asymptotic distribution
+of U(β, τ). To assess this, let the probability limit of S(j)(β, t) be
+denoted s(j)(β, t) and deﬁne
+V (β, t) = S(2)(β, t)
+S(0)(β, t) −
+(S(1)(β, t)
+S(0)(β, t)
+)2
+= . . . =
+1
+n
+n
+∑
+i=1
+(Zi −E(β, t))2 Yi(t) eβZi
+S(0)(β, t)
+.
+3
+
+
+PAGE 4
+(21.1) can be rewritten as
+∫t
+0
+S(0)(β, s)V (β, s)λ0(s)ds.
+If the probability limit of V (β, t) is denoted v(β, t), σ2 can be rewrit-
+ten as,
+σ2(t) =
+∫t
+0
+s(0) (β, s) v(β, s) λ0(s) ds.
+(21.2)
+(notice that everything here is bounded since Z is bounded so point-
+wise convergence gives convergence of the integral (Theorem 15.1)).
+Let the value of this variance function when t = τ be denoted i(β),
+and assume that it is positive. It follows that
+n−1
+2 U(β) = n−1/2U(β, τ)
+L
+−→N(0, i(β))
+as n →∞.
+Note also that the sample information at β can be written as
+ˆI (β) = −∂2 ln L1(β)
+∂β2
+= . . .
+=
+n
+∑
+i=1
+∫τ
+0
+(S(2)(β, s)
+S(0)(β, s) −E2(β, s)
+)
+dNi(s)
+=
+n
+∑
+i=1
+∫τ
+0
+V (β, s)dNi(s)
+=
+n
+∑
+i=1
+∫τ
+0
+V (β, s) dMi(s) +
+n
+∑
+i=1
+∫τ
+0
+V (β, s) dAi(s).
+4
+
+
+PAGE 5
+Thus,
+1
+n
+ˆI (β) = 1
+n
+n
+∑
+i=1
+∫τ
+0
+V (β, s) dMi(s) + 1
+n
+n
+∑
+i=1
+∫τ
+0
+V (β, s) dAi(s).
+Because the ﬁrst term has expectation 0 and variance going to 0, the
+ﬁrst term here converges in probability to 0. Thus, 1
+n ˆI (β) has the
+same probability limit as
+1
+n
+n
+∑
+i=1
+∫τ
+0
+V (β, s) d Ai(s)
+=
+∫τ
+0
+λ0(s)1
+n
+∑
+i
+Yi(s)eβ Zi · V (β, s) ds
+=
+∫τ
+0
+λ0(s) · V (β, s)S(0)(β, s) ds.
+From (21.2), the probability limit of this is σ2(τ) = i(β). Thus, it
+follows from Slutsky’s theorem that as n →∞
+U(β)
+√
+ˆI(β)
+= n−1/2U(β)
+√
+ˆI(β)/n
+L→N(0, 1).
+It can be shown that the limiting distribution is unchanged if we
+replace ˆI(β) by ˆI( ˆβ).
+5
+
+
+PAGE 6
+We now sketch the proofs of the consistency and asymptotic normal-
+ity of bβ. For details, see Fleming and Harrington, Chapter 8, Section
+4.
+Consistency of bβ:
+For this argument, denote the true value of β
+by β0. Deﬁne
+Xn(β) = 1
+n ln
+( L1(β)
+L1(β0)
+)
+and regard this as a function of β in some neighborhood, say N0,
+of β0. It can be shown that Xn(β) is concave, and it is clear that
+Xn(β) is maximized at β = bβ. Now consider
+An (β) = 1
+n
+n
+∑
+i=1
+∫τ
+0
+(
+(β −β0) Zi −ln
+( S(0)(β, s)
+S(0)(β0, s)
+))
+Yi(s)eβ0Ziλ0(s)ds.
+By writing Xn(β) −An(β) as a stochastic integral with respect to
+Mi(·), which has mean 0 and variance converging to 0, it follows that
+Xn(β) and An(β) have the same probability limit as n →∞. But
+An(β) converges in probability to (Theorem 15.1)
+A(β) =
+∫τ
+0
+(
+(β −β0) s(1)(β0, s) −ln
+[ s(0)(β, s)
+s(0)(β0, s)
+]
+s(0)(β0, s)
+)
+λ0(s)ds .
+Thus, Xn(β)
+P
+−→A(β) as n →∞. It can also be shown that this
+convergence is uniform in β over N0.
+Since Xn(β) is maximized at ˆβ, and A(β) is maximized at the true
+value β0 (Exercise 1), and Xn(β) converges (uniformly) in probability
+to A(β), it follows that bβ
+p→β (see e.g. Van der Vaart Theorem 5.7).
+6
+
+
+PAGE 7
+Asymptotic Normality of ˆβ: The asymptotic normality of bβ follows
+from that of n−1
+2 U(β) using standard techniques: Expanding U(bβ)
+about the true value β, we get
+U(bβ) = U(β) −bI (β∗) · (bβ −β),
+where |β −β∗| ≤|β −bβ|. Thus, since U(bβ) = 0,
+n−1
+2 U(β) =
+(1
+n
+bI (β∗)
+)
+· √n (bβ −β).
+Since bβ
+P→β implies β∗
+P
+−→β, it can be shown that 1
+n bI (β∗)
+p→i(β).
+Thus, since
+n−1
+2 U(β)
+L
+−→N(0, i(β) )
+as n →∞,
+it follows from Slutsky’s theorem that as n →∞,
+√n( ˆβ −β)
+L→N( 0, i−1(β) ).
+Since ˆI( ˆβ)/n is a consistent estimator of i(β), it also follows that
+7
+
+
+PAGE 8
+( ˆβ −β)
+√
+ˆI−1( ˆβ)
+L
+−→N(0, 1)
+as n →∞.
+Thus, for scalar Z, the asymptotic normality of Cox’s partial likeli-
+hood score function and maximum partial likelihood estimator have
+been established. These results are the basis for approximate CIs
+and tests concerning the regression parameter β.
+8
+
+
+PAGE 9
+Vector Z
+These results extend to vector Z in a straightforward way, although
+the notation gets a bit messy. Suppose we have p covariates and we
+deﬁne
+Z
+def
+= (Z1, · · · , Zp)T
+and
+β
+def
+= (β1, · · · , βp).
+Let U(β) denote the px1 score function having jth component
+∂ln L1(β) /∂βj,
+let Zi denote the value of Z for subject i, and let S(1)(β, t) be the
+p × 1 vector
+1
+n
+∑
+i
+ZiYi(t) eβZi.
+Note that this is a vector because Zi is px1. Also deﬁne S(2) (β, t)
+be the p × p matrix
+1
+n
+∑
+i
+Yi(t) eβZiZ⊗2
+i ,
+where Z⊗2 def
+= ZZT. Then with the pxp matrix V (β, t) deﬁned as
+V (β, t) = S(2)(β, t)
+S(0)(β, t) −
+(S(1)(β, t)
+S(0)(β, t)
+)⊗2
+and i(β) deﬁned as the probability limit of
+∫τ
+0
+V (β, t) S(0)(β, t) λ0(t)dt,
+similar arguments to those for scalar Z can be used to show that
+9
+
+
+PAGE 10
+n−1
+2 U(β)
+L
+−→N(0, i(β) ),
+where “0” denotes the px1 vector of zeros. These results justify ap-
+plying the usual kinds of asymptotic approximations for tests and
+CIs for the vector β (or components of it) as we do for regular para-
+metric likelihood theory.
+Fleming and Harrington show how the results can be generalized
+to time-varying Z, more general assumptions about censoring, and
+other multiplicative intensity models.
+10
+
+
+PAGE 11
+Underlying Hazard Function.
+It can also be shown that the estimated cumulative underlying haz-
+ard function (Breslow)
+ˆΛ0(t) =
+∫t
+0
+dN(s)
+∑n
+i=1 Yi(s) ebβZi
+is consistent and that
+√n(ˆΛ0(·) −Λ(·))
+converges to a Gaussian process with zero mean and independent
+increments. The proof is a bit detailed, and outlined in Fleming and
+Harrington, section 8.3.
+11
+
+
+PAGE 12
+Exercises
+1. Suppose that the covariates Zi take values in a bounded space.
+Show that Xn(β) −An(β) on page 6 of Unit 21 converges in
+probability to 0. Hint 1: use the ﬁrst formula on page 2 of Unit
+21 (the formula for the Cox partial likelihood in terms of the Z(j)
+and τj) to express Xn(β) as some integral with respect to the
+Ni (Xn(β) = ∑n
+i=1
+∫τ
+0 hi(s)dNi(s) for some hi(s); what should
+you hope hi to be in order to solve this problem?). Hint 2: the
+deﬁnition of S(0) is also on page 2 of Unit 21. Hint 3: show that
+∫t
+0 . . . is a martingale, and therefore EM 2(t) = E < M > (t).
+What is its limit?
+2. (33 points). In Unit 21 page 6 in the proof of consistency of ˆβ
+in the Cox model, we needed that
+A(β) =
+∫τ
+0
+(
+(β −β0) s(1)(β0, s) −ln
+( s(0)(β, s)
+s(0)(β0, s)
+)
+s(0)(β0, s)
+)
+λ0(s)ds
+is maximized at the true value β0. Show that this is true, in-
+cluding also that it is a maximum and not a minimum.
+References
+Van der Vaart, A.W. (1998).
+Asymptotic Statistics.
+Cambridge
+University Press.
+12

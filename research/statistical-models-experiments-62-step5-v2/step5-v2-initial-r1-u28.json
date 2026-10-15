@@ -1,0 +1,108 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "28",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "cex-informative-censoring-does-not-identify-event-law",
+      "model": "gpt-6-luna",
+      "context_sha256": "b093d63d5fa17efa05a4d224ab4d005b49119a5902c8a44bedcec4bf5a5326e6",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Steps 1.1–3.1 correctly give mass 1/2 at each observed pair (1,1) and (1/2,0), while P_A(T≤2)=1/2 and P_B(T≤2)=1. Step 2.2 correctly normalizes the uniform selected law by P(T>1)=2/3. Step 4.1 nevertheless asserts an unproved general necessity of independence and positivity for likelihood construction. This ancillary assertion does not invalidate the counterexample and is a confirmed nonfatal defect; the defining interface explicitly permits informative mechanisms with their joint observation law modeled.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "cex-informative-censoring-does-not-identify-event-law",
+      "disposition": "repaired",
+      "post_sha256": "7d412dc73a1ea05f1b5f8262a50061f3a086b0f5685d8a04f712a3664b1b3329",
+      "review_context_sha256": "7af1af3ad52bd12352f262ef5b1677f5279562c8c180add6f25ae9e56e125d7f",
+      "reason": "Checked both finite joint laws, their recorded pairs, distinct event CDFs, and the independent uniform-selection illustration. Replaced only the unsupported closing necessity assertion with the supplier Definition’s joint-observation-law caveat, stated in F1 and cited by step 4.1. Updated the owning contract claim, inputs and citation uses. The Statement refuted, dependencies, tie convention, and all calculations are unchanged; no choice principle or new prerequisite is used. This is a local repair review, not independent acceptance of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "defect_id": "statistical-models-experiments-62-step5-initial-r1-u28-censoring-necessity",
+      "run": "statistical-models-experiments-62",
+      "at": "2026-10-14T23:26:07.364Z",
+      "class": "accuracy",
+      "subclass": "unsupported-inference",
+      "severity": "nonfatal",
+      "location": "proof-step",
+      "subject": "cex-informative-censoring-does-not-identify-event-law",
+      "caught_at_stage": "4-judge",
+      "caught_by_role": "unknown",
+      "disposition": "fixed",
+      "description": "Steps 1.1–3.1 correctly give mass 1/2 at each observed pair (1,1) and (1/2,0), while P_A(T≤2)=1/2 and P_B(T≤2)=1. Step 2.2 correctly normalizes the uniform selected law by P(T>1)=2/3. Step 4.1 nevertheless asserts an unproved general necessity of independence and positivity for likelihood construction. This ancillary assertion does not invalidate the counterexample and is a confirmed nonfatal defect; the defining interface explicitly permits informative mechanisms with their joint observation law modeled.",
+      "repair": "Replaced step 4.1’s universal necessity claim with the informative-censoring joint-law caveat from def-event-time-observation-schemes; synchronized F1 and the owning proof contract.",
+      "adjudication_ref": [
+        {
+          "id": "cex-informative-censoring-does-not-identify-event-law",
+          "model": "gpt-6-luna",
+          "context_sha256": "b093d63d5fa17efa05a4d224ab4d005b49119a5902c8a44bedcec4bf5a5326e6"
+        }
+      ],
+      "prevention": {
+        "kind": "brief",
+        "ref": "briefs/step5-adjudicator.md"
+      },
+      "repair_cost": "inline-fix",
+      "caught_by_model": "gpt-6-luna",
+      "evidence": [
+        {
+          "path": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u28.task.md",
+          "note": "Exact rejected tuple and original step 4.1 necessity objection."
+        },
+        {
+          "path": "items/cex-informative-censoring-does-not-identify-event-law.md",
+          "note": "Steps 1.1–3.1 retain the valid witness; F1 and step 4.1 now use the actual observation-law caveat."
+        }
+      ]
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "item": "cex-informative-censoring-does-not-identify-event-law",
+    "exact_claim": "Two dependent finite (T,C) laws have identical (min(T,C),1{T≤C}) laws and different T laws; selection of Uniform(0,3) by T>1 gives Uniform(1,3).",
+    "dependency_evidence": "items/def-event-time-observation-schemes.md, Definition: right censoring uses T≤C at ties; delayed entry selects T>L; informative endpoints require their joint observation law to be modeled. The owning A-page and likelihood theorem state independence and positivity as assumptions of particular models.",
+    "source_reading": "No external source was consulted; the finite computations and elementary conditional-density calculation are familiar and were checked directly.",
+    "contract": "research/statistical-models-experiments-62-batch-28.proof-contracts.json: assigned derivation step-4-1 and F1 citation uses only.",
+    "propagation": "No Statement or Definition changed; Statement refuted is byte-identical. No downstream inventory is triggered by the facts/proof-only repair.",
+    "published_consumer_updates": "No published defect or supplier-interface event was discovered; no published-consumer ledger update is proposed.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-28.proof-contracts.json --strict --items cex-informative-censoring-does-not-identify-event-law",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/cex-informative-censoring-does-not-identify-event-law.md",
+        "exit_code": 0,
+        "result": "PASS (direct); 1 checked, 0 failing."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/cex-informative-censoring-does-not-identify-event-law.md",
+        "exit_code": 0,
+        "result": "1 file; all math parses under real KaTeX and frontmatter under renderer YAML; no errors."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/cex-informative-censoring-does-not-identify-event-law.md",
+        "exit_code": 0,
+        "result": "1 item, 7 steps, 0 defects."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent rejudgment of the changed carrier; no unresolved local mathematical or validation obligations."
+  }
+}

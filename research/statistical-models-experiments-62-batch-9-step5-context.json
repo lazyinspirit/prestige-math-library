@@ -1,0 +1,207 @@
+{
+  "group": "c",
+  "batches": [
+    "9"
+  ],
+  "pages_read": [
+    "horvitz-thompson-variance-and-srswor",
+    "horvitz-thompson-variance-and-srswor-examples"
+  ],
+  "items_read": [
+    "def-inclusion-covariance-difference",
+    "def-simple-random-sampling-without-replacement",
+    "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+    "thm-sen-yates-grundy-variance-identity",
+    "thm-srswor-mean-variance-and-finite-population-correction",
+    "ex-srswor-ht-variance-and-yates-grundy",
+    "ex-zero-pair-support-prevents-universal-unbiased-variance-estimation",
+    "ex-srswor-census-and-singleton-boundaries",
+    "ex-syg-sign-condition-and-negative-estimate"
+  ],
+  "conventions": [
+    {
+      "convention": "Population values are fixed; design probability randomizes the sampled subset. The diagonal inclusion convention is πii = πi.",
+      "fixed_by": "def-finite-population-and-sampling-design",
+      "matters_for": [
+        "def-inclusion-covariance-difference",
+        "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+        "thm-sen-yates-grundy-variance-identity",
+        "thm-srswor-mean-variance-and-finite-population-correction"
+      ]
+    },
+    {
+      "convention": "Δij = πij − πiπj for ordered pairs, including Δii = πi(1 − πi).",
+      "fixed_by": "def-inclusion-covariance-difference",
+      "matters_for": [
+        "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+        "thm-sen-yates-grundy-variance-identity",
+        "thm-srswor-mean-variance-and-finite-population-correction",
+        "ex-syg-sign-condition-and-negative-estimate"
+      ]
+    },
+    {
+      "convention": "SRSWOR uses all n-element subsets with equal mass 1/binomial(N,n), for integers 1 ≤ n ≤ N.",
+      "fixed_by": "def-simple-random-sampling-without-replacement",
+      "matters_for": [
+        "thm-srswor-mean-variance-and-finite-population-correction",
+        "ex-srswor-ht-variance-and-yates-grundy",
+        "ex-zero-pair-support-prevents-universal-unbiased-variance-estimation",
+        "ex-srswor-census-and-singleton-boundaries"
+      ]
+    },
+    {
+      "convention": "The variance identity requires positive first-order inclusion probabilities; the all-pairs inverse-inclusion estimate additionally requires πij > 0 for every ordered pair.",
+      "fixed_by": "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+      "matters_for": [
+        "thm-sen-yates-grundy-variance-identity",
+        "ex-srswor-ht-variance-and-yates-grundy",
+        "ex-zero-pair-support-prevents-universal-unbiased-variance-estimation"
+      ]
+    },
+    {
+      "convention": "The SYG identity assumes fixed sample size. Nonpositive distinct-pair Δij is sufficient for nonnegative sample estimates, rather than necessary for a particular fixed population.",
+      "fixed_by": "thm-sen-yates-grundy-variance-identity",
+      "matters_for": [
+        "ex-srswor-ht-variance-and-yates-grundy",
+        "ex-syg-sign-condition-and-negative-estimate"
+      ]
+    },
+    {
+      "convention": "S_U² uses denominator N − 1 and requires N > 1; the sample-mean variance formula allows n = 1 and n = N.",
+      "fixed_by": "thm-srswor-mean-variance-and-finite-population-correction",
+      "matters_for": [
+        "ex-srswor-ht-variance-and-yates-grundy",
+        "ex-srswor-census-and-singleton-boundaries",
+        "thm-stratified-total-unbiasedness-and-variance"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+      "statement": "For a finite population and sampling design with πi > 0 for every unit, Var_d(T̂_HT) = Σi,j Δij yi yj/(πiπj). If additionally πij > 0 for every ordered pair, V̂_HT = Σi,j IiIj(Δij/πij)(yi/πi)(yj/πj) is defined and has expectation Var_d(T̂_HT).",
+      "used_by": [
+        "thm-sen-yates-grundy-variance-identity",
+        "thm-srswor-mean-variance-and-finite-population-correction",
+        "ex-srswor-ht-variance-and-yates-grundy",
+        "ex-zero-pair-support-prevents-universal-unbiased-variance-estimation"
+      ]
+    },
+    {
+      "id": "thm-srswor-mean-variance-and-finite-population-correction",
+      "statement": "For SRSWOR with N > 1 and 1 ≤ n ≤ N, Cov_d(Ii,Ij) = −n(N−n)/(N²(N−1)) for distinct units, and Var_d(ȳ_S) = (1−n/N)S_U²/n. Both formulas include n = 1 and n = N.",
+      "used_by": [
+        "ex-srswor-ht-variance-and-yates-grundy",
+        "ex-srswor-census-and-singleton-boundaries",
+        "thm-stratified-total-unbiasedness-and-variance"
+      ]
+    },
+    {
+      "id": "thm-sen-yates-grundy-variance-identity",
+      "statement": "For a fixed-size sampling design with πi > 0 and xi = yi/πi, Σj Δij = 0 and Var_d(T̂_HT) = −(1/2)Σi,j Δij(xi−xj)². Under positive inclusion probabilities for every ordered pair, the inverse-pair sample expression is unbiased; Δij ≤ 0 for distinct pairs guarantees its nonnegativity on every supported sample.",
+      "used_by": [
+        "ex-srswor-ht-variance-and-yates-grundy",
+        "ex-syg-sign-condition-and-negative-estimate"
+      ]
+    },
+    {
+      "id": "def-simple-random-sampling-without-replacement",
+      "statement": "For an integer n with 1 ≤ n ≤ N, SRSWOR of size n has support {s ⊆ U : |s| = n} and assigns every supported sample probability 1/binomial(N,n).",
+      "used_by": [
+        "thm-srswor-mean-variance-and-finite-population-correction",
+        "ex-srswor-ht-variance-and-yates-grundy",
+        "ex-zero-pair-support-prevents-universal-unbiased-variance-estimation",
+        "ex-srswor-census-and-singleton-boundaries",
+        "def-stratified-sampling-design-and-estimator"
+      ]
+    },
+    {
+      "id": "def-inclusion-covariance-difference",
+      "statement": "For each ordered pair (i,j) ∈ U × U, Δij := πij − πiπj; the convention πii = πi gives Δii = πi(1−πi).",
+      "used_by": [
+        "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+        "thm-sen-yates-grundy-variance-identity",
+        "thm-srswor-mean-variance-and-finite-population-correction",
+        "ex-syg-sign-condition-and-negative-estimate"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Centered-square variance and centered-product covariance, with square-integrability supplied by finite design support.",
+      "opened": true
+    },
+    {
+      "id": "thm-covariance-bilinearity-and-symmetry",
+      "used_for": "Extracting deterministic HT weights from covariance.",
+      "opened": true
+    },
+    {
+      "id": "thm-variance-of-a-finite-sum",
+      "used_for": "Expressing HT variance as the double sum of covariances; also checked its stratified consumer use.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-of-an-indicator-is-probability",
+      "used_for": "Expectations of inclusion indicators and their joint-inclusion products.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Finite-sum expectation linearity in the HT and SYG proofs.",
+      "opened": true
+    },
+    {
+      "id": "def-statistic-and-estimator",
+      "used_for": "The zero-pair-support example's restriction to functions of observed labels and values.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "The finite-population supplier's finite design probability convention.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-on-a-finite-probability-space",
+      "used_for": "Design expectation as a finite weighted sum.",
+      "opened": true
+    },
+    {
+      "id": "lem-indicator-expectation-and-products",
+      "used_for": "The HT unbiasedness supplier's indicator and joint-event identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-expectation",
+      "used_for": "The HT unbiasedness supplier's finite linearity without independence.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+      "used_for": "The expectation convention underlying the published moment suppliers.",
+      "opened": true
+    },
+    {
+      "id": "lem-variance-and-covariance-identities-for-random-variables",
+      "used_for": "Checking the covariance-bilinearity supplier's centered-product expansion and finite-space compatibility.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "horvitz-thompson-variance-and-srswor",
+      "to": "finite-populations-and-sampling-designs",
+      "faithful": true,
+      "note": "The variance page preserves fixed population values, finite design support, observed inclusion indicators, and πii = πi. Positive first-order and pair-inclusion hypotheses are added explicitly where required."
+    },
+    {
+      "from": "stratified-sampling-and-allocation",
+      "to": "horvitz-thompson-variance-and-srswor",
+      "faithful": true,
+      "note": "The stratified definition uses independent uniform fixed-size samples. The variance theorem quotes the SRSWOR formula with N > 1 and applies it only to noncertainty strata, where Nh > 1 follows from 1 ≤ nh < Nh. Certainty strata, including singleton strata, are handled directly as constants."
+    }
+  ]
+}

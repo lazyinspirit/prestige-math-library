@@ -1,0 +1,463 @@
+[
+  {
+    "order": 1964,
+    "id": "interference-exposure-mappings-and-design-based-effects",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Interference and exposure mappings",
+    "companion": "interference-exposure-mappings-and-design-based-effects-examples",
+    "requires": [
+      "randomized-treatment-assignment-and-sharp-null-tests",
+      "statistical-experiments-models-and-identifiability",
+      "estimators-and-randomized-procedures",
+      "finite-probability-spaces-and-random-variables",
+      "conditional-expectation",
+      "probability-spaces-random-variables-and-expectation"
+    ],
+    "items": [
+      {
+        "id": "lem-finite-simple-random-sampling-identities",
+        "kind": "lemma",
+        "title": "Finite simple-random-sampling moment identities",
+        "statement": "For a uniformly chosen subset of fixed size from a finite population, prove the expectation and covariance identities for sample means and the unbiasedness of the sample covariance when its denominator is nonzero.",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space",
+          "def-variance-and-covariance",
+          "def-binomial-coefficient",
+          "lem-finite-sum-laws",
+          "thm-linearity-of-expectation",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Hudgens and M. Elizabeth Halloran, Toward Causal Inference With Interference, Appendix A.4",
+              "url": "https://www.treatment-effects.com/Hudgens-Halloran-2008.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-event-conditional-expectation-formula",
+        "kind": "lemma",
+        "title": "Conditional expectation on positive-probability events in finite spaces",
+        "statement": "Define conditional expectation on a positive-probability event by its finite weighted average; prove the resulting piecewise function is a version given the event sigma-algebra and prove the finite-partition expectation formula.",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "lem-finite-sum-laws",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, 2nd ed., Chapter 4 §4.1",
+              "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter4.pdf"
+            },
+            {
+              "title": "Charles M. Grinstead and J. Laurie Snell, Introduction to Probability, 2nd ed., Chapter 6 §6.1, Definition 6.2 and Theorem 6.5",
+              "url": "https://chance.dartmouth.edu/teaching_aids/books_articles/probability_book/Chapter6.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-potential-outcomes-under-partial-interference",
+        "kind": "definition",
+        "title": "Finite-population potential outcomes under partial interference",
+        "statement": "For finitely many groups of fixed units, define a fixed real outcome for every allowed global binary assignment, the observed outcome at the realized assignment, and partial interference as invariance of a unit's outcome when assignments outside its group change while its within-group assignment stays fixed. Thus the schedule can be written Y_ij(z_i) and allows arbitrary within-group interference.",
+        "deps": [
+          "def-finite-randomized-treatment-assignment-model",
+          "def-finite-probability-space-and-event"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Hudgens and M. Elizabeth Halloran, Toward Causal Inference With Interference, §2.1",
+              "url": "https://www.treatment-effects.com/Hudgens-Halloran-2008.pdf"
+            },
+            {
+              "title": "Peter M. Aronow and Cyrus Samii, Estimating Average Causal Effects Under General Interference, §3",
+              "url": "https://arxiv.org/pdf/1305.6156v4"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-exposure-mapping-under-interference",
+        "kind": "definition",
+        "title": "Exposure mappings and exposure consistency",
+        "statement": "For each unit define a finite-valued exposure mapping from allowed assignments. The map is sufficient for the unit's potential outcome only if assignments with the same mapped exposure always give the same outcome; this common value is Y_ij(d). Define its design probability pi_ij(d) and require it to be positive for every unit included in the exposure-specific target.",
+        "deps": [
+          "def-potential-outcomes-under-partial-interference",
+          "def-finite-randomized-treatment-assignment-model"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Peter M. Aronow and Cyrus Samii, Estimating Average Causal Effects Under General Interference, §§3–4",
+              "url": "https://arxiv.org/pdf/1305.6156v4"
+            },
+            {
+              "title": "Graeme Blair, Alexander Coppock, and Macartan Humphreys, Research Design in the Social Sciences, §18.10",
+              "url": "https://book.declaredesign.org/library/experimental-causal.html"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-two-stage-randomized-interference-design-and-effects",
+        "kind": "definition",
+        "title": "Two-stage randomized design and strategy-specific effects",
+        "statement": "Define N>1 groups with fixed sizes n_i and fixed potential outcomes under partial interference. Assign exactly C groups uniformly to strategy psi and the remainder to phi, then independently within each group choose exactly K_i^s units uniformly for treatment under its strategy s, with 1<=C<N and 1<=K_i^s<n_i. Define the strategy-specific direct, indirect, total, and overall population means and effects, and give the within-group and across-group estimators with their fixed nonzero denominators.",
+        "deps": [
+          "def-potential-outcomes-under-partial-interference",
+          "def-finite-randomized-treatment-assignment-model",
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-estimand-on-a-statistical-model",
+          "def-statistic-and-estimator",
+          "lem-finite-sum-laws",
+          "lem-finite-event-conditional-expectation-formula"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Hudgens and M. Elizabeth Halloran, Toward Causal Inference With Interference, §§2.1–3.5",
+              "url": "https://www.treatment-effects.com/Hudgens-Halloran-2008.pdf"
+            },
+            {
+              "title": "Graeme Blair, Alexander Coppock, and Macartan Humphreys, Research Design in the Social Sciences, §§18.9–18.10",
+              "url": "https://book.declaredesign.org/library/experimental-causal.html"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-ht-exposure-specific-mean-unbiased",
+        "kind": "theorem",
+        "title": "Horvitz–Thompson exposure-specific mean is design-unbiased",
+        "statement": "For a fixed finite population, known finite assignment law, sufficient exposure mapping, and positive unit exposure probabilities pi_ij(d), the estimator (1/M) sum_ij 1{D_ij=d}Y_ij/pi_ij(d) has expectation equal to the finite-population exposure mean (1/M) sum_ij Y_ij(d). Differences of such means are unbiased for the corresponding exposure contrasts.",
+        "strategy": "Write the design expectation as a finite sum over assignments. On the event D_ij=d, exposure consistency replaces the observed outcome by the fixed Y_ij(d); the event probability cancels its positive inverse weight.",
+        "deps": [
+          "def-exposure-mapping-under-interference",
+          "def-potential-outcomes-under-partial-interference",
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space",
+          "def-estimand-on-a-statistical-model",
+          "def-statistic-and-estimator",
+          "lem-finite-sum-laws",
+          "thm-linearity-of-expectation"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Peter M. Aronow and Cyrus Samii, Estimating Average Causal Effects Under General Interference, Lemma 4.1 and Appendix A.2",
+              "url": "https://arxiv.org/pdf/1305.6156v4"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-two-stage-randomized-interference-estimators-unbiased",
+        "kind": "theorem",
+        "title": "Two-stage strategy-specific effect estimators are design-unbiased",
+        "statement": "Under the explicit two-stage design, each within-group treatment-specific outcome mean, each strategy-specific group mean, and each across-group strategy mean has expectation equal to its defined finite-population target. Consequently the four displayed estimators of the direct, indirect, total, and overall effects are unbiased. No stratified-interference assumption is required for these point-estimator identities.",
+        "strategy": "Condition on the first-stage group-strategy assignment and use uniform fixed-size sampling for the second stage. Then average over the simple random sample of groups assigned to each strategy; finish by linearity for the four contrasts.",
+        "deps": [
+          "def-two-stage-randomized-interference-design-and-effects",
+          "lem-finite-simple-random-sampling-identities",
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-estimand-on-a-statistical-model",
+          "def-statistic-and-estimator",
+          "lem-finite-sum-laws",
+          "lem-finite-event-conditional-expectation-formula",
+          "thm-linearity-of-expectation"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Hudgens and M. Elizabeth Halloran, Toward Causal Inference With Interference, Theorems 1–3 and Appendices A.1–A.3",
+              "url": "https://www.treatment-effects.com/Hudgens-Halloran-2008.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "def-stratified-interference-design-based-variance-estimators",
+        "kind": "definition",
+        "title": "Stratified interference and source design-based variance estimators",
+        "statement": "In the setting of [[def-two-stage-randomized-interference-design-and-effects]], **stratified interference** means that, for each group $i$, unit $j$, and treatment count $k\\in\\{1,\\ldots,n_i-1\\}$, the value $Y_{ij}(\\mathbf z_i)$ is the same for any two assignments $\\mathbf z_i,\\mathbf z_i'$ with $\\sum_\\ell z_{i\\ell}=\\sum_\\ell z'_{i\\ell}=k$ and $z_{ij}=z'_{ij}$. Thus at a fixed group treatment count an outcome may depend on the unit's own assignment, but not on which particular peers are treated. This assumption is additional to partial interference and is not needed for point-effect unbiasedness.\n\nFor strategy $s$ and own treatment $z$, write $Y_{ij}(z;s)$ for the common outcome at count $K_i^s$ and own assignment $z$. Define\n$$S_{iz}^2(s)=\\frac1{n_i-1}\\sum_{j=1}^{n_i}\\{Y_{ij}(z;s)-\\bar Y_i(z;s)\\}^2,\\qquad d_{ij}(s)=Y_{ij}(0;s)-Y_{ij}(1;s),$$\n$$S_{i01}(s)=\\frac1{n_i-1}\\sum_{j=1}^{n_i}\\{Y_{ij}(0;s)-\\bar Y_i(0;s)\\}\\{Y_{ij}(1;s)-\\bar Y_i(1;s)\\},$$\nand\n$$S_{iD}^2(s)=\\frac1{n_i-1}\\sum_{j=1}^{n_i}\\{d_{ij}(s)-D_i(s)\\}^2,$$\nwhere $D_i(s)=\\bar Y_i(0;s)-\\bar Y_i(1;s)$. In an observed group assigned $s$, define the estimated group direct effect by\n$$\\hat D_i(s):=\\hat{\\bar Y}_i(0;s)-\\hat{\\bar Y}_i(1;s).$$\nLet $s_{iz}^2(s)$ be the ordinary sample variance of the $m_{iz}^s$ observed outcomes in arm $z$, with denominator $m_{iz}^s-1$, and let $s_{D,s}^2$ be the sample variance of the observed group direct-effect estimates $\\hat D_i(s)$ across the $C_s$ groups assigned to $s$.\n\nThe source direct-effect variance estimator under strategy $s$ is\n$$\\widehat V_D(s)=\\left(1-\\frac{C_s}{N}\\right)\\frac{s_{D,s}^2}{C_s}+\\frac1{C_sN}\\sum_{i:S_i=s}\\left\\{\\frac{s_{i0}^2(s)}{n_i-K_i^s}+\\frac{s_{i1}^2(s)}{K_i^s}\\right\\}.$$\nFor the indirect, total, and overall effect contrasts define\n$$\\widehat V_I(\\phi,\\psi)=\\frac{s_{0,\\phi}^2}{N-C}+\\frac{s_{0,\\psi}^2}{C},\\quad \\widehat V_T(\\phi,\\psi)=\\frac{s_{0,\\phi}^2}{N-C}+\\frac{s_{1,\\psi}^2}{C},$$\n$$\\widehat V_O(\\phi,\\psi)=\\frac{s_{\\phi}^2}{N-C}+\\frac{s_{\\psi}^2}{C},$$\nwhere $s_{z,s}^2$ is the sample variance across groups assigned $s$ of the observed group estimates $\\hat{\\bar Y}_i(z;s)$, and $s_s^2$ is the sample variance across such groups of $\\hat{\\bar Y}_i(s)$.\n\nThese are design-randomization variance estimators for the fixed finite-population point estimators. The group-arm sample variances in these formulas are defined only if $C\\ge2$ and $N-C\\ge2$. In addition, $\\widehat V_D(s)$ requires $2\\le K_i^s\\le n_i-2$ for every group, so both within-group arm sample variances have nonzero denominators. The point estimators themselves remain defined under the broader counts $1\\le K_i^s<n_i$.",
+        "deps": [
+          "def-two-stage-randomized-interference-design-and-effects",
+          "def-potential-outcomes-under-partial-interference",
+          "def-variance-and-covariance"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Hudgens and M. Elizabeth Halloran, Toward Causal Inference With Interference, §4.2 and Theorems 4–9",
+              "url": "https://www.treatment-effects.com/Hudgens-Halloran-2008.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-two-stage-finite-design-variance-identities",
+        "kind": "lemma",
+        "title": "Finite two-stage sampling variance identities",
+        "statement": "For fixed group-level potential means observed with independent, mean-zero within-group randomization errors under complete randomization of C of N groups, derive the design variances of a strategy mean and a two-strategy contrast, the expectation of each observed between-group sample variance, and the exact nonnegative missing group-effect heterogeneity term in the usual arm-wise contrast variance estimator.",
+        "strategy": "Decompose each observed group statistic into its fixed strategy-specific mean and a conditionally centered error. Apply the finite simple-random-sampling identities to the first-stage group sample, and compute the conditional expected sample variance by expanding around the fixed group means.",
+        "deps": [
+          "def-two-stage-randomized-interference-design-and-effects",
+          "lem-finite-simple-random-sampling-identities",
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space",
+          "def-variance-and-covariance",
+          "lem-finite-sum-laws",
+          "lem-finite-event-conditional-expectation-formula",
+          "thm-linearity-of-expectation",
+          "cor-variance-adds-for-pairwise-independent-random-variables"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Hudgens and M. Elizabeth Halloran, Toward Causal Inference With Interference, Appendices A.4 and A.6–A.9",
+              "url": "https://www.treatment-effects.com/Hudgens-Halloran-2008.pdf"
+            },
+            {
+              "title": "Peter M. Aronow and Cyrus Samii, Estimating Average Causal Effects Under General Interference, Appendix A.4",
+              "url": "https://arxiv.org/pdf/1305.6156v4"
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-stratified-interference-variance-estimators-conservative",
+        "kind": "theorem",
+        "title": "Stratified-interference variance estimators are conservative",
+        "statement": "Under stratified interference and the stated minimum sample sizes, the source variance estimator for the population direct effect under psi has expectation equal to the design variance of its point estimator plus (1/N^2) sum_i S^2_{i,D}(psi)/n_i. The arm-wise source estimators for the indirect, total, and overall contrasts have expectations equal to their design variances plus S^2_{I}/N, S^2_{T}/N, and S^2_{O}/N, respectively, where each S^2 is the finite-population variance across groups of the corresponding strategy-specific group effect. All correction terms are nonnegative. Equality holds exactly when each corrected effect is constant over the units or groups indexing its correction term.",
+        "strategy": "First reduce the within-group outcome estimators to simple random-sample means using stratified interference. The finite two-stage variance identity then gives the direct-effect correction; its two-arm form gives the three between-strategy corrections. Characterize zero finite-population variance by constancy.",
+        "deps": [
+          "def-stratified-interference-design-based-variance-estimators",
+          "lem-two-stage-finite-design-variance-identities",
+          "lem-finite-simple-random-sampling-identities",
+          "thm-two-stage-randomized-interference-estimators-unbiased",
+          "def-two-stage-randomized-interference-design-and-effects",
+          "def-variance-and-covariance",
+          "lem-finite-sum-laws",
+          "lem-finite-event-conditional-expectation-formula",
+          "thm-linearity-of-expectation",
+          "lem-measurable-functions-preserve-independence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Hudgens and M. Elizabeth Halloran, Toward Causal Inference With Interference, Theorems 4–9 and Appendices A.4–A.9",
+              "url": "https://www.treatment-effects.com/Hudgens-Halloran-2008.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 1965,
+    "id": "interference-exposure-mappings-and-design-based-effects-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Interference and exposure mappings — Examples",
+    "companion": "interference-exposure-mappings-and-design-based-effects",
+    "requires": [
+      "interference-exposure-mappings-and-design-based-effects"
+    ],
+    "items": [
+      {
+        "id": "cex-cross-group-contamination-violates-partial-interference",
+        "kind": "counterexample",
+        "title": "Cross-group contamination violates partial interference",
+        "statement": "A group's outcome need not be representable as a function of only its own assignment when a unit outside the group affects it.",
+        "strategy": "Hold the first group's assignment fixed and change only the second group's assignment; a response that changes under this comparison contradicts the defining invariance for partial interference.",
+        "deps": [
+          "def-potential-outcomes-under-partial-interference"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Hudgens and M. Elizabeth Halloran, Toward Causal Inference With Interference, §2.1",
+              "url": "https://www.treatment-effects.com/Hudgens-Halloran-2008.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-two-stage-village-strategy-contrasts",
+        "kind": "example",
+        "title": "A finite two-stage village strategy comparison",
+        "statement": "In four groups of three units, a complete two-stage design with one strategy assigning one treated unit per group and another assigning two can produce strategy-specific direct, indirect, total, and overall effects with all four finite-sample estimators equal to their targets for every assignment.",
+        "strategy": "Use outcomes equal to the total number treated in a unit's own group. Compute both strategy targets and each observed within-group and across-group mean directly from the fixed group treated counts.",
+        "deps": [
+          "thm-two-stage-randomized-interference-estimators-unbiased",
+          "def-two-stage-randomized-interference-design-and-effects"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Hudgens and M. Elizabeth Halloran, Toward Causal Inference With Interference, §§2.2–4.1",
+              "url": "https://www.treatment-effects.com/Hudgens-Halloran-2008.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-ht-exposure-specific-mean-two-unit-design",
+        "kind": "example",
+        "title": "Horvitz–Thompson exposure mean in a two-unit design",
+        "statement": "For two units assigned independently and uniformly from the four binary assignments, the exposure-specific mean for exposure (0,1) is design-unbiased under the full-assignment exposure map, even though the unit exposure indicators are dependent only through their shared assignment vector.",
+        "strategy": "List the four equally likely assignments, both units' exposure probabilities, the fixed exposure potential outcomes, and the Horvitz–Thompson estimate under each assignment; average the four estimates.",
+        "deps": [
+          "thm-ht-exposure-specific-mean-unbiased",
+          "def-exposure-mapping-under-interference"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Peter M. Aronow and Cyrus Samii, Estimating Average Causal Effects Under General Interference, §4 and Lemma 4.1",
+              "url": "https://arxiv.org/pdf/1305.6156v4"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "cex-misspecified-own-treatment-exposure-map",
+        "kind": "counterexample",
+        "title": "An own-treatment-only exposure map can be misspecified",
+        "statement": "The exposure map D_1=Z_1 need not be sufficient when a unit's outcome also depends on its peer's treatment; positive exposure probability alone then does not justify the target Y_1(0).",
+        "strategy": "Use a uniform four-assignment design with Y_1(z_1,z_2)=z_2. The assignments with D_1=0 have different outcomes, and the inverse-probability estimate for the attempted target Y_1(0)=0 has a nonzero expectation.",
+        "deps": [
+          "def-exposure-mapping-under-interference",
+          "thm-ht-exposure-specific-mean-unbiased"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Peter M. Aronow and Cyrus Samii, Estimating Average Causal Effects Under General Interference, Condition 1 and §4",
+              "url": "https://arxiv.org/pdf/1305.6156v4"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-nonadditive-spillovers-create-positive-variance-bias",
+        "kind": "example",
+        "title": "Nonadditive direct effects create positive variance-estimator bias",
+        "statement": "In a four-group, two-stage design satisfying stratified interference and all sample-size conditions, nonconstant individual direct effects make the expected source variance estimator for the population direct effect strictly larger than the design variance.",
+        "strategy": "Take four identical groups of size four, assign two groups to each strategy, and treat two units per group. Let only unit 1 have outcome 1 when treated and let every other potential outcome be zero; enumerate the within-group and first-stage distributions and compare the two variances.",
+        "deps": [
+          "thm-stratified-interference-variance-estimators-conservative",
+          "def-stratified-interference-design-based-variance-estimators"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Michael G. Hudgens and M. Elizabeth Halloran, Toward Causal Inference With Interference, Theorem 6 and Corollary",
+              "url": "https://www.treatment-effects.com/Hudgens-Halloran-2008.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  }
+]

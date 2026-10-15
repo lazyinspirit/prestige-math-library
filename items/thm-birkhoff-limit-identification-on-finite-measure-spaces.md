@@ -4,16 +4,13 @@ kind: theorem
 title: Finite-measure identification of the Birkhoff limit
 status: published
 origin: pipeline
-deps: [thm-birkhoff-ergodic-theorem, thm-maximal-ergodic-theorem, def-strict-and-mod-null-invariant-sigma-algebras, lem-mod-null-invariant-sets-have-strictly-invariant-representatives, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-integrals-are-invariant-under-measure-preserving-maps, prop-indefinite-integral-of-an-integrable-function-is-countably-additive, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-axiom-of-choice]
+deps: [thm-birkhoff-ergodic-theorem, thm-maximal-ergodic-theorem, def-strict-and-mod-null-invariant-sigma-algebras, lem-mod-null-invariant-sets-have-strictly-invariant-representatives, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-integrals-are-invariant-under-measure-preserving-maps, prop-indefinite-integral-of-an-integrable-function-is-countably-additive, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-axiom-of-choice, cor-integral-over-a-null-set-vanishes]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  audited: 2026-09-14
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-13
+  repair: research/statistical-models-experiments-62-published-birkhoff-null-set-repair.json
+  precheck: pass
 sources:
   references:
     - title: "Alessio Del Vigna, The Birkhoff Ergodic Theorem"
@@ -58,15 +55,17 @@ integrals and the representative are understood componentwise.
 
 [F5] Nonnegative integration is monotone and positively homogeneous ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]).
 
+[F6] Nonnegative integrals over measurable null sets vanish; applying this to the positive and negative parts gives the same conclusion for integrable real functions ([[cor-integral-over-a-null-set-vanishes]]).
+
 ## Proof
 
 **Proof technique:** direct invariant-stratum argument followed by Radon–Nikodym.
 
-1.1 First let $g$ be real and integrable, and choose its Birkhoff-limit representative $g^*$ to be the pointwise limit on the convergence set and zero elsewhere.  The shifted-average identity and its rearrangement show that the convergence set is strictly invariant and that $g^*$ is strictly invariant. [F1, algebra]
+1.1 First let $g$ be a finite-valued real integrable representative, let $C$ be the measurable conull set where its averages converge to a finite limit, and choose its Birkhoff-limit representative $g^*$ to be that limit on $C$ and zero elsewhere.  The shifted-average identity and its rearrangement show that the convergence set is strictly invariant and that $g^*$ is strictly invariant. [F1, algebra]
 
 1.2 Suppose first that $f$ is real.  On $(X,\mathcal I)$ define $\nu(E)=\int_Ef\,d\mu$.  This is a finite signed measure by [F3], is absolutely continuous with respect to $\mu|_{\mathcal I}$, and has finite total variation.  By [F4] there is an integrable $\mathcal I$-measurable $h$ such that $\int_Eh=\int_Ef$ for every $E\in\mathcal I$.  This is the unique step spending AC. [F3, F4]
 
-2.1 Fix a positive integer $m$ and, for $k\in\mathbb Z$, put $$D_{m,k}=\{k/m\leq g^*<(k+1)/m\}.$$ These form a measurable, strict-invariant partition of $X$.  For $\varepsilon>0$, every point of $D_{m,k}$ belongs to the positive-maximal set of $(g-(k/m-\varepsilon))\mathbf1_{D_{m,k}}$.  The maximal theorem and strict invariance therefore give $$\int_{D_{m,k}}g\,d\mu\geq(k/m-\varepsilon)\mu(D_{m,k}).$$ Since $\mu(D_{m,k})<\infty$, letting $\varepsilon\downarrow0$ gives the same inequality with $k/m$. [F1, F5, step 1.1]
+2.1 Fix a positive integer $m$ and, for $k\in\mathbb Z$, put $$D_{m,k}=\{k/m\leq g^*<(k+1)/m\}.$$ These form a measurable, strict-invariant partition of $X$. For $\varepsilon>0$, set $q=(g-(k/m-\varepsilon))\mathbf1_{D_{m,k}}$ and $M=\{\sup_{n\ge1}S_nq>0\}$. The function $q$ is integrable because $g$ is integrable and $\mu(D_{m,k})<\infty$. Strict invariance gives $A_nq=(A_ng-k/m+\varepsilon)\mathbf1_{D_{m,k}}$ pointwise. On $D_{m,k}\cap C$ these averages tend to $g^*-k/m+\varepsilon\ge\varepsilon>0$, so $D_{m,k}\cap C\subseteq M$. Outside $D_{m,k}$ all partial sums of $q$ are zero, so $M\subseteq D_{m,k}$. Thus $D_{m,k}\setminus M$ is a measurable null set. Applying [F6] to $q^+$ and $q^-$ on this difference justifies replacing the integral over $M$ by the integral over $D_{m,k}$. The maximal theorem therefore gives $$0\le\int_Mq\,d\mu=\int_{D_{m,k}}q\,d\mu=\int_{D_{m,k}}g\,d\mu-(k/m-\varepsilon)\mu(D_{m,k}).$$ Since $\mu(D_{m,k})<\infty$, letting $\varepsilon\downarrow0$ gives the same inequality with $k/m$. [F1, F6, step 1.1, algebra]
 
 3.1 On $D_{m,k}$ one has $g^*<(k+1)/m$, so step 2.1 gives $$\int_{D_{m,k}}g^*\,d\mu\leq\int_{D_{m,k}}g\,d\mu+\frac1m\mu(D_{m,k}).$$ Countable additivity over the partition is legitimate because $g$ and $g^*$ are integrable. Summing yields $$\int_Xg^*\,d\mu\leq\int_Xg\,d\mu+\frac{\mu(X)}m.$$ Letting $m\to\infty$ and then applying the same inequality to $-g$, whose limit is $-g^*$, proves $\int g^*=\int g$. [F1, F3, F5, step 2.1]
 

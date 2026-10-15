@@ -1,0 +1,2175 @@
+{
+  "version": 1,
+  "scope": [
+    "def-wishart-law",
+    "lem-standard-normal-matrix-has-full-row-rank-almost-surely",
+    "def-multivariate-normal-sample-model-and-statistics",
+    "lem-standard-wishart-independent-normal-quadratic-form-is-f",
+    "thm-multivariate-normal-sample-mean-scatter-independence-and-wishart",
+    "thm-covariance-likelihood-ratio-asymptotic-chi-square",
+    "thm-hotelling-t2-exact-f-distribution",
+    "thm-wishart-trace-statistic-is-chi-square",
+    "cor-exact-hotelling-one-sample-test",
+    "ex-sample-covariance-singular-when-sample-size-not-exceeding-dimension",
+    "ex-exact-wishart-trace-and-asymptotic-covariance-lrt-differ",
+    "ex-hotelling-t2-two-dimensional-exact-test"
+  ],
+  "contracts": {
+    "def-wishart-law": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition fixes integers p,m>=1; its m Gaussian outer products never form an empty sum and Sym_p has positive dimension. Singular scale is allowed but does not change the number of factors.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner-focused-boundary-review",
+            "reason": "Definition fixes integers p,m>=1; its m Gaussian outer products never form an empty sum and Sym_p has positive dimension. Singular scale is allowed but does not change the number of factors. The detector matched an indexed finite sum, but its explicitly positive fixed index count cannot be0 under this Definition."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits Σ=0; the pushforward is concentrated at zero. Evidence: Definition section."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes p=m=1 and a single outer product. Evidence: Definition section."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits singular scale and m<p without asserting a density. Evidence: Definition section."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition includes m=1 and allows singular support at m=p. Evidence: Definition section."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition assumes AC for finite product Gaussian law. Evidence: Definition section."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition identifies the pushforward by the continuous outer-product sum with the law of that same sum of independent Gaussian vectors. A tuple distributed by the finite Gaussian product pushes forward to the stated Wishart measure under its sum map."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition identifies the pushforward by the continuous outer-product sum with the law of that same sum of independent Gaussian vectors. Independent Gaussian vectors have that product joint law; applying the same measurable sum map yields exactly the defining pushforward."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Reviewed the full Definition and actual Gaussian, probability/product, law, continuous-map and AC/countable-choice supplier statements. The finite product exists by sigma-finiteness, the outer-product sum is continuous, and its pushforward equals the independent-sum law. p,m>=1 exclude empty sums; m=1, p=1, singular scale and zero scale are admitted without claiming a density. AC is explicitly inherited for Gaussian construction and Borel measurability. No defect; no item edit. Step 5 correction: the earlier no-defect conclusion missed that the Gaussian Definition defers uniqueness. Added lem-characteristic-function-of-a-multivariate-normal-law to the item and manifest deps. Its complete proof identifies the vector law by scalar uniqueness and Cramer-Wold, including singular scales; product and pushforward are now uniquely specified. The Definition is unchanged. This is a repair record, not an independent acceptance of the repair."
+      }
+    },
+    "lem-standard-normal-matrix-has-full-row-rank-almost-surely": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $k=0$, the first column is nonzero almost surely: the event $G_1=0$ is contained in the event that its first coordinate is zero, which has probability zero because a standard normal has a density. For $1\\le k<p$, suppose the first $k$ columns are linearly independent. For each fixed such tuple $v_1,\\ldots,v_k$, their span $V$ is proper; by [F3] choose $a\\ne0$ with $a\\perp V$. The next column is independent of this tuple by [F1], and [F2] gives $a^TG_{k+1}\\sim N(0,\\|a\\|^2)$, so $\\mathbb P(G_{k+1}\\in V)=0$ because that event is contained in $\\{a^TG_{k+1}=0\\}$. The set of dependent $(k+1)$-tuples is Borel, since dependence is the simultaneous vanishing of its $(k+1)\\times(k+1)$ minors and [F5] makes these determinant maps Borel. Integrating these zero-probability sections by [F1] and [F4], and adding the null set of dependent first $k$-tuples, shows that the first $k+1$ columns are linearly independent almost surely.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying step 1.1 successively through $k=p-1$ shows that the square matrix $B=[G_1|\\cdots|G_p]$ is invertible almost surely. For any nonzero $v\\in\\mathbb R^p$, the first $p$ coordinates of $G^Tv$ are $B^Tv\\ne0$, so $v^TGG^Tv=\\|G^Tv\\|^2>0$. Thus $GG^T$ is positive definite almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires 1<=p<=m; step 1.1 starts with a first standard-normal column and step 2.1 uses the first p columns, so no zero-column case is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof proves the zero first-column event is null. Evidence: proof steps 1.1, 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the proof starts at k=0 and includes p=1. Evidence: proof steps 1.1, 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof prove rank deficiency is null. Evidence: proof steps 1.1, 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the proof includes m=p. Evidence: proof steps 1.1, 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and the proof identify the AC Gaussian/section construction. Evidence: proof steps 1.1, 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement proves independence of the first p columns almost surely and consequent positive definiteness of GG^T; step 2.1 proves only this implication, with no characterization of non-Gaussian matrices."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement proves independence of the first p columns almost surely and consequent positive definiteness of GG^T; step 2.1 proves only this implication, with no characterization of non-Gaussian matrices."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Reviewed both proof steps and all cited supplier statements. For each fixed independent k-tuple, a nonzero orthogonal normal gives a null Gaussian hyperplane; the dependent tuple set is Borel by minors, so product law and Tonelli integrate sections without requiring a measurable choice of normal. Finite induction includes p=1 and m=p. A single invertible first-p block proves simultaneous positive definiteness for every nonzero v, avoiding an uncountable intersection of probability-one events. AC supplies the stated Gaussian/measurability conventions. No defect; no item edit."
+      }
+    },
+    "def-multivariate-normal-sample-model-and-statistics": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition sets n>=2,p>=1. The coordinate tuple and sums run from1 through n, and both denominators n and n-1 are positive; n=0 has no defined sample mean here.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner-focused-boundary-review",
+            "reason": "Definition sets n>=2,p>=1. The coordinate tuple and sums run from1 through n, and both denominators n and n-1 are positive; n=0 has no defined sample mean here. The detector matched an indexed finite sum, but its explicitly positive fixed index count cannot be0 under this Definition."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition includes μ=0 while requiring Σ≻0. Evidence: Definition section."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows p=1 and n=2, the smallest defined covariance sample. Evidence: Definition section."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition excludes singular population covariance; realized scatter may be singular. Evidence: Definition section."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition gives n=2 and the n−1 covariance denominator. Evidence: Definition section."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition assumes AC for the product law and Borel statistics. Evidence: Definition section."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition specifies a product experiment and the three continuous statistics R/(n-1),R/n and sample mean; it does not equate a property with a necessary-and-sufficient model condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition specifies a product experiment and the three continuous statistics R/(n-1),R/n and sample mean; it does not equate a property with a necessary-and-sufficient model condition."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Reviewed the complete Definition and actual scientific-contract, experiment, parametric-model, statistic, Gaussian and product/measurability supplier interfaces. n>=2 makes S=R/(n-1) defined; M=R/n is distinguished, with no premature MLE claim. All finite polynomial statistic maps are continuous on the stated Euclidean product. Positive-definite parameter scale is distinct from potentially singular observed scatter. The abstract reference model explicitly records sampling/vector units, fixed parameters, observed random vectors, no latent/design/conditioning mechanism, identity observation and no empirical adequacy claim. No defect; no item edit. Step 5 correction: the MLE rejection is not upheld because M is explicitly a candidate and the later likelihood theorem assumes n>p and proves positivity before optimization. Independent review found the Gaussian-uniqueness supplier missing from the parameter-indexed product construction. Added lem-characteristic-function-of-a-multivariate-normal-law to the item and manifest deps. The complete Definition is unchanged. This is a repair record, not an independent acceptance of the repair."
+      }
+    },
+    "lem-standard-wishart-independent-normal-quadratic-form-is-f": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-wishart-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $p,m\\ge1$ be integers and let $\\Sigma$ be a real symmetric positive-semidefinite $p\\times p$ matrix, in the sense of [[def-multivariate-normal-law]]. Give $\\mathrm{Sym}_p$, the space of real symmetric $p\\times p$ matrices, its Euclidean Borel sigma-algebra by identifying a matrix with its upper-triangular entries. The finite product measure $N_p(0,\\Sigma)^{\\otimes m}$ exists because each factor is a probability measure and hence sigma-finite. Define the **Wishart law** $W_p(\\Sigma,m)$ as the pushforward of this product measure by the continuous map $(z_1,\\ldots,z_m)\\mapsto\\sum_{j=1}^m z_jz_j^T$. Equivalently, it is the law of $\\sum_{j=1}^m Z_jZ_j^T$ for independent $Z_j\\sim N_p(0,\\Sigma)$.\n\nHere $\\Sigma$ is the scale matrix and the positive integer $m$ is the degrees of freedom. This definition allows a singular Wishart law when $m<p$ or $\\Sigma$ is singular; no Lebesgue density is included in the convention. The usual nonsingular density when $m\\ge p$ is not needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-standard-normal-matrix-has-full-row-rank-almost-surely",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $1\\le p\\le m$ and let $G=[G_1|\\cdots|G_m]$ be a $p\\times m$ matrix whose columns are independent $N_p(0,I_p)$ random vectors. Then the first $p$ columns are linearly independent almost surely. Consequently $GG^T$ is positive definite almost surely.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $Z\\sim N_n(0,I_n)$ have independent standard-normal coordinates, and let $U\\in\\mathbb R^{n\\times n}$ satisfy $U^TU=I_n$. Then $UZ$ also has independent $N(0,1)$ coordinates. Here $I_n$ is the identity matrix and $U$ is orthogonal.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-orthogonal-projection-has-independent-chi-square-sums",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $Z\\sim N_n(0,I_n)$, and let $P\\in\\mathbb R^{n\\times n}$ be an orthogonal projection of rank $r$, where $0\\le r\\le n$. Then the random vectors $PZ$ and $(I_n-P)Z$ are independent, and\n$$\n\\|PZ\\|^2\\sim\\chi_r^2,\\qquad \\|(I_n-P)Z\\|^2\\sim\\chi_{n-r}^2.\n$$\nThe two squared norms are independent. The cases $r=0$ and $r=n$ are included, with $\\chi_0^2=\\delta_0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every integer $k\\ge1$, the law $\\chi_k^2$ has density\n$$\nf_k(x)=c_k x^{k/2-1}e^{-x/2}\\mathbf 1_{\\{x>0\\}},\\qquad c_k=\\frac{\\sigma_{k-1}(S^{k-1})}{2(2\\pi)^{k/2}}>0,\n$$\nwhere $\\sigma_{k-1}$ is the polar surface measure on the unit sphere in $\\mathbb R^k$. Consequently, $Q_k>0$ almost surely, and its cumulative distribution function is continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define\n\n$$\\mathcal G_r:=\\sigma\\left(\\bigcup_{i\\in J_r}\\mathcal F_i\\right).$$\n\nThen the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+          "source_section": "Statement",
+          "quote": "An endomorphism $P$ of a finite-dimensional inner product space is the orthogonal projection onto some subspace if and only if\n\n$$P^2=P\\qquad\\text{and}\\qquad P^*=P.$$\n\nIn that case it is the orthogonal projection onto $\\operatorname{im}P$, along $\\ker P=(\\operatorname{im}P)^\\perp$. The cases $P=0$ and $P=I$ are included.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], realize $W=GG^T$ with $G=[g_1|\\cdots|g_m]$ and independent $g_j\\sim N_p(0,I_p)$. For any square matrix $A$, extend inversion by setting $J(A)=A^{-1}$ when $\\det A\\ne0$ and $J(A)=0$ otherwise. This is Borel: the invertible matrices form an open set, inversion is continuous there, and the complementary branch is constant; [F11] supplies Euclidean Borel measurability. Thus $J(GG^T)$ is a Borel matrix-valued random element and agrees with $W^{-1}$ whenever $GG^T$ is invertible. Since $m\\ge p$, [F2] makes $G$ full row rank almost surely; hence for nonzero $v$, $v^TWv=\\|G^Tv\\|^2>0$ and $W$ is invertible almost surely.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $p\\ge2$, write the first row of $G$ as $g$ and the remaining $p-1$ rows as $G_2$. The event $E_2=\\{\\det(G_2G_2^T)\\ne0\\}$ is Borel. Define $C^\\dagger=(G_2G_2^T)^{-1}$ on $E_2$ and $C^\\dagger=0$ on $E_2^c$, and put $P=G_2^TC^\\dagger G_2$; this is Borel by the same piecewise-inversion argument as in step 1.1. By [F2], $E_2$ has probability one. On $E_2$, direct multiplication gives $P^T=P$ and $P^2=P$, and its image is the row space of $G_2$, of dimension $p-1$; [F9] identifies it as an orthogonal projection. For $p=1$, use the empty-row convention $G_2=0$, $P=0$. In either case define the Borel scalar $Q=g(I_m-P)g^T$ on the whole matrix space. On the full-probability event that $G$ has full row rank, the block matrix $W=GG^T=\\begin{pmatrix}gg^T&gG_2^T\\\\G_2g^T&C\\end{pmatrix}$ has invertible lower block $C$ when $p\\ge2$, and solving $Wx=e_1$ gives $e_1^TW^{-1}e_1=(gg^T-gG_2^TC^{-1}G_2g^T)^{-1}$. Thus for $p\\ge2$ this $Q$ equals $(e_1^TW^{-1}e_1)^{-1}$ on the full-probability event. For $p=1$, $W=gg^T$ and the same identity reads $Q=gg^T=(e_1^TW^{-1}e_1)^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F9",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The entries of $G$ are independent standard normals, so its first row $g$ is independent of the remaining rows $G_2$ by [F7]. For each fixed full-row-rank value of $G_2$, $I_m-P$ is an orthogonal projection of rank $m-p+1$. Therefore [F4] gives the section law $Q\\sim\\chi^2_{m-p+1}$ for every such $G_2$; the $p=1$ case follows from [F5]. The matrix rank event is Borel because it is determined by continuous minors, and the extended map $P(G_2)$ is Borel by step 2.1. The exceptional set has probability zero by [F2]. Applying the product-law identity [F8] to these Borel sections shows that the unconditional law of the Borel extension $Q=g(I_m-P)g^T$ is also $\\chi^2_{m-p+1}$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "F11",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any fixed unit vector $u\\in\\mathbb R^p$, [F10] supplies an orthogonal matrix $U$ with $Uu=e_1$. By [F3] and [F7], applying $U$ to each independent column preserves their joint standard-normal product law; hence $UWU^T$ has the same law as $W$. Let $h(t)=t^{-1}$ for $t>0$ and $h(t)=0$ otherwise. Since $J(W)=W^{-1}$ almost surely by step 1.1 and $W\\succ0$ almost surely, $h(u^TJ(W)u)$ has the same law as $Q$ in step 3.1 for every unit $u$, using the orthogonal invariance just proved. Set $U_Z=Z/\\|Z\\|$ when $Z\\ne0$ and let $U_Z=e_1$ when $Z=0$. The map $z\\mapsto U_z$ is Borel, and $Q_Z:=h(U_Z^TJ(W)U_Z)$ is Borel because $J$ and $h$ are Borel; $Z=0$ is null by [F5]–[F6]. For Borel sets $A,B$, independence and the product law give $$\\mathbb P(\\|Z\\|^2\\in A,Q_Z\\in B)=\\int_{\\{z:\\|z\\|^2\\in A\\}}\\mathbb P_W\\bigl(h(u_z^TJ(W)u_z)\\in B\\bigr)\\,d\\mathbb P_Z(z),$$ where $u_z=z/\\|z\\|$ for $z\\ne0$ and $u_0=e_1$. The inner probability is the same for every unit $u_z$, so this factors as $\\mathbb P(\\|Z\\|^2\\in A)\\mathbb P(Q\\in B)$. Thus $Q_Z$ is independent of $\\|Z\\|^2$ and has the same $\\chi^2_{m-p+1}$ law as $Q$ in step 3.1.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "F11",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F5], $\\|Z\\|^2\\sim\\chi_p^2$ and it is independent of $Q_Z\\sim\\chi^2_{m-p+1}$ by step 4.1. Therefore $\\frac{m-p+1}{p}Z^TW^{-1}Z=\\frac{\\|Z\\|^2/p}{Q_Z/(m-p+1)}$ has law $F_{p,m-p+1}$ by the defining Fisher ratio; its denominator is positive almost surely by [F6].",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires m>=p>=1 so the full Gaussian matrix is nonempty, but step 2.1 explicitly allows the empty remaining-row block at p=1: G2=0 and P=0. Step 3.1 then uses Q=gg^T with chi-square_m law and step 5.1 retains positive F degrees(1,m). This is a proved empty-submatrix case, not an excluded full-sample case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof defines U_Z at Z=0 and shows the event is null. Evidence: proof steps 1.1, 2.1, 3.1, 4.1, 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the proof uses the p=1 empty-row convention. Evidence: proof steps 1.1, 2.1, 3.1, 4.1, 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof proves W≻0 at m=p, with one denominator degree. Evidence: proof steps 1.1, 2.1, 3.1, 4.1, 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the proof and 3.1 include m=p and p=1. Evidence: proof steps 1.1, 2.1, 3.1, 4.1, 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and the proof identify the AC uses. Evidence: proof steps 1.1, 2.1, 3.1, 4.1, 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is the Fisher distribution conclusion for independent W and Z. Steps 1.1 through5.1 establish that law under the stated hypotheses and assert no converse from an F-distributed scalar to independence or Wishart marginals."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is the Fisher distribution conclusion for independent W and Z. Steps 1.1 through5.1 establish that law under the stated hypotheses and assert no converse from an F-distributed scalar to independence or Wishart marginals."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Reviewed all five proof steps and exact cited supplier statements: Gaussian product invariance, grouping/measurable independence, rank, orthogonal projections, chi-square positivity, Fisher definition and Tonelli. A product realization may replace (W,Z) since their joint law is the product; it preserves the statistic law. Piecewise inversion and projection maps are Borel. Schur complement gives Q=(e1^T W^-1 e1)^-1; conditional sections of the residual projection have rank m-p+1. Orthogonal invariance makes the directional inverse-form law constant, and the displayed product integral proves independence from ||Z||^2 rather than assuming it. p=1 uses P=0; m=p still gives positive denominator degree one. All factors give (m-p+1) Z^T W^-1 Z/p ~ F(p,m-p+1). No defect; no item edit."
+      }
+    },
+    "thm-multivariate-normal-sample-mean-scatter-independence-and-wishart": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-sample-model-and-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC. Fix integers $n\\ge2$ and $p\\ge1$. Let $\\mathcal S_{++}^p$ be the set of real symmetric $p\\times p$ matrices $\\Sigma$ such that $v^T\\Sigma v>0$ for every nonzero $v\\in\\mathbb R^p$. The iid multivariate-normal sampling experiment has data space $\\mathcal X=(\\mathbb R^p)^n$ with sigma-algebra $\\mathcal B(\\mathbb R^p)^{\\otimes n}$, parameter set $\\Theta=\\mathbb R^p\\times\\mathcal S_{++}^p$, and sampling law $P_{\\mu,\\Sigma}=N_p(\\mu,\\Sigma)^{\\otimes n}$. The finite product is a probability measure by [[def-probability-measure]] and [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]. The coordinate projection $X_i$ is the complete vector observation for sampling unit $i$; its $p$ coordinates need not be independent.\n\nFor $x=(x_1,\\ldots,x_n)\\in\\mathcal X$, define\n$$\\bar x=\\frac1n\\sum_{i=1}^n x_i,\\qquad R(x)=\\sum_{i=1}^n(x_i-\\bar x)(x_i-\\bar x)^T,\\qquad S(x)=\\frac{R(x)}{n-1},\\qquad M(x)=\\frac{R(x)}n.$$\nThe functions $x\\mapsto\\bar x$, $S(x)$, and $M(x)$ are continuous, hence Borel measurable under AC and [[lem-ac-supplies-sequential-choices-for-probability-constructions]]; they are statistics in the experiment by [[def-statistic-and-estimator]]. Here $S$ uses the $n-1$ covariance denominator, while $M$ is the $n$-denominator covariance candidate whose maximum-likelihood property is proved separately below.\n\nThis item instantiates the mathematical portion of the scientific model contract ([[def-scientific-statistical-model-contract]]) as follows. One sampling and analysis unit is one complete observed vector $X_i$; index $i$ identifies the sampling unit and coordinate $a$ identifies a component within that vector. For fixed parameter label $\\theta=(\\mu,\\Sigma)$, $\\mu$ and $\\Sigma$ are fixed, every $X_i$ is random, every component of each $X_i$ is observed, and there are no latent quantities, predictors, treatments, or randomization. The target population for this reference experiment is the abstract law $N_p(\\mu,\\Sigma)$ of a vector-valued sampling unit, and the target parameter is $\\theta$ itself; no separate scientific estimand or physical setting is asserted. The observation map records the complete vector tuple unchanged, and inference uses the joint product law, with no conditioning convention beyond that law. No topological support or empirical adequacy claim is needed; this is a mathematical reference model, not an assertion that observed scientific data follow it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $Z\\sim N_n(0,I_n)$ have independent standard-normal coordinates, and let $U\\in\\mathbb R^{n\\times n}$ satisfy $U^TU=I_n$. Then $UZ$ also has independent $N(0,1)$ coordinates. Here $I_n$ is the identity matrix and $U$ is orthogonal.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define\n\n$$\\mathcal G_r:=\\sigma\\left(\\bigcup_{i\\in J_r}\\mathcal F_i\\right).$$\n\nThen the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-wishart-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $p,m\\ge1$ be integers and let $\\Sigma$ be a real symmetric positive-semidefinite $p\\times p$ matrix, in the sense of [[def-multivariate-normal-law]]. Give $\\mathrm{Sym}_p$, the space of real symmetric $p\\times p$ matrices, its Euclidean Borel sigma-algebra by identifying a matrix with its upper-triangular entries. The finite product measure $N_p(0,\\Sigma)^{\\otimes m}$ exists because each factor is a probability measure and hence sigma-finite. Define the **Wishart law** $W_p(\\Sigma,m)$ as the pushforward of this product measure by the continuous map $(z_1,\\ldots,z_m)\\mapsto\\sum_{j=1}^m z_jz_j^T$. Equivalently, it is the law of $\\sum_{j=1}^m Z_jZ_j^T$ for independent $Z_j\\sim N_p(0,\\Sigma)$.\n\nHere $\\Sigma$ is the scale matrix and the positive integer $m$ is the degrees of freedom. This definition allows a singular Wishart law when $m<p$ or $\\Sigma$ is singular; no Lebesgue density is included in the convention. The usual nonsingular density when $m\\ge p$ is not needed below.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-standard-normal-matrix-has-full-row-rank-almost-surely",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $1\\le p\\le m$ and let $G=[G_1|\\cdots|G_m]$ be a $p\\times m$ matrix whose columns are independent $N_p(0,I_p)$ random vectors. Then the first $p$ columns are linearly independent almost surely. Consequently $GG^T$ is positive definite almost surely.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $Y_i=\\Sigma^{-1/2}(X_i-\\mu)$. The positive root exists by [F10], and if $\\Sigma^{1/2}v=0$ then $v^T\\Sigma v=\\|\\Sigma^{1/2}v\\|^2=0$, so $\\Sigma\\succ0$ makes the root invertible. Whitening is a continuous, hence Borel, map by [F9]; [F6] therefore preserves independence of the sample vectors. By [F2], each $Y_i\\sim N_p(0,I_p)$ has independent standard-normal coordinates, and [F11] gives the product joint law across $i$. Thus all $np$ entries $Y_{ia}$ are independent standard normals. Let $u=n^{-1/2}(1,\\ldots,1)^T\\in\\mathbb R^n$. By [F3], complete $u$ to an orthonormal basis $u_1=u,u_2,\\ldots,u_n$ of $\\mathbb R^n$. For each coordinate $a\\in\\{1,\\ldots,p\\}$, the sample-coordinate vector $(Y_{1a},\\ldots,Y_{na})^T$ is therefore standard normal in $\\mathbb R^n$, and these $p$ vectors are independent.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "F9",
+            "F10",
+            "F11",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $Y=[Y_1|\\cdots|Y_n]$ and, for each $j,a$, define $Y'_{ja}=u_j^T(Y_{1a},\\ldots,Y_{na})^T$. Applying the orthogonal invariance [F4] separately to the $p$ independent coordinate vectors gives independent standard-normal entries within each transformed coordinate vector; [F6] preserves independence between those $p$ vectors under their separate orthogonal maps. Thus all $np$ entries $Y'_{ja}$ are independent standard normals, and the $p$-vectors $Y'_1,\\ldots,Y'_n$ formed from their coordinates are independent $N_p(0,I_p)$ vectors.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $u_1=u$, $Y'_1=\\sqrt n\\,n^{-1}\\sum_iY_i=\\sqrt n\\,\\Sigma^{-1/2}(\\bar X-\\mu)$. Its law and [F2] give $\\sqrt n(\\bar X-\\mu)\\sim N_p(0,\\Sigma)$. The vector $Y'_1$ is independent of $(Y'_2,\\ldots,Y'_n)$ by [F5].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The matrix $U=[u_1|\\cdots|u_n]$ is orthogonal and $u_1=u$. Hence $YY^T$ splits as $YY^T=Yuu^TY^T+\\sum_{j=2}^nY u_ju_j^TY^T$. The first term is $n\\bar Y\\bar Y^T$, and the remaining terms are $Y'_jY_j'^T$, so $\\sum_i(Y_i-\\bar Y)(Y_i-\\bar Y)^T=\\sum_{j=2}^nY'_jY_j'^T$. Since $X_i-\\bar X=\\Sigma^{1/2}(Y_i-\\bar Y)$, it follows that $(n-1)S=\\Sigma^{1/2}(\\sum_{j=2}^nY'_jY_j'^T)\\Sigma^{1/2}$. The independent vectors in [F5] and Wishart definition [F7] give $(n-1)S\\sim W_p(\\Sigma,n-1)$. The sample mean is a function of $Y'_1$, while $S$ is a function of $Y'_2,\\ldots,Y'_n$; the maps are Borel by [F9], so [F6] gives $\\bar X\\perp S$.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $n>p$, then $n-1\\ge p$ and the residual vectors $Y'_2,\\ldots,Y'_n$ are independent standard-normal columns. By [F8], their $p\\times(n-1)$ matrix has row rank $p$ almost surely. Its sum of column outer products is therefore positive definite; the congruence in step 4.1 and $n-1>0$ show $S\\succ0$ almost surely.",
+          "step": "5.1",
+          "inputs": [
+            "F8",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires n>=2,p>=1. Step 4.1 retains n-1 residual normal vectors, so the scatter has at least one outer-product summand even when it is singular."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof center at μ without requiring μ≠0. Evidence: proof steps 1.1, 2.1, 3.1, 4.1, 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the proof include p=1 and n=2. Evidence: proof steps 1.1, 2.1, 3.1, 4.1, 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof gives Wishart law for n≤p; the proof asserts S≻0 only for n>p. Evidence: proof steps 1.1, 2.1, 3.1, 4.1, 5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the proof include n=2 and n=p+1. Evidence: proof steps 1.1, 2.1, 3.1, 4.1, 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and the proof identify AC uses. Evidence: proof steps 1.1, 2.1, 3.1, 4.1, 5.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement gives the mean law, mean/scatter independence and Wishart scatter jointly; step 5.1 adds positive definiteness when n>p, without asserting the converse of the Gaussian sampling assumption."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement gives the mean law, mean/scatter independence and Wishart scatter jointly; step 5.1 adds positive definiteness when n>p, without asserting the converse of the Gaussian sampling assumption."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Reviewed all five proof steps and actual cited Gaussian, independence/grouping, orthogonal/basis, square-root, Wishart, rank and measurable-map supplier statements. Whitening preserves vector independence; rotating each independent coordinate row creates np independent standard-normal entries. The first contrast gives the sample mean; the remaining n-1 contrasts give scatter and are independent of the first. Congruence gives Wishart scale Sigma without a density assertion. n>=2 ensures positive degrees; n>p is used only for rank and inverse availability, covering n=p+1 and p=1. AC and measurability assumptions are explicit. No defect; no item edit."
+      }
+    },
+    "thm-covariance-likelihood-ratio-asymptotic-chi-square": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-sample-model-and-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC. Fix integers $n\\ge2$ and $p\\ge1$. Let $\\mathcal S_{++}^p$ be the set of real symmetric $p\\times p$ matrices $\\Sigma$ such that $v^T\\Sigma v>0$ for every nonzero $v\\in\\mathbb R^p$. The iid multivariate-normal sampling experiment has data space $\\mathcal X=(\\mathbb R^p)^n$ with sigma-algebra $\\mathcal B(\\mathbb R^p)^{\\otimes n}$, parameter set $\\Theta=\\mathbb R^p\\times\\mathcal S_{++}^p$, and sampling law $P_{\\mu,\\Sigma}=N_p(\\mu,\\Sigma)^{\\otimes n}$. The finite product is a probability measure by [[def-probability-measure]] and [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]. The coordinate projection $X_i$ is the complete vector observation for sampling unit $i$; its $p$ coordinates need not be independent.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\nthe product measure $\\lambda_m \\times \\lambda_n$ and the Euclidean Lebesgue\nmeasure $\\lambda_{m+n}$ agree on every Borel subset of $\\mathbb R^{m+n}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $m\\ge1$, let U,V be open subsets of $\\mathbb R^m$, and let $T:U\\to V$ be a $C^1$ diffeomorphism. For every nonnegative Borel $h:V\\to[0,\\infty]$, $\\int_V h(y)\\,dy=\\int_U h(T(x))|\\det DT(x)|\\,dx$, with equality in $[0,\\infty]$ and $0\\cdot\\infty=0$. This statement concerns Borel h; no completed-measurable substitution is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-standard-normal-matrix-has-full-row-rank-almost-surely",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $1\\le p\\le m$ and let $G=[G_1|\\cdots|G_m]$ be a $p\\times m$ matrix whose columns are independent $N_p(0,I_p)$ random vectors. Then the first $p$ columns are linearly independent almost surely. Consequently $GG^T$ is positive definite almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-multivariate-iid-central-limit-theorem",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $d\\ge1$ be a finite integer. Let $(X_k)_{k\\ge1}$ be iid $\\mathbb R^d$-valued random vectors with $\\mathbb E\\|X_1\\|^2<\\infty$, mean m and covariance Sigma. Then $$n^{-1/2}\\sum_{k=1}^n(X_k-m)\\Rightarrow N_d(0,\\Sigma).$$ The covariance may be singular.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-vector-stochastic-order-calculus",
+          "source_section": "Statement",
+          "quote": "Let all random vectors with index $n$ be defined on a common probability space for that $n$; the spaces may vary with $n$. In any fixed finite-dimensional Euclidean space, the following rules hold:",
+          "uses": [
+            "1.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.",
+          "uses": [
+            "1.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-vector-slutsky",
+          "source_section": "Statement",
+          "quote": "Let $d,k,m\\ge1$ be fixed. For each $n$, let $X_n\\in\\mathbb R^d$ and $Y_n\\in\\mathbb R^k$ be random vectors on one probability space; the probability space may vary with $n$. Let $X\\in\\mathbb R^d$ be a random vector on any probability space, and let $c\\in\\mathbb R^k$ be constant. If $X_n\\Rightarrow X$ and $Y_n-c=o_P(1)$, then\n$$ (X_n,Y_n)\\Rightarrow(X,c). $$\nConsequently, for every continuous $h:\\mathbb R^{d+k}\\to\\mathbb R^m$, $h(X_n,Y_n)\\Rightarrow h(X,c)$. No independence between $X_n$ and $Y_n$ is required.",
+          "uses": [
+            "1.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-continuous-mapping-theorem",
+          "source_section": "Statement",
+          "quote": "Let S,T be metric spaces, $g:S\\to T$ measurable, and $\\mu_n\\Rightarrow\\mu$. If the discontinuity set $D_g$ is $\\mu$-null, then $g_*\\mu_n\\Rightarrow g_*\\mu$. Consequently $X_n\\Rightarrow X$ implies $g(X_n)\\Rightarrow g(X)$ whenever $P_X(D_g)=0$.",
+          "uses": [
+            "1.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-wald-score-likelihood-ratio-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied density representatives in\n[[def-score-and-fisher-information]] and [[def-axiom-of-choice]]. Let\n$X_1,\\ldots,X_n$ be iid from a dominated parametric model on an open\n$\\Theta\\subset\\mathbb R^d$, and let $\\ell_n(\\theta)=\\sum_{i=1}^n\\log\np_\\theta(X_i)$. For any nested null $\\Theta_0\\subseteq\\Theta$ for which the\nmaxima exist, the **likelihood-ratio statistic** is\n$$L_n=2\\left\\{\\sup_{\\theta\\in\\Theta}\\ell_n(\\theta)-\\sup_{\\theta\\in\\Theta_0}\\ell_n(\\theta)\\right\\}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $Z\\sim N_n(0,I_n)$ have independent standard-normal coordinates, and let $U\\in\\mathbb R^{n\\times n}$ satisfy $U^TU=I_n$. Then $UZ$ also has independent $N(0,1)$ coordinates. Here $I_n$ is the identity matrix and $U$ is orthogonal.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2] and [F3], one observation has density $\\phi_{\\mu,\\Sigma}(x)=(2\\pi)^{-p/2}(\\det\\Sigma)^{-1/2}\\exp[-(x-\\mu)^T\\Sigma^{-1}(x-\\mu)/2]$: the independent-coordinate product density follows from [F4], its continuous Gaussian formula is Borel by [F15], and the invertible affine map $z\\mapsto\\mu+\\Sigma^{1/2}z$ has determinant $|\\det\\Sigma^{1/2}|=(\\det\\Sigma)^{1/2}$, so [F5] gives the displayed density. Independence in [F1] then makes the sample density its product over $i=1,\\ldots,n$. The finite-dimensional Lebesgue measure is sigma-finite by [F13], so the product law is dominated by it and the displayed function is a likelihood density by [F14].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F13",
+            "F14",
+            "F15",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Under $H_0$, the positive root $\\Sigma_0^{1/2}$ is invertible by [F12], so define $Y_i=\\Sigma_0^{-1/2}(X_i-\\mu)$. By [F1]–[F2] these are iid $N_p(0,I_p)$. Write $C_n=n^{-1}\\sum_iY_iY_i^T$ and $A_n=\\Sigma_0^{-1/2}M\\Sigma_0^{-1/2}=C_n-\\bar Y\\bar Y^T$. For a symmetric matrix, let $\\operatorname{vech}$ list its upper-triangular entries in a fixed order; put $V_i=\\operatorname{vech}(Y_iY_i^T-I_p)$. These vectors have mean zero and diagonal covariance: diagonal coordinates have variance $2$, off-diagonal coordinates variance $1$, and distinct coordinates have covariance zero. Indeed, independence and symmetry give zero for any product with an odd coordinate power; integration by parts against [F3]'s density gives $E Z^2=1$ and $E Z^4=3$ (using $\\phi'(z)=-z\\phi(z)$ and vanishing polynomial-times-Gaussian boundary terms), while independence factors mixed even products. These finite moments make $V_i$ square-integrable, so [F7] yields $\\sqrt n\\operatorname{vech}(C_n-I_p)\\Rightarrow N(0,D)$ with those diagonal variances. Also $\\sqrt n\\bar Y=O_P(1)$ by [F7]–[F8], whence $\\sqrt n\\bar Y\\bar Y^T=n^{-1/2}(\\sqrt n\\bar Y)(\\sqrt n\\bar Y)^T=o_P(1)$ by [F8]. Thus $H_n=\\sqrt n(A_n-I_p)$ converges in distribution to a symmetric Gaussian matrix $H$ whose entries on and above the diagonal are independent, with variances $2$ on the diagonal and $1$ off it.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Taking logarithms of that positive product density gives, up to the parameter-free constant $-np\\log(2\\pi)/2$, $$\\ell_n(\\mu,\\Sigma)=-\\frac n2\\log\\det\\Sigma-\\frac12\\sum_{i=1}^n(X_i-\\mu)^T\\Sigma^{-1}(X_i-\\mu).$$ Expanding $X_i-\\mu=(X_i-\\bar X)+(\\bar X-\\mu)$ and using $\\sum_i(X_i-\\bar X)=0$ shows the quadratic sum equals $n(\\bar X-\\mu)^T\\Sigma^{-1}(\\bar X-\\mu)+\\operatorname{tr}(\\Sigma^{-1}R)$. Since $\\Sigma^{-1}\\succ0$, this is minimized uniquely at $\\mu=\\bar X$ for every fixed $\\Sigma$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F6], $M=R/n\\succ0$ almost surely. The square root $M^{1/2}$ exists by [F12] and is invertible because $M\\succ0$. At $\\mu=\\bar X$, compare the covariance log likelihood at any $\\Sigma\\succ0$ with its value at $M$. Let $B=M^{1/2}\\Sigma^{-1}M^{1/2}\\succ0$. The trace and determinant identities give $$\\ell_n(\\bar X,\\Sigma)-\\ell_n(\\bar X,M)=-\\frac n2\\{\\operatorname{tr}B-\\log\\det B-p\\}.$$ By [F11], the eigenvalues $\\lambda_1,\\ldots,\\lambda_p$ of $B$ are positive and the brace is $\\sum_j(\\lambda_j-\\log\\lambda_j-1)\\ge0$, since $x-\\log x-1\\ge0$ for $x>0$ by differentiation and its unique minimum at $1$. Equality holds precisely when all $\\lambda_j=1$, hence $B=I$ and $\\Sigma=M$. Thus the unrestricted MLE is $(\\bar X,M)$; under $H_0$ the maximizing mean remains $\\bar X$ by step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F11",
+            "F12",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Substituting the unrestricted and null maxima into [F10], and using $R=nM$, yields $$-2\\log\\Lambda_n=n\\{\\operatorname{tr}(\\Sigma_0^{-1}M)+\\log\\det\\Sigma_0-\\log\\det M-p\\}.$$ Since $\\det(\\Sigma_0^{-1/2}M\\Sigma_0^{-1/2})=\\det M/\\det\\Sigma_0$, this is the asserted finite-sample identity.",
+          "step": "4.1",
+          "inputs": [
+            "F10",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since $H_n=O_P(1)$ by [F8], $E_n=A_n-I_p=H_n/\\sqrt n$ has Frobenius norm $\\|E_n\\|_F=O_P(n^{-1/2})$, where $\\|B\\|_F=(\\sum_{i,j}B_{ij}^2)^{1/2}$. On an event whose probability tends to one, every eigenvalue $e_j$ of the symmetric $E_n$ has $|e_j|\\le1/2$. Taylor's theorem on $[-1/2,1/2]$ gives $e-\\log(1+e)=e^2/2+O(|e|^3)$ with a uniform finite remainder constant there. Hence the statistic in step 4.1 equals $$n\\sum_{j=1}^p(e_j-\\log(1+e_j))=\\frac12\\operatorname{tr}(H_n^2)+O_P(n\\|E_n\\|_F^3)=\\frac12\\operatorname{tr}(H_n^2)+o_P(1),$$ because $p$ is fixed and $n\\|E_n\\|_F^3=O_P(n^{-1/2})$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 1.2",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The map $H\\mapsto\\tfrac12\\operatorname{tr}(H^2)$ is continuous, so [F8] and step 1.2 give convergence to $\\tfrac12\\operatorname{tr}(H^2)$. For the stated independent entries this is $$\\sum_{i=1}^p(H_{ii}/\\sqrt2)^2+\\sum_{1\\le i<j\\le p}H_{ij}^2,$$ a sum of $p+p(p-1)/2=p(p+1)/2$ independent squared standard normals, which has law $\\chi^2_{p(p+1)/2}$ by [F9]. Step 5.1 and Slutsky [F8] prove the asserted limit. When $p=1$, the off-diagonal sum is empty and the same count gives one degree of freedom; $p$ is fixed throughout, and no finite-sample calibration follows from this limit.",
+          "step": "6.1",
+          "inputs": [
+            "F8",
+            "F9",
+            "step 1.2",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes p>=1,n>p, so the sample is nonempty. Step 6.1 explicitly includes p=1: the off-diagonal Gaussian-square sum over i<j is empty and contributes0; the diagonal sum has one square and the limiting degrees p(p+1)/2 equal1. No zero-dimensional or zero-sample covariance MLE is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof and 3.1 allow μ=0 through centering. Evidence: proof steps 1.1, 1.2, 2.1, 3.1, 4.1, 5.1, 6.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the proof includes p=1 and gives χ²₁. Evidence: proof steps 1.1, 1.2, 2.1, 3.1, 4.1, 5.1, 6.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof proves M≻0 a.s. for n>p and Σ₀≻0. Evidence: proof steps 1.1, 1.2, 2.1, 3.1, 4.1, 5.1, 6.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the proof and 4.1 include n=p+1 and fixed p. Evidence: proof steps 1.1, 1.2, 2.1, 3.1, 4.1, 5.1, 6.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and the proof identify AC uses in the Gaussian density setup. Evidence: proof steps 1.1, 1.2, 2.1, 3.1, 4.1, 5.1, 6.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement supplies the likelihood-ratio identity and a fixed-dimensional limit. Step 3.1 also proves the equality criterion for its log-likelihood bound: equality forces all eigenvalues of B to be1 and conversely Sigma=M makes B=I. For equality in step 3.1, each nonnegative eigenvalue term must vanish; its unique zero is at1, so B=I and Sigma=M."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement supplies the likelihood-ratio identity and a fixed-dimensional limit. Step 3.1 also proves the equality criterion for its log-likelihood bound: equality forces all eigenvalues of B to be1 and conversely Sigma=M makes B=I. For Sigma=M, B=I and every eigenvalue contribution in step 3.1 is0, attaining the displayed likelihood bound."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Reviewed all seven proof steps and every actual cited supplier statement, including the added orthonormal-basis and orthogonal-Gaussian invariance statements. Confirmed refuter:5:1 as nonfatal: the original rank citation omitted the centering reduction. Repaired F6 by the explicit orthogonal sample contrast construction (n-1>=p), with declared dependencies and contract citation quotes; no Statement, level or downstream interface changed. Product Gaussian density and affine Jacobian meet Borel/sigma-finite/AC hypotheses. The likelihood has unique maxima at mean Xbar and covariance R/n on the probability-one nonsingular event. Null whitening and finite Gaussian fourth moments give diagonal/off-diagonal CLT variances 2/1; mean correction is oP(n^-1/2), and the uniform Taylor remainder is n OP(n^-3/2)=oP(1) in fixed dimension. Half the squared Frobenius norm has p(p+1)/2 independent squares. p=1 and n=p+1 are covered; singular null and growing p are excluded. Repair confidence 1. No judge stamp was present."
+      }
+    },
+    "thm-hotelling-t2-exact-f-distribution": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-multivariate-normal-sample-mean-scatter-independence-and-wishart",
+          "source_section": "Statement",
+          "quote": "Assume AC and the sample model in [[def-multivariate-normal-sample-model-and-statistics]], with $n\\ge2$, $p\\ge1$, and $\\Sigma\\succ0$. Then\n$$\\sqrt n(\\bar X-\\mu)\\sim N_p(0,\\Sigma),\\qquad \\bar X\\perp S,\\qquad (n-1)S\\sim W_p(\\Sigma,n-1).$$\nIf $n>p$, then $S$ is positive definite almost surely. The Wishart scale is $\\Sigma$ and its degrees of freedom are $n-1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wishart-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $p,m\\ge1$ be integers and let $\\Sigma$ be a real symmetric positive-semidefinite $p\\times p$ matrix, in the sense of [[def-multivariate-normal-law]]. Give $\\mathrm{Sym}_p$, the space of real symmetric $p\\times p$ matrices, its Euclidean Borel sigma-algebra by identifying a matrix with its upper-triangular entries. The finite product measure $N_p(0,\\Sigma)^{\\otimes m}$ exists because each factor is a probability measure and hence sigma-finite. Define the **Wishart law** $W_p(\\Sigma,m)$ as the pushforward of this product measure by the continuous map $(z_1,\\ldots,z_m)\\mapsto\\sum_{j=1}^m z_jz_j^T$. Equivalently, it is the law of $\\sum_{j=1}^m Z_jZ_j^T$ for independent $Z_j\\sim N_p(0,\\Sigma)$.\n\nHere $\\Sigma$ is the scale matrix and the positive integer $m$ is the degrees of freedom. This definition allows a singular Wishart law when $m<p$ or $\\Sigma$ is singular; no Lebesgue density is included in the convention. The usual nonsingular density when $m\\ge p$ is not needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-standard-wishart-independent-normal-quadratic-form-is-f",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $m\\ge p\\ge1$, let $W\\sim W_p(I_p,m)$, and let $Z\\sim N_p(0,I_p)$ be independent of $W$. Then $W$ is positive definite almost surely and\n$$\\frac{m-p+1}{p}Z^TW^{-1}Z\\sim F_{p,m-p+1}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every integer $k\\ge1$, the law $\\chi_k^2$ has density\n$$\nf_k(x)=c_k x^{k/2-1}e^{-x/2}\\mathbf 1_{\\{x>0\\}},\\qquad c_k=\\frac{\\sigma_{k-1}(S^{k-1})}{2(2\\pi)^{k/2}}>0,\n$$\nwhere $\\sigma_{k-1}$ is the polar surface measure on the unit sphere in $\\mathbb R^k$. Consequently, $Q_k>0$ almost surely, and its cumulative distribution function is continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-multivariate-normal-sample-model-and-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC. Fix integers $n\\ge2$ and $p\\ge1$. Let $\\mathcal S_{++}^p$ be the set of real symmetric $p\\times p$ matrices $\\Sigma$ such that $v^T\\Sigma v>0$ for every nonzero $v\\in\\mathbb R^p$. The iid multivariate-normal sampling experiment has data space $\\mathcal X=(\\mathbb R^p)^n$ with sigma-algebra $\\mathcal B(\\mathbb R^p)^{\\otimes n}$, parameter set $\\Theta=\\mathbb R^p\\times\\mathcal S_{++}^p$, and sampling law $P_{\\mu,\\Sigma}=N_p(\\mu,\\Sigma)^{\\otimes n}$. The finite product is a probability measure by [[def-probability-measure]] and [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]. The coordinate projection $X_i$ is the complete vector observation for sampling unit $i$; its $p$ coordinates need not be independent.\n\nFor $x=(x_1,\\ldots,x_n)\\in\\mathcal X$, define\n$$\\bar x=\\frac1n\\sum_{i=1}^n x_i,\\qquad R(x)=\\sum_{i=1}^n(x_i-\\bar x)(x_i-\\bar x)^T,\\qquad S(x)=\\frac{R(x)}{n-1},\\qquad M(x)=\\frac{R(x)}n.$$\nThe functions $x\\mapsto\\bar x$, $S(x)$, and $M(x)$ are continuous, hence Borel measurable under AC and [[lem-ac-supplies-sequential-choices-for-probability-constructions]]; they are statistics in the experiment by [[def-statistic-and-estimator]]. Here $S$ uses the $n-1$ covariance denominator, while $M$ is the $n$-denominator covariance candidate whose maximum-likelihood property is proved separately below.\n\nThis item instantiates the mathematical portion of the scientific model contract ([[def-scientific-statistical-model-contract]]) as follows. One sampling and analysis unit is one complete observed vector $X_i$; index $i$ identifies the sampling unit and coordinate $a$ identifies a component within that vector. For fixed parameter label $\\theta=(\\mu,\\Sigma)$, $\\mu$ and $\\Sigma$ are fixed, every $X_i$ is random, every component of each $X_i$ is observed, and there are no latent quantities, predictors, treatments, or randomization. The target population for this reference experiment is the abstract law $N_p(\\mu,\\Sigma)$ of a vector-valued sampling unit, and the target parameter is $\\theta$ itself; no separate scientific estimand or physical setting is asserted. The observation map records the complete vector tuple unchanged, and inference uses the joint product law, with no conditioning convention beyond that law. No topological support or empirical adequacy claim is needed; this is a mathematical reference model, not an assertion that observed scientific data follow it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sylvesters-criterion-for-positive-definiteness",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb R)$ be symmetric, with $n\\ge1$, and let $\\Delta_k$ be the determinant of its leading $k\\times k$ principal submatrix. Then $A$ is positive definite if and only if\n\n$$\\Delta_k>0\\qquad(1\\le k\\le n).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The statistic $T^2$ in the Statement is a random variable: by [F9], $\\{S\\succ0\\}$ is Borel; on this set inversion is continuous, so the displayed quadratic form is Borel, and setting it to zero on the Borel complement preserves measurability. Let $Z=\\sqrt n\\,\\Sigma^{-1/2}(\\bar X-\\mu_0)$. The positive root is invertible by [F7]; under the null, [F1] and [F3] therefore give $Z\\sim N_p(0,I_p)$. Moreover, $Z$ and $W:=\\Sigma^{-1/2}(n-1)S\\Sigma^{-1/2}$ are independent: $\\bar X$ and $S$ are independent by [F1], and the separate whitening maps are continuous, hence Borel, so [F8] preserves independence. The congruence in [F1] and [F2] gives $W\\sim W_p(I_p,n-1)$; it is positive definite almost surely by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "F9",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On the event $S\\succ0$ (which has probability one by [F1]), substitute $S=\\Sigma^{1/2}W\\Sigma^{1/2}/(n-1)$ and $\\bar X-\\mu_0=\\Sigma^{1/2}Z/\\sqrt n$ into the definition. Cancelling the inverse congruence gives $$T^2=(n-1)Z^TW^{-1}Z.$$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F4] with $m=n-1\\ge p$. It gives $\\frac{n-p}{p}Z^TW^{-1}Z\\sim F_{p,n-p}$. Multiplying the identity in step 2.1 by $(n-p)/(p(n-1))$ proves the asserted law. Since $S\\succ0$ almost surely, the off-domain zero convention affects only a null event.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement assumes n>p>=1, hence n>=2 and n-p>=1. Steps 2.1 and3.1 use n-1 Wishart degrees and a nonempty p-dimensional whitened vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof and 2.1 handle the zero extension off S≻0. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the proof include p=1. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof proves S≻0 a.s. for n>p. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the proof includes n=p+1, with n−p=1. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and the proof inherit AC for Gaussian/Wishart construction. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is an implication from the Gaussian null mu=mu0 to the scaled F law; steps 1.1–3.1 do not infer the null or Gaussian model from a scalar distribution."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is an implication from the Gaussian null mu=mu0 to the scaled F law; steps 1.1–3.1 do not infer the null or Gaussian model from a scalar distribution."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Reviewed all three steps and exact sample/Wishart, inverse-form, square-root, Fisher, positivity, measurability and Sylvester supplier interfaces. Positive-definiteness event is Borel; the stated zero extension defines a statistic globally. Under the null the whitened mean and whitened scatter are independent with laws N(0,I) and W(I,n-1). Direct substitution gives T^2=(n-1)Z^T W^-1 Z, hence factor (n-p)/(p(n-1)) and denominator degrees n-p>0. p=1 yields the squared Student normalization and n=p+1 yields degree one; no n<=p assertion. No defect; no item edit."
+      }
+    },
+    "thm-wishart-trace-statistic-is-chi-square": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-multivariate-normal-sample-mean-scatter-independence-and-wishart",
+          "source_section": "Statement",
+          "quote": "Assume AC and the sample model in [[def-multivariate-normal-sample-model-and-statistics]], with $n\\ge2$, $p\\ge1$, and $\\Sigma\\succ0$. Then\n$$\\sqrt n(\\bar X-\\mu)\\sim N_p(0,\\Sigma),\\qquad \\bar X\\perp S,\\qquad (n-1)S\\sim W_p(\\Sigma,n-1).$$\nIf $n>p$, then $S$ is positive definite almost surely. The Wishart scale is $\\Sigma$ and its degrees of freedom are $n-1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wishart-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $p,m\\ge1$ be integers and let $\\Sigma$ be a real symmetric positive-semidefinite $p\\times p$ matrix, in the sense of [[def-multivariate-normal-law]]. Give $\\mathrm{Sym}_p$, the space of real symmetric $p\\times p$ matrices, its Euclidean Borel sigma-algebra by identifying a matrix with its upper-triangular entries. The finite product measure $N_p(0,\\Sigma)^{\\otimes m}$ exists because each factor is a probability measure and hence sigma-finite. Define the **Wishart law** $W_p(\\Sigma,m)$ as the pushforward of this product measure by the continuous map $(z_1,\\ldots,z_m)\\mapsto\\sum_{j=1}^m z_jz_j^T$. Equivalently, it is the law of $\\sum_{j=1}^m Z_jZ_j^T$ for independent $Z_j\\sim N_p(0,\\Sigma)$.\n\nHere $\\Sigma$ is the scale matrix and the positive integer $m$ is the degrees of freedom. This definition allows a singular Wishart law when $m<p$ or $\\Sigma$ is singular; no Lebesgue density is included in the convention. The usual nonsingular density when $m\\ge p$ is not needed below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that\n\n$$R^2=T.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $m=n-1\\ge1$. By [F1]–[F3], the law of $(n-1)S$ is the law of $\\sum_{j=1}^{m}X_jX_j^T$ for independent $X_j=\\Sigma_0^{1/2}Z_j$ with all $pm$ scalar coordinates independent standard normals.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each summand, cyclicity of the finite trace and $\\Sigma_0^{-1/2}\\Sigma_0^{1/2}=I_p$ give $$\\operatorname{tr}(\\Sigma_0^{-1}X_jX_j^T)=X_j^T\\Sigma_0^{-1}X_j=Z_j^TZ_j.$$ By linearity of trace, the target statistic therefore has the law of $\\sum_{j=1}^{m}\\sum_{a=1}^{p}Z_{ja}^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The $pm=p(n-1)$ coordinates in step 2.1 are independent standard normals, so their squared sum has law $\\chi^2_{pm}$ by [F4]. This argument does not require $m\\ge p$: if $m<p$, the matrix scatter may be singular, but its trace and the sum of squares remain defined; $m=1$ and $p=1$ are both included. The statistic is distinct from the likelihood-ratio statistic, whose formula contains a log determinant when the scatter is nonsingular.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement permits singular scatter but requires p>=1,n>=2. Step 1.1 has m=n-1>=1 and step 3.1 counts pm>=1 independent squares; no empty trace-sum convention is needed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof keeps the trace defined for zero or singular scatter. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the proof includes p=1,n=2 and χ²₁. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof permits n≤p and singular S. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the proof include n=2 and positive df p(n−1). Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and the proof identify AC uses. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement identifies an exact trace distribution, not a characterization of covariance equality; steps 2.1–3.1 derive the sum of squares under the null without a reverse statistical implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement identifies an exact trace distribution, not a characterization of covariance equality; steps 2.1–3.1 derive the sum of squares under the null without a reverse statistical implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Reviewed all three steps and exact cited sample-scatter, Gaussian/product, square-root, Wishart and chi-square supplier statements. Null whitening makes each summand trace equal ||Z_j||^2, and the pm scalar independent entries give chi-square p(n-1). This needs inversion only of the fixed positive-definite Sigma0, never of S. Thus n<=p (including n=2 and p>1), p=1 and n-1=1 all remain valid; n=1 is excluded by the model convention. No density or finite-sample likelihood-ratio calibration is inferred. AC is inherited explicitly. No defect; no item edit."
+      }
+    },
+    "cor-exact-hotelling-one-sample-test": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-hotelling-t2-exact-f-distribution",
+          "source_section": "Statement",
+          "quote": "Assume AC, $n>p\\ge1$, and the iid multivariate-normal sample model with covariance $\\Sigma\\succ0$. For $\\mu_0\\in\\mathbb R^p$, define $T^2=n(\\bar X-\\mu_0)^TS^{-1}(\\bar X-\\mu_0)$ when $S\\succ0$, and set $T^2=0$ otherwise. Under $H_0:\\mu=\\mu_0$,\n$$\\frac{n-p}{p(n-1)}T^2\\sim F_{p,n-p}.$$\nThe zero extension does not change the law because $S\\succ0$ almost surely when $n>p$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-hotelling-t2-exact-f-distribution",
+          "source_section": "Statement",
+          "quote": "Assume AC, $n>p\\ge1$, and the iid multivariate-normal sample model with covariance $\\Sigma\\succ0$. For $\\mu_0\\in\\mathbb R^p$, define $T^2=n(\\bar X-\\mu_0)^TS^{-1}(\\bar X-\\mu_0)$ when $S\\succ0$, and set $T^2=0$ otherwise. Under $H_0:\\mu=\\mu_0$,\n$$\\frac{n-p}{p(n-1)}T^2\\sim F_{p,n-p}.$$\nThe zero extension does not change the law because $S\\succ0$ almost surely when $n>p$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-randomized-test",
+          "source_section": "Definition",
+          "quote": "A **randomized test** is a randomized procedure with binary action space\nwhose action set is $\\{0,1\\}$, equipped with its full sigma-algebra\n$2^{\\{0,1\\}}$ (the power set, which is a sigma-algebra by\n[[def-sigma-algebra]]), where $1$ means reject and $0$ means do not reject\n([[def-randomized-procedure-as-a-markov-kernel]]). Its **test function** is\n$$\\varphi(x)=K(x,\\{1\\}),\\qquad x\\in\\mathcal X.$$\nSince $K(x,\\cdot)$ is a probability measure and $\\{0\\},\\{1\\}$ partition the\naction set, $K(x,\\{0\\})+K(x,\\{1\\})=1$. Thus $\\varphi(x)\\in[0,1]$ and\n$1-\\varphi(x)=K(x,\\{0\\})$ is the probability of not rejecting. Give $[0,1]$\nthe trace of the Borel sigma-algebra on $[0,+\\infty]$, namely\n$\\{C\\cap[0,1]:C\\in\\mathcal B([0,+\\infty])\\}$. By\n[[lem-procedure-action-law-is-measurable]], $x\\mapsto K(x,\\{1\\})$ is\nmeasurable; since it has range in $[0,1]$, its preimage of $C\\cap[0,1]$ equals\nits preimage of $C$ and is measurable for every such $C$. Hence $\\varphi$ is a\nmeasurable map in the preimage sense of\n[[def-measurable-function-between-measurable-spaces]]. Its value is the\nrejection probability after observing $x$.\nThe convention $1=\\text{reject}$ is fixed here. No null or alternative\nhypothesis is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-test-size-and-power",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-randomized-procedure-as-a-markov-kernel",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]) and let\n$(\\mathsf D,\\mathcal G)$ be a measurable **action space**: a set of available\nactions equipped with a sigma-algebra of action events, hence a measurable\nspace ([[def-measurable-space]]). A **randomized procedure** (or\nrandomized decision rule) is a probability kernel $K$ from\n$(\\mathcal X,\\mathcal A)$ to $(\\mathsf D,\\mathcal G)$, in the pointwise sense\nof [[def-measure-kernel-and-probability-kernel]]. Thus $K(x,\\cdot)$ is a\nprobability measure on $(\\mathsf D,\\mathcal G)$ for every $x\\in\\mathcal X$,\nand $x\\mapsto K(x,B)$ is $\\mathcal A$-measurable for every $B\\in\\mathcal G$.\nAfter observing $x$, the procedure assigns probability $K(x,B)$ to taking an\naction in $B$. The kernel is specified without reference to the unknown\nparameter. This definition imposes no measurable structure on $\\Theta$. The\nkernel is the specification of the procedure; no representation by a separate\nrandom seed is asserted for arbitrary measurable action spaces.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every $k\\ge1$, the CDF of $t_k$ is continuous and strictly increasing on $\\mathbb R$, is symmetric about zero, and has limits $0$ and $1$ at $-\\infty$ and $+\\infty$. For every $r,s\\ge1$, the CDF of $F_{r,s}$ is continuous on $\\mathbb R$, is zero on $(-\\infty,0]$, and is strictly increasing on $(0,\\infty)$ with limit $1$ at $+\\infty$. Consequently, for each $u\\in(0,1)$ each law has exactly one $u$-quantile on its support.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sylvesters-criterion-for-positive-definiteness",
+          "source_section": "Statement",
+          "quote": "Let $A\\in M_n(\\mathbb R)$ be symmetric, with $n\\ge1$, and let $\\Delta_k$ be the determinant of its leading $k\\times k$ principal submatrix. Then $A$ is positive definite if and only if",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-multivariate-normal-sample-model-and-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC. Fix integers $n\\ge2$ and $p\\ge1$. Let $\\mathcal S_{++}^p$ be the set of real symmetric $p\\times p$ matrices $\\Sigma$ such that $v^T\\Sigma v>0$ for every nonzero $v\\in\\mathbb R^p$. The iid multivariate-normal sampling experiment has data space $\\mathcal X=(\\mathbb R^p)^n$ with sigma-algebra $\\mathcal B(\\mathbb R^p)^{\\otimes n}$, parameter set $\\Theta=\\mathbb R^p\\times\\mathcal S_{++}^p$, and sampling law $P_{\\mu,\\Sigma}=N_p(\\mu,\\Sigma)^{\\otimes n}$. The finite product is a probability measure by [[def-probability-measure]] and [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]. The coordinate projection $X_i$ is the complete vector observation for sampling unit $i$; its $p$ coordinates need not be independent.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The statistic is Borel measurable: the sample maps $\\bar X$ and $S$ are continuous by the model definition [F7]; by [F5], the event $S\\succ0$ is the finite intersection of strict polynomial inequalities on its leading principal minors. On this open set, $S^{-1}$ has entries equal to cofactors divided by $\\det S>0$, so the quadratic-form formula for $T^2$ is continuous by [F6]. Extending that function by zero on the Borel complement remains Borel. Let $D(x)$ be the indicator that the scaled statistic exceeds the stated threshold and define a kernel on actions $\\{0,1\\}$ by $K(x,A)=1$ if $D(x)\\in A$ and $0$ otherwise. For each $x$ this is a probability measure, and $x\\mapsto K(x,A)$ is measurable because $D$ is measurable. Thus [F3] makes this a randomized procedure and [F2] its test function.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $p\\ge1$, $\\mathbb R^p\\setminus\\{\\mu_0\\}$ is nonempty; hence the stated null and alternative parameter sets are nonempty and disjoint. Under AC [A1], [F4] gives a unique $q=F_{p,n-p}^{-1}(1-\\alpha)>0$ satisfying $P(F_{p,n-p}\\le q)=1-\\alpha$. For each null covariance, [F1] gives rejection probability $P(F_{p,n-p}>q)=\\alpha$, with no boundary atom because its CDF is continuous.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F7",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Taking the supremum of the same value $\\alpha$ over the nonempty null set leaves it equal to $\\alpha$. By [F2] this supremum is the test's size, proving exact size. The argument includes every positive-definite null covariance and uses the exact finite-sample F law; no asymptotic calibration is used.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement fixes n>p>=1 and a specified mu0; step 1.2 shows both parameter hypotheses nonempty, while step 2.1 takes size over the nonempty positive-definite null covariances."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof restricts α to (0,1), excluding endpoint levels. Evidence: proof steps 1.1, 1.2, 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the proof includes p=1 and n=p+1. Evidence: proof steps 1.1, 1.2, 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement restricts null covariance to Σ≻0. Evidence: proof steps 1.1, 1.2, 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the proof treats α∈(0,1), excluding 0 and 1. Evidence: proof steps 1.1, 1.2, 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Fact A1 and the proof use AC through the exact F law/CDF. Evidence: proof steps 1.1, 1.2, 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement describes an exact-size rejection test under the Gaussian null. Steps 1.2–2.1 give its probability and supremum; acceptance of one observation is not asserted equivalent to the null being true."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement describes an exact-size rejection test under the Gaussian null. Steps 1.2–2.1 give its probability and supremum; acceptance of one observation is not asserted equivalent to the null being true."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Reviewed all three proof steps and actual randomized-test/kernel, measurable-map, size/power, F-CDF, model and Sylvester supplier statements. The global Borel statistic defines the deterministic binary kernel pointwise. Positive degrees p,n-p and 0<alpha<1 give a unique positive quantile; continuity removes a boundary atom. Every null covariance yields rejection probability alpha, and the null set is nonempty (e.g. Sigma=I), so its supremum is exactly alpha. The p>=1 model also ensures the alternative is nonempty. No claim at alpha endpoints or singular covariance; no extra randomization or asymptotic step. No defect; no item edit."
+      }
+    },
+    "ex-sample-covariance-singular-when-sample-size-not-exceeding-dimension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-sample-model-and-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC. Fix integers $n\\ge2$ and $p\\ge1$. Let $\\mathcal S_{++}^p$ be the set of real symmetric $p\\times p$ matrices $\\Sigma$ such that $v^T\\Sigma v>0$ for every nonzero $v\\in\\mathbb R^p$. The iid multivariate-normal sampling experiment has data space $\\mathcal X=(\\mathbb R^p)^n$ with sigma-algebra $\\mathcal B(\\mathbb R^p)^{\\otimes n}$, parameter set $\\Theta=\\mathbb R^p\\times\\mathcal S_{++}^p$, and sampling law $P_{\\mu,\\Sigma}=N_p(\\mu,\\Sigma)^{\\otimes n}$. The finite product is a probability measure by [[def-probability-measure]] and [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]. The coordinate projection $X_i$ is the complete vector observation for sampling unit $i$; its $p$ coordinates need not be independent.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map whose domain $V$ is finite-dimensional over\n$F$. Its **nullity** and **rank** are",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $v_i=x_i-\\bar x$. Their sum is $\\sum_i v_i=0$, so the $n$ centered vectors are linearly dependent. Their span therefore has dimension at most $n-1\\le p-1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $V=[v_1|\\cdots|v_n]:\\mathbb R^n\\to\\mathbb R^p$. Since $V(1,\\ldots,1)^T=0$, [F2] gives $\\operatorname{rank}V\\le n-1\\le p-1$, so $\\operatorname{im}V$ is a proper subspace of $\\mathbb R^p$. The scatter matrix is $R=VV^T$, hence $\\operatorname{im}R\\subseteq\\operatorname{im}V$; it is not surjective and therefore is singular. Because $n-1>0$, $S=R/(n-1)$ has the same non-surjective image and is singular.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $n=p$, the rank bound in step 1.1 is $p-1$, so equality of sample size and dimension still forces singularity. If $n=1$, the definition $S=R/(n-1)$ has zero denominator and defines no sample covariance; this example makes no $n=1$ covariance claim.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example quantifies over datasets with 2<=n<=p; step 3.1 separately excludes even n=1 because n-1 vanishes. A dataset with zero vectors is outside the declared sample-size domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof includes all-zero data, where R=S=0. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the proof states n=1 is undefined and includes n=p. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof prove every centered scatter in range is singular. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the proof treats n=p and the lower defined n=2 endpoint. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof are deterministic algebra with no selection. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example proves singularity for 2<=n<=p, using im(VV^T) contained in im(V) in step 2.1. It does not assert singularity only when n<=p; collinear larger datasets may also be singular."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example proves singularity for 2<=n<=p, using im(VV^T) contained in im(V) in step 2.1. It does not assert singularity only when n<=p; collinear larger datasets may also be singular."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "n2-p3-centered-rank",
+          "asserts": "For every dataset of $n$ vectors in $\\mathbb R^p$ with $2\\le n\\le p$, the covariance convention",
+          "observations": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ]
+        }
+      ]
+    },
+    "ex-exact-wishart-trace-and-asymptotic-covariance-lrt-differ": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-sample-model-and-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC. Fix integers $n\\ge2$ and $p\\ge1$. Let $\\mathcal S_{++}^p$ be the set of real symmetric $p\\times p$ matrices $\\Sigma$ such that $v^T\\Sigma v>0$ for every nonzero $v\\in\\mathbb R^p$. The iid multivariate-normal sampling experiment has data space $\\mathcal X=(\\mathbb R^p)^n$ with sigma-algebra $\\mathcal B(\\mathbb R^p)^{\\otimes n}$, parameter set $\\Theta=\\mathbb R^p\\times\\mathcal S_{++}^p$, and sampling law $P_{\\mu,\\Sigma}=N_p(\\mu,\\Sigma)^{\\otimes n}$. The finite product is a probability measure by [[def-probability-measure]] and [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]. The coordinate projection $X_i$ is the complete vector observation for sampling unit $i$; its $p$ coordinates need not be independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-covariance-likelihood-ratio-asymptotic-chi-square",
+          "source_section": "Statement",
+          "quote": "Assume AC, fix $p\\ge1$, and use the iid multivariate-normal sample model with $n>p$. Test $H_0:\\Sigma=\\Sigma_0$ against unrestricted $\\Sigma\\in\\mathcal S_{++}^p$, with $\\mu\\in\\mathbb R^p$ unrestricted under both hypotheses and fixed $\\Sigma_0\\succ0$. Let $M=R/n$ be the full-model Gaussian covariance MLE, and let $\\Lambda_n$ be the null-over-full maximized likelihood ratio formed from the explicit Lebesgue Gaussian density. Almost surely,\n$$-2\\log\\Lambda_n=n\\left[\\operatorname{tr}(\\Sigma_0^{-1}M)-\\log\\det(\\Sigma_0^{-1/2}M\\Sigma_0^{-1/2})-p\\right].$$\nWith $p$ fixed and the null true, $-2\\log\\Lambda_n\\Rightarrow\\chi^2_{p(p+1)/2}$ as $n\\to\\infty$. The covariance null is interior in $\\mathcal S_{++}^p$. This calibration is asymptotic; no finite-sample chi-square law is asserted.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-wishart-trace-statistic-is-chi-square",
+          "source_section": "Statement",
+          "quote": "Assume AC, $p\\ge1$, $n\\ge2$, and the iid multivariate-normal sample model. Under $H_0:\\Sigma=\\Sigma_0$ for a specified $\\Sigma_0\\succ0$, the distinct statistic\n$$\\operatorname{tr}\\{\\Sigma_0^{-1}(n-1)S\\}$$\nhas the exact law $\\chi^2_{p(n-1)}$, even when $n\\le p$ and $S$ is singular. This is the Wishart trace statistic, not the covariance likelihood-ratio statistic.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The sample has mean $0$, so its centered sum of squares is $R=3/2+3/2=3$. Thus $S=R/3=1$ and $M=R/4=3/4$ by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $p=1$ and $\\Sigma_0=1$, the trace statistic is $(n-1)S=3$, consistent with its $\\chi^2_{1\\cdot3}=\\chi^2_3$ null law [F3]. Substituting $M=3/4$ in [F2] gives the observed likelihood-ratio value $$4\\left(\\frac34-\\log\\frac34-1\\right)=4\\left(\\log\\frac43-\\frac14\\right)\\approx0.1507.$$ This is not the trace value $3$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The calculations show two different finite-sample statistics and their distinct calibrations; the fact that one observed value is $0.1507$ makes no claim about the likelihood-ratio statistic's null distribution at $n=4$. The asymptotic qualification in [F2] remains necessary.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes exactly four scalar observations, p=1 and positive null variance1; step 1.1 computes R=3,S=1,M=3/4. No operation is defined on an absent sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof includes two zero observations. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "the proof use p=1. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof computes S=1>0, so the LR identity applies. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes n=4>p=1 and disclaims finite-sample LR calibration. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "the proof are exact arithmetic with no selection. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example compares trace3 with the logarithmic likelihood-ratio value about0.1507. Step 3.1 explicitly keeps asymptotic calibration, so it gives neither a converse distribution characterization nor an equivalence of these statistics."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example compares trace3 with the logarithmic likelihood-ratio value about0.1507. Step 3.1 explicitly keeps asymptotic calibration, so it gives neither a converse distribution characterization nor an equivalence of these statistics."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-hotelling-t2-two-dimensional-exact-test": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-sample-model-and-statistics",
+          "source_section": "Definition",
+          "quote": "Assume AC. Fix integers $n\\ge2$ and $p\\ge1$. Let $\\mathcal S_{++}^p$ be the set of real symmetric $p\\times p$ matrices $\\Sigma$ such that $v^T\\Sigma v>0$ for every nonzero $v\\in\\mathbb R^p$. The iid multivariate-normal sampling experiment has data space $\\mathcal X=(\\mathbb R^p)^n$ with sigma-algebra $\\mathcal B(\\mathbb R^p)^{\\otimes n}$, parameter set $\\Theta=\\mathbb R^p\\times\\mathcal S_{++}^p$, and sampling law $P_{\\mu,\\Sigma}=N_p(\\mu,\\Sigma)^{\\otimes n}$. The finite product is a probability measure by [[def-probability-measure]] and [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]. The coordinate projection $X_i$ is the complete vector observation for sampling unit $i$; its $p$ coordinates need not be independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hotelling-t2-exact-f-distribution",
+          "source_section": "Statement",
+          "quote": "Assume AC, $n>p\\ge1$, and the iid multivariate-normal sample model with covariance $\\Sigma\\succ0$. For $\\mu_0\\in\\mathbb R^p$, define $T^2=n(\\bar X-\\mu_0)^TS^{-1}(\\bar X-\\mu_0)$ when $S\\succ0$, and set $T^2=0$ otherwise. Under $H_0:\\mu=\\mu_0$,\n$$\\frac{n-p}{p(n-1)}T^2\\sim F_{p,n-p}.$$\nThe zero extension does not change the law because $S\\succ0$ almost surely when $n>p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-exact-hotelling-one-sample-test",
+          "source_section": "Statement",
+          "quote": "Assume AC, $n>p\\ge1$, and the one-sample multivariate-normal model with covariance $\\Sigma\\succ0$. For a specified $\\mu_0\\in\\mathbb R^p$ and $0<\\alpha<1$, reject $H_0:\\mu=\\mu_0$ when\n$$\\frac{n-p}{p(n-1)}T^2>F_{p,n-p}^{-1}(1-\\alpha),$$\nwhere $T^2$ is the statistic in [[thm-hotelling-t2-exact-f-distribution]]. Against $H_1:\\mu\\ne\\mu_0$, this test has size exactly $\\alpha$ over all null covariances $\\Sigma\\succ0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every $k\\ge1$, the CDF of $t_k$ is continuous and strictly increasing on $\\mathbb R$, is symmetric about zero, and has limits $0$ and $1$ at $-\\infty$ and $+\\infty$. For every $r,s\\ge1$, the CDF of $F_{r,s}$ is continuous on $\\mathbb R$, is zero on $(-\\infty,0]$, and is strictly increasing on $(0,\\infty)$ with limit $1$ at $+\\infty$. Consequently, for each $u\\in(0,1)$ each law has exactly one $u$-quantile on its support.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The four vectors sum to zero, so $\\bar x=0$. Their outer products sum to $2I_2$, hence $R=2I_2$ and $S=R/3=(2/3)I_2$ by [F1]. This matrix is positive definite and has inverse $(3/2)I_2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The difference $\\bar x-\\mu_0=(-1,-1)^T$ has squared Euclidean norm $2$. Therefore [F2] gives $T^2=4(3/2)\\cdot2=12$, and the scale $(n-p)/(p(n-1))=2/(2\\cdot3)=1/3$ makes the F statistic equal $4$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3]–[F4], applying the exact test rule to this observation is exactly the stated comparison $4>F_{2,2}^{-1}(1-\\alpha)$. The example reports the rule as a function of $\\alpha$ and does not infer a rejection decision without choosing $\\alpha$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example specifies four displayed vectors and p=2; step 1.1 gives positive definite S=(2/3)I2. Deleting every observation would change the given numerical problem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "the proof computes the zero sample mean. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes p=2 and makes no p=1 numerical calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof computes S=(2/3)I₂≻0. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "the proof reports the cutoff for α∈(0,1) without choosing endpoints. Evidence: proof steps 1.1, 2.1, 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The observed-data arithmetic uses no choice. The stated exact F law and size calibration inherit AC from the explicitly assumed Gaussian reference model and the Hotelling theorem/test suppliers; def-axiom-of-choice is declared in deps. Evidence: Example, Given, F2 and F3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Example states rejection precisely when4 exceeds the F22 upper quantile. Step 3.1 applies the deterministic rejection rule to the statistic4 computed in step 2.1. If this observation is rejected, the rule in step 3.1 and the statistic4 in step 2.1 imply4>F22^{-1}(1-alpha)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Example states rejection precisely when4 exceeds the F22 upper quantile. Step 3.1 applies the deterministic rejection rule to the statistic4 computed in step 2.1. If4>F22^{-1}(1-alpha), substituting the statistic computed in step 2.1 into the rule in step 3.1 gives rejection."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Reviewed the full Example and all three verification steps against the five actual model/Hotelling/test/F suppliers. Direct arithmetic: sum x_i=0, sum x_i x_i^T=2I, S=2I/3, inverse=3I/2, displacement squared norm=2, T^2=4*(3/2)*2=12, multiplier=(4-2)/(2*(4-1))=1/3 and scaled statistic=4 with F(2,2). The example applies the declared Gaussian test rule to these data; it makes no empirical Gaussian-law claim and no rejection decision without alpha. The threshold uses 0<alpha<1 and a strict comparison. No defect; no item edit. Step 5 correction: the earlier no-defect conclusion missed the omitted Gaussian model hypotheses in F2/F3. Example and Given now specify AC and the iid multivariate-normal reference model with positive-definite covariance; F2/F3 state the actual suppliers full hypotheses. The observed arithmetic is unchanged: n=4>p=2, mean zero, S=2I/3, T^2=12, scaled value 4. Exact-size claims concern the reference sampling experiment, not the fixed tuple. This is a repair record, not an independent acceptance of the repair."
+      }
+    }
+  }
+}

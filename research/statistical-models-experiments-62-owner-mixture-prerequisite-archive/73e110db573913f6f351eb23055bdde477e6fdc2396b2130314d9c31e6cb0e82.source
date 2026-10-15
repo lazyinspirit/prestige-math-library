@@ -1,0 +1,673 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-finite-horizon-test-supermartingale-crossing-bound",
+    "thm-discrete-ville-inequality",
+    "ex-independent-uniform-repeated-peeking-inflates-global-null-error",
+    "cex-test-supermartingale-supremum-threshold-need-not-be-attained"
+  ],
+  "contracts": {
+    "lem-finite-horizon-test-supermartingale-crossing-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nonnegative-test-supermartingale",
+          "source_section": "Definition",
+          "quote": "satisfies $P(E_t\\ge0)=1$ for every $t$, and has $\\mathbb E_P E_0\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time",
+          "source_section": "Statement",
+          "quote": "If $X$ is adapted and $B\\subseteq\\mathbb R$ is Borel, then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-stopping-time",
+          "source_section": "Definition",
+          "quote": "It is **bounded** if some deterministic $N$ satisfies $\\tau\\le N$ almost surely",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-optional-sampling-for-bounded-stopping-times",
+          "source_section": "Statement",
+          "quote": "For a submartingale $X$ the conditional and expectation inequalities point upward; for a supermartingale they point downward.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then $$\\mathbb E[X]\\le\\mathbb E[Y].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "\\mathbb E[\\mathbf 1_A]=\\mathbb P(A)",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The first threshold-crossing time is a stopping time, and its truncation at N is bounded.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Bounded optional sampling gives E_P[M_{tau_a wedge N}] <= E_P[M_0] <= 1.",
+          "inputs": [
+            "F1",
+            "F4",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-2.2",
+          "step": "2.2",
+          "claim": "At the truncated first crossing the process is at least a on A_N and nonnegative on its complement, so M_{tau_a wedge N} >= a 1_{A_N} almost surely.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Expectation monotonicity and the indicator identity convert the stopped expectation bound into P(A_N) <= E_P[M_0]/a <= 1/a.",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement is vacuous when the null family is empty because there is no P in the quantified family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and step 3.1 remain valid when E_P[M_0]=0; the right-hand probability bound is then zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows N=0 and every a>0; step 1.1 includes time zero in the finite maximum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers a process that never reaches a, with tau_a=infinity and A_N empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The only threshold assumption is a>0; there is no endpoint parameter in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 identify AC's uses through the test-supermartingale and bounded optional-sampling suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way probability inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-way probability inequality, not an equivalence."
+        }
+      ]
+    },
+    "thm-discrete-ville-inequality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-horizon-test-supermartingale-crossing-bound",
+          "source_section": "Statement",
+          "quote": "P\\!\\left(\\max_{0\\le t\\le N}M_t\\ge a\\right)\\le \\frac{\\mathbb E_PM_0}{a}\\le\\frac1a.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Then $$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-nonnegative-test-supermartingale",
+          "source_section": "Definition",
+          "quote": "satisfies $P(E_t\\ge0)=1$ for every $t$, and has $\\mathbb E_P E_0\\le1$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-discrete-stopping-time",
+          "source_section": "Definition",
+          "quote": "is a **stopping time** if $\\{\\tau\\le n\\}\\in\\mathcal F_n$ for every $n\\ge0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "At each fixed threshold 1/gamma, the bounded crossing events increase to the infinite first-crossing event.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "A1",
+            "choose"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Continuity from below and the finite-horizon supplier give P(tau_gamma < infinity) <= gamma.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The event that the supremum reaches 1/alpha equals the intersection of crossings at a sequence of strictly lower thresholds converging to 1/alpha.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "Taking the limit in the lower-threshold bounds proves the supremum inequality, and gamma=alpha proves the first-crossing inequality.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "A threshold crossing at any finite stopping time is a subset of the all-time first-crossing event.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement is vacuous for an empty null family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The finite-horizon supplier in steps 1.1–2.1 covers zero initial expectation and yields zero crossing probability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes time zero, so a threshold already crossed at time zero is counted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 cover the no-crossing case tau_gamma=infinity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The threshold level is restricted to alpha in (0,1); endpoint values are not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 carries AC only through the test-supermartingale and bounded optional-sampling route."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states upper bounds, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states upper bounds, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-independent-uniform-repeated-peeking-inflates-global-null-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "and its law is the finite product of the marginal laws:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-discrete-stopping-time",
+          "source_section": "Definition",
+          "quote": "is a **stopping time** if $\\{\\tau\\le n\\}\\in\\mathcal F_n$ for every $n\\ge0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-discrete-ville-inequality",
+          "source_section": "Statement",
+          "quote": "P\\!\\left(\\sup_{t\\ge0}M_t\\ge\\frac1\\alpha\\right)\\le\\alpha",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "Uniformity gives each single-look miss probability 1-alpha.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "step": "1.2",
+          "claim": "The first rejection time is a stopping time because its sublevel event is a finite union in the current look sigma-algebra.",
+          "inputs": [
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "Independence and the product joint law give probability (1-alpha)^K that every look misses.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "Taking the complement gives the exact probability of at least one rejection.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "For K at least two and alpha strictly between zero and one, the exact probability is strictly larger than alpha.",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "The result does not contradict Ville's bound, whose premise is a nonnegative test supermartingale rather than merely separate fixed-look uniformity.",
+          "inputs": [
+            "F4",
+            "A1",
+            "step 1.2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes an integer K>=2 and includes at least two looks."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The level alpha is restricted to (0,1), excluding zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement requires K>=2; step 3.1's formula would equal alpha for the excluded one-look boundary K=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every look has a continuous uniform null law; no degenerate p-value law is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The level alpha is restricted to (0,1), excluding both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 uses AC only for the comparison with the A-page theorem; steps 1.1–4.1 are the exact choice-free computation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a probability formula and strict inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves a probability formula and strict inequality, not an equivalence."
+        }
+      ]
+    },
+    "cex-test-supermartingale-supremum-threshold-need-not-be-attained": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the extended-valued integral",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-martingale-submartingale-and-supermartingale",
+          "source_section": "Definition",
+          "quote": "$$E[X_{n+1}\\mid\\mathcal F_n]=X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\ge X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\le X_n\\quad\\text{almost surely}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nonnegative-test-supermartingale",
+          "source_section": "Definition",
+          "quote": "is a **nonnegative test supermartingale for $\\mathcal P_0$** if, for every $P\\in\\mathcal P_0$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-discrete-ville-inequality",
+          "source_section": "Statement",
+          "quote": "P\\!\\left(\\sup_{t\\ge0}M_t\\ge\\frac1\\alpha\\right)\\le\\alpha",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "step": "1.1",
+          "claim": "The explicit atomic sample space has total probability one and the sigma-algebras F_n form an increasing filtration.",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "step": "2.1",
+          "claim": "The defined process is measurable, nonnegative, bounded, and integrable at every finite time, with every value strictly below c.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "step": "3.1",
+          "claim": "The conditional mean of M_{n+1} on every atom of F_n equals M_n, so M is a martingale.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "step": "4.1",
+          "claim": "The initial expectation is one half, so the explicit martingale satisfies the nonnegative test-supermartingale definition under the singleton null law.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F7",
+            "A1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derivation-5.1",
+          "step": "5.1",
+          "claim": "No finite-time value reaches two, but the path at a approaches two and has supremum two; therefore the supremum event has probability one quarter while the first-crossing event has probability zero.",
+          "inputs": [
+            "given",
+            "F8",
+            "A1",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The construction has a nonempty countable sample space and singleton null family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The chosen atom mass p=1/4 and initial expectation 1/2 are positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional sample or one-look parameter occurs in the construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 distinguishes the limiting path at a from every finite-time value and the other atoms b_k."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement uses the interior value alpha=1/2, so the witness refutes the claimed universal identity within the stated open interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 3.1–5.1 declare the inherited AC convention; the atomic construction and conditional means are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 5.1 gives a concrete witness where the supremum event has probability 1/4 but the crossing event has probability 0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 gives the same strict probability difference, refuting the reverse event-probability implication as well."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,408 @@
+{
+  "version": 1,
+  "scope": [
+    "def-biological-and-technical-replication-model",
+    "thm-mean-and-variance-under-biological-and-technical-replication",
+    "ex-five-assays-on-one-animal-versus-five-animals"
+  ],
+  "contracts": {
+    "def-biological-and-technical-replication-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition explicitly requires n,m>=1 biological units and assays per unit. Empty index sets violate these hypotheses, rather than constituting extra independent families admitted by the model.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner focused mathematical review",
+            "reason": "The Definition explicitly requires n,m>=1 biological units and assays per unit. Empty index sets violate these hypotheses, rather than constituting extra independent families admitted by the model."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero variance components are allowed; finite-moment and independence clauses remain meaningful."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: at n=m=1 the single biological effect and technical error remain distinct modeled contributions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: biological or technical components may be degenerate when their variance is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition uses finite index counts, not an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the index families are explicitly finite, so no arbitrary choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition stipulates independence and centered biological and assay effects; names of replicate units are not claimed to imply those probability assumptions in reverse."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition stipulates independence and centered biological and assay effects; names of replicate units are not claimed to imply those probability assumptions in reverse."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-authoring",
+        "notes": "The definition separates biological, randomization, and measurement roles; states balanced counts, finite second moments, common variances, and mutual independence; and does not infer Gaussianity, empirical adequacy, or independence from role labels."
+      }
+    },
+    "thm-mean-and-variance-under-biological-and-technical-replication": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-biological-and-technical-replication-model",
+          "source_section": "Definition",
+          "quote": "For a specified scientific question, a **biological unit** is one unit at the\nlevel whose biological variation is relevant to the target population. A\n**biological replicate** is a distinct biological unit at that same\nlevel under the sampling law being modeled. The unit receiving randomized\ntreatment is the **randomization unit**; when treatment is assigned to a cage,\nlitter, plot, or batch, that cluster is the randomized replicate even if\nmembers or subsamples within it are measured separately. A **technical\nreplicate** is another reading or assay of the same specimen or material within\none biological unit. These roles follow the scientific and assignment design\nrecorded by [[def-scientific-statistical-model-contract]]; their names alone do\nnot assert statistical independence.\n\nLet $n,m\\ge1$ be integers, let $i\\in\\{1,\\ldots,n\\}$ index biological units,\nand let $j\\in\\{1,\\ldots,m\\}$ index technical measurements of unit $i$. On one\nprobability space, take square-integrable real random variables $B_i$ and\n$E_{ij}$, in the sense of\n[[def-random-element-and-real-random-variable]], with\n$$Y_{ij}=\\mu+\\tau_i+B_i+E_{ij}.$$\nHere $\\mu$ and the treatment contributions $\\tau_i$ are fixed real numbers\nwhen the analysis conditions on the assigned treatment schedule. The random\neffect $B_i$ represents biological variation shared by all measurements of\nunit $i$; $E_{ij}$ is technical measurement error. The complete finite family\n$(B_i)_{i=1}^n,(E_{ij})_{i\\le n,j\\le m}$ is mutually independent in the sense\nof [[def-independent-random-elements]], and\n$$\\mathbb E[B_i]=\\mathbb E[E_{ij}]=0,\\qquad \\operatorname{Var}(B_i)=\\sigma_b^2,\\qquad \\operatorname{Var}(E_{ij})=\\sigma_e^2$$\nfor all indices, where $\\sigma_b^2,\\sigma_e^2\\ge0$. Mean, variance, and\nsquare-integrability use [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]\nand [[def-moments-variance-and-covariance]]. No Gaussian assumption is made.\n\nWith the rows indexed by $(i,j)$, this is a special case of the finite-\ndimensional linear mixed model [[def-linear-mixed-model]]: the random-intercept\ndesign row selects $B_i$, and the fixed mean at that row is $\\mu+\\tau_i$.\nWhen inference averages over randomized assignments, the vector\n$\\boldsymbol\\tau=(\\tau_1,\\ldots,\\tau_n)$ is instead a random vector under the\ndeclared assignment law; its covariance and any dependence on $B$ or $E$ must\nthen be retained as specified by the result that uses it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Summing the model in [F1] over $i,j$ gives $\\bar Y=\\mu+\\bar\\tau+\\bar B+\\bar E$. Each summand is integrable, so [F6] and the zero means in [F1] give $\\mathbb E[\\bar Y]=\\mu+\\bar\\tau$ when $\\boldsymbol\\tau$ is fixed, and $\\mathbb E[\\bar Y]=\\mu+\\mathbb E[\\bar\\tau]$ when it is random.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For distinct biological indices $i\\ne k$, distinct technical indices $(i,j)\\ne(k,\\ell)$, and any biological-technical pair $(i,(k,\\ell))$, the variables in each pair are independent by [F1] and [F5]. They are integrable because they are square-integrable. Applying [F4] to identity functions gives expectation of the product equal to the product of their zero means; [F2] therefore makes every such off-diagonal covariance zero. By [F3], bilinearity over the finite index families then gives $\\operatorname{Cov}(\\bar B,\\bar E)=\\frac{1}{n^2m}\\sum_{i=1}^n\\sum_{k=1}^n\\sum_{\\ell=1}^m\\operatorname{Cov}(B_i,E_{k\\ell})=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Bilinearity [F3] expands $\\operatorname{Var}(\\bar B)$ into $n^2$ covariance terms with coefficient $n^{-2}$. By 1.2 the off-diagonal terms vanish, and the $n$ diagonal terms equal $\\sigma_b^2$ by [F1] and [F2]. Hence $\\operatorname{Var}(\\bar B)=n^{-2}n\\sigma_b^2=\\sigma_b^2/n$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Bilinearity [F3] expands $\\operatorname{Var}(\\bar E)$ into $(nm)^2$ covariance terms with coefficient $(nm)^{-2}$. By 1.2 the off-diagonal terms vanish, and the $nm$ diagonal terms equal $\\sigma_e^2$ by [F1] and [F2]. Hence $\\operatorname{Var}(\\bar E)=(nm)^{-2}(nm)\\sigma_e^2=\\sigma_e^2/(nm)$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "With fixed $\\boldsymbol\\tau$, $\\mu+\\bar\\tau$ is constant and has zero covariance with every square-integrable random variable by [F2]. Expand the variance of $\\bar B+\\bar E$ using [F3]; its cross-covariance is zero by 1.2. Substituting 2.1 and 2.2 proves the fixed-schedule formula.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "With random $\\boldsymbol\\tau$, expand the variance of $\\bar\\tau+\\bar B+\\bar E$ by [F3]. The $\\bar B$-$\\bar E$ covariance is zero by 1.2, and 2.1\u20132.2 give the two component variances, yielding exactly the displayed general formula with both treatment cross-covariances retained. If $\\bar\\tau$ is independent of $\\bar B$ and $\\bar E$, [F4] makes those cross-covariances zero. Expanding $\\operatorname{Var}(n^{-1}\\sum_i\\tau_i)$ by [F3] gives the stated covariance sum; when the $\\tau_i$ are mutually independent with common variance $\\sigma_\\tau^2$, only its $n$ diagonal terms remain, giving $\\sigma_\\tau^2/n$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem inherits n,m>=1 and defines averages using division by n and nm. Setting either index count to zero would leave the displayed averages undefined, so the detector-recognized sums do not admit empty replication.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner focused mathematical review",
+            "reason": "The theorem inherits n,m>=1 and defines averages using division by n and nm. Setting either index count to zero would leave the displayed averages undefined, so the detector-recognized sums do not admit empty replication."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 preserve the formula when either variance component is zero; both zero gives zero conditional variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1\u20132.2: at n=m=1 the fixed-schedule variance is sigma_b squared plus sigma_e squared."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 4.1: constant treatment contributions have zero variance, and zero component variances are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter or endpoint in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof steps 1.1\u20134.1 use only explicitly indexed finite sums; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states formulas, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states formulas, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-unit-one-assay",
+          "claim": "For n=m=1 and fixed tau, the variance reduces to sigma_b squared plus sigma_e squared.",
+          "result": "The single B_1 and E_11 are independent, so their covariance is zero and the formula is Var(B_1+E_11)=sigma_b squared+sigma_e squared."
+        },
+        {
+          "id": "five-readings-allocation",
+          "claim": "For sigma_b squared=4 and sigma_e squared=1, (n,m)=(1,5) gives 21/5 and (n,m)=(5,1) gives 1.",
+          "result": "Direct substitution into the proved identity gives 4+1/5=21/5 and 4/5+1/5=1; the difference is 16/5."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-18-3a",
+        "notes": "Independent current-carrier review of Statement, F1\u2013F6, and Proof 1.1\u20134.1 against all six actual direct suppliers and the model conventions. The family B_i,E_ij is centered, mutually independent, real and square-integrable on one space; 2|X|<=1+X^2 ensures integrability and finite linear combinations remain square-integrable. Identity functions meet the Borel and integrability hypotheses of expectation factorization, so all distinct component covariances and Cov(B-bar,E-bar) vanish. Biological and technical variances count n and nm diagonal terms with coefficients n^-2 and (nm)^-2. Fixed treatment contributions are constants. Random treatment has finite second moments; bilinearity retains Var(tau-bar) and both treatment cross-covariances. Independence of tau-bar from each average suffices to remove those terms; mutually independent equal-variance tau_i additionally yield sigma_tau^2/n, with no iid distribution or Gaussian requirement. Checked n=m=1, either/both zero component variances, constant treatment, dependent assignment covariance sums and cancellation when tau_1=-B_1; n=0 or m=0 is excluded, no iff or choice use. Read reader report and empty findings/refuter artifacts independently. Checked Oehlert \u00a7\u00a71.3,1.5 pp.6,8\u201310 and Holmes\u2013Huber \u00a7\u00a713.3.2,13.4.2,13.4.5: contextual unit/replication sources, not premises for the locally proved formula. No mathematical defect or unmet prerequisite found; no source edit or consumer repair required. Details in research/statistical-models-experiments-62-alpha-batch-18-3a.md.",
+        "prior_author_review": {
+          "status": "complete",
+          "reviewer": "beta-authoring",
+          "notes": "The proof uses finite second moments, zero means, mutual independence, covariance bilinearity, expectation linearity, and factorization only. The fixed-schedule result is choice-free and non-Gaussian. The random-treatment branch retains dependence terms and does not silently assume iid assignment contributions. Source reading motivates the unit distinction; the exact formulas are proved locally. This is author risk review, not independent acceptance."
+        }
+      }
+    },
+    "ex-five-assays-on-one-animal-versus-five-animals": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-biological-and-technical-replication-model",
+          "source_section": "Definition",
+          "quote": "For a specified scientific question, a **biological unit** is one unit at the\nlevel whose biological variation is relevant to the target population. A\n**biological replicate** is a distinct biological unit at that same\nlevel under the sampling law being modeled. The unit receiving randomized\ntreatment is the **randomization unit**; when treatment is assigned to a cage,\nlitter, plot, or batch, that cluster is the randomized replicate even if\nmembers or subsamples within it are measured separately. A **technical\nreplicate** is another reading or assay of the same specimen or material within\none biological unit. These roles follow the scientific and assignment design\nrecorded by [[def-scientific-statistical-model-contract]]; their names alone do\nnot assert statistical independence.\n\nLet $n,m\\ge1$ be integers, let $i\\in\\{1,\\ldots,n\\}$ index biological units,\nand let $j\\in\\{1,\\ldots,m\\}$ index technical measurements of unit $i$. On one\nprobability space, take square-integrable real random variables $B_i$ and\n$E_{ij}$, in the sense of\n[[def-random-element-and-real-random-variable]], with\n$$Y_{ij}=\\mu+\\tau_i+B_i+E_{ij}.$$\nHere $\\mu$ and the treatment contributions $\\tau_i$ are fixed real numbers\nwhen the analysis conditions on the assigned treatment schedule. The random\neffect $B_i$ represents biological variation shared by all measurements of\nunit $i$; $E_{ij}$ is technical measurement error. The complete finite family\n$(B_i)_{i=1}^n,(E_{ij})_{i\\le n,j\\le m}$ is mutually independent in the sense\nof [[def-independent-random-elements]], and\n$$\\mathbb E[B_i]=\\mathbb E[E_{ij}]=0,\\qquad \\operatorname{Var}(B_i)=\\sigma_b^2,\\qquad \\operatorname{Var}(E_{ij})=\\sigma_e^2$$\nfor all indices, where $\\sigma_b^2,\\sigma_e^2\\ge0$. Mean, variance, and\nsquare-integrability use [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]\nand [[def-moments-variance-and-covariance]]. No Gaussian assumption is made.\n\nWith the rows indexed by $(i,j)$, this is a special case of the finite-\ndimensional linear mixed model [[def-linear-mixed-model]]: the random-intercept\ndesign row selects $B_i$, and the fixed mean at that row is $\\mu+\\tau_i$.\nWhen inference averages over randomized assignments, the vector\n$\\boldsymbol\\tau=(\\tau_1,\\ldots,\\tau_n)$ is instead a random vector under the\ndeclared assignment law; its covariance and any dependence on $B$ or $E$ must\nthen be retained as specified by the result that uses it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-mean-and-variance-under-biological-and-technical-replication",
+          "source_section": "Statement",
+          "quote": "Assume the balanced model of\n[[def-biological-and-technical-replication-model]], with $n,m\\ge1$, and set\n$$\\bar Y=\\frac1{nm}\\sum_{i=1}^n\\sum_{j=1}^mY_{ij},\\qquad \\bar B=\\frac1n\\sum_{i=1}^nB_i,\\qquad \\bar E=\\frac1{nm}\\sum_{i=1}^n\\sum_{j=1}^mE_{ij},\\qquad \\bar\\tau=\\frac1n\\sum_{i=1}^n\\tau_i.$$\nFor a fixed treatment schedule $(\\tau_i)_{i=1}^n$,\n$$\\mathbb E[\\bar Y]=\\mu+\\bar\\tau,\\qquad \\operatorname{Var}(\\bar Y)=\\frac{\\sigma_b^2}{n}+\\frac{\\sigma_e^2}{nm}.$$\nIf instead $\\boldsymbol\\tau=(\\tau_1,\\ldots,\\tau_n)$ is square-integrable and\nrandom under the assignment-averaged law, then\n$$\\mathbb E[\\bar Y]=\\mu+\\mathbb E[\\bar\\tau],\\qquad \\operatorname{Var}(\\bar Y)=\\frac{\\sigma_b^2}{n}+\\frac{\\sigma_e^2}{nm}+\\operatorname{Var}(\\bar\\tau)+2\\operatorname{Cov}(\\bar\\tau,\\bar B)+2\\operatorname{Cov}(\\bar\\tau,\\bar E).$$\nThus, when $\\bar\\tau$ is independent of $\\bar B$ and $\\bar E$, the assignment\ncontribution is\n$\\operatorname{Var}(\\bar\\tau)=n^{-2}\\sum_{i,k=1}^n\\operatorname{Cov}(\\tau_i,\\tau_k)$.\nIf, in addition, the $\\tau_i$ are mutually independent with common variance\n$\\sigma_\\tau^2$, the full variance is\n$\\sigma_b^2/n+\\sigma_e^2/(nm)+\\sigma_\\tau^2/n$. Without independence of the\ntreatment average from $\\bar B,\\bar E$, the two covariance terms remain. No\nGaussian assumption is required.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With one animal and five assays, $n=1,m=5$ and $\\bar\\tau=\\tau$. By [F2], the average has expectation $\\mu+\\tau$ and variance $4/1+1/(1\\cdot5)=21/5$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "With five independently sampled animals and one assay per animal, $n=5,m=1$. By [F2], the average again has expectation $\\mu+\\tau$ and variance $4/5+1/(5\\cdot1)=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both designs use five readings, but the first variance exceeds the second by $21/5-1=16/5>0$. The comparison isolates the biological component: averaging the same animal five times leaves its shared $B_1$ contribution unaveraged, while the five-animal design averages five independent biological effects.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If instead $\\sigma_b^2=0$, both designs have variance $\\sigma_e^2/5$; the strict advantage in step 2.1 comes from positive biological variation.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both designs have positive unit and assay counts."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks zero biological variance; zero technical variance is permitted by the same formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-animal design has n=1 and is explicitly evaluated in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 shows that if sigma_b squared is zero, the two allocations tie, so strict inequality is not asserted at that boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval-valued parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two finite allocations are given explicitly; no choice is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example compares the two stated allocations at biological variance four and assay variance one, with a separate zero-biological-variance observation; it asserts no general biconditional about all variance-component values."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example compares the two stated allocations at biological variance four and assay variance one, with a separate zero-biological-variance observation; it asserts no general biconditional about all variance-component values."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "five-reading-allocation",
+          "method": "Substitute the two integer allocations and the stated variance components into the theorem.",
+          "calculation": "One animal: 4+1/5=21/5. Five animals: 4/5+1/5=1. Difference: 16/5.",
+          "result": "Both means equal mu+tau; the five-animal allocation has lower variance by 16/5."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-authoring",
+        "notes": "The example applies the fixed-treatment theorem with n,m positive, equal total readings, and explicit variance components. It limits its conclusion to model variance and records the zero-biological-variance tie; it does not make a general cost or empirical-adequacy claim. This is author risk review, not independent acceptance."
+      }
+    }
+  }
+}

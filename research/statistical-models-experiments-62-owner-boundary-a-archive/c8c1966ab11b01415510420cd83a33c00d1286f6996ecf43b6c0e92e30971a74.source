@@ -1,0 +1,1276 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-local-leading-eigenvector-stability-under-eigengap",
+    "thm-sample-centered-covariance-root-n-frobenius",
+    "def-covariance-and-correlation-principal-component-analysis",
+    "lem-pca-sample-covariance-is-a-measurable-estimator",
+    "thm-pca-leading-direction-maximizes-variance",
+    "thm-repeated-leading-eigenvalue-identifies-subspace",
+    "cor-pca-sample-leading-eigenspace-root-n-consistency",
+    "cex-small-eigengap-allows-fixed-angle-rotation",
+    "ex-covariance-and-correlation-pca-differ-after-rescaling",
+    "ex-pca-tied-eigenvalues-and-sign-ambiguity"
+  ],
+  "contracts": {
+    "thm-local-leading-eigenvector-stability-under-eigengap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-courant-fischer-min-max-principle",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to V$ be self-adjoint on an $n$-dimensional real inner product space,\nand list its eigenvalues in weakly decreasing order:\n\n$$\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_n.$$\n\nThen for every $1\\le k\\le n$,\n\n$$\\lambda_k=\\min_{\\dim W=n-k+1}\\ \\max_{0\\ne v\\in W} R_T(v)=\\max_{\\dim U=k}\\ \\min_{0\\ne v\\in U} R_T(v).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every unit vector $x$, [F3] and [F4] give $|x^{\\mathsf T}Ex|\\le\\|x\\|_2\\|Ex\\|_2\\le\\epsilon$. The top-eigenvalue Rayleigh characterization in [F2] therefore gives $\\lambda_1(A+E)\\le\\lambda_1(A)+\\epsilon$, while evaluating the perturbed Rayleigh quotient at $v$ gives $\\lambda_1(A+E)\\ge v^{\\mathsf T}(A+E)v\\ge\\lambda_1(A)-\\epsilon$. This proves the eigenvalue bound.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The minimum--maximum formula in [F2], with the $(p-1)$-dimensional subspace $v^\\perp$, gives $\\lambda_2(A+E)\\le\\max_{\\|x\\|_2=1,\\ x\\perp v}x^{\\mathsf T}(A+E)x \\le\\lambda_2(A)+\\epsilon$, since every such $x$ has $x^{\\mathsf T}Ax\\le\\lambda_2(A)$. Step 1.1 gives $\\lambda_1(A+E)\\ge\\lambda_1(A)-\\epsilon$, hence $\\lambda_1(A+E)-\\lambda_2(A+E)\\ge g-2\\epsilon>0$; the perturbed leading eigenvalue is simple. Also $\\lambda_1(A+E)-\\lambda_2(A)\\ge g-\\epsilon>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $P=I-vv^{\\mathsf T}$, the orthogonal projection onto $v^\\perp$, and write $\\widetilde\\lambda_1=\\lambda_1(A+E)$. Projecting $(A+E)\\widetilde v=\\widetilde\\lambda_1\\widetilde v$ onto $v^\\perp$ gives $(\\widetilde\\lambda_1 I-A|_{v^\\perp})P\\widetilde v=PE\\widetilde v$. In an orthonormal eigenbasis of $A|_{v^\\perp}$, every eigenvalue of $\\widetilde\\lambda_1 I-A|_{v^\\perp}$ is at least $\\widetilde\\lambda_1-\\lambda_2(A)\\ge g-\\epsilon$ by step 2.1. Therefore $(g-\\epsilon)\\|P\\widetilde v\\|_2\\le\\|PE\\widetilde v\\|_2\\le\\epsilon$. Indeed, $z=Pz+(I-P)z$ is an orthogonal decomposition, so $\\|Pz\\|_2\\le\\|z\\|_2$; then [F3] and $\\|\\widetilde v\\|_2=1$ give the final inequality. Since $\\|P\\widetilde v\\|_2^2=1-(v^{\\mathsf T}\\widetilde v)^2$, division by $g-\\epsilon>0$ proves the angle bound.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The dimension is p>=2; zero-dimensional matrices are excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Epsilon=0 is permitted and step 3.1 gives zero angle; step 1.1 gives zero eigenvalue change."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The condition g=lambda_1-lambda_2 requires p>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The original top eigenvalue is simple and epsilon<g/2 strictly; step 2.1 proves the perturbed gap is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict endpoint epsilon=g/2 is excluded by the statement; step 2.1 uses the strict inequality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement accepts any supplied unit eigenvectors; step 3.1 uses the real spectral theorem without a choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-sample-centered-covariance-root-n-frobenius": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_1,\\ldots,X_p)$ be a measurable random vector in $\\mathbb R^p$,\nwhere $p\\ge1$ is finite, and assume $\\mathbb E\\|X\\|_2^2<\\infty$. Define\nthe mean coordinatewise by $\\mu_j=\\mathbb E X_j$ and define the covariance\nmatrix by\n$$\\Sigma:=\\mathbb E[(X-\\mu)(X-\\mu)^T],$$\nwhere each entry is the expectation of the corresponding real random\nvariable. Write $\\operatorname{tr}(\\Sigma)=\\sum_{j=1}^p\\Sigma_{jj}$.\n\nThe well-definedness lemma proves these expectations are finite,\n$\\Sigma$ is symmetric positive semidefinite, and\n$\\operatorname{tr}(\\Sigma)=\\mathbb E\\|X-\\mu\\|_2^2$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sample-covariance-and-operator-norm-loss",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ be integers and let $X_1,\\ldots,X_n$ be independent identically distributed random vectors in $\\mathbb R^p$ with finite second moments, mean $\\mu=\\mathbb E X_1$, and covariance matrix\n$$\\Sigma=\\mathbb E[(X_1-\\mu)(X_1-\\mu)^{\\mathsf T}].$$\nThe oracle-centered sample covariance and the sample-centered covariance are respectively\n$$\\widehat\\Sigma_\\mu=\\frac1n\\sum_{i=1}^n(X_i-\\mu)(X_i-\\mu)^{\\mathsf T},\\qquad \\widehat\\Sigma^\\ast=\\frac1n\\sum_{i=1}^n(X_i-\\bar X)(X_i-\\bar X)^{\\mathsf T},\\quad \\bar X=\\frac1n\\sum_{i=1}^nX_i.$$\nFor a matrix estimate $A$, squared operator loss is $\\|A-\\Sigma\\|_{\\mathrm{op}}^2$, with the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. This definition distinguishes the known-mean raw second moment from the estimator that removes an unknown mean.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-covariance-vanishes-under-independence",
+          "source_section": "Statement",
+          "quote": "If $X$ and $Y$ are independent square-integrable real random variables, then\n$$\\operatorname{Cov}(X,Y)=0.$$\n\nThus independence implies zero covariance. The converse is false in general.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-markov-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is a nonnegative random variable on a probability\nspace and $a>0$, then\n$$\\mathbb P(X\\ge a)\\le\\frac{\\mathbb E[X]}{a}.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $t^2\\le1+t^4$ for $t\\ge0$, the fourth-moment assumption gives $\\mathbb E\\|X\\|_2^2<\\infty$. Then $\\|X\\|_2\\le1+\\|X\\|_2^2$ gives $\\mathbb E\\|X\\|_2<\\infty$, so the coordinatewise mean $\\mu$ is finite. Put $Y_{n,i}=X_{n,i}-\\mu$ and $M_n=n^{-1}\\sum_iY_{n,i}Y_{n,i}^{\\mathsf T}$. By [F8], $\\|Y_{n,1}\\|_2\\le\\|X_{n,1}\\|_2+\\|\\mu\\|_2$. For $a,b\\ge0$, $2ab\\le a^2+b^2$ gives $(a+b)^2\\le2(a^2+b^2)$ and then $(a+b)^4\\le4(a^2+b^2)^2\\le8(a^4+b^4)$. Hence $\\mathbb E\\|Y_{n,1}\\|_2^4\\le8(\\mathbb E\\|X\\|_2^4+\\|\\mu\\|_2^4)<\\infty$. For each $j,k$, the variables $W_{n,i}^{jk}:=Y_{n,i,j}Y_{n,i,k}-\\Sigma_{jk}$ are centered and square-integrable because $(Y_{n,i,j}Y_{n,i,k})^2\\le\\|Y_{n,i}\\|_2^4$. The map $y\\mapsto y_jy_k-\\Sigma_{jk}$ is Borel, so [F1] and [F2] make $(W_{n,i}^{jk})_{i=1}^n$ independent.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\bar Y_n=n^{-1}\\sum_iY_{n,i}$. By [F1] and [F2], the coordinate variables $Y_{n,i,j}$ are independent across $i$. Thus [F4] makes their cross-covariances zero, and [F4] and [F5] give $\\mathbb E\\|\\bar Y_n\\|_2^2=\\operatorname{tr}(\\Sigma)/n$. Also $\\|\\bar Y_n\\bar Y_n^{\\mathsf T}\\|_F=\\|\\bar Y_n\\|_2^2$ by expanding both squares. For every $C>0$, [F6] therefore gives $\\mathbb P(\\sqrt n\\|\\bar Y_n\\bar Y_n^{\\mathsf T}\\|_F>C) \\le\\operatorname{tr}(\\Sigma)/(C\\sqrt n)\\to0$. Thus this centered-mean term converges to zero in probability.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For fixed $j,k$, all $W_{n,i}^{jk}$ are the same Borel function of the iid vectors $Y_{n,i}$, so they are iid: their independence follows from [F1] and [F2], and equal laws follow because a measurable map sends equal input laws to equal output laws. Thus [F4] gives $\\mathbb E[(M_{n,jk}-\\Sigma_{jk})^2] =n^{-2}\\sum_i\\operatorname{Var}(W_{n,i}^{jk}) =n^{-1}\\operatorname{Var}(W_{n,1}^{jk})$. Since $\\mathbb E[Y_{n,1,j}Y_{n,1,k}]=\\Sigma_{jk}$, $\\operatorname{Var}(W_{n,1}^{jk}) =\\mathbb E[Y_{n,1,j}^2Y_{n,1,k}^2]-\\Sigma_{jk}^2 \\le\\mathbb E[Y_{n,1,j}^2Y_{n,1,k}^2]$. Summing over $j,k$ and using $\\sum_{j,k}Y_{n,1,j}^2Y_{n,1,k}^2=\\|Y_{n,1}\\|_2^4$ yields $\\mathbb E\\|M_n-\\Sigma\\|_F^2\\le n^{-1}\\mathbb E\\|Y_{n,1}\\|_2^4$. Consequently [F6] gives, for every $C>0$, $\\mathbb P(\\sqrt n\\|M_n-\\Sigma\\|_F>C) \\le\\mathbb E\\|Y_{n,1}\\|_2^4/C^2$, so $\\sqrt n\\|M_n-\\Sigma\\|_F=O_P(1)$ by [F7].",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Expanding the centered sum in [F3] gives $\\widehat\\Sigma_n^\\ast=M_n-\\bar Y_n\\bar Y_n^{\\mathsf T}$. For a matrix $B$, let $\\operatorname{vec}(B)\\in\\mathbb R^{p^2}$ list its entries; by the definition of the Frobenius norm, $\\|\\operatorname{vec}(B)\\|_2=\\|B\\|_F$. Applying [F8] to these vectors gives $\\|B+C\\|_F\\le\\|B\\|_F+\\|C\\|_F$, including the triangle inequality used below. For any $\\eta>0$, choose $C_1$ so the limsup tail of $\\sqrt n\\|M_n-\\Sigma\\|_F$ above $C_1$ is at most $\\eta/2$ by step 2.2. For all sufficiently large $n$, the probability that $\\sqrt n\\|\\bar Y_n\\bar Y_n^{\\mathsf T}\\|_F>1$ is at most $\\eta/2$ by step 2.1. The displayed Frobenius triangle inequality then bounds the limsup probability that $\\sqrt n\\|\\widehat\\Sigma_n^\\ast-\\Sigma\\|_F>C_1+1$ by $\\eta$. This is $\\sqrt n\\|\\widehat\\Sigma_n^\\ast-\\Sigma\\|_F=O_P(1)$ by [F7], which is the claimed root-n rate.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F7",
+            "F8",
+            "step 2.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes p>=1 and n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Sigma may be zero; the moment argument and rate in steps 2.1 and 2.2 remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement defines the n-divisor sample covariance at n=1, where it equals zero; the claim is asymptotic as n tends to infinity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular covariance is allowed; steps 1.1, 2.1, and 2.2 use no inverse or Gaussian assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement requires finite fourth moment and fixes divisor n; step 3.1 makes no n-1 endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 use finite sums, Markov inequality, and mutual independence only; no choice axiom is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-covariance-and-correlation-principal-component-analysis": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition restricts p>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero population variance is allowed for covariance-PCA by the definition; correlation-PCA is defined only when every coordinate variance is positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition includes p=1; the separate eigengap theorem requires p>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition represents repeated eigenvalues by their full kernels, not arbitrary vectors."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoints are part of the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No eigenbasis is selected as data: the definition names canonical eigenspaces, and the supplied finite-dimensional spectral theorem is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-pca-sample-covariance-is-a-measurable-estimator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_1,\\ldots,X_p)$ be a measurable random vector in $\\mathbb R^p$,\nwhere $p\\ge1$ is finite, and assume $\\mathbb E\\|X\\|_2^2<\\infty$. Define\nthe mean coordinatewise by $\\mu_j=\\mathbb E X_j$ and define the covariance\nmatrix by\n$$\\Sigma:=\\mathbb E[(X-\\mu)(X-\\mu)^T],$$\nwhere each entry is the expectation of the corresponding real random\nvariable. Write $\\operatorname{tr}(\\Sigma)=\\sum_{j=1}^p\\Sigma_{jj}$.\n\nThe well-definedness lemma proves these expectations are finite,\n$\\Sigma$ is symmetric positive semidefinite, and\n$\\operatorname{tr}(\\Sigma)=\\mathbb E\\|X-\\mu\\|_2^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-second-moment-covariance-matrix-is-well-defined",
+          "source_section": "Statement",
+          "quote": "If $X\\in\\mathbb R^p$ is measurable and $\\mathbb E\\|X\\|_2^2<\\infty$, then\n$\\mu=\\mathbb E X$ and $\\Sigma=\\mathbb E[(X-\\mu)(X-\\mu)^T]$ in\n[[def-covariance-matrix-of-a-random-vector]] are well-defined entrywise,\n$\\Sigma$ is symmetric positive semidefinite, and\n$\\operatorname{tr}(\\Sigma)=\\mathbb E\\|X-\\mu\\|_2^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sample-covariance-and-operator-norm-loss",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ be integers and let $X_1,\\ldots,X_n$ be independent identically distributed random vectors in $\\mathbb R^p$ with finite second moments, mean $\\mu=\\mathbb E X_1$, and covariance matrix\n$$\\Sigma=\\mathbb E[(X_1-\\mu)(X_1-\\mu)^{\\mathsf T}].$$\nThe oracle-centered sample covariance and the sample-centered covariance are respectively\n$$\\widehat\\Sigma_\\mu=\\frac1n\\sum_{i=1}^n(X_i-\\mu)(X_i-\\mu)^{\\mathsf T},\\qquad \\widehat\\Sigma^\\ast=\\frac1n\\sum_{i=1}^n(X_i-\\bar X)(X_i-\\bar X)^{\\mathsf T},\\quad \\bar X=\\frac1n\\sum_{i=1}^nX_i.$$\nFor a matrix estimate $A$, squared operator loss is $\\|A-\\Sigma\\|_{\\mathrm{op}}^2$, with the operator norm of [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]. This definition distinguishes the known-mean raw second moment from the estimator that removes an unknown mean.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regard $\\mathbb S^p$ as the subspace of $\\mathbb R^{p^2}$ with its Borel sigma-algebra. Each matrix coordinate of $T_n$ is a polynomial in the $np$ real sample coordinates, so $T_n:(\\mathbb R^p)^n\\to\\mathbb R^{p^2}$ is continuous. Its values are symmetric because every outer product is symmetric, hence it is also continuous as a map into the subspace $\\mathbb S^p$. By [F7] it is Borel measurable.",
+          "step": "1.1",
+          "inputs": [
+            "F5",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] and [F2], the sample experiment is the stated parameter-indexed iid experiment; [F3] places $\\Sigma_\\theta$ in $\\mathbb S^p$, and [F4] identifies it as the estimand target. The formula in [F5] is exactly $T_n$. Thus [F6] and step 1.1 make $T_n$ a statistic and, since its target space is the same $\\mathbb S^p$, an estimator of $\\psi$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sample statistic assumes p>=1 and n>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines the map even when all sample observations are zero, and step 2.1 proves it remains measurable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, step 1.1 gives the polynomial map as the zero matrix and step 2.1 still proves measurability."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 needs no invertibility or nondegeneracy for measurability."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints are part of the result."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 gives a fixed polynomial formula, with no choice principle used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-pca-leading-direction-maximizes-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-covariance-and-correlation-principal-component-analysis",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a parametric statistical model, let $p\\ge1$, and let\n$X:\\mathcal X\\to\\mathbb R^p$ be a measurable random vector with\n$\\mathbb E_\\theta\\|X\\|_2^2<\\infty$ for every $\\theta\\in\\Theta$. Write\n$\\mu_\\theta=\\mathbb E_\\theta X$ and\n$\\Sigma_\\theta=\\operatorname{Cov}_\\theta(X)$ as in\n[[def-covariance-matrix-of-a-random-vector]]. The map\n$\\psi(\\theta)=\\Sigma_\\theta$ is the covariance-matrix estimand on this model\n([[def-estimand-on-a-statistical-model]]).\n\nFor each $\\theta$, list the real eigenvalues of $\\Sigma_\\theta$ in\nnonincreasing order and counting multiplicity. The **covariance-PCA\ndecomposition** is the list of eigenspaces of $\\Sigma_\\theta$, ordered by\ntheir distinct eigenvalues from largest to smallest. Equivalently, for each\ndistinct eigenvalue $\\lambda$, its component subspace is\n$\\ker(\\Sigma_\\theta-\\lambda I)$. The top eigenspace is the leading principal\nsubspace; when its eigenvalue is simple it is a line, and either unit\nrepresentative has the same sign-free direction.\nThe well-definedness result\n[[lem-finite-second-moment-covariance-matrix-is-well-defined]] ensures these\ncovariance matrices are finite, symmetric, and positive semidefinite. The\nreal spectral theorem\n[[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]] ensures their\neigenspaces span $\\mathbb R^p$.\n\nIf every coordinate variance $(\\Sigma_\\theta)_{jj}$ is positive, put\n$D_\\theta=\\operatorname{diag}(\\sqrt{(\\Sigma_\\theta)_{11}},\\ldots,\n\\sqrt{(\\Sigma_\\theta)_{pp}})$ and standardize the centered vector as\n$Z_\\theta=D_\\theta^{-1}(X-\\mu_\\theta)$. Its covariance is the correlation\nmatrix\n$R_\\theta=D_\\theta^{-1}\\Sigma_\\theta D_\\theta^{-1}$. **Correlation-PCA** is\nthe ordered eigenspace decomposition of $R_\\theta$. Thus both population\nconventions center first; correlation-PCA additionally divides each\ncoordinate by its positive population standard deviation.\n\nFor an iid sample $X_1,\\ldots,X_n$, **sample covariance-PCA** uses the\neigenspaces of the sample-centered covariance\n$\\widehat\\Sigma_n^\\ast=n^{-1}\\sum_i(X_i-\\bar X)(X_i-\\bar X)^{\\mathsf T}$\nfrom [[def-sample-covariance-and-operator-norm-loss]], where\n$\\bar X=n^{-1}\\sum_iX_i$. Sample correlation-PCA standardizes by the\npositive sample standard deviations when all sample coordinate variances are\npositive. The divisor convention here is $n$, not $n-1$. The sample\ncovariance matrix is a statistic, and it is an estimator of the covariance\ntarget in its sample experiment, as proved in\n[[lem-pca-sample-covariance-is-a-measurable-estimator]].\n\nThis definition specifies mathematical matrices under an assumed law. The\nscientific model contract distinguishes that assumption from evidence that an\nempirical law is adequate; PCA itself makes no such adequacy claim\n([[def-scientific-statistical-model-contract]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_1,\\ldots,X_p)$ be a measurable random vector in $\\mathbb R^p$,\nwhere $p\\ge1$ is finite, and assume $\\mathbb E\\|X\\|_2^2<\\infty$. Define\nthe mean coordinatewise by $\\mu_j=\\mathbb E X_j$ and define the covariance\nmatrix by\n$$\\Sigma:=\\mathbb E[(X-\\mu)(X-\\mu)^T],$$\nwhere each entry is the expectation of the corresponding real random\nvariable. Write $\\operatorname{tr}(\\Sigma)=\\sum_{j=1}^p\\Sigma_{jj}$.\n\nThe well-definedness lemma proves these expectations are finite,\n$\\Sigma$ is symmetric positive semidefinite, and\n$\\operatorname{tr}(\\Sigma)=\\mathbb E\\|X-\\mu\\|_2^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-courant-fischer-min-max-principle",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to V$ be self-adjoint on an $n$-dimensional real inner product space,\nand list its eigenvalues in weakly decreasing order:\n\n$$\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_n.$$\n\nThen for every $1\\le k\\le n$,\n\n$$\\lambda_k=\\min_{\\dim W=n-k+1}\\ \\max_{0\\ne v\\in W} R_T(v)=\\max_{\\dim U=k}\\ \\min_{0\\ne v\\in U} R_T(v).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $Y=X-\\mu_\\theta$. Finite second moments make every coordinate in the finite sums below integrable. Expanding the centered scalar square and using [F4] gives $\\operatorname{Var}_\\theta(a^{\\mathsf T}X) =\\mathbb E_\\theta[(a^{\\mathsf T}Y)^2] =\\sum_{j,k}a_ja_k\\mathbb E_\\theta[Y_jY_k] =a^{\\mathsf T}\\Sigma_\\theta a$ by [F2] and [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5], write $a=\\sum_{j=1}^pc_je_j$ in an orthonormal eigenbasis of $\\Sigma_\\theta$ with eigenvalues $\\lambda_1\\ge\\cdots\\ge\\lambda_p$ and $\\sum_jc_j^2=1$. Then $a^{\\mathsf T}\\Sigma_\\theta a=\\sum_j\\lambda_jc_j^2\\le\\lambda_1\\sum_jc_j^2 =\\lambda_1$. The difference is $\\lambda_1-a^{\\mathsf T}\\Sigma_\\theta a =\\sum_j(\\lambda_1-\\lambda_j)c_j^2$, a sum of nonnegative terms, so equality holds exactly when $c_j=0$ for every $\\lambda_j<\\lambda_1$. This is exactly the unit sphere in the leading eigenspace. Step 1.1 identifies this Rayleigh quotient with projected variance, proving the covariance-PCA assertion.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If all coordinate variances are positive, [F1] defines $Z_\\theta=D_\\theta^{-1}(X-\\mu_\\theta)$ with covariance $R_\\theta=D_\\theta^{-1}\\Sigma_\\theta D_\\theta^{-1}$. The hypotheses of steps 1.1--2.1 hold with $Z_\\theta$ and $R_\\theta$ in place of $X$ and $\\Sigma_\\theta$, so the leading correlation-PCA eigenspace maximizes the variance of unit linear scores of $Z_\\theta$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes p>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If Sigma=0, step 2.1 equality characterization gives every unit direction the maximum zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and step 2.1 include p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 allows repeated leading eigenvalues; equality holds on the entire leading eigenspace."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses finite eigenbasis coordinates and finite sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-repeated-leading-eigenvalue-identifies-subspace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-covariance-and-correlation-principal-component-analysis",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a parametric statistical model, let $p\\ge1$, and let\n$X:\\mathcal X\\to\\mathbb R^p$ be a measurable random vector with\n$\\mathbb E_\\theta\\|X\\|_2^2<\\infty$ for every $\\theta\\in\\Theta$. Write\n$\\mu_\\theta=\\mathbb E_\\theta X$ and\n$\\Sigma_\\theta=\\operatorname{Cov}_\\theta(X)$ as in\n[[def-covariance-matrix-of-a-random-vector]]. The map\n$\\psi(\\theta)=\\Sigma_\\theta$ is the covariance-matrix estimand on this model\n([[def-estimand-on-a-statistical-model]]).\n\nFor each $\\theta$, list the real eigenvalues of $\\Sigma_\\theta$ in\nnonincreasing order and counting multiplicity. The **covariance-PCA\ndecomposition** is the list of eigenspaces of $\\Sigma_\\theta$, ordered by\ntheir distinct eigenvalues from largest to smallest. Equivalently, for each\ndistinct eigenvalue $\\lambda$, its component subspace is\n$\\ker(\\Sigma_\\theta-\\lambda I)$. The top eigenspace is the leading principal\nsubspace; when its eigenvalue is simple it is a line, and either unit\nrepresentative has the same sign-free direction.\nThe well-definedness result\n[[lem-finite-second-moment-covariance-matrix-is-well-defined]] ensures these\ncovariance matrices are finite, symmetric, and positive semidefinite. The\nreal spectral theorem\n[[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]] ensures their\neigenspaces span $\\mathbb R^p$.\n\nIf every coordinate variance $(\\Sigma_\\theta)_{jj}$ is positive, put\n$D_\\theta=\\operatorname{diag}(\\sqrt{(\\Sigma_\\theta)_{11}},\\ldots,\n\\sqrt{(\\Sigma_\\theta)_{pp}})$ and standardize the centered vector as\n$Z_\\theta=D_\\theta^{-1}(X-\\mu_\\theta)$. Its covariance is the correlation\nmatrix\n$R_\\theta=D_\\theta^{-1}\\Sigma_\\theta D_\\theta^{-1}$. **Correlation-PCA** is\nthe ordered eigenspace decomposition of $R_\\theta$. Thus both population\nconventions center first; correlation-PCA additionally divides each\ncoordinate by its positive population standard deviation.\n\nFor an iid sample $X_1,\\ldots,X_n$, **sample covariance-PCA** uses the\neigenspaces of the sample-centered covariance\n$\\widehat\\Sigma_n^\\ast=n^{-1}\\sum_i(X_i-\\bar X)(X_i-\\bar X)^{\\mathsf T}$\nfrom [[def-sample-covariance-and-operator-norm-loss]], where\n$\\bar X=n^{-1}\\sum_iX_i$. Sample correlation-PCA standardizes by the\npositive sample standard deviations when all sample coordinate variances are\npositive. The divisor convention here is $n$, not $n-1$. The sample\ncovariance matrix is a statistic, and it is an estimator of the covariance\ntarget in its sample experiment, as proved in\n[[lem-pca-sample-covariance-is-a-measurable-estimator]].\n\nThis definition specifies mathematical matrices under an assumed law. The\nscientific model contract distinguishes that assumption from evidence that an\nempirical law is adequate; PCA itself makes no such adequacy claim\n([[def-scientific-statistical-model-contract]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pca-leading-direction-maximizes-variance",
+          "source_section": "Statement",
+          "quote": "Fix a parameter $\\theta$ in the model of\n[[def-covariance-and-correlation-principal-component-analysis]], and let\n$X$ have finite second moment and covariance matrix $\\Sigma_\\theta$. For\nevery unit vector $a\\in\\mathbb R^p$,\n$$ \\operatorname{Var}_\\theta(a^{\\mathsf T}X)=a^{\\mathsf T}\\Sigma_\\theta a. $$\nConsequently, the maximum projected variance is the largest eigenvalue\n$\\lambda_1(\\Sigma_\\theta)$, and its maximizing unit vectors are exactly the\nunit vectors in the leading eigenspace. When all coordinate variances are\npositive, the same assertion applied to\n$D_\\theta^{-1}(X-\\mu_\\theta)$ says that correlation-PCA maximizes the\nvariance of linear scores of the standardized coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the orthonormal eigenbasis supplied by [F2], the equality $\\lambda_1=\\lambda_2$ gives at least two linearly independent eigenvectors with eigenvalue $\\lambda_1$. The full eigenspace $E_1=\\ker(\\Sigma-\\lambda_1I)$ contains these vectors, is specified by $\\Sigma$ itself, and therefore has dimension at least two.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every unit vector in $E_1$ is a leading principal direction by [F3]. Because a space of dimension at least two contains noncollinear unit vectors, there is no single unit vector selected by $\\Sigma$ alone. The canonical object is the whole leading eigenspace $E_1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypothesis lambda_1=lambda_2 requires p>=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The repeated eigenvalue may be zero; step 1.1 eigenspace argument is unchanged."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement requires at least two eigenvalues."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows multiplicity greater than two; the full kernel is the canonical subspace."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and step 2.1 refer to the canonical kernel and make no arbitrary eigenvector selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "cor-pca-sample-leading-eigenspace-root-n-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-sample-centered-covariance-root-n-frobenius",
+          "source_section": "Statement",
+          "quote": "Fix $p\\ge1$ and a Borel probability law $P$ on $\\mathbb R^p$ with\n$\\mathbb E_P\\|X\\|_2^4<\\infty$, mean $\\mu$, and covariance matrix $\\Sigma$.\nFor each $n\\ge1$, let $X_{n,1},\\ldots,X_{n,n}$ be iid with law $P$; the\nprobability space may depend on $n$. Put\n$$ \\bar X_n:=\\frac1n\\sum_{i=1}^nX_{n,i},\\qquad \\widehat\\Sigma_n^\\ast:=\\frac1n\\sum_{i=1}^n(X_{n,i}-\\bar X_n)(X_{n,i}-\\bar X_n)^{\\mathsf T}, $$\nthe sample-centered covariance with divisor $n$ from\n[[def-sample-covariance-and-operator-norm-loss]]. For a matrix $B$, define\n$\\|B\\|_F:=(\\sum_{j,k=1}^pB_{jk}^2)^{1/2}$. Then\n$$\n\\|\\widehat\\Sigma_n^\\ast-\\Sigma\\|_F=O_P(n^{-1/2}),\n$$\nmeaning $\\sqrt n\\|\\widehat\\Sigma_n^\\ast-\\Sigma\\|_F=O_P(1)$ in the\nbounded-in-probability sense of\n[[def-op-and-little-op-stochastic-bounds]]. No Gaussian assumption is needed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-local-leading-eigenvector-stability-under-eigengap",
+          "source_section": "Statement",
+          "quote": "Let $p\\ge2$, let $A\\in\\mathbb R^{p\\times p}$ be symmetric, and order its\neigenvalues as $\\lambda_1(A)\\ge\\cdots\\ge\\lambda_p(A)$. Suppose its leading\neigenvalue is simple, with gap\n$$\ng:=\\lambda_1(A)-\\lambda_2(A)>0,\n$$\nand let $v$ be a unit leading eigenvector. Let $E\\in\\mathbb R^{p\\times p}$ be\nsymmetric, put $\\epsilon:=\\|E\\|_{\\mathrm{op}}$, and assume\n$0\\le\\epsilon<g/2$. If $\\widetilde v$ is any unit leading eigenvector of\n$A+E$, then the leading eigenvalue of $A+E$ is simple and\n$$ |\\lambda_1(A+E)-\\lambda_1(A)|\\le\\epsilon,\\qquad \\sin\\angle(v,\\widetilde v):=\\sqrt{1-(v^{\\mathsf T}\\widetilde v)^2}\\le\\frac{\\epsilon}{g-\\epsilon}. $$\nThe bound concerns the line spanned by the eigenvector, so it is unchanged by\neither sign choice. It is a local eigengap bound; it does not assert a\ndimension-free Davis--Kahan theorem or a finite-sample inference procedure.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-pca-sample-covariance-is-a-measurable-estimator",
+          "source_section": "Statement",
+          "quote": "Let $(P_\\theta)_{\\theta\\in\\Theta}$ be a family of Borel probability laws on\n$\\mathbb R^p$ with $\\mathbb E_\\theta\\|X\\|_2^2<\\infty$. For each $n\\ge1$,\nobserve an iid sample $X_1,\\ldots,X_n$ with common law $P_\\theta$ and sample\nlaw $P_\\theta^{\\otimes n}$ on the Borel data space $(\\mathbb R^p)^n$. Put\n$\\Sigma_\\theta=\\operatorname{Cov}_\\theta(X)$ and let\n$\\psi(\\theta)=\\Sigma_\\theta$ be the covariance-matrix estimand with target\nthe Borel space $\\mathbb S^p$ of real symmetric $p\\times p$ matrices. The\nsample-centered covariance map\n$$ T_n(x_1,\\ldots,x_n):=\\frac1n\\sum_{i=1}^n(x_i-\\bar x)(x_i-\\bar x)^{\\mathsf T},\\qquad \\bar x=\\frac1n\\sum_{i=1}^nx_i, $$\nis a statistic with target the Borel space $\\mathbb S^p$, and hence is an\nestimator of $\\psi$ in the sense of [[def-statistic-and-estimator]]. This\nstatement asserts measurability and target type only; it asserts no\nunbiasedness or consistency.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $p\\times p$ matrix $B$ and unit vector $u$, applying Cauchy--Schwarz to each row gives $\\|Bu\\|_2^2=\\sum_j(\\sum_kB_{jk}u_k)^2 \\le\\sum_{j,k}B_{jk}^2=\\|B\\|_F^2$. Hence [F4] gives $\\|B\\|_{\\mathrm{op}}\\le\\|B\\|_F$. With $\\epsilon_n=\\|\\widehat\\Sigma_n^\\ast-\\Sigma\\|_{\\mathrm{op}}$, [F1] implies $\\epsilon_n=O_P(n^{-1/2})$ by [F6]. To see $\\mathbb P(G_n)\\to1$, fix $\\eta>0$ and choose $C$ so the limsup tail of $\\sqrt n\\|\\widehat\\Sigma_n^\\ast-\\Sigma\\|_F$ above $C$ is at most $\\eta$. For all sufficiently large $n$, $C/\\sqrt n<g/2$, and then $G_n^c\\subseteq\\{\\sqrt n\\|\\widehat\\Sigma_n^\\ast-\\Sigma\\|_F>C\\}$. Thus $\\limsup_n\\mathbb P(G_n^c)\\le\\eta$, so the claimed probability tends to one.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On $G_n$, [F2] says that the sample leading eigenvalue is simple and $Z_n\\le\\epsilon_n/(g-\\epsilon_n)\\le2\\epsilon_n/g$. The sample matrix is measurable by [F3]; its operator-norm distance from $\\Sigma$ is therefore measurable. The leading line varies continuously on the set of matrices with a simple top eigenvalue: applying [F2] with any such matrix as the base and a perturbation tending to zero makes the sign-free line angle tend to zero. Hence $Z_n$, extended by zero off the Borel event $G_n$, is measurable. Pointwise, $\\sqrt n Z_n\\le(2/g)\\sqrt n\\epsilon_n$, so [F1] and [F6] imply $\\sqrt nZ_n=O_P(1)$ and therefore $Z_n=O_P(n^{-1/2})$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $\\delta>0$ and $\\eta>0$. Since [F6] defines $\\sqrt nZ_n=O_P(1)$, choose $C$ so its limsup tail above $C$ is at most $\\eta$. For all sufficiently large $n$, $C/\\sqrt n<\\delta$, and then $\\{Z_n>\\delta\\}\\subseteq\\{\\sqrt nZ_n>C\\}$. Hence $\\limsup_n\\mathbb P(Z_n>\\delta)\\le\\eta$. Since $\\eta$ was arbitrary, $Z_n\\to0$ in probability.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The top eigengap requires p>=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero sample perturbation gives zero angle on the local event in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement assumes p>=2 and a positive top gap."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement requires a positive population gap; step 2.1 shows sample ties outside the local event have probability tending to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement and step 2.1 use the strict event epsilon<g/2; its boundary is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and step 2.1 define angle between sign-free lines on the simple-gap event; no eigenvector orientation is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-pca-tied-eigenvalues-and-sign-ambiguity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-covariance-and-correlation-principal-component-analysis",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a parametric statistical model, let $p\\ge1$, and let\n$X:\\mathcal X\\to\\mathbb R^p$ be a measurable random vector with\n$\\mathbb E_\\theta\\|X\\|_2^2<\\infty$ for every $\\theta\\in\\Theta$. Write\n$\\mu_\\theta=\\mathbb E_\\theta X$ and\n$\\Sigma_\\theta=\\operatorname{Cov}_\\theta(X)$ as in\n[[def-covariance-matrix-of-a-random-vector]]. The map\n$\\psi(\\theta)=\\Sigma_\\theta$ is the covariance-matrix estimand on this model\n([[def-estimand-on-a-statistical-model]]).\n\nFor each $\\theta$, list the real eigenvalues of $\\Sigma_\\theta$ in\nnonincreasing order and counting multiplicity. The **covariance-PCA\ndecomposition** is the list of eigenspaces of $\\Sigma_\\theta$, ordered by\ntheir distinct eigenvalues from largest to smallest. Equivalently, for each\ndistinct eigenvalue $\\lambda$, its component subspace is\n$\\ker(\\Sigma_\\theta-\\lambda I)$. The top eigenspace is the leading principal\nsubspace; when its eigenvalue is simple it is a line, and either unit\nrepresentative has the same sign-free direction.\nThe well-definedness result\n[[lem-finite-second-moment-covariance-matrix-is-well-defined]] ensures these\ncovariance matrices are finite, symmetric, and positive semidefinite. The\nreal spectral theorem\n[[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]] ensures their\neigenspaces span $\\mathbb R^p$.\n\nIf every coordinate variance $(\\Sigma_\\theta)_{jj}$ is positive, put\n$D_\\theta=\\operatorname{diag}(\\sqrt{(\\Sigma_\\theta)_{11}},\\ldots,\n\\sqrt{(\\Sigma_\\theta)_{pp}})$ and standardize the centered vector as\n$Z_\\theta=D_\\theta^{-1}(X-\\mu_\\theta)$. Its covariance is the correlation\nmatrix\n$R_\\theta=D_\\theta^{-1}\\Sigma_\\theta D_\\theta^{-1}$. **Correlation-PCA** is\nthe ordered eigenspace decomposition of $R_\\theta$. Thus both population\nconventions center first; correlation-PCA additionally divides each\ncoordinate by its positive population standard deviation.\n\nFor an iid sample $X_1,\\ldots,X_n$, **sample covariance-PCA** uses the\neigenspaces of the sample-centered covariance\n$\\widehat\\Sigma_n^\\ast=n^{-1}\\sum_i(X_i-\\bar X)(X_i-\\bar X)^{\\mathsf T}$\nfrom [[def-sample-covariance-and-operator-norm-loss]], where\n$\\bar X=n^{-1}\\sum_iX_i$. Sample correlation-PCA standardizes by the\npositive sample standard deviations when all sample coordinate variances are\npositive. The divisor convention here is $n$, not $n-1$. The sample\ncovariance matrix is a statistic, and it is an estimator of the covariance\ntarget in its sample experiment, as proved in\n[[lem-pca-sample-covariance-is-a-measurable-estimator]].\n\nThis definition specifies mathematical matrices under an assumed law. The\nscientific model contract distinguishes that assumption from evidence that an\nempirical law is adequate; PCA itself makes no such adequacy claim\n([[def-scientific-statistical-model-contract]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-repeated-leading-eigenvalue-identifies-subspace",
+          "source_section": "Statement",
+          "quote": "Let $\\Sigma$ be a covariance matrix in the PCA definition of\n[[def-covariance-and-correlation-principal-component-analysis]], with ordered\neigenvalues $\\lambda_1\\ge\\lambda_2\\ge\\cdots$. If\n$\\lambda_1=\\lambda_2$, then the leading eigenspace\n$E_1=\\ker(\\Sigma-\\lambda_1 I)$ is a uniquely specified subspace of dimension\nat least two. Every unit vector in $E_1$ is a leading principal direction,\nso the covariance matrix determines this subspace but does not single out a\nunit vector in it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pca-leading-direction-maximizes-variance",
+          "source_section": "Statement",
+          "quote": "Fix a parameter $\\theta$ in the model of\n[[def-covariance-and-correlation-principal-component-analysis]], and let\n$X$ have finite second moment and covariance matrix $\\Sigma_\\theta$. For\nevery unit vector $a\\in\\mathbb R^p$,\n$$ \\operatorname{Var}_\\theta(a^{\\mathsf T}X)=a^{\\mathsf T}\\Sigma_\\theta a. $$\nConsequently, the maximum projected variance is the largest eigenvalue\n$\\lambda_1(\\Sigma_\\theta)$, and its maximizing unit vectors are exactly the\nunit vectors in the leading eigenspace. When all coordinate variances are\npositive, the same assertion applied to\n$D_\\theta^{-1}(X-\\mu_\\theta)$ says that correlation-PCA maximizes the\nvariance of linear scores of the standardized coordinates.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The eigenvalues of $\\Sigma_1=I_2$ are $1,1$, and $I_2-I_2$ is the zero matrix, so the defined leading eigenspace is $E_1=\\ker(I_2-I_2)=\\mathbb R^2$. For any finite-second-moment random vector $X$ with covariance $\\Sigma_1$ and every unit vector $a\\in\\mathbb R^2$, [F4] gives $\\operatorname{Var}(a^{\\mathsf T}X)=a^{\\mathsf T}I_2a=\\|a\\|_2^2=1$. Thus every unit vector in $E_1$ attains the same projected variance $1$ and maximizes it; each of its lines is a variance-maximizing direction, while the defined leading PCA subspace remains all of $\\mathbb R^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The eigenvalues of $\\Sigma_2=\\operatorname{diag}(2,1)$ are $2>1$, with leading eigenspace $\\operatorname{span}(e_1)$. Both $e_1$ and $-e_1$ have unit norm and satisfy $\\Sigma_2 e_1=2e_1$ and $\\Sigma_2(-e_1)=2(-e_1)$. They determine the same line, so even a simple leading eigenvalue does not orient its eigenvector.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both examples use p=2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The identity covariance example in step 1.1 has no zero eigenvalues."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Both matrices are two-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 display the tied and simple regimes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly display all eigenspaces and vectors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-covariance-and-correlation-pca-differ-after-rescaling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_1,\\ldots,X_p)$ be a measurable random vector in $\\mathbb R^p$,\nwhere $p\\ge1$ is finite, and assume $\\mathbb E\\|X\\|_2^2<\\infty$. Define\nthe mean coordinatewise by $\\mu_j=\\mathbb E X_j$ and define the covariance\nmatrix by\n$$\\Sigma:=\\mathbb E[(X-\\mu)(X-\\mu)^T],$$\nwhere each entry is the expectation of the corresponding real random\nvariable. Write $\\operatorname{tr}(\\Sigma)=\\sum_{j=1}^p\\Sigma_{jj}$.\n\nThe well-definedness lemma proves these expectations are finite,\n$\\Sigma$ is symmetric positive semidefinite, and\n$\\operatorname{tr}(\\Sigma)=\\mathbb E\\|X-\\mu\\|_2^2$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-covariance-and-correlation-principal-component-analysis",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a parametric statistical model, let $p\\ge1$, and let\n$X:\\mathcal X\\to\\mathbb R^p$ be a measurable random vector with\n$\\mathbb E_\\theta\\|X\\|_2^2<\\infty$ for every $\\theta\\in\\Theta$. Write\n$\\mu_\\theta=\\mathbb E_\\theta X$ and\n$\\Sigma_\\theta=\\operatorname{Cov}_\\theta(X)$ as in\n[[def-covariance-matrix-of-a-random-vector]]. The map\n$\\psi(\\theta)=\\Sigma_\\theta$ is the covariance-matrix estimand on this model\n([[def-estimand-on-a-statistical-model]]).\n\nFor each $\\theta$, list the real eigenvalues of $\\Sigma_\\theta$ in\nnonincreasing order and counting multiplicity. The **covariance-PCA\ndecomposition** is the list of eigenspaces of $\\Sigma_\\theta$, ordered by\ntheir distinct eigenvalues from largest to smallest. Equivalently, for each\ndistinct eigenvalue $\\lambda$, its component subspace is\n$\\ker(\\Sigma_\\theta-\\lambda I)$. The top eigenspace is the leading principal\nsubspace; when its eigenvalue is simple it is a line, and either unit\nrepresentative has the same sign-free direction.\nThe well-definedness result\n[[lem-finite-second-moment-covariance-matrix-is-well-defined]] ensures these\ncovariance matrices are finite, symmetric, and positive semidefinite. The\nreal spectral theorem\n[[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]] ensures their\neigenspaces span $\\mathbb R^p$.\n\nIf every coordinate variance $(\\Sigma_\\theta)_{jj}$ is positive, put\n$D_\\theta=\\operatorname{diag}(\\sqrt{(\\Sigma_\\theta)_{11}},\\ldots,\n\\sqrt{(\\Sigma_\\theta)_{pp}})$ and standardize the centered vector as\n$Z_\\theta=D_\\theta^{-1}(X-\\mu_\\theta)$. Its covariance is the correlation\nmatrix\n$R_\\theta=D_\\theta^{-1}\\Sigma_\\theta D_\\theta^{-1}$. **Correlation-PCA** is\nthe ordered eigenspace decomposition of $R_\\theta$. Thus both population\nconventions center first; correlation-PCA additionally divides each\ncoordinate by its positive population standard deviation.\n\nFor an iid sample $X_1,\\ldots,X_n$, **sample covariance-PCA** uses the\neigenspaces of the sample-centered covariance\n$\\widehat\\Sigma_n^\\ast=n^{-1}\\sum_i(X_i-\\bar X)(X_i-\\bar X)^{\\mathsf T}$\nfrom [[def-sample-covariance-and-operator-norm-loss]], where\n$\\bar X=n^{-1}\\sum_iX_i$. Sample correlation-PCA standardizes by the\npositive sample standard deviations when all sample coordinate variances are\npositive. The divisor convention here is $n$, not $n-1$. The sample\ncovariance matrix is a statistic, and it is an estimator of the covariance\ntarget in its sample experiment, as proved in\n[[lem-pca-sample-covariance-is-a-measurable-estimator]].\n\nThis definition specifies mathematical matrices under an assumed law. The\nscientific model contract distinguishes that assumption from evidence that an\nempirical law is adequate; PCA itself makes no such adequacy claim\n([[def-scientific-statistical-model-contract]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-pca-leading-direction-maximizes-variance",
+          "source_section": "Statement",
+          "quote": "Fix a parameter $\\theta$ in the model of\n[[def-covariance-and-correlation-principal-component-analysis]], and let\n$X$ have finite second moment and covariance matrix $\\Sigma_\\theta$. For\nevery unit vector $a\\in\\mathbb R^p$,\n$$ \\operatorname{Var}_\\theta(a^{\\mathsf T}X)=a^{\\mathsf T}\\Sigma_\\theta a. $$\nConsequently, the maximum projected variance is the largest eigenvalue\n$\\lambda_1(\\Sigma_\\theta)$, and its maximizing unit vectors are exactly the\nunit vectors in the leading eigenspace. When all coordinate variances are\npositive, the same assertion applied to\n$D_\\theta^{-1}(X-\\mu_\\theta)$ says that correlation-PCA maximizes the\nvariance of linear scores of the standardized coordinates.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On this four-point space, $\\mathbb E U=\\mathbb E V=0$, $\\mathbb E U^2=\\mathbb E V^2=1$, and $\\mathbb E[UV]=0$ because two points have $UV=1$ and two have $UV=-1$. Thus $\\mathbb E X=0$, $\\operatorname{Var}(3U)=9$, $\\operatorname{Var}(U+\\sqrt3V)=1+3=4$, and $\\operatorname{Cov}(3U,U+\\sqrt3V)=3$. This gives the stated covariance matrix.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The positive standard-deviation matrix is $D=\\operatorname{diag}(3,2)$, so [F2] gives $D^{-1}\\operatorname{Cov}(X)D^{-1} =\\begin{pmatrix}1&1/2\\\\1/2&1\\end{pmatrix}$. This matrix sends $(1,1)^{\\mathsf T}$ to $\\tfrac32(1,1)^{\\mathsf T}$ and $(1,-1)^{\\mathsf T}$ to $\\tfrac12(1,-1)^{\\mathsf T}$; hence its leading line is $\\operatorname{span}(1,1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The covariance matrix has characteristic roots $(13\\pm\\sqrt{61})/2$, so its leading eigenspace is a line. It sends $(1,1)^{\\mathsf T}$ to $(12,7)^{\\mathsf T}$, which is not a scalar multiple of $(1,1)^{\\mathsf T}$. Thus the correlation-PCA leading line is not the covariance-PCA leading line, and [F3] identifies each as the maximizing line for its own projected variance.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is two-dimensional."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Both coordinate variances are strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example requires two coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 show both matrices have distinct eigenvalues; the difference comes from scale, not a tie."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 states the four-point law and steps 1.1 through 3.1 give exact matrices and directions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        }
+      ],
+      "finite_checks": []
+    },
+    "cex-small-eigengap-allows-fixed-angle-rotation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-local-leading-eigenvector-stability-under-eigengap",
+          "source_section": "Statement",
+          "quote": "Let $p\\ge2$, let $A\\in\\mathbb R^{p\\times p}$ be symmetric, and order its\neigenvalues as $\\lambda_1(A)\\ge\\cdots\\ge\\lambda_p(A)$. Suppose its leading\neigenvalue is simple, with gap\n$$\ng:=\\lambda_1(A)-\\lambda_2(A)>0,\n$$\nand let $v$ be a unit leading eigenvector. Let $E\\in\\mathbb R^{p\\times p}$ be\nsymmetric, put $\\epsilon:=\\|E\\|_{\\mathrm{op}}$, and assume\n$0\\le\\epsilon<g/2$. If $\\widetilde v$ is any unit leading eigenvector of\n$A+E$, then the leading eigenvalue of $A+E$ is simple and\n$$ |\\lambda_1(A+E)-\\lambda_1(A)|\\le\\epsilon,\\qquad \\sin\\angle(v,\\widetilde v):=\\sqrt{1-(v^{\\mathsf T}\\widetilde v)^2}\\le\\frac{\\epsilon}{g-\\epsilon}. $$\nThe bound concerns the line spanned by the eigenvector, so it is unchanged by\neither sign choice. It is a local eigengap bound; it does not assert a\ndimension-free Davis--Kahan theorem or a finite-sample inference procedure.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The eigenvalues of $A_\\delta$ are $1+\\delta$ and $1$, so its leading line is $\\operatorname{span}(e_1)$ and its gap is $g_\\delta=\\delta$. Also $E_\\delta^{\\mathsf T}E_\\delta=(\\delta/4)^2I_2$, whence [F1] gives $\\|E_\\delta\\|_{\\mathrm{op}}=\\delta/4$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The characteristic polynomial of $A_\\delta+E_\\delta=\\begin{pmatrix}1+\\delta&\\delta/4\\\\\\delta/4&1\\end{pmatrix}$ has roots $1+\\delta/2\\pm\\sqrt{(\\delta/2)^2+(\\delta/4)^2} =1+\\delta/2\\pm\\sqrt5\\,\\delta/4$, so the larger root is the leading eigenvalue. If $(x,y)^{\\mathsf T}$ is its leading eigenvector, the first row of the eigenvalue equation gives $y/x=4(\\lambda_1(A_\\delta+E_\\delta)-1-\\delta)/\\delta=\\sqrt5-2$. Thus its line makes angle $\\arctan(\\sqrt5-2)>0$ with $\\operatorname{span}(e_1)$, independently of $\\delta$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Letting $\\delta\\downarrow0$ makes $\\|E_\\delta\\|_{\\mathrm{op}}\\to0$ by step 1.1 while the angle in step 1.2 stays fixed and positive, contradicting the proposed uniform claim. Here $\\epsilon_\\delta=g_\\delta/4<g_\\delta/2$, so [F2] still applies; its gap-dependent bound is consistent with the example.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is two-dimensional."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For each delta>0 the perturbation is nonzero and tends to zero only in the limit; steps 1.1 and 2.1 establish this."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample requires two eigenvalues."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives base gap delta>0 at each instance, and step 2.1 takes it to zero across the family."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 takes delta down to zero while excluding delta=0 itself."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the eigenvalues and eigenvector slope explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence or iff claim is asserted."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

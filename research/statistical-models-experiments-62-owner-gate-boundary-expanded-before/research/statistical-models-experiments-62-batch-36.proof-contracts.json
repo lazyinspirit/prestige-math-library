@@ -1,0 +1,364 @@
+{
+  "version": 1,
+  "scope": [
+    "def-measurand-calibration-and-measurement-uncertainty",
+    "thm-first-order-measurement-uncertainty-propagation",
+    "ex-calibration-curve-reference-uncertainty-and-batch-drift"
+  ],
+  "contracts": {
+    "def-measurand-calibration-and-measurement-uncertainty": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires at least one input quantity, d>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero input covariance gives a degenerate linearized output and standard uncertainty zero; no division by an uncertainty is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: with d=1, Sigma is the single variance and the derivative is the scalar sensitivity coefficient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: singular input covariance matrices are allowed; no inverse or positive-definiteness requirement is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A first-order model is defined only at an estimate in the open domain U; boundary estimates are outside this definition's differentiability premise."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition uses only a finite-dimensional input vector and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition asserts no equivalence or if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts no equivalence or converse claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": []
+    },
+    "thm-first-order-measurement-uncertainty-propagation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-frechet-derivative-on-real-and-complex-matrix-spaces",
+          "source_section": "Definition",
+          "quote": "Let $U$ be an open subset of a real matrix space $\\mathbb R^{m\\times n}$ or of\na complex matrix space $\\mathbb C^{m\\times n}$ viewed as a real vector space,\nand let $F:U\\to W$ take values in a finite-dimensional real normed vector\nspace $(W,\\|\\,\\cdot\\,\\|_W)$.\nWe say that $F$ is **real Fr\\'echet differentiable** at $A\\in U$ if there is a\nreal-linear map $L$ such that\n\n$$\\frac{\\|F(A+H)-F(A)-L[H]\\|_W}{\\|H\\|_F}\\longrightarrow0\\qquad(H\\to0,\\ H\\ne0).$$\n\nThat map $L$ is the **real Fr\\'echet derivative** of $F$ at $A$ and is denoted\n$DF(A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measurand-calibration-and-measurement-uncertainty",
+          "source_section": "Definition",
+          "quote": "A **measurand** is the specified quantity intended to be measured, including\nthe conditions needed to make its value sufficiently well-defined for the\nstated accuracy. A **measurement model** for a scalar measurand $q$ is a\nspecified function\n$$q=f(x_1,\\ldots,x_d)$$\nwhere $f:U\\to\\mathbb R$ is defined on an open set $U\\subseteq\\mathbb R^d$ and\nthe $x_i$ are the input quantities that contribute to the reported result.\nFor the uncertainty model below, assume $\\hat x\\in U$. To treat the nonlinear\noutput $f(X)$ as a random output, either require $X\\in U$ almost surely and\nrequire $\\omega\\mapsto f(X(\\omega))$ to be measurable on the event $\\{X\\in U\\}$,\ndefining it measurably on the null complement, or specify a measurable\nextension of the model to the input values outside $U$. The almost-sure domain\ncondition alone does not ensure measurability. If the variance of $f(X)$ is\nused, also require the resulting output to be square-integrable. The input\nlist includes each significant correction, correction factor, calibration\nquantity, reference value, and other influence quantity used by the model.\nThe estimate based on input estimates\n$\\hat x=(\\hat x_1,\\ldots,\\hat x_d)$ is $\\hat q=f(\\hat x)$.\n\nFor uncertainty evaluation, represent the possible input values by an\n$\\mathbb R^d$-valued random element $X=(X_1,\\ldots,X_d)$ on one probability\nspace, with square-integrable real coordinate variables. Their means are the\ninput estimates, $\\mathbb E[X_i]=\\hat x_i$, and their **input covariance matrix** is\n$$\\Sigma_{ij}=\\operatorname{Cov}(X_i,X_j),\\qquad 1\\le i,j\\le d.$$\nThis probability model represents the evaluated uncertainty of the inputs; it\ndoes not assert that every input varies physically at random. No independence\nof the inputs is assumed.\n\nA **systematic effect** is an identified influence whose estimated\ncontribution can be corrected. A **random effect** is an influence that\nappears as variation across repeated observations under the declared\nconditions. These descriptions concern how an effect enters the measurement\nmodel; they are separate from the Type A/Type B evaluation labels. A\n**correction** is an estimated signed value added algebraically to an\nuncorrected result to compensate for a recognized systematic effect. A\ncorrection factor changes a result multiplicatively according to the stated\nmodel. Applying a correction does not remove uncertainty: uncertainty in the\ncorrection and in its reference values remains an input contribution unless\nits contribution is shown negligible for the stated result. A **reference\nstandard** is a stated reference artifact or realization used to compare or\ncalibrate a measurement system; its assigned value and uncertainty, including\ncovariance with other shared reference inputs, belong in the measurement\nmodel. A **calibration curve** is the specified relation between a reference\nquantity and an instrument response used to convert a later response into an\nestimate of the measurand.\n\n**Type A evaluation** means evaluating an uncertainty component by statistical\nanalysis of a series of observations. **Type B evaluation** means evaluating\nit by other information or methods. These labels describe how a component is\nevaluated, not whether its cause is random or systematic. A **repeatability\ncomponent** describes variation in repeated readings under stated, comparable\nconditions. A later reading of a calibrated instrument can therefore add a\nnew repeatability component; include its covariance with other inputs when\nthe model does not justify treating them as uncorrelated.\n\nA **standard uncertainty** is an uncertainty measure expressed as a standard\ndeviation. The combined standard uncertainty below is the standard deviation\nof a linearized output, not an interval statement.\n\nWhen $f$ is differentiable at $\\hat x$, write\n$g=\\nabla f(\\hat x)$ and define the **first-order linearized output** by\n$$Q_{\\mathrm{lin}}=f(\\hat x)+g^T(X-\\hat x).$$\nThe **first-order combined standard uncertainty** is\n$u_c=\\sqrt{\\operatorname{Var}(Q_{\\mathrm{lin}})}$, the standard deviation of\nthis Taylor-linearized output. The next theorem gives its covariance formula.\nIts use as an approximation to the uncertainty of the nonlinear output\nrequires the first-order model to be adequate for the stated measurement.\nThis standard uncertainty is not itself an interval and implies no coverage\nprobability or confidence level.\n\nA **measurement batch** in the example on the companion page is a declared\nmeasurement occasion or configuration, such as one day of operation. It is a\nlabel for a process condition; it is not a random-effect assumption by itself.\nWhether a calibration relation remains stable across batches is an empirical\nquestion about the stated process and study.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Identify $\\mathbb R^d$ with real $d\\times1$ matrices and let $L=Df(\\hat x)$. By [F3], $f(\\hat x+h)=f(\\hat x)+L[h]+r(h)$ with $r(h)/\\|h\\|\\to0$. For the standard basis $e_i$, put $g_i=L[e_i]$; linearity gives $L[h]=\\sum_i g_i h_i=g^T h$. Thus $Q_{\\mathrm{lin}}$ is the first-order Taylor term.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The finite sum $Q_{\\mathrm{lin}}=f(\\hat x)-g^T\\hat x+\\sum_i g_iX_i$ is square-integrable since $(\\sum_i g_iX_i)^2\\le d\\sum_i g_i^2X_i^2$; therefore [F1] defines its variance and each covariance below.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], $\\operatorname{Var}(Q_{\\mathrm{lin}})=\\operatorname{Cov}(Q_{\\mathrm{lin}},Q_{\\mathrm{lin}})$. Apply the finite bilinearity in [F2] to step 1.2; the constant has zero covariance, so $\\operatorname{Var}(Q_{\\mathrm{lin}})=\\sum_{i=1}^d\\sum_{j=1}^d g_i g_j\\operatorname{Cov}(X_i,X_j)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], each covariance in step 2.1 is $\\Sigma_{ij}$, so the double sum is $g^T\\Sigma g$. Symmetry in [F2] pairs the $(i,j)$ and $(j,i)$ terms to give the stated diagonal and off-diagonal form. It is nonnegative because it equals the variance in [F1], and [F4] therefore gives the stated $u_c^2$ formula.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes d>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: if the derivative or covariance makes the linearized output constant, its variance and u_c are zero; no normalization by u_c occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: for d=1 the off-diagonal sum is empty and the result reduces to g_1^2 Var(X_1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1: the proof uses only the variance identity and covariance entries; Sigma may be singular and is never inverted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement requires xhat in an open domain U, so it does not assert a boundary derivative formula."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All sums are finite and the argument uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way variance identity and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states no converse or identifiability claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "one-input-reduction",
+          "claim": "For d=1, the formula reduces to g_1^2 Sigma_11.",
+          "result": "The off-diagonal index set is empty, leaving the single diagonal term."
+        },
+        {
+          "id": "zero-covariance-reduction",
+          "claim": "If Sigma is the zero matrix, u_c^2=0.",
+          "result": "The displayed finite quadratic form has every summand zero."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-calibration-curve-reference-uncertainty-and-batch-drift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurand-calibration-and-measurement-uncertainty",
+          "source_section": "Definition",
+          "quote": "A **measurand** is the specified quantity intended to be measured, including\nthe conditions needed to make its value sufficiently well-defined for the\nstated accuracy. A **measurement model** for a scalar measurand $q$ is a\nspecified function\n$$q=f(x_1,\\ldots,x_d)$$\nwhere $f:U\\to\\mathbb R$ is defined on an open set $U\\subseteq\\mathbb R^d$ and\nthe $x_i$ are the input quantities that contribute to the reported result.\nFor the uncertainty model below, assume $\\hat x\\in U$. To treat the nonlinear\noutput $f(X)$ as a random output, either require $X\\in U$ almost surely and\nrequire $\\omega\\mapsto f(X(\\omega))$ to be measurable on the event $\\{X\\in U\\}$,\ndefining it measurably on the null complement, or specify a measurable\nextension of the model to the input values outside $U$. The almost-sure domain\ncondition alone does not ensure measurability. If the variance of $f(X)$ is\nused, also require the resulting output to be square-integrable. The input\nlist includes each significant correction, correction factor, calibration\nquantity, reference value, and other influence quantity used by the model.\nThe estimate based on input estimates\n$\\hat x=(\\hat x_1,\\ldots,\\hat x_d)$ is $\\hat q=f(\\hat x)$.\n\nFor uncertainty evaluation, represent the possible input values by an\n$\\mathbb R^d$-valued random element $X=(X_1,\\ldots,X_d)$ on one probability\nspace, with square-integrable real coordinate variables. Their means are the\ninput estimates, $\\mathbb E[X_i]=\\hat x_i$, and their **input covariance matrix** is\n$$\\Sigma_{ij}=\\operatorname{Cov}(X_i,X_j),\\qquad 1\\le i,j\\le d.$$\nThis probability model represents the evaluated uncertainty of the inputs; it\ndoes not assert that every input varies physically at random. No independence\nof the inputs is assumed.\n\nA **systematic effect** is an identified influence whose estimated\ncontribution can be corrected. A **random effect** is an influence that\nappears as variation across repeated observations under the declared\nconditions. These descriptions concern how an effect enters the measurement\nmodel; they are separate from the Type A/Type B evaluation labels. A\n**correction** is an estimated signed value added algebraically to an\nuncorrected result to compensate for a recognized systematic effect. A\ncorrection factor changes a result multiplicatively according to the stated\nmodel. Applying a correction does not remove uncertainty: uncertainty in the\ncorrection and in its reference values remains an input contribution unless\nits contribution is shown negligible for the stated result. A **reference\nstandard** is a stated reference artifact or realization used to compare or\ncalibrate a measurement system; its assigned value and uncertainty, including\ncovariance with other shared reference inputs, belong in the measurement\nmodel. A **calibration curve** is the specified relation between a reference\nquantity and an instrument response used to convert a later response into an\nestimate of the measurand.\n\n**Type A evaluation** means evaluating an uncertainty component by statistical\nanalysis of a series of observations. **Type B evaluation** means evaluating\nit by other information or methods. These labels describe how a component is\nevaluated, not whether its cause is random or systematic. A **repeatability\ncomponent** describes variation in repeated readings under stated, comparable\nconditions. A later reading of a calibrated instrument can therefore add a\nnew repeatability component; include its covariance with other inputs when\nthe model does not justify treating them as uncorrelated.\n\nA **standard uncertainty** is an uncertainty measure expressed as a standard\ndeviation. The combined standard uncertainty below is the standard deviation\nof a linearized output, not an interval statement.\n\nWhen $f$ is differentiable at $\\hat x$, write\n$g=\\nabla f(\\hat x)$ and define the **first-order linearized output** by\n$$Q_{\\mathrm{lin}}=f(\\hat x)+g^T(X-\\hat x).$$\nThe **first-order combined standard uncertainty** is\n$u_c=\\sqrt{\\operatorname{Var}(Q_{\\mathrm{lin}})}$, the standard deviation of\nthis Taylor-linearized output. The next theorem gives its covariance formula.\nIts use as an approximation to the uncertainty of the nonlinear output\nrequires the first-order model to be adequate for the stated measurement.\nThis standard uncertainty is not itself an interval and implies no coverage\nprobability or confidence level.\n\nA **measurement batch** in the example on the companion page is a declared\nmeasurement occasion or configuration, such as one day of operation. It is a\nlabel for a process condition; it is not a random-effect assumption by itself.\nWhether a calibration relation remains stable across batches is an empirical\nquestion about the stated process and study.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-first-order-measurement-uncertainty-propagation",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $\\hat x\\in U$ for an open set $U\\subseteq\\mathbb R^d$, and\nlet $f:U\\to\\mathbb R$ be differentiable at $\\hat x$. Let $X$ be an\n$\\mathbb R^d$-valued random element on one probability space with\nsquare-integrable coordinate variables $X_i$, means $\\mathbb E[X_i]=\\hat x_i$,\nand $X\\in U$ almost surely. Let\n$\\Sigma_{ij}=\\operatorname{Cov}(X_i,X_j)$, set\n$g=\\nabla f(\\hat x)$, and define\n$$Q_{\\mathrm{lin}}=f(\\hat x)+g^T(X-\\hat x),\\qquad u_c^2=\\operatorname{Var}(Q_{\\mathrm{lin}}).$$\nThen\n$$u_c^2=g^T\\Sigma g=\\sum_{i=1}^d g_i^2\\Sigma_{ii}+2\\sum_{1\\le i<j\\le d}g_i g_j\\Sigma_{ij}.$$\nThe equality is exact for the first-order linearized output. To interpret it\nas an approximation to uncertainty in the nonlinear output $f(X)$, require\n$f(X)$ to be a measurable, square-integrable random output (including a\nmeasurable definition on any null event where $X\\notin U$) and require the\nfirst-order model to be adequate. This interpretation is not an assertion of\nexact finite-sample variance or interval coverage.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Averaging over the eight sign triples gives $\\mathbb E[Z_i]=0$, $\\mathbb E[Z_i^2]=1$, and $\\mathbb E[Z_iZ_j]=0$ for $i\\ne j$: each sign appears equally often, its square is always one, and reversing one coordinate cancels each cross-product pair. Also $R_2-R_1=10+\\sqrt{0.03}Z_2>9.8$, while $Y\\in[12.8,13.2]\\subset(1,21)$, so the ordered reference values and inverse curve are valid throughout the finite input support.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "At the input means, the first batch's inverse curve gives $\\hat q=10+(13-1)(20-10)/20=16$. Its gradient in the order $(R_1,R_2,Y)$ is $\\left(1-\\frac{Y-1}{20},\\frac{Y-1}{20},\\frac{R_2-R_1}{20}\\right)=(0.4,0.6,0.5)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The input means are $(10,20,13)$. By [F3] and step 1.1, $\\operatorname{Var}(R_1)=0.01$, $\\operatorname{Var}(R_2)=0.01+0.03=0.04$, $\\operatorname{Var}(Y)=0.04$, and $\\operatorname{Cov}(R_1,R_2)=0.01$; the covariances with $Y$ are zero. Therefore $\\Sigma=\\begin{pmatrix}0.01&0.01&0\\\\0.01&0.04&0\\\\0&0&0.04\\end{pmatrix}$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F2] to step 2.1 and the gradient in step 1.2: $u_c^2=0.4^2(0.01)+0.6^2(0.04)+0.5^2(0.04)+2(0.4)(0.6)(0.01)=0.0308$, so $u_c=\\sqrt{0.0308}\\approx0.1755$ in measurand units. The covariance contribution is positive and would be lost by treating the two reference values as independent.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In the second batch, a measurand value $q=16$ produces response\n$1+2.2(16-10)=14.2$. The first batch's inverse curve maps this response to\n$10+(14.2-1)/2=16.6$, while the second batch's curve maps it to\n$10+(14.2-1)/2.2=16$, so the first-curve mismatch is $0.6$. For the pooled\nfit, the four nominal quantities and responses have means $\\bar q=15$ and\n$\\bar r=11.5$. Their centered sums are\n$S_{qq}=\\sum(q-\\bar q)^2=4(5^2)=100$ and\n$S_{qr}=\\sum(q-\\bar q)(r-\\bar r)=2(-5)(-10.5)+5(9.5)+5(11.5)=210$.",
+          "step": "4.1",
+          "inputs": [
+            "A2",
+            "A3",
+            "A4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "For an equal-weight line $r=a+bq$, write each residual as\n$(r-\\bar r)-b(q-\\bar q)+(\\bar r-a-b\\bar q)$. The centered terms sum to zero,\nso the sum of squared residuals is\n$S_{rr}-2bS_{qr}+b^2S_{qq}+4(\\bar r-a-b\\bar q)^2$, where\n$S_{rr}=\\sum(r-\\bar r)^2$. For each $b$ this is minimized in $a$ at\n$a=\\bar r-b\\bar q$. Since $S_{qq}=100>0$, the remaining quadratic in $b$ is\nuniquely minimized because it equals\n$S_{rr}-S_{qr}^2/S_{qq}+S_{qq}(b-S_{qr}/S_{qq})^2$. Thus\n$b=S_{qr}/S_{qq}=2.1$, giving\n$a=\\bar r-b\\bar q=-20$ and the pooled curve $r=1+2.1(q-10)$. Its inverse\nmaps response $14.2$ to\n$10+(14.2-1)/2.1=114/7\\approx16.286$, which is $2/7$ above the\nsecond-batch estimate $16$. These discrepancies are specific to the\nstipulated curves.",
+          "step": "4.2",
+          "inputs": [
+            "A4",
+            "step 4.1",
+            "algebra",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses three input quantities and a nonempty finite sample space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All three stipulated input variance components are positive in this example."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has three input coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example's covariance matrix is nondegenerate; the general theorem separately allows singular covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the finite sign support keeps R1<R2 and Y strictly between the first batch's response endpoints 1 and 21, so the displayed inverse is defined throughout this example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite eight-point space is explicitly listed by its sign triples; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no converse claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "eight-sign-input-covariance",
+          "claim": "The finite sign construction yields Sigma=[[0.01,0.01,0],[0.01,0.04,0],[0,0,0.04]].",
+          "result": "Directly averaging the eight outcomes gives the stated means and covariance entries."
+        },
+        {
+          "id": "first-batch-delta-calculation",
+          "claim": "The first-batch gradient and propagated variance are (0.4,0.6,0.5) and 0.0308.",
+          "result": "Substitution in the displayed inverse curve and quadratic covariance form gives the stated values."
+        },
+        {
+          "id": "second-batch-drift-calculation",
+          "claim": "The stipulated second curve gives a 0.6-unit discrepancy when the first curve is applied.",
+          "result": "The inverse values are 16.6 and 16 at the same response 14.2."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

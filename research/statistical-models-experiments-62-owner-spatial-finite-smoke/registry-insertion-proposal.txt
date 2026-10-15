@@ -1,0 +1,71 @@
+  // Finite-window spatial likelihood witnesses for SME-50. The parameters
+  // bind the particular square/empty/singleton observations in the contracts.
+  // These deterministic computations do not prove the general item claims.
+  'positive-count-square-window': ({ volume = 4, count = 3 } = {}) => {
+    if (volume !== 4 || count !== 3)
+      return smokeResult(false, 'this witness requires square volume 4 and count 3');
+    const rate = count / volume;
+    const logLikelihood = rho => count * Math.log(rho) - volume * rho;
+    const score = rho => count / rho - volume;
+    const probes = [1 / 16, 1 / 8, 1 / 4, 1 / 2, 3 / 4, 1, 2, 4];
+    const candidates = probes.filter(rho => logLikelihood(rho) >= logLikelihood(rate) - 1e-12);
+    const signs = probes.every(rho => rho < rate ? score(rho) > 0 : rho > rate ? score(rho) < 0 : score(rho) === 0);
+    return smokeResult(rate === 3 / 4 && score(rate) === 0 && signs
+      && candidates.length === 1 && candidates[0] === rate,
+      `square volume=${volume}, count=${count}: score vanishes at rate ${rate}; eight positive-rate log-likelihood probes have unique maximum there, with correct score signs`);
+  },
+  'empty-count-boundary': ({ volume = 4, count = 0 } = {}) => {
+    if (volume !== 4 || count !== 0)
+      return smokeResult(false, 'this witness requires square volume 4 and empty count');
+    const rates = [1, 1 / 2, 1 / 4, 1 / 8, 1 / 16, 1 / 32, 1 / 64];
+    const logLikelihood = rho => -volume * rho;
+    const values = rates.map(logLikelihood);
+    const ordered = values.every((value, i) => value < 0 && (!i || value > values[i - 1]));
+    const halves = values.slice(1).every((value, i) => value === values[i] / 2);
+    const boundary = logLikelihood(0);
+    // Zero belongs to [0,infinity), and does not belong to (0,infinity).
+    const admittedMaximum = Math.max(boundary, ...values);
+    const positiveOnlyMaximum = Math.max(...values);
+    return smokeResult(ordered && halves && boundary === 0
+      && admittedMaximum === 0 && positiveOnlyMaximum < admittedMaximum,
+      `empty count: seven decreasing dyadic rates give increasing negative log likelihoods with exactly halved boundary gaps; rate-zero value is 0 and exceeds every sampled positive rate`);
+  },
+  'no-interaction-ratio': ({ volume = 4, beta = 2, gamma = 1 } = {}) => {
+    if (volume !== 4 || beta !== 2 || gamma !== 1)
+      return smokeResult(false, 'this witness requires volume 4, activity 2 and no interaction gamma=1');
+    // Unit-rate Poisson reference: the exact density is beta^n/Z, with
+    // log Z=volume*(beta-1); pseudo likelihood has integrated intensity v*beta.
+    const logNormalizer = volume * (beta - 1);
+    const exactLog = n => n * Math.log(beta) - logNormalizer;
+    const pseudoLog = n => n * Math.log(beta) - volume * beta;
+    const counts = [0, 1, 2, 3, 4, 5, 6];
+    const constantRatio = counts.every(n => Math.abs(exactLog(n) - pseudoLog(n) - volume) < 1e-12);
+    const sameObservationRatios = counts.every(n => Math.abs(
+      (exactLog(n) - exactLog(0)) - (pseudoLog(n) - pseudoLog(0))) < 1e-12);
+    return smokeResult(constantRatio && sameObservationRatios,
+      `seven finite counts: exact and pseudo log-density differences all equal ${volume}; both observation ratios relative to the empty configuration equal beta^n, and exact/pseudo ratio is exp(4)`);
+  },
+  'soft-interaction-singleton-ratio': ({ volume = 4, beta = 2, gamma = 0.5, radius = 0.5 } = {}) => {
+    if (volume !== 4 || beta !== 2 || gamma !== 0.5 || radius !== 0.5)
+      return smokeResult(false, 'this witness requires [0,2]^2, center (1,1), activity 2, gamma=1/2 and radius 1/2');
+    // The centered closed disk lies wholly inside the square. For the empty
+    // observation T_R=0 everywhere. For the center singleton T_R is 1 in
+    // the disk and 0 outside; hence its integral is computed from two regions.
+    const center = [1, 1], side = 2;
+    const contained = center.every(x => x - radius >= 0 && x + radius <= side);
+    const diskArea = Math.PI * radius ** 2;
+    const squareArea = (6 / 5 - 4 / 5) ** 2;
+    const farthestSquareDistanceSquared = 2 * (1 / 5) ** 2;
+    const integratedEmpty = beta * volume;
+    const integratedSingleton = beta * gamma * diskArea + beta * (volume - diskArea);
+    const eventFactor = beta; // deleting the singleton leaves the empty pattern
+    const logPseudoRatio = Math.log(eventFactor) + integratedEmpty - integratedSingleton;
+    const logExactRatio = Math.log(beta); // both configurations have zero pairs
+    const predictedGap = beta * (1 - gamma) * diskArea;
+    const actualGap = logPseudoRatio - logExactRatio;
+    const lowerBound = 4 / 25;
+    return smokeResult(contained && farthestSquareDistanceSquared <= radius ** 2
+      && Math.abs(squareArea - lowerBound) < 1e-12 && diskArea > lowerBound
+      && Math.abs(actualGap - predictedGap) < 1e-12 && actualGap > lowerBound,
+      `empty/single-center model: exact ratio=2; disk area=${diskArea}; independently integrated pseudo log-ratio gap=${actualGap}=a>4/25, so pseudo ratio=2*exp(a)>2`);
+  },

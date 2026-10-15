@@ -1,0 +1,340 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "batch": "37",
+  "source_search_log": [
+    {
+      "source_id": "currie_iupac_1995",
+      "query": "Currie 1995 IUPAC Recommendations, Nomenclature in evaluation of analytical methods including detection and quantification capabilities, complete full text",
+      "outcome": "The prior models-04 source manifest records HTTP 403 at the official PDF URL and no reading. Search results located the IUPAC official record, the official NIST SP 958 summary, and full-text copies; the old.iupac.org PDF endpoint also returned HTTP 403 on 2026-10-15. The Currie paper was not relied upon. An independent complete 2025 Eurachem guide was retrieved and its relevant sections were read; all mathematical formulas are proved locally.",
+      "attempts": [
+        {
+          "url": "https://publications.iupac.org/pac/1995/pdf/6710x1699.pdf",
+          "at": "prior dossier attempt; exact timestamp not recorded",
+          "outcome": "HTTP 403, as recorded in research/statistics-scaffolds-2026-10-11/models/models-04/sources.json"
+        },
+        {
+          "url": "https://old.iupac.org/publications/pac/1995/pdf/6710x1699.pdf",
+          "at": "2026-10-15",
+          "outcome": "HTTP 403 on direct PDF open; access control was not bypassed"
+        }
+      ],
+      "searches": [
+        {
+          "query": "\"Nomenclature in evaluation of analytical methods including detection and quantification capabilities\" full text PDF",
+          "outcome": "Search returned the official IUPAC record and indexed full-text copies; no complete IUPAC-hosted PDF could be opened."
+        },
+        {
+          "query": "Current independent full-text treatment of critical value, limit of detection, limit of quantification, blank correction, and normal-error calculation",
+          "outcome": "The official Eurachem 2025 third-edition guide was retrieved as an 86-page full-text PDF. Sections 5.3.1–5.3.5 and Annex B were inspected, including terminology, blank-correction variance, false-positive/false-negative calibration, quantification criteria, changing blanks, and the approximate 3.3s caveat."
+        }
+      ],
+      "disposition": "not-relied-upon; complete local proofs and the two successfully fetched independent sources cover all planned mathematics"
+    }
+  ],
+  "item_support": [
+    {
+      "item": "def-critical-detection-and-quantification-levels",
+      "deps": [
+        "def-statistical-experiment",
+        "def-random-element-and-real-random-variable",
+        "def-randomized-test",
+        "def-test-size-and-power",
+        "def-moments-variance-and-covariance",
+        "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+        "def-borel-sigma-algebra",
+        "cor-expectation-of-an-indicator-is-probability",
+        "lem-probability-measure-basic-identities"
+      ],
+      "argument": "Defines the response-only experiment, exact and conservative blank threshold, false-negative probability, and CV-qualified least concentration. It makes existence conditional and does not assert a universal calibration formula."
+    },
+    {
+      "item": "lem-standard-normal-cdf-quantiles-and-symmetry",
+      "deps": [
+        "def-standard-normal-and-normal-laws",
+        "def-cumulative-distribution-function-of-a-random-variable",
+        "def-probability-measure",
+        "lem-normal-density-has-total-mass-one",
+        "thm-derivative-of-exponential",
+        "cor-integral-over-a-null-set-vanishes",
+        "thm-continuity-from-above-for-measures",
+        "thm-continuity-from-below-for-measures",
+        "thm-intermediate-value",
+        "thm-substitution-for-improper-integrals",
+        "thm-lebesgue-measure-of-a-box-of-every-kind",
+        "def-axiom-of-choice",
+        "def-countable-choice",
+        "lem-axiom-of-choice-implies-countable-choice",
+        "lem-probability-measure-basic-identities"
+      ],
+      "argument": "The density is continuous, positive, even, and integrates to one. Probability set differences turn density integrals over intervals into CDF increments; continuity of measures gives the endpoint limits; IVT gives existence and strict increase gives unique quantiles. Reflection of the density and the zero singleton mass give z_(1-q)=-z_q. AC supplies the normal law; CC is inherited only for the zero-width-box null-set supplier."
+    },
+    {
+      "item": "lem-normal-location-scale-mean-and-variance",
+      "deps": [
+        "def-standard-normal-and-normal-laws",
+        "def-moments-variance-and-covariance",
+        "lem-gaussian-even-moment-bound-for-brownian-increments",
+        "thm-change-of-variables-for-expectation",
+        "cor-cauchy-schwarz-for-random-variables",
+        "cor-expectation-linearity-monotonicity-and-modulus-bound",
+        "thm-dominated-convergence",
+        "thm-substitution",
+        "def-axiom-of-choice"
+      ],
+      "argument": "The Gaussian even-moment supplier gives E[Z^2]=1. Cauchy–Schwarz makes Z integrable; symmetry makes each centered truncation's mean zero; dominated convergence yields E[Z]=0. The location-scale push-forward and change-of-variables for expectation then give E[X]=m and Var(X)=sigma^2."
+    },
+    {
+      "item": "thm-known-normal-blank-detection-and-quantification-limits",
+      "deps": [
+        "def-critical-detection-and-quantification-levels",
+        "lem-standard-normal-cdf-quantiles-and-symmetry",
+        "lem-normal-location-scale-mean-and-variance",
+        "def-standard-normal-and-normal-laws",
+        "def-cumulative-distribution-function-of-a-random-variable",
+        "def-statistical-experiment",
+        "def-borel-sigma-algebra",
+        "def-measurable-function-between-measurable-spaces",
+        "def-randomized-test",
+        "def-test-size-and-power",
+        "lem-measurable-rejection-function-defines-randomized-test",
+        "cor-expectation-of-an-indicator-is-probability",
+        "def-axiom-of-choice",
+        "lem-probability-measure-basic-identities"
+      ],
+      "argument": "The threshold indicator is measurable and defines a test. At c=0 the normal quantile and probability-complement identity give exact false-positive probability alpha; the indicator-expectation identity equates it with test size. Under c, the affine normal CDF gives false-negative beta at the unique concentration (z_(1-alpha)+z_(1-beta))*sigma_0. The local moment lemma gives CV(c)=sigma_0/c, whose least qualifying concentration is sigma_0/k_Q."
+    },
+    {
+      "item": "ex-known-blank-normal-detection-and-quantification-limits",
+      "deps": [
+        "def-critical-detection-and-quantification-levels",
+        "lem-standard-normal-cdf-quantiles-and-symmetry",
+        "thm-known-normal-blank-detection-and-quantification-limits"
+      ],
+      "argument": "Substitutes alpha=beta=0.05 and k_Q=0.10 into the proved exact formulas; the NIST known-blank row independently records the rounded numerical multipliers."
+    },
+    {
+      "item": "ex-estimated-blank-variance-inflates-detection-limits",
+      "deps": [
+        "thm-known-normal-blank-detection-and-quantification-limits"
+      ],
+      "argument": "Under the explicit corrected-response law N(c,sigma_0^2+tau^2), applies the theorem with sigma_eff=sqrt(sigma_0^2+tau^2) and proves strict inflation when tau>0. No universal law for blank estimation is asserted."
+    },
+    {
+      "item": "ex-detection-limit-assumptions-and-left-censoring",
+      "deps": [
+        "def-critical-detection-and-quantification-levels",
+        "lem-standard-normal-cdf-quantiles-and-symmetry",
+        "lem-normal-location-scale-mean-and-variance",
+        "def-standard-normal-and-normal-laws",
+        "def-cumulative-distribution-function-of-a-random-variable",
+        "def-axiom-of-choice",
+        "lem-probability-measure-basic-identities"
+      ],
+      "argument": "The blank law fixes L_C using the normal quantile and probability-complement identity. Solving the concentration-dependent false-negative equation gives a finite detection limit exactly when z_(1-beta)*rho*sigma_0<1. CV(c)=sigma_0/c+rho*sigma_0 gives the stated finite-L_Q condition. A report Y<=L_C has the CDF probability, while the threshold point has zero probability."
+    }
+  ],
+  "pages": [
+    {
+      "page": "detection-and-quantification-limits",
+      "items": [
+        "def-critical-detection-and-quantification-levels",
+        "lem-standard-normal-cdf-quantiles-and-symmetry",
+        "lem-normal-location-scale-mean-and-variance",
+        "thm-known-normal-blank-detection-and-quantification-limits"
+      ],
+      "sources": [
+        {
+          "id": "nist_sp958_detection_quantification",
+          "title": "A Century of Excellence in Measurements, Standards, and Technology: A Chronicle of Selected NBS/NIST Publications 1901–2000",
+          "kind": "official NIST monograph",
+          "author": "David R. Lide, editor; detection-limit historical note by Richard M. Lindstrom",
+          "edition_or_version": "NIST Special Publication 958, January 2001",
+          "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication958.pdf",
+          "locator": "Complete 399-page PDF retrieved and extracted previously; this authoring pass inspected PDF pp. 177–179 (printed pp. 164–166), especially the known-blank row in Table I and its alpha=beta=0.05, k_Q=10, constant-sigma_0 assumptions.",
+          "prior_acquisition": {
+            "at": "2026-10-10T14:25:24Z",
+            "bytes": 34530693,
+            "sha256": "2492fc851481a626cf3dc2a1b953b0faa9181a3da163f322b264ac17f2047f26",
+            "pages": 399,
+            "complete_pdf_extracted": true
+          },
+          "contents": [
+            {
+              "name": "PDF pp. 177–179 / printed pp. 164–166: distinctions among critical, detection, and quantification levels",
+              "disposition": "included",
+              "item": "def-critical-detection-and-quantification-levels",
+              "reason": "The local definition states the decision, false-negative, and precision criteria explicitly; NIST documents the conventions and warns that the terms have been conflated."
+            },
+            {
+              "name": "PDF p. 178 / printed p. 165: Table I known-blank normal formulas and assumptions",
+              "disposition": "inline",
+              "item": "thm-known-normal-blank-detection-and-quantification-limits",
+              "reason": "The threshold and CV formulas are proved locally from the stated normal law; the source is a conditional formula cross-check, not a proof substitute."
+            },
+            {
+              "name": "PDF p. 178 / printed p. 165: known-blank row 1.64, 3.29, 10",
+              "disposition": "included",
+              "item": "ex-known-blank-normal-detection-and-quantification-limits",
+              "reason": "Used only for the rounded numerical comparison under the exact table assumptions."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication958.pdf",
+              "at": "2026-10-14T17:24:50.310Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-14T17:24:50.310Z",
+            "bytes": 34530693,
+            "sha256_16": "2492fc851481a626",
+            "kind": "pdf",
+            "pages": 399
+          }
+        },
+        {
+          "id": "eurachem_fitness_for_purpose_2025",
+          "title": "The Fitness for Purpose of Analytical Methods: A Laboratory Guide to Method Validation and Related Topics",
+          "kind": "full guide / book",
+          "author": "Helen Cantwell, editor; Eurachem Method Validation Working Group",
+          "edition_or_version": "3rd edition, 2025; full 86-page guide",
+          "url": "https://www.eurachem.org/images/stories/Guides/pdf/MV_guide_3rd_ed_V1_EN.pdf",
+          "locator": "Sections 5.3.1–5.3.5, PDF pp. 31–36, and Annex B, PDF p. 64. Read definitions, complete blank-correction discussion and Example 4, LOD/LOQ guidance, changing-blank precision note, and the full false-positive/false-negative rationale for the approximate 3.3s calculation.",
+          "contents": [
+            {
+              "name": "§5.3.1, PDF p. 31: critical value, LOD, LOQ, and method-versus-instrument distinction",
+              "disposition": "inline",
+              "item": "def-critical-detection-and-quantification-levels",
+              "reason": "The local definitions preserve the three distinct characteristics and make model and precision criteria explicit."
+            },
+            {
+              "name": "§5.3.2 and Example 4, PDF pp. 31–33: averaging and blank-correction variance",
+              "disposition": "inline",
+              "item": "ex-estimated-blank-variance-inflates-detection-limits",
+              "reason": "The example uses a stated normal corrected-response law; the source supports the need to include blank-correction variation but is not claimed to prove this model."
+            },
+            {
+              "name": "§5.3.3 and Annex B, PDF pp. 34 and 64: false-positive/false-negative definitions and approximate 3.3s factor",
+              "disposition": "inline",
+              "item": "thm-known-normal-blank-detection-and-quantification-limits",
+              "reason": "The guide's approximate factor and degrees-of-freedom caveat are preserved; the exact known-variance normal calculation is derived locally."
+            },
+            {
+              "name": "§5.3.4, PDF p. 34: LOQ as a declared precision/performance criterion and k_Q",
+              "disposition": "included",
+              "item": "def-critical-detection-and-quantification-levels",
+              "reason": "Supports stating the precision tolerance explicitly and not treating k_Q=10 as universal."
+            },
+            {
+              "name": "§5.3.5, PDF p. 35: intermediate precision when blank values differ across days",
+              "disposition": "included",
+              "item": "ex-detection-limit-assumptions-and-left-censoring",
+              "reason": "Supports the caveat that changing blank variability requires a different fitted response law."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://www.eurachem.org/images/stories/Guides/pdf/MV_guide_3rd_ed_V1_EN.pdf",
+              "at": "2026-10-14T17:24:53.646Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-14T17:24:53.646Z",
+            "bytes": 2109337,
+            "sha256_16": "216cabe12591fe23",
+            "kind": "pdf",
+            "pages": 86
+          }
+        }
+      ]
+    },
+    {
+      "page": "detection-and-quantification-limits-examples",
+      "items": [
+        "ex-known-blank-normal-detection-and-quantification-limits",
+        "ex-estimated-blank-variance-inflates-detection-limits",
+        "ex-detection-limit-assumptions-and-left-censoring"
+      ],
+      "sources": [
+        {
+          "id": "nist_sp958_detection_quantification",
+          "title": "A Century of Excellence in Measurements, Standards, and Technology: A Chronicle of Selected NBS/NIST Publications 1901–2000",
+          "kind": "official NIST monograph",
+          "author": "David R. Lide, editor; detection-limit historical note by Richard M. Lindstrom",
+          "edition_or_version": "NIST Special Publication 958, January 2001",
+          "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication958.pdf",
+          "locator": "Complete 399-page PDF retrieved and extracted previously; this authoring pass inspected PDF pp. 177–179 (printed pp. 164–166), especially the known-blank row in Table I and its alpha=beta=0.05, k_Q=10, constant-sigma_0 assumptions.",
+          "prior_acquisition": {
+            "at": "2026-10-10T14:25:24Z",
+            "bytes": 34530693,
+            "sha256": "2492fc851481a626cf3dc2a1b953b0faa9181a3da163f322b264ac17f2047f26",
+            "pages": 399,
+            "complete_pdf_extracted": true
+          },
+          "contents": [
+            {
+              "name": "PDF p. 178 / printed p. 165: known-blank row 1.64, 3.29, 10",
+              "disposition": "included",
+              "item": "ex-known-blank-normal-detection-and-quantification-limits",
+              "reason": "Used as the published rounded-value cross-check for the worked example."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication958.pdf",
+              "at": "2026-10-14T17:24:55.971Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-14T17:24:55.971Z",
+            "bytes": 34530693,
+            "sha256_16": "2492fc851481a626",
+            "kind": "pdf",
+            "pages": 399
+          }
+        },
+        {
+          "id": "eurachem_fitness_for_purpose_2025",
+          "title": "The Fitness for Purpose of Analytical Methods: A Laboratory Guide to Method Validation and Related Topics",
+          "kind": "full guide / book",
+          "author": "Helen Cantwell, editor; Eurachem Method Validation Working Group",
+          "edition_or_version": "3rd edition, 2025; full 86-page guide",
+          "url": "https://www.eurachem.org/images/stories/Guides/pdf/MV_guide_3rd_ed_V1_EN.pdf",
+          "locator": "Sections 5.3.1–5.3.5, PDF pp. 31–36, and Annex B, PDF p. 64; the complete relevant sections were inspected.",
+          "contents": [
+            {
+              "name": "§5.3.2 and Example 4: blank-correction variation changes the standard deviation used for limits",
+              "disposition": "inline",
+              "item": "ex-estimated-blank-variance-inflates-detection-limits",
+              "reason": "The item declares its corrected-response normal law and derives the resulting scale inflation locally."
+            },
+            {
+              "name": "§5.3.5: changing blank values across days may call for intermediate-precision data",
+              "disposition": "inline",
+              "item": "ex-detection-limit-assumptions-and-left-censoring",
+              "reason": "Used as a model-limit caveat; the heteroscedastic distribution and censoring probability are proved under the item's explicit assumptions."
+            }
+          ],
+          "recovery_attempts": [
+            {
+              "url": "https://www.eurachem.org/images/stories/Guides/pdf/MV_guide_3rd_ed_V1_EN.pdf",
+              "at": "2026-10-14T17:24:56.547Z",
+              "outcome": "full-text body fetched"
+            }
+          ],
+          "fetch_verified": {
+            "at": "2026-10-14T17:24:56.547Z",
+            "bytes": 2109337,
+            "sha256_16": "216cabe12591fe23",
+            "kind": "pdf",
+            "pages": 86
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+[
+  {
+    "order": 1934,
+    "id": "horvitz-thompson-variance-and-srswor",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "HT variance and SRSWOR",
+    "companion": "horvitz-thompson-variance-and-srswor-examples",
+    "requires": [
+      "finite-populations-and-sampling-designs",
+      "probability-spaces-random-variables-and-expectation"
+    ],
+    "items": [
+      {
+        "id": "def-inclusion-covariance-difference",
+        "kind": "definition",
+        "title": "Inclusion-covariance difference",
+        "statement": "For a finite sampling design, defines Delta_ij=pi_ij-pi_i pi_j for ordered unit pairs.",
+        "strategy": "Definition: use the first- and second-order inclusion probabilities supplied by the finite-population design and state the ordered-pair convention.",
+        "deps": [
+          "def-finite-population-and-sampling-design"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "def-simple-random-sampling-without-replacement",
+        "kind": "definition",
+        "title": "Simple random sampling without replacement",
+        "statement": "Defines SRSWOR of n units from a finite population as the uniform probability law on all n-element subsets, for 1<=n<=N.",
+        "strategy": "Definition: state the admissible sample sizes, sample support and probability assigned to each subset.",
+        "deps": [
+          "def-finite-population-and-sampling-design"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+        "kind": "theorem",
+        "title": "Horvitz–Thompson variance and pair-inclusion estimate",
+        "statement": "For positive first-order inclusion probabilities, proves Var_d(T_hat_HT)=sum_ij Delta_ij y_i y_j/(pi_i pi_j); if every pi_ij>0, proves the corresponding pair-inclusion estimate is unbiased for that variance.",
+        "strategy": "Direct: expand the finite-sum variance by covariance bilinearity, evaluate inclusion-indicator moments, and then take the expectation of the pair-inclusion estimate.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "def-inclusion-covariance-difference",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "thm-variance-of-a-finite-sum",
+          "cor-expectation-of-an-indicator-is-probability",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-sen-yates-grundy-variance-identity",
+        "kind": "theorem",
+        "title": "Sen–Yates–Grundy variance identity",
+        "statement": "For a fixed-size design with positive first-order inclusion probabilities, proves the Sen–Yates–Grundy identity and, under positive pair inclusion probabilities, unbiasedness of its sample pair-inclusion estimate; pairwise nonpositive distinct-unit Delta values give a sufficient nonnegativity guarantee.",
+        "strategy": "Direct: derive zero row sums of Delta from fixed sample size, expand the squared differences, and apply inclusion-indicator expectation to the sample expression.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "def-inclusion-covariance-difference",
+          "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+          "cor-expectation-of-an-indicator-is-probability",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-moments-variance-and-covariance"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-srswor-mean-variance-and-finite-population-correction",
+        "kind": "theorem",
+        "title": "SRSWOR inclusion covariance and sample-mean variance",
+        "statement": "For N>1 and 1<=n<=N under SRSWOR, derives first- and second-order inclusion probabilities, the negative covariance of distinct inclusion indicators, and Var_d(ybar_s)=(1-n/N)S_U^2/n, including the n=1 and census boundaries.",
+        "strategy": "Direct: count n-subsets containing a fixed unit or pair, substitute the resulting inclusion probabilities into the Horvitz–Thompson variance formula, and simplify using the centered finite-population sum of squares.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "def-simple-random-sampling-without-replacement",
+          "def-inclusion-covariance-difference",
+          "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+          "def-moments-variance-and-covariance"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 1935,
+    "id": "horvitz-thompson-variance-and-srswor-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "HT variance and SRSWOR — Examples",
+    "companion": "horvitz-thompson-variance-and-srswor",
+    "requires": [
+      "horvitz-thompson-variance-and-srswor"
+    ],
+    "items": [
+      {
+        "id": "ex-srswor-ht-variance-and-yates-grundy",
+        "kind": "example",
+        "title": "A three-unit SRSWOR variance calculation",
+        "statement": "For U={1,2,3}, y=(1,2,4), and an SRSWOR of size two, computes inclusion probabilities, HT and SYG variance estimates, the design variance of the sample mean, and its finite discrete support.",
+        "strategy": "Enumerate the three equally likely two-unit samples and calculate every stated estimator and moment.",
+        "deps": [
+          "def-simple-random-sampling-without-replacement",
+          "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+          "thm-sen-yates-grundy-variance-identity",
+          "thm-srswor-mean-variance-and-finite-population-correction"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-zero-pair-support-prevents-universal-unbiased-variance-estimation",
+        "kind": "example",
+        "title": "Zero pair support can prevent universal unbiased variance estimation",
+        "statement": "For two units sampled one at a time, shows pi_12=0, the all-pairs inverse expression cannot use that unsupported pair, the supported-pair truncation is biased, and no estimator based on the observed singleton can be unbiased for the HT variance for every finite population.",
+        "strategy": "Write the two-point design and its variance explicitly; use a four-value rectangle identity to contradict the form of every observed-record estimator.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "def-simple-random-sampling-without-replacement",
+          "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+          "def-statistic-and-estimator"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      },
+      {
+        "id": "ex-srswor-census-and-singleton-boundaries",
+        "kind": "example",
+        "title": "Census and singleton SRSWOR boundaries",
+        "statement": "For a three-unit population, verifies zero design variance at a census and the stated mean-variance formula at n=1, where the usual sample variance is undefined.",
+        "strategy": "Enumerate the census and the three singleton samples, then compare their variances with the finite-population formula.",
+        "deps": [
+          "def-simple-random-sampling-without-replacement",
+          "thm-srswor-mean-variance-and-finite-population-correction"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-syg-sign-condition-and-negative-estimate",
+        "kind": "example",
+        "title": "Positive pair covariances and a negative SYG estimate",
+        "statement": "For a fixed-size four-unit design with all pair supports positive, exhibits positive and negative Delta values, and schedules for which the unbiased SYG estimate is respectively always nonnegative or negative on a possible sample.",
+        "strategy": "Specify all six sample probabilities, calculate the inclusion probabilities and Delta values, then enumerate the SYG estimate and verify its expectation against the HT variance.",
+        "deps": [
+          "def-finite-population-and-sampling-design",
+          "def-inclusion-covariance-difference",
+          "thm-sen-yates-grundy-variance-identity"
+        ],
+        "justified_by": [],
+        "dependency_level": 6
+      }
+    ]
+  }
+]

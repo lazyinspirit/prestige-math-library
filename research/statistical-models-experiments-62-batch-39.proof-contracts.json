@@ -1,0 +1,389 @@
+{
+  "version": 1,
+  "scope": [
+    "def-batch-and-measurement-process-variation",
+    "thm-nested-batch-repeatability-covariance-and-mean-variance",
+    "ex-day-specific-calibration-slope-drift-and-check-standards"
+  ],
+  "contracts": {
+    "def-batch-and-measurement-process-variation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition fixes nonempty I, nonempty J_i for each i, and positive repeat counts m_ij. Thus each replicate sum in bar Y_ij has at least one term and a positive denominator m_ij; empty conditions, batches, or repeat lists fail the declared model input.",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/sme_gate_boundary_measurement",
+            "reason": "Definition fixes nonempty I, nonempty J_i for each i, and positive repeat counts m_ij. Thus each replicate sum in bar Y_ij has at least one term and a positive denominator m_ij; empty conditions, batches, or repeat lists fail the declared model input."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: both variance components are permitted to be zero; the model remains defined and uses no division by a variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a batch with m_ij=1 is permitted; its replicate mean is its single observation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No covariance matrix inverse or positive-definiteness condition is part of the model definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The model is indexed by finite sets and has no continuous domain endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite index sets are explicitly assumed nonempty and no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition stipulates the nested independent random-intercept model Y_ijk=mu+tau_i+B_ij+epsilon_ijk and the interpretation of its variance terms. Its prose condition for pooling calibration curves is a modeling requirement, not an equivalence between a covariance identity and empirical process stability. The forward implication worksheet therefore has no asserted biconditional to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition asserts no converse."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-39",
+        "notes": "Reviewed the full current Definition and all five direct supplier definitions. Finite nonempty I,J_i and positive m_ij make replicate means defined; centered square-integrable independent effects give an admissible finite mixed model with fixed condition design, batch-incidence Z, G=sigma_B^2 I and R=sigma_epsilon^2 I. Zero variance and single repeats are allowed; no covariance inverse, Gaussianity, identifiability or choice is required. Independently checked Fan Li Lecture 5 section 4.1 p.8 and Lecture 6 section 2 pp.4-5: working random effects need no literal random group sample. Accept the reader correction to the sampling-only interpretation, retaining the caveat that a working law alone does not support design-based extrapolation. Measurement definitions preserve batch labels versus stochastic assumptions, calibration and empirical-stability distinctions. Current body matches the post-reader hash; the exact pre-reader archived source matches aff844ad99306b61c90e8639d61a38dc3da9ea41297ce232437793e2e0677637. Consumer search finds only the owned theorem, example and A summary; unchanged model hypotheses remain sufficient for both consumers."
+      }
+    },
+    "thm-nested-batch-repeatability-covariance-and-mean-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-batch-and-measurement-process-variation",
+          "source_section": "Definition",
+          "quote": "Fix nonempty finite index sets $I$ and $J_i$ for $i\\in I$, and positive\nintegers $m_{ij}$ for $i\\in I$ and $j\\in J_i$. The index $i$ names a fixed\nprocess condition, such as a fixed instrument configuration or an operator\nheld fixed by design. The index $j$ names a batch nested within that condition\n(for example, a day, or a specified day\u2013operator combination); $k\\in\\{1,\\ldots,m_{ij}\\}$ names a repeat reading within that batch. If days and\noperators are crossed, or their separate contributions are needed, the model\nmust use additional indices and terms: this nested model does not separate\nsuch effects.\n\nOn one probability space, let the real random variables $B_{ij}$ and\n$\\epsilon_{ijk}$ be jointly independent and square-integrable, with\n$$\\mathbb E[B_{ij}]=0,\\qquad \\operatorname{Var}(B_{ij})=\\sigma_B^2<\\infty,\\qquad \\mathbb E[\\epsilon_{ijk}]=0,\\qquad \\operatorname{Var}(\\epsilon_{ijk})=\\sigma_\\epsilon^2<\\infty.$$\nThe variances are common over the indicated indices and may be zero. Let\n$\\mu$ and each $\\tau_i$ be fixed real constants. The **nested batch\nmeasurement model** is\n$$Y_{ijk}=\\mu+\\tau_i+B_{ij}+\\epsilon_{ijk}.$$\nHere $\\tau_i$ represents the fixed process-condition offset, $B_{ij}$ is the\nrandom batch offset, and $\\epsilon_{ijk}$ is the repeat error. The replicate\nmean is $\\bar Y_{ij\\cdot}=m_{ij}^{-1}\\sum_{k=1}^{m_{ij}}Y_{ijk}$. This is a\nscalar random-intercept specialization of the finite-moment mixed-model form\nin [[def-linear-mixed-model]]; it adds mutual independence across the finite\nbatch and repeat families and assumes a common repeat-error variance.\n\nIn this article, **repeatability** means variation among readings made under\nthe same stated short-term conditions, represented by the repeat-error term\nin this model. **Reproducibility** means variation across the explicitly\nnamed conditions being compared, such as days or operators; the parameter\n$\\sigma_B^2$ describes only the random batch factor represented by $j$. A\ndesign-based interpretation as variation over a target population requires\nbatches sampled from that population; under a working random-effects model,\nits interpretation instead depends on the stated model and inferential target.\n**Stability** means constancy over the stated time interval of the measurement\nprocess law, including its calibration relation and relevant error behavior.\nThese words are used with these declared scopes; terminology in measurement\nstandards can vary.\n\nChoose the batch-effect specification to match the model and inferential\ntarget. A design-based interpretation treats $B_{ij}$ as random when observed\nbatches are sampled from a named population and the target includes variation\nover it. A random-effects distribution may also be used as a working model for\nselected batches that are not a probability sample, but that choice alone does\nnot justify design-based extrapolation. If the selected batches are the entire\ntarget and no distributional model is intended, represent their offsets as\nfixed batch parameters; the random-effect variance formula below then does not\ndescribe extrapolation to unobserved batches. Pool calibration curves only under an explicit common-curve or\nequivalence model over the stated calibration range. Without that model,\nreport batch-specific calibration descriptions. This definition and its\nvariance consequences assert no empirical adequacy or stability of a\nparticular measurement process. The measurement occasion called a batch and\nthe calibration-curve terminology agree with\n[[def-measurand-calibration-and-measurement-uncertainty]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each variable in [F1] is integrable because it is square-integrable on a probability space and $2|X|\\le1+X^2$; finite sums are square-integrable by $(x_1+\\cdots+x_n)^2\\le n\\sum_{r=1}^n x_r^2$. Every product used below is integrable by $2|XZ|\\le X^2+Z^2$. Thus all expectations are finite and the moment definitions and expectation linearity apply.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix distinct $k,\\ell$ in one batch. By [F1], [F3], [F5], and [F6], $\\mathbb E[Y_{ijk}]=\\mathbb E[Y_{ij\\ell}]=\\mu+\\tau_i$. Thus [F2] gives $\\operatorname{Cov}(Y_{ijk},Y_{ij\\ell})=\\mathbb E[(B_{ij}+\\epsilon_{ijk})(B_{ij}+\\epsilon_{ij\\ell})]$. Expand the product and apply [F3] to get $\\mathbb E[B_{ij}^2]+\\mathbb E[B_{ij}\\epsilon_{ij\\ell}]+\\mathbb E[\\epsilon_{ijk}B_{ij}]+\\mathbb E[\\epsilon_{ijk}\\epsilon_{ij\\ell}]$. By [F1] and [F4] each cross-product expectation factors into the product of two zero means; the remaining term is $\\mathbb E[B_{ij}^2]=\\operatorname{Var}(B_{ij})=\\sigma_B^2$ by [F1] and [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For fixed $i,j$, [F1], [F3], [F5], and [F6] give $\\mathbb E[\\bar Y_{ij\\cdot}]=\\mu+\\tau_i$, so its centered form is $B_{ij}+m_{ij}^{-1}\\sum_k\\epsilon_{ijk}$. By [F2], its variance is the expectation of the square of this centered form; expanding that square and repeatedly applying [F3] gives $\\mathbb E[B_{ij}^2]+(2/m_{ij})\\sum_k\\mathbb E[B_{ij}\\epsilon_{ijk}]+(1/m_{ij}^2)\\sum_{k,\\ell}\\mathbb E[\\epsilon_{ijk}\\epsilon_{ij\\ell}]$. By [F1] and [F4], all cross-product expectations vanish and each diagonal term equals $\\mathbb E[\\epsilon_{ijk}^2]=\\sigma_\\epsilon^2$. Also $\\mathbb E[B_{ij}^2]=\\sigma_B^2$. Therefore the result is $\\sigma_B^2+\\sigma_\\epsilon^2/m_{ij}$, including $m_{ij}=1$ and zero variance components.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement explicitly requires nonempty finite I and each J_i and integer m_ij>=1. Proof 3.1 averages exactly m_ij repeat errors; no variance formula is claimed for m_ij=0 because the replicate mean divides by that count.",
+          "reviewed": {
+            "upheld": true,
+            "by": "Codex /root/sme_gate_boundary_measurement",
+            "reason": "Statement explicitly requires nonempty finite I and each J_i and integer m_ij>=1. Proof 3.1 averages exactly m_ij repeat errors; no variance formula is claimed for m_ij=0 because the replicate mean divides by that count."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: if either or both variance components vanish, the same covariance expansion gives zero for the corresponding term; no division by a variance occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: for m_ij=1 the replicate-mean formula becomes Var(Y_ij1)=sigma_B^2+sigma_epsilon^2; the distinct-repeat covariance clause has no pair to which it applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: singular or zero covariance components are allowed; only finite bilinearity and the stated variances are used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no continuous parameter domain or endpoint in this finite-index theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All index families and sums are finite; the proof uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts two formulas, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts no converse or identifiability claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "single-repeat-mean-variance",
+          "claim": "For m_ij=1, the replicate mean has variance sigma_B^2+sigma_epsilon^2.",
+          "result": "The average contains one batch term and one repeat term, so the two independent variances add."
+        },
+        {
+          "id": "two-repeat-covariance",
+          "claim": "For two distinct repeats in one batch, their covariance is sigma_B^2.",
+          "result": "Both observations contain the same B_ij; every distinct repeat-error cross covariance is zero."
+        },
+        {
+          "id": "zero-component-boundary",
+          "claim": "If sigma_B^2=0 and sigma_epsilon^2=0, both asserted variances and covariances are zero.",
+          "result": "Substitution in the two formulas gives zero without a limiting argument."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-39",
+        "notes": "Read the entire current Statement, six facts, three proof steps and all six direct suppliers (the definition already reviewed at level 3). Step 1.1 correctly establishes L1 from 2|X|<=1+X^2 on a mass-one space and finite-sum/product integrability from elementary square bounds. In step 2.1, each distinct-error pair and batch/error pair is independent; the integrable branch of finite-product factorization applies with n=2 and Borel identity functions, so each cross term has zero expectation. The shared B square survives with expectation sigma_B^2. Step 3.1 centers the replicate mean, expands its square and counts exactly m_ij diagonal repeat terms, giving sigma_B^2+sigma_epsilon^2/m_ij. For m_ij=1 the distinct-repeat assertion is vacuous and the mean variance still holds; either or both variance components may be zero. No Gaussianity, limiting interchange, invertibility, AC or empirical adequacy is invoked. Read the published linearity and factorization proofs and checked their exact statements for these applications; no transitive measure-theory closure certification is claimed. Current source equals both frozen source hashes; only F1 contract quotation changed to the corrected full supplier Definition, which matches exactly. This is audit enrichment, not a theorem repair."
+      }
+    },
+    "ex-day-specific-calibration-slope-drift-and-check-standards": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measurand-calibration-and-measurement-uncertainty",
+          "source_section": "Definition",
+          "quote": "A **measurand** is the specified quantity intended to be measured, including\nthe conditions needed to make its value sufficiently well-defined for the\nstated accuracy. A **measurement model** for a scalar measurand $q$ is a\nspecified function\n$$q=f(x_1,\\ldots,x_d)$$\nwhere $f:U\\to\\mathbb R$ is defined on an open set $U\\subseteq\\mathbb R^d$ and\nthe $x_i$ are the input quantities that contribute to the reported result.\nFor the uncertainty model below, assume $\\hat x\\in U$. To treat the nonlinear\noutput $f(X)$ as a random output, either require $X\\in U$ almost surely and\nrequire $\\omega\\mapsto f(X(\\omega))$ to be measurable on the event $\\{X\\in U\\}$,\ndefining it measurably on the null complement, or specify a measurable\nextension of the model to the input values outside $U$. The almost-sure domain\ncondition alone does not ensure measurability. If the variance of $f(X)$ is\nused, also require the resulting output to be square-integrable. The input\nlist includes each significant correction, correction factor, calibration\nquantity, reference value, and other influence quantity used by the model.\nThe estimate based on input estimates\n$\\hat x=(\\hat x_1,\\ldots,\\hat x_d)$ is $\\hat q=f(\\hat x)$.\n\nFor uncertainty evaluation, represent the possible input values by an\n$\\mathbb R^d$-valued random element $X=(X_1,\\ldots,X_d)$ on one probability\nspace, with square-integrable real coordinate variables. Their means are the\ninput estimates, $\\mathbb E[X_i]=\\hat x_i$, and their **input covariance matrix** is\n$$\\Sigma_{ij}=\\operatorname{Cov}(X_i,X_j),\\qquad 1\\le i,j\\le d.$$\nThis probability model represents the evaluated uncertainty of the inputs; it\ndoes not assert that every input varies physically at random. No independence\nof the inputs is assumed.\n\nA **systematic effect** is an identified influence whose estimated\ncontribution can be corrected. A **random effect** is an influence that\nappears as variation across repeated observations under the declared\nconditions. These descriptions concern how an effect enters the measurement\nmodel; they are separate from the Type A/Type B evaluation labels. A\n**correction** is an estimated signed value added algebraically to an\nuncorrected result to compensate for a recognized systematic effect. A\ncorrection factor changes a result multiplicatively according to the stated\nmodel. Applying a correction does not remove uncertainty: uncertainty in the\ncorrection and in its reference values remains an input contribution unless\nits contribution is shown negligible for the stated result. A **reference\nstandard** is a stated reference artifact or realization used to compare or\ncalibrate a measurement system; its assigned value and uncertainty, including\ncovariance with other shared reference inputs, belong in the measurement\nmodel. A **calibration curve** is the specified relation between a reference\nquantity and an instrument response used to convert a later response into an\nestimate of the measurand.\n\n**Type A evaluation** means evaluating an uncertainty component by statistical\nanalysis of a series of observations. **Type B evaluation** means evaluating\nit by other information or methods. These labels describe how a component is\nevaluated, not whether its cause is random or systematic. A **repeatability\ncomponent** describes variation in repeated readings under stated, comparable\nconditions. A later reading of a calibrated instrument can therefore add a\nnew repeatability component; include its covariance with other inputs when\nthe model does not justify treating them as uncorrelated.\n\nA **standard uncertainty** is an uncertainty measure expressed as a standard\ndeviation. The combined standard uncertainty below is the standard deviation\nof a linearized output, not an interval statement.\n\nWhen $f$ is differentiable at $\\hat x$, write\n$g=\\nabla f(\\hat x)$ and define the **first-order linearized output** by\n$$Q_{\\mathrm{lin}}=f(\\hat x)+g^T(X-\\hat x).$$\nThe **first-order combined standard uncertainty** is\n$u_c=\\sqrt{\\operatorname{Var}(Q_{\\mathrm{lin}})}$, the standard deviation of\nthis Taylor-linearized output. The next theorem gives its covariance formula.\nIts use as an approximation to the uncertainty of the nonlinear output\nrequires the first-order model to be adequate for the stated measurement.\nThis standard uncertainty is not itself an interval and implies no coverage\nprobability or confidence level.\n\nA **measurement batch** in the example on the companion page is a declared\nmeasurement occasion or configuration, such as one day of operation. It is a\nlabel for a process condition; it is not a random-effect assumption by itself.\nWhether a calibration relation remains stable across batches is an empirical\nquestion about the stated process and study.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-batch-and-measurement-process-variation",
+          "source_section": "Definition",
+          "quote": "Fix nonempty finite index sets $I$ and $J_i$ for $i\\in I$, and positive\nintegers $m_{ij}$ for $i\\in I$ and $j\\in J_i$. The index $i$ names a fixed\nprocess condition, such as a fixed instrument configuration or an operator\nheld fixed by design. The index $j$ names a batch nested within that condition\n(for example, a day, or a specified day\u2013operator combination); $k\\in\\{1,\\ldots,m_{ij}\\}$ names a repeat reading within that batch. If days and\noperators are crossed, or their separate contributions are needed, the model\nmust use additional indices and terms: this nested model does not separate\nsuch effects.\n\nOn one probability space, let the real random variables $B_{ij}$ and\n$\\epsilon_{ijk}$ be jointly independent and square-integrable, with\n$$\\mathbb E[B_{ij}]=0,\\qquad \\operatorname{Var}(B_{ij})=\\sigma_B^2<\\infty,\\qquad \\mathbb E[\\epsilon_{ijk}]=0,\\qquad \\operatorname{Var}(\\epsilon_{ijk})=\\sigma_\\epsilon^2<\\infty.$$\nThe variances are common over the indicated indices and may be zero. Let\n$\\mu$ and each $\\tau_i$ be fixed real constants. The **nested batch\nmeasurement model** is\n$$Y_{ijk}=\\mu+\\tau_i+B_{ij}+\\epsilon_{ijk}.$$\nHere $\\tau_i$ represents the fixed process-condition offset, $B_{ij}$ is the\nrandom batch offset, and $\\epsilon_{ijk}$ is the repeat error. The replicate\nmean is $\\bar Y_{ij\\cdot}=m_{ij}^{-1}\\sum_{k=1}^{m_{ij}}Y_{ijk}$. This is a\nscalar random-intercept specialization of the finite-moment mixed-model form\nin [[def-linear-mixed-model]]; it adds mutual independence across the finite\nbatch and repeat families and assumes a common repeat-error variance.\n\nIn this article, **repeatability** means variation among readings made under\nthe same stated short-term conditions, represented by the repeat-error term\nin this model. **Reproducibility** means variation across the explicitly\nnamed conditions being compared, such as days or operators; the parameter\n$\\sigma_B^2$ describes only the random batch factor represented by $j$. A\ndesign-based interpretation as variation over a target population requires\nbatches sampled from that population; under a working random-effects model,\nits interpretation instead depends on the stated model and inferential target.\n**Stability** means constancy over the stated time interval of the measurement\nprocess law, including its calibration relation and relevant error behavior.\nThese words are used with these declared scopes; terminology in measurement\nstandards can vary.\n\nChoose the batch-effect specification to match the model and inferential\ntarget. A design-based interpretation treats $B_{ij}$ as random when observed\nbatches are sampled from a named population and the target includes variation\nover it. A random-effects distribution may also be used as a working model for\nselected batches that are not a probability sample, but that choice alone does\nnot justify design-based extrapolation. If the selected batches are the entire\ntarget and no distributional model is intended, represent their offsets as\nfixed batch parameters; the random-effect variance formula below then does not\ndescribe extrapolation to unobserved batches. Pool calibration curves only under an explicit common-curve or\nequivalence model over the stated calibration range. Without that model,\nreport batch-specific calibration descriptions. This definition and its\nvariance consequences assert no empirical adequacy or stability of a\nparticular measurement process. The measurement occasion called a batch and\nthe calibration-curve terminology agree with\n[[def-measurand-calibration-and-measurement-uncertainty]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The day-specific lines are $r_1(q)=1+2q$ and $r_2(q)=1+2.2q$: each intercept is the response at $q=0$, and the slopes are $(21-1)/10=2$ and $(23-1)/10=2.2$. In particular the known standard at $q=5$ has responses $11$ and $12$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The six reference values have mean $\\bar q=5$ and the six responses have mean $\\bar r=69/6=11.5$. Their centered sums are $S_{qq}=\\sum(q-\\bar q)^2=100$ and $S_{qr}=\\sum(q-\\bar q)(r-\\bar r)=210$: the two $q=0$ readings contribute $105$, the $q=5$ readings contribute $0$, and the two $q=10$ readings contribute $105$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write each residual as $(r-\\bar r)-b(q-\\bar q)+(\\bar r-a-b\\bar q)$. The first two terms sum to zero over the six pairs, so expanding the sum of squared residuals gives $\\sum[(r-\\bar r)-b(q-\\bar q)]^2+6(\\bar r-a-b\\bar q)^2$. For fixed $b$ this is minimized at $a=\\bar r-b\\bar q$; the remaining slope-dependent terms are $S_{qq}b^2-2S_{qr}b$, whose completed square is $S_{qq}(b-S_{qr}/S_{qq})^2$ plus a constant. Since $S_{qq}=100>0$, the unique minimizing slope is $b=210/100=21/10$ and $a=11.5-(21/10)(5)=1$, giving $\\hat r(q)=1+(21/10)q$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At the $q=5$ check standard, the pooled line predicts $11.5$, so its day-specific residuals are $11-11.5=-0.5$ and $12-11.5=0.5$. Inverting the pooled line maps the two observed responses to $10/(21/10)=100/21$ and $11/(21/10)=110/21$, whereas the separate day lines each map their own response back to $q=5$. The three-standard table exposes the differing slopes in this stipulated example; it supplies no empirical evidence, statistical test, or general justification for pooling calibration curves.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example explicitly has three reference standards and two days."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "All responses are stipulated deterministic values; the example makes no random-error variance or uncertainty calculation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example does not use a single standard or a single day."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No covariance matrix or variance-component inverse appears."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The three reference values 0, 5, and 10 include both endpoints of the declared calibration range [0,10]; all stated line slopes, including pooled slope 2.1, are positive, so the displayed inverse calculations are defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The complete finite table is displayed and no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The six stipulated readings determine the two day slopes 2 and 2.2 in Verification 1.1 and the pooled slope 21/10 in 2.1; 3.1 computes the resulting residuals and inverse estimates. This finite arithmetic comparison asserts no equivalence criterion for pooling real calibration curves. The forward implication worksheet therefore has no asserted biconditional to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no converse."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "day-specific-slope-arithmetic",
+          "claim": "The endpoint differences give slopes 2 and 2.2.",
+          "result": "(21-1)/(10-0)=2 and (23-1)/(10-0)=2.2."
+        },
+        {
+          "id": "pooled-line-center-sums",
+          "claim": "The equally weighted six-point line has S_qq=100, S_qr=210, slope 2.1, and intercept 1.",
+          "result": "The centered contributions are 50+50 for S_qq and 105+0+105 for S_qr; 210/100=2.1 and 11.5-2.1(5)=1."
+        },
+        {
+          "id": "pooled-check-standard-inverse",
+          "claim": "At the standard q=5, the pooled inverse values are 100/21 and 110/21.",
+          "result": "The responses 11 and 12 invert through r=1+2.1q to (11-1)/2.1=100/21 and (12-1)/2.1=110/21."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-39",
+        "notes": "Read the Example, table, two facts, two assumptions, four verification steps and Remarks and both direct supplier Definitions. Recomputed the six-point deterministic table: day slopes 2 and 11/5 with intercept 1; qbar=5, rbar=23/2, Sqq=100 and Sqr=210. Centering annihilates the intercept cross term; completing the slope square with positive Sqq proves the unique pooled minimizer (a,b)=(1,21/10). At q=5 the residuals are -1/2 and 1/2 and pooled inverse quantities are 100/21 and 110/21; positive slopes make all inversions defined within the calibration range. Endpoints 0,10 lie in the specified table; empty/single-standard problems are not claimed. Stable reference quantities are stipulated, not inferred from two days. No error variance, repeatability, control limit, statistical detection, common-curve adequacy, Gaussianity or choice is asserted. Independently checked NIST sections 2.1.2 and 2.4.5.3 for stable check standards and historical monitoring, and JCGM 100:2008 Annex H.3.1-H.3.3 printed pp.89-91 for least-squares calibration and residual diagnostics. The source is unchanged between pre/post/current hashes. Only the full F2 supplier quotation was synchronized; audit enrichment needs no mathematical repair."
+      }
+    }
+  }
+}

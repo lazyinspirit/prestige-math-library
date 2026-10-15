@@ -1,0 +1,107 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-59-1",
+  "inventory": {
+    "pages": [
+      "sequential-likelihood-ratio-tests",
+      "sequential-likelihood-ratio-tests-examples"
+    ],
+    "items": [
+      "alg-sequential-likelihood-ratio-test",
+      "lem-iid-sequential-likelihood-ratio-factorization",
+      "thm-sequential-likelihood-ratio-test-error-bounds",
+      "thm-sequential-likelihood-ratio-test-terminates-under-drift",
+      "ex-bernoulli-sequential-likelihood-ratio-crossings"
+    ],
+    "pairs": [
+      "sequential-likelihood-ratio-tests"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/alg-sequential-likelihood-ratio-test.md",
+    "items/lem-iid-sequential-likelihood-ratio-factorization.md",
+    "items/thm-sequential-likelihood-ratio-test-error-bounds.md",
+    "items/thm-sequential-likelihood-ratio-test-terminates-under-drift.md",
+    "items/ex-bernoulli-sequential-likelihood-ratio-crossings.md",
+    "library/statistical-models-and-experiments/sequential-likelihood-ratio-tests.md",
+    "library/statistical-models-and-experiments/sequential-likelihood-ratio-tests-examples.md"
+  ],
+  "write_batches": [
+    "59"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-bernoulli-sequential-likelihood-ratio-crossings",
+      "path": [
+        "alg-sequential-likelihood-ratio-test",
+        "ex-bernoulli-sequential-likelihood-ratio-crossings"
+      ],
+      "paths": [
+        [
+          "alg-sequential-likelihood-ratio-test",
+          "ex-bernoulli-sequential-likelihood-ratio-crossings"
+        ],
+        [
+          "lem-iid-sequential-likelihood-ratio-factorization",
+          "ex-bernoulli-sequential-likelihood-ratio-crossings"
+        ],
+        [
+          "thm-sequential-likelihood-ratio-test-error-bounds",
+          "ex-bernoulli-sequential-likelihood-ratio-crossings"
+        ],
+        [
+          "thm-sequential-likelihood-ratio-test-terminates-under-drift",
+          "ex-bernoulli-sequential-likelihood-ratio-crossings"
+        ]
+      ]
+    },
+    {
+      "id": "thm-sequential-likelihood-ratio-test-error-bounds",
+      "path": [
+        "alg-sequential-likelihood-ratio-test",
+        "thm-sequential-likelihood-ratio-test-error-bounds"
+      ],
+      "paths": [
+        [
+          "alg-sequential-likelihood-ratio-test",
+          "thm-sequential-likelihood-ratio-test-error-bounds"
+        ]
+      ]
+    },
+    {
+      "id": "thm-sequential-likelihood-ratio-test-terminates-under-drift",
+      "path": [
+        "alg-sequential-likelihood-ratio-test",
+        "thm-sequential-likelihood-ratio-test-terminates-under-drift"
+      ],
+      "paths": [
+        [
+          "alg-sequential-likelihood-ratio-test",
+          "thm-sequential-likelihood-ratio-test-terminates-under-drift"
+        ],
+        [
+          "lem-iid-sequential-likelihood-ratio-factorization",
+          "thm-sequential-likelihood-ratio-test-terminates-under-drift"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "alg-sequential-likelihood-ratio-test": [
+      "## Definition\n\nAssume the [[def-axiom-of-choice|Axiom of Choice]], which states that every family of nonempty sets has a choice function. Let $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge0})$ be a discrete filtration on a common measurable space and let $P_0,P_1$ be probability measures on it. Assume that for every $t\\ge0$, the restrictions $P_0|_{\\mathcal F_t}$ and $P_1|_{\\mathcal F_t}$ are mutually absolutely continuous: each restriction assigns measure zero to exactly the same $\\mathcal F_t$ events as the other. For each $t$, choose a nonnegative $\\mathcal F_t$-measurable representative $L_t$ of the likelihood-ratio density $d(P_1|_{\\mathcal F_t})/d(P_0|_{\\mathcal F_t})$ [[def-likelihood-ratio-as-rn-derivative]]. The filtration and stopping-time conventions are those of [[def-filtration-and-filtered-probability-space]] and [[def-discrete-stopping-time]].\n\nInput thresholds $\\alpha,\\beta\\in(0,1)$. At times $t=1,2,\\ldots$, compute $L_t$ and apply these instructions:\n\n1. If $L_t\\ge1/\\alpha$, stop and decide $H_1$.\n2. Otherwise, if $L_t\\le\\beta$, stop and decide $H_0$.\n3. Otherwise continue to the next observation.\n\nThe two boundaries are disjoint because $\\beta<1<1/\\alpha$. The output time is\n$$\\tau=\\inf\\{t\\ge1:L_t\\ge1/\\alpha\\text{ or }L_t\\le\\beta\\},\\qquad \\inf\\varnothing=\\infty.$$\nIf $\\tau=\\infty$, the procedure has no finite terminal decision. It does not itself assert that a crossing occurs."
+    ],
+    "lem-iid-sequential-likelihood-ratio-factorization": [
+      "## Statement\n\nAssume AC. Let $P_0,P_1$ be probability measures on a common measurable space and let $(X_i)_{i\\ge1}$ be random elements of $(S,\\Sigma)$ that are IID under each $P_j$, with one-coordinate law $Q_j$. Suppose $Q_1\\ll Q_0$, let $\\lambda=dQ_1/dQ_0$ be a nonnegative representative, and put $\\mathcal F_t=\\sigma(X_1,\\ldots,X_t)$. For every $t\\ge1$,\n$$L_t:=\\prod_{i=1}^t\\lambda(X_i)$$\nis a version of $d(P_1|_{\\mathcal F_t})/d(P_0|_{\\mathcal F_t})$."
+    ],
+    "thm-sequential-likelihood-ratio-test-error-bounds": [
+      "## Statement\n\nAssume AC. Under the hypotheses of [[alg-sequential-likelihood-ratio-test]], the boundary rule $\\tau$ is a stopping time and, for the specified decisions,\n$$P_0(\\tau<\\infty,\\ L_\\tau\\ge1/\\alpha)\\le\\alpha,\\qquad P_1(\\tau<\\infty,\\ L_\\tau\\le\\beta)\\le\\beta.$$\nThese bounds concern terminal errors and do not assume that $\\tau$ is finite almost surely."
+    ],
+    "thm-sequential-likelihood-ratio-test-terminates-under-drift": [
+      "## Statement\n\nAssume AC. Let $(X_i)_{i\\ge1}$ be IID under each of two probability measures $P_j$, with one-coordinate law $Q_j$, and suppose $Q_0$ and $Q_1$ are equivalent. Choose a finite strictly positive representative $\\lambda=dQ_1/dQ_0$ and set $Z=\\log\\lambda$. If\n$$\\mathbb E_{Q_0}|Z|,\\mathbb E_{Q_1}|Z|<\\infty,\\qquad \\mathbb E_{Q_0}Z<0<\\mathbb E_{Q_1}Z,$$\nthen for every $\\alpha,\\beta\\in(0,1)$ the algorithm [[alg-sequential-likelihood-ratio-test]], with $\\mathcal F_0=\\{\\varnothing,\\Omega\\}$ and $\\mathcal F_t=\\sigma(X_1,\\ldots,X_t)$, satisfies\n$$P_0(\\tau<\\infty)=P_1(\\tau<\\infty)=1.$$"
+    ],
+    "ex-bernoulli-sequential-likelihood-ratio-crossings": []
+  }
+}

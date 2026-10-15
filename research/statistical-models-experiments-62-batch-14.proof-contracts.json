@@ -1,0 +1,566 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62",
+  "scope": [
+    "def-two-level-full-factorial-design",
+    "thm-full-two-level-factorial-contrast-orthogonality",
+    "thm-full-factorial-estimator-and-effect-variances",
+    "ex-unbalanced-full-factorial-loses-orthogonality",
+    "ex-two-factor-interaction-and-scale-dependence"
+  ],
+  "contracts": {
+    "def-two-level-full-factorial-design": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly includes factor subset A=emptyset, whose column is the empty product x_emptyset=1. Its normalized coefficient is the run-response average2^{-k}sum_x y_x. The factorial EFFECT is restricted to nonempty A, so no undefined minus group is formed for the intercept."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the empty factor subset has the explicitly defined empty product x_∅=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for k=1, the run set has two sign vectors and the formula defines both the intercept and one factor column."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition accepts any real response table and asserts no nondegeneracy condition on its values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter or endpoint condition is defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the factor set, run set, and subset index set are finite and explicitly given; a fixed ordering is allowed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition subset/sign encoding: given A subset[k], set x_j=+1 for j in A and -1 for j outside A. The positive-coordinate set of this sign vector is exactly A, proving the forward coding inclusion and recovery."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition subset/sign encoding: given x in{-1,+1}^[k], take A={j:x_j=+1}. Rebuilding signs from membership in A returns x coordinatewise, proving the reverse recovery and the stated run/subset bijection."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-full-two-level-factorial-contrast-orthogonality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-level-full-factorial-design",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge1$ and write $[k]=\\{1,\\ldots,k\\}$. A **two-level full factorial design** has run set\n$$\\mathcal X_k=\\{-1,+1\\}^{[k]},$$\nso every one of the $2^k$ sign combinations occurs once. For a run $x\\in\\mathcal X_k$ and a subset $A\\subseteq[k]$, define its sign column by\n$$x_A=\\prod_{j\\in A}x_j,$$\nwhere the empty product is $x_\\varnothing=1$. The design matrix $X$ has one row for each run, one column for each subset of factors, and entry $X_{x,A}=x_A$. Any fixed ordering of the runs and subsets may be used.\n\nThe run set and subset index set both have $2^k$ elements: a subset $A$ corresponds to the sign vector whose $j$th coordinate is $+1$ exactly when $j\\in A$. Thus $X$ is a square $2^k\\times2^k$ matrix.\n\nFor a real response table $y=(y_x)_{x\\in\\mathcal X_k}$, define its normalized factorial coefficient by\n$$\\widehat\\beta_A(y)=2^{-k}\\sum_{x\\in\\mathcal X_k}x_Ay_x.$$\nFor nonempty $A$, put $G_{A,+}=\\{x:x_A=+1\\}$ and $G_{A,-}=\\{x:x_A=-1\\}$. Both sets are nonempty: the all-positive run lies in $G_{A,+}$, and flipping any coordinate in $A$ gives a run in $G_{A,-}$. Define the factorial effect on this response scale as\n$$\\widehat\\tau_A(y)=\\frac{1}{|G_{A,+}|}\\sum_{x\\in G_{A,+}}y_x-\\frac{1}{|G_{A,-}|}\\sum_{x\\in G_{A,-}}y_x.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "source_section": "Definition",
+          "quote": "Vectors $u,v$ in an inner product space ([[def-inner-product-space]]) are **orthogonal**, written $u\\perp v$, if $\\langle u,v\\rangle=0$. Two subspaces are orthogonal if every vector in one is orthogonal to every vector in the other.\n\nA list or set of vectors is **orthogonal** if every two distinct members are orthogonal. It is **orthonormal** if it is orthogonal and every member has induced norm ([[def-inner-product-norm]]) equal to $1$. An **orthonormal basis** is an ordered basis ([[def-linear-basis]]) that is an orthonormal list.\n\nThe empty list is orthonormal and is the orthonormal basis of the zero space. A one-element list is orthogonal; it is orthonormal exactly when its vector has norm $1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $A,B\\subseteq[k]$, every factor in $A\\cap B$ occurs twice in $x_Ax_B$ and has square $1$, while factors outside $A\\triangle B$ do not occur. Hence $x_Ax_B=\\prod_{j\\in A\\triangle B}x_j$. By [F2], $\\langle c_A,c_B\\rangle=\\sum_{x\\in\\mathcal X_k}\\prod_{j\\in A\\triangle B}x_j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $A=B$, then $A\\triangle B=\\varnothing$ and every summand in step 1.1 equals $1$, so the sum is $2^k$. If $A\\ne B$, choose $j\\in A\\triangle B$ and pair each run $x$ with the run obtained by reversing only $x_j$. This is a fixed-point-free involution of $\\mathcal X_k$ and reverses the sign of the summand, so the terms cancel in pairs and the sum is $0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The matrix entry $(A,B)$ of $X^{\\mathsf T}X$ is $\\langle c_A,c_B\\rangle$. Step 2.1 therefore gives $X^{\\mathsf T}X=2^kI_{2^k}$ and the scaled identity; [F3] gives pairwise orthogonality of distinct columns.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 covers A=B, including A=B=emptyset: A triangle B is empty and every product is1, giving inner product2^k. If only one subset is empty, its nonempty symmetric difference supplies the coordinate flip and cancellation in the same proof step."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The off-diagonal Gram entries are zero by the cancellation in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The diagonal and off-diagonal cases in step 2.1 include k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers both equal and distinct subset indices, including the empty subset."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued variable or endpoint is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses one coordinate from the explicitly nonempty finite set A△B; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a Gram identity and no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a Gram identity and no iff."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-full-factorial-estimator-and-effect-variances": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-level-full-factorial-design",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge1$ and write $[k]=\\{1,\\ldots,k\\}$. A **two-level full factorial design** has run set\n$$\\mathcal X_k=\\{-1,+1\\}^{[k]},$$\nso every one of the $2^k$ sign combinations occurs once. For a run $x\\in\\mathcal X_k$ and a subset $A\\subseteq[k]$, define its sign column by\n$$x_A=\\prod_{j\\in A}x_j,$$\nwhere the empty product is $x_\\varnothing=1$. The design matrix $X$ has one row for each run, one column for each subset of factors, and entry $X_{x,A}=x_A$. Any fixed ordering of the runs and subsets may be used.\n\nThe run set and subset index set both have $2^k$ elements: a subset $A$ corresponds to the sign vector whose $j$th coordinate is $+1$ exactly when $j\\in A$. Thus $X$ is a square $2^k\\times2^k$ matrix.\n\nFor a real response table $y=(y_x)_{x\\in\\mathcal X_k}$, define its normalized factorial coefficient by\n$$\\widehat\\beta_A(y)=2^{-k}\\sum_{x\\in\\mathcal X_k}x_Ay_x.$$\nFor nonempty $A$, put $G_{A,+}=\\{x:x_A=+1\\}$ and $G_{A,-}=\\{x:x_A=-1\\}$. Both sets are nonempty: the all-positive run lies in $G_{A,+}$, and flipping any coordinate in $A$ gives a run in $G_{A,-}$. Define the factorial effect on this response scale as\n$$\\widehat\\tau_A(y)=\\frac{1}{|G_{A,+}|}\\sum_{x\\in G_{A,+}}y_x-\\frac{1}{|G_{A,-}|}\\sum_{x\\in G_{A,-}}y_x.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-full-two-level-factorial-contrast-orthogonality",
+          "source_section": "Statement",
+          "quote": "For the design in [[def-two-level-full-factorial-design]], let $c_A=(x_A(x))_{x\\in\\mathcal X_k}$ be the column indexed by $A\\subseteq[k]$. Then\n$$\\langle c_A,c_B\\rangle=\\begin{cases}2^k,&A=B,\\\\0,&A\\ne B.\\end{cases}$$\nThus the columns are pairwise orthogonal and\n$$X^{\\mathsf T}X=2^kI_{2^k},\\qquad 2^{-k}X^{\\mathsf T}X=I_{2^k}.$$\nThis is a deterministic property of the design matrix.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-variance-adds-for-pairwise-independent-random-variables",
+          "source_section": "Statement",
+          "quote": "If $(X_i)_{i\\in I}$ is a finite pairwise-independent family of square-integrable real random variables on a common probability space, then\n$$\\operatorname{Var}\\!\\left(\\sum_{i\\in I}X_i\\right)=\\sum_{i\\in I}\\operatorname{Var}(X_i).$$\nPairwise independence, rather than mutual independence, is sufficient. In particular, the original finite-probability-space case is included, with pairwise atom independence as in the finite-valued convention. The empty sum has variance zero.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substitute the model and the run averages into the definition of $\\widehat\\beta_A$. This gives $$\\widehat\\beta_A=\\sum_{B\\subseteq[k]}\\beta_B\\left(2^{-k}\\sum_{x\\in\\mathcal X_k}x_Ax_B\\right)+\\frac{1}{r2^k}\\sum_{x\\in\\mathcal X_k}\\sum_{s=1}^r x_A\\epsilon_{x,s}.$$ By [F2], the parenthesized factor is $1$ for $B=A$ and $0$ otherwise. Thus $\\widehat\\beta_A-\\beta_A=(r2^k)^{-1}\\sum_{x,s}x_A\\epsilon_{x,s}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $A$ and put $Z_{x,s}=x_A\\epsilon_{x,s}$. Each $x_A$ is $+1$ or $-1$, so multiplication by $x_A$ is a Borel bijection whose inverse is itself; consequently $\\sigma(Z_{x,s})=\\sigma(\\epsilon_{x,s})$. By [F3] and [F4] these variables remain mutually, hence pairwise, independent. Their second moments are finite by the hypothesis, and $2|z|\\le1+z^2$ gives $\\mathbb E|Z_{x,s}|<\\infty$, so their variances are defined. By [F6], variance is covariance with both arguments equal; then [F7] gives $\\operatorname{Var}(Z_{x,s})=x_A^2\\operatorname{Var}(\\epsilon_{x,s})=\\sigma^2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "There are $r2^k$ variables $Z_{x,s}$. By [F8], their sum has variance $r2^k\\sigma^2$. Applying the scalar rule from [F7] to step 1.1 yields $\\operatorname{Var}(\\widehat\\beta_A)=(r2^k)^{-2}r2^k\\sigma^2=\\sigma^2/(r2^k)$.",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For nonempty $A$, choose $j\\in A$. Reversing coordinate $x_j$ bijects $G_{A,+}$ with $G_{A,-}$, so each group has $2^{k-1}$ runs. The difference of their run-average means is therefore $2^{1-k}\\sum_xx_A\\overline Y_x=2\\widehat\\beta_A$ by [F1]. Its variance is four times the coefficient variance from step 2.1, giving $4\\sigma^2/(r2^k)$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The permitted empty factor subset A=emptyset is the intercept column with x_A=1. Proof1.1-2.1 yields its coefficient variance sigma^2/(r2^k) through all r2^k signed errors. The effect/variance factor4 in3.1 is asserted only for nonempty A, so no empty contrast group is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When σ²=0, steps 1.2 and 2.1 give zero variance for every coefficient and effect."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The formulas in the Statement cover k=1 and r=1 without a separate limiting argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement's formulas and steps 1.2 and 2.1 apply also when σ²=0; no Gaussian or zero-interaction restriction is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter is defined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 selects a coordinate from each nonempty finite subset A; the argument uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states variance identities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states variance identities, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "date": "2026-10-15",
+        "notes": "Independently reviewed Statement and steps 1.1, 1.2, 2.1, 3.1 and current F1-F8 supplier interfaces and proofs of orthogonality, covariance bilinearity and finite variance addition. The Gram identity isolates the fixed beta_A; each deterministic sign preserves its error sigma-algebra and second moment. All r*2^k errors are independent on one probability space, so their signed sum has variance r*2^k*sigma^2; scaling and translation give sigma^2/(r*2^k). The finite coordinate flip balances both groups for nonempty A, giving effect=2*coefficient and variance factor four. Checked A=emptyset (coefficient only), k=1, r=1, sigma^2=0, arbitrary nonzero error means, and nonzero interactions. No Gaussian or zero-mean assumption is needed for variance; the mean-response caveat is explicit. No AC or limiting operation is used. Reader and refuter report no findings. NIST section 5.3.3.3.2 lines 20-23,38-39 and Oehlert chapter 8 sections 8.5-8.6 (printed pp.175-181; PDF indices 194-200, lines 7924-8188) were read: the source normal/centered model is narrower, and the broader variance conclusion follows from the local proof. No defect or unresolved prerequisite found."
+      }
+    },
+    "ex-unbalanced-full-factorial-loses-orthogonality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-level-full-factorial-design",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge1$ and write $[k]=\\{1,\\ldots,k\\}$. A **two-level full factorial design** has run set\n$$\\mathcal X_k=\\{-1,+1\\}^{[k]},$$\nso every one of the $2^k$ sign combinations occurs once. For a run $x\\in\\mathcal X_k$ and a subset $A\\subseteq[k]$, define its sign column by\n$$x_A=\\prod_{j\\in A}x_j,$$\nwhere the empty product is $x_\\varnothing=1$. The design matrix $X$ has one row for each run, one column for each subset of factors, and entry $X_{x,A}=x_A$. Any fixed ordering of the runs and subsets may be used.\n\nThe run set and subset index set both have $2^k$ elements: a subset $A$ corresponds to the sign vector whose $j$th coordinate is $+1$ exactly when $j\\in A$. Thus $X$ is a square $2^k\\times2^k$ matrix.\n\nFor a real response table $y=(y_x)_{x\\in\\mathcal X_k}$, define its normalized factorial coefficient by\n$$\\widehat\\beta_A(y)=2^{-k}\\sum_{x\\in\\mathcal X_k}x_Ay_x.$$\nFor nonempty $A$, put $G_{A,+}=\\{x:x_A=+1\\}$ and $G_{A,-}=\\{x:x_A=-1\\}$. Both sets are nonempty: the all-positive run lies in $G_{A,+}$, and flipping any coordinate in $A$ gives a run in $G_{A,-}$. Define the factorial effect on this response scale as\n$$\\widehat\\tau_A(y)=\\frac{1}{|G_{A,+}|}\\sum_{x\\in G_{A,+}}y_x-\\frac{1}{|G_{A,-}|}\\sum_{x\\in G_{A,-}}y_x.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas\n\n$$\\langle x,y\\rangle_{\\mathbb R^n}=\\sum_{k<n}x_ky_k,\\qquad \\langle z,w\\rangle_{\\mathbb C^n}=\\sum_{k<n}z_k\\overline{w_k}$$\n\ndefine inner products, linear in the first argument. At $n=0$, the unique pairing on the zero space is an inner product.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "source_section": "Definition",
+          "quote": "Vectors $u,v$ in an inner product space ([[def-inner-product-space]]) are **orthogonal**, written $u\\perp v$, if $\\langle u,v\\rangle=0$. Two subspaces are orthogonal if every vector in one is orthogonal to every vector in the other.\n\nA list or set of vectors is **orthogonal** if every two distinct members are orthogonal. It is **orthonormal** if it is orthogonal and every member has induced norm ([[def-inner-product-norm]]) equal to $1$. An **orthonormal basis** is an ordered basis ([[def-linear-basis]]) that is an orthonormal list.\n\nThe empty list is orthonormal and is the orthonormal basis of the zero space. A one-element list is orthogonal; it is orthonormal exactly when its vector has norm $1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-full-two-level-factorial-contrast-orthogonality",
+          "source_section": "Statement",
+          "quote": "For the design in [[def-two-level-full-factorial-design]], let $c_A=(x_A(x))_{x\\in\\mathcal X_k}$ be the column indexed by $A\\subseteq[k]$. Then\n$$\\langle c_A,c_B\\rangle=\\begin{cases}2^k,&A=B,\\\\0,&A\\ne B.\\end{cases}$$\nThus the columns are pairwise orthogonal and\n$$X^{\\mathsf T}X=2^kI_{2^k},\\qquad 2^{-k}X^{\\mathsf T}X=I_{2^k}.$$\nThis is a deterministic property of the design matrix.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The intercept column is $1$ in each row, while the first-factor column takes values $−1,−1,+1,−1,+1$ in the five-row design. By [F2], their inner product is $−1−1+1−1+1=−1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], orthogonality requires a zero inner product, so step 1.1 shows these columns are not orthogonal. The same four distinct rows, before the extra replicate, still occur, so any vector in the kernel of the five-row matrix lies in the kernel of the original four-row matrix.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $b$ is in that kernel, the original four-row matrix $X$ satisfies $Xb=0$. Then $0=b^{\\mathsf T}X^{\\mathsf T}Xb=4b^{\\mathsf T}b$ by [F4], so $b=0$. Thus the five-row matrix has full column rank: unequal replication removes orthogonality here but not estimability of these four coefficients.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses k=2 and four nonempty cells."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the relevant inner product as −1, so it is not zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example has two factors and four treatment combinations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 show the replicated design loses orthogonality but retains full column rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued quantity is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All four distinct rows and their five multiplicities are listed in the Given statement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves no iff."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-14",
+        "date": "2026-10-15",
+        "notes": "Independently read Example/Given and all three verification steps, current F1-F4 carriers, and their exact contract quotations. With run multiplicities (2,1,1,1), the five first-factor signs are (-1,-1,+1,-1,+1); their dot product with the intercept is -1, so these columns are not orthogonal in the standard real inner product. Deleting the duplicate row recovers the full four-row matrix with X^T X=4 I_4, so any kernel vector of the five-row matrix has 4 b^T b=0 and is zero. Checked the zero vector and every retained cell: no missing treatment combination or zero multiplicity occurs; the intercept is the empty subset column. The assertion concerns this explicit design and does not assert loss of rank or response additivity. No probability, Gaussian, centering, AC, or limiting assumption is used. NIST section 5.3.3.3.1 lines 9-27,29-46 gives complete coded runs and the balanced orthogonality convention; the counterexample itself is verified locally. Reader/refuter have no findings. No defect, mathematical repair, or unmet prerequisite found."
+      }
+    },
+    "ex-two-factor-interaction-and-scale-dependence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-level-full-factorial-design",
+          "source_section": "Definition",
+          "quote": "Fix an integer $k\\ge1$ and write $[k]=\\{1,\\ldots,k\\}$. A **two-level full factorial design** has run set\n$$\\mathcal X_k=\\{-1,+1\\}^{[k]},$$\nso every one of the $2^k$ sign combinations occurs once. For a run $x\\in\\mathcal X_k$ and a subset $A\\subseteq[k]$, define its sign column by\n$$x_A=\\prod_{j\\in A}x_j,$$\nwhere the empty product is $x_\\varnothing=1$. The design matrix $X$ has one row for each run, one column for each subset of factors, and entry $X_{x,A}=x_A$. Any fixed ordering of the runs and subsets may be used.\n\nThe run set and subset index set both have $2^k$ elements: a subset $A$ corresponds to the sign vector whose $j$th coordinate is $+1$ exactly when $j\\in A$. Thus $X$ is a square $2^k\\times2^k$ matrix.\n\nFor a real response table $y=(y_x)_{x\\in\\mathcal X_k}$, define its normalized factorial coefficient by\n$$\\widehat\\beta_A(y)=2^{-k}\\sum_{x\\in\\mathcal X_k}x_Ay_x.$$\nFor nonempty $A$, put $G_{A,+}=\\{x:x_A=+1\\}$ and $G_{A,-}=\\{x:x_A=-1\\}$. Both sets are nonempty: the all-positive run lies in $G_{A,+}$, and flipping any coordinate in $A$ gives a run in $G_{A,-}$. Define the factorial effect on this response scale as\n$$\\widehat\\tau_A(y)=\\frac{1}{|G_{A,+}|}\\sum_{x\\in G_{A,+}}y_x-\\frac{1}{|G_{A,-}|}\\sum_{x\\in G_{A,-}}y_x.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $x_{\\{1,2\\}}=x_1x_2$ is $+1$ on runs $--$ and $++$, and $-1$ on runs $+-$ and $-+$. By [F1], the raw-scale $AB$ effect is $\\frac{1+6}{2}-\\frac{2+3}{2}=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The log-transformed responses remain indexed by these same four runs, so [F1] uses the same two sign groups. The log-scale $AB$ effect is $\\frac{\\log 1+\\log 6}{2}-\\frac{\\log 2+\\log 3}{2}=0$, using $\\log 1=0$ and $\\log 6=\\log 2+\\log 3$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The raw-scale interaction effect is nonzero while the log-scale interaction effect is zero, so this table's interaction depends on the declared response scale. The run set alone specifies no response additivity or physical mechanism.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two factors and four runs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the log-scale interaction contrast to be zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example uses a two-factor design."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 exhibit a nonzero raw-scale effect and a zero log-scale effect."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: the four positive cell responses are explicitly enumerated, so the logarithms exist."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves no iff."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

@@ -1,0 +1,700 @@
+{
+  "version": 1,
+  "scope": [
+    "def-event-time-observation-schemes",
+    "thm-likelihood-contributions-under-censoring-and-delayed-entry",
+    "cex-informative-censoring-does-not-identify-event-law",
+    "ex-event-time-observation-likelihoods-and-delayed-entry"
+  ],
+  "contracts": {
+    "def-event-time-observation-schemes": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This is a definition of observation maps, not a theorem about a sample with no subjects."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The event and censor times may equal zero, but no proof phase or zero-case property is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition applies to any sample size and asserts no singleton-sample result."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This definition does not prove existence or properties of a degenerate observation law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition fixes event ties by T≤C, interval endpoints by L<T≤R, and strict truncation by T>L and T<R."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition explicitly cites AC for the conditional-independence convention; its kernel versions are specified or supplied under the cited standard-Borel results."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition asserts no biconditional."
+        }
+      ]
+    },
+    "thm-likelihood-contributions-under-censoring-and-delayed-entry": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "An **event time** is a measurable real-valued map $T$ with values in $[0,\\infty)$. A **covariate** is a measurable map $Z$ into a specified standard-Borel space $(\\mathcal Z,\\mathcal B)$, where standard Borel means measurably isomorphic to a Polish space ([[def-standard-borel-space]]). A **censoring or inspection time** is a measurable real-valued map $C$ with values in $[0,\\infty)$. When conditional laws are used, they are probability kernels $K_T(z,\\cdot)$ and $K_C(z,\\cdot)$ in the sense of [[def-conditional-law-given-a-random-element]] and [[def-measure-kernel-and-probability-kernel]]. They are part of the specified model; their existence for real-valued targets and factorization through standard-Borel $Z$ follow under [[def-axiom-of-choice]] from [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]] and [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]].\n\nThe notation $T\\perp\\!\\!\\!\\perp C\\mid\\sigma(Z)$ has the meaning in [[def-conditional-independence-given-a-sigma-algebra]]: for bounded measurable $a,b$, $\\mathbb E[a(T)b(C)\\mid\\sigma(Z)]=\\mathbb E[a(T)\\mid\\sigma(Z)]\\mathbb E[b(C)\\mid\\sigma(Z)]$ almost surely. It is a model assumption about the conditional observation law, not a consequence of adjusting for $Z$ and not an empirical conclusion.\n\nUnder **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$. Thus $\\delta=1$ records an event at $U=T$, including a tie, while $\\delta=0$ records censoring at $U=C$ and implies $T>C$. **Left censoring** at a known threshold $L$ records only $T\\le L$. **Interval censoring** at known endpoints $L<R$ records $L<T\\le R$. **Current-status observation** at an inspection time $C$ records only $\\delta_C=1\\{T\\le C\\}$.\n\n**Left truncation**, also called delayed entry at $L$, selects a unit into the sample only when $T>L$; observation begins after that selection. **Right truncation** at $R$ selects a unit only when $T<R$. These are selection rules before the observed sample is formed, whereas censoring coarsens an event time after sampling. The strict and weak inequalities in these definitions fix the endpoint conventions. A random observation endpoint is called noninformative here only when it is fixed by design or is generated independently of $T$ conditional on the stated covariates under a parameter-distinct law; otherwise its joint observation law must be modeled.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-scientific-statistical-model-contract",
+          "source_section": "Definition",
+          "quote": "Let\n$$\n\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})\n$$\nbe a statistical experiment ([[def-statistical-experiment]]). When the model is\nparametric, write $\\mathsf P(\\theta)=P_\\theta$\n([[def-parametric-statistical-model]]). A **scientific statistical model\ncontract** is an explicit record of the following fields for a specified\nanalysis.\n\n1. **Observation space and record.** Give $(\\mathcal X,\\mathcal A)$ and say\n   which values form one recorded data object. A response and each predictor\n   used as a function of the data must be a specified measurable map from this\n   space to a named measurable target. This is the map convention for a\n   statistic in [[def-statistic-and-estimator]]; it does not make a predictor\n   causal or the response law correct.\n\n2. **Scientific, sampling, assignment, and analysis units.** Name the\n   biological or physical unit about which the scientific question is asked,\n   the sample unit selected for observation when sampling occurs, the\n   assignment unit receiving a randomized treatment when randomization occurs,\n   and the analysis unit represented in each data record. These roles may\n   differ. A technical replicate is a repeated reading or assay of the same\n   specimen; a biological replicate is a distinct biological unit. Neither\n   term asserts independence. State whether enrollment is a probability\n   sample or a specified convenience/design cohort.\n\n3. **Indices and time.** Give every unit, treatment, visit, and repeated\n   measurement index, the object each index identifies, and the time origin.\n   In particular, do not identify a participant index with a visit or assay\n   index merely because all are written as rows in a data array.\n\n4. **Quantity status.** Mark each model quantity as **fixed** (held\n   nonrandom under the declared law), **random** (a measurable random element\n   with its law specified, using [[def-random-element-and-real-random-variable]]\n   and [[def-law-or-distribution-of-a-random-element]]), **observed** (recorded\n   in the data object), or **latent** (part of a fuller model state but not\n   recorded). A latent quantity must separately be declared fixed or random.\n   If inference conditions on a design value or event, name it and state the\n   conditional law being used.\n\n5. **Target and estimand.** Name the target population of units, settings,\n   and time period, and distinguish it from the enrolled or observed sample.\n   Specify the target as a function $\\psi:\\Theta\\to\\mathcal T$ when it is an\n   estimand in the parametric model, as in\n   [[def-estimand-on-a-statistical-model]]. The contract alone does not show\n   that the target is identifiable. Identifiability means that equality of\n   sampling laws forces equality of target values\n   ([[def-identifiability-of-an-estimand]]).\n\n6. **Observation mechanism.** State how a fuller scientific state becomes\n   the recorded data. A deterministic mechanism is a specified measurable map\n   $O:(\\mathcal W,\\mathcal G)\\to(\\mathcal X,\\mathcal A)$. A stochastic\n   mechanism is specified by $K:\\mathcal W\\times\\mathcal A\\to[0,1]$ such that,\n   for each $w$, $A\\mapsto K(w,A)$ is a probability measure and, for each\n   $A\\in\\mathcal A$, $w\\mapsto K(w,A)$ is measurable. These clauses define the\n   mechanism supplied by the contract; they do not assert that a conditional\n   version exists for an arbitrary joint law.\n\n7. **Support and law.** State the sampling law $P_\\theta$ on\n   $(\\mathcal X,\\mathcal A)$. For an asserted support set, give a measurable\n   $S_\\theta\\subseteq\\mathcal X$ with $P_\\theta(S_\\theta)=1$. If “support”\n   instead means topological support, name the topology and the conditions\n   under which that convention is being used. If densities are used, name the\n   dominating measure and state whether their positive sets agree across\n   parameter values. For a randomized design, also state its assignment law;\n   if inference averages over assignments, give the resulting joint law.\n\n8. **Conditioning convention.** Say whether inference uses the joint law,\n   averaging over the declared randomization, or a specified conditional law\n   given the realized design. A conditional law at an event of probability\n   zero must be supplied as a specified version with its existence\n   hypotheses; it is not defined by an ordinary probability ratio.\n\n9. **Adequacy assumptions.** List each scientific adequacy assumption and\n   classify it as **design-controlled** (imposed by protocol and checked\n   against implementation records), **empirically assessable** (data or\n   validation measurements can challenge it, without proving it true), or\n   **substantively untestable** from the declared observed-data law (external\n   domain evidence or additional assumptions are needed). Split an assumption\n   that has different parts into separate entries and justify each label.\n\nThese are bookkeeping and interpretation requirements. They do not assert that\nan empirical law equals a proposed model, that a design was implemented as\nspecified, that calibration is valid, or that any scientific or physical\napplication is adequate. No independence, exchangeability, missingness,\ncausal-identification, or common-support assumption follows from the indexing\nor the classification labels. This definition uses no axiom of choice.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon–Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-law-given-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ and $Y:(\\Omega,\\mathcal F,P)\\to(T,\\mathcal T)$ be measurable random elements. A **conditional law of X given Y** is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that $\\omega\\mapsto K(Y(\\omega),\\cdot)$ is a regular conditional distribution of X given $\\sigma(Y)$ in [[def-regular-conditional-distribution]]. Thus for every $A\\in\\mathcal S$ and $H\\in\\sigma(Y)$,\n$$\\int_H K(Y(\\omega),A)\\,dP=P(H\\cap\\{X\\in A\\}).$$\n\nComposition with Y makes each evaluation $\\sigma(Y)$-measurable, and every section remains a probability by [[def-measure-kernel-and-probability-kernel]]. The notation $P(X\\in A\\mid Y=y)=K(y,A)$ refers to a chosen kernel; it is not a ratio involving the possibly zero probability $P(Y=y)$.\n\nWrite $P_Y(B)=P(Y^{-1}(B))$ for the law in [[def-law-or-distribution-of-a-random-element]]. If a specified countable family $\\mathcal C\\subseteq\\mathcal S$ determines probability measures, two conditional laws K,L agree as measures outside a single $\\mathcal T$-measurable $P_Y$-null set. Indeed for each $A\\in\\mathcal C$ the measurable discrepancy $D_A=\\{y:K(y,A)\\ne L(y,A)\\}$ has null inverse image under Y by [[lem-conditional-expectation-is-unique-almost-surely]]. Hence $P_Y(D_A)=0$ by the law definition; the countable union $D$ is null by [[thm-finite-and-countable-subadditivity-of-measures]], and off D the determining property gives equality of measures. This uses a supplied determining family and makes no AC assertion about obtaining one.\n\nValues on a measurable $P_Y$-null subset may be replaced by a specified fixed probability on E without changing these identities. The inverse image of that subset is measurable null, and all event evaluations are bounded, so the modified event integrals agree. Empty-event evaluations remain zero and whole-target evaluations remain one. Existence on standard-Borel spaces is proved separately; the definition alone does not assert a conditional kernel exists.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ be a measurable random element with standard-Borel target, and let $\\mathcal G\\subseteq\\mathcal F$ be any sub-sigma-algebra. There exists a regular conditional distribution of $X$ given $\\mathcal G$. Every section is a probability measure, including at exceptional sample points, and no countable-generation or completeness assumption on $\\mathcal G$ is required.\n\nFor this necessarily nonempty target, the construction also supplies a bimeasurable bijection $c:E\\to B$ onto a Borel set $B\\subseteq[0,1]$, and a countable algebra $\\mathcal A$ which generates $\\mathcal S$, separates points, and determines finite measures.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X$ and $Y$ take values in nonempty standard-Borel spaces $(E,\\mathcal S)$ and $(T,\\mathcal T)$ on a probability space $(\\Omega,\\mathcal F,P)$. Let $L$ be a specified regular conditional distribution of $X$ given $\\sigma(Y)$, everywhere a probability kernel. There is a probability kernel $K:T\\to E$ such that $L(\\omega,\\cdot)=K(Y(\\omega),\\cdot)$ simultaneously outside a single null set. In fact, with the stated everywhere-kernel convention, the construction below gives this equality for every $\\omega$. Consequently K is a conditional law of X given Y.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-seven-generators-of-the-borel-sigma-algebra-on-r",
+          "source_section": "Statement",
+          "quote": "Each of the following families generates $\\mathcal B(\\mathbb R)$:\n\n1. all open subsets of $\\mathbb R$;\n2. all closed subsets of $\\mathbb R$;\n3. all open intervals $(a,b)$ with $a<b$;\n4. all rational open intervals $(p,q)$ with $p,q\\in\\mathbb Q$ and $p<q$;\n5. all half-open intervals $(a,b]$ with $a<b$;\n6. all open right rays $(a,\\infty)$;\n7. all rational open right rays $(q,\\infty)$ with $q\\in\\mathbb Q$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-product-of-countable",
+          "source_section": "Statement",
+          "quote": "If $A$ and $B$ are at most countable ([[def-countable]]) then so is\n$A \\times B$.\n\n**No choice principle is used**: the two enumerations are given, and the\nenumeration of the product is written down from them.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-distribution-function-of-a-borel-measure-on-r",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a Borel measure on $\\mathbb{R}$ finite on compact sets. Its\n**distribution function normalized at $0$** is the function\n$F_\\mu : \\mathbb{R} \\to \\mathbb{R}$ defined by\n\n$$F_\\mu(x) := \\begin{cases} \\mu((0,x]), & x \\ge 0,\\\\ -\\mu((x,0]), & x < 0. \\end{cases}$$\n\nBoth interval measures are finite: the relevant half-open interval is\ncontained in the closed bounded interval with endpoints $0$ and $x$, which is\ncompact by [[thm-heine-borel-r]], and measure monotonicity\n[[prop-measure-monotonicity]] applies.\n\nThe two cases agree at $x = 0$, where both give $0$. This normalization removes\nthe additive-constant ambiguity that would remain if one used only interval\nincrements.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-lebesgue-stieltjes-correspondence-with-distribution-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $\\mu$ be a Borel measure on\n$\\mathbb{R}$ finite on compact sets, and let\n$F_\\mu$ be its normalized distribution function from\n[[def-distribution-function-of-a-borel-measure-on-r]]. Then:\n\n1. $F_\\mu$ is nondecreasing and right-continuous;\n2. for every $a < b$,\n\n   $$F_\\mu(b) - F_\\mu(a) = \\mu((a,b]);$$\n\n3. the Lebesgue-Stieltjes measure attached to $F_\\mu$ is exactly $\\mu$.\n\nConversely, if $F,G : \\mathbb{R} \\to \\mathbb{R}$ are nondecreasing and\nright-continuous, then $\\mu_F = \\mu_G$ if and only if $F-G$ is constant on\n$\\mathbb{R}$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-interval-formulas-and-atoms-for-lebesgue-stieltjes-measures",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let\n$F : \\mathbb{R} \\to \\mathbb{R}$ be nondecreasing and right-continuous, and let\n$\\mu_F$ be its Lebesgue-Stieltjes measure. Then for every $a < b$,\n\n$$\\mu_F((a,b)) = F(b^-) - F(a),$$\n\n$$\\mu_F([a,b]) = F(b) - F(a^-),$$\n\n$$\\mu_F([a,b)) = F(b^-) - F(a^-),$$\n\nand\n\n$$\\mu_F(\\{a\\}) = F(a) - F(a^-).$$\n\nConsequently $a$ is an atom of $\\mu_F$ in the sense of\n[[def-atom-of-a-measure-on-r]] if and only if $F(a) > F(a^-)$, and the set of\natoms of $\\mu_F$ is at most countable.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $(\\theta,\\eta)$, use [F5] and [A1] to take conditional-law kernels for $T$, $C$, and $(T,C)$ given $Z$. For each pair of rational half-lines $A,B$, [F6] applied to their indicators and the conditional-law identities in [F4] give $K_{T,C}(Z,A\\times B)=K_T(Z,A)K_C(Z,B)$ almost surely.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $L=R$, then $(L,R]$ is empty and both its probability and $F_\\theta(R\\mid z)-F_\\theta(L\\mid z)$ are zero. If $L<R$, the conditional event law is a Borel probability, hence finite on compact sets, and [F9] gives $\\mu_{\\theta,z}((L,R])=F_\\theta(R\\mid z)-F_\\theta(L\\mid z)$. The singleton formula in [F9] gives $\\mu_{\\theta,z}(\\{t\\})=F_\\theta(t\\mid z)-F_\\theta(t^-\\mid z)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F9",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By the definition of $F_\\theta$, $P(T\\le L\\mid z)=F_\\theta(L\\mid z)$ and $P(T>c\\mid z)=S_\\theta(c\\mid z)=1-F_\\theta(c\\mid z)$. Splitting the two values of $\\delta=1\\{T\\le c\\}$ gives the current-status contribution. For random inspection endpoints conditionally independent of $T$ given $Z$, conditioning on the endpoints leaves these event probabilities unchanged, and their law has no $\\theta$ factor.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Since $T\\ge0$ and the selected probability is positive, $R>0$. The open-right interval formula in [F9] gives $P(T<R\\mid z)=F_\\theta(R^-\\mid z)$. Conditioning the event law on $T<R$ divides its restriction to $(-\\infty,R)$ by this positive probability; for an observed threshold independent of $T$ given $Z$, the same conditional law applies given the threshold. When the original law has density, the selected density is $f_\\theta(t\\mid z)/F_\\theta(R^-\\mid z)$ for $t<R$. This uses a selection normalization and has no right-censor factor.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F1",
+            "F9",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The rational rectangles form a countable pi-system generating the product Borel sigma-algebra by [F7]. Removing the countable union of their exceptional null sets makes the equality in step 1.1 simultaneous on this pi-system. The product measure exists by [F8], so [F7] gives $K_{T,C}(z,\\cdot)=K_T(z,\\cdot)\\otimes K_C(z,\\cdot)$ for almost every $z$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under this product law, for every Borel $B\\subseteq[0,\\infty)$, Tonelli and the density of $K^T_\\theta$ give $P(U\\in B,\\delta=1\\mid z)=\\int_B K^C_\\eta(z,[t,\\infty))f_\\theta(t\\mid z)\\,dt$. Thus the density on the $\\delta=1$ branch with respect to Lebesgue measure is $f_\\theta(u\\mid z)G_\\eta(u\\mid z)$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F1",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "On the $\\delta=0$ branch, $T>C$ and $U=C$. Tonelli gives $P(U\\in B,\\delta=0\\mid z)=\\int_B K^T_\\theta(z,(c,\\infty))K^C_\\eta(z,dc)=\\int_B S_\\theta(c\\mid z)g_\\eta(z,c)\\,\\nu(dc)$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F1",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The two branch measures are dominated by $\\rho$, so the displayed functions are their densities. The recorded object is one subject's $(Z,U,\\delta)$ and the likelihood is conditional on $Z$, as explicitly declared in [F10]; this bookkeeping adds no scientific truth claim. The parametric experiment and likelihood conventions [F2]–[F3] therefore yield the stated likelihood. Because the parameter space is $\\Theta\\times H$ and the event and censor laws depend on $\\theta$ and $\\eta$ separately, the factors $f_\\theta^\\delta S_\\theta^{1-\\delta}$ and $G_\\eta^\\delta g_\\eta^{1-\\delta}$ separate; only the former depends on $\\theta$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "step 3.2",
+            "F2",
+            "F3",
+            "F10",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For fixed entry, the event kernel given the pre-entry covariates $W$ is $K^T_\\theta(W,\\cdot)$. For random entry, the stated factorization of the pre-entry conditional joint law gives the same event kernel given $Z=(W,L)$ before selection. In either case, conditional on $Z$ and the positive-probability inclusion event $T>L$, the event law assigns a set $A$ probability $K^T_\\theta(W,A\\cap(L,\\infty))/S_\\theta(L\\mid W)$. Conditional independence of $T$ and $C$ given $Z$ means restricting their product law to $T>L$ leaves this truncated event law and the same censor law as a product. The event density is therefore $f_\\theta(u\\mid W)/S_\\theta(L\\mid W)$ for $u>L$, and the conditional survivor is $S_\\theta(u\\mid W)/S_\\theta(L\\mid W)$ for every $u\\ge L$; at $u=L$ this equals $1$, including when the censoring law has an atom at entry. Applying the branch calculations from steps 3.1–4.1 under that product law yields the asserted denominator, once, in either event-status branch.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Every factorization above was conditional on the stated independence, domination, endpoint, and positivity assumptions. The calculations give no evidence that a real censoring, inspection, or entry mechanism satisfies them; an informative mechanism requires its own joint law.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "step 4.1",
+            "step 1.3",
+            "step 5.1",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 covers L=R: the interval probability is F(R)-F(L)=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 permits event/censor time zero; step 1.3 covers L=0 and the continuous model has F(0)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 separately verify the δ=1 event and δ=0 censoring branches."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 permits a fixed censor time represented by a point-mass censor law; step 5.1 excludes a zero-probability entry event."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2, 1.3, 1.4, and 5.1 preserve (L,R], T≤L, T>L, and T<R endpoint conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is used in step 1.1 for conditional versions and step 4.1 for likelihood-density versions; Countable Choice is used separately in steps 1.2 and 1.4 for the Lebesgue–Stieltjes interval/atom clauses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ]
+    },
+    "cex-informative-censoring-does-not-identify-event-law": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "Under **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "model-a-observation",
+          "claim": "Compute the two observed outcomes under Model A.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "model-b-observation",
+          "claim": "Compute the two observed outcomes under Model B.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "truncation-selection-probability",
+          "claim": "Compute the probability of inclusion under left truncation.",
+          "step": "1.3",
+          "inputs": [
+            "A2"
+          ]
+        },
+        {
+          "id": "same-observed-law",
+          "claim": "The two models induce the same distribution of (U,δ).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "truncation-selected-density",
+          "claim": "Compute the selected density and compare it with the population density.",
+          "step": "2.2",
+          "inputs": [
+            "A2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "different-event-laws",
+          "claim": "The event-time distributions differ despite equal observed laws.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "A1"
+          ]
+        },
+        {
+          "id": "counterexample-conclusion",
+          "claim": "Conclude that informative censoring and truncation alter the observed-data law.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both finite models have nonempty two-point event-time supports."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses strictly positive event and censoring times and does not assert a zero-time case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Each event-time law has two atoms; no one-point support or singleton parameter case is claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 make C a deterministic function of T, exhibiting the informative/degenerate conditional censoring law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 apply δ=1{T≤C}, and step 2.2 applies the strict inclusion rule T>1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction uses only two explicitly listed finite probability spaces and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is a one-way implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is a one-way implication, not a biconditional."
+        }
+      ]
+    },
+    "ex-event-time-observation-likelihoods-and-delayed-entry": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "Under **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-likelihood-contributions-under-censoring-and-delayed-entry",
+          "source_section": "Statement",
+          "quote": "For right-censored data $(U,\\delta)$, define the reference measure",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "2.5"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exponential-survival",
+          "claim": "Integrate the exponential density to obtain its CDF and survivor.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "right-censoring-factors",
+          "claim": "Substitute the exponential density and survivor into the right-censor likelihood.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "interval-factor",
+          "claim": "Compute the probability of the interval observation.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "current-status-factors",
+          "claim": "Compute the current-status event and no-event probabilities.",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "delayed-entry-factors",
+          "claim": "Compute the event and censor factors conditional on T>1.",
+          "step": "2.4",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "right-truncation-factor",
+          "claim": "Normalize the event density conditional on T<2.",
+          "step": "2.5",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "compare-observation-schemes",
+          "claim": "Compare the distinct censoring and truncation denominators.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.4",
+            "step 2.5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 uses the interval (1,2]; the same formula gives zero for a degenerate interval L=R."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives F(0)=0 and S(0)=1, so the density/survival convention at time zero is explicit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 separately computes the δ=1 event and δ=0 censor branches."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a fixed censor time C=2, represented by a point-mass censor law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.5 use (L,R], T≤C, T>L, and T<R with the stated strictness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example substitutes into the supplier formulas; all displayed integrals and selection probabilities are explicit and use no new arbitrary-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no biconditional."
+        }
+      ]
+    }
+  }
+}

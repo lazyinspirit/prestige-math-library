@@ -1,0 +1,139 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "16",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "thm-second-order-response-surface-stationary-point-and-classification",
+      "model": "gpt-6-luna",
+      "context_sha256": "fb1865b751f2a851b53ab8d63b5700fdf78b0a649e89e052d06936989a770ed5",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "With k=1, beta=0, B=[1] and R=[0,infinity), x0=0 is a boundary point and x^2>0=m(0) for every feasible x>0. The blanket denial of constrained-optimum consequences in the Statement and step 5.1 is false. Repaired by restricting the strict global ambient inequalities to any region containing x0, preserving the interior saddle conclusion and distinguishing boundary saddles and infeasible points.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-second-order-response-surface-stationary-point-and-classification",
+      "disposition": "repaired",
+      "post_sha256": "6b8b53dec404c78b0d734838d1fac3c0cb4297bcc99a94e4245051fe591732c9",
+      "review_context_sha256": "e8346dece407041bd34c90004f7968f26bf7be70b29cdb2a2e367b808fafd896",
+      "reason": "Checked all five steps and actual supplier interfaces: expansion has quadratic remainder, nonsingular B gives unique stationary point, the real symmetric-matrix iff criterion and real spectral theorem give an orthonormal eigenbasis, and the resulting signed quadratic sum gives strict global extrema or arbitrarily small opposite increments. Step 5.1 now correctly transfers definite extrema to every feasible region containing x0. The saddle restriction to the horizontal axis supplies a boundary exception. Also repaired the nonfatal one-way F3 paraphrase to accurately state its supplier equivalence and identified the standard orthonormal basis. No AC, empirical adequacy, or optimum at an infeasible point is asserted. This is a self-review of the repair, not an independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "def-local-response-surface-model",
+    "ex-saddle-in-second-order-response-surface"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "sme62-step5-initial-r1-u16-boundary-extremum",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:26:49.282844+00:00",
+        "class": "accuracy",
+        "subclass": "false-boundary-disposition",
+        "severity": "fatal",
+        "location": "statement",
+        "subject": "thm-second-order-response-surface-stationary-point-and-classification",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "16",
+        "item_sha256": "6b8b53dec404c78b0d734838d1fac3c0cb4297bcc99a94e4245051fe591732c9",
+        "evidence": "With k=1, beta=0, B=[1] and R=[0,infinity), x0=0 is a boundary point and x^2>0=m(0) for every feasible x>0. The blanket denial of constrained-optimum consequences in the Statement and step 5.1 is false. Repaired by restricting the strict global ambient inequalities to any region containing x0, preserving the interior saddle conclusion and distinguishing boundary saddles and infeasible points.",
+        "source": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u16.json",
+        "repair_cost": "repair+rejudge"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "sme62-step5-initial-r1-u16-symmetric-matrix-fact",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:26:49.282844+00:00",
+        "class": "accuracy",
+        "subclass": "citation-inaccurate",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "thm-second-order-response-surface-stationary-point-and-classification",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "batch": "16",
+        "item_sha256": "6b8b53dec404c78b0d734838d1fac3c0cb4297bcc99a94e4245051fe591732c9",
+        "evidence": "F3 formerly stated only that a self-adjoint operator has a symmetric matrix, but step 3.1 uses the converse. Its actual published supplier states the equivalence. Corrected the fact paraphrase to iff and explicitly identified the standard orthonormal basis; no additional premise or supplier is needed.",
+        "source": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u16.json",
+        "repair_cost": "inline-fix"
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim": "Symmetric nonsingular quadratic stationary point and ambient eigenvalue classification, with correct feasible boundary extrema caveat.",
+    "sources_consulted": [
+      "items/def-local-response-surface-model.md: Definition",
+      "items/prop-standard-coordinate-inner-products.md: Statement and Proof",
+      "items/prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases.md: Statement and Proof",
+      "items/cor-real-spectral-theorem-for-self-adjoint-endomorphisms.md: Statement and Proof"
+    ],
+    "external_source_reading": "None; the quadratic and restriction arguments are familiar and verified directly.",
+    "checks": [
+      "precheck: exit 0, 1 checked, 0 failing",
+      "rendercheck: exit 0, 1 file, all math and frontmatter parsed",
+      "proof-layout after final item edit: exit 0, 1 item, 5 steps, 0 defects",
+      "focused strict proof-contract: exit 0, 0 errors, 0 warnings, 1/1 item checked; shared lock acquired, file reread before edit, checked and released"
+    ],
+    "remaining_obligations": [],
+    "next_action": "Engine collects this report, handles the unchanged consumer metadata quotation, and obtains independent rejudgment; this worker does not certify or launch a cycle.",
+    "contract_path": "research/statistical-models-experiments-62-batch-16.proof-contracts.json",
+    "contract_repair": "Updated only assigned theorem mathematical derivations 3.1 and 5.1, endpoint boundary evidence, and risk-review notes; declarations and dependencies unchanged.",
+    "published_ledger": "No proposed published-ledger update: the three published suppliers were inspected as actual prerequisites and no defect was found in the inspected arguments. No published consumer references the changed theorem in the current item/page search.",
+    "statement_change": "Compared the original and repaired Statement directly: made the already proved global scope explicit and replaced the blanket boundary/exterior denial with feasible definite extrema, boundary saddle qualification, and infeasibility.",
+    "consumer_examination": [
+      {
+        "id": "def-local-response-surface-model",
+        "path": "items/def-local-response-surface-model.md",
+        "affected_use": "Remarks: The stationary-point and eigenvalue classification is proved in [[thm-second-order-response-surface-stationary-point-and-classification]].",
+        "disposition": "unchanged_sound",
+        "reason": "This contextual link asserts the existence of the stationary-point and eigenvalue theorem; those conclusions and all coefficient/region conventions remain intact. It uses no boundary denial. Definition unchanged; no next hop.",
+        "route": "ordinary frontier owner accounting; no item repair needed"
+      },
+      {
+        "id": "ex-saddle-in-second-order-response-surface",
+        "path": "items/ex-saddle-in-second-order-response-surface.md",
+        "affected_use": "Facts F2 and Verification 1.1-2.1 invoke x0=-B^{-1}beta/2 and the mixed-sign saddle classification with x0=0 in int([-1,1]^2).",
+        "disposition": "unchanged_sound_metadata_quote_refresh",
+        "reason": "Eigenvalues 1 and -1, stationary origin, and feasible arbitrarily small axis increments retain exactly the theorem hypotheses and preserved interior conclusion. No statement or proof repair is necessary. Its owning contract F2 quotation contains the supplier original Statement; that historical excerpt now requires a current quotation refresh by its frontier owner, without changing the consumer item.",
+        "metadata_path": "research/statistical-models-experiments-62-batch-16.proof-contracts.json: contracts.ex-saddle-in-second-order-response-surface.citations[F2].quote",
+        "route": "ordinary frontier owner metadata integration; no Step-5 item carrier edit by this unit"
+      }
+    ],
+    "page_examination": [
+      {
+        "path": "library/statistical-models-and-experiments/response-surfaces-and-optimal-design.md",
+        "affected_use": "The second-order result locates and classifies the stationary point of the fitted polynomial, with no physical or out-of-region guarantee.",
+        "disposition": "unchanged_sound",
+        "reason": "The page promises polynomial classification and denies empirical extrapolation; the repair strengthens the feasible boundary guarantee and preserves that promise."
+      },
+      {
+        "path": "library/statistical-models-and-experiments/response-surfaces-and-optimal-design-examples.md",
+        "affected_use": "The examples verify a saddle point from its two principal curvature directions.",
+        "disposition": "unchanged_sound",
+        "reason": "The saddle example still uses two feasible directions through an interior point; the page makes no boundary claim."
+      }
+    ]
+  }
+}

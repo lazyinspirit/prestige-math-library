@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "status": "proposed-only-not-applied-or-executed",
+  "finite_smoke_replacements": [
+    {
+      "subject": "cex-rademacher-errors-do-not-give-exact-regression-t",
+      "contract_path": "research/statistical-models-experiments-62-batch-3.proof-contracts.json",
+      "old": {
+        "check": "four-outcome-rademacher-pivot",
+        "support": [
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "asserts": "For each support point the pivot equals zero: equal errors give RSS=0 and the defined zero branch, while opposite errors give beta-hat=0 and denominator one."
+      },
+      "replacement": {
+        "check": "four-outcome-rademacher-pivot",
+        "support": [
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            1
+          ]
+        ],
+        "asserts": "Since $X^TX=2$, $\\widehat\\beta=(\\epsilon_1+\\epsilon_2)/2$ and $RSS=(\\epsilon_1-\\epsilon_2)^2/2$. If the errors agree, then $RSS=0$ and the pivot is zero by its definition. If they disagree, then $\\widehat\\beta=0$, $RSS=2$, and the pivot denominator is $s\\sqrt{(X^TX)^{-1}}=\\sqrt2\\sqrt{1/2}=1$, so the pivot is again zero. These cases exhaust the four outcomes. [given, construct, algebra]"
+      },
+      "anchor_exists_by_literal_inspection": true,
+      "registry_entry": "four-outcome-rademacher-pivot"
+    },
+    {
+      "subject": "ex-gaussian-regression-mean-and-prediction-intervals",
+      "contract_path": "research/statistical-models-experiments-62-batch-3.proof-contracts.json",
+      "old": {
+        "check": "four-row-regression-arithmetic",
+        "design": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ],
+        "response": [
+          1,
+          2,
+          2,
+          4
+        ],
+        "asserts": "X^T X=[[4,6],[6,14]], inverse=(1/20)[[14,-6],[-6,4]], X^T Y=[9,18], beta-hat=[0.9,0.9], RSS=0.70, s^2=0.35, MLE variance=0.175, h0=0.30."
+      },
+      "replacement": {
+        "check": "four-row-regression-arithmetic",
+        "design": [
+          [
+            1,
+            0
+          ],
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ]
+        ],
+        "response": [
+          1,
+          2,
+          2,
+          4
+        ],
+        "asserts": "Direct multiplication gives $X^TX=\\begin{pmatrix}4&6\\\\6&14\\end{pmatrix}$, $(X^TX)^{-1}=\\frac1{20}\\begin{pmatrix}14&-6\\\\-6&4\\end{pmatrix}$, and $X^TY=(9,18)^T$. Hence $\\widehat\\beta=(0.9,0.9)^T$, the fitted values are $(0.9,1.8,2.7,3.6)^T$, and $RSS_F=0.1^2+0.2^2+(-0.7)^2+0.4^2=0.70$. Thus $\\nu=2$, $s^2=0.35$, while $\\widehat\\sigma^2_{\\rm ML}=RSS_F/n=0.175$. [given, algebra]\n\n2.1 For $x_0=(1,2)^T$, multiplication by $(X^TX)^{-1}$ gives $h_0=x_0^T(X^TX)^{-1}x_0=0.30$ and the fitted mean $x_0^T\\widehat\\beta=2.7$. With $q=t_{2,0.975}$, [F1] gives the slope interval $0.9\\pm q\\sqrt{0.35\\cdot0.20}$, the mean-response interval $2.7\\pm q\\sqrt{0.35\\cdot0.30}$, and the prediction interval $2.7\\pm q\\sqrt{0.35\\cdot1.30}$. The prediction half-width is $\\sqrt{13/3}$ times the mean-response half-width, so it is wider because it includes the future response error. [F1, step 1.1, algebra]",
+        "x0": [
+          1,
+          2
+        ]
+      },
+      "anchor_exists_by_literal_inspection": true,
+      "registry_entry": "four-row-regression-arithmetic"
+    }
+  ],
+  "registry_code_artifact": "research/statistical-models-experiments-62-owner-regression-finite-smoke-registry-proposal.mjs",
+  "registry_integration": "Insert the two named property entries into existing makeChecks() without dropping existing registry entries or changing runSmoke. Existing smokeResult helper is used. Proposed artifact is not a standalone runnable test.",
+  "dependency_patch": {
+    "subject": "ex-zero-exposure-censored-mle-boundary",
+    "source": "items/ex-zero-exposure-censored-mle-boundary.md",
+    "add_deps": [
+      "def-measure-with-density"
+    ],
+    "manifest": "research/statistical-models-experiments-62-batch-29.pages.json",
+    "manifest_add_deps": [
+      "def-measure-with-density"
+    ],
+    "contract": "research/statistical-models-experiments-62-batch-29.proof-contracts.json",
+    "existing_citation_to_preserve": {
+      "fact": "A1",
+      "source": "def-measure-with-density",
+      "source_section": "Definition",
+      "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+      "uses": [
+        "1.1",
+        "1.2"
+      ]
+    },
+    "existing_quote_matches_actual_definition": true,
+    "no_contract_citation_addition_needed": true,
+    "mathematical_reason": "A1 defines both fixed censoring laws as measures with density 1_{c} relative to delta0+delta5. The density is measurable, finite, and integrates over Borel A to 1_A(c), so it reproduces delta_c and equals1 at the observed c. The same fixed finite dominating measure serves both designs, independently of lambda. Steps1.1 and1.2 require the positive censor factors1. No additional mathematical source repair is necessary."
+  },
+  "formatting_note": "Root formatter may change line breaks or delimiters; preserve source meaning and obtain final exact asserts from the formatted steps before metadata recertification."
+}

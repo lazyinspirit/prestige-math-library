@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "kind": "finite-smoke-four-spatial-witness-proposal",
+  "run": "statistical-models-experiments-62",
+  "apply_by": "root-only",
+  "base_contract_raw_sha256": "e30c695fea11cb6a20a5dae4183745d486f25b0e724f2d4ec6f59d811b7da496",
+  "registry_target": "tools/finite-smoke.mjs",
+  "registry_insertion_point": "Immediately inside makeChecks() returned registry object, before existing first entry. Uses existing smokeResult helper; no extra dependencies.",
+  "registry_fragment": "research/statistical-models-experiments-62-owner-spatial-finite-smoke/registry-insertion-proposal.txt",
+  "contract_replacements": [
+    {
+      "id": "ex-homogeneous-poisson-window-mle-boundary",
+      "field": "finite_smoke",
+      "old": [
+        {
+          "check": "positive-count-square-window",
+          "input": {
+            "window": "[0,2]^2",
+            "volume": 4,
+            "count": 3
+          },
+          "asserts": "n/v=3/4; the homogeneous log likelihood n log \u03c1\u2212v\u03c1 is maximized at \u03c1=3/4."
+        },
+        {
+          "check": "empty-count-boundary",
+          "input": {
+            "window": "[0,2]^2",
+            "volume": 4,
+            "count": 0
+          },
+          "asserts": "The normalized log likelihood relative to unit Poisson is 4(1\u2212\u03c1); it increases to 4 as \u03c1\u21930 and equals 4 at \u03c1=0 only when admitted."
+        }
+      ],
+      "new": [
+        {
+          "check": "positive-count-square-window",
+          "volume": 4,
+          "count": 3,
+          "asserts": "For $n=3$, [F1] gives $\\widehat\\rho=n/|W|=3/4$."
+        },
+        {
+          "check": "empty-count-boundary",
+          "volume": 4,
+          "count": 0,
+          "asserts": "For $n=0$, that log likelihood reduces to $-4\\rho$ for $\\rho>0$; it tends to $0$ as $\\rho\\downarrow0$ and is strictly smaller at every positive rate."
+        }
+      ]
+    },
+    {
+      "id": "ex-strauss-exact-likelihood-versus-pseudolikelihood",
+      "field": "finite_smoke",
+      "old": [
+        {
+          "check": "no-interaction-ratio",
+          "input": {
+            "volume": 4,
+            "beta": 2,
+            "gamma": 1
+          },
+          "asserts": "Exact and pseudo likelihood observation ratios agree; their ratio is the constant e^4."
+        },
+        {
+          "check": "soft-interaction-singleton-ratio",
+          "input": {
+            "volume": 4,
+            "beta": 2,
+            "gamma": 0.5,
+            "radius": 0.5,
+            "a_lower_bound": "4/25"
+          },
+          "asserts": "Exact ratio g(\u03b4x)/g(0)=2; pseudo ratio is 2 exp(a), hence is strictly greater than 2 exp(4/25)>2."
+        }
+      ],
+      "new": [
+        {
+          "check": "no-interaction-ratio",
+          "volume": 4,
+          "beta": 2,
+          "gamma": 1,
+          "asserts": "The ratio of exact to pseudo likelihood is the observation-independent constant $e^4$."
+        },
+        {
+          "check": "soft-interaction-singleton-ratio",
+          "volume": 4,
+          "beta": 2,
+          "gamma": 0.5,
+          "radius": 0.5,
+          "asserts": "The square $[4/5,6/5]^2$ lies inside the radius-$1/2$ ball about $x$, so $a\\ge4/25>0$ by [F12]. Hence $\\exp\\{\\beta(1-\\gamma)a\\}>1$ by [F11], and the pseudo ratio is strictly larger than the exact ratio $\\beta$."
+        }
+      ]
+    }
+  ],
+  "required_parameters": "Use top-level finite_smoke object parameters. Strict explicit fixture validation matches the finite square/empty/singleton models; defaults allow ordinary registry self-test but are not relied on by the contracts. Nested input is not consumed by runSmoke.",
+  "limitations": "Finite witness computations only; positive-rate grid/score signs are not a proof of all-rate maximization, and disk/square numerical arithmetic does not certify the full theorem. Existing local proofs remain mandatory.",
+  "source_changes_required": [],
+  "obligations_preserved": 4,
+  "checks_executed": false
+}

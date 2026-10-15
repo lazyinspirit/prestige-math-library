@@ -1,0 +1,2870 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62-batch-7",
+  "scope": [
+    "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent",
+    "thm-nondegenerate-multivariate-normal-law-has-density",
+    "def-error-contrast-matrix",
+    "def-known-covariance-generalized-least-squares-estimator",
+    "def-linear-mixed-model",
+    "def-gaussian-linear-mixed-model",
+    "def-longitudinal-missingness-mechanisms",
+    "lem-error-contrast-matrix-exists",
+    "lem-gls-information-matrix-is-positive-definite",
+    "lem-marginal-covariance-of-linear-mixed-model",
+    "lem-reml-error-contrast-covariance-is-positive-definite",
+    "lem-gaussian-error-contrast-is-multivariate-normal",
+    "thm-gaussian-conditional-law-of-random-effects",
+    "thm-variance-component-identifiability-iff-covariance-map-injective",
+    "def-restricted-maximum-likelihood-error-contrasts",
+    "thm-known-covariance-gls-is-blue",
+    "lem-reml-error-contrast-basis-change-is-parameter-free",
+    "thm-known-covariance-blup-for-random-effects",
+    "cex-linear-mixed-model-covariance-does-not-imply-ignorable-dropout",
+    "ex-random-intercept-intraclass-correlation",
+    "cex-two-visits-alias-random-slope-and-residual-variance"
+  ],
+  "contracts": {
+    "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-non-negative-square-root-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be non-negative. Then there exists a unique non-negative operator\n$R:V\\to V$ such that",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent-step-1-1",
+          "claim": "Let $S^{1/2}$ and $T^{1/2}$ be the nonnegative square roots from [F2]. The block matrix $A=\\operatorname{diag}(S^{1/2},T^{1/2})$ is nonnegative and satisfies $A^2=\\operatorname{diag}(S,T)$, so uniqueness in [F2] makes $A$ the nonnegative square root of the joint covariance. This argument also applies when either block is singular.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent-step-2-1",
+          "claim": "By [A1] and [F1], the joint law is the law of $(m_1,m_2)+A Z$ for a vector $Z$ with independent standard-normal coordinates. Partition those coordinates into vectors $Z_1,Z_2$ of the matching dimensions. Their sigma-algebras are independent by [F3], and the separate affine maps $m_1+S^{1/2}Z_1$ and $m_2+T^{1/2}Z_2$ remain independent by [F4]. Hence the coordinate blocks of the constructed vector are independent.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent-step-3-1",
+          "claim": "Any jointly multivariate-normal vector with the stated mean and covariance has this constructed law by the uniqueness clause of [F5]. Independence is a property of the joint law, so $U_1$ and $U_2$ are independent.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns two finite coordinate blocks; no empty block convention is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If S=0 or T=0, its square root block is zero and the construction in steps 1.1\u20132.1 still separates the two coordinate blocks."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The square-root and independent-coordinate argument applies to one coordinate in either block. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singular covariance blocks, including zero blocks, are explicitly allowed and the block-diagonal square-root construction still applies. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no parameter interval or endpoint in this independence statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is stated and used to realize the independent normal coordinates. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement proves zero cross-covariance implies independence for the stipulated jointly Gaussian blocks; it does not state independence characterizes joint Gaussianity or supply a converse theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement proves zero cross-covariance implies independence for the stipulated jointly Gaussian blocks; it does not state independence characterizes joint Gaussianity or supply a converse theorem."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed steps 1.1\u20133.1 and exact supplier statements: the PSD block square root is block diagonal by uniqueness; independent standard-normal coordinate groups remain independent under their separate affine maps; the multivariate CF lemma identifies the constructed joint law. Singular and zero blocks require no inverse. AC supplies Gaussian realization and uniqueness; no converse or empty-block assertion is used."
+      }
+    },
+    "thm-nondegenerate-multivariate-normal-law-has-density": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Then $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\nthe product measure $\\lambda_m \\times \\lambda_n$ and the Euclidean Lebesgue\nmeasure $\\lambda_{m+n}$ agree on every Borel subset of $\\mathbb R^{m+n}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-determinant-of-transpose",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$, every commutative ring $R$, and every $A\\in M_n(R)$,\n$$\\det(A^{\\mathsf T})=\\det(A).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Statement",
+          "quote": "If $A=(a_{ij})\\in M_n(R)$ is upper or lower triangular over a commutative ring, with $n\\ge1$, then\n$$\\det(A)=\\prod_{i<n}a_{ii}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "source_section": "Statement",
+          "quote": "Assume AC. Then countable choice holds. Moreover, if $R\\subseteq X\\times X$ is serial on a nonempty set X and $a\\in X$, there is a sequence $(x_n)_{n\\ge0}$ with $x_0=a$ and $x_n R x_{n+1}$ for every n. Thus the countable and dependent choices required by the probability-product suppliers are available under AC.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-nondegenerate-multivariate-normal-law-has-density-step-1-1",
+          "claim": "By [A1], take $d$ independent standard-normal coordinates $Z_1,\\ldots,Z_d$. Their joint law is the product of the coordinate laws by [F2]. Thus, using [F1] and [F3], the vector $Z=(Z_1,\\ldots,Z_d)^T$ has Lebesgue density $f_Z(z)=(2\\pi)^{-d/2}\\exp(-z^Tz/2).$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1"
+          ]
+        },
+        {
+          "id": "thm-nondegenerate-multivariate-normal-law-has-density-step-2-1",
+          "claim": "Let $\\Sigma=LL^T$ be the factorization from [F5]. For any $u\\in\\mathbb R^d$, the scalar $u^TLZ$ is a finite linear combination of the independent standard normals. By [F6] its characteristic function is $\\prod_{k=1}^d \\exp\\!\\left(-s^2(L^Tu)_k^2/2\\right) =\\exp\\!\\left(-s^2u^T\\Sigma u/2\\right),$ so [F7] gives $u^TLZ\\sim N(0,u^T\\Sigma u)$. Therefore $m+LZ$ has all the projection laws defining $N_d(m,\\Sigma)$, and [F8] identifies its law with that of $X$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-nondegenerate-multivariate-normal-law-has-density-step-3-1",
+          "claim": "Let $T(z)=m+Lz$. It is a $C^1$ diffeomorphism with Jacobian determinant $\\det L>0$. For any Borel set $E\\subseteq\\mathbb R^d$, define the nonnegative Borel function $g(x)=\\mathbf1_E(x)f_Z(L^{-1}(x-m))/\\det L$. By [F4] and the countable choice supplied by [A1], $\\int_E f_Z(L^{-1}(x-m))(\\det L)^{-1}\\,dx =\\int_{T^{-1}(E)} f_Z(z)\\,dz =\\mathbb P(TZ\\in E).$ Thus the density in step 2.1 is $f_Z(L^{-1}(x-m))(\\det L)^{-1}$. The determinant is positive because $L$ is triangular with positive diagonal.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "thm-nondegenerate-multivariate-normal-law-has-density-step-4-1",
+          "claim": "Since $\\det\\Sigma=\\det(LL^T)=(\\det L)^2$ by [F9], and $(L^{-1})^TL^{-1}=\\Sigma^{-1}$, substituting the expression for $f_Z$ from step 1.1 into step 3.1 gives exactly $f_{m,\\Sigma}(x)$.",
+          "step": "4.1",
+          "inputs": [
+            "F9",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes dimension d\u22651, so the zero-dimensional law is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: \u03a3=0 is excluded because the theorem assumes \u03a3 positive definite; the final Remark states that singular laws are not covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=1, Cholesky is the positive scalar standard deviation and the formula reduces to the scalar normal density. See step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Positive definiteness excludes zero or singular covariance; the final Remark expressly leaves singular laws outside the density formula. See step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no parameter interval; positive definiteness is the strict domain condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC supplies CC and DC for the independent-normal construction and change-of-variables supplier. See step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement constructs a density from a positive-definite Gaussian law under AC; it does not claim an arbitrary density implies Gaussianity or positive definiteness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement constructs a density from a positive-definite Gaussian law under AC; it does not claim an arbitrary density implies Gaussianity or positive definiteness."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "scalar-specialization",
+          "calculation": "For d=1 and \u03a3=[\u03c3\u00b2] with \u03c3>0, Cholesky gives L=[\u03c3] and the formula becomes (\u03c3\u221a(2\u03c0))\u207b\u00b9 exp(\u2212(x\u2212m)\u00b2/(2\u03c3\u00b2)).",
+          "result": "The displayed multivariate formula reduces to the scalar normal density.",
+          "evidence": "steps 2.1\u20134.1"
+        }
+      ],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed steps 1.1\u20134.1 and all exact fact suppliers: independent scalar densities give the finite product density by Tonelli and Euclidean product measure; scalar CF uniqueness identifies all projections of m+LZ and the multivariate CF lemma identifies its law. Cholesky has positive diagonal, so the affine diffeomorphism has positive determinant; change of variables gives the density and det Sigma=(det L)^2. d=1 works; singular covariance is explicitly excluded. AC supplies CC/DC, product realization and scalar/vector uniqueness. Duke Lecture 4 p.2 states the equivalent Gaussian log density; official PDF retrieved directly and pp.2\u20135 read after browser access failed."
+      }
+    },
+    "def-error-contrast-matrix": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: p<n ensures n-p>=1, so the declared column basis cannot be an empty list; p=n is explicitly excluded in the Remarks."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: every column basis is linearly independent and its size n-p is positive, so the zero matrix cannot be an error-contrast matrix."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition permits n\u2212p=1, giving a single nonzero contrast coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: full column rank X and basis columns of its perpendicular space are required. A rank-deficient design would change that dimension and is not admitted by this convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The p=n endpoint is excluded because the definition requires p<n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition fixes a basis of one finite-dimensional Euclidean subspace; the existence lemma chooses its finite list of n-p basis vectors, not elements of an arbitrary indexed family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition adopts columns forming a basis of col(X) perpendicular as its convention; the subsequent full-column-rank and X-transpose-K identities are consequences, not a claimed two-way theorem about arbitrary matrices."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition adopts columns forming a basis of col(X) perpendicular as its convention; the subsequent full-column-rank and X-transpose-K identities are consequences, not a claimed two-way theorem about arbitrary matrices."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "def-known-covariance-generalized-least-squares-estimator": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition: inherited n,p>=1. The GLS formula is a specified estimator, not an existence claim for an empty observation sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: A zero design has no inverse information matrix, so it is outside this definition; a zero realized response is permitted and maps to the zero estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: with n=p=1, X=(x) of full rank means x is nonzero and V=(v) has v>0; the displayed estimator becomes Y/x and the information is x squared/v."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Definition: Both V inverse and information inverse are part of the formula; positive V and full column rank exclude a singular instance of either inverse."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Saturated n=p is allowed: the full-rank square design gives the unique exact-fit coefficient X inverse Y."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition: Only finite matrix products and uniquely determined inverses specify the estimator, so no family of witness choices is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies one estimator using an invertible information matrix; no converse characterization of all unbiased or best estimators is asserted there."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies one estimator using an invertible information matrix; no converse characterization of all unbiased or best estimators is asserted there."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "def-linear-mixed-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition requires finite n,p>=1, so the observed vector is nonempty. The latent dimension q>=0 may equal zero; this is a finite dimension convention, not an interval limit for covariance parameters."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition permits q=0, so the random-effect vector may have zero coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits n=1 and q=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition boundary: The Remarks explicitly allow singular G and singular R."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition requires finite n,p>=1, so the observed vector is nonempty. The latent dimension q>=0 may equal zero; this is a finite dimension convention, not an interval limit for covariance parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Definition specifies one probability space and finite-dimensional random vectors; it does not assemble random effects by choosing elements of an arbitrary nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition stipulates the observation equation, centered independent random effects and residuals; the marginal covariance identity is not asserted to imply those latent assumptions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition stipulates the observation equation, centered independent random effects and residuals; the marginal covariance identity is not asserted to imply those latent assumptions."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "def-gaussian-linear-mixed-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: inherited n>=1 makes the concatenated Gaussian vector W have q+n>=1 coordinates even if the latent random-effect dimension q is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition and Remarks: zero G or zero R is an allowed singular covariance block under the multivariate-normal supplier; this definition does not use an inverse or demand a density."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n=1 and q=0 give the scalar Gaussian residual branch. Its mean is zero and its covariance is the inherited one-by-one R, including the zero-variance law."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition boundary: The Remarks explicitly permit singular G or R; later inverses and densities require separate hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition specifies finite latent and observed dimensions, not an interval parameter or a limiting family. Gaussianity of W is the added assumption throughout those dimensions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition states AC as an additional assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition adds joint Gaussianity of the concatenated latent vector to the moment model; it does not infer this full law from covariance blocks or scalar marginal normality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition adds joint Gaussianity of the concatenated latent vector to the moment model; it does not infer this full law from covariance blocks or scalar marginal normality."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ]
+    },
+    "def-longitudinal-missingness-mechanisms": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition permits the all-missing pattern and defines monotone dropout to include an empty observed segment. The Statement/Definition states this case explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Pattern probabilities may be zero and the definition is a kernel on the finite pattern set. The Statement/Definition states this case explicitly."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinct one-parameter endpoint occurs in this definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition imposes no nondegeneracy condition, so a deterministic observation kernel is allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition boundary: The pattern set includes all-zero and all-one observation patterns."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A finite set of patterns is specified; no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition distinguishes conditional-law assumptions MCAR and MAR and the residual MNAR category; it does not claim an observed covariance pattern is equivalent to any missingness mechanism."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition distinguishes conditional-law assumptions MCAR and MAR and the residual MNAR category; it does not claim an observed covariance pattern is equivalent to any missingness mechanism."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-error-contrast-matrix-exists": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-double-orthogonal-complement-and-dimension",
+          "source_section": "Statement",
+          "quote": "For every subspace $W$ of a finite-dimensional inner product space $V$,\n\n$$W^{\\perp\\perp}=W,\\qquad \\dim W+\\dim W^\\perp=\\dim V.$$\n\nThese formulas include $W=0$ and $W=V$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fixed-design-linear-regression-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ be integers and let $X\\in\\mathbb R^{n\\times p}$ be a fixed matrix.\nA **fixed-design first-moment linear regression model** is a parametric\nstatistical experiment on $(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ with parameter\nset $\\mathbb R^p$, laws $(P_\\beta)_{\\beta\\in\\mathbb R^p}$, and observed vector\n$Y(y)=y$, such that every coordinate of $Y$ is integrable under $P_\\beta$ and\n$$\\mathbb E_\\beta Y=X\\beta\\qquad(\\beta\\in\\mathbb R^p).$$\nHere $\\mathcal B(\\mathbb R^n)$ is the Borel sigma-algebra, and expectation is\ntaken under the particular law $P_\\beta$. The residual vector\n$\\epsilon_\\beta:=Y-X\\beta$ therefore has coordinatewise mean zero. The phrase\n**fixed design** means that $X$ is held constant in this experiment; it carries\nno probability law or assignment mechanism for $X$.\n\nThis definition states only the first-moment model. It imposes no covariance,\nindependence, or Gaussian assumption. Such assumptions must be stated where\nused.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\nA subset $B \\subseteq V$ is a **basis of $V$** when\n\n- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).\n\n**The empty set is a basis of the zero space, and of nothing else.**\n$\\varnothing$ is linearly independent ([[def-linear-independence]]) and\n$\\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[lem-span-is-the-set-of-linear-combinations]]), so $\\varnothing$ is a basis of\n$V$ exactly when $V = \\{0_V\\}$. This is the case $n = 0$ from which every\ninduction on this page starts, and it is a genuine case rather than a convention.\n\n### Ordered bases\n\nAn **ordered basis of $V$** is a finite list $v : n \\to V$, with $n \\in\n\\mathbb{N}$ and $n = \\{0, \\dots, n-1\\}$ the von Neumann natural\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), such that $v$ is\ninjective ([[def-injection-surjection-bijection]]) and its image $v[n]$ is a\nbasis of $V$.\n\nBy claim 6 of [[lem-independent-list-is-injective]], a list is linearly\nindependent exactly when it is injective with linearly independent image, so an\nordered basis is equally described as a **linearly independent list $v : n \\to V$\nwith $\\operatorname{span}(v[n]) = V$**: the injectivity does not have to be\nimposed separately. The empty list is the ordered basis of the zero space.\n\nAn ordered basis is a list, so it carries an order; a basis is a set, so it does\nnot. Reordering an ordered basis gives a different ordered basis with the same\nimage, and the coordinates of\n[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] are attached to the\nlist, not to the set.\n\n### Bases of a linear subspace\n\nLet $U$ be a linear subspace of $V$ ([[def-linear-subspace]]), which is itself a\nvector space over $F$, with the addition, the zero vector and the scalar\nmultiplication of $V$ restricted to $U$. For $A \\subseteq U$ the two readings of\n\"$A$ is a basis\" \u2014 computed inside $U$, or computed inside $V$ \u2014 agree, so the\nphrase needs no disambiguation below.\n\n- **Independence agrees.** The finite sums $\\sum_{i<n}\\lambda_i a_i$ of a list\n  $a : n \\to U$ are given by the same recursion in $U$ as in $V$\n  ([[def-monoid-finite-product]]), the base value $0_V$ and the operation $+$\n  being literally those of $V$ ([[def-linear-subspace]]). So a list into $U$ has\n  the same sums whichever space it is read in, and the vanishing condition of\n  [[def-linear-independence]] is the same condition in both.\n- **The span agrees.** A subset of $U$ is a linear subspace of $U$ exactly when it\n  is a linear subspace of $V$, conditions (W1), (W2), (W3) being the same\n  conditions in either reading. Now $\\operatorname{span}_V(A) \\subseteq U$, since\n  $U$ is a linear subspace of $V$ containing $A$ and the span is contained in\n  every such subspace; so $\\operatorname{span}_V(A)$ is a linear subspace of $U$\n  containing $A$, whence $\\operatorname{span}_U(A) \\subseteq \\operatorname{span}_V(A)$.\n  Conversely $\\operatorname{span}_U(A)$ is a linear subspace of $V$ containing\n  $A$, whence $\\operatorname{span}_V(A) \\subseteq \\operatorname{span}_U(A)$. The\n  two are therefore equal, and we write $\\operatorname{span}(A)$ for both.\n\nConsequently $A \\subseteq U$ is a basis of the vector space $U$ if and only if\n$A$ is linearly independent as a subset of $V$ and $\\operatorname{span}(A) = U$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dimension",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\n$V$ is **finite-dimensional over $F$** when it has a **finite** basis\n([[def-linear-basis]], [[def-countable]]): some basis $B$ of $V$ satisfies\n$B \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-equinumerous]]).\n\nFor such a $V$, the **dimension of $V$ over $F$**, written $\\dim_F V$, is that\n$n$:\n\n$$\\dim_F V \\;:=\\; \\text{the unique } n \\in \\mathbb{N} \\text{ such that } V \\text{ has a basis } B \\text{ with } B \\approx n .$$\n\n**This is well defined.** Existence of such an $n$ is the hypothesis, together\nwith the fact that a finite set is equinumerous with exactly one natural number\n([[lem-pigeonhole]], claim 3). Uniqueness is\n[[thm-any-two-finite-bases-have-the-same-size]]: two bases of $V$ with $n$ and\nwith $m$ elements force $n = m$. That theorem is therefore a **prerequisite** of\nthis definition, not a later justification of it, and it is listed in `deps`.\n\n$V$ is **infinite-dimensional over $F$** when it is not finite-dimensional over\n$F$, that is, when $V$ has **no** finite basis. No number is attached to such a\nspace here: the symbol $\\dim_F V$ is defined only in the finite-dimensional case,\nand the expression $\\dim_F V = \\infty$ is not used.\n\n**The zero space.** $\\varnothing$ is a basis of $\\{0_V\\}$\n([[def-linear-basis]]) and $\\varnothing \\approx 0$, so $\\{0_V\\}$ is\nfinite-dimensional with $\\dim_F \\{0_V\\} = 0$. Conversely a space of dimension $0$\nhas a basis $B \\approx 0$, that is $B = \\varnothing$, and then\n$V = \\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[def-linear-combination-and-span]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-error-contrast-matrix",
+          "source_section": "Definition",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$ have full column rank, with $p<n$, and let $\\operatorname{col}(X)^\\perp$ denote the orthogonal complement of its column space in Euclidean $\\mathbb R^n$ ([[def-orthogonal-complement]]). An **error-contrast matrix** for $X$ is a matrix $K\\in\\mathbb R^{n\\times(n-p)}$ whose columns form a basis of $\\operatorname{col}(X)^\\perp$. Thus $K$ has full column rank and $X^TK=0$, so $K^TY$ is an $(n-p)$-dimensional vector of linear contrasts that annihilate $X\\beta$. Such a matrix exists by [[lem-error-contrast-matrix-exists]].\n\nThis column-basis convention makes the product $K^TY$ dimensionally defined. The Gaussian restricted-likelihood definition below fixes one such $K$ independently of the covariance parameter.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $W=\\operatorname{col}(X)$. By [A1] and [F2], the columns of $X$ form a basis of $W$, so $\\dim W=p$. Applying [F1] gives $\\dim W^\\perp=n-p$; by [F2], this means $W^\\perp$ has a basis with $n-p$ elements.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $W^\\perp$ has dimension $n-p$, [F2] gives a basis $k_1,\\ldots,k_{n-p}$ of $W^\\perp$. Put these vectors into the columns of $K$. The columns are independent and span $W^\\perp$, so $K$ has full column rank.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every column $k_\\ell$ is orthogonal to each column of $X$, hence $X^T k_\\ell=0$. Thus $X^T K=0$ and $K$ satisfies the error-contrast definition [F3]. This proves existence.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes p\u22651 and p<n, so no empty design or zero-dimensional contrast case is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The strict inequality p<n ensures n-p\u22651, so the constructed contrast basis is nonempty. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When n\u2212p=1, step 2.1 chooses a one-vector basis of the complement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No covariance or probability distribution occurs in this algebraic existence result."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The excluded endpoint p=n would give no nonzero contrast columns; the hypothesis is p<n. See step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The basis is a single finite-dimensional basis whose existence follows from finite dimension; no arbitrary-family choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is existence of a basis matrix for a full-column-rank design with p<n; it asserts no equivalence between existence of some annihilating matrix and the design hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is existence of a basis matrix for a full-column-rank design with p<n; it asserts no equivalence between existence of some annihilating matrix and the design hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed steps 1.1\u20133.1: full-rank columns form a p-element basis of col(X); the exact orthogonal-complement dimension theorem gives dimension n-p and hence a finite basis. Columns of that basis give the stated n by (n-p) matrix and X^T K=0. p<n excludes zero-dimensional contrasts; choosing a single finite basis uses no arbitrary-index AC. Duke Lecture 4 p.5 confirms the column contrast convention C^T Y and C^T X=0."
+      }
+    },
+    "lem-gls-information-matrix-is-positive-definite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-gls-information-matrix-is-positive-definite-step-1-1",
+          "claim": "By [A1] and [F1], write $V=LL^T$ with $L$ invertible. Hence $V^{-1}=L^{-T}L^{-1}$ and $V^{-1}$ is symmetric.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-gls-information-matrix-is-positive-definite-step-2-1",
+          "claim": "For any nonzero $c\\in\\mathbb R^p$, full column rank gives $Xc\\ne0$, so $L^{-1}Xc\\ne0$. Therefore $c^TX^TV^{-1}Xc=(L^{-1}Xc)^T(L^{-1}Xc)>0$. The matrix is symmetric by step 1.1, proving positive definiteness and invertibility.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement and step 1.1: inherited n,p>=1. The tested information quadratic form has coefficient space of dimension p>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: The zero coefficient has quadratic form zero and is not a counterexample to positive definiteness, which tests only nonzero coefficients; full rank sends every such coefficient to nonzero Xc."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For p=1 the proof reduces to the positive scalar quadratic form in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement and step 1.1: A rank-deficient X could annihilate a nonzero coefficient and defeat the strict inequality; the full-column-rank hypothesis explicitly rules this out."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: The proof uses rank X rather than the stricter REML inequality p<n, so n=p is still covered by its positive quadratic form."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement and step 1.1: Fixing a nonzero coefficient and evaluating its positive quadratic form is a universal test, not a selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement derives positivity of X-transpose-V-inverse-X from full column rank and positive V; it asserts no converse recovering both hypotheses from the information matrix."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement derives positivity of X-transpose-V-inverse-X from full column rank and positive V; it asserts no converse recovering both hypotheses from the information matrix."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-marginal-covariance-of-linear-mixed-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-mixed-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ and $q\\ge0$ be finite integers. A **finite-dimensional linear mixed model** on one probability space consists of fixed matrices $X\\in\\mathbb R^{n\\times p}$ and $Z\\in\\mathbb R^{n\\times q}$, a fixed parameter $\\beta\\in\\mathbb R^p$, and square-integrable random vectors $b\\in\\mathbb R^q$ and $\\varepsilon\\in\\mathbb R^n$ such that\n$$Y=X\\beta+Zb+\\varepsilon,\\qquad \\mathbb E b=0,\\qquad \\mathbb E\\varepsilon=0,\\qquad \\operatorname{Cov}(b)=G,\\qquad \\operatorname{Cov}(\\varepsilon)=R,$$\nwhere $b$ and $\\varepsilon$ are independent random elements. Here $G$ and $R$ are the resulting symmetric positive-semidefinite covariance matrices. The fixed-design convention for $X$ and the first-moment regression model is that of [[def-fixed-design-linear-regression-model]]. The explicit scientific record of units, quantities, observation mechanism, and adequacy assumptions is required by [[def-scientific-statistical-model-contract]].\n\nFor longitudinal data, let $j$ index subjects and let $i\\in S_j$ index the visits scheduled for subject $j$. A row of $Y$, $X$, and $Z$ corresponds to one observed subject\u2013visit pair $(j,i)$; the time $t_{ji}$ is measured from a stated origin. Blocks of $b$ may represent subject-specific latent effects, while $R$ records the residual covariance across observed rows. If a visit pattern is fixed or conditioned on, the corresponding rows are selected from the scheduled vectors and matrices. If the pattern is random, its observation mechanism is specified separately; the displayed model does not assert that this mechanism is independent of the full outcomes or ignorable for likelihood inference.\n\nThe definition imposes no Gaussianity, no identical visit schedule, and no claim that a scientific application satisfies the proposed mean or covariance structure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\mathbb E b=\\mathbb E\\varepsilon=0$, linearity [F5] gives $\\mathbb E Y=X\\beta$ and $Y-\\mathbb E Y=Zb+\\varepsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], each covariance entry of $Zb+\\varepsilon$ is the sum of the entries from $Zb$ and $\\varepsilon$ and the two cross-covariance entries. The first two matrices are $ZGZ^T$ and $R$ by [F1] and finite matrix multiplication.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each coordinate pair $b_k,\\varepsilon_\\ell$, [F3] gives independence and [F4] gives $\\mathbb E[b_k\\varepsilon_\\ell]=\\mathbb E[b_k]\\mathbb E[\\varepsilon_\\ell]=0$. Both means vanish by [F1], so every cross-covariance entry is zero. The remaining covariance matrix is therefore $ZGZ^T+R$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement with Definition of the mixed model and step 2.1: n>=1 excludes an empty observed vector, but q=0 gives a zero ZGZ-transpose term and Cov(Y)=R; singular or zero covariance components require no inverse in this identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If either covariance matrix is zero, step 3.1 still removes the cross terms and the same sum formula holds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coordinatewise covariance expansion in steps 2.1\u20133.1 also covers one-dimensional coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The result uses only covariance bilinearity and independence, with no positive-definiteness or Gaussianity condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement with Definition of the mixed model and step 2.1: n>=1 excludes an empty observed vector, but q=0 gives a zero ZGZ-transpose term and Cov(Y)=R; singular or zero covariance components require no inverse in this identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Proof steps 1.1\u20133.1 expand finite coordinate sums on the given probability space; independence of the supplied components is assumed, not constructed by arbitrary-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement deduces Cov(Y)=ZGZ-transpose+R from centered independent components; the covariance identity alone is not claimed to recover independence or the latent representation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement deduces Cov(Y)=ZGZ-transpose+R from centered independent components; the covariance identity alone is not claimed to recover independence or the latent representation."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed steps 1.1\u20133.1 and moment, linearity, covariance bilinearity, independence preservation and expectation factorization suppliers. Finite second moments justify all products and finite sums; cross moments E[b_k epsilon_l] vanish by independent centered coordinates. Covariance is ZGZ^T+R without Gaussianity, inversion or nonsingularity. q=0 gives an empty random-effect contribution and V=R; zero or singular G/R are allowed."
+      }
+    },
+    "lem-reml-error-contrast-covariance-is-positive-definite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-error-contrast-matrix",
+          "source_section": "Definition",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$ have full column rank, with $p<n$, and let $\\operatorname{col}(X)^\\perp$ denote the orthogonal complement of its column space in Euclidean $\\mathbb R^n$ ([[def-orthogonal-complement]]). An **error-contrast matrix** for $X$ is a matrix $K\\in\\mathbb R^{n\\times(n-p)}$ whose columns form a basis of $\\operatorname{col}(X)^\\perp$. Thus $K$ has full column rank and $X^TK=0$, so $K^TY$ is an $(n-p)$-dimensional vector of linear contrasts that annihilate $X\\beta$. Such a matrix exists by [[lem-error-contrast-matrix-exists]].",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-reml-error-contrast-covariance-is-positive-definite-step-1-1",
+          "claim": "The matrix $K^TVK$ is symmetric because $V$ is symmetric.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-reml-error-contrast-covariance-is-positive-definite-step-1-2",
+          "claim": "Let $a\\in\\mathbb R^{n-p}$ be nonzero. By [F1], $K$ has full column rank, so $Ka\\ne0$. Therefore $a^TK^TVKa=(Ka)^TV(Ka)>0$ by positive definiteness of $V$. Thus $K^TVK$ is positive definite.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-reml-error-contrast-covariance-is-positive-definite-step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove symmetry and strict positivity of the quadratic form for every nonzero $a$, which is exactly positive definiteness of $K^TVK$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes p<n and therefore a positive contrast dimension."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement boundary: The p=n case would have no contrast coordinates and is excluded by p<n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n\u2212p=1 the proof checks the single scalar (Ka)^TV(Ka)>0 in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If V were singular, strict positivity could fail; the stated V\u227b0 hypothesis is used for every nonzero Ka. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The p=n endpoint is excluded in the error-contrast definition that supplies K. See step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is needed for the quadratic-form argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement proves positivity of K-transpose-V-K from full-column-rank K and positive V; it does not claim positivity on the contrast subspace implies positivity on the whole observation space."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement proves positivity of K-transpose-V-K from full-column-rank K and positive V; it does not claim positivity on the contrast subspace implies positivity on the whole observation space."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "def-restricted-maximum-likelihood-error-contrasts": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition explicitly indexes the Gaussian family by a nonempty Theta and fixes p<n. Consequently neither an empty parameter family nor a zero-dimensional contrast likelihood is admitted; the displayed determinant formula is not a license to drop those hypotheses.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner focused mathematical review",
+            "reason": "The Definition explicitly indexes the Gaussian family by a nonempty Theta and fixes p<n. Consequently neither an empty parameter family nor a zero-dimensional contrast likelihood is admitted; the displayed determinant formula is not a license to drop those hypotheses."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition boundary: The p=n case has no contrast dimension and is excluded by p<n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition applies when n\u2212p=1 and then uses the one-dimensional Gaussian density."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "V\u03b8\u227b0 is required; singular observation covariance is outside this density definition. The Statement/Definition states this case explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The fixed design endpoint p=n is excluded because no nonzero contrast space remains. The Statement/Definition states this case explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Gaussian family inherits AC from the multivariate-normal definition. The Statement/Definition states this case explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition assigns a fixed-basis Gaussian contrast likelihood; it does not characterize Gaussianity or identify covariance parameters from the numerical likelihood in a reverse direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition assigns a fixed-basis Gaussian contrast likelihood; it does not characterize Gaussianity or identify covariance parameters from the numerical likelihood in a reverse direction."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed the entire Definition and the contrast-law, PD-contrast covariance and density proofs. Fixed K has shape n by n-p and is independent of theta; p<n ensures positive contrast dimension. V_theta positive definite and K injective imply K^T V_theta K positive definite, so determinant/inverse and Gaussian density are defined for every theta. The contrast law removes beta without claiming ML existence, comparisons across fixed-effect designs or parameter-dependent bases. Theta is nonempty and AC is explicit. Duke Lecture 4 p.5 \u00a74.1 states the error-contrast likelihood convention."
+      }
+    },
+    "thm-gaussian-conditional-law-of-random-effects": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-mixed-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ and $q\\ge0$ be finite integers. A **finite-dimensional linear mixed model** on one probability space consists of fixed matrices $X\\in\\mathbb R^{n\\times p}$ and $Z\\in\\mathbb R^{n\\times q}$, a fixed parameter $\\beta\\in\\mathbb R^p$, and square-integrable random vectors $b\\in\\mathbb R^q$ and $\\varepsilon\\in\\mathbb R^n$ such that\n$$Y=X\\beta+Zb+\\varepsilon,\\qquad \\mathbb E b=0,\\qquad \\mathbb E\\varepsilon=0,\\qquad \\operatorname{Cov}(b)=G,\\qquad \\operatorname{Cov}(\\varepsilon)=R,$$\nwhere $b$ and $\\varepsilon$ are independent random elements. Here $G$ and $R$ are the resulting symmetric positive-semidefinite covariance matrices. The fixed-design convention for $X$ and the first-moment regression model is that of [[def-fixed-design-linear-regression-model]]. The explicit scientific record of units, quantities, observation mechanism, and adequacy assumptions is required by [[def-scientific-statistical-model-contract]].\n\nFor longitudinal data, let $j$ index subjects and let $i\\in S_j$ index the visits scheduled for subject $j$. A row of $Y$, $X$, and $Z$ corresponds to one observed subject\u2013visit pair $(j,i)$; the time $t_{ji}$ is measured from a stated origin. Blocks of $b$ may represent subject-specific latent effects, while $R$ records the residual covariance across observed rows. If a visit pattern is fixed or conditioned on, the corresponding rows are selected from the scheduled vectors and matrices. If the pattern is random, its observation mechanism is specified separately; the displayed model does not assert that this mechanism is independent of the full outcomes or ignorable for likelihood inference.\n\nThe definition imposes no Gaussianity, no identical visit schedule, and no claim that a scientific application satisfies the proposed mean or covariance structure.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-marginal-covariance-of-linear-mixed-model",
+          "source_section": "Statement",
+          "quote": "For the moment model $Y=X\\beta+Zb+\\varepsilon$ of [[def-linear-mixed-model]], the marginal covariance is\n$$\\operatorname{Cov}(Y)=V:=ZGZ^T+R.$$\nThis identity uses only the stated means, covariances, and independence; it does not require Gaussianity.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gaussian-linear-mixed-model",
+          "source_section": "Definition",
+          "quote": "The **Gaussian branch** of [[def-linear-mixed-model]] adds the following assumption: under the Axiom of Choice, the concatenated vector\n$$W=\\begin{pmatrix}b\\\\ \\varepsilon\\end{pmatrix}$$\nhas the multivariate-normal law $N_{q+n}(0,\\operatorname{diag}(G,R))$ of [[def-multivariate-normal-law]]. Thus the full latent-effect and residual vector is jointly Gaussian. This is an additional branch; the moment-only definition and the covariance identity do not assume Gaussianity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(U_1,U_2)$ be a jointly multivariate-normal vector with mean $(m_1,m_2)$ and covariance\n$$\\begin{pmatrix}S&0\\\\0&T\\end{pmatrix},$$\nwhere $S$ and $T$ are allowed to be singular positive-semidefinite matrices. Then the random vectors $U_1$ and $U_2$ are independent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $Y_c=Y-X\\beta$. Linearity [F10] and [F1] give $\\mathbb E Y=X\\beta$, so centering by this deterministic vector leaves covariance unchanged; [F2] gives $\\operatorname{Cov}(Y_c)=V$. Coordinatewise independence of $b$ and $\\varepsilon$ gives $\\operatorname{Cov}(b,\\varepsilon)=0$ by [F5] and [F7], so bilinearity [F9] gives $\\operatorname{Cov}(b,Y_c)=\\operatorname{Cov}(b,Zb)=GZ^T$. Since $V$ is invertible by [A1], set $H=GZ^TV^{-1}$ and $U=b-HY_c$. Bilinearity yields $\\operatorname{Cov}(U,Y_c)=GZ^T-HV=0$, and expectation linearity [F10] gives $\\mathbb E U=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The vectors $U$ and $Y_c$ are Borel random vectors by [F11]. For any coefficient vectors $s,t$, the scalar $s^TU+t^TY_c$ is a linear combination of the coordinates of $(b,\\varepsilon)$, so it is normal by the projection definition in [F3]. Thus $(U,Y_c)$ is jointly multivariate normal. Its covariance is block diagonal by step 1.1, so [F4] implies that $U$ and $Y_c$ are independent.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F11",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By step 2.1 and [F5], $U$ and $Y_c$ generate independent sigma-algebras. For every event $E\\in\\sigma(Y_c)$, [F7] applied to $U_k$ and $1_E$ gives $\\mathbb E[U_k1_E]=\\mathbb E[U_k]\\mathbb P(E)=0$. Since $HY_c$ is square-integrable and $\\sigma(Y_c)$-measurable, [F10] gives $\\mathbb E[b_k1_E]=\\mathbb E[(HY_c)_k1_E]$ for every such event; [F6] identifies $HY_c$ as a version of $\\mathbb E[b\\mid Y_c]$. Finally, $\\sigma(Y_c)=\\sigma(Y)$, so the stated conditional-mean formula follows.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "F10",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each coordinate pair $k,\\ell$, $U_kU_\\ell$ is integrable by [F8]. As a measurable function of $U$, it is independent of $Y_c$ by [F7] and step 2.1. For every $E\\in\\sigma(Y_c)$, factorization gives $\\mathbb E[U_kU_\\ell1_E]=\\mathbb E[U_kU_\\ell]\\mathbb P(E)$, so [F6] yields $\\mathbb E[U_kU_\\ell\\mid Y_c]=\\mathbb E[U_kU_\\ell]$. Together with the conditional mean from step 3.1, step 1.1, and $\\sigma(Y_c)=\\sigma(Y)$, the defined entrywise conditional covariance of $b=HY_c+U$ is $\\operatorname{Cov}(U)$.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Expanding $\\operatorname{Cov}(U)=\\operatorname{Cov}(b-HY_c)$ by [F9] and [F1]\u2013[F2] yields $\\operatorname{Cov}(U)=G-GZ^TV^{-1}ZG-GZ^TV^{-1}ZG+GZ^TV^{-1}VV^{-1}ZG =G-GZ^TV^{-1}ZG.$ Together with steps 3.1\u20134.1 this proves both formulas. No inverse of $G$ is used, so singular $G$ is allowed.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F9",
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The observation vector has n\u22651 coordinates under the mixed-model definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "G=0 is allowed; the formula and proof use no inverse of G, as seen in step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement boundary: The conditional argument is coordinatewise and applies when the response and latent effect are scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "V must be positive definite, while the latent covariance G may be singular. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter interval endpoints are asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Gaussian law and block-independence supplier both carry AC. See step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement derives the conditional Gaussian kernel from the jointly Gaussian model and positive marginal V; a conditional mean formula alone is not claimed to imply the full joint model."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement derives the conditional Gaussian kernel from the jointly Gaussian model and positive marginal V; a conditional mean formula alone is not claimed to imply the full joint model."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed every step 1.1\u20135.1 and exact conditional-expectation, L2 product integrability and Gaussian-block independence suppliers. H=GZ^T V^-1 is defined because only V must be positive definite. U=b-H(Y-X beta) is centered, jointly Gaussian with Y-X beta and has zero cross covariance; hence independence, including singular G. Event integral tests give HY_c as a conditional-mean version and constant Cov(U) as entrywise conditional covariance. All products are L1 by Cauchy\u2013Schwarz; covariance expansion gives G-GZ^T V^-1 ZG. q=0 makes the target empty and formulas vacuous. No pointwise conditional density or G inverse asserted. Duke Lecture 6 p.12 has the nonsingular normal-conjugacy special case; the local independent-residual proof establishes the wider claim."
+      }
+    },
+    "thm-variance-component-identifiability-iff-covariance-map-injective": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-variance-component-identifiability-iff-covariance-map-injective-step-1-1",
+          "claim": "Suppose $\\theta\\mapsto V_\\theta$ is injective. If $P_{\\beta,\\theta}=P_{\\beta',\\theta'}$, equality of laws and [F3] give $V_\\theta=V_{\\theta'}$. Injectivity then gives $\\theta=\\theta'$, so the target values agree. By [F1], $\\psi$ is identifiable.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "thm-variance-component-identifiability-iff-covariance-map-injective-step-1-2",
+          "claim": "Conversely, if the covariance map is not injective, choose $\\theta\\ne\\theta'$ with $V_\\theta=V_{\\theta'}$. For any fixed $\\beta$, the two Gaussian laws $N_n(X\\beta,V_\\theta)$ and $N_n(X\\beta,V_{\\theta'})$ are equal by [F2], while the target values are different. Thus $\\psi$ is not identifiable by [F1].",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "thm-variance-component-identifiability-iff-covariance-map-injective-step-2-1",
+          "claim": "Steps 1.1 and 1.2 prove both implications.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement explicitly assumes a nonempty covariance parameter set Theta. Injectivity is compared with equality of its indexed Gaussian laws; an empty parameter family is outside that hypothesis, even though a detector recognizes the word family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner focused mathematical review",
+            "reason": "The Statement explicitly assumes a nonempty covariance parameter set Theta. Injectivity is compared with equality of its indexed Gaussian laws; an empty parameter family is outside that hypothesis, even though a detector recognizes the word family."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The covariance matrices may be zero or singular because the Gaussian characteristic-function argument in step 1.2 does not use an inverse."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate boundary case is part of this claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Positive-semidefinite singular V\u03b8 is allowed; the Gaussian characteristic function and covariance argument still apply. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate boundary case is part of this claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement boundary: AC is inherited from the stated Gaussian family and its characteristic-function uniqueness supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Injectivity implies identifiability by the equal-law covariance argument. See step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Failure of injectivity gives two distinct parameters with the same Gaussian law. See step 1.2."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed steps 1.1,1.2,2.1 and exact identifiability definition. Equal Gaussian sampling laws have equal finite covariance matrices; an injective covariance parameter map therefore identifies theta even when beta itself is not identifiable. Conversely two distinct theta values with the same covariance yield equal laws at any fixed beta by Gaussian uniqueness. Singular/zero covariance allowed; Theta singleton works and nonempty Theta is stipulated. No inference of beta identifiability or non-Gaussian sufficiency. AC inherited from Gaussian law. Duke Lecture 6 \u00a7\u00a75.2 and 7.1 motivate covariance parametrization and aliasing; both directions are proved locally."
+      }
+    },
+    "lem-reml-error-contrast-basis-change-is-parameter-free": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-error-contrast-matrix",
+          "source_section": "Definition",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$ have full column rank, with $p<n$, and let $\\operatorname{col}(X)^\\perp$ denote the orthogonal complement of its column space in Euclidean $\\mathbb R^n$ ([[def-orthogonal-complement]]). An **error-contrast matrix** for $X$ is a matrix $K\\in\\mathbb R^{n\\times(n-p)}$ whose columns form a basis of $\\operatorname{col}(X)^\\perp$. Thus $K$ has full column rank and $X^TK=0$, so $K^TY$ is an $(n-p)$-dimensional vector of linear contrasts that annihilate $X\\beta$. Such a matrix exists by [[lem-error-contrast-matrix-exists]].\n\nThis column-basis convention makes the product $K^TY$ dimensionally defined. The Gaussian restricted-likelihood definition below fixes one such $K$ independently of the covariance parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-restricted-maximum-likelihood-error-contrasts",
+          "source_section": "Definition",
+          "quote": "Assume AC and a Gaussian family of the form in [[def-gaussian-linear-mixed-model]], indexed by a nonempty parameter set $\\Theta$. For each $\\theta\\in\\Theta$, let $G_\\theta$ and $R_\\theta$ be the latent and residual covariance matrices in\n$$V_\\theta=ZG_\\theta Z^T+R_\\theta\\succ0.$$\nLet the fixed design $X\\in\\mathbb R^{n\\times p}$ have full column rank with $p<n$. Fix an error-contrast matrix $K\\in\\mathbb R^{n\\times(n-p)}$ as in [[def-error-contrast-matrix]], independently of $\\theta$. By [[lem-gaussian-error-contrast-is-multivariate-normal]], the contrast vector $K^TY$ has law $N_{n-p}(0,K^TV_\\theta K)$ and its law does not depend on the fixed-effect parameter $\\beta$. The local result [[lem-reml-error-contrast-covariance-is-positive-definite]] shows that this covariance is positive definite, and [[thm-nondegenerate-multivariate-normal-law-has-density]] gives its Gaussian density. The **restricted likelihood for this fixed contrast basis** is\n$$L_R(\\theta;y)=(2\\pi)^{-(n-p)/2}\\det(K^TV_\\theta K)^{-1/2} \\exp\\!\\left(-\\tfrac12(K^Ty)^T(K^TV_\\theta K)^{-1}(K^Ty)\\right).$$\nThis item defines the likelihood for a fixed, parameter-independent choice of contrast coordinates; it makes no claim about likelihood comparisons across different fixed-effect designs.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-determinant-of-transpose",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$, every commutative ring $R$, and every $A\\in M_n(R)$,\n$$\\det(A^{\\mathsf T})=\\det(A).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every real matrix $A\\in M_n(\\mathbb R)$,\n$$A\\text{ is invertible}\\quad\\Longleftrightarrow\\quad\\det(A)\\ne0.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each column of $K'$ lies in the span of the columns of $K$, so there is a matrix $A$ with $K'=KA$. If $Ac=0$, then $K'c=0$; the full column rank of $K'$ gives $c=0$. Thus $A$ is injective. By [F4], $A$ has full rank and is surjective, so it is invertible; [F5] gives $\\det A\\ne0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $q=K^Ty$ and $S_\\theta=K^TV_\\theta K$. Then $K'^Ty=A^Tq$ and $K'^TV_\\theta K'=A^TS_\\theta A$. Multiplication verifies $(A^TS_\\theta A)^{-1}=A^{-1}S_\\theta^{-1}A^{-T}$, so the two Gaussian quadratic forms are equal. By [F3], $\\det(A^TS_\\theta A)=(\\det A)^2\\det(S_\\theta)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitution into the two densities in [F2] leaves the exponential terms equal and changes the determinant prefactor by $|\\det A|^{-1}$. The matrix $A$ depends only on the two fixed bases, not on $\\theta$, so this factor is positive and parameter-independent. Therefore the likelihood maximizers are the same.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma assumes two error-contrast bases and p<n."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Invertibility of the change-of-basis matrix ensures the determinant factor is positive and finite. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In contrast dimension one, A is a nonzero scalar and the factor in step 2.1 is its absolute reciprocal."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The REML definition supplies positive-definite contrast covariance for both bases. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The p=n endpoint is excluded by the error-contrast definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The calculation uses only the fixed bases and finite-dimensional algebra; no additional choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement derives a positive parameter-independent likelihood multiplier for two fixed contrast bases; it does not infer a basis change from equality of likelihood maximizers."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement derives a positive parameter-independent likelihood multiplier for two fixed contrast bases; it does not infer a basis change from equality of likelihood maximizers."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed steps 1.1\u20133.1 and exact rank-nullity/determinant/likelihood supplier statements. Both K,Kprime are fixed bases of the same n-p dimensional space. Writing Kprime=KA gives injective square A, hence invertible and nonzero determinant; A depends only on fixed bases. S transforms to A^T S A, inverse to A^-1 S^-1 A^-T, and contrast q to A^T q: quadratic form unchanged, determinant multiplies by (det A)^2. Therefore density multiplies by |det A|^-1 for every y,theta; factor positive and parameter independent. n-p=1, orientation det A<0 and unattained maxima all covered; argmax sets may both be empty. No different-design comparison. Gaussian/AC assumptions inherited from the cited REML definition. Duke Lecture 4 p.5 supplies contrast-coordinate convention; the determinant argument is local."
+      }
+    },
+    "thm-known-covariance-gls-is-blue": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-fixed-design-linear-regression-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ be integers and let $X\\in\\mathbb R^{n\\times p}$ be a fixed matrix.\nA **fixed-design first-moment linear regression model** is a parametric\nstatistical experiment on $(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ with parameter\nset $\\mathbb R^p$, laws $(P_\\beta)_{\\beta\\in\\mathbb R^p}$, and observed vector\n$Y(y)=y$, such that every coordinate of $Y$ is integrable under $P_\\beta$ and\n$$\\mathbb E_\\beta Y=X\\beta\\qquad(\\beta\\in\\mathbb R^p).$$\nHere $\\mathcal B(\\mathbb R^n)$ is the Borel sigma-algebra, and expectation is\ntaken under the particular law $P_\\beta$. The residual vector\n$\\epsilon_\\beta:=Y-X\\beta$ therefore has coordinatewise mean zero. The phrase\n**fixed design** means that $X$ is held constant in this experiment; it carries\nno probability law or assignment mechanism for $X$.\n\nThis definition states only the first-moment model. It imposes no covariance,\nindependence, or Gaussian assumption. Such assumptions must be stated where\nused.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-marginal-covariance-of-linear-mixed-model",
+          "source_section": "Statement",
+          "quote": "For the moment model $Y=X\\beta+Zb+\\varepsilon$ of [[def-linear-mixed-model]], the marginal covariance is\n$$\\operatorname{Cov}(Y)=V:=ZGZ^T+R.$$\nThis identity uses only the stated means, covariances, and independence; it does not require Gaussianity.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge 1$ and let $A\\in M_n(\\mathbb C)$, with the real case obtained by\nrestricting scalars to $\\mathbb R$. Then the following are equivalent:\n\n1. $A$ has a Cholesky factorisation $A=LL^*$ with $L$ lower triangular and\n   positive real diagonal.\n2. $A$ is Hermitian positive definite.\n\nWhen these conditions hold, the factor $L$ is unique.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gauss-markov-for-fixed-design-regression",
+          "source_section": "Statement",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$ have full column rank in a fixed-design\nfirst-moment regression model. Suppose\n$\\operatorname{Cov}_\\beta(\\epsilon_\\beta)=\\sigma^2 I_n$ for a fixed\n$\\sigma^2>0$, where the vector covariance matrix has entries\n$\\operatorname{Cov}_\\beta(\\epsilon_{\\beta,i},\\epsilon_{\\beta,j})$. For every\ncontrast $c^T\\beta$, the OLS estimate\n$c^T\\widehat\\beta$ is unbiased and has variance no larger than any other\nlinear unbiased estimator of that contrast. Thus OLS is **best linear\nunbiased (BLUE)** for every estimable contrast. Here \u201cbest\u201d means minimum\nvariance within the class of linear unbiased estimators; Gaussianity is not\nassumed.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $L$ from [F3] and set $\\widetilde Y=L^{-1}Y$ and $\\widetilde X=L^{-1}X$. The transformed response is Borel by [F7]. Linearity [F6] and [F1] give $\\mathbb E_\\beta\\widetilde Y=\\widetilde X\\beta$, and covariance bilinearity [F5] with [F2] gives $\\operatorname{Cov}_\\beta(\\widetilde Y)=L^{-1}V L^{-T}=I_n$. Since $L$ is invertible, $\\widetilde X$ has full column rank.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "OLS on the transformed model is $(\\widetilde X^T\\widetilde X)^{-1}\\widetilde X^T\\widetilde Y =(X^TV^{-1}X)^{-1}X^TV^{-1}Y =\\widehat\\beta_{\\mathrm{GLS}},$ because $L^{-T}L^{-1}=V^{-1}$. The transformed model meets every hypothesis of [F4], so this estimator is unbiased and each of its linear contrasts has minimum variance among linear unbiased contrasts.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $C=(X^TV^{-1}X)^{-1}$ and $A=CX^TV^{-1}$. Then $AX=I_p$, so linearity [F6] and [F1] give $\\mathbb E_\\beta[A Y]=\\beta$. By [F5] and [F2], $\\operatorname{Cov}_\\beta(A Y)=A V A^T =CX^TV^{-1}V V^{-1}XC =C.$ Here $C$ is symmetric because $X^TV^{-1}X$ is symmetric positive definite.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $\\widetilde\\beta$ be any linear unbiased estimator. For each $c$, $c^T\\widetilde\\beta$ is a linear unbiased estimator of $c^T\\beta$ in the transformed model of step 1.1. By [F4] and step 2.1 its variance is at least that of $c^T\\widehat\\beta_{\\mathrm{GLS}}$. This holds for every $c\\in\\mathbb R^p$, so the covariance difference is positive semidefinite and GLS is BLUE.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement and steps 1.1\u20133.1: inherited n,p>=1. Unbiased estimators are compared on the inherited nonempty observation and coefficient spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1\u20133.1: The zero contrast has variance zero for GLS and every unbiased competitor; the BLUE inequality remains equality rather than requiring a separate positive variance conclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement permits p=1; the whitening and covariance calculations remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Statement and steps 1.1\u20133.1: The comparison is for a known positive covariance and full rank X; singular-covariance generalized-inverse variants are not the theorem stated here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1\u20133.1: With n=p, any linear unbiased coefficient estimator must equal X inverse, and the competing-estimator covariance gap is zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement and steps 1.1\u20133.1: The competing estimator is arbitrary and its covariance is compared by a deterministic matrix difference; the proof constructs no family of chosen estimators."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement proves unbiasedness, covariance and BLUE optimality under a fixed full-rank design and positive known covariance; it does not claim every BLUE presentation recovers those hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement proves unbiasedness, covariance and BLUE optimality under a fixed full-rank design and positive known covariance; it does not claim every BLUE presentation recovers those hypotheses."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed steps 1.1\u20133.1, current batch-2 Gauss\u2013Markov full proof and local GLS inverse justification. Cholesky whitening sends known common V to I_n while retaining rank and mean; sigma^2=1>0 matches the exact supplier. Every original linear unbiased contrast remains linear after Y=L Ytilde. AX=I and A V A^T=C prove unbiasedness and covariance; Gauss\u2013Markov yields all contrast inequalities and thus PSD covariance difference. n=p is allowed; c=0 trivial; V singular or estimated is excluded. No Gaussian assumption or AC used. Duke Lecture 2 p.2 \u00a71.1 gives precisely whitening and the known-covariance GLS formula."
+      }
+    },
+    "thm-known-covariance-blup-for-random-effects": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-mixed-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ and $q\\ge0$ be finite integers. A **finite-dimensional linear mixed model** on one probability space consists of fixed matrices $X\\in\\mathbb R^{n\\times p}$ and $Z\\in\\mathbb R^{n\\times q}$, a fixed parameter $\\beta\\in\\mathbb R^p$, and square-integrable random vectors $b\\in\\mathbb R^q$ and $\\varepsilon\\in\\mathbb R^n$ such that\n$$Y=X\\beta+Zb+\\varepsilon,\\qquad \\mathbb E b=0,\\qquad \\mathbb E\\varepsilon=0,\\qquad \\operatorname{Cov}(b)=G,\\qquad \\operatorname{Cov}(\\varepsilon)=R,$$\nwhere $b$ and $\\varepsilon$ are independent random elements. Here $G$ and $R$ are the resulting symmetric positive-semidefinite covariance matrices. The fixed-design convention for $X$ and the first-moment regression model is that of [[def-fixed-design-linear-regression-model]]. The explicit scientific record of units, quantities, observation mechanism, and adequacy assumptions is required by [[def-scientific-statistical-model-contract]].\n\nFor longitudinal data, let $j$ index subjects and let $i\\in S_j$ index the visits scheduled for subject $j$. A row of $Y$, $X$, and $Z$ corresponds to one observed subject\u2013visit pair $(j,i)$; the time $t_{ji}$ is measured from a stated origin. Blocks of $b$ may represent subject-specific latent effects, while $R$ records the residual covariance across observed rows. If a visit pattern is fixed or conditioned on, the corresponding rows are selected from the scheduled vectors and matrices. If the pattern is random, its observation mechanism is specified separately; the displayed model does not assert that this mechanism is independent of the full outcomes or ignorable for likelihood inference.\n\nThe definition imposes no Gaussianity, no identical visit schedule, and no claim that a scientific application satisfies the proposed mean or covariance structure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-marginal-covariance-of-linear-mixed-model",
+          "source_section": "Statement",
+          "quote": "For the moment model $Y=X\\beta+Zb+\\varepsilon$ of [[def-linear-mixed-model]], the marginal covariance is\n$$\\operatorname{Cov}(Y)=V:=ZGZ^T+R.$$\nThis identity uses only the stated means, covariances, and independence; it does not require Gaussianity.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-normal-equations-for-best-affine-l2-prediction",
+          "source_section": "Statement",
+          "quote": "Let $X,Y_1,\\dots,Y_n$ be square-integrable real random variables on one\nprobability space, and write\n$$W:=\\operatorname{span}\\big([1],[Y_1],\\dots,[Y_n]\\big)\\subseteq L^2(\\mathbb P),$$\nwhere $[\\cdot]$ denotes the almost-everywhere class from\n[[def-l-p-space-as-a-quotient-by-null-functions]].\n\nThen there is a unique class $[Z_*]\\in W$ minimizing $\\|[X]-[Z]\\|_2$ over\n$[Z]\\in W$. This minimizing class has an affine representative\n$Z_*=a_0+\\sum_{j=1}^n a_jY_j$, and its coefficients satisfy\n$$a_0=\\mathbb E[X]-\\sum_{j=1}^n a_j\\mathbb E[Y_j],$$\n$$\\sum_{j=1}^n \\operatorname{Cov}(Y_i,Y_j)a_j=\\operatorname{Cov}(X,Y_i)\\qquad(1\\le i\\le n).$$\n\nThe class $[Z_*]$ is unique. If the covariance matrix\n$\\Gamma=(\\operatorname{Cov}(Y_i,Y_j))_{i,j}$ is singular, the coefficient vector\nneed not be uniquely determined by the normal equations, but any two solutions\nyield the same predictor almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-known-covariance-generalized-least-squares-estimator",
+          "source_section": "Definition",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$ have full column rank in a fixed-design first-moment regression model, so $\\mathbb E_\\beta Y=X\\beta$ under each law $P_\\beta$ ([[def-fixed-design-linear-regression-model]]). Suppose the same known symmetric positive-definite matrix $V$ is the covariance of $Y$ under every $P_\\beta$. Put\n$$C=(X^T V^{-1}X)^{-1} \\quad\\text{and}\\quad \\widehat\\beta_{\\mathrm{GLS}}:=CX^T V^{-1}Y.$$\nThis is a statistic and estimator of the identity target $\\beta$ under [[def-statistic-and-estimator]] and [[def-estimand-on-a-statistical-model]]: for fixed $X$ and $V$, the displayed expression is a linear, hence Borel-measurable, function of the response. The positive definiteness of $X^TV^{-1}X$ and existence of its inverse are established by [[lem-gls-information-matrix-is-positive-definite]].\n\nThis definition uses the true covariance as known. Replacing $V$ by an estimate defines a plug-in procedure; the theorem below does not assign that procedure the same exact covariance or BLUE guarantee.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-known-covariance-gls-is-blue",
+          "source_section": "Statement",
+          "quote": "Let the linear mixed model have fixed design $X\\in\\mathbb R^{n\\times p}$ of full column rank and known marginal covariance $V=\\operatorname{Cov}(Y)\\succ0$. Then\n$$\\widehat\\beta_{\\mathrm{GLS}}=(X^TV^{-1}X)^{-1}X^TV^{-1}Y$$\nis unbiased for $\\beta$, has covariance $(X^TV^{-1}X)^{-1}$, and is BLUE: for every linear unbiased estimator $\\widetilde\\beta$ and every $c\\in\\mathbb R^p$,\n$$\\operatorname{Var}(c^T\\widehat\\beta_{\\mathrm{GLS}})\\le \\operatorname{Var}(c^T\\widetilde\\beta).$$\nOnly the fixed-design mean and covariance are used; Gaussianity is not assumed.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $Y_c=Y-X\\beta$. By [F1], each pair of coordinates $b_k,\\varepsilon_\\ell$ is independent; since both are centered, factorization in [F7] gives $\\operatorname{Cov}(b,\\varepsilon)=0$. Bilinearity [F5] then gives $\\operatorname{Cov}(b,Y_c)=GZ^T$, while [F2] gives $\\operatorname{Cov}(Y_c)=V$. The affine predictor is a Borel random vector by [F9]. For fixed $\\beta$, apply [F3] coordinatewise to predict $b$ affinely from $Y$: the covariance normal equations have the unique solution $H=GZ^TV^{-1}$ because $V$ is invertible by [A1]. The intercept is $\\mathbb E b-H\\mathbb E Y=-HX\\beta$ by [F8] and [F1]. Thus $H(Y-X\\beta)$ is the best affine $L^2$ predictor when $\\beta$ is treated as known.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $C=(X^TV^{-1}X)^{-1}$ and $P=H(I-XCX^TV^{-1})$. Then $\\widehat b=PY$ and $PX=0$, because $CX^TV^{-1}X=I_p$. By [F9], $\\widehat b$ is Borel; by [F8] and [F1], $\\mathbb E_\\beta\\widehat b=P X\\beta=0=\\mathbb E b$ for every $\\beta$. Every affine linear predictor $a+BY$ unbiased for $b$ for every $\\beta$ must have $a=0$ and $BX=0$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F8",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $Y_c=Y-X\\beta$ and $u=b-HY_c$. By step 1.1, bilinearity gives $\\operatorname{Cov}(u,Y_c)=GZ^T-HV=0$ and $\\operatorname{Cov}(u)=G-GZ^TV^{-1}ZG-GZ^TV^{-1}ZG+GZ^TV^{-1}VV^{-1}ZG =G-GZ^TV^{-1}ZG.$ Also $\\widehat\\beta_{\\mathrm{GLS}}-\\beta=CX^TV^{-1}Y_c$, so its covariance is $C$ by [F4], and its covariance with $u$ is zero because step 1.1 gives $\\operatorname{Cov}(u,Y_c)=0$. Since $b-\\widehat b=u+HX(\\widehat\\beta_{\\mathrm{GLS}}-\\beta),$ the error covariance is $G-GZ^TV^{-1}ZG+HXCX^TH^T,$ which is the displayed matrix after substituting $H$ and $C$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $BY$ be any other affine linear predictor unbiased for $b$ for every $\\beta$. By step 2.1 its intercept is zero and $BX=0$. Put $D=B-P$, so $DX=0$ and the competing prediction error is $(b-PY)-DY$. Since $PV=GZ^T-HXCX^T$, one has $\\operatorname{Cov}(b-PY,Y)=GZ^T-PV=HXCX^T.$ Therefore $\\operatorname{Cov}(b-PY,DY)=HXCX^TD^T=HXC(DX)^T=0$. Expanding the competing error covariance now gives $\\operatorname{Cov}(b-BY)=\\operatorname{Cov}(b-PY)+DVD^T \\succeq \\operatorname{Cov}(b-PY).$ This is exactly the stated BLUP criterion.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition of the mixed model and proof step 2.1: observed n>=1, but q=0 is admitted. Then the latent vector and P have zero output coordinates and the unbiased-prediction comparison is vacuous in that output space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If G=0, H and the BLUP are zero and the displayed error covariance is zero; the covariance comparison in step 4.1 remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof steps 1.1\u20134.1 apply to one latent coordinate, q=1, as scalar-output covariance identities. They require positive marginal V, not a positive random-effect variance G."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement boundary: The proof uses only finite second moments and V\u227b0; no positive-definiteness of G is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 2.1 shows PX=0. When n=p and X is invertible, this forces P=0, and step 4.1 forces any unbiased competitor B=0 as well; the stated error covariance becomes G."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Statement expressly assumes no Axiom of Choice; steps 1.1\u20134.1 manipulate the given finite-dimensional random vectors and unique covariance inverses, without selecting a family of witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement proves the displayed moment-model predictor is BLUP in positive-semidefinite error order; it does not claim BLUP optimality characterizes Gaussianity or the given latent covariance decomposition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement proves the displayed moment-model predictor is BLUP in positive-semidefinite error order; it does not claim BLUP optimality characterizes Gaussianity or the given latent covariance decomposition."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed steps 1.1\u20134.1 and exact affine L2 normal-equation, moment and GLS suppliers. H=GZ^T V^-1 gives known-beta best affine coefficients; no G inverse or Gaussian assumption. Uniform unbiasedness over all beta forces a=0 and BX=0; P=H(I-X C X^T V^-1) satisfies PX=0. The residual u=b-HYc has zero covariance with Yc; expansion gives prediction-error covariance G-HZG+H X C X^T H^T. For competing B=P+D, DX=0 annihilates cross error covariance H X C X^T D^T; extra error DVD^T is PSD. q=0 gives empty target, G=0 gives zero predictor, n=p makes P=0 and error covariance G. V PD and known excludes singular inversion and estimated-component guarantees. Duke Lecture 5 p.9 \u00a74.3 confirms moment-only BLUP and \u00a74.4 unconditional unbiasedness; Lecture 6 p.12 is a Gaussian special case, not the prerequisite for this matrix proof."
+      }
+    },
+    "cex-linear-mixed-model-covariance-does-not-imply-ignorable-dropout": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-mixed-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ and $q\\ge0$ be finite integers. A **finite-dimensional linear mixed model** on one probability space consists of fixed matrices $X\\in\\mathbb R^{n\\times p}$ and $Z\\in\\mathbb R^{n\\times q}$, a fixed parameter $\\beta\\in\\mathbb R^p$, and square-integrable random vectors $b\\in\\mathbb R^q$ and $\\varepsilon\\in\\mathbb R^n$ such that\n$$Y=X\\beta+Zb+\\varepsilon,\\qquad \\mathbb E b=0,\\qquad \\mathbb E\\varepsilon=0,\\qquad \\operatorname{Cov}(b)=G,\\qquad \\operatorname{Cov}(\\varepsilon)=R,$$\nwhere $b$ and $\\varepsilon$ are independent random elements. Here $G$ and $R$ are the resulting symmetric positive-semidefinite covariance matrices. The fixed-design convention for $X$ and the first-moment regression model is that of [[def-fixed-design-linear-regression-model]]. The explicit scientific record of units, quantities, observation mechanism, and adequacy assumptions is required by [[def-scientific-statistical-model-contract]].\n\nFor longitudinal data, let $j$ index subjects and let $i\\in S_j$ index the visits scheduled for subject $j$. A row of $Y$, $X$, and $Z$ corresponds to one observed subject\u2013visit pair $(j,i)$; the time $t_{ji}$ is measured from a stated origin. Blocks of $b$ may represent subject-specific latent effects, while $R$ records the residual covariance across observed rows. If a visit pattern is fixed or conditioned on, the corresponding rows are selected from the scheduled vectors and matrices. If the pattern is random, its observation mechanism is specified separately; the displayed model does not assert that this mechanism is independent of the full outcomes or ignorable for likelihood inference.\n\nThe definition imposes no Gaussianity, no identical visit schedule, and no claim that a scientific application satisfies the proposed mean or covariance structure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-marginal-covariance-of-linear-mixed-model",
+          "source_section": "Statement",
+          "quote": "For the moment model $Y=X\\beta+Zb+\\varepsilon$ of [[def-linear-mixed-model]], the marginal covariance is\n$$\\operatorname{Cov}(Y)=V:=ZGZ^T+R.$$\nThis identity uses only the stated means, covariances, and independence; it does not require Gaussianity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-longitudinal-missingness-mechanisms",
+          "source_section": "Definition",
+          "quote": "Let $m=\\sum_j|S_j|$ and let $Y^*\\in\\mathbb R^m$ be the complete scheduled response vector for subjects $j$ and visits $i$. Let the declared observed covariates take values in a measurable space $(\\mathcal X,\\mathcal A)$. The finite set of observation patterns is $\\mathcal R=\\{0,1\\}^m$; $r_{ji}=1$ means visit $(j,i)$ is observed. A missingness mechanism is a function $g:\\mathcal R\\times\\mathbb R^m\\times\\mathcal X\\to[0,1]$ such that, for every $(y^*,x)$, $\\sum_{r\\in\\mathcal R}g(r\\mid y^*,x)=1$, and, for each fixed $r$, $(y^*,x)\\mapsto g(r\\mid y^*,x)$ is measurable for $\\mathcal B(\\mathbb R^m)\\otimes\\mathcal A$. Thus $g(\\cdot\\mid y^*,x)$ is a probability mass function on $\\mathcal R$, and its dependence on the full data state is the finite-output kernel specified by the observation-mechanism field in [[def-scientific-statistical-model-contract]], which requires a probability measure at each state and measurable state dependence. For a pattern $r$, write $Y_{\\mathrm{obs}}(r)$ for the subvector of $Y^*$ at coordinates with $r_{ji}=1$.\n\nThe mechanism is **missing completely at random (MCAR)** if, for each pattern $r$, $g(r\\mid y^*,x)$ does not depend on $y^*$. It is **missing at random (MAR)** if, for each $r$, it depends on the full response vector only through $Y_{\\mathrm{obs}}(r)$ and $x$. It is **missing not at random (MNAR)** relative to this partition if the MAR condition fails for at least one pattern on the declared support. **Monotone dropout** means that, within each subject, observed visits form an initial segment of the scheduled visits, possibly empty or complete.\n\nThese are properties of the declared observation kernel. A mixed-model mean or covariance equation does not specify the kernel or imply MCAR, MAR, or MNAR.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-scientific-statistical-model-contract",
+          "source_section": "Definition",
+          "quote": "Let\n$$\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$$\nbe a statistical experiment ([[def-statistical-experiment]]). When the model is\nparametric, write $\\mathsf P(\\theta)=P_\\theta$\n([[def-parametric-statistical-model]]). A **scientific statistical model\ncontract** is an explicit record of the following fields for a specified\nanalysis.\n\n1. **Observation space and record.** Give $(\\mathcal X,\\mathcal A)$ and say\n   which values form one recorded data object. A response and each predictor\n   used as a function of the data must be a specified measurable map from this\n   space to a named measurable target. This is the map convention for a\n   statistic in [[def-statistic-and-estimator]]; it does not make a predictor\n   causal or the response law correct.\n\n2. **Scientific, sampling, assignment, and analysis units.** Name the\n   biological or physical unit about which the scientific question is asked,\n   the sample unit selected for observation when sampling occurs, the\n   assignment unit receiving a randomized treatment when randomization occurs,\n   and the analysis unit represented in each data record. These roles may\n   differ. A technical replicate is a repeated reading or assay of the same\n   specimen; a biological replicate is a distinct biological unit. Neither\n   term asserts independence. State whether enrollment is a probability\n   sample or a specified convenience/design cohort.\n\n3. **Indices and time.** Give every unit, treatment, visit, and repeated\n   measurement index, the object each index identifies, and the time origin.\n   In particular, do not identify a participant index with a visit or assay\n   index merely because all are written as rows in a data array.\n\n4. **Quantity status.** Mark each model quantity as **fixed** (held\n   nonrandom under the declared law), **random** (a measurable random element\n   with its law specified, using [[def-random-element-and-real-random-variable]]\n   and [[def-law-or-distribution-of-a-random-element]]), **observed** (recorded\n   in the data object), or **latent** (part of a fuller model state but not\n   recorded). A latent quantity must separately be declared fixed or random.\n   If inference conditions on a design value or event, name it and state the\n   conditional law being used.\n\n5. **Target and estimand.** Name the target population of units, settings,\n   and time period, and distinguish it from the enrolled or observed sample.\n   Specify the target as a function $\\psi:\\Theta\\to\\mathcal T$ when it is an\n   estimand in the parametric model, as in\n   [[def-estimand-on-a-statistical-model]]. The contract alone does not show\n   that the target is identifiable. Identifiability means that equality of\n   sampling laws forces equality of target values\n   ([[def-identifiability-of-an-estimand]]).\n\n6. **Observation mechanism.** State how a fuller scientific state becomes\n   the recorded data. A deterministic mechanism is a specified measurable map\n   $O:(\\mathcal W,\\mathcal G)\\to(\\mathcal X,\\mathcal A)$. A stochastic\n   mechanism is specified by $K:\\mathcal W\\times\\mathcal A\\to[0,1]$ such that,\n   for each $w$, $A\\mapsto K(w,A)$ is a probability measure and, for each\n   $A\\in\\mathcal A$, $w\\mapsto K(w,A)$ is measurable. These clauses define the\n   mechanism supplied by the contract; they do not assert that a conditional\n   version exists for an arbitrary joint law.\n\n7. **Support and law.** State the sampling law $P_\\theta$ on\n   $(\\mathcal X,\\mathcal A)$. For an asserted support set, give a measurable\n   $S_\\theta\\subseteq\\mathcal X$ with $P_\\theta(S_\\theta)=1$. If \u201csupport\u201d\n   instead means topological support, name the topology and the conditions\n   under which that convention is being used. If densities are used, name the\n   dominating measure and state whether their positive sets agree across\n   parameter values. For a randomized design, also state its assignment law;\n   if inference averages over assignments, give the resulting joint law.\n\n8. **Conditioning convention.** Say whether inference uses the joint law,\n   averaging over the declared randomization, or a specified conditional law\n   given the realized design. A conditional law at an event of probability\n   zero must be supplied as a specified version with its existence\n   hypotheses; it is not defined by an ordinary probability ratio.\n\n9. **Adequacy assumptions.** List each scientific adequacy assumption and\n   classify it as **design-controlled** (imposed by protocol and checked\n   against implementation records), **empirically assessable** (data or\n   validation measurements can challenge it, without proving it true), or\n   **substantively untestable** from the declared observed-data law (external\n   domain evidence or additional assumptions are needed). Split an assumption\n   that has different parts into separate entries and justify each label.\n\nThese are bookkeeping and interpretation requirements. They do not assert that\nan empirical law equals a proposed model, that a design was implemented as\nspecified, that calibration is valid, or that any scientific or physical\napplication is adequate. No independence, exchangeability, missingness,\ncausal-identification, or common-support assumption follows from the indexing\nor the classification labels. This definition uses no axiom of choice.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The signs are centered, square-integrable, and independent; $b$ is independent of $\\varepsilon$. Thus this is a moment-only random-intercept mixed model with $G=[1]$ and $R=I_2$. By [F2], its complete-response covariance is $\\operatorname{Cov}\\begin{pmatrix}Y_1\\\\Y_2\\end{pmatrix} =\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}+I_2 =\\begin{pmatrix}2&1\\\\1&2\\end{pmatrix}.$",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let the pattern space be $\\mathcal R=\\{0,1\\}^2$ with its power-set $\\sigma$-algebra, and define the full observation-pattern map $O(y_1,y_2)=(1,\\mathbf 1\\{y_2=2\\})$. It is Borel measurable because its first coordinate is constant and its second is the indicator of a Borel set. The induced kernel $K(y,A)=\\mathbf 1\\{O(y)\\in A\\}$ is the point mass at $O(y)$ for each $y$; for every $A\\subseteq\\mathcal R$, $y\\mapsto K(y,A)$ is measurable as the indicator of the Borel set $O^{-1}(A)$. Thus [F4] applies. Each sign triple has probability $1/8$. The two supported states $(1,-1,-1)$ and $(1,-1,1)$ both give observed first-visit value $Y_1=0$, but their second-visit values are $Y_2=0$ and $Y_2=2$, respectively; their patterns are $(1,0)$ and $(1,1)$.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the missing-visit pattern $r=(1,0)$, the mechanism probability is $1$ at $(Y_1,Y_2)=(0,0)$ and $0$ at $(0,2)$. These supported full-data points have the same observed coordinates $Y_{\\mathrm{obs}}(r)=Y_1=0$, so this pattern probability cannot depend only on the observed data for $r$. By [F3], the mechanism is not MAR, despite the correct random-intercept covariance in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The finite example has one subject and two scheduled visits."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The deterministic dropout kernel attains probabilities zero and one on two supported full-data states. See step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two-state comparison shares the same observed first-visit value. See step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The observation pattern is deterministic conditional on the full response, while the complete response law has positive finite support. See step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter interval is part of this finite counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite state enumeration uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample supplies a particular outcome-dependent observation mechanism violating the proposed covariance-to-ignorability implication; it asserts no biconditional test for all missingness mechanisms."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample supplies a particular outcome-dependent observation mechanism violating the proposed covariance-to-ignorability implication; it asserts no biconditional test for all missingness mechanisms."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "supported-dropout-states",
+          "calculation": "(b,\u03b5\u2081,\u03b5\u2082)=(1,\u22121,\u22121) gives (Y\u2081,Y\u2082)=(0,0), M\u2082=0; (1,\u22121,1) gives (0,2), M\u2082=1.",
+          "result": "Same observed first visit, different dropout pattern, so MAR fails.",
+          "evidence": "steps 1.2\u20132.1"
+        }
+      ],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed all three verification steps and exact MAR/kernel definitions. Eight equiprobable independent sign triples satisfy the moment mixed model with G=1,R=I2 and full-data covariance [[2,1],[1,2]]. O(y)=(1,1{y2=2}) is Borel, induces a point-mass kernel and monotone dropout. Supported points (0,0) and (0,2) have equal first-visit observed value under r=(1,0) but pattern probabilities 1 and 0, refuting MAR. No Gaussianity or full-rank design is needed. Accepted reader title correction from ignorable to MAR: the claim proves a kernel MAR failure, not a full likelihood-ignorability assertion. Duke Lecture 7 p.17 \u00a79.1 supplies the pattern convention; \u00a79.2 concerns the distinct likelihood qualification."
+      }
+    },
+    "ex-random-intercept-intraclass-correlation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-marginal-covariance-of-linear-mixed-model",
+          "source_section": "Statement",
+          "quote": "For the moment model $Y=X\\beta+Zb+\\varepsilon$ of [[def-linear-mixed-model]], the marginal covariance is\n$$\\operatorname{Cov}(Y)=V:=ZGZ^T+R.$$\nThis identity uses only the stated means, covariances, and independence; it does not require Gaussianity.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For either visit, the random part is $b_j+\\varepsilon_{ji}$, so its variance is $\\tau^2+\\sigma^2$ because the two terms are independent and centered. Equivalently, in the marginal-covariance formula use random-intercept design row $1$, $G=[\\tau^2]$, and residual diagonal entry $\\sigma^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the two distinct visits, both observations contain the same $b_j$. The covariance formula gives $\\operatorname{Cov}(Y_{j1},Y_{j2})=\\tau^2$; the residual cross-covariance is zero by the assumed independence.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [A1], both marginal variances are positive. Dividing the covariance from step 1.2 by the square root of the product of the two equal variances from step 1.1 gives $\\tau^2/(\\tau^2+\\sigma^2)$. If $\\tau^2=0<\\sigma^2$ the ICC is $0$; if $\\sigma^2=0<\\tau^2$ it is $1$; if both are zero the correlation is undefined.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has two scheduled visits."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The case \u03c4\u00b2=0<\u03c3\u00b2 gives ICC 0 and is computed in the verification. See step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case \u03c3\u00b2=0<\u03c4\u00b2 gives ICC 1 and is computed in the verification. See step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When \u03c4\u00b2=\u03c3\u00b2=0 both variances vanish and correlation is undefined. See step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The nonnegative variance endpoints are handled explicitly in step 2.1. See step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two-coordinate covariance calculation uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example calculates variance, covariance and their intraclass-correlation ratio for the specified independent random-intercept model; it does not claim that ratio identifies a unique latent model."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example calculates variance, covariance and their intraclass-correlation ratio for the specified independent random-intercept model; it does not claim that ratio identifies a unique latent model."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "variance-endpoints",
+          "calculation": "\u03c4\u00b2=0<\u03c3\u00b2 gives ICC 0; \u03c3\u00b2=0<\u03c4\u00b2 gives ICC 1; \u03c4\u00b2=\u03c3\u00b2=0 makes correlation undefined.",
+          "result": "Matches the formula domain and the three cases in verification step 3.1.",
+          "evidence": "step 2.1"
+        }
+      ],
+      "axioms_used": []
+    },
+    "cex-two-visits-alias-random-slope-and-residual-variance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-marginal-covariance-of-linear-mixed-model",
+          "source_section": "Statement",
+          "quote": "For the moment model $Y=X\\beta+Zb+\\varepsilon$ of [[def-linear-mixed-model]], the marginal covariance is\n$$\\operatorname{Cov}(Y)=V:=ZGZ^T+R.$$\nThis identity uses only the stated means, covariances, and independence; it does not require Gaussianity.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-variance-component-identifiability-iff-covariance-map-injective",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\Theta$ be a nonempty parameter set and let $\\theta\\mapsto(G_\\theta,R_\\theta)$ be a declared covariance-component parameterization of the Gaussian mixed model, with\n$$V_\\theta=ZG_\\theta Z^T+R_\\theta$$\npositive semidefinite for every $\\theta\\in\\Theta$. Consider the parametric family\n$$P_{\\beta,\\theta}=N_n(X\\beta,V_\\theta),\\qquad (\\beta,\\theta)\\in\\mathbb R^p\\times\\Theta,$$\nand the estimand $\\psi(\\beta,\\theta)=\\theta$. Then $\\psi$ is identifiable if and only if the covariance map $\\theta\\mapsto V_\\theta$ is injective on $\\Theta$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gaussian-linear-mixed-model",
+          "source_section": "Definition",
+          "quote": "The **Gaussian branch** of [[def-linear-mixed-model]] adds the following assumption: under the Axiom of Choice, the concatenated vector\n$$W=\\begin{pmatrix}b\\\\ \\varepsilon\\end{pmatrix}$$\nhas the multivariate-normal law $N_{q+n}(0,\\operatorname{diag}(G,R))$ of [[def-multivariate-normal-law]]. Thus the full latent-effect and residual vector is jointly Gaussian. This is an additional branch; the moment-only definition and the covariance identity do not assume Gaussianity.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every real matrix $A\\in M_n(\\mathbb R)$,\n$$A\\text{ is invertible}\\quad\\Longleftrightarrow\\quad\\det(A)\\ne0.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrix $G_2$ is positive definite because for every $(x,y)\\ne(0,0)$, $\\begin{pmatrix}x&y\\end{pmatrix}G_2\\begin{pmatrix}x\\\\y\\end{pmatrix} =\\frac45\\left(x+\\frac14y\\right)^2+\\frac{11}{20}y^2>0.$ Also $G_1=I_2$ and $R_1=I_2$ are positive definite, while $R_2=(6/5)I_2$ is positive definite since $6/5>0$. The design has determinant $1$, so [F4] makes it invertible and therefore full rank.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the first tuple, $V_1=ZG_1Z^T+R_1 =\\begin{pmatrix}1&1\\\\1&2\\end{pmatrix}+I_2 =\\begin{pmatrix}2&1\\\\1&3\\end{pmatrix}.$",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Direct multiplication gives $ZG_2Z^T=\\begin{pmatrix}4/5&1\\\\1&9/5\\end{pmatrix}, \\qquad V_2=ZG_2Z^T+R_2 =\\begin{pmatrix}2&1\\\\1&3\\end{pmatrix} =V_1.$ The covariance parameter tuples are distinct, so the covariance map is not injective.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under either Gaussian tuple, $Y-X\\beta$ has every scalar projection normal: in direction $u$, the coefficient vector on $(b,\\varepsilon)$ is $(Z^Tu,u)$ and its variance is $u^TV_i u$. Since $V_1=V_2$, these projections have identical characteristic functions, so [F3] gives equal response laws. The covariance-component tuples are distinct, so the parameter is not identifiable.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample has exactly two visits and two random-effect coordinates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both candidate random-effect and residual covariance matrices are positive definite, so no zero-variance boundary is needed. See step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The two visit times are 0 and 1 and the fixed design is full rank. See step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The witness remains nondegenerate: both G matrices and both R matrices are positive definite. See step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter interval endpoint is part of the witness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Gaussian sampling laws use the AC-bearing Gaussian definition; step 3.1 applies characteristic-function uniqueness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample exhibits two distinct covariance-component tuples with the same two-visit observation covariance; it is a failure of identification, not a biconditional characterization of all visit designs."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample exhibits two distinct covariance-component tuples with the same two-visit observation covariance; it is a failure of identification, not a biconditional characterization of all visit designs."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-tuple-covariance",
+          "calculation": "ZG\u2081Z\u1d40+R\u2081=[[2,1],[1,3]]=ZG\u2082Z\u1d40+R\u2082; G\u2082 quadratic form is (4/5)(x+y/4)\u00b2+(11/20)y\u00b2.",
+          "result": "Distinct positive-definite tuples give the same positive-definite covariance.",
+          "evidence": "steps 1.1\u20132.1"
+        }
+      ],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed all four verification steps and all cited supplier statements: X=Z=[[1,0],[1,1]] has determinant 1; G2 quadratic form is (4/5)(x+y/4)^2+(11/20)y^2>0. G1,R1,R2 also PD. Direct multiplication gives V1=V2=[[2,1],[1,3]] despite different G and residual variances. Same beta and joint Gaussian projections give the same full response law via the multivariate CF lemma, so the exact covariance-map identifiability theorem applies. Finite witness, not a universal identifiability characterization; repeating this fixed two-visit design preserves equality. AC explicit. Duke Lecture 6 \u00a77.1 motivates covariance aliasing; the two-visit witness is authored and verified locally."
+      }
+    },
+    "lem-gaussian-error-contrast-is-multivariate-normal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-linear-mixed-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ and $q\\ge0$ be finite integers. A **finite-dimensional linear mixed model** on one probability space consists of fixed matrices $X\\in\\mathbb R^{n\\times p}$ and $Z\\in\\mathbb R^{n\\times q}$, a fixed parameter $\\beta\\in\\mathbb R^p$, and square-integrable random vectors $b\\in\\mathbb R^q$ and $\\varepsilon\\in\\mathbb R^n$ such that\n$$Y=X\\beta+Zb+\\varepsilon,\\qquad \\mathbb E b=0,\\qquad \\mathbb E\\varepsilon=0,\\qquad \\operatorname{Cov}(b)=G,\\qquad \\operatorname{Cov}(\\varepsilon)=R,$$\nwhere $b$ and $\\varepsilon$ are independent random elements. Here $G$ and $R$ are the resulting symmetric positive-semidefinite covariance matrices. The fixed-design convention for $X$ and the first-moment regression model is that of [[def-fixed-design-linear-regression-model]]. The explicit scientific record of units, quantities, observation mechanism, and adequacy assumptions is required by [[def-scientific-statistical-model-contract]].\n\nFor longitudinal data, let $j$ index subjects and let $i\\in S_j$ index the visits scheduled for subject $j$. A row of $Y$, $X$, and $Z$ corresponds to one observed subject\u2013visit pair $(j,i)$; the time $t_{ji}$ is measured from a stated origin. Blocks of $b$ may represent subject-specific latent effects, while $R$ records the residual covariance across observed rows. If a visit pattern is fixed or conditioned on, the corresponding rows are selected from the scheduled vectors and matrices. If the pattern is random, its observation mechanism is specified separately; the displayed model does not assert that this mechanism is independent of the full outcomes or ignorable for likelihood inference.\n\nThe definition imposes no Gaussianity, no identical visit schedule, and no claim that a scientific application satisfies the proposed mean or covariance structure.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gaussian-linear-mixed-model",
+          "source_section": "Definition",
+          "quote": "The **Gaussian branch** of [[def-linear-mixed-model]] adds the following assumption: under the Axiom of Choice, the concatenated vector\n$$W=\\begin{pmatrix}b\\\\ \\varepsilon\\end{pmatrix}$$\nhas the multivariate-normal law $N_{q+n}(0,\\operatorname{diag}(G,R))$ of [[def-multivariate-normal-law]]. Thus the full latent-effect and residual vector is jointly Gaussian. This is an additional branch; the moment-only definition and the covariance identity do not assume Gaussianity.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-marginal-covariance-of-linear-mixed-model",
+          "source_section": "Statement",
+          "quote": "For the moment model $Y=X\\beta+Zb+\\varepsilon$ of [[def-linear-mixed-model]], the marginal covariance is\n$$\\operatorname{Cov}(Y)=V:=ZGZ^T+R.$$\nThis identity uses only the stated means, covariances, and independence; it does not require Gaussianity.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-error-contrast-matrix",
+          "source_section": "Definition",
+          "quote": "Let $X\\in\\mathbb R^{n\\times p}$ have full column rank, with $p<n$, and let $\\operatorname{col}(X)^\\perp$ denote the orthogonal complement of its column space in Euclidean $\\mathbb R^n$ ([[def-orthogonal-complement]]). An **error-contrast matrix** for $X$ is a matrix $K\\in\\mathbb R^{n\\times(n-p)}$ whose columns form a basis of $\\operatorname{col}(X)^\\perp$. Thus $K$ has full column rank and $X^TK=0$, so $K^TY$ is an $(n-p)$-dimensional vector of linear contrasts that annihilate $X\\beta$. Such a matrix exists by [[lem-error-contrast-matrix-exists]].\n\nThis column-basis convention makes the product $K^TY$ dimensionally defined. The Gaussian restricted-likelihood definition below fixes one such $K$ independently of the covariance parameter.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ and $(Y_j)_{j\\in J}$ be finite families of square-integrable real random variables on one common probability space. Then covariance is symmetric, and for real scalars $a_i,b_j$,\n$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$\nThis includes empty sums and constant summands. On a finite probability space all real random variables are square-integrable, so the original finite-space case is included with the same centered-product covariance.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $Y-X\\beta=Zb+\\varepsilon$ is centered. Linearity [F6] gives $\\mathbb E Y=X\\beta$, and [F3] gives $\\operatorname{Cov}(Y)=V$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $u\\in\\mathbb R^{n-p}$. Since $X^TK=0$ by [F4], $u^TK^TY=u^TK^T(Zb+\\varepsilon)$, a scalar linear projection of the jointly Gaussian vector in [F2]; it is normal by [F5]. Its mean is zero by [F1] and [F6], and its variance is $u^TK^TVKu$ by step 1.1 and covariance bilinearity [F7].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F8], $Q=K^TY$ is a Borel random vector. For each $u$, [F9] and step 2.1 give $\\mathbb E e^{iu^TQ}=\\exp(-u^TK^TVKu/2)$. This is the characteristic function of $N_{n-p}(0,K^TVK)$ by [F10]; uniqueness [F11] gives the stated law. Its mean and covariance do not depend on $\\beta$, so neither does its law.",
+          "step": "3.1",
+          "inputs": [
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The design satisfies p\u22651 and p<n, so there is no zero-dimensional contrast vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof allows u^TK^TVKu=0 and identifies the resulting projection as a degenerate normal in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n\u2212p=1, step 2.1 is the scalar projection itself and the same characteristic-function argument applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement allows K^TVK to be singular, and step 2.1 includes zero-variance normal projections."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement assumes p<n; at p=n the contrast dimension would be zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is stated and used for the Gaussian law in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a direct conclusion and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-7",
+        "notes": "Reviewed steps 1.1\u20133.1: K^T X=0 removes beta; every projection of K^T Y is a projection of the jointly Gaussian (b,epsilon), with mean zero and covariance K^T V K. Fixed linear maps are Borel. n-p>=1; singular contrast covariance and zero-variance directions are allowed. Confirmed fatal citation-inaccurate F11: the original scalar uniqueness theorem states only laws on R. Replaced F11 with the already-declared multivariate CF lemma, whose proof applies scalar uniqueness to every projection and then Cramer\u2013Wold. The proof and Statement remain unchanged; the contract now cites the exact multivariate statement. AC inherited explicitly. Duke Lecture 4 p.5 confirms the contrast law."
+      }
+    }
+  }
+}

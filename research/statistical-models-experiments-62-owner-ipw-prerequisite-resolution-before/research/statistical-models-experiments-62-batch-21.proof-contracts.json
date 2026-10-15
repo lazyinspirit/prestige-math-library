@@ -1,0 +1,1177 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-standardization-for-a-causal-mean",
+    "alg-inverse-probability-weighting-for-a-causal-mean",
+    "lem-conditional-treatment-indicator-factorization",
+    "thm-standardization-identifies-a-causal-mean",
+    "thm-inverse-probability-weighting-identifies-a-causal-mean",
+    "ex-positivity-failure-prevents-standardization-and-ipw-identification",
+    "ex-standardization-and-ipw-two-strata-calculation",
+    "ex-extreme-ipw-weights-under-poor-overlap",
+    "ex-weight-truncation-changes-the-ipw-target"
+  ],
+  "contracts": {
+    "alg-standardization-for-a-causal-mean": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "alg-standardization-for-a-causal-mean: the input is one fixed probability law and treatment atom, not an empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "alg-standardization-for-a-causal-mean: the Definition requires e_a(L)>0 almost surely, so e_a=0 is outside the domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "alg-standardization-for-a-causal-mean: the Definition permits e_a(L)=1; the conditional mean and weighted functional remain defined when their integrability conditions hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "alg-standardization-for-a-causal-mean: if A=a almost surely, e_a=1 and the Definition reduces to the observed population mean."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "alg-standardization-for-a-causal-mean: the Definition includes e_a=1 and excludes e_a=0 to avoid division by zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "alg-standardization-for-a-causal-mean: the instructions use the supplied atom a and conditional-expectation classes; they select no element from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-inverse-probability-weighting-for-a-causal-mean": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "alg-inverse-probability-weighting-for-a-causal-mean: the input is one fixed probability law and treatment atom, not an empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "alg-inverse-probability-weighting-for-a-causal-mean: the Definition requires e_a(L)>0 almost surely, so e_a=0 is outside the domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "alg-inverse-probability-weighting-for-a-causal-mean: the Definition permits e_a(L)=1; the conditional mean and weighted functional remain defined when their integrability conditions hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "alg-inverse-probability-weighting-for-a-causal-mean: if A=a almost surely, e_a=1 and the Definition reduces to the observed population mean."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "alg-inverse-probability-weighting-for-a-causal-mean: the Definition includes e_a=1 and excludes e_a=0 to avoid division by zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "alg-inverse-probability-weighting-for-a-causal-mean: the instructions use the supplied atom a and conditional-expectation classes; they select no element from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-conditional-treatment-indicator-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define I, e and U as conditional-expectation classes; AC supplies their existence, and positivity and constant preservation give 0<=e<=1.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each bounded measurable truncation Z_n, apply the conditional-independence product identity to obtain E[IZ_n|G]=eE[Z_n|G].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Dominated convergence gives Z_n->Z in L1; conditional-expectation contraction and 0<=e<=1 give L1 convergence of both sides to the asserted limits.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The equal sides of step 2.1 converge to the two classes in step 2.2, so uniqueness of an L1 limit yields the factorization.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: if C is empty then I=0 and both sides of the factorization are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when e=0; its bounded-factor identity and the L1 limit in step 3.1 give zero on both sides."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when e=1; the L1 limit in step 3.1 gives the stated factorization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes Z=0 and other integrable degenerate inputs because the L1 limits remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 include C empty or the whole treatment state space."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof assumes AC only for the library's conditional-expectation existence convention and makes no arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-standardization-identifies-a-causal-mean": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-standardization-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "The **standardization functional** at $a$ is\n$$\\Psi_{\\mathrm{std}}(Q;a)=E_Q[m_a(L)],$$\nprovided $m_a(L)$ is integrable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-conditional-treatment-indicator-factorization",
+          "source_section": "Statement",
+          "quote": "If $Z$ is a real integrable random variable and $Z\\perp\\!\\!\\!\\perp A\\mid\\mathcal G$, then, with $I=\\mathbf 1_{\\{A\\in C\\}}$,\n$$E[IZ\\mid\\mathcal G]=E[I\\mid\\mathcal G]E[Z\\mid\\mathcal G]\\quad\\text{almost surely}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-conditional-independence-equivalences-and-preservation",
+          "source_section": "Statement",
+          "quote": "Conditional independence is preserved by measurable maps of either variable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditional-expectation-is-unique-almost-surely",
+          "source_section": "Statement",
+          "quote": "If $Y,Z$ are conditional-expectation versions of the same real integrable $X$ given $\\mathcal G$, then $Y=Z$ almost surely.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or **parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-identifiability-iff-constant-on-equivalence-classes",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\psi:\\Theta\\to\\mathcal T_0$ be an estimand, and set\n$\\mathcal M:=\\mathsf P(\\Theta)$, the set of laws in the model. For\n$\\theta\\in\\Theta$, write\n$$\n[\\theta]_\\sim:=\\{\\eta\\in\\Theta:\\eta\\sim\\theta\\}.\n$$\nThen the following are equivalent: **(i)** $\\psi$ is identifiable; **(ii)**\n$\\psi$ is constant on every observational equivalence class $[\\theta]_\\sim$;\nand **(iii)** there is a unique function $\\bar\\psi:\\mathcal M\\to\\mathcal T_0$\nsuch that $\\psi=\\bar\\psi\\circ\\mathsf P$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $A\\in\\mathcal F$.\nThen the indicator $\\mathbf 1_A$ satisfies\n$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define I_a, e_a, mu_a and q_a. Indicator expectation and the tower property give P(A=a)=E[I_a]=E[e_a]; consistency gives I_aY=I_aY^a, and coordinate exchangeability plus the factorization lemma yields q_a=e_a mu_a.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since e_a>0 almost surely, q_a/e_a=mu_a; mu_a is integrable, so the standardization functional is well-defined.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The tower property gives E[m_a(L)]=E[mu_a]=E[Y^a].",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The target factors through the observed-law map as the defined standardization functional; uniqueness of the conditional classes makes it well-defined and the identifiability criterion applies.",
+          "step": "4.1",
+          "inputs": [
+            "A2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 3.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Standardization identifies a causal mean: the theorem fixes one treatment atom and has no empty-family input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: e_a(L)=0 violates strict positivity; step 2.1 divides only on the full-measure set where e_a>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid at e_a=1, and step 3.1 averages the observed outcome under treatment a."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If L is degenerate, sigma(L) is trivial and step 3.1 is the unconditional expectation identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes e_a=1 and excludes e_a=0; it assumes no uniform positive lower bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Standardization identifies a causal mean: AC is explicitly retained for conditional-expectation existence; no further selection from a family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        }
+      ],
+      "finite_smoke": [],
+      "unresolved_supplier_citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcome-model-and-causal-estimand",
+          "required_hypotheses": "Potential outcomes, consistency Y=Y^A, integrable Y^a, and full-vector conditional exchangeability; exact current supplier excerpt not available at handoff.",
+          "affected_steps": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-causal-identification-and-partial-identification",
+          "required_hypotheses": "Causal target and identification relative to a specified causal model and observed law; exact current supplier excerpt not available at handoff.",
+          "affected_steps": [
+            "4.1"
+          ]
+        }
+      ]
+    },
+    "thm-inverse-probability-weighting-identifies-a-causal-mean": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-inverse-probability-weighting-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "The **inverse-probability-weighted functional** at $a$ is\n$$\\Psi_{\\mathrm{IPW}}(Q;a)=E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right],$$\nprovided the displayed weighted variable is integrable.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-conditional-treatment-indicator-factorization",
+          "source_section": "Statement",
+          "quote": "If $Z$ is a real integrable random variable and $Z\\perp\\!\\!\\!\\perp A\\mid\\mathcal G$, then, with $I=\\mathbf 1_{\\{A\\in C\\}}$,\n$$E[IZ\\mid\\mathcal G]=E[I\\mid\\mathcal G]E[Z\\mid\\mathcal G]\\quad\\text{almost surely}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or **parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-identifiability-iff-constant-on-equivalence-classes",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\psi:\\Theta\\to\\mathcal T_0$ be an estimand, and set\n$\\mathcal M:=\\mathsf P(\\Theta)$, the set of laws in the model. For\n$\\theta\\in\\Theta$, write\n$$\n[\\theta]_\\sim:=\\{\\eta\\in\\Theta:\\eta\\sim\\theta\\}.\n$$\nThen the following are equivalent: **(i)** $\\psi$ is identifiable; **(ii)**\n$\\psi$ is constant on every observational equivalence class $[\\theta]_\\sim$;\nand **(iii)** there is a unique function $\\bar\\psi:\\mathcal M\\to\\mathcal T_0$\nsuch that $\\psi=\\bar\\psi\\circ\\mathsf P$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $A\\in\\mathcal F$.\nThen the indicator $\\mathbf 1_A$ satisfies\n$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define G, I_a, e_a, mu_a and H_n. The tower property and indicator identity give P(A=a)=E[I_a]=E[e_a]; H_n is bounded and increases to 1/e_a, and consistency replaces I_aY with I_aY^a.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F6",
+            "F10",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Factor |Y^a|, take out bounded H_n, and apply monotone and dominated convergence to prove E[I_a|Y^a|/e_a]=E|Y^a|<infinity.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Factor signed Y^a and take out H_n; dominated convergence on both sides gives E[I_aY^a/e_a]=E[mu_a].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The tower property gives E[mu_a]=E[Y^a]; consistency then identifies the observed weighted expectation and verifies its integrability.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F6",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For every compatible full-data law the observed IPW functional equals the target, so the target factors through the observed law and is identifiable.",
+          "step": "5.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F7",
+            "F8",
+            "F9",
+            "step 4.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Inverse probability weighting identifies a causal mean: the theorem fixes one treatment atom and has no empty-family input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement requires e_a>0 almost surely; step 1.1 defines 1/e_a only on that full-measure set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At e_a=1, step 1.1 has H_n=1 and step 4.1 reduces to consistency and the tower identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If L is degenerate, sigma(L) is trivial and step 4.1 is the unconditional expectation identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 allow e_a arbitrarily close to zero; only e_a=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Inverse probability weighting identifies a causal mean: AC is explicitly retained for conditional-expectation existence; no further selection from a family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        }
+      ],
+      "finite_smoke": [],
+      "unresolved_supplier_citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcome-model-and-causal-estimand",
+          "required_hypotheses": "Potential outcomes, consistency Y=Y^A, integrable Y^a, and full-vector conditional exchangeability; exact current supplier excerpt not available at handoff.",
+          "affected_steps": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-causal-identification-and-partial-identification",
+          "required_hypotheses": "Causal target and identification relative to a specified causal model and observed law; exact current supplier excerpt not available at handoff.",
+          "affected_steps": [
+            "5.1"
+          ]
+        }
+      ]
+    },
+    "ex-positivity-failure-prevents-standardization-and-ipw-identification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-standardization-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "The **standardization functional** at $a$ is\n$$\\Psi_{\\mathrm{std}}(Q;a)=E_Q[m_a(L)],$$\nprovided $m_a(L)$ is integrable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-inverse-probability-weighting-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "The **inverse-probability-weighted functional** at $a$ is\n$$\\Psi_{\\mathrm{IPW}}(Q;a)=E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right],$$\nprovided the displayed weighted variable is integrable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-conditional-treatment-indicator-factorization",
+          "source_section": "Statement",
+          "quote": "If $Z$ is a real integrable random variable and $Z\\perp\\!\\!\\!\\perp A\\mid\\mathcal G$, then, with $I=\\mathbf 1_{\\{A\\in C\\}}$,\n$$E[IZ\\mid\\mathcal G]=E[I\\mid\\mathcal G]E[Z\\mid\\mathcal G]\\quad\\text{almost surely}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two laws have the same three observed cells because treatment is never one in stratum L=0.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The target means are 1/2 and 3/2, so equal observed laws do not determine the target.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At L=0 the propensity is zero, making both formula denominators unavailable; the factorization lemma gives a zero observed numerator irrespective of the unobserved stratum mean.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "ex-positivity-failure-prevents-standardization-and-ipw-identification: the example fixes a nonempty finite probability model rather than an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks e_1(0)=0 directly and shows the functionals are undefined on that positive-probability stratum."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No stratum has e_1=1; the example concerns e_1=0 versus e_1=1/2 only."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "L has two positive-probability values, so the example does not use a degenerate covariate law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The propensity values are exactly 0 and 1/2; step 2.1 checks the zero endpoint.",
+          "evidence": "The propensity values are exactly 0 and 1/2; step 3.1 checks the zero endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "ex-positivity-failure-prevents-standardization-and-ipw-identification: all model values and arithmetic inputs are explicitly specified; the verification selects no witness from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        }
+      ],
+      "finite_smoke": [],
+      "unresolved_supplier_citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcome-model-and-causal-estimand",
+          "required_hypotheses": "Point-treatment potential outcomes and consistency; exact current supplier excerpt not available at handoff.",
+          "affected_steps": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ]
+    },
+    "ex-standardization-and-ipw-two-strata-calculation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-standardization-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "The **standardization functional** at $a$ is\n$$\\Psi_{\\mathrm{std}}(Q;a)=E_Q[m_a(L)],$$\nprovided $m_a(L)$ is integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-inverse-probability-weighting-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "The **inverse-probability-weighted functional** at $a$ is\n$$\\Psi_{\\mathrm{IPW}}(Q;a)=E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right],$$\nprovided the displayed weighted variable is integrable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-standardization-identifies-a-causal-mean",
+          "source_section": "Statement",
+          "quote": "Then $$\\Psi_{\\mathrm{std}}(Q;a)=E_P[Y^a].$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-inverse-probability-weighting-identifies-a-causal-mean",
+          "source_section": "Statement",
+          "quote": "the inverse-probability-weighted functional of [[alg-inverse-probability-weighting-for-a-causal-mean]] is well-defined and satisfies\n$$E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right]=E_P[Y^a].$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The propensity values are 1/4 and 3/4 and the treatment-specific means are 1 and 3, so standardization returns 2.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The treated masses are 1/8 and 3/8; weighting their outcomes by inverse propensity gives 1/2+3/2=2.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The target potential-outcome mean is 2, agreeing with both computations and the two identification statements.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "ex-standardization-and-ipw-two-strata-calculation: the example fixes a nonempty finite probability model rather than an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies e_1(0)=1/4 and e_1(1)=3/4, both positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Neither stratum has e_1=1; the example uses propensities 1/4 and 3/4."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "L is uniform on two values and is not degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Both propensities are strictly between zero and one; no propensity endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "ex-standardization-and-ipw-two-strata-calculation: all model values and arithmetic inputs are explicitly specified; the verification selects no witness from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        }
+      ],
+      "finite_smoke": [],
+      "unresolved_supplier_citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcome-model-and-causal-estimand",
+          "required_hypotheses": "The example's potential-outcome and consistency conventions; exact current supplier excerpt not available at handoff.",
+          "affected_steps": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ]
+    },
+    "ex-extreme-ipw-weights-under-poor-overlap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-inverse-probability-weighting-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "The **inverse-probability-weighted functional** at $a$ is\n$$\\Psi_{\\mathrm{IPW}}(Q;a)=E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right],$$\nprovided the displayed weighted variable is integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-inverse-probability-weighting-identifies-a-causal-mean",
+          "source_section": "Statement",
+          "quote": "the inverse-probability-weighted functional of [[alg-inverse-probability-weighting-for-a-causal-mean]] is well-defined and satisfies\n$$E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right]=E_P[Y^a].$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The only nonzero IPW summand occurs with probability epsilon/2 and is 1/epsilon, so its expectation and the target mean are 1/2.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The second moment is 1/(2 epsilon), hence the variance is 1/(2 epsilon)-1/4 and diverges as epsilon decreases to zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every model has positive propensity while weights can be arbitrarily large; the computation makes no finite-sample claim.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "ex-extreme-ipw-weights-under-poor-overlap: the example fixes a nonempty finite probability model rather than an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example restricts epsilon to (0,1/2), so step 1.1 has e_1(0)=epsilon>0 for every model."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The displayed propensity values are epsilon and 1/2, neither equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "L has two equally likely values for each epsilon."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Step 1.2 studies the limit epsilon down to zero but every model used in step 1.1 has epsilon>0.",
+          "evidence": "Step 2.1 studies epsilon down to zero, but every model used in step 1.1 has epsilon>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "ex-extreme-ipw-weights-under-poor-overlap: all model values and arithmetic inputs are explicitly specified; the verification selects no witness from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        }
+      ],
+      "finite_smoke": [],
+      "unresolved_supplier_citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcome-model-and-causal-estimand",
+          "required_hypotheses": "The example's point-treatment potential outcomes and consistency convention; exact current supplier excerpt not available at handoff.",
+          "affected_steps": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "ex-weight-truncation-changes-the-ipw-target": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-inverse-probability-weighting-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "The **inverse-probability-weighted functional** at $a$ is\n$$\\Psi_{\\mathrm{IPW}}(Q;a)=E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right],$$\nprovided the displayed weighted variable is integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-inverse-probability-weighting-identifies-a-causal-mean",
+          "source_section": "Statement",
+          "quote": "the inverse-probability-weighted functional of [[alg-inverse-probability-weighting-for-a-causal-mean]] is well-defined and satisfies\n$$E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right]=E_P[Y^a].$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The true target and untruncated IPW mean are both 1 in this two-stratum model.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Capping the treated L=0 weight at 3/2 changes the raw population expectation to 3/8.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The mean capped weight is 11/16, so the normalized capped functional is 6/11 rather than 1.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The computation concerns population functionals for known propensities and asserts no finite-sample limit.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "ex-weight-truncation-changes-the-ipw-target: the example fixes a nonempty finite probability model rather than an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example has e_1(0)=1/4 and e_1(1)=3/4, both strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Neither propensity equals one; the example uses 1/4 and 3/4."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "L has two equally likely values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cap 3/2 lies strictly between the two inverse propensities 4/3 and 4; no endpoint propensity is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "ex-weight-truncation-changes-the-ipw-target: all model values and arithmetic inputs are explicitly specified; the verification selects no witness from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item makes no biconditional claim, so this direction is not part of its argument."
+        }
+      ],
+      "finite_smoke": [],
+      "unresolved_supplier_citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcome-model-and-causal-estimand",
+          "required_hypotheses": "The example's point-treatment estimand and consistency convention; exact current supplier excerpt not available at handoff.",
+          "affected_steps": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ]
+    }
+  }
+}

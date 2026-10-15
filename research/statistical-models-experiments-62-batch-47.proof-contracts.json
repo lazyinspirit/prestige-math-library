@@ -1,0 +1,863 @@
+{
+  "version": 1,
+  "scope": [
+    "def-simple-ordinary-and-universal-kriging",
+    "thm-kriging-systems-and-l2-optimality",
+    "thm-gaussian-simple-kriging-equals-conditional-mean",
+    "ex-singular-covariance-simple-kriging",
+    "ex-rank-deficient-universal-kriging-design",
+    "ex-ordinary-kriging-larger-error-than-simple"
+  ],
+  "contracts": {
+    "def-simple-ordinary-and-universal-kriging": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Definition explicitly chooses n>=1 observation sites before forming Z, Sigma and P. An empty observation vector is outside this defined kriging model; no n=0 ordinary-weight constraint or inverse formula is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition permits zero means and defines rules directly from the finite field vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition applies to n=1 and its vectors reduce to scalars."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition explicitly withholds the inverse formula when Sigma is singular."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Definition uses arbitrary sites s0,...,sn in the supplied index set T, real means and finite covariance matrices. It imposes no interval ordering on T and makes no limiting or interval-endpoint prediction claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The definition is choice-free and selects no family of weights."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition specifies three predictor families: known means give m0+lambda^T(Z-m), ordinary weights sum to one, and universal weights satisfy P^T lambda=p0. It asserts no separate characterization theorem whose implication direction must be proved."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition specifies three predictor families: known means give m0+lambda^T(Z-m), ordinary weights sum to one, and universal weights satisfy P^T lambda=p0. It asserts no separate characterization theorem whose implication direction must be proved."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "remark_review": {
+        "status": "complete",
+        "notes": "The variogram citation is now explicitly limited to an order-two intrinsically stationary field indexed by all of R^d, exactly the cited theorem Statement. The Definition and finite-covariance models remain unchanged; no additional dependency or consumer repair is needed."
+      }
+    },
+    "thm-kriging-systems-and-l2-optimality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "Let $X=(X(s))_{s\\in T}$ be a real random field in the sense of\n[[def-random-field-stationarity-covariance-and-variogram]], and suppose the\nfinite vector of field values considered below is square-integrable. Choose\n$n\\ge1$ observation sites $s_1,\\ldots,s_n$ and a target site $s_0$. Write\n$Z=(X(s_1),\\ldots,X(s_n))^\\top$, $Y=X(s_0)$,\n$\\Sigma=\\operatorname{Cov}(Z,Z)$, $c_0=\\operatorname{Cov}(Z,Y)$, and\n$v_0=\\operatorname{Var}(Y)$. A positive-definite matrix $\\Sigma$ means\n$u^\\top\\Sigma u>0$ for every nonzero $u\\in\\mathbb R^n$.\n\nIf the mean vector $m=\\mathbb E Z$ and target mean $m_0=\\mathbb E Y$ are\nknown, a **simple-kriging linear predictor** with weight vector\n$\\lambda\\in\\mathbb R^n$ is\n$$\\widehat Y_{\\mathrm{SK}}(\\lambda)=m_0+\\lambda^\\top(Z-m).$$\nIts mean-square prediction error is\n$\\mathbb E[(Y-\\widehat Y_{\\mathrm{SK}}(\\lambda))^2]$.\n\nFor an **ordinary-kriging model**, the mean is an unknown common constant\n$\\theta$: $\\mathbb E Z=\\theta\\mathbf 1_n$ and $\\mathbb E Y=\\theta$.\nThe predictor is $\\widehat Y_{\\mathrm{OK}}(\\lambda)=\\lambda^\\top Z$.\nThe admissible ordinary weights satisfy $\\mathbf 1_n^\\top\\lambda=1$.\n\nFor a **universal-kriging model**, fix a trend map\n$p:T\\to\\mathbb R^q$, where $q\\ge1$, and an unrestricted coefficient vector\n$\\beta\\in\\mathbb R^q$. Define the finite-site design matrix\n$P\\in\\mathbb R^{n\\times q}$ by row $i$ equal to $p(s_i)^\\top$, and put\n$p_0=p(s_0)$. The model means are $\\mathbb E Z=P\\beta$ and\n$\\mathbb E Y=p_0^\\top\\beta$. The predictor is\n$\\widehat Y_{\\mathrm{UK}}(\\lambda)=\\lambda^\\top Z$; its unbiasedness for\nevery $\\beta\\in\\mathbb R^q$ is expressed by $P^\\top\\lambda=p_0$.\nOrdinary kriging is the special case $q=1$, $P=\\mathbf 1_n$, and $p_0=1$.\n\nThe covariance-based optimality statements on this page use the actual\nfinite covariance matrix and vector. In particular, the inverse formula for\nsimple kriging is not asserted when $\\Sigma$ is singular.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "Let $X=(X(s))_{s\\in T}$ be a real random field in the sense of\n[[def-random-field-stationarity-covariance-and-variogram]], and suppose the\nfinite vector of field values considered below is square-integrable. Choose\n$n\\ge1$ observation sites $s_1,\\ldots,s_n$ and a target site $s_0$. Write\n$Z=(X(s_1),\\ldots,X(s_n))^\\top$, $Y=X(s_0)$,\n$\\Sigma=\\operatorname{Cov}(Z,Z)$, $c_0=\\operatorname{Cov}(Z,Y)$, and\n$v_0=\\operatorname{Var}(Y)$. A positive-definite matrix $\\Sigma$ means\n$u^\\top\\Sigma u>0$ for every nonzero $u\\in\\mathbb R^n$.\n\nIf the mean vector $m=\\mathbb E Z$ and target mean $m_0=\\mathbb E Y$ are\nknown, a **simple-kriging linear predictor** with weight vector\n$\\lambda\\in\\mathbb R^n$ is\n$$\\widehat Y_{\\mathrm{SK}}(\\lambda)=m_0+\\lambda^\\top(Z-m).$$\nIts mean-square prediction error is\n$\\mathbb E[(Y-\\widehat Y_{\\mathrm{SK}}(\\lambda))^2]$.\n\nFor an **ordinary-kriging model**, the mean is an unknown common constant\n$\\theta$: $\\mathbb E Z=\\theta\\mathbf 1_n$ and $\\mathbb E Y=\\theta$.\nThe predictor is $\\widehat Y_{\\mathrm{OK}}(\\lambda)=\\lambda^\\top Z$.\nThe admissible ordinary weights satisfy $\\mathbf 1_n^\\top\\lambda=1$.\n\nFor a **universal-kriging model**, fix a trend map\n$p:T\\to\\mathbb R^q$, where $q\\ge1$, and an unrestricted coefficient vector\n$\\beta\\in\\mathbb R^q$. Define the finite-site design matrix\n$P\\in\\mathbb R^{n\\times q}$ by row $i$ equal to $p(s_i)^\\top$, and put\n$p_0=p(s_0)$. The model means are $\\mathbb E Z=P\\beta$ and\n$\\mathbb E Y=p_0^\\top\\beta$. The predictor is\n$\\widehat Y_{\\mathrm{UK}}(\\lambda)=\\lambda^\\top Z$; its unbiasedness for\nevery $\\beta\\in\\mathbb R^q$ is expressed by $P^\\top\\lambda=p_0$.\nOrdinary kriging is the special case $q=1$, $P=\\mathbf 1_n$, and $p_0=1$.\n\nThe covariance-based optimality statements on this page use the actual\nfinite covariance matrix and vector. In particular, the inverse formula for\nsimple kriging is not asserted when $\\Sigma$ is singular.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-normal-equations-for-best-affine-l2-prediction",
+          "source_section": "Statement",
+          "quote": "Let $X,Y_1,\\dots,Y_n$ be square-integrable real random variables on one\nprobability space, and write\n$$W:=\\operatorname{span}\\big([1],[Y_1],\\dots,[Y_n]\\big)\\subseteq L^2(\\mathbb P),$$\nwhere $[\\cdot]$ denotes the almost-everywhere class from\n[[def-l-p-space-as-a-quotient-by-null-functions]].\n\nThen there is a unique class $[Z_*]\\in W$ minimizing $\\|[X]-[Z]\\|_2$ over\n$[Z]\\in W$. This minimizing class has an affine representative\n$Z_*=a_0+\\sum_{j=1}^n a_jY_j$, and its coefficients satisfy\n$$a_0=\\mathbb E[X]-\\sum_{j=1}^n a_j\\mathbb E[Y_j],$$\n$$\\sum_{j=1}^n \\operatorname{Cov}(Y_i,Y_j)a_j=\\operatorname{Cov}(X,Y_i)\\qquad(1\\le i\\le n).$$\n\nThe class $[Z_*]$ is unique. If the covariance matrix\n$\\Gamma=(\\operatorname{Cov}(Y_i,Y_j))_{i,j}$ is singular, the coefficient vector\nneed not be uniquely determined by the normal equations, but any two solutions\nyield the same predictor almost surely.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a centered error vector $\\varepsilon=Z-\\mathbb E Z$ and centered target error $\\varepsilon_0=Y-\\mathbb E Y$, every unbiased linear predictor has error $\\varepsilon_0-\\lambda^\\top\\varepsilon$. Expanding its squared expectation by [F4] gives the common objective $Q(\\lambda)=v_0-2\\lambda^\\top c_0+\\lambda^\\top\\Sigma\\lambda$. The centered predictor in the simple case has this same error expression.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In the trend model, $\\mathbb E[\\lambda^\\top Z-Y]=(P^\\top\\lambda-p_0)^\\top\\beta$. This expression is zero for every $\\beta\\in\\mathbb R^q$ if $P^\\top\\lambda=p_0$. Conversely, if it is zero for every $\\beta$, taking $\\beta$ successively to be each coordinate vector shows every coordinate of $P^\\top\\lambda-p_0$ is zero. Thus the unbiased weights are exactly the affine constraint $P^\\top\\lambda=p_0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $M=\\begin{pmatrix}\\Sigma&P\\\\P^\\top&0\\end{pmatrix}$ and suppose $M\\binom{x}{y}=0$. The lower block gives $P^\\top x=0$. Taking the inner product of $x$ with the upper block gives $x^\\top\\Sigma x+x^\\top Py=0$; the second term is $(P^\\top x)^\\top y=0$, so positive definiteness gives $x=0$. The upper block now gives $Py=0$, and full column rank gives $y=0$. Hence the finite square matrix $M$ is injective and therefore invertible.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the simple case, [F3] gives the covariance normal equations $\\Sigma\\lambda=c_0$ for the minimizing centered affine predictor. Positive definiteness makes the solution unique, $\\lambda=\\Sigma^{-1}c_0$; substituting it into step 1.1 gives $Q(\\lambda)=v_0-c_0^\\top\\Sigma^{-1}c_0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Invertibility gives a unique solution $(\\lambda,\\nu)$ of the displayed augmented system, and its lower block makes $\\lambda$ feasible. For any other feasible vector $\\lambda+h$, one has $P^\\top h=0$. Using the upper block $\\Sigma\\lambda+P\\nu=c_0$ in the quadratic from step 1.1 gives $Q(\\lambda+h)-Q(\\lambda)=2h^\\top(\\Sigma\\lambda-c_0)+h^\\top\\Sigma h=h^\\top\\Sigma h$. This is positive for nonzero $h$ and zero for $h=0$, so $\\lambda$ is the unique constrained minimizer.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiplying $\\Sigma\\lambda+P\\nu=c_0$ on the left by $\\lambda^\\top$ and using $P^\\top\\lambda=p_0$ yields $\\lambda^\\top\\Sigma\\lambda+\\nu^\\top p_0=\\lambda^\\top c_0$. Substitution in $Q(\\lambda)$ from step 1.1 gives $Q(\\lambda)=v_0-\\lambda^\\top c_0-\\nu^\\top p_0$, as claimed.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement imports the kriging notation with n>=1, and its unknown-trend part assumes q>=1 and full column rank of P. The theorem therefore does not quantify over n=0 observation systems or an empty trend model."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Positive-definite Sigma excludes zero observation covariance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar simple case follows from steps 1.1\u20132.1; for q=1 and P=[p] with p\u22600, the augmented determinant is -p\u00b2, consistent with steps 1.3 and 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Singular Sigma and rank-deficient P are outside the theorem hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement concerns a finite positive-definite covariance matrix and full-rank trend matrix; Proof 1.1\u20133.1 is finite quadratic and block-matrix algebra. No interval-valued parameter or limiting endpoint is part of either asserted formula."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 use finite covariance and matrix algebra only; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 shows P^T lambda=p0 makes the bias vanish for every beta."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 tests coordinate-vector beta values to show zero bias for all beta forces P^T lambda=p0."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "ordinary-is-universal-q1",
+          "claim": "Setting q=1, P=1_n, and p0=1 reduces the universal system to the ordinary system.",
+          "result": "The block matrix and right-hand side reduce exactly to the displayed ordinary equations."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-47",
+        "notes": "Read all six proof steps and direct suppliers. Square integrability licenses Q=v0-2 lambda^T c0+lambda^T Sigma lambda. Unbiasedness for every unrestricted beta is equivalent in both directions to P^T lambda=p0 (test coordinate vectors). The augmented kernel argument uses positive definite Sigma and full column rank P, giving feasibility and a unique pair for every p0. On the feasible affine space the risk difference is h^T Sigma h; the multiplier sign in v0-lambda^T c0-nu^T p0 is correct. n,q>=1 exclude empty systems; n=1 and zero c0 are admitted; singular Sigma and deficient P are outside the invertibility conclusion. No AC is used. Normal-equations supplier gives affine-class existence and covariance equations under exactly finite second moments. Reader found no item defect; refuter finding is confined to the earlier variogram remark and is repaired without changing this proof."
+      }
+    },
+    "thm-gaussian-simple-kriging-equals-conditional-mean": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A real stochastic process\n$X=(X_t)_{t\\in I}$ [[def-stochastic-process-and-finite-dimensional-distributions]]\nis a **Gaussian process** if, for every integer $n\\ge 1$, every time list\n$t_1,\\ldots,t_n\\in I$, and every $a_1,\\ldots,a_n\\in\\mathbb R$, the random\nvariable\n$$\n\\sum_{j=1}^n a_jX_{t_j}\n$$\nhas a normal law $N(m,\\sigma^2)$ for some $m\\in\\mathbb R$ and\n$\\sigma\\ge0$. Variance zero is allowed, so constant linear combinations are\nincluded.\n\nEquivalently, for every such time list the evaluation vector\n$(X_{t_1},\\ldots,X_{t_n})$ has a possibly singular multivariate normal law in\nthe sense of [[def-multivariate-normal-law]]. Indeed, that definition says\nexactly that every scalar projection of the vector is normal. This also covers\nrepeated times, zero coefficients, and singular covariance matrices; no\ndistinct-time convention is needed for this definition.\n\nChoice is declared because the library's scalar and multivariate normal-law\ninterfaces construct their probability laws and independent standard-normal\nrealizations under AC. The equivalence itself is only an unpacking of the\nfinite-dimensional projection definition and makes no further selection.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $(U,V)$ be a jointly multivariate-normal real\nvector with finite-dimensional blocks $U\\in\\mathbb R^p$ and\n$V\\in\\mathbb R^q$, where $p,q\\ge1$. If $\\operatorname{Cov}(U_i,V_j)=0$ for every\n$1\\le i\\le p$ and $1\\le j\\le q$, then $U$ and $V$ are independent. The\ncovariance matrix may be singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-independent-sigma-algebras-and-events",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\nA family $(\\mathcal F_i)_{i\\in I}$ of sub-sigma-algebras of $\\mathcal F$ is\n**independent** when it is independent as a family of event classes in the\nsense of [[def-independent-families-of-event-classes]].\n\nA family $(A_i)_{i\\in I}$ of events is **independent** when the singleton event\nclasses $\\bigl(\\{A_i\\}\\bigr)_{i\\in I}$ are independent. Equivalently, for every\nfinite choice of distinct indices $i_0,\\dots,i_{n-1}$,\n\n$$\\mathbb P\\left(\\bigcap_{k<n}A_{i_k}\\right)=\\prod_{k<n}\\mathbb P(A_{i_k}).$$\n\nFor two events this reduces to the familiar identity\n$\\mathbb P(A\\cap B)=\\mathbb P(A)\\mathbb P(B)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kriging-systems-and-l2-optimality",
+          "source_section": "Statement",
+          "quote": "Use the notation of [[def-simple-ordinary-and-universal-kriging]]. For\nsimple kriging, if $\\Sigma$ is positive definite, the unique mean-square\nminimizing weight vector is $\\lambda_{\\mathrm{SK}}=\\Sigma^{-1}c_0$, and its\nmean-square prediction error is\n$$v_0-c_0^\\top\\Sigma^{-1}c_0.$$\n\nFor an unknown trend with design matrix $P$ and target vector $p_0$,\n$\\lambda^\\top Z$ is unbiased for every $\\beta\\in\\mathbb R^q$ if and only if\n$P^\\top\\lambda=p_0$. Suppose $\\Sigma$ is positive definite and $P$ has full\ncolumn rank (that is, $Py=0$ implies $y=0$ for $y\\in\\mathbb R^q$). Then the\nunique unbiased mean-square minimizing weights $\\lambda\\in\\mathbb R^n$ and Lagrange\nmultiplier $\\nu\\in\\mathbb R^q$ solve\n$$\\begin{pmatrix}\\Sigma&P\\\\P^\\top&0\\end{pmatrix}\\begin{pmatrix}\\lambda\\\\\\nu\\end{pmatrix}=\\begin{pmatrix}c_0\\\\p_0\\end{pmatrix}.$$\nThe augmented matrix is invertible under these hypotheses. The resulting\nmean-square prediction error is\n$$v_0-\\lambda^\\top c_0-\\nu^\\top p_0.$$\nFor ordinary kriging, take $P=\\mathbf 1_n$ and $p_0=1$, giving\n$$\\begin{pmatrix}\\Sigma&\\mathbf 1_n\\\\\\mathbf 1_n^\\top&0\\end{pmatrix}\\begin{pmatrix}\\lambda\\\\\\nu\\end{pmatrix}=\\begin{pmatrix}c_0\\\\1\\end{pmatrix}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X\\in L^1(P)$, if $X$ is $\\mathcal G$-measurable, then $E[X\\mid\\mathcal G]=X$. If $P(\\{X\\in B\\}\\cap A)=P(X\\in B)P(A)$ for every real Borel $B$ and $A\\in\\mathcal G$, then $E[X\\mid\\mathcal G]=EX$ almost surely.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-conditional-expectation-is-unique-almost-surely",
+          "source_section": "Statement",
+          "quote": "If $Y,Z$ are conditional-expectation versions of the same real integrable $X$ given $\\mathcal G$, then $Y=Z$ almost surely.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $\\lambda=\\Sigma^{-1}c_0$ and $R=Y-m_0-\\lambda^\\top(Z-m)$. By [F1], $(R,Z)$ is jointly Gaussian because each of its linear combinations is a linear combination of $(Y,Z)$. Its residual mean is zero, and $\\operatorname{Cov}(R,Z)=c_0^\\top-\\lambda^\\top\\Sigma=0$ by the equation $\\Sigma\\lambda=c_0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F2] to the jointly Gaussian blocks $R$ and $Z$ from step 1.1 shows that $R$ is independent of $Z$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], independence from step 2.1 gives the Borel-event factorization required by [F5] for $R$ and $\\mathcal G=\\sigma(Z)$. The residual is integrable because it is a finite linear combination of square-integrable variables. AC is stated in [A1], so [F5] gives $\\mathbb E[R\\mid\\mathcal G]=\\mathbb E[R]=0$; by [F6], this means $\\mathbb E[R\\mathbf 1_B]=0$ for every $B\\in\\mathcal G$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Put $\\widehat Y=m_0+\\lambda^\\top(Z-m)$. This is $\\sigma(Z)$-measurable and integrable. For each $B\\in\\sigma(Z)$, step 3.1 and $Y=\\widehat Y+R$ give $\\mathbb E[Y\\mathbf 1_B]=\\mathbb E[\\widehat Y\\mathbf 1_B]$. Thus [F6] makes $\\widehat Y$ a version of $\\mathbb E[Y\\mid\\sigma(Z)]$, and [F7] gives the asserted almost-sure equality. AC is used only through the Gaussian-law, Gaussian-independence, and conditional-expectation suppliers.",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement uses the observation vector of the kriging definition, which explicitly has n>=1, and assumes its covariance positive definite. The result addresses conditional expectation given that nonempty finite vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If c0=0, step 1.1 gives lambda=0 and steps 3.1\u20134.1 yield conditional mean m0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The residual covariance argument in step 1.1 is scalar when n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The joint covariance may be singular; step 2.1 uses the supplier result that allows singular covariance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Statement concerns a finite jointly Gaussian vector and its positive-definite observation covariance. Proof 1.1\u20134.1 identifies an almost-sure conditional-expectation class without an interval, limit or time-endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states AC and steps 1.1\u20133.1 identify its Gaussian and conditional-expectation uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement assumes joint Gaussianity and positive-definite Sigma and concludes the displayed predictor is a conditional-expectation version. Steps 1.1\u20134.1 prove this sufficient-condition result; equality of the predictor does not purport to characterize Gaussianity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement assumes joint Gaussianity and positive-definite Sigma and concludes the displayed predictor is a conditional-expectation version. Steps 1.1\u20134.1 prove this sufficient-condition result; equality of the predictor does not purport to characterize Gaussianity."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-47",
+        "notes": "Read all four steps and every direct cited supplier, including the full Gaussian-block independence and independent-conditioning proofs. Affine residual R is jointly Gaussian with Z under the scalar-projection definition, has mean zero and cross-covariance c0^T-lambda^T Sigma=0. Block independence allows singular joint covariance, so zero residual variance is included; n>=1 supplies nonempty blocks. Event independence plus integrability gives zero residual integrals on sigma(Z). The affine predictor is measurable/integrable and matches Y on every observation event, yielding the unique conditional-expectation class. No completion of sigma(Z) is needed. c0=0 yields the constant mean; n=1 works; singular observation Sigma is excluded. AC is explicit and inherited through the Gaussian-law, block-independence and conditional-expectation interfaces, with no additional family selection. Read current reader/refuter evidence: no defect in this argument, and the variogram-remark repair does not affect its prerequisites."
+      }
+    },
+    "ex-singular-covariance-simple-kriging": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "Let $X=(X(s))_{s\\in T}$ be a real random field in the sense of\n[[def-random-field-stationarity-covariance-and-variogram]], and suppose the\nfinite vector of field values considered below is square-integrable. Choose\n$n\\ge1$ observation sites $s_1,\\ldots,s_n$ and a target site $s_0$. Write\n$Z=(X(s_1),\\ldots,X(s_n))^\\top$, $Y=X(s_0)$,\n$\\Sigma=\\operatorname{Cov}(Z,Z)$, $c_0=\\operatorname{Cov}(Z,Y)$, and\n$v_0=\\operatorname{Var}(Y)$. A positive-definite matrix $\\Sigma$ means\n$u^\\top\\Sigma u>0$ for every nonzero $u\\in\\mathbb R^n$.\n\nIf the mean vector $m=\\mathbb E Z$ and target mean $m_0=\\mathbb E Y$ are\nknown, a **simple-kriging linear predictor** with weight vector\n$\\lambda\\in\\mathbb R^n$ is\n$$\\widehat Y_{\\mathrm{SK}}(\\lambda)=m_0+\\lambda^\\top(Z-m).$$\nIts mean-square prediction error is\n$\\mathbb E[(Y-\\widehat Y_{\\mathrm{SK}}(\\lambda))^2]$.\n\nFor an **ordinary-kriging model**, the mean is an unknown common constant\n$\\theta$: $\\mathbb E Z=\\theta\\mathbf 1_n$ and $\\mathbb E Y=\\theta$.\nThe predictor is $\\widehat Y_{\\mathrm{OK}}(\\lambda)=\\lambda^\\top Z$.\nThe admissible ordinary weights satisfy $\\mathbf 1_n^\\top\\lambda=1$.\n\nFor a **universal-kriging model**, fix a trend map\n$p:T\\to\\mathbb R^q$, where $q\\ge1$, and an unrestricted coefficient vector\n$\\beta\\in\\mathbb R^q$. Define the finite-site design matrix\n$P\\in\\mathbb R^{n\\times q}$ by row $i$ equal to $p(s_i)^\\top$, and put\n$p_0=p(s_0)$. The model means are $\\mathbb E Z=P\\beta$ and\n$\\mathbb E Y=p_0^\\top\\beta$. The predictor is\n$\\widehat Y_{\\mathrm{UK}}(\\lambda)=\\lambda^\\top Z$; its unbiasedness for\nevery $\\beta\\in\\mathbb R^q$ is expressed by $P^\\top\\lambda=p_0$.\nOrdinary kriging is the special case $q=1$, $P=\\mathbf 1_n$, and $p_0=1$.\n\nThe covariance-based optimality statements on this page use the actual\nfinite covariance matrix and vector. In particular, the inverse formula for\nsimple kriging is not asserted when $\\Sigma$ is singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct finite summation using [F2] and [F3] gives $\\mathbb E[U]=(-1+1)/2=0$ and $\\mathbb E[U^2]=1$, so [F4] gives $\\operatorname{Var}(U)=1$ and $\\operatorname{Cov}(U,U)=1$. Thus the displayed observation covariance has determinant $1-1=0$ and is singular.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The simple predictor is $\\lambda_1U+\\lambda_2U$ because both known means are zero. Therefore $Y-\\lambda^\\top Z=(1-\\lambda_1-\\lambda_2)U$, whose squared expectation is $(1-\\lambda_1-\\lambda_2)^2\\mathbb E[U^2]=(1-\\lambda_1-\\lambda_2)^2$. It is zero exactly for $\\lambda_1+\\lambda_2=1$, and both $(1,0)$ and $(0,1)$ give the same random variable $U$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes Z=(U,U)^T at the two observation sites s1,s2. The singular 2-by-2 covariance and the Verification 2.1 weight-pair calculation concern those two observations, so deleting every observation changes the example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies all zero-error weights by lambda1+lambda2=1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example fixes two observed coordinates (U,U) to exhibit a singular 2-by-2 covariance and distinct coefficient pairs for the same predictor. Replacing this vector by one observation removes the specified singularity witness and is outside the example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes a singular matrix and step 2.1 gives distinct coefficients for the same predictor."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Example fixes the two-outcome law and three distinct abstract sites, with weights ranging over all R^2. Verification computes the singular covariance and exact squared error; there is no restricted parameter interval whose endpoints are omitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two outcomes are enumerated in steps 1.1\u20132.1; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 shows lambda1+lambda2=1 gives zero error."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 shows zero error forces lambda1+lambda2=1."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-point-singular-simple-kriging",
+          "claim": "Sigma=[[1,1],[1,1]] and error=(1-lambda1-lambda2)^2.",
+          "result": "The determinant is zero and the error vanishes exactly when lambda1+lambda2=1."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "symmetric-rademacher-covariance",
+          "asserts": "Let $\\Omega=\\{-1,1\\}$ have equal probability and let $U(\\omega)=\\omega$."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-47",
+        "notes": "Read both verification steps and all five direct suppliers. On the two equiprobable outcomes E U=0 and E U^2=1, yielding the all-ones covariance with determinant zero. The risk is (1-lambda1-lambda2)^2 for every real weight pair, zero iff the sum is one; (1,0) and (0,1) yield identical U pointwise. This demonstrates coefficient nonuniqueness without contradicting predictor-class uniqueness. Finite real random variables and weighted expectations meet the supplier definitions; no inverse or choice is used. Empty outcome space is excluded by the supplied two-point model, zero residual and singular covariance are included. Reader/refuter report no defect here; selected finite covariance/rank smoke check is recorded in the contract."
+      }
+    },
+    "ex-rank-deficient-universal-kriging-design": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "Let $X=(X(s))_{s\\in T}$ be a real random field in the sense of\n[[def-random-field-stationarity-covariance-and-variogram]], and suppose the\nfinite vector of field values considered below is square-integrable. Choose\n$n\\ge1$ observation sites $s_1,\\ldots,s_n$ and a target site $s_0$. Write\n$Z=(X(s_1),\\ldots,X(s_n))^\\top$, $Y=X(s_0)$,\n$\\Sigma=\\operatorname{Cov}(Z,Z)$, $c_0=\\operatorname{Cov}(Z,Y)$, and\n$v_0=\\operatorname{Var}(Y)$. A positive-definite matrix $\\Sigma$ means\n$u^\\top\\Sigma u>0$ for every nonzero $u\\in\\mathbb R^n$.\n\nIf the mean vector $m=\\mathbb E Z$ and target mean $m_0=\\mathbb E Y$ are\nknown, a **simple-kriging linear predictor** with weight vector\n$\\lambda\\in\\mathbb R^n$ is\n$$\\widehat Y_{\\mathrm{SK}}(\\lambda)=m_0+\\lambda^\\top(Z-m).$$\nIts mean-square prediction error is\n$\\mathbb E[(Y-\\widehat Y_{\\mathrm{SK}}(\\lambda))^2]$.\n\nFor an **ordinary-kriging model**, the mean is an unknown common constant\n$\\theta$: $\\mathbb E Z=\\theta\\mathbf 1_n$ and $\\mathbb E Y=\\theta$.\nThe predictor is $\\widehat Y_{\\mathrm{OK}}(\\lambda)=\\lambda^\\top Z$.\nThe admissible ordinary weights satisfy $\\mathbf 1_n^\\top\\lambda=1$.\n\nFor a **universal-kriging model**, fix a trend map\n$p:T\\to\\mathbb R^q$, where $q\\ge1$, and an unrestricted coefficient vector\n$\\beta\\in\\mathbb R^q$. Define the finite-site design matrix\n$P\\in\\mathbb R^{n\\times q}$ by row $i$ equal to $p(s_i)^\\top$, and put\n$p_0=p(s_0)$. The model means are $\\mathbb E Z=P\\beta$ and\n$\\mathbb E Y=p_0^\\top\\beta$. The predictor is\n$\\widehat Y_{\\mathrm{UK}}(\\lambda)=\\lambda^\\top Z$; its unbiasedness for\nevery $\\beta\\in\\mathbb R^q$ is expressed by $P^\\top\\lambda=p_0$.\nOrdinary kriging is the special case $q=1$, $P=\\mathbf 1_n$, and $p_0=1$.\n\nThe covariance-based optimality statements on this page use the actual\nfinite covariance matrix and vector. In particular, the inverse formula for\nsimple kriging is not asserted when $\\Sigma$ is singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each coordinate $\\epsilon_s$, four outcomes have value $1$ and four have value $-1$, so [F2] and [F3] give $\\mathbb E[\\epsilon_s]=0$ and $\\mathbb E[\\epsilon_s^2]=1$. For distinct coordinates, each of the four sign pairs occurs twice, so [F4] gives $\\operatorname{Cov}(\\epsilon_s,\\epsilon_t)=0$. Hence the observation-error covariance is $I_2$, which is positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two rows of $P$ are linearly independent, but its last two columns are equal, so its rank is two rather than three. For every $\\lambda=(\\lambda_1,\\lambda_2)^\\top$, $P^\\top\\lambda=(\\lambda_1+\\lambda_2,\\lambda_2,\\lambda_2)^\\top$; its last two coordinates cannot equal the target's $2$ and $4$. Thus no weight vector satisfies $P^\\top\\lambda=p(s_0)$, so no linear predictor is unbiased for every $\\beta$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example observes at s1=0 and s2=1, fixing a 2-by-3 quadratic design. Verification 2.1 tests its two weights against target (1,2,4); there is no variable-size observation family admitting n=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the nonsingular covariance I2, isolating design rank as the obstruction."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example fixes exactly two rows, at sites 0 and 1, of a three-column quadratic design. Its rank-two and inconsistent-target computation in Verification 2.1 is not a claim for a variable number of observations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 exhibits a rank-two three-column design with no feasible target constraint."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The labels 0,1,2 are the three fixed sites of the finite quadratic-trend example, not a quantified interval or limit. Verification 2.1 is the exact inconsistent finite linear system at these sites."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The eight sign outcomes are enumerated in step 1.1; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example fixes the quadratic trend at sites 0,1 with target 2. Verification 2.1 proves the inconsistent coordinates lambda2=2 and lambda2=4; the claim is nonexistence of universal-unbiased weights in this fixed model."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example fixes the quadratic trend at sites 0,1 with target 2. Verification 2.1 proves the inconsistent coordinates lambda2=2 and lambda2=4; the claim is nonexistence of universal-unbiased weights in this fixed model."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "quadratic-trend-two-site-design",
+          "claim": "P=[[1,0,0],[1,1,1]] has rank two and p0=(1,2,4).",
+          "result": "P^T lambda=(lambda1+lambda2,lambda2,lambda2), so p0 is not in the image."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-ordinary-kriging-larger-error-than-simple": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "Let $X=(X(s))_{s\\in T}$ be a real random field in the sense of\n[[def-random-field-stationarity-covariance-and-variogram]], and suppose the\nfinite vector of field values considered below is square-integrable. Choose\n$n\\ge1$ observation sites $s_1,\\ldots,s_n$ and a target site $s_0$. Write\n$Z=(X(s_1),\\ldots,X(s_n))^\\top$, $Y=X(s_0)$,\n$\\Sigma=\\operatorname{Cov}(Z,Z)$, $c_0=\\operatorname{Cov}(Z,Y)$, and\n$v_0=\\operatorname{Var}(Y)$. A positive-definite matrix $\\Sigma$ means\n$u^\\top\\Sigma u>0$ for every nonzero $u\\in\\mathbb R^n$.\n\nIf the mean vector $m=\\mathbb E Z$ and target mean $m_0=\\mathbb E Y$ are\nknown, a **simple-kriging linear predictor** with weight vector\n$\\lambda\\in\\mathbb R^n$ is\n$$\\widehat Y_{\\mathrm{SK}}(\\lambda)=m_0+\\lambda^\\top(Z-m).$$\nIts mean-square prediction error is\n$\\mathbb E[(Y-\\widehat Y_{\\mathrm{SK}}(\\lambda))^2]$.\n\nFor an **ordinary-kriging model**, the mean is an unknown common constant\n$\\theta$: $\\mathbb E Z=\\theta\\mathbf 1_n$ and $\\mathbb E Y=\\theta$.\nThe predictor is $\\widehat Y_{\\mathrm{OK}}(\\lambda)=\\lambda^\\top Z$.\nThe admissible ordinary weights satisfy $\\mathbf 1_n^\\top\\lambda=1$.\n\nFor a **universal-kriging model**, fix a trend map\n$p:T\\to\\mathbb R^q$, where $q\\ge1$, and an unrestricted coefficient vector\n$\\beta\\in\\mathbb R^q$. Define the finite-site design matrix\n$P\\in\\mathbb R^{n\\times q}$ by row $i$ equal to $p(s_i)^\\top$, and put\n$p_0=p(s_0)$. The model means are $\\mathbb E Z=P\\beta$ and\n$\\mathbb E Y=p_0^\\top\\beta$. The predictor is\n$\\widehat Y_{\\mathrm{UK}}(\\lambda)=\\lambda^\\top Z$; its unbiasedness for\nevery $\\beta\\in\\mathbb R^q$ is expressed by $P^\\top\\lambda=p_0$.\nOrdinary kriging is the special case $q=1$, $P=\\mathbf 1_n$, and $p_0=1$.\n\nThe covariance-based optimality statements on this page use the actual\nfinite covariance matrix and vector. In particular, the inverse formula for\nsimple kriging is not asserted when $\\Sigma$ is singular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-simple-ordinary-and-universal-kriging",
+          "source_section": "Definition",
+          "quote": "Let $X=(X(s))_{s\\in T}$ be a real random field in the sense of\n[[def-random-field-stationarity-covariance-and-variogram]], and suppose the\nfinite vector of field values considered below is square-integrable. Choose\n$n\\ge1$ observation sites $s_1,\\ldots,s_n$ and a target site $s_0$. Write\n$Z=(X(s_1),\\ldots,X(s_n))^\\top$, $Y=X(s_0)$,\n$\\Sigma=\\operatorname{Cov}(Z,Z)$, $c_0=\\operatorname{Cov}(Z,Y)$, and\n$v_0=\\operatorname{Var}(Y)$. A positive-definite matrix $\\Sigma$ means\n$u^\\top\\Sigma u>0$ for every nonzero $u\\in\\mathbb R^n$.\n\nIf the mean vector $m=\\mathbb E Z$ and target mean $m_0=\\mathbb E Y$ are\nknown, a **simple-kriging linear predictor** with weight vector\n$\\lambda\\in\\mathbb R^n$ is\n$$\\widehat Y_{\\mathrm{SK}}(\\lambda)=m_0+\\lambda^\\top(Z-m).$$\nIts mean-square prediction error is\n$\\mathbb E[(Y-\\widehat Y_{\\mathrm{SK}}(\\lambda))^2]$.\n\nFor an **ordinary-kriging model**, the mean is an unknown common constant\n$\\theta$: $\\mathbb E Z=\\theta\\mathbf 1_n$ and $\\mathbb E Y=\\theta$.\nThe predictor is $\\widehat Y_{\\mathrm{OK}}(\\lambda)=\\lambda^\\top Z$.\nThe admissible ordinary weights satisfy $\\mathbf 1_n^\\top\\lambda=1$.\n\nFor a **universal-kriging model**, fix a trend map\n$p:T\\to\\mathbb R^q$, where $q\\ge1$, and an unrestricted coefficient vector\n$\\beta\\in\\mathbb R^q$. Define the finite-site design matrix\n$P\\in\\mathbb R^{n\\times q}$ by row $i$ equal to $p(s_i)^\\top$, and put\n$p_0=p(s_0)$. The model means are $\\mathbb E Z=P\\beta$ and\n$\\mathbb E Y=p_0^\\top\\beta$. The predictor is\n$\\widehat Y_{\\mathrm{UK}}(\\lambda)=\\lambda^\\top Z$; its unbiasedness for\nevery $\\beta\\in\\mathbb R^q$ is expressed by $P^\\top\\lambda=p_0$.\nOrdinary kriging is the special case $q=1$, $P=\\mathbf 1_n$, and $p_0=1$.\n\nThe covariance-based optimality statements on this page use the actual\nfinite covariance matrix and vector. In particular, the inverse formula for\nsimple kriging is not asserted when $\\Sigma$ is singular.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kriging-systems-and-l2-optimality",
+          "source_section": "Statement",
+          "quote": "Use the notation of [[def-simple-ordinary-and-universal-kriging]]. For\nsimple kriging, if $\\Sigma$ is positive definite, the unique mean-square\nminimizing weight vector is $\\lambda_{\\mathrm{SK}}=\\Sigma^{-1}c_0$, and its\nmean-square prediction error is\n$$v_0-c_0^\\top\\Sigma^{-1}c_0.$$\n\nFor an unknown trend with design matrix $P$ and target vector $p_0$,\n$\\lambda^\\top Z$ is unbiased for every $\\beta\\in\\mathbb R^q$ if and only if\n$P^\\top\\lambda=p_0$. Suppose $\\Sigma$ is positive definite and $P$ has full\ncolumn rank (that is, $Py=0$ implies $y=0$ for $y\\in\\mathbb R^q$). Then the\nunique unbiased mean-square minimizing weights $\\lambda\\in\\mathbb R^n$ and Lagrange\nmultiplier $\\nu\\in\\mathbb R^q$ solve\n$$\\begin{pmatrix}\\Sigma&P\\\\P^\\top&0\\end{pmatrix}\\begin{pmatrix}\\lambda\\\\\\nu\\end{pmatrix}=\\begin{pmatrix}c_0\\\\p_0\\end{pmatrix}.$$\nThe augmented matrix is invertible under these hypotheses. The resulting\nmean-square prediction error is\n$$v_0-\\lambda^\\top c_0-\\nu^\\top p_0.$$\nFor ordinary kriging, take $P=\\mathbf 1_n$ and $p_0=1$, giving\n$$\\begin{pmatrix}\\Sigma&\\mathbf 1_n\\\\\\mathbf 1_n^\\top&0\\end{pmatrix}\\begin{pmatrix}\\lambda\\\\\\nu\\end{pmatrix}=\\begin{pmatrix}c_0\\\\1\\end{pmatrix}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-kriging-systems-and-l2-optimality",
+          "source_section": "Statement",
+          "quote": "Use the notation of [[def-simple-ordinary-and-universal-kriging]]. For\nsimple kriging, if $\\Sigma$ is positive definite, the unique mean-square\nminimizing weight vector is $\\lambda_{\\mathrm{SK}}=\\Sigma^{-1}c_0$, and its\nmean-square prediction error is\n$$v_0-c_0^\\top\\Sigma^{-1}c_0.$$\n\nFor an unknown trend with design matrix $P$ and target vector $p_0$,\n$\\lambda^\\top Z$ is unbiased for every $\\beta\\in\\mathbb R^q$ if and only if\n$P^\\top\\lambda=p_0$. Suppose $\\Sigma$ is positive definite and $P$ has full\ncolumn rank (that is, $Py=0$ implies $y=0$ for $y\\in\\mathbb R^q$). Then the\nunique unbiased mean-square minimizing weights $\\lambda\\in\\mathbb R^n$ and Lagrange\nmultiplier $\\nu\\in\\mathbb R^q$ solve\n$$\\begin{pmatrix}\\Sigma&P\\\\P^\\top&0\\end{pmatrix}\\begin{pmatrix}\\lambda\\\\\\nu\\end{pmatrix}=\\begin{pmatrix}c_0\\\\p_0\\end{pmatrix}.$$\nThe augmented matrix is invertible under these hypotheses. The resulting\nmean-square prediction error is\n$$v_0-\\lambda^\\top c_0-\\nu^\\top p_0.$$\nFor ordinary kriging, take $P=\\mathbf 1_n$ and $p_0=1$, giving\n$$\\begin{pmatrix}\\Sigma&\\mathbf 1_n\\\\\\mathbf 1_n^\\top&0\\end{pmatrix}\\begin{pmatrix}\\lambda\\\\\\nu\\end{pmatrix}=\\begin{pmatrix}c_0\\\\1\\end{pmatrix}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $U_i$ has mean zero and second moment one by [F5] and [F6]. For $i\\ne j$, each sign pair occurs equally often, so [F7] gives $\\operatorname{Cov}(U_i,U_j)=0$. Consequently, $\\Sigma=I_2$, $c_0=(0,0)^\\top$, and $v_0=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "When $\\theta$ is known, [F3] and step 1.1 give simple weight $\\Sigma^{-1}c_0=0$, so the simple minimizing predictor is $\\theta$. Its error is $U_0$ and its mean-square error is $\\mathbb E[U_0^2]=1$. For the ordinary model, the unbiasedness constraint is $\\lambda_1+\\lambda_2=1$ by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The ordinary system in [F4] applies because step 1.1 gives $\\Sigma=I_2$ and the constant-mean design has full rank. Directly, the ordinary prediction error is $U_0-\\lambda_1U_1-\\lambda_2U_2$. Expanding its square, all cross terms have expectation zero by step 1.1, so its mean-square error is $1+\\lambda_1^2+\\lambda_2^2$. Substituting $\\lambda_2=1-\\lambda_1$ gives $\\frac32+2(\\lambda_1-\\frac12)^2$, whose unique minimum is $3/2$ at $\\lambda_1=\\lambda_2=1/2$. Since $3/2>1$, ordinary kriging has the larger error in this example.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes two observations Zi=theta+Ui for i=1,2 and compares weights lambda1,lambda2 constrained to sum to one. Verification 3.1 computes their MSE; an empty weight family is outside this fixed comparison."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes c0=0 and v0=1; steps 2.1\u20133.1 give both errors."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Example fixes observations Z1 and Z2, so its ordinary minimum 3/2 comes from two weights. A one-observation ordinary predictor has a different error and is not asserted by this fixed-model comparison."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the nondegenerate observation covariance I2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The common mean theta ranges over all real numbers and ordinary weights range over the affine line lambda1+lambda2=1. Verification 3.1 minimizes its exact quadratic; no closed or open interval of admissible weights is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All eight equally weighted outcomes are directly enumerated in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example compares two fixed-model minima: simple MSE 1 and ordinary MSE 3/2, computed in Verification 2.1\u20133.1. This numerical comparison supplies no necessary-and-sufficient condition on general kriging models."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example compares two fixed-model minima: simple MSE 1 and ordinary MSE 3/2, computed in Verification 2.1\u20133.1. This numerical comparison supplies no necessary-and-sufficient condition on general kriging models."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "three-rademacher-error-comparison",
+          "claim": "Simple error is 1; ordinary error is 1+lambda1^2+lambda2^2 when lambda1+lambda2=1.",
+          "result": "The ordinary expression has minimum 3/2 at equal weights, above the simple error."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-47",
+        "notes": "Read all three verification steps and six direct suppliers. Enumerating the eight sign triples gives zero means, unit variances and zero cross-products, hence Sigma=I2,c0=0,v0=1. For every real theta, known-mean simple kriging has weights zero and error U0 of MSE 1. Ordinary unbiasedness for all theta requires lambda1+lambda2=1; on this line the MSE is 1+lambda1^2+lambda2^2=3/2+2(lambda1-1/2)^2. Equal weights uniquely minimize it at 3/2. The constant-mean design has full column rank and Sigma is positive definite; zero c0 is explicitly handled. Empty or one-observation models are outside this fixed two-observation example, and no endpoint restriction on weights or AC is used. Reader/refuter evidence contains no defect here; no general comparison converse is claimed."
+      }
+    }
+  }
+}

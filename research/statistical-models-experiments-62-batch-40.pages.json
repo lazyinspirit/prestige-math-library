@@ -1,0 +1,191 @@
+[
+  {
+    "order": 1996,
+    "id": "stationary-time-series-moments-and-autocovariance",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Stationary means and sample autocovariance",
+    "companion": "stationary-time-series-moments-and-autocovariance-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "probability-spaces-random-variables-and-expectation",
+      "stationary-markov-chains-and-ergodic-limits"
+    ],
+    "items": [
+      {
+        "id": "def-strict-and-weak-stationarity-for-time-series",
+        "kind": "definition",
+        "title": "Strict and weak stationarity for integer-indexed time series",
+        "statement": "A real-valued stochastic process X=(X_t)_{t∈Z} is strictly stationary when every finite-dimensional law is invariant under each common integer shift. It is weakly stationary when E|X_t|²<∞ for all t, the mean μ=E[X_t] is constant, and γ(h)=Cov(X_{t+h},X_t) is independent of t for each h∈Z.",
+        "deps": [
+          "def-stochastic-process-and-finite-dimensional-distributions",
+          "def-random-element-and-real-random-variable",
+          "def-law-or-distribution-of-a-random-element",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, complete 57-page lecture notes",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            },
+            {
+              "title": "STAT 720 Time Series Analysis, South Carolina course notes by Wang, focused Sections 2.1–2.2",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": []
+      },
+      {
+        "id": "def-autocovariance-and-sample-autocovariance",
+        "kind": "definition",
+        "title": "Autocovariance and sample autocovariance",
+        "statement": "For a weakly stationary process, its autocovariance function is γ(h)=Cov(X_{t+h},X_t), independent of t. For data x₁,…,x_n with n≥1, define x̄_n=n⁻¹∑_{t=1}^n x_t, the biased sample ACVF γ̂_n(h)=n⁻¹∑_{t=1}^{n−|h|}(x_{t+|h|}−x̄_n)(x_t−x̄_n) for |h|<n, symmetrically for negative h, and γ̂_n(h)=0 for |h|≥n. Also define the pair-count-normalized rescaling γ̃_n(h)=(n−|h|)⁻¹∑_{t=1}^{n−|h|}(x_{t+|h|}−x̄_n)(x_t−x̄_n) for |h|<n, zero otherwise; this denominator convention asserts no unbiasedness property.",
+        "deps": [
+          "def-strict-and-weak-stationarity-for-time-series"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, complete 57-page lecture notes",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            },
+            {
+              "title": "STAT 720 Time Series Analysis, South Carolina course notes by Wang, focused Sections 2.1–2.2 and Lemma 2.3",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "justified_by": []
+      },
+      {
+        "id": "cor-ergodic-time-series-sample-mean-converges-a-s-and-l1",
+        "kind": "corollary",
+        "title": "Ergodic time-series sample means converge almost surely and in L1",
+        "statement": "Assume AC. Let X=(X_t)_{t∈Z} be a real strictly stationary process with E|X_0|<∞. If the canonical shift on the one-sided path law of Y_k=X_{k+1}, k≥0, is ergodic, then n⁻¹∑_{t=1}^n X_t converges almost surely and in L1 to E[X_0].",
+        "deps": [
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-stationary-process-and-canonical-shift",
+          "def-ergodic-measure-preserving-system",
+          "def-axiom-of-choice",
+          "thm-stationary-process-birkhoff-ergodic-limit"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, complete 57-page lecture notes",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            },
+            {
+              "title": "STAT 720 Time Series Analysis, South Carolina course notes by Wang, focused Sections 2.1–2.2",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-sample-acvf-properties-and-summable-covariance-mean-consistency",
+        "kind": "theorem",
+        "title": "Sample-mean variance and positive semidefinite sample ACVF",
+        "statement": "Let $X=(X_t)_{t\\in\\mathbb Z}$ be weakly stationary, with mean $\\mu$ and\nautocovariance $\\gamma$, and define\n$\\bar X_n:=n^{-1}\\sum_{t=1}^nX_t$ for $n\\ge1$. Then\n$$\\operatorname{Var}(\\bar X_n)=\\frac1{n^2}\\sum_{|h|<n}(n-|h|)\\gamma(h).$$\nIf $\\sum_{h\\in\\mathbb Z}|\\gamma(h)|<\\infty$, then\n$$0\\le\\operatorname{Var}(\\bar X_n)\\le\\frac1n\\sum_{h\\in\\mathbb Z}|\\gamma(h)|,$$\nso $\\mathbb E[(\\bar X_n-\\mu)^2]\\to0$: the sample mean is consistent in $L^2$.\nNo mixing property or central limit theorem is asserted here. For every finite\nreal data vector, the zero-extended biased sample\nACVF $\\widehat\\gamma_n$ of\n[[def-autocovariance-and-sample-autocovariance]] has nonnegative Toeplitz\nquadratic forms.",
+        "deps": [
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-autocovariance-and-sample-autocovariance",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "lem-variance-and-covariance-identities-for-random-variables"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, complete 57-page lecture notes",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            },
+            {
+              "title": "STAT 720 Time Series Analysis, South Carolina course notes by Wang, focused Sections 2.1–2.2 and Lemma 2.3",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 1997,
+    "id": "stationary-time-series-moments-and-autocovariance-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Stationary means and sample autocovariance — Examples",
+    "companion": "stationary-time-series-moments-and-autocovariance",
+    "requires": [
+      "stationary-time-series-moments-and-autocovariance"
+    ],
+    "items": [
+      {
+        "id": "ex-pairwise-uncorrelated-dependent-triple",
+        "kind": "example",
+        "title": "Pairwise uncorrelated data can be jointly dependent",
+        "statement": "On the four-outcome uniform probability space Ω={(−1,−1,1),(−1,1,−1),(1,−1,−1),(1,1,1)}, let X₁,X₂,X₃ be the coordinate variables. Each pair has covariance zero, but the three variables are not mutually independent.",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space",
+          "def-variance-and-covariance",
+          "def-independence-of-finite-random-variables"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "cex-pair-count-normalized-sample-acvf-not-positive-semidefinite",
+        "kind": "counterexample",
+        "title": "Pair-count-normalized sample ACVF need not be positive semidefinite",
+        "statement": "For every finite real data vector, the pair-count-normalized sample ACVF γ̃_n has nonnegative Toeplitz quadratic forms.",
+        "deps": [
+          "def-autocovariance-and-sample-autocovariance"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      }
+    ]
+  }
+]

@@ -1,0 +1,1028 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62-batch-3",
+  "scope": [
+    "lem-full-column-rank-matrix-has-economy-qr",
+    "thm-exact-gaussian-linear-regression-inference",
+    "thm-gaussian-regression-confidence-and-prediction-intervals",
+    "cex-rademacher-errors-do-not-give-exact-regression-t",
+    "ex-gaussian-regression-mean-and-prediction-intervals"
+  ],
+  "contracts": {
+    "lem-full-column-rank-matrix-has-economy-qr": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qr-factorisation-over-r-or-c",
+          "source_section": "Statement",
+          "quote": "Every invertible matrix $A\\in M_n(\\mathbb F)$, where $\\mathbb F=\\mathbb R$ or $\\mathbb C$, has a unique factorisation\n\n$$A=QR,$$\n\nwhere $Q^*Q=I$ and $R$ is upper triangular with positive real diagonal entries. Thus $Q$ is orthogonal over $\\mathbb R$ and unitary over $\\mathbb C$. The assertion includes the unique $0\\times0$ factorisation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-dimension-of-a-direct-sum",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$, let $V$ be a vector\nspace over $F$ ([[def-vector-space]]) and let $U$ be a family of linear subspaces\n$U_i$ of $V$ indexed by $i < n$ ([[def-linear-subspace]],\n[[def-sum-of-linear-subspaces]]) with\n\n$$V \\;=\\; \\bigoplus_{i<n} U_i$$\n\n([[def-internal-direct-sum]]) and every $U_i$ finite-dimensional over $F$\n([[def-dimension]]). Then $V$ is finite-dimensional over $F$ and\n\n$$\\dim_F V \\;=\\; \\sum_{i<n} \\dim_F U_i ,$$\n\nthe right-hand side being the finite sum of [[def-monoid-finite-product]] read\nadditively in the commutative monoid $(\\mathbb{N}, +, 0)$\n([[def-nat-addition]], [[lem-nat-add-identity]],\n[[lem-nat-add-associative]], [[lem-nat-add-commutative]]).\n\n**The base case is a genuine case.** At $n = 0$ the direct sum of the empty\nfamily is $\\{0_V\\}$ and the empty sum of natural numbers is $0$, so the formula\nreads $\\dim_F\\{0_V\\} = 0$. **At $n = 2$** it reads\n$\\dim_F(U \\oplus W) = \\dim_F U + \\dim_F W$.\n\n**No choice principle is used.** The only inputs are\n[[thm-dimension-formula]] and [[thm-dimension-of-a-linear-subspace]], both of\nwhich are proved in finite dimension without one.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $W=\\operatorname{col}X$. The columns of $X$ are a basis of $W$, so $\\dim W=p$. By [F1], $\\mathbb R^n=W\\oplus W^\\perp$. Since $W^\\perp$ is a subspace of the finite-dimensional space $\\mathbb R^n$, [F4] makes it finite-dimensional; [F5] then gives $n=\\dim W+\\dim W^\\perp$, so $\\dim W^\\perp=n-p$. By [F2], choose an orthonormal basis of $W^\\perp$ and index its $n-p$ vectors as $z_{p+1},\\ldots,z_n$. The columns of $A=[X\\ z_{p+1}\\ \\cdots\\ z_n]$ form a basis of $\\mathbb R^n$: their $X$-part spans $W$, their remaining part spans $W^\\perp$, and the direct sum in [F1] makes the union linearly independent. Thus $A$ is invertible.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F3] to write $A=UT$, where $U$ is orthogonal and $T$ is upper triangular with positive diagonal. Let $Q$ be the first $p$ columns of $U$, let $Q_0$ be its remaining columns, and let $R$ be the leading $p\\times p$ block of $T$. Because $T_{ij}=0$ when $i>j$, every entry below row $p$ in its first $p$ columns is zero. The first $p$ columns of $A$ are therefore $X=QR$. The matrix $R$ is upper triangular with positive diagonal, while $U=[Q\\ Q_0]$ gives $Q^TQ=I_p$ and the required orthonormal completion.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $R$ is invertible, $X^TX=R^TR$ and $(X^TX)^{-1}=R^{-1}R^{-T}$. Hence $P_X=Q R(R^TR)^{-1}R^TQ^T=Q Q^T$, because $R(R^TR)^{-1}R^T=I_p$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses require n>p>=1, so the zero-dimensional design case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Full column rank with p>=1 excludes a zero-column design and makes R invertible."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes p=1 and step 2.1 applies square QR to the invertible completion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The rank-deficient case is excluded by the full-column-rank hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The factorization has no interval or parameter endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 selects a finite orthonormal basis from F2; no arbitrary-index choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence assertion, not an equivalence."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Independently read all three proof steps and all five cited supplier statements/proofs. Full column rank gives a p-dimensional column space; orthogonal decomposition and the finite direct-sum dimension formula give an (n-p)-dimensional complement. Completing X with a finite orthonormal complement basis makes a square invertible matrix; square QR has a zero lower-left block, giving the economy QR and orthonormal completion. Positive diagonal makes R invertible, and inverse multiplication gives P_X=QQ^T. Checked p=1 and n=p+1; p=0, n=p and rank deficiency are excluded. Only single finite existential basis choices occur, with no AC requirement. MIT Section 15 PDF pp. 3-4 confirms the economy-QR and projection construction. Reader/refuter report no findings for this item. No defect found."
+      }
+    },
+    "thm-exact-gaussian-linear-regression-inference": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-full-column-rank-matrix-has-economy-qr",
+          "source_section": "Statement",
+          "quote": "Let $n>p\\ge1$ and let $X\\in\\mathbb R^{n\\times p}$ have full column rank. Then there are matrices $Q\\in\\mathbb R^{n\\times p}$ and $R\\in\\mathbb R^{p\\times p}$ such that\n\n$$X=QR,$$\n\nwhere $Q^TQ=I_p$ and $R$ is upper triangular with positive diagonal. The columns of $Q$ can be completed to an orthonormal basis $[Q\\ Q_0]$ of $\\mathbb R^n$, with $Q_0\\in\\mathbb R^{n\\times(n-p)}$. For $P_X:=X(X^TX)^{-1}X^T$, one has $P_X=QQ^T$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $Z\\sim N_n(0,I_n)$ have independent standard-normal coordinates, and let $U\\in\\mathbb R^{n\\times n}$ satisfy $U^TU=I_n$. Then $UZ$ also has independent $N(0,1)$ coordinates. Here $I_n$ is the identity matrix and $U$ is orthogonal.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every integer $k\\ge1$, the law $\\chi_k^2$ has density\n$$\nf_k(x)=c_k x^{k/2-1}e^{-x/2}\\mathbf 1_{\\{x>0\\}},\\qquad c_k=\\frac{\\sigma_{k-1}(S^{k-1})}{2(2\\pi)^{k/2}}>0,\n$$\nwhere $\\sigma_{k-1}$ is the polar surface measure on the unit sphere in $\\mathbb R^k$. Consequently, $Q_k>0$ almost surely, and its cumulative distribution function is continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every $k\\ge1$, the CDF of $t_k$ is continuous and strictly increasing on $\\mathbb R$, is symmetric about zero, and has limits $0$ and $1$ at $-\\infty$ and $+\\infty$. For every $r,s\\ge1$, the CDF of $F_{r,s}$ is continuous on $\\mathbb R$, is zero on $(-\\infty,0]$, and is strictly increasing on $(0,\\infty)$ with limit $1$ at $+\\infty$. Consequently, for each $u\\in(0,1)$ each law has exactly one $u$-quantile on its support.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-randomized-test",
+          "source_section": "Definition",
+          "quote": "A **randomized test** is a randomized procedure with binary action space\nwhose action set is $\\{0,1\\}$, equipped with its full sigma-algebra\n$2^{\\{0,1\\}}$ (the power set, which is a sigma-algebra by\n[[def-sigma-algebra]]), where $1$ means reject and $0$ means do not reject\n([[def-randomized-procedure-as-a-markov-kernel]]). Its **test function** is\n$$\\varphi(x)=K(x,\\{1\\}),\\qquad x\\in\\mathcal X.$$\nSince $K(x,\\cdot)$ is a probability measure and $\\{0\\},\\{1\\}$ partition the\naction set, $K(x,\\{0\\})+K(x,\\{1\\})=1$. Thus $\\varphi(x)\\in[0,1]$ and\n$1-\\varphi(x)=K(x,\\{0\\})$ is the probability of not rejecting. Give $[0,1]$\nthe trace of the Borel sigma-algebra on $[0,+\\infty]$, namely\n$\\{C\\cap[0,1]:C\\in\\mathcal B([0,+\\infty])\\}$. By\n[[lem-procedure-action-law-is-measurable]], $x\\mapsto K(x,\\{1\\})$ is\nmeasurable; since it has range in $[0,1]$, its preimage of $C\\cap[0,1]$ equals\nits preimage of $C$ and is measurable for every such $C$. Hence $\\varphi$ is a\nmeasurable map in the preimage sense of\n[[def-measurable-function-between-measurable-spaces]]. Its value is the\nrejection probability after observing $x$.\nThe convention $1=\\text{reject}$ is fixed here. No null or alternative\nhypothesis is part of this definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-test-size-and-power",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.\n\nFor a randomized test with test function\n$\\varphi:\\mathcal X\\to[0,1]$ ([[def-randomized-test]]), its **power function**\nis\n$$\\beta(\\theta):=E_\\theta[\\varphi(X)]\\qquad(\\theta\\in\\Theta).$$\nIts **size** is\n$$\\sup_{\\theta\\in\\Theta_0}\\beta(\\theta),$$\nand it has **level $\\alpha$** when this supremum is at most\n$\\alpha\\in[0,1]$. The expectations exist and lie in $[0,1]$ because\n$0\\le\\varphi\\le1$ and each $P_\\theta$ is a probability measure\n([[def-probability-measure]],\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).\nThe supremum exists because $\\Theta_0$ is nonempty, the values lie in\n$[0,1]$, and $\\mathbb R$ has the least-upper-bound property\n([[def-complete-ordered-field]]).\n\nFor the binary action $a\\in\\{0,1\\}$, where $1$ means reject, the\n**zero-one error loss** is $1$ when $a=1$ and $\\theta\\in\\Theta_0$, or when\n$a=0$ and $\\theta\\in\\Theta_1$, and is $0$ otherwise. The decision-rule risk\nfrom [[def-loss-function-and-risk]] integrates this loss against the action\nkernel and data law. For each fixed $\\theta$, its section on the binary\naction space is measurable. The risk identities proved in\n[[lem-test-zero-one-loss-risk-identities]] show that risk equals\n$\\beta(\\theta)$ on $\\Theta_0$ and $1-\\beta(\\theta)$ on $\\Theta_1$. Thus size\nis the worst null error risk, and power is the rejection probability under\neach alternative parameter.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-orthogonal-projection",
+          "source_section": "Definition",
+          "quote": "Let $W$ be a subspace of a finite-dimensional inner product space $V$. The orthogonal-decomposition theorem ([[thm-finite-dimensional-orthogonal-decomposition]]) gives\n\n$$V=W\\oplus W^\\perp$$\n\nand associates to every $v\\in V$ unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$. The **orthogonal projection onto $W$** is the function\n\n$$P_W:V\\longrightarrow W,\\qquad P_Wv=w.$$\n\nEquivalently, $P_Wv$ is the unique vector of $W$ such that $v-P_Wv\\in W^\\perp$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in an inner product space:\n\n1. if $\\langle u,v\\rangle=0$, then $\\lVert u+v\\rVert^2=\\lVert u\\rVert^2+\\lVert v\\rVert^2$;\n2. $\\lVert u+v\\rVert^2+\\lVert u-v\\rVert^2=2\\lVert u\\rVert^2+2\\lVert v\\rVert^2$;\n3. over $\\mathbb R$, $\\langle u,v\\rangle=\\frac14(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2)$;\n4. over $\\mathbb C$ with the linear-first convention,\n$$\\langle u,v\\rangle=\\frac14\\bigl(\\lVert u+v\\rVert^2-\\lVert u-v\\rVert^2+i\\lVert u+iv\\rVert^2-i\\lVert u-iv\\rVert^2\\bigr).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-axiom-of-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. For every sequence\n$(A_n)_{n\\in\\mathbb N}$ of nonempty sets there is a sequence\n$(a_n)_{n\\in\\mathbb N}$ with $a_n\\in A_n$ for every $n\\in\\mathbb N$. Thus the\nAxiom of Choice implies the pair-local countable choice principle\n$\\mathrm{AC}_\\omega$\n([[def-countable-choice-principle-for-foliation-pair]]).",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-fixed-design-linear-regression-model",
+          "source_section": "Definition",
+          "quote": "Let $n,p\\ge1$ be integers and let $X\\in\\mathbb R^{n\\times p}$ be a fixed matrix.\nA **fixed-design first-moment linear regression model** is a parametric\nstatistical experiment on $(\\mathbb R^n,\\mathcal B(\\mathbb R^n))$ with parameter\nset $\\mathbb R^p$, laws $(P_\\beta)_{\\beta\\in\\mathbb R^p}$, and observed vector\n$Y(y)=y$, such that every coordinate of $Y$ is integrable under $P_\\beta$ and\n$$\\mathbb E_\\beta Y=X\\beta\\qquad(\\beta\\in\\mathbb R^p).$$\nHere $\\mathcal B(\\mathbb R^n)$ is the Borel sigma-algebra, and expectation is\ntaken under the particular law $P_\\beta$. The residual vector\n$\\epsilon_\\beta:=Y-X\\beta$ therefore has coordinatewise mean zero. The phrase\n**fixed design** means that $X$ is held constant in this experiment; it carries\nno probability law or assignment mechanism for $X$.\n\nThis definition states only the first-moment model. It imposes no covariance,\nindependence, or Gaussian assumption. Such assumptions must be stated where\nused.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-least-squares-solution-set",
+          "source_section": "Definition",
+          "quote": "For integers $n,p\\ge1$, a matrix $X\\in\\mathbb R^{n\\times p}$, and a response\nvector $y\\in\\mathbb R^n$, define the **least-squares solution set**\n$$\\mathcal B_{\\mathrm{LS}}(y):=\\operatorname*{arg\\,min}_{b\\in\\mathbb R^p}\\|y-Xb\\|_2^2.$$\nThis is a set-valued definition; it does not select one coefficient vector.\nThe next theorem proves that the set is nonempty and identifies the fitted\nvector and residual as unique, including when $X$ is rank-deficient.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-least-squares-fitted-vector-and-solution-set",
+          "source_section": "Statement",
+          "quote": "Let $n,p\\ge1$, $X\\in\\mathbb R^{n\\times p}$, $y\\in\\mathbb R^n$, and\n$C=\\operatorname{col}(X)\\subseteq\\mathbb R^n$. For the least-squares solution\nset $\\mathcal B_{\\mathrm{LS}}(y)$ of\n[[def-least-squares-solution-set]], the following hold:\n\n1. $\\mathcal B_{\\mathrm{LS}}(y)$ is nonempty, and $b$ is in it exactly when\n   $X^T(Xb-y)=0$.\n2. If $b_0\\in\\mathcal B_{\\mathrm{LS}}(y)$, then\n   $\\mathcal B_{\\mathrm{LS}}(y)=b_0+\\ker X$.\n3. Every least-squares solution has the same fitted vector $P_Cy$ and residual\n   $y-P_Cy$.\n4. The direction space $\\ker X$ of the affine solution set has dimension\n   $p-\\operatorname{rank}(X)$.\n\nThe theorem makes no statistical moment or distributional assumption.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-linear-estimability-iff-row-space",
+          "source_section": "Statement",
+          "quote": "In a fixed-design first-moment regression model with $X\\in\\mathbb R^{n\\times p}$,\na contrast $c^T\\beta$ is linearly estimable if and only if\n$$c\\in\\operatorname{row}(X)=\\operatorname{im}(X^T),$$\nequivalently if and only if there exists $a\\in\\mathbb R^n$ with $X^Ta=c$.\nWhenever this holds, $a^TY$ is unbiased for $c^T\\beta$ for every $\\beta$.\nHere $\\operatorname{row}(X)$ is defined as the image of the transpose map.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-grouping-independent-sigma-algebras",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal F_i)_{i\\in I}$ be an independent family of sigma-algebras on a\nprobability space, and let $J_0,\\dots,J_{m-1}\\subseteq I$ be pairwise disjoint\nindex sets. For each $r<m$, define\n\n$$\\mathcal G_r:=\\sigma\\left(\\bigcup_{i\\in J_r}\\mathcal F_i\\right).$$\n\nThen the sigma-algebras $\\mathcal G_0,\\dots,\\mathcal G_{m-1}$ are independent.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F21",
+          "source": "thm-finite-dimensional-orthogonal-decomposition",
+          "source_section": "Statement",
+          "quote": "If $W$ is a subspace of a finite-dimensional real or complex inner product space $V$, then\n\n$$V=W\\oplus W^\\perp.$$\n\nThus every $v\\in V$ has unique vectors $w\\in W$ and $z\\in W^\\perp$ with $v=w+z$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F22",
+          "source": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "source_section": "Statement",
+          "quote": "Every finite-dimensional real or complex inner product space has an orthonormal basis. In dimension zero, this is the empty basis.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F23",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F24",
+          "source": "cor-dimension-of-a-direct-sum",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$, let $V$ be a vector\nspace over $F$ ([[def-vector-space]]) and let $U$ be a family of linear subspaces\n$U_i$ of $V$ indexed by $i < n$ ([[def-linear-subspace]],\n[[def-sum-of-linear-subspaces]]) with\n\n$$V \\;=\\; \\bigoplus_{i<n} U_i$$\n\n([[def-internal-direct-sum]]) and every $U_i$ finite-dimensional over $F$\n([[def-dimension]]). Then $V$ is finite-dimensional over $F$ and\n\n$$\\dim_F V \\;=\\; \\sum_{i<n} \\dim_F U_i ,$$\n\nthe right-hand side being the finite sum of [[def-monoid-finite-product]] read\nadditively in the commutative monoid $(\\mathbb{N}, +, 0)$\n([[def-nat-addition]], [[lem-nat-add-identity]],\n[[lem-nat-add-associative]], [[lem-nat-add-commutative]]).\n\n**The base case is a genuine case.** At $n = 0$ the direct sum of the empty\nfamily is $\\{0_V\\}$ and the empty sum of natural numbers is $0$, so the formula\nreads $\\dim_F\\{0_V\\} = 0$. **At $n = 2$** it reads\n$\\dim_F(U \\oplus W) = \\dim_F U + \\dim_F W$.\n\n**No choice principle is used.** The only inputs are\n[[thm-dimension-formula]] and [[thm-dimension-of-a-linear-subspace]], both of\nwhich are proved in finite dimension without one.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F25",
+          "source": "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "source_section": "Definition",
+          "quote": "Let $A\\in M_{m\\times n}(F)$. Its **row space** $\\operatorname{Row}(A)\\subseteq F^n$ is the span of its rows, its **column space** $\\operatorname{Col}(A)\\subseteq F^m$ is the span of its columns, and its **nullspace** is\n$$N(A):=\\{x\\in F^n:Ax=0\\}.$$\n\nThe **row rank** and **column rank** are\n$$\\operatorname{rrank}(A):=\\dim_F\\operatorname{Row}(A),\\qquad \\operatorname{crank}(A):=\\dim_F\\operatorname{Col}(A).$$\nThese dimensions are defined because each space is spanned by a finite list.\nStarting with the empty list, inspect the spanning vectors in order and retain a\nvector exactly when it is not in the span of those already retained. Induction\nshows that the retained list is independent and has the same span as the\noriginal finite list, so it is a finite basis. The **rank** of $A$ is its row\nrank; [[thm-row-rank-equals-column-rank]] proves that it also equals the column\nrank.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F25",
+          "source": "thm-row-rank-equals-column-rank",
+          "source_section": "Statement",
+          "quote": "For every finite matrix over a field,\n$$\\operatorname{rrank}(A)=\\operatorname{crank}(A).$$\nBoth dimensions equal the number of pivots in any echelon form of $A$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Gaussian experiment has the fixed-design first moment in [F14], and [F15] defines its least-squares solution set. Apply [F1] and write $X=QR$, with $[Q\\ Q_0]$ orthogonal. Since $R$ is invertible, $X^TX=R^TR$ and $(X^TX)^{-1}=R^{-1}R^{-T}$. Therefore $\\widehat\\beta=R^{-1}Q^TY$ and $P_X=Q R(R^TR)^{-1}R^TQ^T=QQ^T$. For any $b\\in\\mathbb R^p$, orthogonality of the columns of $Q$ and $Q_0$ gives $\\|Y-Xb\\|^2=\\|Q^TY-Rb\\|^2+\\|Q_0^TY\\|^2$. The unique minimizer is $b=R^{-1}Q^TY$, consistent with [F16]; the residual is $Q_0Q_0^TY$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F11",
+            "F12",
+            "F14",
+            "F15",
+            "F16",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $W_U=\\operatorname{col}X$, $A=W_U\\cap W_R^\\perp$, and $B=W_U^\\perp$, and let $P_A,P_B$ be the orthogonal projections onto $A,B$. By [F21], $\\mathbb R^n=W_U\\oplus B$. For any $u\\in W_U$, write $u=P_{W_R}u+(u-P_{W_R}u)$. The first term belongs to $W_R\\subseteq W_U$, while the second lies in $W_R^\\perp$ by [F11] and in $W_U$ because it is a difference of vectors in $W_U$. Thus $u\\in W_R+A$. Conversely $W_R,A\\subseteq W_U$, and $W_R\\cap A=\\{0\\}$ because $A\\subseteq W_R^\\perp$ and [F21] gives $W_R\\cap W_R^\\perp=\\{0\\}$, so $W_U=W_R\\oplus A$. Combining the two decompositions gives $\\mathbb R^n=W_R\\oplus A\\oplus B$, with pairwise orthogonal summands. By [F23], these subspaces are finite-dimensional. The columns of $X$ are a basis of $W_U$, so $\\dim W_U=p$. If $q=p$, then $W_R=\\{0\\}$ and $\\dim W_R=0=p-q$; if $q<p$, [F25] gives $\\dim W_R=\\operatorname{crank}(X_R)=\\operatorname{rrank}(X_R)=\\operatorname{rank}(X_R)=p-q$. Applying [F24] gives $\\dim A=q$ and $\\dim B=n-p=\\nu$. By [F22], choose orthonormal bases of $W_R,A,B$, using the empty basis when $q=p$. Let $O$ be the matrix whose columns are these bases in that order; then $O$ is orthogonal. For every $y=r+a+b$ in the unique decomposition, [F11] gives $P_{W_R}y=r$, $P_Ay=a$, $P_By=b$, and $P_{W_U}y=r+a$. Hence $y-P_{W_R}y=P_Ay+P_By$ and $y-P_{W_U}y=P_By$. Standardize the errors to $\\eta=\\epsilon/\\sigma$. By [F9], each $\\epsilon_i/\\sigma$ is standard normal, and [F19] preserves independence under coordinatewise scaling, so $\\eta$ has independent standard-normal coordinates. Write $O^T\\eta=(Z_R,Z_A,Z_B)$. By [F2], these transformed coordinates are independent standard normals, so [F18] makes $Z_A$ and $Z_B$ independent. Under the null, $\\mu=X\\beta\\in W_R$, so $P_A\\mu=P_B\\mu=0$. The two residual vectors above are therefore $P_A\\epsilon+P_B\\epsilon$ and $P_B\\epsilon$; since $P_X=P_{W_U}$ and the chosen columns are orthonormal, $RSS_R-RSS_F=\\|P_A\\epsilon\\|^2=\\sigma^2\\|Z_A\\|^2$ and $RSS_F=\\|P_B\\epsilon\\|^2=\\sigma^2\\|Z_B\\|^2$. Thus [F3] gives independent $\\chi_q^2$ and $\\chi_\\nu^2$ variables; both degrees are positive, [F4] makes the denominator positive almost surely, and the ratio definition [F5] gives the stated $F_{q,\\nu}$ law.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F9",
+            "F11",
+            "F12",
+            "F13",
+            "F18",
+            "F19",
+            "F21",
+            "F22",
+            "F23",
+            "F24",
+            "F25",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $\\eta=\\epsilon/\\sigma$ and use $U=[Q\\ Q_0]$ from [F1]. The density in [F9] becomes standard normal under this scaling, and [F19] preserves independence under coordinatewise scaling; hence $\\eta$ has independent standard-normal coordinates. By [F2], $U^T\\eta=(G,H)$ has independent standard-normal coordinates, and [F18] groups the first $p$ and last $\\nu$ coordinates into independent vectors. Step 1.1 gives $\\widehat\\beta-\\beta=\\sigma R^{-1}G$ and $(I-P_X)Y=\\sigma Q_0H$. By [F13], these linear and squared-norm maps are Borel, so [F19] preserves the independence of their values. From [F20], $\\widehat\\beta\\sim N_p(\\beta,\\sigma^2R^{-1}R^{-T})=N_p(\\beta,\\sigma^2(X^TX)^{-1})$; [F3] gives $RSS_F/\\sigma^2=\\|H\\|^2\\sim\\chi^2_\\nu$, and $s>0$ almost surely by [F4]. For $c\\ne0$, positive definiteness gives $v_c=c^T(X^TX)^{-1}c>0$. The linear image $Z_c=(R^{-T}c)^TG/\\sqrt{v_c}$ is $N(0,1)$ by [F20], since $\\|R^{-T}c\\|^2=v_c$. It is independent of $\\|H\\|^2$ by [F18] and [F19]. Therefore, almost surely, $T_c=Z_c/\\sqrt{\\|H\\|^2/\\nu}$ has law $t_\\nu$ by [F3] and [F5]; the defined value on $s=0$ does not change its law. Finally, $\\operatorname{row}(X)=\\mathbb R^p$, so [F17] makes every coefficient contrast estimable; explicitly, $X^T[X(X^TX)^{-1}c]=c$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F9",
+            "F13",
+            "F17",
+            "F18",
+            "F19",
+            "F20",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For fixed $v=\\sigma^2>0$, independence and the normal density [F9] make the joint likelihood as a function of $b$ proportional to $\\exp(-\\|Y-Xb\\|^2/(2v))$. Step 1.1 shows its unique maximizer is $\\widehat\\beta$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F9",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $T_{c,\\theta_0}$ by replacing $c^T\\beta$ in the numerator of $T_c$ with $\\theta_0$. This statistic is measurable by [F10] and [F13], since its piecewise formula uses Borel linear and norm maps. Under $H_0:c^T\\beta=\\theta_0$, step 2.1 gives the symmetric continuous $t_\\nu$ law in [F6]; the two tails beyond $\\pm t_{\\nu,1-\\alpha/2}$ each have probability $\\alpha/2$. The contrast null and alternative are both nonempty: $\\beta=\\theta_0c/(c^Tc)$ is in the null, and $\\beta=(\\theta_0+1)c/(c^Tc)$ is in its alternative. The partial F statistic is Borel because $RSS_R$ and $RSS_F$ are continuous functions of $Y$, and its ratio on $\\{RSS_F>0\\}$ with the constant branch on $\\{RSS_F=0\\}$ is Borel by [F13], so the two threshold rejection events are Borel. Step 1.2 and the unique $F_{q,\\nu}$ quantile in [F6] give upper-tail rejection probability $\\alpha$. The F-test null contains $\\beta=0$; step 1.2 gives a $q$-dimensional subspace $A\\subseteq\\operatorname{col}X$ with $q\\ge1$, so some $a\\in A\\setminus\\{0\\}$ equals $X\\beta$ for a coefficient vector $\\beta$. Since $A\\cap W_R=\\{0\\}$, this mean is outside $W_R$, so that parameter is in the alternative. Each Borel rejection event $E$ defines a measurable deterministic kernel by $K(y,\\{1\\})=\\mathbf1_E(y)$ and $K(y,\\{0\\})=1-\\mathbf1_E(y)$, so [F7] applies. Both tests reject with probability $\\alpha$ at every null parameter, so each has size $\\alpha$ by [F8].",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "F13",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Write $r=RSS_F$. At $b=\\widehat\\beta$, the joint log-likelihood for $v>0$ is $-\\frac n2\\log(2\\pi v)-\\frac r{2v}$. If $r>0$, its derivative $(r-nv)/(2v^2)$ is positive for $v<r/n$ and negative for $v>r/n$, so the unique maximum is $v=r/n$. Step 2.1 shows $r>0$ almost surely. If an observed vector has $r=0$, the likelihood tends to infinity as $v\\downarrow0$ and has no maximizer on $(0,\\infty)$. Therefore the joint MLE is $(\\widehat\\beta,RSS_F/n)$ almost surely, while $s^2=RSS_F/(n-p)$ differs because $n>p$ and $RSS_F>0$ almost surely. Together with steps 2.1 and 3.1 this proves all asserted distributional and test-calibration claims, with the likelihood exception stated for every data vector.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement explicitly permits the empty reduced design when q=p. In step 1.2, W_R={0} has dimension0, its orthonormal basis is empty, W_U=W_R direct-sum A still has dim A=p=q, and the F law retains positive degrees q and nu=n-p. The indexed Gaussian parameter family itself is nonempty because1<=p<n and sigma\u00b2>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits q=p, where the reduced design space is zero-dimensional, while nu remains positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits p=1, q=1, or nu=1; step 2.1 uses positive chi-square degrees."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement defines s=0 and RSS_F=0 branches; steps 2.1 and 4.1 show that event has probability zero and state the likelihood behavior."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement restricts 0<alpha<1, and step 3.1 uses the unique t and F quantiles."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 and step 2.1 state where AC is used for normal laws and orthogonal coordinates; the finite algebra adds no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted; the estimability fact is used only in its row-space direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted by this item."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Read the complete current theorem and all 30 declared prerequisite carriers (including the QR lemma already reviewed), checking cited statements and the proofs needed for normal, chi-square, quantile, independence and finite-dimensional geometry uses. QR makes XTX positive definite and gives beta-hat=beta+sigma R^-1 G and RSS=sigma^2 ||H||^2 for independent standard-normal blocks. For the reduced null, R^n=W_R orthogonal-sum A orthogonal-sum B with dimensions p-q,q,n-p gives independent numerator/denominator chi-squares. Checked q=p (empty reduced design), q=1, p=1, nu=1, c nonzero, sigma^2 positive, both null/alternative witnesses and constant null rejection probabilities. Piecewise zero-denominator branches are Borel and change no laws because RSS>0 almost surely. The likelihood derivative has unique maximum RSS/n when RSS>0 and is unbounded when RSS=0. AC is explicit and inherited from normal-law/Fourier uniqueness and countable-choice measurability suppliers. Current first-moment and least-squares draft interfaces match their actual uses; the nuisance variance is fixed when using the beta-indexed first-moment model. MIT Section 15 pp.1-7 and Lecture 4 pp.1-4 checked for model, QR, affine normal covariance and t/F laws; general reduced-subspace F is justified by the local decomposition. Reader-post source exactly matches current raw hash; pre-reader source reconstructed from numbered native reader output matches frozen pre hash. Reader/refuter contain no open findings. Accepted projection-notation repair and elementary measurability/witness expansions; no unresolved defect."
+      }
+    },
+    "thm-gaussian-regression-confidence-and-prediction-intervals": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-exact-gaussian-linear-regression-inference",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Fix a deterministic full-column-rank matrix $X\\in\\mathbb R^{n\\times p}$ with $1\\le p<n$, a parameter $\\beta\\in\\mathbb R^p$, and $\\sigma^2>0$. Observe $Y=X\\beta+\\epsilon$, where the coordinates of $\\epsilon$ are independent with law $N(0,\\sigma^2)$. This is the fixed-design Gaussian experiment on $\\mathbb R^n$ indexed by $(\\beta,\\sigma^2)\\in\\mathbb R^p\\times(0,\\infty)$.\n\nLet $\\widehat\\beta=(X^TX)^{-1}X^TY$ and $P_X:=X(X^TX)^{-1}X^T$, the orthogonal projection matrix onto $\\operatorname{col}X$. Define\n$$RSS_F=\\|(I_n-P_X)Y\\|^2,\\qquad \\nu=n-p,\\qquad s^2=RSS_F/\\nu,\\qquad s=\\sqrt{s^2}.$$\nFor $c\\in\\mathbb R^p\\setminus\\{0\\}$, set\n$$T_c=\\begin{cases}\\dfrac{c^T\\widehat\\beta-c^T\\beta}{s\\sqrt{c^T(X^TX)^{-1}c}},&s>0,\\\\0,&s=0.\\end{cases}$$\nThen $\\widehat\\beta\\sim N_p(\\beta,\\sigma^2(X^TX)^{-1})$, $\\widehat\\beta$ is independent of $RSS_F$, $RSS_F/\\sigma^2\\sim\\chi^2_\\nu$, $s>0$ almost surely, and $T_c\\sim t_\\nu$.\n\nFor a fixed reduced design $X_R\\in\\mathbb R^{n\\times(p-q)}$ with $\\operatorname{rank}X_R=p-q$, $\\operatorname{col}X_R\\subseteq\\operatorname{col}X$, and $1\\le q\\le p$, put $W_R=\\operatorname{col}X_R$ and\n$$RSS_R=\\|Y-P_{W_R}Y\\|^2.$$\nUnder the null hypothesis $X\\beta\\in W_R$, the statistic\n$$F=\\begin{cases}\\dfrac{(RSS_R-RSS_F)/q}{RSS_F/\\nu},&RSS_F>0,\\\\0,&RSS_F=0\\end{cases}$$\nhas law $F_{q,\\nu}$. Both denominator degrees of freedom are positive; the empty reduced design space is allowed when $q=p$.\n\nFor a null value $\\theta_0$, define $T_{c,\\theta_0}$ by replacing $c^T\\beta$ in the numerator of $T_c$ by $\\theta_0$, with the same zero-denominator convention. For $0<\\alpha<1$, the two-sided test of $H_0:c^T\\beta=\\theta_0$ that rejects when $|T_{c,\\theta_0}|>t_{\\nu,1-\\alpha/2}$ has size exactly $\\alpha$. The partial F test that rejects when $F>F^{-1}_{q,\\nu}(1-\\alpha)$ also has size exactly $\\alpha$ under its stated null. The joint Gaussian maximum-likelihood estimate is $\\widehat\\beta$ together with $\\widehat\\sigma^2_{\\rm ML}=RSS_F/n$ almost surely, distinct from $s^2=RSS_F/(n-p)$. If an observed vector has $RSS_F=0$, the likelihood has no maximizer over $\\sigma^2>0$; this event has probability zero in the stated model.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-pivot",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment with $\\Theta\\ne\\varnothing$, and let\n$(S,\\mathcal S)$ be a measurable space. A\nfamily of measurable maps $q_\\theta:\\mathcal X\\to S$, one for each\n$\\theta\\in\\Theta$, is a **pivot** if the pushforward law\n$$\\nu_\\theta(B):=P_\\theta(q_\\theta^{-1}(B)),\\qquad B\\in\\mathcal S$$\nis the same probability measure $\\nu$ for every $\\theta\\in\\Theta$.\nEach section is a random element on $(\\mathcal X,\\mathcal A,P_\\theta)$, so\nits pushforward is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\nNo measurability in $\\theta$ is asserted or needed.\n\nFor $S=\\mathbb R$, a pivot is a parameter-indexed family of measurable\nreal-valued quantities with a common sampling law. The maps $q_\\theta$\nmay depend on the unknown parameter. A pivot need not be invertible in the\nparameter, and its inversion need not be an interval.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment as in [[def-statistical-experiment]], and assume\n$\\Theta\\ne\\varnothing$. A **confidence-set procedure** is a map\n$C:\\mathcal X\\to\\mathcal P(\\Theta)$, where\n$\\mathcal P(\\Theta):=\\{A:A\\subseteq\\Theta\\}$, such that, for every\n$\\eta\\in\\Theta$, its\nmembership section\n$$C_\\eta:=\\{x\\in\\mathcal X:\\eta\\in C(x)\\}$$\nbelongs to $\\mathcal A$. Its **coverage at $\\theta$** is\n$c_C(\\theta):=P_\\theta(C_\\theta)$, and its **confidence level** is\n$\\inf_{\\theta\\in\\Theta}c_C(\\theta)$, the greatest lower bound of those\ncoverage values. For $0\\le\\alpha\\le1$, it has coverage\nat least $1-\\alpha$ if $P_\\theta(C_\\theta)\\ge1-\\alpha$ for every\n$\\theta\\in\\Theta$.\n\nOnly membership sections need to be measurable; no sigma-algebra on the\nparameter set is assumed. The parameter is fixed in the repeated-sampling\ncoverage probability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pivot-inversion-exact-coverage",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),(P_\\theta)_{\\theta\\in\\Theta})$ be an\nexperiment with nonempty $\\Theta$. Let $q_\\theta:\\mathcal X\\to S$ be a\npivot with common law $\\nu$, and let $B\\in\\mathcal S$. Define\n$$C(x):=\\{\\theta\\in\\Theta:q_\\theta(x)\\in B\\}$$\nIf $\\nu(B)\\ge1-\\alpha$, then $C$ is a confidence set with coverage at\nleast $1-\\alpha$. If $\\nu(B)=1-\\alpha$, its coverage is exactly\n$1-\\alpha$ for every parameter value. For an interval $B=[a,b]$ in\n$\\mathbb R$, exactness requires calibration of the actual probability\n$\\nu([a,b])$; quantile labels alone do not remove endpoint atoms.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every $k\\ge1$, the CDF of $t_k$ is continuous and strictly increasing on $\\mathbb R$, is symmetric about zero, and has limits $0$ and $1$ at $-\\infty$ and $+\\infty$. For every $r,s\\ge1$, the CDF of $F_{r,s}$ is continuous on $\\mathbb R$, is zero on $(-\\infty,0]$, and is strictly increasing on $(0,\\infty)$ with limit $1$ at $+\\infty$. Consequently, for each $u\\in(0,1)$ each law has exactly one $u$-quantile on its support.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, and let\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ for $i<n$ be independent\nrandom elements. Define\n\n$$X=(X_0,\\dots,X_{n-1}):\\Omega\\to\\prod_{i<n}S_i.$$\n\nThen $X$ is a random element of\n$\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the\nfinite product of the marginal laws:\n\n$$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-student-t-and-f-laws",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For a positive integer $k$, take the product probability law of an independent standard normal $G$ and an independent $Q_k\\sim\\chi_k^2$. The **Student t law with $k$ degrees of freedom**, denoted $t_k$, is the law of\n$$T_k=\\begin{cases} \\displaystyle\\frac{G}{\\sqrt{Q_k/k}},&Q_k>0,\\\\ 0,&Q_k\\le0. \\end{cases}$$\nFor positive integers $r,s$, take independent $Q_r\\sim\\chi_r^2$ and $Q_s\\sim\\chi_s^2$. The **Fisher F law with degrees $(r,s)$**, denoted $F_{r,s}$, is the law of\n$$F_{r,s}=\\begin{cases} \\displaystyle\\frac{Q_r/r}{Q_s/s},&Q_s>0,\\\\ 0,&Q_s\\le0. \\end{cases}$$\nThe displayed piecewise maps are defined on all of $\\mathbb R^2$ and are Borel measurable: each quotient is continuous on its Borel positive-denominator region, and the value on the complementary Borel nonpositive-denominator region is constant. The positive-degree chi-square lemma proves that the denominators are positive almost surely, so these versions agree almost surely with the usual quotients. Zero degrees are excluded from both definitions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-chi-square-law",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. For an integer $k\\ge1$, let $G=(G_1,\\ldots,G_k)$ have law $N_k(0,I_k)$, so its coordinates are independent $N(0,1)$ random variables. The **chi-square law with $k$ degrees of freedom**, denoted $\\chi_k^2$, is the law of\n$$\nQ_k=\\sum_{j=1}^k G_j^2=\\|G\\|^2.\n$$\nFor $k=0$, define $\\chi_0^2=\\delta_0$, the point mass at zero. This zero-degree law records a rank-zero projection only; it is not used as a denominator in a Student or Fisher ratio. The multivariate-normal characteristic-function theorem makes the definition independent of the chosen realization of $G$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every integer $k\\ge1$, the law $\\chi_k^2$ has density\n$$\nf_k(x)=c_k x^{k/2-1}e^{-x/2}\\mathbf 1_{\\{x>0\\}},\\qquad c_k=\\frac{\\sigma_{k-1}(S^{k-1})}{2(2\\pi)^{k/2}}>0,\n$$\nwhere $\\sigma_{k-1}$ is the polar surface measure on the unit sphere in $\\mathbb R^k$. Consequently, $Q_k>0$ almost surely, and its cumulative distribution function is continuous on $\\mathbb R$ and strictly increasing on $(0,\\infty)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $c\\ne0$. Then $v_c>0$ because $X^TX$ is positive definite. For each full parameter $\\theta=(\\beta,\\sigma^2)$, the statistic $q_\\theta(Y)=(c^T\\widehat\\beta-c^T\\beta)/(s\\sqrt{v_c})$, assigned value $0$ when $s=0$, is a pivot by [F1] and [F2], with common law $t_\\nu$. By [F5], $B=[-t^*,t^*]$ has probability $1-\\alpha$. Define $D_c(Y)=\\{(\\beta',\\sigma'^2)\\in\\Theta:c^T\\beta'\\in C_c(Y)\\}$. For each fixed $(\\beta',\\sigma'^2)\\in\\Theta$, its membership event is $|c^T\\widehat\\beta-c^T\\beta'|\\le t^*s\\sqrt{v_c}$, a closed, hence Borel, set because $\\widehat\\beta$ and $s$ are continuous functions of $Y$. Thus [F3] applies to $D_c$. Pivot inversion [F4] gives exact coverage for $D'_c(Y)=\\{\\theta'\\in\\Theta:|q_{\\theta'}(Y)|\\le t^*\\}$. On $s>0$, $D_c(Y)=D'_c(Y)$; the exceptional event $s=0$ has probability zero for every parameter by [F1]. Therefore $D_c$ has exact coverage $1-\\alpha$, which is precisely $\\mathbb P_{\\beta,\\sigma^2}\\{c^T\\beta\\in C_c(Y)\\}=1-\\alpha$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $x_0\\ne0$, the same argument with $c=x_0$ gives the displayed mean-response interval because $h_0=v_{x_0}$. If $x_0=0$, then $x_0^T\\beta=x_0^T\\widehat\\beta=h_0=0$ for every parameter and data vector, so the interval is $\\{0\\}$ and contains the true mean with probability $1$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write $Z=(\\widehat\\beta-\\beta)/\\sigma$ and $G_*=\\epsilon_0^*/\\sigma$. By [F1] and [F8], $Z$ and $G_*$ are independent centered normal vectors/scalars with covariance $(X^TX)^{-1}$ and variance $1$. Their joint law is the product law by [F7], so [F6] gives $\\frac{Y_0^*-x_0^T\\widehat\\beta}{\\sigma\\sqrt{1+h_0}}=\\frac{G_*-x_0^TZ}{\\sqrt{1+h_0}}\\sim N(0,1)$, since the numerator has variance $1+x_0^T(X^TX)^{-1}x_0=1+h_0$. Because $G_*$ is independent of the training data, [F7] gives $\\mathcal L(Z,RSS_F,G_*)=\\mathcal L(Z,RSS_F)\\otimes\\mathcal L(G_*)$. Since $Z$ is a measurable affine function of $\\widehat\\beta$, [F1] and [F7] imply that $Z$ is independent of $RSS_F$; the joint law therefore factors as $\\mathcal L(Z)\\otimes\\mathcal L(RSS_F)\\otimes\\mathcal L(G_*)$, so $(Z,G_*)$ is independent of $RSS_F$. The displayed standard normal is a measurable function of $(Z,G_*)$, so it is independent of $RSS_F/\\sigma^2\\sim\\chi^2_\\nu$ by [F7]. By [F9] and [F10], the ratio $(Y_0^*-x_0^T\\widehat\\beta)/(s\\sqrt{1+h_0})$ has law $t_\\nu$ with positive denominator almost surely. Its central acceptance interval has probability $1-\\alpha$ by [F5], which is exactly the event $Y_0^*\\in C_{\\rm pred}(Y;x_0)$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The coefficient contrast is required nonzero; p>=1 and n>p in the underlying model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The x0=0 mean-response boundary yields the known singleton {0} with coverage one; the prediction interval remains nondegenerate because of the added future error (step 2.1 and Statement)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows p=1 and nu=1, with t quantiles defined for every positive residual degree."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement handles x0=0 separately; the future-response factor 1+h0 remains positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The level is restricted to 0<alpha<1 and the t quantile is unique by F5 (step 1.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 carry AC inherited from Gaussian and product-law suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The interval statements are implications, not biconditionals."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is stated."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Independently reviewed Statement, all three steps and all thirteen declared prerequisite carriers, using the already-completed level-4 theorem review. For c nonzero, v_c>0; the Borel full-parameter set D_c is equal on s>0 to the actual pivot inverse D_c-prime, giving exact coverage at every (beta,sigma^2). On s=0 the sets need not coincide, but that event is null at every parameter. For x0 nonzero use c=x0; x0=0 gives known mean singleton coverage 1. Future independent error plus the fitted contrast gives variance sigma^2(1+h0)>0; product-law factorization and measurable maps establish joint independence of its standardized normal numerator from RSS/sigma^2, hence the t prediction pivot. Checked x0=0 prediction (h0=0 but added future variance 1), p=1, nu=1, arbitrary fixed x0, 0<alpha<1 and excluded endpoint quantiles. AC is inherited explicitly. The normal projection fact follows directly from the local multivariate-normal definition; independent normals form the product Gaussian law. Native pre-reader numbered output:6622 reconstructs frozen pre hash and current raw source equals frozen reader-post hash. Reader repairs distinguish the exact inverse on the null denominator branch and make elementary independence transfers explicit; accepted without further item edits. MIT Section 15 pp.5-7, Lecture 4 pp.1-4, Wickham pp.6-7 and Stanford lecture4 mean/prediction sections checked. Exact coverage relies on the stated Gaussian model; the Stanford summary table does not supply an exact nonnormal t claim. No unresolved defect."
+      }
+    },
+    "cex-rademacher-errors-do-not-give-exact-regression-t": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every $k\\ge1$, the CDF of $t_k$ is continuous and strictly increasing on $\\mathbb R$, is symmetric about zero, and has limits $0$ and $1$ at $-\\infty$ and $+\\infty$. For every $r,s\\ge1$, the CDF of $F_{r,s}$ is continuous on $\\mathbb R$, is zero on $(-\\infty,0]$, and is strictly increasing on $(0,\\infty)$ with limit $1$ at $+\\infty$. Consequently, for each $u\\in(0,1)$ each law has exactly one $u$-quantile on its support.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $X^TX=2$, $\\widehat\\beta=(\\epsilon_1+\\epsilon_2)/2$ and $RSS=(\\epsilon_1-\\epsilon_2)^2/2$. If the errors agree, then $RSS=0$ and the pivot is zero by its definition. If they disagree, then $\\widehat\\beta=0$, $RSS=2$, and the pivot denominator is $s\\sqrt{(X^TX)^{-1}}=\\sqrt2\\sqrt{1/2}=1$, so the pivot is again zero. These cases exhaust the four outcomes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus the pivot equals zero almost surely. By [F1], a $t_1$ random variable has a continuous law and hence assigns probability zero to the singleton $\\{0\\}$, whereas this pivot assigns it probability one. Its law is not $t_1$, refuting the statement.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness uses the specified two observations and one coefficient; no empty sample is considered."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The equal-error outcomes give RSS=0 and are handled by the pivot zero branch in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Counterexample uses p=1 and n-p=1, satisfying the positive t degrees-of-freedom condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero residual and nonzero residual cases are both enumerated in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No confidence level or quantile endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Counterexample uses a finite four-outcome enumeration; A1 is needed only for the t1 law."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an implication and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an implication and states no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "four-outcome-rademacher-pivot",
+          "support": [
+            [
+              -1,
+              -1
+            ],
+            [
+              -1,
+              1
+            ],
+            [
+              1,
+              -1
+            ],
+            [
+              1,
+              1
+            ]
+          ],
+          "asserts": "Since $X^TX=2$, $\\widehat\\beta=(\\epsilon_1+\\epsilon_2)/2$ and $RSS=(\\epsilon_1-\\epsilon_2)^2/2$. If the errors agree, then $RSS=0$ and the pivot is zero by its definition. If they disagree, then $\\widehat\\beta=0$, $RSS=2$, and the pivot denominator is $s\\sqrt{(X^TX)^{-1}}=\\sqrt2\\sqrt{1/2}=1$, so the pivot is again zero. These cases exhaust the four outcomes. [given, construct, algebra]"
+        }
+      ]
+    },
+    "ex-gaussian-regression-mean-and-prediction-intervals": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-regression-confidence-and-prediction-intervals",
+          "source_section": "Statement",
+          "quote": "Use the fixed full-column-rank Gaussian regression model and notation of [[thm-exact-gaussian-linear-regression-inference]], with $\\nu=n-p$. Let $0<\\alpha<1$, let $t^*=t_{\\nu,1-\\alpha/2}$ be the unique $(1-\\alpha/2)$ quantile of $t_\\nu$, and put $v_c=c^T(X^TX)^{-1}c$ for $c\\ne0$. Then\n$$C_c(Y)=\\left[c^T\\widehat\\beta-t^*s\\sqrt{v_c},\\ c^T\\widehat\\beta+t^*s\\sqrt{v_c}\\right]$$\nhas exact coverage $1-\\alpha$ for $c^T\\beta$.\n\nFor any $x_0\\in\\mathbb R^p$, put $h_0=x_0^T(X^TX)^{-1}x_0$. The mean-response interval\n$$C_{\\rm mean}(Y;x_0)=\\left[x_0^T\\widehat\\beta-t^*s\\sqrt{h_0},\\ x_0^T\\widehat\\beta+t^*s\\sqrt{h_0}\\right]$$\nhas exact coverage $1-\\alpha$ for $x_0^T\\beta$ when $x_0\\ne0$. If $x_0=0$, it is the singleton $\\{0\\}$ and has coverage $1$.\n\nIf $Y_0^*=x_0^T\\beta+\\epsilon_0^*$ is one future response with $\\epsilon_0^*\\sim N(0,\\sigma^2)$ independent of the training data, then\n$$C_{\\rm pred}(Y;x_0)=\\left[x_0^T\\widehat\\beta-t^*s\\sqrt{1+h_0},\\ x_0^T\\widehat\\beta+t^*s\\sqrt{1+h_0}\\right]$$\nsatisfies $\\mathbb P_{\\beta,\\sigma^2}\\{Y_0^*\\in C_{\\rm pred}(Y;x_0)\\}=1-\\alpha$. The added $1$ is the variance contribution of the future response's own error.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication gives $X^TX=\\begin{pmatrix}4&6\\\\6&14\\end{pmatrix}$, $(X^TX)^{-1}=\\frac1{20}\\begin{pmatrix}14&-6\\\\-6&4\\end{pmatrix}$, and $X^TY=(9,18)^T$. Hence $\\widehat\\beta=(0.9,0.9)^T$, the fitted values are $(0.9,1.8,2.7,3.6)^T$, and $RSS_F=0.1^2+0.2^2+(-0.7)^2+0.4^2=0.70$. Thus $\\nu=2$, $s^2=0.35$, while $\\widehat\\sigma^2_{\\rm ML}=RSS_F/n=0.175$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $x_0=(1,2)^T$, multiplication by $(X^TX)^{-1}$ gives $h_0=x_0^T(X^TX)^{-1}x_0=0.30$ and the fitted mean $x_0^T\\widehat\\beta=2.7$. With $q=t_{2,0.975}$, [F1] gives the slope interval $0.9\\pm q\\sqrt{0.35\\cdot0.20}$, the mean-response interval $2.7\\pm q\\sqrt{0.35\\cdot0.30}$, and the prediction interval $2.7\\pm q\\sqrt{0.35\\cdot1.30}$. The prediction half-width is $\\sqrt{13/3}$ times the mean-response half-width, so it is wider because it includes the future response error.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has four observed rows and two coefficients; no empty data case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All displayed design rows and response calculations are fully specified; no zero sample-size case occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example has a zero-valued first predictor entry while retaining full column rank."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The determinant of X^T X is 20, so the displayed fit is nondegenerate and full rank (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example uses alpha=0.05 and step 2.1 uses the t2,0.975 quantile."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All computations are finite matrix arithmetic and use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "four-row-regression-arithmetic",
+          "design": [
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ]
+          ],
+          "response": [
+            1,
+            2,
+            2,
+            4
+          ],
+          "asserts": "Direct multiplication gives $X^TX=\\begin{pmatrix}4&6\\\\6&14\\end{pmatrix}$, $(X^TX)^{-1}=\\frac1{20}\\begin{pmatrix}14&-6\\\\-6&4\\end{pmatrix}$, and $X^TY=(9,18)^T$. Hence $\\widehat\\beta=(0.9,0.9)^T$, the fitted values are $(0.9,1.8,2.7,3.6)^T$, and $RSS_F=0.1^2+0.2^2+(-0.7)^2+0.4^2=0.70$. Thus $\\nu=2$, $s^2=0.35$, while $\\widehat\\sigma^2_{\\rm ML}=RSS_F/n=0.175$. [given, algebra]\n\n2.1 For $x_0=(1,2)^T$, multiplication by $(X^TX)^{-1}$ gives $h_0=x_0^T(X^TX)^{-1}x_0=0.30$ and the fitted mean $x_0^T\\widehat\\beta=2.7$. With $q=t_{2,0.975}$, [F1] gives the slope interval $0.9\\pm q\\sqrt{0.35\\cdot0.20}$, the mean-response interval $2.7\\pm q\\sqrt{0.35\\cdot0.30}$, and the prediction interval $2.7\\pm q\\sqrt{0.35\\cdot1.30}$. The prediction half-width is $\\sqrt{13/3}$ times the mean-response half-width, so it is wider because it includes the future response error. [F1, step 1.1, algebra]",
+          "x0": [
+            1,
+            2
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -12,19 +12,13 @@ aliases: []
 landmark: true
 proof_strategy: contradiction
 verification:
+  repair: research/statistical-models-experiments-62-published-bibliography-thm-of-square-roots-repair.json
   precheck: pass
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
-  audited: 2026-07-25
 sources:
   scraped: []
   references:
     - title: "W. Rudin, Principles of Mathematical Analysis, 3rd ed., Ch. 1 (Thm 1.21)"
-      url: "https://en.wikipedia.org/wiki/Principles_of_Mathematical_Analysis"
     - title: "M. Spivak, Calculus, 4th ed., Ch. 8"
-      url: "https://en.wikipedia.org/wiki/Michael_Spivak"
     - title: "University of Colorado analysis notes: The real numbers"
       url: "https://spot.colorado.edu/~baggett/chap1.pdf"
 pipeline_run: null

@@ -1,0 +1,345 @@
+[
+  {
+    "order": 1942,
+    "id": "blocking-and-paired-designs",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Blocking, pairs, and Latin squares",
+    "companion": "blocking-and-paired-designs-examples",
+    "requires": [
+      "randomized-treatment-assignment-and-sharp-null-tests",
+      "estimators-and-randomized-procedures",
+      "gaussian-orthogonal-decomposition-and-quadratic-forms",
+      "probability-spaces-random-variables-and-expectation"
+    ],
+    "items": [
+      {
+        "id": "def-randomized-complete-block-design",
+        "kind": "definition",
+        "title": "Randomized complete-block design",
+        "statement": "For t treatments and b blocks, each block contains t units and receives every treatment once; independently randomize a uniform treatment permutation within each block. The assignment space is (S_t)^b with its uniform law, which supplies no outcome or error model.",
+        "deps": [
+          "def-finite-randomized-treatment-assignment-model",
+          "def-finite-probability-space-and-event",
+          "def-uniform-finite-probability-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13 §§13.1–13.2",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            },
+            {
+              "title": "Susan Holmes and Wolfgang Huber, Modern Statistics for Modern Biology, Chapter 13 §§13.2 and 13.4.4",
+              "url": "https://www.huber.embl.de/msmb/13-chap.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-rcbd-nested-contrast-model-and-projection",
+        "kind": "lemma",
+        "title": "Nested contrast models and projections in a balanced block design",
+        "statement": "In the balanced t-treatment, b-block cell space, an additive treatment-and-block mean space has dimension t+b−1. A rank-q treatment contrast restriction Cτ=0 gives a nested reduced mean space of dimension t+b−1−q; the reduction in residual sum of squares is b(Cȳ)^T(CC^T)^{-1}(Cȳ), and the full-model residuals are double-centered cell values.",
+        "strategy": "Split the cell space into grand-mean, treatment, and block subspaces; identify the contrast row space as the removed treatment component and compute its projection from treatment means.",
+        "deps": [
+          "def-randomized-complete-block-design",
+          "def-orthogonal-projection",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "thm-rank-nullity",
+          "thm-dimension-of-a-linear-subspace",
+          "cor-dimension-of-a-direct-sum",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "thm-row-rank-equals-column-rank"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13 §13.2.2",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-randomized-latin-square-design",
+        "kind": "definition",
+        "title": "Randomized Latin-square design",
+        "statement": "Fix $t\\ge1$ and put $R_t=\\{0,1,\\ldots,t-1\\}$, with addition interpreted\nmodulo $t$. A **Latin-square allocation of order $t$** is a function\n$L:R_t\\times R_t\\to R_t$ such that for\neach fixed row the map from columns to treatments is a bijection, and for\neach fixed column the map from rows to treatments is a bijection. Thus each\ntreatment occurs exactly once in every row and every column. Let\n$\\mathcal L_t$ be the finite set of these allocations and assign the uniform\nlaw on $\\mathcal L_t$. This law is well-defined: $L_0(r,c)=r+c\\pmod t$ is a\nLatin square, since adding a fixed residue modulo $t$ permutes the residues; hence\n$\\mathcal L_t$ is nonempty. This specifies one exact\nrestricted randomization law. It randomizes over treatment-by-row-by-column\nassignments and, for $t\\ge2$, is distinct from the product of independent\nwithin-block permutations in an RCBD ([[def-randomized-complete-block-design]]).",
+        "deps": [
+          "def-finite-randomized-treatment-assignment-model",
+          "def-finite-probability-space-and-event",
+          "def-randomized-complete-block-design",
+          "def-uniform-finite-probability-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13 §13.3",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-paired-randomization-contrast-moments",
+        "kind": "theorem",
+        "title": "Design expectation and variance of a paired contrast",
+        "statement": "For one pair of units with fixed binary-treatment potential outcomes and no interference, randomizing exactly one unit to treatment makes the observed treated-minus-control contrast unbiased for the pair's average treatment effect. Its design variance is one quarter of the squared difference between the two possible observed contrasts, so baseline outcomes as well as treatment-effect heterogeneity can contribute.",
+        "strategy": "Enumerate the two equally likely assignments, write the two observed contrasts, and compute their finite weighted mean and covariance-based variance.",
+        "deps": [
+          "def-randomized-complete-block-design",
+          "def-finite-randomized-treatment-assignment-model",
+          "def-finite-population-average-treatment-effect-and-weak-null",
+          "def-finite-probability-space-and-event",
+          "def-expectation-on-a-finite-probability-space",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "def-statistic-and-estimator"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13 §13.2",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            },
+            {
+              "title": "Susan Holmes and Wolfgang Huber, Modern Statistics for Modern Biology, Chapter 13 §13.4.4",
+              "url": "https://www.huber.embl.de/msmb/13-chap.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-randomly-selected-unit-effect-moments",
+        "kind": "lemma",
+        "title": "Moments of the effect for the randomly selected treated unit",
+        "statement": "The effect of the randomly selected treated unit has expectation equal to the pair average treatment effect and variance (δ1−δ2)^2/4. This is a latent schedule quantity, not the observed treated-minus-control contrast.",
+        "strategy": "The two equally likely assignments select δ1 or δ2; evaluate their finite weighted mean and variance.",
+        "deps": [
+          "def-randomized-complete-block-design",
+          "def-finite-randomized-treatment-assignment-model",
+          "def-finite-population-average-treatment-effect-and-weak-null",
+          "def-expectation-on-a-finite-probability-space",
+          "def-moments-variance-and-covariance",
+          "def-statistic-and-estimator"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13 §13.2",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "prop-rcbd-treatment-block-interaction-confounded-with-residual",
+        "kind": "proposition",
+        "title": "One cell observation confounds unrestricted interaction with residual error",
+        "statement": "With one response per treatment-by-block cell, a double-centered unrestricted interaction occupies exactly the additive-model residual subspace. The observed residual therefore has no separate pure-error replicate component; this is a design decomposition limitation, not a claim of nonidentifiability under every additional stochastic model.",
+        "strategy": "Use the balanced projection decomposition to identify the residual subspace, then exhibit nonunique decompositions of any observed residual into interaction and projected error.",
+        "deps": [
+          "def-randomized-complete-block-design",
+          "lem-rcbd-nested-contrast-model-and-projection"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13 §13.2.2",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-rcbd-treatment-contrast-f-law",
+        "kind": "theorem",
+        "title": "Exact Gaussian F law for RCBD treatment contrasts",
+        "statement": "Assuming AC, t,b≥2, an additive RCBD mean, and independent N(0,σ²) cell errors with σ²>0, the partial F statistic for any rank-q contrast matrix C with C1=0 has the central F(q,(t−1)(b−1)) law under Cτ=0. This law is model-based and does not follow from randomization alone.",
+        "strategy": "Identify the full and contrast-restricted RCBD mean spaces and their dimensions, then apply the published exact nested Gaussian linear-model F theorem.",
+        "deps": [
+          "def-randomized-complete-block-design",
+          "def-finite-randomized-treatment-assignment-model",
+          "def-axiom-of-choice",
+          "def-statistic-and-estimator",
+          "def-student-t-and-f-laws",
+          "lem-rcbd-nested-contrast-model-and-projection",
+          "thm-gaussian-linear-model-qr-and-exact-t-f-pivots"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 13 §13.2.2",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 1943,
+    "id": "blocking-and-paired-designs-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Blocking, pairs, and Latin squares — Examples",
+    "companion": "blocking-and-paired-designs",
+    "requires": [
+      "blocking-and-paired-designs"
+    ],
+    "items": [
+      {
+        "id": "ex-missing-treatment-is-not-a-complete-block",
+        "kind": "example",
+        "title": "A missing treatment falls outside the complete-block assignment space",
+        "statement": "A block with treatments A, B, and C but only observed assignments A and C is incomplete: its assignment is not a permutation of the treatment set and it is not in the randomized complete-block design's sample space.",
+        "strategy": "Compare the assignment's image with the full treatment set required by the complete-block definition.",
+        "deps": [
+          "def-randomized-complete-block-design"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-latin-square-assignment-is-restricted",
+        "kind": "example",
+        "title": "A Latin-square assignment is a strict subset of RCBD assignments",
+        "statement": "For three treatments and three blocks, the cyclic Latin square is balanced in rows and columns. The RCBD assignment that repeats A, B, C in every block is allowed by the RCBD law but violates column balance and has zero probability under the Latin-square law.",
+        "strategy": "Check the row and column treatment sets in the two arrays, then compare their membership in the two assignment spaces.",
+        "deps": [
+          "def-randomized-complete-block-design",
+          "def-randomized-latin-square-design"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-paired-randomization-contrast-with-heterogeneous-effects",
+        "kind": "example",
+        "title": "A paired contrast with unequal unit-level effects",
+        "statement": "If Y1(0)=Y2(0)=0, Y1(1)=4, and Y2(1)=2, the two equally likely treated-minus-control contrasts are 4 and 2; their expectation is the pair average effect 3 and their design variance is 1. Centering at 3 gives deviations +1 and −1 with equal weights.",
+        "strategy": "Evaluate the two assignments and apply the exact paired-contrast moment theorem.",
+        "deps": [
+          "def-randomized-complete-block-design",
+          "def-expectation-on-a-finite-probability-space",
+          "def-moments-variance-and-covariance"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-rcbd-interaction-shares-the-residual-subspace",
+        "kind": "example",
+        "title": "A two-by-two interaction and error share one residual array",
+        "statement": "The double-centered array [[1,−1],[−1,1]] can be represented wholly as treatment-by-block interaction or wholly as a realized projected error, so the one-cell-per-combination layout does not separate those components.",
+        "strategy": "Verify the row and column sums are zero and display two decompositions of the same residual array.",
+        "deps": [
+          "prop-rcbd-treatment-block-interaction-confounded-with-residual"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-observed-paired-contrast-variance-is-not-effect-heterogeneity",
+        "kind": "counterexample",
+        "title": "Observed paired-contrast variance is not determined by effect heterogeneity",
+        "statement": "For a pair with potential outcomes (Y1(0),Y1(1))=(0,1) and (Y2(0),Y2(1))=(10,10), the effects are 1 and 0 but the observed contrast variance is 90.25, not (1−0)^2/4=0.25.",
+        "strategy": "Enumerate the two assignments and compare the observed contrast variance with the proposed effect-heterogeneity expression.",
+        "deps": [
+          "thm-paired-randomization-contrast-moments",
+          "lem-randomly-selected-unit-effect-moments"
+        ],
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

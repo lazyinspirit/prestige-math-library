@@ -1,0 +1,90 @@
+---
+id: def-finite-population-and-sampling-design
+kind: definition
+title: "Finite populations and sampling designs"
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 2
+deps:
+  - def-scientific-statistical-model-contract
+  - def-fixed-design-linear-regression-model
+  - def-finite-probability-space-and-event
+  - def-expectation-on-a-finite-probability-space
+  - def-measurable-space
+  - def-probability-measure
+  - def-statistical-experiment
+  - def-parametric-statistical-model
+  - def-estimand-on-a-statistical-model
+justified_by:
+  - lem-finite-population-design-law-is-a-probability-measure
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "Shalabh, Sampling Theory, Chapter 1: Introduction, PDF pp. 1–2, IIT Kanpur"
+      url: "https://home.iitk.ac.in/~shalab/sampling/chapter1-sampling-introduction.pdf"
+    - title: "Shalabh, Sampling Theory, Chapter 2: Simple Random Sampling, PDF pp. 1–2 and 14, IIT Kanpur"
+      url: "https://home.iitk.ac.in/~shalab/sampling/chapter2-sampling-simple-random-sampling.pdf"
+    - title: "John J. Borkowski, Horvitz–Thompson Estimators, STAT 446 Lecture 6, §§6.1–6.2, printed pp. 138–143"
+      url: "https://math.montana.edu/jobo/st446/documents/ho6.pdf"
+verification:
+  precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+---
+
+## Definition
+
+Let $N\ge1$ be an integer, let $U=\{1,\ldots,N\}$, and let
+$y:U\to\mathbb R$ be a fixed function. The pair $(U,y)$ is a **finite
+population**; its **total** and **mean** are
+$$T(y):=\sum_{i\in U}y_i,\qquad \bar y_U:=T(y)/N.$$
+
+A **sampling design** on $U$ is a nonempty finite set
+$\mathcal S_d\subseteq\mathcal P(U)$ and a function
+$p_d:\mathcal S_d\to(0,1]$ with $\sum_{s\in\mathcal S_d}p_d(s)=1$.
+Here $\mathcal S_d$ is the support of the design law: zero-weight subsets are
+omitted. Thus $(\mathcal S_d,p_d)$ is a finite probability space in the sense
+of [[def-finite-probability-space-and-event]]. For $A\subseteq\mathcal S_d$
+and $g:\mathcal S_d\to\mathbb R$, put
+$$P_d(A):=\sum_{s\in A}p_d(s),\qquad E_d[g]:=\sum_{s\in\mathcal S_d}p_d(s)g(s).$$
+The random sample is the subset $S\in\mathcal S_d$; probability and
+expectation here average over the design while holding every $y_i$ fixed.
+
+For $i,j\in U$, define the **inclusion indicator**
+$$I_i(s):=\begin{cases}1,&i\in s,\\0,&i\notin s,\end{cases}$$
+the **first-order inclusion probability**
+$$\pi_i:=P_d(\{s\in\mathcal S_d:i\in s\}),$$
+and the **second-order inclusion probability**
+$$\pi_{ij}:=P_d(\{s\in\mathcal S_d:i,j\in s\}).$$
+In particular, $\pi_{ii}=\pi_i$.
+
+The observed record includes the selected unit labels and their values. For a
+common record space set
+$$\mathcal X_d:=\{(s,z):s\in\mathcal S_d,\ z:s\to\mathbb R\},\qquad \mathcal A_d:=\mathcal P(\mathcal X_d),$$
+and for each $y\in\mathbb R^U$ define
+$$O_y(s):=(s,y|_s),\qquad P_y^d(B):=\sum_{\substack{s\in\mathcal S_d\\O_y(s)\in B}}p_d(s)\quad(B\in\mathcal A_d).$$
+For a real-valued statistic $h$ on $\mathcal X_d$, write
+$$E_y^d[h]:=\sum_{s\in\mathcal S_d}p_d(s)h(O_y(s))=E_d[h\circ O_y];$$
+this is expectation under the induced observed-data law.
+The local well-definedness result
+[[lem-finite-population-design-law-is-a-probability-measure]] shows that each
+$P_y^d$ is a probability measure on $(\mathcal X_d,\mathcal A_d)$. Hence
+$$\mathsf E_d:=((\mathcal X_d,\mathcal A_d),\mathbb R^U,(P_y^d)_{y\in\mathbb R^U})$$
+is a statistical experiment ([[def-statistical-experiment]]), with parametric
+model $\mathsf P_d(y)=P_y^d$ ([[def-parametric-statistical-model]]). The total
+$y\mapsto T(y)$ and mean $y\mapsto\bar y_U$ are estimands
+([[def-estimand-on-a-statistical-model]]).
+
+This is design probability: the $y_i$ are fixed and only $S$ is random. A
+superpopulation model instead assigns a probability law to the values $y_i$;
+that additional law is separate from $p_d$. The finite-population target and
+the sampling unit must be recorded in the scientific model contract
+([[def-scientific-statistical-model-contract]]). In fixed-design regression,
+the matrix $X$ is held fixed and has no selection law; that convention alone
+does not specify a sampling design on $U$
+([[def-fixed-design-linear-regression-model]]).

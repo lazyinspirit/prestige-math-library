@@ -1,0 +1,76 @@
+---
+id: thm-equal-cluster-size-design-effect
+kind: theorem
+title: "Equal-size cluster design effect under exchangeable within-cluster covariance"
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 4
+deps:
+  - def-cluster-sampling-design-and-cluster-totals
+  - def-moments-variance-and-covariance
+  - thm-covariance-bilinearity-and-symmetry
+  - thm-variance-of-a-finite-sum
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-15
+sources:
+  references:
+    - title: "Shalabh, Sampling Theory, Chapter 9: Cluster Sampling, PDF pp. 6–7, IIT Kanpur"
+      url: "https://home.iitk.ac.in/~shalab/sampling/chapter9-sampling-cluster-sampling.pdf"
+    - title: "Sharon L. Lohr, Sampling: Design and Analysis, 2nd ed., §5.2.2, printed pp. 139–141"
+      url: "https://drive.uqu.edu.sa/_/maatia/files/Sampling.pdf"
+---
+
+## Statement
+
+Let $m_c\ge2$ and $k\ge1$. In a no-finite-population-correction
+superpopulation comparison, suppose the sampled PSU outcome vectors are
+independent and have a common distribution with
+$$E[Y_{ij}]=\mu,\qquad \operatorname{Var}(Y_{ij})=\sigma^2>0,\qquad \operatorname{Cov}(Y_{ij},Y_{i\ell})=\rho\sigma^2\quad(j\ne\ell),$$
+for each PSU $i$, while distinct PSUs are independent. The cluster estimator
+is the mean of $k$ complete cluster means,
+$$\bar Y_C=\frac{1}{km_c}\sum_{i=1}^{k}\sum_{j=1}^{m_c}Y_{ij},$$
+and the reference element SRS estimator is the mean of $km_c$ independent
+draws from the same one-element marginal distribution. Then
+$$\operatorname{DEFF}:= \frac{\operatorname{Var}(\bar Y_C)}{\operatorname{Var}(\bar Y_E)} =1+(m_c-1)\rho.$$
+The covariance model's validity entails
+$-1/(m_c-1)\le\rho\le1$. In particular, $\rho=0$ means no ICC inflation:
+both variances equal $\sigma^2/(km_c)>0$. This formula makes no claim for
+unequal cluster sizes or weights, nonexchangeable within-cluster covariance,
+dependent PSUs, or non-negligible finite-population corrections.
+
+## Facts & Assumptions
+
+**Given:** $m_c\ge2$, $k\ge1$, $\sigma^2>0$, independent PSU vectors with equal marginal means and variances, common within-PSU covariance $\rho\sigma^2$, and an element-SRS reference of $km_c$ independent marginal draws. This is the no-FPC superpopulation model, not a fixed-population design-variance identity.
+
+[F1] [[def-cluster-sampling-design-and-cluster-totals]]: A PSU is a cluster of SSUs; one-stage cluster sampling selects PSUs and observes every SSU in each selected PSU.
+
+[F2] [[def-moments-variance-and-covariance]]: Variance and covariance are the expectations of the centered square and centered product.
+
+[F3] [[thm-covariance-bilinearity-and-symmetry]]: Covariance is symmetric and bilinear in finite linear combinations of square-integrable variables.
+
+[F4] [[thm-variance-of-a-finite-sum]]: The variance of a finite sum of square-integrable real random variables is the sum of all pairwise covariances.
+
+[A1] Independent PSU outcome vectors share the stated exchangeable within-PSU covariance, and the element-SRS reference uses the same marginal law with its finite-population correction neglected.
+
+## Proof
+
+1.1 Nonnegativity of $\operatorname{Var}(Y_{i1}-Y_{i2})=2\sigma^2(1-\rho)$ gives $\rho\le1$; nonnegativity of $\operatorname{Var}(\sum_{j=1}^{m_c}(Y_{ij}-\mu))=m_c\sigma^2[1+(m_c-1)\rho]$ gives $\rho\ge-1/(m_c-1)$. Thus the stated range is necessary. [given, F2, algebra]
+
+1.2 By [F1], one cluster mean averages its $m_c$ SSU outcomes; expanding its variance with [F4] and [F3] gives $\operatorname{Var}(m_c^{-1}\sum_{j=1}^{m_c}Y_{ij})=(m_c\sigma^2+m_c(m_c-1)\rho\sigma^2)/m_c^2=(\sigma^2/m_c)[1+(m_c-1)\rho]$. [given, F1, F2, F3, F4, A1, algebra]
+
+2.1 The $k$ cluster means are independent by [A1], so [F4] and [F3] give $\operatorname{Var}(\bar Y_C)=\sigma^2[1+(m_c-1)\rho]/(km_c)$ from step 1.2; the $km_c$ independent element draws each have variance $\sigma^2$, hence $\operatorname{Var}(\bar Y_E)=\sigma^2/(km_c)$. [given, F2, F3, F4, A1, step 1.2, algebra]
+
+3.1 Dividing by the positive reference variance in step 2.1 gives $\operatorname{DEFF}=1+(m_c-1)\rho$; if $\rho=0$, this ratio is $1$ while each variance remains $\sigma^2/(km_c)>0$. [step 2.1, algebra] ∎
+
+## Remarks
+
+Shalabh derives the equal-cluster relation after neglecting finite-population corrections. On PDF p. 7 the source states that $\rho=0$ gives relative efficiency $E=1$ and describes this as “there is no error.” In context this means there is no efficiency loss relative to element SRS due to clustering, not zero sampling variance: both variances remain $\sigma^2/(km_c)>0$ when $\sigma^2>0$.

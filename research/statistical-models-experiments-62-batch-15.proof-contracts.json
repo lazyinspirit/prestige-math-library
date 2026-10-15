@@ -1,0 +1,627 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62",
+  "scope": [
+    "def-regular-fractional-factorial-defining-relation-and-resolution",
+    "thm-regular-fractional-factorial-aliasing-criterion",
+    "thm-factorial-column-aliases-prevent-separate-identification",
+    "thm-factorial-foldover-separates-opposite-parity-aliases",
+    "ex-two-three-minus-one-alias-class",
+    "ex-resolution-three-foldover-and-targeted-followup"
+  ],
+  "contracts": {
+    "def-regular-fractional-factorial-defining-relation-and-resolution": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The justified-by alias theorem proves that every prescribed generator sign vector has exactly 2^{k-p} solutions, and k-p≥0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The identity word (+1,∅) has length zero and belongs to H; the definition excludes it from the minimum defining resolution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: When p=k, the alias theorem's row-reduction argument gives one run and H has 2^k words."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The boundary p=k is explicitly admitted and yields a one-run fraction; independent generators remain nonzero, so resolution is defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval-valued parameter or endpoint condition occurs in the definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite sets G_i and signs s_i are part of the given data; the definition invokes no arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: If the jth generator-incidence coordinate equals one, the adopted indicator convention says j belongs to G. This is the definition’s “exactly when” clause, not a claim that resolution alone proves all alias relations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: If j belongs to G, the adopted generator-incidence indicator has jth coordinate one. This is the definition’s “exactly when” clause, not a claim that resolution alone proves all alias relations."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-15",
+        "notes": "Independently reviewed the Definition, batch-14 def-two-level-full-factorial-design (empty product 1 and sign cube), the complete justified-by alias theorem, reader-15 and refute-15. Independent incidence rows have rank p, so every sign vector has 2^{k-p} solutions, including p=k. Generator multiplication is associative symmetric difference with sign multiplication; independent supports make all 2^p products distinct, and only the identity has empty support. Since p>=1 the finite nonidentity set is nonempty and its shortest positive length exists. Negative generators and k=p=1 are admitted; no arbitrary choice is used. The justified-by theorem proves existence and exact constant-word characterization without assuming them from this definition. NIST pri3342 tables 3.14-3.15, pri3343 signed-generator paragraphs, pri3344 defining-relation/resolution paragraphs and Oehlert section 18.2 printed pp.473-475 were read for the conventions. No defect or prerequisite blocker found."
+      }
+    },
+    "thm-regular-fractional-factorial-aliasing-criterion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-fractional-factorial-defining-relation-and-resolution",
+          "source_section": "Definition",
+          "quote": "Fix integers $k\\ge1$ and $1\\le p\\le k$, and put $[k]=\\{1,\\ldots,k\\}$. Let $\\mathbb F_2=\\{0,1\\}$ with addition and multiplication modulo $2$. For a factor subset $G\\subseteq[k]$, its incidence vector $1_G\\in\\mathbb F_2^k$ has coordinate $1$ at $j$ exactly when $j\\in G$. Choose $p$ subsets $G_1,\\ldots,G_p$ whose incidence vectors are linearly independent over $\\mathbb F_2$, and choose signs $s_i\\in\\{-1,+1\\}$. Using the run space and product columns of [[def-two-level-full-factorial-design]], define the **regular fraction**\n\n$$\\mathcal F=\\{x\\in\\{-1,+1\\}^{[k]}:x_{G_i}=s_i\\text{ for }1\\le i\\le p\\},\\qquad x_G=\\prod_{j\\in G}x_j.$$\n\nThe corresponding design is called a regular $2^{k-p}$ fractional factorial; [[thm-regular-fractional-factorial-aliasing-criterion]] proves that $\\mathcal F$ has exactly $2^{k-p}$ runs, including the case $p=k$ with one run. The choices $s_i=-1$ are alternate fractions and are part of the definition.\n\nA **signed word** is a pair $(\\epsilon,A)$ with $\\epsilon\\in\\{-1,+1\\}$ and $A\\subseteq[k]$. It evaluates at $x$ as $\\epsilon x_A$ and multiplies by\n\n$$(\\epsilon,A)(\\delta,B)=(\\epsilon\\delta,A\\triangle B),\\qquad A\\triangle B=(A\\setminus B)\\cup(B\\setminus A).$$\n\nThe identity word is $(+1,\\varnothing)$. The signed generator $h_i=(s_i,G_i)$ evaluates to $+1$ on $\\mathcal F$. The **defining subgroup** $H$ is generated by $h_1,\\ldots,h_p$; the alias theorem proves it is exactly the subgroup of signed words that evaluate to $+1$ on every run in $\\mathcal F$.\n\nFor $A,B\\subseteq[k]$, their restricted sign columns are **equal-column aliases** when $x_A=x_B$ for every $x\\in\\mathcal F$. They are **signed aliases with sign $\\sigma\\in\\{-1,+1\\}$** when $x_A=\\sigma x_B$ on every run; sign $+1$ is the equal-column case and sign $-1$ records opposite columns. The alias theorem gives the exact criterion for each sign.\n\nThe **word length** of $(\\epsilon,A)$ is $|A|$, the number of factor letters, independent of $\\epsilon$. The **resolution** is the minimum $|A|$ among nonidentity words $(\\epsilon,A)\\in H$; it is written as a Roman numeral. Since $p\\ge1$ and the generators are independent, $H$ has a nonidentity word of nonzero length.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-regular-fractional-factorial-defining-relation-and-resolution",
+          "source_section": "Definition",
+          "quote": "Fix integers $k\\ge1$ and $1\\le p\\le k$, and put $[k]=\\{1,\\ldots,k\\}$. Let $\\mathbb F_2=\\{0,1\\}$ with addition and multiplication modulo $2$. For a factor subset $G\\subseteq[k]$, its incidence vector $1_G\\in\\mathbb F_2^k$ has coordinate $1$ at $j$ exactly when $j\\in G$. Choose $p$ subsets $G_1,\\ldots,G_p$ whose incidence vectors are linearly independent over $\\mathbb F_2$, and choose signs $s_i\\in\\{-1,+1\\}$. Using the run space and product columns of [[def-two-level-full-factorial-design]], define the **regular fraction**\n\n$$\\mathcal F=\\{x\\in\\{-1,+1\\}^{[k]}:x_{G_i}=s_i\\text{ for }1\\le i\\le p\\},\\qquad x_G=\\prod_{j\\in G}x_j.$$\n\nThe corresponding design is called a regular $2^{k-p}$ fractional factorial; [[thm-regular-fractional-factorial-aliasing-criterion]] proves that $\\mathcal F$ has exactly $2^{k-p}$ runs, including the case $p=k$ with one run. The choices $s_i=-1$ are alternate fractions and are part of the definition.\n\nA **signed word** is a pair $(\\epsilon,A)$ with $\\epsilon\\in\\{-1,+1\\}$ and $A\\subseteq[k]$. It evaluates at $x$ as $\\epsilon x_A$ and multiplies by\n\n$$(\\epsilon,A)(\\delta,B)=(\\epsilon\\delta,A\\triangle B),\\qquad A\\triangle B=(A\\setminus B)\\cup(B\\setminus A).$$\n\nThe identity word is $(+1,\\varnothing)$. The signed generator $h_i=(s_i,G_i)$ evaluates to $+1$ on $\\mathcal F$. The **defining subgroup** $H$ is generated by $h_1,\\ldots,h_p$; the alias theorem proves it is exactly the subgroup of signed words that evaluate to $+1$ on every run in $\\mathcal F$.\n\nFor $A,B\\subseteq[k]$, their restricted sign columns are **equal-column aliases** when $x_A=x_B$ for every $x\\in\\mathcal F$. They are **signed aliases with sign $\\sigma\\in\\{-1,+1\\}$** when $x_A=\\sigma x_B$ on every run; sign $+1$ is the equal-column case and sign $-1$ records opposite columns. The alias theorem gives the exact criterion for each sign.\n\nThe **word length** of $(\\epsilon,A)$ is $|A|$, the number of factor letters, independent of $\\epsilon$. The **resolution** is the minimum $|A|$ among nonidentity words $(\\epsilon,A)\\in H$; it is written as a Roman numeral. Since $p\\ge1$ and the generators are independent, $H$ has a nonidentity word of nonzero length.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write each run coordinate as $x_j=(-1)^{z_j}$ and each generator sign as $s_i=(-1)^{b_i}$, with $z\\in\\mathbb F_2^k$ and $b\\in\\mathbb F_2^p$. Let $M$ have rows $1_{G_i}$. The equations for $\\mathcal F$ become $Mz=b$. By [A1], $M$ has rank $p$; row reduction gives $p$ pivot coordinates and $k-p$ free coordinates, and every assignment of the free coordinates determines exactly one pivot assignment. Therefore $|\\mathcal F|=2^{k-p}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Row-reduce $M$ to $R=UM$, where $U$ is invertible, and let $D=\\{d_1,\\ldots,d_p\\}$ be the pivot coordinates; write $R_i$ for row $i$ of $R$. For a subset $C$, put $c=1_C$; on a solution $z$, $x_C=(-1)^{c\\cdot z}$. Substitution of the pivot equations gives $c\\cdot z=\\sum_i c_{d_i}b'_i+\\sum_{j\\notin D}(c_j+\\sum_i c_{d_i}R_{ij})z_j$, where $b'=Ub$. This exponent is constant over all free coordinates exactly when every displayed free-coordinate coefficient is zero. Since the pivot columns of $R$ are the identity, those equations say precisely that $c=\\sum_i c_{d_i}R_i$, so $c$ lies in the row space of $M$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $c$ is outside the row space of $M$, step 2.1 shows that $x_C$ is nonconstant on $\\mathcal F$, so neither sign $\\epsilon$ makes $\\epsilon x_C=+1$ on every run. If $c$ is in the row space, then $c=\\sum_i\\lambda_i1_{G_i}$ for a unique $\\lambda\\in\\mathbb F_2^p$, and on $\\mathcal F$ we have $x_C=(-1)^{\\lambda\\cdot b}=\\prod_i s_i^{\\lambda_i}$. Exactly one sign $\\epsilon=\\prod_i s_i^{\\lambda_i}$ makes $\\epsilon x_C=+1$ on all of the nonempty set $\\mathcal F$, and $(\\epsilon,C)=\\prod_{i:\\lambda_i=1}(s_i,G_i)$. Conversely, every such product evaluates to $+1$. Independence makes the $2^p$ choices of $\\lambda$ distinct, proving that $H$ is precisely the set of constant-$+1$ signed words and $|H|=2^p$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For any $A,B\\subseteq[k]$, cancellation of repeated factors gives $x_Ax_B=x_{A\\triangle B}$. Therefore $x_A=\\sigma x_B$ on $\\mathcal F$ exactly when $\\sigma x_{A\\triangle B}=+1$ there. By step 3.1 and the definition of $H$ in [F2], this is equivalent to $(\\sigma,A\\triangle B)\\in H$. The case $\\sigma=+1$ is equality of columns, and $\\sigma=-1$ is opposition.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 proves |F|=2^{k-p}≥1 for every admitted p≤k."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The identity word has empty factor set and is the unique zero-length relation; independence prevents a distinct generator product with empty factor set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For p=k, step 1.1 has no free coordinates and yields exactly one solution; the row-space and alias arguments in steps 2.1–4.1 still apply."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: At p=k the one-run fraction has 2^k signed relations and the exact equal/opposite column criterion remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof step 1.1 allows p=k: there are no free coordinates and exactly one run. Step 4.1 separately identifies sigma=+1 as equal columns and sigma=-1 as opposite columns, covering both signed endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses finite Gaussian elimination on k coordinates and makes no arbitrary-index selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: Step 4.1 proves that a signed column relation implies membership of (sigma,A△B) in H."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: Step 4.1 proves that membership in H makes sigma x_{A△B}=+1 on every run and hence x_A=sigma x_B."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step5-v2-initial-r1-u15 (repair author; not independent review)",
+        "notes": "Checked the complete theorem, its F1/F2 definition interface, full-factorial run convention, and owning A/B page summaries. The former step 3.1 omitted the row-space hypothesis; the prior contract interpreted it implicitly. The repair treats non-row-space supports first: step 2.1 makes their monomials nonconstant, so neither sign gives an identity. For row-space supports the unique generator coordinates give the sole constant sign, and generator independence distinguishes all 2^p products. Step 1.1 ensures nonempty F and 2^(k-p) runs, including p=k. Step 4.1 uses x_B^2=1 to prove both alias directions. The empty support gives only (+1,empty); negative generator signs and one-run fractions satisfy the same argument. All operations are finite and use no AC. This is a proof-only repair; Statement, dependencies, citation quotes and page interfaces are unchanged. The finite F_2 argument is familiar and checked directly; no external source consultation is claimed for this adjudication."
+      }
+    },
+    "thm-factorial-column-aliases-prevent-separate-identification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-fractional-factorial-defining-relation-and-resolution",
+          "source_section": "Definition",
+          "quote": "Fix integers $k\\ge1$ and $1\\le p\\le k$, and put $[k]=\\{1,\\ldots,k\\}$. Let $\\mathbb F_2=\\{0,1\\}$ with addition and multiplication modulo $2$. For a factor subset $G\\subseteq[k]$, its incidence vector $1_G\\in\\mathbb F_2^k$ has coordinate $1$ at $j$ exactly when $j\\in G$. Choose $p$ subsets $G_1,\\ldots,G_p$ whose incidence vectors are linearly independent over $\\mathbb F_2$, and choose signs $s_i\\in\\{-1,+1\\}$. Using the run space and product columns of [[def-two-level-full-factorial-design]], define the **regular fraction**\n\n$$\\mathcal F=\\{x\\in\\{-1,+1\\}^{[k]}:x_{G_i}=s_i\\text{ for }1\\le i\\le p\\},\\qquad x_G=\\prod_{j\\in G}x_j.$$\n\nThe corresponding design is called a regular $2^{k-p}$ fractional factorial; [[thm-regular-fractional-factorial-aliasing-criterion]] proves that $\\mathcal F$ has exactly $2^{k-p}$ runs, including the case $p=k$ with one run. The choices $s_i=-1$ are alternate fractions and are part of the definition.\n\nA **signed word** is a pair $(\\epsilon,A)$ with $\\epsilon\\in\\{-1,+1\\}$ and $A\\subseteq[k]$. It evaluates at $x$ as $\\epsilon x_A$ and multiplies by\n\n$$(\\epsilon,A)(\\delta,B)=(\\epsilon\\delta,A\\triangle B),\\qquad A\\triangle B=(A\\setminus B)\\cup(B\\setminus A).$$\n\nThe identity word is $(+1,\\varnothing)$. The signed generator $h_i=(s_i,G_i)$ evaluates to $+1$ on $\\mathcal F$. The **defining subgroup** $H$ is generated by $h_1,\\ldots,h_p$; the alias theorem proves it is exactly the subgroup of signed words that evaluate to $+1$ on every run in $\\mathcal F$.\n\nFor $A,B\\subseteq[k]$, their restricted sign columns are **equal-column aliases** when $x_A=x_B$ for every $x\\in\\mathcal F$. They are **signed aliases with sign $\\sigma\\in\\{-1,+1\\}$** when $x_A=\\sigma x_B$ on every run; sign $+1$ is the equal-column case and sign $-1$ records opposite columns. The alias theorem gives the exact criterion for each sign.\n\nThe **word length** of $(\\epsilon,A)$ is $|A|$, the number of factor letters, independent of $\\epsilon$. The **resolution** is the minimum $|A|$ among nonidentity words $(\\epsilon,A)\\in H$; it is written as a Roman numeral. Since $p\\ge1$ and the generators are independent, $H$ has a nonidentity word of nonzero length.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two terms in the fitted vector combine as $\\beta_Ac_A+\\beta_Bc_B=\\beta_A(\\sigma c_B)+\\beta_Bc_B=(\\sigma\\beta_A+\\beta_B)c_B$. Thus the fitted vector depends on this pair only through $\\sigma\\beta_A+\\beta_B$, with all other coefficients fixed.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any $t\\in\\mathbb R$, replace $\\beta_A$ by $\\beta_A+t$ and $\\beta_B$ by $\\beta_B-\\sigma t$. Then $\\sigma(\\beta_A+t)+(\\beta_B-\\sigma t)=\\sigma\\beta_A+\\beta_B$, so the combination in step 1.1 and therefore $X\\beta$ are unchanged. Because the error law is independent of $\\beta$, the resulting response distributions are identical. Taking $t\\ne0$ changes both coefficients, proving that neither is separately identifiable in the unrestricted model.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes two distinct effects and two columns in a nonempty regular fraction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 shows the zero perturbation preserves the response law, while every nonzero t gives a distinct parameter pair."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The calculation in steps 1.1–2.1 works for any two distinct effect labels, including a one-factor fraction when its columns coincide or oppose."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The theorem directly treats the maximally confounded case c_A=σc_B and displays the resulting nonzero null direction."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval parameter or endpoint appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The proof uses an arbitrary scalar t and then takes any t≠0; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states no iff claim."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-factorial-foldover-separates-opposite-parity-aliases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-fractional-factorial-defining-relation-and-resolution",
+          "source_section": "Definition",
+          "quote": "Fix integers $k\\ge1$ and $1\\le p\\le k$, and put $[k]=\\{1,\\ldots,k\\}$. Let $\\mathbb F_2=\\{0,1\\}$ with addition and multiplication modulo $2$. For a factor subset $G\\subseteq[k]$, its incidence vector $1_G\\in\\mathbb F_2^k$ has coordinate $1$ at $j$ exactly when $j\\in G$. Choose $p$ subsets $G_1,\\ldots,G_p$ whose incidence vectors are linearly independent over $\\mathbb F_2$, and choose signs $s_i\\in\\{-1,+1\\}$. Using the run space and product columns of [[def-two-level-full-factorial-design]], define the **regular fraction**\n\n$$\\mathcal F=\\{x\\in\\{-1,+1\\}^{[k]}:x_{G_i}=s_i\\text{ for }1\\le i\\le p\\},\\qquad x_G=\\prod_{j\\in G}x_j.$$\n\nThe corresponding design is called a regular $2^{k-p}$ fractional factorial; [[thm-regular-fractional-factorial-aliasing-criterion]] proves that $\\mathcal F$ has exactly $2^{k-p}$ runs, including the case $p=k$ with one run. The choices $s_i=-1$ are alternate fractions and are part of the definition.\n\nA **signed word** is a pair $(\\epsilon,A)$ with $\\epsilon\\in\\{-1,+1\\}$ and $A\\subseteq[k]$. It evaluates at $x$ as $\\epsilon x_A$ and multiplies by\n\n$$(\\epsilon,A)(\\delta,B)=(\\epsilon\\delta,A\\triangle B),\\qquad A\\triangle B=(A\\setminus B)\\cup(B\\setminus A).$$\n\nThe identity word is $(+1,\\varnothing)$. The signed generator $h_i=(s_i,G_i)$ evaluates to $+1$ on $\\mathcal F$. The **defining subgroup** $H$ is generated by $h_1,\\ldots,h_p$; the alias theorem proves it is exactly the subgroup of signed words that evaluate to $+1$ on every run in $\\mathcal F$.\n\nFor $A,B\\subseteq[k]$, their restricted sign columns are **equal-column aliases** when $x_A=x_B$ for every $x\\in\\mathcal F$. They are **signed aliases with sign $\\sigma\\in\\{-1,+1\\}$** when $x_A=\\sigma x_B$ on every run; sign $+1$ is the equal-column case and sign $-1$ records opposite columns. The alias theorem gives the exact criterion for each sign.\n\nThe **word length** of $(\\epsilon,A)$ is $|A|$, the number of factor letters, independent of $\\epsilon$. The **resolution** is the minimum $|A|$ among nonidentity words $(\\epsilon,A)\\in H$; it is written as a Roman numeral. Since $p\\ge1$ and the generators are independent, $H$ has a nonidentity word of nonzero length.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-regular-fractional-factorial-aliasing-criterion",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be the regular fraction determined by $p$ independent generator equations $x_{G_i}=s_i$ on the full $2^k$ sign design, and let $H$ be its signed defining subgroup. Then $|\\mathcal F|=2^{k-p}$, $|H|=2^p$, and $H$ consists of all signed words $(\\epsilon,C)$ for which $\\epsilon x_C=+1$ on every run in $\\mathcal F$. For all factor subsets $A,B\\subseteq[k]$ and signs $\\sigma\\in\\{-1,+1\\}$,\n\n$$x_A=\\sigma x_B\\text{ on }\\mathcal F\\quad\\Longleftrightarrow\\quad(\\sigma,A\\triangle B)\\in H.$$\n\nIn particular, the columns agree exactly when $(+1,A\\triangle B)\\in H$; a relation with sign $-1$ means the columns are opposites.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a signed word $(\\epsilon,A)$ and an original run $x$, multiplication of its factors gives $\\epsilon(\\tau_Jx)_A=(-1)^{|A\\cap J|}\\epsilon x_A$. In particular, for $J=[k]$ the multiplier is $(-1)^{|A|}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every word in $H$ evaluates to $+1$ on all original rows. By step 1.1 it evaluates to $(-1)^{|A\\cap J|}$ on every appended row. Since both blocks are present, it is a constant-$+1$ relation on the stacked table exactly when $|A\\cap J|$ is even. Any relation on the stacked table must also hold on its original rows and hence belong to $H$; therefore the residual subgroup is exactly $H_J$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any two effects, $x_A=\\sigma x_B$ on a run table exactly when the signed word $(\\sigma,A\\triangle B)$ evaluates to $+1$ on every row. By step 2.1, an originally signed-aliased pair retains that relation on the stacked table precisely when $|(A\\triangle B)\\cap J|$ is even; if it is odd, the relation changes sign between blocks and no constant signed alias remains. A pair not signed-aliased on the original fraction cannot become one because the original rows remain in the augmented table. When $J=[k]$, $|A\\triangle B|\\equiv |A|+|B|\\pmod2$, so exactly opposite-parity pairs separate among the original aliases, and even-word relations remain.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: For J=∅, step 1.1 gives no sign change and step 2.1 yields H_J=H, so no alias is removed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The identity word has empty factor set and even intersection with every J, so it always remains in H_J."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For k=1, the same parity formula applies to J=∅ and J={1}, including the one-factor full mirror."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If the transformed fraction coincides with the original support, stacking duplicates the rows and the formula correctly retains H; otherwise it gives the exact new relation subgroup."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof steps 1.1–2.1 also cover J empty, with multiplier +1 and unchanged subgroup H. For J=[k], step 3.1 gives the full mirror and separation exactly of opposite-parity original aliases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: J is a specified finite subset of [k]; the proof uses only its finite intersection counts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 proves that every original relation with even intersection remains on the stacked table."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 proves that an odd-intersection relation changes sign on the appended rows and cannot be a constant signed alias."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-two-three-minus-one-alias-class": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-fractional-factorial-defining-relation-and-resolution",
+          "source_section": "Definition",
+          "quote": "Fix integers $k\\ge1$ and $1\\le p\\le k$, and put $[k]=\\{1,\\ldots,k\\}$. Let $\\mathbb F_2=\\{0,1\\}$ with addition and multiplication modulo $2$. For a factor subset $G\\subseteq[k]$, its incidence vector $1_G\\in\\mathbb F_2^k$ has coordinate $1$ at $j$ exactly when $j\\in G$. Choose $p$ subsets $G_1,\\ldots,G_p$ whose incidence vectors are linearly independent over $\\mathbb F_2$, and choose signs $s_i\\in\\{-1,+1\\}$. Using the run space and product columns of [[def-two-level-full-factorial-design]], define the **regular fraction**\n\n$$\\mathcal F=\\{x\\in\\{-1,+1\\}^{[k]}:x_{G_i}=s_i\\text{ for }1\\le i\\le p\\},\\qquad x_G=\\prod_{j\\in G}x_j.$$\n\nThe corresponding design is called a regular $2^{k-p}$ fractional factorial; [[thm-regular-fractional-factorial-aliasing-criterion]] proves that $\\mathcal F$ has exactly $2^{k-p}$ runs, including the case $p=k$ with one run. The choices $s_i=-1$ are alternate fractions and are part of the definition.\n\nA **signed word** is a pair $(\\epsilon,A)$ with $\\epsilon\\in\\{-1,+1\\}$ and $A\\subseteq[k]$. It evaluates at $x$ as $\\epsilon x_A$ and multiplies by\n\n$$(\\epsilon,A)(\\delta,B)=(\\epsilon\\delta,A\\triangle B),\\qquad A\\triangle B=(A\\setminus B)\\cup(B\\setminus A).$$\n\nThe identity word is $(+1,\\varnothing)$. The signed generator $h_i=(s_i,G_i)$ evaluates to $+1$ on $\\mathcal F$. The **defining subgroup** $H$ is generated by $h_1,\\ldots,h_p$; the alias theorem proves it is exactly the subgroup of signed words that evaluate to $+1$ on every run in $\\mathcal F$.\n\nFor $A,B\\subseteq[k]$, their restricted sign columns are **equal-column aliases** when $x_A=x_B$ for every $x\\in\\mathcal F$. They are **signed aliases with sign $\\sigma\\in\\{-1,+1\\}$** when $x_A=\\sigma x_B$ on every run; sign $+1$ is the equal-column case and sign $-1$ records opposite columns. The alias theorem gives the exact criterion for each sign.\n\nThe **word length** of $(\\epsilon,A)$ is $|A|$, the number of factor letters, independent of $\\epsilon$. The **resolution** is the minimum $|A|$ among nonidentity words $(\\epsilon,A)\\in H$; it is written as a Roman numeral. Since $p\\ge1$ and the generators are independent, $H$ has a nonidentity word of nonzero length.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-regular-fractional-factorial-aliasing-criterion",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be the regular fraction determined by $p$ independent generator equations $x_{G_i}=s_i$ on the full $2^k$ sign design, and let $H$ be its signed defining subgroup. Then $|\\mathcal F|=2^{k-p}$, $|H|=2^p$, and $H$ consists of all signed words $(\\epsilon,C)$ for which $\\epsilon x_C=+1$ on every run in $\\mathcal F$. For all factor subsets $A,B\\subseteq[k]$ and signs $\\sigma\\in\\{-1,+1\\}$,\n\n$$x_A=\\sigma x_B\\text{ on }\\mathcal F\\quad\\Longleftrightarrow\\quad(\\sigma,A\\triangle B)\\in H.$$\n\nIn particular, the columns agree exactly when $(+1,A\\triangle B)\\in H$; a relation with sign $-1$ means the columns are opposites.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-factorial-column-aliases-prevent-separate-identification",
+          "source_section": "Statement",
+          "quote": "Let $c_A,c_B\\in\\mathbb R^{\\mathcal F}$ be the columns for distinct factorial effects $A,B\\subseteq[k]$ in a regular fraction, and suppose $c_A=\\sigma c_B$ for a fixed $\\sigma\\in\\{-1,+1\\}$. Consider the unrestricted fixed-design linear model $Y=X\\beta+\\epsilon$, where these columns occur in $X$ and the distribution of the error vector $\\epsilon$ does not depend on $\\beta$. A coefficient combination is **identifiable** if it has the same value for all parameter vectors giving the same distribution of $Y$. The contribution of these two columns depends only on $\\sigma\\beta_A+\\beta_B$; neither coefficient is separately identifiable while the parameter space remains unrestricted. For equal columns ($\\sigma=+1$), the relevant combination is the sum; for opposite columns ($\\sigma=-1$), it is the difference. Additional runs can remove the ambiguity only if they break the column relation, and hierarchy or sparsity restrictions are extra modeling assumptions.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $x_A,x_B\\in\\{-1,+1\\}$ freely and set $x_C=x_Ax_B$. This gives exactly the four runs listed in the Example, one for each of the four choices of $(x_A,x_B)$, and every run satisfies $x_Ax_Bx_C=+1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Here $H=\\{I,ABC\\}$. By [F2], effects have equal columns exactly when their symmetric difference is either $\\varnothing$ or $\\{A,B,C\\}$. Pairing each subset with its complement gives precisely $\\{I,ABC\\}$, $\\{A,BC\\}$, $\\{B,AC\\}$, and $\\{C,AB\\}$; these four pairs exhaust the eight subsets.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In each listed pair the columns are equal, so [F3] shows that the corresponding terms enter the fitted vector through $\\beta_I+\\beta_{ABC}$, $\\beta_A+\\beta_{BC}$, $\\beta_B+\\beta_{AC}$, or $\\beta_C+\\beta_{AB}$, respectively. The design by itself does not identify the two coefficients within any pair separately.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The specified half-fraction has four explicitly listed runs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The identity and ABC form one of the four computed equal-column pairs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: All three main effects appear in the complete class list: A=BC, B=AC, and C=AB."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 exhausts all eight subsets in four disjoint alias pairs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 1.1 assigns each of x_A,x_B both levels -1 and +1 and determines x_C as their product. These four rows, rather than a limiting continuous parameter, are the whole stated experiment."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 enumerates the four finite choices of A and B explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 applies the alias criterion to every pair in H."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 shows that all subsets differing by ABC are paired and no other differences occur because H has only two elements."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-resolution-three-foldover-and-targeted-followup": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-regular-fractional-factorial-defining-relation-and-resolution",
+          "source_section": "Definition",
+          "quote": "Fix integers $k\\ge1$ and $1\\le p\\le k$, and put $[k]=\\{1,\\ldots,k\\}$. Let $\\mathbb F_2=\\{0,1\\}$ with addition and multiplication modulo $2$. For a factor subset $G\\subseteq[k]$, its incidence vector $1_G\\in\\mathbb F_2^k$ has coordinate $1$ at $j$ exactly when $j\\in G$. Choose $p$ subsets $G_1,\\ldots,G_p$ whose incidence vectors are linearly independent over $\\mathbb F_2$, and choose signs $s_i\\in\\{-1,+1\\}$. Using the run space and product columns of [[def-two-level-full-factorial-design]], define the **regular fraction**\n\n$$\\mathcal F=\\{x\\in\\{-1,+1\\}^{[k]}:x_{G_i}=s_i\\text{ for }1\\le i\\le p\\},\\qquad x_G=\\prod_{j\\in G}x_j.$$\n\nThe corresponding design is called a regular $2^{k-p}$ fractional factorial; [[thm-regular-fractional-factorial-aliasing-criterion]] proves that $\\mathcal F$ has exactly $2^{k-p}$ runs, including the case $p=k$ with one run. The choices $s_i=-1$ are alternate fractions and are part of the definition.\n\nA **signed word** is a pair $(\\epsilon,A)$ with $\\epsilon\\in\\{-1,+1\\}$ and $A\\subseteq[k]$. It evaluates at $x$ as $\\epsilon x_A$ and multiplies by\n\n$$(\\epsilon,A)(\\delta,B)=(\\epsilon\\delta,A\\triangle B),\\qquad A\\triangle B=(A\\setminus B)\\cup(B\\setminus A).$$\n\nThe identity word is $(+1,\\varnothing)$. The signed generator $h_i=(s_i,G_i)$ evaluates to $+1$ on $\\mathcal F$. The **defining subgroup** $H$ is generated by $h_1,\\ldots,h_p$; the alias theorem proves it is exactly the subgroup of signed words that evaluate to $+1$ on every run in $\\mathcal F$.\n\nFor $A,B\\subseteq[k]$, their restricted sign columns are **equal-column aliases** when $x_A=x_B$ for every $x\\in\\mathcal F$. They are **signed aliases with sign $\\sigma\\in\\{-1,+1\\}$** when $x_A=\\sigma x_B$ on every run; sign $+1$ is the equal-column case and sign $-1$ records opposite columns. The alias theorem gives the exact criterion for each sign.\n\nThe **word length** of $(\\epsilon,A)$ is $|A|$, the number of factor letters, independent of $\\epsilon$. The **resolution** is the minimum $|A|$ among nonidentity words $(\\epsilon,A)\\in H$; it is written as a Roman numeral. Since $p\\ge1$ and the generators are independent, $H$ has a nonidentity word of nonzero length.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-regular-fractional-factorial-aliasing-criterion",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be the regular fraction determined by $p$ independent generator equations $x_{G_i}=s_i$ on the full $2^k$ sign design, and let $H$ be its signed defining subgroup. Then $|\\mathcal F|=2^{k-p}$, $|H|=2^p$, and $H$ consists of all signed words $(\\epsilon,C)$ for which $\\epsilon x_C=+1$ on every run in $\\mathcal F$. For all factor subsets $A,B\\subseteq[k]$ and signs $\\sigma\\in\\{-1,+1\\}$,\n\n$$x_A=\\sigma x_B\\text{ on }\\mathcal F\\quad\\Longleftrightarrow\\quad(\\sigma,A\\triangle B)\\in H.$$\n\nIn particular, the columns agree exactly when $(+1,A\\triangle B)\\in H$; a relation with sign $-1$ means the columns are opposites.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-factorial-foldover-separates-opposite-parity-aliases",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a regular fraction with signed defining subgroup $H$. For a specified set of factors $J\\subseteq[k]$, define $\\tau_Jx$ by $(\\tau_Jx)_j=-x_j$ for $j\\in J$ and $(\\tau_Jx)_j=x_j$ for $j\\notin J$. The **partial foldover** on $J$ is the run table formed by stacking the original runs with one transformed copy $\\tau_J(\\mathcal F)$; the **complete mirror foldover** is the case $J=[k]$. Its residual signed defining subgroup is exactly\n\n$$H_J=\\{(\\epsilon,A)\\in H:|A\\cap J|\\text{ is even}\\}.$$\n\nThus an originally signed-aliased pair $A,B$ remains signed-aliased on the augmented table exactly when $|(A\\triangle B)\\cap J|$ is even; if it is odd, the pair is separated. For a complete mirror foldover, a word of order $r=|A\\triangle B|$ changes sign by $(-1)^r$. Therefore aliases between effects of opposite order parity separate, while same-parity relations remain. The displayed formula gives the full residual alias set for every partial foldover; a selected-factor follow-up need not remove other aliases.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-factorial-column-aliases-prevent-separate-identification",
+          "source_section": "Statement",
+          "quote": "Let $c_A,c_B\\in\\mathbb R^{\\mathcal F}$ be the columns for distinct factorial effects $A,B\\subseteq[k]$ in a regular fraction, and suppose $c_A=\\sigma c_B$ for a fixed $\\sigma\\in\\{-1,+1\\}$. Consider the unrestricted fixed-design linear model $Y=X\\beta+\\epsilon$, where these columns occur in $X$ and the distribution of the error vector $\\epsilon$ does not depend on $\\beta$. A coefficient combination is **identifiable** if it has the same value for all parameter vectors giving the same distribution of $Y$. The contribution of these two columns depends only on $\\sigma\\beta_A+\\beta_B$; neither coefficient is separately identifiable while the parameter space remains unrestricted. For equal columns ($\\sigma=+1$), the relevant combination is the sum; for opposite columns ($\\sigma=-1$), it is the difference. Additional runs can remove the ambiguity only if they break the column relation, and hierarchy or sparsity restrictions are extra modeling assumptions.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The equations give $x_Ax_Bx_D=+1$ and $x_Cx_Dx_E=+1$, so the defining words are $ABD$ and $CDE$. Their product is $ABCE$ because the repeated $D$ cancels in symmetric difference. The two incidence vectors are nonzero and distinct; over $\\mathbb F_2$, two nonzero vectors are dependent only if equal, so these generators are independent. By [F2] these and the identity are exactly the four words in $H$. Their nonidentity lengths are $3,3,4$, hence the initial resolution is III.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the complete mirror, [F3] changes the signs of the length-three relations ABD and CDE but preserves ABCE, giving $H_{[5]}=\\{I,ABCE\\}$. The two eight-run blocks are disjoint because ABD has opposite signs on them, and both lie in $Q=\\{x:x_Ax_Bx_Cx_E=+1\\}$; choosing $x_A,x_B,x_C,x_D$ freely determines $x_E$, so $|Q|=16$ and their union is exactly this regular $2^{5-1}$ fraction. Its aliases are precisely $S$ with $S\\triangle\\{A,B,C,E\\}$, so $A$ remains paired with $BCE$, while $C\\triangle DE=CDE$ is absent and that pair separates. The shortest residual word has length $4$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For the partial foldover on $J=\\{A\\}$, [F3] changes ABD and ABCE but preserves CDE, giving $H_J=\\{I,CDE\\}$. The two eight-run blocks are disjoint because ABD has opposite signs on them, and both lie in $Q'=\\{x:x_Cx_Dx_E=+1\\}$; choosing $x_A,x_B,x_C,x_D$ freely determines $x_E$, so their union is all 16 runs in this regular $2^{5-1}$ fraction. The complete residual pairs are precisely $S$ and $S\\triangle\\{C,D,E\\}$: this includes $C=DE$ and excludes the original relation $A=BD$. The shortest residual word has length $3$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The retained columns $c_C=c_{DE}$ in the partial design contribute as $(\\beta_C+\\beta_{DE})c_C$. By [F4], only this combination enters the fitted vector for this pair, so the partial follow-up does not separately identify $\\beta_C$ and $\\beta_{DE}$ without a restriction or further runs.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The original regular 2^{5-2} fraction has 2^{3}=8 runs; each follow-up stacks an eight-row transformed copy."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The identity word remains in both residual subgroups and is excluded from the resolution minimum."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This example has two independent generators and five factors; it is not a one-generator boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The full residual shortest word ABCE has length four, while the partial residual shortest word CDE has length three; all residual aliases are listed by the subgroup formulas."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification steps 2.1 and 2.2 explicitly compare full mirror J={A,B,C,D,E}, leaving H={I,ABCE}, with the single-factor J={A}, leaving H={I,CDE}; these are actual full and targeted followup cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The two finite foldover sets are explicitly specified as [5] and {A}."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: Steps 2.1 and 2.2 derive every residual alias from membership in the corresponding subgroup."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: The residual subgroups in steps 2.1 and 2.2 contain no other nonidentity words, so the listed S-to-symmetric-difference pairs are exhaustive."
+        }
+      ],
+      "finite_checks": []
+    }
+  }
+}

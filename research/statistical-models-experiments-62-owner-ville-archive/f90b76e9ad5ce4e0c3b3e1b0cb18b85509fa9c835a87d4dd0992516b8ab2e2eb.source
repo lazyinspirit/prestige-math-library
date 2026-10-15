@@ -1,0 +1,73 @@
+---
+id: lem-finite-horizon-test-supermartingale-crossing-bound
+kind: lemma
+title: Finite-horizon crossing bound for a nonnegative test supermartingale
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 0
+deps:
+  - def-axiom-of-choice
+  - def-discrete-stopping-time
+  - def-nonnegative-test-supermartingale
+  - cor-expectation-linearity-monotonicity-and-modulus-bound
+  - cor-expectation-of-an-indicator-is-probability
+  - lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time
+  - thm-optional-sampling-for-bounded-stopping-times
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon, Time-uniform Chernoff bounds via nonnegative supermartingales, Probability Surveys 17 (2020), 257–317"
+      url: https://arxiv.org/pdf/1808.03204
+      locator: "§2.3, Lemma 1 (printed p. 14); §6.1, proof of Lemma 1 (printed pp. 44–45). The source uses bounded optional stopping for a nonnegative supermartingale crossing event."
+    - title: "R. L. Wolpert, STA 205: Martingales, Duke University lecture notes (2010)"
+      url: https://www2.stat.duke.edu/courses/Fall10/sta205/lec/topics/mg.pdf
+      locator: "§1, discrete optional stopping (PDF p. 1); §5, Theorem 4 and proof (PDF pp. 11–12), stated for martingales. The local proof uses the published supermartingale optional-sampling supplier for the downward inequality."
+---
+
+## Statement
+
+Assume AC. Let $\mathcal P_0$ be a family of probability laws and let
+$M=(M_t)_{t\in\mathbb N_0}$ be a nonnegative test supermartingale for
+$\mathcal P_0$. For every $P\in\mathcal P_0$, every $a>0$, and every
+$N\in\mathbb N_0$,
+$$
+P\!\left(\max_{0\le t\le N}M_t\ge a\right)\le \frac{\mathbb E_PM_0}{a}\le\frac1a.
+$$
+
+## Facts & Assumptions
+
+**Given:** Assume AC. Let $\mathcal P_0$ be a null family and let
+$M=(M_t)_{t\ge0}$ be a nonnegative test supermartingale for that family. Fix
+$P\in\mathcal P_0$, $a>0$, and a finite horizon $N\in\mathbb N_0$.
+
+[F1] [[def-nonnegative-test-supermartingale]]: under every null law, $M$ is adapted and integrable, is nonnegative almost surely at every time, is a supermartingale, and satisfies $\mathbb E_PM_0\le1$.
+
+[F2] [[lem-first-hitting-time-of-an-adapted-process-is-a-stopping-time]]: for an adapted process and a Borel set $B$, its first time in $B$ is a stopping time.
+
+[F3] [[def-discrete-stopping-time]]: a discrete stopping time is a map into $\mathbb N_0\cup\{\infty\}$ whose events $\{\tau\le n\}$ belong to $\mathcal F_n$; it is bounded when it is bounded almost surely by a deterministic integer.
+
+[F4] [[thm-optional-sampling-for-bounded-stopping-times]]: for bounded stopping times $\sigma\le\tau$, optional sampling for a supermartingale gives $\mathbb E_PM_\tau\le\mathbb E_PM_\sigma$.
+
+[F5] [[cor-expectation-linearity-monotonicity-and-modulus-bound]] and [[cor-expectation-of-an-indicator-is-probability]]: expectation is monotone, and $\mathbb E_P[\mathbf1_A]=P(A)$ for measurable $A$.
+
+[A1] AC is assumed by the test-supermartingale definition and the bounded optional-sampling theorem ([[def-axiom-of-choice]]); it is used only through those suppliers.
+
+## Proof
+
+1.1 Define $\tau_a=\inf\{t\ge0:M_t\ge a\}$, with $\inf\varnothing=\infty$, and $A_N=\{\tau_a\le N\}=\{\max_{0\le t\le N}M_t\ge a\}$. By [F1], $M$ is adapted; applying [F2] with the Borel set $[a,\infty)$ makes $\tau_a$ a stopping time. Thus $\tau_a\wedge N$ and the constant time $0$ are bounded stopping times, with $0\le\tau_a\wedge N$. [given, F1, F2, F3, A1, choose]
+
+2.1 Apply [F4] to $0\le\tau_a\wedge N$ to get $\mathbb E_PM_{\tau_a\wedge N}\le\mathbb E_PM_0\le1$. [F1, F4, A1, step 1.1]
+
+2.2 On $A_N$, $\tau_a\wedge N=\tau_a$ and $M_{\tau_a}\ge a$; on $A_N^c$, $\tau_a\wedge N=N$ and $M_N\ge0$ almost surely by [F1]. Hence $M_{\tau_a\wedge N}\ge a\mathbf1_{A_N}$ almost surely. [F1, step 1.1]
+
+3.1 By [F5] and step 2.1, $aP(A_N)=\mathbb E_P[a\mathbf1_{A_N}]\le\mathbb E_PM_{\tau_a\wedge N}\le\mathbb E_PM_0\le1$. Dividing by $a>0$ proves both bounds. [F5, step 2.1, step 2.2, algebra] ∎
+
+## Remarks
+
+The finite-horizon event is exactly the first-crossing event by time $N$. No assumption that an infinite-horizon supremum is attained is used here.

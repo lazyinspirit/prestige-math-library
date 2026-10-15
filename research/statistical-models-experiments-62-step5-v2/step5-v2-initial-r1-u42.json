@@ -1,0 +1,331 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "42",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "def-linear-process-and-arma-model",
+      "model": "gpt-6-luna",
+      "context_sha256": "6d22644cba63e2faf209ead67d5df4c32f953c6c48e62750293301d5181bdb6c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Confirmed the counterexample directly: choose iid centered finite-variance innovations and an independent nonzero centered finite-variance C. Then X_t=mu+epsilon_t+C is weakly stationary and (1-B)(X-mu)=(1-B)epsilon, but X-mu!=epsilon. Thus cancelling 1-B discards solutions. The definition now imposes a normalized coprime equation and explicitly defines cancellation as an associated reduced model, without asserting solution-set equivalence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-stable-ar-long-run-variance-plug-in-consistency",
+      "model": "gpt-6-luna",
+      "context_sha256": "74cdb090c96016177515ca29f6ce281766b1d411e8e3ae7d5633e73ebc931110",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The rejected inference is mathematically true, but original F3 falsely attributed finite-dimensional tightness to Slutsky and the continuous-probability mapping theorem; neither cited Statement establishes it. Proof 1.2 needs this inference for slope consistency. The already published thm-vector-stochastic-order-calculus Statement part 3 and Proof 1.1 establish it without choice. Added that dependency and F6, then used the OLS full-vector normal limit and an explicit tail bound to prove all coefficient consistency; no projection limit is needed. The corollary Statement is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-linear-process-and-arma-model",
+      "disposition": "repaired",
+      "post_sha256": "4a2358a5fe3e67a5ef8fc7096a244fc4ae28e0e083b042ee5c2907e0703cde9f",
+      "review_context_sha256": "e8f33b77b73d2c9e54e0155fd39175198615a3f6b8e6b7ecc9e9a631cf7ccccb",
+      "reason": "Confirmed the counterexample directly: choose iid centered finite-variance innovations and an independent nonzero centered finite-variance C. Then X_t=mu+epsilon_t+C is weakly stationary and (1-B)(X-mu)=(1-B)epsilon, but X-mu!=epsilon. Thus cancelling 1-B discards solutions. The definition now imposes a normalized coprime equation and explicitly defines cancellation as an associated reduced model, without asserting solution-set equivalence. White-noise, filter, causal/invertible, and AR-intercept conventions are preserved; the filter well-definedness supplier remains valid and no additional choice is used. Owning manifest, definition contract boundary, and A-page summary now state the same reduced-model convention.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cor-stable-ar-long-run-variance-plug-in-consistency",
+      "disposition": "repaired",
+      "post_sha256": "af536a17f6d50e6dcb790be3b4ded1a8ee4b20f69906186dc4d13b7b5ad8b832",
+      "review_context_sha256": "cf06841457d3be0347d90789d446b0ef0877e7b786aa76e32049aab979695dbf",
+      "reason": "The rejected inference is mathematically true, but original F3 falsely attributed finite-dimensional tightness to Slutsky and the continuous-probability mapping theorem; neither cited Statement establishes it. Proof 1.2 needs this inference for slope consistency. The already published thm-vector-stochastic-order-calculus Statement part 3 and Proof 1.1 establish it without choice. Added that dependency and F6, then used the OLS full-vector normal limit and an explicit tail bound to prove all coefficient consistency; no projection limit is needed. The corollary Statement is unchanged. Stable phi and MA polynomial 1 satisfy coprimality; strict stationarity plus finite augmented Gram imply weak stationarity. Exponential filter coefficients give weighted CLT summability and Psi=1/phi(1). Continuous probability pairing and the everywhere-continuous map s/max{(1-sum v_j)^2,phi(1)^2/4} give variance consistency; the event where it differs from the prescribed estimator has probability tending to zero. Residual variance is nonnegative, the limit is strictly positive, and AC and fixed-order assumptions remain explicit. Updated only its owning manifest dependency and proof contract. This is repair evidence, not independent review of the repaired proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+    "thm-arma-causality-and-invertibility-root-criteria",
+    "thm-stationary-arma-spectral-density",
+    "thm-stable-linear-process-sample-mean-clt",
+    "ex-arma-common-factor-cancellation-and-root-classification",
+    "ex-unit-root-precludes-nonzero-variance-stationary-ar1",
+    "ex-dependent-white-noise-is-not-iid",
+    "cor-stable-ar-long-run-variance-plug-in-consistency"
+  ],
+  "downstream_uses": {
+    "cor-stable-ar-long-run-variance-plug-in-consistency": "Statement explicitly imposes the stable AR equation with MA polynomial 1; Proof 1.1 uses its causal transfer 1/phi. The pair (phi,1) is already coprime and requires no cancellation."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append-or-merge-exact-tuple",
+      "defect_id": "sme62-step5-initial-r1-u42-arma-cancellation",
+      "run": "statistical-models-experiments-62",
+      "at": "2026-10-14T23:30:46.111151+00:00",
+      "class": "accuracy",
+      "subclass": "false-or-overstrong-statement",
+      "severity": "fatal",
+      "location": "definition",
+      "subject": "def-linear-process-and-arma-model",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "disposition": "fixed",
+      "defect_type": "logic",
+      "reason": "Confirmed the counterexample directly: choose iid centered finite-variance innovations and an independent nonzero centered finite-variance C. Then X_t=mu+epsilon_t+C is weakly stationary and (1-B)(X-mu)=(1-B)epsilon, but X-mu!=epsilon. Thus cancelling 1-B discards solutions. The definition now imposes a normalized coprime equation and explicitly defines cancellation as an associated reduced model, without asserting solution-set equivalence.",
+      "adjudication_ref": [
+        {
+          "id": "def-linear-process-and-arma-model",
+          "model": "gpt-6-luna",
+          "context_sha256": "6d22644cba63e2faf209ead67d5df4c32f953c6c48e62750293301d5181bdb6c",
+          "item_sha256": "1036d23c62df34664e95098e3300fc1ecbe1f0211af104be989ba0a1b539d811",
+          "path": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u42.json"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "items/def-linear-process-and-arma-model.md",
+          "post_sha256": "4a2358a5fe3e67a5ef8fc7096a244fc4ae28e0e083b042ee5c2907e0703cde9f"
+        },
+        {
+          "path": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u42.json",
+          "section": "decisions, reviews, repair_notes"
+        }
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append-or-merge-exact-tuple",
+      "defect_id": "sme62-step5-initial-r1-u42-ar-tightness-citation",
+      "run": "statistical-models-experiments-62",
+      "at": "2026-10-14T23:30:46.111151+00:00",
+      "class": "accuracy",
+      "subclass": "citation-misattributed",
+      "severity": "fatal",
+      "location": "facts-block",
+      "subject": "cor-stable-ar-long-run-variance-plug-in-consistency",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "final-adjudicator",
+      "disposition": "fixed",
+      "defect_type": "dependency_citation",
+      "reason": "The rejected inference is mathematically true, but original F3 falsely attributed finite-dimensional tightness to Slutsky and the continuous-probability mapping theorem; neither cited Statement establishes it. Proof 1.2 needs this inference for slope consistency. The already published thm-vector-stochastic-order-calculus Statement part 3 and Proof 1.1 establish it without choice. Added that dependency and F6, then used the OLS full-vector normal limit and an explicit tail bound to prove all coefficient consistency; no projection limit is needed. The corollary Statement is unchanged.",
+      "adjudication_ref": [
+        {
+          "id": "cor-stable-ar-long-run-variance-plug-in-consistency",
+          "model": "gpt-6-luna",
+          "context_sha256": "74cdb090c96016177515ca29f6ce281766b1d411e8e3ae7d5633e73ebc931110",
+          "item_sha256": "e7b1e6aab6762d9f44152841237ea009677d8bcec375764e0a101ec4b8ba04f3",
+          "path": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u42.json"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "items/cor-stable-ar-long-run-variance-plug-in-consistency.md",
+          "post_sha256": "af536a17f6d50e6dcb790be3b4ded1a8ee4b20f69906186dc4d13b7b5ad8b832"
+        },
+        {
+          "path": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u42.json",
+          "section": "decisions, reviews, repair_notes"
+        }
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "record-no-published-repair",
+      "reason": "No direct published consumer of the changed ARMA definition was found. The published thm-vector-stochastic-order-calculus was consulted read-only: Statement part 3 and Proof 1.1 justify finite-dimensional tightness, and no defect or repair was found in that use. This records a prerequisite-interface check only, not independent whole-item audit or certification.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "completed": [
+      "def-linear-process-and-arma-model",
+      "cor-stable-ar-long-run-variance-plug-in-consistency"
+    ],
+    "current_conventions": "Integer time, BX_t=X_{t-1}; phi=1-sum phi_j z^j, theta=1+sum theta_j z^j; white noise need not be iid. Reduced-model root tests assume its own equation.",
+    "sources_consulted": "Local item arguments only; no external sources consulted or claimed.",
+    "dependencies_checked": [
+      "def-strict-and-weak-stationarity-for-time-series",
+      "def-moments-variance-and-covariance",
+      "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+      "thm-fixed-order-autoregressive-ols-martingale-limit",
+      "thm-vector-stochastic-order-calculus",
+      "thm-vector-slutsky",
+      "thm-continuous-maps-preserve-convergence-in-probability",
+      "thm-stable-linear-process-sample-mean-clt",
+      "thm-arma-causality-and-invertibility-root-criteria"
+    ],
+    "consumer_examinations": [
+      {
+        "supplier": "def-linear-process-and-arma-model",
+        "id": "lem-absolutely-summable-linear-filters-preserve-weak-stationarity",
+        "path": "items/lem-absolutely-summable-linear-filters-preserve-weak-stationarity.md",
+        "affected_use": "Statement and steps 1.1–5.1 define c(B)Z_t and prove filter convergence/composition; only the unchanged backshift/filter and moment conventions are used.",
+        "invalidated_claim": "None: the exact used premise remains available.",
+        "disposition": "unaffected",
+        "minimality": "No item edit needed; its own reduced equation or unchanged white-noise/filter clauses license the use.",
+        "route": "frontier-owner"
+      },
+      {
+        "supplier": "def-linear-process-and-arma-model",
+        "id": "thm-arma-causality-and-invertibility-root-criteria",
+        "path": "items/thm-arma-causality-and-invertibility-root-criteria.md",
+        "affected_use": "Statement requires (X_t,epsilon_t) to satisfy the normalized coprime ARMA equation; F1 requires coprimality, and steps 1.1, 1.3, 2.2, 2.4 use that imposed equation, never cancellation of an unreduced solution.",
+        "invalidated_claim": "None: the exact used premise remains available.",
+        "disposition": "unaffected",
+        "minimality": "No item edit needed; its own reduced equation or unchanged white-noise/filter clauses license the use.",
+        "route": "frontier-owner"
+      },
+      {
+        "supplier": "def-linear-process-and-arma-model",
+        "id": "thm-stationary-arma-spectral-density",
+        "path": "items/thm-stationary-arma-spectral-density.md",
+        "affected_use": "Statement assumes a weakly stationary solution of the normalized coprime equation; F1 and step 2.1 apply the two-sided inverse directly to that equation. No cancellation-equivalence premise is used.",
+        "invalidated_claim": "None: the exact used premise remains available.",
+        "disposition": "unaffected",
+        "minimality": "No item edit needed; its own reduced equation or unchanged white-noise/filter clauses license the use.",
+        "route": "frontier-owner"
+      },
+      {
+        "supplier": "def-linear-process-and-arma-model",
+        "id": "thm-stable-linear-process-sample-mean-clt",
+        "path": "items/thm-stable-linear-process-sample-mean-clt.md",
+        "affected_use": "F1 defines an absolutely summable causal filter of centered white noise; step 1.1 and the ARMA specialization use an existing causal representation and the coprime root theorem. These premises remain unchanged.",
+        "invalidated_claim": "None: the exact used premise remains available.",
+        "disposition": "unaffected",
+        "minimality": "No item edit needed; its own reduced equation or unchanged white-noise/filter clauses license the use.",
+        "route": "frontier-owner"
+      },
+      {
+        "supplier": "def-linear-process-and-arma-model",
+        "id": "ex-arma-common-factor-cancellation-and-root-classification",
+        "path": "items/ex-arma-common-factor-cancellation-and-root-classification.md",
+        "affected_use": "Example fixes X_t=epsilon_t; Verification 2.1 checks the reduced equation directly before multiplying by 1-2B. Verification 3.1 excludes the raw noncoprime pair from the root criterion, and does not infer cancellation for an arbitrary solution.",
+        "invalidated_claim": "None: the exact used premise remains available.",
+        "disposition": "unaffected",
+        "minimality": "No item edit needed; its own reduced equation or unchanged white-noise/filter clauses license the use.",
+        "route": "frontier-owner"
+      },
+      {
+        "supplier": "def-linear-process-and-arma-model",
+        "id": "ex-unit-root-precludes-nonzero-variance-stationary-ar1",
+        "path": "items/ex-unit-root-precludes-nonzero-variance-stationary-ar1.md",
+        "affected_use": "F1 and Verification 1.1 use centered positive-variance white noise and the explicitly imposed equation X_t-X_{t-1}=epsilon_t, with coprime pair (1-z,1). The unchanged zero-lag and nonzero-lag covariance conditions suffice.",
+        "invalidated_claim": "None: the exact used premise remains available.",
+        "disposition": "unaffected",
+        "minimality": "No item edit needed; its own reduced equation or unchanged white-noise/filter clauses license the use.",
+        "route": "frontier-owner"
+      },
+      {
+        "supplier": "def-linear-process-and-arma-model",
+        "id": "ex-dependent-white-noise-is-not-iid",
+        "path": "items/ex-dependent-white-noise-is-not-iid.md",
+        "affected_use": "F5 and Verification 2.1 use the unchanged white-noise definition: centered positive finite variance and zero covariance at nonzero lags. No ARMA cancellation is used.",
+        "invalidated_claim": "None: the exact used premise remains available.",
+        "disposition": "unaffected",
+        "minimality": "No item edit needed; its own reduced equation or unchanged white-noise/filter clauses license the use.",
+        "route": "frontier-owner"
+      },
+      {
+        "supplier": "def-linear-process-and-arma-model",
+        "id": "cor-stable-ar-long-run-variance-plug-in-consistency",
+        "path": "items/cor-stable-ar-long-run-variance-plug-in-consistency.md",
+        "affected_use": "Statement explicitly imposes the stable AR equation with MA polynomial 1; Proof 1.1 uses its causal transfer 1/phi. The pair (phi,1) is already coprime and requires no cancellation.",
+        "invalidated_claim": "None: the exact used premise remains available.",
+        "disposition": "unaffected_by_supplier_change",
+        "minimality": "No item edit needed; its own reduced equation or unchanged white-noise/filter clauses license the use.",
+        "route": "frontier-owner"
+      }
+    ],
+    "page_examinations": [
+      {
+        "path": "library/statistical-models-and-experiments/arma-causality-invertibility-and-spectra.md",
+        "disposition": "repaired",
+        "reason": "Summary now distinguishes an associated reduced model and requires its equation for root classification."
+      },
+      {
+        "path": "library/statistical-models-and-experiments/arma-causality-invertibility-and-spectra-examples.md",
+        "disposition": "unaffected",
+        "reason": "Cancellation before coprime root tests is valid; its concrete X=epsilon example independently satisfies the reduced equation."
+      }
+    ],
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-42.proof-contracts.json --strict --items def-linear-process-and-arma-model",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings; 1/1 checked"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-42.proof-contracts.json --strict --items cor-stable-ar-long-run-variance-plug-in-consistency",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings; 1/1 checked"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-42.proof-contracts.json --strict --items def-linear-process-and-arma-model,cor-stable-ar-long-run-variance-plug-in-consistency",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings; 2/2 checked after rereading metadata under held shared lock"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-linear-process-and-arma-model.md items/cor-stable-ar-long-run-variance-plug-in-consistency.md --json",
+        "exit_code": 0,
+        "result": "2 files; 1 checked proof passed; definition not-applicable; 0 failures"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-linear-process-and-arma-model.md items/cor-stable-ar-long-run-variance-plug-in-consistency.md library/statistical-models-and-experiments/arma-causality-invertibility-and-spectra.md --json",
+        "exit_code": 0,
+        "result": "3 files checked; 0 errors and 0 warnings"
+      },
+      {
+        "command": "node tools/depcheck.mjs --items-file /tmp/sme-u42-focused-items.json --json",
+        "exit_code": 0,
+        "result": "Explicit two-item selection drawn from batch-42 current manifest; owning page and prerequisite cycle closure checked; 0 errors and 0 warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-linear-process-and-arma-model.md items/cor-stable-ar-long-run-variance-plug-in-consistency.md",
+        "exit_code": 0,
+        "result": "2 items, 4 steps, 0 defects; run once after all final item edits"
+      },
+      {
+        "command": "Read-only comparison of current itemHashGuard and exact section statementHash against report and initial-1.json",
+        "exit_code": 0,
+        "result": "Both review guards match current files; only def-linear-process-and-arma-model Definition changed; corollary Statement unchanged"
+      },
+      {
+        "command": "Read-only validateReports on an in-memory unit-42 projection and verification of digest(original initial-1.json)",
+        "exit_code": 0,
+        "result": "Original input digest exact; 2 rejected tuple decisions, 2 current reviews, valid downstream inventory; no errors. Original pack and workflow state untouched."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Hand off this completed local report; engine owns downstream owner routing, rejudgment and certification.",
+    "published_ledger_proposals": [],
+    "published_findings": "No potentially defective published consumer was found. The published stochastic-order theorem and continuity supplier are used read-only; their consulted relevant arguments license the repaired inference.",
+    "operational_history": [
+      "Definition metadata edited and checked under acquired/released shared lock.",
+      "Corollary metadata was inadvertently edited after a failed lock acquisition; no foreign lock was removed. Reacquire, reread and check batch-42 metadata before handoff.",
+      "Successfully reacquired shared lock; reread both metadata files and source dependency mirrors, checked repaired clauses and strict contracts (2/2 pass), then released own lock. No concurrent corruption found or foreign lock removed."
+    ],
+    "new_prerequisites": "None; existing published stochastic-order theorem establishes the required finite-dimensional tightness claim.",
+    "interface_changes": [
+      "def-linear-process-and-arma-model: Definition changed; all seven dependency/reference item consumers and the unlinked actual AR use in the assigned corollary examined.",
+      "cor-stable-ar-long-run-variance-plug-in-consistency: original Statement unchanged; proof/dependency/contract repair causes no propagation."
+    ],
+    "independent_review": "No independent review of these repairs is claimed; no judge, certificate, stamp or round state was written."
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "5",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "def-wishart-law",
+      "model": "gpt-6-luna",
+      "context_sha256": "eebc569f9e91215d63c06ad7287758d62a427c672a814cea41c2b55e0c198847",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The published Gaussian Definition supplies existence but explicitly defers uniqueness. Its characteristic-function lemma proves uniqueness under AC for every positive-semidefinite scale, including singular scales. Adding that established supplier to deps licenses the uniquely specified Gaussian factors, their finite product, and the continuous outer-product pushforward without changing the Definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-multivariate-normal-sample-model-and-statistics",
+      "model": "gpt-6-luna",
+      "context_sha256": "af0e02de06942bb9c941ad754bca88ed16c7e6a6fe3e655aedf4284c4897f3eb",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The submitted MLE objection is not upheld: the Definition calls M a covariance candidate and defers its MLE property, while the actual likelihood theorem assumes n>p and proves M positive definite almost surely before optimization. Review nevertheless confirms the same fatal missing Gaussian-uniqueness dependency as in def-wishart-law: the parameter-indexed product P_mu,Sigma requires a uniquely specified normal law, whereas its cited Gaussian Definition explicitly defers uniqueness. Added the established characteristic-function/uniqueness lemma to deps; no MLE claim or Definition was weakened.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-hotelling-t2-two-dimensional-exact-test",
+      "model": "gpt-6-luna",
+      "context_sha256": "b9b05dcfbc383f75516e989f59b1822566adeb96fefd2494ed899883836aade0",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "F2 and F3 imported a random-statistic F law and exact-size guarantee without the iid Gaussian experiment, positive-definite covariance or AC required by their actual suppliers. Fixed vectors alone give only arithmetic, not a null law or a test size. Added the reference experiment and AC to Example/Given, restored every supplier hypothesis in F2/F3, and retained n=4>p=2 and the exact strict cutoff.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-wishart-law",
+      "disposition": "repaired",
+      "post_sha256": "588b4ffeea727de7116a2b4e8e2f7e3807deaf9df1f721ab6304aed089fe5c5f",
+      "review_context_sha256": "f42161c76a2fe104173b9a1071736cd0f61a8da4423d6a40b9dd915ae8f0052e",
+      "reason": "Checked the full Gaussian uniqueness lemma: equality of transforms identifies all scalar projections and Cramer-Wold identifies the vector law, including singular covariance. Probability factors are sigma-finite; iteration of the product theorem gives a probability product; the finite polynomial outer-product map is continuous and Borel under AC. Added only the missing uniqueness dependency; the Definition, p,m>=1, singular support and choice scope are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-multivariate-normal-sample-model-and-statistics",
+      "disposition": "repaired",
+      "post_sha256": "5894e7703a6de67950d09b6af0bca592247b5aeaeda809dd810da5bfcd10b060",
+      "review_context_sha256": "2db8d5952bc7c0b37f8fa0756c3b916ce35ef7e6c0a6362a7b3b164f477eb2eb",
+      "reason": "Checked n>=2 makes both covariance denominators positive and the mean/scatter maps polynomial, hence continuous; the parameter covariance is positive definite, while observed M may be singular and is only called a candidate. The likelihood supplier's step 3.1 establishes the MLE on the almost-sure positive-definite event under n>p. Added the Gaussian uniqueness lemma to license the parameter-indexed product law. Sampling/vector units, fixed parameters, identity observation map, AC and the complete Definition remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-hotelling-t2-two-dimensional-exact-test",
+      "disposition": "repaired",
+      "post_sha256": "758765062e2f0315bcf597d59bd520b04b3aa2eb0b6991012ce68880b53f7f0b",
+      "review_context_sha256": "e7ac427ff8bc2e90cd8d5e6b29f62c42befc6c03b7a8a49c2055c0ad20d44578",
+      "reason": "Checked the complete Hotelling theorem and exact-test corollary: AC, iid normal vector observations, positive-definite population covariance, n>p and the mean null give the F law and common size alpha. The repaired example supplies this reference model while computing a fixed observation. Directly verified mean zero, R=2I_2, S=2I_2/3, inverse=3I_2/2, T^2=12, factor 1/3 and scaled value 4. The unique F(2,2) quantile and strict inequality remain valid for every alpha in (0,1).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "statistical-models-experiments-62-step5-initial-r1-u5-1",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:30:48Z",
+        "class": "accuracy",
+        "subclass": "citation-missing",
+        "severity": "fatal",
+        "location": "frontmatter",
+        "subject": "def-wishart-law",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "source": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u5.json",
+        "note": "The published Gaussian Definition supplies existence but explicitly defers uniqueness. Its characteristic-function lemma proves uniqueness under AC for every positive-semidefinite scale, including singular scales. Adding that established supplier to deps licenses the uniquely specified Gaussian factors, their finite product, and the continuous outer-product pushforward without changing the Definition.",
+        "item_sha256": "588b4ffeea727de7116a2b4e8e2f7e3807deaf9df1f721ab6304aed089fe5c5f"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "statistical-models-experiments-62-step5-initial-r1-u5-2",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:30:48Z",
+        "class": "accuracy",
+        "subclass": "citation-missing",
+        "severity": "fatal",
+        "location": "frontmatter",
+        "subject": "def-multivariate-normal-sample-model-and-statistics",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "source": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u5.json",
+        "note": "The submitted MLE objection is not upheld: the Definition calls M a covariance candidate and defers its MLE property, while the actual likelihood theorem assumes n>p and proves M positive definite almost surely before optimization. Review nevertheless confirms the same fatal missing Gaussian-uniqueness dependency as in def-wishart-law: the parameter-indexed product P_mu,Sigma requires a uniquely specified normal law, whereas its cited Gaussian Definition explicitly defers uniqueness. Added the established characteristic-function/uniqueness lemma to deps; no MLE claim or Definition was weakened.",
+        "item_sha256": "5894e7703a6de67950d09b6af0bca592247b5aeaeda809dd810da5bfcd10b060"
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "operation": "append",
+      "row": {
+        "defect_id": "statistical-models-experiments-62-step5-initial-r1-u5-3",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:30:48Z",
+        "class": "accuracy",
+        "subclass": "citation-truncated",
+        "severity": "fatal",
+        "location": "facts-block",
+        "subject": "ex-hotelling-t2-two-dimensional-exact-test",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "group-alpha",
+        "disposition": "fixed",
+        "repair_cost": "repair+rejudge",
+        "source": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u5.json",
+        "note": "F2 and F3 imported a random-statistic F law and exact-size guarantee without the iid Gaussian experiment, positive-definite covariance or AC required by their actual suppliers. Fixed vectors alone give only arithmetic, not a null law or a test size. Added the reference experiment and AC to Example/Given, restored every supplier hypothesis in F2/F3, and retained n=4>p=2 and the exact strict cutoff.",
+        "item_sha256": "758765062e2f0315bcf597d59bd520b04b3aa2eb0b6991012ce68880b53f7f0b"
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-wishart-law",
+      "state": "completed",
+      "claim": "W_p(Sigma,m) is the outer-product-sum pushforward for p,m>=1 and Sigma positive semidefinite; singular support remains allowed.",
+      "source_paths": [
+        "items/def-multivariate-normal-law.md:Definition",
+        "items/lem-characteristic-function-of-a-multivariate-normal-law.md:Statement and Proof steps 1.1–2.1",
+        "items/thm-cramer-wold-device.md:Statement and Proof step 1.1",
+        "items/thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique.md:Statement",
+        "items/cor-continuous-functions-are-borel-measurable.md:Statement"
+      ],
+      "deps_added": [
+        "lem-characteristic-function-of-a-multivariate-normal-law"
+      ],
+      "checks": {
+        "precheck": "exit 0; not-applicable, 0 proofs, 0 failures",
+        "rendercheck": "exit 0; 0 errors/warnings",
+        "proof_contract": "strict assigned-item scope exit 0; 3/3 items, 0 errors/warnings",
+        "manifest_deps": "exit 0; 12 manifest entries, 0 missing/normalized/errors",
+        "depcheck": "focused assigned-item selection exit 0; 0 errors/warnings; prerequisite closure cycle checks retained",
+        "proof_layout": "final batched command exit 0; 3 items, 3 numbered steps, 0 defects"
+      },
+      "unresolved_mathematics": [],
+      "next_action": "Controller collection and independent rejudgment of changed carriers; no mathematical repair obligation remains in this assignment.",
+      "statement_definition_changed": false,
+      "metadata_integration": "Owning manifest dependency mirrors aligned under step5-shared-write-lock acquire/reread/edit/check/release. Owning contract notes retain prior review text and append the actual correction; the Hotelling AC boundary now distinguishes arithmetic from model calibration."
+    },
+    {
+      "id": "def-multivariate-normal-sample-model-and-statistics",
+      "state": "completed",
+      "claim": "P_mu,Sigma=N_p(mu,Sigma) tensor n for n>=2,p>=1,Sigma positive definite; M=R/n is a candidate, not an unconditional MLE.",
+      "source_paths": [
+        "items/def-multivariate-normal-law.md:Definition",
+        "items/lem-characteristic-function-of-a-multivariate-normal-law.md:Statement and Proof",
+        "items/thm-covariance-likelihood-ratio-asymptotic-chi-square.md:Statement,F6,Proof steps 2.1–3.1",
+        "items/def-statistic-and-estimator.md:Definition"
+      ],
+      "deps_added": [
+        "lem-characteristic-function-of-a-multivariate-normal-law"
+      ],
+      "rejection_reason_disposition": "Original claimed unconditional MLE assertion is absent; independent missing uniqueness citation confirmed and repaired.",
+      "unresolved_mathematics": [],
+      "next_action": "Controller collection and independent rejudgment of changed carriers; no mathematical repair obligation remains in this assignment.",
+      "checks": {
+        "precheck": "exit 0; not-applicable, 0 proofs, 0 failures",
+        "rendercheck": "exit 0; 0 errors/warnings",
+        "proof_contract": "strict assigned-item scope exit 0; 3/3 items, 0 errors/warnings",
+        "manifest_deps": "exit 0; 12 manifest entries, 0 missing/normalized/errors",
+        "depcheck": "focused assigned-item selection exit 0; 0 errors/warnings; prerequisite closure cycle checks retained",
+        "proof_layout": "final batched command exit 0; 3 items, 3 numbered steps, 0 defects"
+      },
+      "statement_definition_changed": false,
+      "metadata_integration": "Owning manifest dependency mirrors aligned under step5-shared-write-lock acquire/reread/edit/check/release. Owning contract notes retain prior review text and append the actual correction; the Hotelling AC boundary now distinguishes arithmetic from model calibration."
+    },
+    {
+      "id": "ex-hotelling-t2-two-dimensional-exact-test",
+      "state": "completed",
+      "claim": "Under AC and the iid normal model with Sigma positive definite, the fixed observation has T^2=12 and scaled statistic 4; reject exactly when 4>F_2,2^-1(1-alpha), for 0<alpha<1.",
+      "source_paths": [
+        "items/thm-hotelling-t2-exact-f-distribution.md:Statement,Facts and complete Proof",
+        "items/cor-exact-hotelling-one-sample-test.md:Statement,Facts and complete Proof",
+        "items/lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing.md:Statement (in exact contract evidence)"
+      ],
+      "deps_added": [
+        "def-axiom-of-choice"
+      ],
+      "statement_definition_changed": false,
+      "unresolved_mathematics": [],
+      "next_action": "Controller collection and independent rejudgment of changed carriers; no mathematical repair obligation remains in this assignment.",
+      "checks": {
+        "precheck": "exit 0; 1 proof checked, pass, 0 failures",
+        "rendercheck": "exit 0; 0 errors/warnings",
+        "proof_contract": "strict assigned-item scope exit 0; 3/3 items, 0 errors/warnings",
+        "manifest_deps": "exit 0; 12 manifest entries, 0 missing/normalized/errors",
+        "depcheck": "focused assigned-item selection exit 0; 0 errors/warnings; prerequisite closure cycle checks retained",
+        "proof_layout": "final batched command exit 0; 3 items, 3 numbered steps, 0 defects"
+      },
+      "metadata_integration": "Owning manifest dependency mirrors aligned under step5-shared-write-lock acquire/reread/edit/check/release. Owning contract notes retain prior review text and append the actual correction; the Hotelling AC boundary now distinguishes arithmetic from model calibration."
+    },
+    {
+      "scope": "assignment",
+      "reason": "All three assigned itemHashGuards changed. Native input digest matches the supplied identity. Stored post hashes and review contexts were checked against current carriers without refreshing any review. Direct Statement/Definition section comparison is unchanged for each assigned carrier, so no downstream inventory or maintenance propagation is triggered. The Example and Facts hypothesis repair does not alter a Statement/Definition. No new items, published-carrier edits, potentially defective published consumers, unresolved mathematics, gate diagnostics or independent acceptance of these repairs are claimed.",
+      "published_consumer_ledger": "research/published-consumer-supplier-ledger.md: no proposed update; no published repair or consumer defect identified.",
+      "checks_commands": [
+        "node tools/tsx-run.mjs tools/precheck.mts items/def-wishart-law.md --json",
+        "node tools/tsx-run.mjs tools/precheck.mts items/def-multivariate-normal-sample-model-and-statistics.md items/ex-hotelling-t2-two-dimensional-exact-test.md --json",
+        "node tools/rendercheck.mjs items/def-wishart-law.md --json",
+        "node tools/rendercheck.mjs items/def-multivariate-normal-sample-model-and-statistics.md items/ex-hotelling-t2-two-dimensional-exact-test.md --json",
+        "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-5.proof-contracts.json --strict --items def-wishart-law,def-multivariate-normal-sample-model-and-statistics,ex-hotelling-t2-two-dimensional-exact-test --json",
+        "node tools/manifest-deps.mjs research/statistical-models-experiments-62-batch-5.pages.json",
+        "node tools/depcheck.mjs --items-file /tmp/step5-u5-items.json --json",
+        "node tools/proof-layout.mjs items/def-wishart-law.md items/def-multivariate-normal-sample-model-and-statistics.md items/ex-hotelling-t2-two-dimensional-exact-test.md"
+      ]
+    }
+  ]
+}

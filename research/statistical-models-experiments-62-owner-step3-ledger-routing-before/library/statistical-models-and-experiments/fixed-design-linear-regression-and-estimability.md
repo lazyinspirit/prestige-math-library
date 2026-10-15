@@ -1,0 +1,51 @@
+---
+page: fixed-design-linear-regression-and-estimability
+title: "Fixed-design regression, estimability, and Gauss–Markov"
+status: draft
+items:
+  - def-fixed-design-linear-regression-model
+  - lem-linear-contrast-statistics-are-borel-measurable
+  - def-least-squares-solution-set
+  - def-linear-estimability-in-fixed-design
+  - thm-least-squares-fitted-vector-and-solution-set
+  - thm-linear-estimability-iff-row-space
+  - thm-ols-unbiasedness-and-covariance-full-rank
+  - thm-gauss-markov-for-fixed-design-regression
+examples: []
+---
+
+## Objective
+
+This page develops least squares for a fixed matrix $X\in\mathbb R^{n\times p}$
+and response vector $Y\in\mathbb R^n$. “Fixed design” means the results
+condition on $X$; it does not specify how a scientific study selected that
+design or prove that the regression mean is adequate for an application.
+
+## Scope
+
+For an arbitrary design rank, the least-squares coefficient set is nonempty and
+is a translate of $\ker X$, while the fitted vector and residual are unique.
+A contrast $c^T\beta$ is linearly estimable exactly when
+$c\in\operatorname{row}(X)$, equivalently when it has a linear unbiased
+representative $a^TY$ under the first-moment model $\mathbb E_\beta Y=X\beta$.
+
+Under full column rank, OLS has formula
+$(X^TX)^{-1}X^TY$. If additionally
+$\operatorname{Cov}_\beta(\epsilon)=\sigma^2I_n$ with $\sigma^2>0$, OLS is
+unbiased with covariance $\sigma^2(X^TX)^{-1}$ and is BLUE for every estimable
+contrast. These conclusions use only first and second moments; they do not
+require Gaussian errors.
+
+The page records the model-side fields of
+[[def-scientific-statistical-model-contract]] at an abstract level; it is not a
+complete scientific model contract for an application because no target
+population or scientific units are specified. One
+analysis record is $Y\in\mathbb R^n$; row index $i$ is a response slot; $X$
+and $\beta$ are fixed; and $Y$ is observed under $P_\beta$. No scientific,
+sampling, or assignment unit, time origin, or target population is specified;
+no enrollment process is modeled, so its status is not applicable here; no
+latent observation mechanism or randomized design is modeled. The law is on
+Borel $\mathbb R^n$ for the standard Euclidean metric topology, without an
+additional support assumption. Expectations and
+covariances are under $P_\beta$ with $X$ fixed. The mean equation is a model
+premise that is empirically assessable in an application; no data or validation is supplied here, and no scientific adequacy is claimed.

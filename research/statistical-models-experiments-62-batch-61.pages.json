@@ -1,0 +1,228 @@
+[
+  {
+    "order": 2038,
+    "id": "group-sequential-alpha-spending",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Group-sequential alpha spending",
+    "companion": "group-sequential-alpha-spending-examples",
+    "requires": [
+      "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "central-limit-theorems",
+      "weak-convergence-tightness-and-representation"
+    ],
+    "items": [
+      {
+        "id": "def-group-sequential-alpha-spending-design",
+        "kind": "definition",
+        "title": "Canonical group-sequential alpha-spending design",
+        "statement": "Fix a finite integer maximum K≥1, prescheduled information fractions 0<t_1<⋯<t_K=1 with t_j the fraction of total planned information at look j, and α∈(0,1). A spending function is a nondecreasing A:[0,1]→[0,α] with A(0)=0 and A(1)=α. Under the stipulated simple null P_0, the standardized vector Z has law N_K(0,Σ), with Σ_jk=√(t_j/t_k) for j≤k and symmetry otherwise. The covariance is justified locally. One-sided upper and symmetric two-sided designs stop at the first crossing; cumulative null rejection probability through look k is the union probability of the corresponding crossing events. Exact calibration means that this probability is A(t_k) at every look. In an experiment with a nonempty alternative and singleton null, this probability is the test size.",
+        "deps": [
+          "def-test-size-and-power",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [
+          "thm-group-sequential-alpha-spending-calibration"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David L. DeMets and K. K. Gordon Lan, Interim Analysis: The Alpha Spending Function Approach, Statistics in Medicine 13 (1994), PDF pp. 2–3, 6–7",
+              "url": "https://eclass.uoa.gr/modules/document/file.php/MATH301/PracticalSession3/LanDeMets.pdf"
+            },
+            {
+              "title": "Michael J. Grayling, James M. S. Wason, and Adrian P. Mander, Group Sequential Clinical Trial Designs for Normally Distributed Outcome Variables, The Stata Journal 18(2) (2018), PDF pp. 2–4",
+              "url": "https://arxiv.org/pdf/1710.03127"
+            },
+            {
+              "title": "Giorgos Minas, Multivariate Global Testing and Adaptive Designs, PhD thesis, Chapter 5 §§5.3–5.3.1, printed pp. 72–73",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/58321/7/WRAP_THESIS_Minas_2013.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "alg-group-sequential-alpha-spending-boundary-calibration",
+        "kind": "algorithm",
+        "title": "Recursive group-sequential boundary calibration",
+        "statement": "Given the Axiom of Choice and a canonical design, set t_0=0 and R_0=empty. For k=1,…,K, if A(t_k)=A(t_{k−1}), set the look-k boundary to +infinity. Otherwise, in the one-sided mode choose the unique real b_k satisfying P_0(R_{k−1} union {Z_k>=b_k})=A(t_k); in the symmetric two-sided mode choose the unique c_k>=0 satisfying P_0(R_{k−1} union {|Z_k|>=c_k})=A(t_k). Set R_k to the resulting union of crossing events and output the K boundaries. The procedure uses exact probabilities under the stipulated joint null law; it makes no claim about a particular numerical integration routine.",
+        "deps": [
+          "def-group-sequential-alpha-spending-design",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [
+          "thm-group-sequential-alpha-spending-calibration"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David L. DeMets and K. K. Gordon Lan, Interim Analysis: The Alpha Spending Function Approach, Statistics in Medicine 13 (1994), PDF pp. 2–3, 6–7",
+              "url": "https://eclass.uoa.gr/modules/document/file.php/MATH301/PracticalSession3/LanDeMets.pdf"
+            },
+            {
+              "title": "Michael J. Grayling, James M. S. Wason, and Adrian P. Mander, Group Sequential Clinical Trial Designs for Normally Distributed Outcome Variables, The Stata Journal 18(2) (2018), PDF pp. 2–4",
+              "url": "https://arxiv.org/pdf/1710.03127"
+            },
+            {
+              "title": "Giorgos Minas, Multivariate Global Testing and Adaptive Designs, PhD thesis, Chapter 5 §§5.3–5.3.1, printed pp. 72–73",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/58321/7/WRAP_THESIS_Minas_2013.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-group-sequential-alpha-spending-calibration",
+        "kind": "theorem",
+        "title": "Group-sequential boundaries exist uniquely and spend alpha exactly",
+        "statement": "Assume AC and the canonical design. The recursive algorithm is well-defined: each positive spending increment has a unique finite boundary and each flat increment has boundary +infinity. Under P_0, rejection by look k has probability A(t_k), so the terminal simple-null rejection probability is alpha. In any embedding with a nonempty alternative and singleton null whose law is P_0, the test size is alpha. The same cumulative probability identity holds for separately calibrated symmetric two-sided crossings. The result is conditional on the specified joint Gaussian null law and prescheduled information fractions; it gives no guarantee for data-dependent timing, estimated variance, or an unspecified composite null.",
+        "deps": [
+          "def-group-sequential-alpha-spending-design",
+          "alg-group-sequential-alpha-spending-boundary-calibration",
+          "def-test-size-and-power",
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "def-axiom-of-choice",
+          "thm-continuity-from-below-for-measures",
+          "thm-intermediate-value"
+        ],
+        "justified_by": [],
+        "strategy": "Factor the canonical covariance as an invertible lower-triangular Gram matrix. The resulting nondegenerate Gaussian law has full support and atomless standard-normal marginals. For each look, the probability of a new crossing is a continuous strictly decreasing function of the boundary, with endpoint values equal to the previous cumulative spend and one. The intermediate value theorem gives the unique boundary; the recursion then gives the spending identities.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David L. DeMets and K. K. Gordon Lan, Interim Analysis: The Alpha Spending Function Approach, Statistics in Medicine 13 (1994), PDF pp. 2–3, 6–7",
+              "url": "https://eclass.uoa.gr/modules/document/file.php/MATH301/PracticalSession3/LanDeMets.pdf"
+            },
+            {
+              "title": "Michael J. Grayling, James M. S. Wason, and Adrian P. Mander, Group Sequential Clinical Trial Designs for Normally Distributed Outcome Variables, The Stata Journal 18(2) (2018), PDF pp. 2–4",
+              "url": "https://arxiv.org/pdf/1710.03127"
+            },
+            {
+              "title": "Giorgos Minas, Multivariate Global Testing and Adaptive Designs, PhD thesis, Chapter 5 §§5.3–5.3.1, printed pp. 72–73",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/58321/7/WRAP_THESIS_Minas_2013.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 2039,
+    "id": "group-sequential-alpha-spending-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Group-sequential alpha spending — Examples",
+    "companion": "group-sequential-alpha-spending",
+    "requires": [
+      "group-sequential-alpha-spending"
+    ],
+    "items": [
+      {
+        "id": "ex-pocock-spending-two-look",
+        "kind": "example",
+        "title": "Two-look Pocock-type symmetric spending",
+        "statement": "With alpha=0.05 and t_1=1/2,t_2=1, the Pocock-type spending curve A_P(t)=alpha log(1+(e−1)t) has first spend a_1=alpha log((1+e)/2). If Phi is the standard normal CDF and q(u) its unique u-quantile, the first symmetric boundary is c_1=q(1−a_1/2). The final symmetric boundary c_2 is the unique solution of P_0(|Z_1|>=c_1 or |Z_2|>=c_2)=alpha; the canonical correlation is 1/sqrt(2).",
+        "deps": [
+          "def-group-sequential-alpha-spending-design",
+          "alg-group-sequential-alpha-spending-boundary-calibration",
+          "thm-group-sequential-alpha-spending-calibration",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "thm-continuity-from-below-for-measures",
+          "thm-intermediate-value",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "strategy": "Check the named spending curve, construct its standard-normal quantile, and use the calibration theorem for the exact correlated two-sided final boundary.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David L. DeMets and K. K. Gordon Lan, Interim Analysis: The Alpha Spending Function Approach, Statistics in Medicine 13 (1994), PDF pp. 6–7",
+              "url": "https://eclass.uoa.gr/modules/document/file.php/MATH301/PracticalSession3/LanDeMets.pdf"
+            },
+            {
+              "title": "Michael J. Grayling, James M. S. Wason, and Adrian P. Mander, Group Sequential Clinical Trial Designs for Normally Distributed Outcome Variables, The Stata Journal 18(2) (2018), PDF pp. 2–4",
+              "url": "https://arxiv.org/pdf/1710.03127"
+            },
+            {
+              "title": "Giorgos Minas, Multivariate Global Testing and Adaptive Designs, PhD thesis, Chapter 5 §§5.3–5.3.1, printed pp. 72–73",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/58321/7/WRAP_THESIS_Minas_2013.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-obrien-fleming-spending-two-look",
+        "kind": "example",
+        "title": "Two-look O’Brien–Fleming-type spending",
+        "statement": "With alpha=0.05 and t_1=1/2,t_2=1, the two-sided O’Brien–Fleming-type curve A_OF(0)=0, A_OF(t)=2[1−Phi(z_{0.975}/sqrt(t))] for t>0 has first spend a_1=2[1−Phi(z_{0.975}sqrt(2))]. The first symmetric boundary is c_1=z_{1−a_1/2}; the final boundary c_2 is the unique solution of P_0(|Z_1|>=c_1 or |Z_2|>=c_2)=0.05, with canonical correlation 1/sqrt(2).",
+        "deps": [
+          "def-group-sequential-alpha-spending-design",
+          "alg-group-sequential-alpha-spending-boundary-calibration",
+          "thm-group-sequential-alpha-spending-calibration",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "thm-continuity-from-below-for-measures",
+          "thm-intermediate-value",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "strategy": "Check the two-sided O’Brien–Fleming spending curve, solve the first-look symmetric tail equation, and leave the final boundary as the exact unique bivariate-normal calibration root.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David L. DeMets and K. K. Gordon Lan, Interim Analysis: The Alpha Spending Function Approach, Statistics in Medicine 13 (1994), PDF pp. 6–7",
+              "url": "https://eclass.uoa.gr/modules/document/file.php/MATH301/PracticalSession3/LanDeMets.pdf"
+            },
+            {
+              "title": "Michael J. Grayling, James M. S. Wason, and Adrian P. Mander, Group Sequential Clinical Trial Designs for Normally Distributed Outcome Variables, The Stata Journal 18(2) (2018), PDF pp. 2–4",
+              "url": "https://arxiv.org/pdf/1710.03127"
+            },
+            {
+              "title": "Giorgos Minas, Multivariate Global Testing and Adaptive Designs, PhD thesis, Chapter 5 §§5.3–5.3.1, printed pp. 72–73",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/58321/7/WRAP_THESIS_Minas_2013.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3
+      }
+    ]
+  }
+]

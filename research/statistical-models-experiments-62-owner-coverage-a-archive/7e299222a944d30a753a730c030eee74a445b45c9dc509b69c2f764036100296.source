@@ -1,0 +1,352 @@
+[
+  {
+    "order": 1950,
+    "id": "power-and-sample-size-planning",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Power and sample size",
+    "companion": "power-and-sample-size-planning-examples",
+    "requires": [
+      "finite-populations-and-sampling-designs",
+      "randomized-treatment-assignment-and-sharp-null-tests",
+      "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "weak-convergence-tightness-and-representation"
+    ],
+    "items": [
+      {
+        "id": "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+        "kind": "lemma",
+        "title": "Standard-normal CDF, tail, and quantile identities for power calculations",
+        "statement": "Assume AC. Let \\(Z\\sim N(0,1)\\) and \\(\\Phi(x)=P(Z\\le x)\\). Then \\(\\Phi\\) is continuous and strictly increasing, with limits \\(0\\) and \\(1\\) at \\(-\\infty\\) and \\(+\\infty\\); \\(P(Z=x)=0\\) for every \\(x\\in\\mathbb R\\); and \\(\\Phi(-x)=1-\\Phi(x)\\). For each \\(q\\in(0,1)\\), there is a unique real \\(z_q\\) with \\(\\Phi(z_q)=q\\), and \\(z_{1-q}=-z_q\\), in particular \\(z_{1/2}=0\\).",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-axiom-of-choice-implies-countable-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "def-cumulative-distribution-function-of-a-random-variable",
+          "lem-probability-measure-basic-identities",
+          "thm-derivative-of-exponential",
+          "thm-algebra-of-continuous-functions",
+          "thm-composition-of-continuous-functions",
+          "thm-extreme-value-r",
+          "thm-continuity-from-below-for-measures",
+          "thm-continuity-from-above-for-measures",
+          "thm-intermediate-value",
+          "thm-substitution-for-improper-integrals",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "cor-integral-over-a-null-set-vanishes"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 7, §§7.1–7.4, printed pp. 149–159",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            },
+            {
+              "title": "NIST/SEMATECH e-Handbook of Statistical Methods, §7.2.2.2, PDF pp. 2019–2021",
+              "url": "https://www.itl.nist.gov/div898/handbook/toolaids/pff/E-Handbook.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is used by the standard-normal law and implies countable choice; countable choice is used only with the zero-width-box theorem to show singleton normal probabilities vanish."
+      },
+      {
+        "id": "lem-iid-normal-sample-mean-law",
+        "kind": "lemma",
+        "title": "The mean of a finite independent normal sample is normal",
+        "statement": "Assume AC. Let \\(n\\ge1\\), and let \\(X_1,\\ldots,X_n\\) be mutually independent real random variables on one probability space, each with law \\(N(\\mu,\\sigma^2)\\) for a fixed \\(\\mu\\in\\mathbb R\\) and \\(\\sigma\\ge0\\). Then \\(\\bar X_n=n^{-1}\\sum_{i=1}^nX_i\\) has law \\(N(\\mu,\\sigma^2/n)\\). If \\(\\sigma>0\\), then for every \\(\\mu_0\\in\\mathbb R\\),",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "def-independent-random-elements",
+          "def-characteristic-function-of-a-real-random-variable",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed., §3.3.1–§3.3.2, Example 3.3.5 and Corollary 3.3.13, printed pp. 125–130",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the normal-law characteristic-function formula and the uniqueness theorem for characteristic functions; the finite product calculation uses no further choice."
+      },
+      {
+        "id": "lem-least-feasible-sample-size-exists",
+        "kind": "lemma",
+        "title": "A nonempty set of positive integers has a least member",
+        "statement": "Let \\(S\\subseteq\\mathbb N_{\\ge1}\\) be nonempty. Then there is a unique \\(n_*\\in S\\) such that \\(n_*\\le n\\) for every \\(n\\in S\\).",
+        "strategy": "direct",
+        "deps": [
+          "def-natural-numbers",
+          "thm-well-ordering-principle"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 7, §7.1, printed pp. 149–150",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-power-and-sample-size-planning-specification",
+        "kind": "definition",
+        "title": "Power and sample-size planning specifications",
+        "statement": "Let \\(\\mathsf E_d=((\\mathcal X_d,\\mathcal A_d),\\Theta,(P_{\\theta,d})_{\\theta\\in\\Theta})\\) be the specified statistical experiment for each candidate plan \\(d\\) in a nonempty or empty candidate set \\(\\mathcal D\\). A plan records its sampling or assignment law, a permitted allocation vector \\(\\mathbf n(d)=(n_1,\\ldots,n_g)\\) for an integer \\(g\\ge1\\), with nonnegative integer counts \\(n_j\\), and its total sample size \\(n(d)=\\sum_{j=1}^g n_j\\in\\mathbb N_{\\ge1}\\). Which allocations are permitted, including any positive lower bounds, capacity limits, or costs, is part of \\(\\mathcal D\\).",
+        "strategy": "Specify model, test or interval criteria, effect or precision target, integer allocations, and the extensional least feasible sample size.",
+        "deps": [
+          "def-statistical-experiment",
+          "def-randomized-test",
+          "def-test-size-and-power",
+          "def-natural-numbers",
+          "def-measurable-function-between-measurable-spaces",
+          "lem-least-feasible-sample-size-exists"
+        ],
+        "justified_by": [
+          "lem-least-feasible-sample-size-exists"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 7, §§7.1–7.7, printed pp. 149–161",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            },
+            {
+              "title": "NIST/SEMATECH e-Handbook of Statistical Methods, §7.2.2.2, PDF pp. 2019–2021",
+              "url": "https://www.itl.nist.gov/div898/handbook/toolaids/pff/E-Handbook.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-known-variance-normal-two-sided-z-test-power",
+        "kind": "proposition",
+        "title": "Both tails determine power for the known-variance two-sided normal z-test",
+        "statement": "Assume AC. Let \\(X_1,\\ldots,X_n\\) be mutually independent with common law \\(N(\\mu,\\sigma^2)\\), where \\(n\\ge1\\) and \\(\\sigma>0\\). For a simple null \\(H_0:\\mu=\\mu_0\\), let \\(Z_n=\\sqrt n(\\bar X_n-\\mu_0)/\\sigma\\), let \\(c_\\alpha=z_{1-\\alpha/2}\\) for \\(\\alpha\\in(0,1)\\), and reject when \\(|Z_n|>c_\\alpha\\). This test has size \\(\\alpha\\). At \\(\\mu=\\mu_0+\\delta\\), where \\(\\delta\\in\\mathbb R\\), its exact power is",
+        "strategy": "direct",
+        "deps": [
+          "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+          "lem-iid-normal-sample-mean-law",
+          "def-standard-normal-and-normal-laws",
+          "def-statistical-experiment",
+          "def-randomized-test",
+          "def-test-size-and-power",
+          "def-measurable-function-between-measurable-spaces",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-algebra-of-continuous-functions",
+          "lem-measurable-rejection-function-defines-randomized-test",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 7, §§7.1–7.4, printed pp. 149–159",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            },
+            {
+              "title": "NIST/SEMATECH e-Handbook of Statistical Methods, §7.2.2.2, PDF pp. 2019–2021",
+              "url": "https://www.itl.nist.gov/div898/handbook/toolaids/pff/E-Handbook.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the standard-normal law, its characteristic-function formula, and characteristic-function uniqueness."
+      },
+      {
+        "id": "alg-finite-candidate-power-sample-size-search",
+        "kind": "algorithm",
+        "title": "Finite-candidate power and sample-size search",
+        "statement": "Input a planning specification [[def-power-and-sample-size-planning-specification]], a finite ordered list \\(d_1,\\ldots,d_m\\) of its candidate plans with \\(n(d_1)\\le\\cdots\\le n(d_m)\\), and an exact evaluator that terminates on each listed plan and returns true exactly when that plan meets all requested power, precision, allocation, and resource conditions. The list order among equal-size plans is part of the input.",
+        "strategy": "Inspect the finite candidate list in nondecreasing size order and return the first exact feasible plan.",
+        "deps": [
+          "def-power-and-sample-size-planning-specification"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 7, §§7.1 and 7.3–7.4, printed pp. 149–150, 153–159",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+        "kind": "theorem",
+        "title": "Exact power and least sample size for a known-variance normal z-test",
+        "statement": "Assume AC. Let \\(X_1,\\ldots,X_n\\) be mutually independent with common law \\(N(\\mu,\\sigma^2)\\), where \\(n\\in\\mathbb N_{\\ge1}\\), \\(\\sigma>0\\), and \\(\\mu\\in\\mathbb R\\). Fix \\(\\mu_0\\in\\mathbb R\\), \\(\\alpha,\\beta_{\\rm II}\\in(0,1)\\), and \\(\\delta>0\\), and put \\(\\mu_1=\\mu_0+\\delta\\). Observe \\(\\bar X_n=n^{-1}\\sum_iX_i\\) in the one-dimensional experiment with law \\(N(\\mu,\\sigma^2/n)\\). For the upper-tail test of \\(H_0:\\mu\\le\\mu_0\\) against \\(H_1:\\mu>\\mu_0\\) with rejection rule",
+        "strategy": "direct",
+        "deps": [
+          "def-power-and-sample-size-planning-specification",
+          "lem-least-feasible-sample-size-exists",
+          "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+          "lem-iid-normal-sample-mean-law",
+          "def-statistical-experiment",
+          "def-randomized-test",
+          "def-test-size-and-power",
+          "def-measurable-function-between-measurable-spaces",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-algebra-of-continuous-functions",
+          "lem-measurable-rejection-function-defines-randomized-test",
+          "def-axiom-of-choice",
+          "def-natural-numbers",
+          "lem-integer-part",
+          "ex-ceiling-and-floor-are-adjoint-to-the-inclusion-of-the-integers"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 7, §§7.1–7.4, printed pp. 149–159",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            },
+            {
+              "title": "NIST/SEMATECH e-Handbook of Statistical Methods, §7.2.2.2, PDF pp. 2019–2021",
+              "url": "https://www.itl.nist.gov/div898/handbook/toolaids/pff/E-Handbook.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the standard-normal law, its characteristic-function formula, and characteristic-function uniqueness; no choice is used to obtain the least feasible integer."
+      },
+      {
+        "id": "thm-finite-candidate-power-sample-size-search-correctness",
+        "kind": "theorem",
+        "title": "Finite-candidate power and sample-size search is correct",
+        "statement": "For the finite-candidate algorithm [[alg-finite-candidate-power-sample-size-search]], suppose the input list is ordered by nondecreasing total size and its evaluator returns the exact feasibility truth value for every candidate. The algorithm terminates after at most \\(m\\) evaluations. If it returns a plan, that plan is feasible and its total size is least among feasible plans in the supplied list; if it returns \\(\\text{none}\\), no plan in that list is feasible. When several feasible plans have the same least size, the algorithm returns the first such plan in the supplied tie order.",
+        "strategy": "direct",
+        "deps": [
+          "alg-finite-candidate-power-sample-size-search",
+          "def-power-and-sample-size-planning-specification"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Gary W. Oehlert, A First Course in Design and Analysis of Experiments, Chapter 7, §§7.1 and 7.3–7.4, printed pp. 149–150, 153–159",
+              "url": "https://users.stat.umn.edu/~gary/book/fcdae.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 1951,
+    "id": "power-and-sample-size-planning-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Power and sample size — Examples",
+    "companion": "power-and-sample-size-planning",
+    "requires": [
+      "power-and-sample-size-planning"
+    ],
+    "items": [
+      {
+        "id": "ex-two-sided-normal-z-power-includes-both-tails",
+        "kind": "example",
+        "title": "A two-sided normal z-test retains its lower-tail power",
+        "statement": "Let \\(\\alpha=0.05\\), \\(n=4\\), and \\(\\delta=\\sigma>0\\) in the known-variance normal model, with simple null \\(\\mu=\\mu_0\\) and alternative \\(\\mu=\\mu_0+\\delta\\). The two-sided test rejects for \\(|Z_n|>z_{0.975}\\). Its exact power is",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+          "prop-known-variance-normal-two-sided-z-test-power"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-known-variance-normal-z-sample-size-and-sensitivity",
+        "kind": "example",
+        "title": "An exact one-sided normal sample size and its effect-variance sensitivity",
+        "statement": "Take any \\(\\sigma>0\\), set \\(\\delta=\\sigma\\), and choose \\(\\alpha=\\beta_{\\rm II}=1-\\Phi(1)\\). For the upper-tail test \\(H_0:\\mu\\le\\mu_0\\) against \\(\\mu_1=\\mu_0+\\delta\\), the exact planning rule gives least sample size \\(n_*=4\\) for target power \\(1-\\beta_{\\rm II}\\). At \\(n=4\\), halving the target effect with the same \\(\\sigma\\) lowers power to \\(1/2\\). Keeping \\(\\delta=\\sigma\\) and \\(n=4\\) but doubling the standard deviation (quadrupling the variance) also lowers power to \\(1/2\\).",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-power-and-sample-size-planning-specification",
+          "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+          "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+          "lem-integer-part",
+          "ex-ceiling-and-floor-are-adjoint-to-the-inclusion-of-the-integers"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

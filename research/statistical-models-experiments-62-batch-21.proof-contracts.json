@@ -1,0 +1,1278 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-standardization-for-a-causal-mean",
+    "alg-inverse-probability-weighting-for-a-causal-mean",
+    "lem-conditional-treatment-indicator-factorization",
+    "thm-standardization-identifies-a-causal-mean",
+    "thm-inverse-probability-weighting-identifies-a-causal-mean",
+    "ex-positivity-failure-prevents-standardization-and-ipw-identification",
+    "ex-standardization-and-ipw-two-strata-calculation",
+    "ex-extreme-ipw-weights-under-poor-overlap",
+    "ex-weight-truncation-changes-the-ipw-target"
+  ],
+  "contracts": {
+    "alg-standardization-for-a-causal-mean": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "alg-standardization-for-a-causal-mean: the input is one fixed probability law and treatment atom, not an empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "alg-standardization-for-a-causal-mean: the Definition requires e_a(L)>0 almost surely, so e_a=0 is outside the domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "alg-standardization-for-a-causal-mean: the Definition permits e_a(L)=1; the conditional mean and weighted functional remain defined when their integrability conditions hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "alg-standardization-for-a-causal-mean: if A=a almost surely, e_a=1 and the Definition reduces to the observed population mean."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "alg-standardization-for-a-causal-mean: the Definition includes e_a=1 and excludes e_a=0 to avoid division by zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "alg-standardization-for-a-causal-mean: the instructions use the supplied atom a and conditional-expectation classes; they select no element from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition establishes the conditional-class ratio q_a/e_a and its population expectation. It is not formulated as a two-direction equivalence: a necessary-and-sufficient causal identification criterion for arbitrary observed laws is outside its claimed scope."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A reverse inference would require a necessary-and-sufficient causal identification criterion for arbitrary observed laws. The Definition instead supplies the conditional-class ratio q_a/e_a and its population expectation, so no such converse is a claimed obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-inverse-probability-weighting-for-a-causal-mean": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "alg-inverse-probability-weighting-for-a-causal-mean: the input is one fixed probability law and treatment atom, not an empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "alg-inverse-probability-weighting-for-a-causal-mean: the Definition requires e_a(L)>0 almost surely, so e_a=0 is outside the domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "alg-inverse-probability-weighting-for-a-causal-mean: the Definition permits e_a(L)=1; the conditional mean and weighted functional remain defined when their integrability conditions hold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "alg-inverse-probability-weighting-for-a-causal-mean: if A=a almost surely, e_a=1 and the Definition reduces to the observed population mean."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "alg-inverse-probability-weighting-for-a-causal-mean: the Definition includes e_a=1 and excludes e_a=0 to avoid division by zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "alg-inverse-probability-weighting-for-a-causal-mean: the instructions use the supplied atom a and conditional-expectation classes; they select no element from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition establishes the integrable observed-population variable I_aY/e_a and its expectation. It is not formulated as a two-direction equivalence: a characterization of causal assumptions from an arbitrary weighted expectation is outside its claimed scope."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A reverse inference would require a characterization of causal assumptions from an arbitrary weighted expectation. The Definition instead supplies the integrable observed-population variable I_aY/e_a and its expectation, so no such converse is a claimed obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-conditional-treatment-indicator-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Set $I=\\mathbf 1_{\\{A\\in C\\}}$, $e=E[I\\mid\\mathcal G]$, and $U=E[Z\\mid\\mathcal G]$. These conditional-expectation classes exist under AC, and $0\\le e\\le1$ almost surely by positivity and preservation of constants.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each integer $n\\ge1$, put $Z_n=\\max(-n,\\min(Z,n))$. The functions $z\\mapsto\\max(-n,\\min(z,n))$ are bounded and measurable, so [F1] applied to $1_C(A)$ and this truncation of $Z$ gives $E[IZ_n\\mid\\mathcal G]=eE[Z_n\\mid\\mathcal G]$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By [F4], $Z_n\\to Z$ in $L^1$. Since $|I|\\le1$, $IZ_n\\to IZ$ in $L^1$; [F3] then gives $E[IZ_n\\mid\\mathcal G]\\to E[IZ\\mid\\mathcal G]$ in $L^1$ and $eE[Z_n\\mid\\mathcal G]\\to eU$ in $L^1$, using $0\\le e\\le1$.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two sides of step 2.1 are equal for every $n$ and converge in $L^1$ to the two sides claimed in the Statement. Uniqueness of limits in $L^1$ gives $E[IZ\\mid\\mathcal G]=eU$ almost surely.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: if C is empty then I=0 and both sides of the factorization are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when e=0; its bounded-factor identity and the L1 limit in step 3.1 give zero on both sides."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when e=1; the L1 limit in step 3.1 gives the stated factorization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes Z=0 and other integrable degenerate inputs because the L1 limits remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 include C empty or the whole treatment state space."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof assumes AC only for the library's conditional-expectation existence convention and makes no arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement establishes the conditional product identity for a supplied integrable response independent of treatment. It is not formulated as a two-direction equivalence: a converse inferring conditional independence from one indicator identity is outside its claimed scope."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A reverse inference would require a converse inferring conditional independence from one indicator identity. The Statement instead supplies the conditional product identity for a supplied integrable response independent of treatment, so no such converse is a claimed obligation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-21",
+        "notes": "Reviewed steps 1.1–3.1 against the bounded-product conditional-independence definition, conditional-expectation order/linearity/L1 contraction, and dominated convergence. Truncations are measurable and bounded by |Z|; I and e are bounded by one. Both conditional sides converge in L1, so uniqueness of the L1 limit proves the equality. Zero Z, empty C, e=0 or 1 and constant conditioning cause no exception. AC is declared only for CE existence. No defect or additional hypothesis."
+      }
+    },
+    "thm-standardization-identifies-a-causal-mean": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcomes-and-consistency",
+          "source_section": "Definition",
+          "quote": "Fix a target population with probability law $P$, a real outcome, and a nonempty countable discrete set $\\mathcal A$ of treatment versions. A treatment version $a\\in\\mathcal A$ is a specified intervention protocol, not just a treatment label. The **potential outcome** $Y^a$ is the real random variable giving the outcome for a unit in the target population under version $a$. Write $A$ for the observed treatment assignment or receipt, with values in $\\mathcal A$, and $Y$ for the observed outcome. The **observed potential outcome** is the measurable random variable\n\n$$Y^A=\\sum_{a\\in\\mathcal A}\\mathbf 1_{\\{A=a\\}}Y^a,$$\n\nwhere the countable sum has at most one nonzero summand at each sample point. **Consistency** is the assumption $Y=Y^A$ $P$-almost surely. It links the observed outcome to the potential outcome for the received version; it does not assert that treatment assignment is unconfounded.\n\nThe **full-data law** is the joint law of the potential-outcome family, $A$, any baseline covariate random element $L$, and $Y$. The **observed-data law** is its marginal law of $(A,L,Y)$. A target population, outcome, intervention protocol, and contrast must be fixed before the associated causal target is specified. If interference between units matters, the version or treatment regime must include the relevant assignment or exposure of other units; the notation $Y^a$ by itself does not assert no interference.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-standardization-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "Let $Q$ be a probability law for an observed discrete or atomic treatment $A$, a covariate random element $L$, and a real-valued observed outcome $Y$. Fix an atom $a$ with $Q(A=a)>0$, let $\\mathcal G=\\sigma(L)$, and define\n$$I_a=\\mathbf 1_{\\{A=a\\}},\\qquad e_a(L)=E_Q[I_a\\mid\\mathcal G].$$\nAssume $e_a(L)>0$ $Q$-almost surely and $I_aY\\in L^1(Q)$. Define\n$$q_a(L)=E_Q[I_aY\\mid\\mathcal G],\\qquad m_a(L)=\\frac{q_a(L)}{e_a(L)}.$$\nThe **standardization functional** at $a$ is\n$$\\Psi_{\\mathrm{std}}(Q;a)=E_Q[m_a(L)],$$\nprovided $m_a(L)$ is integrable. The numerator and denominator are conditional-expectation classes; the ratio is defined almost surely because the denominator is positive. In conventional notation $m_a(L)$ is $E_Q[Y\\mid A=a,L]$, and the displayed expectation averages that treatment-specific conditional mean over the target law of $L$.\n\nWhen $L$ has discrete support, this is $\\sum_\\ell E_Q[Y\\mid A=a,L=\\ell]\\,Q(L=\\ell)$. For general $L$ we use the version-free conditional-expectation class above and integrate it under $Q$; no value of a regression function is chosen at a null covariate stratum.\n\nThis is a population functional of the observed law and the true conditional treatment probability. It is not an algorithm for estimating a propensity from a finite sample.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-conditional-treatment-indicator-factorization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC) for the conditional-expectation existence convention used here. Let $(\\Omega,\\mathcal F,P)$ be a probability space, let $\\mathcal G\\subseteq\\mathcal F$ be a sub-$\\sigma$-algebra, let $A$ be a random element, and let $C$ be a measurable set in its state space. If $Z$ is a real integrable random variable and $Z\\perp\\!\\!\\!\\perp A\\mid\\mathcal G$, then, with $I=\\mathbf 1_{\\{A\\in C\\}}$,\n$$E[IZ\\mid\\mathcal G]=E[I\\mid\\mathcal G]E[Z\\mid\\mathcal G]\\quad\\text{almost surely}.$$\nThe conclusion holds for every integrable $Z$, not only bounded outcomes.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-conditional-independence-equivalences-and-preservation",
+          "source_section": "Statement",
+          "quote": "Assume Choice. For random elements $Y,Z$ and a sigma-algebra $\\mathcal G$,\nthe following are equivalent:\n\n1. $Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$;\n2. for every bounded measurable $g$,\n   $$ \\mathbb E[g(Z)\\mid\\mathcal G\\vee\\sigma(Y)] =\\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\n\nConditional independence is preserved by measurable maps of either variable.\nIt is also preserved when a $\\mathcal G$-measurable random element is adjoined\nto either side.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-conditional-expectation-is-unique-almost-surely",
+          "source_section": "Statement",
+          "quote": "If $Y,Z$ are conditional-expectation versions of the same real integrable $X$ given $\\mathcal G$, then $Y=Z$ almost surely.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-identifiability-iff-constant-on-equivalence-classes",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\psi:\\Theta\\to\\mathcal T_0$ be an estimand, and set\n$\\mathcal M:=\\mathsf P(\\Theta)$, the set of laws in the model. For\n$\\theta\\in\\Theta$, write\n$$\n[\\theta]_\\sim:=\\{\\eta\\in\\Theta:\\eta\\sim\\theta\\}.\n$$\nThen the following are equivalent: **(i)** $\\psi$ is identifiable; **(ii)**\n$\\psi$ is constant on every observational equivalence class $[\\theta]_\\sim$;\nand **(iii)** there is a unique function $\\bar\\psi:\\mathcal M\\to\\mathcal T_0$\nsuch that $\\psi=\\bar\\psi\\circ\\mathsf P$.\n\nThe factorization is a statement about sets and functions. It asserts no\nmeasurable structure or measurable factor map.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $A\\in\\mathcal F$.\nThen the indicator $\\mathbf 1_A$ satisfies\n$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-discrete-treatment-potential-outcome-mean-identification",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mathcal A$ be a countable discrete set containing treatment versions $0$ and $1$. On a full-data probability space $(\\Omega,\\mathcal F,P)$, let $A$ take values in $\\mathcal A$, let $L$ take values in a standard-Borel space $\\mathcal L$ ([[def-standard-borel-space]]), let $Y$ be the observed real outcome, and let $(Y^b)_{b\\in\\mathcal A}$ be the potential outcomes of [[def-potential-outcomes-and-consistency]]. For each treatment value $a$ under consideration, assume $Y^a\\in L^1(P)$, consistency $Y=Y^A$ almost surely, conditional exchangeability $\\sigma(Y^b:b\\in\\mathcal A)\\perp\\!\\!\\!\\perp\\sigma(A)\\mid\\sigma(L)$, and positivity $P(A=a)>0$ and $E[\\mathbf1_{\\{A=a\\}}\\mid\\sigma(L)]>0$ almost surely. These are assumptions on the full-data law; Choice is required for the stated conditional-expectation classes and regular conditional distributions.\n\nWrite $P_L(B)=P(L\\in B)$ for the target-population law of $L$. For such an $a$, define the treatment-stratum probability $P_a(C)=P(C\\cap\\{A=a\\})/P(A=a)$ for $C\\in\\mathcal F$. Under $P_a$, let $K_a(l,dy)$ be a regular conditional law of $Y$ given the standard-Borel random element $L$, and put $m_a(l)=\\int y\\,K_a(l,dy)$ wherever the absolute integral is finite, with value $0$ on the exceptional set. The suppliers [[def-conditional-law-given-a-random-element]], [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]], [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]], and [[thm-conditional-integration-through-a-regular-conditional-law]] give this construction. Then $m_a$ is $P_L$-integrable and is uniquely determined $P_L$-almost everywhere by the observed-data law, and\n\n$$E_P[Y^a]=\\int_{\\mathcal L}m_a(l)\\,P_L(dl).$$\n\nIf $L$ is countably discrete, this is\n\n$$E_P[Y^a]=\\sum_{l:P(L=l)>0}E_P[Y\\mid A=a,L=l]P(L=l).$$\n\nIn this sum, $E[Y\\mid A=a,L=l]$ denotes $E[Y\\mathbf1_{\\{A=a,L=l\\}}]/P(A=a,L=l)$, whose denominator is positive for each displayed atom.\n\nFor the binary contrast, both treatment levels must satisfy positivity. The CATE is then represented $P_L$-almost everywhere by $m_1-m_0$, and the ATE is $\\int(m_1-m_0)\\,dP_L$. In the model whose parameters are all full-data laws satisfying these assumptions and whose observation map sends a full-data law to its $(A,L,Y)$ marginal, each $E[Y^a]$ is identifiable in the sense of [[def-identifiability-of-an-estimand]]: it is constant over full-data laws with the same observed-data law.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $P$ in the stated model class, let $I_a=\\mathbf1_{\\{A=a\\}}$, $e_a=E_P[I_a\\mid\\mathcal G]$, $\\mu_a=E_P[Y^a\\mid\\mathcal G]$, and $q_a=E_P[I_aY\\mid\\mathcal G]$. By [F4] and [F10], $P(A=a)=E_P[I_a]=E_P[e_a]$. Global consistency, or the stated atom-consistency directly, gives $I_aY=I_aY^a$ almost surely, so $I_aY$ is integrable. By [F3], full-family exchangeability implies $Y^a\\perp\\!\\!\\!\\perp A\\mid\\mathcal G$; in the general atom formulation this coordinate independence is assumed directly; [F2] then gives $q_a=E_P[I_aY^a\\mid\\mathcal G]=e_a\\mu_a$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\lambda=P_L=Q_L$ be the common law of the covariate coordinate. Since $\\mathcal G=\\sigma(L)=\\{L^{-1}(B):B\\in\\mathcal S\\}$, each real $\\mathcal G$-measurable version $V$ factors as $v(L)$: for each rational $r$ choose $B_r\\in\\mathcal S$ with $\\{V<r\\}=L^{-1}(B_r)$, and put $v(x)=\\inf\\{r\\in\\mathbb Q:x\\in B_r\\}$, replacing nonfinite values by $0$. Its rational sublevel sets make $v$ measurable, and $v(L)=V$. Apply this to the five conditional versions, writing $\\widetilde e_a,\\widetilde q_a$ for the $Q$-conditional classes in [F1], and $\\bar e_a,\\bar q_a,\\bar\\mu_a$ for the $P$-conditional classes $e_a,q_a,\\mu_a$ from step 1.1. By [F12], all five functions are integrable under $\\lambda$. For each measurable set $B$ in the covariate space, the defining event integrals for $e_a,q_a$ and the fact that $Q$ is the observed-data law give $$\\int_B\\widetilde e_a\\,d\\lambda=Q(A=a,L\\in B)=E_P[I_a\\mathbf1_{\\{L\\in B\\}}]=\\int_B\\bar e_a\\,d\\lambda,$$ $$\\int_B\\widetilde q_a\\,d\\lambda=E_Q[I_aY\\mathbf1_{\\{L\\in B\\}}]=E_P[I_aY\\mathbf1_{\\{L\\in B\\}}]=\\int_B\\bar q_a\\,d\\lambda.$$ Each difference is integrable and has zero integral over every $B$, so it and zero are conditional-expectation versions of zero given the full sigma-algebra on $(\\mathcal L,\\mathcal S,\\lambda)$. Uniqueness [F5] gives $\\widetilde e_a=\\bar e_a$ and $\\widetilde q_a=\\bar q_a$ $\\lambda$-almost everywhere. Factoring the a.s. identity in step 1.1 gives $\\bar q_a=\\bar e_a\\bar\\mu_a$ $\\lambda$-almost everywhere; positivity therefore makes the ratio in [F1] equal to $\\bar\\mu_a$ $Q_L$-almost everywhere. Thus $m_a$ is integrable and the standardization functional is well-defined.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "F12",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F12] and step 2.1, $E_Q[m_a(L)]=\\int m_a\\,d\\lambda=\\int\\bar\\mu_a\\,d\\lambda=E_P[\\mu_a]$. The tower property [F4] then gives $\\Psi_{\\mathrm{std}}(Q;a)=E_P[Y^a]$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F12",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For either potential-outcome formulation in the Statement, let $\\Theta_a$ be the class of full-data laws on the fixed measurable spaces for its variables that satisfy the stated integrability, consistency, conditional-exchangeability (or atom-specific independence), and positivity assumptions. Define the target by $\\psi_a(P)=E_P[Y^a]$ and the observation map by $\\mathsf O(P)=\\mathcal L_P(A,L,Y)=Q$, the pushforward of $P$ under $(A,L,Y)$. Steps 2.1–3.1 show for every $P\\in\\Theta_a$ that $\\psi_a(P)=\\Psi_{\\mathrm{std}}(\\mathsf O(P);a)$, where the conditional classes in the right-hand side are determined uniquely by that observed law. Hence the target factors through the observation map on this model, and [F7]–[F9] imply identifiability from $Q$.",
+          "step": "4.1",
+          "inputs": [
+            "A2",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Under the additional countably discrete treatment and standard-Borel covariate hypotheses of [F11], the earlier theorem's RCD regression evaluated at $L$ equals $\\mu_a$ almost surely on the target support, as established in its proof steps 2.1–3.1. Step 2.1 gives the same class for this algorithm's $m_a$. Thus the two standardization functionals coincide. The causal identification on this overlapping domain is the earlier theorem applied to the conditional-class algorithm; steps 1.1–4.1 supply the extension to arbitrary covariate random elements and the general target-atom formulation.",
+          "step": "5.1",
+          "inputs": [
+            "F11",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement permits an arbitrary covariate random element L, hence also the singleton-valued empty covariate tuple. In step 1.1 its sigma-algebra is trivial; the conditional-class and expectation identities in steps 2.1 and 3.1 still apply. An empty treatment-version family cannot contain the supplied positive-probability target atom a and is excluded by that premise."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: e_a(L)=0 violates strict positivity; step 2.1 divides only on the full-measure set where e_a>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid at e_a=1, and step 3.1 averages the observed outcome under treatment a."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If L is degenerate, sigma(L) is trivial and step 3.1 is the unconditional expectation identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes e_a=1 and excludes e_a=0; it assumes no uniform positive lower bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit for CE existence and for selecting B_r for each rational r in the real-version factorization (standardization step 2.1; IPW step 1.1). The selections are countable; no stronger choice assumption is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement establishes sufficient consistency, exchangeability, integrability and positivity for fixed-atom conditional-class identification. It is not formulated as a two-direction equivalence: a necessity result deriving the causal assumptions from equality of a standardization mean is outside its claimed scope."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A reverse inference would require a necessity result deriving the causal assumptions from equality of a standardization mean. The Statement instead supplies sufficient consistency, exchangeability, integrability and positivity for fixed-atom conditional-class identification, so no such converse is a claimed obligation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-21",
+        "notes": "Reviewed all five steps and all 15 cited dependencies, including the independently reviewed current batch-19 proof/contract/manifest. Consistency makes IY integrable; coordinate independence and factorization yield q=e*mu. Rational-sublevel factorization works for arbitrary measurable L spaces, with countably many B_r choices covered by declared AC. Change of variables puts all five functions in L1 of the common L law; event-integral uniqueness equates P and Q numerator/propensity versions. Positive propensity makes their ratio equal mu, hence integrable without uniform overlap. The common-law integral and tower give the target and identifiability; the RCD comparison is restricted to countable treatments containing 0,1 and standard-Borel L. e=1, zero outcomes, constant L and null strata are handled; there is no continuous-treatment pointwise or converse causal-assumption claim. Batch-19 delayed integrability estimate is immediate nonfatal polish, recorded for its owner, and does not invalidate the overlapping-domain result. Reader repair is sound."
+      }
+    },
+    "thm-inverse-probability-weighting-identifies-a-causal-mean": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcomes-and-consistency",
+          "source_section": "Definition",
+          "quote": "Fix a target population with probability law $P$, a real outcome, and a nonempty countable discrete set $\\mathcal A$ of treatment versions. A treatment version $a\\in\\mathcal A$ is a specified intervention protocol, not just a treatment label. The **potential outcome** $Y^a$ is the real random variable giving the outcome for a unit in the target population under version $a$. Write $A$ for the observed treatment assignment or receipt, with values in $\\mathcal A$, and $Y$ for the observed outcome. The **observed potential outcome** is the measurable random variable\n\n$$Y^A=\\sum_{a\\in\\mathcal A}\\mathbf 1_{\\{A=a\\}}Y^a,$$\n\nwhere the countable sum has at most one nonzero summand at each sample point. **Consistency** is the assumption $Y=Y^A$ $P$-almost surely. It links the observed outcome to the potential outcome for the received version; it does not assert that treatment assignment is unconfounded.\n\nThe **full-data law** is the joint law of the potential-outcome family, $A$, any baseline covariate random element $L$, and $Y$. The **observed-data law** is its marginal law of $(A,L,Y)$. A target population, outcome, intervention protocol, and contrast must be fixed before the associated causal target is specified. If interference between units matters, the version or treatment regime must include the relevant assignment or exposure of other units; the notation $Y^a$ by itself does not assert no interference.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-inverse-probability-weighting-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "Let $Q$ be a probability law for an observed discrete or atomic treatment $A$, a covariate random element $L$, and a real-valued observed outcome $Y$. Fix an atom $a$ with $Q(A=a)>0$, let $\\mathcal G=\\sigma(L)$, and set\n$$I_a=\\mathbf 1_{\\{A=a\\}},\\qquad e_a(L)=E_Q[I_a\\mid\\mathcal G].$$\nAssume $e_a(L)>0$ $Q$-almost surely and $I_aY/e_a(L)\\in L^1(Q)$. The **inverse-probability-weighted functional** at $a$ is\n$$\\Psi_{\\mathrm{IPW}}(Q;a)=E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right],$$\nprovided the displayed weighted variable is integrable. The outcome weight is $I_a/e_a(L)$, formed from the true population propensity $e_a(L)$, not an estimate.\n\nThe instructions are: form the event indicator $I_a$; take its conditional expectation given $\\sigma(L)$ to obtain $e_a(L)$; divide $I_aY$ by this positive random variable; and integrate under $Q$. This defines a population functional only. It makes no assertion about finite-sample behavior, estimated propensities, or truncated weights.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-conditional-treatment-indicator-factorization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC) for the conditional-expectation existence convention used here. Let $(\\Omega,\\mathcal F,P)$ be a probability space, let $\\mathcal G\\subseteq\\mathcal F$ be a sub-$\\sigma$-algebra, let $A$ be a random element, and let $C$ be a measurable set in its state space. If $Z$ is a real integrable random variable and $Z\\perp\\!\\!\\!\\perp A\\mid\\mathcal G$, then, with $I=\\mathbf 1_{\\{A\\in C\\}}$,\n$$E[IZ\\mid\\mathcal G]=E[I\\mid\\mathcal G]E[Z\\mid\\mathcal G]\\quad\\text{almost surely}.$$\nThe conclusion holds for every integrable $Z$, not only bounded outcomes.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-identifiability-iff-constant-on-equivalence-classes",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$ be a parametric\nmodel, let $\\psi:\\Theta\\to\\mathcal T_0$ be an estimand, and set\n$\\mathcal M:=\\mathsf P(\\Theta)$, the set of laws in the model. For\n$\\theta\\in\\Theta$, write\n$$\n[\\theta]_\\sim:=\\{\\eta\\in\\Theta:\\eta\\sim\\theta\\}.\n$$\nThen the following are equivalent: **(i)** $\\psi$ is identifiable; **(ii)**\n$\\psi$ is constant on every observational equivalence class $[\\theta]_\\sim$;\nand **(iii)** there is a unique function $\\bar\\psi:\\mathcal M\\to\\mathcal T_0$\nsuch that $\\psi=\\bar\\psi\\circ\\mathsf P$.\n\nThe factorization is a statement about sets and functions. It asserts no\nmeasurable structure or measurable factor map.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let $A\\in\\mathcal F$.\nThen the indicator $\\mathbf 1_A$ satisfies\n$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-conditional-independence-equivalences-and-preservation",
+          "source_section": "Statement",
+          "quote": "Assume Choice. For random elements $Y,Z$ and a sigma-algebra $\\mathcal G$,\nthe following are equivalent:\n\n1. $Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$;\n2. for every bounded measurable $g$,\n   $$ \\mathbb E[g(Z)\\mid\\mathcal G\\vee\\sigma(Y)] =\\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\n\nConditional independence is preserved by measurable maps of either variable.\nIt is also preserved when a $\\mathcal G$-measurable random element is adjoined\nto either side.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "lem-conditional-expectation-is-unique-almost-surely",
+          "source_section": "Statement",
+          "quote": "If $Y,Z$ are conditional-expectation versions of the same real integrable $X$ given $\\mathcal G$, then $Y=Z$ almost surely.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\mathcal G=\\sigma(L)$, $I_a=\\mathbf1_{\\{A=a\\}}$, $e_a=E_P[I_a\\mid\\mathcal G]$, $\\mu_a=E_P[Y^a\\mid\\mathcal G]$, and $H_n=\\min(n,1/e_a)$ on $\\{e_a>0\\}$, setting $H_n=0$ on the null complement. Let $\\lambda=P_L=Q_L$ be the common covariate law. Since $\\mathcal G=\\sigma(L)=\\{L^{-1}(B):B\\in\\mathcal S\\}$, each real $\\mathcal G$-measurable version $V$ factors as $v(L)$: for each rational $r$ choose $B_r\\in\\mathcal S$ with $\\{V<r\\}=L^{-1}(B_r)$, and put $v(x)=\\inf\\{r\\in\\mathbb Q:x\\in B_r\\}$, replacing nonfinite values by $0$. Its rational sublevel sets make $v$ measurable, and $v(L)=V$. Apply this to versions of the $P$- and $Q$-conditional propensities to obtain functions $\\bar e_a$ and $\\widetilde e_a$. By [F13] both are integrable under $\\lambda$. For every measurable set $B$ in that space, $$\\int_B\\widetilde e_a\\,d\\lambda=Q(A=a,L\\in B)=E_P[I_a\\mathbf1_{\\{L\\in B\\}}]=\\int_B\\bar e_a\\,d\\lambda.$$ The difference is integrable and has zero integral over every $B$, so it and zero are conditional-expectation versions of zero given the full sigma-algebra on $(\\mathcal L,\\mathcal S,\\lambda)$. Uniqueness [F14] gives $\\widetilde e_a=\\bar e_a$ $\\lambda$-almost everywhere. Thus the propensity used by [F1] agrees with the full-data propensity. By [F6] and [F11], $P(A=a)=E_P[I_a]=E_P[e_a]$. Then $H_n$ is bounded and $\\mathcal G$-measurable, $H_n\\uparrow1/e_a$ almost surely, and $I_aY=I_aY^a$ almost surely by global consistency or the stated atom-consistency. The conditional expectations exist by AC.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F6",
+            "F10",
+            "F11",
+            "F13",
+            "F14"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Full-family exchangeability, or the stated coordinate independence directly, gives $Y^a\\perp\\!\\!\\!\\perp A\\mid\\mathcal G$. By [F12], this also holds for $|Y^a|$, so [F2] gives $E[I_a|Y^a|\\mid\\mathcal G]=e_aE[|Y^a|\\mid\\mathcal G]$. For each $n$, taking out the bounded factor $H_n$ yields $E[I_a|Y^a|H_n]=E[e_aH_nE[|Y^a|\\mid\\mathcal G]]$. Monotone convergence [F4] on the left and dominated convergence [F5] on the right, since $0\\le e_aH_n\\uparrow1$ and $E[|Y^a|\\mid\\mathcal G]\\in L^1$, give $E[I_a|Y^a|/e_a]=E|Y^a|<\\infty$. Thus the observed weighted outcome is integrable.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F12",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F3], [F2] also gives $E[I_aY^a\\mid\\mathcal G]=e_a\\mu_a$. For each $n$, $E[I_aY^aH_n]=E[e_aH_n\\mu_a]$. The left sides converge to $E[I_aY^a/e_a]$ by [F5] with integrable majorant $I_a|Y^a|/e_a$ from step 2.1; the right sides converge to $E[\\mu_a]$ by [F5] with majorant $|\\mu_a|$. Hence $E[I_aY^a/e_a]=E[\\mu_a]$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By step 1.1 choose the common covariate-law representative $\\bar e_a$ and set the observed-coordinate ratio to zero on its $\\lambda$-null nonpositive set. The change-of-variables identity [F13], first for the absolute value and then for the integrable signed function, shows that the Q-integrand in [F1] and its P observed-coordinate version have the same integral. Their common absolute integral is $E_P[I_a|Y^a|/e_a]$, finite by step 2.1 and $I_aY=I_aY^a$ almost surely, so [F1] is well-defined. The same identity, atom-consistency, step 3.1, and the tower property [F6] give $E_Q[I_aY/e_a(L)]=E_P[I_aY^a/e_a]=E_P[Y^a]$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F6",
+            "F13",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $\\Theta_a$ be the class of full-data laws on the fixed measurable spaces for the variables in the applicable formulation of the Statement that satisfy its integrability, consistency, conditional-exchangeability (or atom-specific independence), and positivity assumptions. Define $\\psi_a(P)=E_P[Y^a]$ and the observation map $\\mathsf O(P)=\\mathcal L_P(A,L,Y)=Q$, the pushforward of $P$ under $(A,L,Y)$. Step 4.1 proves for every $P\\in\\Theta_a$ that $\\psi_a(P)=\\Psi_{\\mathrm{IPW}}(\\mathsf O(P);a)$. This factor is a function of the observed law alone, with its conditional propensity class determined by that law as in step 1.1; [F7]–[F9] therefore give identifiability on this model.",
+          "step": "5.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 4.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement permits an arbitrary covariate random element L, hence also the singleton-valued empty covariate tuple. In step 1.1 its sigma-algebra is trivial; the conditional-class and expectation identities in steps 2.1 and 3.1 still apply. An empty treatment-version family cannot contain the supplied positive-probability target atom a and is excluded by that premise."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement requires e_a>0 almost surely; step 1.1 defines 1/e_a only on that full-measure set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At e_a=1, step 1.1 has H_n=1 and step 4.1 reduces to consistency and the tower identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If L is degenerate, sigma(L) is trivial and step 4.1 is the unconditional expectation identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 allow e_a arbitrarily close to zero; only e_a=0 is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit for CE existence and for selecting B_r for each rational r in the real-version factorization (standardization step 2.1; IPW step 1.1). The selections are countable; no stronger choice assumption is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement establishes sufficient assumptions for integrability of IPW and equality with the fixed-atom potential mean. It is not formulated as a two-direction equivalence: a converse inferring positivity or exchangeability from a weighted mean equality is outside its claimed scope."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A reverse inference would require a converse inferring positivity or exchangeability from a weighted mean equality. The Statement instead supplies sufficient assumptions for integrability of IPW and equality with the fixed-atom potential mean, so no such converse is a claimed obligation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-21",
+        "notes": "Reviewed all five steps and exact cited supplier statements. The rational-sublevel construction factors each real sigma(L)-measurable version even for arbitrary covariate spaces: inf on the range equals V, and nonfinite values off the range have measurable zero fill. Declared AC covers countably many choices of B_r as well as CE existence. Change of variables makes both propensity functions integrable under the common L law; event-integral uniqueness equates them. Truncated inverse propensities are bounded; nonnegative MCT and DCT with E[|Y^a||G] prove absolute integrability before signed DCT. Atom consistency and observed-coordinate pushforward then transfer the finite integral from P to Q. Equal observed laws yield the same functional; no converse causal-assumption claim is made. e=1, zero outcomes and constant L work; e=0 is excluded only almost surely and no uniform lower bound is used. General atom formulation needs no global Y^A. Reader repair is sound, no new defect."
+      }
+    },
+    "ex-positivity-failure-prevents-standardization-and-ipw-identification": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcomes-and-consistency",
+          "source_section": "Definition",
+          "quote": "Fix a target population with probability law $P$, a real outcome, and a nonempty countable discrete set $\\mathcal A$ of treatment versions. A treatment version $a\\in\\mathcal A$ is a specified intervention protocol, not just a treatment label. The **potential outcome** $Y^a$ is the real random variable giving the outcome for a unit in the target population under version $a$. Write $A$ for the observed treatment assignment or receipt, with values in $\\mathcal A$, and $Y$ for the observed outcome. The **observed potential outcome** is the measurable random variable\n\n$$Y^A=\\sum_{a\\in\\mathcal A}\\mathbf 1_{\\{A=a\\}}Y^a,$$\n\nwhere the countable sum has at most one nonzero summand at each sample point. **Consistency** is the assumption $Y=Y^A$ $P$-almost surely. It links the observed outcome to the potential outcome for the received version; it does not assert that treatment assignment is unconfounded.\n\nThe **full-data law** is the joint law of the potential-outcome family, $A$, any baseline covariate random element $L$, and $Y$. The **observed-data law** is its marginal law of $(A,L,Y)$. A target population, outcome, intervention protocol, and contrast must be fixed before the associated causal target is specified. If interference between units matters, the version or treatment regime must include the relevant assignment or exposure of other units; the notation $Y^a$ by itself does not assert no interference.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-standardization-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "Let $Q$ be a probability law for an observed discrete or atomic treatment $A$, a covariate random element $L$, and a real-valued observed outcome $Y$. Fix an atom $a$ with $Q(A=a)>0$, let $\\mathcal G=\\sigma(L)$, and define\n$$I_a=\\mathbf 1_{\\{A=a\\}},\\qquad e_a(L)=E_Q[I_a\\mid\\mathcal G].$$\nAssume $e_a(L)>0$ $Q$-almost surely and $I_aY\\in L^1(Q)$. Define\n$$q_a(L)=E_Q[I_aY\\mid\\mathcal G],\\qquad m_a(L)=\\frac{q_a(L)}{e_a(L)}.$$\nThe **standardization functional** at $a$ is\n$$\\Psi_{\\mathrm{std}}(Q;a)=E_Q[m_a(L)],$$\nprovided $m_a(L)$ is integrable. The numerator and denominator are conditional-expectation classes; the ratio is defined almost surely because the denominator is positive. In conventional notation $m_a(L)$ is $E_Q[Y\\mid A=a,L]$, and the displayed expectation averages that treatment-specific conditional mean over the target law of $L$.\n\nWhen $L$ has discrete support, this is $\\sum_\\ell E_Q[Y\\mid A=a,L=\\ell]\\,Q(L=\\ell)$. For general $L$ we use the version-free conditional-expectation class above and integrate it under $Q$; no value of a regression function is chosen at a null covariate stratum.\n\nThis is a population functional of the observed law and the true conditional treatment probability. It is not an algorithm for estimating a propensity from a finite sample.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-inverse-probability-weighting-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "Let $Q$ be a probability law for an observed discrete or atomic treatment $A$, a covariate random element $L$, and a real-valued observed outcome $Y$. Fix an atom $a$ with $Q(A=a)>0$, let $\\mathcal G=\\sigma(L)$, and set\n$$I_a=\\mathbf 1_{\\{A=a\\}},\\qquad e_a(L)=E_Q[I_a\\mid\\mathcal G].$$\nAssume $e_a(L)>0$ $Q$-almost surely and $I_aY/e_a(L)\\in L^1(Q)$. The **inverse-probability-weighted functional** at $a$ is\n$$\\Psi_{\\mathrm{IPW}}(Q;a)=E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right],$$\nprovided the displayed weighted variable is integrable. The outcome weight is $I_a/e_a(L)$, formed from the true population propensity $e_a(L)$, not an estimate.\n\nThe instructions are: form the event indicator $I_a$; take its conditional expectation given $\\sigma(L)$ to obtain $e_a(L)$; divide $I_aY$ by this positive random variable; and integrate under $Q$. This defines a population functional only. It makes no assertion about finite-sample behavior, estimated propensities, or truncated weights.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-conditional-treatment-indicator-factorization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC) for the conditional-expectation existence convention used here. Let $(\\Omega,\\mathcal F,P)$ be a probability space, let $\\mathcal G\\subseteq\\mathcal F$ be a sub-$\\sigma$-algebra, let $A$ be a random element, and let $C$ be a measurable set in its state space. If $Z$ is a real integrable random variable and $Z\\perp\\!\\!\\!\\perp A\\mid\\mathcal G$, then, with $I=\\mathbf 1_{\\{A\\in C\\}}$,\n$$E[IZ\\mid\\mathcal G]=E[I\\mid\\mathcal G]E[Z\\mid\\mathcal G]\\quad\\text{almost surely}.$$\nThe conclusion holds for every integrable $Z$, not only bounded outcomes.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In both models the observed law assigns probability $1/2$ to $(L,A,Y)=(0,0,0)$, probability $1/4$ to $(1,1,1)$, and probability $1/4$ to $(1,0,0)$. The unobserved value of $Y^1$ at $L=0$ does not enter any observed outcome because $A=0$ there.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The target means differ: $E_{P_0}[Y^1]=\\tfrac12$ while $E_{P_2}[Y^1]=\\tfrac32$. Since the observed laws in step 1.1 coincide, [F3] shows that $E[Y^1]$ is not identified in this model class.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Here $e_1(0)=0$, so the observed treated conditional mean at $L=0$ is unavailable and both $q_1(0)/e_1(0)$ and the treated weight $I_1/e_1(L)$ are undefined. Also [F2] gives $E[I_1Y^1\\mid L=0]=0\\cdot E[Y^1\\mid L=0]=0$ in both models, leaving the differing target-stratum means unrecovered.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes L in {0,1} and the three observed masses1/2,1/4,1/4 computed in step 1.1; it supplies the two nonempty full-data laws P_0 and P_2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks e_1(0)=0 directly and shows the functionals are undefined on that positive-probability stratum."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No stratum has e_1=1; the example concerns e_1=0 versus e_1=1/2 only."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "L has two positive-probability values, so the example does not use a degenerate covariate law."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The propensity values are exactly 0 and 1/2; step 2.1 checks the zero endpoint.",
+          "evidence": "The propensity values are exactly 0 and 1/2; step 3.1 checks the zero endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use explicitly supplied finite laws and compute potential means1/2 and3/2. The AC-backed conditional-identity supplier is used in step 3.1, but no unspecified witness is selected for this example."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example establishes the two concrete laws P_0,P_2 with equal observed masses but potential means1/2 and3/2. It is not formulated as a two-direction equivalence: a characterization of all failures of causal identification by this three-point observed law is outside its claimed scope."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A reverse inference would require a characterization of all failures of causal identification by this three-point observed law. The Example instead supplies the two concrete laws P_0,P_2 with equal observed masses but potential means1/2 and3/2, so no such converse is a claimed obligation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-21",
+        "notes": "Reviewed all three verification steps and both algorithm domains, potential-outcome consistency and equal-observed-law identifiability definition. Deterministic potential outcomes given L ensure exchangeability. Both observed laws have masses 1/2,1/4,1/4 at the stated triples, while target means are 1/2 and 3/2. e(0)=0 on mass 1/2 excludes both strict-positivity algorithms and leaves the missing counterfactual unobserved. No assertion that every positivity failure entails nonidentification is made; this is a two-law witness. No defect."
+      }
+    },
+    "ex-standardization-and-ipw-two-strata-calculation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcomes-and-consistency",
+          "source_section": "Definition",
+          "quote": "Fix a target population with probability law $P$, a real outcome, and a nonempty countable discrete set $\\mathcal A$ of treatment versions. A treatment version $a\\in\\mathcal A$ is a specified intervention protocol, not just a treatment label. The **potential outcome** $Y^a$ is the real random variable giving the outcome for a unit in the target population under version $a$. Write $A$ for the observed treatment assignment or receipt, with values in $\\mathcal A$, and $Y$ for the observed outcome. The **observed potential outcome** is the measurable random variable\n\n$$Y^A=\\sum_{a\\in\\mathcal A}\\mathbf 1_{\\{A=a\\}}Y^a,$$\n\nwhere the countable sum has at most one nonzero summand at each sample point. **Consistency** is the assumption $Y=Y^A$ $P$-almost surely. It links the observed outcome to the potential outcome for the received version; it does not assert that treatment assignment is unconfounded.\n\nThe **full-data law** is the joint law of the potential-outcome family, $A$, any baseline covariate random element $L$, and $Y$. The **observed-data law** is its marginal law of $(A,L,Y)$. A target population, outcome, intervention protocol, and contrast must be fixed before the associated causal target is specified. If interference between units matters, the version or treatment regime must include the relevant assignment or exposure of other units; the notation $Y^a$ by itself does not assert no interference.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-standardization-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "Let $Q$ be a probability law for an observed discrete or atomic treatment $A$, a covariate random element $L$, and a real-valued observed outcome $Y$. Fix an atom $a$ with $Q(A=a)>0$, let $\\mathcal G=\\sigma(L)$, and define\n$$I_a=\\mathbf 1_{\\{A=a\\}},\\qquad e_a(L)=E_Q[I_a\\mid\\mathcal G].$$\nAssume $e_a(L)>0$ $Q$-almost surely and $I_aY\\in L^1(Q)$. Define\n$$q_a(L)=E_Q[I_aY\\mid\\mathcal G],\\qquad m_a(L)=\\frac{q_a(L)}{e_a(L)}.$$\nThe **standardization functional** at $a$ is\n$$\\Psi_{\\mathrm{std}}(Q;a)=E_Q[m_a(L)],$$\nprovided $m_a(L)$ is integrable. The numerator and denominator are conditional-expectation classes; the ratio is defined almost surely because the denominator is positive. In conventional notation $m_a(L)$ is $E_Q[Y\\mid A=a,L]$, and the displayed expectation averages that treatment-specific conditional mean over the target law of $L$.\n\nWhen $L$ has discrete support, this is $\\sum_\\ell E_Q[Y\\mid A=a,L=\\ell]\\,Q(L=\\ell)$. For general $L$ we use the version-free conditional-expectation class above and integrate it under $Q$; no value of a regression function is chosen at a null covariate stratum.\n\nThis is a population functional of the observed law and the true conditional treatment probability. It is not an algorithm for estimating a propensity from a finite sample.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-inverse-probability-weighting-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "Let $Q$ be a probability law for an observed discrete or atomic treatment $A$, a covariate random element $L$, and a real-valued observed outcome $Y$. Fix an atom $a$ with $Q(A=a)>0$, let $\\mathcal G=\\sigma(L)$, and set\n$$I_a=\\mathbf 1_{\\{A=a\\}},\\qquad e_a(L)=E_Q[I_a\\mid\\mathcal G].$$\nAssume $e_a(L)>0$ $Q$-almost surely and $I_aY/e_a(L)\\in L^1(Q)$. The **inverse-probability-weighted functional** at $a$ is\n$$\\Psi_{\\mathrm{IPW}}(Q;a)=E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right],$$\nprovided the displayed weighted variable is integrable. The outcome weight is $I_a/e_a(L)$, formed from the true population propensity $e_a(L)$, not an estimate.\n\nThe instructions are: form the event indicator $I_a$; take its conditional expectation given $\\sigma(L)$ to obtain $e_a(L)$; divide $I_aY$ by this positive random variable; and integrate under $Q$. This defines a population functional only. It makes no assertion about finite-sample behavior, estimated propensities, or truncated weights.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-standardization-identifies-a-causal-mean",
+          "source_section": "Statement",
+          "quote": "Assume AC for the conditional-expectation existence convention. Consider a full-data law $P$ with an observed discrete or atomic treatment $A$, covariate random element $L$, observed outcome $Y$, and potential outcomes $(Y^b)_{b\\in\\mathcal A}$, with supplied potential outcomes (the countably discrete convention is [[def-potential-outcomes-and-consistency]]). Fix an atom $a$ with $P(A=a)>0$ and $Y^a\\in L^1(P)$. Assume consistency $Y=Y^A$, conditional exchangeability $(Y^b)_{b\\in\\mathcal A}\\perp\\!\\!\\!\\perp A\\mid\\sigma(L)$, and positivity\n$$e_a(L):=P(A=a\\mid\\sigma(L))>0\\quad P\\text{-almost surely}.$$\nLet $Q$ be the observed-data law of $(A,L,Y)$, put $\\mathcal G=\\sigma(L)$ and $I_a=\\mathbf 1_{\\{A=a\\}}$, and define the standardization functional $\\Psi_{\\mathrm{std}}(Q;a)$ as in [[alg-standardization-for-a-causal-mean]]. Then\n$$\\Psi_{\\mathrm{std}}(Q;a)=E_P[Y^a].$$\nThus the observed law and the stated causal assumptions identify the population mean of $Y^a$, in the sense of [[def-identifiability-of-an-estimand]]. No lower bound $e_a(L)\\ge\\varepsilon>0$ is needed. This result is for a fixed atomic treatment value; it makes no pointwise claim for a continuous treatment.\n\nFor countably discrete treatments, the supplied potential outcomes and global\nconsistency use [[def-potential-outcomes-and-consistency]]; conditional\nexchangeability is the full-family sigma-algebra condition of\n[[def-conditional-exchangeability-of-potential-outcomes]]. More generally,\nfor a treatment in any measurable space with measurable singleton $\\{a\\}$,\nthe same conclusion holds whenever the supplied integrable $Y^a$ is\nconditionally independent of $A$ given $\\sigma(L)$ and\n$\\mathbf1_{\\{A=a\\}}Y=\\mathbf1_{\\{A=a\\}}Y^a$ almost surely, with the same\npositive propensity. This atom-consistency formulation does not require\na global measurable selection $Y^A$ outside the target atom.\n\nOn the overlapping countably discrete treatment and standard-Borel covariate\ndomain of [[thm-discrete-treatment-potential-outcome-mean-identification]],\nthis conditional-class functional equals that theorem's RCD standardization\nfunctional. The application here also allows arbitrary covariate random\nelements and uses the algorithm's version-free conditional class.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-inverse-probability-weighting-identifies-a-causal-mean",
+          "source_section": "Statement",
+          "quote": "Assume AC for the conditional-expectation existence convention. Let $P$ be a full-data law with a discrete or atomic treatment $A$, covariate random element $L$, observed outcome $Y$, and potential outcomes $(Y^b)_{b\\in\\mathcal A}$ with the countably discrete convention given by [[def-potential-outcomes-and-consistency]]. Fix an atom $a$ with $P(A=a)>0$ and $Y^a\\in L^1(P)$. Assume consistency $Y=Y^A$, conditional exchangeability $(Y^b)_{b\\in\\mathcal A}\\perp\\!\\!\\!\\perp A\\mid\\sigma(L)$, and positivity $e_a(L):=P(A=a\\mid\\sigma(L))>0$ almost surely. For $I_a=\\mathbf1_{\\{A=a\\}}$ and the observed law $Q$ of $(A,L,Y)$, the inverse-probability-weighted functional of [[alg-inverse-probability-weighting-for-a-causal-mean]] is well-defined and satisfies\n$$E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right]=E_P[Y^a].$$\nConsequently, it identifies the population mean of $Y^a$ in the sense of [[def-identifiability-of-an-estimand]]. No uniform lower bound on $e_a$ is assumed. This is a population identity for the true propensity, not a finite-sample stability or estimated-weight result.\n\nFor countably discrete treatments, the supplied potential outcomes and global\nconsistency use [[def-potential-outcomes-and-consistency]]; conditional\nexchangeability is the full-family sigma-algebra condition of\n[[def-conditional-exchangeability-of-potential-outcomes]]. More generally,\nfor a treatment in any measurable space with measurable singleton $\\{a\\}$,\nthe same conclusion holds whenever the supplied integrable $Y^a$ is\nconditionally independent of $A$ given $\\sigma(L)$ and\n$\\mathbf1_{\\{A=a\\}}Y=\\mathbf1_{\\{A=a\\}}Y^a$ almost surely, with the same\npositive propensity. This atom-consistency formulation does not require\na global measurable selection $Y^A$ outside the target atom.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two propensity values are $e_1(0)=1/4$ and $e_1(1)=3/4$. Since $Y^1=1+2L$, the observed treated means are $m_1(0)=1$ and $m_1(1)=3$. Thus [F1] gives $\\Psi_{\\mathrm{std}}=\\tfrac12(1)+\\tfrac12(3)=2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The treated joint masses are $P(L=0,A=1)=1/8$ and $P(L=1,A=1)=3/8$. Therefore [F2] gives $\\Psi_{\\mathrm{IPW}}=\\frac18\\frac{1}{1/4}+\\frac38\\frac{3}{3/4}=\\frac12+\\frac32=2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The target mean is $E[Y^1]=\\tfrac12(1)+\\tfrac12(3)=2$. Consequently the two displayed population functionals agree with the target, as asserted by [F3] and [F4].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example has the two populated L strata with mass1/2 each, treated joint masses1/8 and3/8, and displayed outcome values1,3. It does not have an empty stratum family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies e_1(0)=1/4 and e_1(1)=3/4, both positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Neither stratum has e_1=1; the example uses propensities 1/4 and 3/4."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "L is uniform on two values and is not degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Both propensities are strictly between zero and one; no propensity endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, and 2.1 evaluate those fixed finite masses. AC is declared for the inherited conditional-expectation/identification conventions; no additional selection from a family of model laws is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example establishes the particular propensities1/4,3/4 and outcome means1,3 giving both functionals2. It is not formulated as a two-direction equivalence: an inference of causal assumptions from equality of these numerical functionals alone is outside its claimed scope."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A reverse inference would require an inference of causal assumptions from equality of these numerical functionals alone. The Example instead supplies the particular propensities1/4,3/4 and outcome means1,3 giving both functionals2, so no such converse is a claimed obligation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-21",
+        "notes": "Reviewed all three steps and both algorithms/theorems with the supplied finite law. Deterministic potential outcomes given L ensure exchangeability, consistency is explicit, outcomes bounded and both propensities 1/4,3/4 positive. Treated conditional means 1,3 average to 2. Joint treated masses 1/8,3/8 yield weighted contributions 1/2,3/2, summing to target 2. All denominators are nonzero; this is the stated population calculation, no estimator or unsupported-stratum claim. No defect."
+      }
+    },
+    "ex-extreme-ipw-weights-under-poor-overlap": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcomes-and-consistency",
+          "source_section": "Definition",
+          "quote": "Fix a target population with probability law $P$, a real outcome, and a nonempty countable discrete set $\\mathcal A$ of treatment versions. A treatment version $a\\in\\mathcal A$ is a specified intervention protocol, not just a treatment label. The **potential outcome** $Y^a$ is the real random variable giving the outcome for a unit in the target population under version $a$. Write $A$ for the observed treatment assignment or receipt, with values in $\\mathcal A$, and $Y$ for the observed outcome. The **observed potential outcome** is the measurable random variable\n\n$$Y^A=\\sum_{a\\in\\mathcal A}\\mathbf 1_{\\{A=a\\}}Y^a,$$\n\nwhere the countable sum has at most one nonzero summand at each sample point. **Consistency** is the assumption $Y=Y^A$ $P$-almost surely. It links the observed outcome to the potential outcome for the received version; it does not assert that treatment assignment is unconfounded.\n\nThe **full-data law** is the joint law of the potential-outcome family, $A$, any baseline covariate random element $L$, and $Y$. The **observed-data law** is its marginal law of $(A,L,Y)$. A target population, outcome, intervention protocol, and contrast must be fixed before the associated causal target is specified. If interference between units matters, the version or treatment regime must include the relevant assignment or exposure of other units; the notation $Y^a$ by itself does not assert no interference.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-inverse-probability-weighting-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "Let $Q$ be a probability law for an observed discrete or atomic treatment $A$, a covariate random element $L$, and a real-valued observed outcome $Y$. Fix an atom $a$ with $Q(A=a)>0$, let $\\mathcal G=\\sigma(L)$, and set\n$$I_a=\\mathbf 1_{\\{A=a\\}},\\qquad e_a(L)=E_Q[I_a\\mid\\mathcal G].$$\nAssume $e_a(L)>0$ $Q$-almost surely and $I_aY/e_a(L)\\in L^1(Q)$. The **inverse-probability-weighted functional** at $a$ is\n$$\\Psi_{\\mathrm{IPW}}(Q;a)=E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right],$$\nprovided the displayed weighted variable is integrable. The outcome weight is $I_a/e_a(L)$, formed from the true population propensity $e_a(L)$, not an estimate.\n\nThe instructions are: form the event indicator $I_a$; take its conditional expectation given $\\sigma(L)$ to obtain $e_a(L)$; divide $I_aY$ by this positive random variable; and integrate under $Q$. This defines a population functional only. It makes no assertion about finite-sample behavior, estimated propensities, or truncated weights.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-inverse-probability-weighting-identifies-a-causal-mean",
+          "source_section": "Statement",
+          "quote": "Assume AC for the conditional-expectation existence convention. Let $P$ be a full-data law with a discrete or atomic treatment $A$, covariate random element $L$, observed outcome $Y$, and potential outcomes $(Y^b)_{b\\in\\mathcal A}$ with the countably discrete convention given by [[def-potential-outcomes-and-consistency]]. Fix an atom $a$ with $P(A=a)>0$ and $Y^a\\in L^1(P)$. Assume consistency $Y=Y^A$, conditional exchangeability $(Y^b)_{b\\in\\mathcal A}\\perp\\!\\!\\!\\perp A\\mid\\sigma(L)$, and positivity $e_a(L):=P(A=a\\mid\\sigma(L))>0$ almost surely. For $I_a=\\mathbf1_{\\{A=a\\}}$ and the observed law $Q$ of $(A,L,Y)$, the inverse-probability-weighted functional of [[alg-inverse-probability-weighting-for-a-causal-mean]] is well-defined and satisfies\n$$E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right]=E_P[Y^a].$$\nConsequently, it identifies the population mean of $Y^a$ in the sense of [[def-identifiability-of-an-estimand]]. No uniform lower bound on $e_a$ is assumed. This is a population identity for the true propensity, not a finite-sample stability or estimated-weight result.\n\nFor countably discrete treatments, the supplied potential outcomes and global\nconsistency use [[def-potential-outcomes-and-consistency]]; conditional\nexchangeability is the full-family sigma-algebra condition of\n[[def-conditional-exchangeability-of-potential-outcomes]]. More generally,\nfor a treatment in any measurable space with measurable singleton $\\{a\\}$,\nthe same conclusion holds whenever the supplied integrable $Y^a$ is\nconditionally independent of $A$ given $\\sigma(L)$ and\n$\\mathbf1_{\\{A=a\\}}Y=\\mathbf1_{\\{A=a\\}}Y^a$ almost surely, with the same\npositive propensity. This atom-consistency formulation does not require\na global measurable selection $Y^A$ outside the target atom.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The event $\\{L=0,A=1\\}$ has probability $\\varepsilon/2$ and there the IPW summand $W=I_1Y/e_1(L)$ equals $1/\\varepsilon$. Everywhere else $W=0$. Hence $E[W]=(\\varepsilon/2)(1/\\varepsilon)=1/2=E[Y^1]$, consistently with [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The second moment and variance are $E[W^2]=\\frac{\\varepsilon}{2}\\frac{1}{\\varepsilon^2}=\\frac{1}{2\\varepsilon}$ and $\\operatorname{Var}(W)=\\frac{1}{2\\varepsilon}-\\frac14$. As $\\varepsilon\\downarrow0$, the realized treated weight $1/\\varepsilon$ and this population variance diverge, although the exact population identity remains valid at each $\\varepsilon>0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus strict positivity at each model does not impose a uniform weight or variance bound across models; the example makes no claim about finite-sample estimator consistency.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "For each epsilon in (0,1/2), the Example has two L strata of mass1/2 and a treated event of mass epsilon/2 as calculated in step 1.1. This never becomes an empty probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example restricts epsilon to (0,1/2), so step 1.1 has e_1(0)=epsilon>0 for every model."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The displayed propensity values are epsilon and 1/2, neither equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "L has two equally likely values for each epsilon."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Step 1.2 studies the limit epsilon down to zero but every model used in step 1.1 has epsilon>0.",
+          "evidence": "Step 2.1 studies epsilon down to zero, but every model used in step 1.1 has epsilon>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example is a specified family indexed by an ordinary real epsilon, with step 1.1 and step 2.1 computing its moments explicitly. AC is inherited only for the conditional-expectation conventions, not for choosing an epsilon or a witness law."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example establishes the epsilon-family with mean1/2 and variance1/(2epsilon)-1/4. It is not formulated as a two-direction equivalence: a characterization of every high-variance weight distribution by this family is outside its claimed scope."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A reverse inference would require a characterization of every high-variance weight distribution by this family. The Example instead supplies the epsilon-family with mean1/2 and variance1/(2epsilon)-1/4, so no such converse is a claimed obligation."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-weight-truncation-changes-the-ipw-target": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-potential-outcomes-and-consistency",
+          "source_section": "Definition",
+          "quote": "Fix a target population with probability law $P$, a real outcome, and a nonempty countable discrete set $\\mathcal A$ of treatment versions. A treatment version $a\\in\\mathcal A$ is a specified intervention protocol, not just a treatment label. The **potential outcome** $Y^a$ is the real random variable giving the outcome for a unit in the target population under version $a$. Write $A$ for the observed treatment assignment or receipt, with values in $\\mathcal A$, and $Y$ for the observed outcome. The **observed potential outcome** is the measurable random variable\n\n$$Y^A=\\sum_{a\\in\\mathcal A}\\mathbf 1_{\\{A=a\\}}Y^a,$$\n\nwhere the countable sum has at most one nonzero summand at each sample point. **Consistency** is the assumption $Y=Y^A$ $P$-almost surely. It links the observed outcome to the potential outcome for the received version; it does not assert that treatment assignment is unconfounded.\n\nThe **full-data law** is the joint law of the potential-outcome family, $A$, any baseline covariate random element $L$, and $Y$. The **observed-data law** is its marginal law of $(A,L,Y)$. A target population, outcome, intervention protocol, and contrast must be fixed before the associated causal target is specified. If interference between units matters, the version or treatment regime must include the relevant assignment or exposure of other units; the notation $Y^a$ by itself does not assert no interference.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "alg-inverse-probability-weighting-for-a-causal-mean",
+          "source_section": "Definition",
+          "quote": "Let $Q$ be a probability law for an observed discrete or atomic treatment $A$, a covariate random element $L$, and a real-valued observed outcome $Y$. Fix an atom $a$ with $Q(A=a)>0$, let $\\mathcal G=\\sigma(L)$, and set\n$$I_a=\\mathbf 1_{\\{A=a\\}},\\qquad e_a(L)=E_Q[I_a\\mid\\mathcal G].$$\nAssume $e_a(L)>0$ $Q$-almost surely and $I_aY/e_a(L)\\in L^1(Q)$. The **inverse-probability-weighted functional** at $a$ is\n$$\\Psi_{\\mathrm{IPW}}(Q;a)=E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right],$$\nprovided the displayed weighted variable is integrable. The outcome weight is $I_a/e_a(L)$, formed from the true population propensity $e_a(L)$, not an estimate.\n\nThe instructions are: form the event indicator $I_a$; take its conditional expectation given $\\sigma(L)$ to obtain $e_a(L)$; divide $I_aY$ by this positive random variable; and integrate under $Q$. This defines a population functional only. It makes no assertion about finite-sample behavior, estimated propensities, or truncated weights.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-inverse-probability-weighting-identifies-a-causal-mean",
+          "source_section": "Statement",
+          "quote": "Assume AC for the conditional-expectation existence convention. Let $P$ be a full-data law with a discrete or atomic treatment $A$, covariate random element $L$, observed outcome $Y$, and potential outcomes $(Y^b)_{b\\in\\mathcal A}$ with the countably discrete convention given by [[def-potential-outcomes-and-consistency]]. Fix an atom $a$ with $P(A=a)>0$ and $Y^a\\in L^1(P)$. Assume consistency $Y=Y^A$, conditional exchangeability $(Y^b)_{b\\in\\mathcal A}\\perp\\!\\!\\!\\perp A\\mid\\sigma(L)$, and positivity $e_a(L):=P(A=a\\mid\\sigma(L))>0$ almost surely. For $I_a=\\mathbf1_{\\{A=a\\}}$ and the observed law $Q$ of $(A,L,Y)$, the inverse-probability-weighted functional of [[alg-inverse-probability-weighting-for-a-causal-mean]] is well-defined and satisfies\n$$E_Q\\!\\left[\\frac{I_aY}{e_a(L)}\\right]=E_P[Y^a].$$\nConsequently, it identifies the population mean of $Y^a$ in the sense of [[def-identifiability-of-an-estimand]]. No uniform lower bound on $e_a$ is assumed. This is a population identity for the true propensity, not a finite-sample stability or estimated-weight result.\n\nFor countably discrete treatments, the supplied potential outcomes and global\nconsistency use [[def-potential-outcomes-and-consistency]]; conditional\nexchangeability is the full-family sigma-algebra condition of\n[[def-conditional-exchangeability-of-potential-outcomes]]. More generally,\nfor a treatment in any measurable space with measurable singleton $\\{a\\}$,\nthe same conclusion holds whenever the supplied integrable $Y^a$ is\nconditionally independent of $A$ given $\\sigma(L)$ and\n$\\mathbf1_{\\{A=a\\}}Y=\\mathbf1_{\\{A=a\\}}Y^a$ almost surely, with the same\npositive propensity. This atom-consistency formulation does not require\na global measurable selection $Y^A$ outside the target atom.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The target mean is $E[Y^1]=\\tfrac12(2)+\\tfrac12(0)=1$. The treated mass in $L=0$ is $1/8$ and the outcome there is $2$, so the untruncated IPW expectation is $(1/8)\\cdot4\\cdot2=1$, as [F1]–[F2] predict.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "After capping the functional in [F1], the treated weight in $L=0$ is $3/2$ and the outcome in $L=1$ is zero. The unnormalized capped expectation is therefore $(1/8)(3/2)(2)=3/8$, not the target $1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the capped weights are normalized by their population mean, the denominator is $(1/8)(3/2)+(3/8)(4/3)=11/16$, so the normalized capped mean is $(3/8)/(11/16)=6/11\\ne1$. Thus both capped versions in this example target a different population quantity from the original mean.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "This is a population calculation for known propensities; it does not invoke a finite-sample estimator or an estimated-weight limit.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes two L strata of mass1/2, positive treatment propensities1/4 and3/4, and cap3/2. Its finite probability input is nonempty by these stated masses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example has e_1(0)=1/4 and e_1(1)=3/4, both strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Neither propensity equals one; the example uses 1/4 and 3/4."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "L has two equally likely values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The cap 3/2 lies strictly between the two inverse propensities 4/3 and 4; no endpoint propensity is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 compute the specified uncapped and capped means. AC is declared for the inherited probability/conditional-expectation conventions, while the cap3/2 and all finite masses are supplied directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example establishes the cap3/2 giving raw capped mean3/8 and normalized capped mean6/11 instead of1. It is not formulated as a two-direction equivalence: a criterion classifying every possible cap that changes a population target is outside its claimed scope."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A reverse inference would require a criterion classifying every possible cap that changes a population target. The Example instead supplies the cap3/2 giving raw capped mean3/8 and normalized capped mean6/11 instead of1, so no such converse is a claimed obligation."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-21",
+        "notes": "Reviewed all four steps, algorithm and repaired IPW theorem prerequisites. Potential outcomes are bounded deterministic functions of L, so consistency, exchangeability, integrability and positive propensities hold. True IPW and target both equal 1. Capping reciprocal weights at 3/2 gives raw numerator (1/8)(3/2)2=3/8; treated normalization is 3/16+1/2=11/16>0, giving 6/11. The second stratum reciprocal 4/3 is below the cap. Neither capped value is asserted to obey the unmodified theorem. This explicit population example makes no general or asymptotic estimator claim. No defect."
+      }
+    }
+  }
+}

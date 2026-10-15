@@ -1,0 +1,94 @@
+[
+  {
+    "order": 1992,
+    "id": "method-agreement-and-limits",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Method agreement",
+    "companion": "method-agreement-and-limits-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "weak-convergence-tightness-and-representation",
+      "probability-spaces-random-variables-and-expectation"
+    ],
+    "items": [
+      {
+        "id": "def-method-agreement-and-limits",
+        "kind": "definition",
+        "title": "Method agreement and limits of agreement",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-moments-variance-and-covariance",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be the declared probability model for a\npre-specified target population of measurement conditions. Let $A$ and $B$ be\nreal random variables giving quantitative measurements of the same target\nunder the same stated conditions. The choice of target population and the\nscientific applicability of its probability law are model assumptions; this\ndefinition does not verify them.\n\nAssume the paired difference $D:=A-B$ is square-integrable. It is measurable\nbecause measurable real functions are closed under finite sums and scalar\nmultiples ([[prop-closure-properties-of-measurable-functions-used-by-the-integral]]).\nDefine its **population bias** and standard deviation by\n$$\\mu_D:=\\mathbb E[D],\\qquad \\sigma_D:=\\sqrt{\\operatorname{Var}(D)}.$$\nThe sign convention is $D=A-B$, so positive bias means that $A$ reads larger\nthan $B$ on average. The conventional rounded normal-reference limits of\nagreement are $\\mu_D-1.96\\sigma_D$ and $\\mu_D+1.96\\sigma_D$.\n\nFor an iid sample $D_1,\\ldots,D_n$ of paired differences from the declared\ntarget population, with $n\\ge2$ and observed values $d_1,\\ldots,d_n$, define\n$$\\bar d:=\\frac1n\\sum_{i=1}^n d_i,\\qquad s_D:=\\sqrt{\\frac1{n-1}\\sum_{i=1}^n(d_i-\\bar d)^2}.$$\nThe sample plug-in limits are $\\bar d\\pm1.96s_D$: they substitute the sample\nmean and sample standard deviation into the conventional population formula.\nThey are point estimates; no unbiasedness, consistency, confidence coverage,\nor exact finite-sample coverage for either endpoint is asserted here.\n\nRepeated measurements on one target are not iid merely because there are many\nrecorded pairs. Their within-target dependence must be stated and modeled, for\nexample with a covariance or random-effects model. Correlation measures\nlinear association and does not by itself establish agreement. Limits of\nagreement describe the distribution of differences; they do not decide\nwhether those differences are acceptable for a particular use or whether\neither method is calibrated to a known truth."
+      },
+      {
+        "id": "thm-normal-difference-agreement-limits",
+        "kind": "theorem",
+        "title": "Normal differences have limits at their central quantiles",
+        "deps": [
+          "def-method-agreement-and-limits",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-density-has-total-mass-one",
+          "lem-probability-measure-basic-identities",
+          "def-countable-choice",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "cor-integral-over-a-null-set-vanishes",
+          "thm-exponential-definition-equivalence",
+          "thm-derivative-of-exponential",
+          "cor-mean-value-theorem",
+          "thm-substitution",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume the Axiom of Choice. Use $D$, $\\mu_D$, and $\\sigma_D$ from\n[[def-method-agreement-and-limits]], and suppose the law of $D$ is\n$N(\\mu_D,\\sigma_D^2)$ with $\\sigma_D\\ge0$. Put\n$$\\Phi(x):=N(0,1)((-\\infty,x]),\\qquad z_{.975}:=\\inf\\{x\\in\\mathbb R:\\Phi(x)\\ge .975\\}.$$\nFor $D$, put $F_D(x):=\\mathbb P(D\\le x)$ and, for $0<p<1$, define the lower\n$p$-quantile by\n$$q_p(D):=\\inf\\{x\\in\\mathbb R:F_D(x)\\ge p\\}.$$\nThen $z_{.975}$ is the unique real number with $\\Phi(z_{.975})=.975$, and\n$z_{.975}>0$. The exact central normal quantiles satisfy\n$$q_{.025}(D)=\\mu_D-z_{.975}\\sigma_D,\\qquad q_{.975}(D)=\\mu_D+z_{.975}\\sigma_D.$$\nIf $\\sigma_D>0$, the interval between these quantiles has probability\n$0.95$. If $\\sigma_D=0$, both quantiles equal $\\mu_D$ and the singleton has\nprobability $1$. Thus $\\mu_D\\pm1.96\\sigma_D$ is the customary rounded display;\nthe exact endpoints use $z_{.975}$."
+      }
+    ]
+  },
+  {
+    "order": 1993,
+    "id": "method-agreement-and-limits-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Method agreement — Examples",
+    "companion": "method-agreement-and-limits",
+    "requires": [
+      "method-agreement-and-limits"
+    ],
+    "items": [
+      {
+        "id": "ex-correlation-without-agreement",
+        "kind": "example",
+        "title": "Perfect correlation can coexist with a method offset",
+        "deps": [
+          "def-method-agreement-and-limits",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "cor-expectation-agrees-with-the-finite-weighted-sum"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $\\Omega=\\{0,1\\}$ have probability $1/2$ at each point, and let two\nmethods on the same target report $A(\\omega)=\\omega$ and\n$B(\\omega)=\\omega+c$ for a fixed $c>0$. Their correlation is $1$, but their\ndifference is the nonzero constant $-c$ and their conventional limits of\nagreement both equal $-c$."
+      },
+      {
+        "id": "ex-repeated-method-differences-have-random-intercept-covariance",
+        "kind": "example",
+        "title": "Repeated method differences can share a random intercept",
+        "deps": [
+          "def-method-agreement-and-limits",
+          "def-moments-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry",
+          "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "cor-covariance-vanishes-under-independence",
+          "def-independent-random-elements",
+          "def-identically-distributed-and-iid-random-variables"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $\\Omega=\\{-1,1\\}^3$ have uniform probability, and let $U,\\epsilon_1,\n\\epsilon_2$ be its coordinate variables. For two repeated paired measurements\non one target, suppose the differences follow the random-intercept model\n$D_j=U+\\epsilon_j$, $j=1,2$. Then each difference has mean $0$ and variance\n$2$, but $\\operatorname{Cov}(D_1,D_2)=1$. In fact,\n$$\\mathbb P(D_1=2,D_2=2)=\\frac18\\ne\\frac1{16}=\\mathbb P(D_1=2)\\mathbb P(D_2=2).$$\nThe repeated differences are dependent and hence are not an iid sample."
+      }
+    ]
+  }
+]

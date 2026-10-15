@@ -1,0 +1,2386 @@
+{
+  "version": 1,
+  "scope": [
+    "def-van-hove-window-sequence",
+    "def-spatial-window-average",
+    "thm-van-hove-window-average-l2-consistency",
+    "def-lattice-covariance-and-variogram-estimators",
+    "thm-lattice-covariance-estimator-asymptotically-unbiased",
+    "lem-integers-lattice-is-discrete-lca-group",
+    "lem-dual-of-zd-is-torus",
+    "lem-transport-lattice-spectral-measure-to-torus",
+    "def-regular-grid-periodogram-and-smoother",
+    "thm-regular-grid-periodogram-fejer-expectation",
+    "lem-fixed-grid-sampling-spectral-alias-identity",
+    "thm-regular-grid-smoothed-periodogram-bias-vanishes",
+    "ex-boundary-dominated-windows-are-not-van-hove",
+    "cex-lattice-sample-covariance-not-positive-definite",
+    "cor-fixed-grid-unaliased-spectral-bias-under-no-alias-condition"
+  ],
+  "contracts": {
+    "def-van-hove-window-sequence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires 0<|W_n| for every n; an empty window has zero measure and is outside the admissible sequence. An empty compact K is allowed and gives empty boundary excess, hence ratio zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero-volume windows are excluded by 0<|W_n|. The compact enlargement K={0} is allowed and gives zero boundary excess identically, satisfying its required ratio."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: d=1 is included with positive-length Borel windows and compact subsets of R. One fixed window alone cannot meet the sequence condition |W_n| tending to infinity, but each individual W_n is required to have positive finite length."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: zero-volume windows and bounded-volume sequences are excluded by strict positive finite volumes and divergence to infinity. A compact K consisting of only {0} is allowed and has identically zero boundary excess."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: spatial sets are arbitrary bounded Borel windows, so there is no distinguished interval endpoint. Their boundary is nevertheless addressed by the required measurable excess (W_n+K) minus W_n and its ratio for every compact K, including singleton shifts."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC_omega is explicitly assumed to obtain Lebesgue measurability of Borel windows. Positive volume ensures each window is nonempty; no points are selected from the family W_n or compact enlargements K."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: calling (W_n) a Van Hove sequence entails positive finite volumes, volume divergence, measurable boundary excesses, and their zero relative limit for every compact K."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: a bounded Borel sequence satisfying all the displayed positive-volume, divergence and compact-enlargement conditions is, by the given definition, a Van Hove sequence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-spatial-window-average": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: each W_n inherits strictly positive volume from the Van Hove sequence, so an empty averaging window is inadmissible and division by its volume is not performed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: X identically zero has absolutely integrable paths and yields bar X_Wn=0 on every positive-volume window; the exceptional-event convention also fixes zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a one-dimensional Van Hove sequence in R is permitted and the normalization is by its length. A single observation is not required because the field average is a spatial integral, not a sample average over observations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a deterministic constant field a gives bar X_Wn=a on every positive-volume window, and has no path-integrability exceptional event. Zero-volume normalization remains excluded by the inherited Van Hove definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: integration is over the entire specified Borel W_n, with its actual boundary convention; no interval or frequency endpoint is specified. Boundaries of positive measure are included exactly according to membership in W_n, and positive volume protects normalization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the inherited AC_omega supplies the Lebesgue measure interface for the Borel windows. The average is a section integral and has a fixed zero extension on the exceptional null event; no choice of a representative point from a window is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition normalizes a Lebesgue path integral and fixes zero on its exceptional null set; it does not characterize joint measurability or integrability by existence of a displayed average. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition normalizes a Lebesgue path integral and fixes zero on its exceptional null set; it does not characterize joint measurability or integrability by existence of a displayed average. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-van-hove-window-average-l2-consistency": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-van-hove-window-sequence",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$ and assume the Axiom of Countable Choice\n$\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). By\n[[thm-borel-sets-are-lebesgue-measurable]], every Borel subset of $\\mathbb R^d$\nis Lebesgue measurable under this assumption; by\n[[thm-lebesgue-measure-is-a-complete-measure]], $|\\cdot|$ is the resulting\ncomplete Lebesgue measure. A **Van Hove sequence of spatial windows** is a\nsequence $(W_n)_{n\\ge1}$ of bounded Borel sets\n([[def-borel-sigma-algebra]]) in $\\mathbb R^d$ with\n$0<|W_n|<\\infty$ for every $n$, $|W_n|\\to\\infty$, and\n$$\\frac{|(W_n+K)\\setminus W_n|}{|W_n|}\\longrightarrow0 \\quad\\text{for every compact }K\\subseteq\\mathbb R^d.$$\nHere $|E|$ is Lebesgue measure when $E$ is Lebesgue measurable, and\n$W_n+K:=\\{x+y:x\\in W_n,\\ y\\in K\\}$. As part of the condition, each boundary\nexcess $(W_n+K)\\setminus W_n$ in the display is required to be Lebesgue\nmeasurable. Thus the window volume diverges while every fixed compact spatial\nenlargement adds a negligible relative volume.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-spatial-window-average",
+          "source_section": "Definition",
+          "quote": "Let $(W_n)$ be a Van Hove sequence in $\\mathbb R^d$ as in\n[[def-van-hove-window-sequence]], under its $\\mathrm{AC}_\\omega$ assumption.\nThe Borel-measurability result makes each $W_n$ Lebesgue measurable, and the\ncomplete-measure result supplies the Lebesgue measure used below. On a\nprobability space\n$(\\Omega,\\mathcal F,\\mathbb P)$ ([[def-probability-measure]]), let\n$(X(s))_{s\\in\\mathbb R^d}$ be a real random field in the coordinatewise\nsense of [[def-random-field-stationarity-covariance-and-variogram]]; its\ncoordinates are real random variables\n([[def-random-element-and-real-random-variable]]) such that the map\n$(s,\\omega)\\mapsto X(s,\\omega)$ is measurable for\n$\\mathcal B(\\mathbb R^d)\\otimes\\mathcal F$\n([[def-borel-sigma-algebra]]). For $W_n$, assume that\n$\\int_{W_n}|X(s,\\omega)|\\,ds<\\infty$ for almost every $\\omega$. Define the\n**spatial window average** on that full-measure event by\n$$\\bar X_{W_n}(\\omega):=\\frac1{|W_n|}\\int_{W_n}X(s,\\omega)\\,ds,$$\nand set it to $0$ on the measurable exceptional null set. Here $|W_n|$ and\nthe integral use $d$-dimensional Lebesgue measure, and a sample path means the\nfunction $s\\mapsto X(s,\\omega)$. The theorem\n[[thm-van-hove-window-average-l2-consistency]] establishes this integrability\nand measurability from its stated second-moment hypotheses.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-random-field-stationarity-covariance-and-variogram",
+          "source_section": "Definition",
+          "quote": "Let $T\\subseteq\\mathbb R^d$, $d\\ge1$, have its relative Borel sigma-algebra, and\nlet $(\\Omega,\\mathcal F,\\mathbb P)$ be one probability space. A **real random\nfield** indexed by $T$ is a family $X=(X(s))_{s\\in T}$ of real random variables\n$X(s):\\Omega\\to\\mathbb R$ on that space. This is coordinate measurability:\neach map $(s,\\omega)\\mapsto X(s,\\omega)$ with $s$ fixed is measurable in\n$\\omega$. The field is **jointly measurable** when the map\n$(s,\\omega)\\mapsto X(s,\\omega)$ from\n$(T\\times\\Omega,\\mathcal B(T)\\otimes\\mathcal F)$ to\n$(\\mathbb R,\\mathcal B(\\mathbb R))$ is measurable. Joint measurability is an\nadditional hypothesis when a spatial Lebesgue integral is used; it is not part\nof coordinate measurability.\n\nWrite $\\mathcal L(X(s_1),\\ldots,X(s_n))$ for the pushforward law of a finite\ncoordinate tuple ([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-law-or-distribution-of-a-random-element]]). The field is **strictly stationary** on $T$ when, for every\nfinite tuple $s_1,\\ldots,s_n\\in T$ and every $u\\in\\mathbb R^d$ for which\n$s_i+u\\in T$ for all $i$, these joint laws are invariant under the common\ntranslation $s_i\\mapsto s_i+u$. This extends the integer-shift convention for\ntime series in [[def-strict-and-weak-stationarity-for-time-series]] to spatial\nindices.\n\nWrite $T-T:=\\{t-s:s,t\\in T\\}$ for the set of displacements realized by pairs\nof sites.\n\nThe field is **wide stationary** when every $X(s)$ is square-integrable, its\nmean is one constant $m$, and there is a function $C:T-T\\to\\mathbb R$ such\nthat\n$$\\operatorname{Cov}(X(s),X(t))=C(t-s)\\qquad(s,t\\in T).$$\nFor a wide-stationary field on all of $\\mathbb R^d$, it is **wide isotropic**\nwhen $C(h)$ depends only on the Euclidean norm $\\|h\\|$.\n\nFor $h\\in T-T$ and any $s$ with $s,s+h\\in T$, put\n$\\Delta_hX(s):=X(s+h)-X(s)$. The field is **intrinsically stationary of order\ntwo** when for each $h\\in T-T$ the first and second raw moments of\n$\\Delta_hX(s)$ are finite and independent of the admissible starting site\n$s$. Here these moments are $\\mathbb E[\\Delta_hX(s)]$ and\n$\\mathbb E[(\\Delta_hX(s))^2]$. The common second moment defines the\n**variogram**\n$$\\gamma(h):=\\frac12\\mathbb E[(\\Delta_hX(s))^2].$$\nThe mean increment may depend on $h$ and need not be zero; no finite second\nmoment of the field levels themselves is required by this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-borel-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal T)$ be a topological space ([[def-topological-space]]). The\n**Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:\n\n$$\\mathcal B(X):=\\sigma_X(\\mathcal T).$$\n\nIts members are the **Borel subsets** of $X$. The generated sigma-algebra exists\nand is minimal by [[thm-generated-sigma-algebra-exists-and-is-minimal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space.\n\n- If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the\n  extended-valued integral\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$\n- If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense\n  of [[def-integrable-real-and-complex-functions-and-their-integrals]], its\n  **expectation** is again\n  $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$\n  now a finite real or complex number.\n\nFor an integrable real random variable,\n$$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$\nwhere $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X,Y\\in L^2(\\mathbb P)$ are real random variables, then\n$$\\mathbb E[|XY|]\\le\\big(\\mathbb E[X^2]\\big)^{1/2}\\big(\\mathbb E[Y^2]\\big)^{1/2}.$$\n\nEquality holds if and only if at least one of $X,Y$ is zero almost surely, or\nthere is a constant $c>0$ with\n$$|X|^2=c\\,|Y|^2\\qquad\\mathbb P\\text{-almost surely}.$$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-measure-on-sigma-finite-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. For $E \\in \\mathcal A \\otimes \\mathcal B$, define\n\n$$(\\mu \\times \\nu)(E) := \\int_X \\nu(E_x)\\,d\\mu = \\int_Y \\mu(E^y)\\,d\\nu.$$\n\nThe two displayed integrals are well-defined by\n[[prop-sigma-finite-section-measure-functions-are-measurable]] and equal by\n[[thm-iterated-section-measures-agree-on-product-measurable-sets]]. This is the\n**product measure** of $\\mu$ and $\\nu$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-convergence-in-lp-for-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $1\\le p\\le\\infty$. For real random variables whose classes lie in\n$L^p(\\mathbb P)$ as defined by [[def-l-p-space-as-a-quotient-by-null-functions]],\nwrite $X_n\\to X$ **in $L^p$** when\n$$\\|[X_n]-[X]\\|_{L^p(\\mathbb P)}\\longrightarrow0.$$ \nFor $p<\\infty$, this norm is\n$$\\|[X_n]-[X]\\|_{L^p(\\mathbb P)}=\\bigl(\\mathbb E|X_n-X|^p\\bigr)^{1/p};$$\nfor $p=\\infty$, it is the essential-supremum norm. Thus the assertion concerns\nalmost-everywhere equivalence classes, not chosen representatives.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sections-of-product-measurable-functions-are-measurable",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces, and let\n$$f : X \\times Y \\to \\overline{\\mathbb R}$$\nbe $(\\mathcal A \\otimes \\mathcal B,\\mathcal B(\\overline{\\mathbb R}))$-measurable.\nThen $f_x : Y \\to \\overline{\\mathbb R}$ is $\\mathcal B$-measurable for every\n$x \\in X$, and $f^y : X \\to \\overline{\\mathbb R}$ is $\\mathcal A$-measurable\nfor every $y \\in Y$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F11], Lebesgue measure on $\\mathbb R^d$ is sigma-finite under the assumed $\\mathrm{AC}_\\omega$. Its restriction to $W_n$ is finite by [A1], and the probability measure has total mass $1$. Thus all measure factors used below satisfy the sigma-finiteness hypotheses of [F5] and [F6], including the unbounded lag-space factor in $W_n\\times\\mathbb R^d$. For every $s$, [F4] with $V=1$ gives $\\mathbb E|X(s)|\\le(\\mathbb E[X(s)^2])^{1/2}=M<\\infty$, where $M$ is constant by the stated first- and second-order stationarity. The map $(s,\\omega)\\mapsto |X(s,\\omega)|$ is product-measurable; Tonelli [F5] gives $\\mathbb E\\int_{W_n}|X(s)|\\,ds =\\int_{W_n}\\mathbb E|X(s)|\\,ds\\le M|W_n|<\\infty.$ Therefore the sample path is absolutely integrable almost surely. Tonelli also makes the event where this integral is finite measurable; its probability is one. Applying Tonelli separately to $X^+$ and $X^-$ makes both section integrals measurable, and their difference on that event, extended by zero on its null complement as in [A2], is measurable.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F11",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $\\int_{W_n}\\mathbb E|X(s)|\\,ds<\\infty$, Fubini [F6] applies to $X$ on $W_n\\times\\Omega$. Its constant mean gives $\\mathbb E[\\bar X_{W_n}]=\\frac1{|W_n|}\\int_{W_n}\\mathbb E[X(s)]\\,ds =\\frac1{|W_n|}\\int_{W_n}\\mu\\,ds=\\mu.$",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F3",
+            "F6",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $Z(s):=X(s)-\\mu$. The rectangle-preimage argument in [F9] makes $(s,t,\\omega)\\mapsto Z(s,\\omega)Z(t,\\omega)$ product-measurable. By [F4], $\\mathbb E|Z(s)Z(t)|\\le C(0)$ for all $s,t$. Iterated Tonelli [F5] therefore gives a finite integral, at most $C(0)|W_n|^2$, of the absolute pair product over $W_n\\times W_n\\times\\Omega$. Each $\\Omega$-section is integrable by this bound, so Fubini [F6] makes $(s,t)\\mapsto\\mathbb E[Z(s)Z(t)]$ measurable; it equals $C(t-s)$ by [F2]. A second Fubini calculation yields $\\mathbb E\\bigl[(\\bar X_{W_n}-\\mu)^2\\bigr] =\\frac1{|W_n|^2}\\int_{W_n}\\int_{W_n}C(t-s)\\,dt\\,ds.$ This also proves $\\bar X_{W_n}\\in L^2$.",
+          "step": "1.3",
+          "inputs": [
+            "A2",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "F11",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Define $q_n(h):=|W_n\\cap(W_n-h)|/|W_n|$. The addition-measurability argument in [F9] makes $(s,h)\\mapsto\\mathbf1_{W_n}(s)\\mathbf1_{W_n}(s+h)$ product-measurable, so Tonelli [F5] gives measurability of its section integral $q_n$. Also $0\\le q_n(h)\\le1$. For fixed $h$, translation invariance [F7] gives $|W_n\\setminus(W_n-h)|=|(W_n+h)\\setminus W_n|.$ The latter is bounded by $|(W_n+\\{0,h\\})\\setminus W_n|$, so the Van Hove condition [A1] implies $q_n(h)\\to1$.",
+          "step": "1.4",
+          "inputs": [
+            "A1",
+            "F5",
+            "F7",
+            "F9",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The product-measurable integrand $C(h)\\mathbf1_{W_n}(s)\\mathbf1_{W_n}(s+h)$ is absolutely integrable: Tonelli and [F9] give\n$$\\int_{\\mathbb R^d}\\int_{W_n}|C(h)|\\mathbf1_{W_n}(s+h)\\,ds\\,dh\\le |W_n|\\|C\\|_1<\\infty.$$\nIn the inner integral of step 1.3 set $h=t-s$; translation invariance [F7]\ngives $\\int_{W_n}C(t-s)\\,dt=\\int_{\\mathbb R^d}C(h)\\mathbf1_{W_n}(s+h)\\,dh$.\nFubini [F6] then yields\n$$\\mathbb E\\bigl[(\\bar X_{W_n}-\\mu)^2\\bigr] =\\frac1{|W_n|^2}\\int_{\\mathbb R^d}C(h)|W_n\\cap(W_n-h)|\\,dh.$$\nThe overlap factor is the measure of those $s\\in W_n$ for which $s+h\\in W_n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "F5",
+            "F6",
+            "F7",
+            "F9",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Multiplying the formula in step 2.1 by $|W_n|$ gives $|W_n|\\,\\mathbb E[(\\bar X_{W_n}-\\mu)^2]=\\int_{\\mathbb R^d}C(h)q_n(h)\\,dh.$ By [F10], the right side converges to $\\int C(h)\\,dh$ because $|C(h)q_n(h)|\\le|C(h)|\\in L^1$. It is therefore bounded; since $|W_n|\\to\\infty$, step 2.1 implies $\\mathbb E[(\\bar X_{W_n}-\\mu)^2]\\to0$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F10",
+            "step 2.1",
+            "step 1.4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The mean identity in step 1.2 and the second-moment limit in step 3.1 are exactly $L^2$ convergence to $\\mu$ by [F8].",
+          "step": "4.1",
+          "inputs": [
+            "F8",
+            "step 1.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and A1: every W_n has strictly positive volume, excluding an empty window and its undefined average. Step 1.4 still allows empty overlap W_n intersect (W_n-h), with q_n(h)=0 at such h; the zero integrand is included in the covariance formula."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2, 1.3, 3.1: X identically zero gives mu=0, C=0, average zero and zero squared error. The integrability and sigma-finiteness arguments remain valid without positive variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1-1.4: d=1 is allowed; Tonelli integrates over a bounded Borel subset of R and the overlap q_n(h) uses real h. The result applies to each individual W_n before its sequence limit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2, 1.3, 3.1: a constant deterministic field has covariance zero and its mean is recovered exactly by every window average. Zero covariance is permitted; zero-volume windows are not, by A1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.4: arbitrary bounded Borel windows are admitted, with their actual boundary membership retained in W_n intersect (W_n-h). No interval endpoint is singled out; the Van Hove boundary-excess hypothesis controls the overlap for every fixed h."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: AC_omega supplies sigma-finite Lebesgue measure via F11 and Borel measurability of each positive-volume W_n via A1. Step 1.4 uses the explicit finite compact {0,h}, so that overlap proof adds no arbitrary selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem derives unbiasedness and L2 convergence from integrable stationary covariance and Van Hove windows; it does not assert those window and covariance conditions are necessary for consistency. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem derives unbiasedness and L2 convergence from integrable stationary covariance and Van Hove windows; it does not assert those window and covariance conditions are necessary for consistency. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-lattice-covariance-and-variogram-estimators": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: V_n is nonempty and only lags with N_n(h)>0 are admissible. A lag with no pairs has no displayed covariance or semivariogram estimate; neither reciprocal is formed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero observations give bar Y_n=0 and every admissible raw-product covariance and squared-increment semivariogram zero. Empty pair counts remain excluded rather than assigned a zero ratio."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-window, one-pair, one-frequency, or one-coordinate case is included by the Statement's finite formulas."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition formula covers the constant or zero-data substitution directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: all lattice sites in V_n are retained; a pair is included exactly when j and j+h both belong to V_n. Thus sites on an observation-window boundary enter by set membership, and absent shifted sites are excluded by P_n(h)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: each V_n and admissible P_n(h) are finite nonempty sets, and sums use all their members. The denominator restrictions M_n>0 and N_n(h)>0 suffice; no chosen representative observation or arbitrary-index choice is part of these formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition specifies raw-product pair-count covariance and squared-increment semivariogram conventions; it does not assert a characterization of stationarity by these finite sample formulas. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition specifies raw-product pair-count covariance and squared-increment semivariogram conventions; it does not assert a characterization of stationarity by these finite sample formulas. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-lattice-covariance-estimator-asymptotically-unbiased": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-lattice-covariance-and-variogram-estimators",
+          "source_section": "Definition",
+          "quote": "This convention subtracts the square of the one global sample mean",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])]",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y]",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "\\mathbb E[|XY|]\\le",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-convergence-in-lp-for-random-variables",
+          "source_section": "Definition",
+          "quote": "write $X_n\\to X$ **in $L^p$** when",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Every product $Y_jY_{j+h}$ is integrable by [F3]. By the stationary covariance identity in the Given and [F1], $\\mathbb E[Y_jY_{j+h}]=C(h)+\\mu^2$ for every $j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "By [F3] and [F4], $|\\mathbb E[\\bar Y_n^2]-\\mu^2| =|\\mathbb E[(\\bar Y_n-\\mu)(\\bar Y_n+\\mu)]| \\le\\|\\bar Y_n-\\mu\\|_2\\,\\|\\bar Y_n+\\mu\\|_2\\longrightarrow0,$ because $\\|\\bar Y_n+\\mu\\|_2^2\\le2\\|\\bar Y_n-\\mu\\|_2^2+8\\mu^2$ is bounded by $(a+b)^2\\le2a^2+2b^2$ and [F4].",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "Applying [F2] to the finite average in [A1] and using step 1.1 gives $\\mathbb E[\\widehat C_n(h)]=C(h)+\\mu^2-\\mathbb E[\\bar Y_n^2].$ Step 1.2 therefore proves $\\mathbb E[\\widehat C_n(h)]\\to C(h)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Under the increment-moment hypothesis, every summand in [A1] has expectation $2\\gamma(h)$. Linearity [F2] over the $N_n(h)$ pairs and division by $2N_n(h)$ give $\\mathbb E[\\widehat\\gamma_n(h)]=\\gamma(h)$ whenever the pair count is positive.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1, 3.1: V_n is nonempty and the covariance branch requires N_n(h)>0 eventually; the semivariogram equality is only for n with positive pair count. Empty pair windows have no estimator, and the theorem performs no division for them."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1, 3.1: the zero field has mu=C(h)=gamma(h)=0, so both expected estimates are zero at each admissible pair count and the covariance expectation limit holds exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1, 3.1: for a lag with one available pair, N_n(h)=1, finite-sum expectation identities remain valid. A singleton V_n admits lag h=0; the asymptotic covariance result still requires the stated L2 mean consistency."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1, 3.1: deterministic constant Y_j=a gives raw-product covariance a^2-a^2=0 and semivariogram zero. It satisfies L2 mean consistency exactly, so both conclusions cover this degenerate field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1, 3.1: expectations average exactly the pairs with both sites in V_n. Boundary truncation changes N_n(h) but not any pair expectation; positive pair count is the sole denominator condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1, 3.1: admissible pair sets have positive finite N_n(h). Each expectation is a finite sum over all available pairs; the proof chooses no points or representatives from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves expectation convergence from L2-consistent sample means and proves exact increment unbiasedness separately; neither implication is stated as a necessary condition for unbiased covariance estimates. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem proves expectation convergence from L2-consistent sample means and proves exact increment unbiasedness separately; neither implication is stated as a necessary condition for unbiased covariance estimates. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-integers-lattice-is-discrete-lca-group": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-int-comm-ring",
+          "source_section": "Statement",
+          "quote": "commutative ring with multiplicative identity",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "A **group** is a monoid",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-topologies",
+          "source_section": "Definition",
+          "quote": "**Discrete topology.**",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "The **product topology**",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-continuous-map-top",
+          "source_section": "Definition",
+          "quote": "$f$ is **continuous** if it is continuous at every point of $X$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-topological-group",
+          "source_section": "Definition",
+          "quote": "A **topological group** is a group $G$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hausdorff-space",
+          "source_section": "Definition",
+          "quote": "**Hausdorff** when any two distinct points are separated by disjoint open sets",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-compact-space",
+          "source_section": "Definition",
+          "quote": "is **compact** when every open cover of it",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-locally-compact-space",
+          "source_section": "Definition",
+          "quote": "is **locally compact** when",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "The additive group of $\\mathbb Z$ is abelian by [F1]. Coordinatewise addition on $\\mathbb Z^d$ is associative and commutative, has the zero vector as identity, and sends $x$ to $-x$ coordinatewise as its inverse. Hence $\\mathbb Z^d$ is an abelian group.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "For distinct $x,y\\in\\mathbb Z^d$, the singleton sets $\\{x\\}$ and $\\{y\\}$ are disjoint open neighbourhoods by [F2], so the space is Hausdorff by [F6]. Each singleton $\\{x\\}$ is finite and hence compact by [F7]; it is an open neighbourhood of $x$ by [F2]. Thus the space is locally compact by [F8].",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The product topology on $\\mathbb Z^d\\times\\mathbb Z^d$ is discrete: for each pair $(x,y)$, the basic open set $\\{x\\}\\times\\{y\\}$ is its singleton by [F2, F3]. Therefore coordinatewise addition $\\mathbb Z^d\\times\\mathbb Z^d\\to\\mathbb Z^d$ and inversion $\\mathbb Z^d\\to\\mathbb Z^d$ are continuous by [F4]. By [F5] the group is a topological group, and with step 1.2 it is locally compact Hausdorff abelian. Every map from $\\mathbb Z^d$ is continuous by [F2, F4].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: Z^d contains the zero vector, so the algebraic object cannot be empty. The universal map-continuity conclusion in step 2.1 permits an empty target only if a map into it exists; from nonempty Z^d none exists, and the quantification is then vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the zero vector is the identity, and coordinatewise negation fixes it. Step 1.2 provides its open compact singleton neighborhood just as for any other lattice point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 1.2: d=1 gives the discrete additive integers. A singleton {x} is already a compact open neighborhood, so no product-dimension restriction beyond d>=1 is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement fixes d>=1, so the trivial zero-dimensional group is outside the stated model. Compact singleton neighborhoods are already allowed and proved in step 1.2; no claim for d=0 is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement has a discrete lattice topology and coordinatewise group law, with no interval or angular parameter endpoint. Step 1.2 uses open singleton neighborhoods for every lattice point, so no exceptional edge points exist."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 1.2: the zero vector is explicit, inverses are coordinatewise, and compact neighborhoods are the given singleton {x}; no representative or infinite family selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lattice lemma verifies its specified coordinatewise group and discrete topology are LCA and all maps out are continuous; it does not characterize every LCA group as an integer lattice. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lattice lemma verifies its specified coordinatewise group and discrete topology are LCA and all maps out are continuous; it does not characterize every LCA group as an integer lattice. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-dual-of-zd-is-torus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-pontryagin-dual-and-compact-open-topology",
+          "source_section": "Definition",
+          "quote": "A **character** of $G$ is a continuous group homomorphism",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compact-open-topology-on-a-discrete-domain-is-pointwise",
+          "source_section": "Statement",
+          "quote": "coincides with the topology of pointwise convergence",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integers",
+          "source_section": "Definition",
+          "quote": "The **integers** are the quotient",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-standard-topologies",
+          "source_section": "Definition",
+          "quote": "**Discrete topology.**",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "A **group homomorphism** from $G$ to",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-integer-powers",
+          "source_section": "Definition",
+          "quote": "z^0=1",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-group-power-laws",
+          "source_section": "Statement",
+          "quote": "g^{m+n} = g^{m} g^{n}",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "source_section": "Statement",
+          "quote": "compact metrizable topological abelian group",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-topological-group",
+          "source_section": "Definition",
+          "quote": "A **topological group** is a group $G$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-product-universal-property",
+          "source_section": "Statement",
+          "quote": "the product topology is the coarsest topology",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-homeomorphism-and-open-maps",
+          "source_section": "Definition",
+          "quote": "is a **homeomorphism** if $f$ is a continuous bijection",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-integers-lattice-is-discrete-lca-group",
+          "source_section": "Statement",
+          "quote": "locally compact Hausdorff abelian",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For $z=(z_1,\\ldots,z_d)\\in\\mathbb T^d$, the formula for $\\Psi(z)$ is a homomorphism because for $k,\\ell\\in\\mathbb Z^d$, $\\Psi(z)(k+\\ell)=\\prod_r z_r^{k_r+\\ell_r} =\\left(\\prod_r z_r^{k_r}\\right)\\left(\\prod_r z_r^{\\ell_r}\\right).$ It is continuous because its domain $\\mathbb Z^d$ is discrete, so every preimage of an open set is open. Therefore $\\Psi(z)\\in\\widehat{\\mathbb Z^d}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "The map $\\Psi$ is a group homomorphism because $\\Psi(zz')(k)=\\prod_r(z_rz'_r)^{k_r} =\\left(\\prod_rz_r^{k_r}\\right)\\left(\\prod_r(z'_r)^{k_r}\\right)$ by [F3] and commutativity of $\\mathbb T$ [F4]. If $\\chi\\in\\widehat{\\mathbb Z^d}$, put $z_r:=\\chi(e_r)$, where $e_r$ is the $r$th standard basis vector. Then $z_r\\in\\mathbb T$ by [F1], and the decomposition $k=\\sum_r k_re_r$ together with homomorphism and power laws gives $\\chi(k)=\\prod_r z_r^{k_r}$. Thus $\\chi=\\Psi(z)$; also $z_r=\\chi(e_r)$ recovers each coordinate uniquely, so $\\Psi$ is bijective.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "For each fixed $k$, the coordinate map $z\\mapsto\\Psi(z)(k)$ is a finite product of continuous integer-power maps on $\\mathbb T$, hence continuous by [F4]. The product-topology criterion and [F2] then imply that $\\Psi$ is continuous into $\\widehat{\\mathbb Z^d}$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "The inverse map is $\\chi\\mapsto(\\chi(e_1),\\ldots,\\chi(e_d))$. Each coordinate is continuous by [F2], so the inverse is continuous into the finite product $\\mathbb T^d$. Thus $\\Psi$ is a homeomorphism by [F5] and a group isomorphism by step 1.2 and the pointwise group law in [F1].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and verification step 1.2: T^d contains the all-ones tuple, and the dual contains the trivial character. The product is finite with d>=1, not an empty observation family. The scanner product token names Psi, not an empty-data estimator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 1.1: at k=0 every z_r^0=1, so every character takes value 1. Step 1.2 maps the all-ones tuple to the trivial character; zero frequency is included as that tuple."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and verification step 1.2: d=1 reduces Psi(z)(k) to z^k and the inverse to chi(1). The continuity arguments still apply to the single circle coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification steps 1.1, 1.2: the all-ones torus tuple gives the trivial character, recovered by basis evaluation. The entire group is not trivial because d>=1 in Given; the trivial character is nevertheless included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and verification steps 1.1, 1.2: circle coordinates z_r are intrinsic and integer powers define Psi. If angular representatives are used, -pi and pi give the same z_r and hence the same character; no coordinate branch endpoint changes Psi."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification step 1.2: for any given character chi, inverse coordinates are uniquely prescribed as chi(e_r) using the finite standard basis. Step 2.1 proves that fixed inverse continuous, without arbitrary representative selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves a particular map Psi is a topological group isomorphism, explicitly giving its inverse by basis evaluation; no equivalence between independently variable model hypotheses is being asserted. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves a particular map Psi is a topological group isomorphism, explicitly giving its inverse by basis evaluation; no equivalence between independently variable model hypotheses is being asserted. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-transport-lattice-spectral-measure-to-torus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-dual-of-zd-is-torus",
+          "source_section": "Statement",
+          "quote": "Give $\\mathbb Z^d$ the discrete topology and let\n$\\mathbb T:=\\{z\\in\\mathbb C:|z|=1\\}$ be the multiplicative unit circle. The\nmap\n$$\\Psi:\\mathbb T^d\\longrightarrow\\widehat{\\mathbb Z^d},\\qquad \\Psi(z_1,\\ldots,z_d)(k_1,\\ldots,k_d):=\\prod_{r=1}^d z_r^{k_r}$$\nis a topological group isomorphism, where the dual has the compact-open\ntopology and $\\mathbb T^d$ has the product topology.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-radon-measure-on-an-lch-space",
+          "source_section": "Definition",
+          "quote": "For this page, a Borel measure $\\mu$ on a locally compact Hausdorff space is\n**Radon** when $\\mu(K)<\\infty$ for every compact $K$, and, for every Borel\n$E$ and every open $U$,\n$$\\mu(E)=\\inf_{E\\subseteq V\\text{ open}}\\mu(V),\\qquad \\mu(U)=\\sup_{K\\subseteq U\\text{ compact}}\\mu(K).$$\nCohn calls this convention regular. It does not assert compact inner\napproximation for arbitrary Borel $E$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb T:=\\{z\\in\\mathbb C:|z|=1\\}$ carry the subspace topology of\n$\\mathbb C$ ([[def-subspace-topology-top]],\n[[def-complex-metric-convergence-and-continuity]]) and the multiplication of\n$\\mathbb C$, and let $\\varepsilon:\\mathbb R/\\mathbb Z\\to\\mathbb T$,\n$\\varepsilon([t]):=\\exp(2\\pi i t)$, for the published one-dimensional torus\n$\\mathbb R/\\mathbb Z$ ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]).\nThen $\\mathbb T$ is a compact metrizable topological abelian group\n([[def-topological-group]]), $\\varepsilon$ is an isomorphism of topological\ngroups, and\n$$|zw-z|=|w-1|,\\qquad |z^{-1}-w^{-1}|=|z-w|$$\nfor all $z,w\\in\\mathbb T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-products-of-compact-spaces",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ ([[def-natural-numbers]]) and every family\n$(X_k)_{k < n}$ of compact topological spaces ([[def-compact-space]],\n[[def-topological-space]]), the product\n\n$$\\prod_{k < n} X_k$$\n\nwith the product topology ([[def-product-topology]]) is compact. In particular a\nbinary product $X \\times Y$ of compact spaces is compact, and the empty product,\na one-point space, is compact.\n\n**No choice principle is used beyond [[lem-finite-choice]]**, which is a theorem\nof ZF. That is what separates the finite case from the arbitrary one, where the\nAxiom of Choice is genuinely spent.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-products-preserve-t0-t1-and-hausdorff",
+          "source_section": "Statement",
+          "quote": "For any family $(X_i)_{i\\in I}$, if every $X_i$ is $T_0$, respectively $T_1$, respectively Hausdorff, then $\\prod_{i\\in I}X_i$ is respectively $T_0$, $T_1$, respectively Hausdorff. The empty product is included.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $B_1,B_2,\\ldots$ are pairwise disjoint Borel subsets of $\\mathbb T^d$, then their images under the bijection $\\Psi$ are pairwise disjoint Borel sets by [F1]. Hence $F\\!\\left(\\bigcup_{m\\ge1}B_m\\right) =\\mu\\!\\left(\\bigcup_{m\\ge1}\\Psi(B_m)\\right) =\\sum_{m\\ge1}\\mu(\\Psi(B_m)) =\\sum_{m\\ge1}F(B_m).$ Thus $F$ is a positive measure, and $F(\\mathbb T^d)=\\mu(\\widehat{\\mathbb Z^d})<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For Borel $B\\subseteq\\mathbb T^d$ and $\\varepsilon>0$, outer regularity of $\\mu$ gives an open $U\\supseteq\\Psi(B)$ with $\\mu(U)<\\mu(\\Psi(B))+\\varepsilon$. Then $\\Psi^{-1}(U)$ is open, contains $B$, and $F(\\Psi^{-1}(U))=\\mu(U)$, proving outer regularity of $F$. If $U$ is open in $\\mathbb T^d$, inner regularity of $\\mu$ gives compact $C\\subseteq\\Psi(U)$ with $\\mu(C)>\\mu(\\Psi(U))-\\varepsilon$. Then $\\Psi^{-1}(C)$ is compact in $U$ and $F(\\Psi^{-1}(C))=\\mu(C)$, proving inner regularity on open sets. The torus is compact Hausdorff by [F4], so these properties make $F$ Radon as in [F2].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an indicator $g=\\mathbf1_B$ of a Borel set, $\\int g\\,dF=F(B)=\\mu(\\Psi(B)) =\\int \\mathbf1_B(\\Psi^{-1}(\\chi))\\,\\mu(d\\chi).$ Finite linearity [F3] extends this equality to Borel simple functions. For a nonnegative Borel function $g$, the simple-approximation theorem [F3] supplies Borel simple functions $s_m\\uparrow g$. Since $\\Psi^{-1}$ is continuous, $s_m\\circ\\Psi^{-1}\\uparrow g\\circ\\Psi^{-1}$ measurably on the dual. Applying monotone convergence [F3] to the simple-function identity on both spaces gives the asserted identity for $g$. Splitting the real and imaginary parts of a bounded complex Borel function into positive and negative parts then gives the stated identity by [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the zero Radon measure is permitted and transports to F=0. For B empty, Psi(B) is empty and F(B)=0; the integral identity in step 2.1 remains valid."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: mu=0 is a finite positive Radon measure and its transported F is zero. Both sides of the step 2.1 integral identity are then zero for every bounded Borel g."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1: for d=1, Psi transports a measure on the dual of Z to the single circle, and the same indicator/simple-function argument proves the integral identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2: a zero measure or a single-atom finite Radon measure transports through the fixed homeomorphism, preserving mass and compact/regularity properties. Step 2.1 applies to either without a density assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: Psi is a homeomorphism between the intrinsic torus and dual; integration uses torus Borel sets. Identified angular representatives at opposite cube faces denote the same point, and transporting its measure does not split that point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1: regularity supplies an open or compact approximant for each fixed epsilon, and F3 supplies increasing simple approximations. These are the precise existential suppliers used, rather than an unsupported claim that the entire argument is finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma constructs F from a supplied Radon measure through Psi and proves its integration identity; it makes no converse characterization of arbitrary measures from a single integral value. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma constructs F from a supplied Radon measure through Psi and proves its integration identity; it makes no converse characterization of arbitrary measures from a single integral value. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-regular-grid-periodogram-and-smoother": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: n>=1 gives a nonempty lattice/Fourier grid of n^d points. Compact-support K may vanish on all grid displacements for a particular bandwidth; then the denominator is zero and the smoother is explicitly undefined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Y_j=mu yields zero centered Fourier sum and I_n=0; any defined smoother is then zero. A zero smoothing denominator remains explicitly undefined, independently of this zero-data case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-window, one-pair, one-frequency, or one-coordinate case is included by the Statement's finite formulas."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition formula covers the constant or zero-data substitution directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: angular coordinates are explicitly represented in [-pi,pi)^d and periodic modulo 2pi. Fourier-grid coordinates and K_b^per use that identification, so opposite boundary representatives have the same periodogram and weights."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the grid is explicitly Lambda_n={0,...,n-1}^d, and only finitely many translates of a compactly supported kernel contribute at each point. Weights are defined only for positive total kernel weight; no frequency is selected from an empty positive support."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition fixes a known-mean Fourier-square estimator and normalized kernel smoother, leaving it undefined at zero denominator; it does not assert equivalence between a spectral model and these definitions. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition fixes a known-mean Fourier-square estimator and normalized kernel smoother, leaving it undefined at zero denominator; it does not assert equivalence between a spectral model and these definitions. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-regular-grid-periodogram-fejer-expectation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Dependent Choice**",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-positive-definite-function-on-an-abelian-group",
+          "source_section": "Definition",
+          "quote": "is **positive definite** when",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-bochner-theorem-for-lca-groups",
+          "source_section": "Statement",
+          "quote": "there is a unique finite positive Radon measure",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-dual-of-zd-is-torus",
+          "source_section": "Statement",
+          "quote": "is a topological group isomorphism",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-transport-lattice-spectral-measure-to-torus",
+          "source_section": "Statement",
+          "quote": "Then $F$ is a finite positive Radon measure",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-regular-grid-periodogram-and-smoother",
+          "source_section": "Definition",
+          "quote": "I_n(\\lambda):=\\frac1{(2\\pi)^dN_n}",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])]",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y]",
+          "uses": [
+            "1.1",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-schwarz-for-random-variables",
+          "source_section": "Statement",
+          "quote": "\\mathbb E[|XY|]\\le",
+          "uses": [
+            "1.1",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-product-measure-on-sigma-finite-spaces",
+          "source_section": "Definition",
+          "quote": "For $E \\in \\mathcal A \\otimes \\mathcal B$, define",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "\\int_{X \\times Y} f",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-integers-lattice-is-discrete-lca-group",
+          "source_section": "Statement",
+          "quote": "locally compact Hausdorff abelian",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-angular-fourier-orthogonality",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every integer $k$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "For any finite lattice points $k_1,\\ldots,k_m\\in\\mathbb Z^d$ and complex coefficients $a_1,\\ldots,a_m$, the finite sum $\\sum_r a_r(Y_{k_r}-\\mu)$ is square-integrable. Expanding its squared modulus, using [F6] and stationarity, gives $\\sum_{r,s}a_r\\overline{a_s}c(k_r-k_s) =\\mathbb E\\left|\\sum_r a_r(Y_{k_r}-\\mu)\\right|^2\\ge0.$ Thus $c$ is positive definite by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-1.2",
+          "claim": "By [F9], $\\mathbb Z^d$ is a locally compact Hausdorff abelian group and every function on it is continuous, so $c$ is continuous. By Bochner's theorem [F2], using AC [A1] and DC [A2], there is a unique finite positive Radon measure $F_0$ on $\\widehat{\\mathbb Z^d}$ such that $c(h)=\\int_{\\widehat{\\mathbb Z^d}}\\chi(h)\\,F_0(d\\chi).$",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "derivation-1.3",
+          "claim": "Expand the finite squared modulus in [F5]. Every product is integrable by [F7], and stationarity gives $\\mathbb E[I_n(\\lambda)] =\\frac1{(2\\pi)^dn^d}\\sum_{j,k\\in\\Lambda_n} c(j-k)e^{-i(j-k)\\cdot\\lambda}.$",
+          "step": "1.3",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "By [F3] and [F4], transport $F_0$ to the unique finite positive Radon measure $F$ on $\\mathbb T^d$. Applying the integral-transport identity [F4] to $\\chi\\mapsto\\chi(h)$ gives $c(h)=\\int_{\\mathbb T^d}e^{ih\\cdot\\theta}\\,F(d\\theta).$",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derivation-3.1",
+          "claim": "Substitute the spectral representation from step 2.1 into each summand of step 1.3. Linearity permits moving the finite sum through the integral, and $\\sum_{j,k\\in\\Lambda_n}e^{-i(j-k)\\cdot(\\lambda-\\theta)} =\\left|\\sum_{j\\in\\Lambda_n}e^{-ij\\cdot(\\lambda-\\theta)}\\right|^2.$ After dividing by $(2\\pi)^dn^d$ this is precisely $\\mathbb E[I_n(\\lambda)] =\\int_{\\mathbb T^d}\\Phi_n(\\lambda-\\theta)\\,F(d\\theta).$",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "step 1.3",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-4.1",
+          "claim": "The displayed kernel factors into nonnegative one-dimensional kernels. For each coordinate, expanding the finite square and applying angular orthogonality [F10] to each integer exponent $a-b$ gives $\\int_{-\\pi}^{\\pi}\\frac1{2\\pi n} \\left|\\sum_{a=0}^{n-1}e^{-iax}\\right|^2dx=1.$ The Countable Choice hypothesis of [F10] follows from AC by [F11] and [A1]. Fubini [F8] for the finite product then gives $\\int_{\\mathbb T^d}\\Phi_n(x)\\,dx=1,$ and nonnegativity follows from the squared modulus.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F8",
+            "F10",
+            "F11",
+            "F12",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: n>=1 excludes an empty observation grid. Step 1.1 also permits an empty finite coefficient family, whose quadratic form is zero; no nonempty-family selection is used for positivity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 3.1: zero covariance gives the zero Bochner measure and zero expected periodogram; the deterministic kernel still has unit integral in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.3, 4.1: n=1 has a singleton grid and Phi_1=(2pi)^(-d), whose angular integral is one. The d=1 product formula is the single one-dimensional Fejer kernel."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1: a deterministic constant mean field has centered covariance zero, zero spectral measure and zero expected Fourier square; Bochner does not require nonzero mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: every lambda is in the intrinsic torus and the finite integer-exponent kernel is periodic. Step 4.1 evaluates angular integrals on [-pi,pi]; changing its endpoint representative does not change Lebesgue integrals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement declares AC and DC; AC supplies Countable Choice for the angular orthogonality use in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Fejer theorem derives spectral representation and an expectation convolution from stationary lattice covariance; it does not characterize stationarity by equality of one periodogram expectation. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Fejer theorem derives spectral representation and an expectation convolution from stationary lattice covariance; it does not characterize stationarity by equality of one periodogram expectation. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-regular-grid-smoothed-periodogram-bias-vanishes": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-regular-grid-periodogram-and-smoother",
+          "source_section": "Definition",
+          "quote": "Let $Y=(Y_j)_{j\\in\\mathbb Z^d}$ satisfy the constant-mean,\nlag-dependent-covariance conditions from\n[[def-lattice-covariance-and-variogram-estimators]], with known mean $\\mu$\n(set $\\mu=0$ for a centered field), and use the frequency torus $\\mathbb T^d$\nidentified with $\\widehat{\\mathbb Z^d}$ by\n[[lem-dual-of-zd-is-torus]]. Represent frequency coordinates\n$\\lambda\\in[-\\pi,\\pi)^d$ by the circle tuple\n$(e^{i\\lambda_1},\\ldots,e^{i\\lambda_d})$; coordinates and integration are\nperiodic modulo $2\\pi$ in each coordinate. For $n\\ge1$, set\n$$\\Lambda_n:=\\{0,1,\\ldots,n-1\\}^d,\\qquad N_n:=n^d,$$\nand let the $n^d$ Fourier-grid frequencies be\n$$\\lambda_{n,q}:=2\\pi q/n\\pmod{2\\pi},\\qquad q\\in\\Lambda_n.$$\nThe known-mean **regular-grid periodogram** is\n$$I_n(\\lambda):=\\frac1{(2\\pi)^dN_n} \\left|\\sum_{j\\in\\Lambda_n}(Y_j-\\mu)e^{-i j\\cdot\\lambda}\\right|^2, \\qquad \\lambda\\in\\mathbb T^d.$$\nIntegration over $\\mathbb T^d$ uses product angular Lebesgue measure on the\nfundamental cube $[-\\pi,\\pi)^d$\n([[def-product-measure-on-sigma-finite-spaces]]).\n\nFor smoothing, let $K:\\mathbb R^d\\to[0,\\infty)$ be continuous, even,\ncompactly supported, and satisfy $K(0)>0$. For $b>0$, periodize the rescaled\nkernel by\n$$K_b^{\\mathrm{per}}(x):=\\sum_{m\\in\\mathbb Z^d}b^{-d}K((x+2\\pi m)/b).$$\nBecause $K$ has compact support, only finitely many summands are nonzero for\neach fixed $x$, so this periodization is well-defined.\nFor $\\lambda\\in\\mathbb T^d$, when the denominator is positive, set\n$$w_{n,q,b}(\\lambda):= \\frac{K_b^{\\mathrm{per}}(\\lambda-\\lambda_{n,q})} {\\sum_{r\\in\\Lambda_n}K_b^{\\mathrm{per}}(\\lambda-\\lambda_{n,r})}, \\qquad \\widetilde f_{n,b}(\\lambda):= \\sum_{q\\in\\Lambda_n}w_{n,q,b}(\\lambda)I_n(\\lambda_{n,q}).$$\nThe smoother is undefined when that denominator vanishes. Its target, when a\nspectral density exists, is the density of the **lattice-sampled field on the\ndual torus**; no unaliased continuous-space spectral-density target is part of\nthis definition.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-regular-grid-periodogram-fejer-expectation",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $(Y_j)_{j\\in\\mathbb Z^d}$ be real square-integrable\nrandom variables with constant mean $\\mu$ and lag-dependent covariance\n$$c(h):=\\operatorname{Cov}(Y_{j+h},Y_j),$$\nindependent of $j$. Assume the Axiom of Choice and Dependent Choice. Then there\nis a unique finite positive Radon measure $F$ on the angular torus $\\mathbb T^d$\nsuch that\n$$c(h)=\\int_{\\mathbb T^d}e^{ih\\cdot\\theta}\\,F(d\\theta), \\qquad h\\in\\mathbb Z^d.$$\nFor the periodogram $I_n$ of\n[[def-regular-grid-periodogram-and-smoother]], define the product Fejer kernel\n$$\\Phi_n(x):=\\frac1{(2\\pi)^dn^d} \\left|\\sum_{j\\in\\{0,\\ldots,n-1\\}^d}e^{-ij\\cdot x}\\right|^2 =\\prod_{r=1}^d\\frac1{2\\pi n} \\left|\\sum_{a=0}^{n-1}e^{-iax_r}\\right|^2.$$\nThen, for every $n\\ge1$ and $\\lambda\\in\\mathbb T^d$,\n$$\\mathbb E[I_n(\\lambda)] =\\int_{\\mathbb T^d}\\Phi_n(\\lambda-\\theta)\\,F(d\\theta).$$\nThe kernel is nonnegative and has integral one with respect to product angular\nLebesgue measure. The spectral measure and density here belong to the\nlattice-indexed observations on the dual torus.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-pi-is-the-first-positive-sine-zero",
+          "source_section": "Statement",
+          "quote": "$\\sin\\pi=0$, and $\\sin x>0$ for every $x$ with $0<x<\\pi$. Thus $\\pi$ is the first positive zero of sine.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-product-measure-on-sigma-finite-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. For $E \\in \\mathcal A \\otimes \\mathcal B$, define\n\n$$(\\mu \\times \\nu)(E) := \\int_X \\nu(E_x)\\,d\\mu = \\int_Y \\mu(E^y)\\,d\\nu.$$\n\nThe two displayed integrals are well-defined by\n[[prop-sigma-finite-section-measure-functions-are-measurable]] and equal by\n[[thm-iterated-section-measures-agree-on-product-measurable-sets]]. This is the\n**product measure** of $\\mu$ and $\\nu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\phi_n(x):=(2\\pi n)^{-1}|\\sum_{a=0}^{n-1}e^{-iax}|^2$, so $\\Phi_n(x)=\\prod_{r=1}^d\\phi_n(x_r)$ by [F1]. Fix $0<\\delta<\\pi$. If the circular distance of $x$ from $0$ is at least $\\delta$, choose its representative in $[-\\pi,\\pi]$; then $|\\sin(x/2)|\\ge\\sin(\\delta/2)>0$ by [F2]. The finite geometric-series formula therefore gives $\\phi_n(x)=\\frac1{2\\pi n} \\left|\\frac{\\sin(nx/2)}{\\sin(x/2)}\\right|^2 \\le\\frac1{2\\pi n\\sin^2(\\delta/2)}.$ By the union bound over coordinates and the unit integral of each factor from [F1], $\\int_{\\{x:\\rho_\\infty(x,0)\\ge\\delta\\}}\\Phi_n(x)\\,dx \\le\\frac{d}{n\\sin^2(\\delta/2)},$ where $\\rho_\\infty$ is the maximum circular distance over the $d$ coordinates.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "A3",
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $\\varepsilon>0$. Continuity of $f$ at $\\lambda_0$ gives $0<\\delta<\\pi$ such that $|f(\\theta)-f(\\lambda_0)|<\\varepsilon$ whenever $\\rho_\\infty(\\theta,\\lambda_0)<2\\delta$. For any $\\lambda'$ with $\\rho_\\infty(\\lambda',\\lambda_0)<\\delta$, split the convolution in [F1] into that neighborhood and its complement. On the neighborhood its contribution to $|g_n(\\lambda')-f(\\lambda_0)|$ is at most $\\varepsilon$ because $\\Phi_n$ has integral one. On the complement, $\\rho_\\infty(\\lambda'-\\theta,0)\\ge\\delta$; with $M:=\\|f\\|_\\infty+|f(\\lambda_0)|<\\infty$, step 1.1 gives $|g_n(\\lambda')-f(\\lambda_0)| \\le\\varepsilon+\\frac{Md}{n\\sin^2(\\delta/2)}.$ This bound holds uniformly for all such $\\lambda'$.",
+          "step": "2.1",
+          "inputs": [
+            "A2",
+            "A3",
+            "F1",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $K$ is continuous and $K(0)>0$, there is $a>0$ such that $K(u)>0$ whenever $\\|u\\|_\\infty<a$. A nearest Fourier-grid point to $\\lambda_0$ is within $\\pi/n$ in each circular coordinate. Since $n b_n\\to\\infty$, eventually $\\pi/(n b_n)<a$, so the periodized kernel is positive at that grid point and the denominator in [A1] is positive. Moreover, if a weight in [A1] is positive, compact support of $K$ implies its grid point is within circular distance $R b_n$ of $\\lambda_0$ in every coordinate, where $[-R,R]^d$ contains the support of $K$. Since $b_n\\to0$, all positive-weight grid points eventually lie within the $\\delta$-neighborhood from step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For all sufficiently large $n$, [F3] and [A1] give $\\mathbb E[\\widetilde f_{n,b_n}(\\lambda_0)] =\\sum_{q\\in\\Lambda_n}w_{n,q,b_n}(\\lambda_0) g_n(\\lambda_{n,q}).$ The weights are nonnegative and sum to one, and every positive weight is on a grid point covered by step 2.1. Hence $\\left|\\mathbb E[\\widetilde f_{n,b_n}(\\lambda_0)]-f(\\lambda_0)\\right| \\le\\varepsilon+\\frac{Md}{n\\sin^2(\\delta/2)}.$ Taking $n\\to\\infty$ and then arbitrary $\\varepsilon\\downarrow0$ proves the smoothed bias limit. Taking $\\lambda'=\\lambda_0$ in step 2.1 proves the raw expectation limit as well.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: n>=1 supplies nonempty Fourier grids, while K(0)>0 supplies a nonempty positive neighborhood. A zero spectral density remains allowed; the eventual denominator argument depends on K and mesh, not spectral mass."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1, 3.1, 4.1: f identically zero gives zero raw and smoothed expectations, while eventual positive denominator is supplied by K and the grid mesh independently of f."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 3.1: d=1 is allowed and the nearest-grid estimate is pi/n in one circular coordinate. A fixed n=1 need not have positive smoother denominator; only sufficiently large n under n b_n tending to infinity is promised."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 2.1-4.1: a constant bounded torus density, including zero, is continuous at every target. The unit-mass Fejer convolution returns that constant, and normalized smoothing weights preserve it once defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1, 3.1: localization is by circular distance, not a linear interval cut. A target at the identified -pi/pi boundary is covered by the same target-continuity neighborhood and nearest Fourier-grid estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement carries AC and DC into the imported Fejer expectation, used in steps 1.1, 2.1 and 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Boundedness and target continuity together with b_n tending to zero and n b_n tending to infinity suffice for the bias conclusion; necessity of any of those assumptions is not asserted. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Boundedness and target continuity together with b_n tending to zero and n b_n tending to infinity suffice for the bias conclusion; necessity of any of those assumptions is not asserted. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-boundary-dominated-windows-are-not-van-hove": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-van-hove-window-sequence",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$ and assume the Axiom of Countable Choice\n$\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). By\n[[thm-borel-sets-are-lebesgue-measurable]], every Borel subset of $\\mathbb R^d$\nis Lebesgue measurable under this assumption; by\n[[thm-lebesgue-measure-is-a-complete-measure]], $|\\cdot|$ is the resulting\ncomplete Lebesgue measure. A **Van Hove sequence of spatial windows** is a\nsequence $(W_n)_{n\\ge1}$ of bounded Borel sets\n([[def-borel-sigma-algebra]]) in $\\mathbb R^d$ with\n$0<|W_n|<\\infty$ for every $n$, $|W_n|\\to\\infty$, and\n$$\\frac{|(W_n+K)\\setminus W_n|}{|W_n|}\\longrightarrow0 \\quad\\text{for every compact }K\\subseteq\\mathbb R^d.$$\nHere $|E|$ is Lebesgue measure when $E$ is Lebesgue measurable, and\n$W_n+K:=\\{x+y:x\\in W_n,\\ y\\in K\\}$. As part of the condition, each boundary\nexcess $(W_n+K)\\setminus W_n$ in the display is required to be Lebesgue\nmeasurable. Thus the window volume diverges while every fixed compact spatial\nenlargement adds a negligible relative volume.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-lebesgue-measure-is-a-complete-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra on $\\mathbb{R}^n$ and\n   $\\lambda_n$ is a measure on it ([[def-measure]]);\n2. the measure space $(\\mathbb{R}^n, \\mathcal{L}(\\mathbb{R}^n), \\lambda_n)$ is\n   complete ([[def-complete-measure-space]]), and every $S \\subseteq \\mathbb{R}^n$\n   with $\\lambda_n^*(S) = 0$ is Lebesgue measurable with $\\lambda_n(S) = 0$;\n3. every elementary set is Lebesgue measurable and\n   $\\lambda_n(A) = \\mu_0(A)$ for every $A \\in \\mathcal{E}_n$; in particular\n   $\\lambda_n(B) = \\operatorname{vol}(B)$ for every half-open box $B$,\n   $\\lambda_n(\\varnothing) = 0$ and $\\lambda_n(\\mathbb{R}^n) = +\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each rectangle is bounded and Borel, and $|W_n|=n$, so its volume tends to infinity as required in the first Van Hove condition.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Minkowski addition gives $W_n+K=[-1,n+1]\\times[-1,2]$. The two closed\nrectangles are nested, have finite volume by [F1], and Lebesgue measure is a\nmeasure by [F1], so countable additivity on\n$W_n\\sqcup((W_n+K)\\setminus W_n)=W_n+K$ gives\n$$\\frac{|(W_n+K)\\setminus W_n|}{|W_n|}\n=\\frac{3(n+2)-n}{n}=2+\\frac6n\\longrightarrow2.$$\nThis limit is not zero, contradicting [F1] for the compact $K$; hence the\nsequence is not Van Hove.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example and step 1.1: n is a positive integer and W_n=[0,n]x[0,1] has volume n>0; an empty window is not a member of the exhibited sequence."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The Example fixes positive n, hence |W_n|=n and the enlargement ratio 2+6/n is never zero. A zero field is not an input to this geometric rectangle witness, and n=0 is outside its sequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and steps 1.1, 2.1: n=1 gives unit-square W_1 with volume 1 and enlargement ratio 8=2+6. The example is in R^2; it does not assert a one-dimensional rectangle counterexample."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example fixes W_n=[0,n]x[0,1] for positive n, with positive width and volume. Collapsing width to zero changes the witness and violates the positive-volume requirement; the actual aspect-ratio degeneration is exactly the fixed-width boundary ratio computed in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and step 2.1: W_n and its enlargement are closed rectangles [0,n]x[0,1] and [-1,n+1]x[-1,2]. F1 supplies volumes for boxes of every kind; their closed boundaries do not change n or 3(n+2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Given and step 2.1: AC_omega is explicitly inherited for Borel rectangle Lebesgue measurability. The enlargement K=[-1,1]^2 is fixed, and its Minkowski sum is computed directly; no other choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example verifies a fixed rectangle sequence has boundary ratio tending to 2 for a particular square enlargement; it is a witness of failure, not a characterization of all non-Van-Hove windows. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This example verifies a fixed rectangle sequence has boundary ratio tending to 2 for a particular square enlargement; it is a witness of failure, not a characterization of all non-Van-Hove windows. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "rectangle-boundary-ratio",
+          "claim": "For W_n=[0,n]×[0,1] and K=[−1,1]^2, |W_n|=n and |(W_n+K)\\W_n|=2n+6.",
+          "result": "The ratio is 2+6/n and tends to 2, not 0, as computed in step 1.2."
+        }
+      ]
+    },
+    "cex-lattice-sample-covariance-not-positive-definite": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-lattice-covariance-and-variogram-estimators",
+          "source_section": "Definition",
+          "quote": "This convention subtracts the square of the one global sample mean",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-positive-definite-function-on-an-abelian-group",
+          "source_section": "Definition",
+          "quote": "is **positive definite** when",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivation-1.1",
+          "claim": "Take the data $(y_0,y_1,y_2)=(1,2,3)$ on $V=\\{0,1,2\\}$. Its mean is $\\bar y=2$. By [F1], the lag-zero estimator is $\\widehat C(0)=\\frac{1^2+2^2+3^2}{3}-2^2=\\frac23,$ and the lag-two estimate, based on the single pair $(0,2)$, is $\\widehat C(2)=1\\cdot3-2^2=-1.$ The negative-lag estimate equals $\\widehat C(-2)=\\widehat C(2)$ because the reverse pair has the same product.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derivation-2.1",
+          "claim": "At the two sites $0$ and $2$, all pairwise lag estimates are defined and the estimated covariance matrix is $\\begin{pmatrix}2/3&-1\\\\-1&2/3\\end{pmatrix}.$ Its quadratic form at $v=(1,1)^T$ equals $v^T\\begin{pmatrix}2/3&-1\\\\-1&2/3\\end{pmatrix}v=-2/3<0$. This contradicts the necessary nonnegative quadratic-form condition [F2], so the stated universal claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The counterexample fixes V={0,1,2} and tests sites {0,2}; these are nonempty. Step 1.1 explicitly provides the pair (0,2) for the lag-two denominator, so an empty pair set does not arise in this witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample specifically fixes data (1,2,3); replacing them by zero data would give the zero positive semidefinite estimate and would not be this refuting witness. The assertion refuted is universal, so one nonzero witness suffices."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The witness uses three observations and a two-site quadratic form. Step 1.1 has exactly one lag-two pair, so single-pair estimation is included, but a single-site covariance test cannot refute positive semidefiniteness using the displayed negative off-diagonal."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Counterexample steps 1.1, 2.1: the tested covariance matrix has eigen-direction (1,1) with strictly negative quadratic form -2/3. Zero data or a constant-data replacement would remove the witness; no assertion that every degenerate sample is indefinite is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Counterexample step 1.1: the edge pair (0,2) is explicitly present on the three-site window, and its reverse gives lag -2. Step 2.1 uses both boundary sites as the covariance test, so boundary truncation does not omit a tested estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Given and steps 1.1, 2.1: the data (1,2,3), pair (0,2), and test vector (1,1) are explicit. All tested lag estimates have displayed nonempty pair sets; there is no existential family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The specified three-site data produce a negative two-site covariance quadratic form; this refutes universal positive definiteness and does not claim every pair-count estimator is indefinite. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The specified three-site data produce a negative two-site covariance quadratic form; this refutes universal positive definiteness and does not claim every pair-count estimator is indefinite. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "three-point-sample-matrix",
+          "claim": "For y=(1,2,3) on {0,1,2}, C-hat(0)=2/3 and C-hat(±2)=−1.",
+          "result": "The two-site matrix has quadratic form −2/3 at (1,1), matching steps 1.1–2.1."
+        }
+      ]
+    },
+    "lem-fixed-grid-sampling-spectral-alias-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-random-field-stationarity-covariance-and-variogram",
+          "source_section": "Definition",
+          "quote": "Let $T\\subseteq\\mathbb R^d$, $d\\ge1$, have its relative Borel sigma-algebra, and\nlet $(\\Omega,\\mathcal F,\\mathbb P)$ be one probability space. A **real random\nfield** indexed by $T$ is a family $X=(X(s))_{s\\in T}$ of real random variables\n$X(s):\\Omega\\to\\mathbb R$ on that space. This is coordinate measurability:\neach map $(s,\\omega)\\mapsto X(s,\\omega)$ with $s$ fixed is measurable in\n$\\omega$. The field is **jointly measurable** when the map\n$(s,\\omega)\\mapsto X(s,\\omega)$ from\n$(T\\times\\Omega,\\mathcal B(T)\\otimes\\mathcal F)$ to\n$(\\mathbb R,\\mathcal B(\\mathbb R))$ is measurable. Joint measurability is an\nadditional hypothesis when a spatial Lebesgue integral is used; it is not part\nof coordinate measurability.\n\nWrite $\\mathcal L(X(s_1),\\ldots,X(s_n))$ for the pushforward law of a finite\ncoordinate tuple ([[def-stochastic-process-and-finite-dimensional-distributions]],\n[[def-law-or-distribution-of-a-random-element]]). The field is **strictly stationary** on $T$ when, for every\nfinite tuple $s_1,\\ldots,s_n\\in T$ and every $u\\in\\mathbb R^d$ for which\n$s_i+u\\in T$ for all $i$, these joint laws are invariant under the common\ntranslation $s_i\\mapsto s_i+u$. This extends the integer-shift convention for\ntime series in [[def-strict-and-weak-stationarity-for-time-series]] to spatial\nindices.\n\nWrite $T-T:=\\{t-s:s,t\\in T\\}$ for the set of displacements realized by pairs\nof sites.\n\nThe field is **wide stationary** when every $X(s)$ is square-integrable, its\nmean is one constant $m$, and there is a function $C:T-T\\to\\mathbb R$ such\nthat\n$$\\operatorname{Cov}(X(s),X(t))=C(t-s)\\qquad(s,t\\in T).$$\nFor a wide-stationary field on all of $\\mathbb R^d$, it is **wide isotropic**\nwhen $C(h)$ depends only on the Euclidean norm $\\|h\\|$.\n\nFor $h\\in T-T$ and any $s$ with $s,s+h\\in T$, put\n$\\Delta_hX(s):=X(s+h)-X(s)$. The field is **intrinsically stationary of order\ntwo** when for each $h\\in T-T$ the first and second raw moments of\n$\\Delta_hX(s)$ are finite and independent of the admissible starting site\n$s$. Here these moments are $\\mathbb E[\\Delta_hX(s)]$ and\n$\\mathbb E[(\\Delta_hX(s))^2]$. The common second moment defines the\n**variogram**\n$$\\gamma(h):=\\frac12\\mathbb E[(\\Delta_hX(s))^2].$$\nThe mean increment may depend on $h$ and need not be zero; no finite second\nmoment of the field levels themselves is required by this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linear-change-of-variables-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]) and let $T : \\mathbb{R}^n \\to \\mathbb{R}^n$ be linear\nwith matrix $A$ ([[def-linear-map]],\n[[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).\n\n1. **Invertible case.** If $\\det A \\ne 0$, then $T[E]$ is Lebesgue measurable for\n   every Lebesgue measurable $E$ and\n   $$\\lambda_n\\big(T[E]\\big) \\;=\\; |\\det A|\\;\\lambda_n(E),$$\n   both sides possibly $+\\infty$; the product is defined in\n   $\\overline{\\mathbb{R}}$ because $|\\det A| > 0$.\n2. **Singular case.** If $\\det A = 0$, then $T[E]$ is Lebesgue measurable with\n   $\\lambda_n(T[E]) = 0$ for **every** $E \\subseteq \\mathbb{R}^n$.\n\n**The singular clause is stated as nullity and not as a product.** When\n$\\det A = 0$ and $\\lambda_n(E) = +\\infty$ the expression\n$|\\det A|\\,\\lambda_n(E)$ is $0\\cdot(+\\infty)$, which [[def-extended-reals]]\nleaves undefined; writing the conclusion as $\\lambda_n(T[E]) = 0$ says the same\nthing wherever the product is defined and remains a statement where it is not.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-unit-circle-is-a-compact-metrizable-topological-group",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb T:=\\{z\\in\\mathbb C:|z|=1\\}$ carry the subspace topology of\n$\\mathbb C$ ([[def-subspace-topology-top]],\n[[def-complex-metric-convergence-and-continuity]]) and the multiplication of\n$\\mathbb C$, and let $\\varepsilon:\\mathbb R/\\mathbb Z\\to\\mathbb T$,\n$\\varepsilon([t]):=\\exp(2\\pi i t)$, for the published one-dimensional torus\n$\\mathbb R/\\mathbb Z$ ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]).\nThen $\\mathbb T$ is a compact metrizable topological abelian group\n([[def-topological-group]]), $\\varepsilon$ is an isomorphism of topological\ngroups, and\n$$|zw-z|=|w-1|,\\qquad |z^{-1}-w^{-1}|=|z-w|$$\nfor all $z,w\\in\\mathbb T$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-products-of-compact-spaces",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ ([[def-natural-numbers]]) and every family\n$(X_k)_{k < n}$ of compact topological spaces ([[def-compact-space]],\n[[def-topological-space]]), the product\n\n$$\\prod_{k < n} X_k$$\n\nwith the product topology ([[def-product-topology]]) is compact. In particular a\nbinary product $X \\times Y$ of compact spaces is compact, and the empty product,\na one-point space, is compact.\n\n**No choice principle is used beyond [[lem-finite-choice]]**, which is a theorem\nof ZF. That is what separates the finite case from the arbitrary one, where the\nAxiom of Choice is genuinely spent.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Every Borel measure finite on compact sets on a second-countable LCH space is regular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-regular-grid-periodogram-fejer-expectation",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $(Y_j)_{j\\in\\mathbb Z^d}$ be real square-integrable\nrandom variables with constant mean $\\mu$ and lag-dependent covariance\n$$c(h):=\\operatorname{Cov}(Y_{j+h},Y_j),$$\nindependent of $j$. Assume the Axiom of Choice and Dependent Choice. Then there\nis a unique finite positive Radon measure $F$ on the angular torus $\\mathbb T^d$\nsuch that\n$$c(h)=\\int_{\\mathbb T^d}e^{ih\\cdot\\theta}\\,F(d\\theta), \\qquad h\\in\\mathbb Z^d.$$\nFor the periodogram $I_n$ of\n[[def-regular-grid-periodogram-and-smoother]], define the product Fejer kernel\n$$\\Phi_n(x):=\\frac1{(2\\pi)^dn^d} \\left|\\sum_{j\\in\\{0,\\ldots,n-1\\}^d}e^{-ij\\cdot x}\\right|^2 =\\prod_{r=1}^d\\frac1{2\\pi n} \\left|\\sum_{a=0}^{n-1}e^{-iax_r}\\right|^2.$$\nThen, for every $n\\ge1$ and $\\lambda\\in\\mathbb T^d$,\n$$\\mathbb E[I_n(\\lambda)] =\\int_{\\mathbb T^d}\\Phi_n(\\lambda-\\theta)\\,F(d\\theta).$$\nThe kernel is nonnegative and has integral one with respect to product angular\nLebesgue measure. The spectral measure and density here belong to the\nlattice-indexed observations on the dual torus.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integers",
+          "source_section": "Definition",
+          "quote": "On the set $\\mathbb{N} \\times \\mathbb{N}$ of pairs of natural numbers, define\n\n$$(a,b) \\sim (c,d) \\iff a + d = b + c.$$\n\nThis is an equivalence relation ([[lem-int-equivalence]]). The **integers** are\nthe quotient\n\n$$\\mathbb{Z} := (\\mathbb{N} \\times \\mathbb{N}) / \\sim,$$\n\nand we write $[(a,b)]$ for the equivalence class of $(a,b)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-int-equivalence",
+          "source_section": "Statement",
+          "quote": "The relation $(a,b) \\sim (c,d) \\iff a + d = b + c$ on\n$\\mathbb{N} \\times \\mathbb{N}$ ([[def-integers]]) is an equivalence relation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-universal-property-of-the-quotient",
+          "source_section": "Statement",
+          "quote": "Let $\\sim$ be an equivalence relation on a set $A$, let $A/{\\sim}$ be its\nquotient set and let $\\pi := \\{\\,(a,C) \\in A \\times (A/{\\sim}) : C = [a]\\,\\}$,\nthe quotient map. Let $f : A \\to B$. Then $\\pi$ is a surjective function\n$A \\to A/{\\sim}$ with $\\pi(a) = [a]$, and:\n\n- (i) there is a function $g : A/{\\sim} \\to B$ with $g \\circ \\pi = f$ if and only if $f(a) = f(a')$ whenever $a \\sim a'$;\n- (ii) when such a $g$ exists it is unique, and it satisfies $g([a]) = f(a)$ for every $a \\in A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-n-cross-n-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{N} \\times \\mathbb{N} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the\nplane of pairs of naturals is countably infinite ([[def-countable]]).\n\nThe bijection is exhibited, not merely asserted to exist. Define $2^m$ by\nrecursion on $m$ ([[thm-recursion]]) by $2^0 = 1$ and $2^{\\sigma(m)} = 2^m + 2^m$,\nand set\n\n$$J(m,n) = 2^m \\cdot \\sigma(n + n), \\qquad \\text{that is} \\qquad J(m,n) = 2^m(2n+1).$$\n\nThen $J$ is a bijection from $\\mathbb{N} \\times \\mathbb{N}$ onto\n$\\mathbb{N} \\setminus \\{0\\}$, and $\\sigma$ is a bijection from $\\mathbb{N}$ onto\n$\\mathbb{N} \\setminus \\{0\\}$, so $\\sigma^{-1} \\circ J$ is a bijection\n$\\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$. What makes $J$ bijective is the\ndecomposition of a nonzero natural into a power of two times an odd number,\nexistence and uniqueness both.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-countable-iff-surjection-from-n",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a nonempty set. Then $A$ is at most countable ([[def-countable]]) if\nand only if there is a surjection $s : \\mathbb{N} \\to A$\n([[def-injection-surjection-bijection]]).\n\nMoreover, from any such surjection an injection $A \\to \\mathbb{N}$ is obtained\nexplicitly, without any choice, by\n\n$$j(a) := \\min\\{\\, k \\in \\mathbb{N} : s(k) = a \\,\\}.$$\n\nThis is the working form of countability used everywhere below: to prove a\nnonempty set countable it suffices to list its elements, repetitions and all.\n\n**No choice principle is used.** The backward direction is where an appeal to\nchoice would be natural (\"for each $a$ pick some $k$ with $s(k) = a$\") and it is\navoided outright, because $\\min$ is canonical: every nonempty set of naturals has\na *least* element ([[thm-well-ordering-principle]]), so $j(a)$ is determined by\n$a$ and $s$ alone.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-powers-of-countable-sets-are-countable",
+          "source_section": "Statement",
+          "quote": "If $C$ is at most countable and $m\\in\\mathbb N$, then the finite product $C^m=\\prod_{i<m}C$ is at most countable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].\n\nThe set of admissible simple minorants is nonempty because it contains the zero\nfunction, which is simple ([[def-nonnegative-simple-measurable-function]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First establish the countability needed for the sum. By [F7], the quotient map $\\pi:\\mathbb N\\times\\mathbb N\\to\\mathbb Z$ is surjective, and $\\beta:\\mathbb N\\to\\mathbb N\\times\\mathbb N$ is bijective. Their composite is onto: for any class $z$, take a representative $(a,b)$ and the unique $j$ with $\\beta(j)=(a,b)$; then $\\pi(\\beta(j))=z$. Thus $\\mathbb Z$ is at most countable by the surjection criterion in [F7]. Its finite power $\\mathbb Z^d$ is at most countable by [F7] and is nonempty, since it contains the constant tuple with value $[(0,0)]$ (and for $d=0$ the empty tuple). The same criterion supplies a surjection $e:\\mathbb N\\to\\mathbb Z^d$. Put $K_m:=\\{e(j):0\\le j\\le m\\}$. These are increasing finite subsets whose union is $\\mathbb Z^d$. For a nonnegative family $(a_k)$ define its sum as $\\lim_m\\sum_{k\\in K_m}a_k$. Each index is counted once, even if $e$ repeats values. Every finite subset of $\\mathbb Z^d$ is contained in some $K_m$: choose a preimage index for each of its finitely many elements and take their maximum. Hence the limit equals the supremum of all finite-subset sums and is invariant under reindexing. No countable family of choices is required. Each $\\theta\\mapsto f((\\theta+2\\pi k)/\\delta)$ is nonnegative Borel. The finite partial sums over $K_m$ are Borel and increase; for each real $a$, the strict superlevel set of their limit is the union of their Borel strict superlevel sets, so the limit is measurable. Reindexing the sum over finite subsets shows $g_\\delta$ is periodic. The translates $Q+2\\pi k$, $k\\in\\mathbb Z^d$, form a disjoint partition of $\\mathbb R^d$. Put $P_m:=\\bigcup_{k\\in K_m}(Q+2\\pi k)$, so $P_m\\uparrow\\mathbb R^d$. Translation invariance [F2] first for indicators, then for simple functions by [F9] and by monotone convergence [F3] for nonnegative Borel functions, gives the cellwise integral translations. Monotone convergence [F3] then gives $$\\int_Qg_\\delta(\\theta)d\\theta=\\delta^{-d}\\lim_m\\sum_{k\\in K_m}\\int_{Q+2\\pi k}f(u/\\delta)du=\\delta^{-d}\\int_{\\mathbb R^d}f(u/\\delta)du.$$ For the dilation identity, [F2] gives it first for indicators of Borel sets. For a nonnegative simple function written over disjoint level sets, summing these indicator identities gives the identity for the simple function by [F9]. By [F8], every nonnegative Borel function is an increasing limit of simple functions; monotone convergence [F3] therefore extends the dilation identity to every such function, including $f$. Thus $$\\int_Qg_\\delta(\\theta)d\\theta=\\int_{\\mathbb R^d}f(\\omega)d\\omega<\\infty.$$ The measurable set where $g_\\delta=\\infty$ is null: if it had positive measure, the integral would be at least $M$ times that measure for every $M>0$, contradicting finiteness. This set is periodic, so a finite-valued representative obtained by replacing $g_\\delta$ by zero there remains periodic and defines the same measure.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "given",
+            "algebra",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For integer $h$, the identity $e^{ih\\cdot(\\theta+2\\pi k)}=e^{ih\\cdot\\theta}$ and the finite mass in step 1.1 permit the same increasing finite-union partition for the absolutely integrable complex integrand. Translation on each cell, using the integral- translation identity established in step 1.1 on the nonnegative parts of its real and imaginary parts, gives $$\\int_Qe^{ih\\cdot\\theta}g_\\delta(\\theta)d\\theta=\\delta^{-d}\\int_{\\mathbb R^d}e^{ih\\cdot u}f(u/\\delta)\\,du.$$ To apply dilation to this complex integral, write $e^{ih\\cdot u}f(u/\\delta)$ as the differences of its nonnegative cosine and sine parts. Apply the nonnegative scaling identity established in step 1.1 to $f(\\omega)\\max(\\cos(\\delta h\\cdot\\omega),0)$, $f(\\omega)\\max(-\\cos(\\delta h\\cdot\\omega),0)$, and the corresponding two sine parts. Each is Borel and bounded by $f$, hence integrable; recombining their integrals yields $$\\int_Qe^{ih\\cdot\\theta}g_\\delta(\\theta)d\\theta=\\int_{\\mathbb R^d}e^{i\\delta h\\cdot\\omega}f(\\omega)d\\omega=C(\\delta h)=c(h).$$ The density defines a finite Borel measure on the torus, Radon by [F5] and [F4]. By [F1] the sample is a stationary lattice field; symmetry of real covariance identifies $\\operatorname{Cov}(Y_{j+h},Y_j)$ with $C(\\delta h)$. Uniqueness in [F6] identifies that measure with its torus spectrum. The mass identity at $h=0$ is $C(0)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F6] to the sampled spectrum in step 2.1 to obtain the first periodogram expectation identity. Since $\\Phi_n$ is periodic, bounded for each fixed $n$, and nonnegative, partitioning the density integral exactly as in step 1.1 gives its second expression over $\\mathbb R^d$. That expression integrates a periodic kernel against the original density and does not remove the noncentral translates.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Zero spectral density gives zero sampled measure and zero expected periodogram in steps1.1–3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: h=0 gives integral_Q g_delta=C(0). Step 1.1 allows zero total mass and the proof introduces no positive-mass denominator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1: d=1 and delta=1 are allowed. The integer enumeration, scaling delta^(-d) and integer-character identity apply unchanged in one dimension and at unit spacing."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1, 3.1: f identically zero gives zero aliased density, zero sampled spectral measure and zero expected periodogram. Zero L1 mass also gives zero measure even for a specified representative changed on a null set; no positive covariance or variance inversion is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: Q=[-pi,pi)^d partitions R^d by its integer translates; the lower face is retained and the upper face assigned to the neighboring translate. Step 2.1 identifies measures, so null boundary representatives do not alter the conclusion. The Statement requires a continuous version for any pointwise limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: the zero-class constant tuple proves Z^d nonempty before the surjection criterion supplies enumeration; finite selections suffice for cofinal finite partial sums. Statement assumes AC/DC, and step 2.1 cites F4 to provide Countable Choice for scaling and Radon regularity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma derives the periodized density and exact finite expectation from a specified continuous-space density; it does not assert every lattice spectral measure has such a continuous-space density. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma derives the periodized density and exact finite expectation from a specified continuous-space density; it does not assert every lattice spectral measure has such a continuous-space density. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ]
+    },
+    "cor-fixed-grid-unaliased-spectral-bias-under-no-alias-condition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-fixed-grid-sampling-spectral-alias-identity",
+          "source_section": "Statement",
+          "quote": "Assume AC and DC. Let $X(s)$, $s\\in\\mathbb R^d$, be a real wide-stationary field with mean $\\mu$ and covariance admitting the density representation\n$$C(h)=\\int_{\\mathbb R^d}e^{ih\\cdot\\omega}f(\\omega)\\,d\\omega,\\qquad f:\\mathbb R^d\\to[0,\\infty),\\quad f\\in L^1(\\mathbb R^d),$$\nwhere $f$ is a specified Borel representative. Fix spacing $\\delta>0$ and sample $Y_j=X(\\delta j)$, $j\\in\\mathbb Z^d$. On $Q=[-\\pi,\\pi)^d$ set\n$$g_\\delta(\\theta):=\\delta^{-d}\\sum_{k\\in\\mathbb Z^d}f((\\theta+2\\pi k)/\\delta).$$\nThis nonnegative measurable sum is finite almost everywhere, is in $L^1(Q)$, and defines a periodic density of the sampled field's unique torus spectral measure:\n$$c(h)=C(\\delta h)=\\int_Q e^{ih\\cdot\\theta}g_\\delta(\\theta)\\,d\\theta,\\qquad \\int_Qg_\\delta=\\int_{\\mathbb R^d}f=C(0).$$\nThus for the angular periodogram of [[thm-regular-grid-periodogram-fejer-expectation]],\n$$E[I_n(\\lambda)]=\\int_Q\\Phi_n(\\lambda-\\theta)g_\\delta(\\theta)\\,d\\theta =\\int_{\\mathbb R^d}\\Phi_n(\\lambda-\\delta\\omega)f(\\omega)\\,d\\omega.$$\nThe general fixed-grid target is this aliased density, without any alias-free assumption. Where a pointwise density limit is claimed, a version continuous at the target must be specified; a spectral measure alone supplies no canonical pointwise density value.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-regular-grid-smoothed-periodogram-bias-vanishes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and Dependent Choice, as in\n[[thm-regular-grid-periodogram-fejer-expectation]]. Let the lattice spectral\nmeasure from that theorem be absolutely continuous\nwith a specified bounded representative $f\\in L^\\infty(\\mathbb T^d)$ continuous at the chosen target frequency $\\lambda_0\\in\\mathbb T^d$.\nLet $K$ and $\\widetilde f_{n,b}$ be as in\n[[def-regular-grid-periodogram-and-smoother]], and let $b_n>0$ satisfy\n$$b_n\\to0,\\qquad n b_n\\to\\infty.$$\nThen the denominator\ndefining $\\widetilde f_{n,b_n}(\\lambda_0)$ is positive for all sufficiently\nlarge $n$, and\n$$\\mathbb E[I_n(\\lambda_0)]\\longrightarrow f(\\lambda_0),\\qquad\\mathbb E[\\widetilde f_{n,b_n}(\\lambda_0)]\\longrightarrow f(\\lambda_0).$$\nThis is an asymptotic-bias statement only; it asserts no variance limit,\nweak consistency, or central limit theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-regular-grid-periodogram-and-smoother",
+          "source_section": "Definition",
+          "quote": "Let $Y=(Y_j)_{j\\in\\mathbb Z^d}$ satisfy the constant-mean,\nlag-dependent-covariance conditions from\n[[def-lattice-covariance-and-variogram-estimators]], with known mean $\\mu$\n(set $\\mu=0$ for a centered field), and use the frequency torus $\\mathbb T^d$\nidentified with $\\widehat{\\mathbb Z^d}$ by\n[[lem-dual-of-zd-is-torus]]. Represent frequency coordinates\n$\\lambda\\in[-\\pi,\\pi)^d$ by the circle tuple\n$(e^{i\\lambda_1},\\ldots,e^{i\\lambda_d})$; coordinates and integration are\nperiodic modulo $2\\pi$ in each coordinate. For $n\\ge1$, set\n$$\\Lambda_n:=\\{0,1,\\ldots,n-1\\}^d,\\qquad N_n:=n^d,$$\nand let the $n^d$ Fourier-grid frequencies be\n$$\\lambda_{n,q}:=2\\pi q/n\\pmod{2\\pi},\\qquad q\\in\\Lambda_n.$$\nThe known-mean **regular-grid periodogram** is\n$$I_n(\\lambda):=\\frac1{(2\\pi)^dN_n} \\left|\\sum_{j\\in\\Lambda_n}(Y_j-\\mu)e^{-i j\\cdot\\lambda}\\right|^2, \\qquad \\lambda\\in\\mathbb T^d.$$\nIntegration over $\\mathbb T^d$ uses product angular Lebesgue measure on the\nfundamental cube $[-\\pi,\\pi)^d$\n([[def-product-measure-on-sigma-finite-spaces]]).\n\nFor smoothing, let $K:\\mathbb R^d\\to[0,\\infty)$ be continuous, even,\ncompactly supported, and satisfy $K(0)>0$. For $b>0$, periodize the rescaled\nkernel by\n$$K_b^{\\mathrm{per}}(x):=\\sum_{m\\in\\mathbb Z^d}b^{-d}K((x+2\\pi m)/b).$$\nBecause $K$ has compact support, only finitely many summands are nonzero for\neach fixed $x$, so this periodization is well-defined.\nFor $\\lambda\\in\\mathbb T^d$, when the denominator is positive, set\n$$w_{n,q,b}(\\lambda):= \\frac{K_b^{\\mathrm{per}}(\\lambda-\\lambda_{n,q})} {\\sum_{r\\in\\Lambda_n}K_b^{\\mathrm{per}}(\\lambda-\\lambda_{n,r})}, \\qquad \\widetilde f_{n,b}(\\lambda):= \\sum_{q\\in\\Lambda_n}w_{n,q,b}(\\lambda)I_n(\\lambda_{n,q}).$$\nThe smoother is undefined when that denominator vanishes. Its target, when a\nspectral density exists, is the density of the **lattice-sampled field on the\ndual torus**; no unaliased continuous-space spectral-density target is part of\nthis definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] the sampled field has torus density $g_\\delta$, and the assumed representative meets all hypotheses of [F2]. Thus the denominator in [F3] is eventually positive and both angular expectations tend to $g_\\delta(\\lambda_0)$. Multiplying by $\\delta^d$ and reindexing the convergent nonnegative sum at the target gives $\\delta^d g_\\delta(\\lambda_0)=\\sum_k f(\\omega_0+2\\pi k/\\delta)=a_\\delta(\\omega_0)$. This proves the general aliased limit for both physically normalized estimates.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every alias summand is nonnegative. Therefore $a_\\delta(\\omega_0)-f(\\omega_0)=\\sum_{k\\ne0}f(\\omega_0+2\\pi k/\\delta)$ is zero if and only if every summand is zero. This proves both directions of the stated exact condition. Under the sufficient global condition, only the central translate is nonzero for frequencies in the Nyquist cube; its support stays away from the boundary. Hence the periodic density is bounded and continuous across the boundary as well, and has no noncentral alias at the stated target. All hypotheses and the exact condition are then verified.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: zero spectrum is allowed and yields zero raw and smoothed expected limits. The smoothing denominator depends on kernel and grid rather than spectral mass; F2 gives its eventual positivity even for zero spectrum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: if f(omega_0)=0, the aliased limit is zero exactly when every noncentral nonnegative term is zero. A positive noncentral alias gives nonzero bias at this zero central target."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement includes one dimension and unit spacing."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: zero spectrum is permitted, delta>0 gives positive physical normalization delta^d, and F2 gives eventual positive kernel denominator independently of spectral mass. No inverse density or variance occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1: the general target omega_0 is arbitrary in R^d, including identified torus boundary points when the assumed representative is continuous there and agrees with the sum. Only the sufficient compact-support branch requires omega_0 in the open Nyquist cube; support away from its boundary makes the periodic density continuous across that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: A1 carries inherited AC/DC through the spectral and bias suppliers. F2 supplies eventual positive kernel denominators using K(0)>0 and n b_n tending to infinity, so no choice from empty kernel support or division by zero is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1: vanishing limiting bias implies the total nonnegative noncentral alias sum is zero; each term is at most that sum and therefore is zero."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1: if every noncentral term is zero, their sum is zero and a_delta(omega_0)=f(omega_0); step 1.1 then gives vanishing bias for both estimates."
+        }
+      ]
+    }
+  }
+}

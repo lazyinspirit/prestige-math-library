@@ -1,0 +1,328 @@
+[
+  {
+    "order": 2002,
+    "id": "linear-prediction-for-dependent-data",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Finite-history linear prediction",
+    "companion": "linear-prediction-for-dependent-data-examples",
+    "requires": [
+      "stationary-time-series-moments-and-autocovariance",
+      "probability-spaces-random-variables-and-expectation",
+      "conditional-expectation",
+      "central-limit-theorems"
+    ],
+    "items": [
+      {
+        "id": "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+        "kind": "lemma",
+        "title": "Uncorrelated jointly Gaussian blocks are independent",
+        "statement": "Assume AC. If a finite-dimensional jointly Gaussian vector is partitioned into blocks U and V and every cross-covariance between U and V is zero, then U and V are independent. Singular covariance matrices are allowed.",
+        "deps": [
+          "def-multivariate-normal-law",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-independent-random-elements-have-product-joint-law",
+          "lem-measurable-functions-preserve-independence",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed., Section 3.10",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "J. R. Norris, Probability and Measure, Sections 8.1–8.2",
+              "url": "https://www.statslab.cam.ac.uk/~james/Lectures/pmall.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-best-linear-forecast-from-a-finite-history",
+        "kind": "definition",
+        "title": "Best linear forecast from a finite history",
+        "statement": "For a weakly stationary real process X indexed by Z, integers n,h≥1, and its common mean μ, the finite-history best linear forecast of X_{n+h} is the unique almost-sure class minimizing squared L2 error over all classes represented by a0+Σ_{j=1}^n a_jX_j with real coefficients. It is an affine L2 projection and does not, without further hypotheses, assert equality with conditional expectation.",
+        "deps": [
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-linear-combination-and-span"
+        ],
+        "justified_by": [
+          "thm-finite-history-best-linear-predictor-exists-uniquely"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Section 5.2",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Section 2.7",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-finite-history-best-linear-predictor-exists-uniquely",
+        "kind": "theorem",
+        "title": "Existence and uniqueness of the finite-history predictor class",
+        "statement": "Let X be a weakly stationary real process and let n,h≥1. The affine L2 minimization defining the finite-history best linear forecast of X_{n+h} from X_1,…,X_n has a unique minimizing almost-sure class, even when the history covariance matrix is singular.",
+        "deps": [
+          "def-best-linear-forecast-from-a-finite-history",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "thm-normal-equations-for-best-affine-l2-prediction"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Section 5.2",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Section 2.7",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "alg-durbin-levinson-forecast-recursion",
+        "kind": "algorithm",
+        "title": "Durbin–Levinson forecast recursion",
+        "statement": "Given m≥1 and the ACVF lags γ(0),…,γ(m) of a weakly stationary real process, with every leading Toeplitz covariance matrix Γ_k=(γ(i−j))_{i,j=1}^k positive definite for 1≤k≤m, recursively compute the one-step centered forecast coefficients φ_{k,j} and error variances ν_k. Initialize ν_0=γ(0), κ_1=γ(1)/ν_0, φ_{1,1}=κ_1, and ν_1=ν_0(1−κ_1²). For k=2,…,m set κ_k=[γ(k)−Σ_{j=1}^{k−1}φ_{k−1,j}γ(k−j)]/ν_{k−1}, set φ_{k,j}=φ_{k−1,j}−κ_kφ_{k−1,k−j} for 1≤j<k and φ_{k,k}=κ_k, and set ν_k=ν_{k−1}(1−κ_k²). Output all φ_k and ν_k.",
+        "deps": [
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-autocovariance-and-sample-autocovariance"
+        ],
+        "justified_by": [
+          "thm-durbin-levinson-solves-the-prediction-equations"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Section 5.5.1",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Section 2.7",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-forecast-normal-equations-and-error",
+        "kind": "theorem",
+        "title": "Finite-history forecast equations and error variance",
+        "statement": "Let X be weakly stationary with mean μ and ACVF γ, let n,h≥1, and define Y_i=X_{n+1−i}, Γ_{ij}=γ(i−j), and γ_h=(γ(h),…,γ(h+n−1))ᵀ. If Γ is nonsingular, the unique forecast coefficients satisfy a=Γ⁻¹γ_h, the best linear forecast is μ+Σ_i a_i(Y_i−μ), and its forecast-error variance is γ(0)−aᵀγ_h.",
+        "deps": [
+          "def-best-linear-forecast-from-a-finite-history",
+          "thm-finite-history-best-linear-predictor-exists-uniquely",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-autocovariance-and-sample-autocovariance",
+          "def-moments-variance-and-covariance",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-normal-equations-for-best-affine-l2-prediction"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Section 5.2",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Section 2.7",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-gaussian-best-linear-forecast-equals-conditional-expectation",
+        "kind": "theorem",
+        "title": "A Gaussian finite-history forecast is a conditional expectation",
+        "statement": "Assume AC. In the setting of the finite-history forecast theorem, if (X_{n+h},X_n,…,X_1) is jointly multivariate normal, then the best linear forecast equals E[X_{n+h}|σ(X_1,…,X_n)] almost surely, including when the history covariance is singular.",
+        "deps": [
+          "def-best-linear-forecast-from-a-finite-history",
+          "thm-finite-history-best-linear-predictor-exists-uniquely",
+          "thm-normal-equations-for-best-affine-l2-prediction",
+          "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "lem-conditioning-a-known-variable-and-an-independent-variable",
+          "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "lem-conditional-expectation-is-unique-almost-surely"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Section 5.2",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Section 2.7",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-durbin-levinson-solves-the-prediction-equations",
+        "kind": "theorem",
+        "title": "Durbin–Levinson solves the successive prediction equations",
+        "statement": "Let X be weakly stationary with mean μ and ACVF γ, and suppose Γ_k=(γ(i−j))_{i,j=1}^k is positive definite for each 1≤k≤m. For every k≤m, the algorithm's φ_k is the unique solution of Γ_kφ_k=(γ(1),…,γ(k))ᵀ, and ν_k is the variance of X_{t+1}−μ−Σ_{j=1}^kφ_{k,j}(X_{t+1−j}−μ), equal to γ(0)−(γ(1),…,γ(k))ᵀφ_k.",
+        "deps": [
+          "alg-durbin-levinson-forecast-recursion",
+          "thm-forecast-normal-equations-and-error",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-autocovariance-and-sample-autocovariance",
+          "lem-variance-and-covariance-identities-for-random-variables"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dewei Wang, STAT 720 Time Series Analysis, Section 5.5.1",
+              "url": "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+            },
+            {
+              "title": "Nicolai Meinshausen, Time Series Analysis: Notes for the course HS 2022, Section 2.7",
+              "url": "https://www.stat.ethz.ch/~nicolai/timeseries/TimeSeries2022b.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 2003,
+    "id": "linear-prediction-for-dependent-data-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Finite-history linear prediction — Examples",
+    "companion": "linear-prediction-for-dependent-data",
+    "requires": [
+      "linear-prediction-for-dependent-data"
+    ],
+    "items": [
+      {
+        "id": "ex-ar1-one-step-and-multistep-forecast",
+        "kind": "example",
+        "title": "One-step and multistep forecasts for a causal AR(1)",
+        "statement": "For a weakly stationary causal AR(1) process with |φ|<1 and centered finite-variance white noise, the finite-history forecast of X_{n+h} is μ+φ^h(X_n−μ), and its error variance is σ²Σ_{j=0}^{h−1}φ^{2j}.",
+        "deps": [
+          "def-best-linear-forecast-from-a-finite-history",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-moments-variance-and-covariance",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "cor-cauchy-schwarz-for-random-variables"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-singular-history-covariance-unique-predictor-class",
+        "kind": "example",
+        "title": "A singular history covariance can have nonunique coefficients",
+        "statement": "For the stationary process X_t=Z with Z uniform on {−1,1}, predicting X_3 from X_1,X_2 gives a singular history covariance matrix. The normal equations have many coefficient solutions, but all yield the same predictor Z and the unique predictor class.",
+        "deps": [
+          "def-best-linear-forecast-from-a-finite-history",
+          "thm-finite-history-best-linear-predictor-exists-uniquely",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-finite-probability-space-and-event",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space",
+          "def-variance-and-covariance",
+          "thm-normal-equations-for-best-affine-l2-prediction"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-nongaussian-conditional-mean-not-best-affine-predictor",
+        "kind": "example",
+        "title": "A finite-history conditional mean can be nonlinear",
+        "statement": "A strictly stationary three-state cycle has a one-step conditional mean given X_1 that is not affine in X_1, while its best affine forecast is −X_1/2.",
+        "deps": [
+          "def-best-linear-forecast-from-a-finite-history",
+          "thm-forecast-normal-equations-and-error",
+          "def-strict-and-weak-stationarity-for-time-series",
+          "def-finite-probability-space-and-event",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space",
+          "def-variance-and-covariance",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-sigma-algebra-generated-by-a-function",
+          "lem-conditioning-a-known-variable-and-an-independent-variable"
+        ],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      }
+    ]
+  }
+]

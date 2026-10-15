@@ -1,0 +1,1253 @@
+{
+  "version": 1,
+  "scope": [
+    "def-cox-proportional-hazards-model-and-partial-likelihood",
+    "lem-cox-uniform-risk-set-convergence",
+    "lem-bounded-predictable-counting-integral-pathwise-identity",
+    "lem-cox-partial-likelihood-hessian-convergence",
+    "lem-cox-score-martingale-replacement",
+    "thm-cox-score-limit-and-estimator-linearization",
+    "cor-cox-partial-likelihood-asymptotic-normality",
+    "ex-cox-risk-set-likelihood-and-model-checks"
+  ],
+  "contracts": {
+    "def-cox-proportional-hazards-model-and-partial-likelihood": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the untied partial likelihood is the empty product 1 when no event is observed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the baseline cumulative hazard starts at zero and the relative hazard factor remains defined when the baseline hazard vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: with one subject at risk and an untied failure, the risk-set contribution is its weight divided by itself."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Definition specifies a model and likelihood convention, not an estimator or an information property for degenerate data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: right censoring uses T≤C; Y(t)=1{U≥t} includes a subject at its recorded event time; the horizon is [0,τ]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the Axiom of Choice is explicitly inherited from the observation and predictability interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Definition specifies the exponential hazard, risk-set likelihood and separate tie conventions; the discrete integrated-hazard warning expressly denies general equivalence with a hazard-ratio model, rather than asserting a criterion to prove in two directions. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This Definition specifies the exponential hazard, risk-set likelihood and separate tie conventions; the discrete integrated-hazard warning expressly denies general equivalence with a hazard-ratio model, rather than asserting a criterion to prove in two directions. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Reviewed the complete Definition and its five actual dependency interfaces. The right-censoring convention includes T=C; the failing subject is in its risk set, so positive exponential weights give nonzero denominators. Empty likelihood is 1, singleton contributions are 1, and zero baseline hazards have a relative factor but no quotient. The discrete subset-law and successive weighted-label tie laws are separate explicit assumptions, so their different normalizers are justified; Breslow/Efron denominators remain positive for 0<=k<d<=|R|. Constant-covariate survival uses the absolutely continuous hazard convention, while time-varying paths need not have constant hazard ratios. Nuisance laws and the separate martingale contract are explicit. AC is inherited through conditional expectation and predictability, with no additional selection. Checked Tian unit7 pp.1-9 and extensions pp.8-11 against the stated conventions; no defect found."
+      }
+    },
+    "lem-cox-uniform-risk-set-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $\\tau>0$ and a fixed dimension $p\\ge1$. Work on a probability space with an increasing filtration $(\\mathcal F_t)_{0\\le t\\le\\tau}$ as in [[def-continuous-time-filtration-and-all-pairs-martingale]]. For subject $i$, let $T_i$ be an event time, $C_i$ a censoring time, and $Z_i(t)\\in\\mathbb R^p$ a covariate process predictable relative to this filtration, in the sense of [[def-progressively-measurable-and-predictable-process]]. Use the right-censoring record convention of [[def-event-time-observation-schemes]]: $U_i=\\min(T_i,C_i)$ and $\\delta_i=1\\{T_i\\le C_i\\}$. For this vector covariate process, predictability means coordinatewise predictability: each real-valued coordinate is predictable in the sense of [[def-progressively-measurable-and-predictable-process]]. Define the history sigma-algebra $\\mathcal G_i:=\\sigma\\{Z_i(t):0\\le t\\le\\tau\\}$. The conditional-independence assumption is $T_i\\perp\\!\\!\\!\\perp C_i\\mid\\mathcal G_i$, meaning that for all bounded measurable real functions $a,b$, $E[a(T_i)b(C_i)\\mid\\mathcal G_i]=E[a(T_i)\\mid\\mathcal G_i]E[b(C_i)\\mid\\mathcal G_i]$ almost surely, as in [[def-conditional-independence-given-a-sigma-algebra]]. This conditional-independence relation is a model assumption, not an empirical conclusion. No conditional-kernel representation given the entire covariate path is assumed here.\n\nA Cox proportional-hazards specification fixes a coefficient $\\beta_0\\in\\mathbb R^p$ and a baseline hazard density $\\lambda_0:[0,\\tau]\\to[0,\\infty)$ that is measurable and integrable. Its baseline cumulative hazard is the absolutely continuous function\n$$\\Lambda_0(t)=\\int_0^t\\lambda_0(u)\\,du.$$\nThe conditional event intensity at time $t$ for subject $i$, while that subject is at risk, is\n$$Y_i(t)\\lambda_0(t)\\exp\\{\\beta_0^T Z_i(t)\\},\\qquad Y_i(t):=1\\{U_i\\ge t\\}.$$\nThese specify the conditional event-intensity component. The law of the covariate paths and the censoring law subject to the stated conditional-independence assumption remain nuisance components and are not fixed here. Thus this is a semiparametric model specification; $(\\beta_0,\\lambda_0)$ alone do not define a full parametric statistical experiment on the observed-data space.\nFor the counting-process arguments below, require $Y_i$ to be predictable as well; this is part of the stated observation model and is not inferred from the hazard formula alone.\nFor a constant covariate value $z$, the corresponding event survival function is\n$$S(t\\mid z)=\\exp\\{-e^{\\beta_0^Tz}\\Lambda_0(t)\\}.$$\nFor fixed covariate values $z,z'\\in\\mathbb R^p$, at times with $\\lambda_0(t)>0$ the hazard ratio is\n$$\\frac{\\lambda_0(t)e^{\\beta^Tz}}{\\lambda_0(t)e^{\\beta^Tz'}}=e^{\\beta^T(z-z')}.$$\nThe relative hazard factor is $e^{\\beta^T(z-z')}$ even at times when both baseline-scaled hazards vanish and their quotient is undefined. It is an instantaneous hazard ratio, not a ratio of cumulative event probabilities. For time-varying covariate paths $z(t),z'(t)$ the instantaneous relative hazard factor is $e^{\\beta^T(z(t)-z'(t))}$ and may vary with time.\n\nFor a sample of $n$ subjects, put $R(t)=\\{j:U_j\\ge t\\}$. When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is\n$$L_p(\\beta)=\\prod_{i:\\,\\delta_i=1,\\ U_i\\le\\tau} \\frac{\\exp\\{\\beta^TZ_i(U_i)\\}}{\\sum_{j\\in R(U_i)}\\exp\\{\\beta^TZ_j(U_i)\\}}.$$\nAn empty product is $1$. This partial likelihood is built from risk-set contributions; it is not asserted to be the full likelihood of the censored observations.\n\nTied-event likelihoods require an explicit time-recording convention. Put $D(t)=\\{i:U_i=t,\\delta_i=1\\}$ and $d_t=|D(t)|$. If a discrete or grouped-time model conditions on exactly $d_t$ failures from $D(t)\\subseteq R(t)$ at recorded time $t$ with the risk set fixed for that time, additionally assume that, conditional on that risk set, its covariate weights, and $d_t=d$, the failure subset law assigns each size-$d$ set $A\\subseteq R(t)$ probability proportional to $\\prod_{j\\in A}w_j(t)$. Under this explicit subset-law assumption, its exact conditional tie contribution is\n$$\\frac{\\prod_{i\\in D(t)}w_i(t)} {\\sum_{\\substack{A\\subseteq R(t)\\\\|A|=d_t}}\\ \\prod_{j\\in A}w_j(t)}, \\qquad w_j(t):=\\exp\\{\\beta^TZ_j(t)\\}.$$\nFor the separate exact Cox tied-partial-likelihood convention obtained by coarsening a continuous-time ordering into one recorded tie interval, assume the risk set at the interval start is $R(t)$, its only within-interval departures are the $d_t$ failures in $D(t)$, and the covariates are fixed at the recorded time. Conditional on each successive failure, the next failure label is chosen from the remaining risk set with probability proportional to its weight. Summing these order contributions gives the ordered-risk-set conditional partial-likelihood contribution\n$$\\sum_{\\pi\\in\\operatorname{Perm}(D(t))} \\prod_{k=1}^{d_t} \\frac{w_{\\pi_k}(t)} {\\sum_{j\\in R(t)}w_j(t)-\\sum_{\\ell<k}w_{\\pi_\\ell}(t)}.$$\nHere $\\operatorname{Perm}(D(t))$ is the set of bijections from $\\{1,\\ldots,d_t\\}$ to $D(t)$.\nThe discrete subset expression is exact under its explicit subset-law convention, and the permutation expression is exact for its stated partial-likelihood ordering convention; the latter is not generally the full likelihood of interval-coarsened censored observations. These conventions are not interchangeable without a model relating them. The Breslow and Efron tie formulas are approximations, respectively\n$$L_B(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\left(\\sum_{j\\in R(t)}w_j(t)\\right)^{d_t}}$$\nand\n$$L_E(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\prod_{k=0}^{d_t-1}\\left(\\sum_{j\\in R(t)}w_j(t)-\\frac{k}{d_t}\\sum_{i\\in D(t)}w_i(t)\\right)}.$$\nWith an absolutely continuous event hazard and independent subjects, exact event-time ties have probability zero; grouped-time tie formulas describe additional observation/model conventions.\n\nFor a discrete event-time law, the survival relation $S(t\\mid z)=S_0(t)^{e^{\\beta^Tz}}$ describes proportional integrated hazards and is not equivalent in general to a hazard-ratio model. The proportional-hazards and proportional-integrated-hazards formulations agree under the continuity condition on the baseline survival; the hazard-density model above uses the absolutely continuous convention.\n\nThe counting-process martingale property used for inference is a separate model-contract assumption in the estimator theorem below. The hazard formula by itself does not assert that a compensated event count is a martingale. The Axiom of Choice is inherited from the cited event-observation and predictability interfaces; this definition makes no further choice.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-empirical-process-and-rademacher-process",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal X,\\mathcal A,P)$ be a probability space, let $n\\ge1$ be an integer, and let $Z_1,\\ldots,Z_n$ be IID random elements with law $P$. For a class $\\mathcal F$ of measurable, integrable real-valued functions on $\\mathcal X$, write\n\n$$Pf:=\\int f\\,dP,\\qquad P_nf:=\\frac1n\\sum_{i=1}^n f(Z_i),\\qquad \\mathbb G_n(f):=\\sqrt n\\,(P_nf-Pf).$$\n\nThe map $f\\mapsto P_nf-Pf$ is the centered empirical process, and $\\mathbb G_n$ is its $\\sqrt n$-scaled version. More generally, for independent processes $X_1(t),\\ldots,X_n(t)$ whose marginal expectations are finite for each index $t\\in T$, the centered process sum is\n\n$$S_n(t):=\\sum_{i=1}^n\\bigl(X_i(t)-\\mathbb E X_i(t)\\bigr),\\qquad t\\in T.$$\n\nOn an auxiliary probability-space extension, let $\\sigma_1,\\ldots,\\sigma_n$ be independent signs, each taking $+1$ and $-1$ with probability $1/2$, independent of the observations. The empirical Rademacher process is\n\n$$R_n(f):=\\sum_{i=1}^n\\sigma_i f(Z_i),\\qquad f\\in\\mathcal F.$$\n\nThe centered Rademacher process $\\sum_i\\sigma_i(f(Z_i)-Pf)$ is a distinct process; no equality between it and $R_n$ is part of this definition.\n\nFor a countable class of measurable functions, each displayed supremum of measurable sample paths is measurable. For an uncountable class, ordinary probability or expectation is used only when a specified countable subclass has the same supremum almost surely for the process in question; this is the separable-version convention used here. Otherwise state results using outer probability\n\n$$P^*(A):=\\inf\\{P(B):A\\subseteq B,\\ B\\in\\mathcal A\\}$$\n\nand, for a nonnegative possibly nonmeasurable random quantity $Y$, outer expectation\n\n$$\\mathbb E^*Y:=\\inf\\{\\mathbb E U: U\\text{ is measurable, nonnegative, and }U\\ge Y\\}.$$\n\nIn particular, measurability of every $f$ separately does not by itself make an uncountable supremum measurable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-covering-packing-bracketing-number-and-metric-entropy",
+          "source_section": "Definition",
+          "quote": "A pseudometric $d$ on a set $T$ is a nonnegative symmetric function $d:T\\times T\\to[0,\\infty)$ with $d(t,t)=0$ and $d(s,t)\\le d(s,u)+d(u,t)$; distinct points may have distance zero. For a nonempty subset $\\mathcal F\\subseteq T$ and $\\epsilon>0$, the covering number $N(\\epsilon,\\mathcal F,d)$ is the least finite $k$ for which there are centers $f_1,\\ldots,f_k\\in\\mathcal F$ such that every $f\\in\\mathcal F$ satisfies $d(f,f_j)\\le\\epsilon$ for some $j$. It is $+\\infty$ if no finite cover exists. Set $N(\\epsilon,\\varnothing,d)=1$.\n\nThe packing number $D(\\epsilon,\\mathcal F,d)$ is the largest size of a finite subset $\\{f_1,\\ldots,f_k\\}\\subseteq\\mathcal F$ whose distinct members have pairwise distance strictly greater than $\\epsilon$. If the sizes of such finite subsets are unbounded, put $D=+\\infty$; put $D(\\epsilon,\\varnothing,d)=0$. These conventions give the radius comparison proved in [[lem-packing-covering-number-comparison]]. The metric entropy is $H(\\epsilon,\\mathcal F,d):=\\log N(\\epsilon,\\mathcal F,d)$ for nonempty classes, with $\\log(+\\infty)=+\\infty$.\n\nFor a probability measure $Q$ on $(\\mathcal X,\\mathcal A)$ and a measurable real function $g$, set $\\|g\\|_{Q,r}:=(\\int |g|^r\\,dQ)^{1/r}$ for $1\\le r<\\infty$ when the integral is finite, using the real-power convention, including $0^{1/r}=0$, of [[def-real-power]]. If the integral is $+\\infty$, define $\\|g\\|_{Q,r}:=+\\infty$ directly. The function $|g|$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and [[lem-real-power-preserves-measurability]] makes $|g|^r$ measurable, so this nonnegative extended integral is well-defined. On a class of functions with finite such norms, $d_{Q,r}(f,g):=\\|f-g\\|_{Q,r}$ is a pseudometric: nonnegativity, symmetry, and zero diagonal follow from the absolute value, and the triangle inequality is [[thm-minkowski-inequality-for-integrals]]. Functions that agree $Q$-almost everywhere have distance zero. We write $N(\\epsilon,\\mathcal F,L^r(Q))$ for this covering number.\n\nFor measurable real endpoints $\\ell\\le u$ $Q$-almost everywhere, the bracket $[\\ell,u]$ is the set of measurable functions $f$ satisfying $\\ell\\le f\\le u$ $Q$-almost everywhere. Its $L^r(Q)$ width is $\\|u-\\ell\\|_{Q,r}$. The bracketing number $N_{[]} (\\epsilon,\\mathcal F,L^r(Q))$ is the least number of such brackets of width at most $\\epsilon$ that cover $\\mathcal F$, or $+\\infty$ if no finite cover exists; for the empty class set it equal to $1$. Centers of metric covers are in $\\mathcal F$; bracket endpoints need not be.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-glivenko-cantelli-class",
+          "source_section": "Definition",
+          "quote": "Use the empirical-measure convention of [[def-empirical-process-and-rademacher-process]]: for iid observations $X_1,X_2,\\ldots$ with common law $P$, $P_nf=n^{-1}\\sum_{i=1}^n f(X_i)$ and $Pf=\\int f\\,dP$. Let $\\mathcal F$ be a nonempty class of measurable real-valued functions with a nonnegative measurable integrable envelope $F$, meaning $|f|\\le F$ $P$-almost surely for every $f\\in\\mathcal F$ and $PF<\\infty$. It is **pointwise measurable** if there is a countable subclass $\\mathcal F_0$ such that every $f\\in\\mathcal F$ is the pointwise limit of a sequence from $\\mathcal F_0$. For a pointwise-measurable class, dominated convergence [[thm-dominated-convergence]] gives $Pf_k\\to Pf$ along the approximating sequence, and finite empirical averages converge pointwise, so the supremum defining the uniform law is determined by $\\mathcal F_0$. The class is **$P$-Glivenko–Cantelli** if\n\n$$\\sup_{f\\in\\mathcal F}|P_nf-Pf|\\longrightarrow0$$\n\nin probability. It is **strongly $P$-Glivenko–Cantelli** if the same convergence holds almost surely. For an uncountable class with a countable pointwise-dense subclass, the supremum is interpreted using outer probability unless the chosen version makes it measurable. For a pointwise-measurable class the supremum is determined by the countable subclass and is measurable. That subclass has a common conull envelope bound, so the supremum is finite almost surely; after choosing a real-valued version, almost-sure convergence implies convergence in probability by [[thm-almost-sure-convergence-implies-convergence-in-probability]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gc-by-bracketing-entropy",
+          "source_section": "Statement",
+          "quote": "Let $X_1,X_2,\\ldots$ be iid with law $P$, and let $\\mathcal F$ be a nonempty pointwise-measurable class of measurable real functions with a nonnegative integrable envelope $F$. Suppose $N_{[]} (\\epsilon,\\mathcal F,L^1(P))<\\infty$ for every $\\epsilon>0$. Then $\\mathcal F$ is $P$-Glivenko–Cantelli: $\\sup_{f\\in\\mathcal F}|P_nf-Pf|\\to0$ in probability. If Countable Choice is assumed, then the stronger conclusion holds that this convergence is almost sure. The terms $P_n$, $P$, and the outer-probability convention are those of [[def-empirical-process-and-rademacher-process]], and the class notion is [[def-glivenko-cantelli-class]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $R=\\sup_{\\beta\\in B}\\|\\beta\\|_2$ and $C=e^{KR}\\max(1,K,K^2)$. Each risk coordinate is bounded by $C$ and is Lipschitz in $\\beta$ with constant at most $KC$, since the segment between two points of $B$ lies in the radius-$R$ ball. By [F6]–[F7], the expectations are jointly measurable in time and parameter. Both empirical and population functions are continuous in parameter, so each parameter supremum equals the supremum over a fixed countable dense subset of $B$ and is measurable. Population ratios are deterministic Borel time functions and hence predictable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F1",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each fixed $t,\\beta$ and coordinate $f$, independence and centering give $E[(P_nf-Pf)^2]=\\operatorname{Var}(f)/n\\le C^2/n$: the cross terms vanish by independence. On a finite $\\varepsilon$-net of $B$, the squared maximum over its $m_\\varepsilon$ points and the $d=1+p+p^2$ coordinates has expectation at most $dm_\\varepsilon C^2/n$. Between a point and its nearest net point, the empirical-minus-population Lipschitz bound is $2KC\\varepsilon$. Thus $\\limsup_n E D_n(t)^2\\le8K^2C^2\\varepsilon^2$; let $\\varepsilon\\downarrow0$. The uniform bound $D_n\\le2C$ and [F8] applied to $t\\mapsto E D_n(t)^2$, followed by [F7], prove $E\\int D_n^2d\\nu\\to0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "F8",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Write $q=P(U_i\\ge\\tau)$. Since $c_0\\le s^{(0)}(\\tau,\\beta_0)\\le e^{K\\|\\beta_0\\|_2}q$, $q>0$. For $Q_n=n^{-1}\\sum_i1\\{U_i\\ge\\tau\\}$, independence gives $E(Q_n-q)^2=q(1-q)/n$, so $P(Q_n<q/2)\\le4(1-q)/(nq)\\to0$. Monotonicity of $Y_i$ and the weight bound give $S_n^{(0)}(t,\\beta)\\ge e^{-KR}Q_n$ for every $t,\\beta$. Hence on the event $E_n=\\{Q_n\\ge q/2\\}$ all sample denominators are at least $c=e^{-KR}q/2$, while all population denominators are at least $e^{-KR}q$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $E_n$, ratio subtraction and the bounds of steps 1.1 and 2.2 bound both $\\sup_B\\|\\bar Z_n-\\bar z\\|_2$ and $\\sup_B\\|V_n-V\\|_{\\max}$ by a constant times $D_n(t)$. Off $E_n$, the weighted means have norm at most $K$ and the second-moment matrices have entries at most $K^2$, including the zero convention, so both errors remain bounded by constants depending only on $K,p$. Their expected squared errors are therefore at most $C_1E D_n(t)^2+C_2P(E_n^c)$. Steps 2.1–3.1 prove the fixed-time conclusions; integration against finite $\\nu$, or [F7]–[F8], proves their integrated versions.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "algebra",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Under [A1], each coordinate class has the envelope from step 1.1 and the hypotheses of [F3]–[F5]. Apply only the probability branch of [F5] and take the finite union over coordinates to obtain $\\sup_tD_n(t)\\to_P0$. Step 3.1's ratio bound on $E_n$, whose probability tends to one, gives both uniform-in-time ratio conclusions. No such time-indexed class hypothesis was used in steps 1.1–4.1.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The empirical risks divide by n with positive integer sample size; zero subjects are outside the domain. The sum token is the nonempty subject average, not a request for a zero-subject limit. Empty observed-event lists are compatible with the risk lemma because it uses only U and Y, not an event-time enumeration.",
+          "reviewed": {
+            "upheld": true,
+            "by": "sme_cox_uniform_resolution",
+            "reason": "The empirical risks divide by n with positive integer sample size; zero subjects are outside the domain. The sum token is the nonempty subject average, not a request for a zero-subject limit. Empty observed-event lists are compatible with the risk lemma because it uses only U and Y, not an event-time enumeration."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 explicitly shows the positive denominator lower bound; if the population risk denominator were zero, the stated hypothesis would fail."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: p is any fixed finite dimension ≥1; the finite coordinate union proof also covers p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a uniformly positive population risk denominator, excluding a risk-set-degenerate limit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 uses the terminal risk count Y(tau); the at-risk convention retains U=tau."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1: B contains beta_0 and is nonempty. Compactness in finite-dimensional Euclidean space gives finite epsilon-nets and a countable dense subset of B. Step 1.1 uses that subset for measurable suprema and cites A2 for inherited AC; step 2.1 uses finite nets and adds no stronger choice assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement proves fixed-time and integrated expected error limits and adds a sufficient bracketing condition for a stronger uniform-time limit; it asserts no necessity of bracketing for uniform convergence. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement proves fixed-time and integrated expected error limits and adds a sufficient bracketing condition for a stronger uniform-time limit; it asserts no necessity of bracketing for uniform convergence. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Reviewed every step 1.1-4.1 and all nine dependency interfaces. On the compact parameter set containing beta0 the coordinate envelope and Lipschitz constant are uniform, finite-net IID variance bounds give fixed-time expected squared convergence, and Tonelli plus dominated convergence applies to finite lambda0 dt (or the specified finite density). Parameter continuity yields countable measurable suprema. Positive s0(tau,beta0) implies q=P(U>=tau)>0; the monotone unweighted count gives a simultaneous sample denominator bound with probability tending to one, without a uniform-in-time LLN. Weighted means and covariances stay bounded even under the zero convention, controlling the complementary event. The bracketing GC citation is used only in the optional final branch with pointwise measurability and finite L1 brackets; Cox consumers need only the integrated branch. K=0 and q=1 remain valid; beta0 in B excludes empty B. AC is inherited. The final sentence referring to steps 1.1-4.1 is read as the preceding integrated derivation, not as a denial that the optional branch uses A1; no mathematical defect found."
+      }
+    },
+    "lem-cox-partial-likelihood-hessian-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $\\tau>0$ and a fixed dimension $p\\ge1$. Work on a probability space with an increasing filtration $(\\mathcal F_t)_{0\\le t\\le\\tau}$ as in [[def-continuous-time-filtration-and-all-pairs-martingale]]. For subject $i$, let $T_i$ be an event time, $C_i$ a censoring time, and $Z_i(t)\\in\\mathbb R^p$ a covariate process predictable relative to this filtration, in the sense of [[def-progressively-measurable-and-predictable-process]]. Use the right-censoring record convention of [[def-event-time-observation-schemes]]: $U_i=\\min(T_i,C_i)$ and $\\delta_i=1\\{T_i\\le C_i\\}$. For this vector covariate process, predictability means coordinatewise predictability: each real-valued coordinate is predictable in the sense of [[def-progressively-measurable-and-predictable-process]]. Define the history sigma-algebra $\\mathcal G_i:=\\sigma\\{Z_i(t):0\\le t\\le\\tau\\}$. The conditional-independence assumption is $T_i\\perp\\!\\!\\!\\perp C_i\\mid\\mathcal G_i$, meaning that for all bounded measurable real functions $a,b$, $E[a(T_i)b(C_i)\\mid\\mathcal G_i]=E[a(T_i)\\mid\\mathcal G_i]E[b(C_i)\\mid\\mathcal G_i]$ almost surely, as in [[def-conditional-independence-given-a-sigma-algebra]]. This conditional-independence relation is a model assumption, not an empirical conclusion. No conditional-kernel representation given the entire covariate path is assumed here.\n\nA Cox proportional-hazards specification fixes a coefficient $\\beta_0\\in\\mathbb R^p$ and a baseline hazard density $\\lambda_0:[0,\\tau]\\to[0,\\infty)$ that is measurable and integrable. Its baseline cumulative hazard is the absolutely continuous function\n$$\\Lambda_0(t)=\\int_0^t\\lambda_0(u)\\,du.$$\nThe conditional event intensity at time $t$ for subject $i$, while that subject is at risk, is\n$$Y_i(t)\\lambda_0(t)\\exp\\{\\beta_0^T Z_i(t)\\},\\qquad Y_i(t):=1\\{U_i\\ge t\\}.$$\nThese specify the conditional event-intensity component. The law of the covariate paths and the censoring law subject to the stated conditional-independence assumption remain nuisance components and are not fixed here. Thus this is a semiparametric model specification; $(\\beta_0,\\lambda_0)$ alone do not define a full parametric statistical experiment on the observed-data space.\nFor the counting-process arguments below, require $Y_i$ to be predictable as well; this is part of the stated observation model and is not inferred from the hazard formula alone.\nFor a constant covariate value $z$, the corresponding event survival function is\n$$S(t\\mid z)=\\exp\\{-e^{\\beta_0^Tz}\\Lambda_0(t)\\}.$$\nFor fixed covariate values $z,z'\\in\\mathbb R^p$, at times with $\\lambda_0(t)>0$ the hazard ratio is\n$$\\frac{\\lambda_0(t)e^{\\beta^Tz}}{\\lambda_0(t)e^{\\beta^Tz'}}=e^{\\beta^T(z-z')}.$$\nThe relative hazard factor is $e^{\\beta^T(z-z')}$ even at times when both baseline-scaled hazards vanish and their quotient is undefined. It is an instantaneous hazard ratio, not a ratio of cumulative event probabilities. For time-varying covariate paths $z(t),z'(t)$ the instantaneous relative hazard factor is $e^{\\beta^T(z(t)-z'(t))}$ and may vary with time.\n\nFor a sample of $n$ subjects, put $R(t)=\\{j:U_j\\ge t\\}$. When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is\n$$L_p(\\beta)=\\prod_{i:\\,\\delta_i=1,\\ U_i\\le\\tau} \\frac{\\exp\\{\\beta^TZ_i(U_i)\\}}{\\sum_{j\\in R(U_i)}\\exp\\{\\beta^TZ_j(U_i)\\}}.$$\nAn empty product is $1$. This partial likelihood is built from risk-set contributions; it is not asserted to be the full likelihood of the censored observations.\n\nTied-event likelihoods require an explicit time-recording convention. Put $D(t)=\\{i:U_i=t,\\delta_i=1\\}$ and $d_t=|D(t)|$. If a discrete or grouped-time model conditions on exactly $d_t$ failures from $D(t)\\subseteq R(t)$ at recorded time $t$ with the risk set fixed for that time, additionally assume that, conditional on that risk set, its covariate weights, and $d_t=d$, the failure subset law assigns each size-$d$ set $A\\subseteq R(t)$ probability proportional to $\\prod_{j\\in A}w_j(t)$. Under this explicit subset-law assumption, its exact conditional tie contribution is\n$$\\frac{\\prod_{i\\in D(t)}w_i(t)} {\\sum_{\\substack{A\\subseteq R(t)\\\\|A|=d_t}}\\ \\prod_{j\\in A}w_j(t)}, \\qquad w_j(t):=\\exp\\{\\beta^TZ_j(t)\\}.$$\nFor the separate exact Cox tied-partial-likelihood convention obtained by coarsening a continuous-time ordering into one recorded tie interval, assume the risk set at the interval start is $R(t)$, its only within-interval departures are the $d_t$ failures in $D(t)$, and the covariates are fixed at the recorded time. Conditional on each successive failure, the next failure label is chosen from the remaining risk set with probability proportional to its weight. Summing these order contributions gives the ordered-risk-set conditional partial-likelihood contribution\n$$\\sum_{\\pi\\in\\operatorname{Perm}(D(t))} \\prod_{k=1}^{d_t} \\frac{w_{\\pi_k}(t)} {\\sum_{j\\in R(t)}w_j(t)-\\sum_{\\ell<k}w_{\\pi_\\ell}(t)}.$$\nHere $\\operatorname{Perm}(D(t))$ is the set of bijections from $\\{1,\\ldots,d_t\\}$ to $D(t)$.\nThe discrete subset expression is exact under its explicit subset-law convention, and the permutation expression is exact for its stated partial-likelihood ordering convention; the latter is not generally the full likelihood of interval-coarsened censored observations. These conventions are not interchangeable without a model relating them. The Breslow and Efron tie formulas are approximations, respectively\n$$L_B(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\left(\\sum_{j\\in R(t)}w_j(t)\\right)^{d_t}}$$\nand\n$$L_E(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\prod_{k=0}^{d_t-1}\\left(\\sum_{j\\in R(t)}w_j(t)-\\frac{k}{d_t}\\sum_{i\\in D(t)}w_i(t)\\right)}.$$\nWith an absolutely continuous event hazard and independent subjects, exact event-time ties have probability zero; grouped-time tie formulas describe additional observation/model conventions.\n\nFor a discrete event-time law, the survival relation $S(t\\mid z)=S_0(t)^{e^{\\beta^Tz}}$ describes proportional integrated hazards and is not equivalent in general to a hazard-ratio model. The proportional-hazards and proportional-integrated-hazards formulations agree under the continuity condition on the baseline survival; the hazard-density model above uses the absolutely continuous convention.\n\nThe counting-process martingale property used for inference is a separate model-contract assumption in the estimator theorem below. The hazard formula by itself does not assert that a compensated event count is a martingale. The Axiom of Choice is inherited from the cited event-observation and predictability interfaces; this definition makes no further choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cox-uniform-risk-set-convergence",
+          "source_section": "Statement",
+          "quote": "Let $O_i=(T_i,C_i,Z_i(\\cdot))$, $i\\ge1$, be IID subject records with law $P$, with jointly measurable predictable covariates, $p<\\infty$, and $\\|Z_i(t)\\|_2\\le K$ for all $i,t$ outside one null event. Let $B\\subset\\mathbb R^p$ be compact and contain $\\beta_0$. With $Y_i(t)=1\\{U_i\\ge t\\}$, define, for $r=0,1,2$,\n$$S_n^{(r)}(t,\\beta)=\\frac1n\\sum_{i=1}^nY_i(t)Z_i(t)^{\\otimes r}e^{\\beta^TZ_i(t)},\\qquad s^{(r)}(t,\\beta)=E_P[Y_i(t)Z_i(t)^{\\otimes r}e^{\\beta^TZ_i(t)}],$$\nwhere $Z^{\\otimes0}=1$, $Z^{\\otimes1}=Z$, and $Z^{\\otimes2}=ZZ^T$. Suppose $c_0:=\\inf_{t\\le\\tau}s^{(0)}(t,\\beta_0)>0$. For every finite deterministic measure $\\nu(dt)=w(t)\\,dt$ with nonnegative integrable density $w$, put\n$$D_n(t)=\\max_{r=0,1,2}\\sup_{\\beta\\in B}\\|S_n^{(r)}(t,\\beta)-s^{(r)}(t,\\beta)\\|_{\\max}.$$\nThen for each fixed $t$, $E[D_n(t)^2]\\to0$, and\n$$E\\int_0^\\tau D_n(t)^2\\,\\nu(dt)\\longrightarrow0.$$\nThere are measurable events $E_n$ with $P(E_n)\\to1$ and a constant $c>0$ such that on $E_n$,\n$$S_n^{(0)}(t,\\beta)\\ge c\\qquad\\text{for every }t\\le\\tau,\\ \\beta\\in B.$$\nDefine $\\bar Z_n=S_n^{(1)}/S_n^{(0)}$ and $V_n=S_n^{(2)}/S_n^{(0)}-\\bar Z_n\\bar Z_n^T$, setting each to zero at a zero denominator, and define $\\bar z=s^{(1)}/s^{(0)}$, $V=s^{(2)}/s^{(0)}-\\bar z\\bar z^T$. Their fixed-time and integrated parameter-uniform errors satisfy\n$$E\\sup_{\\beta\\in B}\\|\\bar Z_n(t,\\beta)-\\bar z(t,\\beta)\\|_2^2\\to0,\\qquad E\\sup_{\\beta\\in B}\\|V_n(t,\\beta)-V(t,\\beta)\\|_{\\max}^2\\to0,$$\n$$E\\int_0^\\tau\\sup_{\\beta\\in B}\\!\\left\\{\\|\\bar Z_n-\\bar z\\|_2^2+\\|V_n-V\\|_{\\max}^2\\right\\}\\nu(dt)\\longrightarrow0.$$\nThese conclusions require no regularity of the time-indexed covariate class beyond bounded predictability. In particular take $\\nu(dt)=\\lambda_0(t)\\,dt$.\n\nThe stronger uniform-in-time conclusion remains valid under the following additional, sufficient condition: every scalar coordinate class $\\mathcal F_{r,k}=\\{O\\mapsto[Y(t)Z(t)^{\\otimes r}e^{\\beta^TZ(t)}]_k:t\\le\\tau,\\beta\\in B\\}$ is pointwise measurable and has finite $L^1(P)$ bracketing number at every positive width. Under that condition, $\\sup_tD_n(t)\\to_P0$, and both ratio errors converge uniformly on $[0,\\tau]\\times B$ in probability. This optional condition is not imposed by the Cox inference consumers.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nFor this model and every nonnegative predictable process $G$, define the\npathwise energy integral by\n$$\\int_0^tG_s\\,dA_s:=\\int_0^tG_sY_s\\lambda_s\\,ds,\\qquad t\\le T.$$\nThe **continuous intensity compensator contract** requires the defining\nintegral for $A$ to be finite pathwise, and requires $A$ to be continuous,\nadapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "Under the finite-horizon contract of\n[[def-counting-process-intensity-and-compensator-contract]], the optional\nquadratic variation of $M=N-A$ is $[M]_t=N_t$, its continuous predictable\nbracket is $\\langle M\\rangle_t=A_t$, its self-cross predictable bracket is\n$\\langle M,M\\rangle_t=A_t$, and $M_t^2-A_t$ is a martingale on $[0,T]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-l2-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "For every predictable $H$ on $[0,T]$ with\n$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty$, the limit in\n[[def-l2-counting-process-integral]] exists at each $t\\le T$, is independent\nof the approximating step sequence, and defines a square-integrable\nmartingale. It satisfies, for each $t\\le T$,\n$$\\mathbb E\\left(\\int_0^tH_s\\,dM_s\\right)^2=\\mathbb E\\int_0^tH_s^2\\,dA_s.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-bounded-predictable-counting-integral-pathwise-identity",
+          "source_section": "Statement",
+          "quote": "Under [[def-counting-process-intensity-and-compensator-contract]], for every nonnegative predictable $G$,\n$$E\\int_{(0,T]}G_t\\,dN_t=E\\int_0^T G_t\\,dA_t.$$\nFor every bounded real predictable $H$, the L²-completed stochastic integral equals the pathwise finite-variation expression almost surely:\n$$\\int_0^T H_t\\,dM_t=\\sum_{0<t\\le T}H_t\\Delta N_t-\\int_0^T H_t\\,dA_t,\\qquad M=N-A.$$\nThe identity holds at every fixed terminal time and coordinatewise for vector or matrix integrands. No left continuity of $H$ is assumed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At each recorded failure the risk set contains its failing subject, so its denominator is positive for every $\\beta$, even if risk sets are empty at other times. Differentiate the finite sum defining $\\log L_p$ to obtain $U_n(\\beta)=\\sum_i\\int(Z_i-\\bar Z_n(t,\\beta))\\,dN_i$ and $H_n(\\beta)=-\\int V_n(t,\\beta)\\,dN_\\cdot$. Define $V_n=0$ on empty risk sets. It is predictable, its entries are bounded by $2K^2$, and [F5] permits the pathwise decomposition against $dN_\\cdot=d\\mathcal M+dA_\\cdot$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since subjects have no simultaneous failures, $N_\\cdot$ is simple; $\\mathcal M=\\sum_iM_i$ is square-integrable and has continuous compensator $A_\\cdot=\\sum_iA_i$. Its total compensator satisfies $A_\\cdot(\\tau)\\le ne^{K\\|\\beta_0\\|_2}\\|\\lambda_0\\|_1$, and $EN_\\cdot(\\tau)=EA_\\cdot(\\tau)$ by [F5]. Thus the aggregate contract holds and [L2]–[L3] apply. For each fixed $\\beta$, including the random predictable $V_n(t,\\beta)$, their isometry bounds $E\\|n^{-1}\\int V_n(t,\\beta)d\\mathcal M\\|_F^2\\le C/n$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "L1",
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The parameter maps $V_n(t,\\beta)$ have a deterministic Lipschitz bound independent of $n,t$: on a nonempty risk set, differentiating a weighted expectation of a bounded coordinate $g(Z)$ gives $E_{n,\\beta}[gZ]-E_{n,\\beta}[g]E_{n,\\beta}[Z]$, bounded by $2K\\sup|g|$; apply this to $g=Z_j,Z_jZ_k$ and the covariance product. An empty risk set is empty for every parameter, so its zero convention also has this bound. The population maps satisfy the same bounds by differentiation under their bounded expectations and positive denominators. A finite $\\varepsilon$-net of $B$ and step 2.1 control $n^{-1}\\int V_n d\\mathcal M$ on net points. Between points, [F5] bounds the difference by $C\\varepsilon(N_\\cdot(\\tau)+A_\\cdot(\\tau))/n=O_P(\\varepsilon)$; letting $\\varepsilon\\downarrow0$ proves its uniform parameter convergence to zero. The population Lipschitz bound and integrability of $s^{(0)}(t,\\beta_0)\\lambda_0(t)$ also prove continuity of $J$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "L3",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The compensator term equals $\\int V_n(t,\\beta)S_n^{(0)}(t,\\beta_0)\\lambda_0(t)dt$. Its difference from $J(\\beta)$ is bounded uniformly in parameter by $$C\\int_0^\\tau\\left\\{\\sup_{\\beta\\in B}\\|V_n(t,\\beta)-V(t,\\beta)\\|_{\\max}+|S_n^{(0)}(t,\\beta_0)-s^{(0)}(t,\\beta_0)|\\right\\}\\lambda_0(t)dt.$$ [F6] and [F2]'s expected integrated squared-error convergence make this bound tend to zero in L¹ and hence probability (if $\\|\\lambda_0\\|_1=0$, the bound is zero directly). Combine this with step 3.1 and the Hessian identity in step 1.1 to prove the stated uniform parameter limit. Finally $J(\\beta_0)=I$ by direct multiplication of $V(t,\\beta_0)$ by $s^{(0)}(t,\\beta_0)$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is an asymptotic limit for n subjects, not a zero-subject Hessian claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 4.1 allow zero information in this lemma; the matrix limit remains meaningful without inversion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 differentiates the finite risk-set likelihood for any fixed p≥1, including p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 4.1 allow zero information in this lemma; the matrix limit remains meaningful without inversion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 integrate over [0,τ] and use Y(t)=1{U≥t}, including the event-time endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 explicitly use the AC-dependent counting-process contract and L2 integral interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is uniform Hessian convergence and continuity of J under the IID risk and compensator hypotheses; it does not infer those model hypotheses from a convergent Hessian. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is uniform Hessian convergence and continuity of J under the IID risk and compensator hypotheses; it does not infer those model hypotheses from a convergent Hessian. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Reviewed all steps 1.1-4.1 and ten dependency interfaces, including the current compensated-counting bracket proof. Differentiation of the finite untied likelihood gives H=-integral V_n dN_total, with the failing subject protecting each evaluated denominator. No simultaneous failures makes N_total simple; the finite sum of square-integrable martingales and bounded aggregate compensator satisfies the same contract, so isometry applies even to sample-dependent V_n. Bounded covariates give deterministic covariance Lipschitz constants globally in parameter; finite nets and (N_total+A_total)/n=O_P(1) give uniformity. Integrated risk-set squared-error convergence and Cauchy-Schwarz control the compensator difference in L1 without any time supremum. The population Lipschitz bound gives continuous J and multiplication gives J(beta0)=I. Empty risk sets use a parameter-independent zero convention; lambda0=0 produces zero terms. AC is inherited. Checked Tian asymptotic notes pp.3-5 for the decomposition, and independently checked the added parameter-net argument. No defect found."
+      }
+    },
+    "lem-cox-score-martingale-replacement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $\\tau>0$ and a fixed dimension $p\\ge1$. Work on a probability space with an increasing filtration $(\\mathcal F_t)_{0\\le t\\le\\tau}$ as in [[def-continuous-time-filtration-and-all-pairs-martingale]]. For subject $i$, let $T_i$ be an event time, $C_i$ a censoring time, and $Z_i(t)\\in\\mathbb R^p$ a covariate process predictable relative to this filtration, in the sense of [[def-progressively-measurable-and-predictable-process]]. Use the right-censoring record convention of [[def-event-time-observation-schemes]]: $U_i=\\min(T_i,C_i)$ and $\\delta_i=1\\{T_i\\le C_i\\}$. For this vector covariate process, predictability means coordinatewise predictability: each real-valued coordinate is predictable in the sense of [[def-progressively-measurable-and-predictable-process]]. Define the history sigma-algebra $\\mathcal G_i:=\\sigma\\{Z_i(t):0\\le t\\le\\tau\\}$. The conditional-independence assumption is $T_i\\perp\\!\\!\\!\\perp C_i\\mid\\mathcal G_i$, meaning that for all bounded measurable real functions $a,b$, $E[a(T_i)b(C_i)\\mid\\mathcal G_i]=E[a(T_i)\\mid\\mathcal G_i]E[b(C_i)\\mid\\mathcal G_i]$ almost surely, as in [[def-conditional-independence-given-a-sigma-algebra]]. This conditional-independence relation is a model assumption, not an empirical conclusion. No conditional-kernel representation given the entire covariate path is assumed here.\n\nA Cox proportional-hazards specification fixes a coefficient $\\beta_0\\in\\mathbb R^p$ and a baseline hazard density $\\lambda_0:[0,\\tau]\\to[0,\\infty)$ that is measurable and integrable. Its baseline cumulative hazard is the absolutely continuous function\n$$\\Lambda_0(t)=\\int_0^t\\lambda_0(u)\\,du.$$\nThe conditional event intensity at time $t$ for subject $i$, while that subject is at risk, is\n$$Y_i(t)\\lambda_0(t)\\exp\\{\\beta_0^T Z_i(t)\\},\\qquad Y_i(t):=1\\{U_i\\ge t\\}.$$\nThese specify the conditional event-intensity component. The law of the covariate paths and the censoring law subject to the stated conditional-independence assumption remain nuisance components and are not fixed here. Thus this is a semiparametric model specification; $(\\beta_0,\\lambda_0)$ alone do not define a full parametric statistical experiment on the observed-data space.\nFor the counting-process arguments below, require $Y_i$ to be predictable as well; this is part of the stated observation model and is not inferred from the hazard formula alone.\nFor a constant covariate value $z$, the corresponding event survival function is\n$$S(t\\mid z)=\\exp\\{-e^{\\beta_0^Tz}\\Lambda_0(t)\\}.$$\nFor fixed covariate values $z,z'\\in\\mathbb R^p$, at times with $\\lambda_0(t)>0$ the hazard ratio is\n$$\\frac{\\lambda_0(t)e^{\\beta^Tz}}{\\lambda_0(t)e^{\\beta^Tz'}}=e^{\\beta^T(z-z')}.$$\nThe relative hazard factor is $e^{\\beta^T(z-z')}$ even at times when both baseline-scaled hazards vanish and their quotient is undefined. It is an instantaneous hazard ratio, not a ratio of cumulative event probabilities. For time-varying covariate paths $z(t),z'(t)$ the instantaneous relative hazard factor is $e^{\\beta^T(z(t)-z'(t))}$ and may vary with time.\n\nFor a sample of $n$ subjects, put $R(t)=\\{j:U_j\\ge t\\}$. When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is\n$$L_p(\\beta)=\\prod_{i:\\,\\delta_i=1,\\ U_i\\le\\tau} \\frac{\\exp\\{\\beta^TZ_i(U_i)\\}}{\\sum_{j\\in R(U_i)}\\exp\\{\\beta^TZ_j(U_i)\\}}.$$\nAn empty product is $1$. This partial likelihood is built from risk-set contributions; it is not asserted to be the full likelihood of the censored observations.\n\nTied-event likelihoods require an explicit time-recording convention. Put $D(t)=\\{i:U_i=t,\\delta_i=1\\}$ and $d_t=|D(t)|$. If a discrete or grouped-time model conditions on exactly $d_t$ failures from $D(t)\\subseteq R(t)$ at recorded time $t$ with the risk set fixed for that time, additionally assume that, conditional on that risk set, its covariate weights, and $d_t=d$, the failure subset law assigns each size-$d$ set $A\\subseteq R(t)$ probability proportional to $\\prod_{j\\in A}w_j(t)$. Under this explicit subset-law assumption, its exact conditional tie contribution is\n$$\\frac{\\prod_{i\\in D(t)}w_i(t)} {\\sum_{\\substack{A\\subseteq R(t)\\\\|A|=d_t}}\\ \\prod_{j\\in A}w_j(t)}, \\qquad w_j(t):=\\exp\\{\\beta^TZ_j(t)\\}.$$\nFor the separate exact Cox tied-partial-likelihood convention obtained by coarsening a continuous-time ordering into one recorded tie interval, assume the risk set at the interval start is $R(t)$, its only within-interval departures are the $d_t$ failures in $D(t)$, and the covariates are fixed at the recorded time. Conditional on each successive failure, the next failure label is chosen from the remaining risk set with probability proportional to its weight. Summing these order contributions gives the ordered-risk-set conditional partial-likelihood contribution\n$$\\sum_{\\pi\\in\\operatorname{Perm}(D(t))} \\prod_{k=1}^{d_t} \\frac{w_{\\pi_k}(t)} {\\sum_{j\\in R(t)}w_j(t)-\\sum_{\\ell<k}w_{\\pi_\\ell}(t)}.$$\nHere $\\operatorname{Perm}(D(t))$ is the set of bijections from $\\{1,\\ldots,d_t\\}$ to $D(t)$.\nThe discrete subset expression is exact under its explicit subset-law convention, and the permutation expression is exact for its stated partial-likelihood ordering convention; the latter is not generally the full likelihood of interval-coarsened censored observations. These conventions are not interchangeable without a model relating them. The Breslow and Efron tie formulas are approximations, respectively\n$$L_B(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\left(\\sum_{j\\in R(t)}w_j(t)\\right)^{d_t}}$$\nand\n$$L_E(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\prod_{k=0}^{d_t-1}\\left(\\sum_{j\\in R(t)}w_j(t)-\\frac{k}{d_t}\\sum_{i\\in D(t)}w_i(t)\\right)}.$$\nWith an absolutely continuous event hazard and independent subjects, exact event-time ties have probability zero; grouped-time tie formulas describe additional observation/model conventions.\n\nFor a discrete event-time law, the survival relation $S(t\\mid z)=S_0(t)^{e^{\\beta^Tz}}$ describes proportional integrated hazards and is not equivalent in general to a hazard-ratio model. The proportional-hazards and proportional-integrated-hazards formulations agree under the continuity condition on the baseline survival; the hazard-density model above uses the absolutely continuous convention.\n\nThe counting-process martingale property used for inference is a separate model-contract assumption in the estimator theorem below. The hazard formula by itself does not assert that a compensated event count is a martingale. The Axiom of Choice is inherited from the cited event-observation and predictability interfaces; this definition makes no further choice.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cox-uniform-risk-set-convergence",
+          "source_section": "Statement",
+          "quote": "Let $O_i=(T_i,C_i,Z_i(\\cdot))$, $i\\ge1$, be IID subject records with law $P$, with jointly measurable predictable covariates, $p<\\infty$, and $\\|Z_i(t)\\|_2\\le K$ for all $i,t$ outside one null event. Let $B\\subset\\mathbb R^p$ be compact and contain $\\beta_0$. With $Y_i(t)=1\\{U_i\\ge t\\}$, define, for $r=0,1,2$,\n$$S_n^{(r)}(t,\\beta)=\\frac1n\\sum_{i=1}^nY_i(t)Z_i(t)^{\\otimes r}e^{\\beta^TZ_i(t)},\\qquad s^{(r)}(t,\\beta)=E_P[Y_i(t)Z_i(t)^{\\otimes r}e^{\\beta^TZ_i(t)}],$$\nwhere $Z^{\\otimes0}=1$, $Z^{\\otimes1}=Z$, and $Z^{\\otimes2}=ZZ^T$. Suppose $c_0:=\\inf_{t\\le\\tau}s^{(0)}(t,\\beta_0)>0$. For every finite deterministic measure $\\nu(dt)=w(t)\\,dt$ with nonnegative integrable density $w$, put\n$$D_n(t)=\\max_{r=0,1,2}\\sup_{\\beta\\in B}\\|S_n^{(r)}(t,\\beta)-s^{(r)}(t,\\beta)\\|_{\\max}.$$\nThen for each fixed $t$, $E[D_n(t)^2]\\to0$, and\n$$E\\int_0^\\tau D_n(t)^2\\,\\nu(dt)\\longrightarrow0.$$\nThere are measurable events $E_n$ with $P(E_n)\\to1$ and a constant $c>0$ such that on $E_n$,\n$$S_n^{(0)}(t,\\beta)\\ge c\\qquad\\text{for every }t\\le\\tau,\\ \\beta\\in B.$$\nDefine $\\bar Z_n=S_n^{(1)}/S_n^{(0)}$ and $V_n=S_n^{(2)}/S_n^{(0)}-\\bar Z_n\\bar Z_n^T$, setting each to zero at a zero denominator, and define $\\bar z=s^{(1)}/s^{(0)}$, $V=s^{(2)}/s^{(0)}-\\bar z\\bar z^T$. Their fixed-time and integrated parameter-uniform errors satisfy\n$$E\\sup_{\\beta\\in B}\\|\\bar Z_n(t,\\beta)-\\bar z(t,\\beta)\\|_2^2\\to0,\\qquad E\\sup_{\\beta\\in B}\\|V_n(t,\\beta)-V(t,\\beta)\\|_{\\max}^2\\to0,$$\n$$E\\int_0^\\tau\\sup_{\\beta\\in B}\\!\\left\\{\\|\\bar Z_n-\\bar z\\|_2^2+\\|V_n-V\\|_{\\max}^2\\right\\}\\nu(dt)\\longrightarrow0.$$\nThese conclusions require no regularity of the time-indexed covariate class beyond bounded predictability. In particular take $\\nu(dt)=\\lambda_0(t)\\,dt$.\n\nThe stronger uniform-in-time conclusion remains valid under the following additional, sufficient condition: every scalar coordinate class $\\mathcal F_{r,k}=\\{O\\mapsto[Y(t)Z(t)^{\\otimes r}e^{\\beta^TZ(t)}]_k:t\\le\\tau,\\beta\\in B\\}$ is pointwise measurable and has finite $L^1(P)$ bracketing number at every positive width. Under that condition, $\\sup_tD_n(t)\\to_P0$, and both ratio errors converge uniformly on $[0,\\tau]\\times B$ in probability. This optional condition is not imposed by the Cox inference consumers.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nFor this model and every nonnegative predictable process $G$, define the\npathwise energy integral by\n$$\\int_0^tG_s\\,dA_s:=\\int_0^tG_sY_s\\lambda_s\\,ds,\\qquad t\\le T.$$\nThe **continuous intensity compensator contract** requires the defining\nintegral for $A$ to be finite pathwise, and requires $A$ to be continuous,\nadapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-elementary-predictable-counting-process-integral",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a square-integrable martingale on a finite horizon $[0,T]$ in the\nall-pairs convention of\n[[def-continuous-time-adapted-process-and-martingale]] (in particular, it may\nbe the compensated counting-process martingale of\n[[def-counting-process-intensity-and-compensator-contract]]). Let\n$$0=t_0<t_1<\\cdots<t_m=T$$\nbe a deterministic partition, and let each bounded random variable $H_j$ be\n$\\mathcal F_{t_j}$-measurable. The associated **bounded predictable step\nintegrand** is $H_0=0$ at time $0$ and $H_s=H_j$ on $(t_j,t_{j+1}]$. For this\nchosen step representation define, for $0\\le t\\le T$,\n$$I_t(H):=\\sum_{j=0}^{m-1}H_j\\bigl(M_{t\\wedge t_{j+1}}-M_{t\\wedge t_j}\\bigr).$$\nThis is a finite sum of square-integrable random variables. At this stage the\nrepresentation is part of the input; representation independence and the\nisometry are established in\n[[lem-elementary-counting-process-integral-isometry]].\nThe Axiom of Choice is inherited from the all-pairs martingale and\nconditional-expectation interface; the finite-sum definition makes no\nadditional choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "Under the finite-horizon contract of\n[[def-counting-process-intensity-and-compensator-contract]], the optional\nquadratic variation of $M=N-A$ is $[M]_t=N_t$, its continuous predictable\nbracket is $\\langle M\\rangle_t=A_t$, its self-cross predictable bracket is\n$\\langle M,M\\rangle_t=A_t$, and $M_t^2-A_t$ is a martingale on $[0,T]$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-l2-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "For every predictable $H$ on $[0,T]$ with\n$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty$, the limit in\n[[def-l2-counting-process-integral]] exists at each $t\\le T$, is independent\nof the approximating step sequence, and defines a square-integrable\nmartingale. It satisfies, for each $t\\le T$,\n$$\\mathbb E\\left(\\int_0^tH_s\\,dM_s\\right)^2=\\mathbb E\\int_0^tH_s^2\\,dA_s.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bounded-predictable-counting-integral-pathwise-identity",
+          "source_section": "Statement",
+          "quote": "Under [[def-counting-process-intensity-and-compensator-contract]], for every nonnegative predictable $G$,\n$$E\\int_{(0,T]}G_t\\,dN_t=E\\int_0^T G_t\\,dA_t.$$\nFor every bounded real predictable $H$, the L²-completed stochastic integral equals the pathwise finite-variation expression almost surely:\n$$\\int_0^T H_t\\,dM_t=\\sum_{0<t\\le T}H_t\\Delta N_t-\\int_0^T H_t\\,dA_t,\\qquad M=N-A.$$\nThe identity holds at every fixed terminal time and coordinatewise for vector or matrix integrands. No left continuity of $H$ is assumed.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiating the finite product in [[def-cox-proportional-hazards-model-and-partial-likelihood]] gives $$U_n(\\beta_0)=\\sum_i\\int_0^\\tau\\{Z_i(t)-\\bar Z_n(t,\\beta_0)\\}\\,dN_i(t).$$ By [F4], this pathwise integral can be decomposed as the L² stochastic integral and its compensator integral. Writing $dN_i=dM_i+Y_ie^{\\beta_0^TZ_i}\\lambda_0\\,dt$, the compensator contribution is zero because $\\sum_iY_i(t)e^{\\beta_0^TZ_i(t)}\\{Z_i(t)-\\bar Z_n(t,\\beta_0)\\}=0$ whenever the risk denominator is positive; outside the risk set every summand is zero.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Set $\\mathcal M=\\sum_iM_i$ and $H_n(t)=\\bar Z_n(t,\\beta_0)-\\bar z(t)$. The process $H_n$ is predictable by [F1]–[F3] and the deterministic measurability of $\\bar z$. For bounded predictable step approximations, the finite-sum definition [L2] is linear in the integrator; the isometry [L4] and $A_\\cdot=\\sum_iA_i$ pass that identity to the L² limits. Thus $n^{-1/2}U_n(\\beta_0)=n^{-1/2}\\sum_i\\xi_i-n^{-1/2}\\int_0^\\tau H_n(t)\\,d\\mathcal M(t)$. No simultaneous failures make $N_\\cdot=\\sum_iN_i$ a simple counting process, and the sum of the subject contracts is a square-integrable martingale contract with compensator $A_\\cdot=\\sum_iA_i$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "L1",
+            "L2",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The predictable aggregate integrand $H_n$ is bounded by $2K$. Its compensator energy satisfies $$n^{-1}E\\int_0^\\tau\\|H_n(t)\\|_2^2\\,dA_\\cdot(t)=E\\int_0^\\tau\\|H_n(t)\\|_2^2S_n^{(0)}(t,\\beta_0)\\lambda_0(t)dt\\le e^{K\\|\\beta_0\\|_2}E\\int_0^\\tau\\|H_n(t)\\|_2^2\\lambda_0(t)dt\\longrightarrow0$$ by [F2]'s integrated squared-error conclusion, without a time supremum. Thus [L4] shows the aggregate correction in step 2.1 tends to zero in L² after division by $\\sqrt n$, and therefore is $o_P(1)$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "L4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F4], $\\xi_i$ equals the event sum minus the compensator Lebesgue integral with integrand $Z_i-\\bar z$. Both are measurable functions of the $i$th subject record and the deterministic function $\\bar z$, so the $\\xi_i$ are IID. The integral isometry gives mean zero. Applying its scalar form to each coordinate and polarizing the identity gives the cross-coordinate isometry, hence $E[\\xi_i\\xi_i^T]=\\int_0^\\tau E[Y_i(t)e^{\\beta_0^TZ_i(t)}\\{Z_i(t)-\\bar z(t)\\}^{\\otimes2}]\\lambda_0(t)\\,dt=I$. The equality follows by expanding the outer product and using $\\bar z=s^{(1)}/s^{(0)}$. Independence and centering give $E\\|n^{-1/2}\\sum_i\\xi_i\\|_2^2=\\operatorname{tr}(I)$. For $M>0$, nonnegativity gives $M^2P(\\|n^{-1/2}\\sum_i\\xi_i\\|_2>M)\\le E\\|n^{-1/2}\\sum_i\\xi_i\\|_2^2=\\operatorname{tr}(I)$, so the normalized sum is $O_P(1)$ by [L5]. Combining this with step 3.1 proves the representation and the stated moment properties.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "L3",
+            "L4",
+            "L5",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement has n IID subjects and normalizes by sqrt(n), so n=0 is outside its asymptotic sequence. On a path with no observed failures, the partial-likelihood product is empty and its score is zero; step 1.1 still decomposes and cancels the compensator contribution. The sum detector does not overturn the positive-n domain.",
+          "reviewed": {
+            "upheld": true,
+            "by": "sme_cox_uniform_resolution",
+            "reason": "The Statement has n IID subjects and normalizes by sqrt(n), so n=0 is outside its asymptotic sequence. On a path with no observed failures, the partial-likelihood product is empty and its score is zero; step 1.1 still decomposes and cancels the compensator contribution. The sum detector does not overturn the positive-n domain."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 computes the covariance as I; if I is zero the influence vectors are the zero L2 class and the O_P(1) conclusion still holds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the vector integrals and covariance calculations are coordinatewise and include the scalar case p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 4.1 permit I=0; no invertibility is used, and zero covariance gives the zero L2 influence class."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 keep the event count on [0,τ] and use the at-risk convention U≥t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 carry AC through the explicit counting-process martingale and integral suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This result derives an influence-sum representation and its covariance I from the counting-process model and integrated risk law; the representation is not a characterization of Cox models. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This result derives an influence-sum representation and its covariance I from the counting-process model and integrated risk law; the representation is not a characterization of Cox models. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Reviewed every step 1.1-4.1 and all ten dependency interfaces. Exact cancellation of the compensator holds on nonempty risk sets and all weights vanish on empty ones. Sample means and deterministic population means are bounded predictable integrands. No ties makes the aggregate count simple; the sum compensator and common-filtration martingale contract justify aggregate isometry. Linearity follows first for common step approximants and then in compensator L2 (individual energies are dominated by aggregate energy). Integrated expected squared error, multiplied by bounded S_n0, makes the normalized replacement remainder tend to zero in L2; no optional time-index bracketing assumption enters. Pathwise identity makes each xi a measurable function of its IID subject record; martingale-integral centering, scalar isometry and polarization give covariance I with the correct outer-product subtraction. Trace(I) bounds normalized second moments, including singular or zero information, and proves O_P(1). AC is inherited. Tian asymptotic notes pp.2-4 support the score cancellation; the local replacement argument was checked directly. No defect found."
+      }
+    },
+    "thm-cox-score-limit-and-estimator-linearization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $\\tau>0$ and a fixed dimension $p\\ge1$. Work on a probability space with an increasing filtration $(\\mathcal F_t)_{0\\le t\\le\\tau}$ as in [[def-continuous-time-filtration-and-all-pairs-martingale]]. For subject $i$, let $T_i$ be an event time, $C_i$ a censoring time, and $Z_i(t)\\in\\mathbb R^p$ a covariate process predictable relative to this filtration, in the sense of [[def-progressively-measurable-and-predictable-process]]. Use the right-censoring record convention of [[def-event-time-observation-schemes]]: $U_i=\\min(T_i,C_i)$ and $\\delta_i=1\\{T_i\\le C_i\\}$. For this vector covariate process, predictability means coordinatewise predictability: each real-valued coordinate is predictable in the sense of [[def-progressively-measurable-and-predictable-process]]. Define the history sigma-algebra $\\mathcal G_i:=\\sigma\\{Z_i(t):0\\le t\\le\\tau\\}$. The conditional-independence assumption is $T_i\\perp\\!\\!\\!\\perp C_i\\mid\\mathcal G_i$, meaning that for all bounded measurable real functions $a,b$, $E[a(T_i)b(C_i)\\mid\\mathcal G_i]=E[a(T_i)\\mid\\mathcal G_i]E[b(C_i)\\mid\\mathcal G_i]$ almost surely, as in [[def-conditional-independence-given-a-sigma-algebra]]. This conditional-independence relation is a model assumption, not an empirical conclusion. No conditional-kernel representation given the entire covariate path is assumed here.\n\nA Cox proportional-hazards specification fixes a coefficient $\\beta_0\\in\\mathbb R^p$ and a baseline hazard density $\\lambda_0:[0,\\tau]\\to[0,\\infty)$ that is measurable and integrable. Its baseline cumulative hazard is the absolutely continuous function\n$$\\Lambda_0(t)=\\int_0^t\\lambda_0(u)\\,du.$$\nThe conditional event intensity at time $t$ for subject $i$, while that subject is at risk, is\n$$Y_i(t)\\lambda_0(t)\\exp\\{\\beta_0^T Z_i(t)\\},\\qquad Y_i(t):=1\\{U_i\\ge t\\}.$$\nThese specify the conditional event-intensity component. The law of the covariate paths and the censoring law subject to the stated conditional-independence assumption remain nuisance components and are not fixed here. Thus this is a semiparametric model specification; $(\\beta_0,\\lambda_0)$ alone do not define a full parametric statistical experiment on the observed-data space.\nFor the counting-process arguments below, require $Y_i$ to be predictable as well; this is part of the stated observation model and is not inferred from the hazard formula alone.\nFor a constant covariate value $z$, the corresponding event survival function is\n$$S(t\\mid z)=\\exp\\{-e^{\\beta_0^Tz}\\Lambda_0(t)\\}.$$\nFor fixed covariate values $z,z'\\in\\mathbb R^p$, at times with $\\lambda_0(t)>0$ the hazard ratio is\n$$\\frac{\\lambda_0(t)e^{\\beta^Tz}}{\\lambda_0(t)e^{\\beta^Tz'}}=e^{\\beta^T(z-z')}.$$\nThe relative hazard factor is $e^{\\beta^T(z-z')}$ even at times when both baseline-scaled hazards vanish and their quotient is undefined. It is an instantaneous hazard ratio, not a ratio of cumulative event probabilities. For time-varying covariate paths $z(t),z'(t)$ the instantaneous relative hazard factor is $e^{\\beta^T(z(t)-z'(t))}$ and may vary with time.\n\nFor a sample of $n$ subjects, put $R(t)=\\{j:U_j\\ge t\\}$. When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is\n$$L_p(\\beta)=\\prod_{i:\\,\\delta_i=1,\\ U_i\\le\\tau} \\frac{\\exp\\{\\beta^TZ_i(U_i)\\}}{\\sum_{j\\in R(U_i)}\\exp\\{\\beta^TZ_j(U_i)\\}}.$$\nAn empty product is $1$. This partial likelihood is built from risk-set contributions; it is not asserted to be the full likelihood of the censored observations.\n\nTied-event likelihoods require an explicit time-recording convention. Put $D(t)=\\{i:U_i=t,\\delta_i=1\\}$ and $d_t=|D(t)|$. If a discrete or grouped-time model conditions on exactly $d_t$ failures from $D(t)\\subseteq R(t)$ at recorded time $t$ with the risk set fixed for that time, additionally assume that, conditional on that risk set, its covariate weights, and $d_t=d$, the failure subset law assigns each size-$d$ set $A\\subseteq R(t)$ probability proportional to $\\prod_{j\\in A}w_j(t)$. Under this explicit subset-law assumption, its exact conditional tie contribution is\n$$\\frac{\\prod_{i\\in D(t)}w_i(t)} {\\sum_{\\substack{A\\subseteq R(t)\\\\|A|=d_t}}\\ \\prod_{j\\in A}w_j(t)}, \\qquad w_j(t):=\\exp\\{\\beta^TZ_j(t)\\}.$$\nFor the separate exact Cox tied-partial-likelihood convention obtained by coarsening a continuous-time ordering into one recorded tie interval, assume the risk set at the interval start is $R(t)$, its only within-interval departures are the $d_t$ failures in $D(t)$, and the covariates are fixed at the recorded time. Conditional on each successive failure, the next failure label is chosen from the remaining risk set with probability proportional to its weight. Summing these order contributions gives the ordered-risk-set conditional partial-likelihood contribution\n$$\\sum_{\\pi\\in\\operatorname{Perm}(D(t))} \\prod_{k=1}^{d_t} \\frac{w_{\\pi_k}(t)} {\\sum_{j\\in R(t)}w_j(t)-\\sum_{\\ell<k}w_{\\pi_\\ell}(t)}.$$\nHere $\\operatorname{Perm}(D(t))$ is the set of bijections from $\\{1,\\ldots,d_t\\}$ to $D(t)$.\nThe discrete subset expression is exact under its explicit subset-law convention, and the permutation expression is exact for its stated partial-likelihood ordering convention; the latter is not generally the full likelihood of interval-coarsened censored observations. These conventions are not interchangeable without a model relating them. The Breslow and Efron tie formulas are approximations, respectively\n$$L_B(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\left(\\sum_{j\\in R(t)}w_j(t)\\right)^{d_t}}$$\nand\n$$L_E(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\prod_{k=0}^{d_t-1}\\left(\\sum_{j\\in R(t)}w_j(t)-\\frac{k}{d_t}\\sum_{i\\in D(t)}w_i(t)\\right)}.$$\nWith an absolutely continuous event hazard and independent subjects, exact event-time ties have probability zero; grouped-time tie formulas describe additional observation/model conventions.\n\nFor a discrete event-time law, the survival relation $S(t\\mid z)=S_0(t)^{e^{\\beta^Tz}}$ describes proportional integrated hazards and is not equivalent in general to a hazard-ratio model. The proportional-hazards and proportional-integrated-hazards formulations agree under the continuity condition on the baseline survival; the hazard-density model above uses the absolutely continuous convention.\n\nThe counting-process martingale property used for inference is a separate model-contract assumption in the estimator theorem below. The hazard formula by itself does not assert that a compensated event count is a martingale. The Axiom of Choice is inherited from the cited event-observation and predictability interfaces; this definition makes no further choice.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cox-partial-likelihood-hessian-convergence",
+          "source_section": "Statement",
+          "quote": "Use the IID bounded-covariate setup and the risk-support and compact-set hypotheses of [[lem-cox-uniform-risk-set-convergence]]. For each subject let $N_i(t)=1\\{U_i\\le t,\\delta_i=1\\}$ and $A_i(t)=\\int_0^tY_i(u)e^{\\beta_0^TZ_i(u)}\\lambda_0(u)\\,du$. Assume the continuous counting-process contract of [[def-counting-process-intensity-and-compensator-contract]] for each $M_i=N_i-A_i$ on one common filtration, and assume no two subjects fail at the same time. Write $N_\\cdot=\\sum_iN_i$, $A_\\cdot=\\sum_iA_i$, and $\\mathcal M=N_\\cdot-A_\\cdot$. For $\\beta\\in B$, let\n$$V_n(t,\\beta)=\\frac{S_n^{(2)}(t,\\beta)}{S_n^{(0)}(t,\\beta)} -\\bar Z_n(t,\\beta)\\bar Z_n(t,\\beta)^T,\\qquad V(t,\\beta)=\\frac{s^{(2)}(t,\\beta)}{s^{(0)}(t,\\beta)} -\\bar z(t,\\beta)\\bar z(t,\\beta)^T,$$\nusing zero values when a finite-sample denominator is zero. Let $U_n(\\beta)=\\partial_\\beta\\log L_p(\\beta)$ and $H_n(\\beta)=\\partial_\\beta U_n(\\beta)^T$. Define\n$$J(\\beta)=\\int_0^\\tau V(t,\\beta)s^{(0)}(t,\\beta_0)\\lambda_0(t)\\,dt.$$\nThen the partial log-likelihood Hessian satisfies\n$$\\sup_{\\beta\\in B}\\left\\|n^{-1}H_n(\\beta)+J(\\beta)\\right\\|_{\\max}\\longrightarrow_P0.$$\nThe map $J:B\\to\\mathbb R^{p\\times p}$ is continuous.\nIn particular, $J(\\beta_0)=I$, where\n$$I=\\int_0^\\tau\\left\\{s^{(2)}(t,\\beta_0)- \\frac{s^{(1)}(t,\\beta_0)s^{(1)}(t,\\beta_0)^T}{s^{(0)}(t,\\beta_0)}\\right\\}\\lambda_0(t)\\,dt.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cox-score-martingale-replacement",
+          "source_section": "Statement",
+          "quote": "Use the IID bounded-covariate model, risk-support hypotheses of [[lem-cox-uniform-risk-set-convergence]], the no-tie event process, and the per-subject counting-process contracts of [[def-counting-process-intensity-and-compensator-contract]]. Let\n$$\\bar z(t)=\\frac{s^{(1)}(t,\\beta_0)}{s^{(0)}(t,\\beta_0)},\\qquad I=\\int_0^\\tau\\left\\{s^{(2)}(t,\\beta_0)- \\frac{s^{(1)}(t,\\beta_0)s^{(1)}(t,\\beta_0)^T}{s^{(0)}(t,\\beta_0)}\\right\\}\\lambda_0(t)\\,dt,\\qquad \\xi_i=\\int_0^\\tau\\{Z_i(t)-\\bar z(t)\\}\\,dM_i(t),$$\nwhere each vector integral is defined coordinatewise in L². If $U_n(\\beta)=\\partial_\\beta\\log L_p(\\beta)$ is the partial-likelihood score, then\n$$n^{-1/2}U_n(\\beta_0)=n^{-1/2}\\sum_{i=1}^n\\xi_i+o_P(1).$$\nThe $\\xi_i$ are IID, centered, square-integrable vectors with covariance matrix $I$. In particular, $n^{-1/2}\\sum_i\\xi_i=O_P(1)$. The replacement of the random risk-set mean by $\\bar z$ is part of the conclusion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-op-and-little-op-stochastic-bounds",
+          "source_section": "Definition",
+          "quote": "For each positive integer $n$, let $(\\Omega_n,\\mathcal A_n,P_n)$ be a probability space and let $X_n:\\Omega_n\\to\\mathbb R^d$ be measurable into the Borel sigma-algebra generated by the Euclidean open sets, where $d\\ge1$ is fixed and $\\mathbb R^d$ has the Euclidean norm $\\|\\cdot\\|_2$ ([[def-euclidean-spheres-and-closed-balls]], [[def-random-element-and-real-random-variable]], [[def-probability-measure]]). The spaces and measures may depend on $n$; no common probability space is required.\n\nWrite $X_n=o_P(1)$ if for every $\\varepsilon>0$,\n$$P_n(\\|X_n\\|_2>\\varepsilon)\\longrightarrow0.$$\nWrite $X_n=O_P(1)$, or say that $(X_n)$ is bounded in probability, if for every $\\eta>0$ there is $M>0$ such that\n$$\\limsup_{n\\to\\infty}P_n(\\|X_n\\|_2>M)\\le\\eta.$$\nFor real-valued variables on one common probability space, $o_P(1)$ is convergence in probability to zero as defined in [[def-convergence-in-probability]].\n\nThe norms and tail probabilities are part of the definition. Independence is not implicit in either notation.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\Delta_n=\\hat\\beta_n-\\beta_0$ and $G_n=\\int_0^1n^{-1}H_n(\\beta_0+s\\Delta_n)\\,ds$. Since $\\Delta_n\\to_P0$, the segment lies in $B$ with probability tending to one. The Hessian lemma gives uniform convergence to $-J(\\beta)$, and $J$ is continuous at $\\beta_0$ by bounded covariates, the positive risk denominator, and $\\lambda_0\\in L^1$. Therefore $G_n\\to_P-I$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $I$ is positive definite, it is invertible. Matrix inversion is continuous at the nonsingular matrix $-I$, so $G_n$ is invertible with probability tending to one and $G_n^{-1}\\to_P-I^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "On the event that $\\hat\\beta_n$ is a score root and the segment lies in $B$, the fundamental theorem of calculus applied to the continuously differentiable finite-sample score gives $0=U_n(\\hat\\beta_n)=U_n(\\beta_0)+nG_n\\Delta_n$. Thus $\\sqrt n\\Delta_n=-G_n^{-1}\\{U_n(\\beta_0)/\\sqrt n\\}$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Substitute [F4]. Its normalized IID sum is $O_P(1)$, so the product of that sum with $G_n^{-1}+I^{-1}=o_P(1)$ is $o_P(1)$. Hence $\\sqrt n\\Delta_n=I^{-1}n^{-1/2}\\sum_{i=1}^n\\xi_i+o_P(1)=I^{-1}n^{-1/2}\\sum_{i=1}^n\\int_0^\\tau\\{Z_i(t)-\\bar z(t)\\}\\,dM_i(t)+o_P(1)$, which is the asserted expansion.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The displayed influence expansion divides by sqrt(n) and concerns a consistent measurable score root as n tends to infinity, excluding n=0. A pathwise empty failure set gives a constant likelihood and score zero; the theorem only promises its expansion on probability-tending-to-one root/invertibility events established in steps 1.1, 2.1, 2.2, not a finite empty-data estimator characterization.",
+          "reviewed": {
+            "upheld": true,
+            "by": "sme_cox_uniform_resolution",
+            "reason": "The displayed influence expansion divides by sqrt(n) and concerns a consistent measurable score root as n tends to infinity, excluding n=0. A pathwise empty failure set gives a constant likelihood and score zero; the theorem only promises its expansion on probability-tending-to-one root/invertibility events established in steps 1.1, 2.1, 2.2, not a finite empty-data estimator characterization."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The positive-definite information hypothesis excludes zero information."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits every fixed p≥1, including the scalar case p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "I is required to be positive definite so the inverse in the conclusion exists."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the model and all score/martingale integrals are restricted to the fixed horizon [0,τ]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes AC, inherited through the explicitly cited observation, predictability, and martingale interfaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The measurable consistent score root and positive definite I are assumptions for the influence expansion; the expansion is not asserted to imply the martingale model or existence of such a root. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The measurable consistent score root and positive definite I are assumptions for the influence expansion; the expansion is not asserted to imply the martingale model or existence of such a root. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Reviewed all four steps and eight actual prerequisites. The compact neighborhood contains a ball around beta0, so consistency places the whole line segment in B with probability tending to one even without convex B. Uniform Hessian convergence and continuous J imply the integrated Hessian tends to -I. Positive definite I gives eventual invertibility; score-root and segment events need only probability tending to one. Fundamental calculus uses the integral Hessian, avoiding an invalid multivariate single-intermediate-point assertion. The signs give -G_n^-1 tending to I^-1. The separately proved normalized influence sum is O_P(1), so multiplication by the vanishing inverse error gives o_P(1). Measurability and consistency of the score root are explicit assumptions; neither existence nor consistency is inferred from the likelihood. Degenerate information is excluded by I positive definite, and no-event finite samples are harmless on exceptional events. AC is declared and the optional time-bracketing hypothesis is not used. Tian asymptotic notes pp.6-9 were checked for the expansion and vector setup. No defect found."
+      }
+    },
+    "cor-cox-partial-likelihood-asymptotic-normality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-cox-score-martingale-replacement",
+          "source_section": "Statement",
+          "quote": "Use the IID bounded-covariate model, risk-support hypotheses of [[lem-cox-uniform-risk-set-convergence]], the no-tie event process, and the per-subject counting-process contracts of [[def-counting-process-intensity-and-compensator-contract]]. Let\n$$\\bar z(t)=\\frac{s^{(1)}(t,\\beta_0)}{s^{(0)}(t,\\beta_0)},\\qquad I=\\int_0^\\tau\\left\\{s^{(2)}(t,\\beta_0)- \\frac{s^{(1)}(t,\\beta_0)s^{(1)}(t,\\beta_0)^T}{s^{(0)}(t,\\beta_0)}\\right\\}\\lambda_0(t)\\,dt,\\qquad \\xi_i=\\int_0^\\tau\\{Z_i(t)-\\bar z(t)\\}\\,dM_i(t),$$\nwhere each vector integral is defined coordinatewise in L². If $U_n(\\beta)=\\partial_\\beta\\log L_p(\\beta)$ is the partial-likelihood score, then\n$$n^{-1/2}U_n(\\beta_0)=n^{-1/2}\\sum_{i=1}^n\\xi_i+o_P(1).$$\nThe $\\xi_i$ are IID, centered, square-integrable vectors with covariance matrix $I$. In particular, $n^{-1/2}\\sum_i\\xi_i=O_P(1)$. The replacement of the random risk-set mean by $\\bar z$ is part of the conclusion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cox-score-limit-and-estimator-linearization",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $p<\\infty$, $\\tau>0$, and $\\beta_0\\in\\mathbb R^p$. Let subjects $O_i=(T_i,C_i,Z_i(\\cdot))$ be IID and independent. Assume the Cox model of [[def-cox-proportional-hazards-model-and-partial-likelihood]] with bounded predictable covariates $\\|Z_i(t)\\|_2\\le K$, baseline $\\lambda_0\\in L^1[0,\\tau]$, and no tied failures. Assume the positive population risk denominators of [[lem-cox-uniform-risk-set-convergence]] on a compact neighborhood $B$ of $\\beta_0$. In one common filtration, assume the observed event counts $N_i(t)=1\\{U_i\\le t,\\delta_i=1\\}$ have compensators\n$$A_i(t)=\\int_0^tY_i(u)e^{\\beta_0^TZ_i(u)}\\lambda_0(u)\\,du$$\nand that $M_i=N_i-A_i$ satisfies the square-integrable counting-process contract of [[def-counting-process-intensity-and-compensator-contract]]. This martingale contract is an explicit model assumption. No bracketing or time-class regularity is required: the risk-set lemma supplies the integrated parameter-uniform laws for these bounded predictable paths.\n\nLet $I$ be the matrix in [[lem-cox-partial-likelihood-hessian-convergence]] and assume $I$ is positive definite. Let $\\hat\\beta_n$ be a measurable $\\mathbb R^p$-valued estimator such that, with probability tending to one, it solves the partial-likelihood score equation $U_n(\\hat\\beta_n)=0$, and suppose $\\hat\\beta_n\\to_P\\beta_0$. Then\n$$\\sqrt n(\\hat\\beta_n-\\beta_0) =I^{-1}\\frac1{\\sqrt n}\\sum_{i=1}^n \\int_0^\\tau\\{Z_i(t)-\\bar z(t)\\}\\,dM_i(t)+o_P(1), \\qquad \\bar z(t)=\\frac{s^{(1)}(t,\\beta_0)}{s^{(0)}(t,\\beta_0)}.$$\nThe proof establishes the partial-likelihood score representation locally; it does not treat the score summands with the random risk-set mean as IID.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-iid-terminal-influence-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, let $(\\mathcal O,\\mathcal A,P)$ be a probability space, and let $O_1,O_2,\\ldots$ be IID with law $P$. Let $\\hat\\theta_n$ be a measurable $\\mathbb R^d$-valued estimator based on $O_1,\\ldots,O_n$ for a fixed $\\theta\\in\\mathbb R^d$. Suppose $\\phi:\\mathcal O\\to\\mathbb R^d$ is measurable, $E_P\\phi=0$, and $E_P\\|\\phi\\|_2^2<\\infty$, and set $\\Sigma=E_P[\\phi\\phi^T]$. Assume the separately established expansion, with remainder $r_n$ on the sample probability space,\n\n$$\\hat\\theta_n-\\theta=\\frac1n\\sum_{i=1}^n\\phi(O_i)+r_n,\\qquad r_n=o_P(n^{-1/2}),$$\n\nThen\n\n$$\\sqrt n(\\hat\\theta_n-\\theta)\\Rightarrow N_d(0,\\Sigma).$$\n\nThe remainder notation means $\\sqrt n\\,r_n\\to_P0$, as in [[def-asymptotically-linear-estimator-and-influence-function]]. Thus $\\phi$ is the estimator influence function in the asymptotically linear sense: the theorem assumes the expansion and does not establish it. The covariance may be singular, including zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $X=(X_1,\\ldots,X_p)$ be a measurable random vector in $\\mathbb R^p$,\nwhere $p\\ge1$ is finite, and assume $\\mathbb E\\|X\\|_2^2<\\infty$. Define\nthe mean coordinatewise by $\\mu_j=\\mathbb E X_j$ and define the covariance\nmatrix by\n$$\\Sigma:=\\mathbb E[(X-\\mu)(X-\\mu)^T],$$\nwhere each entry is the expectation of the corresponding real random\nvariable. Write $\\operatorname{tr}(\\Sigma)=\\sum_{j=1}^p\\Sigma_{jj}$.\n\nThe well-definedness lemma proves these expectations are finite,\n$\\Sigma$ is symmetric positive semidefinite, and\n$\\operatorname{tr}(\\Sigma)=\\mathbb E\\|X-\\mu\\|_2^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $\\phi(O_i)=I^{-1}\\xi_i$. By [F1], $E\\phi=0$ and $\\phi$ is square-integrable. Since $I$ is symmetric positive definite, [F4] gives $\\operatorname{Cov}(\\phi)=I^{-1}\\operatorname{Cov}(\\xi_i)(I^{-1})^T=I^{-1}II^{-1}=I^{-1}$. The map is a measurable function of one subject record because $M_i$, $Z_i$, and the compensator $A_i$ are subject-specific and $\\bar z$ is deterministic.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], the expansion is $\\hat\\beta_n-\\beta_0=n^{-1}\\sum_{i=1}^n\\phi(O_i)+r_n$ with $r_n=o_P(n^{-1/2})$. The sample records are IID, $\\hat\\beta_n$ is measurable, $\\phi$ is centered with finite second moment, and AC holds. These are exactly the hypotheses of [F3]; applying it with covariance from step 1.1 proves the stated limit.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary concerns the terminal limit as the IID subject count tends to infinity."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Positive-definite I is required by the estimator expansion and inverse covariance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits any finite p≥1; the covariance calculation also holds for p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The information matrix is assumed positive definite, so singular information is outside this normal-limit claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the influence integral and source estimator theorem use the same fixed horizon [0,τ]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit in the Statement and is required by the terminal IID influence theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Gaussian limit is obtained from a separately proved influence expansion and terminal IID theorem; no converse from Gaussian convergence to an influence expansion is claimed. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Gaussian limit is obtained from a separately proved influence expansion and terminal IID theorem; no converse from Gaussian convergence to an influence expansion is claimed. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Reviewed both proof steps, all six declared dependency interfaces and the full current IID terminal-influence theorem proof. Its prerequisite is a separately established sample estimator expansion with a measurable, centered, square-integrable one-subject influence function, not an assumed estimator CLT. The pathwise representation of xi makes I^-1 xi measurable from each IID subject record; martingale centering and finite compensator energy give the required moments. Positive-definite symmetric I is inherited from the expansion theorem, and covariance transforms to I^-1 I (I^-1)^T=I^-1. Dividing the established root-n expansion gives precisely r_n=o_P(n^-1/2); the terminal theorem then applies by the multivariate IID CLT and vector Slutsky. AC is explicit. No circular use of the normal limit, unsupported independence of random-risk-mean summands, or singular-matrix inversion occurs. Tian asymptotic notes pp.7-10 match the target covariance. No defect found."
+      }
+    },
+    "ex-cox-risk-set-likelihood-and-model-checks": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $\\tau>0$ and a fixed dimension $p\\ge1$. Work on a probability space with an increasing filtration $(\\mathcal F_t)_{0\\le t\\le\\tau}$ as in [[def-continuous-time-filtration-and-all-pairs-martingale]]. For subject $i$, let $T_i$ be an event time, $C_i$ a censoring time, and $Z_i(t)\\in\\mathbb R^p$ a covariate process predictable relative to this filtration, in the sense of [[def-progressively-measurable-and-predictable-process]]. Use the right-censoring record convention of [[def-event-time-observation-schemes]]: $U_i=\\min(T_i,C_i)$ and $\\delta_i=1\\{T_i\\le C_i\\}$. For this vector covariate process, predictability means coordinatewise predictability: each real-valued coordinate is predictable in the sense of [[def-progressively-measurable-and-predictable-process]]. Define the history sigma-algebra $\\mathcal G_i:=\\sigma\\{Z_i(t):0\\le t\\le\\tau\\}$. The conditional-independence assumption is $T_i\\perp\\!\\!\\!\\perp C_i\\mid\\mathcal G_i$, meaning that for all bounded measurable real functions $a,b$, $E[a(T_i)b(C_i)\\mid\\mathcal G_i]=E[a(T_i)\\mid\\mathcal G_i]E[b(C_i)\\mid\\mathcal G_i]$ almost surely, as in [[def-conditional-independence-given-a-sigma-algebra]]. This conditional-independence relation is a model assumption, not an empirical conclusion. No conditional-kernel representation given the entire covariate path is assumed here.\n\nA Cox proportional-hazards specification fixes a coefficient $\\beta_0\\in\\mathbb R^p$ and a baseline hazard density $\\lambda_0:[0,\\tau]\\to[0,\\infty)$ that is measurable and integrable. Its baseline cumulative hazard is the absolutely continuous function\n$$\\Lambda_0(t)=\\int_0^t\\lambda_0(u)\\,du.$$\nThe conditional event intensity at time $t$ for subject $i$, while that subject is at risk, is\n$$Y_i(t)\\lambda_0(t)\\exp\\{\\beta_0^T Z_i(t)\\},\\qquad Y_i(t):=1\\{U_i\\ge t\\}.$$\nThese specify the conditional event-intensity component. The law of the covariate paths and the censoring law subject to the stated conditional-independence assumption remain nuisance components and are not fixed here. Thus this is a semiparametric model specification; $(\\beta_0,\\lambda_0)$ alone do not define a full parametric statistical experiment on the observed-data space.\nFor the counting-process arguments below, require $Y_i$ to be predictable as well; this is part of the stated observation model and is not inferred from the hazard formula alone.\nFor a constant covariate value $z$, the corresponding event survival function is\n$$S(t\\mid z)=\\exp\\{-e^{\\beta_0^Tz}\\Lambda_0(t)\\}.$$\nFor fixed covariate values $z,z'\\in\\mathbb R^p$, at times with $\\lambda_0(t)>0$ the hazard ratio is\n$$\\frac{\\lambda_0(t)e^{\\beta^Tz}}{\\lambda_0(t)e^{\\beta^Tz'}}=e^{\\beta^T(z-z')}.$$\nThe relative hazard factor is $e^{\\beta^T(z-z')}$ even at times when both baseline-scaled hazards vanish and their quotient is undefined. It is an instantaneous hazard ratio, not a ratio of cumulative event probabilities. For time-varying covariate paths $z(t),z'(t)$ the instantaneous relative hazard factor is $e^{\\beta^T(z(t)-z'(t))}$ and may vary with time.\n\nFor a sample of $n$ subjects, put $R(t)=\\{j:U_j\\ge t\\}$. When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is\n$$L_p(\\beta)=\\prod_{i:\\,\\delta_i=1,\\ U_i\\le\\tau} \\frac{\\exp\\{\\beta^TZ_i(U_i)\\}}{\\sum_{j\\in R(U_i)}\\exp\\{\\beta^TZ_j(U_i)\\}}.$$\nAn empty product is $1$. This partial likelihood is built from risk-set contributions; it is not asserted to be the full likelihood of the censored observations.\n\nTied-event likelihoods require an explicit time-recording convention. Put $D(t)=\\{i:U_i=t,\\delta_i=1\\}$ and $d_t=|D(t)|$. If a discrete or grouped-time model conditions on exactly $d_t$ failures from $D(t)\\subseteq R(t)$ at recorded time $t$ with the risk set fixed for that time, additionally assume that, conditional on that risk set, its covariate weights, and $d_t=d$, the failure subset law assigns each size-$d$ set $A\\subseteq R(t)$ probability proportional to $\\prod_{j\\in A}w_j(t)$. Under this explicit subset-law assumption, its exact conditional tie contribution is\n$$\\frac{\\prod_{i\\in D(t)}w_i(t)} {\\sum_{\\substack{A\\subseteq R(t)\\\\|A|=d_t}}\\ \\prod_{j\\in A}w_j(t)}, \\qquad w_j(t):=\\exp\\{\\beta^TZ_j(t)\\}.$$\nFor the separate exact Cox tied-partial-likelihood convention obtained by coarsening a continuous-time ordering into one recorded tie interval, assume the risk set at the interval start is $R(t)$, its only within-interval departures are the $d_t$ failures in $D(t)$, and the covariates are fixed at the recorded time. Conditional on each successive failure, the next failure label is chosen from the remaining risk set with probability proportional to its weight. Summing these order contributions gives the ordered-risk-set conditional partial-likelihood contribution\n$$\\sum_{\\pi\\in\\operatorname{Perm}(D(t))} \\prod_{k=1}^{d_t} \\frac{w_{\\pi_k}(t)} {\\sum_{j\\in R(t)}w_j(t)-\\sum_{\\ell<k}w_{\\pi_\\ell}(t)}.$$\nHere $\\operatorname{Perm}(D(t))$ is the set of bijections from $\\{1,\\ldots,d_t\\}$ to $D(t)$.\nThe discrete subset expression is exact under its explicit subset-law convention, and the permutation expression is exact for its stated partial-likelihood ordering convention; the latter is not generally the full likelihood of interval-coarsened censored observations. These conventions are not interchangeable without a model relating them. The Breslow and Efron tie formulas are approximations, respectively\n$$L_B(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\left(\\sum_{j\\in R(t)}w_j(t)\\right)^{d_t}}$$\nand\n$$L_E(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\prod_{k=0}^{d_t-1}\\left(\\sum_{j\\in R(t)}w_j(t)-\\frac{k}{d_t}\\sum_{i\\in D(t)}w_i(t)\\right)}.$$\nWith an absolutely continuous event hazard and independent subjects, exact event-time ties have probability zero; grouped-time tie formulas describe additional observation/model conventions.\n\nFor a discrete event-time law, the survival relation $S(t\\mid z)=S_0(t)^{e^{\\beta^Tz}}$ describes proportional integrated hazards and is not equivalent in general to a hazard-ratio model. The proportional-hazards and proportional-integrated-hazards formulations agree under the continuity condition on the baseline survival; the hazard-density model above uses the absolutely continuous convention.\n\nThe counting-process martingale property used for inference is a separate model-contract assumption in the estimator theorem below. The hazard formula by itself does not assert that a compensated event count is a martingale. The Axiom of Choice is inherited from the cited event-observation and predictability interfaces; this definition makes no further choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $\\tau>0$ and a fixed dimension $p\\ge1$. Work on a probability space with an increasing filtration $(\\mathcal F_t)_{0\\le t\\le\\tau}$ as in [[def-continuous-time-filtration-and-all-pairs-martingale]]. For subject $i$, let $T_i$ be an event time, $C_i$ a censoring time, and $Z_i(t)\\in\\mathbb R^p$ a covariate process predictable relative to this filtration, in the sense of [[def-progressively-measurable-and-predictable-process]]. Use the right-censoring record convention of [[def-event-time-observation-schemes]]: $U_i=\\min(T_i,C_i)$ and $\\delta_i=1\\{T_i\\le C_i\\}$. For this vector covariate process, predictability means coordinatewise predictability: each real-valued coordinate is predictable in the sense of [[def-progressively-measurable-and-predictable-process]]. Define the history sigma-algebra $\\mathcal G_i:=\\sigma\\{Z_i(t):0\\le t\\le\\tau\\}$. The conditional-independence assumption is $T_i\\perp\\!\\!\\!\\perp C_i\\mid\\mathcal G_i$, meaning that for all bounded measurable real functions $a,b$, $E[a(T_i)b(C_i)\\mid\\mathcal G_i]=E[a(T_i)\\mid\\mathcal G_i]E[b(C_i)\\mid\\mathcal G_i]$ almost surely, as in [[def-conditional-independence-given-a-sigma-algebra]]. This conditional-independence relation is a model assumption, not an empirical conclusion. No conditional-kernel representation given the entire covariate path is assumed here.\n\nA Cox proportional-hazards specification fixes a coefficient $\\beta_0\\in\\mathbb R^p$ and a baseline hazard density $\\lambda_0:[0,\\tau]\\to[0,\\infty)$ that is measurable and integrable. Its baseline cumulative hazard is the absolutely continuous function\n$$\\Lambda_0(t)=\\int_0^t\\lambda_0(u)\\,du.$$\nThe conditional event intensity at time $t$ for subject $i$, while that subject is at risk, is\n$$Y_i(t)\\lambda_0(t)\\exp\\{\\beta_0^T Z_i(t)\\},\\qquad Y_i(t):=1\\{U_i\\ge t\\}.$$\nThese specify the conditional event-intensity component. The law of the covariate paths and the censoring law subject to the stated conditional-independence assumption remain nuisance components and are not fixed here. Thus this is a semiparametric model specification; $(\\beta_0,\\lambda_0)$ alone do not define a full parametric statistical experiment on the observed-data space.\nFor the counting-process arguments below, require $Y_i$ to be predictable as well; this is part of the stated observation model and is not inferred from the hazard formula alone.\nFor a constant covariate value $z$, the corresponding event survival function is\n$$S(t\\mid z)=\\exp\\{-e^{\\beta_0^Tz}\\Lambda_0(t)\\}.$$\nFor fixed covariate values $z,z'\\in\\mathbb R^p$, at times with $\\lambda_0(t)>0$ the hazard ratio is\n$$\\frac{\\lambda_0(t)e^{\\beta^Tz}}{\\lambda_0(t)e^{\\beta^Tz'}}=e^{\\beta^T(z-z')}.$$\nThe relative hazard factor is $e^{\\beta^T(z-z')}$ even at times when both baseline-scaled hazards vanish and their quotient is undefined. It is an instantaneous hazard ratio, not a ratio of cumulative event probabilities. For time-varying covariate paths $z(t),z'(t)$ the instantaneous relative hazard factor is $e^{\\beta^T(z(t)-z'(t))}$ and may vary with time.\n\nFor a sample of $n$ subjects, put $R(t)=\\{j:U_j\\ge t\\}$. When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is\n$$L_p(\\beta)=\\prod_{i:\\,\\delta_i=1,\\ U_i\\le\\tau} \\frac{\\exp\\{\\beta^TZ_i(U_i)\\}}{\\sum_{j\\in R(U_i)}\\exp\\{\\beta^TZ_j(U_i)\\}}.$$\nAn empty product is $1$. This partial likelihood is built from risk-set contributions; it is not asserted to be the full likelihood of the censored observations.\n\nTied-event likelihoods require an explicit time-recording convention. Put $D(t)=\\{i:U_i=t,\\delta_i=1\\}$ and $d_t=|D(t)|$. If a discrete or grouped-time model conditions on exactly $d_t$ failures from $D(t)\\subseteq R(t)$ at recorded time $t$ with the risk set fixed for that time, additionally assume that, conditional on that risk set, its covariate weights, and $d_t=d$, the failure subset law assigns each size-$d$ set $A\\subseteq R(t)$ probability proportional to $\\prod_{j\\in A}w_j(t)$. Under this explicit subset-law assumption, its exact conditional tie contribution is\n$$\\frac{\\prod_{i\\in D(t)}w_i(t)} {\\sum_{\\substack{A\\subseteq R(t)\\\\|A|=d_t}}\\ \\prod_{j\\in A}w_j(t)}, \\qquad w_j(t):=\\exp\\{\\beta^TZ_j(t)\\}.$$\nFor the separate exact Cox tied-partial-likelihood convention obtained by coarsening a continuous-time ordering into one recorded tie interval, assume the risk set at the interval start is $R(t)$, its only within-interval departures are the $d_t$ failures in $D(t)$, and the covariates are fixed at the recorded time. Conditional on each successive failure, the next failure label is chosen from the remaining risk set with probability proportional to its weight. Summing these order contributions gives the ordered-risk-set conditional partial-likelihood contribution\n$$\\sum_{\\pi\\in\\operatorname{Perm}(D(t))} \\prod_{k=1}^{d_t} \\frac{w_{\\pi_k}(t)} {\\sum_{j\\in R(t)}w_j(t)-\\sum_{\\ell<k}w_{\\pi_\\ell}(t)}.$$\nHere $\\operatorname{Perm}(D(t))$ is the set of bijections from $\\{1,\\ldots,d_t\\}$ to $D(t)$.\nThe discrete subset expression is exact under its explicit subset-law convention, and the permutation expression is exact for its stated partial-likelihood ordering convention; the latter is not generally the full likelihood of interval-coarsened censored observations. These conventions are not interchangeable without a model relating them. The Breslow and Efron tie formulas are approximations, respectively\n$$L_B(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\left(\\sum_{j\\in R(t)}w_j(t)\\right)^{d_t}}$$\nand\n$$L_E(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\prod_{k=0}^{d_t-1}\\left(\\sum_{j\\in R(t)}w_j(t)-\\frac{k}{d_t}\\sum_{i\\in D(t)}w_i(t)\\right)}.$$\nWith an absolutely continuous event hazard and independent subjects, exact event-time ties have probability zero; grouped-time tie formulas describe additional observation/model conventions.\n\nFor a discrete event-time law, the survival relation $S(t\\mid z)=S_0(t)^{e^{\\beta^Tz}}$ describes proportional integrated hazards and is not equivalent in general to a hazard-ratio model. The proportional-hazards and proportional-integrated-hazards formulations agree under the continuity condition on the baseline survival; the hazard-density model above uses the absolutely continuous convention.\n\nThe counting-process martingale property used for inference is a separate model-contract assumption in the estimator theorem below. The hazard formula by itself does not assert that a compensated event count is a martingale. The Axiom of Choice is inherited from the cited event-observation and predictability interfaces; this definition makes no further choice.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cox-proportional-hazards-model-and-partial-likelihood",
+          "source_section": "Definition",
+          "quote": "Fix a finite horizon $\\tau>0$ and a fixed dimension $p\\ge1$. Work on a probability space with an increasing filtration $(\\mathcal F_t)_{0\\le t\\le\\tau}$ as in [[def-continuous-time-filtration-and-all-pairs-martingale]]. For subject $i$, let $T_i$ be an event time, $C_i$ a censoring time, and $Z_i(t)\\in\\mathbb R^p$ a covariate process predictable relative to this filtration, in the sense of [[def-progressively-measurable-and-predictable-process]]. Use the right-censoring record convention of [[def-event-time-observation-schemes]]: $U_i=\\min(T_i,C_i)$ and $\\delta_i=1\\{T_i\\le C_i\\}$. For this vector covariate process, predictability means coordinatewise predictability: each real-valued coordinate is predictable in the sense of [[def-progressively-measurable-and-predictable-process]]. Define the history sigma-algebra $\\mathcal G_i:=\\sigma\\{Z_i(t):0\\le t\\le\\tau\\}$. The conditional-independence assumption is $T_i\\perp\\!\\!\\!\\perp C_i\\mid\\mathcal G_i$, meaning that for all bounded measurable real functions $a,b$, $E[a(T_i)b(C_i)\\mid\\mathcal G_i]=E[a(T_i)\\mid\\mathcal G_i]E[b(C_i)\\mid\\mathcal G_i]$ almost surely, as in [[def-conditional-independence-given-a-sigma-algebra]]. This conditional-independence relation is a model assumption, not an empirical conclusion. No conditional-kernel representation given the entire covariate path is assumed here.\n\nA Cox proportional-hazards specification fixes a coefficient $\\beta_0\\in\\mathbb R^p$ and a baseline hazard density $\\lambda_0:[0,\\tau]\\to[0,\\infty)$ that is measurable and integrable. Its baseline cumulative hazard is the absolutely continuous function\n$$\\Lambda_0(t)=\\int_0^t\\lambda_0(u)\\,du.$$\nThe conditional event intensity at time $t$ for subject $i$, while that subject is at risk, is\n$$Y_i(t)\\lambda_0(t)\\exp\\{\\beta_0^T Z_i(t)\\},\\qquad Y_i(t):=1\\{U_i\\ge t\\}.$$\nThese specify the conditional event-intensity component. The law of the covariate paths and the censoring law subject to the stated conditional-independence assumption remain nuisance components and are not fixed here. Thus this is a semiparametric model specification; $(\\beta_0,\\lambda_0)$ alone do not define a full parametric statistical experiment on the observed-data space.\nFor the counting-process arguments below, require $Y_i$ to be predictable as well; this is part of the stated observation model and is not inferred from the hazard formula alone.\nFor a constant covariate value $z$, the corresponding event survival function is\n$$S(t\\mid z)=\\exp\\{-e^{\\beta_0^Tz}\\Lambda_0(t)\\}.$$\nFor fixed covariate values $z,z'\\in\\mathbb R^p$, at times with $\\lambda_0(t)>0$ the hazard ratio is\n$$\\frac{\\lambda_0(t)e^{\\beta^Tz}}{\\lambda_0(t)e^{\\beta^Tz'}}=e^{\\beta^T(z-z')}.$$\nThe relative hazard factor is $e^{\\beta^T(z-z')}$ even at times when both baseline-scaled hazards vanish and their quotient is undefined. It is an instantaneous hazard ratio, not a ratio of cumulative event probabilities. For time-varying covariate paths $z(t),z'(t)$ the instantaneous relative hazard factor is $e^{\\beta^T(z(t)-z'(t))}$ and may vary with time.\n\nFor a sample of $n$ subjects, put $R(t)=\\{j:U_j\\ge t\\}$. When failures are untied, the Cox partial likelihood on $[0,\\tau]$ is\n$$L_p(\\beta)=\\prod_{i:\\,\\delta_i=1,\\ U_i\\le\\tau} \\frac{\\exp\\{\\beta^TZ_i(U_i)\\}}{\\sum_{j\\in R(U_i)}\\exp\\{\\beta^TZ_j(U_i)\\}}.$$\nAn empty product is $1$. This partial likelihood is built from risk-set contributions; it is not asserted to be the full likelihood of the censored observations.\n\nTied-event likelihoods require an explicit time-recording convention. Put $D(t)=\\{i:U_i=t,\\delta_i=1\\}$ and $d_t=|D(t)|$. If a discrete or grouped-time model conditions on exactly $d_t$ failures from $D(t)\\subseteq R(t)$ at recorded time $t$ with the risk set fixed for that time, additionally assume that, conditional on that risk set, its covariate weights, and $d_t=d$, the failure subset law assigns each size-$d$ set $A\\subseteq R(t)$ probability proportional to $\\prod_{j\\in A}w_j(t)$. Under this explicit subset-law assumption, its exact conditional tie contribution is\n$$\\frac{\\prod_{i\\in D(t)}w_i(t)} {\\sum_{\\substack{A\\subseteq R(t)\\\\|A|=d_t}}\\ \\prod_{j\\in A}w_j(t)}, \\qquad w_j(t):=\\exp\\{\\beta^TZ_j(t)\\}.$$\nFor the separate exact Cox tied-partial-likelihood convention obtained by coarsening a continuous-time ordering into one recorded tie interval, assume the risk set at the interval start is $R(t)$, its only within-interval departures are the $d_t$ failures in $D(t)$, and the covariates are fixed at the recorded time. Conditional on each successive failure, the next failure label is chosen from the remaining risk set with probability proportional to its weight. Summing these order contributions gives the ordered-risk-set conditional partial-likelihood contribution\n$$\\sum_{\\pi\\in\\operatorname{Perm}(D(t))} \\prod_{k=1}^{d_t} \\frac{w_{\\pi_k}(t)} {\\sum_{j\\in R(t)}w_j(t)-\\sum_{\\ell<k}w_{\\pi_\\ell}(t)}.$$\nHere $\\operatorname{Perm}(D(t))$ is the set of bijections from $\\{1,\\ldots,d_t\\}$ to $D(t)$.\nThe discrete subset expression is exact under its explicit subset-law convention, and the permutation expression is exact for its stated partial-likelihood ordering convention; the latter is not generally the full likelihood of interval-coarsened censored observations. These conventions are not interchangeable without a model relating them. The Breslow and Efron tie formulas are approximations, respectively\n$$L_B(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\left(\\sum_{j\\in R(t)}w_j(t)\\right)^{d_t}}$$\nand\n$$L_E(\\beta)=\\prod_{t:d_t>0} \\frac{\\prod_{i\\in D(t)}w_i(t)} {\\prod_{k=0}^{d_t-1}\\left(\\sum_{j\\in R(t)}w_j(t)-\\frac{k}{d_t}\\sum_{i\\in D(t)}w_i(t)\\right)}.$$\nWith an absolutely continuous event hazard and independent subjects, exact event-time ties have probability zero; grouped-time tie formulas describe additional observation/model conventions.\n\nFor a discrete event-time law, the survival relation $S(t\\mid z)=S_0(t)^{e^{\\beta^Tz}}$ describes proportional integrated hazards and is not equivalent in general to a hazard-ratio model. The proportional-hazards and proportional-integrated-hazards formulations agree under the continuity condition on the baseline survival; the hazard-density model above uses the absolutely continuous convention.\n\nThe counting-process martingale property used for inference is a separate model-contract assumption in the estimator theorem below. The hazard formula by itself does not assert that a compensated event count is a martingale. The Axiom of Choice is inherited from the cited event-observation and predictability interfaces; this definition makes no further choice.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting $w_j(t)=e^{\\beta Z_j(t)}$ for the three risk-set members in the no-tie partial-likelihood formula of [F1], subject $2$ contributes $e^\\beta/(1+e^\\beta+e^{2\\beta})$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For constant covariate $z$, the survival formula [F3] with $\\lambda_0(t)=1$ gives $P(T\\le1\\mid z)=1-e^{-e^{\\beta z}}$. At $\\beta_0=\\log2$, the risks for $z=1$ and $z'=0$ are $1-e^{-2}$ and $1-e^{-1}$, so their ratio is $(1-e^{-2})/(1-e^{-1})=1+e^{-1}<2$, although their hazard ratio from [F2] is $e^{\\beta_0(z-z')}=2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4], the deterministic paths $Z_1(t)=t$ and $Z_2(t)=0$ are predictable. Substitution into the relative hazard factor of [F2] at $\\beta_0=\\log2$ gives $e^{(\\log2)t}=2^t$, which equals $1$ at $t=0$ and $2$ at $t=1$. Thus a fixed regression coefficient does not force the hazard ratio between changing covariate paths to be constant.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This worked calculation is for a specified risk set with three members, not an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 uses a positive baseline hazard; the definition separately specifies the relative factor when the baseline hazard is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a single event contribution and shows its denominator directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes a nonempty risk set and makes no estimator or information claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the time-varying hazard ratio at t=0 and t=1, the endpoints of the example horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite risk-set calculation and deterministic-path substitutions make no nonempty selection and use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example calculates the three-subject likelihood, hazards versus event risks, and the varying 2^t hazard ratio; it does not supply a necessary-and-sufficient model-checking criterion. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example calculates the three-subject likelihood, hazards versus event risks, and the varying 2^t hazard ratio; it does not supply a necessary-and-sufficient model-checking criterion. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ]
+    },
+    "lem-bounded-predictable-counting-integral-pathwise-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nFor this model and every nonnegative predictable process $G$, define the\npathwise energy integral by\n$$\\int_0^tG_s\\,dA_s:=\\int_0^tG_sY_s\\lambda_s\\,ds,\\qquad t\\le T.$$\nThe **continuous intensity compensator contract** requires the defining\nintegral for $A$ to be finite pathwise, and requires $A$ to be continuous,\nadapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-predictable-step-processes-dense-in-compensator-l2",
+          "source_section": "Statement",
+          "quote": "For the contract of\n[[def-counting-process-intensity-and-compensator-contract]], let\n$\\mathcal P_T$ be the predictable sigma-algebra on $[0,T]\\times\\Omega$ and\ndefine the finite measure\n$$\\mu(E):=\\int_EY_s(\\omega)\\lambda_s(\\omega)\\,(ds\\times P)(d(s,\\omega)),\\qquad E\\in\\mathcal P_T.$$\nThen bounded predictable step processes are dense in $L^2(\\mu)$. The time-zero\nslice has $\\mu$-measure zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-elementary-predictable-counting-process-integral",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a square-integrable martingale on a finite horizon $[0,T]$ in the\nall-pairs convention of\n[[def-continuous-time-adapted-process-and-martingale]] (in particular, it may\nbe the compensated counting-process martingale of\n[[def-counting-process-intensity-and-compensator-contract]]). Let\n$$0=t_0<t_1<\\cdots<t_m=T$$\nbe a deterministic partition, and let each bounded random variable $H_j$ be\n$\\mathcal F_{t_j}$-measurable. The associated **bounded predictable step\nintegrand** is $H_0=0$ at time $0$ and $H_s=H_j$ on $(t_j,t_{j+1}]$. For this\nchosen step representation define, for $0\\le t\\le T$,\n$$I_t(H):=\\sum_{j=0}^{m-1}H_j\\bigl(M_{t\\wedge t_{j+1}}-M_{t\\wedge t_j}\\bigr).$$\nThis is a finite sum of square-integrable random variables. At this stage the\nrepresentation is part of the input; representation independence and the\nisometry are established in\n[[lem-elementary-counting-process-integral-isometry]].\nThe Axiom of Choice is inherited from the all-pairs martingale and\nconditional-expectation interface; the finite-sum definition makes no\nadditional choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-l2-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "For every predictable $H$ on $[0,T]$ with\n$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty$, the limit in\n[[def-l2-counting-process-integral]] exists at each $t\\le T$, is independent\nof the approximating step sequence, and defines a square-integrable\nmartingale. It satisfies, for each $t\\le T$,\n$$\\mathbb E\\left(\\int_0^tH_s\\,dM_s\\right)^2=\\mathbb E\\int_0^tH_s^2\\,dA_s.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The martingale property gives $EN_T=EA_T<\\infty$. For a predictable set $E$, define $\\mu_N(E)=E\\int1_EdN$ and $\\mu_A(E)=E\\int1_EdA$. Measurability of the section integrals holds first for the generators in [F2] (their integrals are $1_B(N_t-N_s)$ and $1_B(A_t-A_s)$), then for all predictable sets: the sets with measurable section integrals form a lambda-system, using subtraction from finite terminal masses and increasing partial sums for disjoint unions. Apply [F3] to this generating pi-system. Pathwise countable additivity and [F4] now make $\\mu_N,\\mu_A$ finite measures. For an interval generator, $E[1_B(M_t-M_s)]=0$ by the martingale property, so their masses agree; time-zero masses are both zero and whole-space masses agree. [F3] gives $\\mu_N=\\mu_A$. Simple functions and [F4] yield the compensation identity for every nonnegative predictable $G$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F5] choose bounded predictable steps $H_m$ with $E\\int|H_m-H|^2dA\\to0$. Step 1.1 and [F8] give $$E\\int|H_m-H|\\,d(N+A)=2E\\int|H_m-H|\\,dA\\le2(EA_T)^{1/2}\\left(E\\int|H_m-H|^2dA\\right)^{1/2}\\longrightarrow0.$$ For steps, [F6] identifies the integral with the difference of its pathwise $N$ and $A$ integrals. The displayed bound makes those differences converge in L¹ to the stated pathwise expression. By [F7] the same step integrals converge in L², hence L¹ on the probability space, to the completed stochastic integral. Uniqueness of L¹ limits proves equality almost surely. Apply this argument separately to each fixed terminal time and each of the finitely many coordinates.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the zero counting measure and empty jump sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: N_0=A_0=0 makes both measures of time-zero generators zero. Step 2.1 uses the completed-integral isometry F7, so zero compensator energy gives zero L2 integral and the same zero pathwise expression."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1, 2.1: scalar real integrands are included. The compensation and step-increment arguments allow any finite unit-jump count; for a path with one jump at t in (0,T], the N integral is H_t Delta N_t=H_t."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1: if EA_T=0, EN_T=EA_T and nonnegativity imply A_T=N_T=0 almost surely. Monotonicity makes both integrators zero; the compensation measures and completed L2 integral vanish. The bound in step 2.1 remains valid with factor (EA_T)^(1/2)=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: the generator (s,t] and terminal sum (0,T] retain the right endpoint. Both time-zero masses are zero since N_0=A_0=0. Step 2.1 applies at each fixed terminal time; at t=0 the jump sum is empty and both integrals are zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 2.1 carry the inherited AC through the density approximation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement identifies completed integrals with pathwise jump-minus-compensator integrals under the counting-process contract; it does not characterize when an arbitrary process has a compensator. This worksheet direction has no separate hypothesis-to-criterion forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement identifies completed integrals with pathwise jump-minus-compensator integrals under the counting-process contract; it does not characterize when an arbitrary process has a compensator. Reversing the actual conclusion would be a new assertion outside this carrier."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Reviewed complete steps 1.1 and 2.1 and all nine dependency interfaces, including current density and L2-isometry proofs. EN_T=EA_T follows from M0=0 and the martingale hypothesis; both compensation measures are finite. Generator section measurability extends by the lambda-system argument (whole space and zero-time masses included), and equality on predictable generators gives compensation for arbitrary nonnegative predictable G, including infinite expectations. Bounded H has finite compensator energy; density and compensation bound the pathwise differences in L1 by twice the compensator L1 error, then Cauchy-Schwarz and the L2 isometry identify the two limits. This claims equality separately at each fixed time and finitely many coordinates, not indistinguishability. Zero energy, no jumps and terminal jumps obey the same proof. AC is inherited for the approximation sequence. Bass sections 2.4-2.5 pp.5-6 support the construction but assume an augmented filtration; the local proof independently works with the stated all-pairs convention. No defect found."
+      }
+    }
+  }
+}

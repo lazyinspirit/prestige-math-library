@@ -1,0 +1,1882 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62",
+  "scope": [
+    "lem-finite-simple-random-sampling-identities",
+    "lem-finite-event-conditional-expectation-formula",
+    "def-potential-outcomes-under-partial-interference",
+    "def-exposure-mapping-under-interference",
+    "def-two-stage-randomized-interference-design-and-effects",
+    "thm-ht-exposure-specific-mean-unbiased",
+    "thm-two-stage-randomized-interference-estimators-unbiased",
+    "def-stratified-interference-design-based-variance-estimators",
+    "lem-two-stage-finite-design-variance-identities",
+    "thm-stratified-interference-variance-estimators-conservative",
+    "cex-cross-group-contamination-violates-partial-interference",
+    "ex-two-stage-village-strategy-contrasts",
+    "ex-ht-exposure-specific-mean-two-unit-design",
+    "cex-misspecified-own-treatment-exposure-map",
+    "ex-nonadditive-spillovers-create-positive-variance-bias"
+  ],
+  "contracts": {
+    "lem-finite-simple-random-sampling-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-binomial-coefficient",
+          "source_section": "Definition",
+          "quote": "For a finite set $A$ and $k \\in \\mathbb{N}$ put\n\n$$[A]^{k} := \\{\\, S \\subseteq A \\ :\\ \\lvert S\\rvert = k \\,\\},$$\n\nthe set of $k$-element subsets of $A$. Every $S \\subseteq A$ is finite\n([[thm-subset-of-a-finite-set]]), so the condition $\\lvert S\\rvert = k$ makes\nsense for every subset.\n\n**$[A]^{k}$ is finite.** It is a subset of $\\mathcal{P}(A)$, which is finite by\n[[cor-cardinality-of-the-power-set]], so [[thm-subset-of-a-finite-set]] applies.\n\n**$\\lvert [A]^{k}\\rvert$ depends only on $\\lvert A\\rvert$.** Let $h : A \\to A'$ be\na bijection of finite sets. The direct image map $S \\mapsto h[S]$ carries\n$[A]^{k}$ into $[A']^{k}$, because $h$ restricted to $S$ is a bijection of $S$\nonto $h[S]$ and so $\\lvert h[S]\\rvert = \\lvert S\\rvert = k$ by the transport\nclause of [[def-finite-cardinality]]; the map $T \\mapsto h^{-1}[T]$ is its\ntwo-sided inverse, since $h^{-1}[h[S]] = S$ and $h[h^{-1}[T]] = T$ for a\nbijection $h$. So $[A]^{k} \\approx [A']^{k}$ and the two have the same\ncardinality.\n\n**Definition.** For $n, k \\in \\mathbb{N}$ set\n\n$$\\binom{n}{k} := \\big\\lvert\\, [n]^{k} \\,\\big\\rvert \\in \\mathbb{N},$$\n\nthe **binomial coefficient**. By the previous paragraph and $\\lvert n\\rvert = n$,\n\n$$\\big\\lvert [A]^{k}\\big\\rvert = \\binom{\\lvert A\\rvert}{k} \\qquad \\text{for every finite } A .$$\n\n**$\\binom{n}{k}$ is a count, so it is a natural number by construction.** It is\n*not* defined as $n!/(k!\\,(n-k)!)$: that expression involves a division, hence\nlives in $\\mathbb{R}$, and the assertion that its value is a natural number is a\ntheorem, proved in [[thm-binomial-closed-formula]]. Defining the coefficient as a\ncount makes integrality free and leaves the closed formula something to prove.\n\n**Boundary values, read off the definition and not stipulated.**\n\n- $\\binom{n}{0} = 1$ **for every $n$, including $n = 0$**: the subsets of $n$ of\n  cardinality $0$ are exactly the subsets equal to $\\varnothing$\n  ([[def-finite-cardinality]], clause (b)), so $[n]^{0} = \\{\\varnothing\\}$, a\n  one-element set. No empty-product convention is involved.\n- $\\binom{n}{n} = 1$: if $S \\subseteq n$ has $\\lvert S\\rvert = n = \\lvert n\\rvert$\n  then $S = n$ by clause 3 of [[thm-subset-of-a-finite-set]], so\n  $[n]^{n} = \\{n\\}$.\n- $\\binom{n}{k} = 0$ for $k > n$: a subset $S \\subseteq n$ has\n  $\\lvert S\\rvert \\le n$ by clause 2 of [[thm-subset-of-a-finite-set]], so\n  $\\lvert S\\rvert = k > n$ is impossible and $[n]^{k} = \\varnothing$\n  ([[lem-nat-trichotomy]]).\n- $\\binom{n}{1} = n$: a subset of cardinality $1$ is $\\{x\\}$ for exactly one\n  $x \\in n$, since $\\lvert S\\rvert = 1$ means $S \\approx \\{0\\}$; so\n  $S \\mapsto$ its unique element is a bijection $[n]^{1} \\to n$.\n- $\\binom{0}{0} = 1$ and $\\binom{0}{k} = 0$ for $k \\ge 1$, both instances of the\n  above.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-expectation",
+          "source_section": "Statement",
+          "quote": "For a finite family of real random variables $(X_i)_{i\\in I}$ on one finite probability space and real scalars $(a_i)_{i\\in I}$,\n$$\\mathbb E\\!\\left[\\sum_{i\\in I}a_iX_i\\right]=\\sum_{i\\in I}a_i\\mathbb E[X_i].$$\nNo independence hypothesis is required. For $I=\\varnothing$, both sides are $0$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "There are $\\binom nm$ equally likely subsets by [F4]. Count pairs $(i,A)$ with $i\\in A$ in two ways: each $m$-element $A$ contributes $m$ pairs and each of the $n$ indices occurs in $\\binom{n-1}{m-1}$ such subsets, so $m\\binom nm=n\\binom{n-1}{m-1}$ and $\\mathbb P(i\\in A)=m/n$. For distinct ordered indices $i,j$, count pairs $(i,j,A)$ with both in $A$: each subset contributes $m(m-1)$ pairs and each ordered pair occurs in $\\binom{n-2}{m-2}$ subsets when $m\\ge2$, so $m(m-1)\\binom nm=n(n-1)\\binom{n-2}{m-2}$. Thus $\\mathbb P(i,j\\in A)=m(m-1)/(n(n-1))$, also zero for $m=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using $\\bar x_A=m^{-1}\\sum_i1\\{i\\in A\\}x_i$, expectation linearity [F6] and the inclusion probability from step 1.1 give $\\mathbb E[\\bar x_A]=m^{-1}\\sum_i(m/n)x_i=\\bar x$. The same identity holds for $y$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Set $d_i=x_i-\\bar x$ and $e_i=y_i-\\bar y$, so $\\sum_i d_i=\\sum_i e_i=0$. Since the centered sample means have expectation zero, [F3], expectation linearity [F6], and the inclusion probabilities in step 1.1 give $\\operatorname{Cov}(\\bar x_A,\\bar y_A)=\\frac1{m^2}\\sum_{i,j}\\operatorname{Cov}(1\\{i\\in A\\},1\\{j\\in A\\})d_i e_j.$ The diagonal indicator covariance is $m(n-m)/n^2$, and for $i\\ne j$ it is $-m(n-m)/(n^2(n-1))$, by subtracting the products of the marginal probabilities in step 1.1. Finite Fubini and splitting [F7] give $\\sum_{i\\ne j}d_i e_j=(\\sum_i d_i)(\\sum_j e_j)-\\sum_i d_i e_i=-\\sum_i d_i e_i$. Substitution yields $(n-m)/(mn(n-1))\\sum_i d_i e_i=(1-m/n)S_{xy}/m$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $m\\ge2$, expansion around the population means gives $\\sum_{i\\in A}(x_i-\\bar x_A)(y_i-\\bar y_A)=\\sum_{i\\in A}d_i e_i-m(\\bar x_A-\\bar x)(\\bar y_A-\\bar y).$ By expectation linearity [F6] and the inclusion probability in step 1.1, the expectation of the first term is $(m/n)\\sum_i d_i e_i=m(n-1)S_{xy}/n$. The expectation of the second term is $m\\operatorname{Cov}(\\bar x_A,\\bar y_A)=(n-m)S_{xy}/n$ by step 2.2. Their difference is $(m-1)S_{xy}$, so division by $m-1$ proves $\\mathbb E[s_{xy,A}]=S_{xy}$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires n>=2; the population and its m-element sample are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 2.2 includes zero centered products, so zero finite-population covariance is retained without division by it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement allows m=1 for sample means and their covariance; it defines sample covariance only when m>=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If either list is constant then S_xy=0; steps 2.2-3.1 still give the stated identities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1-1.4 allow m=1 and m=n; at m=n the sample-mean covariance is zero and the sample covariance is the population covariance."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 counts finite subsets directly, so the argument uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-potential-outcomes-under-partial-interference": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the stated finite population, assignment space, and positive denominators exclude an empty target."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero outcomes or zero-weight terms are retained as finite zero contributions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest allowed sample/group size is either covered explicitly or excluded where its denominator would vanish."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant finite schedules reduce to the stated constant or zero-variance case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: all admissible endpoint values are stated; any value making a denominator zero is explicitly excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all populations, assignments, and selections are finite and explicitly specified; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-exposure-mapping-under-interference": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the stated finite population, assignment space, and positive denominators exclude an empty target."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero outcomes or zero-weight terms are retained as finite zero contributions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest allowed sample/group size is either covered explicitly or excluded where its denominator would vanish."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant finite schedules reduce to the stated constant or zero-variance case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: all admissible endpoint values are stated; any value making a denominator zero is explicitly excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all populations, assignments, and selections are finite and explicitly specified; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-two-stage-randomized-interference-design-and-effects": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the stated finite population, assignment space, and positive denominators exclude an empty target."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero outcomes or zero-weight terms are retained as finite zero contributions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest allowed sample/group size is either covered explicitly or excluded where its denominator would vanish."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant finite schedules reduce to the stated constant or zero-variance case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: all admissible endpoint values are stated; any value making a denominator zero is explicitly excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all populations, assignments, and selections are finite and explicitly specified; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-ht-exposure-specific-mean-unbiased": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-potential-outcomes-under-partial-interference",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal I$ be a finite set of treatment-assignment units partitioned into $N\\ge1$ nonempty groups $\\mathcal I_1,\\ldots,\\mathcal I_N$, with $n_i=|\\mathcal I_i|$. Label the members of each group $\\mathcal I_i$ by $j=1,\\ldots,n_i$. Let $\\mathcal Z\\subseteq\\{0,1\\}^{\\mathcal I}$ be the nonempty finite set of allowed global assignments in a finite randomized treatment-assignment model ([[def-finite-randomized-treatment-assignment-model]], [[def-finite-probability-space-and-event]]). Write $\\mathbf z_i$ for the restriction of $\\mathbf z\\in\\mathcal Z$ to group $i$, and $Z_{ij}$ for unit $j$'s coordinate in its group.\n\nA **fixed finite-population potential-outcome schedule** is a family of real-valued functions $Y_{ij}:\\mathcal Z\\to\\mathbb R$, one for every unit $(i,j)$. The observed outcome at assignment $\\mathbf Z$ is $Y_{ij}^{\\mathrm{obs}}=Y_{ij}(\\mathbf Z)$. The schedule is fixed; only the declared assignment is random. This notation permits arbitrary dependence of $Y_{ij}(\\mathbf z)$ on every component of $\\mathbf z$.\n\nThe schedule satisfies **partial interference** when, for every unit $(i,j)$ and all allowed $\\mathbf z,\\mathbf z'\\in\\mathcal Z$, equality of their within-group assignments $\\mathbf z_i=\\mathbf z'_i$ implies $Y_{ij}(\\mathbf z)=Y_{ij}(\\mathbf z')$. In that case the common value is well-defined as $Y_{ij}(\\mathbf z_i)$: outcomes may depend arbitrarily on assignments within group $i$, but not on assignments outside that group. Partial interference is a substantive model/design restriction, not a consequence of randomization.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-exposure-mapping-under-interference",
+          "source_section": "Definition",
+          "quote": "In the finite-population model of [[def-potential-outcomes-under-partial-interference]], an **exposure mapping** for unit $(i,j)$ is a function $f_{ij}:\\mathcal Z_i\\to\\mathcal D_{ij}$, where $\\mathcal Z_i$ is the finite set of allowed assignments to group $i$ and $\\mathcal D_{ij}$ is a finite set of exposure labels. At assignment $\\mathbf Z$, the unit's exposure is the random label $D_{ij}=f_{ij}(\\mathbf Z_i)$. Its design probability is\n$$\\pi_{ij}(d)=\\mathbb P\\{f_{ij}(\\mathbf Z_i)=d\\}=\\sum_{\\mathbf z\\in\\mathcal Z:\\,f_{ij}(\\mathbf z_i)=d}p(\\mathbf z),$$\nwhere $p(\\mathbf z)=\\mathbb P(\\mathbf Z=\\mathbf z)$ is the declared assignment law.\n\nThe mapping is **sufficient for the potential outcome** of unit $(i,j)$ on a set of labels if, whenever $f_{ij}(\\mathbf z_i)=f_{ij}(\\mathbf z_i')=d$, the fixed outcomes satisfy $Y_{ij}(\\mathbf z_i)=Y_{ij}(\\mathbf z_i')$. For each label in the image of $f_{ij}$ this condition defines a unique value $Y_{ij}(d)$ equal to the common outcome over its preimage. The observed-outcome consistency identity is then $Y_{ij}^{\\mathrm{obs}}=Y_{ij}(D_{ij})$. An exposure-specific finite-population target may include unit $(i,j)$ at label $d$ only when $\\pi_{ij}(d)>0$; otherwise its inverse-probability estimator is undefined. Sufficiency is an assumption about the schedule and map, not a consequence of knowing the assignment probabilities.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-linearity-of-expectation",
+          "source_section": "Statement",
+          "quote": "For a finite family of real random variables $(X_i)_{i\\in I}$ on one finite probability space and real scalars $(a_i)_{i\\in I}$,\n$$\\mathbb E\\!\\left[\\sum_{i\\in I}a_iX_i\\right]=\\sum_{i\\in I}a_i\\mathbb E[X_i].$$\nNo independence hypothesis is required. For $I=\\varnothing$, both sides are $0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a unit $(i,j)$. Since $\\pi_{ij}(d)>0$, the finite sum for the design expectation of its weighted contribution is defined. By [F1], [F2], [F3], and [F4], $\\mathbb E_p\\!\\left[\\frac{1\\{D_{ij}=d\\}Y_{ij}^{\\mathrm{obs}}}{\\pi_{ij}(d)}\\right]=\\frac1{\\pi_{ij}(d)}\\sum_{\\mathbf z\\in\\mathcal Z}p(\\mathbf z)1\\{f_{ij}(\\mathbf z_i)=d\\}Y_{ij}(\\mathbf z_i).$ For every term with nonzero indicator, [F2] makes the outcome equal to the fixed value $Y_{ij}(d)$; terms with zero indicator vanish.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The remaining sum in step 1.1 is $Y_{ij}(d)\\pi_{ij}(d)/\\pi_{ij}(d)=Y_{ij}(d)$ by the definition of $\\pi_{ij}(d)$ and its strict positivity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The population has finitely many units. By expectation linearity [F7], distributing the estimator's finite sum and applying step 2.1 to each unit gives $\\mathbb E_p[\\widehat\\mu_{HT}(d)]=M^{-1}\\sum_{(i,j)\\in\\mathcal U}Y_{ij}(d)=\\mu(d)$. The displayed map is a statistic with the same real target space as $\\mu(d)$, so it is an estimator by [F5].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Applying step 3.1 to each of $d$ and $e$ and distributing the same finite expectation over their difference by [F7] proves the exposure-contrast identity. The argument used only marginal exposure probabilities, so it requires no independence between units' exposures.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F4",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement has M>=1 target units, so the target average denominator is positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 leaves zero-weight assignments and zero outcomes as zero contributions; only positive pi_ij(d) is inverted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement remains valid for a single target unit M=1, provided its exposure probability is positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If each Y_ij(d) is the same constant, step 2.1 returns that constant for each unit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement permits pi_ij(d)=1; it excludes pi_ij(d)=0 for any target unit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1-1.3 use finite assignment and population sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-two-stage-randomized-interference-estimators-unbiased": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-stage-randomized-interference-design-and-effects",
+          "source_section": "Definition",
+          "quote": "Let $N>1$ groups have fixed sizes $n_i\\ge2$, and let the fixed potential outcomes satisfy partial interference as in [[def-potential-outcomes-under-partial-interference]]. Let $\\phi$ and $\\psi$ be two group-specific treatment-allocation strategies. Under strategy $s\\in\\{\\phi,\\psi\\}$, group $i$ has a fixed treated count $K_i^s\\in\\{1,\\ldots,n_i-1\\}$. Fix $C\\in\\{1,\\ldots,N-1\\}$. The two-stage design first chooses uniformly a set of exactly $C$ groups for $\\psi$, assigning the other $N-C$ groups to $\\phi$. Conditional on these strategy labels, it independently chooses in each group a uniformly random $K_i^s$-element subset for treatment, where $s$ is that group's strategy. Here $\\binom nk$ denotes the number of $k$-element subsets of an $n$-element set. Thus, for any strategy vector $\\mathbf s$ with exactly $C$ entries equal to $\\psi$ and any assignment vectors $\\mathbf z_i$ with $\\sum_jz_{ij}=K_i^{s_i}$,\n$$\\mathbb P(\\mathbf S=\\mathbf s,\\mathbf Z=\\mathbf z)=\\binom NC^{-1}\\prod_{i=1}^N\\binom{n_i}{K_i^{s_i}}^{-1};$$\nall other pairs have probability zero. In particular, $\\mathbb P(Z_{ij}=1\\mid S_i=s)=K_i^s/n_i$ and $\\mathbb P(Z_{ij}=0\\mid S_i=s)=(n_i-K_i^s)/n_i$, both positive.\n\nWrite $\\mathbb E_{i,s}$ for expectation under the finite uniform assignment law within group $i$ under strategy $s$. Conditional means given $Z_{ij}=z$ are the finite conditional weighted sums, defined because that event has probability strictly between zero and one; [[lem-finite-event-conditional-expectation-formula]] verifies that their piecewise versions satisfy the integral characterization of [[def-conditional-expectation-given-a-sigma-algebra]]. Define the strategy-specific group and population mean potential outcomes by\n$$\\bar Y_i(z;s)=\\frac1{n_i}\\sum_{j=1}^{n_i}\\mathbb E_{i,s}[Y_{ij}(\\mathbf Z_i)\\mid Z_{ij}=z],\\qquad \\bar Y(z;s)=\\frac1N\\sum_{i=1}^N\\bar Y_i(z;s),$$\nfor $z\\in\\{0,1\\}$, and\n$$\\bar Y_i(s)=\\frac1{n_i}\\sum_{j=1}^{n_i}\\mathbb E_{i,s}[Y_{ij}(\\mathbf Z_i)],\\qquad \\bar Y(s)=\\frac1N\\sum_{i=1}^N\\bar Y_i(s).$$\nThese are finite-population estimands: the outcomes are fixed, and the expectations average only over the specified within-group assignment strategy. Define\n$$DE(\\psi)=\\bar Y(0;\\psi)-\\bar Y(1;\\psi),\\quad IE(\\phi,\\psi)=\\bar Y(0;\\phi)-\\bar Y(0;\\psi),$$\n$$TE(\\phi,\\psi)=\\bar Y(0;\\phi)-\\bar Y(1;\\psi),\\quad OE(\\phi,\\psi)=\\bar Y(\\phi)-\\bar Y(\\psi).$$\n\nFor an observed design realization, put $m_{i1}^s=K_i^s$ and $m_{i0}^s=n_i-K_i^s$, and define, whenever $S_i=s$,\n$$\\hat{\\bar Y}_i(z;s)=\\frac{\\sum_{j=1}^{n_i}1\\{Z_{ij}=z\\}Y_{ij}^{\\mathrm{obs}}}{m_{iz}^s},\\qquad \\hat{\\bar Y}_i(s)=\\frac1{n_i}\\sum_{j=1}^{n_i}Y_{ij}^{\\mathrm{obs}}.$$\nThe denominators are the fixed, positive realized arm sizes. With $C_\\psi=C$ and $C_\\phi=N-C$, define the observed population estimators\n$$\\hat{\\bar Y}(z;s)=\\frac1{C_s}\\sum_{i=1}^N1\\{S_i=s\\}\\hat{\\bar Y}_i(z;s),\\qquad \\hat{\\bar Y}(s)=\\frac1{C_s}\\sum_{i=1}^N1\\{S_i=s\\}\\hat{\\bar Y}_i(s).$$\nThe four strategy-contrast estimators $\\widehat{DE}(\\psi)$, $\\widehat{IE}(\\phi,\\psi)$, $\\widehat{TE}(\\phi,\\psi)$, and $\\widehat{OE}(\\phi,\\psi)$ are obtained by replacing each mean in the corresponding displayed target by its hatted estimator. No stratified-interference or additive-effects assumption is part of this design definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-simple-random-sampling-identities",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge2$, let $x_1,\\ldots,x_n$ and $y_1,\\ldots,y_n$ be fixed real numbers, and choose a subset $A$ uniformly from the $m$-element subsets of $\\{1,\\ldots,n\\}$, where $1\\le m\\le n$. Put\n$$\\bar x=\\frac1n\\sum_{i=1}^n x_i,\\qquad \\bar x_A=\\frac1m\\sum_{i\\in A}x_i,$$\nand define $\\bar y,\\bar y_A$ analogously. Define the finite-population covariance\n$$S_{xy}=\\frac1{n-1}\\sum_{i=1}^n(x_i-\\bar x)(y_i-\\bar y).$$\nThen\n$$\\mathbb E[\\bar x_A]=\\bar x,\\qquad \\operatorname{Cov}(\\bar x_A,\\bar y_A)=\\left(1-\\frac mn\\right)\\frac{S_{xy}}m.$$\nWhen $m\\ge2$, define the sample covariance\n$$s_{xy,A}=\\frac1{m-1}\\sum_{i\\in A}(x_i-\\bar x_A)(y_i-\\bar y_A).$$\nThen $\\mathbb E[s_{xy,A}]=S_{xy}$. Taking $y_i=x_i$ gives the corresponding variance identities.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe an experiment ([[def-statistical-experiment]]). A **statistic** with target\nmeasurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map\n$T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$, where measurability\nmeans that $T^{-1}(B)\\in\\mathcal A$ for every $B\\in\\mathcal B$\n([[def-measurable-function-between-measurable-spaces]]). If\n$\\psi:\\Theta\\to\\mathcal Y$ is an estimand ([[def-estimand-on-a-statistical-model]])\nand its target set $\\mathcal Y$ is equipped with $\\mathcal B$, a statistic\n$\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.\nThe value $\\widehat\\psi(x)$ is the estimate at observed data $x$. Giving\n$\\mathcal Y$ a measurable structure is an additional choice; this definition\ndoes not assert that $\\psi$ is measurable as a function of the parameter.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-event-conditional-expectation-formula",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and $X:\\Omega\\to\\mathbb R$. If $A\\subseteq\\Omega$ has $0<\\mathbb P(A)<1$, define\n$$\\mathbb E[X\\mid A]:=\\frac{1}{\\mathbb P(A)}\\sum_{\\omega\\in A}X(\\omega)w(\\omega).$$\nThen the function equal to $\\mathbb E[X\\mid A]$ on $A$ and $\\mathbb E[X\\mid A^c]$ on $A^c$ is a version of $\\mathbb E[X\\mid\\sigma(A)]$ under the integral characterization. More generally, if $A_1,\\ldots,A_r$ is a finite partition of $\\Omega$ into events of positive probability, then\n$$\\mathbb E[X]=\\sum_{q=1}^r\\mathbb P(A_q)\\mathbb E[X\\mid A_q].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-linearity-of-expectation",
+          "source_section": "Statement",
+          "quote": "For a finite family of real random variables $(X_i)_{i\\in I}$ on one finite probability space and real scalars $(a_i)_{i\\in I}$,\n$$\\mathbb E\\!\\left[\\sum_{i\\in I}a_iX_i\\right]=\\sum_{i\\in I}a_i\\mathbb E[X_i].$$\nNo independence hypothesis is required. For $I=\\varnothing$, both sides are $0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $i,s,z$. The number $m_{iz}^s$ of units with $Z_{ij}=z$ is fixed and positive under [F1]. Each of the $n_i$ units has conditional probability $m_{iz}^s/n_i$ of receiving $z$. Expanding the positive-probability event conditional mean by [F8] and distributing the finite sum over units by [F9] gives $\\mathbb E[\\hat{\\bar Y}_i(z;s)\\mid S_i=s]=\\frac1{m_{iz}^s}\\sum_{j=1}^{n_i}\\mathbb P(Z_{ij}=z\\mid S_i=s)\\mathbb E[Y_{ij}^{\\mathrm{obs}}\\mid S_i=s,Z_{ij}=z]=\\frac1{n_i}\\sum_{j=1}^{n_i}\\mathbb E_{i,s}[Y_{ij}(\\mathbf Z_i)\\mid Z_{ij}=z)=\\bar Y_i(z;s).$ All conditioning events have positive probability by the bounds on $K_i^s$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3], expectation linearity [F9] and the definition of $\\bar Y_i(s)$ give $\\mathbb E[\\hat{\\bar Y}_i(s)\\mid S_i=s]=\\frac1{n_i}\\sum_{j=1}^{n_i}\\mathbb E_{i,s}[Y_{ij}(\\mathbf Z_i)]=\\bar Y_i(s).$ This uses no restriction on how one unit's outcome depends on other assignments within its group.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F7",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Condition on the complete first-stage vector $\\mathbf S$. The denominators $C_s$ are fixed, so expectation linearity [F9] and steps 1.1 and 1.2 yield $\\mathbb E[\\hat{\\bar Y}(z;s)\\mid\\mathbf S]=\\frac1{C_s}\\sum_{i:S_i=s}\\bar Y_i(z;s),\\qquad \\mathbb E[\\hat{\\bar Y}(s)\\mid\\mathbf S]=\\frac1{C_s}\\sum_{i:S_i=s}\\bar Y_i(s).$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F3",
+            "F7",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The set of groups assigned strategy $s$ is a uniform $C_s$-element subset of the $N$ fixed groups. By [F2], each group has inclusion probability $C_s/N$, so the expectation of either average on the right of step 2.1 is the corresponding target population average. The finite-partition identity [F8] and expectation linearity [F9] prove the two population-mean identities.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each effect estimator is the same finite linear contrast of estimated means as its target is of the corresponding target means. Distributing expectation over each contrast by [F9] and applying step 3.1 proves unbiasedness of all four effects. By [F5] and [F6], these statistic-valued contrasts are estimators of the displayed estimands.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F3",
+            "F5",
+            "F6",
+            "F9",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires N>1 and nonempty groups of size at least two."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1-1.5 allow zero potential outcomes and zero effects; all denominators remain assignment counts."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The design permits C=1 or N-C=1 for point estimation; steps 3.1-4.1 still divide by positive counts."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: When all potential outcomes are constant under assignment, steps 1.1-1.5 give the constant means and zero contrasts."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement permits K_i^s=1 and K_i^s=n_i-1 for point estimators; both treatment arms remain nonempty."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The strategy and treatment subsets are finite; steps 1.1-1.4 use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-stratified-interference-design-based-variance-estimators": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the stated finite population, assignment space, and positive denominators exclude an empty target."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: zero outcomes or zero-weight terms are retained as finite zero contributions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the smallest allowed sample/group size is either covered explicitly or excluded where its denominator would vanish."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: constant finite schedules reduce to the stated constant or zero-variance case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: all admissible endpoint values are stated; any value making a denominator zero is explicitly excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: all populations, assignments, and selections are finite and explicitly specified; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-two-stage-finite-design-variance-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-stage-randomized-interference-design-and-effects",
+          "source_section": "Definition",
+          "quote": "Let $N>1$ groups have fixed sizes $n_i\\ge2$, and let the fixed potential outcomes satisfy partial interference as in [[def-potential-outcomes-under-partial-interference]]. Let $\\phi$ and $\\psi$ be two group-specific treatment-allocation strategies. Under strategy $s\\in\\{\\phi,\\psi\\}$, group $i$ has a fixed treated count $K_i^s\\in\\{1,\\ldots,n_i-1\\}$. Fix $C\\in\\{1,\\ldots,N-1\\}$. The two-stage design first chooses uniformly a set of exactly $C$ groups for $\\psi$, assigning the other $N-C$ groups to $\\phi$. Conditional on these strategy labels, it independently chooses in each group a uniformly random $K_i^s$-element subset for treatment, where $s$ is that group's strategy. Here $\\binom nk$ denotes the number of $k$-element subsets of an $n$-element set. Thus, for any strategy vector $\\mathbf s$ with exactly $C$ entries equal to $\\psi$ and any assignment vectors $\\mathbf z_i$ with $\\sum_jz_{ij}=K_i^{s_i}$,\n$$\\mathbb P(\\mathbf S=\\mathbf s,\\mathbf Z=\\mathbf z)=\\binom NC^{-1}\\prod_{i=1}^N\\binom{n_i}{K_i^{s_i}}^{-1};$$\nall other pairs have probability zero. In particular, $\\mathbb P(Z_{ij}=1\\mid S_i=s)=K_i^s/n_i$ and $\\mathbb P(Z_{ij}=0\\mid S_i=s)=(n_i-K_i^s)/n_i$, both positive.\n\nWrite $\\mathbb E_{i,s}$ for expectation under the finite uniform assignment law within group $i$ under strategy $s$. Conditional means given $Z_{ij}=z$ are the finite conditional weighted sums, defined because that event has probability strictly between zero and one; [[lem-finite-event-conditional-expectation-formula]] verifies that their piecewise versions satisfy the integral characterization of [[def-conditional-expectation-given-a-sigma-algebra]]. Define the strategy-specific group and population mean potential outcomes by\n$$\\bar Y_i(z;s)=\\frac1{n_i}\\sum_{j=1}^{n_i}\\mathbb E_{i,s}[Y_{ij}(\\mathbf Z_i)\\mid Z_{ij}=z],\\qquad \\bar Y(z;s)=\\frac1N\\sum_{i=1}^N\\bar Y_i(z;s),$$\nfor $z\\in\\{0,1\\}$, and\n$$\\bar Y_i(s)=\\frac1{n_i}\\sum_{j=1}^{n_i}\\mathbb E_{i,s}[Y_{ij}(\\mathbf Z_i)],\\qquad \\bar Y(s)=\\frac1N\\sum_{i=1}^N\\bar Y_i(s).$$\nThese are finite-population estimands: the outcomes are fixed, and the expectations average only over the specified within-group assignment strategy. Define\n$$DE(\\psi)=\\bar Y(0;\\psi)-\\bar Y(1;\\psi),\\quad IE(\\phi,\\psi)=\\bar Y(0;\\phi)-\\bar Y(0;\\psi),$$\n$$TE(\\phi,\\psi)=\\bar Y(0;\\phi)-\\bar Y(1;\\psi),\\quad OE(\\phi,\\psi)=\\bar Y(\\phi)-\\bar Y(\\psi).$$\n\nFor an observed design realization, put $m_{i1}^s=K_i^s$ and $m_{i0}^s=n_i-K_i^s$, and define, whenever $S_i=s$,\n$$\\hat{\\bar Y}_i(z;s)=\\frac{\\sum_{j=1}^{n_i}1\\{Z_{ij}=z\\}Y_{ij}^{\\mathrm{obs}}}{m_{iz}^s},\\qquad \\hat{\\bar Y}_i(s)=\\frac1{n_i}\\sum_{j=1}^{n_i}Y_{ij}^{\\mathrm{obs}}.$$\nThe denominators are the fixed, positive realized arm sizes. With $C_\\psi=C$ and $C_\\phi=N-C$, define the observed population estimators\n$$\\hat{\\bar Y}(z;s)=\\frac1{C_s}\\sum_{i=1}^N1\\{S_i=s\\}\\hat{\\bar Y}_i(z;s),\\qquad \\hat{\\bar Y}(s)=\\frac1{C_s}\\sum_{i=1}^N1\\{S_i=s\\}\\hat{\\bar Y}_i(s).$$\nThe four strategy-contrast estimators $\\widehat{DE}(\\psi)$, $\\widehat{IE}(\\phi,\\psi)$, $\\widehat{TE}(\\phi,\\psi)$, and $\\widehat{OE}(\\phi,\\psi)$ are obtained by replacing each mean in the corresponding displayed target by its hatted estimator. No stratified-interference or additive-effects assumption is part of this design definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-simple-random-sampling-identities",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge2$, let $x_1,\\ldots,x_n$ and $y_1,\\ldots,y_n$ be fixed real numbers, and choose a subset $A$ uniformly from the $m$-element subsets of $\\{1,\\ldots,n\\}$, where $1\\le m\\le n$. Put\n$$\\bar x=\\frac1n\\sum_{i=1}^n x_i,\\qquad \\bar x_A=\\frac1m\\sum_{i\\in A}x_i,$$\nand define $\\bar y,\\bar y_A$ analogously. Define the finite-population covariance\n$$S_{xy}=\\frac1{n-1}\\sum_{i=1}^n(x_i-\\bar x)(y_i-\\bar y).$$\nThen\n$$\\mathbb E[\\bar x_A]=\\bar x,\\qquad \\operatorname{Cov}(\\bar x_A,\\bar y_A)=\\left(1-\\frac mn\\right)\\frac{S_{xy}}m.$$\nWhen $m\\ge2$, define the sample covariance\n$$s_{xy,A}=\\frac1{m-1}\\sum_{i\\in A}(x_i-\\bar x_A)(y_i-\\bar y_A).$$\nThen $\\mathbb E[s_{xy,A}]=S_{xy}$. Taking $y_i=x_i$ gives the corresponding variance identities.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-linearity-of-expectation",
+          "source_section": "Statement",
+          "quote": "For a finite family of real random variables $(X_i)_{i\\in I}$ on one finite probability space and real scalars $(a_i)_{i\\in I}$,\n$$\\mathbb E\\!\\left[\\sum_{i\\in I}a_iX_i\\right]=\\sum_{i\\in I}a_i\\mathbb E[X_i].$$\nNo independence hypothesis is required. For $I=\\varnothing$, both sides are $0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-event-conditional-expectation-formula",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and $X:\\Omega\\to\\mathbb R$. If $A\\subseteq\\Omega$ has $0<\\mathbb P(A)<1$, define\n$$\\mathbb E[X\\mid A]:=\\frac{1}{\\mathbb P(A)}\\sum_{\\omega\\in A}X(\\omega)w(\\omega).$$\nThen the function equal to $\\mathbb E[X\\mid A]$ on $A$ and $\\mathbb E[X\\mid A^c]$ on $A^c$ is a version of $\\mathbb E[X\\mid\\sigma(A)]$ under the integral characterization. More generally, if $A_1,\\ldots,A_r$ is a finite partition of $\\Omega$ into events of positive probability, then\n$$\\mathbb E[X]=\\sum_{q=1}^r\\mathbb P(A_q)\\mathbb E[X\\mid A_q].$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-variance-adds-for-pairwise-independent-random-variables",
+          "source_section": "Statement",
+          "quote": "If $(X_i)_{i\\in I}$ is a finite pairwise-independent family of square-integrable real random variables on a common probability space, then\n$$\\operatorname{Var}\\!\\left(\\sum_{i\\in I}X_i\\right)=\\sum_{i\\in I}\\operatorname{Var}(X_i).$$\nPairwise independence, rather than mutual independence, is sufficient. In particular, the original finite-probability-space case is included, with pairwise atom independence as in the finite-valued convention. The empty sum has variance zero.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a fixed strategy $s$, write $A_s(\\mathbf S)=C_s^{-1}\\sum_{i:S_i=s}a_i(s)$ and $E_s=C_s^{-1}\\sum_{i:S_i=s}\\epsilon_i(s)$, where $\\epsilon_i(s)=X_i(s)-a_i(s)$; then $\\hat\\mu_s=A_s+E_s$. By [F2], $\\mathbb E[A_s]=\\bar a(s)$. Conditional on each first-stage vector, $\\mathbb E[E_s\\mid\\mathbf S]=0$ by centering; [F6] therefore gives $\\mathbb E[E_s]=0$ and $\\mathbb E[(A_s-\\bar a(s))E_s]=0$. Expanding the variance definition [F3] and using [F5] now gives $\\operatorname{Var}(\\hat\\mu_s)=\\operatorname{Var}(A_s)+\\mathbb E[E_s^2]=\\operatorname{Var}(A_s)+\\mathbb E[\\operatorname{Var}(E_s\\mid\\mathbf S)]$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conditional on a first-stage vector, expand the within-arm sum of squares using [F4]: $\\sum_{i:S_i=s}(X_i(s)-\\hat\\mu_s)^2=\\sum_{i:S_i=s}(a_i(s)-A_s)^2+\\sum_{i:S_i=s}\\epsilon_i(s)^2-C_sE_s^2+2\\sum_{i:S_i=s}(a_i(s)-A_s)\\epsilon_i(s)$. The last term has conditional mean zero. By expectation linearity [F5] and variance addition [F7], the conditional mean of $\\sum_i\\epsilon_i(s)^2-C_sE_s^2$ is $(1-1/C_s)\\sum_{i:S_i=s}v_i(s)$. Dividing by $C_s-1$, then averaging over the first-stage partition by [F5] and [F6], gives the expected fixed selected sample variance plus $N^{-1}\\sum_i v_i(s)$; the fixed sample-variance identity and inclusion probabilities in [F2] make these terms $S_s^2$ and $N^{-1}\\sum_i v_i(s)$. Thus $\\mathbb E[s_{X,s}^2]=S_s^2+N^{-1}\\sum_i v_i(s)$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Let $S_{\\psi\\phi}=(N-1)^{-1}\\sum_i(a_i(\\psi)-\\bar a(\\psi))(a_i(\\phi)-\\bar a(\\phi))$. If $\\bar a_{\\phi}^{\\,S}$ is the sample mean of the fixed $a_i(\\phi)$ values in the $\\psi$-selected groups, the complementary $\\phi$-group mean equals $(N\\bar a(\\phi)-C\\bar a_{\\phi}^{\\,S})/(N-C)$. Applying the covariance identity in [F2] to both fixed lists on the same $C$-group sample gives $\\operatorname{Cov}(\\bar a_{\\psi}^{\\,S},\\bar a_{\\phi}^{\\,S})=(1-C/N)S_{\\psi\\phi}/C$; the complement identity then makes the covariance between the fixed $\\psi$-sample mean and the fixed $\\phi$-complement mean equal to $-S_{\\psi\\phi}/N$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conditional on a first-stage vector, the selected errors are a finite pairwise-independent family, so [F7] gives $\\operatorname{Var}(E_s\\mid\\mathbf S)=C_s^{-2}\\sum_{i:S_i=s}v_i(s)$. The selected groups form a uniform $C_s$-element sample, with inclusion probabilities $C_s/N$ by [F2]. Averaging the conditional variance over first-stage vectors using [F5] and [F6] yields $\\mathbb E[\\operatorname{Var}(E_s\\mid\\mathbf S)]=C_s^{-2}\\sum_i(C_s/N)v_i(s)=\\sum_i v_i(s)/(C_sN)$. The fixed component $\\operatorname{Var}(A_s)=(1-C_s/N)S_s^2/C_s$ by [F2]; step 1.1 then proves the first one-arm variance identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Write $A_\\Delta=A_\\psi-A_\\phi$ and $E_\\Delta=E_\\psi-E_\\phi$. Conditional on the first-stage vector, all selected group errors are centered and independent across groups; [F7] gives $\\operatorname{Var}(E_\\Delta\\mid\\mathbf S)=C^{-2}\\sum_{i:S_i=\\psi}v_i(\\psi)+(N-C)^{-2}\\sum_{i:S_i=\\phi}v_i(\\phi)$. By [F6], its covariance with the fixed $A_\\Delta$ is zero and its conditional variance averages over the design to $\\sum_i v_i(\\psi)/(CN)+\\sum_i v_i(\\phi)/((N-C)N)$, using the inclusion probabilities in [F2]. Expanding the variance definition [F3] with linearity [F5] shows the total contrast variance is the fixed component plus this averaged error variance. The fixed component has variance $(1-C/N)S_\\psi^2/C+(C/N)S_\\phi^2/(N-C)+2S_{\\psi\\phi}/N$ by [F2] and step 1.3. Since $S_{\\psi-\\phi}^2=S_\\psi^2+S_\\phi^2-2S_{\\psi\\phi}$, this is $S_\\psi^2/C+S_\\phi^2/(N-C)-S_{\\psi-\\phi}^2/N$. Adding the second-stage terms proves the stated contrast-variance identity.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By step 1.2 and expectation linearity [F5], the expected arm-wise variance sum is $S_\\psi^2/C+S_\\phi^2/(N-C)+\\sum_i v_i(\\psi)/(CN)+\\sum_i v_i(\\phi)/((N-C)N)$. Comparing with step 2.2 leaves exactly $S_{\\psi-\\phi}^2/N$.",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires N>=4 and 2<=C<=N-2, so both group samples are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1-1.5 allow v_i(s)=0 and zero finite-population variances."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement excludes C_s=1 because the observed group sample variance denominator C_s-1 would vanish."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If group values are constant and v_i(s)=0, the formulas reduce to zero variances and zero correction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The allowed C=2 and N-C=2 cases have sample-variance denominators equal to one; C=1 and N-C=1 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The first-stage sample is finite and uniform; all expectations are finite sums."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-stratified-interference-variance-estimators-conservative": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-stage-randomized-interference-design-and-effects",
+          "source_section": "Definition",
+          "quote": "Let $N>1$ groups have fixed sizes $n_i\\ge2$, and let the fixed potential outcomes satisfy partial interference as in [[def-potential-outcomes-under-partial-interference]]. Let $\\phi$ and $\\psi$ be two group-specific treatment-allocation strategies. Under strategy $s\\in\\{\\phi,\\psi\\}$, group $i$ has a fixed treated count $K_i^s\\in\\{1,\\ldots,n_i-1\\}$. Fix $C\\in\\{1,\\ldots,N-1\\}$. The two-stage design first chooses uniformly a set of exactly $C$ groups for $\\psi$, assigning the other $N-C$ groups to $\\phi$. Conditional on these strategy labels, it independently chooses in each group a uniformly random $K_i^s$-element subset for treatment, where $s$ is that group's strategy. Here $\\binom nk$ denotes the number of $k$-element subsets of an $n$-element set. Thus, for any strategy vector $\\mathbf s$ with exactly $C$ entries equal to $\\psi$ and any assignment vectors $\\mathbf z_i$ with $\\sum_jz_{ij}=K_i^{s_i}$,\n$$\\mathbb P(\\mathbf S=\\mathbf s,\\mathbf Z=\\mathbf z)=\\binom NC^{-1}\\prod_{i=1}^N\\binom{n_i}{K_i^{s_i}}^{-1};$$\nall other pairs have probability zero. In particular, $\\mathbb P(Z_{ij}=1\\mid S_i=s)=K_i^s/n_i$ and $\\mathbb P(Z_{ij}=0\\mid S_i=s)=(n_i-K_i^s)/n_i$, both positive.\n\nWrite $\\mathbb E_{i,s}$ for expectation under the finite uniform assignment law within group $i$ under strategy $s$. Conditional means given $Z_{ij}=z$ are the finite conditional weighted sums, defined because that event has probability strictly between zero and one; [[lem-finite-event-conditional-expectation-formula]] verifies that their piecewise versions satisfy the integral characterization of [[def-conditional-expectation-given-a-sigma-algebra]]. Define the strategy-specific group and population mean potential outcomes by\n$$\\bar Y_i(z;s)=\\frac1{n_i}\\sum_{j=1}^{n_i}\\mathbb E_{i,s}[Y_{ij}(\\mathbf Z_i)\\mid Z_{ij}=z],\\qquad \\bar Y(z;s)=\\frac1N\\sum_{i=1}^N\\bar Y_i(z;s),$$\nfor $z\\in\\{0,1\\}$, and\n$$\\bar Y_i(s)=\\frac1{n_i}\\sum_{j=1}^{n_i}\\mathbb E_{i,s}[Y_{ij}(\\mathbf Z_i)],\\qquad \\bar Y(s)=\\frac1N\\sum_{i=1}^N\\bar Y_i(s).$$\nThese are finite-population estimands: the outcomes are fixed, and the expectations average only over the specified within-group assignment strategy. Define\n$$DE(\\psi)=\\bar Y(0;\\psi)-\\bar Y(1;\\psi),\\quad IE(\\phi,\\psi)=\\bar Y(0;\\phi)-\\bar Y(0;\\psi),$$\n$$TE(\\phi,\\psi)=\\bar Y(0;\\phi)-\\bar Y(1;\\psi),\\quad OE(\\phi,\\psi)=\\bar Y(\\phi)-\\bar Y(\\psi).$$\n\nFor an observed design realization, put $m_{i1}^s=K_i^s$ and $m_{i0}^s=n_i-K_i^s$, and define, whenever $S_i=s$,\n$$\\hat{\\bar Y}_i(z;s)=\\frac{\\sum_{j=1}^{n_i}1\\{Z_{ij}=z\\}Y_{ij}^{\\mathrm{obs}}}{m_{iz}^s},\\qquad \\hat{\\bar Y}_i(s)=\\frac1{n_i}\\sum_{j=1}^{n_i}Y_{ij}^{\\mathrm{obs}}.$$\nThe denominators are the fixed, positive realized arm sizes. With $C_\\psi=C$ and $C_\\phi=N-C$, define the observed population estimators\n$$\\hat{\\bar Y}(z;s)=\\frac1{C_s}\\sum_{i=1}^N1\\{S_i=s\\}\\hat{\\bar Y}_i(z;s),\\qquad \\hat{\\bar Y}(s)=\\frac1{C_s}\\sum_{i=1}^N1\\{S_i=s\\}\\hat{\\bar Y}_i(s).$$\nThe four strategy-contrast estimators $\\widehat{DE}(\\psi)$, $\\widehat{IE}(\\phi,\\psi)$, $\\widehat{TE}(\\phi,\\psi)$, and $\\widehat{OE}(\\phi,\\psi)$ are obtained by replacing each mean in the corresponding displayed target by its hatted estimator. No stratified-interference or additive-effects assumption is part of this design definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stratified-interference-design-based-variance-estimators",
+          "source_section": "Definition",
+          "quote": "In the setting of [[def-two-stage-randomized-interference-design-and-effects]], **stratified interference** means that, for each group $i$, unit $j$, and treatment count $k\\in\\{1,\\ldots,n_i-1\\}$, the value $Y_{ij}(\\mathbf z_i)$ is the same for any two assignments $\\mathbf z_i,\\mathbf z_i'$ with $\\sum_\\ell z_{i\\ell}=\\sum_\\ell z'_{i\\ell}=k$ and $z_{ij}=z'_{ij}$. Thus at a fixed group treatment count an outcome may depend on the unit's own assignment, but not on which particular peers are treated. This assumption is additional to partial interference and is not needed for point-effect unbiasedness.\n\nFor strategy $s$ and own treatment $z$, write $Y_{ij}(z;s)$ for the common outcome at count $K_i^s$ and own assignment $z$. Define\n$$S_{iz}^2(s)=\\frac1{n_i-1}\\sum_{j=1}^{n_i}\\{Y_{ij}(z;s)-\\bar Y_i(z;s)\\}^2,\\qquad d_{ij}(s)=Y_{ij}(0;s)-Y_{ij}(1;s),$$\n$$S_{i01}(s)=\\frac1{n_i-1}\\sum_{j=1}^{n_i}\\{Y_{ij}(0;s)-\\bar Y_i(0;s)\\}\\{Y_{ij}(1;s)-\\bar Y_i(1;s)\\},$$\nand\n$$S_{iD}^2(s)=\\frac1{n_i-1}\\sum_{j=1}^{n_i}\\{d_{ij}(s)-D_i(s)\\}^2,$$\nwhere $D_i(s)=\\bar Y_i(0;s)-\\bar Y_i(1;s)$. In an observed group assigned $s$, define the estimated group direct effect by\n$$\\hat D_i(s):=\\hat{\\bar Y}_i(0;s)-\\hat{\\bar Y}_i(1;s).$$\nLet $s_{iz}^2(s)$ be the ordinary sample variance of the $m_{iz}^s$ observed outcomes in arm $z$, with denominator $m_{iz}^s-1$, and let $s_{D,s}^2$ be the sample variance of the observed group direct-effect estimates $\\hat D_i(s)$ across the $C_s$ groups assigned to $s$.\n\nThe source direct-effect variance estimator under strategy $s$ is\n$$\\widehat V_D(s)=\\left(1-\\frac{C_s}{N}\\right)\\frac{s_{D,s}^2}{C_s}+\\frac1{C_sN}\\sum_{i:S_i=s}\\left\\{\\frac{s_{i0}^2(s)}{n_i-K_i^s}+\\frac{s_{i1}^2(s)}{K_i^s}\\right\\}.$$\nFor the indirect, total, and overall effect contrasts define\n$$\\widehat V_I(\\phi,\\psi)=\\frac{s_{0,\\phi}^2}{N-C}+\\frac{s_{0,\\psi}^2}{C},\\quad \\widehat V_T(\\phi,\\psi)=\\frac{s_{0,\\phi}^2}{N-C}+\\frac{s_{1,\\psi}^2}{C},$$\n$$\\widehat V_O(\\phi,\\psi)=\\frac{s_{\\phi}^2}{N-C}+\\frac{s_{\\psi}^2}{C},$$\nwhere $s_{z,s}^2$ is the sample variance across groups assigned $s$ of the observed group estimates $\\hat{\\bar Y}_i(z;s)$, and $s_s^2$ is the sample variance across such groups of $\\hat{\\bar Y}_i(s)$.\n\nThese are design-randomization variance estimators for the fixed finite-population point estimators. The group-arm sample variances in these formulas are defined only if $C\\ge2$ and $N-C\\ge2$. In addition, $\\widehat V_D(s)$ requires $2\\le K_i^s\\le n_i-2$ for every group, so both within-group arm sample variances have nonzero denominators. The point estimators themselves remain defined under the broader counts $1\\le K_i^s<n_i$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-simple-random-sampling-identities",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge2$, let $x_1,\\ldots,x_n$ and $y_1,\\ldots,y_n$ be fixed real numbers, and choose a subset $A$ uniformly from the $m$-element subsets of $\\{1,\\ldots,n\\}$, where $1\\le m\\le n$. Put\n$$\\bar x=\\frac1n\\sum_{i=1}^n x_i,\\qquad \\bar x_A=\\frac1m\\sum_{i\\in A}x_i,$$\nand define $\\bar y,\\bar y_A$ analogously. Define the finite-population covariance\n$$S_{xy}=\\frac1{n-1}\\sum_{i=1}^n(x_i-\\bar x)(y_i-\\bar y).$$\nThen\n$$\\mathbb E[\\bar x_A]=\\bar x,\\qquad \\operatorname{Cov}(\\bar x_A,\\bar y_A)=\\left(1-\\frac mn\\right)\\frac{S_{xy}}m.$$\nWhen $m\\ge2$, define the sample covariance\n$$s_{xy,A}=\\frac1{m-1}\\sum_{i\\in A}(x_i-\\bar x_A)(y_i-\\bar y_A).$$\nThen $\\mathbb E[s_{xy,A}]=S_{xy}$. Taking $y_i=x_i$ gives the corresponding variance identities.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-two-stage-finite-design-variance-identities",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge4$ groups be completely randomized, with exactly $C$ groups assigned $\\psi$ and $N-C$ assigned $\\phi$, where $2\\le C\\le N-2$. For each group $i$ and strategy $s\\in\\{\\phi,\\psi\\}$, let $a_i(s)$ be a fixed real value and let $X_i(s)$ be a real-valued random variable from that group's finite second-stage assignment law, with $\\mathbb E[X_i(s)]=a_i(s)$ and $v_i(s)=\\operatorname{Var}(X_i(s))$. Conditional on the first-stage vector, the group-specific second-stage random variables are independent. Let $C_\\psi=C$, $C_\\phi=N-C$, and define\n$$\\hat\\mu_s=\\frac1{C_s}\\sum_{i:S_i=s}X_i(s),\\qquad s_{X,s}^2=\\frac1{C_s-1}\\sum_{i:S_i=s}(X_i(s)-\\hat\\mu_s)^2.$$\nFor $S_s^2=(N-1)^{-1}\\sum_i(a_i(s)-\\bar a(s))^2$ and $S_{\\psi-\\phi}^2=(N-1)^{-1}\\sum_i\\{a_i(\\psi)-a_i(\\phi)-\\overline{a(\\psi)-a(\\phi)}\\}^2$, one has\n$$\\operatorname{Var}(\\hat\\mu_s)=\\left(1-\\frac{C_s}{N}\\right)\\frac{S_s^2}{C_s}+\\frac1{C_sN}\\sum_{i=1}^Nv_i(s),\\qquad \\mathbb E[s_{X,s}^2]=S_s^2+\\frac1N\\sum_{i=1}^Nv_i(s),$$\nand\n$$\\operatorname{Var}(\\hat\\mu_\\psi-\\hat\\mu_\\phi)=\\frac{S_\\psi^2}{C}+\\frac{S_\\phi^2}{N-C}-\\frac{S_{\\psi-\\phi}^2}{N}+\\frac1{CN}\\sum_i v_i(\\psi)+\\frac1{(N-C)N}\\sum_i v_i(\\phi).$$\nConsequently,\n$$\\mathbb E\\!\\left[\\frac{s_{X,\\psi}^2}{C}+\\frac{s_{X,\\phi}^2}{N-C}\\right]=\\operatorname{Var}(\\hat\\mu_\\psi-\\hat\\mu_\\phi)+\\frac{S_{\\psi-\\phi}^2}{N}.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "For real random variables $X$ and $Y$ on one finite probability space, define\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\nThe **standard deviation** of $X$ is $\\sigma_X:=\\operatorname{Var}(X)^{1/2}$, using the unique nonnegative square root supplied by [[thm-of-square-roots]]. Variance is nonnegative because its defining random variable is pointwise nonnegative and expectation is a sum with nonnegative weights.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-two-stage-randomized-interference-estimators-unbiased",
+          "source_section": "Statement",
+          "quote": "Under the two-stage design of [[def-two-stage-randomized-interference-design-and-effects]], for either strategy $s\\in\\{\\phi,\\psi\\}$, treatment value $z\\in\\{0,1\\}$, and group $i$,\n$$\\mathbb E[\\hat{\\bar Y}_i(z;s)\\mid S_i=s]=\\bar Y_i(z;s),\\qquad \\mathbb E[\\hat{\\bar Y}_i(s)\\mid S_i=s]=\\bar Y_i(s).$$\nConsequently,\n$$\\mathbb E[\\hat{\\bar Y}(z;s)]=\\bar Y(z;s),\\qquad \\mathbb E[\\hat{\\bar Y}(s)]=\\bar Y(s).$$\nBy taking the displayed contrasts, the design estimators of $DE(\\psi)$, $IE(\\phi,\\psi)$, $TE(\\phi,\\psi)$, and $OE(\\phi,\\psi)$ are unbiased. The proof does not require stratified interference or additive effects.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-linearity-of-expectation",
+          "source_section": "Statement",
+          "quote": "For a finite family of real random variables $(X_i)_{i\\in I}$ on one finite probability space and real scalars $(a_i)_{i\\in I}$,\n$$\\mathbb E\\!\\left[\\sum_{i\\in I}a_iX_i\\right]=\\sum_{i\\in I}a_i\\mathbb E[X_i].$$\nNo independence hypothesis is required. For $I=\\varnothing$, both sides are $0$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-event-conditional-expectation-formula",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and $X:\\Omega\\to\\mathbb R$. If $A\\subseteq\\Omega$ has $0<\\mathbb P(A)<1$, define\n$$\\mathbb E[X\\mid A]:=\\frac{1}{\\mathbb P(A)}\\sum_{\\omega\\in A}X(\\omega)w(\\omega).$$\nThen the function equal to $\\mathbb E[X\\mid A]$ on $A$ and $\\mathbb E[X\\mid A^c]$ on $A^c$ is a version of $\\mathbb E[X\\mid\\sigma(A)]$ under the integral characterization. More generally, if $A_1,\\ldots,A_r$ is a finite partition of $\\Omega$ into events of positive probability, then\n$$\\mathbb E[X]=\\sum_{q=1}^r\\mathbb P(A_q)\\mathbb E[X\\mid A_q].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a group $i$ assigned to $\\psi$, put $k=K_i^\\psi$, and set $x_{0j}=Y_{ij}(0;\\psi)$ and $x_{1j}=Y_{ij}(1;\\psi)$. By [F9], conditioning on $S_i=\\psi$ uses the finite conditional weighted-sum law; [F2] then makes the treated units a uniform $k$-subset and the controls its uniform $(n_i-k)$-element complement. If $\\bar x_{0,T}$ is the treated-subset mean of $x_0$ and $\\bar x_0$ is its full-group mean, the control mean is $\\bar x_0-\\frac{k}{n_i-k}(\\bar x_{0,T}-\\bar x_0)$. Both arm means have expectations $\\bar x_0,\\bar x_1$ by [F3], so $\\mathbb E[\\hat D_i(\\psi)\\mid S_i=\\psi]=D_i(\\psi)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the indirect contrast apply [F4] with $a_i(\\phi)=\\bar Y_i(0;\\phi)$ and $a_i(\\psi)=\\bar Y_i(0;\\psi)$ and observed group means $X_i(s)=\\hat{\\bar Y}_i(0;s)$. These are measurable functions of their groups' second-stage assignments, so [F1] and [F10] supply [F4]'s conditional-independence premise; [F6] supplies the means. The arm-wise estimator's correction is $S_I^2/N$. For the total contrast use $a_i(\\phi)=\\bar Y_i(0;\\phi)$ and $a_i(\\psi)=\\bar Y_i(1;\\psi)$ with their corresponding observed group means; [F6] and [F4] give correction $S_T^2/N$. For the overall contrast use $a_i(s)=\\bar Y_i(s)$ and $X_i(s)=\\hat{\\bar Y}_i(s)$; the same results give correction $S_O^2/N$. The formulas are exactly the arm-wise variance sums in [F2], and expectation linearity [F8] gives each displayed identity.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F8",
+            "F10",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $S_{i0}^2,S_{i1}^2$ for the finite-population variances of $x_0,x_1$ and $S_{i01}$ for their covariance. By [F3], $\\operatorname{Cov}(\\bar x_{0,T},\\bar x_{1,T})=(1-k/n_i)S_{i01}/k$, so the control-mean covariance with the treated mean is $-\\frac{k}{n_i-k}(1-k/n_i)S_{i01}/k=-S_{i01}/n_i$. Also the control-mean variance is $kS_{i0}^2/(n_i(n_i-k))$ and the treated-mean variance is $(n_i-k)S_{i1}^2/(n_i k)$. Expanding the variance of their difference by [F5], expectation linearity [F8], and [F7], and using $S_{iD}^2=S_{i0}^2+S_{i1}^2-2S_{i01}$, gives $v_i=\\operatorname{Var}(\\hat D_i(\\psi)\\mid S_i=\\psi)=S_{i0}^2/(n_i-k)+S_{i1}^2/k-S_{iD}^2(\\psi)/n_i$. The sample-covariance identity [F3] makes $\\mathbb E[s_{i0}^2\\mid S_i=\\psi]=S_{i0}^2$ and $\\mathbb E[s_{i1}^2\\mid S_i=\\psi]=S_{i1}^2$; hence $\\mathbb E[\\hat v_i\\mid S_i=\\psi]=v_i+S_{iD}^2(\\psi)/n_i$ for $\\hat v_i=s_{i0}^2/(n_i-k)+s_{i1}^2/k$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each group estimator $\\hat D_i(\\psi)$ is a measurable function of that group's second-stage assignment. By the conditional independence in [F1] and [F10], these estimators are conditionally independent across groups, so [F4] applies using the means from step 1.1 and variances from step 2.1. With $S_D^2=(N-1)^{-1}\\sum_i(D_i(\\psi)-DE(\\psi))^2$, [F4] gives $\\operatorname{Var}(\\widehat{DE}(\\psi))=(1-C/N)S_D^2/C+(CN)^{-1}\\sum_i v_i$ and $\\mathbb E[s_{D,\\psi}^2]=S_D^2+N^{-1}\\sum_i v_i$. Therefore the first component of $\\widehat V_D$ has expectation $(1-C/N)S_D^2/C+(1-C/N)(CN)^{-1}\\sum_i v_i$. By [F8], [F9], and $\\mathbb P(S_i=\\psi)=C/N$, the second component has expectation $N^{-2}\\sum_i\\{v_i+S_{iD}^2(\\psi)/n_i\\}$. Adding the components and using $(1-C/N)/(CN)+1/N^2=1/(CN)$ proves the direct-effect identity.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Each correction is a positive constant times a finite sum of squared deviations. By [F7], such a correction is zero exactly when every squared deviation is zero: the direct correction requires each within-group direct effect to be constant across units, and each contrast correction requires its corresponding group-level effects to be constant across groups. Thus every correction is nonnegative and the stated equality conditions are exact.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 3.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires N>=4, C and N-C at least two, and nonempty within-group treatment arms."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.2-1.5 allow zero arm variances and zero heterogeneity corrections."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The variance formulas exclude group or within-group sample sizes of one wherever their sample-variance denominator would be zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: step 4.1 shows constant direct effects within groups and constant contrast effects across groups give equality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The stated guard allows K_i^psi=2 and n_i-2 but excludes K_i^psi=1 or n_i-1 for within-group sample variances."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All assignment spaces are finite; steps 1.1-1.5 use finite sums and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "cex-cross-group-contamination-violates-partial-interference": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-potential-outcomes-under-partial-interference",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal I$ be a finite set of treatment-assignment units partitioned into $N\\ge1$ nonempty groups $\\mathcal I_1,\\ldots,\\mathcal I_N$, with $n_i=|\\mathcal I_i|$. Label the members of each group $\\mathcal I_i$ by $j=1,\\ldots,n_i$. Let $\\mathcal Z\\subseteq\\{0,1\\}^{\\mathcal I}$ be the nonempty finite set of allowed global assignments in a finite randomized treatment-assignment model ([[def-finite-randomized-treatment-assignment-model]], [[def-finite-probability-space-and-event]]). Write $\\mathbf z_i$ for the restriction of $\\mathbf z\\in\\mathcal Z$ to group $i$, and $Z_{ij}$ for unit $j$'s coordinate in its group.\n\nA **fixed finite-population potential-outcome schedule** is a family of real-valued functions $Y_{ij}:\\mathcal Z\\to\\mathbb R$, one for every unit $(i,j)$. The observed outcome at assignment $\\mathbf Z$ is $Y_{ij}^{\\mathrm{obs}}=Y_{ij}(\\mathbf Z)$. The schedule is fixed; only the declared assignment is random. This notation permits arbitrary dependence of $Y_{ij}(\\mathbf z)$ on every component of $\\mathbf z$.\n\nThe schedule satisfies **partial interference** when, for every unit $(i,j)$ and all allowed $\\mathbf z,\\mathbf z'\\in\\mathcal Z$, equality of their within-group assignments $\\mathbf z_i=\\mathbf z'_i$ implies $Y_{ij}(\\mathbf z)=Y_{ij}(\\mathbf z')$. In that case the common value is well-defined as $Y_{ij}(\\mathbf z_i)$: outcomes may depend arbitrarily on assignments within group $i$, but not on assignments outside that group. Partial interference is a substantive model/design restriction, not a consequence of randomization.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The global assignments $(z_{11},z_{21})=(0,0)$ and $(0,1)$ have the same first-group restriction $z_{11}=0$, but their first-group outcomes are respectively $0$ and $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The inequality of those outcomes violates the invariance in [F1]. Therefore no function of the first group's assignment alone can represent this schedule, and partial interference fails.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Counterexample has two nonempty groups and all four binary assignments."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 uses the zero outcome at assignment (0,0) and compares it with outcome one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Each group has one unit, which suffices to expose dependence on the other group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If the outside assignment had no effect, partial interference would hold; step 1.1 exhibits the nonconstant case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 compares binary endpoint assignments 0 and 1 in the outside group."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The four assignment vectors and both outcomes are listed explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-two-stage-village-strategy-contrasts": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-two-stage-randomized-interference-design-and-effects",
+          "source_section": "Definition",
+          "quote": "Let $N>1$ groups have fixed sizes $n_i\\ge2$, and let the fixed potential outcomes satisfy partial interference as in [[def-potential-outcomes-under-partial-interference]]. Let $\\phi$ and $\\psi$ be two group-specific treatment-allocation strategies. Under strategy $s\\in\\{\\phi,\\psi\\}$, group $i$ has a fixed treated count $K_i^s\\in\\{1,\\ldots,n_i-1\\}$. Fix $C\\in\\{1,\\ldots,N-1\\}$. The two-stage design first chooses uniformly a set of exactly $C$ groups for $\\psi$, assigning the other $N-C$ groups to $\\phi$. Conditional on these strategy labels, it independently chooses in each group a uniformly random $K_i^s$-element subset for treatment, where $s$ is that group's strategy. Here $\\binom nk$ denotes the number of $k$-element subsets of an $n$-element set. Thus, for any strategy vector $\\mathbf s$ with exactly $C$ entries equal to $\\psi$ and any assignment vectors $\\mathbf z_i$ with $\\sum_jz_{ij}=K_i^{s_i}$,\n$$\\mathbb P(\\mathbf S=\\mathbf s,\\mathbf Z=\\mathbf z)=\\binom NC^{-1}\\prod_{i=1}^N\\binom{n_i}{K_i^{s_i}}^{-1};$$\nall other pairs have probability zero. In particular, $\\mathbb P(Z_{ij}=1\\mid S_i=s)=K_i^s/n_i$ and $\\mathbb P(Z_{ij}=0\\mid S_i=s)=(n_i-K_i^s)/n_i$, both positive.\n\nWrite $\\mathbb E_{i,s}$ for expectation under the finite uniform assignment law within group $i$ under strategy $s$. Conditional means given $Z_{ij}=z$ are the finite conditional weighted sums, defined because that event has probability strictly between zero and one; [[lem-finite-event-conditional-expectation-formula]] verifies that their piecewise versions satisfy the integral characterization of [[def-conditional-expectation-given-a-sigma-algebra]]. Define the strategy-specific group and population mean potential outcomes by\n$$\\bar Y_i(z;s)=\\frac1{n_i}\\sum_{j=1}^{n_i}\\mathbb E_{i,s}[Y_{ij}(\\mathbf Z_i)\\mid Z_{ij}=z],\\qquad \\bar Y(z;s)=\\frac1N\\sum_{i=1}^N\\bar Y_i(z;s),$$\nfor $z\\in\\{0,1\\}$, and\n$$\\bar Y_i(s)=\\frac1{n_i}\\sum_{j=1}^{n_i}\\mathbb E_{i,s}[Y_{ij}(\\mathbf Z_i)],\\qquad \\bar Y(s)=\\frac1N\\sum_{i=1}^N\\bar Y_i(s).$$\nThese are finite-population estimands: the outcomes are fixed, and the expectations average only over the specified within-group assignment strategy. Define\n$$DE(\\psi)=\\bar Y(0;\\psi)-\\bar Y(1;\\psi),\\quad IE(\\phi,\\psi)=\\bar Y(0;\\phi)-\\bar Y(0;\\psi),$$\n$$TE(\\phi,\\psi)=\\bar Y(0;\\phi)-\\bar Y(1;\\psi),\\quad OE(\\phi,\\psi)=\\bar Y(\\phi)-\\bar Y(\\psi).$$\n\nFor an observed design realization, put $m_{i1}^s=K_i^s$ and $m_{i0}^s=n_i-K_i^s$, and define, whenever $S_i=s$,\n$$\\hat{\\bar Y}_i(z;s)=\\frac{\\sum_{j=1}^{n_i}1\\{Z_{ij}=z\\}Y_{ij}^{\\mathrm{obs}}}{m_{iz}^s},\\qquad \\hat{\\bar Y}_i(s)=\\frac1{n_i}\\sum_{j=1}^{n_i}Y_{ij}^{\\mathrm{obs}}.$$\nThe denominators are the fixed, positive realized arm sizes. With $C_\\psi=C$ and $C_\\phi=N-C$, define the observed population estimators\n$$\\hat{\\bar Y}(z;s)=\\frac1{C_s}\\sum_{i=1}^N1\\{S_i=s\\}\\hat{\\bar Y}_i(z;s),\\qquad \\hat{\\bar Y}(s)=\\frac1{C_s}\\sum_{i=1}^N1\\{S_i=s\\}\\hat{\\bar Y}_i(s).$$\nThe four strategy-contrast estimators $\\widehat{DE}(\\psi)$, $\\widehat{IE}(\\phi,\\psi)$, $\\widehat{TE}(\\phi,\\psi)$, and $\\widehat{OE}(\\phi,\\psi)$ are obtained by replacing each mean in the corresponding displayed target by its hatted estimator. No stratified-interference or additive-effects assumption is part of this design definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-two-stage-randomized-interference-estimators-unbiased",
+          "source_section": "Statement",
+          "quote": "Under the two-stage design of [[def-two-stage-randomized-interference-design-and-effects]], for either strategy $s\\in\\{\\phi,\\psi\\}$, treatment value $z\\in\\{0,1\\}$, and group $i$,\n$$\\mathbb E[\\hat{\\bar Y}_i(z;s)\\mid S_i=s]=\\bar Y_i(z;s),\\qquad \\mathbb E[\\hat{\\bar Y}_i(s)\\mid S_i=s]=\\bar Y_i(s).$$\nConsequently,\n$$\\mathbb E[\\hat{\\bar Y}(z;s)]=\\bar Y(z;s),\\qquad \\mathbb E[\\hat{\\bar Y}(s)]=\\bar Y(s).$$\nBy taking the displayed contrasts, the design estimators of $DE(\\psi)$, $IE(\\phi,\\psi)$, $TE(\\phi,\\psi)$, and $OE(\\phi,\\psi)$ are unbiased. The proof does not require stratified interference or additive effects.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In every assignment under strategy $s$, the outcome of every unit in that group equals the fixed treated count $K_i^s$, independently of which particular units are treated. Thus all conditional and unconditional group means under $s$ equal $K_i^s$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Consequently $\\bar Y(0;\\phi)=\\bar Y(1;\\phi)=\\bar Y(\\phi)=1$ and $\\bar Y(0;\\psi)=\\bar Y(1;\\psi)=\\bar Y(\\psi)=2$. Substitution into the definitions gives $DE(\\psi)=0$, $IE(\\phi,\\psi)=-1$, $TE(\\phi,\\psi)=-1$, and $OE(\\phi,\\psi)=-1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In each realized group, every observed outcome equals its strategy's fixed count. The within-group mean in either treatment arm and the full group mean therefore equal that same count. Averaging over the groups assigned each strategy yields hatted means $1$ under $\\phi$ and $2$ under $\\psi$, so all four observed contrasts equal the targets from step 2.1 for every assignment.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example fixes four groups of three units and two groups in each strategy arm."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The chosen outcomes are group treated counts one or two; zero-valued outcomes are not part of this example."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Every group has size three and each strategy has a positive treated and untreated count."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 shows outcomes are constant within a strategy group even though the two strategy values differ."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The treatment values are binary and both strategy counts lie strictly between zero and group size."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: All finite groups, counts, and potential outcomes are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-ht-exposure-specific-mean-two-unit-design": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-exposure-mapping-under-interference",
+          "source_section": "Definition",
+          "quote": "In the finite-population model of [[def-potential-outcomes-under-partial-interference]], an **exposure mapping** for unit $(i,j)$ is a function $f_{ij}:\\mathcal Z_i\\to\\mathcal D_{ij}$, where $\\mathcal Z_i$ is the finite set of allowed assignments to group $i$ and $\\mathcal D_{ij}$ is a finite set of exposure labels. At assignment $\\mathbf Z$, the unit's exposure is the random label $D_{ij}=f_{ij}(\\mathbf Z_i)$. Its design probability is\n$$\\pi_{ij}(d)=\\mathbb P\\{f_{ij}(\\mathbf Z_i)=d\\}=\\sum_{\\mathbf z\\in\\mathcal Z:\\,f_{ij}(\\mathbf z_i)=d}p(\\mathbf z),$$\nwhere $p(\\mathbf z)=\\mathbb P(\\mathbf Z=\\mathbf z)$ is the declared assignment law.\n\nThe mapping is **sufficient for the potential outcome** of unit $(i,j)$ on a set of labels if, whenever $f_{ij}(\\mathbf z_i)=f_{ij}(\\mathbf z_i')=d$, the fixed outcomes satisfy $Y_{ij}(\\mathbf z_i)=Y_{ij}(\\mathbf z_i')$. For each label in the image of $f_{ij}$ this condition defines a unique value $Y_{ij}(d)$ equal to the common outcome over its preimage. The observed-outcome consistency identity is then $Y_{ij}^{\\mathrm{obs}}=Y_{ij}(D_{ij})$. An exposure-specific finite-population target may include unit $(i,j)$ at label $d$ only when $\\pi_{ij}(d)>0$; otherwise its inverse-probability estimator is undefined. Sufficiency is an assumption about the schedule and map, not a consequence of knowing the assignment probabilities.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ht-exposure-specific-mean-unbiased",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal U=\\{(i,j):1\\le i\\le N,\\ 1\\le j\\le n_i\\}$ be a fixed population of $M=\\sum_i n_i$ units. Let $\\mathbf Z$ have a known finite assignment law $p$ and fixed potential-outcome schedule satisfying partial interference. Fix an exposure label $d$ for which the mapping in [[def-exposure-mapping-under-interference]] is sufficient and $\\pi_{ij}(d)>0$ for every $(i,j)\\in\\mathcal U$. Then\n$$\\widehat\\mu_{HT}(d)=\\frac1M\\sum_{(i,j)\\in\\mathcal U}\\frac{1\\{D_{ij}=d\\}Y_{ij}^{\\mathrm{obs}}}{\\pi_{ij}(d)}$$\nis an estimator of the finite-population exposure mean $\\mu(d)=M^{-1}\\sum_{(i,j)\\in\\mathcal U}Y_{ij}(d)$ and satisfies $\\mathbb E_p[\\widehat\\mu_{HT}(d)]=\\mu(d)$. Therefore, for two labels $d,e$ with the same positivity and sufficiency conditions, $\\widehat\\mu_{HT}(d)-\\widehat\\mu_{HT}(e)$ is design-unbiased for $\\mu(d)-\\mu(e)$. Dependence among units' exposures does not affect these expectation identities.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Only assignment $(0,1)$ maps either unit to $d$, so $\\pi_1(d)=\\pi_2(d)=1/4$. The target is $\\mu(d)=(4+10)/2=7$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under assignment $(0,1)$ the estimator equals $\\frac12(4/(1/4)+10/(1/4))=28$. Under each of the other three assignments it is zero. Its design expectation is therefore $(28+0+0+0)/4=7=\\mu(d)$, verifying the unbiasedness identity directly.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example has two target units and four allowed assignments."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 gives zero estimates on the three assignments outside exposure d."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Each target unit has exposure probability 1/4, so the inverse weights are finite."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The three non-target exposure outcomes are set to zero; the exposure-d outcomes are fixed explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The exposure label is discrete and no interval endpoint is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 enumerates all four assignments and their estimator values."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "cex-misspecified-own-treatment-exposure-map": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-exposure-mapping-under-interference",
+          "source_section": "Definition",
+          "quote": "In the finite-population model of [[def-potential-outcomes-under-partial-interference]], an **exposure mapping** for unit $(i,j)$ is a function $f_{ij}:\\mathcal Z_i\\to\\mathcal D_{ij}$, where $\\mathcal Z_i$ is the finite set of allowed assignments to group $i$ and $\\mathcal D_{ij}$ is a finite set of exposure labels. At assignment $\\mathbf Z$, the unit's exposure is the random label $D_{ij}=f_{ij}(\\mathbf Z_i)$. Its design probability is\n$$\\pi_{ij}(d)=\\mathbb P\\{f_{ij}(\\mathbf Z_i)=d\\}=\\sum_{\\mathbf z\\in\\mathcal Z:\\,f_{ij}(\\mathbf z_i)=d}p(\\mathbf z),$$\nwhere $p(\\mathbf z)=\\mathbb P(\\mathbf Z=\\mathbf z)$ is the declared assignment law.\n\nThe mapping is **sufficient for the potential outcome** of unit $(i,j)$ on a set of labels if, whenever $f_{ij}(\\mathbf z_i)=f_{ij}(\\mathbf z_i')=d$, the fixed outcomes satisfy $Y_{ij}(\\mathbf z_i)=Y_{ij}(\\mathbf z_i')$. For each label in the image of $f_{ij}$ this condition defines a unique value $Y_{ij}(d)$ equal to the common outcome over its preimage. The observed-outcome consistency identity is then $Y_{ij}^{\\mathrm{obs}}=Y_{ij}(D_{ij})$. An exposure-specific finite-population target may include unit $(i,j)$ at label $d$ only when $\\pi_{ij}(d)>0$; otherwise its inverse-probability estimator is undefined. Sufficiency is an assumption about the schedule and map, not a consequence of knowing the assignment probabilities.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ht-exposure-specific-mean-unbiased",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal U=\\{(i,j):1\\le i\\le N,\\ 1\\le j\\le n_i\\}$ be a fixed population of $M=\\sum_i n_i$ units. Let $\\mathbf Z$ have a known finite assignment law $p$ and fixed potential-outcome schedule satisfying partial interference. Fix an exposure label $d$ for which the mapping in [[def-exposure-mapping-under-interference]] is sufficient and $\\pi_{ij}(d)>0$ for every $(i,j)\\in\\mathcal U$. Then\n$$\\widehat\\mu_{HT}(d)=\\frac1M\\sum_{(i,j)\\in\\mathcal U}\\frac{1\\{D_{ij}=d\\}Y_{ij}^{\\mathrm{obs}}}{\\pi_{ij}(d)}$$\nis an estimator of the finite-population exposure mean $\\mu(d)=M^{-1}\\sum_{(i,j)\\in\\mathcal U}Y_{ij}(d)$ and satisfies $\\mathbb E_p[\\widehat\\mu_{HT}(d)]=\\mu(d)$. Therefore, for two labels $d,e$ with the same positivity and sufficiency conditions, $\\widehat\\mu_{HT}(d)-\\widehat\\mu_{HT}(e)$ is design-unbiased for $\\mu(d)-\\mu(e)$. Dependence among units' exposures does not affect these expectation identities.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Unit 1 has $D_1=0$ under both assignments $(0,0)$ and $(0,1)$, but its outcomes there are respectively $0$ and $1$. Thus [F1] fails although $\\pi_1(0)=\\pi_2(0)=1/2>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If one nevertheless sets the attempted exposure-zero values to $Y_1^*(0)=Y_1(0,0)=0$ and $Y_2^*(0)=0$, their mean is $0$. The attempted Horvitz–Thompson estimator is $\\frac12\\{1(Z_1=0)Y_1/(1/2)+1(Z_2=0)Y_2/(1/2)\\}=1(Z_1=0)Z_2$. It equals $1$ only at assignment $(0,1)$ and zero at the other three assignments, so its expectation is $1/4\\ne0$. Hence positivity does not repair the misspecified exposure map, and [F2] cannot be applied without its sufficiency premise.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Counterexample has two units and all four binary assignments."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Step 2.1 uses the attempted target value zero and displays the resulting nonzero expectation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Both units have positive own-treatment exposure probability 1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: If the outcome did not depend on the peer treatment, the own-treatment map would be sufficient; step 1.1 violates that condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 compares the two assignments with own-treatment exposure exactly zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite law is uniform on four explicit assignments."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-nonadditive-spillovers-create-positive-variance-bias": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stratified-interference-design-based-variance-estimators",
+          "source_section": "Definition",
+          "quote": "In the setting of [[def-two-stage-randomized-interference-design-and-effects]], **stratified interference** means that, for each group $i$, unit $j$, and treatment count $k\\in\\{1,\\ldots,n_i-1\\}$, the value $Y_{ij}(\\mathbf z_i)$ is the same for any two assignments $\\mathbf z_i,\\mathbf z_i'$ with $\\sum_\\ell z_{i\\ell}=\\sum_\\ell z'_{i\\ell}=k$ and $z_{ij}=z'_{ij}$. Thus at a fixed group treatment count an outcome may depend on the unit's own assignment, but not on which particular peers are treated. This assumption is additional to partial interference and is not needed for point-effect unbiasedness.\n\nFor strategy $s$ and own treatment $z$, write $Y_{ij}(z;s)$ for the common outcome at count $K_i^s$ and own assignment $z$. Define\n$$S_{iz}^2(s)=\\frac1{n_i-1}\\sum_{j=1}^{n_i}\\{Y_{ij}(z;s)-\\bar Y_i(z;s)\\}^2,\\qquad d_{ij}(s)=Y_{ij}(0;s)-Y_{ij}(1;s),$$\n$$S_{i01}(s)=\\frac1{n_i-1}\\sum_{j=1}^{n_i}\\{Y_{ij}(0;s)-\\bar Y_i(0;s)\\}\\{Y_{ij}(1;s)-\\bar Y_i(1;s)\\},$$\nand\n$$S_{iD}^2(s)=\\frac1{n_i-1}\\sum_{j=1}^{n_i}\\{d_{ij}(s)-D_i(s)\\}^2,$$\nwhere $D_i(s)=\\bar Y_i(0;s)-\\bar Y_i(1;s)$. In an observed group assigned $s$, define the estimated group direct effect by\n$$\\hat D_i(s):=\\hat{\\bar Y}_i(0;s)-\\hat{\\bar Y}_i(1;s).$$\nLet $s_{iz}^2(s)$ be the ordinary sample variance of the $m_{iz}^s$ observed outcomes in arm $z$, with denominator $m_{iz}^s-1$, and let $s_{D,s}^2$ be the sample variance of the observed group direct-effect estimates $\\hat D_i(s)$ across the $C_s$ groups assigned to $s$.\n\nThe source direct-effect variance estimator under strategy $s$ is\n$$\\widehat V_D(s)=\\left(1-\\frac{C_s}{N}\\right)\\frac{s_{D,s}^2}{C_s}+\\frac1{C_sN}\\sum_{i:S_i=s}\\left\\{\\frac{s_{i0}^2(s)}{n_i-K_i^s}+\\frac{s_{i1}^2(s)}{K_i^s}\\right\\}.$$\nFor the indirect, total, and overall effect contrasts define\n$$\\widehat V_I(\\phi,\\psi)=\\frac{s_{0,\\phi}^2}{N-C}+\\frac{s_{0,\\psi}^2}{C},\\quad \\widehat V_T(\\phi,\\psi)=\\frac{s_{0,\\phi}^2}{N-C}+\\frac{s_{1,\\psi}^2}{C},$$\n$$\\widehat V_O(\\phi,\\psi)=\\frac{s_{\\phi}^2}{N-C}+\\frac{s_{\\psi}^2}{C},$$\nwhere $s_{z,s}^2$ is the sample variance across groups assigned $s$ of the observed group estimates $\\hat{\\bar Y}_i(z;s)$, and $s_s^2$ is the sample variance across such groups of $\\hat{\\bar Y}_i(s)$.\n\nThese are design-randomization variance estimators for the fixed finite-population point estimators. The group-arm sample variances in these formulas are defined only if $C\\ge2$ and $N-C\\ge2$. In addition, $\\widehat V_D(s)$ requires $2\\le K_i^s\\le n_i-2$ for every group, so both within-group arm sample variances have nonzero denominators. The point estimators themselves remain defined under the broader counts $1\\le K_i^s<n_i$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-stratified-interference-variance-estimators-conservative",
+          "source_section": "Statement",
+          "quote": "Assume the two-stage design of [[def-two-stage-randomized-interference-design-and-effects]], stratified interference as in [[def-stratified-interference-design-based-variance-estimators]], and $2\\le C\\le N-2$. For the population direct-effect variance estimator under $\\psi$, additionally assume $2\\le K_i^\\psi\\le n_i-2$ for every group. Then\n$$\\mathbb E[\\widehat V_D(\\psi)]=\\operatorname{Var}(\\widehat{DE}(\\psi))+\\frac1{N^2}\\sum_{i=1}^N\\frac{S_{iD}^2(\\psi)}{n_i}.$$\nFor the source arm-wise variance estimators of the indirect, total, and overall contrasts,\n$$\\mathbb E[\\widehat V_I(\\phi,\\psi)]=\\operatorname{Var}(\\widehat{IE}(\\phi,\\psi))+\\frac{S_I^2}{N},$$\n$$\\mathbb E[\\widehat V_T(\\phi,\\psi)]=\\operatorname{Var}(\\widehat{TE}(\\phi,\\psi))+\\frac{S_T^2}{N},\\qquad \\mathbb E[\\widehat V_O(\\phi,\\psi)]=\\operatorname{Var}(\\widehat{OE}(\\phi,\\psi))+\\frac{S_O^2}{N},$$\nwhere\n$$I_i=\\bar Y_i(0;\\phi)-\\bar Y_i(0;\\psi),\\quad T_i=\\bar Y_i(0;\\phi)-\\bar Y_i(1;\\psi),\\quad O_i=\\bar Y_i(\\phi)-\\bar Y_i(\\psi),$$\nand, with $\\bar I=N^{-1}\\sum_iI_i$, $\\bar T=N^{-1}\\sum_iT_i$, and $\\bar O=N^{-1}\\sum_iO_i$,\n$$S_I^2=\\frac1{N-1}\\sum_i(I_i-\\bar I)^2,\\qquad S_T^2=\\frac1{N-1}\\sum_i(T_i-\\bar T)^2,\\qquad S_O^2=\\frac1{N-1}\\sum_i(O_i-\\bar O)^2.$$\nAll correction terms are nonnegative. The direct-effect correction is zero exactly when, within every group, the individual direct effects $Y_{ij}(0;\\psi)-Y_{ij}(1;\\psi)$ are constant across $j$. Each contrast correction is zero exactly when its corresponding group-level effects are constant across $i$. Thus the variance estimators are conservative, and equality requires the stated additivity condition. The variance estimators are undefined outside their stated minimum sample sizes; the point-effect estimators remain defined for the wider design range $1\\le K_i^s<n_i$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any fixed group assignment, $Y_{ij}(\\mathbf z_i)$ depends only on $z_{ij}$. Hence changing peer assignments while holding the unit's treatment and the treated count fixed leaves its outcome unchanged, so stratified interference holds. The unit direct effects are $d_{ij}=Y_{ij}(0)-Y_{ij}(1)=-a_j=(-1,0,0,0)$, which are not constant.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The finite-population mean direct effect in each group is $-1/4$, and its finite-population variance is $S_{iD}^2=(3/4)/3=1/4$. Within a group, the estimated direct effect is $-1/2$ if unit 1 is treated and $0$ otherwise, each with probability $1/2$. Its variance is therefore $1/16$. The within-group variance component $\\hat v_i=s_{i0}^2/2+s_{i1}^2/2$ is $1/4$ when unit 1 is treated and $0$ otherwise, so $\\mathbb E[\\hat v_i]=1/8$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Two groups are selected for $\\psi$, and their within-group assignments are independent. The population direct-effect estimator is their mean. Its values are $-1/2,-1/4,0$ with probabilities $1/4,1/2,1/4$, respectively, so its mean is $-1/4$ and its design variance is $1/32$. For two selected groups, the between-group sample variance of their direct-effect estimates is $1/8$ when their outcomes differ and $0$ otherwise; the outcomes differ with probability $1/2$, giving expected sample variance $1/16$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The expected between-group term in the source variance estimator is $(1-C/N)s_{D,\\psi}^2/C=(1/4)s_{D,\\psi}^2$, hence its expectation is $1/64$. The expected within-group term is $(CN)^{-1}$ times the sum over the two selected groups' $\\hat v_i$ values, giving $(1/8)(2\\cdot1/8)=1/32$. Therefore the complete variance estimator has expectation $1/64+1/32=3/64$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The positive bias is $3/64-1/32=1/64$. It also equals the theorem's correction $N^{-2}\\sum_iS_{iD}^2/n_i=16^{-1}\\cdot4\\cdot(1/4)/4=1/64$. Thus the nonadditive individual effects give a strict conservative bias despite stratified interference and all required sample sizes.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example has four groups with four units each and two groups assigned to each strategy."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The schedule has zero outcomes for untreated units and three of four treated-type outcomes; these zero terms are retained."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: Step 1.2 computes direct estimates of -1/2 or 0, and the minimum sample sizes are all two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Step 1.1 identifies nonconstant within-group direct effects; step 3.1 compares the strict positive correction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The design uses K=2 and n-K=2, strictly inside the admissible variance-estimator range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.2-1.4 enumerate the two-point within-group and first-stage distributions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a direct definition, calculation, or one-way conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-finite-event-conditional-expectation-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-agrees-with-the-finite-weighted-sum",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space and let $X:\\Omega\\to\\mathbb R$.\nAfter identifying $(\\Omega,w)$ with the full-power-set probability space of\n[[thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]],\nthe expectation defined by\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]] agrees with\nthe published finite formulas:\n$$\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)=\\sum_{x\\in X(\\Omega)}x\\,\\mathbb P(X=x).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any event $B$ with $\\mathbb P(B)>0$, the displayed definition is a finite real sum divided by a positive real. Its conditional weights $w_B(\\omega)=w(\\omega)/\\mathbb P(B)$ on $B$ are nonnegative and sum to one, since $\\sum_{\\omega\\in B}w_B(\\omega)=\\mathbb P(B)/\\mathbb P(B)=1$. Thus this formula is the expectation under the probability law restricted and normalized to $B$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $T(\\omega)=\\mathbb E[X\\mid A]$ for $\\omega\\in A$ and $T(\\omega)=\\mathbb E[X\\mid A^c]$ for $\\omega\\in A^c$. The four events in $\\sigma(A)$ are $\\emptyset,A,A^c,\\Omega$, so $T$ is $\\sigma(A)$-measurable. For either cell $B\\in\\{A,A^c\\}$, its finite weighted integral satisfies $\\int_B T\\,dP=\\mathbb P(B)\\mathbb E[X\\mid B]=\\sum_{\\omega\\in B}X(\\omega)w(\\omega)=\\int_B X\\,dP$ by step 1.1 and [F4]. Splitting over the cells using [F6] proves the same identity for every event in $\\sigma(A)$. Since $\\Omega$ is finite, $X$ and $T$ have finite weighted absolute sums and are integrable. Therefore [F3] makes $T$ a conditional-expectation version.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For the partition $A_1,\\ldots,A_r$, disjoint splitting [F6] gives $\\mathbb E[X]=\\sum_{q=1}^r\\sum_{\\omega\\in A_q}X(\\omega)w(\\omega)$. By step 1.1, each inner sum is $\\mathbb P(A_q)\\mathbb E[X\\mid A_q]$, proving the partition identity.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "All conditional values and sums above are finite and every denominator is explicitly positive, so the proof uses no general conditional-expectation existence theorem or choice axiom.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: 0<P(A)<1 makes both conditioning cells nonempty, and a finite probability-space partition covers the nonempty Ω."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: Zero-weight atoms remain in the sums; only the strictly positive masses P(A), P(A^c), and P(A_q) are inverted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: A singleton partition {Ω} is allowed and gives E[X|Ω]=E[X]; the event-version clause separately requires both cell masses positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: For constant X=c, each conditional mean is c and the partition sum is c times total probability 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Events of probability 0 or 1 are excluded from the two-cell version; positive-probability partition cells include the one-cell endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Steps 1.1–3.1 use finite weighted sums and disjoint splitting only; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves finite conditional-expectation identities and a version property; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves finite conditional-expectation identities and a version property; it states no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "two-atom-partition",
+          "claim": "For weights (1/3,2/3), A={a}, and X(a)=0,X(b)=3, the conditional means are 0 and 3 and the partition identity gives E[X]=2.",
+          "result": "The piecewise conditional version equals X on both atoms, and (1/3)·0+(2/3)·3=2=E[X]."
+        }
+      ]
+    }
+  }
+}

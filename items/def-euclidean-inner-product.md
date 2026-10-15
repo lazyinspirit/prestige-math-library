@@ -12,12 +12,8 @@ justified_by: []
 aliases: []
 landmark: false
 verification:
+  repair: research/statistical-models-experiments-62-published-euclidean-scope-note-repair.json
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
 sources:
   scraped: []
   references:
@@ -112,8 +108,7 @@ here.
   product on $\mathbb{R}^{n}$ and nothing more. The general theory of inner
   product spaces — abstract inner products, orthonormal bases, Gram-Schmidt,
   orthogonal projection and orthogonal complements of arbitrary subspaces — is
-  planned for a page of this library that comes **earlier in the plan order** and
-  is not yet built. No item on this page claims anything about abstract inner
+  developed elsewhere in this library. No item on this page claims anything about abstract inner
   product spaces, and no item on this page introduces the general notion.
 
 - **The standard basis and coordinates.** For $i < n$ the standard unit vector

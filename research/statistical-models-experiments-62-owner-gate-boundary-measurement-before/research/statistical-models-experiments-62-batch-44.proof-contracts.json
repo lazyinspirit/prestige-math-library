@@ -1,0 +1,999 @@
+{
+  "version": 1,
+  "level": 2,
+  "scope": [
+    "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+    "def-general-state-space-model-by-kernels",
+    "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+    "def-linear-gaussian-state-space-model-with-independent-noises",
+    "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian",
+    "ex-state-space-model-same-dynamics-distinct-observation-kernels",
+    "ex-linear-gaussian-singular-state-covariance-positive-innovation-covariance"
+  ],
+  "contracts": {
+    "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent in the sense of [[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "Then $X$ is a random element of $\\left(\\prod_{i<n}S_i,\\bigotimes_{i<n}\\Sigma_i\\right)$, and its law is the finite product of the marginal laws: $$\\mathbb P_X=\\bigotimes_{i<n}\\mathbb P_{X_i}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-cramer-wold-device",
+          "source_section": "Statement",
+          "quote": "Borel probability laws on $\\mathbb R^d$ are determined by all the laws $(p_\\theta)_*\\mu$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "noise-projections-independent",
+          "step": "1.1",
+          "claim": "The stacked vector has product joint law; measurable scalar projections of separate independent coordinates remain independent, with the specified normal means and variances.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "projection-characteristic-function",
+          "step": "2.1",
+          "claim": "The characteristic function of every scalar projection of the stack is the normal characteristic function with the block-diagonal mean and variance, so scalar uniqueness gives the projected normal law.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "stack-law-identification",
+          "step": "3.1",
+          "claim": "The block covariance is positive semidefinite, the corresponding multivariate-normal law exists, and Cramer–Wold identifies it with the law of the stack.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a finite nonempty family m≥1; the empty stack is outside its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If every a_j and Σ_j is zero, step 2.1 gives zero for every scalar projection, and step 3.1 identifies the stack with the point mass at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When m=1, the block stack is Z_1 and the claimed law is its given law, as identified in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes zero-variance scalar projections, and step 3.1 allows singular diagonal blocks without any inverse."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no time interval or endpoint parameter in the finite family statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit; its uses are the Gaussian-law, scalar-uniqueness and Cramer–Wold applications in steps 1.1–3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a one-way closure result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a one-way closure result, not an equivalence."
+        }
+      ]
+    },
+    "def-general-state-space-model-by-kernels": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition includes T=0, where the path space is E_0 and the only specified law is μ_0."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numeric conclusion is asserted; probability kernels may assign zero mass to measurable sets."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes T=1 with exactly one transition kernel K_1 and one observation kernel G_1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The definition permits point-mass kernels and imposes no density or nonsingularity condition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition distinguishes initial state index 0 from transition and observation indices 1 through T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition assumes AC for the associated law through the Ionescu–Tulcea theorem; finite-product standard-Borel closure is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines a model class and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines a model class and asserts no biconditional."
+        }
+      ]
+    },
+    "thm-finite-horizon-state-space-kernel-law-exists-uniquely": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-general-state-space-model-by-kernels",
+          "source_section": "Definition",
+          "quote": "Assume AC ([[def-axiom-of-choice]]) and fix a finite horizon $T\\ge0$. For\n$0\\le t\\le T$, let\n$(E_t,\\mathcal E_t)$ be a standard-Borel state space; for $1\\le t\\le T$, let\n$(F_t,\\mathcal F_t)$ be a standard-Borel observation space\n([[def-standard-borel-space]]), meaning a measurable space bimeasurably\nisomorphic to a Polish space. A probability kernel has probability-measure\nsections and measurable evaluations as in\n[[def-measure-kernel-and-probability-kernel]]. Specify an initial probability\nmeasure $\\mu_0$ on $E_0$ (a measure of total mass one, as in\n[[def-probability-measure]]), transition probability kernels $K_t$ from\n$E_{t-1}$ to $E_t$, and observation probability kernels $G_t$ from $E_t$ to\n$F_t$, for $1\\le t\\le T$.\n\nThe trajectory space, with the finite product sigma-algebra generated by\nmeasurable coordinate rectangles\n([[def-product-sigma-algebra-and-finite-product-sigma-algebras]]), is\n$$\\mathcal Z_T=E_0\\times E_1\\times F_1\\times\\cdots\\times E_T\\times F_T,$$\nwith $\\mathcal Z_0=E_0$. Its finite-horizon law $P_T$ is the unique probability\nlaw whose ordered iterated kernel integral is\n$$\\mu_0(dx_0)\\prod_{t=1}^T K_t(x_{t-1},dx_t)G_t(x_t,dy_t).$$\nThe product notation means successive integration in the displayed order; it\ndoes not assert the existence of densities. Existence and uniqueness under AC\nare proved in [[thm-finite-horizon-state-space-kernel-law-exists-uniquely]].\nEvery finite product trajectory space is standard Borel by\n[[lem-finite-products-of-standard-borel-spaces-are-standard-borel]].\n\nThe initial and transition laws specify the state evolution, while each\n$G_t$ specifies the observation law given the current state in this model.\nState evolution by itself therefore does not specify a joint state-observation\nlaw. No density or time-homogeneity assumption is imposed, and no strict\nstationarity assumption (shift invariance of all finite-dimensional laws) is\nrequired ([[def-strict-and-weak-stationarity-for-time-series]]). This is a\nsingle law, not a parameter-indexed family. The model contract records a\nproposed law and makes no claim that it adequately describes an application\n([[def-scientific-statistical-model-contract]]).\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "whose finite-prefix laws are the prescribed iterated integrals",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "source_section": "Statement",
+          "quote": "Every finite product of standard Borel spaces, with its finite product sigma-algebra, is standard Borel.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "history-kernel-lifts",
+          "step": "1.1",
+          "claim": "Coordinate projections lift each state and observation kernel to the full preceding history; measurable composition preserves measurable evaluations and probability-valued sections, while singleton tails complete the sequence.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "finite-prefix-existence",
+          "step": "2.1",
+          "claim": "AC and Ionescu–Tulcea give the countable path law; its finite prefix marginal has exactly the ordered K_t and G_t iterated integral on a standard-Borel finite product.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "finite-prefix-uniqueness",
+          "step": "3.1",
+          "claim": "Appending deterministic singleton tails extends any competing finite law to a full path law with the same prescribed prefixes; Ionescu–Tulcea uniqueness gives equality.",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 2.1",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats T=0 explicitly: the path is E_0 and its law is μ_0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The product-kernel integral allows zero probability on measurable sets and never divides by an event probability, as used in steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For T=1, step 2.1 gives the prefix law μ_0(dx_0)K_1(x_0,dx_1)G_1(x_1,dy_1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Dirac initial, transition or observation kernels remain probability kernels and satisfy the same lifted-kernel proof in steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the initial endpoint and appends singleton tails after the final coordinate D_{2T}."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit and is used in steps 2.1–3.1 only through the Ionescu–Tulcea existence and uniqueness theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an existence-and-uniqueness assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an existence-and-uniqueness assertion, not an equivalence."
+        }
+      ]
+    },
+    "def-linear-gaussian-state-space-model-with-independent-noises": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The definition permits T=0, in which case there are no process or observation noises and the initial Gaussian law remains."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition allows zero mean and zero covariance matrices, yielding deterministic Gaussian coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows T=1 with one transition, one observation, and positive dimensions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "All P_0,Q_t,R_t may be singular, including zero matrices; no inverse is part of the definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition starts from x_0 and indexes its equations from t=1 to the finite endpoint T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition assumes AC to realize all positive-semidefinite Gaussian laws; its finite product construction is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines a subclass and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines a subclass and asserts no biconditional."
+        }
+      ]
+    },
+    "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "A **linear-Gaussian state-space model with independent noises** is the general finite-horizon kernel model",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent in the sense of [[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-independent-random-elements-have-product-joint-law",
+          "source_section": "Statement",
+          "quote": "its law is the finite product of the marginal laws",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Then $x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable, and",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **probability kernel** satisfies $K(s,T)=1$ for every s.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-measurability-of-integration-against-a-kernel",
+          "source_section": "Statement",
+          "quote": "the function $$I_f(s)=\\int_T f(s,t)\\,K(s,dt)$$ is $\\Sigma$-measurable",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "there is a unique probability measure whose rectangle probabilities are the ordered iterated kernel integrals",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "source_section": "Statement",
+          "quote": "Then $$Z\\sim N_D(a,\\Sigma).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "source_section": "Statement",
+          "quote": "Every finite product of standard Borel spaces, with its finite product sigma-algebra, is standard Borel.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "independent-noise-space",
+          "step": "1.1",
+          "claim": "AC supplies each Gaussian marginal law; finite products form a probability space whose coordinate rectangles factor, giving the required mutual independence and product joint law.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "translated-gaussian-kernels",
+          "step": "1.2",
+          "claim": "Affine maps of the Gaussian noise define probability-valued state and observation kernels; product-measurability and kernel integration give measurable evaluations, and characteristic functions identify the translated Gaussian laws.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "given"
+          ]
+        },
+        {
+          "id": "kernel-factorization",
+          "step": "2.1",
+          "claim": "Finite Tonelli integration over the independent process and observation noises successively yields exactly the ordered kernel-product law, which is the unique law from the finite-horizon theorem.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F10",
+            "F12",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "joint-gaussian-path",
+          "step": "3.1",
+          "claim": "The stacked noise vector is multivariate normal; recursive substitution makes the path a deterministic linear image, whose projections have the stated mean and positive-semidefinite covariance.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For T=0, the product noise vector contains only X_0, the path map is the identity, and the statement reduces to its initial Gaussian law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If all means and covariance matrices vanish, the product noise path is the point mass at zero and the kernel and Gaussian formulas remain valid in steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For T=1, step 2.1 has exactly K_1 followed by G_1 and step 3.1 is the finite affine image of three Gaussian blocks."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 use characteristic functions and positive-semidefinite covariances only; no determinant or inverse excludes singular blocks."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The construction begins with X_0 and ends at X_T,Y_T; step 3.1 uses the corresponding finite block matrix."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit and used in steps 1.1–3.1 through Gaussian existence, characteristic uniqueness, Cramer–Wold and Ionescu–Tulcea; finite product construction itself is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a construction and Gaussian-law conclusion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a construction and Gaussian-law conclusion, not an equivalence."
+        }
+      ]
+    },
+    "ex-state-space-model-same-dynamics-distinct-observation-kernels": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-general-state-space-model-by-kernels",
+          "source_section": "Definition",
+          "quote": "Its finite-horizon law $P_T$ is the unique probability law whose ordered iterated kernel integral is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "A **linear-Gaussian state-space model with independent noises** is the general finite-horizon kernel model",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian",
+          "source_section": "Statement",
+          "quote": "The recursions $x_t=F_t x_{t-1}+q_t$ and $y_t=H_t x_t+r_t$ induce the general kernel-product law",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Such a law exists, has mean m and covariance Sigma",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "The family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras $(\\sigma(X_i))_{i\\in I}$ are independent in the sense of [[def-independent-sigma-algebras-and-events]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "covariance is symmetric and bilinear on finite linear combinations.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "there is a unique probability measure whose rectangle probabilities are the ordered iterated kernel integrals",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "same-state-dynamics",
+          "step": "1.1",
+          "claim": "The zero process noise makes both state transitions the same identity kernel; the two translated Gaussian observation kernels have different means at x=1, and the local suppliers give each model its joint law.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "given",
+            "F10"
+          ]
+        },
+        {
+          "id": "different-cross-covariances",
+          "step": "1.2",
+          "claim": "Independence makes the process/observation-noise cross moment vanish; covariance bilinearity then gives covariance c for model c, hence values 1 and 2.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "joint-laws-distinct",
+          "step": "2.1",
+          "claim": "Equal joint laws with finite second moments would have equal covariance of the first and third coordinates, contradicting step 2.1.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F8",
+            "step 1.2",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes T=1, one state coordinate and one observation coordinate; an empty horizon is not part of this setup."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly uses Q_1=0 and the point-mass process noise, with no division by its variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example has exactly one state transition and one observation, as calculated in steps 1.1–1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero process-noise covariance is allowed by the definition; both joint laws remain valid by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the common transition X_0 to X_1 and the observation Y_1 at the final step."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit in A1 and is used only through the Gaussian and finite path-law suppliers in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example distinguishes two laws and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example distinguishes two laws and asserts no equivalence."
+        }
+      ]
+    },
+    "ex-linear-gaussian-singular-state-covariance-positive-innovation-covariance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-linear-gaussian-state-space-model-with-independent-noises",
+          "source_section": "Definition",
+          "quote": "symmetric positive-semidefinite matrices, meaning $v^TPv\\ge0$ for every real vector $v$ of matching dimension",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-linear-gaussian-state-space-path-law-is-jointly-gaussian",
+          "source_section": "Statement",
+          "quote": "The recursions $x_t=F_t x_{t-1}+q_t$ and $y_t=H_t x_t+r_t$ induce the general kernel-product law",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Singular Sigma is allowed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-horizon-state-space-kernel-law-exists-uniquely",
+          "source_section": "Statement",
+          "quote": "there is a unique probability measure whose rectangle probabilities are the ordered iterated kernel integrals",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "singular-state-covariance",
+          "step": "1.1",
+          "claim": "The one-step parameter tuple satisfies the model contract; the finite path law exists, X_1=0, and its prediction mean and variance are both zero.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "given",
+            "algebra",
+            "F6"
+          ]
+        },
+        {
+          "id": "positive-innovation-covariance",
+          "step": "2.1",
+          "claim": "The one-step prediction residual equals r_1, whose variance is one, so the scalar innovation covariance is positive definite.",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "separation-of-covariances",
+          "step": "3.1",
+          "claim": "The example has singular state covariance and positive definite observation innovation covariance, and no state-covariance inverse is used.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes T=1 and nonempty scalar state and observation spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the zero state prediction variance explicitly, while step 2.1 gives a nonzero innovation variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The single transition and single observation are evaluated directly in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The state prediction covariance is the zero matrix in step 1.1; the example uses no inverse of it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example starts from X_0 and computes the prediction residual at observation time 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is explicit and used only by the Gaussian-model and finite-path suppliers in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct covariance calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct covariance calculation, not an equivalence."
+        }
+      ]
+    }
+  }
+}

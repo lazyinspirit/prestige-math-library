@@ -1,0 +1,135 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "7",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "lem-gls-information-matrix-is-positive-definite",
+      "model": "gpt-6-luna",
+      "context_sha256": "9ea9eea7521c1c181d7e99fc5836578cdcd34c8e1cf98657867fc616d06c152d",
+      "outcome": "false_positive",
+      "reason": "The definition lists this lemma only in justified_by, not deps, as SCHEMA.md requires for a well-definedness discharge. The lemma assumes only full column rank and positive-definite V: Cholesky gives V inverse = L inverse transpose times L inverse, and c transpose X transpose V inverse X c is the strictly positive squared norm of L inverse X c. No estimator existence or BLUE property is assumed; there is no circular proof or dependency cycle.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-random-intercept-intraclass-correlation",
+      "model": "gpt-6-luna",
+      "context_sha256": "2c7f6e39f2c10d415c412600f2a8469abb1a527534e041deb6cf4ebad09cc66c",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F2 attributed the correlation ratio to def-moments-variance-and-covariance, whose complete Definition supplies only moments, mean, variance and covariance. This is a nonfatal citation error: with Z=(1,1) transpose, G=[tau squared] and R=sigma squared times I, the supplied marginal-covariance lemma gives both variances tau squared + sigma squared and cross-covariance tau squared. F2 now cites only centered moments; local convention A2 defines correlation for positive variances and is cited in step 2.1. The unchanged formula and the zero, one and undefined zero-total-variance cases follow directly.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-gls-information-matrix-is-positive-definite",
+      "disposition": "unaffected",
+      "post_sha256": "c4374860f562fd57d35dc1379b7f70a8088671b987a5e3c431fdf3899e01f547",
+      "review_context_sha256": "a3705f0881b554cc6663353ea7482dca7d8e8534de16f6518b6ae9956f6dd9e6",
+      "reason": "The definition lists this lemma only in justified_by, not deps, as SCHEMA.md requires for a well-definedness discharge. The lemma assumes only full column rank and positive-definite V: Cholesky gives V inverse = L inverse transpose times L inverse, and c transpose X transpose V inverse X c is the strictly positive squared norm of L inverse X c. No estimator existence or BLUE property is assumed; there is no circular proof or dependency cycle.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-random-intercept-intraclass-correlation",
+      "disposition": "repaired",
+      "post_sha256": "47abc640bc0308eab511883d36ec333c32f12f1635d72a1bcac54d0fd2ed72cd",
+      "review_context_sha256": "675731a3d5b981004ab1ea933fb28ae8ebf76fb5de8096dcd538b6c403533904",
+      "reason": "F2 attributed the correlation ratio to def-moments-variance-and-covariance, whose complete Definition supplies only moments, mean, variance and covariance. This is a nonfatal citation error: with Z=(1,1) transpose, G=[tau squared] and R=sigma squared times I, the supplied marginal-covariance lemma gives both variances tau squared + sigma squared and cross-covariance tau squared. F2 now cites only centered moments; local convention A2 defines correlation for positive variances and is cited in step 2.1. The unchanged formula and the zero, one and undefined zero-total-variance cases follow directly.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "statistical-models-experiments-62-step5-initial-r1-u7-icc-correlation-attribution",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:30:13Z",
+        "class": "accuracy",
+        "subclass": "citation-misattributed",
+        "severity": "nonfatal",
+        "location": "facts-block",
+        "subject": "ex-random-intercept-intraclass-correlation",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "fixed",
+        "repair_cost": "inline-fix",
+        "item_sha256": "47abc640bc0308eab511883d36ec333c32f12f1635d72a1bcac54d0fd2ed72cd",
+        "adjudication_ref": [
+          "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u7.json"
+        ],
+        "evidence": [
+          {
+            "path": "items/ex-random-intercept-intraclass-correlation.md",
+            "note": "Original F2 attributed correlation to a moments-only supplier. F2 now cites only variance/covariance; A2 explicitly defines the ratio and its positive-variance domain, and step 2.1 cites A2."
+          },
+          {
+            "path": "items/def-moments-variance-and-covariance.md",
+            "note": "The complete Definition ends with covariance and contains no correlation definition."
+          },
+          {
+            "path": "research/statistical-models-experiments-62-batch-7.proof-contracts.json",
+            "note": "F2 uses and step 2.1 inputs synchronized; stale finite-check locator corrected to step 2.1; strict focused check passed."
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "statistical-models-experiments-62-step5-initial-r1-u7-gls-circularity-false-positive",
+        "run": "statistical-models-experiments-62",
+        "at": "2026-10-14T23:30:13Z",
+        "class": "accuracy",
+        "subclass": "other",
+        "subclass_note": "Rejected claim of circular dependence is false: the GLS definition uses the schema-permitted justified_by discharge, while the lemma proves positivity from rank and Cholesky without assuming estimator existence.",
+        "severity": "nonfatal",
+        "location": "frontmatter",
+        "subject": "lem-gls-information-matrix-is-positive-definite",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "disposition": "false-positive",
+        "repair_cost": "none",
+        "item_sha256": "c4374860f562fd57d35dc1379b7f70a8088671b987a5e3c431fdf3899e01f547",
+        "adjudication_ref": [
+          "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u7.json"
+        ],
+        "evidence": [
+          {
+            "path": "items/def-known-covariance-generalized-least-squares-estimator.md",
+            "note": "This lemma occurs in justified_by only, not deps."
+          },
+          {
+            "path": "items/lem-gls-information-matrix-is-positive-definite.md",
+            "note": "Steps 1.1 and 2.1 prove the claim solely from full column rank and Cholesky; no GLS estimator property is assumed."
+          },
+          {
+            "path": "SCHEMA.md",
+            "note": "Sources and well-definedness schema permits this directed deps/justified_by arrangement."
+          }
+        ]
+      }
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "GLS: unchanged proof, owning contract, page and permitted justified_by discharge reviewed; no circular inference. Familiar finite-dimensional linear algebra; no external source consultation claimed.",
+    "ICC: familiar elementary second-moment calculation. Reviewed current example, def-moments-variance-and-covariance Definition, def-linear-mixed-model Definition, lem-marginal-covariance-of-linear-mixed-model Statement and proof, and both owning pages. Correlation introduced explicitly as local notation A2, with no new supplier or changed Statement/Definition. Owning contract F2 uses narrowed to step 1.1; step 2.1 claim/inputs changed to A2, and finite-check prose locator corrected from nonexistent step 3.1 to step 2.1. Shared contract reread/edited/strictly checked under step5-shared-write-lock and released.",
+    "Focused checks all exited 0: node tools/tsx-run.mjs tools/precheck.mts items/lem-gls-information-matrix-is-positive-definite.md items/ex-random-intercept-intraclass-correlation.md (2 checked, 0 failing); node tools/rendercheck.mjs on those two files (real KaTeX/YAML pass); node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-7.proof-contracts.json --strict --items lem-gls-information-matrix-is-positive-definite,ex-random-intercept-intraclass-correlation (2/2, 0 errors/warnings); node tools/depcheck.mjs --items-file /tmp/step5-v2-initial-r1-u7-items.json --quiet (selected items/pages and prerequisite cycle checks passed); node tools/proof-layout.mjs items/ex-random-intercept-intraclass-correlation.md (1 item, 3 steps, 0 defects). The focused finite-smoke command exited 0 with 0 registered checks over the selected 2 items; it supplies no numerical verification. Endpoint cases were checked mathematically.",
+    "The GLS carrier is unchanged. The ICC change is confined to Facts & Assumptions and Verification; its Example and all Statement/Definition sections are unchanged. No new item, interface change, downstream propagation, gate diagnostic, published-supplier defect or maintenance repair is required. No published-consumer ledger update is proposed. The hashes were captured immediately after each completed review; no independent review of this repair is claimed. No unresolved obligations remain in this assignment."
+  ]
+}

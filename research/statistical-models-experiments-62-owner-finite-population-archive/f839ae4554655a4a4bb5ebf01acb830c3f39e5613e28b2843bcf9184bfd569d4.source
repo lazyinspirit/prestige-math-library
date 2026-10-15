@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62-batch-8",
+  "scope": [
+    "def-finite-population-and-sampling-design",
+    "lem-finite-population-design-law-is-a-probability-measure",
+    "thm-horvitz-thompson-total-is-design-unbiased",
+    "thm-zero-inclusion-probability-precludes-identification-and-universal-unbiasedness",
+    "ex-srswor-inclusion-probabilities-and-negative-covariance",
+    "ex-census-and-certainty-units-under-ht",
+    "ex-zero-inclusion-probability-and-unobserved-unit"
+  ],
+  "contracts": {
+    "def-finite-population-and-sampling-design": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The definition assumes N>=1 and a nonempty normalized design support."},
+        {"case":"zero","status":"checked","evidence":"Definition permits zero-valued y_i; totals and means remain defined."},
+        {"case":"one","status":"checked","evidence":"Definition includes the single-unit case N=1 and its mean T/N."},
+        {"case":"degenerate","status":"checked","evidence":"Definition permits a one-sample design support with probability one."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval parameter or endpoint appears in the definition."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The definition selects no element from an arbitrary family and uses only finite sets."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The definition states no equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The definition states no equivalence."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-population-design-law-is-a-probability-measure": {
+      "risk": "low",
+      "kind": "lemma",
+      "citations": [
+        {"fact":"F1","source":"def-finite-population-and-sampling-design","source_section":"Definition","quote":"The observed record includes the selected unit labels and their values.","uses":["1.1","1.2","2.1"]},
+        {"fact":"F2","source":"def-sigma-algebra","source_section":"Definition","quote":"A **sigma-algebra on $X$** is an algebra of subsets $\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:","uses":["1.1"]},
+        {"fact":"F3","source":"def-measure","source_section":"Definition","quote":"The second condition is **countable additivity**.","uses":["2.1"]},
+        {"fact":"F4","source":"def-probability-measure","source_section":"Definition","quote":"A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$","uses":["1.2","2.1"]}
+      ],
+      "derivations": [
+        {"id":"sigma-algebra-of-records","step":"1.1","claim":"The full power set of the common observed-record space is a sigma-algebra.","inputs":["F1","F2","algebra"]},
+        {"id":"mass-one-and-empty-set","step":"1.2","claim":"The induced set function is nonnegative, assigns zero to the empty set, and has total mass one.","inputs":["F1","F4","algebra"]},
+        {"id":"countable-additivity","step":"2.1","claim":"Disjoint record events pull back to disjoint subsets of finite design support, so the induced set function is countably additive and has total mass one.","inputs":["F1","F3","F4","step 1.2","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.2 verifies P_y^d(empty)=0."},
+        {"case":"zero","status":"checked","evidence":"Step 1.2 uses nonnegative design weights, including possible zero probabilities for record events."},
+        {"case":"one","status":"checked","evidence":"Steps 1.2 and 2.1 apply when the design support has one outcome."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 proves countable additivity for a one-outcome design as well."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval parameter or endpoint appears in the measure construction."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The proof uses only a finite support and does not select from an arbitrary family."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma states no equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The lemma states no equivalence."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-horvitz-thompson-total-is-design-unbiased": {
+      "risk": "low",
+      "kind": "theorem",
+      "citations": [
+        {"fact":"F1","source":"def-finite-population-and-sampling-design","source_section":"Definition","quote":"The random sample is the subset $S\\in\\mathcal S_d$; probability and expectation here average over the design while holding every $y_i$ fixed.","uses":["1.1","1.2","2.1"]},
+        {"fact":"F2","source":"lem-finite-population-design-law-is-a-probability-measure","source_section":"Statement","quote":"For every fixed $y\\in\\mathbb R^U$, the set function $P_y^d$ defined in [[def-finite-population-and-sampling-design]] is a probability measure on $(\\mathcal X_d,\\mathcal A_d)$.","uses":["1.1"]},
+        {"fact":"F3","source":"def-statistic-and-estimator","source_section":"Definition","quote":"A **statistic** with target measurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map $T:(\\mathcal X,\\mathcal A)\\to(\\mathcal Y,\\mathcal B)$","uses":["1.1"]},
+        {"fact":"F4","source":"def-indicator-random-variable","source_section":"Definition","quote":"For an event $A$ in a finite probability space, its **indicator random variable** is","uses":["1.2"]},
+        {"fact":"F5","source":"lem-indicator-expectation-and-products","source_section":"Statement","quote":"For every event $A$, $\\mathbb E[\\mathbf1_A]=\\mathbb P(A)$.","uses":["1.2"]},
+        {"fact":"F6","source":"def-expectation-on-a-finite-probability-space","source_section":"Definition","quote":"The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is","uses":["1.2","2.1","3.1"]},
+        {"fact":"F7","source":"thm-linearity-of-expectation","source_section":"Statement","quote":"For a finite family of real random variables $(X_i)_{i\\in I}$ on one finite probability space and real scalars $(a_i)_{i\\in I}$,","uses":["2.1","3.1"]},
+        {"fact":"F8","source":"def-borel-sigma-algebra","source_section":"Definition","quote":"The **Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:","uses":["1.1"]},
+        {"fact":"F9","source":"def-unbiased-estimator-and-umvu","source_section":"Definition","quote":"It is **unbiased** if it is integrable under every $P_\\theta$ and","uses":["1.1","2.1","3.1"]}
+      ],
+      "derivations": [
+        {"id":"estimator-is-well-defined","step":"1.1","claim":"Positive inclusion probabilities make the estimator formula finite; the full event sigma-algebra makes it measurable, and finite design support makes it integrable under every induced law.","inputs":["given","F1","F2","F3","F8","F9","algebra"]},
+        {"id":"inclusion-indicator-means","step":"1.2","claim":"Each inclusion indicator has design expectation equal to its first-order inclusion probability.","inputs":["F1","F4","F5","F6"]},
+        {"id":"ht-total-expectation","step":"2.1","claim":"Finite expectation linearity gives E_d[HT total]=sum_i y_i=T(y), hence the total estimator is unbiased.","inputs":["F1","F6","F7","F9","step 1.1","step 1.2","algebra"]},
+        {"id":"ht-mean-expectation","step":"3.1","claim":"Dividing the unbiased total estimator by positive N gives an unbiased estimator of the finite-population mean.","inputs":["given","F6","F7","F9","step 1.1","step 2.1","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The statement assumes N>=1 and a normalized nonempty design support."},
+        {"case":"zero","status":"not_applicable","reason":"The theorem assumes every pi_i>0; zero-inclusion units are handled by the separate nonidentifiability theorem."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 applies to a singleton population whenever its sole inclusion probability is positive."},
+        {"case":"degenerate","status":"checked","evidence":"Steps 1.2–2.1 apply to a one-outcome design, including a census."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval parameter or endpoint appears in the theorem."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The proof uses only finite sums and makes no arbitrary selection."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem states an expectation identity, not an equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The theorem states an expectation identity, not an equivalence."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-zero-inclusion-probability-precludes-identification-and-universal-unbiasedness": {
+      "risk": "medium",
+      "kind": "theorem",
+      "citations": [
+        {"fact":"F1","source":"def-finite-population-and-sampling-design","source_section":"Definition","quote":"The observed record includes the selected unit labels and their values.","uses":["1.1","2.1","3.1"]},
+        {"fact":"F2","source":"lem-finite-population-design-law-is-a-probability-measure","source_section":"Statement","quote":"For every fixed $y\\in\\mathbb R^U$, the set function $P_y^d$ defined in [[def-finite-population-and-sampling-design]] is a probability measure on $(\\mathcal X_d,\\mathcal A_d)$.","uses":["2.1"]},
+        {"fact":"F3","source":"def-parametric-statistical-model","source_section":"Definition","quote":"Its **parametric statistical model** is the parameter map","uses":["2.1"]},
+        {"fact":"F4","source":"def-estimand-on-a-statistical-model","source_section":"Definition","quote":"an **estimand** or **parameter target** is a specified function","uses":["2.1"]},
+        {"fact":"F5","source":"def-identifiability-of-an-estimand","source_section":"Definition","quote":"An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric model $\\mathsf P$ when","uses":["2.1"]},
+        {"fact":"F6","source":"def-statistic-and-estimator","source_section":"Definition","quote":"A **statistic** with target measurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map","uses":["3.1"]},
+        {"fact":"F7","source":"def-borel-sigma-algebra","source_section":"Definition","quote":"The **Borel sigma-algebra of $X$** is the sigma-algebra generated by its open sets:","uses":["3.1"]},
+        {"fact":"F8","source":"def-expectation-on-a-finite-probability-space","source_section":"Definition","quote":"The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is","uses":["3.1"]},
+        {"fact":"F9","source":"def-unbiased-estimator-and-umvu","source_section":"Definition","quote":"It is **unbiased** if it is integrable under every $P_\\theta$ and","uses":["3.1"]}
+      ],
+      "derivations": [
+        {"id":"zero-pi-omits-unit","step":"1.1","claim":"A zero inclusion probability and strictly positive support weights imply that no supported sample contains the unit.","inputs":["given","F1","algebra"]},
+        {"id":"same-law-different-total","step":"2.1","claim":"Changing only the never-observed coordinate leaves every record and law unchanged while changing the total, so the total is not identifiable.","inputs":["F1","F2","F3","F4","F5","step 1.1","construct","algebra"]},
+        {"id":"no-universal-unbiased-estimator","step":"3.1","claim":"Every observed-record estimator has equal expectations under the two schedules, so it cannot be unbiased for both unequal totals.","inputs":["F1","F6","F7","F8","F9","step 2.1","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The statement assumes a nonempty finite population and normalized design support."},
+        {"case":"zero","status":"checked","evidence":"Steps 1.1–2.1 treat pi_i=0 directly and construct two distinct totals."},
+        {"case":"one","status":"checked","evidence":"Steps 1.1–2.1 also apply when U has one unit and the design never samples it."},
+        {"case":"degenerate","status":"checked","evidence":"The proof allows a degenerate design; the two-unit example in step 2.1 has one supported sample."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval parameter or endpoint appears in the theorem."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The proof chooses one nonzero real perturbation and uses no choice principle."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem gives a one-way failure result, not an equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The theorem gives a one-way failure result, not an equivalence."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-srswor-inclusion-probabilities-and-negative-covariance": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {"fact":"F1","source":"def-finite-population-and-sampling-design","source_section":"Definition","quote":"For $i,j\\in U$, define the **inclusion indicator**","uses":["1.1","1.2","3.1"]},
+        {"fact":"F2","source":"thm-horvitz-thompson-total-is-design-unbiased","source_section":"Statement","quote":"Under the induced observed-data law $P_y^d$, these are estimators of the finite-population total and mean, respectively, and","uses":["3.1"]},
+        {"fact":"F3","source":"def-variance-and-covariance","source_section":"Definition","quote":"$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2],\\qquad \\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].","uses":["2.1"]},
+        {"fact":"F4","source":"thm-linearity-of-expectation","source_section":"Statement","quote":"For a finite family of real random variables $(X_i)_{i\\in I}$ on one finite probability space and real scalars $(a_i)_{i\\in I}$,","uses":["2.1"]},
+        {"fact":"F5","source":"lem-indicator-expectation-and-products","source_section":"Statement","quote":"For every event $A$, $\\mathbb E[\\mathbf1_A]=\\mathbb P(A)$.","uses":["2.1"]},
+        {"fact":"F6","source":"def-indicator-random-variable","source_section":"Definition","quote":"For an event $A$ in a finite probability space, its **indicator random variable** is","uses":["2.1"]},
+        {"fact":"F7","source":"def-expectation-on-a-finite-probability-space","source_section":"Definition","quote":"The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is","uses":["2.1"]}
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {"id":"count-first-order-inclusion","step":"1.1","claim":"Symmetry and incidence counting give pi_i=n/N for each unit.","inputs":["given","F1","construct","algebra"]},
+        {"id":"count-second-order-inclusion","step":"1.2","claim":"Symmetry and ordered-pair incidence counting give pi_ij=n(n-1)/(N(N-1)) for distinct units.","inputs":["given","F1","construct","algebra"]},
+        {"id":"derive-inclusion-covariance","step":"2.1","claim":"The covariance definition and indicator identities reduce covariance to pi_ij-pi_i pi_j, whose value is negative unless the sample is a census.","inputs":["F3","F4","F5","F6","F7","step 1.1","step 1.2","algebra"]},
+        {"id":"recover-srs-sample-mean","step":"3.1","claim":"Substituting pi_i=n/N into the Horvitz–Thompson mean yields the ordinary sample mean, which is unbiased by the A-page theorem.","inputs":["given","F1","F2","step 1.1","algebra"]}
+      ],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The example assumes N>=2 and 1<=n<=N."},
+        {"case":"zero","status":"checked","evidence":"Step 1.2 covers pi_ij=0 when n=1; step 2.1 still gives the correct negative covariance."},
+        {"case":"one","status":"checked","evidence":"Steps 1.1–2.1 include the singleton sample-size case n=1."},
+        {"case":"degenerate","status":"checked","evidence":"When n=N, step 2.1 gives zero covariance for the census design."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval parameter or endpoint appears in this finite counting example."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"All sample families are finite and counted explicitly; no arbitrary choice is used."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example states direct formulas, not an equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example states direct formulas, not an equivalence."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-census-and-certainty-units-under-ht": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {"fact":"F1","source":"def-finite-population-and-sampling-design","source_section":"Definition","quote":"the **first-order inclusion probability**","uses":["1.1","2.1","3.1"]},
+        {"fact":"F2","source":"thm-horvitz-thompson-total-is-design-unbiased","source_section":"Statement","quote":"Under the induced observed-data law $P_y^d$, these are estimators of the finite-population total and mean, respectively, and","uses":["2.1"]},
+        {"fact":"F3","source":"def-expectation-on-a-finite-probability-space","source_section":"Definition","quote":"The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is","uses":["2.1"]},
+        {"fact":"F4","source":"def-unbiased-estimator-and-umvu","source_section":"Definition","quote":"It is **unbiased** if it is integrable under every $P_\\theta$ and","uses":["2.1"]}
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {"id":"compute-certainty-unit-design","step":"1.1","claim":"The two-sample design has pi_1=1, pi_2=pi_3=1/2 and HT totals a+2b and a+2c.","inputs":["given","F1","algebra"]},
+        {"id":"average-certainty-design","step":"2.1","claim":"The design average is a+b+c, and the A-page theorem and unbiasedness definition apply to its mean estimator.","inputs":["F1","F2","F3","F4","step 1.1","algebra"]},
+        {"id":"evaluate-census-design","step":"3.1","claim":"With only sample U, every pi_i=1 and the HT total and mean equal their targets on the single outcome.","inputs":["given","F1","algebra"]}
+      ],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Both displayed designs have a nonempty population and normalized support."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 remains valid for zero values among a,b,c because the weights are finite."},
+        {"case":"one","status":"not_applicable","reason":"The certainty-unit design is explicitly three-unit; the general theorem covers N=1."},
+        {"case":"degenerate","status":"checked","evidence":"Step 3.1 treats the one-outcome census design."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval parameter or endpoint appears in the example."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Both finite designs are fully specified and use no choice principle."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example contains no equivalence claim."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example contains no equivalence claim."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-zero-inclusion-probability-and-unobserved-unit": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {"fact":"F1","source":"def-finite-population-and-sampling-design","source_section":"Definition","quote":"The observed record includes the selected unit labels and their values.","uses":["1.1","2.1"]},
+        {"fact":"F2","source":"thm-zero-inclusion-probability-precludes-identification-and-universal-unbiasedness","source_section":"Statement","quote":"Let $i\\in U$ have $\\pi_i=0$ in a finite-population design as in [[def-finite-population-and-sampling-design]].","uses":["2.1"]},
+        {"fact":"F3","source":"def-statistic-and-estimator","source_section":"Definition","quote":"A **statistic** with target measurable space $(\\mathcal Y,\\mathcal B)$ is a measurable map","uses":["2.1"]},
+        {"fact":"F4","source":"def-unbiased-estimator-and-umvu","source_section":"Definition","quote":"It is **unbiased** if it is integrable under every $P_\\theta$ and","uses":["2.1"]}
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {"id":"compute-unobserved-records","step":"1.1","claim":"The design has pi_2=0, identical observed records under y and y-prime, and totals zero and one.","inputs":["given","F1","algebra"]},
+        {"id":"rule-out-unbiasedness-in-example","step":"2.1","claim":"Any estimator takes one value at the common record, so the two degenerate-law expectations cannot equal both totals; this verifies the general theorem's instance.","inputs":["F1","F2","F3","F4","step 1.1","algebra"]}
+      ],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The example has two units and one supported sample."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 exhibits the zero-inclusion unit directly."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 uses a singleton sample from a two-unit population."},
+        {"case":"degenerate","status":"checked","evidence":"The design has one outcome with probability one, handled in steps 1.1–2.1."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval parameter or endpoint appears in the example."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The two populations and the sole sample are explicit; no choice principle is used."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example is a countermodel to universal unbiasedness, not an equivalence."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example is a countermodel to universal unbiasedness, not an equivalence."}
+      ],
+      "finite_smoke": []
+    }
+  }
+}

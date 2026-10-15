@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "batch": "46",
+  "round": 0,
+  "reviewed_items": [
+    "def-van-hove-window-sequence",
+    "def-spatial-window-average",
+    "thm-van-hove-window-average-l2-consistency",
+    "def-lattice-covariance-and-variogram-estimators",
+    "thm-lattice-covariance-estimator-asymptotically-unbiased",
+    "lem-integers-lattice-is-discrete-lca-group",
+    "lem-dual-of-zd-is-torus",
+    "lem-transport-lattice-spectral-measure-to-torus",
+    "def-regular-grid-periodogram-and-smoother",
+    "thm-regular-grid-periodogram-fejer-expectation",
+    "lem-fixed-grid-sampling-spectral-alias-identity",
+    "thm-regular-grid-smoothed-periodogram-bias-vanishes",
+    "cor-fixed-grid-unaliased-spectral-bias-under-no-alias-condition",
+    "ex-boundary-dominated-windows-are-not-van-hove",
+    "cex-lattice-sample-covariance-not-positive-definite"
+  ],
+  "reviewed_pages": [
+    "spatial-field-summary-estimators",
+    "spatial-field-summary-estimators-examples"
+  ],
+  "decision": "repair",
+  "reason": "First review requests one local repair: declare and propagate Countable Choice for Lebesgue-window use, and close the local measurability and approximation justifications below. All affected Van Hove consumers are within this pair; no outside repair is indicated.",
+  "findings": [
+    {
+      "id": "def-van-hove-window-sequence",
+      "type": "prerequisite",
+      "reason": "The definition assigns Lebesgue volumes to bounded Borel windows. The actual suppliers `thm-borel-sets-are-lebesgue-measurable` and `thm-lebesgue-measure-is-a-complete-measure` require Countable Choice (ACω); the latter is also the `justified_by` result for `def-lebesgue-measure-and-the-lebesgue-sigma-algebra`. State ACω and make the Borel-to-Lebesgue measurability prerequisite explicit, then carry it to the in-pair consumers."
+    },
+    {
+      "id": "thm-van-hove-window-average-l2-consistency",
+      "type": "local",
+      "reason": "Steps 1.3–1.4 invoke Fubini/Tonelli before establishing product measurability of the pair product and overlap integrand. F9 asserts this but does not derive the measurable pair map or the Borel measurability of (s,h) ↦ 1_W(s)1_W(s+h); supply a direct rectangle/Borel-addition argument or the exact suppliers."
+    },
+    {
+      "id": "lem-transport-lattice-spectral-measure-to-torus",
+      "type": "local",
+      "reason": "Step 2.1 extends the identity from simple functions to arbitrary nonnegative Borel functions by choosing increasing simple approximations, but supplies no construction or citation for their existence. Cite `thm-increasing-simple-approximation-of-a-nonnegative-measurable-function` or construct the approximants locally."
+    },
+    {
+      "id": "lem-fixed-grid-sampling-spectral-alias-identity",
+      "type": "local",
+      "reason": "Steps 1.1 and 2.1 use countable sums over Z^d and extend the change-of-variables identity from indicators/simple functions to arbitrary nonnegative Borel f. Make the countable enumeration and simple approximation explicit; current suppliers `ex-integers-are-countably-infinite`, `lem-finite-powers-of-countable-sets-are-countable`, and `thm-increasing-simple-approximation-of-a-nonnegative-measurable-function` support those steps."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-spatial-window-average",
+      "decision": "repair",
+      "reason": "Carry the ACω prerequisite for the Van Hove windows and Lebesgue integral into this definition."
+    },
+    {
+      "id": "thm-van-hove-window-average-l2-consistency",
+      "decision": "repair",
+      "reason": "Carry ACω into the result and address the local product-measurability gap above."
+    },
+    {
+      "id": "ex-boundary-dominated-windows-are-not-van-hove",
+      "decision": "repair",
+      "reason": "Carry the ACω prerequisite for the Van Hove definition and its Lebesgue-volume calculation."
+    },
+    {
+      "id": "spatial-field-summary-estimators",
+      "decision": "repair",
+      "reason": "Update the page summary to reflect the Countable Choice prerequisite for its Lebesgue-window claims."
+    },
+    {
+      "id": "spatial-field-summary-estimators-examples",
+      "decision": "repair",
+      "reason": "Check that the boundary-window example page reflects the inherited Countable Choice prerequisite."
+    }
+  ]
+}

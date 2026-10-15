@@ -1,0 +1,1102 @@
+{
+  "version": 1,
+  "scope": [
+    "def-potential-outcomes-and-consistency",
+    "def-positivity-for-discrete-treatment",
+    "lem-conditional-independence-integrable-factorization",
+    "def-conditional-exchangeability-of-potential-outcomes",
+    "def-causal-average-treatment-effects",
+    "thm-discrete-treatment-potential-outcome-mean-identification",
+    "ex-randomized-treatment-identification",
+    "ex-binary-confounding-standardization",
+    "ex-positivity-failure-nonidentification"
+  ],
+  "contracts": {
+    "def-potential-outcomes-and-consistency": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: a nonempty treatment-version set and a probability law are part of the setup."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero is an admissible observed or potential outcome value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the one-version case is allowed and consistency still compares the observed value with its sole potential outcome."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: equal potential outcomes are allowed and give a zero individual contrast."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The discrete treatment-version set has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the family and assignment are supplied as data; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-positivity-for-discrete-treatment": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires a specified treatment value and random treatment variable."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero conditional treatment probability is excluded on target support."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: conditional probability one is allowed for a single treatment value; a contrast must separately satisfy positivity for every arm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the conditional probability class remains meaningful for a constant covariate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The treatment state space is discrete and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Choice is used only for the conditional-expectation class that defines the propensity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-conditional-independence-integrable-factorization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-conditional-lp-contraction",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $1\\le p\\le\\infty$, conditional expectation is a linear map from real $L^p(P)$ to real $L^p(P|_{\\mathcal G})$ satisfying $\\|E[X\\mid\\mathcal G]\\|_p\\le\\|X\\|_p$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each integer $n\\ge1$, let $T_n(u)=\\max(-n,\\min(u,n))$. The functions $T_n(U)$ and $h(Z)$ are bounded and measurable, so [F1] gives the identity $E[T_n(U)h(Z)\\mid\\mathcal G]=E[T_n(U)\\mid\\mathcal G]E[h(Z)\\mid\\mathcal G]$ of the classes in [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $U\\in L^1$, $T_n(U)\\to U$ in $L^1$; boundedness of $h$ gives $T_n(U)h(Z)\\to Uh(Z)$ in $L^1$. By [F3], the conditional expectations on the left converge in $L^1$ to $E[Uh(Z)\\mid\\mathcal G]$, and $E[T_n(U)\\mid\\mathcal G]\\to E[U\\mid\\mathcal G]$ in $L^1$. Also $|E[h(Z)\\mid\\mathcal G]|\\le\\|h\\|_\\infty$ almost surely by [F3], so multiplication by this factor preserves that $L^1$ convergence. Taking the $L^1$ limits in step 1.1 proves the stated identity of almost-sure classes.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a probability space and supplied random elements."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1–2.1: if U or h is zero, the displayed factorization has both sides zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1–2.1: a constant h is included among bounded measurable functions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1–2.1: the proof also applies when U is constant or Z is G-measurable."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no ordered parameter interval in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the conditional-expectation classes supplied under A1; no additional choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states an implication, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-conditional-exchangeability-of-potential-outcomes": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires a treatment random element and a potential-outcome family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero-valued potential outcomes are permitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a single treatment version gives a well-defined generated sigma-algebra."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a constant potential-outcome family is permitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition uses no interval structure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the conditional-independence convention inherits Choice from its conditional-expectation classes."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-causal-average-treatment-effects": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition requires the two treatment versions 0 and 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero-valued potential outcomes are allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: constant potential outcomes give zero ATE and CATE."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: identical potential outcomes are allowed and yield a zero contrast."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The treatment contrast is the discrete pair 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+      "evidence": "Definition: Choice is used for the CATE conditional-expectation class; the ordinary ATE integral itself uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-discrete-treatment-potential-outcome-mean-identification": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-potential-outcomes-and-consistency",
+          "source_section": "Definition",
+          "quote": "Fix a target population with probability law $P$, a real outcome, and a nonempty countable discrete set $\\mathcal A$ of treatment versions. A treatment version $a\\in\\mathcal A$ is a specified intervention protocol, not just a treatment label. The **potential outcome** $Y^a$ is the real random variable giving the outcome for a unit in the target population under version $a$. Write $A$ for the observed treatment assignment or receipt, with values in $\\mathcal A$, and $Y$ for the observed outcome. The **observed potential outcome** is the measurable random variable\n\n$$Y^A=\\sum_{a\\in\\mathcal A}\\mathbf 1_{\\{A=a\\}}Y^a,$$\n\nwhere the countable sum has at most one nonzero summand at each sample point. **Consistency** is the assumption $Y=Y^A$ $P$-almost surely. It links the observed outcome to the potential outcome for the received version; it does not assert that treatment assignment is unconfounded.\n\nThe **full-data law** is the joint law of the potential-outcome family, $A$, any baseline covariate random element $L$, and $Y$. The **observed-data law** is its marginal law of $(A,L,Y)$. A target population, outcome, intervention protocol, and contrast must be fixed before the associated causal target is specified. If interference between units matters, the version or treatment regime must include the relevant assignment or exposure of other units; the notation $Y^a$ by itself does not assert no interference.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-exchangeability-of-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $A$ be the observed treatment assignment, $L$ a baseline covariate random element, and $(Y^a)_{a\\in\\mathcal A}$ the potential-outcome family of [[def-potential-outcomes-and-consistency]]. **Conditional exchangeability given $L$** means\n\n$$\\sigma(Y^a:a\\in\\mathcal A)\\perp\\!\\!\\!\\perp\\sigma(A)\\mid\\sigma(L),$$\n\nwhere conditional independence is the bounded-measurable-function factorization of [[def-conditional-independence-given-a-sigma-algebra]] under the [[def-axiom-of-choice]]. Each fixed $Y^a$ is then conditionally independent of $A$ given $L$ by measurable-map preservation in [[lem-conditional-independence-equivalences-and-preservation]]. This is a full-data assumption; the observed distribution alone does not establish it.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-positivity-for-discrete-treatment",
+          "source_section": "Definition",
+          "quote": "Let $A$ take values in a countable discrete set on a target probability space, and let $L$ be the baseline covariate random element. For a treatment value $a$ of interest, the conditional treatment probability is the almost-sure class\n\n$$e_a=E[\\mathbf 1_{\\{A=a\\}}\\mid\\sigma(L)],$$\n\nusing the conditional-expectation convention of [[def-conditional-expectation-as-an-ae-class]] under the [[def-axiom-of-choice]]. **Positivity for $a$ on the target population** means both $P(A=a)>0$ and $e_a>0$ almost surely under the target law of $L$. Positivity for a contrast is required at every treatment value in that contrast.\n\nThe almost-sure condition is relative to the target population: values of $L$ with zero target probability impose no condition. Strict positivity does not mean that $e_a$ is bounded away from zero. The marginal condition makes the observed treatment-stratum law $P(\\,\\cdot\\mid A=a)$ available.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-causal-average-treatment-effects",
+          "source_section": "Definition",
+          "quote": "In a fixed target population with two specified treatment versions $0$ and $1$ and integrable potential outcomes $Y^0,Y^1$ from [[def-potential-outcomes-and-consistency]], the **average treatment effect (ATE)** is the target-population mean contrast $E[Y^1-Y^0]$. For a baseline covariate random element $L$, the **conditional average treatment effect (CATE) given $L$** is the conditional-expectation almost-sure class\n\n$$E[Y^1-Y^0\\mid\\sigma(L)],$$\n\nusing the conditional-expectation convention of [[def-conditional-expectation-as-an-ae-class]] under the [[def-axiom-of-choice]]. Thus a CATE is determined only up to equality almost surely under the target law of $L$; a pointwise value at a null covariate value is not specified by this definition. The ATE is the mean of the individual contrast, not an assertion that both potential outcomes are observed for any unit.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-conditional-independence-integrable-factorization",
+          "source_section": "Statement",
+          "quote": "Assume the [[def-axiom-of-choice]] for the conditional-expectation classes. Let $U$ be a real integrable random variable, let $Z$ be a random element, and let $\\mathcal G$ be a sub-sigma-algebra. If $U$ and $Z$ are conditionally independent given $\\mathcal G$ in the bounded-function sense of [[def-conditional-independence-given-a-sigma-algebra]], then for every bounded measurable real function $h$ on the state space of $Z$,\n\n$$E[U h(Z)\\mid\\mathcal G]=E[U\\mid\\mathcal G]E[h(Z)\\mid\\mathcal G]\\quad\\text{almost surely}.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ be a measurable random element with standard-Borel target, and let $\\mathcal G\\subseteq\\mathcal F$ be any sub-sigma-algebra. There exists a regular conditional distribution of $X$ given $\\mathcal G$. Every section is a probability measure, including at exceptional sample points, and no countable-generation or completeness assumption on $\\mathcal G$ is required.\n\nFor this necessarily nonempty target, the construction also supplies a bimeasurable bijection $c:E\\to B$ onto a Borel set $B\\subseteq[0,1]$, and a countable algebra $\\mathcal A$ which generates $\\mathcal S$, separates points, and determines finite measures.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X$ and $Y$ take values in nonempty standard-Borel spaces $(E,\\mathcal S)$ and $(T,\\mathcal T)$ on a probability space $(\\Omega,\\mathcal F,P)$. Let $L$ be a specified regular conditional distribution of $X$ given $\\sigma(Y)$, everywhere a probability kernel. There is a probability kernel $K:T\\to E$ such that $L(\\omega,\\cdot)=K(Y(\\omega),\\cdot)$ simultaneously outside a single null set. In fact, with the stated everywhere-kernel convention, the construction below gives this equality for every $\\omega$. Consequently K is a conditional law of X given Y.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-conditional-law-given-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ and $Y:(\\Omega,\\mathcal F,P)\\to(T,\\mathcal T)$ be measurable random elements. A **conditional law of X given Y** is a probability kernel $K:(T,\\mathcal T)\\to(E,\\mathcal S)$ such that $\\omega\\mapsto K(Y(\\omega),\\cdot)$ is a regular conditional distribution of X given $\\sigma(Y)$ in [[def-regular-conditional-distribution]]. Thus for every $A\\in\\mathcal S$ and $H\\in\\sigma(Y)$,\n$$\\int_H K(Y(\\omega),A)\\,dP=P(H\\cap\\{X\\in A\\}).$$\n\nComposition with Y makes each evaluation $\\sigma(Y)$-measurable, and every section remains a probability by [[def-measure-kernel-and-probability-kernel]]. The notation $P(X\\in A\\mid Y=y)=K(y,A)$ refers to a chosen kernel; it is not a ratio involving the possibly zero probability $P(Y=y)$.\n\nWrite $P_Y(B)=P(Y^{-1}(B))$ for the law in [[def-law-or-distribution-of-a-random-element]]. If a specified countable family $\\mathcal C\\subseteq\\mathcal S$ determines probability measures, two conditional laws K,L agree as measures outside a single $\\mathcal T$-measurable $P_Y$-null set. Indeed for each $A\\in\\mathcal C$ the measurable discrepancy $D_A=\\{y:K(y,A)\\ne L(y,A)\\}$ has null inverse image under Y by [[lem-conditional-expectation-is-unique-almost-surely]]. Hence $P_Y(D_A)=0$ by the law definition; the countable union $D$ is null by [[thm-finite-and-countable-subadditivity-of-measures]], and off D the determining property gives equality of measures. This uses a supplied determining family and makes no AC assertion about obtaining one.\n\nValues on a measurable $P_Y$-null subset may be replaced by a specified fixed probability on E without changing these identities. The inverse image of that subset is measurable null, and all event evaluations are bounded, so the modified event integrals agree. Empty-event evaluations remain zero and whole-target evaluations remain one. Existence on standard-Borel spaces is proved separately; the definition alone does not assert a conditional kernel exists.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-conditional-integration-through-a-regular-conditional-law",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a specified regular conditional distribution of $X:(\\Omega,\\mathcal F,P)\\to(E,\\mathcal S)$ given $\\mathcal G$. For measurable $f:E\\to[0,\\infty]$, the measurable function $I_f(\\omega)=\\int f(x)K(\\omega,dx)$ satisfies\n\n$$\\int_H I_f\\,dP=\\int_H f(X)\\,dP\\qquad(H\\in\\mathcal G).$$\n\nThis assertion is choice-free. Under AC, it says $I_f=E[f(X)\\mid\\mathcal G]$ as nonnegative almost-sure classes. If $f:E\\to\\mathbb R$ is measurable and $E|f(X)|<\\infty$, put $D=\\{I_{|f|}<\\infty\\}$. Then $D\\in\\mathcal G$, $P(D)=1$, and the signed integral on $D$, extended by zero off $D$, is a real integrable conditional-expectation version of $f(X)$. Its identification with the AC-based conditional-expectation class uses AC only for that class convention.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-conditional-expectation-is-unique-almost-surely",
+          "source_section": "Statement",
+          "quote": "If $Y,Z$ are conditional-expectation versions of the same real integrable $X$ given $\\mathcal G$, then $Y=Z$ almost surely.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-taking-out-what-is-known",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $X\\in L^1(P)$ and $Z$ is bounded real $\\mathcal G$-measurable, then $E[ZX\\mid\\mathcal G]=ZE[X\\mid\\mathcal G]$ almost surely. The identity also holds for finite real $\\mathcal G$-measurable $Z$ whenever $ZX$ and $ZE[X\\mid\\mathcal G]$ are integrable. In fact $X,ZX\\in L^1$ imply the latter integrability.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. For real $X,Y\\in L^1(P)$ and $a,b\\in\\mathbb R$, $E[aX+bY\\mid\\mathcal G]=aE[X\\mid\\mathcal G]+bE[Y\\mid\\mathcal G]$. Conditional expectation is positive, preserves order and constants, satisfies $E(E[X\\mid\\mathcal G])=EX$, and $|E[X\\mid\\mathcal G]|\\le E[|X|\\mid\\mathcal G]$ almost surely. Also $X<Y$ almost surely implies $E[X\\mid\\mathcal G]<E[Y\\mid\\mathcal G]$ almost surely.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-tower-property-of-conditional-expectation",
+          "source_section": "Statement",
+          "quote": "Assume AC for existence. If $\\mathcal H\\subseteq\\mathcal G\\subseteq\\mathcal F$ and $X\\in L^1(P)$, then $E[E[X\\mid\\mathcal G]\\mid\\mathcal H]=E[X\\mid\\mathcal H]$ and $E[E[X\\mid\\mathcal H]\\mid\\mathcal G]=E[X\\mid\\mathcal H]$ almost surely. Also, if a version of $E[X\\mid\\mathcal G]$ is $\\mathcal H$-measurable, it is a version of $E[X\\mid\\mathcal H]$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a treatment value $a$ satisfying the hypotheses, write $e_a=E[\\mathbf1_{\\{A=a\\}}\\mid\\sigma(L)]$, and define $P_a(C)=P(C\\cap\\{A=a\\})/P(A=a)$. For every Borel $B\\subseteq\\mathcal L$, the defining event-integral identity for $e_a$ gives $P_a(L\\in B)=E_P[\\mathbf1_{\\{L\\in B\\}}e_a]/P(A=a)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Under $P_a$, $Y$ is integrable because $Y=Y^a$ on $\\{A=a\\}$ by consistency and $E_{P_a}|Y|=E_P[\\mathbf1_{\\{A=a\\}}|Y^a|]/P(A=a)\\le E_P|Y^a|/P(A=a)$. By [A1, F7, F8], choose a conditional law $K_a(l,dy)$ of $Y$ given $L$ under $P_a$; [F9] makes its zero-filled integral $m_a(L)$ a real integrable version of $E_{P_a}[Y\\mid\\sigma(L)]$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $v_a=E_P[Y^a\\mid\\sigma(L)]$. Conditional independence in [F2], applied to the coordinate $Y^a$ and the bounded indicator $\\mathbf1_{\\{A=a\\}}$, together with [F6], gives $E_P[\\mathbf1_{\\{A=a\\}}Y^a\\mid\\sigma(L)]=e_a v_a$ almost surely.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The covariate laws $P_{a,L}$ and $P_L$ are equivalent. Indeed, $P_L(B)=0$ makes the numerator in step 1.1 zero. Conversely, if $P_L(B)>0$, positivity gives $P(L\\in B,e_a>0)>0$; since $\\{e_a>0\\}=\\bigcup_{n\\ge1}\\{e_a\\ge1/n\\}$ up to a null set, some $n$ has $P(L\\in B,e_a\\ge1/n)>0$, so the numerator is positive.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For every $B\\in\\mathcal B(\\mathcal L)$, the defining event integrals of $m_a(L)$ under $P_a$, consistency [F1], step 1.3, and the take-out rule [F11] give $E_{P_a}[\\mathbf1_{\\{L\\in B\\}}m_a(L)]=E_{P_a}[\\mathbf1_{\\{L\\in B\\}}Y]=E_{P_a}[\\mathbf1_{\\{L\\in B\\}}Y^a]=E_{P_a}[\\mathbf1_{\\{L\\in B\\}}v_a]$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F9",
+            "F11",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Both $m_a(L)$ and $v_a$ are $\\sigma(L)$-measurable integrable versions under $P_a$ with the same event integrals for $Y$. Uniqueness [F10] gives $m_a(L)=v_a$ $P_a$-almost surely. Step 2.1 transfers this equality to $P_L$-almost every covariate value, so the integral in the statement is finite and independent of the conditional-law version and its null-set filler.",
+          "step": "3.1",
+          "inputs": [
+            "F9",
+            "F10",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F12], $E_P[v_a]=E_P[Y^a]$. Since $m_a(L)=v_a$ $P$-almost surely on the target covariate law by step 3.1, the change-of-variables identity [F13] yields $\\int m_a(l)P_L(dl)=E_P[Y^a]$.",
+          "step": "4.1",
+          "inputs": [
+            "F12",
+            "F13",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $L$ is countably discrete, positivity implies $P(A=a,L=l)>0$ for every atom $l$ with $P(L=l)>0$, so the conditional-mean definition in the statement and the version identity [F9] give $m_a(l)=E[Y\\mid A=a,L=l]$ there. Splitting the integral in step 4.1 over the countable support proves the displayed sum; its absolute convergence follows from the integrability of $v_a$. For $a=0,1$, linearity of conditional expectation [F12] gives the CATE version $m_1(L)-m_0(L),$ and subtraction of the two mean identities gives the ATE formula. Equal observed-data laws give the same $P_L$, stratum laws $P_a$, and $P_a$ conditional-mean classes; step 2.1 makes these classes unique on the target support. Hence [F14] identifies each $E[Y^a]$ and the ATE.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F9",
+            "F10",
+            "F12",
+            "F13",
+            "F14",
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires treatment versions 0 and 1 and a probability law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: zero conditional probability on a positive target stratum is excluded by positivity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 5.1: a single-arm conditional probability may equal one for a single-mean result; binary ATE requires both arms positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–5.1: a constant L is allowed and reduces the formula to the marginal randomized case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the conditional probability endpoints 0 and 1 are handled explicitly by positivity and the per-arm scope."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–1.3 use Choice for conditional-expectation classes and RCD existence; the positivity and equivalence calculations add no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem establishes an identifying functional, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem establishes an identifying functional, not an iff characterization."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-randomized-treatment-identification": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-potential-outcomes-and-consistency",
+          "source_section": "Definition",
+          "quote": "Fix a target population with probability law $P$, a real outcome, and a nonempty countable discrete set $\\mathcal A$ of treatment versions. A treatment version $a\\in\\mathcal A$ is a specified intervention protocol, not just a treatment label. The **potential outcome** $Y^a$ is the real random variable giving the outcome for a unit in the target population under version $a$. Write $A$ for the observed treatment assignment or receipt, with values in $\\mathcal A$, and $Y$ for the observed outcome. The **observed potential outcome** is the measurable random variable\n\n$$Y^A=\\sum_{a\\in\\mathcal A}\\mathbf 1_{\\{A=a\\}}Y^a,$$\n\nwhere the countable sum has at most one nonzero summand at each sample point. **Consistency** is the assumption $Y=Y^A$ $P$-almost surely. It links the observed outcome to the potential outcome for the received version; it does not assert that treatment assignment is unconfounded.\n\nThe **full-data law** is the joint law of the potential-outcome family, $A$, any baseline covariate random element $L$, and $Y$. The **observed-data law** is its marginal law of $(A,L,Y)$. A target population, outcome, intervention protocol, and contrast must be fixed before the associated causal target is specified. If interference between units matters, the version or treatment regime must include the relevant assignment or exposure of other units; the notation $Y^a$ by itself does not assert no interference.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-exchangeability-of-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $A$ be the observed treatment assignment, $L$ a baseline covariate random element, and $(Y^a)_{a\\in\\mathcal A}$ the potential-outcome family of [[def-potential-outcomes-and-consistency]]. **Conditional exchangeability given $L$** means\n\n$$\\sigma(Y^a:a\\in\\mathcal A)\\perp\\!\\!\\!\\perp\\sigma(A)\\mid\\sigma(L),$$\n\nwhere conditional independence is the bounded-measurable-function factorization of [[def-conditional-independence-given-a-sigma-algebra]] under the [[def-axiom-of-choice]]. Each fixed $Y^a$ is then conditionally independent of $A$ given $L$ by measurable-map preservation in [[lem-conditional-independence-equivalences-and-preservation]]. This is a full-data assumption; the observed distribution alone does not establish it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-positivity-for-discrete-treatment",
+          "source_section": "Definition",
+          "quote": "Let $A$ take values in a countable discrete set on a target probability space, and let $L$ be the baseline covariate random element. For a treatment value $a$ of interest, the conditional treatment probability is the almost-sure class\n\n$$e_a=E[\\mathbf 1_{\\{A=a\\}}\\mid\\sigma(L)],$$\n\nusing the conditional-expectation convention of [[def-conditional-expectation-as-an-ae-class]] under the [[def-axiom-of-choice]]. **Positivity for $a$ on the target population** means both $P(A=a)>0$ and $e_a>0$ almost surely under the target law of $L$. Positivity for a contrast is required at every treatment value in that contrast.\n\nThe almost-sure condition is relative to the target population: values of $L$ with zero target probability impose no condition. Strict positivity does not mean that $e_a$ is bounded away from zero. The marginal condition makes the observed treatment-stratum law $P(\\,\\cdot\\mid A=a)$ available.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-causal-average-treatment-effects",
+          "source_section": "Definition",
+          "quote": "In a fixed target population with two specified treatment versions $0$ and $1$ and integrable potential outcomes $Y^0,Y^1$ from [[def-potential-outcomes-and-consistency]], the **average treatment effect (ATE)** is the target-population mean contrast $E[Y^1-Y^0]$. For a baseline covariate random element $L$, the **conditional average treatment effect (CATE) given $L$** is the conditional-expectation almost-sure class\n\n$$E[Y^1-Y^0\\mid\\sigma(L)],$$\n\nusing the conditional-expectation convention of [[def-conditional-expectation-as-an-ae-class]] under the [[def-axiom-of-choice]]. Thus a CATE is determined only up to equality almost surely under the target law of $L$; a pointwise value at a null covariate value is not specified by this definition. The ATE is the mean of the individual contrast, not an assertion that both potential outcomes are observed for any unit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-discrete-treatment-potential-outcome-mean-identification",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mathcal A$ be a countable discrete set containing treatment versions $0$ and $1$. On a full-data probability space $(\\Omega,\\mathcal F,P)$, let $A$ take values in $\\mathcal A$, let $L$ take values in a standard-Borel space $\\mathcal L$ ([[def-standard-borel-space]]), let $Y$ be the observed real outcome, and let $(Y^b)_{b\\in\\mathcal A}$ be the potential outcomes of [[def-potential-outcomes-and-consistency]]. For each treatment value $a$ under consideration, assume $Y^a\\in L^1(P)$, consistency $Y=Y^A$ almost surely, conditional exchangeability $\\sigma(Y^b:b\\in\\mathcal A)\\perp\\!\\!\\!\\perp\\sigma(A)\\mid\\sigma(L)$, and positivity $P(A=a)>0$ and $E[\\mathbf1_{\\{A=a\\}}\\mid\\sigma(L)]>0$ almost surely. These are assumptions on the full-data law; Choice is required for the stated conditional-expectation classes and regular conditional distributions.\n\nWrite $P_L(B)=P(L\\in B)$ for the target-population law of $L$. For such an $a$, define the observed treatment-stratum law $P_a(C)=P(C\\cap\\{A=a\\})/P(A=a)$. Under $P_a$, let $K_a(l,dy)$ be a regular conditional law of $Y$ given the standard-Borel random element $L$, and put $m_a(l)=\\int y\\,K_a(l,dy)$ wherever the absolute integral is finite, with value $0$ on the exceptional set. The suppliers [[def-conditional-law-given-a-random-element]], [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]], [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]], and [[thm-conditional-integration-through-a-regular-conditional-law]] give this construction. Then $m_a$ is $P_L$-integrable and is uniquely determined $P_L$-almost everywhere by the observed-data law, and\n\n$$E_P[Y^a]=\\int_{\\mathcal L}m_a(l)\\,P_L(dl).$$\n\nIf $L$ is countably discrete, this is\n\n$$E_P[Y^a]=\\sum_{l:P(L=l)>0}E_P[Y\\mid A=a,L=l]P(L=l).$$\n\nIn this sum, $E[Y\\mid A=a,L=l]$ denotes $E[Y\\mathbf1_{\\{A=a,L=l\\}}]/P(A=a,L=l)$, whose denominator is positive for each displayed atom.\n\nFor the binary contrast, both treatment levels must satisfy positivity. The CATE is then represented $P_L$-almost everywhere by $m_1-m_0$, and the ATE is $\\int(m_1-m_0)\\,dP_L$. In the model whose parameters are all full-data laws satisfying these assumptions and whose observation map sends a full-data law to its $(A,L,Y)$ marginal, each $E[Y^a]$ is identifiable in the sense of [[def-identifiability-of-an-estimand]]: it is constant over full-data laws with the same observed-data law.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each of the four points $(u_i,a)$ has probability $1/4$. By definition $Y=Y^A$, so consistency [F1] holds; $Y^0,Y^1$ are bounded and hence integrable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $i,a\\in\\{0,1\\}$, $P(U=u_i,A=a)=1/4=P(U=u_i)P(A=a)$. The pair $(Y^0,Y^1)$ is a function of $U$, so it is independent of $A$; since $L$ is constant, [F2] and [F3] give conditional exchangeability. Also $P(A=0)=P(A=1)=1/2$, and conditioning on constant $L$ leaves these probabilities unchanged, so [F4] holds.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under $P_0$, $U$ remains uniform and $Y=Y^0=0$, so $m_0=0$. Under $P_1$, $U$ remains uniform and $Y=Y^1$, so $m_1=1/2$. As $P_L$ is a point mass, [F6] gives $E[Y^0]=0$ and $E[Y^1]=1/2$; hence the identified ATE is $1/2$, agreeing with [F5].",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example and step 1.1 use an explicit four-point nonempty probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and step 2.1 include a zero potential outcome."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 2.1 include a potential outcome equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example: L is constant and the theorem covers this degenerate covariate law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: the binary treatment levels 0 and 1 are the stated endpoints and both have probability 1/2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 records A1 for the formal conditional-independence convention; the finite probability calculations themselves are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a single model, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a single model, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-binary-confounding-standardization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-potential-outcomes-and-consistency",
+          "source_section": "Definition",
+          "quote": "Fix a target population with probability law $P$, a real outcome, and a nonempty countable discrete set $\\mathcal A$ of treatment versions. A treatment version $a\\in\\mathcal A$ is a specified intervention protocol, not just a treatment label. The **potential outcome** $Y^a$ is the real random variable giving the outcome for a unit in the target population under version $a$. Write $A$ for the observed treatment assignment or receipt, with values in $\\mathcal A$, and $Y$ for the observed outcome. The **observed potential outcome** is the measurable random variable\n\n$$Y^A=\\sum_{a\\in\\mathcal A}\\mathbf 1_{\\{A=a\\}}Y^a,$$\n\nwhere the countable sum has at most one nonzero summand at each sample point. **Consistency** is the assumption $Y=Y^A$ $P$-almost surely. It links the observed outcome to the potential outcome for the received version; it does not assert that treatment assignment is unconfounded.\n\nThe **full-data law** is the joint law of the potential-outcome family, $A$, any baseline covariate random element $L$, and $Y$. The **observed-data law** is its marginal law of $(A,L,Y)$. A target population, outcome, intervention protocol, and contrast must be fixed before the associated causal target is specified. If interference between units matters, the version or treatment regime must include the relevant assignment or exposure of other units; the notation $Y^a$ by itself does not assert no interference.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-exchangeability-of-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $A$ be the observed treatment assignment, $L$ a baseline covariate random element, and $(Y^a)_{a\\in\\mathcal A}$ the potential-outcome family of [[def-potential-outcomes-and-consistency]]. **Conditional exchangeability given $L$** means\n\n$$\\sigma(Y^a:a\\in\\mathcal A)\\perp\\!\\!\\!\\perp\\sigma(A)\\mid\\sigma(L),$$\n\nwhere conditional independence is the bounded-measurable-function factorization of [[def-conditional-independence-given-a-sigma-algebra]] under the [[def-axiom-of-choice]]. Each fixed $Y^a$ is then conditionally independent of $A$ given $L$ by measurable-map preservation in [[lem-conditional-independence-equivalences-and-preservation]]. This is a full-data assumption; the observed distribution alone does not establish it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-positivity-for-discrete-treatment",
+          "source_section": "Definition",
+          "quote": "Let $A$ take values in a countable discrete set on a target probability space, and let $L$ be the baseline covariate random element. For a treatment value $a$ of interest, the conditional treatment probability is the almost-sure class\n\n$$e_a=E[\\mathbf 1_{\\{A=a\\}}\\mid\\sigma(L)],$$\n\nusing the conditional-expectation convention of [[def-conditional-expectation-as-an-ae-class]] under the [[def-axiom-of-choice]]. **Positivity for $a$ on the target population** means both $P(A=a)>0$ and $e_a>0$ almost surely under the target law of $L$. Positivity for a contrast is required at every treatment value in that contrast.\n\nThe almost-sure condition is relative to the target population: values of $L$ with zero target probability impose no condition. Strict positivity does not mean that $e_a$ is bounded away from zero. The marginal condition makes the observed treatment-stratum law $P(\\,\\cdot\\mid A=a)$ available.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-causal-average-treatment-effects",
+          "source_section": "Definition",
+          "quote": "In a fixed target population with two specified treatment versions $0$ and $1$ and integrable potential outcomes $Y^0,Y^1$ from [[def-potential-outcomes-and-consistency]], the **average treatment effect (ATE)** is the target-population mean contrast $E[Y^1-Y^0]$. For a baseline covariate random element $L$, the **conditional average treatment effect (CATE) given $L$** is the conditional-expectation almost-sure class\n\n$$E[Y^1-Y^0\\mid\\sigma(L)],$$\n\nusing the conditional-expectation convention of [[def-conditional-expectation-as-an-ae-class]] under the [[def-axiom-of-choice]]. Thus a CATE is determined only up to equality almost surely under the target law of $L$; a pointwise value at a null covariate value is not specified by this definition. The ATE is the mean of the individual contrast, not an assertion that both potential outcomes are observed for any unit.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-discrete-treatment-potential-outcome-mean-identification",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mathcal A$ be a countable discrete set containing treatment versions $0$ and $1$. On a full-data probability space $(\\Omega,\\mathcal F,P)$, let $A$ take values in $\\mathcal A$, let $L$ take values in a standard-Borel space $\\mathcal L$ ([[def-standard-borel-space]]), let $Y$ be the observed real outcome, and let $(Y^b)_{b\\in\\mathcal A}$ be the potential outcomes of [[def-potential-outcomes-and-consistency]]. For each treatment value $a$ under consideration, assume $Y^a\\in L^1(P)$, consistency $Y=Y^A$ almost surely, conditional exchangeability $\\sigma(Y^b:b\\in\\mathcal A)\\perp\\!\\!\\!\\perp\\sigma(A)\\mid\\sigma(L)$, and positivity $P(A=a)>0$ and $E[\\mathbf1_{\\{A=a\\}}\\mid\\sigma(L)]>0$ almost surely. These are assumptions on the full-data law; Choice is required for the stated conditional-expectation classes and regular conditional distributions.\n\nWrite $P_L(B)=P(L\\in B)$ for the target-population law of $L$. For such an $a$, define the observed treatment-stratum law $P_a(C)=P(C\\cap\\{A=a\\})/P(A=a)$. Under $P_a$, let $K_a(l,dy)$ be a regular conditional law of $Y$ given the standard-Borel random element $L$, and put $m_a(l)=\\int y\\,K_a(l,dy)$ wherever the absolute integral is finite, with value $0$ on the exceptional set. The suppliers [[def-conditional-law-given-a-random-element]], [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]], [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]], and [[thm-conditional-integration-through-a-regular-conditional-law]] give this construction. Then $m_a$ is $P_L$-integrable and is uniquely determined $P_L$-almost everywhere by the observed-data law, and\n\n$$E_P[Y^a]=\\int_{\\mathcal L}m_a(l)\\,P_L(dl).$$\n\nIf $L$ is countably discrete, this is\n\n$$E_P[Y^a]=\\sum_{l:P(L=l)>0}E_P[Y\\mid A=a,L=l]P(L=l).$$\n\nIn this sum, $E[Y\\mid A=a,L=l]$ denotes $E[Y\\mathbf1_{\\{A=a,L=l\\}}]/P(A=a,L=l)$, whose denominator is positive for each displayed atom.\n\nFor the binary contrast, both treatment levels must satisfy positivity. The CATE is then represented $P_L$-almost everywhere by $m_1-m_0$, and the ATE is $\\int(m_1-m_0)\\,dP_L$. In the model whose parameters are all full-data laws satisfying these assumptions and whose observation map sends a full-data law to its $(A,L,Y)$ marginal, each $E[Y^a]$ is identifiable in the sense of [[def-identifiability-of-an-estimand]]: it is constant over full-data laws with the same observed-data law.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The point set has eight equally likely elements, $Y^0$ and $Y^1$ are bounded, and $Y=Y^A$ by construction, so all required integrability and consistency conditions hold by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Given $L=l$, $(Y^0,Y^1)=(10l,10l+1)$ is fixed, hence its sigma-algebra is contained in $\\sigma(L)$ and [F3] gives conditional exchangeability [F2]. Direct counting gives $P(A=1\\mid L=0)=1/4$, $P(A=1\\mid L=1)=3/4$, and the complementary probabilities for $A=0$; both marginal probabilities equal $1/2$. Thus [F4] holds.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In stratum $L=0$, the observed outcome means are $E[Y\\mid A=1,L=0]=1$ and $E[Y\\mid A=0,L=0]=0$. In stratum $L=1$, they are $11$ and $10$. Since $P(L=0)=P(L=1)=1/2$, [F6] standardizes the treatment means to $E[Y^1]=(1+11)/2=6$ and $E[Y^0]=(0+10)/2=5$, so [F5] gives ATE $1$.",
+          "step": "1.3",
+          "inputs": [
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Bayes' rule gives $P(L=1\\mid A=1)=3/4$ and $P(L=1\\mid A=0)=1/4$. Therefore $E[Y\\mid A=1]=(1/4)1+(3/4)11=8.5$ and $E[Y\\mid A=0]=(3/4)0+(1/4)10=2.5$, whose difference is $6$, not the ATE. The difference comes from the different target-covariate mixtures in the two treatment groups.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example and step 1.1 use an explicit eight-point nonempty probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and step 2.1 include zero outcomes in the L=0 stratum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and step 2.1 include outcome value one in the treated L=0 stratum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+      "evidence": "Example: the two L strata are both present; no empty covariate stratum is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and step 1.2 use binary treatment arms 0 and 1, each with positive marginal probability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 records A1 for the conditional-independence convention; all finite probabilities are counted directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example illustrates one identifying model, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example illustrates one identifying model, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-positivity-failure-nonidentification": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-potential-outcomes-and-consistency",
+          "source_section": "Definition",
+          "quote": "Fix a target population with probability law $P$, a real outcome, and a nonempty countable discrete set $\\mathcal A$ of treatment versions. A treatment version $a\\in\\mathcal A$ is a specified intervention protocol, not just a treatment label. The **potential outcome** $Y^a$ is the real random variable giving the outcome for a unit in the target population under version $a$. Write $A$ for the observed treatment assignment or receipt, with values in $\\mathcal A$, and $Y$ for the observed outcome. The **observed potential outcome** is the measurable random variable\n\n$$Y^A=\\sum_{a\\in\\mathcal A}\\mathbf 1_{\\{A=a\\}}Y^a,$$\n\nwhere the countable sum has at most one nonzero summand at each sample point. **Consistency** is the assumption $Y=Y^A$ $P$-almost surely. It links the observed outcome to the potential outcome for the received version; it does not assert that treatment assignment is unconfounded.\n\nThe **full-data law** is the joint law of the potential-outcome family, $A$, any baseline covariate random element $L$, and $Y$. The **observed-data law** is its marginal law of $(A,L,Y)$. A target population, outcome, intervention protocol, and contrast must be fixed before the associated causal target is specified. If interference between units matters, the version or treatment regime must include the relevant assignment or exposure of other units; the notation $Y^a$ by itself does not assert no interference.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-conditional-exchangeability-of-potential-outcomes",
+          "source_section": "Definition",
+          "quote": "Let $A$ be the observed treatment assignment, $L$ a baseline covariate random element, and $(Y^a)_{a\\in\\mathcal A}$ the potential-outcome family of [[def-potential-outcomes-and-consistency]]. **Conditional exchangeability given $L$** means\n\n$$\\sigma(Y^a:a\\in\\mathcal A)\\perp\\!\\!\\!\\perp\\sigma(A)\\mid\\sigma(L),$$\n\nwhere conditional independence is the bounded-measurable-function factorization of [[def-conditional-independence-given-a-sigma-algebra]] under the [[def-axiom-of-choice]]. Each fixed $Y^a$ is then conditionally independent of $A$ given $L$ by measurable-map preservation in [[lem-conditional-independence-equivalences-and-preservation]]. This is a full-data assumption; the observed distribution alone does not establish it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-conditional-independence-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Assume the axiom of choice so that the library's conditional-expectation\nclasses are available. Let $Y$ and $Z$ be random elements and let\n$\\mathcal G\\subseteq\\mathcal F$ be a sigma-algebra. We say that $Y$ and $Z$ are\n**conditionally independent given $\\mathcal G$**, and write\n$Y\\perp\\!\\!\\!\\perp Z\\mid\\mathcal G$, if for every pair of bounded measurable\nreal functions $f,g$,\n$$ \\mathbb E[f(Y)g(Z)\\mid\\mathcal G] =\\mathbb E[f(Y)\\mid\\mathcal G]\\, \\mathbb E[g(Z)\\mid\\mathcal G]\\quad\\text{a.s.} $$\nThis is an equality of almost-everywhere classes and hence does not depend on\nrepresentatives.\n\nFor sigma-algebras $\\mathcal H_1,\\mathcal H_2\\subseteq\\mathcal F$, the notation\n$\\mathcal H_1\\perp\\!\\!\\!\\perp\\mathcal H_2\\mid\\mathcal G$ means the same identity\nfor every bounded $\\mathcal H_1$-measurable $U$ and bounded\n$\\mathcal H_2$-measurable $V$.\n\nThe definition is symmetric. If $\\mathcal G=\\{\\varnothing,\\Omega\\}$ modulo\nnull sets, it reduces to ordinary independence. If one side is\n$\\mathcal G$-measurable, conditional independence is automatic because that\nfactor is already known when conditioning. The choices of the zero function or\nthe constant-one function cause no exceptional case.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-positivity-for-discrete-treatment",
+          "source_section": "Definition",
+          "quote": "Let $A$ take values in a countable discrete set on a target probability space, and let $L$ be the baseline covariate random element. For a treatment value $a$ of interest, the conditional treatment probability is the almost-sure class\n\n$$e_a=E[\\mathbf 1_{\\{A=a\\}}\\mid\\sigma(L)],$$\n\nusing the conditional-expectation convention of [[def-conditional-expectation-as-an-ae-class]] under the [[def-axiom-of-choice]]. **Positivity for $a$ on the target population** means both $P(A=a)>0$ and $e_a>0$ almost surely under the target law of $L$. Positivity for a contrast is required at every treatment value in that contrast.\n\nThe almost-sure condition is relative to the target population: values of $L$ with zero target probability impose no condition. Strict positivity does not mean that $e_a$ is bounded away from zero. The marginal condition makes the observed treatment-stratum law $P(\\,\\cdot\\mid A=a)$ available.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-causal-average-treatment-effects",
+          "source_section": "Definition",
+          "quote": "In a fixed target population with two specified treatment versions $0$ and $1$ and integrable potential outcomes $Y^0,Y^1$ from [[def-potential-outcomes-and-consistency]], the **average treatment effect (ATE)** is the target-population mean contrast $E[Y^1-Y^0]$. For a baseline covariate random element $L$, the **conditional average treatment effect (CATE) given $L$** is the conditional-expectation almost-sure class\n\n$$E[Y^1-Y^0\\mid\\sigma(L)],$$\n\nusing the conditional-expectation convention of [[def-conditional-expectation-as-an-ae-class]] under the [[def-axiom-of-choice]]. Thus a CATE is determined only up to equality almost surely under the target law of $L$; a pointwise value at a null covariate value is not specified by this definition. The ATE is the mean of the individual contrast, not an assertion that both potential outcomes are observed for any unit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-discrete-treatment-potential-outcome-mean-identification",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mathcal A$ be a countable discrete set containing treatment versions $0$ and $1$. On a full-data probability space $(\\Omega,\\mathcal F,P)$, let $A$ take values in $\\mathcal A$, let $L$ take values in a standard-Borel space $\\mathcal L$ ([[def-standard-borel-space]]), let $Y$ be the observed real outcome, and let $(Y^b)_{b\\in\\mathcal A}$ be the potential outcomes of [[def-potential-outcomes-and-consistency]]. For each treatment value $a$ under consideration, assume $Y^a\\in L^1(P)$, consistency $Y=Y^A$ almost surely, conditional exchangeability $\\sigma(Y^b:b\\in\\mathcal A)\\perp\\!\\!\\!\\perp\\sigma(A)\\mid\\sigma(L)$, and positivity $P(A=a)>0$ and $E[\\mathbf1_{\\{A=a\\}}\\mid\\sigma(L)]>0$ almost surely. These are assumptions on the full-data law; Choice is required for the stated conditional-expectation classes and regular conditional distributions.\n\nWrite $P_L(B)=P(L\\in B)$ for the target-population law of $L$. For such an $a$, define the observed treatment-stratum law $P_a(C)=P(C\\cap\\{A=a\\})/P(A=a)$. Under $P_a$, let $K_a(l,dy)$ be a regular conditional law of $Y$ given the standard-Borel random element $L$, and put $m_a(l)=\\int y\\,K_a(l,dy)$ wherever the absolute integral is finite, with value $0$ on the exceptional set. The suppliers [[def-conditional-law-given-a-random-element]], [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]], [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]], and [[thm-conditional-integration-through-a-regular-conditional-law]] give this construction. Then $m_a$ is $P_L$-integrable and is uniquely determined $P_L$-almost everywhere by the observed-data law, and\n\n$$E_P[Y^a]=\\int_{\\mathcal L}m_a(l)\\,P_L(dl).$$\n\nIf $L$ is countably discrete, this is\n\n$$E_P[Y^a]=\\sum_{l:P(L=l)>0}E_P[Y\\mid A=a,L=l]P(L=l).$$\n\nIn this sum, $E[Y\\mid A=a,L=l]$ denotes $E[Y\\mathbf1_{\\{A=a,L=l\\}}]/P(A=a,L=l)$, whose denominator is positive for each displayed atom.\n\nFor the binary contrast, both treatment levels must satisfy positivity. The CATE is then represented $P_L$-almost everywhere by $m_1-m_0$, and the ATE is $\\int(m_1-m_0)\\,dP_L$. In the model whose parameters are all full-data laws satisfying these assumptions and whose observation map sends a full-data law to its $(A,L,Y)$ marginal, each $E[Y^a]$ is identifiable in the sense of [[def-identifiability-of-an-estimand]]: it is constant over full-data laws with the same observed-data law.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In both laws, when $L=0$ one has $A=0,Y=Y^0=0$, and when $L=1$ one has $A=1,Y=Y^1=1$. Thus the observed law is identical in $Q_1,Q_2$, and consistency [F1] holds in each.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In each law the potential-outcome vector is $\\sigma(L)$-measurable and $A=L$ is $\\sigma(L)$-measurable. By [F3], conditional exchangeability [F2] holds. However, $P(A=1\\mid L=0)=0$ and $P(A=0\\mid L=1)=0$, so [F4] fails despite $P(A=0)=P(A=1)=1/2$. Hence the hypotheses of [F7] are not met.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under $Q_1$, $E[Y^1-Y^0]=1$. Under $Q_2$, $E[Y^1-Y^0]=E[L]=1/2$. The same observed law therefore corresponds to two target values, so [F6] says the ATE is not identifiable under consistency and conditional exchangeability without positivity.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example and step 1.1 use an explicit two-point nonempty probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives conditional treatment probabilities equal to zero on positive target strata."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 gives conditional treatment probabilities equal to one on the complementary strata."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example uses a deterministic treatment assignment conditional on L, the boundary case illustrating the failure."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 checks both endpoints 0 and 1 and distinguishes them from positive marginal treatment probabilities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 records A1 for the formal conditional-independence convention; the two laws are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example refutes identification for one model pair, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example refutes identification for one model pair, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

@@ -1,0 +1,2011 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62",
+  "scope": [
+    "def-power-and-sample-size-planning-specification",
+    "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+    "lem-iid-normal-sample-mean-law",
+    "lem-least-feasible-sample-size-exists",
+    "prop-known-variance-normal-two-sided-z-test-power",
+    "alg-finite-candidate-power-sample-size-search",
+    "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+    "thm-finite-candidate-power-sample-size-search-correctness",
+    "ex-two-sided-normal-z-power-includes-both-tails",
+    "ex-known-variance-normal-z-sample-size-and-sensitivity",
+    "lem-ceiling-and-least-positive-integer-threshold",
+    "alg-positive-integer-power-sample-size-search",
+    "thm-positive-integer-power-sample-size-search-correctness",
+    "cex-no-finite-query-universal-sample-size-infeasibility-detector"
+  ],
+  "contracts": {
+    "def-power-and-sample-size-planning-specification": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition allows an empty candidate set and declares none when the feasible subset is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits zero allocation components but requires total sample size at least one; the all-zero allocation is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition includes total sample size one among the positive-integer candidates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition imposes no nondegeneracy condition on the experiment; precision intervals may have equal endpoints subject to the stated width target."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition permits alpha, beta, gamma and eta at 0 or 1, and explicitly requires w>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition selects from the supplied plan set; when feasible sizes exist, the local well-ordering lemma supplies the least size without a choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition specifies feasibility and output; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition specifies feasibility and output; it states no equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Read the full Definition against current experiment, randomized-test, size/power, measurable-map, natural-number and least-feasible-size interfaces. Null, alternative and test target are nonempty and disjoint as required; feasibility has universal target quantification and composite-null supremum. Measurable finite interval endpoints give measurable fixed-parameter coverage and width events. Empty candidates/feasible set return none; zero allocation components are allowed but total size is positive; alpha,beta,gamma,eta endpoints are meaningful and w>0. Least size follows well-ordering without simultaneous plan selection or additional choice. Tie selection is extensional, not an algorithmic oracle."
+      }
+    },
+    "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-axiom-of-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. For every sequence\n$(A_n)_{n\\in\\mathbb N}$ of nonempty sets there is a sequence\n$(a_n)_{n\\in\\mathbb N}$ with $a_n\\in A_n$ for every $n\\in\\mathbb N$. Thus the\nAxiom of Choice implies the pair-local countable choice principle\n$\\mathrm{AC}_\\omega$\n([[def-countable-choice-principle-for-foliation-pair]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-normal-density-has-total-mass-one",
+          "source_section": "Statement",
+          "quote": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-composition-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g(A) \\subseteq B$, and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$. If $g$ is continuous\nat $c$ and $f$ is continuous at $g(c) \\in B$, then $f \\circ g$ is continuous at\n$c$ ([[def-continuity-real]]).\n\nConsequently, if $g$ is continuous on $A$ and $f$ is continuous on $B$, then\n$f \\circ g$ is continuous on $A$.\n\n**No side hypothesis is needed, and that is the whole point.** The composition\ntheorem for limits, [[thm-composition-of-function-limits]], must assume one of\ntwo extra conditions: either $L \\in B$ with $f(L) = M$, or $g \\ne L$ on a\npunctured neighbourhood of $c$; with both dropped the statement is false, which\nis [[fs-naive-composition-of-limits]]. The first of those conditions is exactly\n*continuity of $f$ at $L$* written out, so under the hypotheses above it holds\nautomatically and nothing has to be assumed. The mechanism is visible in the\nproof: [[def-continuity-real]] quantifies over $|y - b| < \\rho$ rather than over\n$0 < |y - b| < \\rho$, so the value $y = b$ that the limit version cannot control\nis precisely the one the continuity hypothesis does control.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-extreme-value-r",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ be continuous on $A$\n([[def-continuity-real]]) and let $K \\subseteq A$ be **nonempty** and compact\n([[def-open-cover-r]]). Then $\\sup f[K]$ and $\\inf f[K]$ exist and are\n**attained**: there are $p, q \\in K$ with\n\n$$f(q) \\;=\\; \\inf f[K] \\;\\le\\; f(x) \\;\\le\\; \\sup f[K] \\;=\\; f(p) \\qquad \\text{for every } x \\in K .$$\n\nEquivalently, the set $f[K]$ has a maximum and a minimum\n([[def-max-min]]), namely $\\max f[K] = f(p)$ and $\\min f[K] = f(q)$.\n\n**Nonemptiness of $K$ is a hypothesis, not an oversight.** For $K = \\varnothing$\nthe set $f[K]$ is empty, and neither a supremum nor a maximum of the empty set\nexists in this library ([[def-complete-ordered-field]] supplies suprema of\nnonempty sets bounded above only).\n\n**This theorem is stated twice in this library, on purpose.** Its metric-space\ntwin is [[thm-extreme-value-metric]], proved from the cover machinery of metric\nspaces; the proof below is $\\mathbb{R}$-native, running through Heine-Borel for\n$\\mathbb{R}$ and the order-completeness of $\\mathbb{R}$, and it uses no cover\nargument beyond the one already spent in\n[[thm-continuous-image-of-a-compact-set-r]]. That the two statements are the\nsame statement in two vocabularies is proved in\n[[lem-real-and-metric-notions-agree]], later on this page.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuity-from-above-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be a decreasing sequence of measurable sets for a measure $\\mu$. If $\\mu(E_{n_0})<+\\infty$ for some $n_0$, then\n\n$$\\mu\\left(\\bigcap_{n\\in\\mathbb N}E_n\\right)=\\inf_{n\\in\\mathbb N}\\mu(E_n).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] \u2014 hence the least-upper-bound property \u2014 that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate \u2014 the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates \u2014 and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-substitution-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $J$ be intervals, possibly open at finite or infinite singular ends, and let $\\phi:I\\to J$ be a monotone differentiable surjection. Assume $\\phi'$ is locally Riemann integrable and the proper change-of-variable hypotheses hold on every compact truncation. If $f$ is locally Riemann integrable on $J$, then\n$$\\int_J f(x)\\,dx\\quad\\text{and}\\quad\\int_I f(\\phi(t))|\\phi'(t)|\\,dt$$\nconverge simultaneously and, when convergent, are equal. At several singular ends this assertion is applied separately to the corresponding ends; orientation is retained for decreasing parametrizations.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-probability-measure-basic-identities",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space, let $A,B\\in\\mathcal F$,\nand let $(A_n)_{n\\in\\mathbb N}$ be events.\n\n1. $\\mathbb P(A^c)=1-\\mathbb P(A)$.\n2. If $A\\subseteq B$, then $\\mathbb P(A)\\le\\mathbb P(B)$.\n3. If $A\\subseteq B$, then $\\mathbb P(B\\setminus A)=\\mathbb P(B)-\\mathbb P(A)$.\n4. $\\mathbb P(\\bigcup_n A_n)\\le\\sum_{n=0}^\\infty \\mathbb P(A_n)$, and for every\n   natural $m$,\n   $$\\mathbb P\\left(\\bigcup_{n<m}A_n\\right)\\le\\sum_{n<m}\\mathbb P(A_n).$$\n5. $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$.\n6. If $A_n\\uparrow A$, then\n   $$\\mathbb P(A)=\\sup_n\\mathbb P(A_n).$$\n   If $A_n\\downarrow A$, then\n   $$\\mathbb P(A)=\\inf_n\\mathbb P(A_n).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-cumulative-distribution-function-of-a-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable. Its **cumulative distribution function** is\nthe function\n$$F_X:\\mathbb R\\to[0,1],\\qquad F_X(x):=\\mathbb P(X\\le x)=\\mathbb P_X((-\\infty,x]).$$\n\nThe second expression is the same quantity written in terms of the law\n[[def-law-or-distribution-of-a-random-element]] of $X$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $a<b$, [F8] and [F9] give $\\Phi(b)-\\Phi(a)=P(a<Z\\le b)=\\int_{(a,b]}g(t)\\,dt$. By [F2] and [F3], $g$ has a minimum $c$ on $[a,b]$; [F1] makes $c>0$, so $\\Phi(b)-\\Phi(a)\\ge c(b-a)>0$, proving strict increase. For a fixed $x$, [F2] and [F3] bound $g$ by some $M<\\infty$ on $[x-1,x+1]$; whenever $|y-x|<1$, $|\\Phi(y)-\\Phi(x)|\\le M|y-x|$, proving continuity at $x$. Since $x$ was arbitrary, $\\Phi$ is continuous.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The events $\\{Z\\le k\\}$ increase to the whole space and $\\{Z\\le-k\\}$ decrease to the empty set as positive integers $k\\to\\infty$. By [F1] and [F4], $\\Phi(k)\\to1$ and $\\Phi(-k)\\to0$. Given $q\\in(0,1)$, choose $k$ with $\\Phi(-k)<q<\\Phi(k)$; [F5] on $[-k,k]$ gives $z_q$ with $\\Phi(z_q)=q$, and strict increase from step 1.1 makes it unique.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [A1] and [F6], $P(Z=x)=\\int_{\\{x\\}}g\\,d\\lambda=0$ for every $x$. The density $g$ is even; applying [F7] gives $\\Phi(-x)=\\int_x^\\infty g(t)\\,dt$. Since $P(Z=x)=0$, [F8] identifies this upper tail with $1-\\Phi(x)$. Thus $\\Phi(-x)=1-\\Phi(x)$. Taking $x=z_q$ and using the uniqueness in step 2.1 gives $\\Phi(-z_q)=1-q$ and $z_{1-q}=-z_q$; at $q=1/2$, this yields $z_{1/2}=0$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The standard-normal law is a supplied probability law, not an empty candidate set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 proves P(Z=x)=0 for every singleton, including x=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The CDF limits in step 2.1 are 0 and 1, and quantiles are asserted only for q strictly between them."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement concerns the nondegenerate standard normal law with positive density."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 establishes the CDF limits at both infinite endpoints and restricts quantiles to q in (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses an integer k after proving the tail limits; this is a single existential choice, not a choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement claims CDF and quantile properties, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement claims CDF and quantile properties, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Checked Proof 1.1\u20133.1 and all 17 current dependency interfaces. Positive continuous density has positive attained minimum on [a,b] and finite local maximum, giving strict increase and continuity. Increasing/decreasing events exhaust R/empty; monotonicity extends integer tail limits to real limits. IVT and strict increase give unique quantiles only for 0<q<1. AC supplies normal law and countable choice for singleton-null box theorem; null integrals remove endpoints. Reflection substitution is a differentiable monotone bijection with derivative -1 and integrable positive Gaussian density, giving symmetry and z_(1-q)=-z_q. Checked x=0, q=1/2, tails, and excluded q=0,1."
+      }
+    },
+    "lem-iid-normal-sample-mean-law": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F0",
+          "source": "def-characteristic-function-of-a-real-random-variable",
+          "source_section": "Definition",
+          "quote": "For a real random variable $X$ on $(\\Omega,\\mathcal F,\\mathbb P)$, its **characteristic function** is\n$$\\varphi_X(t)=\\mathbb E[e^{itX}]=\\int_{\\mathbb R}e^{itx}\\,\\mathbb P_X(dx),\\qquad t\\in\\mathbb R.$$\nFor a specified Borel probability measure $\\mu$ on $\\mathbb R$, write $\\varphi_\\mu(t)=\\int e^{itx}\\,\\mu(dx)$.\n\nThe complex integral means the sum of the real integral and $i$ times the imaginary integral, as in [[def-integrable-real-and-complex-functions-and-their-integrals]]. Euler's formula in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] gives $e^{itx}=\\cos(tx)+i\\sin(tx)$, a continuous function of $x$ with modulus one. Its components are bounded and measurable, hence integrable against a probability measure. [[thm-change-of-variables-for-expectation]] therefore applies to this bounded Borel function and proves the displayed identity. [[thm-integral-triangle-inequality]] gives $|\\varphi_\\mu(t)|\\le\\int1\\,d\\mu=1$.\n\nNo moment assumption is imposed. In particular $X=0$ gives $\\varphi_X\\equiv1$ and a constant $X=c$ gives $\\varphi_X(t)=e^{itc}$. These definitions require no choice of representatives or new use of AC.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "source_section": "Statement",
+          "quote": "For real $a,b,t$, $\\varphi_{aX+b}(t)=e^{itb}\\varphi_X(at)$. For a finite mutually independent family $(X_j)_{j=1}^n$ of real random variables, $\\varphi_{\\sum_jX_j}(t)=\\prod_j\\varphi_{X_j}(t)$. The empty sum has characteristic function one.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-uniqueness-of-a-law-from-its-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Assume AC. Two Borel probability laws on $\\mathbb R$ with equal characteristic functions are equal. In particular a real random variable has a real-valued characteristic function if and only if its law is symmetric under $x\\mapsto-x$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F0] and [F2], for every $t\\in\\mathbb R$, $\\varphi_{\\bar X_n}(t)=\\varphi_{\\sum_iX_i}(t/n)=\\prod_{i=1}^n\\varphi_{X_i}(t/n)=\\left[\\exp\\!\\left(i\\mu t/n-\\sigma^2t^2/(2n^2)\\right)\\right]^n=\\exp\\!\\left(i\\mu t-\\sigma^2t^2/(2n)\\right)$, where [F1] supplies each factor and [F4] combines the $n$ exponents.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F0",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1], the last expression is the characteristic function of $N(\\mu,\\sigma^2/n)$. Uniqueness [F3] proves $\\bar X_n\\sim N(\\mu,\\sigma^2/n)$. When $\\sigma>0$, the affine identity in [F2] applied to $\\sqrt n(\\bar X_n-\\mu_0)/\\sigma$ gives the stated shifted $N(\\cdot,1)$ law. The same calculation covers $\\sigma=0$, where both laws are point masses at their respective means.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F0",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires n>=1; the empty sum case is not included."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement allows sigma=0 and step 2.1 identifies the corresponding degenerate Dirac law; the standardized claim is restricted to sigma>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1, step 1.1 yields the original N(mu,sigma^2) characteristic function."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The sigma=0 case is explicitly retained and handled as a Dirac law in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints or tail thresholds occur in this law calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite independent family is given in the statement; the product calculation in step 1.1 makes no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives a distributional identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives a distributional identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Checked both steps against current affine/product characteristic-function identities, normal characteristic function (including sigma=0), uniqueness under AC, and exponential addition. The n factors at t/n give variance sigma^2/n; n>=1 prevents division by zero. The standardized conclusion is restricted to sigma>0; sigma=0 gives the point mass without standardization. Mutual rather than pairwise independence is explicit; inherited AC is declared."
+      }
+    },
+    "lem-least-feasible-sample-size-exists": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $S\\subseteq\\mathbb N$; by the Given, $S$ is nonempty.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to obtain a least member $n_*\\in S$. If $n'_*$ were another least member, then $n_*\\le n'_*$ and $n'_*\\le n_*$, hence $n_*=n'_*$ by antisymmetry.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes S is nonempty; step 1.1 applies the well-ordering principle under that hypothesis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement restricts S to positive integers, so zero is excluded; step 1.1 places S inside N."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes the singleton set S={1}; step 2.1 returns its unique least member."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves uniqueness even when candidate descriptions could share the same integer value."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or real endpoint in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the supplied nonempty set directly; no element is selected from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an existence and uniqueness claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an existence and uniqueness claim, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "S={1}",
+          "result": "least member is 1, with uniqueness by antisymmetry."
+        },
+        {
+          "case": "S={3,8}",
+          "result": "least member is 3."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Checked Proof 1.1\u20132.1 against current natural-number definition and well-ordering statement. Nonempty S contained in positive naturals is a nonempty subset of N; well-ordering gives membership and leastness, antisymmetry gives uniqueness. Singleton {1}, sparse and unbounded S work; empty S is excluded and no monotonicity or choice is needed."
+      }
+    },
+    "prop-known-variance-normal-two-sided-z-test-power": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-axiom-of-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. For every sequence\n$(A_n)_{n\\in\\mathbb N}$ of nonempty sets there is a sequence\n$(a_n)_{n\\in\\mathbb N}$ with $a_n\\in A_n$ for every $n\\in\\mathbb N$. Thus the\nAxiom of Choice implies the pair-local countable choice principle\n$\\mathrm{AC}_\\omega$\n([[def-countable-choice-principle-for-foliation-pair]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-iid-normal-sample-mean-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n\\ge1$, and let $X_1,\\ldots,X_n$ be mutually independent real random variables on one probability space, each with law $N(\\mu,\\sigma^2)$ for a fixed $\\mu\\in\\mathbb R$ and $\\sigma\\ge0$. Then $\\bar X_n=n^{-1}\\sum_{i=1}^nX_i$ has law $N(\\mu,\\sigma^2/n)$. If $\\sigma>0$, then for every $\\mu_0\\in\\mathbb R$,\n$$\\frac{\\sqrt n(\\bar X_n-\\mu_0)}{\\sigma}\\sim N\\!\\left(\\frac{\\sqrt n(\\mu-\\mu_0)}{\\sigma},1\\right).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $Z\\sim N(0,1)$ and $\\Phi(x)=P(Z\\le x)$. Then $\\Phi$ is continuous and strictly increasing, with limits $0$ and $1$ at $-\\infty$ and $+\\infty$; $P(Z=x)=0$ for every $x\\in\\mathbb R$; and $\\Phi(-x)=1-\\Phi(x)$. For each $q\\in(0,1)$, there is a unique real $z_q$ with $\\Phi(z_q)=q$, and $z_{1-q}=-z_q$, in particular $z_{1/2}=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-randomized-test",
+          "source_section": "Definition",
+          "quote": "A **randomized test** is a randomized procedure with binary action space\nwhose action set is $\\{0,1\\}$, equipped with its full sigma-algebra\n$2^{\\{0,1\\}}$ (the power set, which is a sigma-algebra by\n[[def-sigma-algebra]]), where $1$ means reject and $0$ means do not reject\n([[def-randomized-procedure-as-a-markov-kernel]]). Its **test function** is\n$$\\varphi(x)=K(x,\\{1\\}),\\qquad x\\in\\mathcal X.$$\nSince $K(x,\\cdot)$ is a probability measure and $\\{0\\},\\{1\\}$ partition the\naction set, $K(x,\\{0\\})+K(x,\\{1\\})=1$. Thus $\\varphi(x)\\in[0,1]$ and\n$1-\\varphi(x)=K(x,\\{0\\})$ is the probability of not rejecting. Give $[0,1]$\nthe trace of the Borel sigma-algebra on $[0,+\\infty]$, namely\n$\\{C\\cap[0,1]:C\\in\\mathcal B([0,+\\infty])\\}$. By\n[[lem-procedure-action-law-is-measurable]], $x\\mapsto K(x,\\{1\\})$ is\nmeasurable; since it has range in $[0,1]$, its preimage of $C\\cap[0,1]$ equals\nits preimage of $C$ and is measurable for every such $C$. Hence $\\varphi$ is a\nmeasurable map in the preimage sense of\n[[def-measurable-function-between-measurable-spaces]]. Its value is the\nrejection probability after observing $x$.\nThe convention $1=\\text{reject}$ is fixed here. No null or alternative\nhypothesis is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-measurable-rejection-function-defines-randomized-test",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment ([[def-statistical-experiment]]) and let\n$\\varphi:X\\to[0,1]$ be measurable, where $[0,1]$ has its Borel sigma-algebra.\nOn the binary action space $\\{0,1\\}$ with its full sigma-algebra, define\n$$K(x,B)=\\varphi(x)\\mathbf 1_B(1)+(1-\\varphi(x))\\mathbf 1_B(0)\\qquad (B\\subseteq\\{0,1\\}).$$\nThen $K$ is a probability kernel and hence a randomized procedure; its\nrandomized-test function under the convention $1=\\mathrm{reject}$ is\n$\\varphi$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-test-size-and-power",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.\n\nFor a randomized test with test function\n$\\varphi:\\mathcal X\\to[0,1]$ ([[def-randomized-test]]), its **power function**\nis\n$$\\beta(\\theta):=E_\\theta[\\varphi(X)]\\qquad(\\theta\\in\\Theta).$$\nIts **size** is\n$$\\sup_{\\theta\\in\\Theta_0}\\beta(\\theta),$$\nand it has **level $\\alpha$** when this supremum is at most\n$\\alpha\\in[0,1]$. The expectations exist and lie in $[0,1]$ because\n$0\\le\\varphi\\le1$ and each $P_\\theta$ is a probability measure\n([[def-probability-measure]],\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).\nThe supremum exists because $\\Theta_0$ is nonempty, the values lie in\n$[0,1]$, and $\\mathbb R$ has the least-upper-bound property\n([[def-complete-ordered-field]]).\n\nFor the binary action $a\\in\\{0,1\\}$, where $1$ means reject, the\n**zero-one error loss** is $1$ when $a=1$ and $\\theta\\in\\Theta_0$, or when\n$a=0$ and $\\theta\\in\\Theta_1$, and is $0$ otherwise. The decision-rule risk\nfrom [[def-loss-function-and-risk]] integrates this loss against the action\nkernel and data law. For each fixed $\\theta$, its section on the binary\naction space is measurable. The risk identities proved in\n[[lem-test-zero-one-loss-risk-identities]] show that risk equals\n$\\beta(\\theta)$ on $\\Theta_0$ and $1-\\beta(\\theta)$ on $\\Theta_1$. Thus size\nis the worst null error risk, and power is the rejection probability under\neach alternative parameter.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], countable choice is available for the Borel-measurability supplier in [F5]. The map $x\\mapsto\\sqrt n(x-\\mu_0)/\\sigma$ is continuous, hence its two-tail region $\\{|x|>c_\\alpha\\}$ is Borel and its indicator is measurable. [F5] therefore makes the stated indicator a randomized-test function in the experiment described by [F3]; by [F1], under $H_0$ its standardized statistic has law $N(0,1)$. Since $1-\\alpha/2>1/2$, [F2] gives $c_\\alpha>0$, and the two rejection tails are disjoint.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under the null, the probability of the upper tail is $1-\\Phi(c_\\alpha)=\\alpha/2$, and the probability of the lower tail is $\\Phi(-c_\\alpha)=\\alpha/2$ by symmetry and the quantile identity. Their sum is $\\alpha$, proving the test size.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under $\\mu=\\mu_0+\\delta$, [F1] gives $Z_n\\sim N(\\lambda,1)$. Thus $P(Z_n>c_\\alpha)=1-\\Phi(c_\\alpha-\\lambda)$, while $P(Z_n<-c_\\alpha)=\\Phi(-c_\\alpha-\\lambda)$; the no-atom clause in [F2] justifies the strict lower tail. The two events are disjoint by step 1.1, so their probabilities add to the stated power-function value.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes n>=1 and specifies the simple null against the nonempty two-sided alternative; no empty sample is claimed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement permits delta=0 only as evaluation of the power function at the null; the alternative remains nonempty and two-sided. The formula reduces to the null rejection probability alpha."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement includes n=1 and the same shifted-normal calculation applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and Proof step 3.1: the zero-shift evaluation leaves the standard normal test distribution unchanged and is explicitly distinguished from power at a nonnull alternative; sigma>0 excludes a degenerate sampling law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes alpha in (0,1), so c_alpha=z_(1-alpha/2) is an interior finite quantile."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite sample is supplied in the statement; the two-tail calculation uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition gives a size and power formula, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition gives a size and power formula, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Independently checked current Statement, F1\u2013F6 and Proof 1.1\u20133.1 against all current supplier interfaces and reader/refuter evidence. AC discharges the explicit countable-choice measurability premise; n>=1 and sigma>0 make the affine statistic defined. alpha in (0,1) gives positive cutoff, disjoint Borel tails, and exact size alpha. Shifted normal probabilities give both tails with atoms excluded; delta=0 returns alpha, negative delta swaps tails, and nonzero delta is in the declared two-sided alternative. Reader clarification is accepted with unchanged formula/proof substance. Native diff reversed in memory recovers exact frozen pre hash ce39b903eea02d1ee89cf3aa414d0d56c1082680a9657870b1f2cfda0c3bd95e; current raw hash equals reader post d762767f9577c3068e5d14912408af0d1dc57155d49648d1a3de0ef4aa0fbc35. Direct item consumer uses delta=sigma>0 and remains sound; A-page summary remains accurate."
+      }
+    },
+    "alg-finite-candidate-power-sample-size-search": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly returns none without evaluation when m=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition uses plans whose total size is positive; individual allocation components may be zero under the planning specification."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits a one-element candidate list and returns that plan exactly when its evaluator is true."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition fixes supplied tie order among equal-size plans and returns the first passing one."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The algorithm takes a finite list of plans and has no interval endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition takes the finite ordered list as supplied input; the procedure does not choose from an unspecified family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition, exact-evaluator input contract: A true answer for a listed candidate plan certifies that this very plan meets every requested power, precision, allocation and resource condition. The contract concerns the listed plan itself, and does not infer feasibility of all alternative plans of the same size."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition, exact-evaluator input contract: A listed candidate plan meeting all requested conditions must receive a true answer from the exact evaluator. The contract concerns the listed plan itself, and does not infer feasibility of all alternative plans of the same size."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "empty list",
+          "result": "returns none with zero evaluator calls."
+        },
+        {
+          "case": "two equal-size candidates, first false and second true",
+          "result": "returns the second candidate, preserving the supplied tie order among feasible candidates."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-authoring",
+        "notes": "Checked the declared hypotheses, all proof inputs and cited supplier bodies; the item remains draft pending independent owner review."
+      }
+    },
+    "thm-known-variance-normal-z-test-power-and-minimum-sample-size": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-axiom-of-choice-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice. For every sequence\n$(A_n)_{n\\in\\mathbb N}$ of nonempty sets there is a sequence\n$(a_n)_{n\\in\\mathbb N}$ with $a_n\\in A_n$ for every $n\\in\\mathbb N$. Thus the\nAxiom of Choice implies the pair-local countable choice principle\n$\\mathrm{AC}_\\omega$\n([[def-countable-choice-principle-for-foliation-pair]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-iid-normal-sample-mean-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $n\\ge1$, and let $X_1,\\ldots,X_n$ be mutually independent real random variables on one probability space, each with law $N(\\mu,\\sigma^2)$ for a fixed $\\mu\\in\\mathbb R$ and $\\sigma\\ge0$. Then $\\bar X_n=n^{-1}\\sum_{i=1}^nX_i$ has law $N(\\mu,\\sigma^2/n)$. If $\\sigma>0$, then for every $\\mu_0\\in\\mathbb R$,\n$$\\frac{\\sqrt n(\\bar X_n-\\mu_0)}{\\sigma}\\sim N\\!\\left(\\frac{\\sqrt n(\\mu-\\mu_0)}{\\sigma},1\\right).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $Z\\sim N(0,1)$ and $\\Phi(x)=P(Z\\le x)$. Then $\\Phi$ is continuous and strictly increasing, with limits $0$ and $1$ at $-\\infty$ and $+\\infty$; $P(Z=x)=0$ for every $x\\in\\mathbb R$; and $\\Phi(-x)=1-\\Phi(x)$. For each $q\\in(0,1)$, there is a unique real $z_q$ with $\\Phi(z_q)=q$, and $z_{1-q}=-z_q$, in particular $z_{1/2}=0$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-randomized-test",
+          "source_section": "Definition",
+          "quote": "A **randomized test** is a randomized procedure with binary action space\nwhose action set is $\\{0,1\\}$, equipped with its full sigma-algebra\n$2^{\\{0,1\\}}$ (the power set, which is a sigma-algebra by\n[[def-sigma-algebra]]), where $1$ means reject and $0$ means do not reject\n([[def-randomized-procedure-as-a-markov-kernel]]). Its **test function** is\n$$\\varphi(x)=K(x,\\{1\\}),\\qquad x\\in\\mathcal X.$$\nSince $K(x,\\cdot)$ is a probability measure and $\\{0\\},\\{1\\}$ partition the\naction set, $K(x,\\{0\\})+K(x,\\{1\\})=1$. Thus $\\varphi(x)\\in[0,1]$ and\n$1-\\varphi(x)=K(x,\\{0\\})$ is the probability of not rejecting. Give $[0,1]$\nthe trace of the Borel sigma-algebra on $[0,+\\infty]$, namely\n$\\{C\\cap[0,1]:C\\in\\mathcal B([0,+\\infty])\\}$. By\n[[lem-procedure-action-law-is-measurable]], $x\\mapsto K(x,\\{1\\})$ is\nmeasurable; since it has range in $[0,1]$, its preimage of $C\\cap[0,1]$ equals\nits preimage of $C$ and is measurable for every such $C$. Hence $\\varphi$ is a\nmeasurable map in the preimage sense of\n[[def-measurable-function-between-measurable-spaces]]. Its value is the\nrejection probability after observing $x$.\nThe convention $1=\\text{reject}$ is fixed here. No null or alternative\nhypothesis is part of this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f, g : A \\to \\mathbb{R}$, let\n$\\alpha \\in \\mathbb{R}$ and let $c \\in A$. Suppose $f$ and $g$ are continuous at\n$c$ ([[def-continuity-real]]). Then:\n\n1. $f + g$, $\\alpha f$ and $fg$ are continuous at $c$;\n2. $|f|$, the function $x \\mapsto |f(x)|$, is continuous at $c$;\n3. $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, defined pointwise by\n   $x \\mapsto \\max\\{f(x), g(x)\\}$ and $x \\mapsto \\min\\{f(x), g(x)\\}$\n   ([[def-max-min]]), are continuous at $c$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is continuous at\n   $c$ as a function on $A_0$.\n\nMoreover, with no hypothesis at all:\n\n5. every constant function $A \\to \\mathbb{R}$ and the identity\n   $\\mathrm{id} : A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.\n\nConsequently, if $f$ and $g$ are continuous **on** $A$ then so are $f+g$,\n$\\alpha f$, $fg$, $|f|$, $\\max\\{f,g\\}$ and $\\min\\{f,g\\}$, and\n$(f/g)|_{A_0}$ is continuous on $A_0$.\n\n**Claim 4 is stated on $A_0$ because $f/g$ is not defined where $g$ vanishes**,\nand $g$ may well vanish at points of $A$ far from $c$. The hypothesis is\n$g(c) \\ne 0$, not \"$g$ nowhere zero\"; what it buys is that $c$ itself lies in\nthe smaller domain, which is what makes continuity there mean anything.\n\n**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from\n[[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$\nand $\\delta$, and claims 2, 3 and 5 are proved directly below. So no choice\nprinciple is used anywhere in this item.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-measurable-rejection-function-defines-randomized-test",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment ([[def-statistical-experiment]]) and let\n$\\varphi:X\\to[0,1]$ be measurable, where $[0,1]$ has its Borel sigma-algebra.\nOn the binary action space $\\{0,1\\}$ with its full sigma-algebra, define\n$$K(x,B)=\\varphi(x)\\mathbf 1_B(1)+(1-\\varphi(x))\\mathbf 1_B(0)\\qquad (B\\subseteq\\{0,1\\}).$$\nThen $K$ is a probability kernel and hence a randomized procedure; its\nrandomized-test function under the convention $1=\\mathrm{reject}$ is\n$\\varphi$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-test-size-and-power",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.\n\nFor a randomized test with test function\n$\\varphi:\\mathcal X\\to[0,1]$ ([[def-randomized-test]]), its **power function**\nis\n$$\\beta(\\theta):=E_\\theta[\\varphi(X)]\\qquad(\\theta\\in\\Theta).$$\nIts **size** is\n$$\\sup_{\\theta\\in\\Theta_0}\\beta(\\theta),$$\nand it has **level $\\alpha$** when this supremum is at most\n$\\alpha\\in[0,1]$. The expectations exist and lie in $[0,1]$ because\n$0\\le\\varphi\\le1$ and each $P_\\theta$ is a probability measure\n([[def-probability-measure]],\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).\nThe supremum exists because $\\Theta_0$ is nonempty, the values lie in\n$[0,1]$, and $\\mathbb R$ has the least-upper-bound property\n([[def-complete-ordered-field]]).\n\nFor the binary action $a\\in\\{0,1\\}$, where $1$ means reject, the\n**zero-one error loss** is $1$ when $a=1$ and $\\theta\\in\\Theta_0$, or when\n$a=0$ and $\\theta\\in\\Theta_1$, and is $0$ otherwise. The decision-rule risk\nfrom [[def-loss-function-and-risk]] integrates this loss against the action\nkernel and data law. For each fixed $\\theta$, its section on the binary\naction space is measurable. The risk identities proved in\n[[lem-test-zero-one-loss-risk-identities]] show that risk equals\n$\\beta(\\theta)$ on $\\Theta_0$ and $1-\\beta(\\theta)$ on $\\Theta_1$. Thus size\nis the worst null error risk, and power is the rejection probability under\neach alternative parameter.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-power-and-sample-size-planning-specification",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E_d=((\\mathcal X_d,\\mathcal A_d),\\Theta,(P_{\\theta,d})_{\\theta\\in\\Theta})$ be the specified statistical experiment for each candidate plan $d$ in a nonempty or empty candidate set $\\mathcal D$. A plan records its sampling or assignment law, a permitted allocation vector $\\mathbf n(d)=(n_1,\\ldots,n_g)$ for an integer $g\\ge1$, with nonnegative integer counts $n_j$, and its total sample size $n(d)=\\sum_{j=1}^g n_j\\in\\mathbb N_{\\ge1}$. Which allocations are permitted, including any positive lower bounds, capacity limits, or costs, is part of $\\mathcal D$.\n\nFor a test plan, fix disjoint nonempty hypotheses $\\Theta_0,\\Theta_1\\subseteq\\Theta$, a measurable randomized test function $\\varphi_d:\\mathcal X_d\\to[0,1]$ ([[def-randomized-test]]), and a nonempty target set $\\Theta_\\star\\subseteq\\Theta_1$. Its power at $\\theta$ is $\\pi_d(\\theta)=E_{\\theta,d}[\\varphi_d(X)]$, its size is $s_d=\\sup_{\\theta\\in\\Theta_0}\\pi_d(\\theta)$, and its type-II error at a specified alternative $\\theta$ is $1-\\pi_d(\\theta)$ ([[def-test-size-and-power]]). A target effect is the declared alternative parameter or contrast, for example $\\delta=\\mu_1-\\mu_0$ in a scalar location model. The sidedness is fixed by the test's predeclared rejection region: an upper or lower tail, or a stated two-sided region such as $\\{|T_d-c_0|>c\\}$; no conversion from a one-sided cutoff to a two-sided cutoff is implicit.\n\nA test-based request specifies nominal size $\\alpha\\in[0,1]$, target type-II error $\\beta\\in[0,1]$, and the target set $\\Theta_\\star$. A plan meets it when $s_d\\le\\alpha$ and $\\pi_d(\\theta)\\ge1-\\beta$ for every $\\theta\\in\\Theta_\\star$, together with every other declared design constraint.\n\nAn optional precision request specifies a scalar estimand $\\psi:\\Theta\\to\\mathbb R$, measurable endpoint functions $L_d,U_d:(\\mathcal X_d,\\mathcal A_d)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ with $L_d\\le U_d$ and interval $C_d(X)=[L_d(X),U_d(X)]$, a target set $\\Theta_\\star$, coverage target $1-\\gamma$ with $\\gamma\\in[0,1]$, maximum width $w>0$, and width assurance $1-\\eta$ with $\\eta\\in[0,1]$. It is met when, for every $\\theta\\in\\Theta_\\star$,\n$$P_{\\theta,d}\\{\\psi(\\theta)\\in C_d(X)\\}\\ge1-\\gamma \\quad\\text{and}\\quad P_{\\theta,d}\\{U_d(X)-L_d(X)\\le w\\}\\ge1-\\eta.$$\nThus precision is a property of the stated interval procedure and sampling law, not just a target effect label.\n\nLet $\\mathcal F\\subseteq\\mathcal D$ be the plans meeting all selected test, precision, allocation, and resource conditions. The planned sample size is $\\text{none}$ if $\\mathcal F=\\varnothing$, and otherwise is the least integer in $\\{n(d):d\\in\\mathcal F\\}$. Among plans tied at that size, the specification may return any one or a declared tie-breaking choice. The definition is an extensional selection rule over its declared candidates; a finite search algorithm is a separate procedure.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-least-feasible-sample-size-exists",
+          "source_section": "Statement",
+          "quote": "Let $S\\subseteq\\mathbb N_{\\ge1}$ be nonempty. Then there is a unique $n_*\\in S$ such that $n_*\\le n$ for every $n\\in S$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-ceiling-and-least-positive-integer-threshold",
+          "source_section": "Statement",
+          "quote": "Identify integers and naturals with their canonical copies in the reals. For every real $x$, put $\\lceil x\\rceil=-\\lfloor-x\\rfloor$, using [[lem-integer-part]]. Then $\\lceil x\\rceil$ is an integer, $x\\le\\lceil x\\rceil$, and\n$$\\lceil x\\rceil\\le m\\quad\\Longleftrightarrow\\quad x\\le m\\qquad(m\\in\\mathbb Z).$$\nFor $a\\ge0$, the least positive integer $n$ with $n\\ge a$ is $\\max\\{1,\\lceil a\\rceil\\}$. In particular $\\lceil0\\rceil=0$, and $\\lceil k\\rceil=k$ for every integer $k$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [A1], countable choice is available for the Borel-measurability supplier in [F5]. The affine statistic $x\\mapsto\\sqrt n(x-\\mu_0)/\\sigma$ is continuous, so the strict upper-level rejection set is Borel and its indicator is measurable. [F5] therefore makes $\\varphi_n$ a randomized-test function in the sample-mean experiment described by [F3]; [F1] gives its statistic the stated shifted normal law.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $\\lambda_\\mu=\\sqrt n(\\mu-\\mu_0)/\\sigma$. Under parameter $\\mu$, the rejection probability is $1-\\Phi(z_{1-\\alpha}-\\lambda_\\mu)=\\Phi(\\lambda_\\mu-z_{1-\\alpha})$ by the symmetry in [F2]. This is the stated power function.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $H_0$, $\\lambda_\\mu\\le0$. Since $\\Phi$ is strictly increasing, the power in step 2.1 is increasing in $\\mu$, so its supremum over $\\mu\\le\\mu_0$ occurs at $\\mu_0$. There it equals $\\Phi(-z_{1-\\alpha})=\\Phi(z_\\alpha)=\\alpha$ by [F2]; hence the test size is $\\alpha$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "At $\\mu_1=\\mu_0+\\delta$, target power is attained exactly when $\\Phi(\\delta\\sqrt n/\\sigma-z_{1-\\alpha})\\ge\\Phi(z_{1-\\beta_{\\rm II}})$. Strict increase of $\\Phi$ makes this equivalent to $\\delta\\sqrt n/\\sigma\\ge q$, where $q=z_{1-\\alpha}+z_{1-\\beta_{\\rm II}}$. If $q\\le0$, the left side is positive for every $n\\ge1$, so all positive sizes qualify. If $q>0$, the condition is $n\\ge(\\sigma/\\delta)^2q^2$.",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $q\\le0$, the least positive size is $1$, which agrees with the displayed formula. For $q>0$, [F8] makes the least integer at least $(\\sigma/\\delta)^2q^2$ its ceiling, already positive. The cases in step 3.2 make the target-feasible set nonempty; step 3.1 shows that every candidate size satisfies the size constraint $s_n=\\alpha$. Thus the target-feasible sizes are exactly the plans meeting the test request, and [F7] identifies their least size with the planning rule's output. The unified expression is the stated $n_*$.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.2 proves the target-feasible size set is nonempty in both q cases."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The branch q=0 is included in step 3.2; sigma and delta are strictly positive, and sample size zero is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 returns size one when q<=0 and the max-with-one formula covers any ceiling below one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumes sigma>0 and delta>0; the degenerate sigma=0 or zero-effect cases are outside this theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes alpha,beta_II are strictly between zero and one, so their normal quantiles are finite interior quantiles."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The explicit q cases construct a feasible positive integer; no selection from a family is used in step 4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.2 derives the necessary inequality on n from the power target using strict increase of Phi."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.2 reverses the same equivalence, and step 4.1 converts it to the least positive integer."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "q<=0",
+          "result": "every positive integer n satisfies the target inequality; least positive n is 1."
+        },
+        {
+          "case": "q>0",
+          "result": "n>= (sigma/delta)^2 q^2; the least positive integer is the ceiling, with max{1,...} handling the common formula."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Read all five proof phases/steps against the previously reviewed 16 prerequisite interfaces. Borel rejection is valid under AC-to-CC; normal shift and symmetry give Phi(lambda-z_(1-alpha)). This increases with mu, so the composite-null supremum is attained at mu0 and equals alpha even for alpha>1/2. Strict increase gives the exact target inequality delta*sqrt(n)/sigma>=q. Checked q<0, q=0 (every positive size), q>0 (squaring only positive sides), integral threshold and threshold below one. Ceiling supplier yields the least positive feasible size and finite quantiles ensure existence. delta>0, sigma>0, interior alpha/beta and AC are explicit; no unknown-variance or asymptotic inference."
+      }
+    },
+    "thm-finite-candidate-power-sample-size-search-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-power-and-sample-size-planning-specification",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E_d=((\\mathcal X_d,\\mathcal A_d),\\Theta,(P_{\\theta,d})_{\\theta\\in\\Theta})$ be the specified statistical experiment for each candidate plan $d$ in a nonempty or empty candidate set $\\mathcal D$. A plan records its sampling or assignment law, a permitted allocation vector $\\mathbf n(d)=(n_1,\\ldots,n_g)$ for an integer $g\\ge1$, with nonnegative integer counts $n_j$, and its total sample size $n(d)=\\sum_{j=1}^g n_j\\in\\mathbb N_{\\ge1}$. Which allocations are permitted, including any positive lower bounds, capacity limits, or costs, is part of $\\mathcal D$.\n\nFor a test plan, fix disjoint nonempty hypotheses $\\Theta_0,\\Theta_1\\subseteq\\Theta$, a measurable randomized test function $\\varphi_d:\\mathcal X_d\\to[0,1]$ ([[def-randomized-test]]), and a nonempty target set $\\Theta_\\star\\subseteq\\Theta_1$. Its power at $\\theta$ is $\\pi_d(\\theta)=E_{\\theta,d}[\\varphi_d(X)]$, its size is $s_d=\\sup_{\\theta\\in\\Theta_0}\\pi_d(\\theta)$, and its type-II error at a specified alternative $\\theta$ is $1-\\pi_d(\\theta)$ ([[def-test-size-and-power]]). A target effect is the declared alternative parameter or contrast, for example $\\delta=\\mu_1-\\mu_0$ in a scalar location model. The sidedness is fixed by the test's predeclared rejection region: an upper or lower tail, or a stated two-sided region such as $\\{|T_d-c_0|>c\\}$; no conversion from a one-sided cutoff to a two-sided cutoff is implicit.\n\nA test-based request specifies nominal size $\\alpha\\in[0,1]$, target type-II error $\\beta\\in[0,1]$, and the target set $\\Theta_\\star$. A plan meets it when $s_d\\le\\alpha$ and $\\pi_d(\\theta)\\ge1-\\beta$ for every $\\theta\\in\\Theta_\\star$, together with every other declared design constraint.\n\nAn optional precision request specifies a scalar estimand $\\psi:\\Theta\\to\\mathbb R$, measurable endpoint functions $L_d,U_d:(\\mathcal X_d,\\mathcal A_d)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ with $L_d\\le U_d$ and interval $C_d(X)=[L_d(X),U_d(X)]$, a target set $\\Theta_\\star$, coverage target $1-\\gamma$ with $\\gamma\\in[0,1]$, maximum width $w>0$, and width assurance $1-\\eta$ with $\\eta\\in[0,1]$. It is met when, for every $\\theta\\in\\Theta_\\star$,\n$$P_{\\theta,d}\\{\\psi(\\theta)\\in C_d(X)\\}\\ge1-\\gamma \\quad\\text{and}\\quad P_{\\theta,d}\\{U_d(X)-L_d(X)\\le w\\}\\ge1-\\eta.$$\nThus precision is a property of the stated interval procedure and sampling law, not just a target effect label.\n\nLet $\\mathcal F\\subseteq\\mathcal D$ be the plans meeting all selected test, precision, allocation, and resource conditions. The planned sample size is $\\text{none}$ if $\\mathcal F=\\varnothing$, and otherwise is the least integer in $\\{n(d):d\\in\\mathcal F\\}$. Among plans tied at that size, the specification may return any one or a declared tie-breaking choice. The definition is an extensional selection rule over its declared candidates; a finite search algorithm is a separate procedure.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-finite-candidate-power-sample-size-search",
+          "source_section": "Definition",
+          "quote": "Input a planning specification [[def-power-and-sample-size-planning-specification]], a finite ordered list $d_1,\\ldots,d_m$ of its candidate plans with $n(d_1)\\le\\cdots\\le n(d_m)$, and an exact evaluator that terminates on each listed plan and returns true exactly when that plan meets all requested power, precision, allocation, and resource conditions. The list order among equal-size plans is part of the input.\n\nInspect $d_1,\\ldots,d_m$ in order. Return the first plan for which the evaluator returns true, together with its total size $n(d_j)$. If no entry passes, return $\\text{none}$. If $m=0$, return $\\text{none}$ without an evaluation.\n\nThis procedure certifies $\\text{none}$ only for the supplied finite list. The exact evaluator is an input subroutine; no numerical approximation or universal termination claim for arbitrary probability laws is part of this algorithm.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each evaluator call terminates by the hypothesis. The loop makes at most $m$ calls; for $m=0$ it returns immediately. Thus the algorithm terminates after finitely many calls.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If the algorithm returns $d_j$, it does so only after the evaluator returns true, which by [F1] means $d_j$ is feasible. Each earlier $d_k$, $k<j$, was evaluated false; since the list is ordered by size, no feasible listed plan has smaller total size than $d_j$. The first passing index also gives the declared tie rule.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If the algorithm returns $\\text{none}$, it evaluated every listed plan and each exact result was false, so no candidate in that list is feasible.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles m=0 and the algorithm returns none immediately."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement uses candidates from the planning specification, which requires positive total sizes; zero allocation components do not change that."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers a one-candidate list with at most one terminating evaluator call."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the first passing candidate implements the stated tie order for equal sizes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem concerns a finite candidate list, not an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The supplied list is finite; steps 1.1\u20132.1 enumerate it without choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives correctness cases, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives correctness cases, not an iff statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "empty list",
+          "result": "terminates with none and certifies that no listed candidate is feasible."
+        },
+        {
+          "case": "sizes 2, 2, 4 with exact results false, true, true",
+          "result": "returns the second candidate of size 2; no smaller feasible listed candidate exists."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-authoring",
+        "notes": "Checked the declared hypotheses, all proof inputs and cited supplier bodies; the item remains draft pending independent owner review."
+      }
+    },
+    "ex-two-sided-normal-z-power-includes-both-tails": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-known-variance-normal-two-sided-z-test-power",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X_1,\\ldots,X_n$ be mutually independent with common law $N(\\mu,\\sigma^2)$, where $n\\ge1$ and $\\sigma>0$. For the simple null $H_0:\\mu=\\mu_0$ against the two-sided alternative $H_1:\\mu\\ne\\mu_0$, let $Z_n=\\sqrt n(\\bar X_n-\\mu_0)/\\sigma$, let $c_\\alpha=z_{1-\\alpha/2}$ for $\\alpha\\in(0,1)$, and reject when $|Z_n|>c_\\alpha$. This test has size $\\alpha$. At $\\mu=\\mu_0+\\delta$, where $\\delta\\in\\mathbb R$, its rejection probability (the power function evaluated at this parameter) is\n$$1-\\Phi(c_\\alpha-\\lambda)+\\Phi(-c_\\alpha-\\lambda), \\qquad \\lambda=\\frac{\\sqrt n\\,\\delta}{\\sigma}.$$\nFor $\\delta\\ne0$ this is power at the stated alternative; for $\\delta=0$ it is the null rejection probability. The first term is the upper-tail rejection probability and the second is the lower-tail rejection probability.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $Z\\sim N(0,1)$ and $\\Phi(x)=P(Z\\le x)$. Then $\\Phi$ is continuous and strictly increasing, with limits $0$ and $1$ at $-\\infty$ and $+\\infty$; $P(Z=x)=0$ for every $x\\in\\mathbb R$; and $\\Phi(-x)=1-\\Phi(x)$. For each $q\\in(0,1)$, there is a unique real $z_q$ with $\\Phi(z_q)=q$, and $z_{1-q}=-z_q$, in particular $z_{1/2}=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Here $c_\\alpha=z_{1-\\alpha/2}=z_{0.975}$ and $\\lambda=\\sqrt4\\,\\sigma/\\sigma=2$. Substitution into [F1] gives the displayed upper-tail term $1-\\Phi(z_{0.975}-2)$ and lower-tail term $\\Phi(-z_{0.975}-2)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both arguments $z_{0.975}-2$ and $-z_{0.975}-2$ are finite, so [F2] gives $1-\\Phi(z_{0.975}-2)>0$ and $\\Phi(-z_{0.975}-2)>0$. Thus the displayed power has a positive contribution from each rejection tail.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes a positive standard deviation and sample size and has no empty candidate set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The lower-tail term is strictly positive by the CDF limit and strict increase cited in verification step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes n=4; it does not state a one-observation case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example assumes sigma>0 and uses a finite shift delta=sigma."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example fixes alpha=0.05, an interior value, so z_0.975 is finite."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The parameter values are fixed; verification steps 1.1\u20132.1 substitute them directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example substitutes into a power formula and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example substitutes into a power formula and asserts no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "alpha=0.05, n=4, delta=sigma",
+          "result": "lambda=2 and exact power is 1-Phi(z_0.975-2)+Phi(-z_0.975-2), with both terms positive."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Read Example, F1/F2 and Verification 1.1\u20132.1. At n=4, delta=sigma>0 the repaired proposition applies at a nonnull parameter and gives lambda=2 and c=z_0.975; alpha=0.05 is interior. Both finite-argument tails are strictly positive from strict CDF increase and limits, so omitting the lower one changes the exact power. Direct consumer review of the reader Statement clarification requires no edit. AC is explicit in Facts/Given."
+      }
+    },
+    "ex-known-variance-normal-z-sample-size-and-sensitivity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $X_1,\\ldots,X_n$ be mutually independent with common law $N(\\mu,\\sigma^2)$, where $n\\in\\mathbb N_{\\ge1}$, $\\sigma>0$, and $\\mu\\in\\mathbb R$. Fix $\\mu_0\\in\\mathbb R$, $\\alpha,\\beta_{\\rm II}\\in(0,1)$, and $\\delta>0$, and put $\\mu_1=\\mu_0+\\delta$. Observe $\\bar X_n=n^{-1}\\sum_iX_i$ in the one-dimensional experiment with law $N(\\mu,\\sigma^2/n)$. For the upper-tail test of $H_0:\\mu\\le\\mu_0$ against $H_1:\\mu>\\mu_0$ with rejection rule\n$$\\varphi_n(x)=\\mathbf 1\\!\\left\\{\\frac{\\sqrt n(x-\\mu_0)}{\\sigma}>z_{1-\\alpha}\\right\\},$$\nthe test size is $\\alpha$, and its power at any $\\mu$ is\n$$\\pi_n(\\mu)=\\Phi\\!\\left(\\frac{\\sqrt n(\\mu-\\mu_0)}{\\sigma}-z_{1-\\alpha}\\right).$$\nThe least positive integer sample size attaining target power $1-\\beta_{\\rm II}$ at $\\mu_1$, with candidate sizes $\\mathbb N_{\\ge1}$, is\n$$n_*=\\max\\!\\left\\{1,\\left\\lceil \\left(\\frac{\\sigma}{\\delta}\\right)^2 \\max\\!\\left\\{0,z_{1-\\alpha}+z_{1-\\beta_{\\rm II}}\\right\\}^{2}\\right\\rceil\\right\\}.$$\nIf $z_{1-\\alpha}+z_{1-\\beta_{\\rm II}}\\le0$, every positive integer size meets the target and the least is $1$. This is an exact result for the specified known-$\\sigma$ normal model; it makes no approximation or claim for an unknown-$\\sigma$ $t$-test or another sampling law.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $Z\\sim N(0,1)$ and $\\Phi(x)=P(Z\\le x)$. Then $\\Phi$ is continuous and strictly increasing, with limits $0$ and $1$ at $-\\infty$ and $+\\infty$; $P(Z=x)=0$ for every $x\\in\\mathbb R$; and $\\Phi(-x)=1-\\Phi(x)$. For each $q\\in(0,1)$, there is a unique real $z_q$ with $\\Phi(z_q)=q$, and $z_{1-q}=-z_q$, in particular $z_{1/2}=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ceiling-and-least-positive-integer-threshold",
+          "source_section": "Statement",
+          "quote": "Identify integers and naturals with their canonical copies in the reals. For every real $x$, put $\\lceil x\\rceil=-\\lfloor-x\\rfloor$, using [[lem-integer-part]]. Then $\\lceil x\\rceil$ is an integer, $x\\le\\lceil x\\rceil$, and\n$$\\lceil x\\rceil\\le m\\quad\\Longleftrightarrow\\quad x\\le m\\qquad(m\\in\\mathbb Z).$$\nFor $a\\ge0$, the least positive integer $n$ with $n\\ge a$ is $\\max\\{1,\\lceil a\\rceil\\}$. In particular $\\lceil0\\rceil=0$, and $\\lceil k\\rceil=k$ for every integer $k$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $1/2<\\Phi(1)<1$ by [F2], $\\alpha=\\beta_{\\rm II}=1-\\Phi(1)$ belong to $(0,1)$. Thus $z_{1-\\alpha}=z_{1-\\beta_{\\rm II}}=z_{\\Phi(1)}=1$, and the quantile sum in [F1] is $2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The theorem's formula gives $n_*=\\max\\{1,\\lceil(\\sigma/\\sigma)^2(2)^2\\rceil\\}=4$ by [F3]. At $n=3$, power is $\\Phi(\\sqrt3-1)<\\Phi(1)$ because $\\sqrt3<2$ and $\\Phi$ is strictly increasing. Therefore the target fails at $n=3$, while [F1] and the formula certify that $n=4$ is the least positive feasible size.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "At $n=4$, halving $\\delta$ changes $\\sqrt n\\,\\delta/\\sigma$ from $2$ to $1$, so the power becomes $\\Phi(1-1)=\\Phi(0)=1/2<\\Phi(1)=1-\\beta_{\\rm II}$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If instead $\\delta=\\sigma$ and $n=4$ are fixed while the standard deviation becomes $2\\sigma$, then the standardized effect also becomes $1$; the power is again $1/2$, below target. This standard-deviation change quadruples the variance, so the example records variance sensitivity without treating the variance itself as the standard deviation.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Example fixes positive sigma, delta and sample size targets; it contains no empty candidate set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification step 2.2 computes the changed-effect power as Phi(0)=1/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The target is first met at n=4; step 2.1 checks n=3 fails and invokes the theorem for minimality over all positive integers."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Example assumes positive standard deviation and positive target effect."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification step 1.1 shows alpha and beta are interior because 1/2<Phi(1)<1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All numerical parameters are fixed in the example; the displayed theorem supplies the least size."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies values and makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies values and makes no iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "delta=sigma and alpha=beta_II=1-Phi(1)",
+          "result": "q=2 and n*=ceil(4)=4; n=3 fails since sqrt(3)<2."
+        },
+        {
+          "case": "halve delta at n=4",
+          "result": "standardized shift becomes 1 and power is Phi(0)=1/2<Phi(1)."
+        },
+        {
+          "case": "double sigma at n=4 with delta fixed",
+          "result": "standardized shift becomes 1 and power is Phi(0)=1/2<Phi(1); variance is multiplied by four."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Read Example, F1\u2013F3 and Verification 1.1\u20133.1 against the current exact one-sided normal theorem, quantile identities and ceiling lemma. Phi(1) lies strictly between 1/2 and 1, so both error targets are interior and both quantiles equal 1. delta=sigma gives threshold 4 and exact ceiling 4; n=3 has lower power. At n=4 halved effect or doubled known standard deviation gives standardized effect 1, hence power Phi(0)=1/2 below target. The latter quadruples variance and keeps the original physical delta fixed; test cutoff uses the changed known standard deviation. AC and model restrictions are explicit; no numerical approximation or variance/standard-deviation confusion."
+      }
+    },
+    "lem-ceiling-and-least-positive-integer-threshold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "Identify $\\mathbb{Z}$ with its canonical copy inside $\\mathbb{R}$, along the\nembeddings $\\mathbb{N} \\to \\mathbb{Z} \\to \\mathbb{Q} \\to \\mathbb{R}$\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]],\n[[def-integers]]). Then for every real $x$ there is **exactly one** integer $m$\nwith\n\n$$m \\;\\le\\; x \\;<\\; m + 1 .$$\n\nIt is written $\\lfloor x \\rfloor$ and called the **integer part**, or **floor**,\nof $x$.\n\n**Two independent ingredients are needed and neither may be dropped.** Existence\nis the Archimedean property ([[thm-of-archimedean]]) together with the\nwell-ordering of $\\mathbb{N}$ ([[thm-well-ordering-principle]]): the first says\nthat $x$ is caught between two integers at all, the second picks the *least*\ninteger above $x$. Uniqueness is the discreteness of $\\mathbb{Z}$: no integer\nlies strictly between $m$ and $m+1$.\n\nThis lemma is stated once here and reused. It is what turns \"the nearest integer\nto $x$\" from a picture into an object, and the companion page's oscillator\n$\\psi(x) = \\inf_{n \\in \\mathbb{Z}} |x - n|$ is computed from it in one line.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-int-ordered-ring",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-int-order]] is well defined and is a total order on\n$\\mathbb{Z}$; it is compatible with addition ($x \\le y$ implies\n$x + z \\le y + z$) and positives are closed under multiplication\n($0 < x$ and $0 < y$ imply $0 < xy$). Thus $\\mathbb{Z}$ is a totally\nordered commutative ring.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nat-embeds-int",
+          "source_section": "Statement",
+          "quote": "The map $\\iota(n) = [(n,0)]$ is injective and preserves addition,\nmultiplication, and order. Its image is exactly the set of nonnegative\nintegers, so every $x \\ge 0$ in $\\mathbb{Z}$ is $\\iota(k)$ for a unique\nnatural $k$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nat-discrete",
+          "source_section": "Statement",
+          "quote": "For all $m, n \\in \\mathbb{N}$: $m < n \\iff \\sigma(m) \\le n$ ([[def-nat-order]]). Consequently there is no $k$ with $n < k < \\sigma(n)$: the successor $\\sigma(n)$ is the immediate successor of $n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-add-order",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b, c, d \\in F$.\n\n1. **Translation invariance.** If $a < b$ then $a + c < b + c$.\n2. **Adding inequalities.** If $a < b$ and $c < d$ then $a + c < b + d$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply [F1] to $-x$ and write $k=\\lfloor-x\\rfloor$, $c=-k$. By [F2], $c$ is an integer. Negating $k\\le-x<k+1$ using [F4] gives $c-1<x\\le c$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For an integer $k$, [F1] applied to $-k\\le-k<-k+1$ gives $\\lfloor-k\\rfloor=-k$, so $\\lceil k\\rceil=k$. This includes $k=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every positive integer $d$ is at least one: by [F2] it is the image of a natural, which is nonzero because the embedding is injective and preserves zero, and [F3] gives the conclusion. If an integer $m$ satisfies $x\\le m$ but $m<c$, then the positive integer $c-m$ is at least one. Thus $m\\le c-1<x\\le m$ by step 1.1, a contradiction. Therefore $x\\le m$ implies $c\\le m$; conversely $c\\le m$ implies $x\\le m$ because $x\\le c$. This proves the equivalence with $c=\\lceil x\\rceil$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $a\\ge0$, step 1.1 gives $\\lceil a\\rceil\\ge a\\ge0$. Thus $n_*=\\max\\{1,\\lceil a\\rceil\\}$ is an integer at least one, hence a positive natural under [F2], and $n_*\\ge a$. If a positive integer $n$ satisfies $n\\ge a$, step 2.1 gives $n\\ge\\lceil a\\rceil$ and step 2.1's discreteness argument gives $n\\ge1$. Hence $n\\ge n_*$, proving leastness.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every real has a floor by the explicit supplier; no varying empty domain or degenerate distribution is involved."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 proves ceiling0=0; step 3.1 clamps the positive threshold minimum at1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Integer fixed points in step 1.2 include1; step 3.1 gives minimum1 for a<=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every real has a floor by the explicit supplier; no varying empty domain or degenerate distribution is involved."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Nonstrict inequalities in steps 1.1\u20132.1 retain equality at integer thresholds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 explicitly constructs the feasible positive integer, without a choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 proves ceilingx<=m implies x<=m by x<=ceilingx."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 excludes every m<ceilingx with x<=m by integer discreteness."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Checked Proof 1.1\u20133.1 against current floor uniqueness, natural-to-integer order embedding, natural discreteness, ordered-ring and ordered-field statements. Negating the floor bounds gives c-1<x<=c; positive integral c-m>=1 proves both directions of c<=m iff x<=m. Tested x negative, zero, integral and nonintegral; a=0 returns 1 and integral a>=1 returns a. No choice or missing hypothesis."
+      }
+    },
+    "alg-positive-integer-power-sample-size-search": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: empty feasible domain never terminates ascending mode, but certified modes return none."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: B=0 is allowed only with its valid all-size completeness certificate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: ascending search starts at1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the constant-false evaluator makes ascending mode continue forever; bounded mode with a genuine completeness certificate, including B=0, and the all-size infeasibility-proof mode can instead return none. The constant-true evaluator returns size one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: bounded search includesB."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: exact per-size Boolean evaluator is input; no plan choice/witness is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition, exact-evaluator input contract: a true evaluator output certifies that the admitted candidate size is feasible. These are the two admitted directions of \u201cexactly when\u201d; termination is a separate theorem and is not inferred from this input convention."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition, exact-evaluator input contract: feasibility of an admitted candidate size requires a true evaluator output. These are the two admitted directions of \u201cexactly when\u201d; termination is a separate theorem and is not inferred from this input convention."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "owner-focused-scope-repair",
+        "notes": "Procedural instructions state exact-evaluator and global certificate assumptions; theorem handles their separate correctness and termination obligations."
+      }
+    },
+    "thm-positive-integer-power-sample-size-search-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-power-and-sample-size-planning-specification",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E_d=((\\mathcal X_d,\\mathcal A_d),\\Theta,(P_{\\theta,d})_{\\theta\\in\\Theta})$ be the specified statistical experiment for each candidate plan $d$ in a nonempty or empty candidate set $\\mathcal D$. A plan records its sampling or assignment law, a permitted allocation vector $\\mathbf n(d)=(n_1,\\ldots,n_g)$ for an integer $g\\ge1$, with nonnegative integer counts $n_j$, and its total sample size $n(d)=\\sum_{j=1}^g n_j\\in\\mathbb N_{\\ge1}$. Which allocations are permitted, including any positive lower bounds, capacity limits, or costs, is part of $\\mathcal D$.\n\nFor a test plan, fix disjoint nonempty hypotheses $\\Theta_0,\\Theta_1\\subseteq\\Theta$, a measurable randomized test function $\\varphi_d:\\mathcal X_d\\to[0,1]$ ([[def-randomized-test]]), and a nonempty target set $\\Theta_\\star\\subseteq\\Theta_1$. Its power at $\\theta$ is $\\pi_d(\\theta)=E_{\\theta,d}[\\varphi_d(X)]$, its size is $s_d=\\sup_{\\theta\\in\\Theta_0}\\pi_d(\\theta)$, and its type-II error at a specified alternative $\\theta$ is $1-\\pi_d(\\theta)$ ([[def-test-size-and-power]]). A target effect is the declared alternative parameter or contrast, for example $\\delta=\\mu_1-\\mu_0$ in a scalar location model. The sidedness is fixed by the test's predeclared rejection region: an upper or lower tail, or a stated two-sided region such as $\\{|T_d-c_0|>c\\}$; no conversion from a one-sided cutoff to a two-sided cutoff is implicit.\n\nA test-based request specifies nominal size $\\alpha\\in[0,1]$, target type-II error $\\beta\\in[0,1]$, and the target set $\\Theta_\\star$. A plan meets it when $s_d\\le\\alpha$ and $\\pi_d(\\theta)\\ge1-\\beta$ for every $\\theta\\in\\Theta_\\star$, together with every other declared design constraint.\n\nAn optional precision request specifies a scalar estimand $\\psi:\\Theta\\to\\mathbb R$, measurable endpoint functions $L_d,U_d:(\\mathcal X_d,\\mathcal A_d)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ with $L_d\\le U_d$ and interval $C_d(X)=[L_d(X),U_d(X)]$, a target set $\\Theta_\\star$, coverage target $1-\\gamma$ with $\\gamma\\in[0,1]$, maximum width $w>0$, and width assurance $1-\\eta$ with $\\eta\\in[0,1]$. It is met when, for every $\\theta\\in\\Theta_\\star$,\n$$P_{\\theta,d}\\{\\psi(\\theta)\\in C_d(X)\\}\\ge1-\\gamma \\quad\\text{and}\\quad P_{\\theta,d}\\{U_d(X)-L_d(X)\\le w\\}\\ge1-\\eta.$$\nThus precision is a property of the stated interval procedure and sampling law, not just a target effect label.\n\nLet $\\mathcal F\\subseteq\\mathcal D$ be the plans meeting all selected test, precision, allocation, and resource conditions. The planned sample size is $\\text{none}$ if $\\mathcal F=\\varnothing$, and otherwise is the least integer in $\\{n(d):d\\in\\mathcal F\\}$. Among plans tied at that size, the specification may return any one or a declared tie-breaking choice. The definition is an extensional selection rule over its declared candidates; a finite search algorithm is a separate procedure.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-positive-integer-power-sample-size-search",
+          "source_section": "Definition",
+          "quote": "Input the full planning specification [[def-power-and-sample-size-planning-specification]] and an exact evaluator $E$ on every positive integer $n$. Each call $E(n)$ must terminate and return a Boolean with the following meaning: $E(n)$ is true exactly when the specification has a feasible plan of total size $n$, including its sampling law/test, power or precision target, allowed allocation and resource conditions. With a fixed allocation rule this is the ordinary per-size power calculation. For several candidate plans at one size, this assumption requires exact resolution of whether any is feasible; it is not supplied by the procedure. The evaluator, and any stopping certificate below, are inputs, not a universal ability to compute probabilities of arbitrary models.\n\nChoose one of these admissible modes.\n\n1. **Unbounded ascending search.** Set $n=1$. Evaluate $E(n)$. If true, return $n$; otherwise replace $n$ by $n+1$ and repeat. This branch never returns $\\mathrm{none}$ merely because a finite prefix failed.\n\n2. **Certified bounded search.** Supply a nonnegative integer $B$ and a valid completeness certificate that, if any positive size is feasible, some feasible size is at most $B$. Evaluate $E(1),\\ldots,E(B)$ in order, returning the first true index. If all are false, return $\\mathrm{none}$; for $B=0$, return $\\mathrm{none}$ immediately. The certificate is a mathematical premise covering all positive sizes, not a claim inferred from those finite evaluations. A proved feasible witness of size $B$ is one sufficient certificate.\n\n3. **Certified infeasibility.** Supply a valid proof that $E(n)$ is false for every positive integer $n$. Return $\\mathrm{none}$ without an evaluation.\n\nThe output is a sample size, not a selected allocation. Selecting a plan at that size requires an explicit witness-producing evaluator or an independently specified selection rule. The extensional target remains the least feasible positive integer, or $\\mathrm{none}$ if no such integer exists. Termination properties are separate proved results; no global infeasibility decision is asserted for unrestricted black-box input.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-least-feasible-sample-size-exists",
+          "source_section": "Statement",
+          "quote": "Let $S\\subseteq\\mathbb N_{\\ge1}$ be nonempty. Then there is a unique $n_*\\in S$ such that $n_*\\le n$ for every $n\\in S$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $S\\ne\\varnothing$. By [F3] let $n_*=\\min S$. In ascending mode [F2] calls the evaluator at $1,\\ldots,n_*$: each call terminates, every earlier answer is false by leastness, and the answer at $n_*$ is true. The finite sequence of calls therefore terminates at $n_*$, with exactly $n_*$ evaluations and the output required by [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "In bounded mode at most $B$ calls occur and every call terminates, so the mode terminates, including when $B=0$. If an index is returned, every smaller positive integer has already answered false, and exactness makes the returned integer the least of $S$, not merely least in a selected list.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If ascending mode terminates, [F2] says it returns only at a true answer, so its returned integer is in $S$ and $S$ is nonempty. Conversely, if $S$ is empty, every terminating call answers false and [F2] increments to the next positive integer. No return instruction is reached, so the execution continues forever. Together with step 1.1 this proves the equivalence and the empty-case behavior.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If bounded mode returns none, every index at most $B$ is infeasible. Were $S$ nonempty, the completeness certificate would place some element of $S$ at most $B$, contradicting those answers. Thus $S$ is empty and none is the answer of [F1]. Conversely, empty $S$ makes every bounded answer false, so none is returned.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the infeasibility mode the supplied proof states that $S$ is empty, so immediate return of none is correct by [F1]. A true answer at a positive $B$ proves that $B\\in S$ and therefore is itself a finite completeness witness, whether or not feasibility is monotone. The constant-false evaluator is nondecreasing but has empty $S$, so step 2.1 shows that monotonicity alone does not give termination of ascending search. These observations establish all remaining assertions.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 proves ascending divergence; steps 2.2\u20133.1 justify certified none."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes zero-length bounded search with validcertificate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 returns1 if that is the leastfeasible size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof step 2.1 treats empty S and proves endless ascending execution; step 1.2 covers bounded B=0, and step 3.1 covers a supplied infeasibility proof and the constant-false nondecreasing evaluator. Constant-true E has least size one by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes a true evaluator answeratB."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the provedleastmember result, not a choiceaxiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves termination impliesnonemptyS."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves nonemptyS impliestermination."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Checked full Statement and all five proof steps against the actual algorithm Definition, planning rule and least-size lemma. Ascending branch reaches min S after exactly min S individually terminating calls when S nonempty; any return requires a true answer, establishing both iff directions. Empty S gives endless increments rather than none. Bounded branch makes at most B calls; global completeness is used exactly to rule out an unseen feasible size after all false answers. B=0 is valid only with a certificate forcing S empty. Immediate infeasibility branch uses its all-size proof. A crossing witness works without monotonicity; constant-false monotone oracle shows monotonicity alone is insufficient. No global time bound or allocation witness is asserted."
+      }
+    },
+    "cex-no-finite-query-universal-sample-size-infeasibility-detector": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-power-and-sample-size-planning-specification",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E_d=((\\mathcal X_d,\\mathcal A_d),\\Theta,(P_{\\theta,d})_{\\theta\\in\\Theta})$ be the specified statistical experiment for each candidate plan $d$ in a nonempty or empty candidate set $\\mathcal D$. A plan records its sampling or assignment law, a permitted allocation vector $\\mathbf n(d)=(n_1,\\ldots,n_g)$ for an integer $g\\ge1$, with nonnegative integer counts $n_j$, and its total sample size $n(d)=\\sum_{j=1}^g n_j\\in\\mathbb N_{\\ge1}$. Which allocations are permitted, including any positive lower bounds, capacity limits, or costs, is part of $\\mathcal D$.\n\nFor a test plan, fix disjoint nonempty hypotheses $\\Theta_0,\\Theta_1\\subseteq\\Theta$, a measurable randomized test function $\\varphi_d:\\mathcal X_d\\to[0,1]$ ([[def-randomized-test]]), and a nonempty target set $\\Theta_\\star\\subseteq\\Theta_1$. Its power at $\\theta$ is $\\pi_d(\\theta)=E_{\\theta,d}[\\varphi_d(X)]$, its size is $s_d=\\sup_{\\theta\\in\\Theta_0}\\pi_d(\\theta)$, and its type-II error at a specified alternative $\\theta$ is $1-\\pi_d(\\theta)$ ([[def-test-size-and-power]]). A target effect is the declared alternative parameter or contrast, for example $\\delta=\\mu_1-\\mu_0$ in a scalar location model. The sidedness is fixed by the test's predeclared rejection region: an upper or lower tail, or a stated two-sided region such as $\\{|T_d-c_0|>c\\}$; no conversion from a one-sided cutoff to a two-sided cutoff is implicit.\n\nA test-based request specifies nominal size $\\alpha\\in[0,1]$, target type-II error $\\beta\\in[0,1]$, and the target set $\\Theta_\\star$. A plan meets it when $s_d\\le\\alpha$ and $\\pi_d(\\theta)\\ge1-\\beta$ for every $\\theta\\in\\Theta_\\star$, together with every other declared design constraint.\n\nAn optional precision request specifies a scalar estimand $\\psi:\\Theta\\to\\mathbb R$, measurable endpoint functions $L_d,U_d:(\\mathcal X_d,\\mathcal A_d)\\to(\\mathbb R,\\mathcal B(\\mathbb R))$ with $L_d\\le U_d$ and interval $C_d(X)=[L_d(X),U_d(X)]$, a target set $\\Theta_\\star$, coverage target $1-\\gamma$ with $\\gamma\\in[0,1]$, maximum width $w>0$, and width assurance $1-\\eta$ with $\\eta\\in[0,1]$. It is met when, for every $\\theta\\in\\Theta_\\star$,\n$$P_{\\theta,d}\\{\\psi(\\theta)\\in C_d(X)\\}\\ge1-\\gamma \\quad\\text{and}\\quad P_{\\theta,d}\\{U_d(X)-L_d(X)\\le w\\}\\ge1-\\eta.$$\nThus precision is a property of the stated interval procedure and sampling law, not just a target effect label.\n\nLet $\\mathcal F\\subseteq\\mathcal D$ be the plans meeting all selected test, precision, allocation, and resource conditions. The planned sample size is $\\text{none}$ if $\\mathcal F=\\varnothing$, and otherwise is the least integer in $\\{n(d):d\\in\\mathcal F\\}$. Among plans tied at that size, the specification may return any one or a declared tie-breaking choice. The definition is an extensional selection rule over its declared candidates; a finite search algorithm is a separate procedure.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-test-size-and-power",
+          "source_section": "Definition",
+          "quote": "Let $\\mathsf E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). Let\n$\\Theta_0,\\Theta_1$ be nonempty disjoint subsets of $\\Theta$, called the null\nand alternative hypotheses. A hypothesis is **simple** when it is a singleton\nand **composite** when it has at least two elements.\n\nFor a randomized test with test function\n$\\varphi:\\mathcal X\\to[0,1]$ ([[def-randomized-test]]), its **power function**\nis\n$$\\beta(\\theta):=E_\\theta[\\varphi(X)]\\qquad(\\theta\\in\\Theta).$$\nIts **size** is\n$$\\sup_{\\theta\\in\\Theta_0}\\beta(\\theta),$$\nand it has **level $\\alpha$** when this supremum is at most\n$\\alpha\\in[0,1]$. The expectations exist and lie in $[0,1]$ because\n$0\\le\\varphi\\le1$ and each $P_\\theta$ is a probability measure\n([[def-probability-measure]],\n[[def-expectation-of-a-nonnegative-or-integrable-random-variable]]).\nThe supremum exists because $\\Theta_0$ is nonempty, the values lie in\n$[0,1]$, and $\\mathbb R$ has the least-upper-bound property\n([[def-complete-ordered-field]]).\n\nFor the binary action $a\\in\\{0,1\\}$, where $1$ means reject, the\n**zero-one error loss** is $1$ when $a=1$ and $\\theta\\in\\Theta_0$, or when\n$a=0$ and $\\theta\\in\\Theta_1$, and is $0$ otherwise. The decision-rule risk\nfrom [[def-loss-function-and-risk]] integrates this loss against the action\nkernel and data law. For each fixed $\\theta$, its section on the binary\naction space is measurable. The risk identities proved in\n[[lem-test-zero-one-loss-risk-identities]] show that risk equals\n$\\beta(\\theta)$ on $\\Theta_0$ and $1-\\beta(\\theta)$ on $\\Theta_1$. Thus size\nis the worst null error risk, and power is the rejection probability under\neach alternative parameter.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "An **experiment** is a measurable space $(\\mathcal X,\\mathcal A)$, a set $\\Theta$ of\nparameter labels, and a family $(P_\\theta)_{\\theta\\in\\Theta}$ of probability\nmeasures on $(\\mathcal X,\\mathcal A)$ ([[def-measurable-space]],\n[[def-probability-measure]]). The measures $P_\\theta$ are the sampling laws.\nIf data under a parameter value are realized as a random element, its law is\nthe pushforward measure $P_X(B)=P(X^{-1}(B))$ from\n[[def-law-or-distribution-of-a-random-element]]; it is a probability measure by\n[[lem-law-of-a-random-element-is-a-probability-measure]].\n\nThe definition specifies the family of laws only. It supplies no sigma-algebra\non $\\Theta$, no measurability condition on $\\theta\\mapsto P_\\theta$, and no\ncommon underlying probability space on which all observations must be realized.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-randomized-test",
+          "source_section": "Definition",
+          "quote": "A **randomized test** is a randomized procedure with binary action space\nwhose action set is $\\{0,1\\}$, equipped with its full sigma-algebra\n$2^{\\{0,1\\}}$ (the power set, which is a sigma-algebra by\n[[def-sigma-algebra]]), where $1$ means reject and $0$ means do not reject\n([[def-randomized-procedure-as-a-markov-kernel]]). Its **test function** is\n$$\\varphi(x)=K(x,\\{1\\}),\\qquad x\\in\\mathcal X.$$\nSince $K(x,\\cdot)$ is a probability measure and $\\{0\\},\\{1\\}$ partition the\naction set, $K(x,\\{0\\})+K(x,\\{1\\})=1$. Thus $\\varphi(x)\\in[0,1]$ and\n$1-\\varphi(x)=K(x,\\{0\\})$ is the probability of not rejecting. Give $[0,1]$\nthe trace of the Borel sigma-algebra on $[0,+\\infty]$, namely\n$\\{C\\cap[0,1]:C\\in\\mathcal B([0,+\\infty])\\}$. By\n[[lem-procedure-action-law-is-measurable]], $x\\mapsto K(x,\\{1\\})$ is\nmeasurable; since it has range in $[0,1]$, its preimage of $C\\cap[0,1]$ equals\nits preimage of $C$ and is measurable for every such $C$. Hence $\\varphi$ is a\nmeasurable map in the preimage sense of\n[[def-measurable-function-between-measurable-spaces]]. Its value is the\nrejection probability after observing $x$.\nThe convention $1=\\text{reject}$ is fixed here. No null or alternative\nhypothesis is part of this definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-measurable-rejection-function-defines-randomized-test",
+          "source_section": "Statement",
+          "quote": "Let $\\mathsf E=((X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$ be a\nstatistical experiment ([[def-statistical-experiment]]) and let\n$\\varphi:X\\to[0,1]$ be measurable, where $[0,1]$ has its Borel sigma-algebra.\nOn the binary action space $\\{0,1\\}$ with its full sigma-algebra, define\n$$K(x,B)=\\varphi(x)\\mathbf 1_B(1)+(1-\\varphi(x))\\mathbf 1_B(0)\\qquad (B\\subseteq\\{0,1\\}).$$\nThen $K$ is a probability kernel and hence a randomized procedure; its\nrandomized-test function under the convention $1=\\mathrm{reject}$ is\n$\\varphi$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ ([[def-sigma-algebra]]) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Give the procedure the constant-false oracle $E_0(n)=0$. Correctness forces the output none, and universal termination makes its queried set $Q$ finite. Put $M=1+\\sum_{q\\in Q}q$, which is a positive integer greater than every queried positive size, including $M=1$ when $Q$ is empty, and define $E_M(n)=\\mathbf1\\{n\\ge M\\}$. Both oracles are nondecreasing and answer false at every query in the completed $E_0$ transcript.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Run the same deterministic procedure with $E_M$. Its initial internal state is the same, and whenever a query is reached along the original transcript, its answer is the same false value. Induction through the finite transcript therefore gives identical internal states, queries and terminal output. It returns none on $E_M$, although $M$ is the least feasible size. This contradicts the claimed correctness.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "These oracles are realizable as exact power-feasibility inputs: use candidate plans $d_n$ with one allocation count equal to $n$, for every positive integer $n$; at that size take the measurable space $\\{0,1\\}$ with its full power set, parameters $0,1$, null law $P_{0,n}=\\delta_0$, target law $P_{1,n}=\\delta_{E(n)}$, and test $\\varphi(x)=x$. The full power set makes $\\varphi$ measurable, and the proved point-mass and measurable-rejection-function suppliers in [F2] make this an experiment and randomized test. Its null size is zero and target power is $E(n)$, so a size bound zero and target power $1/2$ in [F1] make feasibility equivalent to $E(n)=1$. Use either $E_0$ or $E_M$; hence the distinction is compatible with explicit statistical laws, not a numerical approximation error.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the empty feasible set of the constant-false oracle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 has test size0; this is allowed by the planning specification."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 choosesM=1 when no queries occurred."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 uses valid point-mass laws to realize exact powers0or1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Counterexample step 3.1 realizes exact target powers zero and one using point masses, with null size zero and target threshold one half. Step 1.1 also covers an empty queried set by M=1; no size-zero candidate is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly constructsM from finite queried integers without an arbitrary choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Counterexample step 3.1: feasibility forces E(n)>=1/2 and hence E(n)=1 because E is Boolean. This checks the stated feasibility equivalence for the constructed laws, not the refuted universal termination claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Counterexample step 3.1: E(n)=1 gives target power one, above one half, and null size zero satisfies its bound. This checks the stated feasibility equivalence for the constructed laws, not the refuted universal termination claim."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-17-3a",
+        "notes": "Read Steps 1.1\u20133.1 and current planning, experiment, randomized-test, power, Dirac and measurable-indicator interfaces. Universal termination on all-false gives finite Q; M=1+sum(Q) is larger than every positive queried index, also for Q empty. Determinism preserves the entire adaptive transcript for threshold oracle 1{n>=M}; both oracles are nondecreasing yet correct answers differ. Explicit {0,1} experiments with null Dirac0 and alternative Dirac_E(n), phi(x)=x, alpha=0 and target=1/2 realize exact feasibility for every size. Null/alternative parameter labels remain disjoint even when laws coincide. No monotonicity, independence across n, extra observations or extra choice is assumed."
+      }
+    }
+  }
+}

@@ -1,0 +1,820 @@
+{
+  "version": 1,
+  "scope": [
+    "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+    "lem-finite-support-risk-set-proportion-limits",
+    "thm-finite-support-nelson-aalen-kaplan-meier-consistency",
+    "lem-uniform-right-censoring-risk-set-convergence",
+    "thm-pointwise-nelson-aalen-kaplan-meier-greenwood-limit",
+    "ex-kaplan-meier-hand-risk-set-and-support-loss"
+  ],
+  "contracts": {
+    "def-nelson-aalen-kaplan-meier-greenwood-estimators": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition states a positive integer n and its finite sums and products therefore have a nonempty subject index set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition sets the Nelson–Aalen integrand to zero when Y_n=0; at u=0, Y_n(0)=n and any observed baseline event is included by the [0,t] interval."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits n=1 and makes Greenwood undefined when its event denominator is zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition sets the empty event product to 1 and the empty Greenwood sum to 0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition counts T=C as an event, uses U_i≥t for the risk set, and includes event increments on [0,t]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-sample formulas make no selection from a nonempty family and invoke no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    },
+    "lem-finite-support-risk-set-proportion-limits": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "An **event time** is a measurable real-valued map $T$ with values in $[0,\\infty)$. A **covariate** is a measurable map $Z$ into a specified standard-Borel space $(\\mathcal Z,\\mathcal B)$, where standard Borel means measurably isomorphic to a Polish space ([[def-standard-borel-space]]). A **censoring or inspection time** is a measurable real-valued map $C$ with values in $[0,\\infty)$. When conditional laws are used, they are probability kernels $K_T(z,\\cdot)$ and $K_C(z,\\cdot)$ in the sense of [[def-conditional-law-given-a-random-element]] and [[def-measure-kernel-and-probability-kernel]]. They are part of the specified model; their existence for real-valued targets and factorization through standard-Borel $Z$ follow under [[def-axiom-of-choice]] from [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]] and [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]].\n\nThe notation $T\\perp\\!\\!\\!\\perp C\\mid\\sigma(Z)$ has the meaning in [[def-conditional-independence-given-a-sigma-algebra]]: for bounded measurable $a,b$, $\\mathbb E[a(T)b(C)\\mid\\sigma(Z)]=\\mathbb E[a(T)\\mid\\sigma(Z)]\\mathbb E[b(C)\\mid\\sigma(Z)]$ almost surely. It is a model assumption about the conditional observation law, not a consequence of adjusting for $Z$ and not an empirical conclusion.\n\nUnder **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$. Thus $\\delta=1$ records an event at $U=T$, including a tie, while $\\delta=0$ records censoring at $U=C$ and implies $T>C$. **Left censoring** at a known threshold $L$ records only $T\\le L$. **Interval censoring** at known endpoints $L<R$ records $L<T\\le R$. **Current-status observation** at an inspection time $C$ records only $\\delta_C=1\\{T\\le C\\}$.\n\n**Left truncation**, also called delayed entry at $L$, selects a unit into the sample only when $T>L$; observation begins after that selection. **Right truncation** at $R$ selects a unit only when $T<R$. These are selection rules before the observed sample is formed, whereas censoring coarsens an event time after sampling. The strict and weak inequalities in these definitions fix the endpoint conventions. A random observation endpoint is called noninformative here only when it is fixed by design or is generated independently of $T$ conditional on the stated covariates under a parameter-distinct law; otherwise its joint observation law must be modeled.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "For a positive integer sample size $n$, let $(T_i,C_i)$, $1\\le i\\le n$, be event and censoring times with right-censored observations $(U_i,\\delta_i)$ as in [[def-event-time-observation-schemes]], so $U_i=\\min(T_i,C_i)$ and $\\delta_i=\\mathbf 1\\{T_i\\le C_i\\}$. The subject counting process and at-risk process are $N_i(t)=\\mathbf 1\\{U_i\\le t,\\ \\delta_i=1\\}$ and $Y_i(t)=\\mathbf 1\\{U_i\\ge t\\}$.\nThe endpoint convention makes $Y_i$ left-continuous at $U_i$: a subject is still at risk at the observed time, including a tied event and censoring time. Set $N_n=\\sum_{i=1}^nN_i$ and $Y_n=\\sum_{i=1}^nY_i$. Let $dN_n$ be the finite counting measure of observed events on $[0,\\infty)$, with atom $\\Delta N_n(u):=\\sum_{i=1}^n\\mathbf 1\\{U_i=u,\\ \\delta_i=1\\}$ at each $u\\ge0$; in particular, $\\Delta N_n(0)=N_n(0)$. Tied failures at $u$ contribute their full count and censorings at $u$ do not contribute to $dN_n(u)$.\n\nFor $t\\ge0$, the **Nelson–Aalen estimator** is $\\widehat\\Lambda_n(t)=\\int_{[0,t]}\\frac{\\mathbf 1\\{Y_n(u)>0\\}}{Y_n(u)}\\,dN_n(u)$, where the integrand is defined to be zero when $Y_n(u)=0$. The **Kaplan–Meier estimator** is $\\widehat S_n(t)=\\prod_{\\substack{0\\le u\\le t:\\,\\Delta N_n(u)>0}}\\left(1-\\frac{\\Delta N_n(u)}{Y_n(u)}\\right)$.\nEach product is finite and a factor is zero if every subject at risk fails at that time. The target survival function is $S(t)=P(T>t)$. If $T$ has density $f$, $S$ is positive on the horizon, and $\\lambda=f/S$, the continuous cumulative hazard is $\\Lambda(t)=\\int_0^t\\lambda(u)\\,du=-\\log S(t)$.\n\nThese inclusive endpoint formulas reduce to the usual $(0,t]$ formulas whenever $\\Delta N_n(0)=0$. If $T$ has finite support $0\\le a_1<\\cdots<a_m$, write $q_j=P(T=a_j\\mid T\\ge a_j)$; the corresponding discrete cumulative hazard is $\\Lambda_d(t)=\\sum_{a_j\\le t}q_j$. Under IID sampling, independent censoring, and positive risk probability at the support points, the Nelson–Aalen increments estimate these $q_j$; in general this discrete cumulative hazard is not $-\\log S(t)$.\n\nA baseline event is included at $u=0$; if it occurs then $N_i(0)=1$, so a model contract requiring $N_i(0)=0$ must exclude this case.\n\nAn empty event product is $1$, and an empty Greenwood event sum is $0$.\n\nOn a horizon where every event contribution has $Y_n(u)-\\Delta N_n(u)>0$, the **Greenwood variance estimate** is $\\widehat V_G(t)=\\widehat S_n(t)^2\\sum_{0\\le u\\le t:\\,\\Delta N_n(u)>0}\\frac{\\Delta N_n(u)}{Y_n(u)\\{Y_n(u)-\\Delta N_n(u)\\}}$.\nGreenwood's formula is used as a first-order asymptotic variance estimate when the sampling and censoring assumptions justify that approximation; the formula alone asserts no asymptotic result and is not an exact finite-sample variance identity. It is undefined when a contributing denominator is zero.\n\nFor each fixed $t$, $\\widehat\\Lambda_n(t)$ and $\\widehat S_n(t)$ are statistics of the observed sample in the sense of [[def-statistic-and-estimator]]. Greenwood's formula is a measurable function on the measurable subset $D_n(t)$ of the observed sample space $([0,\\infty)\\times\\{0,1\\})^n$ where every contributing denominator is positive. Its **zero extension** $\\widehat V_G^\\circ(t)$, equal to $\\widehat V_G(t)$ on $D_n(t)$ and $0$ elsewhere, is a statistic on the whole observed sample space. This extension assigns no Greenwood variance interpretation outside $D_n(t)$.\n\nTo verify measurability, scan indices $i=1,\\ldots,n$ and include only the first event observation at each distinct time in $[0,t]$; each inclusion condition uses finitely many Borel equalities and inequalities among the observed $U_i$ and $\\delta_i$. Risk and event counts are finite Borel sums. The finitely many positive-denominator tests make $D_n(t)$ measurable; evaluating divisions only on their positive-denominator branches makes the sums, products, and zero extension Borel measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $D_{ij}=\\mathbf 1\\{U_i=a_j,\\delta_i=1\\}$. By [F1], $Y_i(a_j)=\\mathbf 1\\{T_i\\ge a_j,C_i\\ge a_j\\}$ and $D_{ij}=\\mathbf 1\\{T_i=a_j,C_i\\ge a_j\\}$. Independence in [A1] therefore gives $E[Y_i(a_j)]=r_j=P(T\\ge a_j)P(C\\ge a_j)$ and $E[D_{ij}]=P(T=a_j)P(C\\ge a_j)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two indicators are bounded IID sequences by [F2]. For either sequence, the variance of its sample mean is at most $1/(4n)$, so Chebyshev's inequality gives convergence in probability to its expectation. Since there are finitely many support points, these convergences hold jointly over $j=1,\\ldots,m$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $r_j>0$, with probability tending to one $Y_n(a_j)/n>r_j/2$. On that event the ratio is the quotient of the two convergent proportions from step 2.1, and its limit is $\\frac{P(T=a_j)P(C\\ge a_j)}{P(T\\ge a_j)P(C\\ge a_j)}=P(T=a_j\\mid T\\ge a_j)=q_j$. The zero-denominator event has probability tending to zero by the same risk-proportion convergence, so the stated zero convention does not change the limit.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires a positive integer n; the zero sample is outside its domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 retains the zero-denominator convention and proves its probability tends to zero because r_j>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The bounded-indicator variance bound in step 2.1 also holds at n=1; the claim concerns n tending to infinity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 remains valid for q_j=0 or q_j=1 because only r_j>0 is needed to divide."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 counts T=C as an event and includes it in Y_i(a_j); this also holds at the baseline support point a_j=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finitely many IID indicators are summed directly; no arbitrary-family choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states one-way convergence and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from the ratio limit to independent censoring is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Read Statement, Facts and steps 1.1–3.1 against observation, estimator and IID definitions. T=C is counted as an event; at a_j=0 risk is n. Indicator expectations factor by within-subject independence; variance at most 1/(4n) gives joint convergence for the finite support. Positive r_j makes the zero-denominator branch negligible and permits the quotient limit, including q_j=0 or 1. No AC, converse or empty-sample assertion. Reader baseline extension reviewed as sound audit enrichment; refuter has no finding for this item."
+      }
+    },
+    "thm-finite-support-nelson-aalen-kaplan-meier-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "An **event time** is a measurable real-valued map $T$ with values in $[0,\\infty)$. A **covariate** is a measurable map $Z$ into a specified standard-Borel space $(\\mathcal Z,\\mathcal B)$, where standard Borel means measurably isomorphic to a Polish space ([[def-standard-borel-space]]). A **censoring or inspection time** is a measurable real-valued map $C$ with values in $[0,\\infty)$. When conditional laws are used, they are probability kernels $K_T(z,\\cdot)$ and $K_C(z,\\cdot)$ in the sense of [[def-conditional-law-given-a-random-element]] and [[def-measure-kernel-and-probability-kernel]]. They are part of the specified model; their existence for real-valued targets and factorization through standard-Borel $Z$ follow under [[def-axiom-of-choice]] from [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]] and [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]].\n\nThe notation $T\\perp\\!\\!\\!\\perp C\\mid\\sigma(Z)$ has the meaning in [[def-conditional-independence-given-a-sigma-algebra]]: for bounded measurable $a,b$, $\\mathbb E[a(T)b(C)\\mid\\sigma(Z)]=\\mathbb E[a(T)\\mid\\sigma(Z)]\\mathbb E[b(C)\\mid\\sigma(Z)]$ almost surely. It is a model assumption about the conditional observation law, not a consequence of adjusting for $Z$ and not an empirical conclusion.\n\nUnder **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$. Thus $\\delta=1$ records an event at $U=T$, including a tie, while $\\delta=0$ records censoring at $U=C$ and implies $T>C$. **Left censoring** at a known threshold $L$ records only $T\\le L$. **Interval censoring** at known endpoints $L<R$ records $L<T\\le R$. **Current-status observation** at an inspection time $C$ records only $\\delta_C=1\\{T\\le C\\}$.\n\n**Left truncation**, also called delayed entry at $L$, selects a unit into the sample only when $T>L$; observation begins after that selection. **Right truncation** at $R$ selects a unit only when $T<R$. These are selection rules before the observed sample is formed, whereas censoring coarsens an event time after sampling. The strict and weak inequalities in these definitions fix the endpoint conventions. A random observation endpoint is called noninformative here only when it is fixed by design or is generated independently of $T$ conditional on the stated covariates under a parameter-distinct law; otherwise its joint observation law must be modeled.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "For a positive integer sample size $n$, let $(T_i,C_i)$, $1\\le i\\le n$, be event and censoring times with right-censored observations $(U_i,\\delta_i)$ as in [[def-event-time-observation-schemes]], so $U_i=\\min(T_i,C_i)$ and $\\delta_i=\\mathbf 1\\{T_i\\le C_i\\}$. The subject counting process and at-risk process are $N_i(t)=\\mathbf 1\\{U_i\\le t,\\ \\delta_i=1\\}$ and $Y_i(t)=\\mathbf 1\\{U_i\\ge t\\}$.\nThe endpoint convention makes $Y_i$ left-continuous at $U_i$: a subject is still at risk at the observed time, including a tied event and censoring time. Set $N_n=\\sum_{i=1}^nN_i$ and $Y_n=\\sum_{i=1}^nY_i$. Let $dN_n$ be the finite counting measure of observed events on $[0,\\infty)$, with atom $\\Delta N_n(u):=\\sum_{i=1}^n\\mathbf 1\\{U_i=u,\\ \\delta_i=1\\}$ at each $u\\ge0$; in particular, $\\Delta N_n(0)=N_n(0)$. Tied failures at $u$ contribute their full count and censorings at $u$ do not contribute to $dN_n(u)$.\n\nFor $t\\ge0$, the **Nelson–Aalen estimator** is $\\widehat\\Lambda_n(t)=\\int_{[0,t]}\\frac{\\mathbf 1\\{Y_n(u)>0\\}}{Y_n(u)}\\,dN_n(u)$, where the integrand is defined to be zero when $Y_n(u)=0$. The **Kaplan–Meier estimator** is $\\widehat S_n(t)=\\prod_{\\substack{0\\le u\\le t:\\,\\Delta N_n(u)>0}}\\left(1-\\frac{\\Delta N_n(u)}{Y_n(u)}\\right)$.\nEach product is finite and a factor is zero if every subject at risk fails at that time. The target survival function is $S(t)=P(T>t)$. If $T$ has density $f$, $S$ is positive on the horizon, and $\\lambda=f/S$, the continuous cumulative hazard is $\\Lambda(t)=\\int_0^t\\lambda(u)\\,du=-\\log S(t)$.\n\nThese inclusive endpoint formulas reduce to the usual $(0,t]$ formulas whenever $\\Delta N_n(0)=0$. If $T$ has finite support $0\\le a_1<\\cdots<a_m$, write $q_j=P(T=a_j\\mid T\\ge a_j)$; the corresponding discrete cumulative hazard is $\\Lambda_d(t)=\\sum_{a_j\\le t}q_j$. Under IID sampling, independent censoring, and positive risk probability at the support points, the Nelson–Aalen increments estimate these $q_j$; in general this discrete cumulative hazard is not $-\\log S(t)$.\n\nA baseline event is included at $u=0$; if it occurs then $N_i(0)=1$, so a model contract requiring $N_i(0)=0$ must exclude this case.\n\nAn empty event product is $1$, and an empty Greenwood event sum is $0$.\n\nOn a horizon where every event contribution has $Y_n(u)-\\Delta N_n(u)>0$, the **Greenwood variance estimate** is $\\widehat V_G(t)=\\widehat S_n(t)^2\\sum_{0\\le u\\le t:\\,\\Delta N_n(u)>0}\\frac{\\Delta N_n(u)}{Y_n(u)\\{Y_n(u)-\\Delta N_n(u)\\}}$.\nGreenwood's formula is used as a first-order asymptotic variance estimate when the sampling and censoring assumptions justify that approximation; the formula alone asserts no asymptotic result and is not an exact finite-sample variance identity. It is undefined when a contributing denominator is zero.\n\nFor each fixed $t$, $\\widehat\\Lambda_n(t)$ and $\\widehat S_n(t)$ are statistics of the observed sample in the sense of [[def-statistic-and-estimator]]. Greenwood's formula is a measurable function on the measurable subset $D_n(t)$ of the observed sample space $([0,\\infty)\\times\\{0,1\\})^n$ where every contributing denominator is positive. Its **zero extension** $\\widehat V_G^\\circ(t)$, equal to $\\widehat V_G(t)$ on $D_n(t)$ and $0$ elsewhere, is a statistic on the whole observed sample space. This extension assigns no Greenwood variance interpretation outside $D_n(t)$.\n\nTo verify measurability, scan indices $i=1,\\ldots,n$ and include only the first event observation at each distinct time in $[0,t]$; each inclusion condition uses finitely many Borel equalities and inequalities among the observed $U_i$ and $\\delta_i$. Risk and event counts are finite Borel sums. The finitely many positive-denominator tests make $D_n(t)$ measurable; evaluating divisions only on their positive-denominator branches makes the sums, products, and zero extension Borel measurable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-support-risk-set-proportion-limits",
+          "source_section": "Statement",
+          "quote": "For every positive integer sample size $n$, let $(T_i,C_i)$ be IID subject pairs with $T_i$ independent of $C_i$, and let the event-time support be $0\\le a_1<\\cdots<a_m$. Fix $j$ and suppose $P(T\\ge a_j)>0$ and $P(C\\ge a_j)>0$. Put $q_j=P(T=a_j\\mid T\\ge a_j)$, $r_j=P(U\\ge a_j)$, $Y_n(a_j)=\\sum_{i=1}^n\\mathbf 1\\{U_i\\ge a_j\\}$, and $dN_n(a_j)=\\sum_{i=1}^n\\mathbf 1\\{U_i=a_j,\\delta_i=1\\}$.\nThen $Y_n(a_j)/n\\to_P r_j=P(T\\ge a_j)P(C\\ge a_j)>0$, $dN_n(a_j)/n\\to_P P(T=a_j)P(C\\ge a_j)$, and the ratio $dN_n(a_j)/Y_n(a_j)$, set to zero when its denominator is zero, converges in probability to $q_j$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $a_0=0$ and let $k$ be the number of event support points not exceeding $t$. Since event times are positive, before $a_1$ the estimates are $\\widehat S_n=1$ and $\\widehat\\Lambda_n=0$, matching $S(a_0)=1$ and $\\Lambda_d(a_0)=0$. Positive $S(t)$ and censoring survival imply $P(T\\ge a_j)P(C\\ge a_j)>0$ for every $j\\le k$, so [F3] applies at each of these finitely many points.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose the product limit through $a_{j-1}$ converges to $S(a_{j-1})$ and the Nelson–Aalen sum through $a_{j-1}$ converges to $\\sum_{\\ell<j}q_\\ell$. By [F1]–[F2], at $a_j$ the product is multiplied by $1-dN_n(a_j)/Y_n(a_j)$ and the sum is incremented by $dN_n(a_j)/Y_n(a_j)$. [F3] and continuity of finite products and sums give limits $S(a_{j-1})(1-q_j)=P(T>a_j)=S(a_j)$ and $\\sum_{\\ell\\le j}q_\\ell$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Finite induction over $j=1,\\ldots,k$ proves both limits at every support point through $t$. On each interval between successive support points, the estimators and their targets are constant, so the same limits hold at the given $t$. The Nelson–Aalen limit is the discrete hazard sum displayed in the statement; the proof does not replace it by a continuous cumulative hazard.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 sets k=0 before the first support point and gives the empty product 1 and empty hazard sum 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If support starts at zero, the [0,t] formulas include the baseline event and step 1.2 updates from P(T≥0)=1 to S(0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 starts at a_1 from the base case and applies the event update once."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The theorem statement allows q_j=0 and excludes q_j=1 through t by requiring S(t)>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The [0,t] formulas include failures at t and at a baseline support point a_1=0; step 1.2 treats both through the event-to-risk ratio."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses a finite induction over the ordered support and makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts a conditional consistency conclusion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from consistency to censoring independence or positive support is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Independently read the entire argument with observation/estimator definitions and the completed finite-support risk lemma. Positive S(t) and P(C>=t) supply every included risk denominator; finite products and sums preserve joint probability convergence. The k=0 empty branch is exact, the induction begins at P(T>=a_1)=1 and includes a_1=0, and no support lies in gaps. Discrete hazard sum is not identified with -log S. Yu finite-support proof (PDF pp.35–36) checked; local Chebyshev proof needs no strong-law supplier or AC. Refuter:32:1 confirmed: old F2 strictly-positive support contradicts the Statement and baseline case. Corrected F2 and Given to nonnegative support; proof and Statement unchanged."
+      }
+    },
+    "lem-uniform-right-censoring-risk-set-convergence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "For a positive integer sample size $n$, let $(T_i,C_i)$, $1\\le i\\le n$, be event and censoring times with right-censored observations $(U_i,\\delta_i)$ as in [[def-event-time-observation-schemes]], so $U_i=\\min(T_i,C_i)$ and $\\delta_i=\\mathbf 1\\{T_i\\le C_i\\}$. The subject counting process and at-risk process are $N_i(t)=\\mathbf 1\\{U_i\\le t,\\ \\delta_i=1\\}$ and $Y_i(t)=\\mathbf 1\\{U_i\\ge t\\}$.\nThe endpoint convention makes $Y_i$ left-continuous at $U_i$: a subject is still at risk at the observed time, including a tied event and censoring time. Set $N_n=\\sum_{i=1}^nN_i$ and $Y_n=\\sum_{i=1}^nY_i$. Let $dN_n$ be the finite counting measure of observed events on $[0,\\infty)$, with atom $\\Delta N_n(u):=\\sum_{i=1}^n\\mathbf 1\\{U_i=u,\\ \\delta_i=1\\}$ at each $u\\ge0$; in particular, $\\Delta N_n(0)=N_n(0)$. Tied failures at $u$ contribute their full count and censorings at $u$ do not contribute to $dN_n(u)$.\n\nFor $t\\ge0$, the **Nelson–Aalen estimator** is $\\widehat\\Lambda_n(t)=\\int_{[0,t]}\\frac{\\mathbf 1\\{Y_n(u)>0\\}}{Y_n(u)}\\,dN_n(u)$, where the integrand is defined to be zero when $Y_n(u)=0$. The **Kaplan–Meier estimator** is $\\widehat S_n(t)=\\prod_{\\substack{0\\le u\\le t:\\,\\Delta N_n(u)>0}}\\left(1-\\frac{\\Delta N_n(u)}{Y_n(u)}\\right)$.\nEach product is finite and a factor is zero if every subject at risk fails at that time. The target survival function is $S(t)=P(T>t)$. If $T$ has density $f$, $S$ is positive on the horizon, and $\\lambda=f/S$, the continuous cumulative hazard is $\\Lambda(t)=\\int_0^t\\lambda(u)\\,du=-\\log S(t)$.\n\nThese inclusive endpoint formulas reduce to the usual $(0,t]$ formulas whenever $\\Delta N_n(0)=0$. If $T$ has finite support $0\\le a_1<\\cdots<a_m$, write $q_j=P(T=a_j\\mid T\\ge a_j)$; the corresponding discrete cumulative hazard is $\\Lambda_d(t)=\\sum_{a_j\\le t}q_j$. Under IID sampling, independent censoring, and positive risk probability at the support points, the Nelson–Aalen increments estimate these $q_j$; in general this discrete cumulative hazard is not $-\\log S(t)$.\n\nA baseline event is included at $u=0$; if it occurs then $N_i(0)=1$, so a model contract requiring $N_i(0)=0$ must exclude this case.\n\nAn empty event product is $1$, and an empty Greenwood event sum is $0$.\n\nOn a horizon where every event contribution has $Y_n(u)-\\Delta N_n(u)>0$, the **Greenwood variance estimate** is $\\widehat V_G(t)=\\widehat S_n(t)^2\\sum_{0\\le u\\le t:\\,\\Delta N_n(u)>0}\\frac{\\Delta N_n(u)}{Y_n(u)\\{Y_n(u)-\\Delta N_n(u)\\}}$.\nGreenwood's formula is used as a first-order asymptotic variance estimate when the sampling and censoring assumptions justify that approximation; the formula alone asserts no asymptotic result and is not an exact finite-sample variance identity. It is undefined when a contributing denominator is zero.\n\nFor each fixed $t$, $\\widehat\\Lambda_n(t)$ and $\\widehat S_n(t)$ are statistics of the observed sample in the sense of [[def-statistic-and-estimator]]. Greenwood's formula is a measurable function on the measurable subset $D_n(t)$ of the observed sample space $([0,\\infty)\\times\\{0,1\\})^n$ where every contributing denominator is positive. Its **zero extension** $\\widehat V_G^\\circ(t)$, equal to $\\widehat V_G(t)$ on $D_n(t)$ and $0$ elsewhere, is a statistic on the whole observed sample space. This extension assigns no Greenwood variance interpretation outside $D_n(t)$.\n\nTo verify measurability, scan indices $i=1,\\ldots,n$ and include only the first event observation at each distinct time in $[0,t]$; each inclusion condition uses finitely many Borel equalities and inequalities among the observed $U_i$ and $\\delta_i$. Risk and event counts are finite Borel sums. The finitely many positive-denominator tests make $D_n(t)$ measurable; evaluating divisions only on their positive-denominator branches makes the sums, products, and zero extension Borel measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $V_i=-U_i$, let $F(x)=P(V_i\\le x)$, and let $F_n(x)=n^{-1}\\sum_{i=1}^n\\mathbf 1\\{V_i\\le x\\}$. Then $\\bar Y_n(u)=F_n(-u)$ and $s_0(u)=F(-u)$. Both CDFs are right-continuous, so their supremum error over $\\mathbb R$ is the supremum over rational $x$; over $[-t,0]$ it is the supremum over $(\\mathbb Q\\cap[-t,0))\\cup\\{0\\}$ (with $\\{0\\}$ alone when $t=0$). Thus both suprema are measurable. Fix $0<\\varepsilon<1$. Choose the finitely many distinct quantiles $x_k=\\inf\\{x:F(x)\\ge k\\varepsilon\\}$ for $1\\le k<1/\\varepsilon$, together with $x_0=-\\infty$ and $x_{m+1}=+\\infty$, where $m$ is the number of distinct finite cutpoints. Between consecutive distinct quantiles $x_j<x_{j+1}$, the quantile construction gives $F(x_{j+1}-)-F(x_j)\\le\\varepsilon$; any jump at a cutpoint is isolated as its singleton point. At each finite cutpoint, both $F_n(x_j)$ and $F_n(x_j-)$ converge in probability to their expectations by Chebyshev's inequality applied to the IID indicators $\\mathbf 1\\{V_i\\le x_j\\}$ and $\\mathbf 1\\{V_i<x_j\\}$. For $x\\in(x_j,x_{j+1})$, monotonicity gives $F_n(x_j)\\le F_n(x)\\le F_n(x_{j+1}-)$ and $F(x_j)\\le F(x)\\le F(x_{j+1}-)$; hence $|F_n(x)-F(x)|$ is at most the largest one-sided endpoint error plus $\\varepsilon$. At singleton cutpoints, direct endpoint convergence applies. Taking the maximum over the finite partition, then $n\\to\\infty$ and $\\varepsilon\\downarrow0$, proves the first convergence.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $Z_n=\\sup_{0\\le u\\le t}|\\bar Y_n(u)-s_0(u)|$. Since $Z_n\\le1$, for every $\\eta>0$, $E[Z_n^2]\\le\\eta^2+P(Z_n>\\eta)$. Step 1.1 makes the second term tend to zero; then letting $\\eta\\downarrow0$ proves the expected-square convergence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement defines empirical risk fractions only for positive integer n, excluding the empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 controls both F_n(x_j) and its left limit, so censor-time atoms are retained."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses bounded indicator means and its convergence claim is asymptotic, including finite n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If U_i is constant, the empirical and population risk indicators agree exactly as covered by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 1.1: both u=0 and u=t are included. Under x=-u the supremum is over [-t,0]; right continuity recovers x=-t from rational points to its right and the separate singleton {0} retains x=0. For t=0 it is the singleton {0}. The quantile argument separately retains jump cutpoints via both F_n(x_j) and F_n(x_j-)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite quantile construction is deterministic and uses no arbitrary-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts convergence and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from empirical convergence to an IID law is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Reviewed both proof steps with the estimator and IID definitions and Dudley Theorem 1.3 and its complete proof (Cambridge excerpt PDF pp.1–2). Negating U turns weak survival into a right-continuous CDF; rational interior points plus right endpoint 0 make the compact supremum measurable including t=0. Finite quantile cutpoints isolate atoms and bound open-interval CDF variation by epsilon, including infinite tails; endpoint indicator means converge by Chebyshev. Bounded Z_n yields expected-square convergence. No continuity of the observed-time law or AC is needed. Refuter:32:2 is confirmed: ETH PDF title page names Sara van de Geer and PDF p.119 has Lemma 6.4.1 on Frechet differentiability, unrelated to this result. Removed the inaccurate redundant citation; retained the independently checked Dudley source. Statement and proof unchanged."
+      }
+    },
+    "thm-pointwise-nelson-aalen-kaplan-meier-greenwood-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "An **event time** is a measurable real-valued map $T$ with values in $[0,\\infty)$. A **covariate** is a measurable map $Z$ into a specified standard-Borel space $(\\mathcal Z,\\mathcal B)$, where standard Borel means measurably isomorphic to a Polish space ([[def-standard-borel-space]]). A **censoring or inspection time** is a measurable real-valued map $C$ with values in $[0,\\infty)$. When conditional laws are used, they are probability kernels $K_T(z,\\cdot)$ and $K_C(z,\\cdot)$ in the sense of [[def-conditional-law-given-a-random-element]] and [[def-measure-kernel-and-probability-kernel]]. They are part of the specified model; their existence for real-valued targets and factorization through standard-Borel $Z$ follow under [[def-axiom-of-choice]] from [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]] and [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]].\n\nThe notation $T\\perp\\!\\!\\!\\perp C\\mid\\sigma(Z)$ has the meaning in [[def-conditional-independence-given-a-sigma-algebra]]: for bounded measurable $a,b$, $\\mathbb E[a(T)b(C)\\mid\\sigma(Z)]=\\mathbb E[a(T)\\mid\\sigma(Z)]\\mathbb E[b(C)\\mid\\sigma(Z)]$ almost surely. It is a model assumption about the conditional observation law, not a consequence of adjusting for $Z$ and not an empirical conclusion.\n\nUnder **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$. Thus $\\delta=1$ records an event at $U=T$, including a tie, while $\\delta=0$ records censoring at $U=C$ and implies $T>C$. **Left censoring** at a known threshold $L$ records only $T\\le L$. **Interval censoring** at known endpoints $L<R$ records $L<T\\le R$. **Current-status observation** at an inspection time $C$ records only $\\delta_C=1\\{T\\le C\\}$.\n\n**Left truncation**, also called delayed entry at $L$, selects a unit into the sample only when $T>L$; observation begins after that selection. **Right truncation** at $R$ selects a unit only when $T<R$. These are selection rules before the observed sample is formed, whereas censoring coarsens an event time after sampling. The strict and weak inequalities in these definitions fix the endpoint conventions. A random observation endpoint is called noninformative here only when it is fixed by design or is generated independently of $T$ conditional on the stated covariates under a parameter-distinct law; otherwise its joint observation law must be modeled.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "For a positive integer sample size $n$, let $(T_i,C_i)$, $1\\le i\\le n$, be event and censoring times with right-censored observations $(U_i,\\delta_i)$ as in [[def-event-time-observation-schemes]], so $U_i=\\min(T_i,C_i)$ and $\\delta_i=\\mathbf 1\\{T_i\\le C_i\\}$. The subject counting process and at-risk process are $N_i(t)=\\mathbf 1\\{U_i\\le t,\\ \\delta_i=1\\}$ and $Y_i(t)=\\mathbf 1\\{U_i\\ge t\\}$.\nThe endpoint convention makes $Y_i$ left-continuous at $U_i$: a subject is still at risk at the observed time, including a tied event and censoring time. Set $N_n=\\sum_{i=1}^nN_i$ and $Y_n=\\sum_{i=1}^nY_i$. Let $dN_n$ be the finite counting measure of observed events on $[0,\\infty)$, with atom $\\Delta N_n(u):=\\sum_{i=1}^n\\mathbf 1\\{U_i=u,\\ \\delta_i=1\\}$ at each $u\\ge0$; in particular, $\\Delta N_n(0)=N_n(0)$. Tied failures at $u$ contribute their full count and censorings at $u$ do not contribute to $dN_n(u)$.\n\nFor $t\\ge0$, the **Nelson–Aalen estimator** is $\\widehat\\Lambda_n(t)=\\int_{[0,t]}\\frac{\\mathbf 1\\{Y_n(u)>0\\}}{Y_n(u)}\\,dN_n(u)$, where the integrand is defined to be zero when $Y_n(u)=0$. The **Kaplan–Meier estimator** is $\\widehat S_n(t)=\\prod_{\\substack{0\\le u\\le t:\\,\\Delta N_n(u)>0}}\\left(1-\\frac{\\Delta N_n(u)}{Y_n(u)}\\right)$.\nEach product is finite and a factor is zero if every subject at risk fails at that time. The target survival function is $S(t)=P(T>t)$. If $T$ has density $f$, $S$ is positive on the horizon, and $\\lambda=f/S$, the continuous cumulative hazard is $\\Lambda(t)=\\int_0^t\\lambda(u)\\,du=-\\log S(t)$.\n\nThese inclusive endpoint formulas reduce to the usual $(0,t]$ formulas whenever $\\Delta N_n(0)=0$. If $T$ has finite support $0\\le a_1<\\cdots<a_m$, write $q_j=P(T=a_j\\mid T\\ge a_j)$; the corresponding discrete cumulative hazard is $\\Lambda_d(t)=\\sum_{a_j\\le t}q_j$. Under IID sampling, independent censoring, and positive risk probability at the support points, the Nelson–Aalen increments estimate these $q_j$; in general this discrete cumulative hazard is not $-\\log S(t)$.\n\nA baseline event is included at $u=0$; if it occurs then $N_i(0)=1$, so a model contract requiring $N_i(0)=0$ must exclude this case.\n\nAn empty event product is $1$, and an empty Greenwood event sum is $0$.\n\nOn a horizon where every event contribution has $Y_n(u)-\\Delta N_n(u)>0$, the **Greenwood variance estimate** is $\\widehat V_G(t)=\\widehat S_n(t)^2\\sum_{0\\le u\\le t:\\,\\Delta N_n(u)>0}\\frac{\\Delta N_n(u)}{Y_n(u)\\{Y_n(u)-\\Delta N_n(u)\\}}$.\nGreenwood's formula is used as a first-order asymptotic variance estimate when the sampling and censoring assumptions justify that approximation; the formula alone asserts no asymptotic result and is not an exact finite-sample variance identity. It is undefined when a contributing denominator is zero.\n\nFor each fixed $t$, $\\widehat\\Lambda_n(t)$ and $\\widehat S_n(t)$ are statistics of the observed sample in the sense of [[def-statistic-and-estimator]]. Greenwood's formula is a measurable function on the measurable subset $D_n(t)$ of the observed sample space $([0,\\infty)\\times\\{0,1\\})^n$ where every contributing denominator is positive. Its **zero extension** $\\widehat V_G^\\circ(t)$, equal to $\\widehat V_G(t)$ on $D_n(t)$ and $0$ elsewhere, is a statistic on the whole observed sample space. This extension assigns no Greenwood variance interpretation outside $D_n(t)$.\n\nTo verify measurability, scan indices $i=1,\\ldots,n$ and include only the first event observation at each distinct time in $[0,t]$; each inclusion condition uses finitely many Borel equalities and inequalities among the observed $U_i$ and $\\delta_i$. Risk and event counts are finite Borel sums. The finitely many positive-denominator tests make $D_n(t)$ measurable; evaluating divisions only on their positive-denominator branches makes the sums, products, and zero extension Borel measurable.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-counting-process-intensity-and-compensator-contract",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Fix a finite horizon\n$T>0$, a probability space $(\\Omega,\\mathcal F,P)$ and a continuous-time\nfiltration $(\\mathcal F_t)_{0\\le t\\le T}$ in the all-pairs convention of\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. A **simple\nunit-jump counting process** is an adapted, càdlàg (right-continuous with left\nlimits), nondecreasing, integer-valued process $N$ with $N_0=0$,\n$N_T<\\infty$ almost surely, and $\\Delta N_t\\in\\{0,1\\}$ for every\n$0<t\\le T$ outside one null event; here $\\Delta N_t:=N_t-N_{t-}$.\n\nAn **at-risk process** is a predictable process\n$Y:[0,T]\\times\\Omega\\to\\{0,1\\}$, and an **intensity density** is a finite,\nnonnegative predictable process $\\lambda$. Form the Lebesgue integral\n$$A_t:=\\int_0^tY_s\\lambda_s\\,ds,\\qquad 0\\le t\\le T.$$\nFor this model and every nonnegative predictable process $G$, define the\npathwise energy integral by\n$$\\int_0^tG_s\\,dA_s:=\\int_0^tG_sY_s\\lambda_s\\,ds,\\qquad t\\le T.$$\nThe **continuous intensity compensator contract** requires the defining\nintegral for $A$ to be finite pathwise, and requires $A$ to be continuous,\nadapted and predictable with\n$A_0=0$, and that $\\mathbb E[A_T]<\\infty$. Set $M_t:=N_t-A_t$. The model\ncontract is the additional hypothesis that $M$ is a square-integrable\nmartingale relative to the stated filtration. Under this contract $A$ is a\ncontinuous predictable compensator of $N$.\n\nThe displayed intensity density alone does **not** assert that $N-A$ is a\nmartingale, that such a process exists for a given $N$, or that the contract\nfollows from an empirical observation scheme. No general compensator-existence\ntheorem is included here. The Axiom of Choice is inherited from the\ncontinuous-time martingale and conditional-expectation interfaces; no further\nchoice is used to state the model contract.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-compensated-counting-process-brackets",
+          "source_section": "Statement",
+          "quote": "Under the finite-horizon contract of\n[[def-counting-process-intensity-and-compensator-contract]], the optional\nquadratic variation of $M=N-A$ is $[M]_t=N_t$, its continuous predictable\nbracket is $\\langle M\\rangle_t=A_t$, its self-cross predictable bracket is\n$\\langle M,M\\rangle_t=A_t$, and $M_t^2-A_t$ is a martingale on $[0,T]$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-l2-counting-process-integral",
+          "source_section": "Definition",
+          "quote": "For the compensator contract on $[0,T]$, let $H$ be a predictable real\nprocess with\n$$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty.$$\nWhen the elementary integrals of a sequence of bounded predictable step\nprocesses converging to $H$ in this norm converge in $L^2(P)$, denote the\nresulting $L^2(P)$ class at time $t$ by\n$$\\int_0^t H_s\\,dM_s.$$\nThe definition is conditional on existence of the limit. The L²-extension\ntheorem below proves existence for every such predictable $H$, independence\nfrom the approximating sequence, the martingale property, and the isometry.\nThe Axiom of Choice is inherited through the conditional-expectation and\n$L^2$-completion interfaces used by that theorem.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-l2-counting-process-integral-isometry",
+          "source_section": "Statement",
+          "quote": "For every predictable $H$ on $[0,T]$ with\n$\\mathbb E\\int_0^T H_s^2\\,dA_s<\\infty$, the limit in\n[[def-l2-counting-process-integral]] exists at each $t\\le T$, is independent\nof the approximating step sequence, and defines a square-integrable\nmartingale. It satisfies, for each $t\\le T$,\n$$\\mathbb E\\left(\\int_0^tH_s\\,dM_s\\right)^2=\\mathbb E\\int_0^tH_s^2\\,dA_s.$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-uniform-right-censoring-risk-set-convergence",
+          "source_section": "Statement",
+          "quote": "Let $U_1,U_2,\\ldots$ be IID real-valued observed times. For every positive integer $n$, define $\\bar Y_n(u)=n^{-1}\\sum_{i=1}^n\\mathbf 1\\{U_i\\ge u\\}$ and $s_0(u)=P(U_i\\ge u)$. For every finite $t\\ge0$,\n$$\\sup_{0\\le u\\le t}|\\bar Y_n(u)-s_0(u)|\\to_P0,\\qquad E\\left[\\sup_{0\\le u\\le t}|\\bar Y_n(u)-s_0(u)|^2\\right]\\to0.$$",
+          "uses": [
+            "2.2",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-iid-terminal-influence-limit",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $d\\ge1$, let $(\\mathcal O,\\mathcal A,P)$ be a probability space, and let $O_1,O_2,\\ldots$ be IID with law $P$. Let $\\hat\\theta_n$ be a measurable $\\mathbb R^d$-valued estimator based on $O_1,\\ldots,O_n$ for a fixed $\\theta\\in\\mathbb R^d$. Suppose $\\phi:\\mathcal O\\to\\mathbb R^d$ is measurable, $E_P\\phi=0$, and $E_P\\|\\phi\\|_2^2<\\infty$, and set $\\Sigma=E_P[\\phi\\phi^T]$. Assume the separately established expansion, with remainder $r_n$ on the sample probability space,\n\n$$\\hat\\theta_n-\\theta=\\frac1n\\sum_{i=1}^n\\phi(O_i)+r_n,\\qquad r_n=o_P(n^{-1/2}),$$\n\nThen\n\n$$\\sqrt n(\\hat\\theta_n-\\theta)\\Rightarrow N_d(0,\\Sigma).$$\n\nThe remainder notation means $\\sqrt n\\,r_n\\to_P0$, as in [[def-asymptotically-linear-estimator-and-influence-function]]. Thus $\\phi$ is the estimator influence function in the asymptotically linear sense: the theorem assumes the expansion and does not establish it. The covariance may be singular, including zero.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-first-and-second-order-delta-method-for-random-vectors",
+          "source_section": "Statement",
+          "quote": "Let $d,k\\ge1$, let $r_n>0$ be deterministic with $r_n\\to\\infty$, and let $T_n$ be $\\mathbb R^d$-valued random vectors with target $\\theta\\in\\mathbb R^d$. Suppose $Z_n=r_n(T_n-\\theta)\\Rightarrow Z$ for an $\\mathbb R^d$-valued random vector $Z$. All vector norms below are Euclidean.\n\nIf $g:\\mathbb R^d\\to\\mathbb R^k$ is Borel and there is a linear map $A:\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=Ah+\\rho_1(h),\\qquad \\frac{\\|\\rho_1(h)\\|}{\\|h\\|}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n\\{g(T_n)-g(\\theta)\\}\\Rightarrow AZ.$$\n\nIf, in addition, $A=0$ and there is a continuous symmetric bilinear map $H:\\mathbb R^d\\times\\mathbb R^d\\to\\mathbb R^k$ such that\n$$g(\\theta+h)-g(\\theta)=\\frac12H[h,h]+\\rho_2(h),\\qquad \\frac{\\|\\rho_2(h)\\|}{\\|h\\|^2}\\longrightarrow0\\quad(h\\to0,\\ h\\ne0),$$\nthen\n$$r_n^2\\{g(T_n)-g(\\theta)\\}\\Rightarrow \\frac12H[Z,Z].$$\nFor scalar-valued $g$, $H$ is the usual Hessian bilinear form. The second-order premise is a pointwise Peano expansion; continuous second derivatives on a neighborhood are not required.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-progressively-measurable-and-predictable-process",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,P)$ be a probability space with a continuous-time\nfiltration $(\\mathcal F_t)_{t\\ge0}$\n[[def-continuous-time-filtration-and-all-pairs-martingale]]. All processes here\nare real-valued and indexed by $[0,\\infty)$. AC is inherited from the cited\ncontinuous-time-filtration interface, whose separate martingale clause uses\nconditional expectation. Once the filtered probability space and stopping\ntimes are given, the progressive and predictable constructions below make no\nadditional choice: they use only generated sigma-algebras and product\nrectangles.\n\n1. **Progressively measurable.** A process $X=(X_t)_{t\\ge0}$ is\n   **progressively measurable** relative to $(\\mathcal F_t)$ when for every\n   $t\\ge0$ the restricted map\n   $[0,t]\\times\\Omega\\to\\mathbb R$, $(s,\\omega)\\mapsto X_s(\\omega)$, is\n   measurable for the product sigma-algebra\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$\n   [[def-product-sigma-algebra-and-finite-product-sigma-algebras]].\n\n2. **Time-zero and interval generators.** On the product space\n   $[0,\\infty)\\times\\Omega$, let $\\mathcal P$ be the sigma-algebra generated by\n   the family\n   $$\\mathcal G:=\\bigl\\{(s,u]\\times A:\\ 0\\le s<u<\\infty,\\ A\\in\\mathcal F_s\\bigr\\}\\ \\cup\\ \\bigl\\{\\{0\\}\\times A:\\ A\\in\\mathcal F_0\\bigr\\}.$$\n   The interval generators with $s=0$ are included, so $(0,u]\\times A$ with\n   $A\\in\\mathcal F_0$ is a generator. The sigma-algebra $\\mathcal P$ exists by\n   [[thm-generated-sigma-algebra-exists-and-is-minimal]] and is called the\n   **predictable sigma-algebra**. A process $H=(H_t)_{t\\ge0}$ is\n   **predictable** when the map $(s,\\omega)\\mapsto H_s(\\omega)$ is\n   $\\mathcal P$-measurable. For a finite horizon $T>0$ we write\n   $\\mathcal P_T$ for the sigma-algebra on $[0,T]\\times\\Omega$ generated by the\n   same family restricted to $u\\le T$ together with the time-zero generators;\n   this is the trace of $\\mathcal P$ on $[0,T]\\times\\Omega$. Indeed, the\n   trace of an interval generator is empty when $s\\ge T$, and otherwise is\n   $(s,\\min(u,T)]\\times A$, while time-zero generators are unchanged.\n   Conversely every listed finite-horizon generator is such a trace.\n\n3. **Sections, adaptedness, and null sets.** Two structural conventions are\n   used repeatedly and are part of the definition.\n   (a) Every generator is a measurable rectangle of\n   $\\mathcal B([0,\\infty))\\otimes\\mathcal F$, hence\n   $\\mathcal P\\subseteq\\mathcal B([0,\\infty))\\otimes\\mathcal F$; the time-zero\n   generator $\\{0\\}\\times A$ has $dt\\otimes P$-measure zero for every $A$. A\n   set in $\\mathcal P$ has its section at each fixed time $s$ in $\\mathcal F_s$:\n   sets with that section property form a sigma-algebra, and each generator\n   has the property by the increasing-filtration condition. Its section at\n   each fixed $\\omega$ is Borel in time, by the same sigma-algebra argument.\n   (b) If a process is predictable then it is progressively measurable: for\n   $s\\le t$ the section $\\omega\\mapsto H_s(\\omega)$ is $\\mathcal F_s$-measurable\n   $\\subseteq\\mathcal F_t$-measurable, and the progressive-measurability claim\n   is the restriction of the joint map to $[0,t]\\times\\Omega$; the restriction\n   of a $\\mathcal P$-measurable map to $[0,t]\\times\\Omega$ is measurable for\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$ because every generator with $u\\le t$\n   lies in that product sigma-algebra and the generators with $u>t$ have\n   intersection with $[0,t]\\times\\Omega$ of the form $(s,t]\\times A$ with\n   $s<t$ and $A\\in\\mathcal F_s$, or the empty set when $s\\ge t$.\n   The time-zero generators also lie in\n   $\\mathcal B([0,t])\\otimes\\mathcal F_t$.\n\nThe family $\\mathcal G$ need not itself contain the whole space, but a finite intersection\nof generators is empty or again a generator, or a time-zero generator, because\n$(s,u]\\cap(s',u']=(s\\vee s',u\\wedge u']$ and $A\\cap A'\\in\\mathcal F_{s\\vee s'}$\nwhenever $A\\in\\mathcal F_s$, $A'\\in\\mathcal F_{s'}$, while\n$\\{0\\}\\times A$ is disjoint from every interval generator, including\n$(0,u]\\times A'$. Two time-zero generators intersect in\n$\\{0\\}\\times(A\\cap A')$ with $A\\cap A'\\in\\mathcal F_0$.\nThus the family consisting of the whole space\ntogether with finite intersections of generators is a pi-system generating\n$\\mathcal P$; this is the structural fact used by the density theorem below.\n\nBecause predictability is a measurability requirement for the joint map, it is\npreserved by pointwise limits, products and linear combinations of predictable\nprocesses. A deterministic function $h$ of time defines a predictable process\nexactly when $h$ is Borel measurable: the sets $C$ for which\n$C\\times\\Omega\\in\\mathcal P$ form a sigma-algebra containing the intervals\n$(s,u]$ and $\\{0\\}$, hence all Borel sets. Conversely, take any fixed\n$\\omega\\in\\Omega$ (a probability space is nonempty) and use the Borel\ntime-section property from 3(a) on every inverse image of an open set.\nThis single choice uses no choice axiom. In particular the\nindicators $1_{[0,u]}$ and $1_{(0,u]}$ are predictable for every deterministic\n$u\\ge0$, and the process $s\\mapsto 1_{s\\le\\tau(\\omega)}$ for a stopping time\n$\\tau$ [[def-continuous-time-stopping-time]] is predictable, since\n$$\\{(s,\\omega):s>\\tau(\\omega)\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}(q,\\infty)\\times\\{\\tau<q\\}=\\bigcup_{q\\in\\mathbb Q_{>0}}\\bigcup_{n>q}(q,n]\\times\\{\\tau<q\\}$$\nis a countable union of generators: for rational $q>0$ one has\n$\\{\\tau<q\\}=\\bigcup_{q'<q,\\ q'\\in\\mathbb Q}\\{\\tau\\le q'\\}\\in\\mathcal F_q$. The\ncomplement of that set inside $[0,\\infty)\\times\\Omega$ is the event of the\nindicator, so $1_{[0,\\tau]}$ is predictable; its left-continuity in the time\nvariable is the visual form of the same computation.\n\nNo completeness of the filtration and no right continuity of $(\\mathcal F_t)$\nis used or assumed. Apart from the inherited ambient assumption just recorded,\nthe constructions in this definition are choice-free.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Independence within a subject gives $s_0(u)=P(T_i\\ge u,C_i\\ge u)=S(u)G(u)$. On $[0,t]$, $s_0(u)\\ge c:=S(t)G(t)>0$. Since $S$ is absolutely continuous and $S'(u)=-f(u)=-\\lambda(u)S(u)$ almost everywhere, integration of $(\\log S)'=-\\lambda$ gives $\\Lambda(t)=-\\log S(t)$. The assumed integral makes $\\sigma^2(t)$ finite and also gives $\\int_0^t\\lambda(u)\\,du<\\infty$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each finite $n$, event times have no ties in $(0,t]$ almost surely: for $i\\ne j$, subject independence and the absolutely continuous law on $[0,t]$ give $P(T_i=T_j\\le t)=0$, and there are finitely many pairs. Thus $N_n=\\sum_iN_i$ is a simple counting process. Set $Y_n=\\sum_iY_i$, $A_n=\\sum_iA_i=\\int_0^{\\cdot}Y_n(u)\\lambda(u)\\,du$, and $M_n=\\sum_iM_i=N_n-A_n$. Finite sums preserve the martingale property and square integrability; [F4] gives $E[A_n(t)]=\\sum_iE[A_i(t)]<\\infty$. The process $J_n=\\mathbf 1\\{Y_n>0\\}$ is predictable, and so is $\\eta_n=Y_n\\lambda$ by [F11]; both meet [F4]'s domain, with $A_n=\\int_0^{\\cdot}J_n(u)\\eta_n(u)\\,du$. Hence the pooled process also satisfies the finite-horizon contract. By [F5], its predictable bracket is $A_n$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F11",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "We will identify the completed integrals with pathwise finite-variation integrals for every bounded predictable integrand $H$ used below. The paths of $Y_i$ and $\\bar Y_n$ are left-continuous on $(0,t]$, and $s_0(u)=P(U_i\\ge u)$ is left-continuous there by continuity of probabilities along decreasing events. Consequently $s_0^{-1}$, the floored reciprocal $b_n$, its difference $H_n$, and the floored product reciprocal $q_n$ below all have bounded left-continuous paths, with a deterministic bound for each fixed $n$. On deterministic partitions with mesh tending to zero, take the left-step approximants $H^{(m)}(u)=H(t_j)$ on $(t_j,t_{j+1}]$ and set their time-zero value to zero. They are elementary predictable integrands, converge pointwise to $H$ at every $u>0$, and retain the bound. For any subject or pooled contract, [F13] for the finite compensator measure $E\\,dA$ gives $E\\int_0^t|H^{(m)}-H|^2dA\\to0$, and [F7] gives convergence of their elementary integrals to the completed integral in $L^2(P)$. The paths of $M=N-A$ have finite variation; [F13] applied pathwise to its finite variation measure gives convergence of the same elementary sums to $\\int_{(0,t]}H\\,dN-\\int_0^tH\\,dA$. Uniqueness of limits in probability identifies these two limits almost surely at the fixed time. The time-zero convention is immaterial because $N_0=A_0=0$ and $A$ is continuous. This proves the pathwise identities needed below without assuming a general semimartingale integration theorem.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F11",
+            "F13",
+            "step 1.1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Write $\\bar Y_n=Y_n/n$. By [F8], $E[\\sup_{u\\le t}|\\bar Y_n(u)-s_0(u)|^2]\\to0$. Let $b_n(u)=1/\\max(\\bar Y_n(u),c/2)$ and $H_n(u)=b_n(u)-1/s_0(u)$. These are bounded predictable processes: $\\bar Y_n$ is predictable by [F4], and Borel transformations preserve predictability by [F11]. The reciprocal map with floor $c/2$ is $4/c^2$-Lipschitz, so $E[\\sup_{u\\le t}|H_n(u)|^2]\\to0$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "F8",
+            "F11",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The energy of $H_n$ for $M_n$ is finite because $H_n$ is bounded and $E[A_n(t)]<\\infty$. Applying [F7] to the pooled contract gives $E|n^{-1/2}\\int_0^tH_n\\,dM_n|^2=n^{-1}E\\int_0^tH_n^2\\,dA_n=E\\int_0^tH_n^2\\bar Y_n\\lambda\\,du\\le (\\int_0^t\\lambda\\,du)E[\\sup_{u\\le t}|H_n(u)|^2]\\to0$. Thus this stochastic-integral remainder is $o_P(1)$. On the event $E_n=\\{\\sup_{u\\le t}|\\bar Y_n(u)-s_0(u)|<c/2\\}$, whose probability tends to one by [F8], $Y_n(u)>0$ throughout and $b_n=1/\\bar Y_n$. By the pathwise identification in step 2.1, $d\\bar N_n=\\bar Y_n\\lambda\\,du+d\\bar M_n$ gives there $\\sqrt n(\\widehat\\Lambda_n-\\Lambda)=n^{-1/2}\\int_0^t b_n\\,dM_n$. For each bounded predictable step integrand, the finite-sum definition in [F6] makes the integral against $M_n=\\sum_iM_i$ equal to the sum of the subject integrals. Approximate $s_0^{-1}$ in the pooled compensator energy by such steps; [F7] gives L² convergence, and $dA_i\\le dA_n$ lets the same approximants converge for each of the finitely many subjects. Since $s_0^{-1}$ is a deterministic Borel time function, it is predictable by [F11]. Passing the finite-sum identity to these L² limits yields $\\sqrt n(\\widehat\\Lambda_n-\\Lambda)=n^{-1/2}\\sum_{i=1}^n\\int_0^t s_0^{-1}\\,dM_i+o_P(1)$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F11",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For one subject, step 2.1 identifies the integral in step 3.1 as $\\phi_i^\\Lambda(t)=\\mathbf 1\\{\\delta_i=1,U_i\\le t\\}/s_0(U_i)-\\int_0^{U_i\\wedge t}\\lambda(u)/s_0(u)\\,du$, so it is a measurable function of $(T_i,C_i)$. It has mean zero by the martingale property and, by [F7] and Tonelli [F12], variance $E\\int_0^t s_0(u)^{-2}\\,dA_i(u)=\\int_0^t s_0(u)^{-2}E[Y_i(u)]\\lambda(u)\\,du=\\int_0^t\\lambda(u)/s_0(u)\\,du=\\sigma^2(t)$. The integrand is nonnegative and product-measurable because $Y_i$ is predictable and $s_0^{-2}\\lambda$ is a deterministic Borel function. Hence these influence variables are IID and square-integrable. The normalized IID sum is bounded in probability by its fixed second moment, so step 3.1 gives a separately established expansion with $o_P(n^{-1/2})$ remainder. Applying [F9] proves $\\sqrt n(\\widehat\\Lambda_n-\\Lambda)\\Rightarrow N(0,\\sigma^2(t))$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "F9",
+            "F11",
+            "F12",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "On $E_n$, for all sufficiently large $n$, every event jump has size $x=1/Y_n(u)\\le2/(nc)\\le1/2$. For $0\\le x\\le1/2$, the power series for $-\\log(1-x)-x$ gives $|\\log(1-x)+x|\\le x^2$. There are at most $n$ event jumps, so $|\\log\\widehat S_n(t)+\\widehat\\Lambda_n(t)|\\le4/(nc^2)$. Consequently $\\sqrt n\\{\\widehat S_n-e^{-\\widehat\\Lambda_n}\\}\\to_P0$. Step 4.1 also gives $\\widehat\\Lambda_n-\\Lambda=O_P(n^{-1/2})$; Taylor's formula for $e^{-x}$ on $[0,\\infty)$ then yields $\\sqrt n(\\widehat S_n-S)=-S(t)n^{-1/2}\\sum_i\\phi_i^\\Lambda(t)+o_P(1)$. Taking $g(x)=e^{-x}$ and derivative $g'(\\Lambda)=-S(t)$ in [F10] transfers the terminal normal limit, giving $N(0,S(t)^2\\sigma^2(t))$.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F10",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For sufficiently large $n$, define the bounded predictable $q_n(u)=[\\max(\\bar Y_n(u),c/2)\\max(\\bar Y_n(u)-1/n,c/4)]^{-1}$. On $E_n$, $\\Delta N_n(u)=1$ at event times and $q_n(u)=1/[\\bar Y_n(u)(\\bar Y_n(u)-1/n)]$, so $n\\sum_{u\\le t}\\Delta N_n(u)/[Y_n(u)(Y_n(u)-\\Delta N_n(u))]=\\int_0^tq_n\\,d\\bar N_n$. The uniform convergence in [F8] implies $q_n\\bar Y_n\\to1/s_0$ uniformly in probability, while $q_n$ is uniformly bounded. Using step 2.1, decompose $\\int q_n\\,d\\bar N_n=\\int q_n\\bar Y_n\\lambda\\,du+n^{-1}\\int q_n\\,dM_n$. The first term tends to $\\sigma^2(t)$ by boundedness and $\\int\\lambda<\\infty$; by [F3]–[F4] the second has second moment at most $n^{-1}(8/c^2)^2E[A_1(t)]$, which tends to zero. Therefore the scaled Greenwood sum tends to $\\sigma^2(t)$, and $\\widehat S_n(t)^2\\to_P S(t)^2$ by step 5.1. Since $P(E_n)\\to1$ and Greenwood's formula is defined on $E_n$ for large $n$, the zero extension agrees with the formula on an event whose probability tends to one. It follows that $n\\widehat V_G^\\circ(t)\\to_P S(t)^2\\sigma^2(t)$, which equals $\\operatorname{Var}(\\phi_i^S(t))$ by step 4.1. This is a first-order variance estimate, not a finite-sample identity.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "F11",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement quantifies over positive integer sample sizes and an IID subject sequence, not an empty sample."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If lambda=0 almost everywhere, steps 4.1 and 6.1 give zero influence variance and zero scaled Greenwood limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1 uses the zero extension on samples with a zero Greenwood denominator; the bad-domain probability tends to zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 permits sigma^2(t)=0, and the terminal-limit supplier includes a degenerate normal target."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 5.1–6.1 include a failure at t; F1 fixes T=C as an event and F2 uses U_i≥u in the risk set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement carries AC through the L2 completion and IID terminal suppliers; steps 1.2 and 4.1 make no further arbitrary-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives one-way expansions and limits, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from asymptotic normality or Greenwood consistency to the model assumptions is asserted."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "AC"
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Read all eight steps, all fourteen direct dependency carriers and their actual cited clauses/proofs. T>0 and absolute continuity on [0,t] exclude baseline events and pooled ties; c=S(t)G(t)>0 bounds risk. Pooled process satisfies the binary-J intensity contract with eta=Y_n lambda. Step 2.1 constructs deterministic left-step approximants for the bounded left-continuous reciprocal integrands; compensator-energy DCT, L2 isometry and pathwise finite-variation DCT identify the completed integrals, without a general stochastic integration theorem. The floored reciprocal error tends to zero in expected squared supremum; pooled isometry proves the scaled remainder o_P(1). Step 4.1 gives a measurable IID subject contribution, mean zero, variance integral lambda/s_0 by Tonelli on finite Lebesgue horizon times probability. Thus the terminal IID supplier is applied only after proving the expansion. At most n unit events with risk at least nc/2 bound the log-product remainder by 4/(nc^2); scalar Taylor/delta gives the KM expansion. Greenwood floored product reciprocal is bounded by 8/c^2; its martingale contribution has second moment O(1/n), and drift tends to sigma^2. Positive denominators hold on E_n for large n, so zero extension is harmless. Zero lambda gives zero variance; censor atoms and C=0 are allowed; no process limit is claimed. AC is explicitly inherited through martingale/conditional-expectation, L2 completion and IID CLT interfaces, with no new local arbitrary selection. Reader F2 endpoint/caveat alignment is audit enrichment; no refuter finding on this item. Tian Unit12 PDF pp.5–10 and12–14 and Unit3 p.11 checked as asymptotic context; local proof supplies its own missing source derivations."
+      }
+    },
+    "ex-kaplan-meier-hand-risk-set-and-support-loss": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-event-time-observation-schemes",
+          "source_section": "Definition",
+          "quote": "An **event time** is a measurable real-valued map $T$ with values in $[0,\\infty)$. A **covariate** is a measurable map $Z$ into a specified standard-Borel space $(\\mathcal Z,\\mathcal B)$, where standard Borel means measurably isomorphic to a Polish space ([[def-standard-borel-space]]). A **censoring or inspection time** is a measurable real-valued map $C$ with values in $[0,\\infty)$. When conditional laws are used, they are probability kernels $K_T(z,\\cdot)$ and $K_C(z,\\cdot)$ in the sense of [[def-conditional-law-given-a-random-element]] and [[def-measure-kernel-and-probability-kernel]]. They are part of the specified model; their existence for real-valued targets and factorization through standard-Borel $Z$ follow under [[def-axiom-of-choice]] from [[thm-existence-of-regular-conditional-distributions-for-standard-borel-targets]] and [[lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable]].\n\nThe notation $T\\perp\\!\\!\\!\\perp C\\mid\\sigma(Z)$ has the meaning in [[def-conditional-independence-given-a-sigma-algebra]]: for bounded measurable $a,b$, $\\mathbb E[a(T)b(C)\\mid\\sigma(Z)]=\\mathbb E[a(T)\\mid\\sigma(Z)]\\mathbb E[b(C)\\mid\\sigma(Z)]$ almost surely. It is a model assumption about the conditional observation law, not a consequence of adjusting for $Z$ and not an empirical conclusion.\n\nUnder **right censoring**, the recorded pair is $U=\\min(T,C)$ and $\\delta=1\\{T\\le C\\}$. Thus $\\delta=1$ records an event at $U=T$, including a tie, while $\\delta=0$ records censoring at $U=C$ and implies $T>C$. **Left censoring** at a known threshold $L$ records only $T\\le L$. **Interval censoring** at known endpoints $L<R$ records $L<T\\le R$. **Current-status observation** at an inspection time $C$ records only $\\delta_C=1\\{T\\le C\\}$.\n\n**Left truncation**, also called delayed entry at $L$, selects a unit into the sample only when $T>L$; observation begins after that selection. **Right truncation** at $R$ selects a unit only when $T<R$. These are selection rules before the observed sample is formed, whereas censoring coarsens an event time after sampling. The strict and weak inequalities in these definitions fix the endpoint conventions. A random observation endpoint is called noninformative here only when it is fixed by design or is generated independently of $T$ conditional on the stated covariates under a parameter-distinct law; otherwise its joint observation law must be modeled.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nelson-aalen-kaplan-meier-greenwood-estimators",
+          "source_section": "Definition",
+          "quote": "For a positive integer sample size $n$, let $(T_i,C_i)$, $1\\le i\\le n$, be event and censoring times with right-censored observations $(U_i,\\delta_i)$ as in [[def-event-time-observation-schemes]], so $U_i=\\min(T_i,C_i)$ and $\\delta_i=\\mathbf 1\\{T_i\\le C_i\\}$. The subject counting process and at-risk process are $N_i(t)=\\mathbf 1\\{U_i\\le t,\\ \\delta_i=1\\}$ and $Y_i(t)=\\mathbf 1\\{U_i\\ge t\\}$.\nThe endpoint convention makes $Y_i$ left-continuous at $U_i$: a subject is still at risk at the observed time, including a tied event and censoring time. Set $N_n=\\sum_{i=1}^nN_i$ and $Y_n=\\sum_{i=1}^nY_i$. Let $dN_n$ be the finite counting measure of observed events on $[0,\\infty)$, with atom $\\Delta N_n(u):=\\sum_{i=1}^n\\mathbf 1\\{U_i=u,\\ \\delta_i=1\\}$ at each $u\\ge0$; in particular, $\\Delta N_n(0)=N_n(0)$. Tied failures at $u$ contribute their full count and censorings at $u$ do not contribute to $dN_n(u)$.\n\nFor $t\\ge0$, the **Nelson–Aalen estimator** is $\\widehat\\Lambda_n(t)=\\int_{[0,t]}\\frac{\\mathbf 1\\{Y_n(u)>0\\}}{Y_n(u)}\\,dN_n(u)$, where the integrand is defined to be zero when $Y_n(u)=0$. The **Kaplan–Meier estimator** is $\\widehat S_n(t)=\\prod_{\\substack{0\\le u\\le t:\\,\\Delta N_n(u)>0}}\\left(1-\\frac{\\Delta N_n(u)}{Y_n(u)}\\right)$.\nEach product is finite and a factor is zero if every subject at risk fails at that time. The target survival function is $S(t)=P(T>t)$. If $T$ has density $f$, $S$ is positive on the horizon, and $\\lambda=f/S$, the continuous cumulative hazard is $\\Lambda(t)=\\int_0^t\\lambda(u)\\,du=-\\log S(t)$.\n\nThese inclusive endpoint formulas reduce to the usual $(0,t]$ formulas whenever $\\Delta N_n(0)=0$. If $T$ has finite support $0\\le a_1<\\cdots<a_m$, write $q_j=P(T=a_j\\mid T\\ge a_j)$; the corresponding discrete cumulative hazard is $\\Lambda_d(t)=\\sum_{a_j\\le t}q_j$. Under IID sampling, independent censoring, and positive risk probability at the support points, the Nelson–Aalen increments estimate these $q_j$; in general this discrete cumulative hazard is not $-\\log S(t)$.\n\nA baseline event is included at $u=0$; if it occurs then $N_i(0)=1$, so a model contract requiring $N_i(0)=0$ must exclude this case.\n\nAn empty event product is $1$, and an empty Greenwood event sum is $0$.\n\nOn a horizon where every event contribution has $Y_n(u)-\\Delta N_n(u)>0$, the **Greenwood variance estimate** is $\\widehat V_G(t)=\\widehat S_n(t)^2\\sum_{0\\le u\\le t:\\,\\Delta N_n(u)>0}\\frac{\\Delta N_n(u)}{Y_n(u)\\{Y_n(u)-\\Delta N_n(u)\\}}$.\nGreenwood's formula is used as a first-order asymptotic variance estimate when the sampling and censoring assumptions justify that approximation; the formula alone asserts no asymptotic result and is not an exact finite-sample variance identity. It is undefined when a contributing denominator is zero.\n\nFor each fixed $t$, $\\widehat\\Lambda_n(t)$ and $\\widehat S_n(t)$ are statistics of the observed sample in the sense of [[def-statistic-and-estimator]]. Greenwood's formula is a measurable function on the measurable subset $D_n(t)$ of the observed sample space $([0,\\infty)\\times\\{0,1\\})^n$ where every contributing denominator is positive. Its **zero extension** $\\widehat V_G^\\circ(t)$, equal to $\\widehat V_G(t)$ on $D_n(t)$ and $0$ elsewhere, is a statistic on the whole observed sample space. This extension assigns no Greenwood variance interpretation outside $D_n(t)$.\n\nTo verify measurability, scan indices $i=1,\\ldots,n$ and include only the first event observation at each distinct time in $[0,t]$; each inclusion condition uses finitely many Borel equalities and inequalities among the observed $U_i$ and $\\delta_i$. Risk and event counts are finite Borel sums. The finitely many positive-denominator tests make $D_n(t)$ measurable; evaluating divisions only on their positive-denominator branches makes the sums, products, and zero extension Borel measurable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At time $1$, all four subjects are at risk and one fails, so $Y_1=4,d_1=1$. At time $2$, three remain at risk and one fails, so $Y_2=3,d_2=1$. By [F2], $\\widehat\\Lambda_n(3)=1/4+1/3=7/12$ and $\\widehat S_n(3)=(1-1/4)(1-1/3)=1/2$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Both Greenwood denominators are positive, and [F2] gives $\\widehat V_G(3)=\\frac14\\left(\\frac1{4\\cdot3}+\\frac1{3\\cdot2}\\right)=1/16$. The two censorings at time $3$ add no event increment, so all three estimates remain at these values after time $3$ if the product and sum are carried forward.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under either law in [A1], an event time above $3$ produces the same observed record $(U,\\delta)=(3,0)$; event times $1$ and $2$ produce $(1,1)$ and $(2,1)$. Thus the entire observed-data law is identical under $P_A$ and $P_B$, while $P_A(T>4.5)=0$ and $P_B(T>4.5)=1/2$. Survival beyond the censoring horizon is therefore not identified by these observations.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four observed subjects and has no empty-sample branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the zero event increment at censoring time 3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 calculates one failure at each of times 1 and 2 and verifies both risk-set counts."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 allows the deterministic censoring law C=3 and compares two distinct event-time tails."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include event times 1 and 2 and the censoring endpoint 3 under T≤C."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both event-time laws and the four observed records are explicit; no choice operation is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves observational nonidentifiability in one direction and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse identification claim appears in the example."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": []
+    }
+  }
+}

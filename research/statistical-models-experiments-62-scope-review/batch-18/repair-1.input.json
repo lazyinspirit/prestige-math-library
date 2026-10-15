@@ -1,0 +1,72 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-18-1",
+  "inventory": {
+    "pages": [
+      "biological-and-technical-replication",
+      "biological-and-technical-replication-examples"
+    ],
+    "items": [
+      "def-biological-and-technical-replication-model",
+      "thm-mean-and-variance-under-biological-and-technical-replication",
+      "ex-five-assays-on-one-animal-versus-five-animals"
+    ],
+    "pairs": [
+      "biological-and-technical-replication"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-biological-and-technical-replication-model.md",
+    "items/thm-mean-and-variance-under-biological-and-technical-replication.md",
+    "items/ex-five-assays-on-one-animal-versus-five-animals.md",
+    "library/statistical-models-and-experiments/biological-and-technical-replication.md",
+    "library/statistical-models-and-experiments/biological-and-technical-replication-examples.md"
+  ],
+  "write_batches": [
+    "18"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-five-assays-on-one-animal-versus-five-animals",
+      "path": [
+        "def-biological-and-technical-replication-model",
+        "ex-five-assays-on-one-animal-versus-five-animals"
+      ],
+      "paths": [
+        [
+          "def-biological-and-technical-replication-model",
+          "ex-five-assays-on-one-animal-versus-five-animals"
+        ],
+        [
+          "thm-mean-and-variance-under-biological-and-technical-replication",
+          "ex-five-assays-on-one-animal-versus-five-animals"
+        ]
+      ]
+    },
+    {
+      "id": "thm-mean-and-variance-under-biological-and-technical-replication",
+      "path": [
+        "def-biological-and-technical-replication-model",
+        "thm-mean-and-variance-under-biological-and-technical-replication"
+      ],
+      "paths": [
+        [
+          "def-biological-and-technical-replication-model",
+          "thm-mean-and-variance-under-biological-and-technical-replication"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-biological-and-technical-replication-model": [
+      "## Definition\n\nFor a specified scientific question, a **biological unit** is one unit at the\nlevel whose biological variation is relevant to the target population. A\n**biological replicate** is another independently sampled unit at that same\nlevel under the sampling law being modeled. The unit receiving randomized\ntreatment is the **randomization unit**; when treatment is assigned to a cage,\nlitter, plot, or batch, that cluster is the randomized replicate even if\nmembers or subsamples within it are measured separately. A **technical\nreplicate** is another reading or assay of the same specimen or material within\none biological unit. These roles follow the scientific and assignment design\nrecorded by [[def-scientific-statistical-model-contract]]; their names alone do\nnot assert statistical independence.\n\nLet $n,m\\ge1$ be integers, let $i\\in\\{1,\\ldots,n\\}$ index biological units,\nand let $j\\in\\{1,\\ldots,m\\}$ index technical measurements of unit $i$. On one\nprobability space, take square-integrable real random variables $B_i$ and\n$E_{ij}$, in the sense of\n[[def-random-element-and-real-random-variable]], with\n$$Y_{ij}=\\mu+\\tau_i+B_i+E_{ij}.$$\nHere $\\mu$ and the treatment contributions $\\tau_i$ are fixed real numbers\nwhen the analysis conditions on the assigned treatment schedule. The random\neffect $B_i$ represents biological variation shared by all measurements of\nunit $i$; $E_{ij}$ is technical measurement error. The complete finite family\n$(B_i)_{i=1}^n,(E_{ij})_{i\\le n,j\\le m}$ is mutually independent in the sense\nof [[def-independent-random-elements]], and\n$$\\mathbb E[B_i]=\\mathbb E[E_{ij}]=0,\\qquad \\operatorname{Var}(B_i)=\\sigma_b^2,\\qquad \\operatorname{Var}(E_{ij})=\\sigma_e^2$$\nfor all indices, where $\\sigma_b^2,\\sigma_e^2\\ge0$. Mean, variance, and\nsquare-integrability use [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]\nand [[def-moments-variance-and-covariance]]. No Gaussian assumption is made.\n\nWith the rows indexed by $(i,j)$, this is a special case of the finite-\ndimensional linear mixed model [[def-linear-mixed-model]]: the random-intercept\ndesign row selects $B_i$, and the fixed mean at that row is $\\mu+\\tau_i$.\nWhen inference averages over randomized assignments, the vector\n$\\boldsymbol\\tau=(\\tau_1,\\ldots,\\tau_n)$ is instead a random vector under the\ndeclared assignment law; its covariance and any dependence on $B$ or $E$ must\nthen be retained as specified by the result that uses it."
+    ],
+    "thm-mean-and-variance-under-biological-and-technical-replication": [
+      "## Statement\n\nAssume the balanced model of\n[[def-biological-and-technical-replication-model]], with $n,m\\ge1$, and set\n$$\\bar Y=\\frac1{nm}\\sum_{i=1}^n\\sum_{j=1}^mY_{ij},\\qquad \\bar B=\\frac1n\\sum_{i=1}^nB_i,\\qquad \\bar E=\\frac1{nm}\\sum_{i=1}^n\\sum_{j=1}^mE_{ij},\\qquad \\bar\\tau=\\frac1n\\sum_{i=1}^n\\tau_i.$$\nFor a fixed treatment schedule $(\\tau_i)_{i=1}^n$,\n$$\\mathbb E[\\bar Y]=\\mu+\\bar\\tau,\\qquad \\operatorname{Var}(\\bar Y)=\\frac{\\sigma_b^2}{n}+\\frac{\\sigma_e^2}{nm}.$$\nIf instead $\\boldsymbol\\tau=(\\tau_1,\\ldots,\\tau_n)$ is square-integrable and\nrandom under the assignment-averaged law, then\n$$\\mathbb E[\\bar Y]=\\mu+\\mathbb E[\\bar\\tau],\\qquad \\operatorname{Var}(\\bar Y)=\\frac{\\sigma_b^2}{n}+\\frac{\\sigma_e^2}{nm}+\\operatorname{Var}(\\bar\\tau)+2\\operatorname{Cov}(\\bar\\tau,\\bar B)+2\\operatorname{Cov}(\\bar\\tau,\\bar E).$$\nThus, when $\\bar\\tau$ is independent of $\\bar B$ and $\\bar E$, the assignment\ncontribution is\n$\\operatorname{Var}(\\bar\\tau)=n^{-2}\\sum_{i,k=1}^n\\operatorname{Cov}(\\tau_i,\\tau_k)$.\nIf, in addition, the $\\tau_i$ are mutually independent with common variance\n$\\sigma_\\tau^2$, the full variance is\n$\\sigma_b^2/n+\\sigma_e^2/(nm)+\\sigma_\\tau^2/n$. Without independence of the\ntreatment average from $\\bar B,\\bar E$, the two covariance terms remain. No\nGaussian assumption is required."
+    ],
+    "ex-five-assays-on-one-animal-versus-five-animals": []
+  }
+}

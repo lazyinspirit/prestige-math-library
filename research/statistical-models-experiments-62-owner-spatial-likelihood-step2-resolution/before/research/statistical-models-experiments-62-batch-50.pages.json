@@ -1,0 +1,292 @@
+[
+  {
+    "order": 2016,
+    "id": "finite-window-spatial-point-process-likelihoods",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Finite-window spatial likelihood",
+    "companion": "finite-window-spatial-point-process-likelihoods-examples",
+    "requires": [
+      "poisson-and-cox-point-process-models",
+      "dominated-experiments-likelihood-and-sufficiency",
+      "measures-and-their-basic-properties"
+    ],
+    "items": [
+      {
+        "id": "lem-borel-product-of-second-countable-spaces",
+        "kind": "lemma",
+        "title": "Borel sigma-algebra of a product of second-countable spaces",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-product-topology",
+          "def-second-countable-space",
+          "thm-product-of-countable"
+        ],
+        "dependency_level": 0,
+        "statement": "For second-countable topological spaces X,Y with the product topology, B(X×Y)=B(X)⊗B(Y).",
+        "strategy": "Use the countable product basis to show every product-open set is a countable union of measurable rectangles, then use continuous coordinate projections for the reverse inclusion.",
+        "provenance": { "statement": "ai-altered", "proof": "ai-altered" },
+        "axiom_use": "The proof uses only countable bases and finite products of countable sets; no choice principle is used."
+      },
+      {
+        "id": "def-finite-window-spatial-observation",
+        "kind": "definition",
+        "title": "Finite-window spatial observations and configurations",
+        "deps": [
+          "def-random-measure-and-locally-finite-point-process",
+          "def-borel-sigma-algebra",
+          "def-measurable-space",
+          "def-sigma-algebra",
+          "def-generated-sigma-algebra",
+          "thm-generated-sigma-algebra-exists-and-is-minimal",
+          "def-measure",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-restriction-of-a-measure",
+          "prop-restriction-is-a-measure",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "def-countable-choice"
+        ],
+        "dependency_level": 1,
+        "statement": "For bounded Borel W⊂R^d, define Lebesgue volume, its restriction to W, and the finite-window configuration space of finite counting measures supported on W, with evaluation sigma-algebra and boundary points included exactly when they belong to W.",
+        "provenance": { "statement": "literature-derived", "proof": "not-applicable" },
+        "axiom_use": "Countable Choice is inherited through the library's construction of Lebesgue measure; no full Axiom of Choice or dependent choice is used."
+      },
+      {
+        "id": "lem-finite-configuration-product-measurable",
+        "kind": "lemma",
+        "title": "Products of a measurable intensity over finite configurations are measurable",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function"
+        ],
+        "dependency_level": 2,
+        "statement": "For finite-valued Borel f on W, the occurrence product η↦∏_{x∈η}f(x), including multiplicity and empty product 1, is measurable on the finite-window configuration space.",
+        "strategy": "Prove the assertion for simple functions from evaluation maps, then pass to an increasing simple approximation and its pointwise product limit.",
+        "provenance": { "statement": "literature-derived", "proof": "ai-altered" },
+        "axiom_use": "Countable Choice is inherited through the finite-window Lebesgue measure; the product-measurability argument itself uses no choice."
+      },
+      {
+        "id": "lem-finite-window-pair-count-is-measurable",
+        "kind": "lemma",
+        "title": "Finite-window pair counts are measurable",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "lem-borel-product-of-second-countable-spaces",
+          "thm-rational-points-and-boxes-in-rn",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-dynkin-pi-lambda",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral"
+        ],
+        "dependency_level": 2,
+        "statement": "For R≥0, S_R(η)=((η⊗η)(D_R)-η(W))/2 is measurable and counts unordered pairs of distinct atom occurrences at Euclidean distance at most R.",
+        "strategy": "Show η↦(η⊗η)(A) is measurable on rectangles, extend to the product Borel sigma-algebra by Dynkin's theorem, then apply it to the closed distance set.",
+        "provenance": { "statement": "ai-altered", "proof": "ai-altered" },
+        "axiom_use": "Countable Choice is inherited through the finite-window Lebesgue measure; the pair-count measurability proof itself uses no choice."
+      },
+      {
+        "id": "lem-finite-product-measure-with-density",
+        "kind": "lemma",
+        "title": "Finite products of measures with densities have the product density",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "def-measure-with-density",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral"
+        ],
+        "dependency_level": 2,
+        "statement": "For finite μ on W and measurable f≥0 with finite integral, (fμ)^{⊗n} has density ∏_i f(x_i) relative to μ^{⊗n}, including the empty tuple convention at n=0.",
+        "strategy": "Both measures are finite and agree on measurable rectangles by the product formula and Tonelli; uniqueness extends equality to the product sigma-algebra.",
+        "provenance": { "statement": "literature-derived", "proof": "ai-altered" },
+        "axiom_use": "Countable Choice is inherited through the finite-window Lebesgue measure; the finite product-density proof itself uses no choice."
+      },
+      {
+        "id": "def-papangelou-conditional-intensity",
+        "kind": "definition",
+        "title": "Papangelou conditional intensity on a finite window",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "def-probability-measure",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-nonnegative-lebesgue-integral",
+          "def-extended-real-valued-measurable-function",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "lem-deletion-of-one-point-is-measurable"
+        ],
+        "dependency_level": 2,
+        "statement": "For a law P_{θ,b} on finite configurations and fixed exterior boundary b, λ_θ(u;η,b) is its Papangelou conditional intensity relative to ℓ_W when it satisfies the deletion-form Georgii–Nguyen–Zessin identity for every nonnegative product-measurable test function.",
+        "provenance": { "statement": "literature-derived", "proof": "not-applicable" },
+        "axiom_use": "Countable Choice is inherited through the window's Lebesgue measure; the defining identity uses no further choice."
+      },
+      {
+        "id": "def-finite-window-pseudolikelihood",
+        "kind": "definition",
+        "title": "Finite-window point-process pseudolikelihood",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "def-papangelou-conditional-intensity",
+          "lem-deletion-of-one-point-is-measurable",
+          "def-nonnegative-lebesgue-integral"
+        ],
+        "dependency_level": 3,
+        "statement": "For fixed data η and fixed boundary b, define PL(θ;η)=∏_{x∈η}λ_θ(x;η-δ_x,b) exp{-∫_W λ_θ(u;η,b)du}, when the displayed factors and integral are finite; it is a criterion, not generally a joint likelihood.",
+        "provenance": { "statement": "literature-derived", "proof": "not-applicable" },
+        "axiom_use": "Countable Choice is inherited through the window's Lebesgue measure; the definition uses no further choice."
+      },
+      {
+        "id": "def-finite-window-gibbs-density",
+        "kind": "definition",
+        "title": "Finite-window Gibbs density relative to a Poisson reference",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "def-poisson-and-cox-point-process",
+          "def-measure-with-density",
+          "def-probability-measure",
+          "def-nonnegative-lebesgue-integral"
+        ],
+        "dependency_level": 3,
+        "statement": "Given a specified finite-window Poisson law Q, measurable support S_θ, and measurable energy H_θ, define a Gibbs law only when Z_θ=∫e^{-H_θ}1_{S_θ}dQ is finite and positive, with density Z_θ^{-1}e^{-H_θ}1_{S_θ}.",
+        "provenance": { "statement": "literature-derived", "proof": "not-applicable" },
+        "axiom_use": "Countable Choice is inherited through the window's Lebesgue measure; the density definition uses no further choice."
+      },
+      {
+        "id": "lem-diffuse-finite-window-poisson-process-is-simple",
+        "kind": "lemma",
+        "title": "A finite Poisson process with atomless intensity is simple",
+        "deps": [
+          "def-random-measure-and-locally-finite-point-process",
+          "def-poisson-and-cox-point-process",
+          "thm-finite-intensity-poisson-process-existence-and-mixed-binomial-law",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 4,
+        "statement": "A finite Poisson point process with atomless finite intensity is almost surely simple.",
+        "strategy": "Under the finite mixed-binomial representation, each pair of iid locations collides on a product-null diagonal; a finite union for each count and the countable Poisson mixture preserve nullity.",
+        "provenance": { "statement": "literature-derived", "proof": "ai-altered" },
+        "axiom_use": "No choice principle is used by the finite-mixture and diagonal-null proof."
+      },
+      {
+        "id": "thm-finite-window-spatial-poisson-likelihood",
+        "kind": "theorem",
+        "title": "Finite-window spatial Poisson likelihood relative to unit rate",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "lem-finite-configuration-product-measurable",
+          "lem-finite-product-measure-with-density",
+          "def-poisson-and-cox-point-process",
+          "thm-finite-intensity-poisson-process-existence-and-mixed-binomial-law",
+          "def-measure-with-density",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_level": 4,
+        "statement": "For bounded Borel W and finite-valued Borel λ_θ≥0 with Λ_θ=∫_Wλ_θdx<∞, dP_θ/dP_0(η)=exp{|W|-Λ_θ}∏_{x∈η}λ_θ(x), where P_0 is unit-rate Poisson law and products count occurrences. The log likelihood up to |W| is Σ_{x∈η}log λ_θ(x)-Λ_θ, with value -∞ when an observed event has zero intensity.",
+        "strategy": "Expand P_θ and P_0 with the finite mixed-binomial representation, rewrite each finite product measure by its product density, and verify ∫_A g_θ dP_0=P_θ(A) for every measurable A.",
+        "provenance": { "statement": "literature-derived", "proof": "ai-altered" },
+        "axiom_use": "Countable Choice is inherited through Lebesgue measure. The formula explicitly supplies every parameter's density version, so no full Axiom of Choice is used."
+      },
+      {
+        "id": "prop-homogeneous-poisson-window-mle",
+        "kind": "proposition",
+        "title": "Homogeneous Poisson rate MLE in a positive-volume window",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "thm-finite-window-spatial-poisson-likelihood",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 5,
+        "statement": "If |W|>0 and N(W)>0, the homogeneous rate MLE over ρ≥0 is N(W)/|W|. If N(W)=0, the supremum is at ρ=0, attained when zero is admitted and otherwise approached only as ρ↓0.",
+        "strategy": "Subtract log likelihoods at ρ and N(W)/|W|, then use the mean value theorem to show log t-t+1≤0 with equality only at t=1; handle zero count directly.",
+        "provenance": { "statement": "literature-derived", "proof": "ai-altered" },
+        "axiom_use": "Countable Choice is inherited through the window's Lebesgue measure; no further choice is used."
+      },
+      {
+        "id": "lem-finite-window-gibbs-density-ratio-is-papangelou",
+        "kind": "lemma",
+        "title": "A positive finite-window Gibbs density has its density-ratio Papangelou intensity",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "def-dirac-measure",
+          "def-finite-window-gibbs-density",
+          "def-papangelou-conditional-intensity",
+          "lem-deletion-of-one-point-is-measurable",
+          "lem-finite-intensity-mecke-identity",
+          "thm-finite-intensity-poisson-process-existence-and-mixed-binomial-law",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_level": 5,
+        "statement": "If P has a finite, strictly positive density g relative to the unit-rate finite-window Poisson law, then λ_g(u;η)=g(η+δ_u)/g(η) satisfies the deletion-form Papangelou identity.",
+        "strategy": "Apply the finite-intensity Mecke identity to the test function g(η)h(u,η-δ_u), using measurable single-occurrence deletion, then factor g(η+δ_u)=g(η)λ_g(u;η).",
+        "provenance": { "statement": "literature-derived", "proof": "ai-altered" },
+        "axiom_use": "The finite-window measure uses Countable Choice through Lebesgue measure; the density-ratio argument itself uses no choice."
+      }
+    ]
+  },
+  {
+    "order": 2017,
+    "id": "finite-window-spatial-point-process-likelihoods-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Finite-window spatial likelihood — Examples",
+    "companion": "finite-window-spatial-point-process-likelihoods",
+    "requires": [
+      "finite-window-spatial-point-process-likelihoods"
+    ],
+    "items": [
+      {
+        "id": "ex-homogeneous-poisson-window-mle-boundary",
+        "kind": "example",
+        "title": "Homogeneous Poisson rate estimation at positive-count and zero-count boundaries",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "prop-homogeneous-poisson-window-mle"
+        ],
+        "dependency_level": 6,
+        "statement": "For W=[0,2]^2, |W|=4, a three-point homogeneous Poisson pattern has MLE 3/4; an empty pattern has the rate-zero boundary supremum, attained only if zero belongs to the parameter space.",
+        "provenance": { "statement": "literature-derived", "proof": "ai-altered" }
+      },
+      {
+        "id": "ex-strauss-exact-likelihood-versus-pseudolikelihood",
+        "kind": "example",
+        "title": "Exact and pseudo likelihoods for finite-window Poisson and Strauss models",
+        "deps": [
+          "def-finite-window-spatial-observation",
+          "lem-finite-window-pair-count-is-measurable",
+          "def-finite-window-gibbs-density",
+          "def-papangelou-conditional-intensity",
+          "def-finite-window-pseudolikelihood",
+          "lem-diffuse-finite-window-poisson-process-is-simple",
+          "thm-finite-window-spatial-poisson-likelihood",
+          "lem-finite-window-gibbs-density-ratio-is-papangelou",
+          "def-poisson-and-cox-point-process",
+          "def-scalar-poisson-count-law",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-measure-monotonicity"
+        ],
+        "dependency_level": 6,
+        "statement": "For a finite Poisson reference on W=[0,2]^2, the homogeneous Poisson pseudolikelihood is proportional to the exact likelihood. For the soft Strauss density with R=1/2, β>0, and 0<γ<1, compare the empty and one-point patterns to show the pseudolikelihood is not proportional to the exact joint density.",
+        "strategy": "Bound the Strauss normalizer above by E_{P0}[β^N] and below by the empty-pattern probability, derive its Papangelou ratio from Mecke, then compare exact and pseudo likelihood ratios for empty and one-point observations.",
+        "provenance": { "statement": "literature-derived", "proof": "ai-altered" },
+        "axiom_use": "Countable Choice is inherited through the window's Lebesgue measure; no full Axiom of Choice is used."
+      }
+    ]
+  }
+]

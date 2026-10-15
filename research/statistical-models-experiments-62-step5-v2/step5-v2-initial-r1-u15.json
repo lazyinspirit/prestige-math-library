@@ -1,0 +1,96 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "15",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "thm-regular-fractional-factorial-aliasing-criterion",
+      "model": "gpt-6-luna",
+      "context_sha256": "8854a4bd0b474859e56b4a79e8a99cc25ff85709df47b6f61bb2fd05ad75ee6b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "Step 3.1 inferred c=sum_i lambda_i 1_G_i for an arbitrary support C without the row-space hypothesis. For k=2, p=1, G_1={1}, s_1=+1 and C={2}, the runs are (1,1) and (1,-1), so no sign makes epsilon x_C identically +1. Step 2.1 supplies the missing criterion but the original inference does not apply it conditionally. Repaired step 3.1 explicitly excludes supports outside row(M), then proves the unique sign and generated-word representation for supports inside row(M). The theorem statement remains valid and unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-regular-fractional-factorial-aliasing-criterion",
+      "disposition": "repaired",
+      "post_sha256": "7f280b5a7e83a10cb7719a73418478331af97c4a09fbbc18c64ca4ff570fc1d7",
+      "review_context_sha256": "58cc50d2db104edc41139087e29ea9659709bba7e36a466e0f9eff49e1f92746",
+      "reason": "Checked every proof step against the actual regular-fraction Definition and full-factorial run convention. Full row rank makes Mz=b solvable with k-p free bits, giving a nonempty fraction of size 2^(k-p). RREF substitution shows a support monomial is constant exactly for row-space supports. The repaired case split gives no signed identity outside that space, and the unique sign product s_i^lambda_i inside it. Independent supports distinguish 2^p generator products, including p=k; the empty support has only the positive identity sign. Finally x_A x_B=x_(A triangle B) establishes both signed-alias directions. F1/F2 use only generator equations and signed multiplication, avoiding the definition's justified-by conclusion. All choices are finite, with no AC. The owning pages and contract preserve this interface; only step 3.1 and its contract claim/inputs/current risk note changed. This is the repair author's check, not an independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "merge_or_append",
+      "item": "thm-regular-fractional-factorial-aliasing-criterion",
+      "class": "accuracy",
+      "subclass": "invalid-inference",
+      "severity": "fatal",
+      "location": "proof-step",
+      "location_detail": "Proof step 3.1",
+      "caught_at_stage": "5-adjudicate",
+      "caught_by_role": "group-alpha",
+      "disposition": "fixed",
+      "reason": "The row-space representation was asserted without its hypothesis; the two-run example in the decision refutes the unrestricted inference. Step 3.1 now treats non-row-space supports explicitly and restricts the unique generator-coordinate argument to row-space supports. Synchronised the assigned contract entry; Statement and Definition interfaces did not change.",
+      "adjudication_ref": "research/statistical-models-experiments-62-step5-v2/step5-v2-initial-r1-u15.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "item_paths": [
+      "items/thm-regular-fractional-factorial-aliasing-criterion.md"
+    ],
+    "metadata_paths": [
+      "research/statistical-models-experiments-62-batch-15.proof-contracts.json"
+    ],
+    "contract_integration": "Acquired step5-shared-write-lock as step5-v2-initial-r1-u15, reread the contract, edited only the assigned entry, passed its strict scoped check, and released the lock. Current risk notes identify the repair author and claim no external source consultation; original round evidence was not edited.",
+    "interface": "Only Proof step 3.1 changed in the item. Statement section hash equals the frozen value 79d14c9a886fde72f7aa0b2cd40893fb9c3d3328f758450ccede4180ea81de3b. No Statement/Definition change or new prerequisite, hence no downstream propagation.",
+    "source_evidence": "Read the complete local theorem and its actual prerequisite definitions: items/def-regular-fractional-factorial-defining-relation-and-resolution.md and items/def-two-level-full-factorial-design.md. Read the assigned contract and both owning page summaries. This is familiar finite linear algebra checked directly; no external source reading is claimed.",
+    "checks": [
+      {
+        "command": "node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-15.proof-contracts.json --items thm-regular-fractional-factorial-aliasing-criterion --strict --json",
+        "exit_code": 0,
+        "result": "ok:true; one assigned item checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/thm-regular-fractional-factorial-aliasing-criterion.md --json",
+        "exit_code": 0,
+        "result": "one file and one proof checked; status pass; zero failures; no formatter needed"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/thm-regular-fractional-factorial-aliasing-criterion.md --json",
+        "exit_code": 0,
+        "result": "one file checked; zero errors and warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/thm-regular-fractional-factorial-aliasing-criterion.md",
+        "exit_code": 0,
+        "result": "one item; four steps; zero defects; run once after final item edit"
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run statistical-models-experiments-62 --items thm-regular-fractional-factorial-aliasing-criterion",
+        "exit_code": 0,
+        "result": "Captured the review hashes immediately after completing the mathematical review and contract synchronisation, before further source edits; hashes copied to reviews."
+      }
+    ],
+    "published_ledger": "No published-supplier or published-consumer defect found within this proof-only repair; no update proposed to research/published-consumer-supplier-ledger.md.",
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and independent rejudgment of the changed draft item; no judge, stamp, certificate or round transition performed by this worker."
+  }
+}

@@ -1,0 +1,1070 @@
+{
+  "version": 1,
+  "level": 3,
+  "scope": [
+    "def-inclusion-covariance-difference",
+    "def-simple-random-sampling-without-replacement",
+    "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+    "thm-sen-yates-grundy-variance-identity",
+    "thm-srswor-mean-variance-and-finite-population-correction",
+    "ex-srswor-ht-variance-and-yates-grundy",
+    "ex-zero-pair-support-prevents-universal-unbiased-variance-estimation",
+    "ex-srswor-census-and-singleton-boundaries",
+    "ex-syg-sign-condition-and-negative-estimate"
+  ],
+  "contracts": {
+    "def-inclusion-covariance-difference": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supplier definition requires a nonempty finite population, so no empty population is in this definition's domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Delta_ij is a difference of probabilities and uses no division, so zero first- or second-order inclusion probabilities cause no undefined value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the diagonal convention pi_ii=pi_i gives Delta_ii=pi_i(1-pi_i), including a one-unit population."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: if pi_i is 0 or 1, the formula remains defined and gives the corresponding diagonal value."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval, limiting value, or endpoint hypothesis in this finite-pair definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition selects no object from a family and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Deltaij is defined by the algebraic expression piij-pii pij. This definition does not characterize which arbitrary arrays are valid sampling-design inclusion probabilities or assert an iff nonnegative-variance criterion. The forward boundary would require a separate asserted biconditional, which this specific claim does not contain."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Deltaij is defined by the algebraic expression piij-pii pij. This definition does not characterize which arbitrary arrays are valid sampling-design inclusion probabilities or assert an iff nonnegative-variance criterion. The reverse boundary would infer these hypotheses or this construction from the conclusion, an implication this specific item does not assert."
+        }
+      ]
+    },
+    "def-simple-random-sampling-without-replacement": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes a finite population with N>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: n is restricted to 1<=n<=N, so the zero-sample-size case is explicitly outside the design."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: n=1 is admissible and assigns probability 1/N to every singleton."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: n=N has one supported subset, the whole population, with probability 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both n=1 and n=N are included by the stated domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The design is defined by an explicit finite subset support and requires no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The entry specifies the uniform mass1/binom(N,n) on n-element subsets for admissible n. It does not claim an iff characterization of SRSWOR from equal first-order inclusion probabilities; such equality alone is weaker than a uniform subset law. The forward boundary would require a separate asserted biconditional, which this specific claim does not contain."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The entry specifies the uniform mass1/binom(N,n) on n-element subsets for admissible n. It does not claim an iff characterization of SRSWOR from equal first-order inclusion probabilities; such equality alone is weaker than a uniform subset law. The reverse boundary would infer these hypotheses or this construction from the conclusion, an implication this specific item does not assert."
+        }
+      ]
+    },
+    "thm-horvitz-thompson-variance-and-pair-inclusion-estimator": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-population-and-sampling-design",
+          "source_section": "Definition",
+          "quote": "$$\\pi_{ij}:=P_d(\\{s\\in\\mathcal S_d:i,j\\in s\\}).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inclusion-covariance-difference",
+          "source_section": "Definition",
+          "quote": "$$\\Delta_{ij}:=\\pi_{ij}-\\pi_i\\pi_j,$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$ If $X$ and $Y$ are square-integrable real random variables on the same probability space, their **covariance** is $$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-variance-of-a-finite-sum",
+          "source_section": "Statement",
+          "quote": "Equivalently, it is $\\sum_{i,j\\in I}\\operatorname{Cov}(X_i,X_j)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-covariance-bilinearity-and-symmetry",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{Cov}\\!\\left(\\sum_{i\\in I}a_iX_i,\\sum_{j\\in J}b_jY_j\\right)=\\sum_{i\\in I}\\sum_{j\\in J}a_ib_j\\operatorname{Cov}(X_i,Y_j).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The finite support and positive pi_i make every weighted inclusion indicator square-integrable and identify the HT total as their finite sum.",
+          "inputs": [
+            "given",
+            "F1",
+            "choose"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The finite-sum variance theorem rewrites the total variance as the double sum of pairwise covariances.",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Covariance bilinearity pulls out the HT weights, and the indicator moment identity gives Cov(I_i,I_j)=Delta_ij; substitution proves the variance formula.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "Taking expectation of the pair-inclusion expression cancels each positive pi_ij and reproduces the variance formula.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "F7",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d5",
+          "step": "5.1",
+          "claim": "A zero pi_ij leaves the corresponding all-pairs coefficient undefined; dropping that term changes the expression and does not prove another estimator impossible.",
+          "inputs": [
+            "given",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Population U and design support are nonempty, but the general design may support the empty sampled subset. On that outcome every I_i is0, so HT total and the pair-inclusion sample expression are0; Proof1.1 and4.1 retain their finite-integrability and expectation argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 treats zero pair support without division; the first-order variance formula assumes pi_i>0 as stated."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 use finite sums and remain valid for a one-unit population when pi_1>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 gives zero variance when every y_i is zero or the design is a census."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1-2.1 use finite sums only and invoke no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        }
+      ]
+    },
+    "thm-sen-yates-grundy-variance-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-population-and-sampling-design",
+          "source_section": "Definition",
+          "quote": "$$I_i(s):=\\begin{cases}1,&i\\in s,\\\\0,&i\\notin s,\\end{cases}$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inclusion-covariance-difference",
+          "source_section": "Definition",
+          "quote": "$$\\Delta_{ij}:=\\pi_{ij}-\\pi_i\\pi_j,$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{Var}_d(\\widehat T_{HT})=\\sum_{i,j\\in U}\\frac{\\Delta_{ij}y_i y_j}{\\pi_i\\pi_j},$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "$$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Fixed sample size gives sum_j I_j=n; multiplying by I_i and taking expectations proves sum_j Delta_ij=0.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Symmetry gives zero column sums; expanding the squared differences cancels row and column terms and recovers the HT variance double sum.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Under positive pair support, linearity and E[I_iI_j]=pi_ij show the sample SYG expression is unbiased by the identity from step 1.2.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "Pairing symmetric ordered terms gives a sum over i<j; nonpositive Delta makes every sample summand nonnegative.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "With positive first-order inclusions a fixed supported sample cannot be empty. The permitted singleton population U={i} is necessarily a census: Delta_ii=0 and its squared difference is0, while the distinct-pair index set is empty. The SYG true/sample expressions therefore reduce to0 in Proof2.1 and4.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The variance identity itself allows zero pair support; step 3.1 states the sample estimate only under positive pi_ij."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1's row-sum identity applies to fixed sample size one; the estimator condition remains separately explicit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "With census or constant y_i, step 3.1 gives zero true variance and the squared-difference expression is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval-valued parameter in this theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 3.1, and 4.1 use finite sums on U and make no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-srswor-mean-variance-and-finite-population-correction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-population-and-sampling-design",
+          "source_section": "Definition",
+          "quote": "$$\\pi_i:=P_d(\\{s\\in\\mathcal S_d:i\\in s\\}),$$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-simple-random-sampling-without-replacement",
+          "source_section": "Definition",
+          "quote": "$$p_d(s)=\\binom{N}{n}^{-1}.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-inclusion-covariance-difference",
+          "source_section": "Definition",
+          "quote": "$$\\Delta_{ij}:=\\pi_{ij}-\\pi_i\\pi_j,$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{Var}_d(\\widehat T_{HT})=\\sum_{i,j\\in U}\\frac{\\Delta_{ij}y_i y_j}{\\pi_i\\pi_j},$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "If $X$ and $Y$ are square-integrable real random variables on the same probability space, their **covariance** is $$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Counting n-subsets containing a fixed unit or pair gives pi_i=n/N and pi_ij=n(n-1)/(N(N-1)), with n=1 handled separately.",
+          "inputs": [
+            "given",
+            "F2",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Expanding centered covariance and substituting the inclusion probabilities yields the negative distinct-indicator covariance.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The sample mean is the HT mean; the HT variance formula and the diagonal/off-diagonal coefficients simplify to the finite-population correction.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "The census has zero variance and the n=1 formula remains defined although the sample variance denominator does not.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement explicitly fixes N>1 and 1<=n<=N: both unit index set and sampled data are nonempty. At the admitted smallest sample n=1, Proof1.1 handles zero DISTINCT pair inclusion and4.1 evaluates the sample-mean variance; that is not an empty sample.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner-delegated-focused-boundary-review",
+            "reason": "Statement explicitly fixes N>1 and 1<=n<=N: both unit index set and sampled data are nonempty. At the admitted smallest sample n=1, Proof1.1 handles zero DISTINCT pair inclusion and4.1 evaluates the sample-mean variance; that is not an empty sample."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes n=1, where distinct pi_ij are zero; no inverse-pair estimator is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 computes the n=1 variance as (1-1/N)S_U^2 and states the unavailable sample variance denominator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If all population values are equal then S_U^2=0 and step 3.1 gives zero design variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 include both n=1 and n=N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 counts finite subsets directly and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states equalities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states equalities, not a biconditional."
+        }
+      ]
+    },
+    "ex-srswor-ht-variance-and-yates-grundy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-random-sampling-without-replacement",
+          "source_section": "Definition",
+          "quote": "$$p_d(s)=\\binom{N}{n}^{-1}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{Var}_d(\\widehat T_{HT})=\\sum_{i,j\\in U}\\frac{\\Delta_{ij}y_i y_j}{\\pi_i\\pi_j},$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sen-yates-grundy-variance-identity",
+          "source_section": "Statement",
+          "quote": "$$\\widehat V_{SYG}:=-\\frac12\\sum_{i,j\\in U}I_iI_j\\frac{\\Delta_{ij}}{\\pi_{ij}}(x_i-x_j)^2$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-srswor-mean-variance-and-finite-population-correction",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{Var}_d(\\bar y_S)=\\left(1-\\frac nN\\right)\\frac{S_U^2}{n}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Enumerate the three equally likely samples, count first- and second-order inclusions, compute Delta, and compute the population variance.",
+          "inputs": [
+            "given",
+            "F1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Compute the three HT totals and average their squared deviations from total 7 to get variance 7/2.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.2",
+          "claim": "Substitute the scaled values into the pair-inclusion and SYG formulas, obtain 3/4, 27/4, 3, and average to 7/2.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "3.1",
+          "claim": "Enumerate the three sample means, compute their variance 7/18, and verify the finite-population formula.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a three-unit population and a nonempty size-two sample."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed population values are 1, 2, and 4; this calculation does not analyze a zero-valued schedule."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes n=2 and does not analyze singleton samples."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed schedule yields three distinct sample means and is not a degenerate design example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example fixes n=2 between its census and singleton endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 2.2, and 3.1 enumerate the three finite samples directly; no object is chosen from an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies finite calculations and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies finite calculations and asserts no biconditional."
+        }
+      ]
+    },
+    "ex-zero-pair-support-prevents-universal-unbiased-variance-estimation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-population-and-sampling-design",
+          "source_section": "Definition",
+          "quote": "The observed record includes the selected unit labels and their values.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-simple-random-sampling-without-replacement",
+          "source_section": "Definition",
+          "quote": "$$p_d(s)=\\binom{N}{n}^{-1}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-horvitz-thompson-variance-and-pair-inclusion-estimator",
+          "source_section": "Statement",
+          "quote": "Its design variance is $$\\operatorname{Var}_d(\\widehat T_{HT})=\\sum_{i,j\\in U}\\frac{\\Delta_{ij}y_i y_j}{\\pi_i\\pi_j},$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-statistic-and-estimator",
+          "source_section": "Definition",
+          "quote": "a statistic $\\widehat\\psi$ with this same target space is an **estimator of $\\psi$**.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Enumerate singleton samples, get pi_i=1/2 and pi_12=0, then compute the HT total variance as (a-b)^2.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The all-pairs coefficient at pi_12=0 is undefined; retaining only supported diagonal terms gives expectation a^2+b^2, not the variance when a=b=1.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Any estimator on the two observed singleton records has coordinate functions g_1 and g_2; four population schedules produce inconsistent unbiasedness equations.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra",
+            "contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes two units and one observed unit."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 explicitly handle pi_12=0 and the supported-pair omission."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The sample size is n=1 throughout, and steps 1.1, 2.1, and 3.1 prove the singleton case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a=b=1 to show the supported-pair expression can be biased even when the true variance is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or limiting parameter in this example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 considers every estimator as two functions on the two explicit records and uses four finite schedules."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves an impossibility and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves an impossibility and asserts no biconditional."
+        }
+      ]
+    },
+    "ex-srswor-census-and-singleton-boundaries": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-simple-random-sampling-without-replacement",
+          "source_section": "Definition",
+          "quote": "$$p_d(s)=\\binom{N}{n}^{-1}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-srswor-mean-variance-and-finite-population-correction",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{Var}_d(\\bar y_S)=\\left(1-\\frac nN\\right)\\frac{S_U^2}{n}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Compute population mean and S_U^2, then verify the census sample mean is constant and the formula gives zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Enumerate singleton means, compute expectation and variance 14/9, and compare to the n=1 formula while noting the sample variance denominator is zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes U={1,2,3}."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The fixed population values are positive and no zero-valued population is analyzed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly verifies n=1 and the unavailable sample-variance denominator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the degenerate census distribution with variance zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover n=N and n=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 enumerate finite samples directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional."
+        }
+      ]
+    },
+    "ex-syg-sign-condition-and-negative-estimate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-population-and-sampling-design",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$ be an integer, let $U=\\{1,\\ldots,N\\}$, and let\n$y:U\\to\\mathbb R$ be a fixed function. The pair $(U,y)$ is a **finite\npopulation**; its **total** and **mean** are\n$$T(y):=\\sum_{i\\in U}y_i,\\qquad \\bar y_U:=T(y)/N.$$\n\nA **sampling design** on $U$ is a nonempty finite set\n$\\mathcal S_d\\subseteq\\mathcal P(U)$ and a function\n$p_d:\\mathcal S_d\\to(0,1]$ with $\\sum_{s\\in\\mathcal S_d}p_d(s)=1$.\nHere $\\mathcal S_d$ is the support of the design law: zero-weight subsets are\nomitted. Thus $(\\mathcal S_d,p_d)$ is a finite probability space in the sense\nof [[def-finite-probability-space-and-event]]. For $A\\subseteq\\mathcal S_d$\nand $g:\\mathcal S_d\\to\\mathbb R$, put\n$$P_d(A):=\\sum_{s\\in A}p_d(s),\\qquad E_d[g]:=\\sum_{s\\in\\mathcal S_d}p_d(s)g(s).$$\nThe random sample is the subset $S\\in\\mathcal S_d$; probability and\nexpectation here average over the design while holding every $y_i$ fixed.\n\nFor $i,j\\in U$, define the **inclusion indicator**\n$$I_i(s):=\\begin{cases}1,&i\\in s,\\\\0,&i\\notin s,\\end{cases}$$\nthe **first-order inclusion probability**\n$$\\pi_i:=P_d(\\{s\\in\\mathcal S_d:i\\in s\\}),$$\nand the **second-order inclusion probability**\n$$\\pi_{ij}:=P_d(\\{s\\in\\mathcal S_d:i,j\\in s\\}).$$\nIn particular, $\\pi_{ii}=\\pi_i$.\n\nThe observed record includes the selected unit labels and their values. For a\ncommon record space set\n$$\\mathcal X_d:=\\{(s,z):s\\in\\mathcal S_d,\\ z:s\\to\\mathbb R\\},\\qquad \\mathcal A_d:=\\mathcal P(\\mathcal X_d),$$\nand for each $y\\in\\mathbb R^U$ define\n$$O_y(s):=(s,y|_s),\\qquad P_y^d(B):=\\sum_{\\substack{s\\in\\mathcal S_d\\\\O_y(s)\\in B}}p_d(s)\\quad(B\\in\\mathcal A_d).$$\nFor a real-valued statistic $h$ on $\\mathcal X_d$, write\n$$E_y^d[h]:=\\sum_{s\\in\\mathcal S_d}p_d(s)h(O_y(s))=E_d[h\\circ O_y];$$\nthis is expectation under the induced observed-data law.\nThe local well-definedness result\n[[lem-finite-population-design-law-is-a-probability-measure]] shows that each\n$P_y^d$ is a probability measure on $(\\mathcal X_d,\\mathcal A_d)$. Hence\n$$\\mathsf E_d:=((\\mathcal X_d,\\mathcal A_d),\\mathbb R^U,(P_y^d)_{y\\in\\mathbb R^U})$$\nis a statistical experiment ([[def-statistical-experiment]]), with parametric\nmodel $\\mathsf P_d(y)=P_y^d$ ([[def-parametric-statistical-model]]). The total\n$y\\mapsto T(y)$ and mean $y\\mapsto\\bar y_U$ are estimands\n([[def-estimand-on-a-statistical-model]]).\n\nThis is design probability: the $y_i$ are fixed and only $S$ is random. A\nsuperpopulation model instead assigns a probability law to the values $y_i$;\nthat additional law is separate from $p_d$. The finite-population target and\nthe sampling unit must be recorded in the scientific model contract\n([[def-scientific-statistical-model-contract]]). In fixed-design regression,\nthe matrix $X$ is held fixed and has no selection law; that convention alone\ndoes not specify a sampling design on $U$\n([[def-fixed-design-linear-regression-model]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inclusion-covariance-difference",
+          "source_section": "Definition",
+          "quote": "Let $(U,y)$ be a finite population with a sampling design as in\n[[def-finite-population-and-sampling-design]]. For each ordered pair\n$(i,j)\\in U\\times U$, the **inclusion-covariance difference** is\n$$\\Delta_{ij}:=\\pi_{ij}-\\pi_i\\pi_j,$$\nwhere $\\pi_i$ is the probability that unit $i$ is included and $\\pi_{ij}$ is\nthe probability that both $i$ and $j$ are included. The supplier convention\n$\\pi_{ii}=\\pi_i$ gives $\\Delta_{ii}=\\pi_i(1-\\pi_i)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sen-yates-grundy-variance-identity",
+          "source_section": "Statement",
+          "quote": "Let $(U,y)$ be a finite population with a fixed-size sampling design as in\n[[def-finite-population-and-sampling-design]], so every supported sample has\nthe same size $n$. Assume $\\pi_i>0$ for every $i\\in U$ and put\n$x_i:=y_i/\\pi_i$. Then\n$$\\sum_{j\\in U}\\Delta_{ij}=0\\quad(i\\in U),$$\nand the Horvitz–Thompson variance satisfies the Sen–Yates–Grundy identity\n$$\\operatorname{Var}_d(\\widehat T_{HT})=-\\frac12\\sum_{i,j\\in U}\\Delta_{ij}(x_i-x_j)^2.$$\nIf additionally $\\pi_{ij}>0$ for every ordered pair, then the sample\nexpression\n$$\\widehat V_{SYG}:=-\\frac12\\sum_{i,j\\in U}I_iI_j\\frac{\\Delta_{ij}}{\\pi_{ij}}(x_i-x_j)^2$$\nis unbiased for $\\operatorname{Var}_d(\\widehat T_{HT})$. If\n$\\Delta_{ij}\\le0$ for every distinct pair, this condition guarantees that\n$\\widehat V_{SYG}$ is nonnegative for every supported sample. It is a\nsufficient sign condition for the sample expression; the true variance in\nthe identity is nonnegative for every valid design.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The six weights sum to $2(2/5)+4(1/20)=1$ and every sample has size two; each unit's incident weights sum to $1/2$, so $\\pi_i=1/2$. Pair probabilities are $\\pi_{12}=\\pi_{34}=2/5$ and $1/20$ for cross pairs; by [F2], $\\Delta_{12}=\\Delta_{34}=2/5-1/4=3/20$ and $\\Delta_{ij}=1/20-1/4=-1/5$ for cross pairs. All $\\pi_{ij}$ are positive.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $y^A=(0,0,1,1)$, $x=(0,0,2,2)$. Samples $\\{1,2\\}$ and $\\{3,4\\}$ give SYG estimate zero; each cross sample gives $-\\Delta_{ij}(x_i-x_j)^2/\\pi_{ij}=16$. The six estimates are $0,0,16,16,16,16$ and have expectation $4(1/20)(16)=16/5$. HT totals are $0,4,2$ with probabilities $2/5,2/5,1/5$, so their mean is $2$ and variance is $(2/5)4+(2/5)4=16/5$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $y^B=(0,1,0,0)$, $x=(0,2,0,0)$. The HT total is $2$ or $0$ with probability $1/2$ each, so its variance is $1$. Sample $\\{1,2\\}$ has probability $2/5$ and SYG estimate $-\\Delta_{12}(x_1-x_2)^2/\\pi_{12}=-(3/20)(4)/(2/5)=-3/2$; samples $\\{2,3\\}$ and $\\{2,4\\}$ have estimate $16$ and the other three have zero. The expectation is $(2/5)(-3/2)+2(1/20)(16)=1$, equal to the variance despite the negative sample value; thus the nonpositive-Delta condition is sufficient but not necessary for all supported estimates to be nonnegative for a particular fixed population, as schedule $y^A$ in step 2.1 shows.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four units and six positive-probability samples."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies positive pair support; steps 3.1-2.1 include zero population values in both schedules."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes a four-unit population and sample size two."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both stated schedules yield nonconstant HT totals."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 enumerate the six finite outcomes of the explicitly specified design."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The six-pair design has positive Delta12 and Delta34. Verification2.1 gives nonnegative estimates for schedule yA, whereas3.1 gives a negative value for yB. It deliberately illustrates a sufficient condition without asserting a sign-condition biconditional. The forward boundary would require a separate asserted biconditional, which this specific claim does not contain."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The six-pair design has positive Delta12 and Delta34. Verification2.1 gives nonnegative estimates for schedule yA, whereas3.1 gives a negative value for yB. It deliberately illustrates a sufficient condition without asserting a sign-condition biconditional. The reverse boundary would infer these hypotheses or this construction from the conclusion, an implication this specific item does not assert."
+        }
+      ]
+    }
+  }
+}

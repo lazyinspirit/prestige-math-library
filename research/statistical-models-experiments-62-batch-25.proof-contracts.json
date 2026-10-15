@@ -1,0 +1,919 @@
+{
+  "version": 1,
+  "level": "statistical-models-experiments-62",
+  "note": "Step-1 proof contracts for batch 25. Citations quote exact local supplier sections; derivations map each numbered step to its explicit inputs. Boundary rows are item-specific. No registered finite-smoke check applies to these items; the binary finite constructions are verified in the local arguments.",
+  "scope": [
+    "def-full-observed-and-missing-data",
+    "def-mcar-mar-and-mnar",
+    "lem-observed-data-likelihood-under-response-model",
+    "thm-binary-outcome-mnar-nonidentification",
+    "thm-mar-ignorable-likelihood-factorization",
+    "ex-death-is-not-missingness",
+    "ex-missingness-mechanisms-and-nonidentification"
+  ],
+  "contracts": {
+    "def-full-observed-and-missing-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition assigns every empty coordinate tuple to a one-point measurable space, so an all-missing or fully observed coordinate block remains well-typed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition states that unrecorded values remain full-data components and are not replaced by numeric zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition permits finite k\u22651 and a pattern with a single recorded coordinate; it imposes no larger minimum pattern size."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition treats an empty observed or missing coordinate block as a one-point measurable space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition permits I_r to be empty or all of {1,\u2026,k}; both extreme patterns are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition supplies a finite pattern variable and coordinate projections; it selects no representative, family member, or witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: a measurable set in the observed-record disjoint-union sigma-algebra has a measurable section in every pattern component {r} x W_obs(r), by the displayed defining criterion. This equivalence defines the sigma-algebra; it is not a separate theorem about missingness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: if every pattern section of a set is measurable in its component, that set is measurable in the declared disjoint-union sigma-algebra, by the same explicit defining criterion. Empty-coordinate components are the stated one-point measurable spaces."
+        }
+      ]
+    },
+    "def-mcar-mar-and-mnar": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition is relative to the nonempty finite pattern set supplied by the full/observed-data setup."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition permits a response-kernel probability of zero for a pattern; the classification is still evaluated pattern by pattern."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition covers a probability-one response pattern through the constant-probability MCAR clause and the observed-coordinate MAR clause."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition explicitly notes that a constant mechanism is a special case of MAR."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition allows response probabilities at both zero and one as values of a probability kernel."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition classifies a supplied conditional kernel and asserts no existence or selection of a kernel."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "MCAR is stated as a special case of MAR, not as an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "MAR need not be MCAR, so the Definition states no reverse implication."
+        }
+      ]
+    },
+    "lem-observed-data-likelihood-under-response-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-full-observed-and-missing-data",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let\n$W=(W_1,\\ldots,W_k)$, for a finite $k\\ge1$, be a random element of the product\nmeasurable space $\\mathcal W=\\prod_{j=1}^k\\mathcal W_j$\n([[def-random-element-and-real-random-variable]],\n[[def-measurable-space]]). The law of $W$ is the pushforward probability\nmeasure defined in [[def-law-or-distribution-of-a-random-element]]. Let\n$\\mathcal R$ be a nonempty finite set of observation patterns with its\ndiscrete sigma-algebra, and let $R:\\Omega\\to\\mathcal R$ be a random element.\n\nFor each $r\\in\\mathcal R$, specify the recorded coordinate set\n$I_r\\subseteq\\{1,\\ldots,k\\}$ and its complement\n$J_r=\\{1,\\ldots,k\\}\\setminus I_r$. The **observed projection**\n$W_{\\mathrm{obs}}(r)$ is the coordinate projection into\n$\\mathcal W_{\\mathrm{obs}}(r):=\\prod_{j\\in I_r}\\mathcal W_j$, and the\n**missing projection** $W_{\\mathrm{mis}}(r)$ is the projection into\n$\\mathcal W_{\\mathrm{mis}}(r):=\\prod_{j\\in J_r}\\mathcal W_j$. An empty\ncoordinate tuple takes values in a one-point measurable space. The **observed\nrecord** is $O=(R,W_{\\mathrm{obs}}(R))$ in the disjoint union\n$\\bigsqcup_{r\\in\\mathcal R}(\\{r\\}\\times\\mathcal W_{\\mathrm{obs}}(r))$,\nwhere a set in the disjoint-union sigma-algebra is measurable exactly when\neach pattern section is measurable. The pattern records which coordinates are\navailable; it does not replace an unrecorded full-data value by zero.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-mcar-mar-and-mnar",
+          "source_section": "Definition",
+          "quote": "Fix the full-data/observed-data partition of\n[[def-full-observed-and-missing-data]]. A **response mechanism** is a\nspecified conditional law $g(r\\mid w)$ of the pattern $R$ given full data\n$W=w$, represented by a probability kernel from the full-data space to the\nfinite pattern space\n([[def-conditional-law-given-a-random-element]],\n[[def-measure-kernel-and-probability-kernel]]). In a parameterized model, write\nthe response kernel as $g_\\psi$; it must be a probability distribution over\npatterns for each full-data value.\n\nRelative to a specified full-data law, the mechanism is **missing completely\nat random (MCAR)** when, for every pattern $r$, $g(r\\mid w)$ is constant in\n$w$ almost surely. It is **missing at random (MAR)** when, for every pattern\n$r$, there is a measurable function $h_r$ on that pattern's observed-data\nspace such that\n$$g(r\\mid w)=h_r(W_{\\mathrm{obs}}(r))\\quad\\text{almost surely}.$$\nFor a family of full-data laws, the condition is required under each law with\nthe same response mechanism and observed-coordinate function. It is\n**missing not at random (MNAR)** when MAR fails for at least one pattern, for\nthe declared full-data and observed-data partition. MCAR is a special case of\nMAR, since a constant is a function of the observed coordinates.\n\nThese conditions concern a supplied version of the conditional law; values\noff the full-data model's support do not affect the classification. This\ndefinition does not assert that a response mechanism is empirically true or\nthat every joint law comes with a selected conditional kernel.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-dominated-statistical-experiment",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe a statistical experiment ([[def-statistical-experiment]]). It is\n**dominated** by a supplied positive measure $\\mu$ on\n$(\\mathcal X,\\mathcal A)$ when $\\mu$ is sigma-finite\n([[def-finite-sigma-finite-and-semifinite-measures]]) and\n$P_\\theta\\ll\\mu$ for every $\\theta\\in\\Theta$\n([[def-absolutely-continuous-with-respect-to-a-positive-measure]]).\nThe dominating measure is part of the specified setup. This condition adds no\nmeasurable structure on $\\Theta$ and no measurability of\n$\\theta\\mapsto P_\\theta$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon\u2013Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $\\mu$ and $\\nu$ are sigma-finite positive measures on the same\nmeasurable space and $\\nu\\ll\\mu$, then the Radon\u2013Nikodym class\n$d\\nu/d\\mu$ has a finite-valued nonnegative measurable representative. Every\nfinite-valued representative of that class is nonnegative\n$\\mu$-almost everywhere.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3] and [F4], choose a countable cover $E_n$ of $\\mathcal W$ with $\\mu(E_n)<\\infty$, replace it by the increasing cover $F_n=\\bigcup_{j\\le n}E_j$, and put $A_1=F_1$ and $A_n=F_n\\setminus F_{n-1}$ for $n\\ge2$. The $A_n$ partition $\\mathcal W$ and each has finite $\\mu$-measure. Set $c_n=2^{-n}/(1+\\mu(A_n))$ and define $\\rho(E)=\\sum_{n\\ge1}c_n\\mu(E\\cap A_n)$. Rearrangement of nonnegative double series shows that $\\rho$ is countably additive; moreover $\\rho(\\mathcal W)\\le\\sum_n2^{-n}<\\infty$, and $\\rho(E)=0$ exactly when $\\mu(E)=0$, since every $c_n>0$ and the $A_n$ partition $\\mathcal W$. Thus $\\rho$ is finite and equivalent to $\\mu$.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F9",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every pattern $r$, the coordinate projection $\\pi_r$ is measurable by [F1], so $\\kappa_r=\\rho\\circ\\pi_r^{-1}$ is a finite measure. If $\\kappa_r(B)=0$, equivalence gives $\\mu(\\pi_r^{-1}B)=0$, and [F3] gives $P_\\theta(\\pi_r^{-1}B)=0$. Thus the full-data marginal $B\\mapsto P_\\theta(\\pi_r^{-1}B)$ is absolutely continuous with respect to $\\kappa_r$. The pattern sublaw $B\\mapsto\\int_{\\pi_r^{-1}B}g_\\psi(r\\mid w)\\,P_\\theta(dw)$ is bounded above by that marginal because the kernel section lies in $[0,1]$, so it too is absolutely continuous. By [A1, F6, F8], choose finite-valued nonnegative densities $q_{\\theta,r}$ and $\\ell_{\\theta,\\psi,r}$ for these finite measures.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F6",
+            "F8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a measurable set $A$ in the observed disjoint union, its pattern sections $A_r=\\{x:(r,x)\\in A\\}$ satisfy $P_{\\theta,\\psi}(O\\in A)=\\sum_r\\int_{A_r}\\ell_{\\theta,\\psi,r}\\,d\\kappa_r =\\int_A\\ell_{\\theta,\\psi}(r,x)\\,d\\lambda_O$. These densities therefore represent the observed-record law relative to the stated $\\lambda_O$; their total mass is one because $\\sum_rP_{\\theta,\\psi}(R=r)=\\int\\sum_rg_\\psi(r\\mid w)\\,P_\\theta(dw)=1$. The full-data marginal densities $q_{\\theta,r}$ likewise integrate to one.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the product-reference case, for each pattern $r$ and observed-coordinate measurable set $B$, the product decomposition in the Statement gives the pattern sublaw as $\\int_{B\\times\\mathcal W_{\\mathrm{mis}}(r)} p_\\theta(x,z)g_\\psi(r\\mid x,z)\\, d(\\nu_r^{\\mathrm{obs}}\\times\\nu_r^{\\mathrm{mis}})$. Its integrand is nonnegative and product-measurable, so [F9] gives the displayed missing-coordinate integral as a density relative to $\\nu_r^{\\mathrm{obs}}$. Applying the same argument with $g$ omitted gives the displayed marginal density $\\bar q_{\\theta,r}$. Empty blocks use the one-point unit measure as stated.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "F9",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: an empty observed or missing coordinate block is the one-point space with unit mass. In the product-reference specialization the missing-coordinate integral therefore integrates over that singleton when there are no missing coordinates; the all-missing observed record likewise uses its one-point observed-coordinate space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1: the pattern sublaw is the integral of the nonnegative response-kernel section against the full-data law. A response section identically zero produces the zero sublaw; in the product-reference formula the corresponding integrand and displayed density are zero. General selected density versions remain understood up to their reference-null sets."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 sums the response-kernel probabilities to one, including a pattern with probability one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement includes the no-missing and all-missing coordinate splits through its one-point empty-block convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 normalizes all finite response patterns, including probabilities at zero and one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement, A1, and step 1.2: AC permits simultaneous selection of finite-valued nonnegative Radon\u2013Nikodym density representatives q_theta,r and ell_theta,psi,r. Step 1.1 constructs the equivalent finite reference from the supplied sigma-finite exhaustion; step 3.1 uses the stated product decomposition and Tonelli for the special-case integral."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves a density formula and normalization, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves a density formula and normalization, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Independently checked all four proof steps and every cited supplier statement/definition. The disjoint finite-measure pieces have positive weights, giving a countably additive finite rho with exactly the mu-null sets. Measurable coordinate pushforwards kappa_r are finite; P_theta domination and 0<=g<=1 give absolute continuity of both marginal and pattern sublaw. Finite references and finite target measures satisfy the RN exhaustion and nonnegative-representative hypotheses; AC covers simultaneous version selection. Finite pattern summation gives the observed-record density and total mass one. Product-coordinate integrands are measurable and nonnegative and both coordinate references are sigma-finite, so Tonelli applies. Section integrals may be infinite on reference-null sets, which is compatible with being density versions; finite representatives are available when required. Checked all-missing/no-missing singleton blocks, zero/one response probabilities and zero reference pieces; a zero full dominator cannot support a nonempty probability model. Mao Chapter 1 section 1.2 and NRC Chapter 4 pp.60-61 support the product likelihood interpretation; the general equivalent-reference argument is proved locally. Reader/refuter reported no findings. No defect or repair."
+      }
+    },
+    "thm-binary-outcome-mnar-nonidentification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-full-observed-and-missing-data",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let\n$W=(W_1,\\ldots,W_k)$, for a finite $k\\ge1$, be a random element of the product\nmeasurable space $\\mathcal W=\\prod_{j=1}^k\\mathcal W_j$\n([[def-random-element-and-real-random-variable]],\n[[def-measurable-space]]). The law of $W$ is the pushforward probability\nmeasure defined in [[def-law-or-distribution-of-a-random-element]]. Let\n$\\mathcal R$ be a nonempty finite set of observation patterns with its\ndiscrete sigma-algebra, and let $R:\\Omega\\to\\mathcal R$ be a random element.\n\nFor each $r\\in\\mathcal R$, specify the recorded coordinate set\n$I_r\\subseteq\\{1,\\ldots,k\\}$ and its complement\n$J_r=\\{1,\\ldots,k\\}\\setminus I_r$. The **observed projection**\n$W_{\\mathrm{obs}}(r)$ is the coordinate projection into\n$\\mathcal W_{\\mathrm{obs}}(r):=\\prod_{j\\in I_r}\\mathcal W_j$, and the\n**missing projection** $W_{\\mathrm{mis}}(r)$ is the projection into\n$\\mathcal W_{\\mathrm{mis}}(r):=\\prod_{j\\in J_r}\\mathcal W_j$. An empty\ncoordinate tuple takes values in a one-point measurable space. The **observed\nrecord** is $O=(R,W_{\\mathrm{obs}}(R))$ in the disjoint union\n$\\bigsqcup_{r\\in\\mathcal R}(\\{r\\}\\times\\mathcal W_{\\mathrm{obs}}(r))$,\nwhere a set in the disjoint-union sigma-algebra is measurable exactly when\neach pattern section is measurable. The pattern records which coordinates are\navailable; it does not replace an unrecorded full-data value by zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-mcar-mar-and-mnar",
+          "source_section": "Definition",
+          "quote": "Fix the full-data/observed-data partition of\n[[def-full-observed-and-missing-data]]. A **response mechanism** is a\nspecified conditional law $g(r\\mid w)$ of the pattern $R$ given full data\n$W=w$, represented by a probability kernel from the full-data space to the\nfinite pattern space\n([[def-conditional-law-given-a-random-element]],\n[[def-measure-kernel-and-probability-kernel]]). In a parameterized model, write\nthe response kernel as $g_\\psi$; it must be a probability distribution over\npatterns for each full-data value.\n\nRelative to a specified full-data law, the mechanism is **missing completely\nat random (MCAR)** when, for every pattern $r$, $g(r\\mid w)$ is constant in\n$w$ almost surely. It is **missing at random (MAR)** when, for every pattern\n$r$, there is a measurable function $h_r$ on that pattern's observed-data\nspace such that\n$$g(r\\mid w)=h_r(W_{\\mathrm{obs}}(r))\\quad\\text{almost surely}.$$\nFor a family of full-data laws, the condition is required under each law with\nthe same response mechanism and observed-coordinate function. It is\n**missing not at random (MNAR)** when MAR fails for at least one pattern, for\nthe declared full-data and observed-data partition. MCAR is a special case of\nMAR, since a constant is a function of the observed coordinates.\n\nThese conditions concern a supplied version of the conditional law; values\noff the full-data model's support do not affect the classification. This\ndefinition does not assert that a response mechanism is empirically true or\nthat every joint law comes with a selected conditional kernel.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-observational-equivalence",
+          "source_section": "Definition",
+          "quote": "In a parametric model $\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A)$,\ntwo parameter values $\\theta,\\eta\\in\\Theta$ are **observationally\nequivalent**, written $\\theta\\sim\\eta$, if and only if\n$$\nP_\\theta=P_\\eta,\n$$\nthat is, $P_\\theta(A)=P_\\eta(A)$ for every $A\\in\\mathcal A$\n([[def-parametric-statistical-model]]). Equivalent parameter values therefore\ngive exactly the same sampling law. No distinctness of $\\theta$ and $\\eta$ is\nrequired.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "For a parametric model with parameter set $\\Theta$, an **estimand** or\n**parameter target** is a specified function\n$$\n\\psi:\\Theta\\to\\mathcal T_0,\n$$\nwhere $\\mathcal T_0$ is a set of target values\n([[def-parametric-statistical-model]]). This definition imposes no measurable\nstructure on $\\Theta$ or $\\mathcal T_0$ and does not require $\\psi$ to determine\nthe full parameter value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-identifiability-of-an-estimand",
+          "source_section": "Definition",
+          "quote": "An estimand $\\psi:\\Theta\\to\\mathcal T_0$ is **identifiable** in a parametric\nmodel $\\mathsf P$ when\n$$\nP_\\theta=P_\\eta\\quad\\Longrightarrow\\quad\\psi(\\theta)=\\psi(\\eta)\\qquad(\\theta,\\eta\\in\\Theta),\n$$\nor equivalently when $\\psi$ is constant on each set of parameter values with\nthe same sampling law ([[def-parametric-statistical-model]],\n[[def-observational-equivalence]], [[def-estimand-on-a-statistical-model]]).\nThe model is **identifiable** when its identity target\n$\\operatorname{id}_\\Theta:\\Theta\\to\\Theta$ is identifiable, equivalently\nwhen $\\mathsf P$ is injective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-mcar-mar-and-mnar",
+          "source_section": "Definition",
+          "quote": "Fix the full-data/observed-data partition of\n[[def-full-observed-and-missing-data]]. A **response mechanism** is a\nspecified conditional law $g(r\\mid w)$ of the pattern $R$ given full data\n$W=w$, represented by a probability kernel from the full-data space to the\nfinite pattern space\n([[def-conditional-law-given-a-random-element]],\n[[def-measure-kernel-and-probability-kernel]]). In a parameterized model, write\nthe response kernel as $g_\\psi$; it must be a probability distribution over\npatterns for each full-data value.\n\nRelative to a specified full-data law, the mechanism is **missing completely\nat random (MCAR)** when, for every pattern $r$, $g(r\\mid w)$ is constant in\n$w$ almost surely. It is **missing at random (MAR)** when, for every pattern\n$r$, there is a measurable function $h_r$ on that pattern's observed-data\nspace such that\n$$g(r\\mid w)=h_r(W_{\\mathrm{obs}}(r))\\quad\\text{almost surely}.$$\nFor a family of full-data laws, the condition is required under each law with\nthe same response mechanism and observed-coordinate function. It is\n**missing not at random (MNAR)** when MAR fails for at least one pattern, for\nthe declared full-data and observed-data partition. MCAR is a special case of\nMAR, since a constant is a function of the observed coordinates.\n\nThese conditions concern a supplied version of the conditional law; values\noff the full-data model's support do not affect the classification. This\ndefinition does not assert that a response mechanism is empirically true or\nthat every joint law comes with a selected conditional kernel.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any $P\\in\\Theta_{a,b}$, write $c=P(R=0,Y=1)$. Since $P(R=0)=1-a$, one has $0\\le c\\le1-a$, and $m(P)=P(Y=1,R=1)+P(Y=1,R=0)=b+c$. Hence $b\\le m(P)\\le b+1-a$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, fix any $m\\in[b,b+1-a]$ and assign $P(Y=1,R=1)=b$, $P(Y=0,R=1)=a-b$, $P(Y=1,R=0)=m-b$, and $P(Y=0,R=0)=1-a-m+b$. Each entry is nonnegative by the bounds on $a,b,m$; the four entries sum to one. This law has response rate $a$, observed success mass $b$, and mean $m$, so every point of the interval is attained, including both endpoints.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under each such law, the pushforward law of $O$ has masses $b$ at $(1,1)$, $a-b$ at $(1,0)$, and $1-a$ at $(0,0)$, independent of $m$. Thus all parameters in $\\Theta_{a,b}$ are observationally equivalent. If $a<1$, the interval has positive length $1-a$, so it contains distinct means and the estimand is not identifiable. If $a=1$, it is the singleton $\\{b\\}$ and the mean is identified as $b$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $P\\in\\Theta_{a,b}$ use the finite conditional response kernel in [F8]. Under MAR, the probability $g_P(0\\mid Y)$ depends only on the empty observed projection for pattern $R=0$, so it is constant $P_Y$-almost surely. Hence $g_P(1\\mid Y)=1-g_P(0\\mid Y)$ is also constant $P_Y$-almost surely; its constant is $P(R=1)=a$, by integrating over $P_Y$. Therefore $b=P(R=1,Y=1)=aP(Y=1)$, and for $a>0$ the mean is $b/a$. If $a=0$, every law in the interval construction of step 1.2 has $R=0$ almost surely; its selected kernel is constant on the support of $Y$, so it is MCAR and hence MAR. The whole interval $[0,1]$ therefore remains compatible with MAR.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F8",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement imposes 0\u2264b\u2264a\u22641, and step 1.2 constructs a probability law for every m in the resulting nonempty interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats a=0 directly: b=0, the compatible interval is [0,1], and no division by a is made."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats a=1: the interval collapses to {b}, so all data are observed and the mean is identified."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 include a=1, where the missing mass is zero and the interval is a singleton."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies nonnegativity and attainability at m=b and m=b+1-a, where an unobserved-outcome cell may be zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 gives the four joint masses explicitly; no family of representatives or witnesses is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives an identified set and an identification consequence, not an if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives an identified set and an identification consequence, not an if-and-only-if characterization."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Read every current proof step, cited definition and reader/refuter evidence. The unobserved success mass c lies in [0,1-a]; the four cells b,a-b,m-b,1-a-m+b are nonnegative exactly on the stated mean interval and sum to one. The observed pushforward masses b,a-b,1-a are independent of m, giving nonidentifiability exactly when a<1. The finite conditional response kernel is explicitly supplied on positive-mass states with arbitrary normalized values on null states. For the empty R=0 observed block MAR forces g(0|Y) constant almost surely, hence g(1|Y)=a and b=a*m. At a=0 all means in [0,1] are MAR-compatible; at a=1 the interval is {b}. Checked b=0, b=a, deterministic Y and both interval endpoints; no hidden positivity or choice assumption. Mao Chapter 1 sections 1.6-1.7 support the identification interpretation; the finite proof independently verifies the exact interval. No defect, repair or outside consumer change."
+      }
+    },
+    "thm-mar-ignorable-likelihood-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-observed-data-likelihood-under-response-model",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $W=(W_1,\\ldots,W_k)$ have a full-data model dominated by a\ncommon sigma-finite positive measure $\\mu$ on the finite product measurable\nspace $\\mathcal W=\\prod_{j=1}^k\\mathcal W_j$, with selected finite-valued\ndensity representatives $p_\\theta$ as in\n[[def-dominated-statistical-experiment]] and [[def-likelihood-density]]. Let\n$\\mathcal R$ be a nonempty finite pattern set, let $I_r$ and $J_r$ be the\nobserved and missing coordinate sets for pattern $r$, and write\n$\\pi_r(w)=W_{\\mathrm{obs}}(r)$ for its measurable coordinate projection. Let\n$g_\\psi(r\\mid w)$ be a supplied response probability kernel as in\n[[def-mcar-mar-and-mnar]], and define the joint model by\n$$P_{\\theta,\\psi}(dw,\\{r\\})=g_\\psi(r\\mid w)P_\\theta(dw).$$\n\nFix a finite positive measure $\\rho$ equivalent to $\\mu$; such a measure\nexists for every sigma-finite $\\mu$. For each pattern put\n$$\\kappa_r(B)=\\rho(\\pi_r^{-1}(B))$$\nfor measurable $B\\subseteq\\mathcal W_{\\mathrm{obs}}(r)$, and define the finite\nmeasure on the observed disjoint union by\n$$\\lambda_O(A)=\\sum_{r\\in\\mathcal R}\\kappa_r(\\{x:(r,x)\\in A\\}).$$\nThe full-data marginal law of $W_{\\mathrm{obs}}(r)$ and the pattern-$r$\nobserved sublaw $B\\mapsto P_{\\theta,\\psi}(R=r,\\pi_r(W)\\in B)$ are absolutely\ncontinuous with respect to $\\kappa_r$. Choose finite-valued nonnegative\nRadon--Nikodym density representatives $q_{\\theta,r}$ and\n$\\ell_{\\theta,\\psi,r}$ for these measures. Then the observed record\n$O=(R,W_{\\mathrm{obs}}(R))$ is dominated by $\\lambda_O$ and has density\n$\\ell_{\\theta,\\psi}(r,x)=\\ell_{\\theta,\\psi,r}(x)$ at $(r,x)$.\n\nIn the product-reference special case where\n$\\mu=\\nu=\\bigotimes_{j=1}^k\\nu_j$, each $\\nu_j$ is sigma-finite, and the\ncoordinate reordering $w=(x,z)=(W_{\\mathrm{obs}}(r),W_{\\mathrm{mis}}(r))$\nidentifies $\\nu$ with\n$\\nu_r^{\\mathrm{obs}}\\times\\nu_r^{\\mathrm{mis}}$, where\n$\\nu_r^{\\mathrm{obs}}=\\bigotimes_{j\\in I_r}\\nu_j$ and\n$\\nu_r^{\\mathrm{mis}}=\\bigotimes_{j\\in J_r}\\nu_j$, one may instead use the\npattern reference $\\nu_r^{\\mathrm{obs}}$, with disjoint-union reference\n$\\lambda_O^{\\mathrm{prod}}(A)=\\sum_r\\nu_r^{\\mathrm{obs}}(\\{x:(r,x)\\in A\\})$.\nThe observed record is dominated by this sigma-finite measure, and Tonelli's\ntheorem gives the density versions\n$$\\bar q_{\\theta,r}(x)=\\int p_\\theta(x,z)\\,\\nu_r^{\\mathrm{mis}}(dz),\\qquad\n\\ell_{\\theta,\\psi,r}(x)=\\int p_\\theta(x,z)g_\\psi(r\\mid x,z)\\,\\nu_r^{\\mathrm{mis}}(dz).$$\nAn empty coordinate block is a one-point space with unit mass.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-mcar-mar-and-mnar",
+          "source_section": "Definition",
+          "quote": "Fix the full-data/observed-data partition of\n[[def-full-observed-and-missing-data]]. A **response mechanism** is a\nspecified conditional law $g(r\\mid w)$ of the pattern $R$ given full data\n$W=w$, represented by a probability kernel from the full-data space to the\nfinite pattern space\n([[def-conditional-law-given-a-random-element]],\n[[def-measure-kernel-and-probability-kernel]]). In a parameterized model, write\nthe response kernel as $g_\\psi$; it must be a probability distribution over\npatterns for each full-data value.\n\nRelative to a specified full-data law, the mechanism is **missing completely\nat random (MCAR)** when, for every pattern $r$, $g(r\\mid w)$ is constant in\n$w$ almost surely. It is **missing at random (MAR)** when, for every pattern\n$r$, there is a measurable function $h_r$ on that pattern's observed-data\nspace such that\n$$g(r\\mid w)=h_r(W_{\\mathrm{obs}}(r))\\quad\\text{almost surely}.$$\nFor a family of full-data laws, the condition is required under each law with\nthe same response mechanism and observed-coordinate function. It is\n**missing not at random (MNAR)** when MAR fails for at least one pattern, for\nthe declared full-data and observed-data partition. MCAR is a special case of\nMAR, since a constant is a function of the observed coordinates.\n\nThese conditions concern a supplied version of the conditional law; values\noff the full-data model's support do not affect the classification. This\ndefinition does not assert that a response mechanism is empirically true or\nthat every joint law comes with a selected conditional kernel.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-parametric-statistical-model",
+          "source_section": "Definition",
+          "quote": "For an experiment on $(\\mathcal X,\\mathcal A)$, let\n$\\mathcal P(\\mathcal X,\\mathcal A)$ denote the set of all probability measures\non that measurable space. Its **parametric statistical model** is the parameter\nmap\n$$\n\\mathsf P:\\Theta\\to\\mathcal P(\\mathcal X,\\mathcal A),\\qquad \\mathsf P(\\theta)=P_\\theta,\n$$\nregarded together with its parameter set and sample space\n([[def-statistical-experiment]]). The map need not be injective. Unless a\nmeasurable structure on $\\Theta$ is supplied separately, no measurability of\n$\\mathsf P$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f : X \\to [0,+\\infty]$ be measurable. For $k \\in \\mathbb{N}$ define\n\n$$s_k := \\sum_{j=0}^{k2^k-1} j2^{-k}\\, \\mathbf{1}_{\\{j2^{-k} \\le f < (j+1)2^{-k}\\}} + k\\,\\mathbf{1}_{\\{f \\ge k\\}}.$$\n\nThen each $s_k$ is a simple measurable function,\n\n$$0 \\le s_k \\le s_{k+1} \\le f,$$\n\nand $s_k(x) \\to f(x)$ for every $x \\in X$. If $E \\subseteq X$ is a set on which\n$f \\le M < +\\infty$, then $s_k \\to f$ uniformly on $E$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-integration-against-a-radon-nikodym-derivative",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a sigma-finite positive measure and let $\\nu$ be a signed measure or a finite complex measure with $\\nu\\ll\\mu$. If $h$ is a representative of $d\\nu/d\\mu$, then\n$$\\nu(E)=\\int_E h\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nMore generally, if\n$$g=\\sum_{j=1}^m c_j\\mathbf 1_{E_j}$$\nis the canonical disjoint representation of a simple measurable function and $|\\nu|(E_j)<+\\infty$ for every $j$, then\n$$\\int g\\,d\\nu=\\sum_{j=1}^m c_j\\int_{E_j} h\\,d\\mu.$$\nIn particular, whenever the Lebesgue integral of $gh$ is defined, one has\n$$\\int g\\,d\\nu=\\int gh\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-likelihood-density",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal E=((\\mathcal X,\\mathcal A),\\Theta,(P_\\theta)_{\\theta\\in\\Theta})$\nbe dominated by the fixed sigma-finite positive measure $\\mu$. For each\n$\\theta$, the Radon\u2013Nikodym theorem gives the almost-everywhere class\n$dP_\\theta/d\\mu$; a sigma-finite exhaustion for $\\mu$ is also finite for the\nprobability measure $P_\\theta$. Under AC, select simultaneously a\nfinite-valued measurable nonnegative representative $p_\\theta$ from each\nclass. The nonnegative version exists by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nFor fixed observed $x\\in\\mathcal X$, the function\n$$L_x:\\Theta\\to[0,+\\infty),\\qquad L_x(\\theta):=p_\\theta(x),$$\nis the **likelihood at $x$**. This is a function on the parameter labels, not\na probability distribution on $\\Theta$. No sigma-algebra on $\\Theta$ or\nmeasurability of $L_x$ is implied. Each density is determined only\n$\\mu$-almost everywhere; there is no canonical pointwise version and, for\narbitrary uncountable $\\Theta$, no common exceptional null set is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each MAR factor in the Statement, replace any measurable\nalmost-sure version $h_{\\psi,r}$ by\n$h^*_{\\psi,r}=\\min(1,\\max(0,h_{\\psi,r}))$. Since every kernel evaluation\n$g_\\psi(r\\mid w)$ lies in $[0,1]$ and equals\n$h_{\\psi,r}(\\pi_r(w))$ $P_\\theta$-almost surely for every $\\theta$, clipping\nleaves each of those identities true and makes $h^*_{\\psi,r}$ pointwise\n$[0,1]$-valued.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a measurable observed-coordinate set $B$, put\n$u=\\mathbf1_Bh^*_{\\psi,r}$. By [F4], the integral of any nonnegative simple\nfunction of $\\pi_r(W)$ under $P_\\theta$ equals its integral under the\npushforward law $Q_{\\theta,r}$; [F5] supplies increasing simple\napproximations to $u$, and [F6] passes to their limit. Since\n$Q_{\\theta,r}$ has density $q_{\\theta,r}$ with respect to $m_r$, [F7] gives\nthe same integral as $\\int_Bh^*_{\\psi,r}(x)q_{\\theta,r}(x)\\,dm_r(x)$,\nagain by simple approximation and monotone convergence. MAR therefore yields\n$P_{\\theta,\\psi}(R=r,\\pi_r(W)\\in B)\n=\\int_Bh^*_{\\psi,r}(x)q_{\\theta,r}(x)\\,dm_r(x)$.\nThus $h^*_{\\psi,r}q_{\\theta,r}$ is a selected density version for the\nobserved pattern section; in the product-reference case this agrees as a\ndensity class with the coordinate integral in the Statement.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Because $q_{\\theta,r}(x)\\ge0$ and the same nonempty parameter set $\\Psi$\nis allowed for every $\\theta$, the profile satisfies\n$\\sup_{\\psi\\in\\Psi}\\ell_{\\theta,\\psi}(r,x)\n=q_{\\theta,r}(x)\\sup_{\\psi\\in\\Psi}h^*_{\\psi,r}(x)$. The multiplier is finite\nand common to every $\\theta$, and if it is zero the record has zero likelihood\nfor all $\\theta$. For fixed $\\psi$, whenever $h^*_{\\psi,r}(x)>0$ and\n$q_{\\theta_2,r}(x)>0$, the ratio at $\\theta_1$ and $\\theta_2$ is\n$q_{\\theta_1,r}(x)/q_{\\theta_2,r}(x)$. A target depending on $\\psi$ can still\ndepend on the response factor, and a non-Cartesian allowed parameter set need\nnot permit common profiling.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes the nonempty finite pattern set and product-coordinate model of its observed-likelihood lemma."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 states that a response factor zero for every psi makes the record unsupported and licenses no likelihood inference."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 factors h even when h=1; the response factor then leaves the full-data marginal likelihood unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "When no coordinates are missing, the integral in step 1.1 is over the unit-mass one-point block and still gives the factorization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 distinguishes positive response-factor support from the zero-factor case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the AC use: selecting finite-valued density representatives; subsequent factor cancellation is algebraic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a factorization and likelihood consequence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states a factorization and likelihood consequence, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Independently read all three proof steps, all cited supplier statements and the completed lower-level likelihood lemma. The hypothesis supplies one common measurable MAR factor for each psi,r across all theta, not theta-dependent factors. Clipping preserves each almost-sure identity. For u=1_B*h, pushforward integration follows from indicator identities and increasing nonnegative simple approximation; Q is a probability so the RN integration supplier finite-cell hypotheses hold, and MCT applies both under Q and under its sigma-finite reference. Thus h*q represents the pattern sublaw. Finite selected q and bounded h give finite pointwise likelihood versions; product-coordinate integrals agree as density classes rather than arbitrary pointwise versions. Fixed-psi cancellation uses h>0 and positive denominator; common nonempty Cartesian Psi gives sup_psi(q*h)=q*sup_psi h including q=0 and zero supremum, without requiring attainment or measurability in parameter labels. No shared null set across uncountably many parameters is claimed. AC is inherited and used for simultaneous representatives. Checked empty coordinate blocks and null support. Mao section 1.4 and NRC Chapter 4 pp.60-61 explicitly qualify ignorability by parameter distinctness. Reader/refuter have no findings. No defect or repair."
+      }
+    },
+    "ex-death-is-not-missingness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "A **random element** of $S$ is a measurable map $$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$ in the sense of [[def-measurable-function-between-measurable-spaces]]. When $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from [[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-full-observed-and-missing-data",
+          "source_section": "Definition",
+          "quote": "The pattern records which coordinates are available; it does not replace an unrecorded full-data value by zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-estimand-on-a-statistical-model",
+          "source_section": "Definition",
+          "quote": "an **estimand** or **parameter target** is a specified function",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $Q_t$ has no value stipulated on the event $\\{D=1\\}$, it is only a function on $\\{D=0\\}$ and is not a map from the whole baseline probability space to $\\mathbb R$. It therefore is not a real random variable on the stated population by [F1]. [F1, given]",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The observed-pattern construction [F2] can mask a coordinate of a full-data vector, but it does not define a value where the scientific outcome itself does not exist. Thus $E(Q_t)$ over all enrolled participants is not a well-defined target function as required by [F3]. Assigning a post-death value, using a composite outcome, or restricting to survivors defines a different scientific target and must be stated separately. [F2, F3, step 1.1, given] \u220e",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example assumes P(D=1)>0, so the event where Qt is undefined is not empty modulo probability."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The example's positive-death-probability hypothesis excludes P(D=1)=0; on a null death event an arbitrary extension would not change an expectation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example notes that if P(D=1)=1, the score has no survivor domain and still cannot define an all-participant outcome."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the positive-probability domain gap; the all-survive degenerate case is excluded by the stated hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The example distinguishes P(D=1)=0 from P(D=1)=1; its undefined-target conclusion assumes positive death probability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example chooses no representative or witness; it compares a supplied partial score domain with the full population."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example gives a one-way domain obstruction, not an if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example gives a one-way domain obstruction, not an if-and-only-if characterization."
+        }
+      ],
+      "finite_checks": []
+    },
+    "ex-missingness-mechanisms-and-nonidentification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-full-observed-and-missing-data",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space and let\n$W=(W_1,\\ldots,W_k)$, for a finite $k\\ge1$, be a random element of the product\nmeasurable space $\\mathcal W=\\prod_{j=1}^k\\mathcal W_j$\n([[def-random-element-and-real-random-variable]],\n[[def-measurable-space]]). The law of $W$ is the pushforward probability\nmeasure defined in [[def-law-or-distribution-of-a-random-element]]. Let\n$\\mathcal R$ be a nonempty finite set of observation patterns with its\ndiscrete sigma-algebra, and let $R:\\Omega\\to\\mathcal R$ be a random element.\n\nFor each $r\\in\\mathcal R$, specify the recorded coordinate set\n$I_r\\subseteq\\{1,\\ldots,k\\}$ and its complement\n$J_r=\\{1,\\ldots,k\\}\\setminus I_r$. The **observed projection**\n$W_{\\mathrm{obs}}(r)$ is the coordinate projection into\n$\\mathcal W_{\\mathrm{obs}}(r):=\\prod_{j\\in I_r}\\mathcal W_j$, and the\n**missing projection** $W_{\\mathrm{mis}}(r)$ is the projection into\n$\\mathcal W_{\\mathrm{mis}}(r):=\\prod_{j\\in J_r}\\mathcal W_j$. An empty\ncoordinate tuple takes values in a one-point measurable space. The **observed\nrecord** is $O=(R,W_{\\mathrm{obs}}(R))$ in the disjoint union\n$\\bigsqcup_{r\\in\\mathcal R}(\\{r\\}\\times\\mathcal W_{\\mathrm{obs}}(r))$,\nwhere a set in the disjoint-union sigma-algebra is measurable exactly when\neach pattern section is measurable. The pattern records which coordinates are\navailable; it does not replace an unrecorded full-data value by zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-mcar-mar-and-mnar",
+          "source_section": "Definition",
+          "quote": "Fix the full-data/observed-data partition of\n[[def-full-observed-and-missing-data]]. A **response mechanism** is a\nspecified conditional law $g(r\\mid w)$ of the pattern $R$ given full data\n$W=w$, represented by a probability kernel from the full-data space to the\nfinite pattern space\n([[def-conditional-law-given-a-random-element]],\n[[def-measure-kernel-and-probability-kernel]]). In a parameterized model, write\nthe response kernel as $g_\\psi$; it must be a probability distribution over\npatterns for each full-data value.\n\nRelative to a specified full-data law, the mechanism is **missing completely\nat random (MCAR)** when, for every pattern $r$, $g(r\\mid w)$ is constant in\n$w$ almost surely. It is **missing at random (MAR)** when, for every pattern\n$r$, there is a measurable function $h_r$ on that pattern's observed-data\nspace such that\n$$g(r\\mid w)=h_r(W_{\\mathrm{obs}}(r))\\quad\\text{almost surely}.$$\nFor a family of full-data laws, the condition is required under each law with\nthe same response mechanism and observed-coordinate function. It is\n**missing not at random (MNAR)** when MAR fails for at least one pattern, for\nthe declared full-data and observed-data partition. MCAR is a special case of\nMAR, since a constant is a function of the observed coordinates.\n\nThese conditions concern a supplied version of the conditional law; values\noff the full-data model's support do not affect the classification. This\ndefinition does not assert that a response mechanism is empirically true or\nthat every joint law comes with a selected conditional kernel.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-mcar-mar-and-mnar",
+          "source_section": "Definition",
+          "quote": "Fix the full-data/observed-data partition of\n[[def-full-observed-and-missing-data]]. A **response mechanism** is a\nspecified conditional law $g(r\\mid w)$ of the pattern $R$ given full data\n$W=w$, represented by a probability kernel from the full-data space to the\nfinite pattern space\n([[def-conditional-law-given-a-random-element]],\n[[def-measure-kernel-and-probability-kernel]]). In a parameterized model, write\nthe response kernel as $g_\\psi$; it must be a probability distribution over\npatterns for each full-data value.\n\nRelative to a specified full-data law, the mechanism is **missing completely\nat random (MCAR)** when, for every pattern $r$, $g(r\\mid w)$ is constant in\n$w$ almost surely. It is **missing at random (MAR)** when, for every pattern\n$r$, there is a measurable function $h_r$ on that pattern's observed-data\nspace such that\n$$g(r\\mid w)=h_r(W_{\\mathrm{obs}}(r))\\quad\\text{almost surely}.$$\nFor a family of full-data laws, the condition is required under each law with\nthe same response mechanism and observed-coordinate function. It is\n**missing not at random (MNAR)** when MAR fails for at least one pattern, for\nthe declared full-data and observed-data partition. MCAR is a special case of\nMAR, since a constant is a function of the observed coordinates.\n\nThese conditions concern a supplied version of the conditional law; values\noff the full-data model's support do not affect the classification. This\ndefinition does not assert that a response mechanism is empirically true or\nthat every joint law comes with a selected conditional kernel.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-mcar-mar-and-mnar",
+          "source_section": "Definition",
+          "quote": "Fix the full-data/observed-data partition of\n[[def-full-observed-and-missing-data]]. A **response mechanism** is a\nspecified conditional law $g(r\\mid w)$ of the pattern $R$ given full data\n$W=w$, represented by a probability kernel from the full-data space to the\nfinite pattern space\n([[def-conditional-law-given-a-random-element]],\n[[def-measure-kernel-and-probability-kernel]]). In a parameterized model, write\nthe response kernel as $g_\\psi$; it must be a probability distribution over\npatterns for each full-data value.\n\nRelative to a specified full-data law, the mechanism is **missing completely\nat random (MCAR)** when, for every pattern $r$, $g(r\\mid w)$ is constant in\n$w$ almost surely. It is **missing at random (MAR)** when, for every pattern\n$r$, there is a measurable function $h_r$ on that pattern's observed-data\nspace such that\n$$g(r\\mid w)=h_r(W_{\\mathrm{obs}}(r))\\quad\\text{almost surely}.$$\nFor a family of full-data laws, the condition is required under each law with\nthe same response mechanism and observed-coordinate function. It is\n**missing not at random (MNAR)** when MAR fails for at least one pattern, for\nthe declared full-data and observed-data partition. MCAR is a special case of\nMAR, since a constant is a function of the observed coordinates.\n\nThese conditions concern a supplied version of the conditional law; values\noff the full-data model's support do not affect the classification. This\ndefinition does not assert that a response mechanism is empirically true or\nthat every joint law comes with a selected conditional kernel.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-binary-outcome-mnar-nonidentification",
+          "source_section": "Statement",
+          "quote": "Let $Y,R\\in\\{0,1\\}$, with $R=1$ meaning that $Y$ is observed, and encode the\nobserved record as $O=(R,RY)$. When $R=0$, the zero in the second recorded\ncoordinate is a placeholder and does not assign the missing full-data value\n$Y=0$. Put\n$$a=P(R=1),\\qquad b=P(R=1,Y=1),\\qquad 0\\le b\\le a\\le1.$$\nLet $\\Theta_{a,b}$ be the set of all joint laws $P$ of $(Y,R)$ with these\nvalues of $a$ and $b$, and let the statistical model map $P\\in\\Theta_{a,b}$\nto the law of $O$. For each individual $P$, use its finite conditional\nresponse kernel specified below when assessing the MAR clause; arbitrary\nnull-state values do not affect that classification. The full-data mean $m(P)=P(Y=1)$ is an estimand on this\nmodel. Its set of values over $\\Theta_{a,b}$ is exactly\n$$[b,b+1-a].$$\nConsequently, without a MAR restriction, the mean is not identifiable when\n$a<1$; it is identified as $b$ when $a=1$. If MAR also holds, then for $a>0$\nthe mean is $b/a$, while for $a=0$ it remains unidentified.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-mcar-mar-and-mnar",
+          "source_section": "Definition",
+          "quote": "Fix the full-data/observed-data partition of\n[[def-full-observed-and-missing-data]]. A **response mechanism** is a\nspecified conditional law $g(r\\mid w)$ of the pattern $R$ given full data\n$W=w$, represented by a probability kernel from the full-data space to the\nfinite pattern space\n([[def-conditional-law-given-a-random-element]],\n[[def-measure-kernel-and-probability-kernel]]). In a parameterized model, write\nthe response kernel as $g_\\psi$; it must be a probability distribution over\npatterns for each full-data value.\n\nRelative to a specified full-data law, the mechanism is **missing completely\nat random (MCAR)** when, for every pattern $r$, $g(r\\mid w)$ is constant in\n$w$ almost surely. It is **missing at random (MAR)** when, for every pattern\n$r$, there is a measurable function $h_r$ on that pattern's observed-data\nspace such that\n$$g(r\\mid w)=h_r(W_{\\mathrm{obs}}(r))\\quad\\text{almost surely}.$$\nFor a family of full-data laws, the condition is required under each law with\nthe same response mechanism and observed-coordinate function. It is\n**missing not at random (MNAR)** when MAR fails for at least one pattern, for\nthe declared full-data and observed-data partition. MCAR is a special case of\nMAR, since a constant is a function of the observed coordinates.\n\nThese conditions concern a supplied version of the conditional law; values\noff the full-data model's support do not affect the classification. This\ndefinition does not assert that a response mechanism is empirically true or\nthat every joint law comes with a selected conditional kernel.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-measure-kernel-and-probability-kernel",
+          "source_section": "Definition",
+          "quote": "A **measure kernel** from $(S,\\Sigma)$ to $(T,\\Tau)$ is a map $K:S\\times\\Tau\\to[0,\\infty]$ such that, for every $s\\in S$, $A\\mapsto K(s,A)$ is a measure on $(T,\\Tau)$, and for every $A\\in\\Tau$, $s\\mapsto K(s,A)$ is $\\Sigma$-measurable. Measures and measurability have the meanings in [[def-measure]] and [[def-measurable-function-between-measurable-spaces]]; the evaluation functions use the Borel sigma-algebra on $[0,\\infty]$.\n\nA **probability kernel** satisfies $K(s,T)=1$ for every s. A **finite kernel** satisfies $K(s,T)<\\infty$ for every s; there need not be a common bound on these masses. A **uniformly sigma-finite kernel**, in the convention of this page, comes with a specified sequence $T_n\\in\\Tau$ increasing to T such that $K(s,T_n)<\\infty$ for every s and n. This is a common measurable exhaustion, not a bound uniform in s. A finite kernel has the constant exhaustion $T_n=T$. An arbitrary measure kernel is not assumed to have such an exhaustion.\n\nAll these requirements are pointwise in s, not merely almost everywhere for an unspecified measure on S. If T is empty, its only measure is zero, so a probability kernel into T can exist only when S is empty. If S is empty, the kernel requirements are vacuous. The zero kernel is finite. This definition selects no versions and uses no choice axiom.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the first model, $g(1\\mid x,y)=1/2$ is constant in $(x,y)$, hence MCAR by [F2]. In the second, both pattern probabilities are functions of $x$ alone, which is recorded for both patterns, so MAR holds by [F3]; it is not MCAR because the probability differs at $x=0$ and $x=1$. In the third, $P(Y=0\\mid X=x)=P(Y=1\\mid X=x)=1/2$ for each $x$, and $g(0\\mid x,0)=3/4$ while $g(0\\mid x,1)=1/4$. Thus the pattern-$0$ probability cannot be a function of its observed coordinate $x$ alone, so the mechanism is MNAR by [F4].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each row of the table contains nonnegative entries summing to one. Under either law, $P(R=1,Y=1)=1/4$, $P(R=1,Y=0)=1/4$, and $P(R=0)=1/2$, so the observed record laws agree and have $a=1/2$, $b=1/4$. The means are $1/4$ and $3/4$. For the selected finite kernels in [F6], $P^{-}$ has $g_{P^-}(1\\mid1)=1$ and $g_{P^-}(1\\mid0)=1/3$, while $P^{+}$ has $g_{P^+}(1\\mid1)=1/3$ and $g_{P^+}(1\\mid0)=1$. In each law the pattern-$0$ response probability also differs across the two values of $Y$, although the observed projection for that pattern is empty; hence neither law is MAR. This agrees with [F5] and shows the observed respondent mean $1/2$ does not identify the population mean.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes nonempty binary full-data and response spaces and lists the four joint cells explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes zero joint-cell masses at the two endpoint laws while each row remains a probability distribution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes response probabilities equal to one for the two endpoint MNAR laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example's two tables place zero mass in opposite nonresponse cells and still yield the same observed law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 realizes both endpoints 1/4 and 3/4 of the identified interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example supplies explicit probabilities for every binary cell and each mechanism; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example verifies finite response mechanisms and compatible laws, not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example verifies finite response mechanisms and compatible laws, not an if-and-only-if assertion."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-25",
+        "notes": "Read both verification steps, every cited supplier and current lower-level binary theorem; reader and refuter give no findings. Independent fair X,Y give positive mass to both Y values at each X. The first kernel is constant; the second and its complement factor through observed X for both patterns and vary with X; the third complement takes 3/4 and 1/4 at the same observed X, preventing an almost-sure X-only factor. All three are pointwise normalized probability kernels. Each four-cell row sums to one and gives observed masses 1/4,1/4,1/2. Means are 1/4 and 3/4, and selected conditional response probabilities are respectively (1,1/3) and (1/3,1) on Y=(1,0); both positive-mass states prevent null-state escape from MNAR. Respondent mean is 1/2 and the means attain both endpoints of the supplier interval [1/4,3/4]. The prose realizes the interval through its endpoints and the cited theorem proves intermediate attainability. Zero cells create no zero conditional denominator. No AC use. Source context checked in Mao sections 1.3-1.7 and NRC Chapter 4 patternwise MAR definitions. No defect or repair."
+      }
+    }
+  }
+}

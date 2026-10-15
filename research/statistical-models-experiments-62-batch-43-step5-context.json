@@ -1,0 +1,229 @@
+{
+  "group": "o",
+  "batches": [
+    "43"
+  ],
+  "pages_read": [
+    "linear-prediction-for-dependent-data",
+    "linear-prediction-for-dependent-data-examples"
+  ],
+  "items_read": [
+    "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+    "def-best-linear-forecast-from-a-finite-history",
+    "thm-finite-history-best-linear-predictor-exists-uniquely",
+    "alg-durbin-levinson-forecast-recursion",
+    "thm-forecast-normal-equations-and-error",
+    "thm-gaussian-best-linear-forecast-equals-conditional-expectation",
+    "thm-durbin-levinson-solves-the-prediction-equations",
+    "ex-ar1-one-step-and-multistep-forecast",
+    "ex-singular-history-covariance-unique-predictor-class",
+    "ex-nongaussian-conditional-mean-not-best-affine-predictor"
+  ],
+  "conventions": [
+    {
+      "convention": "Best linear forecast means affine squared-L2 minimization over almost-sure equivalence classes, including an intercept; uniqueness concerns the predictor class rather than its coefficients. History length n and forecast horizon h are integers at least one.",
+      "fixed_by": "def-best-linear-forecast-from-a-finite-history",
+      "matters_for": [
+        "thm-finite-history-best-linear-predictor-exists-uniquely",
+        "thm-forecast-normal-equations-and-error",
+        "thm-gaussian-best-linear-forecast-equals-conditional-expectation",
+        "ex-singular-history-covariance-unique-predictor-class",
+        "ex-nongaussian-conditional-mean-not-best-affine-predictor",
+        "ex-ar1-one-step-and-multistep-forecast"
+      ]
+    },
+    {
+      "convention": "History is reversed: Y_i = X_(n+1-i), Γ_ij = γ(i-j), and the target covariance vector has entries γ(h+i-1). The inverse coefficient formula requires nonsingular history covariance.",
+      "fixed_by": "thm-forecast-normal-equations-and-error",
+      "matters_for": [
+        "thm-durbin-levinson-solves-the-prediction-equations",
+        "ex-nongaussian-conditional-mean-not-best-affine-predictor"
+      ]
+    },
+    {
+      "convention": "Durbin–Levinson input comprises population ACVF lags through m, with positive-definite Γ_k for 1 ≤ k ≤ m. Only ν_0 through ν_(m-1) are denominators; the final output ν_m may be zero.",
+      "fixed_by": "alg-durbin-levinson-forecast-recursion",
+      "matters_for": [
+        "thm-durbin-levinson-solves-the-prediction-equations"
+      ]
+    },
+    {
+      "convention": "Gaussian block independence assumes AC, finite positive block dimensions, joint multivariate normality, and zero coordinate cross-covariances; singular covariance is permitted.",
+      "fixed_by": "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+      "matters_for": [
+        "thm-gaussian-best-linear-forecast-equals-conditional-expectation",
+        "thm-gaussian-simple-kriging-equals-conditional-mean"
+      ]
+    },
+    {
+      "convention": "The AR(1) example assumes a causal L2 series representation and centered, pairwise uncorrelated innovations with common positive finite variance; innovation independence and Gaussianity are not required.",
+      "fixed_by": "ex-ar1-one-step-and-multistep-forecast",
+      "matters_for": [
+        "ex-ar1-one-step-and-multistep-forecast"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "thm-finite-history-best-linear-predictor-exists-uniquely",
+      "statement": "Let X be a weakly stationary real process and let n,h ≥ 1. The affine L2 minimization defining the finite-history best linear forecast of X_(n+h) from X_1,…,X_n has a unique minimizing almost-sure class, even when the history covariance matrix is singular.",
+      "used_by": [
+        "def-best-linear-forecast-from-a-finite-history",
+        "thm-forecast-normal-equations-and-error",
+        "thm-gaussian-best-linear-forecast-equals-conditional-expectation",
+        "ex-singular-history-covariance-unique-predictor-class"
+      ]
+    },
+    {
+      "id": "thm-forecast-normal-equations-and-error",
+      "statement": "For a weakly stationary real process with mean μ and ACVF γ, n,h ≥ 1, reversed history Y_i = X_(n+1-i), Γ_ij = γ(i-j), and γ_h = (γ(h),…,γ(h+n-1))ᵀ: if Γ is nonsingular, the unique forecast coefficients satisfy a = Γ⁻¹γ_h, the forecast is μ + Σ_i a_i(Y_i−μ), and its error variance is γ(0)−aᵀγ_h.",
+      "used_by": [
+        "thm-durbin-levinson-solves-the-prediction-equations",
+        "ex-nongaussian-conditional-mean-not-best-affine-predictor"
+      ]
+    },
+    {
+      "id": "lem-uncorrelated-jointly-gaussian-blocks-are-independent",
+      "statement": "Assume the Axiom of Choice. Let (U,V) be a jointly multivariate-normal real vector with finite-dimensional blocks U ∈ R^p and V ∈ R^q, where p,q ≥ 1. If Cov(U_i,V_j) = 0 for every coordinate pair, then U and V are independent. The covariance matrix may be singular.",
+      "used_by": [
+        "thm-gaussian-best-linear-forecast-equals-conditional-expectation",
+        "thm-gaussian-simple-kriging-equals-conditional-mean"
+      ]
+    },
+    {
+      "id": "alg-durbin-levinson-forecast-recursion",
+      "statement": "For m ≥ 1 and weakly stationary population ACVF lags with positive-definite leading covariance blocks through m, initialize ν_0 = γ(0), κ_1 = γ(1)/ν_0, φ_(1,1) = κ_1, ν_1 = ν_0(1−κ_1²). For k = 2,…,m compute κ_k = [γ(k)−Σ_(j=1)^(k−1) φ_(k−1,j)γ(k−j)]/ν_(k−1), update φ_(k,j) = φ_(k−1,j)−κ_kφ_(k−1,k−j) for j < k, set φ_(k,k) = κ_k and ν_k = ν_(k−1)(1−κ_k²), and return all coefficient vectors and variances.",
+      "used_by": [
+        "thm-durbin-levinson-solves-the-prediction-equations"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-multivariate-normal-law",
+      "used_for": "Scalar-projection characterization, AC-qualified Gaussian realization, affine images, and singular covariance.",
+      "opened": true
+    },
+    {
+      "id": "lem-characteristic-function-of-a-multivariate-normal-law",
+      "used_for": "Equality and uniqueness of Gaussian vector laws, including singular covariance.",
+      "opened": true
+    },
+    {
+      "id": "thm-non-negative-square-root-exists-and-is-unique",
+      "used_for": "Identification of the block-diagonal positive-semidefinite covariance square root.",
+      "opened": true
+    },
+    {
+      "id": "thm-independent-random-elements-have-product-joint-law",
+      "used_for": "Product law of independent standard-normal coordinates in the block-independence proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-measurable-functions-preserve-independence",
+      "used_for": "Preservation of block independence under separate affine maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-rectangle-criterion-for-independent-random-elements",
+      "used_for": "Block independence and transfer of rectangle factorization between equal joint laws.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Explicit inherited choice assumption in Gaussian construction, uniqueness, and conditioning branches.",
+      "opened": true
+    },
+    {
+      "id": "def-l-p-space-as-a-quotient-by-null-functions",
+      "used_for": "Almost-sure predictor classes and their distinction from affine coefficient representations.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-combination-and-span",
+      "used_for": "Finite history span used in affine minimization.",
+      "opened": true
+    },
+    {
+      "id": "thm-normal-equations-for-best-affine-l2-prediction",
+      "used_for": "Existence and uniqueness of affine predictor classes, intercept and covariance equations, and singular coefficient equivalence.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Finite-second-moment covariance and error-variance definitions.",
+      "opened": true
+    },
+    {
+      "id": "lem-variance-and-covariance-identities-for-random-variables",
+      "used_for": "Symmetry, finite bilinearity, and expansion of prediction-error variances.",
+      "opened": true
+    },
+    {
+      "id": "cor-cauchy-schwarz-for-random-variables",
+      "used_for": "Passing future-innovation orthogonality through the causal AR(1) L2 limit.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-expectation-given-a-sigma-algebra",
+      "used_for": "Measurability, integrability, and event-integral characterization of conditional-expectation versions.",
+      "opened": true
+    },
+    {
+      "id": "lem-conditioning-a-known-variable-and-an-independent-variable",
+      "used_for": "Conditioning measurable forecasts and independent mean-zero residuals; known-variable conditional mean in the finite example.",
+      "opened": true
+    },
+    {
+      "id": "thm-basic-algebra-and-order-properties-of-conditional-expectation",
+      "used_for": "Conditional linearity in the Gaussian forecast proof.",
+      "opened": true
+    },
+    {
+      "id": "lem-conditional-expectation-is-unique-almost-surely",
+      "used_for": "Almost-sure identification of conditional-expectation versions.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Uniform finite probability spaces in the singular-history and nonlinear-conditional-mean examples.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-real-random-variable-and-distribution",
+      "used_for": "Finite random variables and their laws in both finite examples.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-on-a-finite-probability-space",
+      "used_for": "Explicit finite weighted-sum moment computations.",
+      "opened": true
+    },
+    {
+      "id": "def-variance-and-covariance",
+      "used_for": "Finite covariance matrices and one-history forecast coefficient calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-sigma-algebra-generated-by-a-function",
+      "used_for": "The bijective three-state observation generates the full event sigma-algebra.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "linear-prediction-for-dependent-data",
+      "to": "stationary-time-series-moments-and-autocovariance",
+      "faithful": true,
+      "note": "The supplier definitions require an integer-indexed real process, finite second moments for weak stationarity, constant mean, and γ(h) = Cov(X_(t+h),X_t). Forecast consumers preserve these hypotheses; covariance symmetry justifies reversing lag signs. No strict-stationarity, ergodicity, sample-ACVF, or CLT conclusion is imported."
+    },
+    {
+      "from": "kriging-as-best-linear-prediction",
+      "to": "linear-prediction-for-dependent-data",
+      "faithful": true,
+      "note": "The Gaussian kriging theorem cites the block-independence lemma faithfully: AC is explicit, residual and observation blocks are finite and jointly Gaussian, their cross-covariance vanishes, and singular joint covariance is permitted. Kriging separately assumes positive-definite observation covariance for its inverse formula and does not import time-series stationarity."
+    }
+  ]
+}

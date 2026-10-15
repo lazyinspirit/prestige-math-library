@@ -1,0 +1,602 @@
+[
+  {
+    "order": 1956,
+    "id": "structural-causal-models-dags-and-adjustment",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "SCM, DAGs, adjustment",
+    "companion": "structural-causal-models-dags-and-adjustment-examples",
+    "requires": [
+      "potential-outcomes-and-causal-identification",
+      "statistical-experiments-models-and-identifiability",
+      "markov-kernels-and-markov-chains",
+      "conditional-distributions-and-regular-conditional-probability",
+      "independence-borel-cantelli-and-zero-one-laws"
+    ],
+    "items": [
+      {
+        "id": "def-d-separation-in-a-dag",
+        "kind": "definition",
+        "title": "Paths, active paths, and d-separation in a finite DAG",
+        "statement": "A **finite directed acyclic graph** (DAG) is a finite vertex set $V$ with an\narrow set $E\\subseteq V\\times V$ and no directed cycle. A **path** from $u$ to\n$v$ is a finite sequence of distinct vertices beginning at $u$ and ending at\n$v$ in which each consecutive pair is joined by an arrow in either direction;\nthe arrows are not required to point along the sequence. An internal vertex of\na path is a **collider on that path** when the two arrows on the path both point\ninto it, and is a **noncollider** otherwise. A vertex $w$ is a **descendant** of\n$v$ if there is a directed path from $v$ to $w$; for this definition\n$\\operatorname{De}^+(v)$ includes $v$ itself as well as its descendants.\n\nFor pairwise disjoint vertex sets $X,Y,C\\subseteq V$, a path joining $X$ to\n$Y$ is **active given $C$** when every internal noncollider is outside $C$ and\nevery internal collider has at least one member of $\\operatorname{De}^+(v)$ in\n$C$. The set $C$ **d-separates** $X$ and $Y$ in $G$ when no path joining $X$ to\n$Y$ is active given $C$; write $X\\perp_d Y\\mid C$ in $G$. The empty set of\nvertices is allowed for any of $X,Y,C$; in particular d-separation is vacuous\nif either endpoint set is empty.\n\nFor $T\\subseteq V$, $G_{\\underline T}$ is obtained by deleting every arrow\nwhose tail lies in $T$, and $G_{\\overline T}$ by deleting every arrow whose\nhead lies in $T$. These are graph operations only; they do not by themselves\nspecify a probability law under intervention.",
+        "deps": [],
+        "strategy": "definition",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §2-1, pp. 671–672",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Fine Point 6.1, pp. 78–79",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-products-of-probability-kernels",
+        "kind": "lemma",
+        "title": "Finite products of probability kernels are probability kernels",
+        "statement": "Let $(S,\\Sigma)$ and $(T_i,\\Tau_i)$ for $i<n$ be measurable spaces, with\n$n<\\infty$, and let $K_i:S\\to T_i$ be probability kernels with the same\nsource. There is a unique probability kernel\n$$K:S\\to\\prod_{i<n}T_i$$\nwhose evaluation on every measurable rectangle is\n$$K(s,\\prod_{i<n}B_i)=\\prod_{i<n}K_i(s,B_i).$$\nFor $n=0$, the target is the empty-product singleton and $K$ is its point\nmass. For $n>0$, the product sigma-algebra is the recursive finite product\nsigma-algebra.",
+        "deps": [
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-dynkin-pi-lambda"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John K. Hunter, Measure Theory, Theorem 5.14",
+              "url": "https://www.math.ucdavis.edu/~hunter/measure_theory/measure_notes.pdf"
+            },
+            {
+              "title": "Terence Tao, An Introduction to Measure Theory, Proposition 1.7.11",
+              "url": "https://terrytao.wordpress.com/wp-content/uploads/2012/12/gsm-126-tao5-measure-book.pdf"
+            }
+          ]
+        },
+        "axiom_use": "The products are finite and the factors are probability measures; no choice axiom is used.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-recursive-structural-causal-model-and-dag",
+        "kind": "definition",
+        "title": "Recursive structural causal models on finite DAGs",
+        "statement": "Fix a finite DAG $G=(V,E)$ and a specified topological ordering\n$v_1,\\ldots,v_n$ (every arrow points from an earlier to a later vertex).\nPartition $V=O\\sqcup H$ into **observed** vertices $O$ and **latent** vertices\n$H$. For each $v\\in V$, specify a measurable state space $(S_v,\\mathcal\nS_v)$, a measurable exogenous space $(E_v,\\mathcal E_v)$, a jointly\nmeasurable structural function\n$$f_v:\\prod_{u\\in\\operatorname{pa}(v)}S_u\\times E_v\\to S_v,$$\nand an exogenous random element $U_v$ with values in $E_v$. Here\n$\\operatorname{pa}(v)=\\{u:(u,v)\\in E\\}$; the empty product is a singleton.\nThe model is **Markovian** when the finite family $(U_v)_{v\\in V}$ is mutually\nindependent. No parametric form or distributional truth is asserted. Correlated\ndisturbances may be represented by adding their common causes as latent\nvertices, after which the exogenous family in the expanded model is required\nto be mutually independent.\n\nRecursion in the topological order defines the endogenous random elements\nuniquely by $X_v=f_v(X_{\\operatorname{pa}(v)},U_v)$. The full-joint law is the\nlaw of $(X_v)_{v\\in V}$; the observed law is its marginal law on $O$. An\nobserved-only DAG factorization is asserted only when $H=\\varnothing$ or when\nan additional stated latent-variable condition proves it.\n\nFor $I\\subseteq V$ and a value $a=(a_v)_{v\\in I}\\in\\prod_{v\\in I}S_v$,\n**$do(X_I=a)$** means replace only the equations indexed by $I$ by the\nconstants $X_v=a_v$, leaving every other structural function and every\nexogenous law unchanged. Recursion then defines counterfactual values\n$X_w^a$ for every vertex $w$; the interventional law is their joint law. The\nresponse map $(a,\\omega)\\mapsto X_w^a(\\omega)$ is jointly measurable, by\ninduction through the finite topological order and joint measurability of each\n$f_v$. This permits evaluation at a random treatment value, such as\n$X_w^{M^a}$. When $I=\\{A\\}$, write $X_w^a$ for the response under\n$do(A=a)$. If the factual treatment is $A$, then on $\\{A=a\\}$ recursion\ngives $X_w=X_w^a$ for every vertex $w$.",
+        "deps": [
+          "def-d-separation-in-a-dag",
+          "def-measurable-space",
+          "def-measurable-function-between-measurable-spaces",
+          "def-independent-random-elements",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras"
+        ],
+        "strategy": "definition",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §2-2, pp. 672–674",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Technical Points 6.1–6.3, pp. 72–74",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-ancestral-moral-graph-of-a-dag",
+        "kind": "definition",
+        "title": "The ancestral moral graph of a DAG",
+        "statement": "For $S\\subseteq V$, its **ancestral set** is\n$$\\operatorname{An}_G(S):=\\{v\\in V:\\text{there is a directed path from }v\\text{ to some }s\\in S\\},$$\nwhere paths of length zero are allowed, so $S\\subseteq\\operatorname{An}_G(S)$.\nThe induced directed subgraph on this set keeps exactly the arrows of $G$\nwhose two endpoints lie in $\\operatorname{An}_G(S)$. Its **moral graph** is\nthe undirected simple graph obtained by replacing every arrow by an\nundirected edge and joining every distinct pair of parents of a common child\nby an undirected edge; loops and duplicate edges are discarded. This\nundirected graph is the **ancestral moral graph** on $S$ and is denoted\n$\\operatorname{mor}_G(S)$.",
+        "deps": [
+          "def-d-separation-in-a-dag"
+        ],
+        "strategy": "definition",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §2-1, p. 672",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Fine Point 6.1, pp. 78–79",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-faithfulness-of-a-dag-model",
+        "kind": "definition",
+        "title": "Faithfulness of a law to a DAG",
+        "statement": "Assume AC, and let a joint law $P$ on the measurable vertex variables of a\nfinite DAG $G$ be given. The law is **faithful to $G$** if, for every triple\nof pairwise disjoint vertex sets $A,B,C$, the conditional independence\n$$\\sigma(X_A)\\perp\\!\\!\\!\\perp\\sigma(X_B)\\mid\\sigma(X_C)$$\nimplies that $C$ d-separates $A$ and $B$ in $G$. This is the converse of the\nglobal Markov implication; faithfulness is a separate assumption on the\nspecified law, not a consequence of DAG factorization. No claim about Markov\nequivalence, skeletons, or unshielded colliders is included. Here $X_A$ is\nthe finite random vector $(X_v)_{v\\in A}$ with the finite-product\nsigma-algebra; for $A=\\varnothing$ it is the unique random element of the\nempty-product singleton.",
+        "deps": [
+          "def-d-separation-in-a-dag",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "definition",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §2-1, pp. 671–672",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Fine Point 6.2, pp. 79–80",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC as required by the conditional-independence definition.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-recursive-scm-topological-kernel-factorization",
+        "kind": "lemma",
+        "title": "A Markovian recursive SCM has a topological kernel factorization",
+        "statement": "Let a finite Markovian recursive SCM be as in\n[[def-recursive-structural-causal-model-and-dag]], with topological order\n$v_1,\\ldots,v_n$. For each $v$, let $\\nu_v$ be the law of $U_v$ and define\n$$K_v(x_{\\operatorname{pa}(v)},B) :=\\nu_v\\{u:f_v(x_{\\operatorname{pa}(v)},u)\\in B\\},\\qquad B\\in\\mathcal S_v.$$\nThen $K_v$ is a probability kernel from the parent-coordinate product to\n$(S_v,\\mathcal S_v)$. If $n=0$, the full-joint law (and the only possible\ninterventional law) is the point mass on the empty-product singleton. For\n$n\\ge1$, the full-joint law is the iterated topological composition\n$$\\mu(dx_{v_1},\\ldots,dx_{v_n}) :=K_{v_1}(dx_{v_1})\\prod_{r=2}^n K_{v_r}(x_{\\operatorname{pa}(v_r)},dx_{v_r}).$$\nFor $n\\ge1$ and an intervention $do(X_I=a)$, the same formula holds with the factor\n$K_v$ replaced by the point mass $\\delta_{a_v}$ for each $v\\in I$; all other\nfactors are unchanged. Marginalizing latent coordinates means taking the\npushforward to $\\prod_{v\\in O}S_v$ and does not in general produce a\nfactorization on the observed-only induced graph.",
+        "deps": [
+          "def-recursive-structural-causal-model-and-dag",
+          "lem-finite-products-of-probability-kernels",
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "thm-measurability-of-integration-against-a-kernel",
+          "def-composition-of-probability-kernels",
+          "lem-kernel-composition-is-well-defined-and-associative",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §2-2, pp. 672–674",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Technical Points 6.1–6.3, pp. 72–74",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used. The exogenous family is finite; its product law, the structural kernels and their finite composition are supplied by the stated choice-free suppliers.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-active-routes-in-a-finite-dag-have-active-paths",
+        "kind": "lemma",
+        "title": "Every active finite route contains an active path",
+        "deps": [
+          "def-d-separation-in-a-dag"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §2-1, pp. 671–672",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Only finite graph arguments and a minimum in the natural numbers are used; no choice axiom is used.",
+        "strategy": "direct",
+        "statement": "In a finite DAG, a **route** is a finite sequence of vertices with consecutive vertices adjacent by an arrow in either direction; repeated vertices are allowed. Collider and noncollider status is assigned to each internal occurrence using its two incident route arrows. A route is **active given $C$** if each noncollider occurrence is outside $C$ and each collider occurrence is an ancestor of $C$, including membership in $C$. If an active route joins vertices $x,y\\notin C$ with $x\\ne y$, then an active distinct-vertex path joins $x$ and $y$ given $C$.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-d-separation-ancestral-moral-separation",
+        "kind": "lemma",
+        "title": "D-separation is separation in the ancestral moral graph",
+        "statement": "For disjoint $X,Y,C\\subseteq V$, $C$ d-separates $X$ and $Y$ in $G$ if and\nonly if deleting $C$ from $\\operatorname{mor}_G(X\\cup Y\\cup C)$ leaves no\nundirected path from $X$ to $Y$.",
+        "deps": [
+          "def-d-separation-in-a-dag",
+          "def-ancestral-moral-graph-of-a-dag",
+          "lem-active-routes-in-a-finite-dag-have-active-paths"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §2-1, p. 672",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Fine Point 6.1, pp. 78–79",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "axiom_use": "The graph is finite, so the finite path and shortening arguments use no choice axiom.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-conditional-independence-under-kernel-extension-and-conditioning",
+        "kind": "lemma",
+        "title": "Conditional independence under kernel extension and conditioning",
+        "deps": [
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-tower-property-of-conditional-expectation",
+          "thm-dynkin-pi-lambda",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "def-axiom-of-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Aldous–Chewi, Probability Theory, Lecture 9, Definition 9.1 and Lemma 9.2, printed pp. 35–36",
+              "url": "https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC for the conditional-expectation and conditional-independence interfaces. No regular conditional distribution is constructed.",
+        "strategy": "direct",
+        "statement": "Assume AC. Let $L,R,C,V$ be random elements in arbitrary measurable spaces. Suppose $L\\perp\\!\\!\\!\\perp R\\mid\\sigma(C)$ and that the joint law of $(L,R,C,V)$ is obtained from the law of $(L,R,C)$ by a probability kernel $K(l,c,dv)$ depending only on $(l,c)$. Then\n$$ (L,V)\\perp\\!\\!\\!\\perp R\\mid\\sigma(C),\\qquad L\\perp\\!\\!\\!\\perp R\\mid\\sigma(C,V). $$\nNo regular conditional law on an unspecified measurable space is assumed: $K$ is supplied in the hypotheses.",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-dag-factorization-implies-d-separation-conditional-independence",
+        "kind": "theorem",
+        "title": "DAG factorization implies the global Markov property",
+        "statement": "Assume AC. Let $(X_v)_{v\\in V}$ be random elements in measurable spaces\nwhose joint law is generated, in a topological order of the finite DAG $G$,\nby probability kernels $K_v(x_{\\operatorname{pa}(v)},dx_v)$. For pairwise\ndisjoint $A,B,C\\subseteq V$, if $C$ d-separates $A$ and $B$ in $G$, then\n$$\\sigma(X_A)\\perp\\!\\!\\!\\perp\\sigma(X_B)\\mid\\sigma(X_C).$$\nThis is the global Markov implication. Its converse is the separate\nfaithfulness condition in [[def-faithfulness-of-a-dag-model]].",
+        "deps": [
+          "def-d-separation-in-a-dag",
+          "def-ancestral-moral-graph-of-a-dag",
+          "lem-d-separation-ancestral-moral-separation",
+          "lem-conditional-independence-under-kernel-extension-and-conditioning",
+          "def-measure-kernel-and-probability-kernel",
+          "def-composition-of-probability-kernels",
+          "lem-kernel-composition-is-well-defined-and-associative",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-axiom-of-choice",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-faithfulness-of-a-dag-model"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §2-1, pp. 671–672",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Fine Point 6.1, pp. 78–79",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC for the conditional-expectation and conditional-independence interfaces. The finite graph elimination and kernel construction use no further choice.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-backdoor-criterion-implies-counterfactual-exchangeability",
+        "kind": "lemma",
+        "title": "The backdoor criterion implies conditional exchangeability",
+        "statement": "Assume AC and a finite Markovian recursive SCM on $G$. Let $T,W$ be disjoint\nvertex sets and let $C$ be a set of nondescendants of $T$. Define the\nresponse-family sigma-algebra\n$$\\mathcal R_W^T:=\\sigma\\{X_w^t:w\\in W,\\ t\\in\\prod_{v\\in T}S_v\\}.$$\nIf $C$ d-separates $T$ and $W$ in $G_{\\underline T}$, then\n$$\\sigma(X_T)\\perp\\!\\!\\!\\perp\\mathcal R_W^T\\mid\\sigma(X_C).$$\nFor each fixed intervention value $t$, this implies\n$X_W^t\\perp\\!\\!\\!\\perp X_T\\mid\\sigma(X_C)$. No treatment-positivity\ncondition is needed.",
+        "deps": [
+          "def-recursive-structural-causal-model-and-dag",
+          "lem-recursive-scm-topological-kernel-factorization",
+          "def-d-separation-in-a-dag",
+          "def-ancestral-moral-graph-of-a-dag",
+          "lem-d-separation-ancestral-moral-separation",
+          "thm-dag-factorization-implies-d-separation-conditional-independence",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-axiom-of-choice",
+          "thm-dynkin-pi-lambda",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §3-1, pp. 674–675",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, §7.2 and Technical Point 7.1, pp. 87–88",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC as required by the conditional-expectation and conditional-independence interfaces. The finite response-copy construction uses no further choice.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-backdoor-adjustment-sufficiency",
+        "kind": "theorem",
+        "title": "Backdoor adjustment identifies an interventional law",
+        "statement": "Assume AC and a finite Markovian SCM on a finite DAG $G$. Let $A$ be an\nobserved countable-valued treatment, $Y$ an observed standard-Borel outcome,\nand $L$ an observed finite vector of standard-Borel vertices containing no\ndescendant of $A$. Fix an atom $a$ with $P(A=a)>0$. Suppose (i) $L$\nd-separates $A$ and $Y$ in $G_{\\underline A}$ and (ii) a regular conditional\npropensity $e_a(L)=P(A=a\\mid L)$ is strictly positive $P_L$-almost surely.\nThen for every Borel set $B$ in the state space of $Y$,\n$$P(Y^a\\in B)=\\int P(Y\\in B\\mid A=a,L=l)\\,P_L(dl).$$\nThe right side depends only on the observed law. Thus the law of $Y^a$ is an\nidentifiable estimand on any statistical model consisting of such SCMs with\nthe same observed variables. If $Y$ is real and $Y^a$ is integrable, applying\nthe identity to bounded truncations and taking limits gives\n$$E[Y^a]=\\int E(Y\\mid A=a,L=l)\\,P_L(dl).$$\nFor a continuous treatment, the corresponding regular conditional formula is\nidentified only for $P_A$-almost every $a$; this theorem makes no pointwise\nclaim at a null treatment value.",
+        "deps": [
+          "def-recursive-structural-causal-model-and-dag",
+          "def-potential-outcomes-and-consistency",
+          "lem-backdoor-criterion-implies-counterfactual-exchangeability",
+          "def-measure-kernel-and-probability-kernel",
+          "def-regular-conditional-distribution",
+          "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "def-axiom-of-choice",
+          "def-parametric-statistical-model",
+          "def-observational-equivalence",
+          "def-estimand-on-a-statistical-model",
+          "def-identifiability-of-an-estimand",
+          "thm-identifiability-iff-constant-on-equivalence-classes"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §3-1, pp. 674–675",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, §§7.2–7.3, pp. 87–89",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC for regular conditional distributions, disintegration and conditional independence. No further choice is used.",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-frontdoor-interventional-identities",
+        "kind": "lemma",
+        "title": "Counterfactual identities under the front-door conditions",
+        "statement": "Assume AC and a finite Markovian recursive SCM on a full DAG with observed\nvertices $A,M,Y$ and any number of latent vertices. Suppose: (i) every\ndirected path from $A$ to $Y$ contains $M$; (ii) $A$ and $M$ are\nd-separated by the empty set in $G_{\\underline A}$; and (iii) $A$\nd-separates $M$ and $Y$ in $G_{\\underline M}$. For each supplied value\n$a\\in S_A$, let $M^a$ be the response under $do(A=a)$. Define\n$$I_M=\\operatorname{An}_{G_{\\overline A}}(M)\\setminus\\{A\\},\\qquad I_Y=\\operatorname{An}_{G_{\\overline M}}(Y)\\setminus\\{M\\},$$\nwhere ancestry includes the vertex itself and $U_I$ is the finite vector of\nexogenous coordinates $(U_v)_{v\\in I}$. Then $M^a$ is measurable with\nrespect to $\\sigma(U_{I_M})$, each response $Y^m$ is measurable with\nrespect to $\\sigma(U_{I_Y})$, and\n$$M^a\\perp\\!\\!\\!\\perp A,\\qquad I_M\\cap I_Y=\\varnothing,\\qquad M^a\\perp\\!\\!\\!\\perp U_{I_Y},\\qquad M\\perp\\!\\!\\!\\perp U_{I_Y}\\mid A.$$\nThe recursive responses also satisfy $Y^a=Y^{M^a}$ almost surely. The\nconditional independence is for the factual law; it supplies a genuine\nconditional product law for the exogenous coordinates used by the outcome\nresponse.",
+        "deps": [
+          "def-recursive-structural-causal-model-and-dag",
+          "def-d-separation-in-a-dag",
+          "lem-recursive-scm-topological-kernel-factorization",
+          "thm-dag-factorization-implies-d-separation-conditional-independence",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "def-conditional-independence-given-a-sigma-algebra",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §3-2, pp. 675–676",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Technical Point 7.4, p. 101",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC for the conditional-independence statement. The exogenous-coordinate separation uses finite sets and no further choice.",
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-frontdoor-adjustment-sufficiency",
+        "kind": "theorem",
+        "title": "Front-door adjustment identifies an interventional mean",
+        "statement": "Assume AC and a finite Markovian SCM with observed countable-valued\ntreatment $A$, observed standard-Borel mediator $M$, and real outcome $Y$.\nFix an atom $a$ with $P(A=a)>0$. Suppose in the full DAG: (i) $M$ lies on\nevery directed path from $A$ to $Y$; (ii) $A$ and $M$ are d-separated by the\nempty set in $G_{\\underline A}$; and (iii) $A$ d-separates $M$ and $Y$ in\n$G_{\\underline M}$. Write $\\mu_a=P(M\\in\\cdot\\mid A=a)$ and, for every\npositive-probability treatment atom $a'$, write\n$\\mu_{a'}=P(M\\in\\cdot\\mid A=a')$. Assume the nested-law support condition\n$$\\mu_a\\ll\\mu_{a'}\\qquad\\text{for every }a'\\text{ with }P(A=a')>0,$$\nand absolute integrability of the nested conditional means:\n$$\\int\\!\\int E(|Y|\\mid M=m,A=a')\\,P_A(da')\\,\\mu_a(dm)<\\infty.$$\nThen\n$$E[Y^a]=\\int P(dm\\mid A=a)\\int E(Y\\mid M=m,A=a')\\,P_A(da').$$\nThe right side is determined by the observed law, so the interventional mean\nis identifiable on any statistical model of SCMs satisfying these\nassumptions. For a discrete mediator, the support condition says that every\nmediator value having positive probability under $A=a$ also has positive\nprobability under every positive-probability treatment atom. These are\nsufficient conditions only. For non-atomic treatment values, regular\nconditional formulas are determined only $P_A$-almost everywhere; this\nitem makes no pointwise claim at a null treatment value.",
+        "deps": [
+          "def-recursive-structural-causal-model-and-dag",
+          "def-potential-outcomes-and-consistency",
+          "lem-frontdoor-interventional-identities",
+          "def-measure-kernel-and-probability-kernel",
+          "def-regular-conditional-distribution",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets",
+          "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable",
+          "thm-tower-property-of-conditional-expectation",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral",
+          "def-axiom-of-choice",
+          "def-parametric-statistical-model",
+          "def-observational-equivalence",
+          "def-estimand-on-a-statistical-model",
+          "def-identifiability-of-an-estimand",
+          "thm-identifiability-iff-constant-on-equivalence-classes"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §3-2, pp. 675–676",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Technical Point 7.4, p. 101",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assume AC for the regular conditional laws, disintegration and conditional-expectation interfaces. The finite structural recursion and countable treatment mixture use no further choice.",
+        "dependency_level": 5
+      }
+    ]
+  },
+  {
+    "order": 1957,
+    "id": "structural-causal-models-dags-and-adjustment-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "SCM, DAGs, adjustment — Examples",
+    "companion": "structural-causal-models-dags-and-adjustment",
+    "requires": [
+      "structural-causal-models-dags-and-adjustment"
+    ],
+    "items": [
+      {
+        "id": "ex-confounding-and-collider-conditioning",
+        "kind": "example",
+        "title": "A confounder and a conditioned collider",
+        "statement": "Consider first a confounding SCM with independent $U\\sim\\mathrm{Bernoulli}(1/2)$\nand $E\\sim\\mathrm{Bernoulli}(1/4)$, observed $A=U\\mathbin{\\mathrm{xor}}E$,\nand observed $Y=U$. Its DAG is $U\\to A$ and $U\\to Y$. The only path between\n$A$ and $Y$ is the backdoor path $A\\leftarrow U\\to Y$.\n\nFor collider conditioning, let independent $B,C\\sim\\mathrm{Bernoulli}(1/2)$,\nand set $D=B\\lor C$. Its DAG is $B\\to D\\leftarrow C$.",
+        "deps": [
+          "def-d-separation-in-a-dag",
+          "def-recursive-structural-causal-model-and-dag",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §2-1 and §3-1, pp. 671–675",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Fine Point 6.1 and §7.1, pp. 78, 85–86",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-same-observed-law-different-intervention-law",
+        "kind": "example",
+        "title": "The same observed law can have different intervention laws",
+        "statement": "Let $U\\sim\\mathrm{Bernoulli}(1/2)$. In SCM 1 set $A=U$ and $Y=A$; its graph\nis $U\\to A\\to Y$. In SCM 2 set $A=U$ and $Y=U$; its graph is\n$U\\to A$ and $U\\to Y$. Degenerate independent exogenous errors at $A$ and\n$Y$ complete both Markovian SCMs.",
+        "deps": [
+          "def-recursive-structural-causal-model-and-dag",
+          "def-parametric-statistical-model",
+          "def-observational-equivalence",
+          "def-estimand-on-a-statistical-model",
+          "def-identifiability-of-an-estimand"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §3-1, pp. 674–675",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, §6.1, pp. 71–74",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-frontdoor-adjustment-binary-model",
+        "kind": "example",
+        "title": "A binary SCM where front-door adjustment works",
+        "statement": "Let $U\\sim\\mathrm{Bernoulli}(1/2)$,\n$E_A\\sim\\mathrm{Bernoulli}(1/4)$, and\n$E_M\\sim\\mathrm{Bernoulli}(1/5)$ be mutually independent. Set\n$$A=U\\mathbin{\\mathrm{xor}}E_A,\\qquad M=A\\mathbin{\\mathrm{xor}}E_M,\\qquad Y=M\\lor U.$$\nThe full graph is $U\\to A$, $U\\to Y$, $A\\to M$, $M\\to Y$. The only directed\n$A$-to-$Y$ path passes through $M$; there is no backdoor path from $A$ to\n$M$; and the backdoor path $M\\leftarrow A\\leftarrow U\\to Y$ is blocked by\n$A$. Both mediator values have positive probability conditional on either\ntreatment value, so the nested conditional laws have the required support.",
+        "deps": [
+          "def-recursive-structural-causal-model-and-dag",
+          "thm-frontdoor-adjustment-sufficiency",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Judea Pearl, Causal Diagrams for Empirical Research, §3-2, pp. 675–676",
+              "url": "https://ftp.cs.ucla.edu/pub/stat_ser/R218-B.pdf"
+            },
+            {
+              "title": "Miguel A. Hernán and James M. Robins, Causal Inference: What If, Technical Point 7.4, p. 101",
+              "url": "https://miguelhernan.org/s/hernanrobins_WhatIf_2jan25.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      }
+    ]
+  }
+]

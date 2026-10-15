@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "batch": "17",
+  "round": 0,
+  "reviewed_items": [
+    "lem-standard-normal-cdf-quantiles-and-tail-symmetry-for-power",
+    "lem-iid-normal-sample-mean-law",
+    "lem-least-feasible-sample-size-exists",
+    "lem-ceiling-and-least-positive-integer-threshold",
+    "def-power-and-sample-size-planning-specification",
+    "prop-known-variance-normal-two-sided-z-test-power",
+    "alg-finite-candidate-power-sample-size-search",
+    "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+    "thm-finite-candidate-power-sample-size-search-correctness",
+    "ex-two-sided-normal-z-power-includes-both-tails",
+    "ex-known-variance-normal-z-sample-size-and-sensitivity"
+  ],
+  "reviewed_pages": [
+    "power-and-sample-size-planning",
+    "power-and-sample-size-planning-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The normal-law, quantile, exact power, finite-list search, and example arguments are substantively sound. Two proofs should state how their AC hypothesis supplies the countable-choice premise of a cited measurability result. More significantly, the approved SME-17 design calls for a procedure over candidate positive-integer sizes that returns the least feasible size or none; the current generic specification is extensional, while the algorithm and its correctness theorem cover only a supplied finite list. Owner reconciliation is needed because the approved scope does not specify that finite exhaustive domain or a certificate for infeasibility over all positive integers.",
+  "findings": [
+    {
+      "id": "power-and-sample-size-planning",
+      "type": "scope",
+      "reason": "The approved SME-17 design says the procedure evaluates candidate sizes in N_{>=1} and returns the least feasible size or none. The current algorithm scans only a supplied finite list, and its theorem certifies none only for that list. The definition allows an unrestricted candidate set and is an extensional rule, not a terminating search procedure. The owner must reconcile whether the approved candidate domain is finite and exhaustive or supply the missing termination/completeness premise for reporting none over all positive sizes."
+    },
+    {
+      "id": "prop-known-variance-normal-two-sided-z-test-power",
+      "type": "local",
+      "reason": "F5 uses cor-continuous-functions-are-borel-measurable, whose statement assumes countable choice. The proposition assumes AC, which implies countable choice, but that implication is not stated or cited in the facts/proof. Add the explicit discharge, for example via lem-axiom-of-choice-implies-countable-choice; no claim change is needed."
+    },
+    {
+      "id": "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+      "type": "local",
+      "reason": "F5 uses cor-continuous-functions-are-borel-measurable, whose statement assumes countable choice. The theorem assumes AC, which implies countable choice, but that implication is not stated or cited in the facts/proof. Add the explicit discharge, for example via lem-axiom-of-choice-implies-countable-choice; no claim change is needed."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-power-and-sample-size-planning-specification",
+      "decision": "escalate",
+      "reason": "Its unrestricted candidate set and extensional none rule do not supply a terminating procedure for the approved all-size scope."
+    },
+    {
+      "id": "alg-finite-candidate-power-sample-size-search",
+      "decision": "escalate",
+      "reason": "The algorithm is sound for its finite supplied list, but does not establish the approved all-size procedure."
+    },
+    {
+      "id": "thm-finite-candidate-power-sample-size-search-correctness",
+      "decision": "escalate",
+      "reason": "The theorem proves correctness only within the supplied finite list."
+    },
+    {
+      "id": "power-and-sample-size-planning",
+      "decision": "escalate",
+      "reason": "The A page describes only the finite-list search for the general procedure."
+    },
+    {
+      "id": "power-and-sample-size-planning-examples",
+      "decision": "accept",
+      "reason": "The examples page makes no general-search claim."
+    },
+    {
+      "id": "prop-known-variance-normal-two-sided-z-test-power",
+      "decision": "repair",
+      "reason": "State explicitly that AC supplies the countable-choice premise used for measurability."
+    },
+    {
+      "id": "thm-known-variance-normal-z-test-power-and-minimum-sample-size",
+      "decision": "repair",
+      "reason": "State explicitly that AC supplies the countable-choice premise used for measurability; the special-case normal sample-size result is otherwise sound."
+    },
+    {
+      "id": "ex-two-sided-normal-z-power-includes-both-tails",
+      "decision": "accept",
+      "reason": "Its use of the two-sided power result is sound; the requested clarification does not change that result's interface."
+    },
+    {
+      "id": "ex-known-variance-normal-z-sample-size-and-sensitivity",
+      "decision": "accept",
+      "reason": "Its exact special-case calculations are sound; the requested clarification does not change the theorem's interface."
+    }
+  ]
+}

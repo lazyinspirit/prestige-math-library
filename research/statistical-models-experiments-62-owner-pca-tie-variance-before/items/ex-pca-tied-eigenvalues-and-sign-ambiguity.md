@@ -1,0 +1,63 @@
+---
+id: ex-pca-tied-eigenvalues-and-sign-ambiguity
+kind: example
+title: "Tied PCA eigenvalues and sign ambiguity"
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 4
+deps:
+  - def-covariance-and-correlation-principal-component-analysis
+  - thm-repeated-leading-eigenvalue-identifies-subspace
+  - cor-real-spectral-theorem-for-self-adjoint-endomorphisms
+justified_by: []
+proof_strategy: direct
+verification:
+  precheck: pass
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+sources:
+  references:
+    - title: "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)"
+      url: "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf"
+    - title: "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis"
+      url: "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf"
+---
+
+## Example
+
+The covariance matrix $\Sigma_1=I_2$ has a repeated leading eigenvalue. Every
+unit direction in $\mathbb R^2$ (and its line) maximizes projected variance,
+but the leading PCA subspace defined by the full leading eigenspace is
+$\mathbb R^2$. In contrast, $\Sigma_2=\operatorname{diag}(2,1)$ has the
+unique leading line $\operatorname{span}(e_1)$, but both $e_1$ and $-e_1$ are
+unit leading eigenvectors. Thus a tie makes the defined leading subspace
+multidimensional, while the sign ambiguity remains even when that subspace is
+a line.
+
+## Facts & Assumptions
+
+**Given:** The two real symmetric covariance matrices
+$\Sigma_1=I_2$ and $\Sigma_2=\operatorname{diag}(2,1)$.
+
+[F1] [[def-covariance-and-correlation-principal-component-analysis]]:
+PCA uses ordered eigenspaces of the covariance matrix, and a unit
+eigenvector represents a direction only up to its sign.
+
+[F2] [[thm-repeated-leading-eigenvalue-identifies-subspace]]: when the top
+two eigenvalues are equal, the leading eigenspace has dimension at least two
+and is not a distinguished unit vector.
+
+[F3] [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]: each real
+symmetric matrix has an orthonormal eigenbasis.
+
+## Verification
+
+**Proof technique:** direct.
+
+1.1 The eigenvalues of $\Sigma_1=I_2$ are $1,1$, and $I_2-I_2$ is the zero matrix, so the defined leading eigenspace is $E_1=\ker(I_2-I_2)=\mathbb R^2$. By [F3], every unit vector in $E_1$ maximizes projected variance; each of its lines is therefore a variance-maximizing direction, while the defined leading PCA subspace remains all of $\mathbb R^2$. [F1, F2, F3, given, algebra]
+
+2.1 The eigenvalues of $\Sigma_2=\operatorname{diag}(2,1)$ are $2>1$, with leading eigenspace $\operatorname{span}(e_1)$. Both $e_1$ and $-e_1$ have unit norm and satisfy $\Sigma_2 e_1=2e_1$ and $\Sigma_2(-e_1)=2(-e_1)$. They determine the same line, so even a simple leading eigenvalue does not orient its eigenvector. [F1, F3, step 1.1, algebra] ∎

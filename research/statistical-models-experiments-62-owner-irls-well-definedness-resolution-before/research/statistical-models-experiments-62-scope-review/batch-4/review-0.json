@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "batch": "4",
+  "round": 0,
+  "reviewed_items": [
+    "def-glm-observation-family",
+    "lem-glm-mean-and-variance-identities",
+    "lem-glm-product-density",
+    "def-generalized-linear-model",
+    "def-nested-model-deviance",
+    "thm-canonical-glm-score-and-hessian",
+    "thm-glm-general-link-score-and-information",
+    "alg-fisher-scoring-irls",
+    "lem-nested-model-deviance-nonnegative",
+    "thm-canonical-glm-strict-concavity",
+    "thm-irls-is-fisher-scoring-step",
+    "ex-poisson-overdispersion",
+    "ex-identity-link-bernoulli-boundary",
+    "ex-logistic-separation-no-finite-mle",
+    "ex-singular-fisher-information-nonunique-irls",
+    "ex-bernoulli-logit-glm-one-step",
+    "ex-poisson-log-glm-one-step"
+  ],
+  "reviewed_pages": [
+    "generalized-linear-models-and-fisher-scoring",
+    "generalized-linear-models-and-fisher-scoring-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch is within the approved scope, but three local proof or prerequisite-use repairs are needed. No unresolved outside-scope gap requires escalation.",
+  "findings": [
+    {
+      "id": "lem-glm-mean-and-variance-identities",
+      "type": "local",
+      "reason": "Step 2.1 uses the signed density-integration identity and finite first moment, while the cited supplier states the identity for nonnegative functions. Add the short justification: finite second moment gives E|Y|<∞, then apply the supplier to Y⁺ and Y⁻ and subtract."
+    },
+    {
+      "id": "thm-canonical-glm-score-and-hessian",
+      "type": "local",
+      "reason": "The proof invokes the mean-and-variance lemma without stating its moment and derivative-envelope hypotheses. The score formula does not need them: derive μᵢ=b′(ηᵢ) directly from τ and the canonical-link definition, then avoid importing those extra assumptions."
+    },
+    {
+      "id": "thm-irls-is-fisher-scoring-step",
+      "type": "prerequisite",
+      "reason": "The statement assumes only algorithm admissibility and invertible information, but uses the general-link theorem, which additionally requires differentiability of η↦θ, common-support differentiability and local derivative envelopes, and finite component-score second moments. State the applicable general-link hypotheses explicitly; this is repairable on the item page."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-bernoulli-logit-glm-one-step",
+      "decision": "accept",
+      "reason": "The one-observation Bernoulli model has finite support and bounded local derivatives; its information is 1/4 and hence invertible, so the added hypotheses hold."
+    },
+    {
+      "id": "ex-poisson-log-glm-one-step",
+      "decision": "accept",
+      "reason": "At the stated point the information is 1. The Poisson family has finite score moments and locally integrable first and second parameter-derivative envelopes, so the added hypotheses hold."
+    },
+    {
+      "id": "generalized-linear-models-and-fisher-scoring",
+      "decision": "accept",
+      "reason": "Its summary covers the finite Fisher-scoring/IRLS step and states no convergence guarantee; it remains accurate with the theorem's hypotheses explicit."
+    },
+    {
+      "id": "generalized-linear-models-and-fisher-scoring-examples",
+      "decision": "accept",
+      "reason": "Its summary describes the specific finite Bernoulli-logit and Poisson-log calculations, which satisfy the theorem's conditions."
+    }
+  ]
+}

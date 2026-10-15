@@ -1,0 +1,74 @@
+---
+id: thm-local-leading-eigenvector-stability-under-eigengap
+kind: theorem
+title: "Local leading-eigenvector stability under a spectral gap"
+status: draft
+origin: pipeline
+pipeline_run: statistical-models-experiments-62
+dependency_level: 0
+deps:
+  - cor-real-spectral-theorem-for-self-adjoint-endomorphisms
+  - thm-courant-fischer-min-max-principle
+  - def-operator-norm-on-a-finite-dimensional-inner-product-space
+  - def-euclidean-inner-product
+  - thm-cauchy-schwarz-in-an-inner-product-space
+justified_by: []
+proof_strategy: direct
+verification:
+  precheck: pass
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "Online Bayesian Data Analysis, Lecture Notes 8: Learning Signal Representations (11 April 2016)"
+      url: "https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/material/learning_representations.pdf"
+    - title: "Soumendu Sundar Mukherjee, Multivariate Analysis, Lecture 8: Principal Component Analysis"
+      url: "https://soumendu041.gitlab.io/teaching/courses/mva2021/lectures/scribes/lec-8.pdf"
+---
+
+## Statement
+
+Let $p\ge2$, let $A\in\mathbb R^{p\times p}$ be symmetric, and order its
+eigenvalues as $\lambda_1(A)\ge\cdots\ge\lambda_p(A)$. Suppose its leading
+eigenvalue is simple, with gap
+$$g:=\lambda_1(A)-\lambda_2(A)>0,$$
+and let $v$ be a unit leading eigenvector. Let $E\in\mathbb R^{p\times p}$ be
+symmetric, put $\epsilon:=\|E\|_{\mathrm{op}}$, and assume
+$0\le\epsilon<g/2$. If $\widetilde v$ is any unit leading eigenvector of
+$A+E$, then the leading eigenvalue of $A+E$ is simple and
+$$|\lambda_1(A+E)-\lambda_1(A)|\le\epsilon,\qquad \sin\angle(v,\widetilde v):=\sqrt{1-(v^{\mathsf T}\widetilde v)^2}\le\frac{\epsilon}{g-\epsilon}.$$
+The bound concerns the line spanned by the eigenvector, so it is unchanged by
+either sign choice. It is a local eigengap bound; it does not assert a
+dimension-free Davis--Kahan theorem or a finite-sample inference procedure.
+
+## Facts & Assumptions
+
+**Given:** A real symmetric $p\times p$ matrix $A$, $p\ge2$, a simple leading
+eigenvalue with gap $g>0$, a unit leading eigenvector $v$, a real symmetric
+perturbation $E$ with operator norm $\epsilon<g/2$, and a unit leading
+eigenvector $\widetilde v$ of $A+E$.
+
+[F1] [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]: a real
+symmetric matrix has an orthonormal eigenbasis with real eigenvalues.
+
+[F2] [[thm-courant-fischer-min-max-principle]]: for a symmetric operator, the
+ordered eigenvalues are characterized by the minimum-over-subspaces and
+maximum-over-subspaces Rayleigh-quotient formulas.
+
+[F3] [[def-operator-norm-on-a-finite-dimensional-inner-product-space]]:
+$\|E\|_{\mathrm{op}}=\max_{\|x\|_2=1}\|Ex\|_2$.
+
+[F4] [[def-euclidean-inner-product]] and
+[[thm-cauchy-schwarz-in-an-inner-product-space]]: the Euclidean norm is induced
+by $x^{\mathsf T}y$, and $|x^{\mathsf T}y|\le\|x\|_2\|y\|_2$.
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 For every unit vector $x$, [F3] and [F4] give $|x^{\mathsf T}Ex|\le\|x\|_2\|Ex\|_2\le\epsilon$. The top-eigenvalue Rayleigh characterization in [F2] therefore gives $\lambda_1(A+E)\le\lambda_1(A)+\epsilon$, while evaluating the perturbed Rayleigh quotient at $v$ gives $\lambda_1(A+E)\ge v^{\mathsf T}(A+E)v\ge\lambda_1(A)-\epsilon$. This proves the eigenvalue bound. [F2, F3, F4, given, algebra]
+
+2.1 The minimum--maximum formula in [F2], with the $(p-1)$-dimensional subspace $v^\perp$, gives $\lambda_2(A+E)\le\max_{\|x\|_2=1,\ x\perp v}x^{\mathsf T}(A+E)x \le\lambda_2(A)+\epsilon$, since every such $x$ has $x^{\mathsf T}Ax\le\lambda_2(A)$. Step 1.1 gives $\lambda_1(A+E)\ge\lambda_1(A)-\epsilon$, hence $\lambda_1(A+E)-\lambda_2(A+E)\ge g-2\epsilon>0$; the perturbed leading eigenvalue is simple. Also $\lambda_1(A+E)-\lambda_2(A)\ge g-\epsilon>0$. [F1, F2, F3, step 1.1, algebra]
+
+3.1 Let $P=I-vv^{\mathsf T}$, the orthogonal projection onto $v^\perp$, and write $\widetilde\lambda_1=\lambda_1(A+E)$. Projecting $(A+E)\widetilde v=\widetilde\lambda_1\widetilde v$ onto $v^\perp$ gives $(\widetilde\lambda_1 I-A|_{v^\perp})P\widetilde v=PE\widetilde v$. In an orthonormal eigenbasis of $A|_{v^\perp}$, every eigenvalue of $\widetilde\lambda_1 I-A|_{v^\perp}$ is at least $\widetilde\lambda_1-\lambda_2(A)\ge g-\epsilon$ by step 2.1. Therefore $(g-\epsilon)\|P\widetilde v\|_2\le\|PE\widetilde v\|_2\le\epsilon$. Indeed, $z=Pz+(I-P)z$ is an orthogonal decomposition, so $\|Pz\|_2\le\|z\|_2$; then [F3] and $\|\widetilde v\|_2=1$ give the final inequality. Since $\|P\widetilde v\|_2^2=1-(v^{\mathsf T}\widetilde v)^2$, division by $g-\epsilon>0$ proves the angle bound. [F1, F3, step 2.1, algebra] ∎

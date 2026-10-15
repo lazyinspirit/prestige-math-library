@@ -1,0 +1,224 @@
+[
+  {
+    "order": 1960,
+    "id": "instrumental-variables-and-late",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "IV and LATE",
+    "companion": "instrumental-variables-and-late-examples",
+    "requires": [
+      "potential-outcomes-and-causal-identification",
+      "statistical-experiments-models-and-identifiability",
+      "probability-spaces-random-variables-and-expectation",
+      "conditional-expectation",
+      "independence-borel-cantelli-and-zero-one-laws"
+    ],
+    "items": [
+      {
+        "id": "def-instrumental-variable-potential-outcomes",
+        "kind": "definition",
+        "title": "Binary instrumental-variable potential-outcome setup",
+        "deps": [
+          "def-random-element-and-real-random-variable",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-independent-random-elements"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $(\\Omega,\\mathcal F,P)$ be a probability space for a target population of\nunits. A real random variable is a measurable map to $\\mathbb R$ with its Borel\nsigma-algebra ([[def-random-element-and-real-random-variable]]); expectations\nare integrals with respect to $P$\n([[def-expectation-of-a-nonnegative-or-integrable-random-variable]]). A unit's\npotential outcomes depend only on that unit's treatment receipt and instrument\nassignment; this is the no-interference and single-treatment-version scope used\nhere.\n\nAn **IV potential-outcome setup** consists of binary random variables\n$Z,A:\\Omega\\to\\{0,1\\}$, an outcome $Y:\\Omega\\to\\mathbb R$, binary potential\ntreatments $A(z):\\Omega\\to\\{0,1\\}$ for $z\\in\\{0,1\\}$, and real potential\noutcomes $Y(a,z):\\Omega\\to\\mathbb R$ for $a,z\\in\\{0,1\\}$. Each potential\noutcome is integrable. The instrument has positive assignment probability at\nboth levels, $0<P(Z=1)<1$.\n\nAll of $Z,A,Y,A(z),Y(a,z)$ are measurable random variables, with the\ndiscrete sigma-algebra on $\\{0,1\\}$ and the Borel sigma-algebra on $\\mathbb R$.\n\n**Consistency** means $A=A(Z)$ and $Y=Y(A,Z)$ almost surely. The **exclusion\nrestriction** means $Y(a,1)=Y(a,0)$ almost surely for each $a$; under this\ncondition write the common value as $Y(a)$. **Joint instrument independence**\nmeans that $Z$ is independent of the random element\n$(A(0),A(1),(Y(a,z))_{a,z\\in\\{0,1\\}})$, using the independence\ndefinition in [[def-independent-random-elements]]. Under exclusion this is\nequivalent to independence of $Z$ and $(A(0),A(1),Y(0),Y(1))$. Thus joint\ninstrument independence is defined even when exclusion fails. **Relevance** means\n$$\\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0]\\ne0.$$\n**Monotonicity** means $A(1)\\ge A(0)$ almost surely. These are distinct model\nconditions: a setup need not satisfy all of them.\n\nFor an integrable real random variable $X$ and a measurable event $B$ with\n$P(B)>0$, define its **event-conditioned mean** by\n$$E[X\\mid B]:=\\frac{E[\\mathbf1_BX]}{P(B)}.$$\nIn particular $E[X\\mid Z=z]$ means $E[X\\mid\\{Z=z\\}]$. This is the\nfinite-atom conditional mean used throughout this pair. The indicator is\n$\\mathbf1_B(\\omega)=1$ on $B$ and $0$ off $B$."
+      },
+      {
+        "id": "def-principal-strata-and-late",
+        "kind": "definition",
+        "title": "Binary-instrument principal strata and LATE",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes"
+        ],
+        "dependency_level": 1,
+        "statement": "In the setup of [[def-instrumental-variable-potential-outcomes]], the four\npossible joint values of $(A(0),A(1))$ define the following **principal\nstrata** (subsets of the target population):\n\n- **Always-takers:** $A(0)=A(1)=1$.\n- **Never-takers:** $A(0)=A(1)=0$.\n- **Compliers:** $A(0)=0$ and $A(1)=1$; write this event as\n  $C=\\{A(1)>A(0)\\}$.\n- **Defiers:** $A(0)=1$ and $A(1)=0$.\n\nUnder exclusion, the common potential outcomes $Y(a)$ are defined as in\n[[def-instrumental-variable-potential-outcomes]]. When $Y(0),Y(1)$ are\nintegrable, the **average treatment effect** is\n$\\operatorname{ATE}:=E[Y(1)-Y(0)]$. If $P(C)>0$, the **local average treatment\neffect** (**LATE**) is\n$$\\tau_C:=E[Y(1)-Y(0)\\mid C].$$\nComplier status depends on the joint pair of potential treatments and is not\ndefined by the single treatment value observed for a unit. Monotonicity excludes\ndefiers; it does not assert that the LATE equals the population ATE."
+      },
+      {
+        "id": "def-wald-ratio",
+        "kind": "definition",
+        "title": "Binary-instrument Wald ratio",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes"
+        ],
+        "dependency_level": 1,
+        "statement": "For a setup of [[def-instrumental-variable-potential-outcomes]] with integrable\nobserved outcome $Y$, define the reduced-form outcome contrast and first-stage\ntreatment contrast by\n$$\\Delta_Y:=E[Y\\mid Z=1]-E[Y\\mid Z=0],\\qquad \\Delta_A:=E[A\\mid Z=1]-E[A\\mid Z=0].$$\nWhenever $\\Delta_A\\ne0$, the **Wald ratio** is the observed-data functional\n$$\\psi_W:=\\frac{\\Delta_Y}{\\Delta_A}.$$\nThis definition alone does not assert that the ratio equals a treatment effect."
+      },
+      {
+        "id": "lem-iv-observed-contrasts-equal-potential-outcome-contrasts",
+        "kind": "lemma",
+        "title": "IV observed contrasts as potential-outcome contrasts",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "lem-measurable-functions-preserve-independence",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_level": 1,
+        "statement": "In an IV setup satisfying consistency, exclusion, and joint instrument\nindependence, let $\\tau=Y(1)-Y(0)$. Then\n$$E[A\\mid Z=1]-E[A\\mid Z=0]=E[A(1)-A(0)]$$\nand\n$$E[Y\\mid Z=1]-E[Y\\mid Z=0]\n=E[(A(1)-A(0))\\tau].$$\nNo monotonicity or relevance condition is needed for these equalities; positivity\nof both instrument atoms and integrability are part of the setup."
+      },
+      {
+        "id": "lem-binary-monotonicity-excludes-defiers",
+        "kind": "lemma",
+        "title": "Binary monotonicity excludes defiers",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes",
+          "def-principal-strata-and-late"
+        ],
+        "dependency_level": 2,
+        "statement": "In the binary setup of [[def-principal-strata-and-late]], assume monotonicity\n$A(1)\\ge A(0)$ almost surely. Then the always-taker, never-taker and complier\nevents are pairwise disjoint and cover $\\Omega$ up to a null set; the defier\nevent has probability zero."
+      },
+      {
+        "id": "lem-iv-first-stage-is-complier-proportion",
+        "kind": "lemma",
+        "title": "The monotone IV first stage is the complier proportion",
+        "deps": [
+          "def-principal-strata-and-late",
+          "def-instrumental-variable-potential-outcomes",
+          "def-independent-random-elements",
+          "def-independent-sigma-algebras-and-events",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "lem-binary-monotonicity-excludes-defiers"
+        ],
+        "dependency_level": 3,
+        "statement": "Under consistency, joint instrument independence and monotonicity in the binary\nIV setup,\n$$E[A\\mid Z=1]-E[A\\mid Z=0]=P(C),$$\nwhere $C=\\{A(1)>A(0)\\}$ is the complier event. If the instrument is relevant,\nthen $P(C)>0$."
+      },
+      {
+        "id": "lem-iv-reduced-form-is-complier-effect",
+        "kind": "lemma",
+        "title": "The monotone IV reduced form is a complier-weighted effect",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes",
+          "def-principal-strata-and-late",
+          "lem-iv-observed-contrasts-equal-potential-outcome-contrasts",
+          "lem-binary-monotonicity-excludes-defiers"
+        ],
+        "dependency_level": 3,
+        "statement": "Under consistency, exclusion, joint instrument independence and monotonicity\nin the binary IV setup, with $\\tau=Y(1)-Y(0)$ and $C=\\{A(1)>A(0)\\}$,\n$$E[Y\\mid Z=1]-E[Y\\mid Z=0]=E[\\mathbf1_C\\tau].$$\nIf $P(C)>0$, the right-hand side is $P(C)E[\\tau\\mid C]$."
+      },
+      {
+        "id": "thm-wald-identifies-a-homogeneous-effect",
+        "kind": "theorem",
+        "title": "A constant additive effect is identified by the Wald ratio",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes",
+          "def-principal-strata-and-late",
+          "def-wald-ratio",
+          "lem-iv-observed-contrasts-equal-potential-outcome-contrasts",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-estimand-on-a-statistical-model",
+          "def-identifiability-of-an-estimand"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $\\Theta$ be a nonempty set of full-data laws satisfying the binary IV\nsetup, consistency, exclusion and joint instrument independence. Each\n$\\theta\\in\\Theta$ induces an observed-data law $P_\\theta$ for $(Z,A,Y)$, and\nlet $\\psi_{\\rm ATE}(\\theta)=E_\\theta[Y(1)-Y(0)]$. Suppose relevance holds and\nthere is a constant $\\tau_0\\in\\mathbb R$ such that\n$Y(1)-Y(0)=\\tau_0$ almost surely under every $\\theta\\in\\Theta$. Then\n$$\\psi_W(P_\\theta)=\\frac{E_\\theta[Y\\mid Z=1]-E_\\theta[Y\\mid Z=0]}{E_\\theta[A\\mid Z=1]-E_\\theta[A\\mid Z=0]}=\\tau_0=\\psi_{\\rm ATE}(\\theta).$$\nConsequently, the ATE is identifiable in the induced observed-data model.\nMonotonicity is not assumed."
+      },
+      {
+        "id": "thm-wald-identifies-the-complier-average-effect",
+        "kind": "theorem",
+        "title": "The Wald ratio identifies the complier average treatment effect",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes",
+          "def-principal-strata-and-late",
+          "def-wald-ratio",
+          "lem-iv-first-stage-is-complier-proportion",
+          "lem-iv-reduced-form-is-complier-effect",
+          "def-estimand-on-a-statistical-model",
+          "def-identifiability-of-an-estimand"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $\\Theta$ be a nonempty class of full-data laws satisfying the binary IV\nsetup, consistency, exclusion, joint instrument independence, relevance and\nmonotonicity. Each $\\theta\\in\\Theta$ induces the observed-data law $P_\\theta$\nof $(Z,A,Y)$. Define the estimand\n$\\psi_C(\\theta)=E_\\theta[Y(1)-Y(0)\\mid C]$, where\n$C=\\{A(1)>A(0)\\}$. Then the Wald ratio is defined and\n$$\\psi_W(P_\\theta)=\\frac{E_\\theta[Y\\mid Z=1]-E_\\theta[Y\\mid Z=0]}{E_\\theta[A\\mid Z=1]-E_\\theta[A\\mid Z=0]}=\\psi_C(\\theta).$$\nThus the LATE is identifiable in the induced observed-data model. This does\nnot assert that the LATE equals the population ATE."
+      }
+    ]
+  },
+  {
+    "order": 1961,
+    "id": "instrumental-variables-and-late-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "IV and LATE — Examples",
+    "companion": "instrumental-variables-and-late",
+    "requires": [
+      "instrumental-variables-and-late"
+    ],
+    "items": [
+      {
+        "id": "ex-weak-first-stage-wald-ratio-sensitivity",
+        "kind": "example",
+        "title": "A small first stage magnifies reduced-form changes",
+        "deps": [
+          "def-wald-ratio"
+        ],
+        "dependency_level": 2,
+        "statement": "Consider two hypothetical pairs of observed mean contrasts. In each, the\nfirst-stage contrast is $\\Delta_A=0.02$; the reduced-form contrasts are\n$\\Delta_Y=0.06$ and $\\Delta_Y=0.07$. The ratio formula gives $3$ and $3.5$,\nrespectively. This is arithmetic illustrating the ratio's sensitivity to a\nsmall denominator; it makes no claim about a sampling distribution, estimator\nvariance, or causal validity."
+      },
+      {
+        "id": "ex-exclusion-violation-distorts-wald-ratio",
+        "kind": "example",
+        "title": "A direct encouragement effect changes the Wald ratio",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes",
+          "def-wald-ratio"
+        ],
+        "dependency_level": 2,
+        "statement": "Let the target population have equally likely types $c,n$ and let $Z$ be an\nindependent fair binary assignment. Set $(A(0),A(1))=(0,1)$ for type $c$ and\n$(0,0)$ for type $n$. Define $Y(a,z)=2a+z$, and observe $A=A(Z)$ and\n$Y=Y(A,Z)$. The exclusion restriction fails because changing $z$ changes $Y$\neven at fixed $a$; the treatment effect at either fixed $z$ is $2$."
+      },
+      {
+        "id": "ex-defiers-break-the-late-ratio",
+        "kind": "example",
+        "title": "Defiers can make the Wald ratio differ from the complier effect",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes",
+          "def-principal-strata-and-late",
+          "def-wald-ratio",
+          "lem-iv-observed-contrasts-equal-potential-outcome-contrasts"
+        ],
+        "dependency_level": 2,
+        "statement": "Take a population with type probabilities $0.2$ always-takers, $0.3$\nnever-takers, $0.4$ compliers, and $0.1$ defiers. Independently randomize\n$Z$ with probabilities $1/2,1/2$. Let $Y(0)=0$ for all types and let\n$Y(1)=0,0,1,3$ for always-takers, never-takers, compliers and defiers,\nrespectively. Set $Y(a,z)=Y(a)$ and observe by consistency. Exclusion and\ninstrument independence hold, but monotonicity fails."
+      },
+      {
+        "id": "cex-valid-iv-does-not-identify-ate-without-further-restrictions",
+        "kind": "counterexample",
+        "title": "Core IV conditions alone do not identify the population ATE",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes",
+          "def-principal-strata-and-late",
+          "def-wald-ratio",
+          "def-estimand-on-a-statistical-model",
+          "def-identifiability-of-an-estimand"
+        ],
+        "dependency_level": 2,
+        "statement": "The binary-IV core conditions—consistency, joint instrument independence,\nexclusion and relevance—by themselves identify the population ATE, without\nmonotonicity or a homogeneity restriction."
+      },
+      {
+        "id": "ex-randomized-encouragement-late-calculation",
+        "kind": "example",
+        "title": "A finite randomized encouragement example",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes",
+          "def-principal-strata-and-late",
+          "def-wald-ratio",
+          "thm-wald-identifies-the-complier-average-effect"
+        ],
+        "dependency_level": 5,
+        "statement": "Take four equally likely unit types: one always-taker with $(A(0),A(1))=(1,1)$\nand $(Y(0),Y(1))=(0,4)$; one never-taker with $(0,0)$ and $(0,4)$; and two\ncompliers with $(0,1)$ and outcome pairs $(0,1)$ and $(0,3)$. Independently\nassign $Z$ with probabilities $1/2,1/2$, impose consistency and exclusion, and\nlet $A=A(Z)$ and $Y=Y(A)$. The model has no defiers, but the effects vary by\ntype."
+      },
+      {
+        "id": "ex-heterogeneous-effects-late-differs-from-ate",
+        "kind": "example",
+        "title": "With heterogeneous effects, LATE can differ from ATE",
+        "deps": [
+          "def-instrumental-variable-potential-outcomes",
+          "def-principal-strata-and-late",
+          "def-wald-ratio",
+          "thm-wald-identifies-the-complier-average-effect"
+        ],
+        "dependency_level": 5,
+        "statement": "Take four equally likely types: an always-taker with treatment effect $4$, a\nnever-taker with effect $4$, and two compliers with effects $1$ and $3$. Let\nall $Y(0)=0$, let $Y(1)$ equal those effects, and let $Z$ be an independent fair\nbinary assignment. The model has consistency, exclusion, instrument\nindependence, relevance and monotonicity."
+      }
+    ]
+  }
+]

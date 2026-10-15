@@ -1,0 +1,82 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-26-1",
+  "inventory": {
+    "pages": [
+      "missing-data-weighting-and-sensitivity",
+      "missing-data-weighting-and-sensitivity-examples"
+    ],
+    "items": [
+      "lem-missing-at-random-integrable-factorization",
+      "alg-response-probability-weighting",
+      "thm-missing-at-random-weighting-identity",
+      "def-pattern-mixture-sensitivity-parameter",
+      "ex-ipw-instability-and-mnar-sensitivity-curve"
+    ],
+    "pairs": [
+      "missing-data-weighting-and-sensitivity"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/lem-missing-at-random-integrable-factorization.md",
+    "items/alg-response-probability-weighting.md",
+    "items/thm-missing-at-random-weighting-identity.md",
+    "items/def-pattern-mixture-sensitivity-parameter.md",
+    "items/ex-ipw-instability-and-mnar-sensitivity-curve.md",
+    "library/statistical-models-and-experiments/missing-data-weighting-and-sensitivity.md",
+    "library/statistical-models-and-experiments/missing-data-weighting-and-sensitivity-examples.md"
+  ],
+  "write_batches": [
+    "26"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-ipw-instability-and-mnar-sensitivity-curve",
+      "path": [
+        "def-pattern-mixture-sensitivity-parameter",
+        "ex-ipw-instability-and-mnar-sensitivity-curve"
+      ],
+      "paths": [
+        [
+          "def-pattern-mixture-sensitivity-parameter",
+          "ex-ipw-instability-and-mnar-sensitivity-curve"
+        ]
+      ]
+    },
+    {
+      "id": "thm-missing-at-random-weighting-identity",
+      "path": [
+        "lem-missing-at-random-integrable-factorization",
+        "thm-missing-at-random-weighting-identity"
+      ],
+      "paths": [
+        [
+          "lem-missing-at-random-integrable-factorization",
+          "thm-missing-at-random-weighting-identity"
+        ],
+        [
+          "alg-response-probability-weighting",
+          "thm-missing-at-random-weighting-identity"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "lem-missing-at-random-integrable-factorization": [
+      "## Statement\n\nAssume AC. Let $(\\Omega,\\mathcal F,P)$ be a probability space, let $\\mathcal G\\subseteq\\mathcal F$ be a sub-sigma-algebra, let $R$ be a random variable taking values in $\\{0,1\\}$, and let $Y$ be a real integrable random variable. If $R$ and $Y$ are conditionally independent given $\\mathcal G$, then for every Borel function $\\varphi:\\mathbb R\\to\\mathbb R$ such that $\\varphi(Y)$ is integrable,\n$$E[R\\varphi(Y)\\mid\\mathcal G]=E[R\\mid\\mathcal G]E[\\varphi(Y)\\mid\\mathcal G]\\quad\\text{almost surely}.$$"
+    ],
+    "alg-response-probability-weighting": [
+      "## Definition\n\nLet $(\\mathcal X,\\mathcal A)$ be a measurable covariate space and let $n\\ge1$. In the one-outcome full/observed-data convention of [[def-full-observed-and-missing-data]], $X_i\\in\\mathcal X$ is observed for every unit, $R_i\\in\\{0,1\\}$ indicates whether the real outcome $Y_i$ is observed, and the encoded input stores $Z_i=Y_i$ when $R_i=1$ and the placeholder $Z_i=0$ when $R_i=0$. The mask $R_i$ distinguishes the placeholder from an observed zero; it is not an imputation or a replacement of the missing full-data value. Let $\\pi:\\mathcal X\\to(0,1]$ be a supplied, known, measurable response-probability function, with $\\pi(x_i)>0$ for every record in the input.\n\n**Input:** $n$, records $(x_i,r_i,z_i)_{i=1}^n$ satisfying the stated conventions, and the function $\\pi$.\n\n**Procedure:** For each record use weight $1/\\pi(x_i)$ when $r_i=1$ and weight zero when $r_i=0$. Return the unnormalized Horvitz–Thompson weighted mean\n$$\\widehat\\mu_{\\mathrm{HT}}=\\frac1n\\sum_{i=1}^n\\frac{z_i}{\\pi(x_i)}.$$\n\nThe procedure takes the true known response probabilities as input. Substituting fitted probabilities is a different procedure; this definition makes no finite-sample stability or estimated-weight inference claim. The weighting convention is the one used for a single response indicator; no joint treatment/response weight is defined here."
+    ],
+    "thm-missing-at-random-weighting-identity": [
+      "## Statement\n\nAssume AC. Let $(\\Omega,\\mathcal F,P)$ be a probability space, $X$ a fully observed random element, $G=\\sigma(X)$, $R\\in\\{0,1\\}$ the response indicator ($R=1$ exactly when the real full-data outcome $Y$ is observed, under the one-outcome convention of [[def-full-observed-and-missing-data]]), and $Y\\in L^1(P)$. Suppose $R$ and $Y$ are conditionally independent given $G$, the MAR condition in the assigned one-outcome, fully observed-$X$ formulation. Let $\\pi$ be a chosen version of $E[R\\mid G]$ and assume $\\pi>0$ almost surely on the target law. Define $RY/\\pi$ to be zero on the null set where $\\pi=0$. Then $RY/\\pi\\in L^1(P)$ and\n$$E\\!\\left[\\frac{RY}{\\pi}\\right]=E[Y].$$\n\nHere $\\pi$ is the true response probability, not a fitted estimate. This is a population identity; by itself it gives no finite-sample stability or estimated-weight inference result."
+    ],
+    "def-pattern-mixture-sensitivity-parameter": [
+      "## Definition\n\nAssume AC. Let $X$ take values in a standard-Borel space $\\mathcal X$, let $Y$ be real-valued, and let $R\\in\\{0,1\\}$ indicate response in the one-outcome full/observed-data setup of [[def-full-observed-and-missing-data]]. Suppose $P(R=1)>0$, $P(R=0)>0$, and the covariate laws overlap in this direction: for every measurable $A\\subseteq\\mathcal X$, $P(X\\in A\\mid R=1)=0$ implies $P(X\\in A\\mid R=0)=0$. Under the respondent law $P(\\cdot\\mid R=1)$, choose a conditional law $K_1(x,\\cdot)$ of $Y$ given $X=x$; standard-Borel disintegration supplies such a probability kernel under AC ([[thm-disintegration-of-a-joint-law-on-standard-borel-spaces]], [[def-conditional-law-given-a-random-element]]). The overlap condition makes the respondent version relevant almost surely under the nonrespondent covariate law.\n\nA **location-shift pattern-mixture sensitivity function** is a measurable $\\Delta:\\mathcal X\\to\\mathbb R$ for which the nonrespondent conditional law is specified by\n$$K_0^\\Delta(x,B)=\\int_{\\mathbb R}\\mathbf1_B(y+\\Delta(x))K_1(x,dy)$$\nfor every Borel set $B\\subseteq\\mathbb R$, on the covariate support of nonrespondents. This is the full conditional distribution restriction $Y\\mid(X=x,R=0)\\stackrel d=Y_1+\\Delta(x)$ for $Y_1\\sim K_1(x,\\cdot)$, not merely a restriction on conditional means. For each $x$, $K_0^\\Delta(x,\\cdot)$ is the pushforward of $K_1(x,\\cdot)$ under the measurable translation $y\\mapsto y+\\Delta(x)$, hence is a probability measure; its evaluations are measurable in $x$ by kernel integration because $(x,y)\\mapsto\\mathbf1_B(y+\\Delta(x))$ is measurable ([[def-measure-kernel-and-probability-kernel]], [[thm-measurability-of-integration-against-a-kernel]]). The relation specifies the missing conditional law while leaving the respondent conditional law fixed. A finite mean target additionally requires integrability under the resulting full-data law; the definition alone does not assert that moment condition.\n\nIn this specified family, $\\Delta=0$ gives equality of the respondent and nonrespondent conditional laws. This does not make equality of conditional means alone equivalent to MAR in a general full-data model; equality of means need not imply equality of distributions. Values where no respondents occur are outside the definition because $K_1$ is unavailable there, and a pattern with no nonrespondents requires no sensitivity function.\n\nThe formal one-outcome MCAR/MAR/MNAR taxonomy for this pair is supplied by [[def-mcar-mar-and-mnar]]. The location-shift relation above is the selected sensitivity model within that taxonomy; it does not claim that all MNAR laws are location shifts."
+    ],
+    "ex-ipw-instability-and-mnar-sensitivity-curve": []
+  }
+}

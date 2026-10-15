@@ -1,0 +1,46 @@
+{
+  "run": "statistical-models-experiments-62",
+  "phase": "initial",
+  "round": 1,
+  "unit": "43",
+  "input_sha256": "77ecbd8d4aa303aaba0147d354b0f891cee61cb250c992ec56d5ce4c07ca22d1",
+  "decisions": [
+    {
+      "id": "alg-durbin-levinson-forecast-recursion",
+      "model": "gpt-6-luna",
+      "context_sha256": "4455ca13da9c26ce7661533e53f9053d8b7412605c56764e90c62eb87e6ac713",
+      "outcome": "false_positive",
+      "reason": "The cited theorem proves executability together with correctness by induction; its wording about outputs does not supply an assumed nonzero denominator. Step 1.1 first obtains nu_0=gamma(0)>0 from Gamma_1. Assuming only the already constructed order k-1 outputs and their proved identities, step 1.2 evaluates the positive quadratic form of Gamma_k at (1,-Gamma_(k-1)^(-1)r), obtaining nu_(k-1)=gamma(0)-r^T Gamma_(k-1)^(-1)r>0 before the order k division. Steps 2.1, 3.1 and 4.1 then verify every row of the new normal equations and the variance update, closing that induction. Thus all divisions through order m are justified without assuming the full recursion runs. The final nu_m can vanish because it is never a denominator. This is precisely the permitted justified_by relationship for an algorithm and its well-definedness theorem, rather than a circular deps edge.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "alg-durbin-levinson-forecast-recursion",
+      "disposition": "unaffected",
+      "post_sha256": "94ee4bf8a4aeb793b0c01ce94a12aece38ccc76ed187b9f18b92d293881c975a",
+      "review_context_sha256": "9ffd33ab39e6d9311d4f46343677a786ea4b23aaae85f9797bb83e18ad4f90c9",
+      "reason": "Reviewed the full procedure, both direct stationarity/ACVF definitions, the full justifying theorem, its normal-equations supplier and covariance identities, the owning manifest and boundary contract, and the page interface. The finite loop uses supplied lags only through gamma(m), with simultaneous old-vector coefficient updates; m=1 has an empty loop. The theorem's constructive induction establishes positivity of exactly nu_0 through nu_(m-1), solves the Toeplitz systems by reversal symmetry, and identifies the returned variances. Positive definiteness through Gamma_m suffices; Gamma_(m+1) need not be positive definite and zero final error is allowed. No Gaussianity or choice assumption is required. Manifest and contract preserve these conditions. The item guard equals the frozen assignment before guard, and no content or metadata repair is needed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://people.stat.sc.edu/wang528/Stat%20720/STAT720%20Notes.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "No item, contract, manifest, page, shared ledger, verification stamp or workflow state was changed. No Statement/Definition changed, so no downstream propagation or maintenance repair is triggered. No confirmed defect or potentially defective published consumer was found; no canonical defect-ledger or published-ledger update is proposed.",
+    "Consulted Wang, STAT 720, Section 5.5.1, Proposition 5.3 and its complete proof, printed pages 73-75 (PDF pages 75-77). That source derives the same recursion under zero mean, positive variance and covariance decay at infinity. Those stronger source conditions were not silently substituted for the item's finite positive-definiteness hypothesis: the local quadratic-form induction establishes the latter version directly, after centering the process.",
+    "Immediately after mathematical review, node tools/step5-workflow.mjs review-contexts --run statistical-models-experiments-62 --items alg-durbin-levinson-forecast-recursion exited 0 and supplied the recorded guard and review-context hashes.",
+    "node tools/rendercheck.mjs items/alg-durbin-levinson-forecast-recursion.md --json exited 0: checked 1, errors [], warnings []. node tools/proof-contract.mjs research/statistical-models-experiments-62-batch-43.proof-contracts.json --items alg-durbin-levinson-forecast-recursion --strict --json exited 0: ok true, one selected and checked item, errors [], warnings []. No changed item paths exist, so the post-edit proof-layout obligation is inapplicable. No judges, gates or additional review cycles were launched.",
+    "All assigned tuples and items are covered; no unresolved mathematical obligations or prerequisite additions remain. Independent rejudgment, collection and certification remain the engine's responsibility."
+  ]
+}

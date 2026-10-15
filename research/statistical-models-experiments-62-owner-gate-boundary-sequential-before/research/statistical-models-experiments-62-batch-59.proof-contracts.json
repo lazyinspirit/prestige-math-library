@@ -1,0 +1,1039 @@
+{
+  "version": 1,
+  "scope": [
+    "alg-sequential-likelihood-ratio-test",
+    "lem-iid-sequential-likelihood-ratio-factorization",
+    "thm-sequential-likelihood-ratio-test-error-bounds",
+    "thm-sequential-likelihood-ratio-test-terminates-under-drift",
+    "ex-bernoulli-sequential-likelihood-ratio-crossings"
+  ],
+  "contracts": {
+    "alg-sequential-likelihood-ratio-test": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition returns no finite decision when no boundary is ever reached, with tau=infinity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition includes the lower event L_t<=beta, so zero-valued representatives trigger that stated boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition has beta<1<1/alpha, so L_t=1 lies strictly between both boundaries and the rule continues."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition assumes equivalent restrictions; if P0=P1 then L_t=1 almost surely and the procedure need not terminate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The input requires alpha,beta strictly between zero and one; endpoint thresholds are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition explicitly assumes AC for choosing the Radon-Nikodym density representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm makes no if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-iid-sequential-likelihood-ratio-factorization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-independent-random-elements",
+          "source_section": "Definition",
+          "quote": "Let $X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$ be random elements on a\ncommon probability space. For each $i$, write\n\n$$\\sigma(X_i):=\\{X_i^{-1}(B):B\\in\\Sigma_i\\}\\subseteq\\mathcal F.$$\n\nThe family $(X_i)_{i\\in I}$ is **independent** when the sigma-algebras\n$(\\sigma(X_i))_{i\\in I}$ are independent in the sense of\n[[def-independent-sigma-algebras-and-events]].\n\nWhen $\\Sigma_i$ is a Borel sigma-algebra, this agrees with the notation\n$\\sigma(X_i)$ from [[def-sigma-algebra-generated-by-a-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rectangle-criterion-for-independent-random-elements",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. Then the following are\nequivalent:\n\n1. the family $(X_i)_{i\\in I}$ is independent;\n2. for every natural number $n\\ge1$, every choice of distinct indices\n   $i_0,\\dots,i_{n-1}\\in I$, and every choice of measurable sets\n   $B_k\\in\\Sigma_{i_k}$,\n   $$\\mathbb P\\bigl(X_{i_0}\\in B_0,\\dots,X_{i_{n-1}}\\in B_{n-1}\\bigr)=\\prod_{k<n}\\mathbb P(X_{i_k}\\in B_k).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-measurable-rectangle",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. A subset of\n$X \\times Y$ is a **measurable rectangle** if it has the form $A \\times B$ with\n$A \\in \\mathcal A$ and $B \\in \\mathcal B$.\n\nThe ambient sigma-algebras matter: the same set may be a measurable rectangle\nfor one pair $(\\mathcal A,\\mathcal B)$ and not for another.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A)$ and $(Y,\\mathcal B)$ be measurable spaces. Their\n**product sigma-algebra** is\n\n$$\\mathcal A \\otimes \\mathcal B := \\sigma(\\{A \\times B : A \\in \\mathcal A,\\ B \\in \\mathcal B\\}),$$\n\nthe sigma-algebra on $X \\times Y$ generated by the measurable rectangles of\n[[def-measurable-rectangle]].\n\nFor the empty family, put $\\prod_{i<0}X_i:=\\{()\\}$ and define its **empty\nproduct sigma-algebra** by\n\n$$\\bigotimes_{i<0}\\mathcal A_i:=\\{\\varnothing,\\{()\\}\\}.$$\n\nFor a nonempty finite family of measurable spaces $(X_i,\\mathcal A_i)$ with\n$i<n$, the **finite product sigma-algebra** is defined recursively by\n\n$$\\bigotimes_{i<1}\\mathcal A_i := \\mathcal A_0,\\qquad \\bigotimes_{i<n+1}\\mathcal A_i := \\left(\\bigotimes_{i<n}\\mathcal A_i\\right)\\otimes\\mathcal A_n.$$\n\nThis recursive definition is the finite base case used later when the library\npasses to countable product constructions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-law-of-a-random-element-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Then\n$\\mathbb P_X$ is a probability measure on $(S,\\Sigma)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-pi-system",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **pi-system on $X$** is a nonempty family\n$\\mathcal P\\subseteq\\mathcal P(X)$ closed under binary intersections: if\n$A,B\\in\\mathcal P$, then $A\\cap B\\in\\mathcal P$.\n\nThe nonempty-family requirement is the convention used here. It does not require\n$X\\in\\mathcal P$ and it does not add an empty-intersection axiom.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$ generating $\\mathcal A$, and let $\\mu,\\nu$ be measures on $(X,\\mathcal A)$ that agree on $\\mathcal P$. Suppose there is an increasing sequence $(P_n)$ in $\\mathcal P$ with\n\n$$X=\\bigcup_nP_n,\\qquad \\mu(P_n)=\\nu(P_n)<+\\infty\\quad(n\\in\\mathbb N).$$\n\nThen $\\mu=\\nu$ on $\\mathcal A$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-likelihood-ratio-as-rn-derivative",
+          "source_section": "Definition",
+          "quote": "Let $P_0$ and $P_1$ be probability measures on the same measurable space.\nAssume AC. Their Lebesgue decomposition relative to $P_0$ is the unique\ndecomposition\n$P_1=P_{1,\\mathrm{ac}}+P_{1,\\mathrm{s}}$ with\n$P_{1,\\mathrm{ac}}\\ll P_0$ and $P_{1,\\mathrm{s}}\\perp P_0$\n([[thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]],\n[[thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures]]).\nBoth components are positive by\n[[lem-positive-lebesgue-components-of-a-positive-measure]], and\n$P_{1,\\mathrm{ac}}$ is finite because their sum has mass one. Define the\n**likelihood-ratio density** of $P_1$ against $P_0$ to be the\n$P_0$-almost-everywhere class\n$$\n\\frac{dP_{1,\\mathrm{ac}}}{dP_0}\n$$\nof [[def-radon-nikodym-derivative]]. Under AC this class has a nonnegative\nmeasurable representative by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nThis is a full density of $P_1$ with respect to $P_0$ only in the\nabsolutely continuous case $P_1\\ll P_0$. If that condition fails, the\nsingular component remains separate. A displayed representative is not a\ncanonical pointwise function: its values are determined only\n$P_0$-almost everywhere.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-likelihood-ratio-change-of-measure",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $P_0,P_1$ be probability measures on one measurable space.\nLet $r$ be a nonnegative measurable representative of the likelihood-ratio\nclass for $P_1$ versus $P_0$. If $P_1\\ll P_0$, then\n$$\nE_{P_0}[g r]=E_{P_1}[g]\n$$\nfor every nonnegative measurable $g$, and also for every real-valued\n$P_1$-integrable measurable $g$. Here $E_{P_i}[h]$ means\n$\\int h\\,dP_i$. Without $P_1\\ll P_0$, this identity need not hold because the\nsingular component may be nonzero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F8] with $g=1$, $\\int\\lambda\\,dQ_0=1$, so $N=\\{\\lambda=\\infty\\}$ is $Q_0$-null and hence $Q_1$-null. Set $\\lambda=0$ on $N$; this preserves its density class and gives a finite nonnegative representative. Now fix $t\\ge1$ and $j\\in\\{0,1\\}$. The vector $Y_t=(X_1,\\ldots,X_t)$ is measurable into the finite product sigma-algebra because preimages of all-coordinate rectangles are finite intersections of coordinate events, and those rectangles generate that sigma-algebra by [F3]. Its law $\\mu_{j,t}$ is a probability measure by [F5]. On every rectangle $R=\\prod_{i=1}^tB_i$, [F1] and [F2] give $\\mu_{j,t}(R)=\\prod_iQ_j(B_i)$. Repeated application of [F4] constructs $Q_j^{\\otimes t}$ with those same rectangle masses. The all-coordinate rectangles form a pi-system by [F3] and [F6], generate the product sigma-algebra, and have a finite exhaustion consisting of the whole space, whose mass is one for both measures. Hence [F6] gives $\\mu_{j,t}=Q_j^{\\otimes t}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $\\Lambda_t(x_1,\\ldots,x_t)=(\\lambda(x_1),\\ldots,\\lambda(x_t))$. Preimages of product rectangles are finite intersections of measurable coordinate preimages, so [F3] makes $\\Lambda_t$ measurable. The finite multiplication map $m_t:\\mathbb R^t\\to\\mathbb R$, $m_t(y)=\\prod_{i=1}^ty_i$, is continuous: the two-coordinate multiplication map is continuous by $|ab-a'b'|\\le |a||b-b'|+|b'||a-a'|$, and finite products follow by induction. Thus [F12] makes $m_t$ Borel and [F13] makes $h_t=m_t\\circ\\Lambda_t$ measurable. By [F9], $\\nu_t(B):=\\int_Bh_t\\,dQ_0^{\\otimes t}$ is a measure. For each rectangle $R=\\prod_iB_i$, repeated Tonelli integration, justified by induction on the finite number $t$ of factors, gives $\\nu_t(R)=\\prod_{i=1}^t\\int_{B_i}\\lambda\\,dQ_0=\\prod_{i=1}^tQ_1(B_i)$, where each factor uses [F8]. This is the rectangle formula for $Q_1^{\\otimes t}$ by [F4]. The two measures agree on the generating pi-system and both have total mass one, so [F6] gives $\\nu_t=Q_1^{\\otimes t}$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F12",
+            "F13",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $A\\in\\mathcal F_t=\\sigma(Y_t)$, then $A=Y_t^{-1}(B)$ for some product-measurable $B$: the family of such preimages is a sigma-algebra and is exactly the sigma-algebra generated by $Y_t$. The definition of law [F5] gives the integral change-of-variables identity first for indicators and nonnegative simple functions; increasing simple approximation and [F11] extend it to $h_t\\mathbf1_B$. Thus, using steps 1.1 and 2.1, $P_1(A)=Q_1^{\\otimes t}(B)=\\int_Bh_t\\,dQ_0^{\\otimes t}=\\int_Ah_t(Y_t)\\,dP_0$. This is the Radon–Nikodym characterization of $L_t=h_t(Y_t)$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "F11",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires t>=1 and makes no assertion for the empty product at t=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 permits lambda=0 and uses nonnegative product integrals, so a zero density coordinate is covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If Q1=Q0 then lambda=1 almost surely; step 2.1 gives the same product law on both sides."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No topological, variance, or nondegeneracy condition is assumed for the measurable observation space."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The product-density statement has no numeric boundary parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Assumption A1 and step 2.1 use AC for the supplied Radon-Nikodym density definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a density identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a density identity, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-sequential-likelihood-ratio-test-error-bounds": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-sequential-likelihood-ratio-test",
+          "source_section": "Definition",
+          "quote": "Assume the [[def-axiom-of-choice|Axiom of Choice]], which states that every family of nonempty sets has a choice function. Let $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge0})$ be a discrete filtration on a common measurable space and let $P_0,P_1$ be probability measures on it. Assume that for every $t\\ge0$, the restrictions $P_0|_{\\mathcal F_t}$ and $P_1|_{\\mathcal F_t}$ are mutually absolutely continuous: each restriction assigns measure zero to exactly the same $\\mathcal F_t$ events as the other. For each $t$, choose a nonnegative $\\mathcal F_t$-measurable representative $L_t$ of the likelihood-ratio density $d(P_1|_{\\mathcal F_t})/d(P_0|_{\\mathcal F_t})$ [[def-likelihood-ratio-as-rn-derivative]]. The filtration and stopping-time conventions are those of [[def-filtration-and-filtered-probability-space]] and [[def-discrete-stopping-time]].\n\nInput thresholds $\\alpha,\\beta\\in(0,1)$. At times $t=1,2,\\ldots$, compute $L_t$ and apply these instructions:\n\n1. If $L_t\\ge1/\\alpha$, stop and decide $H_1$.\n2. Otherwise, if $L_t\\le\\beta$, stop and decide $H_0$.\n3. Otherwise continue to the next observation.\n\nThe two boundaries are disjoint because $\\beta<1<1/\\alpha$. The output time is\n$$\\tau=\\inf\\{t\\ge1:L_t\\ge1/\\alpha\\text{ or }L_t\\le\\beta\\},\\qquad \\inf\\varnothing=\\infty.$$\nIf $\\tau=\\infty$, the procedure has no finite terminal decision. It does not itself assert that a crossing occurs.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-likelihood-ratio-as-rn-derivative",
+          "source_section": "Definition",
+          "quote": "Let $P_0$ and $P_1$ be probability measures on the same measurable space.\nAssume AC. Their Lebesgue decomposition relative to $P_0$ is the unique\ndecomposition\n$P_1=P_{1,\\mathrm{ac}}+P_{1,\\mathrm{s}}$ with\n$P_{1,\\mathrm{ac}}\\ll P_0$ and $P_{1,\\mathrm{s}}\\perp P_0$\n([[thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]],\n[[thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures]]).\nBoth components are positive by\n[[lem-positive-lebesgue-components-of-a-positive-measure]], and\n$P_{1,\\mathrm{ac}}$ is finite because their sum has mass one. Define the\n**likelihood-ratio density** of $P_1$ against $P_0$ to be the\n$P_0$-almost-everywhere class\n$$\n\\frac{dP_{1,\\mathrm{ac}}}{dP_0}\n$$\nof [[def-radon-nikodym-derivative]]. Under AC this class has a nonnegative\nmeasurable representative by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nThis is a full density of $P_1$ with respect to $P_0$ only in the\nabsolutely continuous case $P_1\\ll P_0$. If that condition fails, the\nsingular component remains separate. A displayed representative is not a\ncanonical pointwise function: its values are determined only\n$P_0$-almost everywhere.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-likelihood-ratio-change-of-measure",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $P_0,P_1$ be probability measures on one measurable space.\nLet $r$ be a nonnegative measurable representative of the likelihood-ratio\nclass for $P_1$ versus $P_0$. If $P_1\\ll P_0$, then\n$$\nE_{P_0}[g r]=E_{P_1}[g]\n$$\nfor every nonnegative measurable $g$, and also for every real-valued\n$P_1$-integrable measurable $g$. Here $E_{P_i}[h]$ means\n$\\int h\\,dP_i$. Without $P_1\\ll P_0$, this identity need not hold because the\nsingular component may be nonzero.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-filtration-and-filtered-probability-space",
+          "source_section": "Definition",
+          "quote": "A **discrete filtered probability space** is $(\\Omega,\\mathcal F,(\\mathcal F_n)_{n\\in\\mathbb N_0},P)$, where $(\\Omega,\\mathcal F,P)$ is a probability space [[def-probability-measure]], each $\\mathcal F_n$ is a sigma-algebra on $\\Omega$ [[def-sigma-algebra]], and $\\mathcal F_n\\subseteq\\mathcal F_{n+1}\\subseteq\\mathcal F$. The sequence $(\\mathcal F_n)$ is a **filtration**. Time starts at zero. Neither completeness nor triviality of $\\mathcal F_0$ is required.\n\nRestriction of $P$ to $\\mathcal F_n$ has total mass one and is countably additive: a disjoint sequence in $\\mathcal F_n$ is also such a sequence in $\\mathcal F$, with the same union and the same values of $P$. Thus each restriction is a probability measure. This specifies a structure and uses no choice principle. Real-valued processes will be the default.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-adapted-and-integrable-stochastic-process",
+          "source_section": "Definition",
+          "quote": "On a filtered probability space [[def-filtration-and-filtered-probability-space]], a **real stochastic process** is a sequence $(X_n)_{n\\in\\mathbb N_0}$ of real random variables [[def-random-element-and-real-random-variable]] on the same space. It is **adapted** when $X_n^{-1}(B)\\in\\mathcal F_n$ for every $n$ and every real Borel set $B$. It is **integrable** when $E|X_n|<\\infty$ for every $n$, using [[def-expectation-of-a-nonnegative-or-integrable-random-variable]].\n\nAn integrable adapted process satisfies both conditions at each fixed time. Integrability here does not mean $\\sup_nE|X_n|<\\infty$: the deterministic process $X_n=n$ has $E|X_n|=n<\\infty$ at every time but unbounded supremum. Measurability and finiteness of each integral are separate requirements. No versions, limits or choices are selected.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-conditional-expectation-given-a-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,P)$ be a probability space, $\\mathcal G\\subseteq\\mathcal F$ a sub-sigma-algebra, and $X:\\Omega\\to\\mathbb R$ integrable. A **conditional-expectation version of $X$ given $\\mathcal G$** is a real, $\\mathcal G$-measurable, integrable function $Y$ such that $\\int_A Y\\,dP=\\int_A X\\,dP$ for every $A\\in\\mathcal G$. No completeness of $\\mathcal G$ is assumed.\n\nExpectation means the integral of [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]. Integrable representatives use [[def-l-one-of-a-measure]]; quotient notation is introduced after uniqueness.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-conditional-expectation-exists-by-radon-nikodym",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every real integrable $X$ on $(\\Omega,\\mathcal F,P)$ and every sub-sigma-algebra $\\mathcal G$, a conditional-expectation version of $X$ given $\\mathcal G$ exists.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-conditional-expectation-is-unique-almost-surely",
+          "source_section": "Statement",
+          "quote": "If $Y,Z$ are conditional-expectation versions of the same real integrable $X$ given $\\mathcal G$, then $Y=Z$ almost surely.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-conditional-expectation-as-an-ae-class",
+          "source_section": "Definition",
+          "quote": "Assume AC for the supplied existence theorem. Write $E[X\\mid\\mathcal G]$ for the unique class in $L^1(\\Omega,\\mathcal G,P|_{\\mathcal G})$ consisting of conditional-expectation versions of $X$. A chosen real $\\mathcal G$-measurable representative is a **version**. Equalities and inequalities involving these classes mean almost-sure equalities and inequalities.\n\nExistence is [[thm-conditional-expectation-exists-by-radon-nikodym]] and uniqueness is [[lem-conditional-expectation-is-unique-almost-surely]], applied to [[def-conditional-expectation-given-a-sigma-algebra]]. The quotient is [[def-l-p-space-as-a-quotient-by-null-functions]]. If $X=X^{\\ast}$ almost surely, [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]] gives identical event integrals, so the output class is independent of the input representative. The [[def-axiom-of-choice]] assumption is inherited from RN existence.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-martingale-submartingale-and-supermartingale",
+          "source_section": "Definition",
+          "quote": "Assume AC [[def-axiom-of-choice]]. An integrable adapted real process $X$ [[def-adapted-and-integrable-stochastic-process]] is a **martingale**, **submartingale**, or **supermartingale** when, respectively, for every $n\\ge0$,\n$$E[X_{n+1}\\mid\\mathcal F_n]=X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\ge X_n,\\qquad E[X_{n+1}\\mid\\mathcal F_n]\\le X_n\\quad\\text{almost surely}.$$\nThese are three separate conditions, with the convention that a submartingale has conditional future mean at least its present value. The conditional expectations are the almost-sure classes of [[def-conditional-expectation-as-an-ae-class]]; that supplier inherits AC from its Radon–Nikodym existence proof. The definition itself selects no representative and assumes no completed filtration.\n\nThe condition is imposed at each adjacent pair of times. An all-pairs formulation requires a proof. No boundedness or independence is part of this definition, and no trivial or deterministic initial value is imposed.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-nonnegative-test-supermartingale",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice (AC) [[def-axiom-of-choice]]. Let\n$(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\in\\mathbb N_0})$ be a discrete filtration\non a measurable space, and let $\\mathcal P_0$ be a family of probability laws\non $(\\Omega,\\mathcal F)$. A real-valued process $E=(E_t)_{t\\in\\mathbb N_0}$ is\na **nonnegative test supermartingale for $\\mathcal P_0$** if, for every\n$P\\in\\mathcal P_0$, it is adapted and integrable under $P$\n[[def-filtration-and-filtered-probability-space]]\n[[def-martingale-submartingale-and-supermartingale]], satisfies\n$P(E_t\\ge0)=1$ for every $t$, and has $\\mathbb E_P E_0\\le1$.\n\nThe same process must satisfy the supermartingale condition under every law\nin the null family; that is what makes the definition uniform over a composite\nnull. The initial value may be random and need not be bounded by one\npointwise. Time starts at zero.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-villes-inequality",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $\\mathcal P_0$ be a family of probability laws on a common\ndiscrete filtered measurable space and let $E=(E_t)_{t\\ge0}$ be a nonnegative\ntest supermartingale for $\\mathcal P_0$\n[[def-nonnegative-test-supermartingale]]. For every $P\\in\\mathcal P_0$ and\nevery $\\alpha\\in(0,1)$,\n$$P\\!\\left(\\sup_{t\\ge0}E_t\\ge\\frac1\\alpha\\right)\\le\\alpha.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-discrete-stopping-time",
+          "source_section": "Definition",
+          "quote": "For a filtration $(\\mathcal F_n)_{n\\ge0}$, a map\n$$\\tau:\\Omega\\longrightarrow\\mathbb N_0\\cup\\{\\infty\\}$$\nis a **stopping time** if $\\{\\tau\\le n\\}\\in\\mathcal F_n$ for every $n\\ge0$. It is **bounded** if some deterministic $N$ satisfies $\\tau\\le N$ almost surely, and **finite** if $P(\\tau<\\infty)=1$. These notions are distinct: finite does not mean bounded.\n\nThe event condition is literal, not merely modulo null sets; no completion of the filtration is assumed. Measurability as an extended-integer-valued random variable follows from the equivalent event tests below.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $L_t$ is nonnegative by [F3] and $\\mathcal F_t$-measurable by [F2] and [F5]. Applying [F4] with $g=1$ gives $\\mathbb E_{P_0}L_t=P_1(\\Omega)=1$ for every $t$, so each $L_t$ is integrable.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $n\\ge1$, $\\{\\tau\\le n\\}=\\bigcup_{t=1}^n(\\{L_t\\ge1/\\alpha\\}\\cup\\{L_t\\le\\beta\\})\\in\\mathcal F_n$, because each $L_t$ is adapted and the filtration is increasing; $\\{\\tau\\le0\\}=\\varnothing$. Hence [F12] makes $\\tau$ a stopping time.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "F12"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $t\\ge1$ and $A\\in\\mathcal F_{t-1}$. Since $A\\in\\mathcal F_t$, [F4] at times $t$ and $t-1$ gives $\\mathbb E_{P_0}[\\mathbf1_A L_t]=P_1(A)=\\mathbb E_{P_0}[\\mathbf1_A L_{t-1}]$. By [F7], choose a version $Y_t$ of $\\mathbb E_{P_0}[L_t\\mid\\mathcal F_{t-1}]$. Its defining event-integral identities [F6] show that $Y_t$ and $L_{t-1}$ have the same conditional-expectation integrals; [F8] makes them equal almost surely. Thus $L$ is a nonnegative $P_0$-martingale by [F9].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For each $t$, $L_t<\\infty$ $P_0$-almost surely because it is integrable, hence also $P_1$-almost surely by equivalence of the restrictions. Moreover, [F4] gives $P_1(L_t=0)=\\int_{\\{L_t=0\\}}L_t\\,dP_0=0$, so equivalence gives $P_0(L_t=0)=0$. Define $R_t=1/L_t$ where $0<L_t<\\infty$ and set it to $0$ on the common null complement. It is $\\mathcal F_t$-measurable by [F2] and [F5]. Applying [F4] with $g=\\mathbf1_A R_t$ for $A\\in\\mathcal F_t$ gives $\\mathbb E_{P_1}[\\mathbf1_A R_t]=P_0(A)$, so $R_t$ is integrable with mean one.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $t\\ge1$ and $A\\in\\mathcal F_{t-1}$, step 2.2 at times $t$ and $t-1$ gives $\\mathbb E_{P_1}[\\mathbf1_A R_t]=P_0(A)=\\mathbb E_{P_1}[\\mathbf1_A R_{t-1}]$. Existence [F7], the defining conditional-expectation identity [F6], and uniqueness [F8] identify $\\mathbb E_{P_1}[R_t\\mid\\mathcal F_{t-1}]=R_{t-1}$ almost surely. Thus $R$ is a nonnegative $P_1$-martingale by [F9].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By steps 1.1 and 2.1, $L$ is a nonnegative martingale under $P_0$ with $\\mathbb E_{P_0}L_0=1$; by [F10] it is a nonnegative test supermartingale for the singleton null $\\{P_0\\}$. By steps 2.2 and 3.1, $R$ is a nonnegative test supermartingale for $\\{P_1\\}$. Applying [F11] gives $P_0(\\sup_{t\\ge0}L_t\\ge1/\\alpha)\\le\\alpha$ and $P_1(\\sup_{t\\ge0}R_t\\ge1/\\beta)\\le\\beta$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F10",
+            "F11",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The event of a terminal $H_1$ decision is contained in $\\{\\sup_{t\\ge0}L_t\\ge1/\\alpha\\}$. Since $R_t=1/L_t$ almost surely under $P_1$, the event of a terminal $H_0$ decision is contained in $\\{\\sup_{t\\ge0}R_t\\ge1/\\beta\\}$. The two bounds in step 4.1 prove both terminal-error inequalities.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 covers an empty terminal-error event by inclusion in the all-time crossing event."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 defines the reciprocal off a common null set; the lower boundary L_t<=beta still includes zero representatives."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 1.2 have beta<1<1/alpha; L_t=1 meets neither boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 5.1 still give zero error when P0=P1 and L_t=1 almost surely; no termination is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement restricts alpha,beta to (0,1), so endpoint tests are outside scope."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Assumption A1 and steps 2.1, 2.2, and 4.1 retain the AC branch for densities, conditional expectations, and Ville."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states inequalities, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states inequalities, not an if-and-only-if claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-sequential-likelihood-ratio-test-terminates-under-drift": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-measurable-functions-preserve-independence",
+          "source_section": "Statement",
+          "quote": "Let $(X_i)_{i\\in I}$ be an independent family of random elements\n$X_i:(\\Omega,\\mathcal F,\\mathbb P)\\to(S_i,\\Sigma_i)$. For each $i$, let\n$g_i:(S_i,\\Sigma_i)\\to(T_i,\\mathcal T_i)$ be measurable. Then the family\n$(g_i\\circ X_i)_{i\\in I}$ is independent.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-kolmogorov-iid-l1-strong-law",
+          "source_section": "Statement",
+          "quote": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-law-or-distribution-of-a-random-element",
+          "source_section": "Definition",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element. Its\n**law** or **distribution** is the set function\n$$\\mathbb P_X:\\Sigma\\to[0,+\\infty],\\qquad \\mathbb P_X(B):=\\mathbb P(X^{-1}(B)).$$\n\nThus the law of $X$ records the probability of each measurable target set by\npulling it back to an event in the original probability space.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-likelihood-ratio-as-rn-derivative",
+          "source_section": "Definition",
+          "quote": "Let $P_0$ and $P_1$ be probability measures on the same measurable space.\nAssume AC. Their Lebesgue decomposition relative to $P_0$ is the unique\ndecomposition\n$P_1=P_{1,\\mathrm{ac}}+P_{1,\\mathrm{s}}$ with\n$P_{1,\\mathrm{ac}}\\ll P_0$ and $P_{1,\\mathrm{s}}\\perp P_0$\n([[thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]],\n[[thm-lebesgue-decomposition-is-unique-for-sigma-finite-signed-measures]]).\nBoth components are positive by\n[[lem-positive-lebesgue-components-of-a-positive-measure]], and\n$P_{1,\\mathrm{ac}}$ is finite because their sum has mass one. Define the\n**likelihood-ratio density** of $P_1$ against $P_0$ to be the\n$P_0$-almost-everywhere class\n$$\n\\frac{dP_{1,\\mathrm{ac}}}{dP_0}\n$$\nof [[def-radon-nikodym-derivative]]. Under AC this class has a nonnegative\nmeasurable representative by\n[[lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative]].\n\nThis is a full density of $P_1$ with respect to $P_0$ only in the\nabsolutely continuous case $P_1\\ll P_0$. If that condition fails, the\nsingular component remains separate. A displayed representative is not a\ncanonical pointwise function: its values are determined only\n$P_0$-almost everywhere.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-likelihood-ratio-change-of-measure",
+          "source_section": "Statement",
+          "quote": "Assume AC and let $P_0,P_1$ be probability measures on one measurable space.\nLet $r$ be a nonnegative measurable representative of the likelihood-ratio\nclass for $P_1$ versus $P_0$. If $P_1\\ll P_0$, then\n$$\nE_{P_0}[g r]=E_{P_1}[g]\n$$\nfor every nonnegative measurable $g$, and also for every real-valued\n$P_1$-integrable measurable $g$. Here $E_{P_i}[h]$ means\n$\\int h\\,dP_i$. Without $P_1\\ll P_0$, this identity need not hold because the\nsingular component may be nonzero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-iid-sequential-likelihood-ratio-factorization",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $P_0,P_1$ be probability measures on a common measurable space and let $(X_i)_{i\\ge1}$ be random elements of $(S,\\Sigma)$ that are IID under each $P_j$, with one-coordinate law $Q_j$. Suppose $Q_1\\ll Q_0$, let $\\lambda=dQ_1/dQ_0$ be a nonnegative representative, and put $\\mathcal F_t=\\sigma(X_1,\\ldots,X_t)$. For every $t\\ge1$,\n$$L_t:=\\prod_{i=1}^t\\lambda(X_i)$$\nis a version of $d(P_1|_{\\mathcal F_t})/d(P_0|_{\\mathcal F_t})$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "alg-sequential-likelihood-ratio-test",
+          "source_section": "Definition",
+          "quote": "Assume the [[def-axiom-of-choice|Axiom of Choice]], which states that every family of nonempty sets has a choice function. Let $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge0})$ be a discrete filtration on a common measurable space and let $P_0,P_1$ be probability measures on it. Assume that for every $t\\ge0$, the restrictions $P_0|_{\\mathcal F_t}$ and $P_1|_{\\mathcal F_t}$ are mutually absolutely continuous: each restriction assigns measure zero to exactly the same $\\mathcal F_t$ events as the other. For each $t$, choose a nonnegative $\\mathcal F_t$-measurable representative $L_t$ of the likelihood-ratio density $d(P_1|_{\\mathcal F_t})/d(P_0|_{\\mathcal F_t})$ [[def-likelihood-ratio-as-rn-derivative]]. The filtration and stopping-time conventions are those of [[def-filtration-and-filtered-probability-space]] and [[def-discrete-stopping-time]].\n\nInput thresholds $\\alpha,\\beta\\in(0,1)$. At times $t=1,2,\\ldots$, compute $L_t$ and apply these instructions:\n\n1. If $L_t\\ge1/\\alpha$, stop and decide $H_1$.\n2. Otherwise, if $L_t\\le\\beta$, stop and decide $H_0$.\n3. Otherwise continue to the next observation.\n\nThe two boundaries are disjoint because $\\beta<1<1/\\alpha$. The output time is\n$$\\tau=\\inf\\{t\\ge1:L_t\\ge1/\\alpha\\text{ or }L_t\\le\\beta\\},\\qquad \\inf\\varnothing=\\infty.$$\nIf $\\tau=\\infty$, the procedure has no finite terminal decision. It does not itself assert that a crossing occurs.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-composition-with-borel-functions-preserves-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$, $(Y,\\mathcal{B})$, and $(Z,\\mathcal{C})$ be measurable\nspaces. If $f : (X,\\mathcal{A}) \\to (Y,\\mathcal{B})$ is measurable and\n$g : (Y,\\mathcal{B}) \\to (Z,\\mathcal{C})$ is measurable, then\n$g \\circ f : (X,\\mathcal{A}) \\to (Z,\\mathcal{C})$ is measurable.\n\nIn particular, if $f$ is measurable and $g$ is a Borel measurable function on\nits codomain, then $g \\circ f$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-change-of-variables-for-expectation",
+          "source_section": "Statement",
+          "quote": "Let $X:(\\Omega,\\mathcal F,\\mathbb P)\\to(S,\\Sigma)$ be a random element, let\n$\\mathbb P_X$ be its law, and let $g:(S,\\Sigma)\\to\\mathbb R$ or\n$g:(S,\\Sigma)\\to\\mathbb C$ be measurable.\n\n1. If $g\\ge0$, then\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$\n2. If $g(X)$ is integrable, then $g$ is integrable with respect to\n   $\\mathbb P_X$ and the same formula holds:\n   $$\\mathbb E[g(X)]=\\int_S g\\,d\\mathbb P_X.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $r$ be any nonnegative RN representative of $Q_1$ with respect to $Q_0$. Since $\\int r\\,dQ_0=1$, the set where $r=\\infty$ is $Q_0$-null and hence $Q_1$-null. On $A=\\{r=0\\}$ the change-of-measure identity [F5] gives $Q_1(A)=\\int_A r\\,dQ_0=0$; equivalence $Q_0\\ll Q_1$ then makes $A$ $Q_0$-null too. Replacing $r$ by $1$ on these common null sets yields a finite strictly positive measurable representative $\\lambda$ of the same density class. Its range lies in $(0,\\infty)$, so it is measurable into that subspace with its Borel sigma-algebra $\\{B\\cap(0,\\infty):B\\in\\mathcal B(\\mathbb R)\\}$. Although the logarithm is continuous on this subspace, [F8] only covers Euclidean domains. For every open $U\\subseteq\\mathbb R$, $\\log^{-1}(U)$ is open in $(0,\\infty)$ and therefore Borel there; since open sets generate $\\mathcal B(\\mathbb R)$, $\\log:(0,\\infty)\\to\\mathbb R$ is Borel measurable. Thus [F9] makes $Z=\\log\\circ\\lambda$ real-valued and measurable.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $j$, the variables $Z_i:=Z(X_i)$ are IID under $P_j$: measurability gives the same pushforward law for all coordinates, and [F2] preserves their independence. The change-of-variables identity [F10] gives $\\mathbb E_{P_j}|Z_i|=\\mathbb E_{Q_j}|Z|<\\infty$ and $\\mathbb E_{P_j}Z_i=\\mu_j:=\\mathbb E_{Q_j}Z$. Thus [F3] gives $t^{-1}\\sum_{i=1}^t Z_i\\to\\mu_j$ almost surely under $P_j$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F10",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $G_t=\\prod_{i=1}^t\\lambda(X_i)$. By [F6], $G_t$ is a version of the finite-time density, so the algorithm's chosen representative $L_t$ equals $G_t$ $P_0$-almost surely by uniqueness of Radon–Nikodym derivatives. The representative $\\lambda$ is finite and strictly positive $Q_0$-almost surely; equivalence of $Q_0,Q_1$ gives the same under $Q_1$. Thus $G_t$ is finite and strictly positive $P_0$-almost surely, and for $A\\in\\mathcal F_t$, $P_1(A)=\\int_A G_t\\,dP_0$ implies $P_1(A)=0$ exactly when $P_0(A)=0$. The finite-time restrictions are therefore equivalent, so $L_t=G_t$ also $P_1$-almost surely. Intersecting these probability-one events over countably many $t$ gives one event under each law on which the equalities hold for every $t$. Positivity of $\\lambda$ there yields $\\log L_t=\\sum_{i=1}^tZ_i$.",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under $P_0$, steps 1.2 and 2.1 give $\\log L_t/t\\to\\mu_0<0$, hence $\\log L_t\\to-\\infty$. Since $\\log\\beta$ is finite, some finite $t$ satisfies $L_t\\le\\beta$, so the lower boundary has been crossed and the algorithm has $\\tau<\\infty$.",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Under $P_1$, steps 1.2 and 2.1 give $\\log L_t/t\\to\\mu_1>0$, hence $\\log L_t\\to+\\infty$. Since $\\log(1/\\alpha)$ is finite, some finite $t$ satisfies $L_t\\ge1/\\alpha$, so the upper boundary has been crossed and $\\tau<\\infty$. This proves almost-sure termination under both laws, without a claim about $\\mathbb E_{P_j}\\tau$.",
+          "step": "4.1",
+          "inputs": [
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The observation sequence is indexed by positive integers and is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 modifies a common null set to obtain a finite strictly positive likelihood representative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 excludes lambda=1 almost surely because that would give both drift means zero, contrary to the strict signs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2 exclude identical one-observation laws, whose log-likelihood drift would be zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The algorithm thresholds are restricted to alpha,beta in (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Assumption A1 and step 1.1 use AC for the Radon-Nikodym density representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient drift condition, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a sufficient drift condition, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-bernoulli-sequential-likelihood-ratio-crossings": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-sequential-likelihood-ratio-test",
+          "source_section": "Definition",
+          "quote": "Assume the [[def-axiom-of-choice|Axiom of Choice]], which states that every family of nonempty sets has a choice function. Let $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge0})$ be a discrete filtration on a common measurable space and let $P_0,P_1$ be probability measures on it. Assume that for every $t\\ge0$, the restrictions $P_0|_{\\mathcal F_t}$ and $P_1|_{\\mathcal F_t}$ are mutually absolutely continuous: each restriction assigns measure zero to exactly the same $\\mathcal F_t$ events as the other. For each $t$, choose a nonnegative $\\mathcal F_t$-measurable representative $L_t$ of the likelihood-ratio density $d(P_1|_{\\mathcal F_t})/d(P_0|_{\\mathcal F_t})$ [[def-likelihood-ratio-as-rn-derivative]]. The filtration and stopping-time conventions are those of [[def-filtration-and-filtered-probability-space]] and [[def-discrete-stopping-time]].\n\nInput thresholds $\\alpha,\\beta\\in(0,1)$. At times $t=1,2,\\ldots$, compute $L_t$ and apply these instructions:\n\n1. If $L_t\\ge1/\\alpha$, stop and decide $H_1$.\n2. Otherwise, if $L_t\\le\\beta$, stop and decide $H_0$.\n3. Otherwise continue to the next observation.\n\nThe two boundaries are disjoint because $\\beta<1<1/\\alpha$. The output time is\n$$\\tau=\\inf\\{t\\ge1:L_t\\ge1/\\alpha\\text{ or }L_t\\le\\beta\\},\\qquad \\inf\\varnothing=\\infty.$$\nIf $\\tau=\\infty$, the procedure has no finite terminal decision. It does not itself assert that a crossing occurs.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-iid-sequential-likelihood-ratio-factorization",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $P_0,P_1$ be probability measures on a common measurable space and let $(X_i)_{i\\ge1}$ be random elements of $(S,\\Sigma)$ that are IID under each $P_j$, with one-coordinate law $Q_j$. Suppose $Q_1\\ll Q_0$, let $\\lambda=dQ_1/dQ_0$ be a nonnegative representative, and put $\\mathcal F_t=\\sigma(X_1,\\ldots,X_t)$. For every $t\\ge1$,\n$$L_t:=\\prod_{i=1}^t\\lambda(X_i)$$\nis a version of $d(P_1|_{\\mathcal F_t})/d(P_0|_{\\mathcal F_t})$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sequential-likelihood-ratio-test-error-bounds",
+          "source_section": "Statement",
+          "quote": "Assume AC. Under the hypotheses of [[alg-sequential-likelihood-ratio-test]], the boundary rule $\\tau$ is a stopping time and, for the specified decisions,\n$$P_0(\\tau<\\infty,\\ L_\\tau\\ge1/\\alpha)\\le\\alpha,\\qquad P_1(\\tau<\\infty,\\ L_\\tau\\le\\beta)\\le\\beta.$$\nThese bounds concern terminal errors and do not assume that $\\tau$ is finite almost surely.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sequential-likelihood-ratio-test-terminates-under-drift",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X_i)_{i\\ge1}$ be IID under each of two probability measures $P_j$, with one-coordinate law $Q_j$, and suppose $Q_0$ and $Q_1$ are equivalent. Choose a finite strictly positive representative $\\lambda=dQ_1/dQ_0$ and set $Z=\\log\\lambda$. If\n$$\\mathbb E_{Q_0}|Z|,\\mathbb E_{Q_1}|Z|<\\infty,\\qquad \\mathbb E_{Q_0}Z<0<\\mathbb E_{Q_1}Z,$$\nthen for every $\\alpha,\\beta\\in(0,1)$ the algorithm [[alg-sequential-likelihood-ratio-test]], with $\\mathcal F_0=\\{\\varnothing,\\Omega\\}$ and $\\mathcal F_t=\\sigma(X_1,\\ldots,X_t)$, satisfies\n$$P_0(\\tau<\\infty)=P_1(\\tau<\\infty)=1.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The one-observation likelihood ratio is $\\lambda(1)=(3/4)/(1/4)=3$ and $\\lambda(0)=(1/4)/(3/4)=1/3$. Both laws give positive mass to both outcomes, so they are equivalent.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $t\\ge1$, set $G_t=\\prod_{i=1}^t\\lambda(X_i)$ and choose the algorithm's representatives to be $L_t=G_t$, with $L_0=1$. By [F3], $G_t$ is a version of the finite-time density. It is finite and strictly positive because each factor is either $3$ or $1/3$, so for every $A\\in\\mathcal F_t$, $P_1(A)=\\int_A G_t\\,dP_0$ implies $P_1(A)=0$ exactly when $P_0(A)=0$. At $t=0$, both restrictions to the trivial sigma-algebra assign zero to $\\varnothing$ and one to $\\Omega$, so they are equivalent and $L_0=1$ is their density. The algorithm's finite-time equivalence hypotheses therefore hold for every $t\\ge0$. Also, each nonempty atom of $\\mathcal F_t$ is a fiber for a binary word and has positive $P_0$-probability by [F1]; consequently any other $\\mathcal F_t$-measurable density representative agrees with $G_t$ everywhere, since it agrees $P_0$-almost surely.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The log increment is $Z(1)=\\log3$ and $Z(0)=-\\log3$. Hence $\\mathbb E_{Q_0}|Z|=\\mathbb E_{Q_1}|Z|=\\log3<\\infty$, $\\mathbb E_{Q_0}Z=-(1/2)\\log3<0$, and $\\mathbb E_{Q_1}Z=(1/2)\\log3>0$. The hypotheses of [F5] hold by steps 1.1 and 1.2, so its general termination theorem gives almost-sure stopping under both laws.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "given",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $S_t=\\sum_{i=1}^tX_i$. By step 1.2 and the values in step 1.1, $L_t=\\prod_{i=1}^t\\lambda(X_i)=3^{S_t}(1/3)^{t-S_t}=3^{2S_t-t}$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The boundaries are $4$ and $1/4$. Starting a two-observation block at $L=1$, the first observation gives $L=3$ or $1/3$, both strictly between the boundaries. A repeated outcome in the second observation gives $L=9$ for $11$ or $L=1/9$ for $00$, crossing the upper or lower boundary; a mixed pair multiplies by $1$ and returns to $L=1$. Induction over successive disjoint pairs shows that the procedure stops at the first pair with equal outcomes.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Under either hypothesis, a pair is mixed with probability $2(1/4)(3/4)=3/8$. The disjoint pairs are independent by [F1], so the probability that the first $k$ pairs are all mixed is $(3/8)^k\\to0$. Thus the pair calculation also verifies almost-sure stopping.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Under $P_0$, each disjoint pair is $11$ with probability $1/16$, $00$ with probability $9/16$, and mixed with probability $3/8$. The event of a type-I error is that the first pair that is not mixed is $11$, so $P_0(\\text{type-I error})=\\sum_{k=1}^{\\infty}(3/8)^{k-1}(1/16)=(1/16)/(1-3/8)=1/10$. Under $P_1$, the probability of $00$ is $1/16$ and of a mixed pair is again $3/8$, so the event of a type-II error gives the same geometric sum and probability $1/10$.",
+          "step": "4.2",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Since $1/10\\le1/4=\\alpha=\\beta$, these exact terminal errors satisfy both bounds in [F4]; the hypotheses for that theorem's procedure hold by step 1.2.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "step 1.2",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has an infinite IID observation sequence and no empty-sample case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives positive likelihood ratios 3 and 1/3 for both Bernoulli outcomes, so neither density value is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 shows a mixed pair returns L to 1, which is strictly between the boundaries and continues."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example specifies distinct probabilities 1/4 and 3/4, so the observation laws are not degenerate or identical."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and step 3.1 use alpha=beta=1/4, strictly inside (0,1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example assumes AC in A1; the finite Bernoulli computation makes no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves direct crossing probabilities and makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves direct crossing probabilities and makes no equivalence claim."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

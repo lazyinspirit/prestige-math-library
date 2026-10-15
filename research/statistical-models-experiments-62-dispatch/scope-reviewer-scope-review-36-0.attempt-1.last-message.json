@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "batch": "36",
+  "round": 0,
+  "reviewed_items": [
+    "def-measurand-calibration-and-measurement-uncertainty",
+    "thm-first-order-measurement-uncertainty-propagation",
+    "ex-calibration-curve-reference-uncertainty-and-batch-drift"
+  ],
+  "reviewed_pages": [
+    "measurement-calibration-and-uncertainty",
+    "measurement-calibration-and-uncertainty-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed the assigned pages and items against the SME-36 scope and actual prerequisite statements and proofs. The covariance propagation theorem and finite-input calculation are sound; two local corrections are needed.",
+  "findings": [
+    {
+      "id": "def-measurand-calibration-and-measurement-uncertainty",
+      "type": "local",
+      "reason": "The definition says X being in U almost surely suffices to evaluate f(X), but that does not ensure f∘X is measurable. State that f∘X must be measurable when treated as a random output; if its variance is discussed, specify the needed moment condition. The theorem's Q_lin calculation does not use f(X)."
+    },
+    {
+      "id": "ex-calibration-curve-reference-uncertainty-and-batch-drift",
+      "type": "scope",
+      "reason": "The approved batch scope calls for a pooled-curve discrepancy. Step 4.1's value 16.6 comes from applying only the first-batch inverse, not from pooling. Add an explicit pooling rule and recalculate: equal-weight least squares through the four nominal calibration points gives y=1+2.1(q-10); response 14.2 then maps to 114/7≈16.286, which is 2/7 above the batch-2 value 16. Preserve 16.6 as the separate first-curve mismatch."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-first-order-measurement-uncertainty-propagation",
+      "decision": "accept",
+      "reason": "Its proof uses the measurable, square-integrable linearized output Q_lin and does not evaluate f(X). The proposed measurability clarification does not affect it."
+    },
+    {
+      "id": "ex-calibration-curve-reference-uncertainty-and-batch-drift",
+      "decision": "repair",
+      "reason": "The finite-support calibration model is measurable; the separate pooled-curve scope correction is required."
+    },
+    {
+      "id": "def-batch-and-measurement-process-variation",
+      "decision": "accept",
+      "reason": "It uses the measurand definition only for batch and calibration terminology; it does not rely on f(X) as a random output."
+    },
+    {
+      "id": "thm-nested-batch-repeatability-covariance-and-mean-variance",
+      "decision": "accept",
+      "reason": "Its indirect use through the batch definition concerns the finite-moment nested model, not nonlinear measurement-output measurability."
+    },
+    {
+      "id": "ex-day-specific-calibration-slope-drift-and-check-standards",
+      "decision": "accept",
+      "reason": "It uses the calibration-curve definition for stipulated finite deterministic responses and is unaffected by the clarification."
+    },
+    {
+      "id": "measurement-calibration-and-uncertainty",
+      "decision": "accept",
+      "reason": "Its summary remains accurate with the measurability condition made explicit."
+    },
+    {
+      "id": "measurement-calibration-and-uncertainty-examples",
+      "decision": "accept",
+      "reason": "Its summary remains accurate after the linked item's pooled-curve calculation is corrected."
+    },
+    {
+      "id": "measurement-batch-and-process-variation",
+      "decision": "accept",
+      "reason": "Its batch-model and pooling caveats remain consistent with the proposed clarification."
+    },
+    {
+      "id": "measurement-batch-and-process-variation-examples",
+      "decision": "accept",
+      "reason": "Its stipulated pooled-fit example uses finite deterministic data and is unaffected."
+    }
+  ]
+}

@@ -1,0 +1,307 @@
+[
+  {
+    "order": 1926,
+    "id": "multivariate-normal-wishart-hotelling",
+    "kind": "A",
+    "category": "statistical-models-and-experiments",
+    "title": "Multivariate normal, Wishart, and Hotelling $T^2$",
+    "companion": "multivariate-normal-wishart-hotelling-examples",
+    "requires": [
+      "scientific-statistical-model-contracts",
+      "exact-gaussian-linear-regression-inference",
+      "dominated-experiments-likelihood-and-sufficiency",
+      "finite-sample-tests-neyman-pearson-and-valid-p-values",
+      "confidence-sets-pivots-and-test-inversion",
+      "gaussian-orthogonal-decomposition-and-quadratic-forms",
+      "likelihood-asymptotics-wald-score-and-likelihood-ratio",
+      "central-limit-theorems",
+      "probability-spaces-random-variables-and-expectation",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "inner-product-spaces-and-orthogonality"
+    ],
+    "items": [
+      {
+        "id": "def-wishart-law",
+        "kind": "definition",
+        "title": "Wishart law by Gaussian outer products",
+        "statement": "Assume AC. For integers $p,m\\ge1$ and a real symmetric positive-semidefinite matrix $\\Sigma$, define $W_p(\\Sigma,m)$ as the pushforward of the finite product law $N_p(0,\\Sigma)^{\\otimes m}$ by $(z_1,\\ldots,z_m)\\mapsto\\sum_{j=1}^m z_jz_j^T$. This convention allows singular support when $m<p$ or $\\Sigma$ is singular; no density is asserted.",
+        "strategy": "Define the law as the pushforward of the finite product Gaussian measure under the continuous outer-product sum map; state the scale and integer degrees-of-freedom conventions and retain singular cases.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-probability-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-law-or-distribution-of-a-random-element",
+          "cor-continuous-functions-are-borel-measurable",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-standard-normal-matrix-has-full-row-rank-almost-surely",
+        "kind": "lemma",
+        "title": "A standard-normal matrix with at least as many columns as rows has full row rank almost surely",
+        "statement": "Assume AC. Let $1\\le p\\le m$ and let $G=[G_1\\mid\\cdots\\mid G_m]$ be a $p\\times m$ matrix whose columns are independent $N_p(0,I_p)$ vectors. Then its first $p$ columns are linearly independent almost surely; hence $GG^T$ is positive definite almost surely.",
+        "strategy": "Induct over the first $p$ columns. For each fixed proper span, an independent nondegenerate Gaussian vector lies in it with probability zero because a nonzero orthogonal projection is a continuous scalar normal; use the finite product law to integrate these zero-probability sections.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-continuous-functions-are-borel-measurable",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+        ],
+        "justified_by": [],
+        "dependency_level": 0
+      },
+      {
+        "id": "def-multivariate-normal-sample-model-and-statistics",
+        "kind": "definition",
+        "title": "The iid multivariate-normal sample and covariance conventions",
+        "statement": "Assume AC and fix integers $n\\ge2$, $p\\ge1$, $\\mu\\in\\mathbb R^p$, and real symmetric positive-definite $\\Sigma$. The observation space is $(\\mathbb R^p)^n$ with its finite product Borel sigma-algebra and sampling law $N_p(\\mu,\\Sigma)^{\\otimes n}$. Index $i$ identifies one vector-valued sampling unit, not a scalar coordinate. For observations $x_1,\\ldots,x_n$, define $\\bar x=n^{-1}\\sum_i x_i$, $R=\\sum_i(x_i-\\bar x)(x_i-\\bar x)^T$, the sample covariance $S=R/(n-1)$, and the normalized scatter $M=R/n$. The Gaussian likelihood theorem below, rather than this definition, establishes that $M$ is the maximum-likelihood covariance estimate.",
+        "strategy": "Specify the observation space, parameter labels, product sampling law, sampling unit, and the separate $n-1$ sample-covariance and $n$ normalized-scatter conventions; make no empirical adequacy claim.",
+        "deps": [
+          "def-scientific-statistical-model-contract",
+          "def-statistical-experiment",
+          "def-parametric-statistical-model",
+          "def-multivariate-normal-law",
+          "def-axiom-of-choice",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-probability-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-statistic-and-estimator",
+          "cor-continuous-functions-are-borel-measurable",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-standard-wishart-independent-normal-quadratic-form-is-f",
+        "kind": "lemma",
+        "title": "The standard Wishart inverse quadratic form has an exact Fisher law",
+        "statement": "Assume AC. Let $m\\ge p\\ge1$, let $W\\sim W_p(I_p,m)$, and let $Z\\sim N_p(0,I_p)$ be independent of $W$. Then $W$ is positive definite almost surely and $\\frac{m-p+1}{p}Z^TW^{-1}Z\\sim F_{p,m-p+1}$, where the Wishart and Fisher conventions are those defined on this page and in the Gaussian orthogonal-decomposition page.",
+        "strategy": "Represent $W=GG^T$; rotate each fixed direction to the first coordinate using Gaussian orthogonal invariance; a block Schur complement identifies the reciprocal inverse entry with a Gaussian residual squared norm of rank $m-p+1$; combine its chi-square law with the independent $p$-degree Gaussian norm.",
+        "deps": [
+          "def-wishart-law",
+          "lem-standard-normal-matrix-has-full-row-rank-almost-surely",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-grouping-independent-sigma-algebras",
+          "lem-measurable-functions-preserve-independence",
+          "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "thm-orthogonal-projection-has-independent-chi-square-sums",
+          "def-orthogonal-projection",
+          "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+          "def-chi-square-law",
+          "def-student-t-and-f-laws",
+          "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-continuous-functions-are-borel-measurable",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases"
+        ],
+        "justified_by": [],
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-multivariate-normal-sample-mean-scatter-independence-and-wishart",
+        "kind": "theorem",
+        "title": "The Gaussian sample mean is independent of the Wishart sample scatter",
+        "statement": "Assume AC and the sample model above. For every $n\\ge2$, $\\sqrt n(\\bar X-\\mu)\\sim N_p(0,\\Sigma)$, $\\bar X$ is independent of $S$, and $(n-1)S\\sim W_p(\\Sigma,n-1)$. If $n>p$, then $S$ is positive definite almost surely. The Wishart scale is $\\Sigma$ and its degrees of freedom are $n-1$; the covariance denominator is $n-1$.",
+        "strategy": "Whiten the independent sample vectors and apply one orthogonal transform on the sample-index coordinate whose first row is $n^{-1/2}(1,\\ldots,1)$. The first transformed vector gives the mean; the other $n-1$ independent Gaussian vectors give the Wishart scatter. Use the Gaussian-matrix rank lemma only for the $n>p$ invertibility claim.",
+        "deps": [
+          "def-multivariate-normal-sample-model-and-statistics",
+          "def-wishart-law",
+          "lem-standard-normal-matrix-has-full-row-rank-almost-surely",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-grouping-independent-sigma-algebras",
+          "lem-measurable-functions-preserve-independence",
+          "thm-orthogonal-transform-preserves-standard-normal-product-law",
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "cor-continuous-functions-are-borel-measurable",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-covariance-likelihood-ratio-asymptotic-chi-square",
+        "kind": "theorem",
+        "title": "The Gaussian covariance likelihood ratio has its fixed-dimensional Wilks limit",
+        "statement": "Assume AC, fix $p\\ge1$, and use the iid multivariate-normal sample model with $n>p$. Test $H_0:\\Sigma=\\Sigma_0$ against unrestricted $\\Sigma\\in\\mathcal S_{++}^p$, with the mean $\\mu\\in\\mathbb R^p$ unrestricted under both hypotheses and fixed $\\Sigma_0\\succ0$. Let $M=R/n$ be the full-model Gaussian covariance MLE, and let $\\Lambda_n$ be the null-over-full maximized likelihood ratio using the explicit Lebesgue Gaussian density. Almost surely, $-2\\log\\Lambda_n=n[\\operatorname{tr}(\\Sigma_0^{-1}M)-\\log\\det(\\Sigma_0^{-1/2}M\\Sigma_0^{-1/2})-p]$. With $p$ fixed and the null true, $-2\\log\\Lambda_n\\Rightarrow\\chi^2_{p(p+1)/2}$ as $n\\to\\infty$. This calibration is asymptotic and uses an interior positive-definite covariance null; no finite-sample chi-square law is asserted.",
+        "strategy": "Derive the explicit product Gaussian likelihood and its unrestricted and constrained maxima. Whiten the sample under the null, apply the multivariate iid CLT to the symmetric second-moment coordinates, expand $x-\\log(1+x)-1$ at zero, and identify the limiting quadratic form as the sum of $p(p+1)/2$ independent standard-normal squares.",
+        "deps": [
+          "def-multivariate-normal-sample-model-and-statistics",
+          "lem-standard-normal-matrix-has-full-row-rank-almost-surely",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-standard-normal-and-normal-laws",
+          "def-independent-random-elements",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "def-dominated-statistical-experiment",
+          "def-likelihood-density",
+          "def-wald-score-likelihood-ratio-statistics",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-multivariate-iid-central-limit-theorem",
+          "thm-continuous-mapping-theorem",
+          "thm-vector-slutsky",
+          "thm-vector-stochastic-order-calculus",
+          "def-op-and-little-op-stochastic-bounds",
+          "def-chi-square-law",
+          "cor-continuous-functions-are-borel-measurable"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-hotelling-t2-exact-f-distribution",
+        "kind": "theorem",
+        "title": "The one-sample Hotelling statistic has an exact F law",
+        "statement": "Assume AC, $n>p\\ge1$, and the iid multivariate-normal sample model with covariance $\\Sigma\\succ0$. For $\\mu_0\\in\\mathbb R^p$, define $T^2=n(\\bar X-\\mu_0)^TS^{-1}(\\bar X-\\mu_0)$ on $S\\succ0$ and set it to $0$ otherwise. Under $H_0:\\mu=\\mu_0$, $\\frac{n-p}{p(n-1)}T^2\\sim F_{p,n-p}$. The zero extension does not affect the law because $S\\succ0$ almost surely when $n>p$.",
+        "strategy": "Whiten the mean and sample scatter, apply the standard Wishart inverse-quadratic-form lemma with $m=n-1$, and substitute $R=(n-1)S$ to convert its F normalization to the stated sample-covariance convention.",
+        "deps": [
+          "def-multivariate-normal-sample-model-and-statistics",
+          "thm-multivariate-normal-sample-mean-scatter-independence-and-wishart",
+          "lem-standard-wishart-independent-normal-quadratic-form-is-f",
+          "def-wishart-law",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-student-t-and-f-laws",
+          "def-chi-square-law",
+          "lem-positive-df-chi-square-has-density-and-regular-cdf",
+          "lem-measurable-functions-preserve-independence",
+          "cor-continuous-functions-are-borel-measurable",
+          "lem-ac-supplies-sequential-choices-for-probability-constructions",
+          "thm-sylvesters-criterion-for-positive-definiteness"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-wishart-trace-statistic-is-chi-square",
+        "kind": "theorem",
+        "title": "The exact covariance trace statistic has p(n−1) chi-square degrees of freedom",
+        "statement": "Assume AC, $p\\ge1$, $n\\ge2$, and the iid multivariate-normal sample model. Under $H_0:\\Sigma=\\Sigma_0$ for a specified $\\Sigma_0\\succ0$, the distinct statistic $\\operatorname{tr}(\\Sigma_0^{-1}(n-1)S)$ has the exact law $\\chi^2_{p(n-1)}$, even when $n\\le p$ and $S$ is singular. This is the Wishart trace statistic, not the covariance likelihood-ratio statistic.",
+        "strategy": "Represent $(n-1)S$ as the Wishart sum of $n-1$ independent $N_p(0,\\Sigma_0)$ outer products, whiten each vector by $\\Sigma_0^{-1/2}$, and collect all $p(n-1)$ independent squared standard-normal coordinates.",
+        "deps": [
+          "def-multivariate-normal-sample-model-and-statistics",
+          "thm-multivariate-normal-sample-mean-scatter-independence-and-wishart",
+          "def-wishart-law",
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-chi-square-law",
+          "thm-independent-random-elements-have-product-joint-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 3
+      },
+      {
+        "id": "cor-exact-hotelling-one-sample-test",
+        "kind": "corollary",
+        "title": "The one-sample Hotelling F test has exact size alpha",
+        "statement": "Assume AC, $n>p\\ge1$, and the model and notation of the exact Hotelling theorem. For $0<\\alpha<1$, reject $H_0:\\mu=\\mu_0$ when $\\frac{n-p}{p(n-1)}T^2>F_{p,n-p}^{-1}(1-\\alpha)$. The test has size exactly $\\alpha$ over all null covariances $\\Sigma\\succ0$.",
+        "strategy": "The scaled statistic has the common F law under every null parameter; the continuous strictly increasing F CDF supplies the unique upper-tail quantile, so every null rejection probability equals $\\alpha$ and their supremum is $\\alpha$.",
+        "deps": [
+          "thm-hotelling-t2-exact-f-distribution",
+          "def-multivariate-normal-sample-model-and-statistics",
+          "def-axiom-of-choice",
+          "def-randomized-test",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-measure-kernel-and-probability-kernel",
+          "def-measurable-function-between-measurable-spaces",
+          "def-test-size-and-power",
+          "def-student-t-and-f-laws",
+          "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-sylvesters-criterion-for-positive-definiteness"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      }
+    ]
+  },
+  {
+    "order": 1927,
+    "id": "multivariate-normal-wishart-hotelling-examples",
+    "kind": "B",
+    "category": "statistical-models-and-experiments",
+    "title": "Multivariate normal, Wishart, and Hotelling $T^2$ — Examples",
+    "companion": "multivariate-normal-wishart-hotelling",
+    "requires": [
+      "multivariate-normal-wishart-hotelling"
+    ],
+    "items": [
+      {
+        "id": "ex-sample-covariance-singular-when-sample-size-not-exceeding-dimension",
+        "kind": "example",
+        "title": "The unbiased sample covariance is singular when 2 ≤ n ≤ p",
+        "statement": "For any $n\\ge2$ observations in $\\mathbb R^p$ with $2\\le n\\le p$, their sample covariance $S=(n-1)^{-1}\\sum_i(X_i-\\bar X)(X_i-\\bar X)^T$ is singular. At $n=1$ the stated covariance convention is undefined because its denominator is zero.",
+        "strategy": "Center the data matrix; the all-ones vector is in its kernel, so rank-nullity bounds the centered image by n−1≤p−1. The Gram scatter maps into that proper image and is singular.",
+        "deps": [
+          "def-multivariate-normal-sample-model-and-statistics",
+          "def-rank-and-nullity",
+          "thm-rank-nullity"
+        ],
+        "justified_by": [],
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-exact-wishart-trace-and-asymptotic-covariance-lrt-differ",
+        "kind": "example",
+        "title": "The exact Wishart trace and covariance likelihood ratio are different statistics",
+        "statement": "For $p=1$, $n=4$, $\\Sigma_0=1$, and observations $(\\sqrt{3/2},-\\sqrt{3/2},0,0)$, the sample covariance is $S=1$. The exact trace statistic is $3$, while the covariance likelihood-ratio statistic is $4(\\log(4/3)-1/4)\\approx0.1507$. This separates the exact $\\chi^2_3$ trace calibration from the fixed-dimensional asymptotic $\\chi^2_1$ likelihood-ratio calibration; it asserts no finite-sample chi-square law for the latter.",
+        "strategy": "Compute the centered sum of squares, then evaluate the two separately defined statistics using the unbiased covariance and Gaussian maximum-likelihood covariance conventions.",
+        "deps": [
+          "def-multivariate-normal-sample-model-and-statistics",
+          "thm-covariance-likelihood-ratio-asymptotic-chi-square",
+          "thm-wishart-trace-statistic-is-chi-square"
+        ],
+        "justified_by": [],
+        "dependency_level": 4
+      },
+      {
+        "id": "ex-hotelling-t2-two-dimensional-exact-test",
+        "kind": "example",
+        "title": "A two-dimensional Hotelling statistic and its exact F cutoff",
+        "statement": "For the four observations $(1,0),(-1,0),(0,1),(0,-1)$ with $p=2$, $n=4$, and tested mean $\\mu_0=(1,1)^T$, the unbiased sample covariance is $S=\\frac23I_2$, the Hotelling statistic is $T^2=12$, and the exactly calibrated F statistic is $4$. At level $\\alpha$, the decision rule is to reject precisely when $4>F_{2,2}^{-1}(1-\\alpha)$.",
+        "strategy": "Compute the sample mean and covariance from the four vectors, substitute into the Hotelling quadratic form, and apply the exact F calibration with its stated $n-1$ covariance denominator.",
+        "deps": [
+          "def-multivariate-normal-sample-model-and-statistics",
+          "thm-hotelling-t2-exact-f-distribution",
+          "cor-exact-hotelling-one-sample-test",
+          "def-student-t-and-f-laws",
+          "lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing"
+        ],
+        "justified_by": [],
+        "dependency_level": 5
+      }
+    ]
+  }
+]

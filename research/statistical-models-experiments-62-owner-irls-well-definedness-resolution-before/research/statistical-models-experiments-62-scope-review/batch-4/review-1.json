@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "run": "statistical-models-experiments-62",
+  "batch": "4",
+  "round": 1,
+  "reviewed_items": [
+    "def-glm-observation-family",
+    "lem-glm-mean-and-variance-identities",
+    "lem-glm-product-density",
+    "def-generalized-linear-model",
+    "def-nested-model-deviance",
+    "thm-canonical-glm-score-and-hessian",
+    "thm-glm-general-link-score-and-information",
+    "alg-fisher-scoring-irls",
+    "lem-nested-model-deviance-nonnegative",
+    "thm-canonical-glm-strict-concavity",
+    "thm-irls-is-fisher-scoring-step",
+    "ex-poisson-overdispersion",
+    "ex-identity-link-bernoulli-boundary",
+    "ex-logistic-separation-no-finite-mle",
+    "ex-singular-fisher-information-nonunique-irls",
+    "ex-bernoulli-logit-glm-one-step",
+    "ex-poisson-log-glm-one-step"
+  ],
+  "reviewed_pages": [
+    "generalized-linear-models-and-fisher-scoring",
+    "generalized-linear-models-and-fisher-scoring-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The three round-0 findings are resolved, and the affected consumers remain sound. The algorithm still states well-definedness properties without the required justified_by field; at round 1, this must go to the owner rather than trigger another repair.",
+  "findings": [
+    {
+      "id": "alg-fisher-scoring-irls",
+      "type": "local",
+      "reason": "The Definition asserts that the procedure is single-valued and returns the unique minimum-norm least-squares solution, but has no justified_by field. Record the results establishing this well-definedness—thm-of-square-roots, thm-moore-penrose-pseudoinverse-exists-and-is-unique, and thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution—in justified_by, as required for algorithms."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-bernoulli-logit-glm-one-step",
+      "decision": "accept",
+      "reason": "Bernoulli’s finite support supplies the required local derivative envelopes and finite score moments; the information is 1/4, so the Fisher-scoring theorem applies."
+    },
+    {
+      "id": "ex-identity-link-bernoulli-boundary",
+      "decision": "accept",
+      "reason": "At interior means the Bernoulli regularity conditions hold; the boundary is outside the finite natural-parameter domain and its weight diverges, as claimed."
+    },
+    {
+      "id": "ex-poisson-log-glm-one-step",
+      "decision": "accept",
+      "reason": "The stated Poisson model has finite score moments and locally integrable parameter-derivative envelopes; its information is 1, so the Fisher-scoring theorem applies."
+    },
+    {
+      "id": "ex-singular-fisher-information-nonunique-irls",
+      "decision": "accept",
+      "reason": "The regular Bernoulli model has positive weights and rank-one information; the algorithm’s minimum-norm convention gives the stated selection without invoking the invertible-information theorem."
+    },
+    {
+      "id": "thm-irls-is-fisher-scoring-step",
+      "decision": "accept",
+      "reason": "The revised statement includes the general-link theorem’s additional regularity and moment hypotheses; the normal-equation proof establishes the update."
+    },
+    {
+      "id": "generalized-linear-models-and-fisher-scoring",
+      "decision": "accept",
+      "reason": "The page describes a single finite update and makes no unconditional convergence or termination claim; its summary remains accurate."
+    },
+    {
+      "id": "generalized-linear-models-and-fisher-scoring-examples",
+      "decision": "accept",
+      "reason": "The page summarizes the specific finite examples, whose uses satisfy the revised theorem’s hypotheses."
+    }
+  ]
+}

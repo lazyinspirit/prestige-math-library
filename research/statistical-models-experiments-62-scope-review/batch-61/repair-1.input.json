@@ -1,0 +1,145 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-61-1",
+  "inventory": {
+    "pages": [
+      "group-sequential-alpha-spending",
+      "group-sequential-alpha-spending-examples"
+    ],
+    "items": [
+      "def-group-sequential-alpha-spending-design",
+      "alg-group-sequential-alpha-spending-boundary-calibration",
+      "thm-group-sequential-alpha-spending-calibration",
+      "ex-pocock-spending-two-look",
+      "ex-obrien-fleming-spending-two-look"
+    ],
+    "pairs": [
+      "group-sequential-alpha-spending"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-group-sequential-alpha-spending-design.md",
+    "items/alg-group-sequential-alpha-spending-boundary-calibration.md",
+    "items/thm-group-sequential-alpha-spending-calibration.md",
+    "items/ex-pocock-spending-two-look.md",
+    "items/ex-obrien-fleming-spending-two-look.md",
+    "library/statistical-models-and-experiments/group-sequential-alpha-spending.md",
+    "library/statistical-models-and-experiments/group-sequential-alpha-spending-examples.md"
+  ],
+  "write_batches": [
+    "61"
+  ],
+  "consumer_scope": [
+    {
+      "id": "alg-group-sequential-alpha-spending-boundary-calibration",
+      "path": [
+        "def-group-sequential-alpha-spending-design",
+        "alg-group-sequential-alpha-spending-boundary-calibration"
+      ],
+      "paths": [
+        [
+          "def-group-sequential-alpha-spending-design",
+          "alg-group-sequential-alpha-spending-boundary-calibration"
+        ],
+        [
+          "thm-group-sequential-alpha-spending-calibration",
+          "alg-group-sequential-alpha-spending-boundary-calibration"
+        ]
+      ]
+    },
+    {
+      "id": "def-group-sequential-alpha-spending-design",
+      "path": [
+        "alg-group-sequential-alpha-spending-boundary-calibration",
+        "thm-group-sequential-alpha-spending-calibration",
+        "def-group-sequential-alpha-spending-design"
+      ],
+      "paths": [
+        [
+          "alg-group-sequential-alpha-spending-boundary-calibration",
+          "thm-group-sequential-alpha-spending-calibration",
+          "def-group-sequential-alpha-spending-design"
+        ],
+        [
+          "thm-group-sequential-alpha-spending-calibration",
+          "def-group-sequential-alpha-spending-design"
+        ]
+      ]
+    },
+    {
+      "id": "ex-obrien-fleming-spending-two-look",
+      "path": [
+        "def-group-sequential-alpha-spending-design",
+        "ex-obrien-fleming-spending-two-look"
+      ],
+      "paths": [
+        [
+          "def-group-sequential-alpha-spending-design",
+          "ex-obrien-fleming-spending-two-look"
+        ],
+        [
+          "alg-group-sequential-alpha-spending-boundary-calibration",
+          "ex-obrien-fleming-spending-two-look"
+        ],
+        [
+          "thm-group-sequential-alpha-spending-calibration",
+          "ex-obrien-fleming-spending-two-look"
+        ]
+      ]
+    },
+    {
+      "id": "ex-pocock-spending-two-look",
+      "path": [
+        "def-group-sequential-alpha-spending-design",
+        "ex-pocock-spending-two-look"
+      ],
+      "paths": [
+        [
+          "def-group-sequential-alpha-spending-design",
+          "ex-pocock-spending-two-look"
+        ],
+        [
+          "alg-group-sequential-alpha-spending-boundary-calibration",
+          "ex-pocock-spending-two-look"
+        ],
+        [
+          "thm-group-sequential-alpha-spending-calibration",
+          "ex-pocock-spending-two-look"
+        ]
+      ]
+    },
+    {
+      "id": "thm-group-sequential-alpha-spending-calibration",
+      "path": [
+        "def-group-sequential-alpha-spending-design",
+        "thm-group-sequential-alpha-spending-calibration"
+      ],
+      "paths": [
+        [
+          "def-group-sequential-alpha-spending-design",
+          "thm-group-sequential-alpha-spending-calibration"
+        ],
+        [
+          "alg-group-sequential-alpha-spending-boundary-calibration",
+          "thm-group-sequential-alpha-spending-calibration"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-group-sequential-alpha-spending-design": [
+      "## Definition\n\nAssume the Axiom of Choice ([[def-axiom-of-choice]]). Fix a finite integer\nmaximum $K\\ge1$, prescheduled information fractions\n$0<t_1<\\cdots<t_K=1$ (where $t_j$ is the fraction of total planned\ninformation available at look $j$), and a nominal level $\\alpha\\in(0,1)$. An\n**alpha-spending function** is a nondecreasing map\n$A:[0,1]\\to[0,\\alpha]$ with $A(0)=0$ and $A(1)=\\alpha$.\n\nUnder the stipulated simple null law $P_0$, the standardized look vector is\n$Z=(Z_1,\\ldots,Z_K)\\sim N_K(0,\\Sigma)$, where\n$$\\Sigma_{jk}=\\sqrt{t_j/t_k}\\quad(j\\le k),\\qquad \\Sigma_{jk}=\\Sigma_{kj}\\quad(j>k).$$\nHere $N_K$ is the finite-dimensional multivariate normal law of\n[[def-multivariate-normal-law]], whose projection characterization determines\nthe law by [[lem-characteristic-function-of-a-multivariate-normal-law]].\nThe construction of this covariance matrix as a valid Gaussian covariance is\nproved in [[thm-group-sequential-alpha-spending-calibration]]. The standardized\ncoordinates are correlated; independence of the $Z_j$ is not assumed.\n\nFor a **one-sided upper-boundary design**, look $j$ rejects when\n$Z_j\\ge b_j$. For a **symmetric two-sided design**, look $j$ rejects when\n$|Z_j|\\ge c_j$. In either case, the procedure stops at its first crossing.\nFor each $k$, its cumulative type-I probability is the probability under the\nstipulated null law of crossing at one of looks $1,\\ldots,k$. The design is\nexactly calibrated to $A$ when this cumulative probability equals $A(t_k)$\nfor every $k$. If it is embedded in an experiment with a nonempty alternative\nand singleton null hypothesis, this null rejection probability is the test\nsize in the sense of [[def-test-size-and-power]].\n\nThe fractions and joint null law are assumptions of this definition. It does\nnot derive a Gaussian model from an asymptotic central limit theorem, justify\ndata-dependent look timing, justify estimated variance, or establish error\ncontrol over an unspecified composite null. A two-sided design calibrates its\ntwo-sided crossing events separately; one-sided boundaries are not doubled\nto obtain two-sided boundaries."
+    ],
+    "alg-group-sequential-alpha-spending-boundary-calibration": [
+      "## Definition\n\n**Inputs:** The Axiom of Choice ([[def-axiom-of-choice]]) and a canonical design from\n[[def-group-sequential-alpha-spending-design]] and a mode, either one-sided\nupper-boundary or symmetric two-sided.\n\n**Output:** The look boundaries for the selected mode.\n\nSet $t_0=0$, $R_0=\\varnothing$, and process $k=1,\\ldots,K$ in order. Let\n$R_{k-1}$ be the union of the crossing events already defined at the earlier\nlooks.\n\n- If $A(t_k)=A(t_{k-1})$, set the boundary at look $k$ to $+\\infty$. Its\n  crossing event is empty, so $R_k=R_{k-1}$.\n- If $A(t_k)>A(t_{k-1})$ and the mode is one-sided, choose the real number\n  $b_k$ satisfying\n  $$P_0(R_{k-1}\\cup\\{Z_k\\ge b_k\\})=A(t_k),$$\n  and set $R_k=R_{k-1}\\cup\\{Z_k\\ge b_k\\}$.\n- If $A(t_k)>A(t_{k-1})$ and the mode is symmetric two-sided, choose\n  $c_k\\ge0$ satisfying\n  $$P_0(R_{k-1}\\cup\\{|Z_k|\\ge c_k\\})=A(t_k),$$\n  and set $R_k=R_{k-1}\\cup\\{|Z_k|\\ge c_k\\}$.\n\nThe root-existence theorem\n[[thm-group-sequential-alpha-spending-calibration]] proves that every\npositive spending increment has a unique finite solution; the algorithm\ntherefore makes no arbitrary boundary selection. The procedure specifies\nexact boundaries under the supplied joint null law. It does not prescribe a\nnumerical integration package or tolerance."
+    ],
+    "thm-group-sequential-alpha-spending-calibration": [
+      "## Statement\n\nAssume AC and the canonical group-sequential design of\n[[def-group-sequential-alpha-spending-design]]. The recursive boundary\nalgorithm [[alg-group-sequential-alpha-spending-boundary-calibration]] is\nwell-defined: every positive spending increment has a unique finite boundary,\nwhile a zero increment has boundary $+\\infty$. For every $k$, the probability\nunder $P_0$ of a rejection by look $k$ is $A(t_k)$; in particular the terminal\nsimple-null rejection probability is $\\alpha$. When embedded in an experiment\nwith a nonempty alternative and a singleton null whose law is $P_0$, the test\nsize is therefore $\\alpha$. The same cumulative-probability conclusion holds\nfor separately calibrated symmetric two-sided crossing events. This exact\nstatement is conditional on the specified joint Gaussian null law and\nprescheduled information fractions; it does not cover data-dependent timing,\nan estimated variance, or a composite null without an additional argument."
+    ],
+    "ex-pocock-spending-two-look": [],
+    "ex-obrien-fleming-spending-two-look": []
+  }
+}
