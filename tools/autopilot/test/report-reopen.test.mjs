@@ -8,7 +8,7 @@ import { reverseCommittedPatch } from '../../autopilot-report-reopen.mjs';
 import { spawnSync, execFileSync } from 'node:child_process';
 const SOURCE = process.env.AUTOPILOT_TEST_REPO || fileURLToPath(new URL('../../..', import.meta.url));
 const CANDIDATE = process.env.STEP6_CANDIDATE_TOOLS || join(SOURCE, 'tools');
-function fixture(t, configure = () => {}) {
+function fixture(t, configure = () => {}, packaging = false) {
  const root = mkdtempSync(join(tmpdir(), 'report-reopen-cli-')); t.after(() => rmSync(root, { recursive:true, force:true }));
  const put = (path, text) => { mkdirSync(dirname(join(root,path)),{recursive:true}); writeFileSync(join(root,path), typeof text === 'string' ? text : JSON.stringify(text)); };
  for (const dir of ['research','items','library/algebra','tools/autopilot/bin','.autopilot/demo','research/demo-dispatch']) mkdirSync(join(root,dir),{recursive:true});
@@ -16,6 +16,7 @@ function fixture(t, configure = () => {}) {
  for (const p of readdirSync(join(SOURCE,'tools/autopilot'))) if (p !== 'bin') symlinkSync(join(SOURCE,'tools/autopilot',p),join(root,'tools/autopilot',p));
  for (const p of ['step6-report.mjs','publication-ready.mjs']) copyFileSync(join(SOURCE,'tools',p),join(root,'tools',p));
  copyFileSync(join(SOURCE,'tools/autopilot/bin/autopilot.mts'),join(root,'tools/autopilot/bin/autopilot.mts'));
+ if (packaging) { rmSync(join(root,'tools/run-commit-scope.mjs')); copyFileSync(join(SOURCE,'tools/run-commit-scope.mjs'),join(root,'tools/run-commit-scope.mjs')); }
  put('WORKFLOW.md','Original policy\n');
  put('briefs/tasks/frontier-dependency-ledger.md','Original shared dependency-review brief.\n');
  writeFileSync(join(root,'tools/step6-report.mjs'), readFileSync(join(root,'tools/step6-report.mjs'),'utf8') + '\n// Original fixture before bounded core repair.\n');
@@ -46,6 +47,10 @@ function fixture(t, configure = () => {}) {
  assert.equal(call('step6-report.mjs',['snapshot']).status,0);
  for(const p of ['step6-report.mjs','autopilot-report-reopen.mjs']) copyFileSync(join(CANDIDATE,p),join(root,'tools',p));
  copyFileSync(join(CANDIDATE,'autopilot/bin/autopilot.mts'),join(root,'tools/autopilot/bin/autopilot.mts'));
+ if (packaging) {
+  copyFileSync(join(CANDIDATE,'run-commit-scope.mjs'),join(root,'tools/run-commit-scope.mjs'));
+
+ }
  git(['add','tools']); git(['commit','-m','bounded report integrity repair']);
  const stages = {'5-freeze':{doneAt:'earlier'},'6-readiness-v2':{doneAt:'passed'},'6-evidence-v2':{doneAt:'passed'},'6-report-baseline-v2':{enteredAt:'entered'}};
  const dispatches = {};
@@ -56,7 +61,7 @@ function fixture(t, configure = () => {}) {
  }
  put('.autopilot/demo/events.jsonl','');
  put('.autopilot/demo/state.json',{run:'demo',paused:true,stage:'6-report-baseline-v2',stages,dispatches,blockers:[{stage:'6-report-baseline-v2',reason:'race'}]});
- const cli = (...args) => spawnSync(process.execPath,[join(SOURCE,'tools/tsx-run.mjs'),join(root,'tools/autopilot/bin/autopilot.mts'),'reopen-report','--repo',root,'--state-dir',join(root,'.autopilot/demo'),'--run','demo','--authorization','.autopilot/demo/auth.json',...args],{encoding:'utf8',maxBuffer:16*1024*1024});
+ const cli = (...args) => spawnSync(process.execPath,[join(SOURCE,'tools/tsx-run.mjs'),join(root,'tools/autopilot/bin/autopilot.mts'),packaging?'reopen-closeout-packaging':'reopen-report','--repo',root,'--state-dir',join(root,'.autopilot/demo'),'--run','demo','--authorization','.autopilot/demo/auth.json',...args],{encoding:'utf8',maxBuffer:16*1024*1024});
  const authorize = () => { const inspected=cli('--inspect'); assert.equal(inspected.status,0,inspected.stderr); const guards=JSON.parse(inspected.stdout); put('.autopilot/demo/auth.json',{authorized_by:'owner',authorization:'Owner authorizes exact bounded pre-report integrity repair and fresh native suffix execution.',guards}); return guards; };
  return {root,put,cli,authorize};
 }
@@ -199,4 +204,58 @@ test('production recovery keeps a foreign owner item consumed by owning readines
  const before=readFileSync(join(f.root,'research/demo-step6-report-integrity.json'));
  const result=f.cli('--inspect');assert.notEqual(result.status,0,result.stdout);
  assert.deepEqual(readFileSync(join(f.root,'research/demo-step6-report-integrity.json')),before);
+});
+
+
+function packagingFixture(t) {
+ const f=fixture(t,()=>{},true);
+ const state=JSON.parse(readFileSync(join(f.root,'.autopilot/demo/state.json')));
+ for (const id of ['6-report-baseline-v2','6-owner-report-v2','6-owner-report-render-v2']) state.stages[id]={enteredAt:'entered',gatesPassedAt:'passed',doneAt:'passed'};
+ state.stage='6-close-v2';state.stages['6-close-v2']={enteredAt:'entered'};
+ for(const d of Object.values(state.dispatches)) d.lastExitOk=true;
+ for(const [id,role,label,ok] of [['6-owner-report-v2','alpha-report','owner-report-v2',true],['6-owner-report-render-v2','tool','owner-report-render-v2',true],['6-close-v2','tool','close-step6-v2',false]]) {
+  state.dispatches[`${id}:${label}`]={role,label,startedAt:'started',endedAt:'ended',lastExitOk:ok};
+  f.put(`research/demo-dispatch/${role}-${label}.result.json`,{run:'demo',role,label,ok,runner:role==='alpha-report'?'codex':'tool',process_exit_code:0});
+  f.put(`research/demo-dispatch/${role}-${label}.attempt-1.log`,'Original actual dispatch diagnostic log.');
+ }
+ f.put('.autopilot/demo/state.json',state);
+ f.put('.autopilot/demo/report-reopen-before/receipt.json',{immutable:true});
+ f.put('research/demo-step6-report.response.json',{version:2,original:true});
+ f.put('research/demo-step6-report.md','Original rendered report.');
+ return f;
+}
+test('packaging CLI archives real report/render/failed closeout history and resets only the native suffix',t=>{
+ const f=packagingFixture(t),guards=f.authorize();
+ const oldArchive=readFileSync(join(f.root,'.autopilot/demo/report-reopen-before/receipt.json'));
+ const source=readFileSync(join(f.root,'items/thm-owned.md'));
+ const originals=guards.artifacts.map(row=>[row.path,readFileSync(join(f.root,row.path))]);
+ const result=f.cli(); assert.equal(result.status,0,result.stderr);
+ const archive=join(f.root,'.autopilot/demo/report-packaging-reopen-before');
+ for(const [path,bytes] of originals){assert.deepEqual(readFileSync(join(archive,path)),bytes);assert.equal(existsSync(join(f.root,path)),false);}
+ assert.deepEqual(readFileSync(join(f.root,'.autopilot/demo/report-reopen-before/receipt.json')),oldArchive);
+ assert.deepEqual(readFileSync(join(f.root,'items/thm-owned.md')),source);
+ const state=JSON.parse(readFileSync(join(f.root,'.autopilot/demo/state.json')));
+ assert.equal(state.stages['5-freeze'].doneAt,'earlier'); assert.equal(state.stage,'6-readiness-v2');assert.equal(state.paused,true);
+ for(const id of guards.reopen_stages) assert.equal(state.stages[id],undefined);
+ assert.deepEqual(state.dispatches,{});assert.equal(JSON.parse(readFileSync(join(archive,'receipt.json'))).native_coverage_created,false);
+ assert.equal(existsSync(join(archive,'events.before.jsonl')),true);
+ assert.notEqual(f.cli().status,0);
+});
+for(const [name,mutate] of [
+ ['active controller',f=>f.put('.autopilot/demo/controller.lock',{pid:process.pid})],
+ ['unpaused controller',f=>{const p='.autopilot/demo/state.json',s=JSON.parse(readFileSync(join(f.root,p)));s.paused=false;f.put(p,s);}],
+ ['changed mathematics',f=>f.put('items/thm-owned.md','changed proof')],
+ ['changed prerequisite',f=>f.put('items/def-context.md','changed prerequisite')],
+ ['changed readiness input',f=>f.put('research/demo-judge-closure.json',{run:'demo',closed:false})],
+ ['new unsealed policy',f=>f.put('research/demo-closeout-operational-contexts.json',{invented:true})],
+ ['synthetic owner report',f=>f.put('research/demo-dispatch/alpha-report-owner-report-v2.result.json',{run:'demo',role:'alpha-report',label:'owner-report-v2',ok:true,written_by:'autopilot'})],
+ ['successful closeout',f=>{const p='.autopilot/demo/state.json',s=JSON.parse(readFileSync(join(f.root,p)));s.dispatches['6-close-v2:close-step6-v2'].lastExitOk=true;f.put(p,s);}],
+ ['stale event authorization',f=>f.put('.autopilot/demo/events.jsonl','{"type":"changed"}\n')],
+ ['changed original report',f=>f.put('research/demo-step6-report.md','changed report')],
+]) test(`packaging CLI refuses ${name} and retains the original baseline`,t=>{
+ const f=packagingFixture(t); f.authorize();
+ const baseline=readFileSync(join(f.root,'research/demo-step6-report-integrity.json'));mutate(f);
+ const result=f.cli();assert.notEqual(result.status,0,result.stdout);
+ assert.deepEqual(readFileSync(join(f.root,'research/demo-step6-report-integrity.json')),baseline);
+ assert.equal(existsSync(join(f.root,'.autopilot/demo/report-packaging-reopen-before')),false);
 });

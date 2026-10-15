@@ -151,3 +151,44 @@ manifest and canonical page category/kind, and matching physical source ID, kind
 These old records establish ownership only: they grant no fresh authoring
 readiness, mathematical acceptance or native execution coverage. Owning readiness
 and reporter inputs remain excluded from every foreign exemption.
+
+## Failed first closeout packaging recovery
+
+`reopen-closeout-packaging` is a separate guarded native route for a paused,
+drained, stopped run whose first scoped closeout dispatch ended unsuccessfully.
+The actual readiness, evidence, report baseline, owner report and renderer must
+have passed; a genuine successful native owner report result is mandatory.
+Any existing run closeout commit, successful closeout, live controller or active
+worker refuses recovery. Existing `reopen-report` guards are unchanged.
+
+The current single-parent HEAD may contain only the exact administrative paths
+in `PACKAGING_CORE`. Every current carrier must match its committed blob; every
+parent blob must equal its ORIGINAL frozen report hash. The inspector replaces
+only these current readiness rows with their authenticated original hashes in
+memory and requires the ORIGINAL readiness aggregate and count. Content, actual
+owned mathematical carriers, prerequisite context and readiness input hashes
+must agree. No historical core reversal or new policy is allowed before this
+inspection. Unexplained protected changes fail closed.
+
+Use the same required `--run`, `--state-dir`, `--authorization` and optional
+`--inspect` arguments as `reopen-report`. The owner authorization binds exact
+HEAD/parent, state/events/index hashes, core preimages and current hashes,
+mathematics/context hashes, all original suffix artifact hashes and stages.
+Application repeats inspection, archives the complete original state/events,
+readiness/evidence/report baseline/report response/rendered report/layout and
+all suffix dispatch artifacts (including attempts, logs and failed results) in
+`.autopilot/RUN/report-packaging-reopen-before/`, then retires only those derived
+artifacts and six suffix state records. Existing
+`report-reopen-before/` is untouched. The durable archive explicitly creates no
+native execution coverage. State remains paused at `6-readiness-v2`.
+
+Only afterward may the owner install the hash-bound exact operational-context
+policy and update any necessary owner scope authorization. HH admission extends
+only to its two original physical
+`owner/authoring-readiness-escalation/cross-batch/{,final/}local-read-context`
+resolver roots. All ordinary tree hashes, external evidence, required-input
+refusals, report protection and outside-preservation guards still apply.
+Native restart/resume must execute the entire fresh readiness battery,
+evidence, baseline, owner report, renderer, scoped commit and terminal gates.
+Old successful dispatches cannot supply fresh coverage. Do not overwrite a
+frozen report snapshot to introduce the new policy.

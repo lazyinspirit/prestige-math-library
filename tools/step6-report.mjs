@@ -3,9 +3,8 @@
 //
 // Expensive mathematical gates produce structured receipts before this tool
 // runs.  `evidence` reconciles those receipts and the append-only ledgers once;
-// the read-only Alpha interprets that compact packet, while `render` supplies
-// every exhaustive count and fatal-defect row mechanically.  The reporter can
-// therefore be concise without gaining the power to omit or invent a defect.
+// `summary` and `render` emit a short deterministic report. Complete defects,
+// judge history and current input bindings remain in the sealed JSON audit packet.
 
 import { existsSync, readdirSync, readFileSync, writeFileSync, lstatSync, mkdirSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
@@ -14,7 +13,7 @@ import { spawnSync } from 'node:child_process';
 import { protectedEntryHash, runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
 import { resolveLineup } from './models.mjs';
 import { parseFrontmatter } from './content-policy-lib.mjs';
-import { TERMINAL_REJUDGE_ROUNDS } from './step5-terminal-resolution.mjs';
+import { makeSummaryResponse, renderSummaryReport, step6Telemetry } from './step6-summary.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
 import { activeOwnershipRows } from './defect-ownership.mjs';
 
@@ -24,7 +23,7 @@ const value = (flag) => { const i = args.indexOf(flag); return i < 0 ? '' : args
 const run = value('--run');
 const root = resolve(value('--root') || join(dirname(fileURLToPath(import.meta.url)), '..'));
 const die = (message) => { console.error(`ERROR ${message}`); process.exit(1); };
-const commands = ['evidence', 'check-evidence', 'snapshot', 'check', 'check-response', 'render', 'recovery-inventory'];
+const commands = ['evidence', 'check-evidence', 'summary', 'snapshot', 'check', 'check-response', 'render', 'recovery-inventory'];
 if (!run || !commands.includes(command)) die(`usage: node tools/step6-report.mjs <${commands.join('|')}> --run <run> [--root <repo>] [--in <response.json>] [--out <path>]`);
 
 const research = join(root, 'research');
@@ -65,7 +64,7 @@ function countBy(rows, key) {
   return Object.fromEntries(Object.entries(out).sort(([a], [b]) => a.localeCompare(b)));
 }
 
-function repairCounts(touches) {
+function repairCounts(touches, activeItems) {
   const counts = {};
   for (const seeded of touches?.seeded ?? []) counts[seeded.id] = (counts[seeded.id] ?? 0) + (seeded.count ?? 1);
   const snapshots = touches?.snapshots ?? [];
@@ -74,7 +73,7 @@ function repairCounts(touches) {
     const after = snapshots[index]?.hashes ?? {};
     for (const id of Object.keys(after)) if (id in before && before[id] !== after[id]) counts[id] = (counts[id] ?? 0) + 1;
   }
-  return Object.entries(counts).filter(([, count]) => count > 1)
+  return Object.entries(counts).filter(([id, count]) => activeItems.has(id) && count > 1)
     .map(([id, count]) => ({ id, repairs: count })).sort((a, b) => b.repairs - a.repairs || a.id.localeCompare(b.id));
 }
 
@@ -257,7 +256,7 @@ function buildEvidence() {
       configured_set_stats: configuredSetStats,
       adjudications: { rows: adjudications.length, outcomes: countBy(adjudications, 'outcome') },
     },
-    repeated_repairs: repairCounts(touches),
+    repeated_repairs: repairCounts(touches, activeItems),
     pathway: {
       obligations: (pathway.briefs ?? []).length,
       closed: (pathway.briefs ?? []).filter((row) => row.status === 'closed').length,
@@ -550,6 +549,15 @@ function parseResponse(path) {
   return { response, evidence };
 }
 
+if (command === 'summary') {
+  const evidence = readJson(evidencePath);
+  if (canonical(evidence) !== canonical(buildEvidence())) die('step6-evidence-stale: summary requires current evidence');
+  writeFileSync(responsePath, JSON.stringify(makeSummaryResponse(evidence, run), null, 2) + '\n');
+  parseResponse(responsePath);
+  console.log('step6-report-response: wrote deterministic evidence summary');
+  process.exit(0);
+}
+
 if (command === 'check-response') {
   parseResponse(value('--in') || responsePath);
   console.log('step6-report-response: structured interpretation matches evidence');
@@ -558,59 +566,6 @@ if (command === 'check-response') {
 
 const { response, evidence } = parseResponse(value('--in') || responsePath);
 const out = value('--out') || reportPath;
-const cell = (text) => String(text ?? '').replaceAll('|', '\\|').replaceAll('\n', ' ');
-const terminalByResolver = Object.entries(evidence.verification.terminal_resolutions.reduce((counts, row) => {
-  const resolver = row.resolved_by || 'unspecified';
-  counts[resolver] = (counts[resolver] ?? 0) + 1;
-  return counts;
-}, {})).sort(([left], [right]) => left.localeCompare(right))
-  .map(([resolver, count]) => `${resolver}: ${count}`).join('; ');
-const lines = [`# ${run} — Step 6 owner report`, '', response.executive_summary.trim(), '',
-  '## What was built', '',
-  `- ${evidence.build.pages} pages and ${evidence.build.items} items across ${evidence.build.categories.length} categories.`,
-  `- Categories: ${evidence.build.categories.join(', ') || 'none'}.`,
-  `- Item kinds: ${Object.entries(evidence.build.items_by_kind).map(([kind, count]) => `${kind} ${count}`).join('; ')}.`, '',
-  '## Deferred from this run', ''];
-if (!evidence.deferrals.pairs.length && !evidence.deferrals.items.length) lines.push('No documented deferrals.');
-for (const row of evidence.deferrals.pairs) lines.push(`- A/B pair \`${row.page}\` / \`${row.companion}\`: ${row.reason}`);
-for (const row of evidence.deferrals.items) lines.push(`- Item \`${row.item}\` on \`${row.page}\`: ${row.reason}`);
-lines.push('',
-  '## Verification closure', '',
-  `- Judge lineup: ${evidence.verification.judge_lineup}.`,
-  `- Proof layout: ${evidence.verification.proof_layout.items} items, ${evidence.verification.proof_layout.steps} steps; separation and blue tags both passed on current inputs.`,
-  `- Current judge verdicts complete: ${evidence.verification.verdicts_complete}/${evidence.verification.scope}.`,
-  `- Terminal resolutions after the ${TERMINAL_REJUDGE_ROUNDS}-rejudge cap: ${evidence.verification.terminal_resolutions.length}${evidence.verification.terminal_resolutions.length ? ` (${terminalByResolver}; items: ${evidence.verification.terminal_resolutions.map((row) => row.id).join(', ')})` : ''}.`,
-  `- Judge closure: ${evidence.verification.closure_closed ? 'closed' : 'open'}; workflow-owned blockers: ${evidence.verification.workflow_owned_blockers}.`,
-  `- Evidence fingerprint: \`${evidence.evidence_sha256}\`.`, '',
-  '## Fatal mathematical defects — exhaustive ledger table', '',
-  `The run recorded ${evidence.defects.fatal_count} fatal defect row(s). Every row is reproduced below from the defect ledger.`, '',
-  '| Defect | Item / subject | Class | Subclass | Location | Disposition | Caught at |',
-  '|---|---|---|---|---|---|---|');
-for (const row of evidence.defects.fatal) lines.push(`| ${cell(row.defect_id)} | ${cell(row.subject)} | ${cell(row.class)} | ${cell(row.subclass)} | ${cell(row.location)} | ${cell(row.disposition)} | ${cell(row.caught_at_stage)} |`);
-if (!evidence.defects.fatal.length) lines.push('| — | — | — | — | — | none | — |');
-lines.push('', `Grouped by class: ${Object.entries(evidence.defects.by_class).map(([name, count]) => `${name} ${count}`).join('; ') || 'none'}.`,
-  `Grouped by location: ${Object.entries(evidence.defects.by_location).map(([name, count]) => `${name} ${count}`).join('; ') || 'none'}.`, '',
-  '## Judge and adjudication record', '',
-  '| Model | Exact verdicts | Kept | Rejected | Null |', '|---|---:|---:|---:|---:|');
-for (const [model, stats] of Object.entries(evidence.judges.by_model)) lines.push(`| ${cell(model)} | ${stats.verdicts} | ${stats.kept} | ${stats.rejected} | ${stats.null} |`);
-const sets = evidence.judges.configured_set_stats;
-lines.push('', `Across ${sets.versions_with_evidence} text version(s) with configured-judge evidence: ${sets.complete_versions} complete model set(s), ${sets.all_keep} all keep, ${sets.all_reject} all reject, ${sets.mixed} mixed, ${sets.contains_null} containing a null response, and ${sets.incomplete} incomplete.`,
-  `Adjudications: ${Object.entries(evidence.judges.adjudications.outcomes).map(([outcome, count]) => `${outcome} ${count}`).join('; ') || 'none'}.`, '',
-  '## Repeated repairs and pathway closure', '');
-if (evidence.repeated_repairs.length) {
-  lines.push(`Items repaired more than once: ${evidence.repeated_repairs.map((row) => `${row.id} (${row.repairs})`).join('; ')}.`);
-} else lines.push('No item was repaired more than once according to the touch ledger.');
-lines.push(`Pathway obligations closed: ${evidence.pathway.closed}/${evidence.pathway.obligations}; categories: ${evidence.pathway.categories.join(', ') || 'none'}.`, '',
-  '## Caveats', '');
-if (response.caveats.length) for (const caveat of response.caveats) lines.push(`- ${caveat}`); else lines.push('- None identified beyond the owner actions below.');
-lines.push('', '## Owner reading priorities', '');
-if (response.owner_reading_priorities.length) for (const row of response.owner_reading_priorities) lines.push(`- ${row.subject}: ${row.reason}`); else lines.push('- No special priority beyond the complete fatal-defect table and personal mathematical audit.');
-lines.push('', '## Workflow recommendations', '');
-if (response.recommendations.length) for (const row of response.recommendations) lines.push(`${row.rank}. ${row.recommendation} (risk: ${row.risk}) — ${row.impact} Evidence: ${row.evidence}`); else lines.push('No evidence-supported workflow change is recommended.');
-lines.push('', '## Publication readiness', '',
-  `Verdict: **${response.readiness_verdict}**.`,
-  `Remaining owner actions: ${evidence.readiness.owner_actions_remaining.join('; ') || 'none'}.`,
-  'This report does not publish, change status fields, push, or deploy.', '');
 mkdirSync(dirname(out), { recursive: true });
-writeFileSync(out, lines.join('\n'));
-console.log(`step6-report-render: wrote ${out} with ${evidence.defects.fatal_count} mechanically complete fatal row(s)`);
+writeFileSync(out, renderSummaryReport({ run, evidence, response, telemetry: step6Telemetry(root, run) }));
+console.log(`step6-report-render: wrote concise report ${out}; exhaustive evidence remains in JSON`);

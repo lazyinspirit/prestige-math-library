@@ -333,8 +333,12 @@ function operationalContextExclusions(root, run, protectedPaths) {
   const seen = new Set();
   for (const row of evidence.directories) {
     safePath(row.path);
-    if (!row.path.startsWith('research/' + run + '-owner-escalation-repairs/')
-      || !/\/(?:overlay|shadow)$/.test(row.path) || seen.has(row.path)
+    const historicalHHResolver = run === 'hopf-hecke-unfinished-15-2026-10-15'
+      && ['research/' + run + '-owner/authoring-readiness-escalation/cross-batch/local-read-context',
+        'research/' + run + '-owner/authoring-readiness-escalation/cross-batch/final/local-read-context'].includes(row.path);
+    const ordinaryResolver = row.path.startsWith('research/' + run + '-owner-escalation-repairs/')
+      && /\/(?:overlay|shadow)$/.test(row.path);
+    if ((!ordinaryResolver && !historicalHHResolver) || seen.has(row.path)
       || typeof row.reason !== 'string' || row.reason.trim().length < 20
       || !Number.isSafeInteger(row.entries) || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')
       || !Array.isArray(row.evidence) || !row.evidence.length)
@@ -360,7 +364,7 @@ function operationalContextExclusions(root, run, protectedPaths) {
     candidate === dir || candidate.startsWith(dir + '/')) };
 }
 
-function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingReceipt = false) {
+function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingReceipt = false, preflight = false) {
   const { policyPath, policyText, policy, reviewedHook } = readScopePolicy(root, run);
   const selected = runScope(run, root);
   // Pathway gates govern absent authored pathways. Closeout owns every
@@ -429,7 +433,12 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
     if (row.sha256 !== null) regularPath(root, row.path);
     additional.add(row.path);
   }
-  for (const path of required) regularPath(root, path, allowMissingReceipt && path === finalReceipt);
+  // Packaging is checked before reporting. Only exact future derived artifacts
+  // may be absent here; authoritative sources and every present path stay strict.
+  const pending = path => preflight && (path === finalReceipt || ['proof-layout.json',
+    'publication-readiness.json', 'step6-report-integrity.json', 'step6-report.response.json',
+    'step6-report.md', 'step6-evidence.json'].some(name => path === `research/${run}-${name}`));
+  for (const path of required) regularPath(root, path, pending(path) || allowMissingReceipt && path === finalReceipt);
   const index = indexEntries(root), tree = treeEntries(root);
   const others = nul(git(root, ['ls-files', '--others', '--exclude-standard', '-z']));
   const inventory = [...new Set([...index.map(row => row.path), ...tree.map(row => row.path), ...others])].sort();
@@ -455,7 +464,7 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   const owned = new Set(paths), owns = path => owned.has(path);
   for (const path of paths) {
     if (!owns(path)) throw Error('closeout: recorded path no longer belongs to this run: ' + path);
-    regularPath(root, path, !required.has(path) || allowMissingReceipt && path === finalReceipt);
+    regularPath(root, path, pending(path) || !required.has(path) || allowMissingReceipt && path === finalReceipt);
   }
   // check-ignore reads exact filenames and rejects literal pathspec magic.
   const ignored = nul(git(root, ['check-ignore', '-z', '--stdin'], {
@@ -469,6 +478,11 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
 
 // Read-only binding helper for an owner administrative reseal. It does not
 // capture outside rows, write receipts or grant workflow/commit authority.
+export function preflightCloseoutScope(root, run) {
+  const receipt = 'research/' + run + '-dispatch/tool-close-step6-v2.result.json';
+  return loadScope(root, run, receipt, [], true, true);
+}
+
 export function inspectCloseoutScope(root, run) {
   const receipt = 'research/' + run + '-dispatch/tool-close-step6-v2.result.json';
   const previous = existsSync(join(root, receipt)) ? JSON.parse(readFileSync(join(root, receipt), 'utf8')) : null;

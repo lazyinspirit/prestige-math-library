@@ -34,7 +34,7 @@ import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
 import { doctor } from '../src/doctor.mts';
 import { formatProblems } from '../src/spec.mts';
 import { acquireControllerLock } from '../src/controller-lock.mts';
-import { inspectReportReopen, reopenReport } from '../../autopilot-report-reopen.mjs';
+import { inspectReportReopen, reopenReport, inspectPackagingReopen, reopenPackaging } from '../../autopilot-report-reopen.mjs';
 import { reopenStep3 } from '../src/step3-reopen.mts';
 import { inspectCloseoutReopen, reopenCloseout } from '../src/closeout-reopen.mts';
 import { appendFrontier, assertNoAppendTransaction, recoverAppendItemOrder } from '../src/frontier-append.mts';
@@ -220,6 +220,7 @@ async function buildExecutor(run?: string) {
 }
 
 switch (cmd) {
+  case 'reopen-closeout-packaging':
   case 'reopen-report': {
     const run = opt('run') ?? die('--run is required');
     const authorization = opt('authorization') ?? die('--authorization is required');
@@ -227,9 +228,10 @@ switch (cmd) {
     const options = { repo, run, stateDir: opt('state-dir') ? stateDir : join(repo, '.autopilot', run),
       dispatchDir: config.dispatchDir ?? join(repo, 'research', `${run}-dispatch`), authorizationPath: resolve(repo, authorization) };
     try {
-      if (has('inspect')) console.log(JSON.stringify(inspectReportReopen(options).guards, null, 2));
+      const packaging = cmd === 'reopen-closeout-packaging';
+      if (has('inspect')) console.log(JSON.stringify((packaging ? inspectPackagingReopen : inspectReportReopen)(options).guards, null, 2));
       else {
-        const receipt = reopenReport(options);
+        const receipt = (packaging ? reopenPackaging : reopenReport)(options);
         console.log(`reopen-report: archived original evidence and reopened ${receipt.guards.reopen_stages.length} native suffix stages`);
         console.log('  remains paused; start/resume for fresh readiness, evidence, baseline and owner report');
       }

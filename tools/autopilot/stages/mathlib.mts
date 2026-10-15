@@ -1543,13 +1543,20 @@ export const stages = [
   {
     id: '6-pathway-author-v2', label: 'Lead Alpha pathway rewrite', units: () => ['all'],
     artifacts: (ctx) => `research/${ctx.run}-pathway-closure.json`,
-    // Role `alpha-high` since 2026-08-24; the pattern still said `alpha`. No run
-    // has reached step 6 under the new lane, so there is no legacy result to
-    // keep matching and the correct single spelling is enough.
-    pattern: resultPattern('alpha-high', 'pathway-close-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'alpha-high', label: 'pathway-close-v2', job: 'authoring', covers: ['all'],
-      brief: 'briefs/alpha.md',
-      task: [`research/${ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 }],
+    // Preserve native prose work when needed and historical receipt identity.
+    pattern: /^(?:tool-(?:tool-)?|alpha-high-(?:alpha-high-)?)(?:pathway-close-v2)\.result\.json$/, concurrency: 1,
+    plan: (ctx) => {
+      const receipt = join(ctx.repo, 'research', `${ctx.run}-pathway-closure.json`);
+      let closure = null;
+      try { closure = existsSync(receipt) ? JSON.parse(readFileSync(receipt, 'utf8')) : null; } catch { /* Native author/closure gates retain malformed-evidence handling. */ }
+      if (closure?.run === ctx.run && Array.isArray(closure.briefs) && closure.briefs.length === 0) {
+        const checked = spawnSync('node', ['tools/pathway-closure.mjs', 'check', '--run', ctx.run], { cwd: ctx.repo, encoding: 'utf8' });
+        if (checked.status === 0) return [{ role: 'tool', label: 'pathway-close-v2', job: 'bookkeeping-mechanical', covers: ['all'],
+          argv: ['node', 'tools/pathway-closure.mjs', 'check', '--run', ctx.run] }];
+      }
+      return [{ role: 'alpha-high', label: 'pathway-close-v2', job: 'authoring', covers: ['all'],
+        brief: 'briefs/alpha.md', task: [`research/${ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 }];
+    },
     gates: (ctx) => [
       gate('pathway-closure', ['node', 'tools/pathway-closure.mjs', 'check', '--run', ctx.run]),
       frontierItemGate(ctx, 'pathcheck', 'pathcheck'), frontierItemGate(ctx, 'prosecheck', 'prosecheck'), closureGate(ctx, { selectiveStep5: true }),
@@ -1601,9 +1608,8 @@ export const stages = [
       argv: ['node', 'tools/step6-report.mjs', 'evidence', '--run', ctx.run] }],
     gates: (ctx) => [gate('step6-evidence', ['node', 'tools/step6-report.mjs', 'check-evidence', '--run', ctx.run])],
   },
-  // Freeze the validated mathematical tree before asking for prose.  The next
-  // agent is kernel-enforced read-only and returns JSON; this receipt catches an
-  // out-of-band mutation as a hard failure rather than trusting that instruction.
+  // Seal validated inputs before deterministic reporting; every later integrity
+  // gate still rejects an out-of-band mutation.
   {
     id: '6-report-baseline-v2', label: 'freeze validated tree before reporting', units: () => ['all'],
     artifacts: (ctx) => `research/${ctx.run}-step6-report-integrity.json`,
@@ -1613,12 +1619,11 @@ export const stages = [
     gates: (ctx) => [gate('report-integrity', ['node', 'tools/step6-report.mjs', 'check', '--run', ctx.run])],
   },
   {
-    id: '6-owner-report-v2', label: 'read-only evidence-bound owner report', units: () => ['all'],
+    id: '6-owner-report-v2', label: 'deterministic evidence-bound owner summary', units: () => ['all'],
     artifacts: (ctx) => `research/${ctx.run}-step6-report.response.json`,
-    pattern: resultPattern('alpha-report', 'owner-report-v2'), concurrency: 1,
-    plan: (ctx) => [{ role: 'alpha-report', label: 'owner-report-v2', job: 'reporting', covers: ['all'],
-      brief: 'briefs/alpha.md', task: `research/${ctx.run}-alpha-step6.task.md`, timeout: 10800,
-      outputSchema: 'briefs/schemas/step6-report.json', resultArtifact: `research/${ctx.run}-step6-report.response.json` }],
+    pattern: /^(?:tool-(?:tool-)?|alpha-report-(?:alpha-report-)?)(?:owner-report-v2)\.result\.json$/, concurrency: 1,
+    plan: (ctx) => [{ role: 'tool', label: 'owner-report-v2', job: 'bookkeeping-mechanical', covers: ['all'],
+      argv: ['node', 'tools/step6-report.mjs', 'summary', '--run', ctx.run] }],
     gates: (ctx) => [gate('step6-evidence', ['node', 'tools/step6-report.mjs', 'check-evidence', '--run', ctx.run]),
       gate('report-response', ['node', 'tools/step6-report.mjs', 'check-response', '--run', ctx.run])],
   },

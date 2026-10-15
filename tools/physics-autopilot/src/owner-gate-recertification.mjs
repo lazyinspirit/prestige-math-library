@@ -6,6 +6,8 @@ import { createHash, randomUUID } from 'node:crypto';
 import { frontierGateScope } from '../../physics-support/frontier-gate-scope.mjs';
 import { markdownFiles, readItem } from '../../physics-support/physics-content.mjs';
 import { originalImportPath } from '../../physics-support/physics-imports.mjs';
+import { scanProofFiles } from '../../physics-support/proof-layout.mjs';
+import { runPages, dependencyLevels } from '../../physics-support/item-dependency-levels.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const json = value => JSON.stringify(value);
@@ -247,6 +249,84 @@ function filesBelowIfDirectory(path) {
   }
 }
 
+/** Owner authorization binds stable source/context, not changing report receipts
+ * or a particular battery. This still hashes actual source bytes every time. */
+export function step6SourceAuthorizationSnapshot(ctx) {
+  return gateReviewSnapshot(ctx, [{ id: 'step6-owner-source-authorization', argv: [] }], ['6-closeout']);
+}
+
+export function authorizeStep6Recertification(ctx, { reviewer = 'owner', resolveEscalations = false } = {}) {
+  if (!resolveEscalations || !reviewer?.trim()) throw Error('Owner must resolve escalations and identify the reviewer');
+  const request = readJSON(join(ctx.config.stateDir, 'owner-gate-request.json'));
+  const state = readJSON(join(ctx.config.stateDir, 'state.json'));
+  if (request.version !== 2 || request.snapshot?.run !== ctx.run
+    || !request.snapshot.stages.every(id => id.startsWith('6-'))
+    || state.run !== ctx.run || state.paused !== true)
+    throw Error('Authorization requires this exact paused Step-6 owner boundary');
+  const snapshot = step6SourceAuthorizationSnapshot(ctx);
+  const authorization = { version: 1, run: ctx.run, authorized_by: 'owner', reviewer,
+    escalations_resolved: true, recertificationScope: RECERTIFICATION_SCOPE,
+    at: new Date().toISOString(), fingerprint: snapshot.sha256, snapshot };
+  atomic(join(ctx.config.stateDir, 'owner-step6-authorization.json'), authorization);
+  return { fingerprint: authorization.fingerprint, subjects: snapshot.items.length };
+}
+
+function automaticStep6Receipt(ctx, request, snapshot, receiptPath) {
+  if (!snapshot.stages.every(id => id.startsWith('6-'))) return;
+  const authorizationPath = join(ctx.config.stateDir, 'owner-step6-authorization.json');
+  if (!existsSync(authorizationPath)) return;
+  const authorization = readJSON(authorizationPath);
+  const sourceBefore = step6SourceAuthorizationSnapshot(ctx);
+  if (authorization.version !== 1 || authorization.run !== ctx.run
+    || authorization.authorized_by !== 'owner' || authorization.escalations_resolved !== true
+    || authorization.recertificationScope !== RECERTIFICATION_SCOPE
+    || !authorization.reviewer?.trim() || authorization.fingerprint !== sourceBefore.sha256
+    || authorization.snapshot?.sha256 !== authorization.fingerprint)
+    throw Error('Step-6 owner source authorization is stale or invalid; renew it after resolving current changes');
+  const reviewStartedAt = new Date().toISOString();
+  const graph = dependencyLevels(runPages(ctx.repo, ctx.run));
+  if (graph.errors.length) throw Error(graph.errors.join('\n'));
+  const sorted = array => [...array].sort();
+  const checks = snapshot.items.map(row => {
+    const path = join(ctx.repo, 'items', `${row.id}.md`);
+    const item = readItem(path), manifest = graph.items.get(row.id)?.item;
+    if (digest(item.raw) !== row.carrierSha256 || item.id !== row.id
+      || !item.kind || !item.title?.trim() || !['draft', 'published'].includes(item.status)
+      || !Array.isArray(item.deps) || item.deps.some(dep => typeof dep !== 'string' || !dep))
+      throw Error(`Malformed current source metadata: ${row.id}`);
+    if (manifest && (digest(json(manifest)) !== row.manifestSha256
+      || item.kind !== manifest.kind || item.title !== manifest.title
+      || item.dependency_level !== graph.levels.get(row.id)
+      || json(sorted(item.deps)) !== json(sorted(manifest.deps))
+      || (manifest.domain !== undefined && item.domain !== manifest.domain)))
+      throw Error(`Current source/manifest metadata mismatch: ${row.id}`);
+    return { ...row, metadataCheck: { id: item.id, kind: item.kind, title: item.title,
+      status: item.status, dependency_level: item.dependency_level, deps: item.deps,
+      manifestMatched: Boolean(manifest) } };
+  });
+  // Fresh real renderer check in the already dependency-ordered native scope.
+  // No cached proof-layout receipt can stand in for this per-battery pass.
+  const layout = scanProofFiles(snapshot.items.map(row => `items/${row.id}.md`), ctx.repo);
+  const failures = layout.flatMap(item => item.errors.map(error => `${item.file}: ${error.message ?? JSON.stringify(error)}`));
+  if (failures.length) throw Error(failures.join('\n'));
+  if (step6SourceAuthorizationSnapshot(ctx).sha256 !== sourceBefore.sha256)
+    throw Error('Step-6 source/context changed during actual formatting/metadata checks');
+  const reviewedAt = new Date().toISOString();
+  const evidencePath = join(ctx.config.stateDir, 'owner-gate-checks', `${request.attempt}.json`);
+  atomic(evidencePath, { version: 1, run: ctx.run, attempt: request.attempt,
+    recertificationScope: RECERTIFICATION_SCOPE, mathematical_review: false,
+    reviewStartedAt, reviewedAt, authorizationFingerprint: sourceBefore.sha256,
+    metadata: checks, formatting: layout });
+  const evidence = `${evidencePath} (fresh native renderer and source/manifest metadata checks)`;
+  atomic(receiptPath, { version: 2, run: ctx.run, recertificationScope: RECERTIFICATION_SCOPE,
+    attempt: request.attempt, snapshotSha256: snapshot.sha256,
+    reviewer: authorization.reviewer, writersDrained: true, writerScopes: [],
+    reviewStartedAt, reviewedAt,
+    items: checks.map(row => ({ id: row.id, carrierSha256: row.carrierSha256,
+      manifestSha256: row.manifestSha256, verdict: 'format-metadata-pass',
+      formatting: { verdict: 'pass', evidence }, metadata: { verdict: 'pass', evidence } })) });
+}
+
 /** Called only by the drained native level join. One owner receipt authorizes
  * exactly one full native battery; failed attempts and crashes need fresh
  * formatting/metadata checks, without a detailed content review. */
@@ -266,6 +346,7 @@ export function authorizeOwnerGate({ ctx, gates, stages, writers = [] }) {
       request = { version: 2, attempt: randomUUID(), createdAt: new Date().toISOString(), snapshot };
       atomic(requestPath, request);
     }
+    automaticStep6Receipt(ctx, request, snapshot, receiptPath);
     if (!existsSync(receiptPath)) throw Error(`Missing owner recertification: ${receiptPath}`);
     const receipt = readJSON(receiptPath);
     if (receipt.version !== 2 || receipt.recertificationScope !== RECERTIFICATION_SCOPE

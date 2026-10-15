@@ -30,6 +30,11 @@ if (!run || write === verify) {
   process.exit(2);
 }
 
+if (write && existsSync(join(root, `research/${run}-closeout-scope.json`))) {
+  const { preflightCloseoutScope } = await import('./run-commit-scope.mjs');
+  preflightCloseoutScope(root, run);
+}
+
 const receiptRel = `research/${run}-publication-readiness.json`;
 const receiptPath = join(root, receiptRel);
 const artifactRels = [

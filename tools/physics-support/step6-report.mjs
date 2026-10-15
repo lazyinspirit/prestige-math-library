@@ -5,9 +5,8 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 //
 // Expensive mathematical gates produce structured receipts before this tool
 // runs.  `evidence` reconciles those receipts and the append-only ledgers once;
-// the read-only Alpha interprets that compact packet, while `render` supplies
-// every exhaustive count and fatal-defect row mechanically.  The reporter can
-// therefore be concise without gaining the power to omit or invent a defect.
+// `summary` produces its deterministic owner response and `render` presents
+// essential closure facts. The complete packet retains every audit row.
 
 import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, writeFileSync, lstatSync, mkdirSync } from 'node:fs';
@@ -15,11 +14,11 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
 import { resolveLineup } from './models.mjs';
-import { TERMINAL_REJUDGE_ROUNDS } from './step5-terminal-resolution.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
 import { activeOwnershipRows } from '../defect-ledger-ownership.mjs';
 import { protectedEntryHashes } from './step6-report-tree.mjs';
 import { validateFrontier } from './step5-rounds.mjs';
+import { makeSummaryResponse, renderSummaryReport, step6Telemetry } from '../step6-summary.mjs';
 
 const LEDGER_TOOL = fileURLToPath(new URL('./defect-ledger.mjs', import.meta.url));
 
@@ -29,7 +28,7 @@ const value = (flag) => { const i = args.indexOf(flag); return i < 0 ? '' : args
 const run = value('--run');
 const root = resolve(value('--root') || (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot)));
 const die = (message) => { console.error(`ERROR ${message}`); process.exit(1); };
-const commands = ['evidence', 'check-evidence', 'snapshot', 'check', 'check-response', 'render'];
+const commands = ['evidence', 'check-evidence', 'snapshot', 'check', 'check-response', 'summary', 'render'];
 if (!run || !commands.includes(command)) die(`usage: node tools/physics-support/step6-report.mjs <${commands.join('|')}> --run <run> [--root <repo>] [--in <response.json>] [--out <path>]`);
 
 const research = join(root, 'research');
@@ -312,6 +311,19 @@ if (command === 'check-evidence') {
   process.exit(0);
 }
 
+// This command verifies the packet against current native evidence before
+// interpreting it. Existing evidence, response and integrity gates remain
+// separate engine requirements; no mathematical coverage is inferred here.
+if (command === 'summary') {
+  const evidence = readJson(evidencePath);
+  if (canonical(evidence) !== canonical(buildEvidence())) die('step6-evidence-stale: evidence does not match current receipts and ledgers');
+  const response = makeSummaryResponse(evidence, run, { physics: true });
+  writeFileSync(value('--out') || responsePath, `${JSON.stringify(response, null, 2)}\n`);
+  parseResponse(value('--out') || responsePath);
+  console.log('step6-report-summary: deterministic evidence-bound owner response');
+  process.exit(0);
+}
+
 const ignored = new Set(['.git', 'node_modules']);
 const allowed = new Set([relative(root, responsePath), relative(root, reportPath), relative(root, integrityPath)]);
 const dispatchPrefix = `research/${run}-dispatch/`;
@@ -377,65 +389,8 @@ if (command === 'check-response') {
 
 const { response, evidence } = parseResponse(value('--in') || responsePath);
 const out = value('--out') || reportPath;
-const cell = (text) => String(text ?? '').replaceAll('|', '\\|').replaceAll('\n', ' ');
-const terminalByResolver = Object.entries(evidence.verification.terminal_resolutions.reduce((counts, row) => {
-  const resolver = row.resolved_by || 'unspecified';
-  counts[resolver] = (counts[resolver] ?? 0) + 1;
-  return counts;
-}, {})).sort(([left], [right]) => left.localeCompare(right))
-  .map(([resolver, count]) => `${resolver}: ${count}`).join('; ');
-const lines = [`# ${run} — Step 6 owner report`, '', response.executive_summary.trim(), '',
-  '## What was built', '',
-  `- ${evidence.build.pages} pages and ${evidence.build.items} items across ${evidence.build.categories.length} categories.`,
-  `- Categories: ${evidence.build.categories.join(', ') || 'none'}.`,
-  `- Item kinds: ${Object.entries(evidence.build.items_by_kind).map(([kind, count]) => `${kind} ${count}`).join('; ')}.`, '',
-  '## Deferred from this run', ''];
-if (!evidence.deferrals.pairs.length && !evidence.deferrals.items.length) lines.push('No documented deferrals.');
-for (const row of evidence.deferrals.pairs) lines.push(`- A/B pair \`${row.page}\` / \`${row.companion}\`: ${row.reason}`);
-for (const row of evidence.deferrals.items) lines.push(`- Item \`${row.item}\` on \`${row.page}\`: ${row.reason}`);
-lines.push('',
-  '## Verification closure', '',
-  `- Judge lineup: ${evidence.verification.judge_lineup}.`,
-  `- Proof layout: ${evidence.verification.proof_layout.items} items, ${evidence.verification.proof_layout.steps} steps; separation and blue tags both passed on current inputs.`,
-  `- Current judge verdicts complete: ${evidence.verification.verdicts_complete}/${evidence.verification.scope}.`,
-  `- Terminal resolutions after the ${TERMINAL_REJUDGE_ROUNDS}-rejudge cap: ${evidence.verification.terminal_resolutions.length}${evidence.verification.terminal_resolutions.length ? ` (${terminalByResolver}; items: ${evidence.verification.terminal_resolutions.map((row) => row.id).join(', ')})` : ''}.`,
-  `- Judge closure: ${evidence.verification.closure_closed ? 'closed' : 'open'}; workflow-owned blockers: ${evidence.verification.workflow_owned_blockers}.`,
-  `- Evidence fingerprint: \`${evidence.evidence_sha256}\`.`, '',
-  '## Fatal mathematical defects — exhaustive ledger table', '',
-  `The run recorded ${evidence.defects.fatal_count} fatal defect row(s). Every row is reproduced below from the defect ledger.`, '',
-  `Current ownership: ${evidence.defects.active_fatal_count ?? evidence.defects.fatal_count} active fatal row(s); ${evidence.defects.historical_fatal_count ?? 0} superseded historical fatal row(s).`, '',
-  `Outside original maintenance: ${(evidence.defects.outsideOpenFindings ?? []).length} OPEN finding(s), excluded from owned closure, not passed or repaired${(evidence.defects.outsideOpenFindings ?? []).length ? ` (${evidence.defects.outsideOpenFindings.map(row => `${row.defect_id}: ${row.subject}`).join('; ')})` : ''}.`, '',
-  '| Defect | Item / subject | Class | Subclass | Location | Disposition | Ownership | Caught at |',
-  '|---|---|---|---|---|---|---|---|');
-for (const row of evidence.defects.fatal) {
-  const ownership = row.ownership_status === 'superseded'
-    ? `historical; superseded by ${(row.current_owners ?? []).join(', ')}` : 'active';
-  lines.push(`| ${cell(row.defect_id)} | ${cell(row.subject)} | ${cell(row.class)} | ${cell(row.subclass)} | ${cell(row.location)} | ${cell(row.disposition)} | ${cell(ownership)} | ${cell(row.caught_at_stage)} |`);
-}
-if (!evidence.defects.fatal.length) lines.push('| — | — | — | — | — | none | — | — |');
-lines.push('', `Grouped by class: ${Object.entries(evidence.defects.by_class).map(([name, count]) => `${name} ${count}`).join('; ') || 'none'}.`,
-  `Grouped by location: ${Object.entries(evidence.defects.by_location).map(([name, count]) => `${name} ${count}`).join('; ') || 'none'}.`, '',
-  '## Judge and adjudication record', '',
-  '| Model | Exact verdicts | Kept | Rejected | Null |', '|---|---:|---:|---:|---:|');
-for (const [model, stats] of Object.entries(evidence.judges.by_model)) lines.push(`| ${cell(model)} | ${stats.verdicts} | ${stats.kept} | ${stats.rejected} | ${stats.null} |`);
-const sets = evidence.judges.configured_set_stats;
-lines.push('', `Across ${sets.versions_with_evidence} text version(s) with configured-judge evidence: ${sets.complete_versions} complete model set(s), ${sets.all_keep} all keep, ${sets.all_reject} all reject, ${sets.mixed} mixed, ${sets.contains_null} containing a null response, and ${sets.incomplete} incomplete.`,
-  `Adjudications: ${Object.entries(evidence.judges.adjudications.outcomes).map(([outcome, count]) => `${outcome} ${count}`).join('; ') || 'none'}.`, '',
-  '## Repeated repairs and pathway closure', '');
-if (evidence.repeated_repairs.length) {
-  lines.push(`Items repaired more than once: ${evidence.repeated_repairs.map((row) => `${row.id} (${row.repairs})`).join('; ')}.`);
-} else lines.push('No item was repaired more than once according to the touch ledger.');
-lines.push(`Pathway obligations closed: ${evidence.pathway.closed}/${evidence.pathway.obligations}; categories: ${evidence.pathway.categories.join(', ') || 'none'}.`, '',
-  '## Caveats', '');
-if (response.caveats.length) for (const caveat of response.caveats) lines.push(`- ${caveat}`); else lines.push('- None identified beyond the owner actions below.');
-lines.push('', '## Owner reading priorities', '');
-if (response.owner_reading_priorities.length) for (const row of response.owner_reading_priorities) lines.push(`- ${row.subject}: ${row.reason}`); else lines.push('- No special priority beyond the complete fatal-defect table and personal mathematical audit.');
-lines.push('', '## Workflow recommendations', '');
-if (response.recommendations.length) for (const row of response.recommendations) lines.push(`${row.rank}. ${row.recommendation} (risk: ${row.risk}) — ${row.impact} Evidence: ${row.evidence}`); else lines.push('No evidence-supported workflow change is recommended.');
-lines.push('', '## Publication readiness', '',
-  `Verdict: **${response.readiness_verdict}**.`,
-  `Remaining owner actions: ${evidence.readiness.owner_actions_remaining.join('; ') || 'none'}.`,
-  'This report does not publish, change status fields, push, or deploy.', '');
+const telemetry = step6Telemetry(root, run, { stateDir: `.physics-autopilot/${run}` });
+const rendered = renderSummaryReport({ run, evidence, response, telemetry });
 mkdirSync(dirname(out), { recursive: true });
-writeFileSync(out, lines.join('\n'));
-console.log(`step6-report-render: wrote ${out} with ${evidence.defects.fatal_count} mechanically complete fatal row(s)`);
+writeFileSync(out, rendered);
+console.log(`step6-report-render: wrote ${out}; complete audit remains in ${relative(root, evidencePath)}`);

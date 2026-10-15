@@ -14,6 +14,7 @@ const read = file => existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) :
 const runtime = ctx => ctx.stateDir ?? ctx.config?.stateDir ?? join(ctx.repo, '.autopilot', ctx.run);
 const requestPath = ctx => join(runtime(ctx), 'owner-gate-request.json');
 const permissionPath = ctx => join(runtime(ctx), 'owner-gate-permission.json');
+const closeoutAuthorizationPath = ctx => join(runtime(ctx), 'owner-step6-authorization.json');
 
 export function recertificationArchiveDir(ctx, request) {
   // Reporter integrity deliberately excludes native dispatch evidence. The
@@ -64,6 +65,23 @@ export function holdBeforeBattery({ ctx, executor, stage }) {
   writeFileSync(requestPath(ctx), JSON.stringify(request, null, 2) + '\n');
   executor.state.paused = true;
   executor.state.save();
+  const authorization = read(closeoutAuthorizationPath(ctx));
+  if (group.every(s => s.id.startsWith('6-')) && authorization?.run === ctx.run
+    && authorization.authorized_by === 'owner' && authorization.escalations_resolved === true
+    && authorization.fingerprint === frontierInputs(ctx).fingerprint) {
+    // Every battery still gets its own actual dependency-ordered hash/metadata/
+    // formatting pass. Only the repeated human wait is removed. Any changed
+    // frontier/context or native owner failure hold requires fresh intervention.
+    try {
+      recertify({ ...ctx, stateDir: runtime(ctx) }, { resolveEscalations: true });
+      executor.state.paused = false;
+      executor.state.save();
+      executor.reporter.notify('owner-step6-recertified', `Automatic fresh pass for ${key} under the exact owner authorization`);
+    } catch (error) {
+      executor.reporter.notify('paused', `Step-6 mechanical recertification failed: ${error.message}`);
+    }
+    return;
+  }
   executor.reporter.notify('paused', `Owner pre-gate hold: ${requestPath(ctx)}`);
 }
 
@@ -126,6 +144,12 @@ export function recertify(ctx, { resolveEscalations = false } = {}) {
   const archive = join(archiveDir, `owner-gate-recertification-${randomUUID()}.json`);
   writeFileSync(archive, JSON.stringify(receipt, null, 2) + '\n', { flag: 'wx' });
   writeFileSync(permissionPath(ctx), JSON.stringify({ ...receipt, receipt: relative(ctx.repo, archive) }, null, 2) + '\n');
+  if (ctx.authorizeStep6) {
+    if (!request.stages.every(id => id.startsWith('6-'))) throw Error('Step-6 authorization requires a Step-6 boundary');
+    writeFileSync(closeoutAuthorizationPath(ctx), JSON.stringify({ version: 1, run: ctx.run,
+      authorized_by: 'owner', escalations_resolved: true, at: receipt.at,
+      fingerprint: receipt.fingerprint, source_receipt: relative(ctx.repo, archive) }, null, 2) + '\n');
+  }
   return { receipt: relative(ctx.repo, archive), subjects: rows.length, mode: receipt.mode };
 }
 
@@ -133,7 +157,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const args = process.argv.slice(2), value = flag => args[args.indexOf(flag) + 1];
   try {
     if (!args.includes('--run') || !args.includes('--state-dir')) throw Error('--run and --state-dir are required');
-    console.log(JSON.stringify(recertify({ repo: process.cwd(), run: value('--run'), stateDir: value('--state-dir') },
+    console.log(JSON.stringify(recertify({ repo: process.cwd(), run: value('--run'), stateDir: value('--state-dir'), authorizeStep6: args.includes('--authorize-step6') },
       { resolveEscalations: args.includes('--escalations-resolved') })));
   } catch (error) { console.error(error.message); process.exitCode = 1; }
 }
