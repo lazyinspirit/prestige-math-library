@@ -19,8 +19,7 @@ sources:
   references:
     - title: "Hans-Jürgen Schneider, Lectures on Hopf algebras, notes by Sonia Natale"
       url: "https://www.famaf.unc.edu.ar/~andrus/papers/Schn1.pdf"
-      locator: 'Theorem 1.5(c), printed p. 16: commutative or cocommutative Hopf algebras have $S^2=\mathrm{id}
----
+      locator: 'Theorem 1.5(c), printed p. 16: commutative or cocommutative Hopf algebras have $S^2=\mathrm{id}$'
     - title: "Pavel Etingof and Mykola Semenyakin, A brief introduction to quantum groups"
       url: "https://arxiv.org/pdf/2106.05252"
       locator: "Proposition 2.2(v), PDF p. 4: involutivity in the commutative or cocommutative cases"
