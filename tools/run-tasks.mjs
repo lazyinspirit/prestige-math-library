@@ -37,6 +37,8 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { alphabeticLabel, loadAssignmentBatches, validateAssignment } from './alpha-group-assignment.mjs';
+import { MAX_RUN_BATCHES, MAX_GROUPS, MAX_BATCHES_PER_GROUP } from './autopilot/src/capacity.mjs';
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -71,11 +73,23 @@ if (!batches.length) {
   process.exit(2);
 }
 
-// Group metadata is generated during planning; no assignment workflow stage.
-// this is the same positional fallback `stages/mathlib.mts` uses, and it is only
-// used here to enumerate which group-labelled paths COULD be asked for.
-const groupLabels = [];
-for (let i = 0; i < batches.length; i += 3) groupLabels.push(String.fromCharCode(97 + groupLabels.length));
+// Enumerate the actual native assignment, including category-cohesive groups
+// beyond ceil(batch count / 3). Use the native positional fallback only before
+// planning has produced an assignment. A present invalid assignment fails closed.
+const assignmentPath = R('research', `${run}-alpha-groups.json`);
+let groupLabels;
+if (existsSync(assignmentPath)) {
+  const raw = readJson(assignmentPath);
+  const groups = Array.isArray(raw) ? raw : raw?.groups;
+  const checked = validateAssignment(groups, loadAssignmentBatches(REPO, run, MAX_RUN_BATCHES),
+    { maxGroups: MAX_GROUPS, maxBatches: MAX_BATCHES_PER_GROUP });
+  if (checked.errors.length) throw new Error(checked.errors.join('\n'));
+  groupLabels = groups.map(group => group.label);
+} else {
+  groupLabels = [];
+  for (let i = 0; i < batches.length; i += MAX_BATCHES_PER_GROUP)
+    groupLabels.push(alphabeticLabel(groupLabels.length));
+}
 
 const spec = readJson(R('research/plan-spec.json'));
 const pageById = new Map(spec.pages.map((p) => [p.id, p]));

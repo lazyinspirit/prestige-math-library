@@ -2,6 +2,7 @@
 // Source verdicts remain attributed to their original runs and are never
 // represented as new model executions.
 import { MAX_GROUPS, MAX_RUN_PAIRS } from './capacity.mjs';
+import { alphabeticLabel } from '../../alpha-group-assignment.mjs';
 
 export function buildMapping(sources) {
   const pages = new Set(), items = new Set(), mappings = [], groups = [];
@@ -22,7 +23,7 @@ export function buildMapping(sources) {
     }
     const covered = new Set();
     for (const group of source.groups) {
-      const label = String.fromCharCode(97 + groupNumber++);
+      const label = alphabeticLabel(groupNumber++);
       groupMap[group.label] = label;
       const covers = group.covers.map(String).map(batch => {
         if (!batchMap[batch] || covered.has(batch)) throw new Error(`Invalid group coverage ${source.run}/${batch}`);

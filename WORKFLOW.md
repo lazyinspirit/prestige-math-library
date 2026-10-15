@@ -506,6 +506,24 @@ appends and later Step-5 rows retain the strict schema.
 
 ## Run controls and cutover
 
+Mathematics run inventory supports up to 128 A/B pairs, with exactly one pair per
+batch and at most three batches per group. Groups use lowercase spreadsheet
+labels (`a` through `z`, then `aa`, `ab`, and so on). Inventory capacity does not
+increase active workers: the global concurrency limit remains 30, and stage,
+role, prerequisite, exclusive-writer, review and gate checks still apply. Physics
+retains its own independent limits.
+
+Extend an existing unfinished Step-1 frontier with native `plan --append` only
+after original `1-drift` and `1-drift-apply` have passed natively and the run is
+paused at `1-scaffold` (or a native append boundary), with controller and writers
+stopped and drained. Append preserves prior manifests and evidence, archives
+changed generated metadata, and adds fresh native drift review and apply stages.
+It cannot remove or replace prior pairs. When an owner's revised pre-authoring
+scope requires removing original pairs, preserve that run and its evidence and
+plan a fresh superseding run; earlier readings may be cited as context, while
+all native execution, review and gate evidence must be obtained for the new run.
+Never force-replan or rewrite historical native reports to imply new coverage.
+
 Use `node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts` with the ordinary
 `plan`, `doctor`, `start`, `status`, `pause`, `resume` and `retry` commands.
 `doctor` and generated task checks can run before authoring; they do not prepare
