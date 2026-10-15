@@ -46,17 +46,18 @@ function enqueue(root,run,state,events,items){
 }
 function status(state){return {complete:!state.active&&!Object.values(state.obligations).some(o=>o.status!=='complete'),active:state.active,packs:state.packs,pending:Object.values(state.obligations).filter(o=>o.status!=='complete'),frontier_events:state.frontier_events,completed_changes:state.completed_changes??[],collections:state.collections??[]};}
 export function maintenanceStatus(root,run){return status(load(root,run));}
-export function syncMaintenance(root,run,events=[]){const state=load(root,run);enqueue(root,run,state,events,readLibraryItems(root));save(root,run,state);return status(state);}
+export function syncMaintenance(root,run,events=[]){const state=load(root,run);enqueue(root,run,state,events,readLibraryItems(root,{run}));save(root,run,state);return status(state);}
 
 export function prepareMaintenance(root,run){
   const state=load(root,run),dir=directory(root,run);
   if(state.active)return {complete:false,pack:verifyPack(root,run,state,state.active)};
   const entries=Object.entries(state.obligations).filter(([,o])=>o.status==='pending');
   if(!entries.length)return {complete:true};
-  const items=readLibraryItems(root),eligible=frontier(root,run,items),ids=[...new Set(entries.map(([,o])=>o.id))].sort();
+  const ids=[...new Set(entries.map(([,o])=>o.id))].sort();
+  const items=readLibraryItems(root,{run,requiredIds:ids}),eligible=frontier(root,run,items);
   check(ids.every(id=>!eligible.has(id)),'outside consumer entered eligible frontier');
   const id=`pack-${String(state.packs.length+1).padStart(4,'0')}`;
-  const before=Object.fromEntries(items.map(i=>[i.id,{sha256:i.sha256,guard_sha256:itemHashGuard(readFileSync(join(root,'items',`${i.id}.md`),'utf8')),statement_sha256:i.statement_sha256}]));
+  const before=Object.fromEntries(items.map(i=>[i.id,{sha256:i.sha256,guard_sha256:i.guard_sha256,statement_sha256:i.statement_sha256}]));
   const carriers=Object.fromEntries(ids.map(id=>[id,readFileSync(join(root,'items',`${id}.md`),'utf8')]));
   const lanes=partitionImpacts(ids,3,items).map((targets,index)=>({lane:index+1,ids:targets,assignment:relative(root,join(dir,`${id}-lane-${index+1}.json`)),task:relative(root,join(dir,`${id}-lane-${index+1}.md`)),report:relative(root,join(dir,`${id}-lane-${index+1}-report.json`))}));
   const pack={version:1,run,id,ids,before,carriers,obligations:Object.fromEntries(entries),events:state.events,lanes};
@@ -79,7 +80,7 @@ export function collectMaintenance(root,run,packOrId){
   const state=load(root,run),dir=directory(root,run),id=typeof packOrId==='string'?packOrId:packOrId?.id??state.active;
   if(state.active!==id&&state.collections?.some(c=>c.pack===id))return status(state);
   check(state.active===id,'pack is not active');const pack=verifyPack(root,run,state,id);
-  const items=readLibraryItems(root),current=new Map(items.map(i=>[i.id,i]));
+  const items=readLibraryItems(root,{run,requiredIds:pack.ids}),current=new Map(items.map(i=>[i.id,i]));
   check(JSON.stringify([...current.keys()].sort())===JSON.stringify(Object.keys(pack.before).sort()),'item inventory changed: no new or removed items permitted');
   const assigned=new Set(pack.ids);
   for(const item of items)if(!assigned.has(item.id))check(item.sha256===pack.before[item.id].sha256,`unassigned carrier changed: ${item.id}`);

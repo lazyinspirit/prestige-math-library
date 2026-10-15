@@ -29,8 +29,8 @@ export const packPath = (root, run, phase, round) => join(workflowDir(root, run)
 const atomic = (path, value) => { mkdirSync(resolve(path, '..'), {recursive:true}); const tmp = `${path}.${process.pid}.tmp`; writeFileSync(tmp, JSON.stringify(value,null,2)+'\n'); renameSync(tmp,path); };
 const frozen = (path, value) => { if (existsSync(path)) { if (JSON.stringify(read(path)) !== JSON.stringify(value)) throw Error(`immutable evidence conflict: ${path}`); } else atomic(path,value); };
 const key = row => `${row.id}\0${row.model}\0${row.context_sha256}`;
-const hashes = root => Object.fromEntries(readLibraryItems(root).map(row => [row.id,row.guard_sha256]));
-const statementHashes = root => Object.fromEntries(readLibraryItems(root).map(row => [row.id,row.statement_sha256]));
+const hashes = (root, run) => Object.fromEntries(readLibraryItems(root,{run}).map(row => [row.id,row.guard_sha256]));
+const statementHashes = (root, run) => Object.fromEntries(readLibraryItems(root,{run}).map(row => [row.id,row.statement_sha256]));
 const diff = (a,b) => [...new Set([...Object.keys(a),...Object.keys(b)])].filter(id=>a[id]!==b[id]).sort();
 const evidenceText = row => typeof row.reason === 'string' && row.reason.trim().length >= 40 && row.uncertain === false
   && Array.isArray(row.source_urls) && row.source_urls.every(url=>/^https:\/\//.test(url))
@@ -314,7 +314,7 @@ function frozenSupportingEvidence(root,run,supporting) {
   }
   return evidence;
 }
-const rawHashes=root=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.sha256]));
+const rawHashes=(root,run)=>Object.fromEntries(readLibraryItems(root,{run}).map(row=>[row.id,row.sha256]));
 const creationId=/^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 function subjectScope(pack,created=[]) {
   if(pack.repair_scope!=='frontier')return null;
@@ -353,8 +353,8 @@ function impactTargets(root,run,phase,items,seeds,discovered=[]) {
     maintenance.push({id,published:Boolean(items.find(row=>row.id===id)?.published),suppliers:roots,paths:roots.map(root=>[root,id]),reported:true});
   return {frontier,seeds:roots,impacts,targets,maintenance};
 }
-function libraryIdentity(root) {
-  const items=readLibraryItems(root),ids=new Set(items.map(row=>row.id)),aliases=new Map();
+function libraryIdentity(root,run) {
+  const items=readLibraryItems(root,{run}),ids=new Set(items.map(row=>row.id)),aliases=new Map();
   for(const row of items)for(const alias of row.aliases??[]){
     if(ids.has(alias))continue; // Existing canonical IDs win, matching depcheck.
     requireValue(!aliases.has(alias),`duplicate library alias: ${alias}`);aliases.set(alias,row.id);
@@ -453,8 +453,8 @@ function nextImpactPhase(phase,progress) {
 /** Workers call this read-only helper immediately after the mathematical
  * review. The supplied hash is preserved, never reconstructed after another
  * worker edits a supplier. Multiple simultaneously reviewed ids may be batched. */
-export function reviewContextHashes(root,ids) {
-  const items=readLibraryItems(root),current=hashes(root),hash=dependencyReviewHasher(items,current);
+export function reviewContextHashes(root,ids,{run=null}={}) {
+  const items=readLibraryItems(root,{run,requiredIds:ids}),current=hashes(root,run),hash=dependencyReviewHasher(items,current);
   return Object.fromEntries(ids.map(id=>{requireValue(current[id],`unknown review item: ${id}`);return [id,{post_sha256:current[id],review_context_sha256:hash(id)}];}));
 }
 
@@ -467,7 +467,7 @@ export function initialize(root, run) {
   if (!batches.length) throw Error('Step 5 requires nonempty original batch manifests');
   const frontier=freezeFrontier({run,batches});
   mkdirSync(dir,{recursive:true});
-  frozen(join(dir,'baseline.json'),hashes(root));
+  frozen(join(dir,'baseline.json'),hashes(root,run));
   frozen(join(dir,'step4-verdicts.json'),validVerdicts(lines(join(root,'research',`${run}-judge.jsonl`))));
   frozen(path,frontier);
   return frontier;
@@ -567,8 +567,8 @@ export function prepareAdjudication(root,run,phase,round) {
   const dependencyLevels=Object.fromEntries(order.map(row=>[row.id,row.level]));
   const assignments=Object.fromEntries(units.map(u=>[u,rejected.filter(r=>byId.get(r.id)===u)
     .sort((a,b)=>(rank.get(a.id)??Infinity)-(rank.get(b.id)??Infinity))]));
-  const identity=libraryIdentity(root);
-  const pack={version:2,adjudicationSchemaVersion:1,repair_scope:'frontier',frontier_ids:frontier.ids,run,phase,round,judge_model:activeModel,units,assignments,dependency_levels:dependencyLevels,before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),rejected,input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8'))}};
+  const identity=libraryIdentity(root,run);
+  const pack={version:2,adjudicationSchemaVersion:1,repair_scope:'frontier',frontier_ids:frontier.ids,run,phase,round,judge_model:activeModel,units,assignments,dependency_levels:dependencyLevels,before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),rejected,input_evidence:{[judgeInput]:digest(readFileSync(judgeInput,'utf8'))}};
   frozen(path,pack); writeTasks(root,pack,'adjudicate'); return pack;
 }
 
@@ -793,7 +793,7 @@ export function recordOperationalSupplement(root,run,phase,round,authorizationPa
     &&auth.mathematical_review===false&&auth.native_coverage_adopted===false
     &&typeof auth.reason==='string'&&auth.reason.trim().length>=80
     &&JSON.stringify(auth.subjects)===JSON.stringify(ids),'invalid exact operational owner authorization');
-  const certificate=verifyCertification(root,run,{allowMissing:false}),current=hashes(root);
+  const certificate=verifyCertification(root,run,{allowMissing:false}),current=hashes(root,run);
   const bindings=operationalBindings(root,pack,reports,certificate);
   const coverage=verifyOperationalCoverage(root,run,ids,current);
   for(const id of ids)requireValue(current[id]===pack.before[id],'operational carry changed after original assignment');
@@ -896,7 +896,7 @@ export function validateReports(pack,reports,now,{root=null,ownerSupplement=null
   for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
   if(createdItems.length&&root){
     try{
-      const identity=libraryIdentity(root),itemById=new Map(identity.items.map(value=>[value.id,value]));
+      const identity=libraryIdentity(root,pack.run),itemById=new Map(identity.items.map(value=>[value.id,value]));
       for(const row of createdItems)creationRegistration(root,pack.run,row);
       for(const [id,owner] of creatorById){
         const {row,assigned,report}=owner,local=new Set(report.created_items.map(value=>value.id));
@@ -954,7 +954,7 @@ export function recoverOperationalDerived(root,run,round,authorizationPath) {
   requireValue(state.run===run&&state.stage==='5.10-gate'&&state.paused===true
     &&Object.values(state.dispatches??{}).every(row=>!row.startedAt||Boolean(row.endedAt)),
     'derived recovery requires the exact paused native terminal battery and drained writers');
-  const pack=readPack(root,run,phase,round),current=hashes(root),items=readLibraryItems(root);
+  const pack=readPack(root,run,phase,round),current=hashes(root,run),items=readLibraryItems(root,{run});
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
   const operational=loadOperationalSupplement(root,pack,reports,current);
   requireValue(operational&&auth.version===1&&auth.run===run&&auth.phase===phase&&auth.round===round
@@ -1055,14 +1055,14 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   if(existsSync(collectedPath)){
     const prior=read(collectedPath);verifyEvidence(prior.evidence,{root,run});
     if(!deferImpactClosure){
-      const scoped=prerequisiteScope(readLibraryItems(root),[...gateFrontier(root,run),...(prior.created_items??[]).map(row=>row.id)]);
-      for(const id of diff(prior.post,hashes(root)).filter(id=>scoped.has(id)))throw Error(`writer changed relevant content after collection: ${id}`);
+      const scoped=prerequisiteScope(readLibraryItems(root,{run}),[...gateFrontier(root,run),...(prior.created_items??[]).map(row=>row.id)]);
+      for(const id of diff(prior.post,hashes(root,run)).filter(id=>scoped.has(id)))throw Error(`writer changed relevant content after collection: ${id}`);
     }
     syncMaintenance(root,run,prior.statement_events??[]);return prior;
   }
   const pack=readPack(root,run,phase,round);
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
-  const current=hashes(root),reported={...current},items=readLibraryItems(root);
+  const current=hashes(root,run),reported={...current},items=readLibraryItems(root,{run});
   const ownerSupplement=loadOwnerSupplement(root,pack,reports,current,items);
   const operationalSupplement=loadOperationalSupplement(root,pack,reports,current);
   if(deferImpactClosure) {
@@ -1121,7 +1121,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
   }
-  const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
+  const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root,run),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
   if(operationalSupplement){
     receipt.operational_resolution={path:operationalSupplement.path,subjects:[...operationalSupplement.ids],
       reason:operationalSupplement.reason,mathematical_review:false,native_coverage_adopted:false};
@@ -1139,8 +1139,8 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
       supplement:ownerSupplement.path,supplement_sha256:evidence[ownerSupplement.path],
       reviewed_ids:[...ownerSupplement.ids],supporting_evidence:ownerSupplement.supporting_evidence};
   }
-  receipt.restated=restatedIds(pack,result.changed,statementHashes(root));
-  const afterStatements=statementHashes(root);
+  receipt.restated=restatedIds(pack,result.changed,statementHashes(root,run));
+  const afterStatements=statementHashes(root,run);
   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
   if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length)receipt.downstream=[];
   const frontier=gateFrontier(root,run);
@@ -1242,7 +1242,7 @@ export function advanceImpact(root,run,phase,round) {
   collect(root,run,active.phase,round,{deferImpactClosure:true});
   const completed=progress.passes.map(pass=>read(effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pass}-${round}-collected.json`))));
   for(const receipt of completed)verifyEvidence(receipt.evidence,{root,run});
-  const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root),items=readLibraryItems(root);
+  const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root,run),items=readLibraryItems(root,{run});
   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
   const maintenanceChanges=maintenance.completed_changes.filter(row=>maintenanceIds.has(row.pack));
   const frontier=gateFrontier(root,run);
@@ -1287,8 +1287,8 @@ export function advanceImpact(root,run,phase,round) {
       if(owners.size)propagated[impact.id]=[...owners][0];
     }
     order.forEach((id,index)=>assignments[propagated[id]??String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
-    const identity=libraryIdentity(root);
-    const pack={version:2,run,phase:nextPhase,basePhase:phase,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
+    const identity=libraryIdentity(root,run);
+    const pack={version:2,run,phase:nextPhase,basePhase:phase,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
     if(Object.keys(propagated).length){
       pack.reader_concern_owners=propagated;
       pack.reader_owner_sessions={};pack.input_evidence={};
@@ -1345,7 +1345,7 @@ export function verifyCompletedImpact(root,run,phase,round) {
       `completed owner collection does not bind pass: ${pass}`);
     const receipt=read(path);verifyEvidence(receipt.evidence,{root,run});return receipt;
   });
-  const items=readLibraryItems(root),frontier=gateFrontier(root,run),current=hashes(root);
+  const items=readLibraryItems(root,{run}),frontier=gateFrontier(root,run),current=hashes(root,run);
   const stable=prerequisiteScope(items,[...frontier,...(result.created_items??[]).map(row=>row.id)]);
   for(const id of diff(result.post,current).filter(id=>stable.has(id)))
     throw Error(`writer changed relevant content after completed owner collection: ${id}`);
@@ -1389,7 +1389,7 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   if(phase==='gate')return prepareGateRepairPack(root,run,phase,round,failures);
   const source=phase==='impact-initial'?'initial':'repeat';
   const result=collect(root,run,source,round);
-  const items=readLibraryItems(root);
+  const items=readLibraryItems(root,{run});
   const scope=impactTargets(root,run,phase,items,result.restated??result.changed,result.downstream??[]);
   const {seeds,impacts}=scope;
   const concerns=phase==='impact-initial'&&round===1?loadReaderConcerns(root,run):null;
@@ -1400,8 +1400,8 @@ export function prepareImpact(root,run,phase,round,{failures=null}={}) {
   // Preserve explicit dependency cycles for the dependency gate to judge.
   const {order,cycles}=orderImpacts(items,targets);
   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
-  const identity=libraryIdentity(root);
-  const pack={version:2,run,phase,round,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,units:['1','2','3'],assignments,before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
+  const identity=libraryIdentity(root,run);
+  const pack={version:2,run,phase,round,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,units:['1','2','3'],assignments,before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
   if(concerns){
     pack.reader_concerns=concerns.entries;
     pack.reader_concern_owners=Object.fromEntries(concerns.entries.map(row=>[row.id,pack.units.find(unit=>assignments[unit].includes(row.id))]));
@@ -1417,7 +1417,7 @@ export function prepareGateRepairPack(root,run,phase,round,failures) {
   const path=packPath(root,run,phase,round);
   if(existsSync(path)){const saved=read(path);writeTasks(root,saved,'repair');return saved;}
   requireValue(failures!==null,'gate repair requires failed diagnostics');
-  const identity=libraryIdentity(root),diagnostics=gateDiagnostics(failures,identity.ids);
+  const identity=libraryIdentity(root,run),diagnostics=gateDiagnostics(failures,identity.ids);
   requireValue(diagnostics.length>0,'gate repair requires at least one failed diagnostic');
   const frontier=gateFrontier(root,run);
   const excluded=[...new Set(diagnostics.flatMap(row=>row.subjects).filter(id=>!frontier.has(id)))].sort();
@@ -1446,7 +1446,7 @@ export function prepareGateRepairPack(root,run,phase,round,failures) {
     for(const [unit,subjects] of scoped)gateAssignments[unit].push({...diagnostic,subjects,ownerHeld:unit===globalOwner});
   }
   const pack={version:2,gateRoutingVersion:1,repair_scope:'frontier',frontier_ids:[...frontier].sort(),run,phase,basePhase:'gate',round,units:['1','2','3'],assignments,
-    before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
+    before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
     impacts:[],seeds:[],failures,excluded_out_of_frontier:excluded,gateAssignments,cycles,ledger_updates:[]};
   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
@@ -1469,7 +1469,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   if(existsSync(savedPath)) {
     const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence,{root,run});
     const frontier=gateFrontier(root,run),scoped=saved.items.filter(row=>frontier.has(row.id));
-    const current=hashes(root);for(const row of scoped)requireValue(row.guard_sha256===current[row.id],`stale completed certification ${row.id}`);
+    const current=hashes(root,run);for(const row of scoped)requireValue(row.guard_sha256===current[row.id],`stale completed certification ${row.id}`);
     const contexts=contextHasher(root,scoped.map(row=>row.id));
     for(const row of scoped){const now=contexts.get(row.id);requireValue(now?.item_sha256===row.item_sha256&&now?.context_sha256===row.context_sha256,`stale completed certification context ${row.id}`);}
     atomic(join(workflowDir(root,run),'certification.json'),saved);return saved;
@@ -1485,19 +1485,19 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const eligible=gateFrontier(root,run),createdIds=new Set([...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])].map(row=>row.id));
   const certifiedScope=id=>eligible.has(id)||createdIds.has(id);
   const reviewed=new Map(allReviews.filter(row=>certifiedScope(row.id)).map(row=>[row.id,row]));
-  const current=hashes(root), rawBefore=rawHashes(root), baseline=read(join(dir,'baseline.json'));
+  const current=hashes(root,run), rawBefore=rawHashes(root,run), baseline=read(join(dir,'baseline.json'));
   const changed=diff(baseline,current).filter(certifiedScope);
   const priorItems=new Map((prior?.items??[]).filter(row=>certifiedScope(row.id)).map(row=>[row.id,row]));
   const progress=read(impactProgressPath(root,run,phase,round));
   const impactPack=readPack(root,run,progress.repairBasePhase??phase,round);
   // Stable subjects retain all external prerequisite carriers as context;
   // unrelated writers cannot turn their own content into this run's subjects.
-  const library=readLibraryItems(root),stable=prerequisiteScope(library,[...eligible,...createdIds]);
+  const library=readLibraryItems(root,{run}),stable=prerequisiteScope(library,[...eligible,...createdIds]);
   for(const id of diff(result.post,current).filter(id=>stable.has(id)))requireValue(false,`writer changed relevant content after collection: ${id}`);
   // Certification covers an examination of every discovered consumer. A
   // consumer may remain unchanged when sound; only logically necessary owner
   // repairs belong in `changed`.
-  const currentImpacts=discoverDownstream({items:readLibraryItems(root),repairedIds:result.restated??[...new Set([...(impactPack.seeds??[]),...result.changed])]}).map(row=>row.id);
+  const currentImpacts=discoverDownstream({items:readLibraryItems(root,{run}),repairedIds:result.restated??[...new Set([...(impactPack.seeds??[]),...result.changed])]}).map(row=>row.id);
   const allowed=gateFrontier(root,run);
   for(const id of currentImpacts)if((!allowed||allowed.has(id))&&!reviewed.has(id))throw Error(`new downstream consumer requires owner review: ${id}`);
   for(const row of allReviews)if(row.post_sha256!==current[row.id]&&reviewed.get(row.id)===row)throw Error(`review changed before certification: ${row.id}`);
@@ -1511,7 +1511,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
       &&contexts.get(id)?.item_sha256===row.item_sha256&&contexts.get(id)?.context_sha256===row.context_sha256,
       `stale root owner review context before certification: ${id}`);
   }
-  if(diff(rawBefore,rawHashes(root)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
+  if(diff(rawBefore,rawHashes(root,run)).some(id=>stable.has(id)))throw Error('relevant item writer overlapped certification');
   const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence};
   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
   const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??priorItems.get(id)?.reason}));
@@ -1541,7 +1541,7 @@ export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=n
   if(existsSync(path))return read(path);
   const cert=verifyCertification(root,run,{allowMissing:false});
   const frontier=gateFrontier(root,run),candidates=cert.items.filter(row=>frontier.has(row.id));
-  const current=hashes(root);for(const row of candidates)if(current[row.id]!==row.guard_sha256)throw Error(`item changed before Sol judgment: ${row.id}`);
+  const current=hashes(root,run);for(const row of candidates)if(current[row.id]!==row.guard_sha256)throw Error(`item changed before Sol judgment: ${row.id}`);
   requireValue((round===1&&cert.phase==='impact-initial')||(round>1&&cert.phase==='impact-repeat'&&cert.round===round-1),'Sol judge round does not follow a completed certification barrier');
   const priorVerdicts=round===1?[]:read(join(dir,`judge-${round-1}.json`)).verdicts;
   const judgeModel=MODELS.sol61.id;
@@ -1565,7 +1565,7 @@ export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=n
 }
 
 export function verifyWave(root,run,{contextHasher=currentHashesMany,frontierOnly=true}={}) {
-  const cert=verifyCertification(root,run,{allowMissing:false}), current=hashes(root);
+  const cert=verifyCertification(root,run,{allowMissing:false}), current=hashes(root,run);
   const frontier=frontierOnly?gateFrontier(root,run):null,items=cert.items.filter(row=>!frontier||frontier.has(row.id));
   const contexts=contextHasher(root,items.map(row=>row.id));
   for(const row of items)if(row.guard_sha256!==current[row.id])throw Error(`stale Step 5 certification ${row.id}`);
@@ -1590,7 +1590,7 @@ function main() {
   let result;
   if(args[0]==='review-contexts'){
     const ids=opt('--items').split(',').filter(Boolean);requireValue(ids.length,'--items required');
-    console.log(JSON.stringify(reviewContextHashes(root,ids),null,2));return;
+    console.log(JSON.stringify(reviewContextHashes(root,ids,{run}),null,2));return;
   }
   switch(args[0]) {
     case 'recover-operational-derived':result=recoverOperationalDerived(root,run,round,opt('--authorization'));break;

@@ -41,7 +41,8 @@ export function validateFrontier(frontier) {
 
 // An active independent writer may briefly remove or truncate a file between
 // directory enumeration and open. Retry only those local shape/read races;
-// persistent missing or invalid files remain hard errors, never skipped rows.
+// persistent strict reads remain hard errors; explicit run scope below can
+// record independently active foreign authoring carriers as non-pass observations.
 const itemReadWait = new Int32Array(new SharedArrayBuffer(4));
 function readLibraryItemSource(path, name) {
   for (let attempt = 0; attempt < 6; attempt += 1) {
@@ -64,21 +65,121 @@ function readLibraryItemSource(path, name) {
 
 /** Dependencies and other links are direct examination candidates, not edit
  * mandates. Only a new consumer statement change propagates another hop. */
-export function readLibraryItems(repo) {
-  return readdirSync(join(repo, 'items')).filter((name) => name.endsWith('.md')).sort().map((name) => {
-    const text = readLibraryItemSource(join(repo, 'items', name), name);
-    const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
-    requireValue(match, `missing frontmatter: ${name}`);
-    const fm = match[1];
-    const scalar = (key) => fm.match(new RegExp(`^${key}:\\s*["']?([^\\r\\n"']+)["']?\\s*$`, 'm'))?.[1]?.trim();
-    const id = scalar('id');
-    requireValue(id === name.slice(0, -3), `item id mismatch: ${name}`);
-    const body = text.slice(match[0].length);
-    const links = [...body.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)].map((m) => m[1]);
-    const deps = unique([...frontmatterList(fm, 'deps'), ...frontmatterList(fm, 'justified_by'), ...frontmatterList(fm, 'forward_refs')]);
-    const references = unique([...links, ...frontmatterList(fm, 'external_refs')]).filter(id => !deps.includes(id));
-    return { id, deps, references, body_links: unique(links), aliases: frontmatterList(fm, 'aliases'), published: scalar('status') === 'published', sha256: digest(text), guard_sha256: itemHashGuard(text), statement_sha256: statementHash(text) };
-  });
+// Explicit run context enables only a narrow independently-active foreign
+// authoring-carrier exclusion. No process-global run or filename-prefix ownership exists.
+function scopedInventoryContext(repo, run, items, requiredIds, invalid) {
+  requireValue(/^[A-Za-z0-9._-]+$/.test(run), 'invalid scoped inventory run');
+  const dir = join(repo, 'research', `${run}-step5-v2`), frontierPath = join(dir, 'frontier.json');
+  const frontier = new Set();
+  if (existsSync(frontierPath)) {
+    const saved = validateFrontier(JSON.parse(readFileSync(frontierPath, 'utf8')));
+    requireValue(saved.run === run, 'scoped inventory frontier run mismatch');
+    for (const id of saved.ids) frontier.add(id);
+  }
+  // Current manifest additions remain strict alongside the original frontier.
+  const manifests = readdirSync(join(repo, 'research')).filter(name =>
+    name.startsWith(`${run}-batch-`) && /^\d+\.pages\.json$/.test(name.slice(`${run}-batch-`.length)));
+  requireValue(manifests.length > 0, 'scoped inventory requires current run manifests');
+  for (const name of manifests) for (const page of JSON.parse(readFileSync(join(repo, 'research', name), 'utf8')))
+    for (const item of page.items) frontier.add(item.id);
+  const byId = new Map(items.map(item => [item.id, item])), aliases = new Map();
+  const initial = join(dir, 'initial-1.json');
+  const original = existsSync(initial) ? JSON.parse(readFileSync(initial, 'utf8')) : null;
+  const canonical = new Set([...byId.keys(), ...invalid.map(row => row.id), ...Object.keys(original?.before ?? {})]);
+  for (const [alias, id] of Object.entries(original?.before_aliases ?? {})) aliases.set(alias, new Set([id]));
+  for (const item of items) for (const alias of item.aliases ?? []) {
+    if (!aliases.has(alias)) aliases.set(alias, new Set());
+    aliases.get(alias).add(item.id);
+  }
+  const resolve = raw => {
+    if (canonical.has(raw) || frontier.has(raw)) return raw;
+    const targets = aliases.get(raw);requireValue(!targets || targets.size === 1, `ambiguous required alias: ${raw}`);
+    return targets ? [...targets][0] : raw;
+  };
+  const required = new Set([...frontier, ...requiredIds].map(resolve));
+  for (const id of required) {
+    const item = byId.get(id);
+    requireValue(item, `required current-run item or supplier is unreadable/missing: ${id}`);
+    // readLibraryItems.deps includes declared deps/justified_by/forward_refs,
+    // preserving the existing required-context convention rather than pruning it.
+    for (const raw of item.deps ?? []) required.add(resolve(raw));
+  }
+  return { frontier, required, resolve };
+}
+function activeForeignItemOwner(repo, run, id) {
+  const runtime = join(repo, '.autopilot');if (!existsSync(runtime)) return null;
+  const matches = [];
+  for (const entry of readdirSync(runtime, { withFileTypes: true })) {
+    if (!entry.isDirectory() || entry.name === run) continue;
+    const statePath = join(runtime, entry.name, 'state.json');if (!existsSync(statePath)) continue;
+    let state, stateBytes;try { stateBytes = readFileSync(statePath, 'utf8');state = JSON.parse(stateBytes); } catch { continue; }
+    if (state.run !== entry.name || state.stage !== '1-scaffold' || state.finishedAt) continue;
+    for (const [key, dispatch] of Object.entries(state.dispatches ?? {})) {
+      if (dispatch.stage !== '1-scaffold' || dispatch.role !== 'beta' || !dispatch.startedAt || dispatch.endedAt) continue;
+      for (const batch of dispatch.covers ?? []) {
+        if (!/^\d+$/.test(String(batch))) continue;
+        const manifest = join('research', `${entry.name}-batch-${batch}.pages.json`), full = join(repo, manifest);
+        if (!existsSync(full)) continue;
+        let pages, bytes;try { bytes = readFileSync(full, 'utf8');pages = JSON.parse(bytes); } catch { continue; }
+        for (const page of pages) for (const item of page.items ?? []) if (item.id === id)
+          matches.push({ run: entry.name, batch: String(batch), manifest, manifest_sha256: digest(bytes),
+            native_state: join('.autopilot', entry.name, 'state.json'), native_state_sha256: digest(stateBytes), dispatch_key: key,
+            dispatch: { stage: dispatch.stage, role: dispatch.role, label: dispatch.label,
+              covers: dispatch.covers, attempt: dispatch.attempt, attempts: dispatch.attempts,
+              startedAt: dispatch.startedAt, endedAt: dispatch.endedAt, lastExitOk: dispatch.lastExitOk },
+            dispatch_started_at: dispatch.startedAt, native_stage: state.stage, item });
+      }
+    }
+  }
+  return matches.length === 1 ? matches[0] : null;
+}
+
+export function readLibraryItems(repo, { run = null, requiredIds = [] } = {}) {
+  const invalid = [], items = [];
+  for (const name of readdirSync(join(repo, 'items')).filter(name => name.endsWith('.md')).sort()) {
+    try {
+      const text = readLibraryItemSource(join(repo, 'items', name), name);
+      const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+      requireValue(match, `missing frontmatter: ${name}`);
+      const fm = match[1];
+      const scalar = (key) => fm.match(new RegExp(`^${key}:\\s*["']?([^\\r\\n"']+)["']?\\s*$`, 'm'))?.[1]?.trim();
+      const id = scalar('id');
+      requireValue(id === name.slice(0, -3), `item id mismatch: ${name}`);
+      const body = text.slice(match[0].length);
+      const links = [...body.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)].map((m) => m[1]);
+      const deps = unique([...frontmatterList(fm, 'deps'), ...frontmatterList(fm, 'justified_by'), ...frontmatterList(fm, 'forward_refs')]);
+      const references = unique([...links, ...frontmatterList(fm, 'external_refs')]).filter(id => !deps.includes(id));
+      items.push({ id, deps, references, body_links: unique(links), aliases: frontmatterList(fm, 'aliases'), published: scalar('status') === 'published', sha256: digest(text), guard_sha256: itemHashGuard(text), statement_sha256: statementHash(text) });
+    } catch (error) {
+      if (!run || (error.code !== 'ENOENT' && error.transientItemRead !== true)) throw error;
+      invalid.push({ id: name.slice(0, -3), error });
+    }
+  }
+  const context = run ? scopedInventoryContext(repo, run, items, requiredIds, invalid) : null;
+  if (!invalid.length) return items;
+  const observations = [];
+  for (const row of invalid) {
+    // The strict closure is checked first, so an active foreign writer never
+    // licenses omission of a real current-run item, alias target or supplier.
+    if (context.required.has(row.id)) throw row.error;
+    const owner = activeForeignItemOwner(repo, run, row.id);
+    if (!owner) throw row.error;
+    const independent = [...(owner.item.deps ?? []), ...(owner.item.justified_by ?? []), ...(owner.item.forward_refs ?? [])]
+      .every(raw => !context.frontier.has(context.resolve(raw)));
+    requireValue(independent, `incomplete foreign item is a current-frontier consumer: ${row.id}`);
+    observations.push({ id: row.id, disposition: 'observed-excluded-not-passed',
+      reason: 'Unavailable metadata belongs to an exact independently active foreign authoring carrier; it is outside the current frontier and required dependency closure.',
+      read_error: row.error.message, foreign_owner: owner });
+  }
+  const record = { version: 1, kind: 'outside-inflight-library-observation', run,
+    mathematical_review: false, certification_coverage: false, observations };
+  const directory = join(repo, 'research', `${run}-step5-v2`, 'outside-inflight-observations');
+  mkdirSync(directory, { recursive: true });
+  const target = join(directory, `${digest(record)}.json`), bytes = JSON.stringify(record, null, 2) + '\n';
+  if (existsSync(target)) requireValue(readFileSync(target, 'utf8') === bytes, 'outside observation archive conflict');
+  else writeFileSync(target, bytes, { flag: 'wx' });
+  Object.defineProperty(items, 'outside_observations', { value: record, enumerable: false });
+  return items;
 }
 
 export function discoverDownstream({ items, repairedIds }) {
