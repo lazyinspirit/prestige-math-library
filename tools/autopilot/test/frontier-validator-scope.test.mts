@@ -16,7 +16,7 @@ function fixture(t: any) {
   // integration suites; this suite checks the actual stage-to-wrapper protocol.
   writeFileSync(join(repo, 'tools/tsx-run.mjs'),
     'console.log(JSON.stringify({script: process.argv[2], args: process.argv.slice(3)}));\n');
-  for (const tool of ['rendercheck', 'prosecheck', 'depcheck', 'fwdcheck', 'extcheck', 'depsource', 'pathcheck'])
+  for (const tool of ['rendercheck', 'prosecheck', 'depcheck', 'fwdcheck', 'extcheck', 'depsource', 'pathcheck', 'validate-plan'])
     writeFileSync(join(repo, `tools/${tool}.mjs`),
       `console.log(JSON.stringify({script: 'tools/${tool}.mjs', args: process.argv.slice(2)}));\n`);
   const pages = [
@@ -67,6 +67,20 @@ function assertSelection(ctx: any, tool: string, args: string[]) {
     if (tool === 'depsource') assert.equal(args[args.indexOf('--run') + 1], ctx.run);
   }
 }
+
+test('only the pre-materialization drift plan gate forwards before-apply', t => {
+  const ctx = fixture(t);
+  for (const id of ['1-drift', '1-drift-apply', '1-scaffold']) {
+    const stage: any = stages.find(s => s.id === id);
+    const gate = stage.gates(ctx).find((g: any) => g.id === 'validate-plan');
+    assert.ok(gate, `${id} must validate its plan`);
+    const args = validatorArgs(ctx, gate);
+    assert.equal(args.includes('--before-apply'), id === '1-drift', id);
+    assert.equal(args[args.indexOf('--run') + 1], ctx.run);
+    assert.deepEqual(JSON.parse(readFileSync(join(ctx.repo, args[args.indexOf('--pages-file') + 1]), 'utf8')),
+      ['selected', 'selected-examples']);
+  }
+});
 
 test('actual stage validators receive only current manifest subjects', t => {
   const ctx = fixture(t);

@@ -323,7 +323,8 @@ const policyItemGate = (ctx) => gate('content-policy-items', ['node', 'tools/con
   liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
 });
 
-const planGate = (ctx: any) => frontierItemGate(ctx, 'validate-plan', 'validate-plan');
+const planGate = (ctx: any, beforeApply = false) =>
+  frontierItemGate(ctx, 'validate-plan', 'validate-plan', beforeApply ? ['--before-apply'] : []);
 
 /** The Step 1 drift review's teeth. The review is the `drift` unit of stage 1;
  *  this is what makes its report load-bearing rather than decorative. Fails on
@@ -1060,7 +1061,7 @@ export const stages = [
       timeout: 7200,
     }],
     gates: (ctx: any) => [
-      gate('drift-review', ['node', 'tools/drift-review-check.mjs', '--run', ctx.run, '--before-apply']), planGate(ctx),
+      gate('drift-review', ['node', 'tools/drift-review-check.mjs', '--run', ctx.run, '--before-apply']), planGate(ctx, true),
     ],
     onHold: holdStep1,
   },

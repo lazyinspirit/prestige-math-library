@@ -31,8 +31,8 @@ function fixture(t) {
     save();
     return spawnSync(process.execPath, [tool, 'research/plan-spec.json', '--repo', repo, ...(scoped ? ['--run', name] : [])], { cwd: repo, encoding: 'utf8' });
   }
-  function gate() {
-    return spawnSync(process.execPath, ['tools/frontier-item-gate.mjs', '--run', 'run-test', '--tool', 'validate-plan'], { cwd: repo, encoding: 'utf8' });
+  function gate(args = []) {
+    return spawnSync(process.execPath, ['tools/frontier-item-gate.mjs', '--run', 'run-test', '--tool', 'validate-plan', ...(args.length ? ['--', ...args] : [])], { cwd: repo, encoding: 'utf8' });
   }
   return { repo, pages, save, item, home, run, gate };
 }
@@ -304,4 +304,26 @@ test('before-apply checks scheduled page moves with current inventories and reta
   const unknown = execute(true); assert.equal(unknown.status, 2, output(unknown)); assert.match(output(unknown), /must occur exactly once/);
   const bare = spawnSync(process.execPath, [tool, 'research/plan-spec.json', '--repo', f.repo, '--before-apply'], { cwd: f.repo, encoding: 'utf8' });
   assert.equal(bare.status, 2, output(bare)); assert.match(output(bare), /requires --run/);
+});
+
+test('native drift wrapper sees repaired canonical requirements without mutating old manifests', t => {
+  const f = fixture(t);
+  f.item('lem-supplier'); f.home('supplier', ['lem-supplier']);
+  f.pages[1].items[0].deps = ['lem-supplier']; f.save();
+  const manifest = join(f.repo, 'research/run-test-batch-1.pages.json');
+  const current = JSON.parse(readFileSync(manifest, 'utf8'));
+  current[0].requires = [];
+  writeFileSync(manifest, JSON.stringify(current));
+  const before = readFileSync(manifest);
+  const stale = f.gate();
+  assert.equal(stale.status, 1, output(stale));
+  assert.match(output(stale), /\[undeclared-prereq\]/);
+  const repaired = f.gate(['--before-apply']);
+  assert.equal(repaired.status, 0, output(repaired));
+  assert.deepEqual(readFileSync(manifest), before);
+  current[0].items[0].deps = ['lem-unresolved-current'];
+  writeFileSync(manifest, JSON.stringify(current));
+  const unresolved = f.gate(['--before-apply']);
+  assert.equal(unresolved.status, 1, output(unresolved));
+  assert.match(output(unresolved), /\[resolve\].*lem-unresolved-current/);
 });

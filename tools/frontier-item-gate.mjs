@@ -18,7 +18,7 @@ if (!/^[a-zA-Z0-9_-]+$/.test(run ?? '') || ![...positional, ...selectors, 'pathc
   throw Error('Usage: frontier-item-gate.mjs --run RUN --tool TOOL [-- TOOL_ARGS]');
 if (toolArgs.includes('--items-file') || toolArgs.includes('--pages-file'))
   throw Error('The frontier supplies its own selectors');
-const allowedFlags = { precheck: ['--json'], rendercheck: ['--json', '--quiet'], prosecheck: ['--warnings', '--strict'], depcheck: ['--json', '--quiet', '--pending-audit-ok'], fwdcheck: ['--json', '--quiet'], extcheck: ['--json', '--quiet'], depsource: ['--json'], pathcheck: ['--json', '--quiet'], 'validate-plan': [] };
+const allowedFlags = { precheck: ['--json'], rendercheck: ['--json', '--quiet'], prosecheck: ['--warnings', '--strict'], depcheck: ['--json', '--quiet', '--pending-audit-ok'], fwdcheck: ['--json', '--quiet'], extcheck: ['--json', '--quiet'], depsource: ['--json'], pathcheck: ['--json', '--quiet'], 'validate-plan': ['--before-apply'] };
 if (tool === 'impact-audit') {
   const switches = new Set(['--json', '--current', '--direct-boundary']);
   const pairs = new Set(['--touches', '--from', '--to', '--receipt', '--template', '--refresh-receipt']);
