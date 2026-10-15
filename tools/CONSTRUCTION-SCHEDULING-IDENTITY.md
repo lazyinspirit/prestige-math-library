@@ -15,7 +15,9 @@ ledger/plan ownership check. The adjacent document must name the exact run and
 batch; each listed ID must match exactly one contract with the same assigned
 page, a valid kind/prefix and an explicit valid dependency array. The complete
 contract is retained and actual source dependencies are combined normally.
-If no adjacent record exists for an explicit listed ID, its actual item source
+An absent adjacent document is bound as `null` in the scheduling inputs, with
+absence recognized only for `ENOENT`. A present malformed document still fails.
+If the document or its record is absent for an explicit listed ID, its actual item source
 may supply the scheduling contract only with a complete frontmatter envelope
 and complete parseable top-level `id`, `kind`, `pipeline_run`, optional `page`
 and `deps` fields. Quoted keys are decoded before selection; duplicate selected

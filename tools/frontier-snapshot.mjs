@@ -59,15 +59,22 @@ export function loadStep3(root, run, {constructionScheduling=false}={}) {
     // including every explicit dependency. A missing adjacent entry can use a
     // complete same-run source identity/deps; contradictory entries still hold.
     const inputs = schedulingIdentityInputs.items ??= {};
-    inputs[batch] ??= readFileSync(join(dir, `${run}-batch-${batch}.items.json`), 'utf8');
-    const contracts = JSON.parse(inputs[batch]);
-    if (contracts.run !== run || contracts.batch !== batch || !Array.isArray(contracts.items))
+    if (!Object.hasOwn(inputs, batch)) {
+      try { inputs[batch] = readFileSync(join(dir, `${run}-batch-${batch}.items.json`), 'utf8'); }
+      catch (error) {
+        if (error.code !== 'ENOENT') throw error;
+        inputs[batch] = null; // Bind actual absence; do not invent contracts.
+      }
+    }
+    const contracts = inputs[batch] === null ? null : JSON.parse(inputs[batch]);
+    if (inputs[batch] !== null && (!contracts || contracts.run !== run
+      || contracts.batch !== batch || !Array.isArray(contracts.items)))
       throw Error(`Invalid construction scheduling item contracts in batch ${batch}`);
     const prefixes = {definition:'def',algorithm:'alg',theorem:'thm',lemma:'lem',proposition:'prop',
       corollary:'cor',example:'ex',counterexample:'cex','false-statement':'fs',remark:'rem','open-problem':'op'};
     return { ...page, id, items: page.items.map(item => {
       if (typeof item !== 'string') return item;
-      const matches = contracts.items.filter(contract => contract.id === item);
+      const matches = contracts === null ? [] : contracts.items.filter(contract => contract.id === item);
       let contract = matches[0];
       if (matches.length === 0) {
         const source = readFileSync(join(root, 'items', `${safe(item)}.md`), 'utf8');
