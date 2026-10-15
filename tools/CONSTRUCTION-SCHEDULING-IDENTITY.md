@@ -15,9 +15,16 @@ ledger/plan ownership check. The adjacent document must name the exact run and
 batch; each listed ID must match exactly one contract with the same assigned
 page, a valid kind/prefix and an explicit valid dependency array. The complete
 contract is retained and actual source dependencies are combined normally.
-Missing or ambiguous contracts fail closed. The dependency hash also binds the
-exact adjacent document bytes. This does not infer an absent dependency array
-or use empty canonical plan item lists as a substitute for current contracts.
+If no adjacent record exists for an explicit listed ID, its actual item source
+may supply the contract only with complete parseable YAML frontmatter naming
+the exact ID and `pipeline_run`, a valid kind/prefix and an explicit dependency
+array. Any explicit source `page` must agree with the assigned page. The full
+actual frontmatter is retained and the dependency hash additionally binds the
+exact source bytes. An existing contradictory or duplicate adjacent record
+cannot use this fallback. Missing or invalid source identity, frontmatter or
+dependencies fail closed. The dependency hash also binds the exact adjacent
+document bytes. This does not infer an absent dependency array or use empty
+canonical plan item lists as a substitute for current contracts.
 
 This projection changes no source file and grants no author acceptance, review
 coverage or gate readiness. The ordinary loader, validators and post-drain

@@ -34,7 +34,8 @@ export function loadStep3(root, run, {constructionScheduling=false}={}) {
     if (!stringItems) return { ...page, id };
     // Some authors keep complete current contracts in an adjacent items file
     // while their pages file temporarily lists IDs. Preserve those contracts,
-    // including every explicit dependency; absent/ambiguous contracts hold.
+    // including every explicit dependency. A missing adjacent entry can use a
+    // complete same-run actual source; contradictory entries still hold.
     const inputs = schedulingIdentityInputs.items ??= {};
     inputs[batch] ??= readFileSync(join(dir, `${run}-batch-${batch}.items.json`), 'utf8');
     const contracts = JSON.parse(inputs[batch]);
@@ -45,8 +46,18 @@ export function loadStep3(root, run, {constructionScheduling=false}={}) {
     return { ...page, id, items: page.items.map(item => {
       if (typeof item !== 'string') return item;
       const matches = contracts.items.filter(contract => contract.id === item);
-      const contract = matches[0];
-      if (matches.length !== 1 || contract.page !== id || !prefixes[contract.kind]
+      let contract = matches[0];
+      if (matches.length === 0) {
+        const source = readFileSync(join(root, 'items', `${safe(item)}.md`), 'utf8');
+        const envelope = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+        contract = envelope ? yaml().parse(envelope[1]) : null;
+        if (!contract || typeof contract !== 'object' || Array.isArray(contract)
+          || contract.id !== item || contract.pipeline_run !== run
+          || (Object.hasOwn(contract, 'page') && contract.page !== id))
+          throw Error(`Invalid construction scheduling source identity ${item} in batch ${batch}`);
+        (schedulingIdentityInputs.sources ??= {})[item] = source;
+      }
+      if (matches.length > 1 || (matches.length === 1 && contract.page !== id) || !prefixes[contract.kind]
         || !item.startsWith(`${prefixes[contract.kind]}-`) || !/^[a-zA-Z0-9_-]+$/.test(item)
         || !Array.isArray(contract.deps) || contract.deps.some(dep =>
           typeof dep !== 'string' || !/^[a-zA-Z0-9_-]+$/.test(dep)))
