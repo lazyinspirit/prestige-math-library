@@ -43,6 +43,13 @@ const ADJUDICATION_SCIENCE_STAT=statSync(ADJUDICATION_SCIENCE_URL);
 const { scientificCorrectionPhase, scientificCorrectionProgressPath, scientificCorrectionRequest,
   assertScientificCorrectionDrained, scientificCorrectionCompletion }=await import(
   ADJUDICATION_SCIENCE_URL.href+'?v='+ADJUDICATION_SCIENCE_STAT.mtimeMs+':'+ADJUDICATION_SCIENCE_STAT.size);
+const OWNER_FINDING_URL=new URL('./step5-owner-finding-queue.mjs',import.meta.url);
+const OWNER_FINDING_STAT=statSync(OWNER_FINDING_URL);
+const { ownerFindingRequest, ownerFindingCompletion }=await import(
+  OWNER_FINDING_URL.href+'?v='+OWNER_FINDING_STAT.mtimeMs+':'+OWNER_FINDING_STAT.size);
+const ownerFindingCollectionToken=Symbol('authenticated native owner finding collection');
+const ownerFindingPhase=phase=>'owner-finding-correction-'+phase;
+const ownerFindingProgressPath=(root,run,phase,round)=>join(workflowDir(root,run),ownerFindingPhase(phase)+'-'+round+'-progress.json');
 const scientificValidationToken=Symbol('authenticated single-subject scientific correction');
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
@@ -374,8 +381,10 @@ function writeTasks(root,pack,mode) {
   }
 }
 
-export function validateReports(pack,reports,now,{root=null,scientificCorrection=null}={}) {
-  const corrected=id=>scientificCorrection?.token===scientificValidationToken&&scientificCorrection.subject===id;
+export function validateReports(pack,reports,now,{root=null,scientificCorrection=null,ownerFindingCorrection=null}={}) {
+  const childReview=id=>ownerFindingCorrection?.token===ownerFindingCollectionToken
+    ?ownerFindingCorrection.reviews.find(row=>row.id===id):null;
+  const corrected=id=>(scientificCorrection?.token===scientificValidationToken&&scientificCorrection.subject===id)||!!childReview(id);
   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
   for(const unit of pack.units) {
     const report=reports.find(r=>String(r.unit)===unit);
@@ -424,8 +433,8 @@ export function validateReports(pack,reports,now,{root=null,scientificCorrection
   }
   for(const id of changed) {
     if(pack.repair_scope==='frontier'&&!pack.frontier_ids?.includes(id)&&pack.before[id])errors.push(`out-of-frontier consumer cannot be repaired by Step 5: ${id}`);
-    const created=creatorById.get(id),review=reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
-    if(!now[id]||!review||(!created&&!pack.before[id]))errors.push(`unlicensed or unreviewed change ${id}`);
+    const created=creatorById.get(id),review=childReview(id)??reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
+    if(!now[id]||!review||review.post_sha256!==now[id]||(!created&&!pack.before[id]))errors.push(`unlicensed or unreviewed change ${id}`);
     if(pack.rejected&&!created&&!corrected(id)&&!decisions.some(r=>r.id===id&&['confirmed_fatal','confirmed_nonfatal'].includes(r.outcome)))errors.push(`change without confirmed adjudication ${id}`);
   }
   for(const id of Object.keys(pack.before))if(!now[id])errors.push(`unlicensed deletion ${id}`);
@@ -468,7 +477,8 @@ export function validateReports(pack,reports,now,{root=null,scientificCorrection
 export function adjudicationCorrectionWork(root,run,phase,round) {
   const path=correctionProgressPath(workflowDir(root,run),phase,round);
   return [...(existsSync(path)?[correctionPhase(phase)+':1']:[]),
-    ...(existsSync(scientificCorrectionProgressPath(workflowDir(root,run),phase,round))?[scientificCorrectionPhase(phase)+':1']:[])];
+    ...(existsSync(scientificCorrectionProgressPath(workflowDir(root,run),phase,round))?[scientificCorrectionPhase(phase)+':1']:[]),
+    ...(existsSync(ownerFindingProgressPath(root,run,phase,round))?['1','2','3'].map(unit=>ownerFindingPhase(phase)+':'+unit):[])];
 }
 
 function inheritedContext(root,run,phase,round) {
@@ -486,10 +496,11 @@ function scientificAdjudicationContext(root,run,phase,round) {
   if(phase!=='repeat')return null;
   const dir=workflowDir(root,run);
   if(!existsSync(join(dir,'owner-adjudication-scientific-repair-request.json')))return null;
-  const pack=readPack(root,run,phase,round),items=readLibraryItems(root);
+  const pack=readPack(root,run,phase,round),items=readLibraryItems(root),current=hashes(root,items),contexts=reviewContexts(items);
+  const currentReviewCallback=id=>({post_sha256:current[id],review_context_sha256:contexts.hash(id,current)});
   return scientificCorrectionRequest(root,run,phase,round,{pack,
     reports:pack.units.map(unit=>read(workerReport(root,run,phase,round,unit))),
-    current:hashes(root,items),statements:Object.fromEntries(items.map(row=>[row.id,row.statement_sha256])),items,dir,
+    current,statements:Object.fromEntries(items.map(row=>[row.id,row.statement_sha256])),items,dir,currentReviewCallback,
     ...(existsSync(scientificCorrectionProgressPath(dir,phase,round))
       &&existsSync(workerReport(root,run,scientificCorrectionPhase(phase),round,'1'))
       ?{allowCompletedContinuation:true,currentReview:reviewContextHashes(root,
@@ -535,8 +546,80 @@ function advanceScientificAdjudication(root,run,phase,round) {
   frozen(path,progress);return progress;
 }
 
+function ownerFindingContext(root,run,phase,round) {
+  if(phase!=='repeat')return null;
+  const dir=workflowDir(root,run);
+  if(!existsSync(join(dir,'owner-finding-queue-request.json')))return null;
+  const items=readLibraryItems(root),progress=ownerFindingProgressPath(root,run,phase,round);
+  const continuation=existsSync(progress)&&['1','2','3'].every(unit=>existsSync(workerReport(root,run,ownerFindingPhase(phase),round,unit)));
+  const contexts=continuation?reviewContextHashes(root,read(progress).subjects):null;
+  return ownerFindingRequest(root,run,phase,round,{items,current:hashes(root,items),
+    statements:Object.fromEntries(items.map(row=>[row.id,row.statement_sha256])),dir,
+    allowCompletedContinuation:continuation,currentReviewCallback:id=>contexts?.[id]});
+}
+
+function advanceOwnerFindingQueue(root,run,phase,round) {
+  const context=ownerFindingContext(root,run,phase,round);
+  if(!context)return null;
+  const path=ownerFindingProgressPath(root,run,phase,round);
+  if(existsSync(path)){
+    const prior=read(path);
+    requireValue(prior.request.path===context.request.path&&prior.request.sha256===context.request.sha256,'owner finding queue request changed');
+    verifyEvidence(prior.evidence);return prior;
+  }
+  // Close the prior native scope correction on its genuine own snapshot before
+  // another authorized writer changes other sources. This is no gate attempt.
+  const scientificProgress=scientificCorrectionProgressPath(workflowDir(root,run),phase,round);
+  if(existsSync(scientificProgress)){
+    const prior=scientificAdjudicationContext(root,run,phase,round);
+    requireValue(prior?.continuation,'scope correction has not genuinely completed');
+    collect(root,run,scientificCorrectionPhase(phase),round,{correctionToken:scientificCollectionToken});
+  }
+  const identity=libraryIdentity(root),correction=ownerFindingPhase(phase);
+  const pack={version:2,run,phase:correction,round,repair_scope:'frontier',frontier_ids:[...gateFrontier(root,run)],
+    units:['1','2','3'],assignments:context.assignments,before:hashes(root),before_statements:statementHashes(root),
+    before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds:[],impacts:[],cycles:[],
+    failures:null,gateAssignments:{},ledger_updates:[],input_evidence:context.evidence,
+    owner_finding_queue:{request:context.request,payload:context.payload}};
+  frozen(packPath(root,run,correction,round),pack);writeTasks(root,pack,'repair');
+  const evidence={...context.evidence,[packPath(root,run,correction,round)]:digest(readFileSync(packPath(root,run,correction,round),'utf8'))};
+  for(const unit of pack.units){
+    const task=workerReport(root,run,correction,round,unit).replace(/\.json$/,'.task.md');
+    const entries=context.payload.entries.filter(row=>row.owner_lane===unit);
+    writeFileSync(task,readFileSync(task,'utf8')+[
+      '', '# Explicit canonical owner findings: native repair continuation',
+      'Request: '+context.request.path+'. Assigned findings: '+entries.map(row=>row.root_finding.defect_id).join(', ')+'.',
+      'Repair only assigned Source items and the exact necessary owning contract/metadata. No prerequisite creation, original report, original tuple, original task, frozen pack, baseline or workflow edits. Independent lanes preserve original scientific-owner grouping; work supplier before consumer within your lane.',
+      'Read the actual completed native outcome and original scientific owner evidence/proposals for each entry. Preserve the richest sound scope and completed native improvements. Reuse existing unaffected proof evidence with attribution; no repeated whole-proof audits. Proposals are evidence to check, never automatic proof authority.',
+      'Every entry requires a genuine minimal Source repair, fresh actual review-context and root_finding_resolutions row {defect_id,status:"fixed",subjects:[subject],reason,uncertain:false,source_urls:[],familiar:true}. Ordinary decisions:[] and created_items:[].',
+      'For entries containing original_tuple, also return scientific_correction_adjudications with ONLY that exact frozen id/model/context_sha256 identity and fresh effective outcome/reason/evidence. Preserve the original false-positive outcome for a distinct newly referred defect; do not pretend the original rejection was valid. Keep every original report/decision immutable.',
+      'Return genuine current repaired reviews, exact downstream affected uses and supporting_evidence raw hashes for all nested scientific evidence actually used. Explicitly repair only invalidated contract quotes and metadata under the shared write lock. Report all scoped content checks and proof-layout. No software tests, judges, certificates or claims of independent acceptance.', ''
+    ].join('\n'));
+    evidence[task]=digest(readFileSync(task,'utf8'));
+  }
+  const progress={version:1,run,phase,round,correction_phase:correction,request:context.request,
+    subjects:context.subjects,assignments:context.assignments,evidence};
+  frozen(path,progress);return progress;
+}
+
 export function advanceAdjudicationCorrection(root,run,phase,round) {
+  // Pending writers retain their frozen authority. Full scientific current-
+  // state authentication belongs at the drained completion join, not mid-edit.
+  const queueProgress=ownerFindingProgressPath(root,run,phase,round);
+  if(existsSync(queueProgress)){
+    const prior=read(queueProgress),pointer=read(join(workflowDir(root,run),'owner-finding-queue-request.json'));
+    requireValue(prior.run===run&&prior.phase===phase&&prior.round===round
+      &&resolve(root,pointer.request.path)===prior.request.path&&pointer.request.sha256===prior.request.sha256,
+      'frozen owner finding queue authority changed');
+    verifyEvidence(prior.evidence);return prior;
+  }
   const scientific=advanceScientificAdjudication(root,run,phase,round);
+  if(scientific){
+    const path=join(root,'research',run+'-dispatch','alpha-repair-'+workerLabel(scientificCorrectionPhase(phase),round,'1')+'.result.json');
+    if(!existsSync(path)||read(path).ok!==true)return scientific;
+  }
+  const findings=advanceOwnerFindingQueue(root,run,phase,round);
+  if(findings)return findings;
   if(scientific)return scientific;
   const context=inheritedContext(root,run,phase,round);
   if(!context)return null;
@@ -581,6 +664,8 @@ export function advanceAdjudicationCorrection(root,run,phase,round) {
 const inheritedCollectionToken=Symbol('native inherited correction collection');
 const scientificCollectionToken=Symbol('native scientific correction collection');
 export function collect(root,run,phase,round,{deferImpactClosure=false,correctionToken=null}={}) {
+  if(phase.startsWith('owner-finding-correction-'))requireValue(correctionToken===ownerFindingCollectionToken,
+    'owner finding collection requires its authenticated native parent');
   if(phase.startsWith('scientific-correction-'))requireValue(correctionToken===scientificCollectionToken,
     'scientific correction collection requires its authenticated native parent');
   if(phase.startsWith('correction-'))requireValue(correctionToken===inheritedCollectionToken,
@@ -611,6 +696,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     // retained in receipt.post and must receive a fresh native owner review.
     for(const repair of external.repairs)reported[repair.id]=pack.before[repair.id];
   }
+  let ownerCorrection=null,ownerCompletion=null,ownerContext=null;
+  const ownerProgress=ownerFindingProgressPath(root,run,phase,round);
+  const ownerPack=['initial','repeat'].includes(phase)&&existsSync(ownerProgress)
+    ?readPack(root,run,ownerFindingPhase(phase),round):null;
   let scientificCorrection=null,scientificAdopted=null,scientificContext=null;
   let effectiveReports=reports;
   const scientificProgress=scientificCorrectionProgressPath(workflowDir(root,run),phase,round);
@@ -620,7 +709,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     requireValue(context&&progress.request.path===context.request.path&&progress.request.sha256===context.request.sha256,
       'missing or stale scientific correction request');
     assertScientificCorrectionDrained(root,context);verifyEvidence(progress.evidence);
-    const historical={...reported,[context.payload.subject]:context.payload.narrowed_content_sha256};
+    const historical={...(ownerPack?.before??reported),[context.payload.subject]:context.payload.narrowed_content_sha256};
     const originalValidation=validateReports(pack,reports,historical,{root});
     requireValue(!originalValidation.errors.length,originalValidation.errors.join('\n'));
     const childPhase=scientificCorrectionPhase(phase),child=read(workerReport(root,run,childPhase,round,'1'));
@@ -632,8 +721,35 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
       decisions:report.decisions.map(row=>key(row)===originalKey?scientificAdopted.decision:row),
       reviews:report.reviews.map(row=>row.id===subject?scientificAdopted.review:row)});
   }
+  if(ownerPack){
+    ownerContext=ownerFindingContext(root,run,phase,round);
+    const progress=read(ownerProgress);
+    requireValue(ownerContext&&progress.request.path===ownerContext.request.path&&progress.request.sha256===ownerContext.request.sha256,
+      'missing or stale owner finding queue request');
+    verifyEvidence(progress.evidence);
+    const childPhase=ownerFindingPhase(phase),childReports=ownerPack.units.map(unit=>read(workerReport(root,run,childPhase,round,unit)));
+    const contexts=reviewContextHashes(root,ownerContext.subjects);
+    ownerCompletion=ownerFindingCompletion(ownerPack,childReports,current,id=>contexts[id]);
+    // The earlier native snapshot is genuine queue evidence, not a fabricated
+    // current map. Every original report must validate before any projection.
+    const historical={...ownerPack.before};
+    if(scientificContext)historical[scientificContext.payload.subject]=scientificContext.payload.narrowed_content_sha256;
+    const originals=validateReports(pack,reports,historical,{root});
+    requireValue(!originals.errors.length,originals.errors.join('\n'));
+    ownerCorrection=collect(root,run,childPhase,round,{correctionToken:ownerFindingCollectionToken});
+    const decisions=new Map(ownerCompletion.decisions.map(row=>[key(row),row]));
+    const reviews=new Map(ownerCompletion.reviews.map(row=>[row.id,row]));
+    effectiveReports=effectiveReports.map(report=>({...report,
+      decisions:report.decisions.map(row=>decisions.get(key(row))??row),
+      reviews:report.reviews.map(row=>reviews.get(row.id)??row)}));
+  }
   const result=validateReports(pack,effectiveReports,reported,{root,
-    scientificCorrection:scientificAdopted?{token:scientificValidationToken,subject:scientificAdopted.subject}:null});
+    scientificCorrection:scientificAdopted?{token:scientificValidationToken,subject:scientificAdopted.subject}:null,
+    ownerFindingCorrection:ownerCompletion?{token:ownerFindingCollectionToken,reviews:ownerCompletion.reviews}:null});
+  if(ownerCompletion){
+    const assigned=new Set(result.reviews.map(row=>row.id));
+    result.reviews.push(...ownerCompletion.reviews.filter(row=>!assigned.has(row.id)));
+  }
   let correction=null,adopted=null;
   if(result.errors.length&&['initial','repeat'].includes(phase)){
     const progressPath=correctionProgressPath(workflowDir(root,run),phase,round);
@@ -652,6 +768,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     }
   }
   if(result.errors.length)throw Error(result.errors.join('\n'));
+  if(pack.owner_finding_queue){
+    const contexts=reviewContextHashes(root,pack.owner_finding_queue.payload.entries.map(row=>row.subject));
+    ownerCompletion=ownerFindingCompletion(pack,reports,current,id=>contexts[id]);
+  }
   const scientificContexts=collectionItems?reviewContexts(collectionItems):null;
   const scientificCompletion=scientificRepairCompletion(pack,reports,current,
     row=>scientificContexts.matches(row,current));
@@ -729,12 +849,30 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     receipt.downstream=[...new Set([...receipt.downstream,...scientificCorrection.downstream])];
     receipt.ledger_updates.push(...scientificCorrection.ledger_updates);
   }
+  if(pack.owner_finding_queue)receipt.owner_finding_completion=ownerCompletion;
+  if(ownerCorrection){
+    const path=join(workflowDir(root,run),ownerFindingPhase(phase)+'-'+round+'-collected.json');
+    Object.assign(receipt.evidence,ownerContext.evidence,ownerCorrection.evidence,{[path]:digest(readFileSync(path,'utf8'))});
+    receipt.native_owner_finding_decisions=ownerContext.payload.entries.map(entry=>{
+      const data=read(resolve(root,entry.root_finding.record.path)),finding=Array.isArray(data)?data[0]:data;
+      const resolution=ownerCompletion.root_finding_resolutions.find(row=>row.defect_id===finding.defect_id);
+      requireValue(resolution,'missing authenticated native finding resolution');
+      return {id:entry.subject,outcome:finding.severity==='fatal'?'confirmed_fatal':'confirmed_nonfatal',
+        reason:resolution.reason,root_finding_defect_id:finding.defect_id,
+        attribution:'Separately confirmed native owner finding; not an original judge tuple'};
+    });
+    receipt.native_owner_finding_corrections={request:ownerContext.request,completion:ownerCompletion,
+      original_decisions:reports.flatMap(report=>report.decisions).filter(row=>ownerCompletion.decisions.some(decision=>key(decision)===key(row))),
+      attribution:'Exact separately completed native repairs; original reports preserved'};
+    receipt.downstream=[...new Set([...receipt.downstream,...ownerCorrection.downstream])];
+    receipt.ledger_updates.push(...ownerCorrection.ledger_updates);
+  }
   receipt.restated=restatedIds(pack,diff(pack.before,current),statementHashes(root));
   const afterStatements=statementHashes(root);
   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
   // Gate workers may explicitly refer a failed, unassigned frontier carrier.
   // Retain that inventory for native review without inventing interface seeds.
-  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length&&pack.phase!=='gate'&&pack.basePhase!=='gate'&&!phase.startsWith('correction-')&&!phase.startsWith('scientific-correction-')&&!scientificCorrection)receipt.downstream=[];
+  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length&&pack.phase!=='gate'&&pack.basePhase!=='gate'&&!phase.startsWith('correction-')&&!phase.startsWith('scientific-correction-')&&!scientificCorrection&&!ownerCorrection&&!phase.startsWith('owner-finding-correction-'))receipt.downstream=[];
   const frontier=gateFrontier(root,run);
   const direct=discoverDownstream({items:readLibraryItems(root),repairedIds:receipt.restated});
   const required=direct.filter(row=>frontier.has(row.id));
@@ -1177,7 +1315,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
     latest_adjudication_round:phase==='impact-repeat'?round:(prior?.latest_adjudication_round??null)};
   if(phase==='impact-repeat') {
     const frontier=read(join(dir,'frontier.json'));
-    const decisions=[...sourceResult.decisions,...(sourceResult.native_correction_decisions??[])].map(d=>({run,round,id:d.id,decision:d.outcome==='confirmed_fatal'?'confirmed-fatal':'rejected-finding',resolved:true,basis:d.reason,item_sha256:readPack(root,run,'repeat',round).before[d.id]}));
+    const decisions=[...sourceResult.decisions,...(sourceResult.native_correction_decisions??[]),...(sourceResult.native_owner_finding_decisions??[])].map(d=>({run,round,id:d.id,decision:d.outcome==='confirmed_fatal'?'confirmed-fatal':'rejected-finding',resolved:true,basis:d.reason,item_sha256:readPack(root,run,'repeat',round).before[d.id]}));
     const byId=new Map();for(const row of decisions){const old=byId.get(row.id);if(!old||row.decision==='confirmed-fatal')byId.set(row.id,row);}
     const threshold=assessFatalThreshold({frontier,round,expectedIds:[...byId.keys()],decisions:[...byId.values()]});
     if(threshold.errors.length)throw Error(threshold.errors.join('\n'));

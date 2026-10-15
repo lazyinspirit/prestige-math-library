@@ -271,6 +271,42 @@ review, extra supplier edit or gate waiver supplies authority. Collection binds
 the genuine correction receipt, and the ordinary full gate battery and later
 consumer maintenance still apply. Root alone closes the canonical finding.
 
+Several distinct confirmed findings can instead receive an explicit native
+owner queue before repeat collection. Root advertises an immutable
+`owner-finding-queue-ID.json` through `owner-finding-queue-request.json` in the
+same workflow directory. Each entry binds one unique unsuperseded OPEN canonical
+owner finding, its original-frontier subject and owner lane, genuine current
+source and content/interface guards, completed native context, and original-owner
+science and unapplied proposals. An entry explicitly selects `native-referral`,
+`assigned-scope-restoration`, or `owner-discovery`. The first requires an actual
+native referral or the actual assigned rejected subject. An assigned original
+tuple must be copied exactly and separately reconciled. The discovery mode binds
+the named original scientific owner's final discovery and current snapshot;
+its native outcome is context only and supplies no invented edge or rejection.
+
+After all writers drain, the engine freezes
+`owner-finding-correction-repeat-ROUND.json` with disjoint lanes 1, 2 and 3 and
+binds its exact tasks in `owner-finding-correction-repeat-ROUND-progress.json`.
+Every entry must receive an actual source repair, fresh current native review
+and explicit typed root-finding resolution. No new prerequisite or ordinary
+judge tuple is permitted. Distinct repairs on a correctly false-positive subject
+retain that effective false-positive original decision. Continuation authenticates
+the frozen request/progress, pack/tasks and all three completed native reports
+and dispatches, and requires the changed-source set to equal the authorized
+subjects exactly. Parent collection preserves original history and validates
+only authenticated subject-specific replacements; unrelated errors still block.
+Separate fatal findings count in the round's unique fatal original-frontier item
+inventory, deduplicated by subject, without fabricated model/context tuples.
+Root closes canonical findings only after genuine completed resolutions.
+
+An earlier collected single-subject correction remains bound to its genuine
+collected `post` snapshot and immutable native evidence. Later source differences
+are permitted only for the exact subjects of a separately authenticated completed
+root queue starting at that snapshot. Its own live subject and current dependency
+review must still match. A caller-supplied historical hash map is not authority.
+These continuations do not authorize outside source writes, bypass gates, alter
+original reports, or waive normal consumer/context closure and certification.
+
 When an actual initial/repeat collection gate reports a missing original-frontier
 downstream inventory, root may complete the routing metadata through
 `research/RUN-step5-v2/owner-downstream-inventory.json` with `version:1`, `run`,

@@ -8,6 +8,7 @@ import { itemHashGuard } from './item-hash.mjs';
 import { statementHash } from './step5-statement.mjs';
 import { validateFrontier } from './step5-rounds.mjs';
 import { MODELS } from './models.mjs';
+import { ownerFindingRequest } from './step5-owner-finding-queue.mjs';
 
 const raw = bytes => createHash('sha256').update(bytes).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -27,7 +28,7 @@ export const scientificCorrectionProgressPath = (dir, phase, round) =>
 /** The original native result stays immutable. A root finding or a supplied
  * proposal alone is never source authority or a substitute for a native child. */
 export function scientificCorrectionRequest(root, run, phase, round,
-  { pack, reports, current, statements, items, dir, allowCompletedContinuation = false, currentReview = null }) {
+  { pack, reports, current, statements, items, dir, allowCompletedContinuation = false, currentReview = null, currentReviewCallback = null }) {
   if (!supported(phase)) return null;
   root = resolve(root);
   dir = resolve(dir);
@@ -219,9 +220,6 @@ export function scientificCorrectionRequest(root, run, phase, round,
       && childPack.before?.[id] === request.narrowed_content_sha256
       && childPack.before_statements?.[id] === request.narrowed_statement_sha256,
       'child pack must assign only the actual narrowed subject to native owner1');
-    const differences = [...new Set([...Object.keys(childPack.before ?? {}), ...Object.keys(current)])]
-      .filter(subject => childPack.before?.[subject] !== current[subject]);
-    need(isDeepStrictEqual(differences, [id]), 'scientific child changed an unassigned source or made no restoration');
     const childReportPath = join(dir, childLabel + '.json');
     const childDispatchPath = join(root, 'research', run + '-dispatch', 'alpha-repair-' + childLabel + '.result.json');
     need(existsSync(childReportPath) && existsSync(childDispatchPath), 'missing actual completed native correction');
@@ -233,6 +231,45 @@ export function scientificCorrectionRequest(root, run, phase, round,
       && isDeepStrictEqual(childDispatch.covers, [childPhase + ':1'])
       && typeof childDispatch.ended_at === 'string' && !Number.isNaN(Date.parse(childDispatch.ended_at)),
       'scientific child lacks completed native Sol6.1-high authority');
+    const collectedPath = join(dir, childPhase + '-' + round + '-collected.json');
+    let genuineChildPost = current;
+    if (existsSync(collectedPath)) {
+      const collected = read(collectedPath);
+      need(collected.version === 2 && collected.run === run && collected.phase === childPhase
+        && collected.round === round && Array.isArray(collected.errors) && collected.errors.length === 0
+        && collected.post && collected.evidence && typeof collected.evidence === 'object',
+        'invalid actual collected scientific child');
+      for (const [path, hash] of Object.entries(collected.evidence)) {
+        const absolute = isAbsolute(path) ? path : resolve(root, path);
+        bound({ path: relative(root, absolute), sha256: hash });
+      }
+      for (const path of [childPackPath, childReportPath, childDispatchPath]) {
+        need(collected.evidence[path] === raw(readFileSync(path)), 'collected child lacks authentic native input: ' + path);
+      }
+      need(collected.post[id] === current[id]
+        && collected.reviews?.some(row => isDeepStrictEqual(row, childReport.reviews?.[0])),
+        'live scientific subject no longer matches its collected native review');
+      genuineChildPost = collected.post;
+      const laterChanges = [...new Set([...Object.keys(collected.post), ...Object.keys(current)])]
+        .filter(subject => collected.post[subject] !== current[subject]);
+      if (laterChanges.length) {
+        need(typeof currentReviewCallback === 'function', 'later authorized queue requires fresh current-review callback');
+        const queue = ownerFindingRequest(root, run, phase, round, { items, current, statements, dir,
+          allowCompletedContinuation: true, currentReviewCallback });
+        need(queue?.completion && !queue.subjects.includes(id)
+          && isDeepStrictEqual([...laterChanges].sort(), [...queue.subjects].sort()),
+          'later source differences are not the exact authenticated completed root queue');
+        const queuePack = read(join(dir, 'owner-finding-correction-' + phase + '-' + round + '.json'));
+        need(isDeepStrictEqual(queuePack.before, collected.post),
+          'later queue does not start from the genuine collected scientific child snapshot');
+        Object.assign(evidence, queue.evidence);
+        context.authorizedLaterQueue = queue.request;
+      }
+      evidence[collectedPath] = raw(readFileSync(collectedPath));
+    }
+    const differences = [...new Set([...Object.keys(childPack.before ?? {}), ...Object.keys(genuineChildPost)])]
+      .filter(subject => childPack.before?.[subject] !== genuineChildPost[subject]);
+    need(isDeepStrictEqual(differences, [id]), 'scientific child changed an unassigned source or made no restoration');
     context.completion = scientificCorrectionCompletion(childReport, request, current, currentReview);
     for (const path of [progressPath, childReportPath, childDispatchPath]) evidence[path] = raw(readFileSync(path));
     context.continuation = true;
