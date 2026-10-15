@@ -262,7 +262,11 @@ function validateRow(row, ids, opts = {}) {
   if (row.subclass === 'other' && !fallbackSubclassNote(row, opts)) errs.push(`${row.defect_id}: subclass "other" requires subclass_note`);
   if (row.prevention && !['mechanical', 'brief', 'process', 'none'].includes(row.prevention.kind)) errs.push(`${row.defect_id}: prevention.kind invalid`);
   if (row.adjudication_ref && !Array.isArray(row.adjudication_ref)) errs.push(`${row.defect_id}: adjudication_ref must be an array`);
-  if (row.evidence && row.evidence.some((e) => !e?.path)) errs.push(`${row.defect_id}: evidence entries need a path`);
+  if (row.evidence && row.evidence.some((e) =>
+    !(typeof e?.path === 'string' && e.path.trim())
+    && !(typeof e?.url === 'string' && /^https?:\/\/[^\s]+$/.test(e.url)))) {
+    errs.push(`${row.defect_id}: evidence entries need a path or absolute HTTP(S) source URL`);
+  }
   if (row.defect_id) {
     if (ids.has(row.defect_id)) errs.push(`duplicate defect_id ${row.defect_id}`);
     ids.add(row.defect_id);

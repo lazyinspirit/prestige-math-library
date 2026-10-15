@@ -158,6 +158,11 @@ work.
 
 ## Independent review through closeout
 
+Defect evidence may identify a repository path or an absolute HTTP(S) source
+URL. A source URL remains a source locator; it does not claim a local full-text
+file or reading attestation. Correct invalid taxonomy spellings with guarded,
+append-only taxonomy successors, preserving the original frozen rows.
+
 Step 3 keeps the existing independent batch review, routed adjudication and
 unfinished cross-review continuation. A partial process handoff is not completed
 artifact coverage; continuations require actual completed-obligation progress.
@@ -170,6 +175,16 @@ and carrier bindings, and guarded current source excerpts. All ordinary shared
 finding, ledger and current-content checks still apply. It does not rewrite
 observations, accept source content, or combine unrelated defects. Native owner
 recertification binds this receipt and its evidence inputs before the battery.
+A later same-owner external-context refresh may be bound separately through
+`RUN-step3-historical-context-transition.json`. Its immutable Root receipt must
+bind genuine frozen/current decisions and context preimages, the exact owner
+proposal and preserved review evidence, and actual completed native certification
+of the refreshed consumer. The verifier permits only context receipt seals and
+the explicitly reviewed consumer bindings/evidence to evolve; every observation,
+verdict, subject and other decision field stays exact. Current native external
+context checks remain mandatory. Original closure and historical evidence are
+never resealed. Valid append-only taxonomy successors retain their original
+Step-3 ledger predecessors in the authenticated historical projection.
 Step-3 readers and refuters use GPT-6 Luna/max; batch adjudicators use GPT-6.1
 Sol/medium. Step-4 read-only batch readers use GPT-6.1 Sol/medium, and the
 per-item judge sweep uses GPT-6 Luna/max.
