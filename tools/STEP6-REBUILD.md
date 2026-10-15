@@ -55,8 +55,22 @@ subject among actual owned item/page IDs, including exact
 selected item carriers. Incidental supplier mentions and reachable prerequisite IDs
 remain readiness context and confer no commit ownership. Foreign-only ledger
 changes stay outside the commit even when relevant as context. Mixed changes to
-owned and foreign ledger records fail closed for separate integration; table
-records are classified individually. This ownership rule applies only to explicit
+owned and foreign ledger records fail closed unless an exact owner-authorized
+addition-only fragment is bound in `closeout-scope.shared_fragments`; table
+records are classified individually. A fragment binds a run-local authority file
+and its SHA-256, exact before/target owned records, and hashed native evidence.
+It cannot remove, replace, or reorder existing records. Both the authority and
+evidence are sealed before the actual metadata/render pass and full battery.
+The v3 transaction composes additions separately into the current HEAD and index
+under the normal index lock and ref compare-and-swap, retaining their separate
+foreign bytes and staged content. It inserts no foreign working content, checks
+exact base reconstruction and residuals, and leaves the full working file
+unchanged. Terminal record line endings are normalized only for boundary
+signatures; original bytes are retained. Unrelated foreign changes may continue
+between gates; relevant semantic context remains sealed. Fragment authority
+remains selected after integration for truthful retry handling. Legacy closeout
+rejects fragments. Missing or changed authority, conflicting owned records,
+unsupported index flags or modes, or residual changes fail closed. This ownership rule applies only to explicit
 policies; default shared-input restrictions and readiness context seals remain.
 
 The final report records status, frontier counts, material caveats, measured

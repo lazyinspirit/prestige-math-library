@@ -13,8 +13,9 @@ export function step6OwnedInputs(run, root, { physics = false } = {}) {
   if (!/^[a-zA-Z0-9][a-zA-Z0-9_-]*$/.test(run)) throw Error('invalid scoped run identity');
   const finalReceipt = `research/${run}-dispatch/tool-step6-finalize-v3.result.json`;
   if (existsSync(join(root, `research/${run}-closeout-scope.json`))) {
-    const selected = new Set(preflightCloseoutScope(root, run, finalReceipt, { physics }).paths);
-    return selectSharedOwnership(run, root, { physics, scope: runScope(run, root), selected, policy: true });
+    const authority = preflightCloseoutScope(root, run, finalReceipt, { physics });
+    const selected = new Set(authority.paths);
+    return selectSharedOwnership(run, root, { physics, scope: runScope(run, root), selected, policy: true, fragments: authority.fragments });
   }
   const scope = runScope(run, root);
   if (!scope.items.length || !scope.pages.length) throw Error('empty closeout source frontier');
@@ -92,7 +93,7 @@ function publishedOwnershipParts(text, run, ownedIds) {
   return Object.fromEntries(Object.entries(parts).map(([key, rows]) => [key, JSON.stringify(rows)]));
 }
 
-function selectSharedOwnership(run, root, { physics, scope, selected, policy }) {
+function selectSharedOwnership(run, root, { physics, scope, selected, policy, fragments = [] }) {
   // Preserve unchanged and foreign-only shared edits outside the commit.
   // Reuse precisely the native scientific projections, not a filename-prefix
   // approximation or a whole-ledger object hash. A relevant change still
@@ -122,6 +123,9 @@ function selectSharedOwnership(run, root, { physics, scope, selected, policy }) 
     // Explicit policy owns only its selected carriers. Other relevant shared
     // records remain sealed context, without acquiring commit ownership.
     if (policy && !selected.has(path)) continue;
+    // Explicit fragment authority remains stable after commit/retry; the v3
+    // transaction validates and composes only its exact owned-record additions.
+    if (fragments.some(fragment => fragment.path === path)) continue;
     if (policy && path === 'research/published-consumer-supplier-ledger.md') {
       const ownedIds = new Set([...scope.items.map(row => row.id), ...scope.pages.map(row => row.id),
         ...[...selected].flatMap(file => /^items\/([^/]+)\.md$/.exec(file)?.slice(1) ?? [])]);

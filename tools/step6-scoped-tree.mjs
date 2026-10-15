@@ -180,6 +180,18 @@ export function scopedReadinessTree(run, root, { scope = runScope(run, root), in
     if (policy.version !== 1 || policy.run !== run || policy.authorized_by !== 'owner'
       || !Array.isArray(policy.additional_paths)) throw Error('invalid exact closeout scope policy');
     add(policyFile);
+    for (const row of policy.shared_fragments ?? []) {
+      if (row.path !== 'research/published-consumer-supplier-ledger.md'
+        || typeof row.authority !== 'string' || !row.authority.startsWith(`research/${run}-`)
+        || row.authority.split('/').includes('..')) throw Error('invalid shared-fragment ownership path');
+      add(row.authority);
+      const fragment = JSON.parse(readSource(row.authority));
+      for (const evidence of fragment.evidence ?? []) {
+        if (typeof evidence.path !== 'string' || !evidence.path.startsWith(`research/${run}-`)
+          || evidence.path.split('/').includes('..')) throw Error('invalid shared-fragment evidence path');
+        add(evidence.path);
+      }
+    }
     for (const row of policy.additional_paths) {
       if (typeof row.path !== 'string' || row.path.startsWith('/') || row.path.split('/').includes('..')
         || typeof row.ownership_evidence !== 'string' || !row.ownership_evidence.startsWith(`research/${run}-`)

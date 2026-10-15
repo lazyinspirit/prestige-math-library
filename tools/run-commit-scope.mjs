@@ -1,5 +1,6 @@
 // Optional owner-authorized closeout. Imported only when a run has a policy.
 // The engine's mathematical/readiness/report gates remain unchanged.
+import { validateFragment, decodeLedger } from './step6-ledger-fragment.mjs';
 import { spawnSync } from 'node:child_process';
 import { accessSync, constants, copyFileSync, existsSync, lstatSync, mkdirSync,
   mkdtempSync, readFileSync, readdirSync, readlinkSync, rmSync, statSync,
@@ -292,12 +293,14 @@ function readScopePolicy(root, run) {
   const policyPath = 'research/' + run + '-closeout-scope.json';
   regularPath(root, policyPath);
   const policyText = readFileSync(join(root, policyPath), 'utf8'), policy = JSON.parse(policyText);
-  const keys = new Set(['version', 'run', 'authorized_by', 'authorization', 'additional_paths', 'reviewed_hook']);
+  const keys = new Set(['version', 'run', 'authorized_by', 'authorization', 'additional_paths', 'reviewed_hook', 'shared_fragments']);
   if (Object.keys(policy).some(key => !keys.has(key)) || policy.version !== 1 || policy.run !== run
     || policy.authorized_by !== 'owner' || typeof policy.authorization !== 'string'
     || policy.authorization.trim().length < 20 || !Array.isArray(policy.additional_paths)) {
     throw Error('closeout: invalid owner-authorized run-local scope policy');
   }
+  if (policy.shared_fragments !== undefined && (!Array.isArray(policy.shared_fragments) || policy.shared_fragments.length > 1))
+    throw Error('closeout: invalid bounded shared-fragment authority');
   const reviewedHook = policy.reviewed_hook ?? null;
   if (Object.hasOwn(policy, 'reviewed_hook') && (!reviewedHook
     || Object.keys(reviewedHook).length !== Object.keys(inertHook).length
@@ -434,6 +437,37 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
     }
     required.add(path);
   }
+  // Only the fresh v3 transaction composes shared fragments. Legacy git-add
+  // closeout must never acquire this path as whole-file commit authority.
+  const fragments = [];
+  if (policy.shared_fragments?.length) {
+    if (finalReceipt !== `research/${run}-dispatch/tool-step6-finalize-v3.result.json`)
+      throw Error('closeout: shared fragments require the native v3 transaction');
+    const ownedIds = new Set([...selected.items.map(row => row.id), ...selected.pages.map(row => row.id),
+      ...claims.map(row => row.id), ...policy.additional_paths.flatMap(row => /^items\/([^/]+)\.md$/.exec(row.path)?.slice(1) ?? [])]);
+    for (const row of policy.shared_fragments) {
+      if (!row || Object.keys(row).some(key => !['path', 'authority', 'sha256'].includes(key))
+        || row.path !== 'research/published-consumer-supplier-ledger.md'
+        || !runResearch(run, safePath(row.authority)) || !/^[a-f0-9]{64}$/.test(row.sha256 ?? ''))
+        throw Error('closeout: invalid exact shared-fragment binding');
+      regularPath(root, row.authority);
+      const bytes = readFileSync(join(root, row.authority));
+      if (sha256(bytes) !== row.sha256) throw Error('closeout: fragment authority changed');
+      const spec = JSON.parse(decodeLedger(bytes));
+      validateFragment(spec, run, ownedIds, decodeLedger(readFileSync(join(root, row.path))));
+      required.add(row.authority);
+      for (const evidence of spec.evidence) {
+        if (!evidence || Object.keys(evidence).some(key => !['path', 'sha256'].includes(key))
+          || !runResearch(run, safePath(evidence.path)) || !/^[a-f0-9]{64}$/.test(evidence.sha256 ?? ''))
+          throw Error('closeout: invalid fragment supporting evidence');
+        regularPath(root, evidence.path);
+        if (sha256(readFileSync(join(root, evidence.path))) !== evidence.sha256)
+          throw Error('closeout: fragment supporting evidence changed');
+        required.add(evidence.path);
+      }
+      fragments.push({ path: row.path, authority: row.authority, sha256: row.sha256, spec, ownedIds: [...ownedIds].sort() });
+    }
+  }
   const additional = new Set();
   for (const row of policy.additional_paths) {
     if (!row || Object.keys(row).some(key => !['path', 'sha256', 'reason', 'ownership_evidence'].includes(key))
@@ -505,9 +539,10 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
     input: pathsInput(paths), optional: true, literalPathspecs: false,
   }) || Buffer.alloc(0));
   if (ignored.length) throw Error('closeout: required/authorized artifact is ignored by Git: ' + ignored[0]);
-  return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook,
+  return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook, fragments,
     contextSha256: sha256(JSON.stringify({ ...(physics ? { domain: 'physics' } : {}), selected, required: [...required].sort(),
-      claims: sha256(claimsText), noopClosures, operationalContexts: exclusions.sha256, additional: policy.additional_paths })) };
+      claims: sha256(claimsText), noopClosures, operationalContexts: exclusions.sha256, additional: policy.additional_paths,
+      sharedFragments: fragments.map(({ path, authority, sha256 }) => ({ path, authority, sha256 })) })) };
 }
 
 // Read-only binding helper for an owner administrative reseal. It does not

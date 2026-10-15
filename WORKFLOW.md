@@ -410,7 +410,12 @@ post-commit content gate battery. See [the implementation](tools/STEP6-REBUILD.m
 and [mechanical check map](tools/STEP6-MECHANICAL-CHECKS.md). New v3 stages require
 an explicit guarded cutover for historical frozen runs; installation alone does
 not migrate or resume them. Legacy closeout/recovery commands remain available
-for their original historical receipts.
+for their original historical receipts. Exact owner-authorized addition-only
+published-ledger fragments are supported only by the v3 transaction: authority
+and evidence are sealed before preparation, while separate current HEAD/index
+foreign residuals and all working bytes are preserved at the actual ref boundary.
+They grant record-level commit authority only, without mathematical acceptance
+or ownership of the entire shared carrier. Conflicts fail closed.
 
 Readiness and closeout treat both `ENOENT` and `ENOTDIR` as an absent path:
 a regular file cannot contain child evidence files. Readiness follows existing

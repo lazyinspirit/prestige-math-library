@@ -1,5 +1,6 @@
 // Final transaction only. Git plumbing never touches foreign working files,
 // runs filters, or checks out a tree. All content gates precede this operation.
+import { composeFragment, fragmentRecords, recordSignature, decodeLedger } from './step6-ledger-fragment.mjs';
 import { copyFileSync, existsSync, lstatSync, mkdirSync, mkdtempSync, openSync,
   closeSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve, relative } from 'node:path';
@@ -38,7 +39,18 @@ export function preflightStep6(root, run, { physics = false, finalReceipt = fina
   // Retain original Git side-effect refusals. Plumbing uses no filters or
   // commit hooks even when a previously reviewed inert hook is allowed.
   refuseGitSideEffects(gitRoot, paths, policy?.reviewedHook ?? verifiedInertHook(gitRoot));
-  indexEntries(gitRoot); // checks conflicts, flags, unsupported submodules
+  const preflightIndex = indexEntries(gitRoot); // checks conflicts, flags, unsupported submodules
+  // Fail incompatible owned bases during real preparation, before final gates.
+  // This read-only preflight is not an atomic snapshot; commit recomposes at CAS.
+  const preflightHead = policy?.fragments?.length ? treeEntries(gitRoot) : [];
+  for (const fragment of policy?.fragments ?? []) {
+    const path = (prefix ? prefix + '/' : '') + fragment.path;
+    const headRow = preflightHead.find(row => row.path === path), indexRow = preflightIndex.find(row => row.path === path);
+    if (!headRow || !indexRow || headRow.mode !== '100644' || indexRow.mode !== '100644' || indexRow.flags !== '0')
+      throw Error('step6 commit: fragment requires existing ordinary HEAD/index carrier');
+    for (const row of [headRow, indexRow])
+      composeFragment(decodeLedger(git(gitRoot, ['cat-file', 'blob', row.oid])), fragment.spec, run, new Set(fragment.ownedIds));
+  }
   const scope = runScope(run, root);
   for (const row of [...scope.items, ...scope.pages]) {
     if (!localPaths.includes(row.file)) throw Error(`step6 commit: selected carrier is not owned: ${row.file}`);
@@ -48,7 +60,7 @@ export function preflightStep6(root, run, { physics = false, finalReceipt = fina
   const ignored = git(gitRoot, ['check-ignore', '-z', '--stdin'],
     { input: nul(paths), optional: true, literalPathspecs: false });
   if (ignored?.length) throw Error('step6 commit: an owned artifact is ignored');
-  return { root, gitRoot, prefix, localPaths, paths, finalReceipt, policy,
+  return { root, gitRoot, prefix, localPaths, paths, finalReceipt, policy, fragments: policy?.fragments ?? [],
     owns: path => paths.includes(path) };
 }
 
@@ -74,6 +86,23 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
     const originalIndex = readFileSync(actualIndex);
     const beforeIndex = indexEntries(gitRoot), beforeTree = treeEntries(gitRoot, beforeHead);
     const outsideIndex = outside(beforeIndex), outsideTree = outside(beforeTree);
+    const fragmentStates = new Map();
+    for (const fragment of scope.fragments) {
+      const path = (scope.prefix ? scope.prefix + '/' : '') + fragment.path;
+      const headRow = beforeTree.find(row => row.path === path), indexRow = beforeIndex.find(row => row.path === path);
+      if (!headRow || !indexRow || headRow.mode !== '100644' || indexRow.mode !== '100644' || indexRow.flags !== '0')
+        throw Error('step6 commit: fragment requires existing ordinary HEAD/index carrier');
+      const headText = decodeLedger(git(gitRoot, ['cat-file', 'blob', headRow.oid]));
+      const indexText = decodeLedger(git(gitRoot, ['cat-file', 'blob', indexRow.oid]));
+      const ids = new Set(fragment.ownedIds);
+      const head = composeFragment(headText, fragment.spec, run, ids);
+      const index = composeFragment(indexText, fragment.spec, run, ids);
+      const residual = text => fragmentRecords(text, run, ids).filter(row => !row.owned).map(row => recordSignature(row.text));
+      equal(residual(head.text), residual(headText), 'fragment HEAD foreign residual');
+      equal(residual(index.text), residual(indexText), 'fragment index foreign residual');
+      fragmentStates.set(path, { fragment, head, index, headRow, indexRow,
+        headForeign: digest(residual(headText)), indexForeign: digest(residual(indexText)) });
+    }
     const validated = paths.filter(path => path !== (scope.prefix ? scope.prefix + '/' : '') + finalReceipt)
       .map(path => fileState(gitRoot, path));
     mkdirSync(dirname(receiptFile), { recursive: true });
@@ -83,7 +112,11 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
         outside_index_sha256: digest(outsideIndex), outside_head_sha256: digest(outsideTree),
         outside_working: 'Preserved by construction: only owned files written; no checkout, filters, hooks or foreign content scan.',
         policy_sha256: scope.policy?.policySha256 ?? null,
-        context_sha256: scope.policy?.contextSha256 ?? null } }, null, 2) + '\n');
+        context_sha256: scope.policy?.contextSha256 ?? null,
+        shared_fragments: [...fragmentStates].map(([path, row]) => ({ path, authority: row.fragment.authority,
+          authority_sha256: row.fragment.sha256, before_head_blob: row.headRow.oid, before_index_blob: row.indexRow.oid,
+          head_foreign_sha256: row.headForeign, index_foreign_sha256: row.indexForeign,
+          head_result_sha256: sha256(row.head.text), index_result_sha256: sha256(row.index.text) })) } }, null, 2) + '\n');
     // Keep native coverage FALSE until every commit/index assertion succeeds.
     // The tree receives the prospective successful blob; a crash before final
     // materialization leaves an explicit pending result, never adoptable success.
@@ -91,7 +124,7 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
       run, covers: ['all'], ok: false, transaction_pending: true, before_head: beforeHead }, null, 2) + '\n');
     writeFileSync(receiptFile, pendingReceipt);
     const expectedReceipt = pendingReceipt;
-    const present = paths.filter(path => regularPath(gitRoot, path, true));
+    const present = paths.filter(path => !fragmentStates.has(path) && regularPath(gitRoot, path, true));
     const oids = textGit(gitRoot, ['hash-object', '-w', '--no-filters', '--stdin-paths'],
       { input: Buffer.from(present.join('\n') + '\n') }).split('\n');
     if (oids.length !== present.length) throw Error('step6 commit: incomplete owned object inventory');
@@ -100,31 +133,53 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
     const blobs = new Map(present.map((path, i) => [path, { path, oid: oids[i],
       mode: !checkModes && oldTree.get(path) ? oldTree.get(path).mode
         : lstatSync(join(gitRoot, path)).mode & 0o111 ? '100755' : '100644' }]));
+    const indexBlobs = new Map(blobs);
+    for (const [path, row] of fragmentStates) {
+      const object = text => textGit(gitRoot, ['hash-object', '-w', '--no-filters', '--stdin'], { input: Buffer.from(text) });
+      blobs.set(path, { path, mode: '100644', oid: object(row.head.text) });
+      indexBlobs.set(path, { path, mode: '100644', oid: object(row.index.text) });
+    }
+    const assertFragmentTree = (tree, kind, label) => {
+      const entries = new Map(treeEntries(gitRoot, tree).map(row => [row.path, row]));
+      for (const [path, row] of fragmentStates) {
+        const actual = entries.get(path), expected = (kind === 'head' ? blobs : indexBlobs).get(path);
+        if (!actual || actual.oid !== expected.oid || actual.mode !== expected.mode)
+          throw Error(`step6 commit: ${label} fragment blob mismatch`);
+        const text = decodeLedger(git(gitRoot, ['cat-file', 'blob', actual.oid]));
+        const residual = fragmentRecords(text, run, new Set(row.fragment.ownedIds))
+          .filter(record => !record.owned).map(record => recordSignature(record.text));
+        equal(digest(residual), kind === 'head' ? row.headForeign : row.indexForeign, label + ' fragment residual');
+      }
+    };
     const receiptGitPath = (scope.prefix ? scope.prefix + '/' : '') + finalReceipt;
     const receiptBlob = textGit(gitRoot, ['hash-object', '-w', '--no-filters', '--stdin'], { input: successfulReceipt });
     blobs.get(receiptGitPath).oid = receiptBlob;
     const zero = '0'.repeat(beforeHead.length);
-    const updates = paths.flatMap(path => {
-      const row = blobs.get(path);
+    const updatesFor = source => paths.flatMap(path => {
+      const row = source.get(path);
       return [`0 ${zero}\t${path}`, ...(row ? [`${row.mode} ${row.oid}\t${path}`] : [])];
     });
+    const updates = updatesFor(blobs), indexUpdates = updatesFor(indexBlobs);
     git(gitRoot, ['read-tree', beforeHead], { env });
     git(gitRoot, ['update-index', '-z', '--index-info'], { env, input: nul(updates) });
     const tree = textGit(gitRoot, ['write-tree'], { env });
     equal(outside(treeEntries(gitRoot, tree)), outsideTree, 'outside proposed HEAD');
+    assertFragmentTree(tree, 'head', 'proposed HEAD');
     const commit = textGit(gitRoot, ['commit-tree', tree, '-p', beforeHead], {
       input: Buffer.from(`chore(${run}): close out validated frontier\n\n${paths.length} exact owned paths; no push or publication.\n`) });
     // Construct the real-index result from its exact original, preserving all
     // foreign staged blobs and flags. update-index never reads working bytes.
     copyFileSync(actualIndex, integrateIndex);
     git(gitRoot, ['update-index', '-z', '--index-info'],
-      { env: { GIT_INDEX_FILE: integrateIndex }, input: nul(updates) });
+      { env: { GIT_INDEX_FILE: integrateIndex }, input: nul(indexUpdates) });
+    assertFragmentTree(textGit(gitRoot, ['write-tree'], { env: { GIT_INDEX_FILE: integrateIndex } }), 'index', 'proposed integrated index');
     equal(paths.filter(path => path !== (scope.prefix ? scope.prefix + '/' : '') + finalReceipt)
       .map(path => fileState(gitRoot, path)), validated, 'validated owned working bytes');
     if (!readFileSync(receiptFile).equals(expectedReceipt)) throw Error('step6 commit: receipt changed');
     const currentScope = preflightStep6(root, run, { physics, finalReceipt });
     equal(currentScope.paths, paths, 'owned inventory');
     equal(currentScope.policy?.contextSha256 ?? null, scope.policy?.contextSha256 ?? null, 'scope authority');
+    equal(currentScope.fragments, scope.fragments, 'fragment authority');
     if (!readFileSync(actualIndex).equals(originalIndex)) throw Error('step6 commit: real index changed despite lock');
     if (textGit(gitRoot, ['symbolic-ref', '--short', 'HEAD']) !== 'main') throw Error('step6 commit: branch changed');
     // Recheck only the validated frontier/context at the atomic ref boundary,
@@ -140,11 +195,18 @@ export function commitStep6(root, run, { physics = false, finalReceipt = finalPa
     const committed = new Map(afterTree.map(row => [row.path, row]));
     const indexed = new Map(afterIndex.map(row => [row.path, row]));
     for (const path of paths) {
-      const expected = blobs.get(path);
-      for (const actual of [committed.get(path), indexed.get(path)]) {
+      for (const [actual, expected] of [[committed.get(path), blobs.get(path)], [indexed.get(path), indexBlobs.get(path)]]) {
         if (expected ? !actual || actual.oid !== expected.oid || actual.mode !== expected.mode : actual)
           throw Error(`step6 commit: owned committed/index blob mismatch: ${path}`);
       }
+    }
+    for (const [path, row] of fragmentStates) {
+      const ids = new Set(row.fragment.ownedIds);
+      const residual = text => fragmentRecords(text, run, ids).filter(record => !record.owned).map(record => recordSignature(record.text));
+      const committedText = decodeLedger(git(gitRoot, ['cat-file', 'blob', committed.get(path).oid]));
+      const indexedText = decodeLedger(git(gitRoot, ['cat-file', 'blob', indexed.get(path).oid]));
+      equal(digest(residual(committedText)), row.headForeign, 'committed fragment foreign residual');
+      equal(digest(residual(indexedText)), row.indexForeign, 'indexed fragment foreign residual');
     }
     equal(paths.filter(path => path !== (scope.prefix ? scope.prefix + '/' : '') + finalReceipt)
       .map(path => fileState(gitRoot, path)), validated, 'committed owned working bytes');
