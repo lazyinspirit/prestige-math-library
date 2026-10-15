@@ -244,7 +244,11 @@ export function sourceIdenticalAcceptanceContinuity(
           ? "Example"
           : meta.kind === "counterexample"
             ? "Statement refuted"
-            : "Statement";
+            : meta.kind === "remark" &&
+                !sectionText(body, "Statement") &&
+                sectionText(body, "Remarks")
+              ? "Remarks"
+              : "Statement";
     if (
       !sectionText(body, heading) ||
       norm(row.statement) !== norm(sectionText(body, heading))
