@@ -1315,7 +1315,8 @@ export const stages = [
     },
     onProgress: ({ctx, executor, stage}: any) => {
       if (!ctx.doctor && ![...executor.inflight.values()].some((d: any) => d.meta.stage === stage.id)
-        && !executor.adoptedUnits(stage).size) writeBatchDependencyLevels(ctx.repo, ctx.run);
+        && !executor.adoptedUnits(stage).size && executor.stageStatus(stage, ctx).unitsDone)
+        writeBatchDependencyLevels(ctx.repo, ctx.run);
     },
     gates: (ctx) => [
       gate('batch-dependency-levels', ['node', 'tools/batch-dependency-levels.mjs', 'check', '--run', ctx.run]),
