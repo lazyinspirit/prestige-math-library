@@ -28,6 +28,9 @@ const modelsArg = option('--models');
 const lineupArg = option('--lineup');
 const effortArg = option('--effort');
 const limitArg = option('--limit');
+const currency = option('--currency') || 'context-or-item';
+if (!['context-or-item', 'exact-context'].includes(currency))
+  throw new Error('--currency must be context-or-item or exact-context');
 // Kept as run metadata for callers and logs. Stateless judging deliberately
 // does not use it as a session namespace.
 const run = option('--run');
@@ -40,7 +43,7 @@ const contextCache = option('--context-cache') || (/-judge\.jsonl$/.test(ledger)
 if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
   console.error('usage: node tools/judge-sweep.mjs --ledger FILE --cost FILE '
     + '(--pages PAGE,... | --items ID,... | --manifests FILE,...) '
-    + '[--lineup sol|sol61|luna] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--run RUN]');
+    + '[--lineup sol|sol61|luna] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--currency context-or-item|exact-context] [--run RUN]');
   process.exit(2);
 }
 if (manifestsArg && (pagesArg || itemsArg)) {
@@ -136,7 +139,7 @@ for (const model of models) {
     const current = currentHashes.get(id);
     if (!current) throw new Error(`${id}: missing current context hash`);
     return !(history.get(`${id}\0${model}`) ?? []).some((row) =>
-      typeof row.keep === 'boolean' && verdictIsCurrent(row, current));
+      typeof row.keep === 'boolean' && verdictIsCurrent(row, current, currency));
   }).slice(0, limit);
   console.log(`[judge-sweep] ${model}: pending ${owed.length}/${ids.length}, cap ${caps[model]}`);
   pending.push(...owed.map((id) => ({ id, model })));

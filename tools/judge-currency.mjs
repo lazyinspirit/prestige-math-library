@@ -34,9 +34,17 @@
  *        a verdict row from the judge ledger
  * @param {{context: string, item: string|null}} current
  *        the item's current context hash and current judge-form item hash
+ * @param {'context-or-item'|'exact-context'} [currency='context-or-item']
+ *        Step5 certified waves require both the exact item and frozen context.
  * @returns {boolean}
  */
-export function verdictIsCurrent(row, current) {
+export function verdictIsCurrent(row, current, currency = 'context-or-item') {
+  if (!['context-or-item', 'exact-context'].includes(currency))
+    throw new Error(`unknown judge currency policy: ${currency}`);
+  if (currency === 'exact-context') {
+    return Boolean(row && current && current.context && current.item
+      && row.context_sha256 === current.context && row.item_sha256 === current.item);
+  }
   if (!row || !current) return false;
   if (row.context_sha256 && row.context_sha256 === current.context) return true;
   // A ledger written before `item_sha256` existed carries none, and `null`
