@@ -105,11 +105,14 @@ if (receiptPath) {
   dirty = git('status', '--porcelain', '--', '.').split('\n').filter(Boolean);
 }
 
+const headBeforeCommit = git('rev-parse', 'HEAD').trim();
 try {
   git('add', '-A', '--', '.');
-  git('commit', '-m', `chore(${run}): engine close-out — commit the run's working tree\n\n${dirty.length} path(s); status fields untouched; push and publish remain owner acts.`);
+  git('commit', '--quiet', '-m', `chore(${run}): engine close-out — commit the run's working tree\n\n${dirty.length} path(s); status fields untouched; push and publish remain owner acts.`);
 } catch (cause) {
-  if (receiptPath) {
+  let headUnchanged = false;
+  try { headUnchanged = git('rev-parse', 'HEAD').trim() === headBeforeCommit; } catch { /* preserve committed evidence if HEAD cannot be read */ }
+  if (receiptPath && headUnchanged) {
     try { git('reset', '--', finalReceipt); } catch { /* best effort */ }
     try {
       if (previousReceipt) writeFileSync(receiptPath, previousReceipt);
