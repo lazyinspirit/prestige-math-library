@@ -102,14 +102,14 @@ test('outside maintenance has separate tasks and waits between parallel frontier
     }
   }finally{f.close();}
 });
-test('5.7 repeats only on a complete above-threshold report; gate failures preserve the repair loop',()=>{
+test('5.7 repeats until a complete zero-defect report; gate failures preserve the repair loop',()=>{
   const f=fixture();try {
     const path=join(f.repo,'research/demo-step5-v2/threshold-1.json');
     writeFileSync(path,JSON.stringify({belowThreshold:false,fatalCount:2,originalCount:100,errors:[]}));
     assert.deepEqual(f.stage('5.7-certify').route({ctx:f.ctx,outcome:'passed'}),{next:'5.4-rejudge'});
-    writeFileSync(path,JSON.stringify({belowThreshold:true,fatalCount:1,originalCount:100,errors:[]}));
+    writeFileSync(path,JSON.stringify({belowThreshold:true,fatalCount:0,originalCount:100,errors:[]}));
     assert.equal(f.stage('5.7-certify').route({ctx:f.ctx,outcome:'passed'}),null);
-    for(const fatalCount of [2,3]){
+    for(const fatalCount of [1,2,3]){
       writeFileSync(path,JSON.stringify({belowThreshold:true,fatalCount,originalCount:100,errors:[]}));
       assert.deepEqual(f.stage('5.7-certify').route({ctx:f.ctx,outcome:'passed'}),{next:'5.4-rejudge'});
     }

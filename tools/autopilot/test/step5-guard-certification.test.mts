@@ -150,15 +150,15 @@ test('v2 evidence loss fails closed and cannot invoke the legacy licence fallbac
   result = fx.guard(); assert.equal(result.status, 1); assert.match(result.stdout, /frontier.json/);
 });
 
-test('final closure rejects a bound old five-percent passing flag at or above two percent', () => {
+test('final closure rejects a historical percentage passing flag with any confirmed-fatal item', () => {
   const fx = fixture(), threshold = join(fx.dir, 'threshold-1.json');
-  for (const fatalCount of [2, 3]) {
+  for (const fatalCount of [1, 2, 3]) {
     fx.write(threshold, { round: 1, originalCount: 100, fatalIds: [], fatalCount, belowThreshold: true, errors: [] });
     fx.write(join(fx.dir, 'certification.json'), { ...fx.cert,
       evidence: { ...fx.cert.evidence, [threshold]: digest(readFileSync(threshold, 'utf8')) } });
     const result = fx.guard();
     assert.equal(result.status, 1);
-    assert.match(result.stdout, /strictly below 2%/);
+    assert.match(result.stdout, /confirmed-fatal count must be 0/);
   }
 });
 

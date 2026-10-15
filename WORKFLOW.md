@@ -308,9 +308,11 @@ cannot cover the inventory, and retries target only failing batches.
 
 Step 5 retains the round-based adjudication/repair engine, supplier-before-consumer
 maintenance, frozen frontier guards and its complete gate battery. The
-judgment/adjudication rounds continue until the latest round's unique confirmed
-fatal original-frontier items are strictly below 2% of the immutable original
-inventory. Exactly 2% requires another round; unresolved defects still block closure.
+judgment/adjudication rounds continue until the latest round has zero items
+deemed defective by adjudicators (zero unique confirmed-fatal items across all
+adjudicated subjects). Any confirmed-fatal item requires another round, even if
+repaired within that round; uncertainty, missing adjudications and unresolved
+defects still block closure. The frozen original inventory remains unchanged.
 Step 5 rejudgment uses GPT-6.1 Sol at high reasoning effort, independent of the
 Step-4 judge model.
 Step-5 final judge closure retains the genuine frozen Step-4 Luna verdicts for

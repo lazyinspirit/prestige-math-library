@@ -135,7 +135,6 @@ export function assessFatalThreshold({ frontier, round, expectedIds, decisions }
   const latest = new Map();
   for (const row of decisions) if (row.run === frontier.run && row.round === round) latest.set(row.id, row);
   const errors = [], fatalIds = [];
-  const original = new Set(frontier.ids);
   for (const id of expected) {
     const row = latest.get(id);
     if (!row) { errors.push(`missing adjudication: ${id}`); continue; }
@@ -143,10 +142,10 @@ export function assessFatalThreshold({ frontier, round, expectedIds, decisions }
     if (row.decision === 'uncertain' || row.resolved !== true) errors.push(`unresolved adjudication: ${id}`);
     if (typeof row.basis !== 'string' || !row.basis.trim()) errors.push(`missing logical basis: ${id}`);
     if (!hashPattern.test(row.item_sha256 ?? '')) errors.push(`missing adjudicated carrier hash: ${id}`);
-    if (row.decision === 'confirmed-fatal' && original.has(id)) fatalIds.push(id);
+    if (row.decision === 'confirmed-fatal') fatalIds.push(id);
   }
   for (const id of latest.keys()) if (!expected.includes(id)) errors.push(`unexpected adjudication: ${id}`);
-  return { round, originalCount: frontier.ids.length, fatalIds: unique(fatalIds), fatalCount: fatalIds.length, belowThreshold: errors.length === 0 && fatalIds.length * 50 < frontier.ids.length, errors };
+  return { round, originalCount: frontier.ids.length, fatalIds: unique(fatalIds), fatalCount: fatalIds.length, belowThreshold: errors.length === 0 && fatalIds.length === 0, errors };
 }
 
 /** All receipts are collected first. Certification is a single stable barrier,

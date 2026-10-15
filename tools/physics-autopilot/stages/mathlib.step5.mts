@@ -117,7 +117,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
     if(threshold.errors?.length||typeof threshold.belowThreshold!=='boolean'
       ||!Number.isSafeInteger(threshold.fatalCount)||threshold.fatalCount<0
       ||!Number.isSafeInteger(threshold.originalCount)||threshold.originalCount<1)throw Error('invalid fatal threshold evidence');
-    return threshold.belowThreshold&&threshold.fatalCount*50<threshold.originalCount?null:{next:'5.4-rejudge'};
+    return threshold.belowThreshold&&threshold.fatalCount===0?null:{next:'5.4-rejudge'};
   };
   const battery=(ctx:any)=>{
     const gates=[

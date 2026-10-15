@@ -16,24 +16,19 @@ function decisions(count: number, round = 1) {
   return Array.from({ length: count }, (_, i) => ({ run: 'fixture', round, id: `item-${i}`, decision: 'confirmed-fatal', resolved: true, basis: 'The asserted implication fails; repaired the missing hypothesis.', item_sha256: hash }));
 }
 
-test('fatal threshold uses unique latest decisions and strictly less than two percent of frozen original frontier', () => {
-  const scope = frontier();
-  const two = decisions(2);
-  const args = { frontier: scope, round: 1, expectedIds: two.map((r) => r.id), decisions: two };
-  assert.equal(assessFatalThreshold(args).belowThreshold, false);
-  const rows = [...two, { ...two[1], decision: 'rejected-finding' }];
-  const result = assessFatalThreshold({ ...args, decisions: rows });
-  assert.equal(result.fatalCount, 1);
-  assert.equal(result.originalCount, 100);
-  assert.equal(result.belowThreshold, true);
-  assert.equal(assessFatalThreshold({ frontier: frontier(50), round: 1, expectedIds: ['item-0'], decisions: decisions(1) }).belowThreshold, false);
-  assert.equal(assessFatalThreshold({ frontier: frontier(51), round: 1, expectedIds: ['item-0'], decisions: decisions(1) }).belowThreshold, true);
-  const three = decisions(3);
-  assert.equal(assessFatalThreshold({ frontier: scope, round: 1, expectedIds: three.map(row => row.id), decisions: three }).belowThreshold, false);
-  for (const [count, pass] of [[31, true], [32, false]] as const) {
-    const rows = decisions(count);
-    assert.equal(assessFatalThreshold({ frontier: frontier(1551), round: 1, expectedIds: rows.map(row => row.id), decisions: rows }).belowThreshold, pass);
+test('fatal threshold requires zero unique confirmed-fatal adjudicated items regardless of frontier size', () => {
+  for (const size of [1, 50, 51, 100, 1551]) {
+    const scope = frontier(size), rows = decisions(1);
+    const args = { frontier: scope, round: 1, expectedIds: ['item-0'], decisions: rows };
+    assert.equal(assessFatalThreshold(args).belowThreshold, false);
+    const result = assessFatalThreshold({ ...args, decisions: [...rows, { ...rows[0], decision: 'rejected-finding' }] });
+    assert.equal(result.fatalCount, 0);
+    assert.equal(result.originalCount, size);
+    assert.equal(result.belowThreshold, true);
+    assert.equal(assessFatalThreshold({ frontier: scope, round: 1, expectedIds: [], decisions: [] }).belowThreshold, true);
   }
+  const added = { ...decisions(1)[0], id: 'added-prerequisite' };
+  assert.equal(assessFatalThreshold({ frontier: frontier(), round: 1, expectedIds: [added.id], decisions: [added] }).belowThreshold, false);
 });
 
 test('missing, wrong-round, uncertain, unresolved, and unbound decisions never pass threshold', () => {

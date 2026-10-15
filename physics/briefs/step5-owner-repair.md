@@ -196,5 +196,5 @@ Do not write judge verdicts, stamps, central certificates or round state, launch
 workers, or reseal items while writers remain. The engine alone dispatches
 Sol 6.1 high judgment and controls repeats. Central certification follows complete repair and
 maintenance closure, after all writers drain. A successful dispatch does not
-establish completion, and the strict less-than-2% threshold never waives
+establish completion, and the zero-confirmed-fatal requirement never waives
 unresolved mathematics. Do not claim independent review for your own repair.
