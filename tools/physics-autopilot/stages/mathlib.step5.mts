@@ -128,7 +128,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
       '--run', ctx.run, '--contracts', `research/${ctx.run}-proof-contracts.json`]),
     // Published maintenance and auditor additions are outside the immutable
     // original frontier; their maintenance evidence remains separately owned and validated.
-    closureGate(ctx,{judgeLineup:'sol61'}),ledgerGate(ctx),
+    closureGate(ctx),ledgerGate(ctx),
     ];
     // Doctor inspects future command descriptors before 7-scope creates the
     // frontier. Actual execution always scopes the complete battery.
