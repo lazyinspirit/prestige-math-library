@@ -1,0 +1,1035 @@
+{
+  "version": 1,
+  "level": "physics-td-qft-rpm-62-2026-10-14",
+  "scope": [
+    "post-qft-example-formal-observable-map",
+    "pthm-qft-example-formal-scattering-decay",
+    "pthm-qft-example-dirac-magnetic-benchmark",
+    "ex-qft-x04",
+    "ex-qft-x05",
+    "ex-qft-x09"
+  ],
+  "contracts": {
+    "post-qft-example-formal-observable-map": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Names the selected formal amplitude, spin weighting, final-state sum, two-body flux and phase-space map, symmetry factor, and scalar-rate convention."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "Explicitly excludes exact continuum S/LSZ, convergence, loop and soft-radiation bounds, detector cuts, threshold resummation, and empirical results; an energy-width convention does not supply survival dynamics."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Complete Tong Chapters 3, 4 and 6 HTML and the complete Srednicki book draft were inspected. Fan et al. is recorded only to mark the empirical boundary. The optional full Weigand notes were read but dropped from active fetch evidence after six parser failures; Tong and Srednicki remain independent full-text treatments."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This is a postulate with no Proof section. It adopts the model-specific phenomenological reading and does not claim a deductive or empirical proof of a continuum theory."
+        }
+      },
+      "supplier_excerpts": [
+        {
+          "supplier": "def-qft-example-observable-types",
+          "carrier": "items/def-qft-example-observable-types.md",
+          "status": "Current batch-49 X01 draft carrier inspected; its local proof is present and independent review remains pending.",
+          "source_section": "Definition",
+          "exact_statement": "A formal coefficient record is a sequence $(c_n)_{n\\in\\mathbb N}$ of specified coefficients. Unless convergence and an evaluation map are separately proved and adopted, the symbol records coefficients only: it is not an evaluated function, exact probability, convergent perturbation series, or error bound.",
+          "relevant_hypotheses_and_conventions": "Formal coefficients and empirical estimates are different categories; empirical estimates retain reported source conditions and uncertainty.",
+          "supplier_proof_status": "Draft definition with local type/unit proof; no independent acceptance asserted.",
+          "consumer_use": "Sets the formal-versus-empirical distinction."
+        },
+        {
+          "supplier": "lem-qft-example-two-body-phase-space",
+          "carrier": "items/lem-qft-example-two-body-phase-space.md",
+          "status": "Current batch-46 QFT-MX02 draft and complete proof inspected; no independent acceptance asserted.",
+          "source_section": "Statement",
+          "exact_statement": "The cross-section coefficient map is $(\\hbar c)^2\\overline{|\\mathcal A|^2}d\\Phi_2/(F S_f)$; the decay map is $(2\\hbar\\mathsf M_0S_f)^{-1}\\int|\\mathcal G|^2d\\Phi_2$.",
+          "relevant_hypotheses_and_conventions": "Uses stated shell, strict-threshold, flux, final-state and Countable Choice conventions.",
+          "supplier_proof_status": "Draft mathematical lemma with complete conditional proof.",
+          "consumer_use": "Supplies the mathematical maps adopted here."
+        },
+        {
+          "supplier": "post-qft-formal-qed-coefficients",
+          "carrier": "items/post-qft-formal-qed-coefficients.md",
+          "status": "Current batch-53 QFT-G02 postulate draft registered and inspected. It has no Proof section; its exact direct interface is present, while the transitive Dirac-matrix supplier has escalated readiness.",
+          "source_section": "Postulate",
+          "exact_statement": "For mu>0 and off-shell p with h(p,p)-mu^2 nonzero, use fermion-line coefficient i(not p+mu)/(h(p,p)-mu^2). The Feynman-gauge photon-line coefficient is D^F_ab(k)=-i h_ab/(h(k,k)+i0).",
+          "relevant_hypotheses_and_conventions": "Electron charge is -e_n; the selected tree channel uses the photon line at s>0. A distributional free time-ordered line uses the actual H_mu carrier conditionally on AC_omega.",
+          "supplier_proof_status": "Current draft physical postulate with no Proof section and no independent acceptance. The broad Dirac matrix definition in its dependency chain is escalated.",
+          "consumer_use": "Supplies the present vertex/free-line adoption, with the +i0 boundary factor at its regular s>0 point."
+        }
+      ]
+    },
+    "pthm-qft-example-formal-scattering-decay": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qft-example-data",
+          "source_section": "Definition",
+          "quote": "These are conventions for constructed and formal calculations in this page pair. They are not empirical claims, physical postulates, or existence claims about an interacting continuum theory.\n\nUse the geometric spacetime metric $\\eta=\\operatorname{diag}(-1,1,1,1)$ and the time coordinate $x^0=ct$ in metres. For Clifford algebra and momentum contraction use the separate algebraic metric $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$; a slash or a square of an energy four-vector uses $h$, never $\\eta$.\n\nA physical energy four-vector is $p=(E,c\\mathbf p_{\\rm phys})$, with each component in joules. Write $M=mc^2$ for rest energy in joules and $p^2=h(p,p)=E^2-c^2|\\mathbf p_{\\rm phys}|^2$. For two such vectors, $s=(p_1+p_2)^2$ is in $\\mathrm J^2$. Natural momentum coordinates are the energy-vector components divided by $\\hbar c$, in $\\mathrm m^{-1}$; they are not substituted into SI formulas without restoring this factor. In the common natural-unit field convention, $\\mu=mc/\\hbar$ is in $\\mathrm m^{-1}$, a scalar field has dimension $\\mathrm m^{-1}$, and a Dirac field has dimension $\\mathrm m^{-3/2}$.\n\nTake SI $e>0$ in coulombs, $\\hbar>0$ in joule-seconds, $c>0$ in metres per second, and $\\epsilon_0=(\\mu_0c^2)^{-1}$. Define\n$$\\alpha=\\frac{e^2}{4\\pi\\epsilon_0\\hbar c},\\qquad g=e\\sqrt{\\frac{\\mu_0c}{\\hbar}}=\\sqrt{4\\pi\\alpha}>0.$$\nHere $g$ is a dimensionless coupling. It is not the metric and not a gyromagnetic factor.\n\nFor gauge notation set $A_{\\rm lower}=(-\\phi/c,\\mathbf A)$, with $A_a$ in tesla-metres and gauge function $\\chi$ in webers. With charge $q$ in coulombs define\n$$D_a=\\partial_a-\\frac{iqA_a}{\\hbar},\\qquad \\psi\\mapsto e^{iq\\chi/\\hbar}\\psi,\\qquad A\\mapsto A+d\\chi.$$\nFor the electron parameter use $q=-e$. The equivalent natural-unit coordinates are $A_{\\rm nat}=A_{\\rm SI}/\\sqrt{\\mu_0\\hbar c}$ and $q_{\\rm nat}=q_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}$.\n\nFinite-matrix examples act on $\\mathbb C^d$ with the operator norm. For Hilbert spaces, use the first-variable-linear pairing $(u,v)_1=v^\\dagger u$; a displayed coordinate contraction $u^\\dagger v$ is second-variable-linear and equals $\\overline{(u,v)_1}$. Thus norms, traces, and modulus-squared amplitudes agree under conversion, although the unsquared pairing is conjugated. No amplitude is assigned a probability by these conventions.",
+          "uses": [
+            "1.4",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-example-observable-types",
+          "source_section": "Definition",
+          "quote": "Use the framework-local unit and domain dictionary of\n[[def-qft-framework-units]] and the energy, SI/natural-unit, and finite-matrix\nconventions of [[def-qft-example-data]]. A physical quantity is always typed\nrelative to the selected QFT formulation and its declared model data; its name\nor units alone do not identify it with a quantity in another formulation.\n\nFor the **exact finite-regulator class** used on this page, the state space is\nthe finite-dimensional Hilbert space $\\mathcal H=\\mathbb C^d$ for an integer\n$d\\ge1$. Model inputs include the selected Hermitian Hamiltonian matrices,\ntheir time-dependent Hermitian interaction when present, a dimensionless\ncoupling parameter, an initial state, and an explicitly supplied finite\noutcome measurement. A pure initial state is a vector $\\psi\\in\\mathbb C^d$\nwith $\\|\\psi\\|=1$; a mixed state is a matrix $\\rho=\\rho^*$ with\n$\\langle\\rho v,v\\rangle\\ge0$ for every $v$ and $\\operatorname{tr}\\rho=1$.\nAn exact regulated observable on this finite space is a specified Hermitian\nmatrix $O=O^*$ with a declared physical unit. The matrix and state are model\ndata; the measurement procedure and any physical rule assigning outcomes are\nadditional data. This definition does not say that an operator symbol by\nitself is a detector outcome or probability.\n\nA **finite probability law** on the declared outcome set\n$\\{1,\\ldots,m\\}$, $m\\ge1$, is a vector $(p_1,\\ldots,p_m)$ with\n$p_a\\ge0$ and $\\sum_{a=1}^m p_a=1$. It is a mathematical type. Assigning that\nlaw to a particular preparation and measurement is a separate physical\npostulate. A prediction derived from an actually constructed regulated model\nis conditional on those inputs and the adopted rule.\n\nA **formal coefficient record** is a sequence $(c_n)_{n\\in\\mathbb N}$ of\nspecified coefficients, sometimes displayed as the symbol\n$\\sum_{n\\ge0}c_n\\lambda^n$. Unless convergence and an evaluation map are\nseparately proved and adopted, the symbol records coefficients only: it is not\nan evaluated function, exact probability, convergent perturbation series, or\nerror bound. A formal coefficient can be assigned a phenomenological meaning\nonly by a separate, model-specific physical adoption with its approximation\nscope stated.\n\nAn **empirical estimate** is a source-reported number obtained by analyzing a\nfinite record of measurement outcomes under the stated preparation, apparatus,\ncalibration, sampling, and analysis conditions. Its reported uncertainty and\nconditions travel with the estimate. It is not the exact model value, and it\ndoes not prove the framework used to interpret it. The 2022 Fan et al. report\nis an example of a source-reported electron magnetic-moment determination;\nthis definition supplies no numerical result, uncertainty reconstruction, or\nnew experimental claim.\n\nPrimitive and derived status is formulation-relative. In a selected regulated\nmodel, the regulator, Hamiltonian data, coupling, initial state, and supplied\nmeasurement are declared inputs; an evolution, amplitude, or probability law\nis derived only when the construction and adopted rule establish it. In a\nformal calculation, the specified masses, couplings, coefficient rules, and\nsubtraction prescription are inputs, while its listed coefficients are\nderived within that formal calculation. An empirical estimate is a reported\ndata-analysis result, not a primitive model parameter or a theorem.\n\nThe following units are examples of types, not identifications of quantities:\na cross section $\\sigma$ is area-valued with SI unit $\\mathrm{m^2}$; a rate\n$\\Gamma$ is inverse-time-valued with unit $\\mathrm{s^{-1}}$; an energy width\n$\\Gamma_E$ has unit joule. Only a separately stated convention may identify\n$\\Gamma_E=\\hbar\\Gamma$. The fine-structure parameter $\\alpha$, a dimensionless\ncoupling $g$, and a gyromagnetic factor $g_s$ are dimensionless but have\ndifferent physical meanings. The name “width,” a common symbol, or matching\ndimensions does not supply an exponential-decay law or an equality between\nthese parameters.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-example-spin-trace-completeness",
+          "source_section": "Statement",
+          "quote": "Use the finite Dirac matrices and adjoint of [[def-qft-dirac-projections]], and the separate geometric metric $\\eta=\\operatorname{diag}(-1,1,1,1)$ and algebraic contraction $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$ of [[def-qft-example-data]]. Write $p=(E,\\mathbf p)$ for an energy four-vector with components in joules, $M\\geq0$ for a rest-energy parameter in joules, and $E=\\sqrt{|\\mathbf p|^2+M^2}>0$. In the natural-length variables of the Dirac definition, $\\mathbf k=\\mathbf p/(\\hbar c)$, $\\mu=M/(\\hbar c)$, and $\\omega=E/(\\hbar c)$.\n\nLet $\\beta=\\gamma^0$, $\\alpha_j=\\beta\\gamma^j$, $\\Sigma_j=\\operatorname{diag}(\\sigma_j,\\sigma_j)$, and $\\gamma_5=i\\gamma^0\\gamma^1\\gamma^2\\gamma^3$. Define $H_\\pm=\\boldsymbol\\alpha\\cdot\\mathbf p\\pm\\beta M$ and $P_\\pm=(I_4+H_\\pm/E)/2$. Each $P_\\pm$ is a Hermitian rank-two projection. Choose orthonormal bases $\\xi_{\\pm,1},\\xi_{\\pm,2}$ of their ranges and put $u_s=\\sqrt{2E}\\xi_{+,s}$ and $v_s=\\sqrt{2E}\\xi_{-,s}$ for $s=1,2$. With $\\bar z=z^\\dagger\\beta$ and $\\not p=\\gamma^0E-\\sum_j\\gamma^jp_j$, the following hold:\n\n$$\\operatorname{Tr}I_4=4,\\quad \\operatorname{Tr}\\gamma^a=0,\\quad \\operatorname{Tr}(\\gamma^a\\gamma^b)=4h^{ab},\\quad \\operatorname{Tr}(\\gamma^a\\gamma^b\\gamma^c)=0,$$\n\n$$\\operatorname{Tr}(\\gamma^a\\gamma^b\\gamma^c\\gamma^d) =4(h^{ab}h^{cd}-h^{ac}h^{bd}+h^{ad}h^{bc}), \\qquad \\sum_s u_s\\bar u_s=\\not p+M,\\quad \\sum_s v_s\\bar v_s=\\not p-M.$$\n\nThe columns satisfy $(\\not p-M)u_s=0$ and $(\\not p+M)v_s=0$. For all $x,y\\in\\mathbb C^4$, complex conjugation of a Dirac current is $\\overline{\\bar x\\gamma^a y}=\\bar y\\gamma^a x$. The Countable Choice hypothesis written in the current draft [[def-qft-dirac-projections]] is retained as a supplier assumption; this finite-dimensional proof makes no additional choice use.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qft-example-two-body-phase-space",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]], and use [[def-qft-example-data]] and [[def-qft-example-two-body-phase-space-data]]. Write\n$$\\mathcal H^+_{\\mathsf M}=\\{(E,\\mathbf q)\\in(0,\\infty)\\times\\mathbb R^3:E=\\sqrt{|\\mathbf q|^2+\\mathsf M^2}\\}$$\nfor the positive shell in that Definition, and $C_+=\\{(E,\\mathbf q)\\in\\mathbb R\\times\\mathbb R^3:E\\geq|\\mathbf q|\\}$ for the closed future cone of $h=(+,-,-,-)$. A proper orthochronous linear $h$-Lorentz map is a real linear $\\Lambda$ with $\\Lambda^Th\\Lambda=h$, $\\det\\Lambda=1$, and $\\Lambda(C_+)=C_+$. For energy four-vectors on these positive shells, the shell measure $d^3\\mathbf p/((2\\pi)^3\\,2E)$ is invariant under every such map. Let $\\mathsf M_1,\\mathsf M_2\\geq0$, let $P$ be future timelike, meaning $P^0>0$ and $h(P,P)>0$, set $s=h(P,P)>(\\mathsf M_1+\\mathsf M_2)^2$, and write $E_i(r)=\\sqrt{r^2+\\mathsf M_i^2}$. Let $f$ be a nonnegative Borel function on $\\mathcal H^+_{\\mathsf M_1}\\times\\mathcal H^+_{\\mathsf M_2}$. For a proper orthochronous $h$-Lorentz map $\\Lambda_P$ with $\\Lambda_P P=(\\sqrt{s},\\mathbf0)$, define the finite Borel measure $\\Phi_{2,P}$ as the pushforward of $\\frac{k_*}{16\\pi^2\\sqrt{s}}d\\Omega$ under\n$$\\mathbf n\\longmapsto\\left(\\Lambda_P^{-1}(E_1^*,k_*\\mathbf n),\\Lambda_P^{-1}(E_2^*,-k_*\\mathbf n)\\right),$$\nwhere $E_i^*$ and $k_*$ are from [[def-qft-example-two-body-phase-space-data]]. The proof below shows that $\\Phi_{2,P}$ is independent of the choice of $\\Lambda_P$; for $P=(\\sqrt{s},\\mathbf0)$ it is exactly the center-of-momentum measure $d\\Phi_2$ in that Definition. The standard two-body on-shell integral\n$$(2\\pi)^4\\int d\\nu_{\\mathsf M_1}(k_1)d\\nu_{\\mathsf M_2}(k_2)\\, \\delta^{(4)}(P-k_1-k_2)\\,f(k_1,k_2)$$\nis interpreted by first evaluating the spatial delta in $k_2$, then the one-dimensional energy delta by the increasing radial change of variable $r\\mapsto E_1(r)+E_2(r)$. Explicitly, for each fixed angular direction and nonnegative Borel radial function $g:(0,\\infty)\\to[0,\\infty]$, the radial action after spatial evaluation is $\\int_0^\\infty g(r)\\delta(\\sqrt{s}-E_1(r)-E_2(r))\\,dr=g(k_*)/(d(E_1+E_2)/dr|_{k_*})$; this is the pushforward evaluation under that $C^1$ diffeomorphism, not a product of distributions. It equals $\\int f\\,d\\Phi_{2,P}$. The threshold root is $k_*$ in that Definition, and\n$$\\int d\\Phi_{2,P}=\\int d\\Phi_2=\\frac{k_*}{4\\pi\\sqrt{s}}.$$\nFor equal rest energies $\\mathsf M_1=\\mathsf M_2=\\mathsf M$, set $\\beta=\\sqrt{1-4\\mathsf M^2/s}$; then $k_*=\\sqrt{s}\\beta/2$ and $\\int d\\Phi_{2,P}=\\int d\\Phi_2=\\beta/(8\\pi)$. For the scattering flux identities, take incoming $p_i=(E_i,\\mathbf p_i)\\in\\mathcal H^+_{\\mathsf M_{i,\\mathrm{in}}}$, where $\\mathsf M_{i,\\mathrm{in}}\\geq0$, and require $p_1+p_2=P$. A center-of-momentum map is a proper orthochronous $h$-Lorentz map $\\Lambda$ with $\\Lambda P=(\\sqrt{s},\\mathbf0)$; write $\\Lambda p_1=(E_1^*,\\mathbf p_1^*)$ and define $p_*=|\\mathbf p_1^*|$. The value is independent of the choice of $\\Lambda$, since two such maps differ by a spatial rotation. Their invariant flux is $F=4p_*\\sqrt{s}$. For equal incoming rest energies $\\mathsf M_{\\mathrm{in}}\\geq0$ with $s\\geq4\\mathsf M_{\\mathrm{in}}^2$, define $\\beta_{\\mathrm{in}}=\\sqrt{1-4\\mathsf M_{\\mathrm{in}}^2/s}$; then $p_*=\\sqrt{s}\\beta_{\\mathrm{in}}/2$ and $F=2s\\beta_{\\mathrm{in}}$. For finite nonempty incoming and outgoing label sets, normalized initial weights, and the Borel amplitude family of the Definition, whenever $F>0$ the cross-section coefficient map gives\n$$\\frac{d\\sigma_{\\mathrm{coeff}}}{d\\Omega} =\\frac{(\\hbar c)^2}{64\\pi^2s}\\, \\frac{k_*}{p_*}\\, \\frac{\\overline{|\\mathcal A|^2}}{S_f}.$$\nFor a parent at rest, represented by $P_0=(\\mathsf M_0,\\mathbf0)$ with $\\mathsf M_0>2\\mathsf M$, and two equal-rest-energy daughters on $\\mathcal H^+_{\\mathsf M}$ with total four-vector $P_0$ and constant amplitude $G_E$ in joules, the rate coefficient is $|G_E|^2\\sqrt{1-4\\mathsf M^2/\\mathsf M_0^2}/(32\\pi\\hbar\\mathsf M_0)$ when the daughters are identical. This is a coefficient calculation, not a claim of exponential survival.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-qft-example-scalar-tree-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $m\\geq0$ be a scalar rest energy in joules, and let $p_1,p_2,k_1,k_2$ be the incoming and outgoing scattering vectors on the positive $m$-shell of [[def-qft-example-two-body-phase-space-data]], so each $(E,\\mathbf q)$ satisfies $E=\\sqrt{|\\mathbf q|^2+m^2}>0$. Require $p_1+p_2=k_1+k_2=P$ and $s=h(P,P)>4m^2$, with $h$ as in [[def-qft-example-data]]. Evaluate the coefficient map in a center-of-momentum frame $\\Lambda P=(\\sqrt{s},\\mathbf0)$ as defined in [[lem-qft-example-two-body-phase-space]]. For one scalar initial label of weight $1$ and one specified final channel, take the dimensionless real quartic tree amplitude $\\mathcal A=-\\lambda$. The coefficient map of [[lem-qft-example-two-body-phase-space]] gives\n$$\\frac{d\\sigma_{\\mathrm{coeff}}}{d\\Omega} =\\frac{\\lambda^2(\\hbar c)^2}{128\\pi^2s}, \\qquad \\sigma_{\\mathrm{coeff}}=\\frac{\\lambda^2(\\hbar c)^2}{32\\pi s}$$\nfor identical final scalars integrated over the full labeled sphere. For distinguishable final scalars the two coefficients are twice these values.\n\nFor a parent at rest, $P_0=(\\mathsf M_0,\\mathbf0)$ with energy $\\mathsf M_0>2m$, decaying through a specified single channel to two identical scalars on the positive $m$-shell whose total four-vector is $P_0$, under a constant amplitude $G_E$ in joules, the rate coefficient is\n$$\\Gamma_{\\mathrm{coeff}} =\\frac{|G_E|^2}{32\\pi\\hbar\\mathsf M_0} \\sqrt{1-\\frac{4m^2}{\\mathsf M_0^2}}.$$\nThis result concerns the defined formal coefficients. It does not assert an exact exponential survival law.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-qft-example-formal-observable-map",
+          "source_section": "Postulate",
+          "quote": "For a specifically named finite tree calculation, adopt its selected formal\ndiagram coefficient as a **leading perturbative coefficient** with a stated\nphenomenological reading. For QED, use the vertex and free-line conventions\nof the current draft supplier\n[[post-qft-formal-qed-coefficients]]. A particle of natural charge $q_n$ has\nvertex $iq_n\\gamma^a$; the electron has $q_n=-e_n$ and vertex\n$-ie_n\\gamma^a$. The rational fermion line is\n$$ i\\frac{\\not p+\\mu}{h(p,p)-\\mu^2}, $$\nfor $\\mu>0$ and off-shell $p$ with $h(p,p)-\\mu^2\\ne0$. In Feynman gauge\nthe auxiliary photon line is\n$$ -i\\frac{h_{ab}}{h(k,k)+i0}=i\\frac{\\eta_{ab}}{h(k,k)+i0}. $$\nFor a finite matrix kernel the coefficientwise inverse in\n[[post-qft-formal-qed-coefficients]] is part of the formal convention and\nasserts no convergence. If a time-ordered distribution is used, use the\nactual free carrier specified there; that identification is conditional on\n[[def-countable-choice]]. The displayed pole notation does not define loop\nproducts. In the pair-production channel below the selected muon also has\nmodel charge $-e$, and only the photon line is internal.\n\nFor declared incoming spin probabilities, sum over declared final spin\nlabels, and a specified formal amplitude $\\mathcal A$, adopt the\ncross-section coefficient map of\n[[lem-qft-example-two-body-phase-space]]. Its scattering inputs are\npositive-shell energy vectors $p_i=(E_i,\\mathbf p_i)$ with\n$E_i=\\sqrt{|\\mathbf p_i|^2+\\mathsf M_{i,\\rm in}^2}>0$,\n$\\mathsf M_{i,\\rm in}\\ge0$, and common future-timelike total\n$P=p_1+p_2=k_1+k_2$. The outgoing $k_j$ are on their specified positive\nshells. Require $s=h(P,P)>(\\mathsf M_1+\\mathsf M_2)^2$ for the outgoing\nrest energies and positive incoming flux $F>0$, precisely the supplier's\nadmissible scattering domain. In the center-of-momentum frame it\nuses the invariant incoming flux $F$, the two-body measure $d\\Phi_2$, and the\nfinal-state factor $S_f=2$ for identical particles or $S_f=1$ for\ndistinguishable particles, integrated over the full labeled sphere. When\nthis coefficient is read phenomenologically, the initial preparation,\nchannel, threshold, and approximation are part of the model statement. No\nuniversal error estimate for omitted terms is implied.\n\nFor the scalar examples, separately adopt the constant formal amplitudes\n$\\mathcal A=-\\lambda$ for the quartic contact channel and $\\mathcal G=G_E$\nfor the cubic parent decay, with the units and external normalization stated\nat each use. The scalar scattering inputs lie on their stated positive\nshells with a common total and the same strict threshold and positive-flux\nconditions. For decay, the parent is $P_0=(\\mathsf M_0,\\mathbf0)$,\n$\\mathsf M_0>\\mathsf M_1+\\mathsf M_2$, and its two positive-shell daughters\nsum to $P_0$. Their coefficient map is the one in\n[[lem-qft-example-two-body-phase-space]]. If a rate $\\Gamma$ is reported as\nan energy width, the convention is explicitly $\\Gamma_E:=\\hbar\\Gamma$; it\ndoes not supply a survival law.\n\nThe readings above do not identify a formal coefficient with an exact\ncontinuum cross section, probability, decay rate, or measured estimate. In\nparticular they do not construct an interacting continuum $S$-matrix or LSZ\nlimit, establish convergence of a perturbation series, bound loop or\nsoft-radiation effects, specify beam or detector cuts, resolve threshold\nresummation, or reproduce the statistical analysis of an experiment. A\ncomparison with observations would require the actual apparatus, sampling,\ncalibration, uncertainty, and radiative-inclusiveness conditions. The\nreported electron magnetic-moment measurements, including the Fan et al.\nreport listed in the source references, remain source-reported\nempirical results and are not premises of this adoption.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "post-qft-formal-qed-coefficients",
+          "source_section": "Postulate",
+          "quote": "Adopt the following coefficient convention for finite formal QED bookkeeping in\nthe Minkowski, units, and Clifford conventions of\n[[def-qft-framework-units]]. In particular,\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, $h=-\\eta$,\n$\\{\\gamma^a,\\gamma^b\\}=2h^{ab}I_4$, and\n$\\not p:=\\gamma^a h_{ab}p^b$. The inverse-length mass is\n$\\mu=m_{\\rm rest,SI}c/\\hbar$ and a declared physical charge $q_{\\rm SI}$ has\ndimensionless value $q_{\\rm n}=q_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}$.\n\nA **formal coefficient graph** here is a finite directed graph of interaction\nvertices and internal lines with a momentum covector assigned to each line and\nmomentum conservation imposed at each vertex. It records a coefficient at a\nfixed finite or formal order; it is not, by this definition, a convergent\namplitude or an operator on a continuum interacting Hilbert space. For a Dirac\nspecies of dimensionless charge $g$, use $D_a=\\partial_a-ig a_a$ and adopt the\nvertex factor $ig\\gamma^a$. For an electron, $g=-e_{\\rm n}$, so the vertex is\n$-ie_{\\rm n}\\gamma^a$.\n\nFor $\\mu>0$ and off-shell momentum $p$ with $h(p,p)-\\mu^2\\ne0$, set\n$$S_0(p)=\\frac{\\not p+\\mu}{h(p,p)-\\mu^2}.$$\nThe adopted fermion-line coefficient is $iS_0(p)$. In Feynman gauge the\nauxiliary covariant photon-line coefficient is\n$$D^F_{ab}(k)=-\\frac{i h_{ab}}{h(k,k)+i0}\n=\\frac{i\\eta_{ab}}{h(k,k)+i0}.$$\nThe symbol $+i0$ denotes the selected Feynman boundary-value convention when a\ndistributional line is used; it does not define products of singular loop\ndistributions. The coefficient $D^F_{ab}$ is a calculational tensor factor,\nnot a declaration of four positive physical photon polarization states.\n\nFor the formal matrix realization, use the coefficientwise inverse specified\nby the planned interface [[def-qft-qed-formal-ring]]: if $K_0$ is an invertible\nfinite matrix and $K(z)=K_0+zV$, the formal inverse is the power series in\n$z$; no convergence in $z$ is claimed. The planned off-shell/tree identities\nof [[lem-qft-qed-tree-ward]] fix the $h=-\\eta$ slash and the nonzero-denominator\nconditions. When a time-ordered free distribution is needed, use the actual\ncarrier $H_\\mu$ of [[lem-qft-free-time-ordered-kernel]], for which\n$(\\Box-\\mu^2)H_\\mu=i\\delta_0$ and whose definition has no extra prefactor\n$i$. The distributional use of that carrier is conditional on\n[[def-countable-choice]]; the formal coefficient factors above are adopted\nindependently of that optional distributional identification.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "In the center-of-momentum frame the selected photon momentum is $P$ and $h(P,P)=s>0$. The current QFT-G02 convention [A3] supplies two charge-$-e_n$ vertices and photon factor $-ih_{ab}/(s+i0)$. At this regular point, $\\lim_{\\epsilon\\downarrow0}(s+i\\epsilon)^{-1}=s^{-1}$, so the scalar denominator is $1/s$. Under the selected-graph normalization [A2], the remaining spin dependence is the stated product of the two currents, up to a common phase that vanishes from the modulus square. This calculation uses no internal fermion line or loop product.",
+          "inputs": [
+            "given",
+            "A2",
+            "A3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Summing the final spin labels and averaging the four initial pairs, [F3] reduces the squared currents to $$ L_e^{ab}=\\frac14\\operatorname{Tr}[(\\not p_2-m)\\gamma^a(\\not p_1+m)\\gamma^b],\\qquad L_{\\mu,ab}=\\operatorname{Tr}[(\\not k_1+M)\\gamma_a(\\not k_2-M)\\gamma_b]. $$ The terms with three gamma matrices vanish. Expanding the remaining terms with the two- and four-gamma traces in [F3] gives $$ L_e^{ab}=p_2^ap_1^b+p_2^bp_1^a-\\frac{s}{2}h^{ab},\\qquad L_{\\mu,ab}=4(k_{1a}k_{2b}+k_{1b}k_{2a}-\\frac{s}{2}h_{ab}), $$ because $p_1\\cdot p_2+m^2=s/2$ and $k_1\\cdot k_2+M^2=s/2$ follow by expanding the two total-momentum squares.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "The adjoint equations from [F3] give $\\bar v(p_2)\\not p_2=-m\\bar v(p_2)$ and $\\not p_1u(p_1)=mu(p_1)$, so contraction with $P=p_1+p_2$ cancels the two terms. Similarly, $\\bar u(k_1)\\not k_1=M\\bar u(k_1)$ and $\\not k_2v(k_2)=-Mv(k_2)$ cancel in the outgoing current. This proves both displayed current contractions, including when either mass is zero; no general off-shell or loop Ward statement is inferred.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-4",
+          "step": "1.4",
+          "claim": "The declared positive-shell scalar inputs, common total and center-of-momentum evaluation meet [F5] exactly; the decay daughters have total $P_0$ and satisfy its strict rest-parent threshold. Apply [F5] to these declared scalar amplitudes and thresholds. Its identical-final factor is $S_f=2$ on the full labeled sphere, while the distinguishable case has $S_f=1$, so the total scattering coefficients have the stated factor of two. The decay result uses the same identical-particle factor and the parent-rest coefficient map. Since $[G_E]=[m_s]=[\\mathsf M_0]=\\mathrm J$ and $[\\hbar]=\\mathrm{J\\,s}$, $[\\Gamma_{\\rm coeff}]=\\mathrm J^2/(\\mathrm{J\\,s\\,J})=\\mathrm{s}^{-1}$; $(\\hbar c)^2/s$ has unit $\\mathrm{m}^2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "In this chart $P=(\\sqrt{s},\\mathbf0)$ gives $\\mathbf p_2=-\\mathbf p_1$ and $E_1+E_2=\\sqrt{s}$. The equal mass-shell equations and $E_i>0$ imply $E_1=E_2=\\sqrt{s}/2$, hence $|\\mathbf p_1|=\\sqrt{s/4-m^2}=\\sqrt{s}\\beta_e/2>0$; the same argument gives $\\widetilde E_1=\\widetilde E_2=\\sqrt{s}/2$ and $|\\mathbf k_1|=\\sqrt{s}\\beta_\\mu/2>0$. Thus $\\theta$ is defined. If $\\Lambda_1,\\Lambda_2$ both send $P$ to rest, $\\Lambda_2\\Lambda_1^{-1}$ fixes $(1,\\mathbf0)$ and so acts by a proper spatial rotation by [F4]; it preserves the Euclidean dot product, making $\\theta$ independent of the selected chart's residual orientation. Contracting the tensors in 1.2 and using the mass-shell dot products gives $$ L_e^{ab}L_{\\mu,ab}=4\\{2[(p_2\\cdot k_1)(p_1\\cdot k_2)+(p_2\\cdot k_2)(p_1\\cdot k_1)] +s^2-s(p_1\\cdot p_2+k_1\\cdot k_2)\\}. $$ The cross terms with one metric contribute $-s(p_1\\cdot p_2+k_1\\cdot k_2)$, and the metric-metric term contributes $s^2$; together these equal $s(m^2+M^2)$. The mixed dot products are $p_2\\cdot k_1=p_1\\cdot k_2=s/4+|\\mathbf p_1||\\mathbf k_1|\\cos\\theta$ and $p_2\\cdot k_2=p_1\\cdot k_1=s/4-|\\mathbf p_1||\\mathbf k_1|\\cos\\theta$. Substituting and multiplying by $g^4/s^2$ gives the stated spin-averaged squared coefficient.",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The strict threshold gives $\\beta_e,\\beta_\\mu>0$. For distinguishable muon labels, [F4] gives $d\\Phi_2/d\\Omega=\\beta_\\mu/(32\\pi^2)$ and $F=2s\\beta_e$. Inserting the squared coefficient derived in step 2.1 into its map and using $g^4=(4\\pi\\alpha)^2$ yields the displayed differential coefficient. The sphere integrals are $\\int d\\Omega=4\\pi$ and $\\int\\cos^2\\theta\\,d\\Omega=4\\pi/3$ (integrate $2\\pi u^2$ over $-1\\leq u\\leq1$), giving the displayed total coefficient.",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "If $\\delta=4m^2/s\\leq1/2$, set $$ B_0=2-\\beta_\\mu^2+\\beta_\\mu^2\\cos^2\\theta,\\qquad Q=1-\\beta_\\mu^2\\cos^2\\theta. $$ Then $B_0\\geq1$ and $0\\leq Q\\leq1$. The ratio of the full differential coefficient to its $m=0$ value is $$ R=\\frac{B_0+\\delta Q}{B_0\\sqrt{1-\\delta}}\\geq1. $$ Moreover $$ R-1=\\frac1{\\sqrt{1-\\delta}}-1+ \\frac{\\delta Q}{B_0\\sqrt{1-\\delta}} \\leq2\\sqrt2\\,\\delta\\leq4\\delta, $$ since $1/\\sqrt{1-\\delta}-1\\leq\\sqrt2\\delta$ and $B_0\\sqrt{1-\\delta}\\geq1/\\sqrt2$. This compares only the two formal tree coefficients.",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "The units and formal/empirical types in [F1]–[F2] identify the results as formal coefficients with area or inverse-time units. The adopted interpretation in [A1] gives only the named leading-coefficient reading; neither an exact continuum observable, a measured estimate, nor an exponential survival law follows.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "Strict pair threshold",
+          "inputs": [
+            "given",
+            "F4",
+            "step 3.1"
+          ],
+          "expected": "beta_e and beta_mu are positive, so the incoming flux is nonzero and the displayed coefficient has no threshold denominator."
+        },
+        {
+          "name": "Massless boundary",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 3.1"
+          ],
+          "expected": "At m=M=0 the formal total coefficient is 4 pi alpha^2 (hbar c)^2/(3s), with area unit m^2."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-qft-example-spin-trace-completeness",
+          "carrier": "items/lem-qft-example-spin-trace-completeness.md",
+          "status": "Current batch-46 draft and complete finite proof inspected; its direct def-qft-dirac-projections supplier has escalated readiness.",
+          "source_section": "Statement",
+          "exact_statement": "Use the finite Dirac matrices and adjoint of [[def-qft-dirac-projections]], and the separate geometric metric $\\eta=\\operatorname{diag}(-1,1,1,1)$ and algebraic contraction $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$ of [[def-qft-example-data]]. Write $p=(E,\\mathbf p)$ for an energy four-vector with components in joules, $M\\geq0$ for a rest-energy parameter in joules, and $E=\\sqrt{|\\mathbf p|^2+M^2}>0$. In the natural-length variables of the Dirac definition, $\\mathbf k=\\mathbf p/(\\hbar c)$, $\\mu=M/(\\hbar c)$, and $\\omega=E/(\\hbar c)$.\n\nLet $\\beta=\\gamma^0$, $\\alpha_j=\\beta\\gamma^j$, $\\Sigma_j=\\operatorname{diag}(\\sigma_j,\\sigma_j)$, and $\\gamma_5=i\\gamma^0\\gamma^1\\gamma^2\\gamma^3$. Define $H_\\pm=\\boldsymbol\\alpha\\cdot\\mathbf p\\pm\\beta M$ and $P_\\pm=(I_4+H_\\pm/E)/2$. Each $P_\\pm$ is a Hermitian rank-two projection. Choose orthonormal bases $\\xi_{\\pm,1},\\xi_{\\pm,2}$ of their ranges and put $u_s=\\sqrt{2E}\\xi_{+,s}$ and $v_s=\\sqrt{2E}\\xi_{-,s}$ for $s=1,2$. With $\\bar z=z^\\dagger\\beta$ and $\\not p=\\gamma^0E-\\sum_j\\gamma^jp_j$, the following hold:\n\n$$\\operatorname{Tr}I_4=4,\\quad \\operatorname{Tr}\\gamma^a=0,\\quad \\operatorname{Tr}(\\gamma^a\\gamma^b)=4h^{ab},\\quad \\operatorname{Tr}(\\gamma^a\\gamma^b\\gamma^c)=0,$$\n\n$$\\operatorname{Tr}(\\gamma^a\\gamma^b\\gamma^c\\gamma^d) =4(h^{ab}h^{cd}-h^{ac}h^{bd}+h^{ad}h^{bc}), \\qquad \\sum_s u_s\\bar u_s=\\not p+M,\\quad \\sum_s v_s\\bar v_s=\\not p-M.$$\n\nThe columns satisfy $(\\not p-M)u_s=0$ and $(\\not p+M)v_s=0$. For all $x,y\\in\\mathbb C^4$, complex conjugation of a Dirac current is $\\overline{\\bar x\\gamma^a y}=\\bar y\\gamma^a x$. The Countable Choice hypothesis written in the current draft [[def-qft-dirac-projections]] is retained as a supplier assumption; this finite-dimensional proof makes no additional choice use.",
+          "relevant_hypotheses_and_conventions": "Finite explicit matrices, M>=0, E>0, h=-eta, and inherited AC_omega.",
+          "supplier_proof_status": "Finite proof is complete conditional on the matrix definition; independent approval is not asserted.",
+          "consumer_use": "F3 is used in step 1.2, step 1.3"
+        },
+        {
+          "supplier": "def-qft-dirac-projections",
+          "carrier": "items/def-qft-dirac-projections.md",
+          "status": "Current batch-42 carrier exists; Step 1 decision escalated because QFT-MF01 review is open and QFT-MF02 is recorded artifact-missing.",
+          "source_section": "Definition",
+          "exact_statement": "Use the Pauli matrices to define beta=diag(I2,-I2), alpha_j=[[0,sigma_j],[sigma_j,0]], gamma^0=beta and gamma^j=beta alpha_j.",
+          "relevant_hypotheses_and_conventions": "The broad definition also assumes AC_omega and free Dirac Hilbert/shell interfaces; this consumer uses its finite matrix convention.",
+          "supplier_proof_status": "Current draft with escalated readiness; its finite matrix excerpt is exact but upstream closure remains open.",
+          "consumer_use": "Records the transitive prerequisite blocker."
+        },
+        {
+          "supplier": "lem-qft-example-two-body-phase-space",
+          "carrier": "items/lem-qft-example-two-body-phase-space.md",
+          "status": "Current batch-46 draft; complete proof and strict-threshold hypotheses inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Assume Countable Choice [[def-countable-choice]], and use [[def-qft-example-data]] and [[def-qft-example-two-body-phase-space-data]]. A proper orthochronous linear $h$-Lorentz map is a real linear $\\Lambda$ with $\\Lambda^Th\\Lambda=h$, $\\det\\Lambda=1$, and $\\Lambda$ preserving the future cone $E>0$. For future energy four-vectors in the algebraic metric $h=(+,-,-,-)$, the shell measure $d^3\\mathbf p/((2\\pi)^3\\,2E)$ is invariant under every such map. Write $E_i(r)=\\sqrt{r^2+\\mathsf M_i^2}$. The standard two-body on-shell integral\n$$(2\\pi)^4\\int d\\nu_{\\mathsf M_1}(k_1)d\\nu_{\\mathsf M_2}(k_2)\\, \\delta^{(4)}(P-k_1-k_2)\\,f(k_1,k_2)$$\nis interpreted by first evaluating the spatial delta in $k_2$, then the one-dimensional energy delta by the increasing radial change of variable $r\\mapsto E_1(r)+E_2(r)$. Explicitly, after the spatial evaluation its radial action is $\\int_0^\\infty g(r)\\delta(\\sqrt{s}-E_1(r)-E_2(r))\\,dr=g(k_*)/(d(E_1+E_2)/dr|_{k_*})$ for nonnegative Borel $g$; this is the pushforward evaluation under that $C^1$ diffeomorphism, not a product of distributions. It equals $\\int f\\,d\\Phi_2$ from the Definition. The threshold root is $k_*$ in that Definition, and\n$$\\int d\\Phi_2=\\frac{k_*}{4\\pi\\sqrt{s}}.$$\nFor equal rest energies $\\mathsf M_1=\\mathsf M_2=\\mathsf M$, set $\\beta=\\sqrt{1-4\\mathsf M^2/s}$; then $k_*=\\sqrt{s}\\beta/2$ and $\\int d\\Phi_2=\\beta/(8\\pi)$. For an incoming pair with invariant energy $s$ and center-of-momentum momentum magnitude $p_*$, the flux is $F=4p_*\\sqrt{s}$. For equal incoming rest energies $\\mathsf M_{\\mathrm{in}}$ with $s\\geq4\\mathsf M_{\\mathrm{in}}^2$, define $\\beta_{\\mathrm{in}}=\\sqrt{1-4\\mathsf M_{\\mathrm{in}}^2/s}$; then $p_*=\\sqrt{s}\\beta_{\\mathrm{in}}/2$ and $F=2s\\beta_{\\mathrm{in}}$. For finite nonempty incoming and outgoing label sets, normalized initial weights, and the Borel amplitude family of the Definition, whenever $F>0$ the cross-section coefficient map gives\n$$\\frac{d\\sigma_{\\mathrm{coeff}}}{d\\Omega} =\\frac{(\\hbar c)^2}{64\\pi^2s}\\, \\frac{k_*}{p_*}\\, \\frac{\\overline{|\\mathcal A|^2}}{S_f}.$$\nFor a parent at rest with energy $\\mathsf M_0>2\\mathsf M$ decaying to two equal rest-energy daughters with constant amplitude $G_E$ in joules, the rate coefficient is $|G_E|^2\\sqrt{1-4\\mathsf M^2/\\mathsf M_0^2}/(32\\pi\\hbar\\mathsf M_0)$ when the daughters are identical. This is a coefficient calculation, not a claim of exponential survival.",
+          "relevant_hypotheses_and_conventions": "Uses positive-shell energy vectors, strict thresholds, AC_omega and the declared S_f factor.",
+          "supplier_proof_status": "Draft complete local argument; no independent acceptance is asserted.",
+          "consumer_use": "F4 is used in step 3.1"
+        },
+        {
+          "supplier": "post-qft-formal-qed-coefficients",
+          "carrier": "items/post-qft-formal-qed-coefficients.md",
+          "status": "Current batch-53 QFT-G02 postulate draft registered and inspected. It has no proof section; its transitive Dirac-matrix prerequisite has escalated readiness.",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt the following coefficient convention for finite formal QED bookkeeping in\nthe Minkowski, units, and Clifford conventions of\n[[def-qft-framework-units]]. In particular,\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, $h=-\\eta$,\n$\\{\\gamma^a,\\gamma^b\\}=2h^{ab}I_4$, and\n$\\not p:=\\gamma^a h_{ab}p^b$. The inverse-length mass is\n$\\mu=m_{\\rm rest,SI}c/\\hbar$ and a declared physical charge $q_{\\rm SI}$ has\ndimensionless value $q_{\\rm n}=q_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}$.\n\nA **formal coefficient graph** here is a finite directed graph of interaction\nvertices and internal lines with a momentum covector assigned to each line and\nmomentum conservation imposed at each vertex. It records a coefficient at a\nfixed finite or formal order; it is not, by this definition, a convergent\namplitude or an operator on a continuum interacting Hilbert space. For a Dirac\nspecies of dimensionless charge $g$, use $D_a=\\partial_a-ig a_a$ and adopt the\nvertex factor $ig\\gamma^a$. For an electron, $g=-e_{\\rm n}$, so the vertex is\n$-ie_{\\rm n}\\gamma^a$.\n\nFor $\\mu>0$ and off-shell momentum $p$ with $h(p,p)-\\mu^2\\ne0$, set\n$$S_0(p)=\\frac{\\not p+\\mu}{h(p,p)-\\mu^2}.$$\nThe adopted fermion-line coefficient is $iS_0(p)$. In Feynman gauge the\nauxiliary covariant photon-line coefficient is\n$$D^F_{ab}(k)=-\\frac{i h_{ab}}{h(k,k)+i0}\n=\\frac{i\\eta_{ab}}{h(k,k)+i0}.$$\nThe symbol $+i0$ denotes the selected Feynman boundary-value convention when a\ndistributional line is used; it does not define products of singular loop\ndistributions. The coefficient $D^F_{ab}$ is a calculational tensor factor,\nnot a declaration of four positive physical photon polarization states.\n\nFor the formal matrix realization, use the coefficientwise inverse specified\nby the planned interface [[def-qft-qed-formal-ring]]: if $K_0$ is an invertible\nfinite matrix and $K(z)=K_0+zV$, the formal inverse is the power series in\n$z$; no convergence in $z$ is claimed. The planned off-shell/tree identities\nof [[lem-qft-qed-tree-ward]] fix the $h=-\\eta$ slash and the nonzero-denominator\nconditions. When a time-ordered free distribution is needed, use the actual\ncarrier $H_\\mu$ of [[lem-qft-free-time-ordered-kernel]], for which\n$(\\Box-\\mu^2)H_\\mu=i\\delta_0$ and whose definition has no extra prefactor\n$i$. The distributional use of that carrier is conditional on\n[[def-countable-choice]]; the formal coefficient factors above are adopted\nindependently of that optional distributional identification.",
+          "relevant_hypotheses_and_conventions": "The selected one-photon channel has muon and electron model charges -e_n, uses the photon at h(P,P)=s>0, and has no internal fermion line. The +i0 line is evaluated at this regular point; no loop product or continuum S-matrix is used.",
+          "supplier_proof_status": "Draft physical postulate, not a theorem; current carrier and interface are present, while its broad Dirac-definition chain remains escalated.",
+          "consumer_use": "A3 is used in step 1.1"
+        },
+        {
+          "supplier": "post-qft-example-formal-observable-map",
+          "carrier": "items/post-qft-example-formal-observable-map.md",
+          "status": "Current assigned A-page draft postulate, with the QFT-G02 draft interface inspected; no independent acceptance is asserted. Its QFT-G02 dependency inherits the transitive Dirac-definition escalation.",
+          "source_section": "Postulate",
+          "exact_statement": "For a specifically named finite tree calculation, adopt its selected formal\ndiagram coefficient as a **leading perturbative coefficient** with a stated\nphenomenological reading. For QED, use the vertex and free-line conventions\nof the current draft supplier\n[[post-qft-formal-qed-coefficients]]. A particle of natural charge $q_n$ has\nvertex $iq_n\\gamma^a$; the electron has $q_n=-e_n$ and vertex\n$-ie_n\\gamma^a$. The rational fermion line is\n$$ i\\frac{\\not p+\\mu}{h(p,p)-\\mu^2}, $$\nfor $\\mu>0$ and off-shell $p$ with $h(p,p)-\\mu^2\\ne0$. In Feynman gauge\nthe auxiliary photon line is\n$$ -i\\frac{h_{ab}}{h(k,k)+i0}=i\\frac{\\eta_{ab}}{h(k,k)+i0}. $$\nFor a finite matrix kernel the coefficientwise inverse in\n[[post-qft-formal-qed-coefficients]] is part of the formal convention and\nasserts no convergence. If a time-ordered distribution is used, use the\nactual free carrier specified there; that identification is conditional on\n[[def-countable-choice]]. The displayed pole notation does not define loop\nproducts. In the pair-production channel below the selected muon also has\nmodel charge $-e$, and only the photon line is internal.\n\nFor declared incoming spin probabilities, sum over declared final spin\nlabels, and a specified formal amplitude $\\mathcal A$, adopt the\ncross-section coefficient map of\n[[lem-qft-example-two-body-phase-space]]. In the center-of-momentum frame it\nuses the invariant incoming flux $F$, the two-body measure $d\\Phi_2$, and the\nfinal-state factor $S_f=2$ for identical particles or $S_f=1$ for\ndistinguishable particles, integrated over the full labeled sphere. When\nthis coefficient is read phenomenologically, the initial preparation,\nchannel, threshold, and approximation are part of the model statement. No\nuniversal error estimate for omitted terms is implied.\n\nFor the scalar examples, separately adopt the constant formal amplitudes\n$\\mathcal A=-\\lambda$ for the quartic contact channel and $\\mathcal G=G_E$\nfor the cubic parent decay, with the units and external normalization stated\nat each use. Their coefficient map is the one in\n[[lem-qft-example-two-body-phase-space]]. If a rate $\\Gamma$ is reported as\nan energy width, the convention is explicitly $\\Gamma_E:=\\hbar\\Gamma$; it\ndoes not supply a survival law.\n\nThe readings above do not identify a formal coefficient with an exact\ncontinuum cross section, probability, decay rate, or measured estimate. In\nparticular they do not construct an interacting continuum $S$-matrix or LSZ\nlimit, establish convergence of a perturbation series, bound loop or\nsoft-radiation effects, specify beam or detector cuts, resolve threshold\nresummation, or reproduce the statistical analysis of an experiment. A\ncomparison with observations would require the actual apparatus, sampling,\ncalibration, uncertainty, and radiative-inclusiveness conditions. The\nreported electron magnetic-moment measurements, including the Fan et al.\nreport listed in the source references, remain source-reported\nempirical results and are not premises of this adoption.",
+          "relevant_hypotheses_and_conventions": "No exact continuum observable, measurement, or error estimate is adopted.",
+          "supplier_proof_status": "Physical postulate with no Proof section.",
+          "consumer_use": "A1 is used in step 5.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a two-particle channel above strict threshold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; step 2.1 allows zero masses and step 3.1 has no zero-flux denominator because the strict thresholds give positive beta values."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The initial spin average has four labels and the final spin sum is finite; no singleton channel is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; step 3.1 retains coincident masses above strict threshold, with equality at pair threshold excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; steps 3.1 and 4.1 include zero masses and delta=0 or delta=1/2, while strict threshold and delta>1/2 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Facts & Assumptions; step 1.2 uses only the finite spin labels under the stated AC_omega supplier hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Formal tree scattering and scalar-decay coefficients: Assume $\\mathrm{AC}_\\omega$ [[def-countable-choice]]. Use the geometric metric $\\eta=(-,+,+,+)$ and the distinct algebraic contraction $h=-\\eta=(+,-,-,-)$ of [[def-qft-example-data]]. Let $m,M\\geq0$ be the electron and muon rest energies in joules. Let $p_1,p_2$ be future electron and positron energy four-vectors with rest energy $m$, and $k_1,k_2$ future muon and antimuon energy four-vectors with rest energy $M$, satisfying $p_1+p_2=k_1+k_2=P$ and $$ s=h(P,P)>4\\max(m^2,M^2). $$ Write $g=\\sqrt{4\\pi\\alpha}>0$, as in [[def-qft-example-data]], and $$ \\beta_e=\\sqrt{1-\\frac{4m^2}{s}},\\qquad \\beta_\\mu=\\sqrt{1-\\frac{4M^2}{s}}. $$ For the selected formal one-photon tree coefficient, take equal incoherent weight $1/4$ f The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Formal tree scattering and scalar-decay coefficients: Assume $\\mathrm{AC}_\\omega$ [[def-countable-choice]]. Use the geometric metric $\\eta=(-,+,+,+)$ and the distinct algebraic contraction $h=-\\eta=(+,-,-,-)$ of [[def-qft-example-data]]. Let $m,M\\geq0$ be the electron and muon rest energies in joules. Let $p_1,p_2$ be future electron and positron energy four-vectors with rest energy $m$, and $k_1,k_2$ future muon and antimuon energy four-vectors with rest energy $M$, satisfying $p_1+p_2=k_1+k_2=P$ and $$ s=h(P,P)>4\\max(m^2,M^2). $$ Write $g=\\sqrt{4\\pi\\alpha}>0$, as in [[def-qft-example-data]], and $$ \\beta_e=\\sqrt{1-\\frac{4m^2}{s}},\\qquad \\beta_\\mu=\\sqrt{1-\\frac{4M^2}{s}}. $$ For the selected formal one-photon tree coefficient, take equal incoherent weight $1/4$ f The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ]
+    },
+    "pthm-qft-example-dirac-magnetic-benchmark": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-qft-qed-local-coupling",
+          "source_section": "Postulate",
+          "quote": "Adopt a smooth local classical Maxwell–Dirac model on an open region of the\nflat spacetime specified by [[def-qft-framework-units]]. Let $A_{{\\rm SI},a}$\nbe a supplied real $C^\\infty$ electromagnetic covector potential and let\n$\\psi:\\!U\\to\\mathbb C^4$ be a $C^\\infty$ commuting spinor field. The charge\n$q_{\\rm SI}$ and rest mass $m_{\\rm SI}>0$ are model inputs; for the electron\ntake $q_{\\rm SI}=-e_{\\rm SI}$. Use the component, metric, Clifford, charge,\nfield-normalization, and unit conventions of\n[[def-qft-qed-gauge-data]], [[def-qft-qed-physical-gauge-quantities]],\n[[def-qft-framework-units]], and the electromagnetic suppliers of\n[[post-qft-free-photon-model]]. In particular,\n$D_a=\\partial_a-iq_{\\rm SI}A_{{\\rm SI},a}/\\hbar\n=\\partial_a-iq_{\\rm n}a_a$ and $\\mu=m_{\\rm SI}c/\\hbar$.\n\nAdopt the local action density in natural normalization\n\n$$\\mathcal L_{\\rm nat}\n=-\\frac14 f_{ab}f^{ab}\n+\\frac{i}{2}\\bigl(\\bar\\psi\\gamma^aD_a\\psi\n-(D_a\\bar\\psi)\\gamma^a\\psi\\bigr)-\\mu\\bar\\psi\\psi,$$\n\nwhere $f_{ab}=\\partial_a a_b-\\partial_ba_a$ on the region where the\npotential is supplied, $\\bar\\psi=\\psi^\\dagger\\beta$, and\n$D_a\\bar\\psi=\\partial_a\\bar\\psi+iq_{\\rm n}a_a\\bar\\psi$. The physical action\nis $S_{\\rm cl}=\\hbar\\int_U\\mathcal L_{\\rm nat}\\,d^4x$ with $x^0=ct$. For\ncompactly supported local variations this is the adopted classical\nMaxwell–Dirac formulation; its Euler–Lagrange consequences are not postulated\nas a proof in this item.\n\nFor a smooth gauge function $\\chi$ in webers, the adopted local\ntransformation is\n$A_{{\\rm SI},a}\\mapsto A_{{\\rm SI},a}+\\partial_a\\chi$ and\n$\\psi\\mapsto e^{iq_{\\rm SI}\\chi/\\hbar}\\psi$. It leaves $F=dA$ invariant and\nmakes $D_a\\psi$ transform by the same phase. This is the covector form of the\nSI potential rule in [[def-em-gauge-transformation]]. Gauge functions in the\nlocal variation argument are compactly supported; no assertion is made about\nlarge gauge transformations, nontrivial bundles, boundary charges, or\nasymptotic sectors.\n\nThe model adopts the separately specified free Dirac representation of\n[[post-qft-free-field-model]] and the positive free photon representation of\n[[post-qft-free-photon-model]] as the free-field correspondence used to\ndescribe the selected species. This extra correspondence does not quantize\nthe interacting classical action. In particular, this postulate supplies no\ninteracting continuum four-dimensional QED Hilbert space, no globally\nwell-posed coupled PDE, no pointwise operator-valued composite current, no\nscattering or LSZ construction, and no regulator-removal or\nnonperturbative-existence result.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-qed-gauge-data",
+          "source_section": "Definition",
+          "quote": "Use smooth fields on Minkowski coordinate space with $x^0=ct$ and $\\eta=\\operatorname{diag}(-1,1,1,1)$. Components of $x$ are measured in metres. Fix the Dirac matrices and adjoint of [[def-qft-dirac-projections]], so $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$ and $\\bar\\psi=\\psi^\\dagger\\beta$.\n\nFor the SI-normalization bookkeeping, let $c>0$ (m s$^{-1}$), $\\hbar>0$ (J s), $\\mu_0>0$ (N A$^{-2}$), a real charge parameter $q$ (C), and a mass parameter $m>0$ (kg) be symbolic inputs; put $\\epsilon_0=(\\mu_0c^2)^{-1}$. In the current SI, $c$ and $h$ are defining constants while $\\mu_0$ is experimentally determined; the formula below keeps $\\mu_0$ symbolic and assigns it no numerical value. Use the lower-potential convention\n$$A_a=(-\\phi/c,\\mathbf A),\\qquad F_{ab}=\\partial_aA_b-\\partial_bA_a,$$\nwhere $A_a$ has units T m, $\\phi$ is in volts, and $\\mathbf A$ is in T m. Define\n$$S_0=\\sqrt{\\mu_0\\hbar c},\\qquad a_a=A_a/S_0,\\qquad f_{ab}=\\partial_aa_b-\\partial_ba_a,$$\n$$\\mu=mc/\\hbar,\\qquad g=q\\sqrt{\\mu_0c/\\hbar}=q/\\sqrt{\\epsilon_0\\hbar c},\\qquad D_a=\\partial_a-ig a_a.$$\nThus $a_a$ and $\\mu$ have units m$^{-1}$, $f_{ab}$ has units m$^{-2}$, and $g$ is dimensionless. For $\\psi$ with units m$^{-3/2}$, both $-\\tfrac14 f_{ab}f^{ab}$ and $\\bar\\psi(i\\gamma^aD_a-\\mu)\\psi$ have units m$^{-4}$; their integral over $d^4x$ is dimensionless and represents the action divided by $\\hbar$ in this normalization.\n\nFor a real smooth gauge parameter $\\chi$ in webers, put $\\alpha=\\chi/S_0$ (dimensionless) and use\n$$A'_a=A_a+\\partial_a\\chi,\\qquad a'_a=a_a+\\partial_a\\alpha,\\qquad \\psi'=e^{ig\\alpha}\\psi.$$\nThe induced covariant derivative is $D'_a=\\partial_a-ig a'_a$. These are formal mathematical conventions for the later conditional deductions. They do not adopt a measured value of $\\mu_0$, identify $q$ with an electron charge, impose charge quantization, or assert that interacting continuum fields exist.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-qed-physical-gauge-quantities",
+          "source_section": "Definition",
+          "quote": "Use the oriented, time-oriented Minkowski model, length coordinates, metric,\nand SI/natural dictionary of [[def-qft-framework-units]], with\n$\\eta=\\operatorname{diag}(-1,1,1,1)$ and $x^0=ct$. Use the gamma matrices,\nDirac adjoint, and effective Clifford metric of\n[[def-qft-qed-gauge-data]]: $\\gamma^0=\\beta$, $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$,\nand $\\bar\\psi=\\psi^\\dagger\\beta$. Assume Countable Choice\n[[def-countable-choice]] for the mathematical QFT gauge-data supplier; the\nunit conversions below do not themselves spend a choice principle.\n\nIdentify the SI charge and mass symbols $q,m$ in\n[[def-qft-qed-gauge-data]] with $q_{\\rm SI},m_{\\rm SI}$ here. Its natural\ncoupling $g$ is $q_{\\rm n}$ below, and its inverse-length mass $\\mu$ is the\nsame $m_{\\rm SI}c/\\hbar$.\n\nLet $q_{\\rm SI}\\in\\mathbb R$ be a selected charge parameter in coulombs and\n$m_{\\rm SI}>0$ a selected rest-mass parameter in kilograms. They are inputs\nof the chosen model; neither is derived from Maxwell's equations. Set\n$\\mu=m_{\\rm SI}c/\\hbar$ in $\\mathrm m^{-1}$ and\n$q_{\\rm n}=q_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}$, which is dimensionless under the\nframework units of [[def-qft-framework-units]]. For an electron use\n$q_{\\rm SI}=-e_{\\rm SI}$ and\n$e_{\\rm n}=e_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}>0$, so $q_{\\rm n}=-e_{\\rm n}$.\nUse $\\varepsilon_0=(\\mu_0c^2)^{-1}$ with the measured current-SI\n$\\mu_0$ of [[def-qft-framework-units]]. These definitions therefore do not\nassign an exact numerical value to $q_{\\rm n}$, $e_{\\rm n}$, or\n$\\varepsilon_0$.\n\nIn a named inertial chart, let $A^\\mu_{\\rm SI}=(\\varphi/c,\\mathbf A)$ be the\nelectromagnetic potential when one is supplied, with components in\n$\\mathrm{T\\,m}$ under [[def-em-si-conventions]] and\n[[def-em-electromagnetic-tensor]]. Define the canonical potential and\nfield-strength components by\n\n$$a^\\mu:=\\frac{A^\\mu_{\\rm SI}}{\\sqrt{\\mu_0\\hbar c}},\\qquad f^{\\mu\\nu}:=\\frac{F^{\\mu\\nu}_{\\rm SI}}{\\sqrt{\\mu_0\\hbar c}}.$$\n\nThey have engineering dimensions $\\mathrm m^{-1}$ and $\\mathrm m^{-2}$,\nrespectively. With the metric-lowered potential\n$A_{{\\rm SI},a}=\\eta_{ab}A^b_{\\rm SI}$, the potential component convention is\n$A_{{\\rm SI},0}=-\\varphi/c$ and $A_{{\\rm SI},i}=A_i$. The covariant derivative\nin the selected QED model is\n\n$$D_a:=\\partial_a-iq_{\\rm n}a_a =\\partial_a-\\frac{iq_{\\rm SI}}{\\hbar}A_{{\\rm SI},a},$$\n\nsince $q_{\\rm n}a_a=q_{\\rm SI}A_{{\\rm SI},a}/\\hbar$. Both terms in $D_a$\nhave unit $\\mathrm m^{-1}$. If the SI gauge function $\\chi$ has unit\n$\\mathrm{Wb}=\\mathrm{T\\,m^2}$, then $q_{\\rm SI}\\chi/\\hbar$ is dimensionless;\nthe corresponding natural gauge function\n$\\lambda=\\chi/\\sqrt{\\mu_0\\hbar c}$ is dimensionless and\n$q_{\\rm n}\\lambda=q_{\\rm SI}\\chi/\\hbar$. These conversions apply to smooth\nlocal gauge transformations; they assert no boundary condition, asymptotic\ncharge sector, or global gauge-fixing result.\n\nIf a separately specified finite regulator introduces Hamiltonian\neigenvalues, they have unit joule; this definition introduces no regulator.\nThe field components and units refer to the selected inertial chart, not to a\nnew observer congruence or a cross-framework identification.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-example-dirac-pauli-square",
+          "source_section": "Statement",
+          "quote": "Let $m>0$ be a particle mass in kilograms, $q\\in\\mathbb R$ its charge in coulombs, and $A:\\mathbb R^3\\to\\mathbb R^3$ a smooth spatial vector potential with components in tesla-metres. Set $B_k=\\epsilon_{kij}\\partial_iA_j$ and define on the common core $\\mathcal C=C_c^\\infty(\\mathbb R^3;\\mathbb C^4)$\n$$\\pi_i=-i\\hbar\\partial_i-qA_i,\\qquad H_D=c\\sum_i\\alpha_i\\pi_i+\\beta mc^2,\\qquad \\Sigma_i=\\operatorname{diag}(\\sigma_i,\\sigma_i).$$\nHere the matrices are those of [[lem-qft-example-spin-trace-completeness]] and $\\hbar,c$ have the SI conventions of [[def-qft-example-data]]. These differential maps preserve $\\mathcal C$, and on $\\mathcal C$,\n$$[\\pi_i,\\pi_j]=iq\\hbar\\epsilon_{ijk}B_k,\\qquad H_D^2=m^2c^4I_4+c^2(\\boldsymbol\\pi^2-q\\hbar\\boldsymbol\\Sigma\\cdot\\mathbf B).$$\nIf the formal first-order square-root coefficient is written as $mc^2+K/(2m)$ with $K=\\boldsymbol\\pi^2-q\\hbar\\boldsymbol\\Sigma\\cdot\\mathbf B$, then its spin term is $-(q/m)\\mathbf S\\cdot\\mathbf B$, where $\\mathbf S=\\hbar\\boldsymbol\\Sigma/2$. Under the coefficient convention $H_{\\mathrm{mag}}=-\\boldsymbol\\mu_{\\mathrm{mag}}\\cdot\\mathbf B$ and $\\boldsymbol\\mu_{\\mathrm{mag}}=g_s(q/(2m))\\mathbf S$, equality of the formal coefficients as a linear function of $q$ gives $g_s=2$ for the minimal tree-level term. No magnetic self-adjoint closure, full spectrum, operator square-root theorem, radiative correction, or empirical prediction is asserted.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qft-dirac-projections",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]], the mathematical scalar shell conventions of [[def-qft-scalar-mass-shell]], and the second-variable-linear Hilbert pairing of [[def-qft-fock-and-test-spaces]]. In the fixed inertial coordinates $x=(x^0,\\mathbf x)$ of [[def-inertial-frame-and-inertial-chart]] on the affine Minkowski model [[def-sr-affine-minkowski-model]], $\\eta=\\operatorname{diag}(-1,1,1,1)$; these coordinates have length units under [[def-qft-scalar-mass-shell]]. The parameter $\\mu\\ge0$ and momentum coordinate $\\mathbf k$ have inverse-length units, and $\\omega(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2}$ has the same units. The parameter is not identified here with a physical rest mass. Matrix $h_D$ has inverse-length units; the dimensionless spin matrices have no physical unit assignment in this mathematical item.\n\nUse the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.\n\nLet $\\mathcal H_D$ be the space of measurable functions $u:\\mathbb R^3\\to\\mathbb C^4$, modulo equality almost everywhere, with\n$$\\|u\\|^2=\\int_{\\mathbb R^3}u(\\mathbf k)^\\dagger u(\\mathbf k)\\,\\frac{d^3\\mathbf k}{(2\\pi)^3}<\\infty,$$\nand pairing $\\langle u,v\\rangle=\\int u(\\mathbf k)^\\dagger v(\\mathbf k)\\,d^3\\mathbf k/(2\\pi)^3$. Define the measurable matrix $h_D(\\mathbf k)=\\sum_j\\alpha_j k_j+\\beta\\mu$ and its maximal multiplication operator with domain $D(h_D)=\\{u\\in\\mathcal H_D:h_Du\\in\\mathcal H_D\\}$. For $\\omega(\\mathbf k)>0$, define the matrix fields\n$$P_\\pm(\\mathbf k)=\\frac12\\left(I_4\\pm\\frac{h_D(\\mathbf k)}{\\omega(\\mathbf k)}\\right).$$\nWhen $\\mu=0$ at $\\mathbf k=0$, set $P_+(0)=\\operatorname{diag}(I_2,0)$ and $P_-(0)=\\operatorname{diag}(0,I_2)$. These are complementary rank-two orthogonal projections; the value at this Lebesgue-null point does not change their multiplication operators. Write $M_{P_\\pm}$ for their maximal multiplication operators and $\\mathcal H_\\pm=\\operatorname{ran}M_{P_\\pm}$. The companion matrix lemma on this page proves these are bounded orthogonal projections with closed ranges. The conjugate Hilbert space $\\overline{\\mathcal H_-}$ has vectors $\\bar u$, scalar multiplication $z\\bar u=\\overline{\\bar z u}$, and pairing $\\langle\\bar u,\\bar v\\rangle=\\langle v,u\\rangle$.\n\nUse the sine and cosine definitions of [[def-sine-and-cosine-by-power-series]]. For a length-coordinate increment $t\\in\\mathbb R$ and $\\omega(\\mathbf k)>0$, define the matrix multiplier\n$$W_D(t,\\mathbf k)=\\cos(\\omega t)I_4+i\\frac{\\sin(\\omega t)}{\\omega}h_D(\\mathbf k).$$\nAt the massless apex set $W_D(t,0)=I_4$. Its unitarity, group law and generator identity are proved by the companion matrix lemma on this page.\n\nThe symbols $P_+$ and $P_-$ designate the positive- and negative-energy matrix formulas for this fixed free Dirac operator. This is purely mathematical data; no physical spin-statistics postulate or empirical assertion is included.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qft-example-data",
+          "source_section": "Definition",
+          "quote": "These are conventions for constructed and formal calculations in this page pair. They are not empirical claims, physical postulates, or existence claims about an interacting continuum theory.\n\nUse the geometric spacetime metric $\\eta=\\operatorname{diag}(-1,1,1,1)$ and the time coordinate $x^0=ct$ in metres. For Clifford algebra and momentum contraction use the separate algebraic metric $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$; a slash or a square of an energy four-vector uses $h$, never $\\eta$.\n\nA physical energy four-vector is $p=(E,c\\mathbf p_{\\rm phys})$, with each component in joules. Write $M=mc^2$ for rest energy in joules and $p^2=h(p,p)=E^2-c^2|\\mathbf p_{\\rm phys}|^2$. For two such vectors, $s=(p_1+p_2)^2$ is in $\\mathrm J^2$. Natural momentum coordinates are the energy-vector components divided by $\\hbar c$, in $\\mathrm m^{-1}$; they are not substituted into SI formulas without restoring this factor. In the common natural-unit field convention, $\\mu=mc/\\hbar$ is in $\\mathrm m^{-1}$, a scalar field has dimension $\\mathrm m^{-1}$, and a Dirac field has dimension $\\mathrm m^{-3/2}$.\n\nTake SI $e>0$ in coulombs, $\\hbar>0$ in joule-seconds, $c>0$ in metres per second, and $\\epsilon_0=(\\mu_0c^2)^{-1}$. Define\n$$\\alpha=\\frac{e^2}{4\\pi\\epsilon_0\\hbar c},\\qquad g=e\\sqrt{\\frac{\\mu_0c}{\\hbar}}=\\sqrt{4\\pi\\alpha}>0.$$\nHere $g$ is a dimensionless coupling. It is not the metric and not a gyromagnetic factor.\n\nFor gauge notation set $A_{\\rm lower}=(-\\phi/c,\\mathbf A)$, with $A_a$ in tesla-metres and gauge function $\\chi$ in webers. With charge $q$ in coulombs define\n$$D_a=\\partial_a-\\frac{iqA_a}{\\hbar},\\qquad \\psi\\mapsto e^{iq\\chi/\\hbar}\\psi,\\qquad A\\mapsto A+d\\chi.$$\nFor the electron parameter use $q=-e$. The equivalent natural-unit coordinates are $A_{\\rm nat}=A_{\\rm SI}/\\sqrt{\\mu_0\\hbar c}$ and $q_{\\rm nat}=q_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}$.\n\nFinite-matrix examples act on $\\mathbb C^d$ with the operator norm. For Hilbert spaces, use the first-variable-linear pairing $(u,v)_1=v^\\dagger u$; a displayed coordinate contraction $u^\\dagger v$ is second-variable-linear and equals $\\overline{(u,v)_1}$. Thus norms, traces, and modulus-squared amplitudes agree under conversion, although the unsquared pairing is conjugated. No amplitude is assigned a probability by these conventions.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qft-framework-units",
+          "source_section": "Definition",
+          "quote": "Fix the oriented, time-oriented affine Minkowski spacetime and an inertial\nchart of [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use signature\n$\\eta=\\operatorname{diag}(-1,1,1,1)$, length coordinates\n$x^0=ct$ and $x^i$ in metres, and coordinate time $t$ in seconds as in\n[[def-sr-si-units-and-coordinate-conventions]]. Greek spacetime indices run\nfrom $0$ to $3$; spatial indices run from $1$ to $3$ and are contracted with\nthe Euclidean spatial metric. The coordinates $x^a$ have unit metre and\n$\\partial_a:=\\partial/\\partial x^a$ has unit $\\mathrm m^{-1}$.\n\nThe positive constants $c$, $h$ and $e_{\\rm SI}$ have the exact SI defining\nvalues; write $\\hbar:=h/(2\\pi)$. The magnetic constant $\\mu_0>0$ has SI unit\n$\\mathrm{N\\,A^{-2}}$ and is experimentally determined under the current SI;\nno exact numerical value or current estimate for it is adopted. Put\n$\\varepsilon_0=(\\mu_0c^2)^{-1}$ when that symbol is used. These are SI\nnormalization inputs, not empirical claims about a selected QFT model.\n\nFor a species with rest mass $m_{\\rm rest,SI}>0$ in kilograms define its\ninverse-length mass parameter\n\n$$\\mu:=\\frac{m_{\\rm rest,SI}c}{\\hbar}\\quad[\\mathrm m^{-1}].$$\n\nFor spatial wave vector $\\mathbf k$ in $\\mathrm m^{-1}$ put\n$\\omega(\\mathbf k):=\\sqrt{|\\mathbf k|^2+\\mu^2}$ in $\\mathrm m^{-1}$. Here\n$\\omega$ is the temporal wave number, not the SI angular frequency; the\ncorresponding SI angular frequency is $c\\omega$. Energy and momentum are\n$E=\\hbar c\\omega$ in joules and $\\mathbf p=\\hbar\\mathbf k$ in\n$\\mathrm{kg\\,m\\,s^{-1}}$. With $p=(\\omega,\\mathbf k)$ the phase convention is\n\n$$p\\mathbin{\\circ}x:=\\omega x^0-\\mathbf k\\cdot\\mathbf x=-\\eta(p,x).$$\n\nThe natural action is $S/\\hbar$. Its canonical density in four dimensions has\nunit $\\mathrm m^{-4}$; the corresponding physical energy density is\n$\\hbar c$ times that density and has unit $\\mathrm{J\\,m^{-3}}$.\n\nFor canonical engineering dimensions in this four-dimensional normalization,\nwrite $\\phi_{\\rm n}$ for a scalar field with length degree $-1$ and\n$\\psi_{\\rm n}$ for a Dirac field with length degree $-3/2$. These are the\ndimensions fixed by the selected free kinetic terms, not exact scaling\ndimensions of interacting fields: anomalous dimensions, when present, are\nseparate quantities. Let $A^\\mu_{\\rm SI}=(\\varphi/c,\\mathbf A)$ and\n$F^{\\mu\\nu}_{\\rm SI}$ use the component convention of\n[[def-em-electromagnetic-tensor]], namely\n$F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$, with\n$F_{\\mu\\nu}=\\partial_\\mu A_\\nu-\\partial_\\nu A_\\mu$ only when a potential is\nsupplied. Define the normalized photon potential and field strength by\n\n$$a^\\mu:=\\frac{A^\\mu_{\\rm SI}}{\\sqrt{\\mu_0\\hbar c}},\\qquad f^{\\mu\\nu}:=\\frac{F^{\\mu\\nu}_{\\rm SI}}{\\sqrt{\\mu_0\\hbar c}}.$$\n\nThey have length degrees $-1$ and $-2$, respectively. The EM supplier is used\nonly for SI units and tensor components: no classical Maxwell equation,\nLorentz-force law, or classical-to-quantum identification is adopted here.\n\nFor any separately declared SI charge parameter $q_{\\rm SI}$ in coulombs put\n\n$$q_{\\rm n}:=q_{\\rm SI}\\sqrt{\\frac{\\mu_0c}{\\hbar}}.$$\n\nIt is dimensionless. For the positive exact SI elementary charge use\n$e_{\\rm n}:=e_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}$ and define the rationalized\ndimensionless coupling $\\alpha:=e_{\\rm n}^2/(4\\pi)$. Since $\\mu_0$ is\nmeasured, these formulas do not assign an exact numerical value to\n$e_{\\rm n}$ or $\\alpha$. If the model uses minimal coupling, its convention is\n$D_\\mu=\\partial_\\mu-iq_{\\rm n}a_\\mu$; for an electron with\n$q_{\\rm SI}=-e_{\\rm SI}$ this reads $D_\\mu=\\partial_\\mu+ie_{\\rm n}a_\\mu$.\nBare, renormalized-at-scale, and measured effective charges are separately\nlabelled model parameters; applying the conversion to one label does not\nidentify it with either of the others or specify a running law.\n\nThe Clifford convention is $\\gamma^0=\\beta$, $\\gamma^i=\\beta\\alpha^i$,\n$\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}$, so the effective Clifford metric is\n$-\\eta$. In a supplied free Dirac model the displayed equation is\n$(i\\gamma^a\\partial_a-\\mu)\\psi=0$. The phase and Clifford choices are\nconventions; this item proves no Dirac representation or field equation.\nTime evolution is written $U(t)=\\exp(-itH/\\hbar)$ when a selected model has\nactually constructed a self-adjoint Hamiltonian $H$ and its unitary group; the\ncorresponding Heisenberg conjugation is $O_H(t)=U(t)^*O\\,U(t)$. No such\nHamiltonian or group is constructed here. Where a free-field module uses an\ninner product linear in its second variable, convert to the repository's\nfirst-variable-linear pairing by\n$\\langle u,v\\rangle_{\\rm FF}=(v,u)_{\\rm root}$.\n\nFor precision about domains, let $\\mathcal H$ be a complex Hilbert space with\ninner product linear in its first variable and let\n$\\mathscr D\\subseteq\\mathcal H$ be a dense complex linear subspace. A **weak operator-valued distribution\non the common domain $\\mathscr D$** means a complex-linear assignment\n$g\\mapsto\\Phi(g)$ for $g\\in\\mathcal D(\\mathbb R^4)$, where each\n$\\Phi(g):\\mathscr D\\to\\mathcal H$ is linear and, for every\n$u,v\\in\\mathscr D$, the scalar map\n$g\\mapsto\\langle\\Phi(g)u,v\\rangle$ is a continuous complex-linear functional\non the test-function space with the topology of\n[[def-test-function-topology]], hence a distribution as in [[def-distribution]].\nThis definition gives no pointwise field $\\Phi(x)$ and no product\n$\\Phi(x)\\Phi(x)$; a product or extension needs a separate construction.\nSmeared fields are not thereby bounded, symmetric, self-adjoint, or\nself-adjointly closable. Locality, local observable algebras, graded locality,\nand gauge-specific potential behavior are likewise supplied only by the\nrelevant constructed model modules. Test-function units can be chosen so a\nspecified smeared observable is dimensionless; there is no universal test\nfunction unit asserted here.\n\nPrimitive data for a selected model include its species and rest masses,\ndeclared charge parameters, regulator geometry, couplings, state and any\nconstructed measurement data. Vacuum-subtracted Hamiltonians, regulator\neigenvalues, distributions, correlations and outcome probabilities are\nderived only when their constructions supply the required domains and\nwell-definedness. This dictionary neither constructs an interacting\nfour-dimensional QED Hilbert space nor asserts pointwise field products,\nscattering, an LSZ limit, asymptotic completeness, or removal of a regulator.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qft-example-observable-types",
+          "source_section": "Definition",
+          "quote": "Use the framework-local unit and domain dictionary of\n[[def-qft-framework-units]] and the energy, SI/natural-unit, and finite-matrix\nconventions of [[def-qft-example-data]]. A physical quantity is always typed\nrelative to the selected QFT formulation and its declared model data; its name\nor units alone do not identify it with a quantity in another formulation.\n\nFor the **exact finite-regulator class** used on this page, the state space is\nthe finite-dimensional Hilbert space $\\mathcal H=\\mathbb C^d$ for an integer\n$d\\ge1$. Model inputs include the selected Hermitian Hamiltonian matrices,\ntheir time-dependent Hermitian interaction when present, a dimensionless\ncoupling parameter, an initial state, and an explicitly supplied finite\noutcome measurement. A pure initial state is a vector $\\psi\\in\\mathbb C^d$\nwith $\\|\\psi\\|=1$; a mixed state is a matrix $\\rho=\\rho^*$ with\n$\\langle\\rho v,v\\rangle\\ge0$ for every $v$ and $\\operatorname{tr}\\rho=1$.\nAn exact regulated observable on this finite space is a specified Hermitian\nmatrix $O=O^*$ with a declared physical unit. The matrix and state are model\ndata; the measurement procedure and any physical rule assigning outcomes are\nadditional data. This definition does not say that an operator symbol by\nitself is a detector outcome or probability.\n\nA **finite probability law** on the declared outcome set\n$\\{1,\\ldots,m\\}$, $m\\ge1$, is a vector $(p_1,\\ldots,p_m)$ with\n$p_a\\ge0$ and $\\sum_{a=1}^m p_a=1$. It is a mathematical type. Assigning that\nlaw to a particular preparation and measurement is a separate physical\npostulate. A prediction derived from an actually constructed regulated model\nis conditional on those inputs and the adopted rule.\n\nA **formal coefficient record** is a sequence $(c_n)_{n\\in\\mathbb N}$ of\nspecified coefficients, sometimes displayed as the symbol\n$\\sum_{n\\ge0}c_n\\lambda^n$. Unless convergence and an evaluation map are\nseparately proved and adopted, the symbol records coefficients only: it is not\nan evaluated function, exact probability, convergent perturbation series, or\nerror bound. A formal coefficient can be assigned a phenomenological meaning\nonly by a separate, model-specific physical adoption with its approximation\nscope stated.\n\nAn **empirical estimate** is a source-reported number obtained by analyzing a\nfinite record of measurement outcomes under the stated preparation, apparatus,\ncalibration, sampling, and analysis conditions. Its reported uncertainty and\nconditions travel with the estimate. It is not the exact model value, and it\ndoes not prove the framework used to interpret it. The 2022 Fan et al. report\nis an example of a source-reported electron magnetic-moment determination;\nthis definition supplies no numerical result, uncertainty reconstruction, or\nnew experimental claim.\n\nPrimitive and derived status is formulation-relative. In a selected regulated\nmodel, the regulator, Hamiltonian data, coupling, initial state, and supplied\nmeasurement are declared inputs; an evolution, amplitude, or probability law\nis derived only when the construction and adopted rule establish it. In a\nformal calculation, the specified masses, couplings, coefficient rules, and\nsubtraction prescription are inputs, while its listed coefficients are\nderived within that formal calculation. An empirical estimate is a reported\ndata-analysis result, not a primitive model parameter or a theorem.\n\nThe following units are examples of types, not identifications of quantities:\na cross section $\\sigma$ is area-valued with SI unit $\\mathrm{m^2}$; a rate\n$\\Gamma$ is inverse-time-valued with unit $\\mathrm{s^{-1}}$; an energy width\n$\\Gamma_E$ has unit joule. Only a separately stated convention may identify\n$\\Gamma_E=\\hbar\\Gamma$. The fine-structure parameter $\\alpha$, a dimensionless\ncoupling $g$, and a gyromagnetic factor $g_s$ are dimensionless but have\ndifferent physical meanings. The name “width,” a common symbol, or matching\ndimensions does not supply an exponential-decay law or an equality between\nthese parameters.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-qft-qed-local-coupling",
+          "source_section": "Postulate",
+          "quote": "Adopt a smooth local classical Maxwell–Dirac model on an open region of the\nflat spacetime specified by [[def-qft-framework-units]]. Let $A_{{\\rm SI},a}$\nbe a supplied real $C^\\infty$ electromagnetic covector potential and let\n$\\psi:\\!U\\to\\mathbb C^4$ be a $C^\\infty$ commuting spinor field. The charge\n$q_{\\rm SI}$ and rest mass $m_{\\rm SI}>0$ are model inputs; for the electron\ntake $q_{\\rm SI}=-e_{\\rm SI}$. Use the component, metric, Clifford, charge,\nfield-normalization, and unit conventions of\n[[def-qft-qed-gauge-data]], [[def-qft-qed-physical-gauge-quantities]],\n[[def-qft-framework-units]], and the electromagnetic suppliers of\n[[post-qft-free-photon-model]]. In particular,\n$D_a=\\partial_a-iq_{\\rm SI}A_{{\\rm SI},a}/\\hbar\n=\\partial_a-iq_{\\rm n}a_a$ and $\\mu=m_{\\rm SI}c/\\hbar$.\n\nAdopt the local action density in natural normalization\n\n$$\\mathcal L_{\\rm nat}\n=-\\frac14 f_{ab}f^{ab}\n+\\frac{i}{2}\\bigl(\\bar\\psi\\gamma^aD_a\\psi\n-(D_a\\bar\\psi)\\gamma^a\\psi\\bigr)-\\mu\\bar\\psi\\psi,$$\n\nwhere $f_{ab}=\\partial_a a_b-\\partial_ba_a$ on the region where the\npotential is supplied, $\\bar\\psi=\\psi^\\dagger\\beta$, and\n$D_a\\bar\\psi=\\partial_a\\bar\\psi+iq_{\\rm n}a_a\\bar\\psi$. The physical action\nis $S_{\\rm cl}=\\hbar\\int_U\\mathcal L_{\\rm nat}\\,d^4x$ with $x^0=ct$. For\ncompactly supported local variations this is the adopted classical\nMaxwell–Dirac formulation; its Euler–Lagrange consequences are not postulated\nas a proof in this item.\n\nFor a smooth gauge function $\\chi$ in webers, the adopted local\ntransformation is\n$A_{{\\rm SI},a}\\mapsto A_{{\\rm SI},a}+\\partial_a\\chi$ and\n$\\psi\\mapsto e^{iq_{\\rm SI}\\chi/\\hbar}\\psi$. It leaves $F=dA$ invariant and\nmakes $D_a\\psi$ transform by the same phase. This is the covector form of the\nSI potential rule in [[def-em-gauge-transformation]]. Gauge functions in the\nlocal variation argument are compactly supported; no assertion is made about\nlarge gauge transformations, nontrivial bundles, boundary charges, or\nasymptotic sectors.\n\nThe model adopts the separately specified free Dirac representation of\n[[post-qft-free-field-model]] and the positive free photon representation of\n[[post-qft-free-photon-model]] as the free-field correspondence used to\ndescribe the selected species. This extra correspondence does not quantize\nthe interacting classical action. In particular, this postulate supplies no\ninteracting continuum four-dimensional QED Hilbert space, no globally\nwell-posed coupled PDE, no pointwise operator-valued composite current, no\nscattering or LSZ construction, and no regulator-removal or\nnonperturbative-existence result.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D11",
+          "claim": "Compact covariant integration by parts yields the real first variation of the adopted commuting-spinor action.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D21",
+          "claim": "Arbitrary compact variations force the smooth Euler-Lagrange residual to vanish pointwise; the converse follows from the first-variation formula.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D31",
+          "claim": "SI-natural conversion and explicit gamma blocks rewrite the covariant equation as the QX12 Hamiltonian differential expression.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D41",
+          "claim": "The covariant-momentum commutator and Pauli algebra give the exact compact-core square formula.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D51",
+          "claim": "Formal coefficient comparison gives -q/m S dot B; the adopted magnetic convention then gives gs=2.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 4.1",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "Uniform-field smooth gauge",
+          "inputs": [
+            "given",
+            "F5",
+            "step 3.1"
+          ],
+          "expected": "A=(B0/2)(-y,x,0) is smooth and curl A=B0 z-hat."
+        },
+        {
+          "name": "Spin eigenvalues",
+          "inputs": [
+            "F4",
+            "step 5.1"
+          ],
+          "expected": "Sigma_z=diag(1,-1,1,-1), so S_z eigenvalues are plus/minus hbar/2 and the formal gap is e hbar B0/m for q=-e."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-qft-qed-local-coupling",
+          "carrier": "items/post-qft-qed-local-coupling.md",
+          "status": "Current batch-52 G01 postulate carrier is registered and its action was inspected; its full dependency-level chain is stale and includes an escalated Dirac-definition path.",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt the local Maxwell-Dirac action density in natural normalization $-\\frac14f_{ab}f^{ab}+\\frac i2(\\bar\\psi\\gamma^aD_a\\psi-(D_a\\bar\\psi)\\gamma^a\\psi)-\\mu\\bar\\psi\\psi$.",
+          "relevant_hypotheses_and_conventions": "Smooth real potential, commuting spinor, SI/natural conversion and compactly supported variations; the Euler-Lagrange consequence is left to a consuming proof.",
+          "supplier_proof_status": "Draft physical postulate with no Proof section; no independent acceptance.",
+          "consumer_use": "Supplies the adopted action."
+        },
+        {
+          "supplier": "def-qft-qed-gauge-data",
+          "carrier": "items/def-qft-qed-gauge-data.md",
+          "status": "Current batch-44 draft definition and unit/gauge proof inspected.",
+          "source_section": "Definition",
+          "exact_statement": "Use smooth fields on Minkowski coordinate space with $x^0=ct$ and $\\eta=\\operatorname{diag}(-1,1,1,1)$. Components of $x$ are measured in metres. Fix the Dirac matrices and adjoint of [[def-qft-dirac-projections]], so $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$ and $\\bar\\psi=\\psi^\\dagger\\beta$.\n\nFor the SI-normalization bookkeeping, let $c>0$ (m s$^{-1}$), $\\hbar>0$ (J s), $\\mu_0>0$ (N A$^{-2}$), a real charge parameter $q$ (C), and a mass parameter $m>0$ (kg) be symbolic inputs; put $\\epsilon_0=(\\mu_0c^2)^{-1}$. In the current SI, $c$ and $h$ are defining constants while $\\mu_0$ is experimentally determined; the formula below keeps $\\mu_0$ symbolic and assigns it no numerical value. Use the lower-potential convention\n$$A_a=(-\\phi/c,\\mathbf A),\\qquad F_{ab}=\\partial_aA_b-\\partial_bA_a,$$\nwhere $A_a$ has units T m, $\\phi$ is in volts, and $\\mathbf A$ is in T m. Define\n$$S_0=\\sqrt{\\mu_0\\hbar c},\\qquad a_a=A_a/S_0,\\qquad f_{ab}=\\partial_aa_b-\\partial_ba_a,$$\n$$\\mu=mc/\\hbar,\\qquad g=q\\sqrt{\\mu_0c/\\hbar}=q/\\sqrt{\\epsilon_0\\hbar c},\\qquad D_a=\\partial_a-ig a_a.$$\nThus $a_a$ and $\\mu$ have units m$^{-1}$, $f_{ab}$ has units m$^{-2}$, and $g$ is dimensionless. For $\\psi$ with units m$^{-3/2}$, both $-\\tfrac14 f_{ab}f^{ab}$ and $\\bar\\psi(i\\gamma^aD_a-\\mu)\\psi$ have units m$^{-4}$; their integral over $d^4x$ is dimensionless and represents the action divided by $\\hbar$ in this normalization.\n\nFor a real smooth gauge parameter $\\chi$ in webers, put $\\alpha=\\chi/S_0$ (dimensionless) and use\n$$A'_a=A_a+\\partial_a\\chi,\\qquad a'_a=a_a+\\partial_a\\alpha,\\qquad \\psi'=e^{ig\\alpha}\\psi.$$\nThe induced covariant derivative is $D'_a=\\partial_a-ig a'_a$. These are formal mathematical conventions for the later conditional deductions. They do not adopt a measured value of $\\mu_0$, identify $q$ with an electron charge, impose charge quantization, or assert that interacting continuum fields exist.",
+          "relevant_hypotheses_and_conventions": "Lower-potential convention A0=-phi/c, x0=ct, real charge and AC_omega.",
+          "supplier_proof_status": "Draft definition with local proof; no independent approval.",
+          "consumer_use": "F2 is used in step 1.1, step 2.1, step 3.1"
+        },
+        {
+          "supplier": "def-qft-dirac-projections",
+          "carrier": "items/def-qft-dirac-projections.md",
+          "status": "Current batch-42 draft carrier exists; readiness is escalated because the QFT-MF01 review is open and QFT-MF02 is artifact-missing.",
+          "source_section": "Definition",
+          "exact_statement": "Assume Countable Choice [[def-countable-choice]], the mathematical scalar shell conventions of [[def-qft-scalar-mass-shell]], and the second-variable-linear Hilbert pairing of [[def-qft-fock-and-test-spaces]]. In the fixed inertial coordinates $x=(x^0,\\mathbf x)$ of [[def-inertial-frame-and-inertial-chart]] on the affine Minkowski model [[def-sr-affine-minkowski-model]], $\\eta=\\operatorname{diag}(-1,1,1,1)$; these coordinates have length units under [[def-qft-scalar-mass-shell]]. The parameter $\\mu\\ge0$ and momentum coordinate $\\mathbf k$ have inverse-length units, and $\\omega(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2}$ has the same units. The parameter is not identified here with a physical rest mass. Matrix $h_D$ has inverse-length units; the dimensionless spin matrices have no physical unit assignment in this mathematical item.\n\nUse the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.\n\nLet $\\mathcal H_D$ be the space of measurable functions $u:\\mathbb R^3\\to\\mathbb C^4$, modulo equality almost everywhere, with\n$$\\|u\\|^2=\\int_{\\mathbb R^3}u(\\mathbf k)^\\dagger u(\\mathbf k)\\,\\frac{d^3\\mathbf k}{(2\\pi)^3}<\\infty,$$\nand pairing $\\langle u,v\\rangle=\\int u(\\mathbf k)^\\dagger v(\\mathbf k)\\,d^3\\mathbf k/(2\\pi)^3$. Define the measurable matrix $h_D(\\mathbf k)=\\sum_j\\alpha_j k_j+\\beta\\mu$ and its maximal multiplication operator with domain $D(h_D)=\\{u\\in\\mathcal H_D:h_Du\\in\\mathcal H_D\\}$. For $\\omega(\\mathbf k)>0$, define the matrix fields\n$$P_\\pm(\\mathbf k)=\\frac12\\left(I_4\\pm\\frac{h_D(\\mathbf k)}{\\omega(\\mathbf k)}\\right).$$\nWhen $\\mu=0$ at $\\mathbf k=0$, set $P_+(0)=\\operatorname{diag}(I_2,0)$ and $P_-(0)=\\operatorname{diag}(0,I_2)$. These are complementary rank-two orthogonal projections; the value at this Lebesgue-null point does not change their multiplication operators. Write $M_{P_\\pm}$ for their maximal multiplication operators and $\\mathcal H_\\pm=\\operatorname{ran}M_{P_\\pm}$. The companion matrix lemma on this page proves these are bounded orthogonal projections with closed ranges. The conjugate Hilbert space $\\overline{\\mathcal H_-}$ has vectors $\\bar u$, scalar multiplication $z\\bar u=\\overline{\\bar z u}$, and pairing $\\langle\\bar u,\\bar v\\rangle=\\langle v,u\\rangle$.\n\nUse the sine and cosine definitions of [[def-sine-and-cosine-by-power-series]]. For a length-coordinate increment $t\\in\\mathbb R$ and $\\omega(\\mathbf k)>0$, define the matrix multiplier\n$$W_D(t,\\mathbf k)=\\cos(\\omega t)I_4+i\\frac{\\sin(\\omega t)}{\\omega}h_D(\\mathbf k).$$\nAt the massless apex set $W_D(t,0)=I_4$. Its unitarity, group law and generator identity are proved by the companion matrix lemma on this page.\n\nThe symbols $P_+$ and $P_-$ designate the positive- and negative-energy matrix formulas for this fixed free Dirac operator. This is purely mathematical data; no physical spin-statistics postulate or empirical assertion is included.",
+          "relevant_hypotheses_and_conventions": "Only the explicit finite matrices are consumed; the broader supplier declares AC_omega and Hilbert/shell/Fock interfaces.",
+          "supplier_proof_status": "Current draft with escalated readiness; exact finite block remains usable conditionally.",
+          "consumer_use": "F4 is used in step 3.1, step 4.1"
+        },
+        {
+          "supplier": "lem-qft-example-dirac-pauli-square",
+          "carrier": "items/lem-qft-example-dirac-pauli-square.md",
+          "status": "Current batch-46 mathematical draft and full core proof inspected; its spin-trace supplier inherits the Dirac-definition escalation.",
+          "source_section": "Statement",
+          "exact_statement": "Let $m>0$ be a particle mass in kilograms, $q\\in\\mathbb R$ its charge in coulombs, and $A:\\mathbb R^3\\to\\mathbb R^3$ a smooth spatial vector potential with components in tesla-metres. Set $B_k=\\epsilon_{kij}\\partial_iA_j$ and define on the common core $\\mathcal C=C_c^\\infty(\\mathbb R^3;\\mathbb C^4)$\n$$\\pi_i=-i\\hbar\\partial_i-qA_i,\\qquad H_D=c\\sum_i\\alpha_i\\pi_i+\\beta mc^2,\\qquad \\Sigma_i=\\operatorname{diag}(\\sigma_i,\\sigma_i).$$\nHere the matrices are those of [[lem-qft-example-spin-trace-completeness]] and $\\hbar,c$ have the SI conventions of [[def-qft-example-data]]. These differential maps preserve $\\mathcal C$, and on $\\mathcal C$,\n$$[\\pi_i,\\pi_j]=iq\\hbar\\epsilon_{ijk}B_k,\\qquad H_D^2=m^2c^4I_4+c^2(\\boldsymbol\\pi^2-q\\hbar\\boldsymbol\\Sigma\\cdot\\mathbf B).$$\nIf the formal first-order square-root coefficient is written as $mc^2+K/(2m)$ with $K=\\boldsymbol\\pi^2-q\\hbar\\boldsymbol\\Sigma\\cdot\\mathbf B$, then its spin term is $-(q/m)\\mathbf S\\cdot\\mathbf B$, where $\\mathbf S=\\hbar\\boldsymbol\\Sigma/2$. Under the coefficient convention $H_{\\mathrm{mag}}=-\\boldsymbol\\mu_{\\mathrm{mag}}\\cdot\\mathbf B$ and $\\boldsymbol\\mu_{\\mathrm{mag}}=g_s(q/(2m))\\mathbf S$, equality of the formal coefficients as a linear function of $q$ gives $g_s=2$ for the minimal tree-level term. No magnetic self-adjoint closure, full spectrum, operator square-root theorem, radiative correction, or empirical prediction is asserted.",
+          "relevant_hypotheses_and_conventions": "All products remain on C_c^infty; no self-adjoint closure is assumed.",
+          "supplier_proof_status": "Draft complete conditional proof; independent acceptance pending.",
+          "consumer_use": "F3 is used in step 4.1, step 5.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes the common compact-spinor core on R^3 and three spatial indices. The zero spinor remains in the core and every displayed operator identity holds on it; no optional empty coordinate system is varied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; step 4.1 gives the core identity for B=0 as well, while the magnetic example assumes B0>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The explicit four-component spin space has both spin eigenvalues."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; step 5.1 uses m>0 and q=-e!=0 in the formal coefficient comparison."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; step 4.1 keeps every differential product on the common compact-smooth core and claims no spectral endpoint or closure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition; step 4.1 uses explicit finite Pauli blocks, with the upstream AC_omega condition recorded in Fact F4."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Minimal Dirac magnetic benchmark from the adopted action: Assume the adopted local Maxwell–Dirac action of [[post-qft-qed-local-coupling]] with electron charge $q=-e$, $e>0$, and rest mass $m>0$. Specialize its supplied smooth potential to a static pure magnetic field on Minkowski space, with $\\phi=0$ and $\\mathbf A\\in C^\\infty(\\mathbb R^3;\\mathbb R^3)$ in SI units $\\mathrm{T\\,m}$. Define $\\mathbf B=\\nabla\\times\\mathbf A$ in tesla, $$ \\pi_i=-i\\hbar\\partial_i-qA_i,\\qquad H_D=c\\sum_{i=1}^3\\alpha_i\\pi_i+\\beta mc^2, $$ on the common invariant core $\\mathcal D=C_c^\\infty(\\mathbb R^3;\\mathbb C^4)$. Use the Dirac matrices and adjoint of [[def-qft-dirac-projections]] and $$ \\Sigma_i=\\operatorname{diag}(\\sigma_i,\\sigma_i),\\qquad S_i=\\frac{\\hbar}{2}\\Sigma_i. $$ The compactly su The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Minimal Dirac magnetic benchmark from the adopted action: Assume the adopted local Maxwell–Dirac action of [[post-qft-qed-local-coupling]] with electron charge $q=-e$, $e>0$, and rest mass $m>0$. Specialize its supplied smooth potential to a static pure magnetic field on Minkowski space, with $\\phi=0$ and $\\mathbf A\\in C^\\infty(\\mathbb R^3;\\mathbb R^3)$ in SI units $\\mathrm{T\\,m}$. Define $\\mathbf B=\\nabla\\times\\mathbf A$ in tesla, $$ \\pi_i=-i\\hbar\\partial_i-qA_i,\\qquad H_D=c\\sum_{i=1}^3\\alpha_i\\pi_i+\\beta mc^2, $$ on the common invariant core $\\mathcal D=C_c^\\infty(\\mathbb R^3;\\mathbb C^4)$. Use the Dirac matrices and adjoint of [[def-qft-dirac-projections]] and $$ \\Sigma_i=\\operatorname{diag}(\\sigma_i,\\sigma_i),\\qquad S_i=\\frac{\\hbar}{2}\\Sigma_i. $$ The compactly su The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ]
+    },
+    "ex-qft-x04": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-qft-example-formal-scattering-decay",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ [[def-countable-choice]]. Use the fixed Cartesian\nMinkowski chart $x=(ct,\\mathbf x)$, the geometric metric\n$\\eta=(-,+,+,+)$, and the distinct algebraic contraction\n$h=-\\eta=(+,-,-,-)$ of [[def-qft-example-data]]. Let $m,M\\geq0$ be the\nelectron and muon rest energies in joules. In this chart, a future energy\nfour-vector is\n$q=(E,\\mathbf q)\\in\\mathbb R^4$ with $E>0$; it has rest energy $\\mathsf M\\geq0$\nwhen $h(q,q)=\\mathsf M^2$. All four-vector components are in joules, and\n$\\mathbf q$ is $c$ times physical spatial momentum. Let $p_1,p_2$ be future electron\nand positron energy four-vectors with rest energy $m$, and $k_1,k_2$ future\nmuon and antimuon energy four-vectors with rest energy $M$, satisfying\n$p_1+p_2=k_1+k_2=P$ and\n$$ s=h(P,P)>4\\max(m^2,M^2). $$\nBy [[lem-qft-example-two-body-phase-space]], choose a proper orthochronous\n$h$-Lorentz matrix $\\Lambda\\in GL(4,\\mathbb R)$, meaning\n$\\Lambda^Th\\Lambda=h$, $\\det\\Lambda=1$, and preservation of the future\ncausal cone $C_+:=\\{(E,\\mathbf q):E>0,\\ h((E,\\mathbf q),(E,\\mathbf q))\\geq0\\}$,\nwith $\\Lambda P=(\\sqrt{s},\\mathbf0)$.\nIts boost construction supplies such a map because $P$ is future timelike.\nThe **center-of-momentum inertial chart** has coordinates\n$x^{\\rm CM}=\\Lambda x$ on spacetime and corresponding four-vector components\n$q^{\\rm CM}=\\Lambda q$; from here on, four-vector components are in that\nchart, so $P=(\\sqrt{s},\\mathbf0)$. The strict threshold makes\n$\\mathbf p_1$ and $\\mathbf k_1$ nonzero. Define the\nscattering angle $\\theta\\in[0,\\pi]$ by\n$$\\theta:=\\arccos\\!\\left(\\frac{\\mathbf p_1\\cdot\\mathbf k_1}{|\\mathbf p_1|\\,|\\mathbf k_1|}\\right),$$\nusing the Euclidean inner product on $\\mathbb R^3$.\nWrite $g=\\sqrt{4\\pi\\alpha}>0$, as in\n[[def-qft-example-data]], and\n$$ \\beta_e=\\sqrt{1-\\frac{4m^2}{s}},\\qquad \\beta_\\mu=\\sqrt{1-\\frac{4M^2}{s}}. $$\nFor the selected formal one-photon tree coefficient, take equal incoherent\nweight $1/4$ for the four initial spin-label pairs and sum over final spin\nlabels. Take the selected muon model charge to be $-e$ as well. Up to an\nirrelevant common phase, its amplitude is\n$$ \\mathcal M_{\\rm tree}=\\frac{g^2}{s} [\\bar v(p_2)\\gamma^a u(p_1)] [\\bar u(k_1)\\gamma_a v(k_2)], $$\nwhere the brackets denote the product of the two currents. This selected\nformal amplitude adopts the current draft QFT-G02 line/vertex convention;\nit is not an exact amplitude of a constructed continuum theory.\n\nConditional on this amplitude adoption and\n[[post-qft-example-formal-observable-map]], the spin-averaged squared\ncoefficient is\n$$ \\overline{|\\mathcal M_{\\rm tree}|^2} =g^4[3-\\beta_e^2-\\beta_\\mu^2 +\\beta_e^2\\beta_\\mu^2\\cos^2\\theta], $$\nThe distinguishable-particle differential and total\ncross-section coefficients are\n$$ \\frac{d\\sigma_{\\rm coeff}}{d\\Omega} =\\frac{\\alpha^2(\\hbar c)^2\\beta_\\mu}{4s\\beta_e} [3-\\beta_e^2-\\beta_\\mu^2+\\beta_e^2\\beta_\\mu^2\\cos^2\\theta], $$\n$$ \\sigma_{\\rm coeff} =\\frac{\\pi\\alpha^2(\\hbar c)^2}{s}\\frac{\\beta_\\mu}{\\beta_e} [3-\\beta_e^2-\\beta_\\mu^2+\\tfrac13\\beta_e^2\\beta_\\mu^2]. $$\nFor $\\delta=4m^2/s\\leq1/2$, the ratio of this differential coefficient to\nthe coefficient at $m=0$ with the same $M,s,\\theta$ belongs to\n$[1,1+4\\delta]$. This bound is only the incoming-electron-mass effect\nwithin the selected tree coefficient.\n\nThe on-shell equations also give\n$$ P_a\\bar v(p_2)\\gamma^a u(p_1)=0,\\qquad P_a\\bar u(k_1)\\gamma^a v(k_2)=0. $$\nThese are the two current contractions for this finite external-spinor\ncalculation; they do not assert an all-orders or loop Ward theorem.\n\nFor the separate scalar conventions of\n[[post-qft-example-formal-observable-map]], let $m_s\\geq0$ be a scalar rest\nenergy, let the incoming $r_1,r_2$ and outgoing $l_1,l_2$ lie on the\npositive $m_s$-shell, meaning each $(E,\\mathbf q)$ has\n$E=\\sqrt{|\\mathbf q|^2+m_s^2}>0$, and require\n$r_1+r_2=l_1+l_2=P_s$ with $s=h(P_s,P_s)>4m_s^2$.\nEvaluate in a proper orthochronous center-of-momentum chart taking $P_s$\nto $(\\sqrt{s},\\mathbf0)$ as in [F4]. Let $\\lambda\\in\\mathbb R$ be the dimensionless\nconstant quartic amplitude parameter. The identical-final full-sphere and\ndistinguishable total coefficients are respectively\n$$ \\sigma_{\\rm coeff}^{\\rm identical} =\\frac{\\lambda^2(\\hbar c)^2}{32\\pi s},\\qquad \\sigma_{\\rm coeff}^{\\rm distinguishable} =\\frac{\\lambda^2(\\hbar c)^2}{16\\pi s}. $$\nFor a parent at rest of energy $\\mathsf M_0>2m_s$ and a constant identical\ndaughter amplitude $G_E$ in joules, take the daughters on the positive\n$m_s$-shell with total $P_0=(\\mathsf M_0,\\mathbf0)$. The rate coefficient is\n$$ \\Gamma_{\\rm coeff} =\\frac{|G_E|^2}{32\\pi\\hbar\\mathsf M_0} \\sqrt{1-\\frac{4m_s^2}{\\mathsf M_0^2}}\\quad[\\mathrm{s}^{-1}]. $$\nIf an energy width is named, its convention is $\\Gamma_E:=\\hbar\\Gamma_{\\rm\ncoeff}$ in joules. None of these coefficient statements implies an exact\nsurvival law. The QFT-G02 postulate is a current draft carrier; its use here\nretains draft status and does not imply independent acceptance.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-example-data",
+          "source_section": "Definition",
+          "quote": "These are conventions for constructed and formal calculations in this page pair. They are not empirical claims, physical postulates, or existence claims about an interacting continuum theory.\n\nUse the geometric spacetime metric $\\eta=\\operatorname{diag}(-1,1,1,1)$ and the time coordinate $x^0=ct$ in metres. For Clifford algebra and momentum contraction use the separate algebraic metric $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$; a slash or a square of an energy four-vector uses $h$, never $\\eta$.\n\nA physical energy four-vector is $p=(E,c\\mathbf p_{\\rm phys})$, with each component in joules. Write $M=mc^2$ for rest energy in joules and $p^2=h(p,p)=E^2-c^2|\\mathbf p_{\\rm phys}|^2$. For two such vectors, $s=(p_1+p_2)^2$ is in $\\mathrm J^2$. Natural momentum coordinates are the energy-vector components divided by $\\hbar c$, in $\\mathrm m^{-1}$; they are not substituted into SI formulas without restoring this factor. In the common natural-unit field convention, $\\mu=mc/\\hbar$ is in $\\mathrm m^{-1}$, a scalar field has dimension $\\mathrm m^{-1}$, and a Dirac field has dimension $\\mathrm m^{-3/2}$.\n\nTake SI $e>0$ in coulombs, $\\hbar>0$ in joule-seconds, $c>0$ in metres per second, and $\\epsilon_0=(\\mu_0c^2)^{-1}$. Define\n$$\\alpha=\\frac{e^2}{4\\pi\\epsilon_0\\hbar c},\\qquad g=e\\sqrt{\\frac{\\mu_0c}{\\hbar}}=\\sqrt{4\\pi\\alpha}>0.$$\nHere $g$ is a dimensionless coupling. It is not the metric and not a gyromagnetic factor.\n\nFor gauge notation set $A_{\\rm lower}=(-\\phi/c,\\mathbf A)$, with $A_a$ in tesla-metres and gauge function $\\chi$ in webers. With charge $q$ in coulombs define\n$$D_a=\\partial_a-\\frac{iqA_a}{\\hbar},\\qquad \\psi\\mapsto e^{iq\\chi/\\hbar}\\psi,\\qquad A\\mapsto A+d\\chi.$$\nFor the electron parameter use $q=-e$. The equivalent natural-unit coordinates are $A_{\\rm nat}=A_{\\rm SI}/\\sqrt{\\mu_0\\hbar c}$ and $q_{\\rm nat}=q_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}$.\n\nFinite-matrix examples act on $\\mathbb C^d$ with the operator norm. For Hilbert spaces, use the first-variable-linear pairing $(u,v)_1=v^\\dagger u$; a displayed coordinate contraction $u^\\dagger v$ is second-variable-linear and equals $\\overline{(u,v)_1}$. Thus norms, traces, and modulus-squared amplitudes agree under conversion, although the unsquared pairing is conjugated. No amplitude is assigned a probability by these conventions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-qft-example-formal-observable-map",
+          "source_section": "Postulate",
+          "quote": "For a specifically named finite tree calculation, adopt its selected formal\ndiagram coefficient as a **leading perturbative coefficient** with a stated\nphenomenological reading. For QED, use the vertex and free-line conventions\nof the current draft supplier\n[[post-qft-formal-qed-coefficients]]. A particle of natural charge $q_n$ has\nvertex $iq_n\\gamma^a$; the electron has $q_n=-e_n$ and vertex\n$-ie_n\\gamma^a$. The rational fermion line is\n$$ i\\frac{\\not p+\\mu}{h(p,p)-\\mu^2}, $$\nfor $\\mu>0$ and off-shell $p$ with $h(p,p)-\\mu^2\\ne0$. In Feynman gauge\nthe auxiliary photon line is\n$$ -i\\frac{h_{ab}}{h(k,k)+i0}=i\\frac{\\eta_{ab}}{h(k,k)+i0}. $$\nFor a finite matrix kernel the coefficientwise inverse in\n[[post-qft-formal-qed-coefficients]] is part of the formal convention and\nasserts no convergence. If a time-ordered distribution is used, use the\nactual free carrier specified there; that identification is conditional on\n[[def-countable-choice]]. The displayed pole notation does not define loop\nproducts. In the pair-production channel below the selected muon also has\nmodel charge $-e$, and only the photon line is internal.\n\nFor declared incoming spin probabilities, sum over declared final spin\nlabels, and a specified formal amplitude $\\mathcal A$, adopt the\ncross-section coefficient map of\n[[lem-qft-example-two-body-phase-space]]. Its scattering inputs are\npositive-shell energy vectors $p_i=(E_i,\\mathbf p_i)$ with\n$E_i=\\sqrt{|\\mathbf p_i|^2+\\mathsf M_{i,\\rm in}^2}>0$,\n$\\mathsf M_{i,\\rm in}\\ge0$, and common future-timelike total\n$P=p_1+p_2=k_1+k_2$. The outgoing $k_j$ are on their specified positive\nshells. Require $s=h(P,P)>(\\mathsf M_1+\\mathsf M_2)^2$ for the outgoing\nrest energies and positive incoming flux $F>0$, precisely the supplier's\nadmissible scattering domain. In the center-of-momentum frame it\nuses the invariant incoming flux $F$, the two-body measure $d\\Phi_2$, and the\nfinal-state factor $S_f=2$ for identical particles or $S_f=1$ for\ndistinguishable particles, integrated over the full labeled sphere. When\nthis coefficient is read phenomenologically, the initial preparation,\nchannel, threshold, and approximation are part of the model statement. No\nuniversal error estimate for omitted terms is implied.\n\nFor the scalar examples, separately adopt the constant formal amplitudes\n$\\mathcal A=-\\lambda$ for the quartic contact channel and $\\mathcal G=G_E$\nfor the cubic parent decay, with the units and external normalization stated\nat each use. The scalar scattering inputs lie on their stated positive\nshells with a common total and the same strict threshold and positive-flux\nconditions. For decay, the parent is $P_0=(\\mathsf M_0,\\mathbf0)$,\n$\\mathsf M_0>\\mathsf M_1+\\mathsf M_2$, and its two positive-shell daughters\nsum to $P_0$. Their coefficient map is the one in\n[[lem-qft-example-two-body-phase-space]]. If a rate $\\Gamma$ is reported as\nan energy width, the convention is explicitly $\\Gamma_E:=\\hbar\\Gamma$; it\ndoes not supply a survival law.\n\nThe readings above do not identify a formal coefficient with an exact\ncontinuum cross section, probability, decay rate, or measured estimate. In\nparticular they do not construct an interacting continuum $S$-matrix or LSZ\nlimit, establish convergence of a perturbation series, bound loop or\nsoft-radiation effects, specify beam or detector cuts, resolve threshold\nresummation, or reproduce the statistical analysis of an experiment. A\ncomparison with observations would require the actual apparatus, sampling,\ncalibration, uncertainty, and radiative-inclusiveness conditions. The\nreported electron magnetic-moment measurements, including the Fan et al.\nreport listed in the source references, remain source-reported\nempirical results and are not premises of this adoption.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Setting $\\beta_e=\\beta_\\mu=1$ in [F1] gives $$ \\frac{d\\sigma_{\\rm coeff}}{d\\Omega} =\\frac{\\alpha^2(\\hbar c)^2}{4s}(1+\\cos^2\\theta). $$ Thus its values at $0$ and $\\pi/2$ are respectively $\\alpha^2(\\hbar c)^2/(2s)$ and $\\alpha^2(\\hbar c)^2/(4s)$, and their ratio is $2$. The numerator has unit $\\mathrm{J}^2\\mathrm{m}^2$ and $s$ has unit $\\mathrm{J}^2$, so each coefficient has area unit $\\mathrm{m}^2$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Integrating the same density uses $\\int_{S^2}d\\Omega=4\\pi$ and $\\int_{S^2}\\cos^2\\theta\\,d\\Omega=4\\pi/3$, so $$ \\sigma_{\\rm coeff} =\\frac{\\alpha^2(\\hbar c)^2}{4s}\\left(4\\pi+\\frac{4\\pi}{3}\\right) =\\frac{4\\pi\\alpha^2(\\hbar c)^2}{3s}. $$ The adopted reading [A1] introduces no count or measurement record.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "Two-angle ratio",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ],
+          "expected": "The theta=0 coefficient is twice the theta=pi/2 coefficient."
+        },
+        {
+          "name": "Angular integral",
+          "inputs": [
+            "step 2.1"
+          ],
+          "expected": "The total is 4 pi alpha^2(hbar c)^2/(3s), with m^2 unit."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "pthm-qft-example-formal-scattering-decay",
+          "carrier": "items/pthm-qft-example-formal-scattering-decay.md",
+          "status": "Current assigned A-page theorem; readiness escalated for missing QFT-G02 and the transitive Dirac-projection chain.",
+          "source_section": "Statement",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$ [[def-countable-choice]]. Use the geometric\nmetric $\\eta=(-,+,+,+)$ and the distinct algebraic contraction\n$h=-\\eta=(+,-,-,-)$ of [[def-qft-example-data]]. Let $m,M\\geq0$ be the\nelectron and muon rest energies in joules. Let $p_1,p_2$ be future electron\nand positron energy four-vectors with rest energy $m$, and $k_1,k_2$ future\nmuon and antimuon energy four-vectors with rest energy $M$, satisfying\n$p_1+p_2=k_1+k_2=P$ and\n$$ s=h(P,P)>4\\max(m^2,M^2). $$\nWrite $g=\\sqrt{4\\pi\\alpha}>0$, as in\n[[def-qft-example-data]], and\n$$ \\beta_e=\\sqrt{1-\\frac{4m^2}{s}},\\qquad \\beta_\\mu=\\sqrt{1-\\frac{4M^2}{s}}. $$\nFor the selected formal one-photon tree coefficient, take equal incoherent\nweight $1/4$ for the four initial spin-label pairs and sum over final spin\nlabels. Take the selected muon model charge to be $-e$ as well. Up to an\nirrelevant common phase, its amplitude is\n$$ \\mathcal M_{\\rm tree}=\\frac{g^2}{s} [\\bar v(p_2)\\gamma^a u(p_1)] [\\bar u(k_1)\\gamma_a v(k_2)], $$\nwhere the brackets denote the product of the two currents. This selected\nformal amplitude adopts the current draft QFT-G02 line/vertex convention;\nit is not an exact amplitude of a constructed continuum theory.\n\nConditional on this amplitude adoption and\n[[post-qft-example-formal-observable-map]], the spin-averaged squared\ncoefficient is\n$$ \\overline{|\\mathcal M_{\\rm tree}|^2} =g^4[3-\\beta_e^2-\\beta_\\mu^2 +\\beta_e^2\\beta_\\mu^2\\cos^2\\theta], $$\nwhere $\\theta$ is the center-of-momentum angle between $\\mathbf p_1$ and\n$\\mathbf k_1$. The distinguishable-particle differential and total\ncross-section coefficients are\n$$ \\frac{d\\sigma_{\\rm coeff}}{d\\Omega} =\\frac{\\alpha^2(\\hbar c)^2\\beta_\\mu}{4s\\beta_e} [3-\\beta_e^2-\\beta_\\mu^2+\\beta_e^2\\beta_\\mu^2\\cos^2\\theta], $$\n$$ \\sigma_{\\rm coeff} =\\frac{\\pi\\alpha^2(\\hbar c)^2}{s}\\frac{\\beta_\\mu}{\\beta_e} [3-\\beta_e^2-\\beta_\\mu^2+\\tfrac13\\beta_e^2\\beta_\\mu^2]. $$\nFor $\\delta=4m^2/s\\leq1/2$, the ratio of this differential coefficient to\nthe coefficient at $m=0$ with the same $M,s,\\theta$ belongs to\n$[1,1+4\\delta]$. This bound is only the incoming-electron-mass effect\nwithin the selected tree coefficient.\n\nThe on-shell equations also give\n$$ P_a\\bar v(p_2)\\gamma^a u(p_1)=0,\\qquad P_a\\bar u(k_1)\\gamma^a v(k_2)=0. $$\nThese are the two current contractions for this finite external-spinor\ncalculation; they do not assert an all-orders or loop Ward theorem.\n\nFor the separate scalar conventions of\n[[post-qft-example-formal-observable-map]], let $m_s\\geq0$ be a scalar rest\nenergy, $s>4m_s^2$, and let $\\lambda\\in\\mathbb R$ be the constant quartic\namplitude parameter. The identical-final full-sphere and distinguishable\ntotal coefficients are respectively\n$$ \\sigma_{\\rm coeff}^{\\rm identical} =\\frac{\\lambda^2(\\hbar c)^2}{32\\pi s},\\qquad \\sigma_{\\rm coeff}^{\\rm distinguishable} =\\frac{\\lambda^2(\\hbar c)^2}{16\\pi s}. $$\nFor a parent at rest of energy $\\mathsf M_0>2m_s$ and a constant identical\ndaughter amplitude $G_E$ in joules, the rate coefficient is\n$$ \\Gamma_{\\rm coeff} =\\frac{|G_E|^2}{32\\pi\\hbar\\mathsf M_0} \\sqrt{1-\\frac{4m_s^2}{\\mathsf M_0^2}}\\quad[\\mathrm{s}^{-1}]. $$\nIf an energy width is named, its convention is $\\Gamma_E:=\\hbar\\Gamma_{\\rm\ncoeff}$ in joules. None of these coefficient statements implies an exact\nsurvival law. The QFT-G02 postulate is a current draft carrier; its use here\nretains draft status and does not imply independent acceptance.",
+          "relevant_hypotheses_and_conventions": "Set m=M=0 and s>0.",
+          "supplier_proof_status": "Draft theorem with complete local proof; upstream blockers are explicit.",
+          "consumer_use": "F1 is used in step 1.1, step 2.1"
+        },
+        {
+          "supplier": "post-qft-example-formal-observable-map",
+          "carrier": "items/post-qft-example-formal-observable-map.md",
+          "status": "Current assigned A-page postulate, conditional on missing QFT-G02.",
+          "source_section": "Postulate",
+          "exact_statement": "For a specifically named finite tree calculation, adopt its selected formal\ndiagram coefficient as a **leading perturbative coefficient** with a stated\nphenomenological reading. For QED, use the vertex and free-line conventions\nof the current draft supplier\n[[post-qft-formal-qed-coefficients]]. A particle of natural charge $q_n$ has\nvertex $iq_n\\gamma^a$; the electron has $q_n=-e_n$ and vertex\n$-ie_n\\gamma^a$. The rational fermion line is\n$$ i\\frac{\\not p+\\mu}{h(p,p)-\\mu^2}, $$\nfor $\\mu>0$ and off-shell $p$ with $h(p,p)-\\mu^2\\ne0$. In Feynman gauge\nthe auxiliary photon line is\n$$ -i\\frac{h_{ab}}{h(k,k)+i0}=i\\frac{\\eta_{ab}}{h(k,k)+i0}. $$\nFor a finite matrix kernel the coefficientwise inverse in\n[[post-qft-formal-qed-coefficients]] is part of the formal convention and\nasserts no convergence. If a time-ordered distribution is used, use the\nactual free carrier specified there; that identification is conditional on\n[[def-countable-choice]]. The displayed pole notation does not define loop\nproducts. In the pair-production channel below the selected muon also has\nmodel charge $-e$, and only the photon line is internal.\n\nFor declared incoming spin probabilities, sum over declared final spin\nlabels, and a specified formal amplitude $\\mathcal A$, adopt the\ncross-section coefficient map of\n[[lem-qft-example-two-body-phase-space]]. In the center-of-momentum frame it\nuses the invariant incoming flux $F$, the two-body measure $d\\Phi_2$, and the\nfinal-state factor $S_f=2$ for identical particles or $S_f=1$ for\ndistinguishable particles, integrated over the full labeled sphere. When\nthis coefficient is read phenomenologically, the initial preparation,\nchannel, threshold, and approximation are part of the model statement. No\nuniversal error estimate for omitted terms is implied.\n\nFor the scalar examples, separately adopt the constant formal amplitudes\n$\\mathcal A=-\\lambda$ for the quartic contact channel and $\\mathcal G=G_E$\nfor the cubic parent decay, with the units and external normalization stated\nat each use. Their coefficient map is the one in\n[[lem-qft-example-two-body-phase-space]]. If a rate $\\Gamma$ is reported as\nan energy width, the convention is explicitly $\\Gamma_E:=\\hbar\\Gamma$; it\ndoes not supply a survival law.\n\nThe readings above do not identify a formal coefficient with an exact\ncontinuum cross section, probability, decay rate, or measured estimate. In\nparticular they do not construct an interacting continuum $S$-matrix or LSZ\nlimit, establish convergence of a perturbation series, bound loop or\nsoft-radiation effects, specify beam or detector cuts, resolve threshold\nresummation, or reproduce the statistical analysis of an experiment. A\ncomparison with observations would require the actual apparatus, sampling,\ncalibration, uncertainty, and radiative-inclusiveness conditions. The\nreported electron magnetic-moment measurements, including the Fan et al.\nreport listed in the source references, remain source-reported\nempirical results and are not premises of this adoption.",
+          "relevant_hypotheses_and_conventions": "No exact continuum or empirical identification.",
+          "supplier_proof_status": "Physical postulate; no Proof section.",
+          "consumer_use": "A1 is used in step 2.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A nonempty two-particle channel with s>0 is fixed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; step 1.1 substitutes m=M=0 and the coefficient stays finite for s>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton channel or probability law is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; step 1.1 gives positive comparison coefficients under alpha>0 and s>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; step 1.1 evaluates the polynomial at theta=0 and pi/2, with s=0 excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only explicit angular algebra and sphere integration are used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Massless formal annihilation angular contrast: Use the massless $m=M=0$ case of the formal tree theorem [[pthm-qft-example-formal-scattering-decay]] with $s>0$. The differential coefficient at $\\theta=0$ is twice its value at $\\theta=\\pi/2$; integrating over the full sphere gives $$ \\sigma_{\\rm coeff}=\\frac{4\\pi\\alpha^2(\\hbar c)^2}{3s}. $$ All three quantities are formal coefficients in the adopted map, not event counts or exact measured cross sections. The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Massless formal annihilation angular contrast: Use the massless $m=M=0$ case of the formal tree theorem [[pthm-qft-example-formal-scattering-decay]] with $s>0$. The differential coefficient at $\\theta=0$ is twice its value at $\\theta=\\pi/2$; integrating over the full sphere gives $$ \\sigma_{\\rm coeff}=\\frac{4\\pi\\alpha^2(\\hbar c)^2}{3s}. $$ All three quantities are formal coefficients in the adopted map, not event counts or exact measured cross sections. The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ]
+    },
+    "ex-qft-x05": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-qft-example-scalar-tree-coefficients",
+          "source_section": "Statement",
+          "quote": "Let $m\\geq0$ be a scalar rest energy in joules, and let $p_1,p_2,k_1,k_2$ be the incoming and outgoing scattering vectors on the positive $m$-shell of [[def-qft-example-two-body-phase-space-data]], so each $(E,\\mathbf q)$ satisfies $E=\\sqrt{|\\mathbf q|^2+m^2}>0$. Require $p_1+p_2=k_1+k_2=P$ and $s=h(P,P)>4m^2$, with $h$ as in [[def-qft-example-data]]. Evaluate the coefficient map in a center-of-momentum frame $\\Lambda P=(\\sqrt{s},\\mathbf0)$ as defined in [[lem-qft-example-two-body-phase-space]]. For one scalar initial label of weight $1$ and one specified final channel, take the dimensionless real quartic tree amplitude $\\mathcal A=-\\lambda$. The coefficient map of [[lem-qft-example-two-body-phase-space]] gives\n$$\\frac{d\\sigma_{\\mathrm{coeff}}}{d\\Omega} =\\frac{\\lambda^2(\\hbar c)^2}{128\\pi^2s}, \\qquad \\sigma_{\\mathrm{coeff}}=\\frac{\\lambda^2(\\hbar c)^2}{32\\pi s}$$\nfor identical final scalars integrated over the full labeled sphere. For distinguishable final scalars the two coefficients are twice these values.\n\nFor a parent at rest, $P_0=(\\mathsf M_0,\\mathbf0)$ with energy $\\mathsf M_0>2m$, decaying through a specified single channel to two identical scalars on the positive $m$-shell whose total four-vector is $P_0$, under a constant amplitude $G_E$ in joules, the rate coefficient is\n$$\\Gamma_{\\mathrm{coeff}} =\\frac{|G_E|^2}{32\\pi\\hbar\\mathsf M_0} \\sqrt{1-\\frac{4m^2}{\\mathsf M_0^2}}.$$\nThis result concerns the defined formal coefficients. It does not assert an exact exponential survival law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-example-data",
+          "source_section": "Definition",
+          "quote": "These are conventions for constructed and formal calculations in this page pair. They are not empirical claims, physical postulates, or existence claims about an interacting continuum theory.\n\nUse the geometric spacetime metric $\\eta=\\operatorname{diag}(-1,1,1,1)$ and the time coordinate $x^0=ct$ in metres. For Clifford algebra and momentum contraction use the separate algebraic metric $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$; a slash or a square of an energy four-vector uses $h$, never $\\eta$.\n\nA physical energy four-vector is $p=(E,c\\mathbf p_{\\rm phys})$, with each component in joules. Write $M=mc^2$ for rest energy in joules and $p^2=h(p,p)=E^2-c^2|\\mathbf p_{\\rm phys}|^2$. For two such vectors, $s=(p_1+p_2)^2$ is in $\\mathrm J^2$. Natural momentum coordinates are the energy-vector components divided by $\\hbar c$, in $\\mathrm m^{-1}$; they are not substituted into SI formulas without restoring this factor. In the common natural-unit field convention, $\\mu=mc/\\hbar$ is in $\\mathrm m^{-1}$, a scalar field has dimension $\\mathrm m^{-1}$, and a Dirac field has dimension $\\mathrm m^{-3/2}$.\n\nTake SI $e>0$ in coulombs, $\\hbar>0$ in joule-seconds, $c>0$ in metres per second, and $\\epsilon_0=(\\mu_0c^2)^{-1}$. Define\n$$\\alpha=\\frac{e^2}{4\\pi\\epsilon_0\\hbar c},\\qquad g=e\\sqrt{\\frac{\\mu_0c}{\\hbar}}=\\sqrt{4\\pi\\alpha}>0.$$\nHere $g$ is a dimensionless coupling. It is not the metric and not a gyromagnetic factor.\n\nFor gauge notation set $A_{\\rm lower}=(-\\phi/c,\\mathbf A)$, with $A_a$ in tesla-metres and gauge function $\\chi$ in webers. With charge $q$ in coulombs define\n$$D_a=\\partial_a-\\frac{iqA_a}{\\hbar},\\qquad \\psi\\mapsto e^{iq\\chi/\\hbar}\\psi,\\qquad A\\mapsto A+d\\chi.$$\nFor the electron parameter use $q=-e$. The equivalent natural-unit coordinates are $A_{\\rm nat}=A_{\\rm SI}/\\sqrt{\\mu_0\\hbar c}$ and $q_{\\rm nat}=q_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}$.\n\nFinite-matrix examples act on $\\mathbb C^d$ with the operator norm. For Hilbert spaces, use the first-variable-linear pairing $(u,v)_1=v^\\dagger u$; a displayed coordinate contraction $u^\\dagger v$ is second-variable-linear and equals $\\overline{(u,v)_1}$. Thus norms, traces, and modulus-squared amplitudes agree under conversion, although the unsquared pairing is conjugated. No amplitude is assigned a probability by these conventions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-qft-example-formal-observable-map",
+          "source_section": "Postulate",
+          "quote": "For a specifically named finite tree calculation, adopt its selected formal\ndiagram coefficient as a **leading perturbative coefficient** with a stated\nphenomenological reading. For QED, use the vertex and free-line conventions\nof the current draft supplier\n[[post-qft-formal-qed-coefficients]]. A particle of natural charge $q_n$ has\nvertex $iq_n\\gamma^a$; the electron has $q_n=-e_n$ and vertex\n$-ie_n\\gamma^a$. The rational fermion line is\n$$ i\\frac{\\not p+\\mu}{h(p,p)-\\mu^2}, $$\nfor $\\mu>0$ and off-shell $p$ with $h(p,p)-\\mu^2\\ne0$. In Feynman gauge\nthe auxiliary photon line is\n$$ -i\\frac{h_{ab}}{h(k,k)+i0}=i\\frac{\\eta_{ab}}{h(k,k)+i0}. $$\nFor a finite matrix kernel the coefficientwise inverse in\n[[post-qft-formal-qed-coefficients]] is part of the formal convention and\nasserts no convergence. If a time-ordered distribution is used, use the\nactual free carrier specified there; that identification is conditional on\n[[def-countable-choice]]. The displayed pole notation does not define loop\nproducts. In the pair-production channel below the selected muon also has\nmodel charge $-e$, and only the photon line is internal.\n\nFor declared incoming spin probabilities, sum over declared final spin\nlabels, and a specified formal amplitude $\\mathcal A$, adopt the\ncross-section coefficient map of\n[[lem-qft-example-two-body-phase-space]]. Its scattering inputs are\npositive-shell energy vectors $p_i=(E_i,\\mathbf p_i)$ with\n$E_i=\\sqrt{|\\mathbf p_i|^2+\\mathsf M_{i,\\rm in}^2}>0$,\n$\\mathsf M_{i,\\rm in}\\ge0$, and common future-timelike total\n$P=p_1+p_2=k_1+k_2$. The outgoing $k_j$ are on their specified positive\nshells. Require $s=h(P,P)>(\\mathsf M_1+\\mathsf M_2)^2$ for the outgoing\nrest energies and positive incoming flux $F>0$, precisely the supplier's\nadmissible scattering domain. In the center-of-momentum frame it\nuses the invariant incoming flux $F$, the two-body measure $d\\Phi_2$, and the\nfinal-state factor $S_f=2$ for identical particles or $S_f=1$ for\ndistinguishable particles, integrated over the full labeled sphere. When\nthis coefficient is read phenomenologically, the initial preparation,\nchannel, threshold, and approximation are part of the model statement. No\nuniversal error estimate for omitted terms is implied.\n\nFor the scalar examples, separately adopt the constant formal amplitudes\n$\\mathcal A=-\\lambda$ for the quartic contact channel and $\\mathcal G=G_E$\nfor the cubic parent decay, with the units and external normalization stated\nat each use. The scalar scattering inputs lie on their stated positive\nshells with a common total and the same strict threshold and positive-flux\nconditions. For decay, the parent is $P_0=(\\mathsf M_0,\\mathbf0)$,\n$\\mathsf M_0>\\mathsf M_1+\\mathsf M_2$, and its two positive-shell daughters\nsum to $P_0$. Their coefficient map is the one in\n[[lem-qft-example-two-body-phase-space]]. If a rate $\\Gamma$ is reported as\nan energy width, the convention is explicitly $\\Gamma_E:=\\hbar\\Gamma$; it\ndoes not supply a survival law.\n\nThe readings above do not identify a formal coefficient with an exact\ncontinuum cross section, probability, decay rate, or measured estimate. In\nparticular they do not construct an interacting continuum $S$-matrix or LSZ\nlimit, establish convergence of a perturbation series, bound loop or\nsoft-radiation effects, specify beam or detector cuts, resolve threshold\nresummation, or reproduce the statistical analysis of an experiment. A\ncomparison with observations would require the actual apparatus, sampling,\ncalibration, uncertainty, and radiative-inclusiveness conditions. The\nreported electron magnetic-moment measurements, including the Fan et al.\nreport listed in the source references, remain source-reported\nempirical results and are not premises of this adoption.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Set the daughter rest energy to zero in [F1]. The square-root threshold factor becomes $1$, so the identical total coefficient is $\\lambda^2(\\hbar c)^2/(32\\pi s)$ and the distinguishable total is twice that. The cross-section unit is $(\\mathrm{J\\,m})^2/\\mathrm{J}^2=\\mathrm{m}^2$. For the same massless daughter specialization, [F1] gives $$ \\Gamma_{\\rm coeff}=\\frac{|G_E|^2}{32\\pi\\hbar\\mathsf M_0}. $$ Its unit is $\\mathrm J^2/(\\mathrm{J\\,s\\,J})=\\mathrm{s}^{-1}$, so it is a rate coefficient. Since $G_E\\ne0$, $\\hbar>0$, and $\\mathsf M_0>0$, this coefficient is strictly positive.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Under [A2], $\\mu_T$ has density $f_T(t)=\\Gamma e^{-\\Gamma t}$ on $[0,\\infty)$. Its total mass is $\\int_0^\\infty\\Gamma e^{-\\Gamma t}\\,dt=1$, and the mean is $$\\mathbb E[T]=\\int_0^\\infty t\\Gamma e^{-\\Gamma t}\\,dt=\\left[-t e^{-\\Gamma t}\\right]_0^\\infty+\\int_0^\\infty e^{-\\Gamma t}\\,dt=\\frac1\\Gamma,$$ by integration by parts; $t e^{-\\Gamma t}\\to0$ since $\\Gamma>0$. The survival function is continuous and strictly decreasing from $1$ to $0$, so the defining equation for $t_{1/2}$ has a unique solution; solving $e^{-\\Gamma t_{1/2}}=1/2$ gives $t_{1/2}=\\ln2/\\Gamma$. These formulas use [A2], not the formal rate coefficient alone; no experiment or detector record is specified.",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "Half-life equation",
+          "inputs": [
+            "A2",
+            "step 2.1"
+          ],
+          "expected": "Substitution of ln(2)/Gamma into exp(-Gamma t) gives 1/2."
+        },
+        {
+          "name": "Massless rate units",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ],
+          "expected": "|G_E|^2/(32 pi hbar M0) has unit s^-1."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "cor-qft-example-scalar-tree-coefficients",
+          "carrier": "items/cor-qft-example-scalar-tree-coefficients.md",
+          "status": "Current QFT-MX02 draft corollary and full proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Let $m\\geq0$ be a scalar rest energy in joules and $s>4m^2$. For a specified dimensionless real quartic tree amplitude $\\mathcal A=-\\lambda$, the coefficient map of [[lem-qft-example-two-body-phase-space]] gives\n$$\\frac{d\\sigma_{\\mathrm{coeff}}}{d\\Omega} =\\frac{\\lambda^2(\\hbar c)^2}{128\\pi^2s}, \\qquad \\sigma_{\\mathrm{coeff}}=\\frac{\\lambda^2(\\hbar c)^2}{32\\pi s}$$\nfor identical final scalars integrated over the full labeled sphere. For distinguishable final scalars the two coefficients are twice these values.\n\nFor a parent at rest with energy $\\mathsf M_0>2m$ decaying to two identical scalars of rest energy $m$ under a specified constant amplitude $G_E$ in joules, the rate coefficient is\n$$\\Gamma_{\\mathrm{coeff}} =\\frac{|G_E|^2}{32\\pi\\hbar\\mathsf M_0} \\sqrt{1-\\frac{4m^2}{\\mathsf M_0^2}}.$$\nThis result concerns the defined formal coefficients. It does not assert an exact exponential survival law.",
+          "relevant_hypotheses_and_conventions": "Strict threshold and S_f=2 for identical final particles.",
+          "supplier_proof_status": "Draft corollary with complete proof; independent review pending.",
+          "consumer_use": "F1 is used in step 1.1"
+        },
+        {
+          "supplier": "pthm-qft-example-formal-scattering-decay",
+          "carrier": "items/pthm-qft-example-formal-scattering-decay.md",
+          "status": "Current assigned A-page theorem; its QED branch is escalated for missing G02, while scalar result is also supported directly by the current corollary.",
+          "source_section": "Statement",
+          "exact_statement": "For massless identical daughters $\\Gamma_{coeff}=|G_E|^2/(32\\pi\\hbar\\mathsf M_0)$; the scalar scattering coefficient includes S_f=2.",
+          "relevant_hypotheses_and_conventions": "Set m_s=0, s>0 and M0>0.",
+          "supplier_proof_status": "Draft theorem with complete conditional proof.",
+          "consumer_use": "Connects the B example to the A-page scalar coefficient."
+        },
+        {
+          "supplier": "post-qft-example-formal-observable-map",
+          "carrier": "items/post-qft-example-formal-observable-map.md",
+          "status": "Current assigned A-page postulate; QFT-G02 carrier is missing.",
+          "source_section": "Postulate",
+          "exact_statement": "For a specifically named finite tree calculation, adopt its selected formal\ndiagram coefficient as a **leading perturbative coefficient** with a stated\nphenomenological reading. For QED, use the vertex and free-line conventions\nof the current draft supplier\n[[post-qft-formal-qed-coefficients]]. A particle of natural charge $q_n$ has\nvertex $iq_n\\gamma^a$; the electron has $q_n=-e_n$ and vertex\n$-ie_n\\gamma^a$. The rational fermion line is\n$$ i\\frac{\\not p+\\mu}{h(p,p)-\\mu^2}, $$\nfor $\\mu>0$ and off-shell $p$ with $h(p,p)-\\mu^2\\ne0$. In Feynman gauge\nthe auxiliary photon line is\n$$ -i\\frac{h_{ab}}{h(k,k)+i0}=i\\frac{\\eta_{ab}}{h(k,k)+i0}. $$\nFor a finite matrix kernel the coefficientwise inverse in\n[[post-qft-formal-qed-coefficients]] is part of the formal convention and\nasserts no convergence. If a time-ordered distribution is used, use the\nactual free carrier specified there; that identification is conditional on\n[[def-countable-choice]]. The displayed pole notation does not define loop\nproducts. In the pair-production channel below the selected muon also has\nmodel charge $-e$, and only the photon line is internal.\n\nFor declared incoming spin probabilities, sum over declared final spin\nlabels, and a specified formal amplitude $\\mathcal A$, adopt the\ncross-section coefficient map of\n[[lem-qft-example-two-body-phase-space]]. In the center-of-momentum frame it\nuses the invariant incoming flux $F$, the two-body measure $d\\Phi_2$, and the\nfinal-state factor $S_f=2$ for identical particles or $S_f=1$ for\ndistinguishable particles, integrated over the full labeled sphere. When\nthis coefficient is read phenomenologically, the initial preparation,\nchannel, threshold, and approximation are part of the model statement. No\nuniversal error estimate for omitted terms is implied.\n\nFor the scalar examples, separately adopt the constant formal amplitudes\n$\\mathcal A=-\\lambda$ for the quartic contact channel and $\\mathcal G=G_E$\nfor the cubic parent decay, with the units and external normalization stated\nat each use. Their coefficient map is the one in\n[[lem-qft-example-two-body-phase-space]]. If a rate $\\Gamma$ is reported as\nan energy width, the convention is explicitly $\\Gamma_E:=\\hbar\\Gamma$; it\ndoes not supply a survival law.\n\nThe readings above do not identify a formal coefficient with an exact\ncontinuum cross section, probability, decay rate, or measured estimate. In\nparticular they do not construct an interacting continuum $S$-matrix or LSZ\nlimit, establish convergence of a perturbation series, bound loop or\nsoft-radiation effects, specify beam or detector cuts, resolve threshold\nresummation, or reproduce the statistical analysis of an experiment. A\ncomparison with observations would require the actual apparatus, sampling,\ncalibration, uncertainty, and radiative-inclusiveness conditions. The\nreported electron magnetic-moment measurements, including the Fan et al.\nreport listed in the source references, remain source-reported\nempirical results and are not premises of this adoption.",
+          "relevant_hypotheses_and_conventions": "The exponential assumption is added separately in B item A2.",
+          "supplier_proof_status": "Physical postulate; no Proof section.",
+          "consumer_use": "A1 is used in step 2.1"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes s>0 and parent energy M0>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement; step 1.1 allows lambda=0, while the stated G_E nonzero condition keeps the separate exponential rate positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-channel probability law is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; step 1.1 specializes to massless daughters, which is above the strict parent threshold M0>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; steps 1.1 and 2.1 include the massless-daughter limit and use Gamma>0 for convergence of the lifetime integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only scalar substitution and elementary integration are used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Scalar symmetry factor and conditional lifetime model: Let $s>0$, $\\lambda\\in\\mathbb R$, parent energy $\\mathsf M_0>0$, and $G_E\\ne0$ in joules. With massless equal scalar daughters, the identical final-state quartic total coefficient is $$ \\sigma_{\\rm coeff}^{\\rm identical} =\\frac{\\lambda^2(\\hbar c)^2}{32\\pi s}, $$ and the distinguishable-final coefficient is twice this value. The identical-daughter decay-rate coefficient is $$ \\Gamma_{\\rm coeff}=\\frac{|G_E|^2}{32\\pi\\hbar\\mathsf M_0} \\quad[\\mathrm{s}^{-1}]. $$ If, as a separate assumption, survival is exponential with rate $\\Gamma=\\Gamma_{\\rm coeff}$, then the mean lifetime is $1/\\Gamma$ and the half-life is $\\ln 2/\\Gamma$. The exponential law is not a consequence of the formal coefficient calculation. The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Scalar symmetry factor and conditional lifetime model: Let $s>0$, $\\lambda\\in\\mathbb R$, parent energy $\\mathsf M_0>0$, and $G_E\\ne0$ in joules. With massless equal scalar daughters, the identical final-state quartic total coefficient is $$ \\sigma_{\\rm coeff}^{\\rm identical} =\\frac{\\lambda^2(\\hbar c)^2}{32\\pi s}, $$ and the distinguishable-final coefficient is twice this value. The identical-daughter decay-rate coefficient is $$ \\Gamma_{\\rm coeff}=\\frac{|G_E|^2}{32\\pi\\hbar\\mathsf M_0} \\quad[\\mathrm{s}^{-1}]. $$ If, as a separate assumption, survival is exponential with rate $\\Gamma=\\Gamma_{\\rm coeff}$, then the mean lifetime is $1/\\Gamma$ and the half-life is $\\ln 2/\\Gamma$. The exponential law is not a consequence of the formal coefficient calculation. The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ]
+    },
+    "ex-qft-x09": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-qft-example-dirac-magnetic-benchmark",
+          "source_section": "Statement",
+          "quote": "Assume the adopted local Maxwell–Dirac action of\n[[post-qft-qed-local-coupling]] with electron charge $q=-e$, $e>0$, and\nrest mass $m>0$. Specialize its supplied smooth potential to a static pure\nmagnetic field on Minkowski space, with $\\phi=0$ and\n$\\mathbf A\\in C^\\infty(\\mathbb R^3;\\mathbb R^3)$ in SI units\n$\\mathrm{T\\,m}$. Define $\\mathbf B=\\nabla\\times\\mathbf A$ in tesla,\n$$ \\pi_i=-i\\hbar\\partial_i-qA_i,\\qquad H_D=c\\sum_{i=1}^3\\alpha_i\\pi_i+\\beta mc^2, $$\non the common invariant core\n$\\mathcal D=C_c^\\infty(\\mathbb R^3;\\mathbb C^4)$. Use the Dirac matrices\nand adjoint of [[def-qft-dirac-projections]] and\n$$ \\Sigma_i=\\operatorname{diag}(\\sigma_i,\\sigma_i),\\qquad S_i=\\frac{\\hbar}{2}\\Sigma_i. $$\nThe compactly supported spinor-variation Euler–Lagrange equation of the\nadopted action, after conversion to SI units, is\n$$ i\\hbar\\partial_t\\psi=H_D\\psi $$\nfor this pure magnetic specialization. On $\\mathcal D$ its square is\n$$ H_D^2=m^2c^4I_4+c^2(\\boldsymbol\\pi^2-q\\hbar\\boldsymbol\\Sigma\\cdot\\mathbf B). $$\nWriting the formal first-order square-root coefficient as\n$mc^2+K/(2m)$, where\n$K=\\boldsymbol\\pi^2-q\\hbar\\boldsymbol\\Sigma\\cdot\\mathbf B$, the spin\nterm is $-(q/m)\\mathbf S\\cdot\\mathbf B$. Under the explicitly chosen\nmagnetic-energy convention\n$$ H_{\\rm mag}=-\\boldsymbol\\mu_{\\rm mag}\\cdot\\mathbf B,\\qquad \\boldsymbol\\mu_{\\rm mag}=g_s\\frac{q}{2m}\\mathbf S, $$\ncoefficient comparison gives $g_s=2$ for this minimal tree coefficient.\nThe equation is an Euler–Lagrange conclusion, not a claim that every field\nis a stationary solution. The square and coefficient are formal on the\nstated core; no magnetic self-adjoint closure, full spectrum, radiative\ncorrection, or empirical measurement is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-example-data",
+          "source_section": "Definition",
+          "quote": "These are conventions for constructed and formal calculations in this page pair. They are not empirical claims, physical postulates, or existence claims about an interacting continuum theory.\n\nUse the geometric spacetime metric $\\eta=\\operatorname{diag}(-1,1,1,1)$ and the time coordinate $x^0=ct$ in metres. For Clifford algebra and momentum contraction use the separate algebraic metric $h=-\\eta=\\operatorname{diag}(1,-1,-1,-1)$; a slash or a square of an energy four-vector uses $h$, never $\\eta$.\n\nA physical energy four-vector is $p=(E,c\\mathbf p_{\\rm phys})$, with each component in joules. Write $M=mc^2$ for rest energy in joules and $p^2=h(p,p)=E^2-c^2|\\mathbf p_{\\rm phys}|^2$. For two such vectors, $s=(p_1+p_2)^2$ is in $\\mathrm J^2$. Natural momentum coordinates are the energy-vector components divided by $\\hbar c$, in $\\mathrm m^{-1}$; they are not substituted into SI formulas without restoring this factor. In the common natural-unit field convention, $\\mu=mc/\\hbar$ is in $\\mathrm m^{-1}$, a scalar field has dimension $\\mathrm m^{-1}$, and a Dirac field has dimension $\\mathrm m^{-3/2}$.\n\nTake SI $e>0$ in coulombs, $\\hbar>0$ in joule-seconds, $c>0$ in metres per second, and $\\epsilon_0=(\\mu_0c^2)^{-1}$. Define\n$$\\alpha=\\frac{e^2}{4\\pi\\epsilon_0\\hbar c},\\qquad g=e\\sqrt{\\frac{\\mu_0c}{\\hbar}}=\\sqrt{4\\pi\\alpha}>0.$$\nHere $g$ is a dimensionless coupling. It is not the metric and not a gyromagnetic factor.\n\nFor gauge notation set $A_{\\rm lower}=(-\\phi/c,\\mathbf A)$, with $A_a$ in tesla-metres and gauge function $\\chi$ in webers. With charge $q$ in coulombs define\n$$D_a=\\partial_a-\\frac{iqA_a}{\\hbar},\\qquad \\psi\\mapsto e^{iq\\chi/\\hbar}\\psi,\\qquad A\\mapsto A+d\\chi.$$\nFor the electron parameter use $q=-e$. The equivalent natural-unit coordinates are $A_{\\rm nat}=A_{\\rm SI}/\\sqrt{\\mu_0\\hbar c}$ and $q_{\\rm nat}=q_{\\rm SI}\\sqrt{\\mu_0c/\\hbar}$.\n\nFinite-matrix examples act on $\\mathbb C^d$ with the operator norm. For Hilbert spaces, use the first-variable-linear pairing $(u,v)_1=v^\\dagger u$; a displayed coordinate contraction $u^\\dagger v$ is second-variable-linear and equals $\\overline{(u,v)_1}$. Thus norms, traces, and modulus-squared amplitudes agree under conversion, although the unsquared pairing is conjugated. No amplitude is assigned a probability by these conventions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-example-observable-types",
+          "source_section": "Definition",
+          "quote": "Use the framework-local unit and domain dictionary of\n[[def-qft-framework-units]] and the energy, SI/natural-unit, and finite-matrix\nconventions of [[def-qft-example-data]]. A physical quantity is always typed\nrelative to the selected QFT formulation and its declared model data; its name\nor units alone do not identify it with a quantity in another formulation.\n\nFor the **exact finite-regulator class** used on this page, the state space is\nthe finite-dimensional Hilbert space $\\mathcal H=\\mathbb C^d$ for an integer\n$d\\ge1$. Model inputs include the selected Hermitian Hamiltonian matrices,\ntheir time-dependent Hermitian interaction when present, a dimensionless\ncoupling parameter, an initial state, and an explicitly supplied finite\noutcome measurement. A pure initial state is a vector $\\psi\\in\\mathbb C^d$\nwith $\\|\\psi\\|=1$; a mixed state is a matrix $\\rho=\\rho^*$ with\n$\\langle\\rho v,v\\rangle\\ge0$ for every $v$ and $\\operatorname{tr}\\rho=1$.\nAn exact regulated observable on this finite space is a specified Hermitian\nmatrix $O=O^*$ with a declared physical unit. The matrix and state are model\ndata; the measurement procedure and any physical rule assigning outcomes are\nadditional data. This definition does not say that an operator symbol by\nitself is a detector outcome or probability.\n\nA **finite probability law** on the declared outcome set\n$\\{1,\\ldots,m\\}$, $m\\ge1$, is a vector $(p_1,\\ldots,p_m)$ with\n$p_a\\ge0$ and $\\sum_{a=1}^m p_a=1$. It is a mathematical type. Assigning that\nlaw to a particular preparation and measurement is a separate physical\npostulate. A prediction derived from an actually constructed regulated model\nis conditional on those inputs and the adopted rule.\n\nA **formal coefficient record** is a sequence $(c_n)_{n\\in\\mathbb N}$ of\nspecified coefficients, sometimes displayed as the symbol\n$\\sum_{n\\ge0}c_n\\lambda^n$. Unless convergence and an evaluation map are\nseparately proved and adopted, the symbol records coefficients only: it is not\nan evaluated function, exact probability, convergent perturbation series, or\nerror bound. A formal coefficient can be assigned a phenomenological meaning\nonly by a separate, model-specific physical adoption with its approximation\nscope stated.\n\nAn **empirical estimate** is a source-reported number obtained by analyzing a\nfinite record of measurement outcomes under the stated preparation, apparatus,\ncalibration, sampling, and analysis conditions. Its reported uncertainty and\nconditions travel with the estimate. It is not the exact model value, and it\ndoes not prove the framework used to interpret it. The 2022 Fan et al. report\nis an example of a source-reported electron magnetic-moment determination;\nthis definition supplies no numerical result, uncertainty reconstruction, or\nnew experimental claim.\n\nPrimitive and derived status is formulation-relative. In a selected regulated\nmodel, the regulator, Hamiltonian data, coupling, initial state, and supplied\nmeasurement are declared inputs; an evolution, amplitude, or probability law\nis derived only when the construction and adopted rule establish it. In a\nformal calculation, the specified masses, couplings, coefficient rules, and\nsubtraction prescription are inputs, while its listed coefficients are\nderived within that formal calculation. An empirical estimate is a reported\ndata-analysis result, not a primitive model parameter or a theorem.\n\nThe following units are examples of types, not identifications of quantities:\na cross section $\\sigma$ is area-valued with SI unit $\\mathrm{m^2}$; a rate\n$\\Gamma$ is inverse-time-valued with unit $\\mathrm{s^{-1}}$; an energy width\n$\\Gamma_E$ has unit joule. Only a separately stated convention may identify\n$\\Gamma_E=\\hbar\\Gamma$. The fine-structure parameter $\\alpha$, a dimensionless\ncoupling $g$, and a gyromagnetic factor $g_s$ are dimensionless but have\ndifferent physical meanings. The name “width,” a common symbol, or matching\ndimensions does not supply an exponential-decay law or an equality between\nthese parameters.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D11",
+          "claim": "The explicit potential gives uniform B; the diagonal Pauli matrix gives the two shifts and their gap.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D12",
+          "claim": "The spin-gap energy divided by 2 pi hbar equals the defined cyclic orbital coefficient frequency; units and empirical boundary are stated.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "Uniform-field curl",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ],
+          "expected": "curl[(B0/2)(-y,x,0)]=B0 z-hat."
+        },
+        {
+          "name": "Spin splitting",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ],
+          "expected": "Shifts are plus/minus e hbar B0/(2m); gap e hbar B0/m."
+        },
+        {
+          "name": "Cyclic frequency",
+          "inputs": [
+            "A1",
+            "step 2.1"
+          ],
+          "expected": "nu_s,coeff=e B0/(2 pi m)=nu_c,orb."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "pthm-qft-example-dirac-magnetic-benchmark",
+          "carrier": "items/pthm-qft-example-dirac-magnetic-benchmark.md",
+          "status": "Current assigned A-page theorem; escalated on its transitive Dirac-definition readiness.",
+          "source_section": "Statement",
+          "exact_statement": "The minimal spin term is $-(q/m)\\mathbf S\\cdot\\mathbf B$ on the stated compact-smooth core.",
+          "relevant_hypotheses_and_conventions": "q=-e, m>0, smooth pure magnetic potential and adopted local action.",
+          "supplier_proof_status": "Draft theorem with full conditional proof; no independent approval.",
+          "consumer_use": "Supplies the formal spin coefficient."
+        },
+        {
+          "supplier": "post-qft-qed-local-coupling",
+          "carrier": "items/post-qft-qed-local-coupling.md",
+          "status": "Current batch-52 draft action carrier inspected; its level metadata is stale and its transitive Dirac path is escalated.",
+          "source_section": "Postulate",
+          "exact_statement": "The adopted local classical Maxwell-Dirac model selects q=-e for the electron and supplies no interacting continuum QED construction.",
+          "relevant_hypotheses_and_conventions": "Only the stated smooth pure-magnetic action specialization is used.",
+          "supplier_proof_status": "Physical postulate with no Proof section.",
+          "consumer_use": "Supplies model and charge sign."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "B0>0 and a nonempty four-component spin space are assumed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The identity extends to zero field, but this example explicitly takes B0>0 for a nonzero gap."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Both spin eigenspaces are used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; step 1.1 uses positive e, m, and B0, so the two spin shifts are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; step 1.1 verifies the globally smooth potential and introduces no spectral endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement; step 1.1 uses the explicit diagonal Sigma_z eigenvalues and both spin eigenspaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Minimal Dirac spin and orbital coefficient comparison: Take $q=-e$ with $e>0$, $m>0$, and a constant field $\\mathbf B=B_0\\hat z$ with $B_0>0$. It is realized by the smooth SI potential $$ \\mathbf A(x,y,z)=\\frac{B_0}{2}(-y,x,0),\\qquad \\phi=0, $$ for which $\\nabla\\times\\mathbf A=B_0\\hat z$. By [[pthm-qft-example-dirac-magnetic-benchmark]], the formal spin term is $-(q/m)\\mathbf S\\cdot\\mathbf B=(e/m)S_zB_0$. Since $\\Sigma_z=\\operatorname{diag}(1,-1,1,-1)$, its two spin eigenvalue coefficients are $$ \\Delta E_{\\uparrow,\\downarrow}=\\pm\\frac{e\\hbar B_0}{2m},\\qquad \\Delta E_{\\rm gap}=\\frac{e\\hbar B_0}{m}. $$ Define the comparison orbital coefficient by $\\omega_{c,\\rm orb}:=eB_0/m$ and $\\nu_{c,\\rm orb}:=\\omega_{c,\\rm orb}/(2\\pi)$. The cyclic coefficient frequency of the sp The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Minimal Dirac spin and orbital coefficient comparison: Take $q=-e$ with $e>0$, $m>0$, and a constant field $\\mathbf B=B_0\\hat z$ with $B_0>0$. It is realized by the smooth SI potential $$ \\mathbf A(x,y,z)=\\frac{B_0}{2}(-y,x,0),\\qquad \\phi=0, $$ for which $\\nabla\\times\\mathbf A=B_0\\hat z$. By [[pthm-qft-example-dirac-magnetic-benchmark]], the formal spin term is $-(q/m)\\mathbf S\\cdot\\mathbf B=(e/m)S_zB_0$. Since $\\Sigma_z=\\operatorname{diag}(1,-1,1,-1)$, its two spin eigenvalue coefficients are $$ \\Delta E_{\\uparrow,\\downarrow}=\\pm\\frac{e\\hbar B_0}{2m},\\qquad \\Delta E_{\\rm gap}=\\frac{e\\hbar B_0}{m}. $$ Define the comparison orbital coefficient by $\\omega_{c,\\rm orb}:=eB_0/m$ and $\\nu_{c,\\rm orb}:=\\omega_{c,\\rm orb}/(2\\pi)$. The cyclic coefficient frequency of the sp The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ]
+    }
+  }
+}

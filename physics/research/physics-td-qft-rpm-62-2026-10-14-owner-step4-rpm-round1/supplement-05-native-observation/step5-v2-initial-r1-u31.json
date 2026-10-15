@@ -1,0 +1,70 @@
+{
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "phase": "initial",
+  "round": 1,
+  "unit": "31",
+  "input_sha256": "c7d8a222abea8b2aeaf8ca5059b6b3a3871cdaeeeed41debed66cfc1d833fd32",
+  "decisions": [
+    {
+      "id": "lem-rpm-finite-time-ode-comparison",
+      "model": "gpt-6-luna",
+      "context_sha256": "2daa1e22ffe64afbef1e850405fb80b176cabe0ae67fe23120aa1ced53afe57e",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The cited vector FTC requires a<b. The target bound and integral inequality at t=0 are immediate equalities, but step 1.1 applied FTC to every [0,t]. Repaired by restricting FTC to 0<t<=T and treating t=0 directly using the zero-length integral convention; no claim or constant changes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-rpm-controlled-newtonian-reduction",
+      "model": "gpt-6-luna",
+      "context_sha256": "add1bb422cd1e2ae4b2859272c410b46d9db9afbb9836fc21fb440aef7b86270",
+      "outcome": "false_positive",
+      "reason": "The supplied interfaces explicitly identify the thresholds: thm-gr-weak-field-scaled-trajectory-limit takes epsilon_* from lem-gr-weak-field-christoffel-bounds, whose Statement in turn takes epsilon_* from lem-gr-weak-field-admissibility-and-inverse-bounds. The latter defines it as min{epsilon_0,1,(128C)^(-1)}. Thus L3 has exactly the admissibility range; g00<=-1/2 along the compact segment and continuity give the stated open time-oriented neighborhood without narrowing any hypothesis.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-rpm-low-speed-energy-bound",
+      "model": "gpt-6-luna",
+      "context_sha256": "443bca985a52fdb9f42d2a53cce9ea939f7c22f5440e8f4e088f7cb9bf95159c",
+      "outcome": "false_positive",
+      "reason": "The Example explicitly stipulates gamma=(1-|v|^2/c^2)^(-1/2), E=gamma*m*c^2 and T=E-m*c^2; the only deduction is the purely algebraic low-speed lemma with delta=1/10. It does not infer this energy formula from unspecified motion. No worldline assumption is needed for that conditional calculation. Its physical state reading is also realizable: in the named inertial chart any stipulated vector |v|<=c/10 is the velocity of the smooth curve t -> (ct,x0+t*v) on R, whose tangent (c,v) is future timelike since -c^2+|v|^2<0. No dynamics or empirical premise enters.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-rpm-finite-time-ode-comparison",
+      "disposition": "repaired",
+      "post_sha256": "a71aecd09eb9e547ba7125c51bea4d30bfd2a70fa35b5580af5e78fa24847e93",
+      "review_context_sha256": "4c64613ba24b98e00c74f9122f1a8217e14697c0d5d4997b30852027c3e06349",
+      "reason": "Reviewed the continuous derivative components, forward FTC with a<b, zero-length integral convention, Euclidean integral norm bound and Gronwall hypotheses. Repaired only the t=0 FTC invocation and synchronized step 1.1/endpoints in the owning contract. For t>0 subtraction gives d<=d(0)+eta*t+L*integral(d), at t=0 equality holds, and nondecreasing a=d(0)+eta*t with b=L yields the unchanged bound, including T=0, L=0 and eta=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "in_progress",
+    "completed": [
+      "lem-rpm-finite-time-ode-comparison: repair complete, strict scoped contract check passed, current review hashes captured."
+    ],
+    "sources": [
+      "items/cor-vector-valued-ftc-and-lipschitz-bound.md Statement: a<b",
+      "items/def-vector-valued-derivative-and-integral.md Definition: oriented zero-length integral is zero",
+      "items/thm-gronwall-integral-inequality.md Statement: continuous d, nondecreasing a=d(0)+eta*t, b=L>=0"
+    ],
+    "unresolved_obligations": [
+      "Repair stale L3 worldline-definition quotation in owning theorem contract under shared lock, repeat strict contract check, and capture final unchanged-item review contexts."
+    ],
+    "independent_review": false
+  }
+}

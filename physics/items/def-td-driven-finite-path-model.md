@@ -1,0 +1,42 @@
+---
+id: def-td-driven-finite-path-model
+kind: definition
+title: "Finite driven protocol and path work"
+status: published
+origin: pipeline
+domain: physics
+library: physics
+dependency_level: 4
+deps: [def-td-finite-microstate-model]
+dependency_roles:
+  def-td-finite-microstate-model: formulation-prerequisite
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+physical_scope: "A finite-microstate, finite-stage formal path model with externally changed energies and row-stochastic transitions, with a specified detailed-balanced subclass for an adopted single-equilibrium-reservoir heat interpretation; the internal-energy reading uses a common fixed chart with bulk center-of-mass dynamics suppressed, and a common rest chart requires constant center-of-mass velocity over the modeled interval; it does not assert that a material apparatus has this dynamics."
+sources:
+  references:
+    - title: "C. Jarzynski, Introduction to Nonequilibrium Statistical Physics, lecture notes, Nonequilibrium Work Relations"
+      url: "https://terpconnect.umd.edu/~cjarzyns/CHEM-CHPH-PHYS_703_Spr_20/onlineLectures/Nonequilibrium%20Work%20Relations.pdf"
+      locator: "Complete 21-page lecture PDF; slides on forward/reverse work distributions and the Jarzynski and Crooks relations."
+    - title: "U. Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines"
+      url: "https://arxiv.org/html/1205.4176v1"
+      locator: "Sections 2.3, 3.2.1, 3.2.3, 6.1.2 (equation 113), and 9.4.5 (equations 240 and 245); the discrete-kernel subclass is specified locally."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+---
+
+## Definition
+
+Take $\Omega$ to be a finite nonempty microstate set as in [[def-td-finite-microstate-model]]: distinct elements count as distinct microstates, and the physical energy values are finite and measured in joules in the declared rest frame. For the physical internal-energy interpretation, use one declared fixed Galilean chart for every stage, with the bulk center-of-mass and separately tracked external-energy sectors suppressed from this finite protocol. The companion mechanical model supplies the center-of-mass data required by the microstate supplier; when the common chart is called a center-of-mass rest chart throughout the protocol, its center-of-mass velocity is constant over the modeled interval, and one constant boost selects that chart. This fixed-chart idealization does not infer a rest chart from the finite set or transition kernels, and does not describe an accelerating bulk body. Fix an integer $m\ge1$ and stage energy functions $E_k:\Omega\to\mathbb R\,\mathrm J$ for $k=0,\ldots,m$, with the energy offsets fixed by the declared protocol model. Fix inverse temperature $\beta>0$ in joules$^{-1}$. The finite partition sum and canonical probability vector at stage $k$ are $Z_k=\sum_{i\in\Omega}e^{-\beta E_k(i)}$ and $\pi_k(i)=e^{-\beta E_k(i)}/Z_k$. Since $\Omega$ is nonempty and finite and each energy is finite, $0<Z_k<\infty$ and $\pi_k$ is a strictly positive probability vector.
+
+A transition kernel at stage $k$ is a matrix $K_k(i,j)\ge0$ with $\sum_{j\in\Omega}K_k(i,j)=1$. The general class permits every such row-stochastic kernel; normalization alone imposes no thermal consistency. For the subclass interpreted as transitions due only to one equilibrium reservoir at inverse temperature $\beta$, adopt the discrete detailed-balance condition $\pi_k(i)K_k(i,j)=\pi_k(j)K_k(j,i)$ for every $k,i,j$. Since $\pi_k$ is strictly positive, $K_k(i,j)>0$ if and only if $K_k(j,i)>0$; on positive pairs this gives $K_k(i,j)/K_k(j,i)=e^{-\beta(E_k(j)-E_k(i))}$. In this physical subclass, also adopt that the fixed-stage energy change is entirely reservoir heat, with no untracked work, particle exchange, or intrinsic state-entropy contribution. These are model assumptions, not a deduction that an apparatus realizes this reservoir. Arbitrary row-stochastic kernels remain admissible for the formal path formulas; any other physical transfer interpretation requires a separately specified model. In the forward stage order, the energy changes instantaneously from $E_{k-1}$ to $E_k$ while the state is still $i_{k-1}$; the subsequent transition samples $i_k$ using $K_k(i_{k-1},i_k)$ at fixed energy $E_k$. A path is $\omega=(i_0,\ldots,i_m)\in\Omega^{m+1}$. The initial law is a probability vector $\mu_0:\Omega\to[0,1]$ with $\sum_{i\in\Omega}\mu_0(i)=1$. Its path probability is $P_F(\omega)=\mu_0(i_0)\prod_{k=1}^mK_k(i_{k-1},i_k)$; summing over all paths gives $1$ by the normalization of $\mu_0$ and the row sums of the kernels.
+
+The quench-work sign is positive when the quench raises the energy. The fixed-stage energy increment $Q_{\mathrm{in}}$ is positive when the subsequent transition raises the energy; it is interpreted as heat into the system under the single-reservoir subclass assumptions just stated. On the general formal class it denotes only this energy increment. Define $W(\omega)=\sum_{k=1}^m[E_k(i_{k-1})-E_{k-1}(i_{k-1})]$ and $Q_{\mathrm{in}}(\omega)=\sum_{k=1}^m[E_k(i_k)-E_k(i_{k-1})]$, both in joules. Define $F_k=-\beta^{-1}\log Z_k$ and $\Delta F=F_m-F_0=-\beta^{-1}\log(Z_m/Z_0)$. These are finite-model quantities; their physical interpretation is conditional on the adopted preparation and transition assumptions.

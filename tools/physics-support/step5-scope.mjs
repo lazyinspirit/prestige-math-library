@@ -47,7 +47,7 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 // nobody), and a recorded cross-group finding that the owning group never
 // answered.
 
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { buildGroupBundle } from './evidence-bundle.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 import { join, dirname } from 'node:path';
@@ -64,6 +64,32 @@ import {
 
 const REPO = (process.env.PHYSICS_REPO ?? (physicsExistsSync(join(physicsToolRoot, 'PHYSICS-CONTENT-MODEL.md')) ? join(physicsToolRoot, 'physics') : physicsToolRoot));
 const R = (...p) => join(REPO, ...p);
+// Published page alerts, like published supplier alerts, remain read-only
+// context in their original digest. Match actual frontmatter, never filenames.
+let publishedPageIds;
+function isPublishedContext(id) {
+  if (isPublishedItem(REPO, id)) return true;
+  if (!publishedPageIds) {
+    const statuses = new Map();
+    const visit = (dir) => {
+      if (!existsSync(dir)) return;
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const path = join(dir, entry.name);
+        if (entry.isDirectory()) visit(path);
+        else if (entry.isFile() && entry.name.endsWith('.md')) {
+          const fm = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(readFileSync(path, 'utf8'))?.[1] ?? '';
+          const page = /^page:\s*([\w-]+)\s*$/m.exec(fm)?.[1];
+          if (!page) continue;
+          const published = /^status:\s*published\s*$/m.test(fm);
+          statuses.set(page, statuses.has(page) ? false : published);
+        }
+      }
+    };
+    visit(R('library'));
+    publishedPageIds = new Set([...statuses].filter(([, published]) => published).map(([id]) => id));
+  }
+  return publishedPageIds.has(id);
+}
 const argv = process.argv.slice(2);
 const mode = argv[0];
 const allowPendingAlerts = argv.includes('--allow-pending-alerts');
@@ -223,7 +249,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
     const from = String(digest.group ?? '');
     const fromBatch = String(digest.batches?.[0] ?? '');
     for (const raw of includeConcerns ? (digest.concerns ?? []) : []) {
-      if (isPublishedItem(REPO, raw.id)) continue;
+      if (isPublishedContext(raw.id)) continue;
       const ownerRecord = index.itemOwner.get(raw.id) ?? index.pageOwner.get(raw.id);
       const owner = ownerRecord?.group;
       const alert = {
@@ -245,7 +271,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
       alerts.push(alert);
     }
     for (const raw of digest.alerts ?? []) {
-      if (isPublishedItem(REPO, raw.item)) continue;
+      if (isPublishedContext(raw.item)) continue;
       const ownerRecord = index.itemOwner.get(raw.item) ?? index.pageOwner.get(raw.item);
       const owner = ownerRecord?.group;
       const alert = {
@@ -268,7 +294,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
     }
   }
   for (const raw of readJsonl(crossPath)) {
-    if (isPublishedItem(REPO, raw.item)) continue;
+    if (isPublishedContext(raw.item)) continue;
     const alert = {
       version: 1,
       source: 'step5-rejection',
@@ -660,7 +686,7 @@ if (mode === 'digests') {
     for (const a of d.alerts ?? []) {
       // Published suppliers stay read-only context, just as in collectAlerts.
       // Keep their findings in the original digest; do not assign run ownership.
-      if (isPublishedItem(REPO, a.item)) continue;
+      if (isPublishedContext(a.item)) continue;
       const owner = index.itemOwner.get(a.item) ?? index.pageOwner.get(a.item);
       if (!owner) bad.push(`batch ${g.label}: alert names \`${a.item}\`, which belongs to no batch in this run`);
       else if (owner.group === g.label) bad.push(`batch ${g.label}: alert names \`${a.item}\`, which it owns — that is a concern, not an alert`);

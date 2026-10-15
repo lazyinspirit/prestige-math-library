@@ -1,0 +1,62 @@
+--- research/physics-td-qft-rpm-62-2026-10-14-owner-step4-td-math-definitions-round1/new-failures-wave2/baseline/lem-tdmath-periodic-law-local-tame-transfer.md
++++ items/lem-tdmath-periodic-law-local-tame-transfer.md
+@@ -20,6 +20,12 @@
+   - thm-tdmath-specific-entropy-density
+   - thm-dominated-convergence
+   - thm-monotone-convergence-for-the-integral
++  - thm-dunford-pettis-for-l-one-on-a-finite-measure-space
++  - thm-eberlein-smulian
++  - thm-kolmogorov-extension-for-standard-borel-coordinate-spaces
++  - def-weak-topology-on-a-normed-space
++  - thm-holder-inequality-for-integrals
++  - def-tdmath-poisson-configuration-reference
+ dependency_roles:
+   def-axiom-of-choice: mathematical-premise
+   def-ultrafilter-extension-principle: mathematical-premise
+@@ -33,6 +39,12 @@
+   thm-tdmath-specific-entropy-density: mathematical-premise
+   thm-dominated-convergence: mathematical-premise
+   thm-monotone-convergence-for-the-integral: mathematical-premise
++  thm-dunford-pettis-for-l-one-on-a-finite-measure-space: mathematical-premise
++  thm-eberlein-smulian: mathematical-premise
++  thm-kolmogorov-extension-for-standard-borel-coordinate-spaces: mathematical-premise
++  def-weak-topology-on-a-normed-space: mathematical-premise
++  thm-holder-inequality-for-integrals: mathematical-premise
++  def-tdmath-poisson-configuration-reference: mathematical-premise
+ provenance:
+   statement: ai-altered
+   proof: ai-altered
+@@ -56,7 +68,7 @@
+ 
+ **Given:** The stated choice hypotheses, torus-invariant laws, and bounded entropy densities.
+ 
+-[A1] [[def-axiom-of-choice]], [[def-ultrafilter-extension-principle]], [[def-dependent-choice]], and [[def-hahn-banach-extension-principle-relative]]: the explicit hypotheses for the local compactness, marginal extension and sequential compactness supplied by [F4].
++[A1] [[def-axiom-of-choice]], [[def-ultrafilter-extension-principle]], [[def-dependent-choice]], and [[def-hahn-banach-extension-principle-relative]]: the explicit hypotheses for the weak-density compactness, marginal extension and subsequence extraction supplied by [F4].
+ 
+ [F1] [[def-tdmath-periodized-empirical-field]] and [[lem-tdmath-periodized-empirical-field-stationary-density]]: the empirical field averages translations of the periodic continuation; its barycenter is stationary with intensity $E_{C_L}N/L^d$ when this expectation is finite.
+ 
+@@ -64,9 +76,9 @@
+ 
+ [F3] [[thm-tdmath-poisson-reference-count-properties]]: Poisson counts have all positive exponential moments.
+ 
+-[F4] [[thm-tdmath-local-tame-entropy-compactness]]: its local-density weak compactness, consistent marginal extension, and count-tail truncation argument apply under the named choice hypotheses to uniformly bounded entropy on every fixed cube.
++[F4] [[thm-dunford-pettis-for-l-one-on-a-finite-measure-space]] and [[thm-eberlein-smulian]]: under the named choice hypotheses, uniformly integrable real $L^1$ densities on a probability space have weakly compact closures and weakly convergent subsequences. [[def-weak-topology-on-a-normed-space]] and [[thm-holder-inequality-for-integrals]] make bounded measurable tests weakly continuous. The cell spaces in [[def-tdmath-poisson-configuration-reference]] are standard Borel; [[thm-kolmogorov-extension-for-standard-borel-coordinate-spaces]] extends their consistent finite-dimensional laws under AC. The local extraction required here is proved in steps 3.2 and 4.1, rather than attributed to compactness of specific-entropy levels.
+ 
+-[F5] [[thm-tdmath-specific-entropy-density]]: for a stationary law, $I(P)=\sup_{a\in\mathbb N}a^{-d}D(P_{[0,a)^d}\Vert Q_{[0,a)^d})$.
++[F5] [[thm-tdmath-specific-entropy-density]]: for a stationary law, $I(P)=\sup_{a\in\mathbb N,\ a\geq1}a^{-d}D(P_{[0,a)^d}\Vert Q_{[0,a)^d})$.
+ 
+ [F6] [[thm-monotone-convergence-for-the-integral]] and [[thm-dominated-convergence]]: bounded count truncations may increase to counts, and Poisson exponential domination justifies the tail limits below.
+ 
+@@ -82,6 +94,10 @@
+ 
+ 3.1 On a bounded $A\subset W$, apply the entropy inequality to $t\min(N_A\mathbf1_{\{N_A>K\}},M)$ and let $M\to\infty$. If $C_W$ is the uniform bound from step 2.1, then
+ $$tE_{\widetilde C_L}[N_A\mathbf1_{\{N_A>K\}}]\leq C_W+\log E_{Q_W}e^{tN_A\mathbf1_{\{N_A>K\}}}.$$
+-For fixed $t>0$, the logarithm tends to zero as $K\to\infty$ by [F3] and [F6]. First take $t$ large and then $K$ large. This proves uniform count-tail integrability. The local weak-density compactness and consistent marginal extension in [F4] now give subsequential convergence for bounded local tests; the uniform tails upgrade it to $\tau_L$ convergence. Every limit is stationary. Lower semicontinuity of finite-region entropy and step 2.1 imply $a^{-d}D(P_W\Vert Q_W)\leq\liminf c_L$ for every integer $a$ along a subsequence realizing the liminf; [F5] proves the stated entropy bound. [A1, F2, F3, F4, F5, F6, step 2.1, algebra]
++For fixed $t>0$, the logarithm tends to zero as $K\to\infty$ by [F3] and [F6]. First take $t$ large and then $K$ large. This proves uniform count-tail integrability. [F2, F3, F6, step 2.1, algebra]
+ 
+-4.1 If the empirical fields converge in probability to $P_*$, then for bounded local $f$ the bounded random variables $R_{L,\omega}(f)$ converge in probability to $P_*(f)$, hence their expectations converge. By step 1.1 this is convergence of $\widetilde C_L(f)$. For tame $f$, truncate on $\{N_A\leq K\}$; step 3.1 makes the truncation error uniformly small, and the same is true for the limit law. Taking $L\to\infty$ and then $K\to\infty$ proves convergence for every stated tame observable. [F4, step 1.1, step 3.1, algebra] ∎
++3.2 Consider any sequence of periods tending to infinity and enumerate the integer cubes $W=a+[0,m)^d$. For each fixed $W$, step 2.1 gives a finite entropy bound $C_W$ on an eventual tail; it does not assert a bound for all periods on arbitrarily large cubes. For a probability density $h=dP_W/dQ_W$ with entropy at most $C_W$, the inequalities $-u\log u\leq1/e$ for $0\leq u\leq1$ and $h\log h\geq h\log K$ on $\{h>K\}$ give $\int_{h>K}h\,dQ_W\leq(C_W+1/e)/\log K$. These densities have norm one and are uniformly integrable. By [F4], discard the finite exceptional prefix for the first cube and extract a weakly convergent subsequence, then do so for the second cube and continue; diagonal extraction, using AC, gives weak convergence on every cube. Each limiting density is nonnegative with integral one, by tests against indicators and $1$. The entropy variational formula [F2] is a supremum of weakly continuous affine functions, so it gives entropy at most $C_W$ for each limit. [A1, F2, F4, step 2.1, algebra]
++
++4.1 Consistency of restrictions and stationarity pass to these limits by testing bounded measurable local functions: every equality involves only finitely many cube coordinates. A finite set of unit cells lies in an integer cube; its induced marginal is independent of the containing cube by consistency through a larger cube. The standard-Borel extension [F4] gives a law on the countable cell product, hence on simple locally finite configurations. It is stationary. The bound of step 3.1 holds for its cube marginals as well, so its counts are integrable and their tails are controlled. Truncating $f$ on $\{N_A\leq K\}$ therefore upgrades bounded-local convergence of the extracted sequence to convergence for every tame $f$, by step 3.1. This proves relative sequential compactness as the periods tend to infinity. Along any such convergent sequence, the same variational formula gives $D(P_W\Vert Q_W)\leq\liminf D((\widetilde C_L)_W\Vert Q_W)$. Taking a further subsequence realizing $\liminf c_L$, step 2.1 gives $a^{-d}D(P_{[0,a)^d}\Vert Q_{[0,a)^d})\leq\liminf c_L$ for every integer $a\geq1$; [F5] yields $I(P)\leq\liminf c_L$. [A1, F2, F4, F5, step 2.1, step 3.1, step 3.2, construct]
++
++5.1 If the empirical fields converge in probability to $P_*$, then for bounded local $f$ the bounded random variables $R_{L,\omega}(f)$ converge in probability to $P_*(f)$, hence their expectations converge. By step 1.1 this is convergence of $\widetilde C_L(f)$. For tame $f$, truncate on $\{N_A\leq K\}$; step 3.1 makes the truncation error uniformly small, and the same is true for the limit law. Taking $L\to\infty$ and then $K\to\infty$ proves convergence for every stated tame observable. [step 1.1, step 3.1, step 4.1, algebra] ∎

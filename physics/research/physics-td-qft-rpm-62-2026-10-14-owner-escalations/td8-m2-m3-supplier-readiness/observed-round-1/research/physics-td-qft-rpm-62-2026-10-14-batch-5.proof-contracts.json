@@ -1,0 +1,1159 @@
+{
+  "version": 1,
+  "level": "physics-td-qft-rpm-62-2026-10-14-batch-5",
+  "scope": [
+    "lem-tdmath-local-contraction-flow",
+    "lem-tdmath-variational-flow-and-commutation",
+    "lem-tdmath-exact-multiple-implies-pfaff-integrability",
+    "thm-tdmath-codimension-one-frobenius",
+    "thm-tdmath-local-caratheodory-inaccessibility",
+    "ex-tdmath-two-dimensional-pfaff-factor",
+    "cex-tdmath-contact-form-is-not-locally-integrable",
+    "cex-tdmath-closed-punctured-plane-form-is-not-exact"
+  ],
+  "contracts": {
+    "lem-tdmath-local-contraction-flow": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By openness choose $R>0$ with $\\overline B(q_0,2R)\\subset U$. Continuity of $X$ and $DX$ at $q_0$ gives finite $M,L\\ge0$ bounding $\\|X\\|$ on $\\overline B(q_0,R)$ and $\\|DX\\|$ on $B(q_0,2R)$. By [F1] $X$ is totally differentiable there, and [F2] applied to the convex ball $B(q_0,2R)$ gives $\\|X(u)-X(v)\\|\\le L\\|u-v\\|$ for $u,v\\in\\overline B(q_0,R)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\mathcal C$ be the closed ball in $C([-\\delta,\\delta],\\mathbb R^m)$ of curves with values in $\\overline B(q_0,R)$, with the supremum norm. It is complete: a Cauchy sequence converges uniformly componentwise because $\\mathbb R^m$ is complete; its uniform limit is continuous and remains in the closed ball. For $p\\in\\overline B(q_0,R/2)$ define $T_p\\gamma(t):=p+\\int_0^t X(\\gamma(s))\\,ds$. The integrand is continuous and hence integrable by [F3]. Choose $\\delta>0$ with $M\\delta\\le R/2$ and $L\\delta<1$. Then $T_p$ maps $\\mathcal C$ into itself, since $\\|T_p\\gamma(t)-q_0\\|\\le\\|p-q_0\\|+M|t|\\le R$, and is a contraction with constant at most $L\\delta$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Starting at the constant curve $\\gamma_0(t)=p$, iterate $\\gamma_{k+1}=T_p\\gamma_k$. If $\\kappa=L\\delta<1$, then $\\|\\gamma_{k+1}-\\gamma_k\\|_\\infty\\le\\kappa^k\\|\\gamma_1-\\gamma_0\\|_\\infty$; the geometric tail bound makes $(\\gamma_k)$ uniformly Cauchy. Its limit $\\phi(\\cdot,p)\\in\\mathcal C$ is a fixed point by the contraction bound. Any two fixed points have distance at most $\\kappa$ times that distance, so they coincide.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $g(s)=X(\\phi(s,p))$, continuity and [F3] make every component Riemann integrable. At an interior $t$, the difference quotient of $\\phi(t,p)=p+\\int_0^t g(s)\\,ds$ differs from $g(t)$ by at most $\\sup_{|s-t|\\le|h|}\\|g(s)-g(t)\\|$, which tends to zero by continuity; thus $\\partial_t\\phi=X(\\phi)$. Conversely any $C^1$ solution staying in the ball satisfies the fixed-point equation by [F4], so uniqueness of the fixed point is uniqueness of the IVP.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $p,p'$ lie in $\\overline B(q_0,R/2)$, subtract their fixed-point equations and take suprema to obtain $\\|\\phi(\\cdot,p)-\\phi(\\cdot,p')\\|_\\infty\\le\\|p-p'\\|+L\\delta\\|\\phi(\\cdot,p)-\\phi(\\cdot,p')\\|_\\infty$. Since $L\\delta<1$, division gives the local Lipschitz estimate $(1-L\\delta)^{-1}\\|p-p'\\|$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Whenever the compositions remain in the chosen ball, both $t\\mapsto\\phi(t+s,p)$ and $t\\mapsto\\phi(t,\\phi(s,p))$ solve the same IVP at $t=0$, with initial value $\\phi(s,p)$. Uniqueness from step 3.1 gives the local flow law; setting $t=-s$ gives the local inverse relation.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No base point q0 exists in an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector field is covered at step 2.2 by its unique constant fixed point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement covers m=1; the same Euclidean ball and scalar contraction estimates apply, step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At t=0 the fixed-point equation gives phi(0,p)=p, step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The ODE derivative is asserted on the open time interval with one-sided endpoint behavior supplied by the continuous integral equation, step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Picard iterates are a single recursively defined sequence and converge by a geometric bound, step 2.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is an existence and uniqueness assertion, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma is an existence and uniqueness assertion, not an iff statement."
+        }
+      ]
+    },
+    "lem-tdmath-variational-flow-and-commutation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-tdmath-local-contraction-flow",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, $m\\ge1$, let $X:U\\to\\mathbb R^m$ have continuous first partial derivatives, and fix $q_0\\in U$. There are $r,\\delta>0$ and a map $\\phi:[-\\delta,\\delta]\\times\\overline B(q_0,r/2)\\to\\overline B(q_0,r)$ such that for each $p\\in\\overline B(q_0,r/2)$, $t\\mapsto\\phi(t,p)$ is $C^1$, satisfies $\\phi(0,p)=p$ and $\\partial_t\\phi(t,p)=X(\\phi(t,p))$ on $(-\\delta,\\delta)$, and is the unique such solution that stays in $\\overline B(q_0,r)$. The dependence on the initial point is locally Lipschitz, and the local flow law $\\phi(t,\\phi(s,p))=\\phi(t+s,p)$ holds whenever the displayed maps are defined in the chosen neighborhood.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $p$ near $q$ put $\\Delta_h(t):=\\phi_X^t(p+h)-\\phi_X^t(p)$. The integral equations from [F1] and the one-variable fundamental theorem applied to $\\theta\\mapsto X(\\phi_X^s(p)+\\theta\\Delta_h(s))$ give\n$$\\Delta_h(t)=h+\\int_0^t A_h(s)\\Delta_h(s)\\,ds,\\quad A_h(s):=\\int_0^1DX(\\phi_X^s(p)+\\theta\\Delta_h(s))\\,d\\theta.$$\nThe segments lie in $K$ after shrinking the initial ball and time interval. The local Lipschitz estimate in [F1] gives $\\sup_t\\|\\Delta_h(t)\\|=O(\\|h\\|)$. Uniform continuity of $DX$ on $K$ from [F4] makes $A_h(s)$ converge uniformly to $DX(\\phi_X^s(p))$ as $h\\to0$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The linear integral equation $J(t)=I+\\int_0^tDX(\\phi_X^s(p))J(s)\\,ds$ has a unique continuous solution by the same complete-curve-space contraction argument as [F1], after retaining $L\\delta<1$. Subtracting $J(t)h$ from the equation in step 1.1 gives a remainder $R_h$ satisfying $\\|R_h\\|_\\infty\\le L\\delta\\|R_h\\|_\\infty+\\delta\\|A_h-DX(\\phi_X^s(p))\\|_\\infty\\|\\Delta_h\\|_\\infty=o(\\|h\\|)$. Hence $D_q\\phi_X^t(p)=J(t,p)$. The continuous integrand in the equation for $J$ has average over $[t,t+h]$ tending to its value at $t$: the quotient error is at most $\\sup_{|s-t|\\le|h|}\\|DX(\\phi_X^s(p))J(s,p)-DX(\\phi_X^t(p))J(t,p)\\|$, which tends to zero. Thus $\\partial_tJ=DX(\\phi_X^t(p))J$ and $J(0,p)=I$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $J_h(s)=D_q\\phi_X^s(p+h)$ and $J_0(s)=D_q\\phi_X^s(p)$. Subtracting their integral equations gives\n$$J_h-J_0=\\int_0^t DX(\\phi_h)(J_h-J_0)\\,ds+\\int_0^t(DX(\\phi_h)-DX(\\phi_0))J_0\\,ds,$$\nwhere $\\phi_h=\\phi_X^s(p+h)$ and $\\phi_0=\\phi_X^s(p)$. Boundedness of $D^2X$ on $K$ and $\\phi_h-\\phi_0=O(\\|h\\|)$ bound the second integral by $C\\|h\\|$ for a fixed $C$; the first integral has norm at most $L\\delta\\|J_h-J_0\\|_\\infty$. Since $L\\delta<1$, absorption gives $J_h-J_0=O(\\|h\\|)$ uniformly in time. Uniform continuity of $D^2X$ on $K$ and the integral mean-value formula give, uniformly in $s$,\n$$DX(\\phi_h)-DX(\\phi_0)=D^2X(\\phi_0)[\\phi_h-\\phi_0,\\cdot]+o(\\|h\\|)\n=D^2X(\\phi_0)[J_0h,\\cdot]+o(\\|h\\|),$$\nusing $\\phi_h-\\phi_0=J_0h+o(\\|h\\|)$ from step 1.2. Also $J_h=J_0+O(\\|h\\|)$. Substitute these expansions in the subtracted equation: the forcing term is\n$$\\int_0^tD^2X(\\phi_0)[J_0h,J_0(\\cdot)]\\,ds+o(\\|h\\|),$$\nuniformly in time. For each $h$, let $K_h$ solve the linear integral equation obtained by retaining this displayed leading term and the coefficient $DX(\\phi_0)$; existence and uniqueness follow from the same contraction bound $L\\delta<1$. Then $R_h:=J_h-J_0-K_h$ satisfies $\\|R_h\\|_\\infty\\le L\\delta\\|R_h\\|_\\infty+o(\\|h\\|)$, so $R_h=o(\\|h\\|)$. Thus $D_pJ[h](v)=K_h(v)$, and, writing $K_2[u,v]=D_q^2\\phi_X[u,v]$, it is the unique solution\n$$K_2(t)[u,v]=\\int_0^t\\big(DX(\\phi_X^s)K_2(s)[u,v]+D^2X(\\phi_X^s)[J(s)u,J(s)v]\\big)\\,ds.$$\nThe integral equation makes $K_2$ bilinear in $(u,v)$; the same contraction estimate and continuity of its coefficients give continuous dependence on $(t,p)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Since $\\partial_t\\phi_X=X(\\phi_X)$, the chain rule [F2] and the established continuous first and second derivatives in $q$ give continuous mixed time derivatives; differentiating once more in $t$ gives $\\partial_t^2\\phi_X=DX(\\phi_X)X(\\phi_X)$. Hence the local flow is jointly $C^2$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $V(t):=Y(\\phi_X^t(q))$ and $W(t):=D_q\\phi_X^t(q)Y(q)$. By [F2] and the variational equation, $V'=DY(\\phi_X^t)X(\\phi_X^t)$ and $W'=DX(\\phi_X^t)W$. The identity $[X,Y]=0$ makes $V$ solve this same linear equation with $V(0)=W(0)=Y(q)$; uniqueness from the contraction argument gives $D_q\\phi_X^t(q)Y(q)=Y(\\phi_X^t(q))$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For fixed $t$, the curve $s\\mapsto\\phi_X^t(\\phi_Y^s(q))$ has derivative $D\\phi_X^t\\,Y(\\phi_Y^s(q))=Y(\\phi_X^t(\\phi_Y^s(q))$ by step 3.1, and starts at $\\phi_X^t(q)$. It is therefore the $Y$-flow from that initial point; IVP uniqueness from [F1] yields $\\phi_X^t\\phi_Y^s(q)=\\phi_Y^s\\phi_X^t(q)$.",
+          "step": "3.2",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "There is no base point or local flow on an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For the zero field the flow is identity, J=I, and the bracket is zero; the integral equations include this case, steps 1.2 and 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement permits m=1; the variational equation remains scalar and the commutation implication is valid, steps 1.2 and 3.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At zero time the flow is identity and J(0,q)=I, step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All flow identities are restricted to times for which the local maps remain in the neighborhood; this domain restriction is in the Statement and is used in steps 3.1–3.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Linear variational solutions and difference quotients are uniquely determined by contraction; no choice principle is used, steps 1.2–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an implication from a vanishing bracket to commuting flows."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from commuting flows to a vanishing bracket is asserted."
+        }
+      ]
+    },
+    "lem-tdmath-exact-multiple-implies-pfaff-integrability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-one-form-and-horizontal-path",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$ be open, $n\\ge1$, with coordinates $(x_1,\\ldots,x_n,z)$. A $C^2$ one-form on $U$ is a field of linear functionals on tangent vectors of the form $\\omega=\\sum_{i=1}^n a_i(x,z)\\,dx_i+b(x,z)\\,dz$, where every coefficient is twice continuously differentiable. At $q\\in U$, it acts by $\\omega_q(u_1,\\ldots,u_n,w)=\\sum_i a_i(q)u_i+b(q)w$. It is nonsingular on $U$ when $\\omega_q\\ne0$ for every $q$; then $H_q:=\\ker\\omega_q$ is an $n$-dimensional subspace of $T_qU\\cong\\mathbb R^{n+1}$.\n\nFor one-forms $\\alpha,\\beta$, their exterior product is the alternating two-form $(\\alpha\\wedge\\beta)(u,v)=\\alpha(u)\\beta(v)-\\alpha(v)\\beta(u)$. For a one-form $\\alpha$ and a two-form $\\sigma$, $(\\alpha\\wedge\\sigma)(u,v,w)=\\alpha(u)\\sigma(v,w)-\\alpha(v)\\sigma(u,w)+\\alpha(w)\\sigma(u,v)$. The exterior derivative of the displayed $C^2$ form is the $C^1$ two-form\n\n$$d\\omega=\\sum_{1\\le i<j\\le n}(\\partial_i a_j-\\partial_j a_i)\\,dx_i\\wedge dx_j+\\sum_{i=1}^n(\\partial_i b-\\partial_z a_i)\\,dx_i\\wedge dz.$$\n\nA piecewise-$C^1$ path is a continuous $\\gamma:[s_0,s_1]\\to U$ with $s_0\\le s_1$ and admitting a finite partition on each closed subinterval of which it is $C^1$. It is $\\omega$-horizontal when $\\omega_{\\gamma(t)}(\\dot\\gamma(t))=0$ on the interior of each such subinterval. Endpoints where a derivative is one-sided are included by continuity. For an open $V\\subseteq U$, $p$ is horizontally reachable from $q$ within $V$ if a horizontal path in $V$ joins $q$ to $p$. Both signs of time and finite concatenations are allowed by this definition.\n\nOn a neighborhood $W$, an integrating factor for $\\omega$ is a nowhere-zero $\\mu\\in C^1(W)$ for which $\\mu\\omega=dS$ for some $S\\in C^2(W)$ with $dS$ nowhere zero. This definition is local; it asserts neither a global potential on $U$ nor a physical identification or calibration of $S$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $q\\in U$ and distinct coordinates $i,j$. Choose $h,k>0$ small enough that the coordinate rectangle from $q$ to $q+he_i+ke_j$ lies in $U$, and set $\\Delta=S(q+he_i+ke_j)-S(q+he_i)-S(q+ke_j)+S(q)$. By [F4] the second partials are uniformly continuous on the chosen closed rectangle. Applying [F2] to coordinate segments and [F3] to their continuous derivatives, Newton–Leibniz gives\n$$\\Delta=\\int_0^h\\!\\int_0^k S_{ij}(q+se_i+te_j)\\,dt\\,ds=\\int_0^k\\!\\int_0^h S_{ji}(q+se_i+te_j)\\,ds\\,dt.$$\nEach equality follows by taking the two endpoint differences in the outer coordinate and then applying Newton–Leibniz to the inner difference; both integrands are continuous by $S\\in C^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Divide both expressions in step 1.1 by $hk$ and let $h,k\\downarrow0$. Continuity of $S_{ij}$ and $S_{ji}$ makes each average tend to its value at $q$, so $S_{ij}(q)=S_{ji}(q)$. Since $q,i,j$ were arbitrary, the coordinate formula in [F1] gives $d(dS)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $\\lambda:=1/\\mu\\in C^1(U)$. Then $\\omega=\\lambda dS$. Expanding the coordinate derivative by the product rule and using step 1.2 yields $d\\omega=d\\lambda\\wedge dS$. Therefore $\\omega\\wedge d\\omega=\\lambda\\,dS\\wedge d\\lambda\\wedge dS=0$, because the alternating product vanishes when the same one-form $dS$ occurs twice.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "There is no point at which a form or potential is evaluated on an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If omega is the zero form then the conclusion omega wedge d omega=0 is immediate; the proof algebra also covers it, step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In one dimension every three-form is zero; the coordinate argument remains valid, step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The nonzero multiplier hypothesis is explicit; a zero multiplier is outside the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "U is open, so no boundary-point extension is claimed; the rectangle argument is restricted to rectangles in U, step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only a point and two coordinate directions are fixed; the argument uses no choice principle, step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves only exact-multiple implies the Pfaff condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No integrating-factor construction is asserted here."
+        }
+      ]
+    },
+    "thm-tdmath-codimension-one-frobenius": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-one-form-and-horizontal-path",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$ be open, $n\\ge1$, with coordinates $(x_1,\\ldots,x_n,z)$. A $C^2$ one-form on $U$ is a field of linear functionals on tangent vectors of the form $\\omega=\\sum_{i=1}^n a_i(x,z)\\,dx_i+b(x,z)\\,dz$, where every coefficient is twice continuously differentiable. At $q\\in U$, it acts by $\\omega_q(u_1,\\ldots,u_n,w)=\\sum_i a_i(q)u_i+b(q)w$. It is nonsingular on $U$ when $\\omega_q\\ne0$ for every $q$; then $H_q:=\\ker\\omega_q$ is an $n$-dimensional subspace of $T_qU\\cong\\mathbb R^{n+1}$.\n\nFor one-forms $\\alpha,\\beta$, their exterior product is the alternating two-form $(\\alpha\\wedge\\beta)(u,v)=\\alpha(u)\\beta(v)-\\alpha(v)\\beta(u)$. For a one-form $\\alpha$ and a two-form $\\sigma$, $(\\alpha\\wedge\\sigma)(u,v,w)=\\alpha(u)\\sigma(v,w)-\\alpha(v)\\sigma(u,w)+\\alpha(w)\\sigma(u,v)$. The exterior derivative of the displayed $C^2$ form is the $C^1$ two-form\n\n$$d\\omega=\\sum_{1\\le i<j\\le n}(\\partial_i a_j-\\partial_j a_i)\\,dx_i\\wedge dx_j+\\sum_{i=1}^n(\\partial_i b-\\partial_z a_i)\\,dx_i\\wedge dz.$$\n\nA piecewise-$C^1$ path is a continuous $\\gamma:[s_0,s_1]\\to U$ with $s_0\\le s_1$ and admitting a finite partition on each closed subinterval of which it is $C^1$. It is $\\omega$-horizontal when $\\omega_{\\gamma(t)}(\\dot\\gamma(t))=0$ on the interior of each such subinterval. Endpoints where a derivative is one-sided are included by continuity. For an open $V\\subseteq U$, $p$ is horizontally reachable from $q$ within $V$ if a horizontal path in $V$ joins $q$ to $p$. Both signs of time and finite concatenations are allowed by this definition.\n\nOn a neighborhood $W$, an integrating factor for $\\omega$ is a nowhere-zero $\\mu\\in C^1(W)$ for which $\\mu\\omega=dS$ for some $S\\in C^2(W)$ with $dS$ nowhere zero. This definition is local; it asserts neither a global potential on $U$ nor a physical identification or calibration of $S$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tdmath-local-contraction-flow",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, $m\\ge1$, let $X:U\\to\\mathbb R^m$ have continuous first partial derivatives, and fix $q_0\\in U$. There are $r,\\delta>0$ and a map $\\phi:[-\\delta,\\delta]\\times\\overline B(q_0,r/2)\\to\\overline B(q_0,r)$ such that for each $p\\in\\overline B(q_0,r/2)$, $t\\mapsto\\phi(t,p)$ is $C^1$, satisfies $\\phi(0,p)=p$ and $\\partial_t\\phi(t,p)=X(\\phi(t,p))$ on $(-\\delta,\\delta)$, and is the unique such solution that stays in $\\overline B(q_0,r)$. The dependence on the initial point is locally Lipschitz, and the local flow law $\\phi(t,\\phi(s,p))=\\phi(t+s,p)$ holds whenever the displayed maps are defined in the chosen neighborhood.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tdmath-variational-flow-and-commutation",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a $C^2$ vector field on an open subset of $\\mathbb R^m$, where $C^2$ means that total derivatives through order two exist and are continuous. Its local flow $\\phi_X^t(q)$ from [[lem-tdmath-local-contraction-flow]] is $C^2$ jointly in $(t,q)$, and $J(t,q):=D_q\\phi_X^t(q)$ satisfies $\\partial_tJ=DX(\\phi_X^t(q))J$ and $J(0,q)=I$. For two such fields define their bracket by $[X,Y](q):=DY(q)X(q)-DX(q)Y(q)$. If $[X,Y]=0$ on a neighborhood and all local maps stay there, then $D_q\\phi_X^t(q)Y(q)=Y(\\phi_X^t(q))$ and their local flows commute: $\\phi_X^t\\circ\\phi_Y^s=\\phi_Y^s\\circ\\phi_X^t$ whenever both sides are defined.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-tdmath-exact-multiple-implies-pfaff-integrability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$ be open. Let $\\omega$ be a $C^1$ one-form on $U$, $\\mu\\in C^1(U)$ nowhere zero, and $S\\in C^2(U)$ with $dS=\\mu\\omega$. Then $\\omega\\wedge d\\omega=0$ on $U$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-tdmath-local-implicit-rank",
+          "source_section": "Planned Statement (conditional interface; carrier absent)",
+          "quote": "If F:O⊂R^N→R^q is C1, F(u0)=0 and DF(u0) has row rank q, then after a coordinate permutation the zero set near u0 is a unique C1 graph over the remaining N−q free coordinates. In the square case, the same assertion gives a local C1 implicit solution when the solved-coordinate derivative is invertible.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\omega_{q_0}\\ne0$, one coordinate coefficient is nonzero at $q_0$; relabel that coordinate as $z$ and shrink the neighborhood so $b\\ne0$. Put $c_i:=-a_i/b$ and $X_i:=\\partial_{x_i}+c_i\\partial_z$. Then $X_i\\in C^2$, $\\omega(X_i)=a_i+bc_i=0$, and the $X_i$ are a basis of $\\ker\\omega$ because their first $n$ components form the standard basis.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Define $[X,Y]:=DY\\,X-DX\\,Y$. Coordinate expansion of the displayed formula for $d\\omega$ gives $d\\omega(X,Y)=X[\\omega(Y)]-Y[\\omega(X)]-\\omega([X,Y])$. Thus for horizontal fields $d\\omega(X_i,X_j)=-\\omega([X_i,X_j])$. Also $[X_i,X_j]$ has zero $x$-components, hence is vertical. Evaluating the three-form on $(\\partial_z,X_i,X_j)$ gives $(\\omega\\wedge d\\omega)(\\partial_z,X_i,X_j)=b\\,d\\omega(X_i,X_j)$. Under (i), $d\\omega(X_i,X_j)=0$; then $\\omega([X_i,X_j])=0$, and a vertical vector $v\\partial_z$ has $\\omega(v\\partial_z)=vb$, so $[X_i,X_j]=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2]–[F3] the fields $X_i$ have commuting local $C^2$ flows $\\phi_i^t$. Define $\\Phi(x,\\eta):=\\phi_n^{x_n}\\circ\\cdots\\circ\\phi_1^{x_1}(0,\\eta)$ for $(x,\\eta)$ near $(0,z_0)$. Each $X_i$ changes only $x_i$, at rate one, so the first $n$ coordinates of $\\Phi(x,\\eta)$ are exactly $x$. Commutation and the transported-field identity in [F3] give $\\partial_{x_i}\\Phi=X_i(\\Phi)$. At $(0,z_0)$ the columns of $D\\Phi$ are $X_1,\\ldots,X_n,\\partial_z$; their first $n$ components form $I_n$ and the last column is $\\partial_z$, so $D\\Phi$ is invertible.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $N=n+1$ and $H(u,y):=\\Phi(u)-y$ on a neighborhood of $(u_0,y_0)=((0,z_0),(0,z_0))$. Then $H(u_0,y_0)=0$ and $D_uH=D\\Phi(u_0)$ is invertible, hence $DH$ has full row rank $N$. Apply [L1] with the $u$ coordinates as the solved block and $y$ as the free block: conditionally, there is a unique local $C^1$ map $G(y)$ with $\\Phi(G(y))=y$. Since $\\Phi$ is $C^2$, differentiating this identity by [F5] gives $D\\Phi(G(y))DG(y)=I$ and hence $DG(y)=(D\\Phi(G(y)))^{-1}$. The right side is $C^1$ (matrix inverse entries are cofactors divided by the nonzero determinant), so $G$ is $C^2$.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Let $S(x,z)$ be the last coordinate $\\eta$ of $G(x,z)$. Then $S\\in C^2$, $S(\\Phi(x,\\eta))=\\eta$, and $S_z(0,z_0)=1$; after shrinking, $S_z\\ne0$. Differentiating along $X_i$ gives $S_{x_i}+c_iS_z=0$, so $dS=S_z(dz-\\sum_i c_i dx_i)=(S_z/b)\\omega$. Thus $\\mu:=S_z/b$ is $C^1$ and nowhere zero. This proves (ii), conditionally on [L1].",
+          "step": "2.3",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "F3",
+            "algebra",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, if (ii) holds, [F4] gives $\\omega\\wedge d\\omega=0$ on that neighborhood, proving (i).",
+          "step": "3.1",
+          "inputs": [
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The local theorem is stated near a selected point q0."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Nonsingularity excludes the zero covector near q0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the horizontal distribution has rank one, brackets with itself vanish, and the local construction still applies, steps 1.2–2.3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the initially named coefficient b(q0) vanishes, a finite coordinate relabel selects a nonzero component; if omega(q0)=0 the theorem excludes the point, step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All constructions occur on open neighborhoods and are shrunk so flows remain interior, steps 2.1–2.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finitely many coordinate choices and a deterministic flow composition are used; the only unsupplied input is the recorded local-rank theorem, steps 1.1–2.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Pfaff condition constructs mu and S conditionally on the planned rank supplier, steps 1.1–2.3."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "An exact nonzero multiple implies the Pfaff condition by the local exactness lemma, step 3.1."
+        }
+      ]
+    },
+    "thm-tdmath-local-caratheodory-inaccessibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-one-form-and-horizontal-path",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$ be open, $n\\ge1$, with coordinates $(x_1,\\ldots,x_n,z)$. A $C^2$ one-form on $U$ is a field of linear functionals on tangent vectors of the form $\\omega=\\sum_{i=1}^n a_i(x,z)\\,dx_i+b(x,z)\\,dz$, where every coefficient is twice continuously differentiable. At $q\\in U$, it acts by $\\omega_q(u_1,\\ldots,u_n,w)=\\sum_i a_i(q)u_i+b(q)w$. It is nonsingular on $U$ when $\\omega_q\\ne0$ for every $q$; then $H_q:=\\ker\\omega_q$ is an $n$-dimensional subspace of $T_qU\\cong\\mathbb R^{n+1}$.\n\nFor one-forms $\\alpha,\\beta$, their exterior product is the alternating two-form $(\\alpha\\wedge\\beta)(u,v)=\\alpha(u)\\beta(v)-\\alpha(v)\\beta(u)$. For a one-form $\\alpha$ and a two-form $\\sigma$, $(\\alpha\\wedge\\sigma)(u,v,w)=\\alpha(u)\\sigma(v,w)-\\alpha(v)\\sigma(u,w)+\\alpha(w)\\sigma(u,v)$. The exterior derivative of the displayed $C^2$ form is the $C^1$ two-form\n\n$$d\\omega=\\sum_{1\\le i<j\\le n}(\\partial_i a_j-\\partial_j a_i)\\,dx_i\\wedge dx_j+\\sum_{i=1}^n(\\partial_i b-\\partial_z a_i)\\,dx_i\\wedge dz.$$\n\nA piecewise-$C^1$ path is a continuous $\\gamma:[s_0,s_1]\\to U$ with $s_0\\le s_1$ and admitting a finite partition on each closed subinterval of which it is $C^1$. It is $\\omega$-horizontal when $\\omega_{\\gamma(t)}(\\dot\\gamma(t))=0$ on the interior of each such subinterval. Endpoints where a derivative is one-sided are included by continuity. For an open $V\\subseteq U$, $p$ is horizontally reachable from $q$ within $V$ if a horizontal path in $V$ joins $q$ to $p$. Both signs of time and finite concatenations are allowed by this definition.\n\nOn a neighborhood $W$, an integrating factor for $\\omega$ is a nowhere-zero $\\mu\\in C^1(W)$ for which $\\mu\\omega=dS$ for some $S\\in C^2(W)$ with $dS$ nowhere zero. This definition is local; it asserts neither a global potential on $U$ nor a physical identification or calibration of $S$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tdmath-local-contraction-flow",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, $m\\ge1$, let $X:U\\to\\mathbb R^m$ have continuous first partial derivatives, and fix $q_0\\in U$. There are $r,\\delta>0$ and a map $\\phi:[-\\delta,\\delta]\\times\\overline B(q_0,r/2)\\to\\overline B(q_0,r)$ such that for each $p\\in\\overline B(q_0,r/2)$, $t\\mapsto\\phi(t,p)$ is $C^1$, satisfies $\\phi(0,p)=p$ and $\\partial_t\\phi(t,p)=X(\\phi(t,p))$ on $(-\\delta,\\delta)$, and is the unique such solution that stays in $\\overline B(q_0,r)$. The dependence on the initial point is locally Lipschitz, and the local flow law $\\phi(t,\\phi(s,p))=\\phi(t+s,p)$ holds whenever the displayed maps are defined in the chosen neighborhood.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tdmath-variational-flow-and-commutation",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a $C^2$ vector field on an open subset of $\\mathbb R^m$, where $C^2$ means that total derivatives through order two exist and are continuous. Its local flow $\\phi_X^t(q)$ from [[lem-tdmath-local-contraction-flow]] is $C^2$ jointly in $(t,q)$, and $J(t,q):=D_q\\phi_X^t(q)$ satisfies $\\partial_tJ=DX(\\phi_X^t(q))J$ and $J(0,q)=I$. For two such fields define their bracket by $[X,Y](q):=DY(q)X(q)-DX(q)Y(q)$. If $[X,Y]=0$ on a neighborhood and all local maps stay there, then $D_q\\phi_X^t(q)Y(q)=Y(\\phi_X^t(q))$ and their local flows commute: $\\phi_X^t\\circ\\phi_Y^s=\\phi_Y^s\\circ\\phi_X^t$ whenever both sides are defined.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tdmath-codimension-one-frobenius",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$, $n\\ge1$, be open and let $\\omega=\\sum_{i=1}^n a_i dx_i+b dz$ be a $C^2$ one-form with $\\omega_q\\ne0$ near $q_0\\in U$. After shrinking to a neighborhood on which one coefficient $b$ is nonzero, the following are equivalent: (i) $\\omega\\wedge d\\omega=0$ throughout that neighborhood; (ii) on a possibly smaller neighborhood there are $\\mu\\in C^1$ nowhere zero and $S\\in C^2$ with $dS=\\mu\\omega$. The theorem is local; it gives no global exactness or thermodynamic calibration.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with $\\|r(h)\\|_2/\\|h\\|_2\\to0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-tdmath-local-implicit-rank",
+          "source_section": "Planned Statement (conditional interface; carrier absent)",
+          "quote": "If F:O⊂R^N→R^q is C1, F(u0)=0 and DF(u0) has row rank q, then after a coordinate permutation the zero set near u0 is a unique C1 graph over the remaining N−q free coordinates. In the square case, the same assertion gives a local C1 implicit solution when the solved-coordinate derivative is invertible.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $c_i=-a_i/b$ and $X_i=\\partial_{x_i}+c_i\\partial_z$. These $C^2$ fields form a basis of $\\ker\\omega$. Their bracket has only a vertical component, $[X_i,X_j]^z=\\partial_i c_j+c_i\\partial_zc_j-\\partial_jc_i-c_j\\partial_zc_i$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Direct coordinate expansion gives $d\\omega(X,Y)=X[\\omega(Y)]-Y[\\omega(X)]-\\omega([X,Y])$ for $[X,Y]=DY\\,X-DX\\,Y$. Suppose for contradiction that $[X_i,X_j](q)\\ne0$ at some $q$. For small $t$, let $Y_t=(\\phi_i^t)_*X_j$, so $Y_t(q)=D\\phi_i^t(\\phi_i^{-t}(q))X_j(\\phi_i^{-t}(q))$. The flow and variational equations give $\\phi_i^{-t}(q)=q-tX_i(q)+o(t)$ and $D\\phi_i^t(\\phi_i^{-t}(q))=I+tDX_i(q)+o(t)$; differentiability of $X_j$ gives $X_j(\\phi_i^{-t}(q))=X_j(q)-tDX_j(q)X_i(q)+o(t)$. Multiplying yields $Y_t(q)=X_j(q)-t[X_i,X_j](q)+o(t)$. Since $[X_i,X_j](q)=v\\partial_z$ for some $v\\ne0$ and $b(q)\\ne0$, $\\omega_q([X_i,X_j](q))=vb(q)\\ne0$; hence $\\omega_q(Y_t(q))=-tvb(q)+o(t)\\ne0$ for all sufficiently small nonzero $t$, so $Y_t(q)$ is transverse to $\\ker\\omega_q$. Thus $X_1(q),\\ldots,X_n(q),Y_t(q)$ are linearly independent.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The flow of $Y_t$ is $\\phi_i^t\\circ\\phi_j^s\\circ\\phi_i^{-t}$, a finite concatenation of horizontal flows; its negative times are available too. Fix such a small $t$ and compose the $n$ flows of $X_1,\\ldots,X_n$ and this flow to define $\\Psi_t:\\mathbb R^{n+1}\\to U$ near $0$, starting at $q$. Then $D\\Psi_t(0)$ has the independent columns in step 1.2, so it is invertible. By choosing $t$ and all duration parameters small, every intermediate segment stays in any prescribed neighborhood $V$ of $q$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For target $p$ near $q$, set $H(s,p)=\\Psi_t(s)-p$. At $(0,q)$, $H=0$ and its derivative in the solved $s$ coordinates is $D\\Psi_t(0)$, which is invertible. Apply [L1] to $H$ with the target $p$ as free coordinates. Conditionally, every $p$ in some open neighborhood of $q$ is $\\Psi_t(s(p))$, hence horizontally reachable by the explicit concatenation in step 2.1 within $V$. This contradicts (a), which requires an unreachable point in every such $V$.",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus every bracket $[X_i,X_j]$ vanishes. The coordinate identity from step 1.2 gives $d\\omega(X_i,X_j)=-\\omega([X_i,X_j])=0$, hence $(\\omega\\wedge d\\omega)(\\partial_z,X_i,X_j)=0$ for every pair. These evaluations determine the three-form: modulo the $n$-plane $\\ker\\omega$, the tangent space has dimension one, so every triple reduces by multilinearity and alternation to a multiple of one $\\partial_z$ and two horizontal vectors. Therefore $\\omega\\wedge d\\omega=0$. By [F4], condition (b) follows, conditionally on [L1].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 3.1",
+            "algebra",
+            "step 1.2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Conversely suppose (b) holds near $q$, with $dS=\\mu\\omega$. Since $\\mu(q)\\ne0$ and $\\omega_q\\ne0$, $dS_q\\ne0$. For each smooth piece of a horizontal path $\\gamma$, [F5] gives $(S\\circ\\gamma)'=dS(\\dot\\gamma)=\\mu\\omega(\\dot\\gamma)=0$. By [F6] the value of $S$ is constant on that piece, and hence on the finite concatenation. Choose $v$ with $dS_q(v)\\ne0$; [F7] gives $S(q+tv)=S(q)+t\\,dS_q(v)+o(t)$, so for every neighborhood $V$ of $q$ some sufficiently small nonzero $t$ has $q+tv\\in V$ and $S(q+tv)\\ne S(q)$. That point cannot be horizontally reachable from $q$ inside $V$, proving (a).",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns points q in an open state domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The one-form is assumed nowhere zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When n=1 every pairwise bracket vanishes and the same local argument applies; the accessibility implication remains local, steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero-duration paths only reach q itself; the inaccessibility clause is witnessed by a distinct point with different S value, step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain is open and all finite flow concatenations are chosen inside any prescribed neighborhood, steps 2.1–2.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The construction uses finitely many fields and deterministic local flows; the planned rank carrier is explicitly missing, steps 2.1–2.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Local inaccessibility rules out a nonzero bracket by the endpoint-map argument, then gives the Pfaff condition and integrating factor conditionally, steps 1.1–3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "A nonzero dS is constant on horizontal paths, and points of another S value exist in every neighborhood, step 4.1."
+        }
+      ]
+    },
+    "ex-tdmath-two-dimensional-pfaff-factor": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-one-form-and-horizontal-path",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$ be open, $n\\ge1$, with coordinates $(x_1,\\ldots,x_n,z)$. A $C^2$ one-form on $U$ is a field of linear functionals on tangent vectors of the form $\\omega=\\sum_{i=1}^n a_i(x,z)\\,dx_i+b(x,z)\\,dz$, where every coefficient is twice continuously differentiable. At $q\\in U$, it acts by $\\omega_q(u_1,\\ldots,u_n,w)=\\sum_i a_i(q)u_i+b(q)w$. It is nonsingular on $U$ when $\\omega_q\\ne0$ for every $q$; then $H_q:=\\ker\\omega_q$ is an $n$-dimensional subspace of $T_qU\\cong\\mathbb R^{n+1}$.\n\nFor one-forms $\\alpha,\\beta$, their exterior product is the alternating two-form $(\\alpha\\wedge\\beta)(u,v)=\\alpha(u)\\beta(v)-\\alpha(v)\\beta(u)$. For a one-form $\\alpha$ and a two-form $\\sigma$, $(\\alpha\\wedge\\sigma)(u,v,w)=\\alpha(u)\\sigma(v,w)-\\alpha(v)\\sigma(u,w)+\\alpha(w)\\sigma(u,v)$. The exterior derivative of the displayed $C^2$ form is the $C^1$ two-form\n\n$$d\\omega=\\sum_{1\\le i<j\\le n}(\\partial_i a_j-\\partial_j a_i)\\,dx_i\\wedge dx_j+\\sum_{i=1}^n(\\partial_i b-\\partial_z a_i)\\,dx_i\\wedge dz.$$\n\nA piecewise-$C^1$ path is a continuous $\\gamma:[s_0,s_1]\\to U$ with $s_0\\le s_1$ and admitting a finite partition on each closed subinterval of which it is $C^1$. It is $\\omega$-horizontal when $\\omega_{\\gamma(t)}(\\dot\\gamma(t))=0$ on the interior of each such subinterval. Endpoints where a derivative is one-sided are included by continuity. For an open $V\\subseteq U$, $p$ is horizontally reachable from $q$ within $V$ if a horizontal path in $V$ joins $q$ to $p$. Both signs of time and finite concatenations are allowed by this definition.\n\nOn a neighborhood $W$, an integrating factor for $\\omega$ is a nowhere-zero $\\mu\\in C^1(W)$ for which $\\mu\\omega=dS$ for some $S\\in C^2(W)$ with $dS$ nowhere zero. This definition is local; it asserts neither a global potential on $U$ nor a physical identification or calibration of $S$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "$dS=e^xy\\,dx+e^x\\,dy=e^x(dy+y\\,dx)=\\mu\\omega$, and $S_y=e^x>0$, so $dS$ and $\\mu$ are nowhere zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any piecewise-$C^1$ horizontal path $\\gamma$, [F1] gives $(S\\circ\\gamma)'=dS(\\dot\\gamma)=\\mu\\omega(\\dot\\gamma)=0$ on each smooth piece; therefore $S$ is constant along every finite concatenation of horizontal pieces.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is on the nonempty plane R2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The one-form is nonzero everywhere because its dy coefficient is 1, as stated in the Example and verified in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The displayed model has two coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No divisions or limiting parameter choices occur in the exact calculation, step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Horizontal-path constancy is established on each closed smooth path piece, step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The factor and potential are explicitly given, step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a verified example, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a verified example, not an iff statement."
+        }
+      ]
+    },
+    "cex-tdmath-contact-form-is-not-locally-integrable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-one-form-and-horizontal-path",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$ be open, $n\\ge1$, with coordinates $(x_1,\\ldots,x_n,z)$. A $C^2$ one-form on $U$ is a field of linear functionals on tangent vectors of the form $\\omega=\\sum_{i=1}^n a_i(x,z)\\,dx_i+b(x,z)\\,dz$, where every coefficient is twice continuously differentiable. At $q\\in U$, it acts by $\\omega_q(u_1,\\ldots,u_n,w)=\\sum_i a_i(q)u_i+b(q)w$. It is nonsingular on $U$ when $\\omega_q\\ne0$ for every $q$; then $H_q:=\\ker\\omega_q$ is an $n$-dimensional subspace of $T_qU\\cong\\mathbb R^{n+1}$.\n\nFor one-forms $\\alpha,\\beta$, their exterior product is the alternating two-form $(\\alpha\\wedge\\beta)(u,v)=\\alpha(u)\\beta(v)-\\alpha(v)\\beta(u)$. For a one-form $\\alpha$ and a two-form $\\sigma$, $(\\alpha\\wedge\\sigma)(u,v,w)=\\alpha(u)\\sigma(v,w)-\\alpha(v)\\sigma(u,w)+\\alpha(w)\\sigma(u,v)$. The exterior derivative of the displayed $C^2$ form is the $C^1$ two-form\n\n$$d\\omega=\\sum_{1\\le i<j\\le n}(\\partial_i a_j-\\partial_j a_i)\\,dx_i\\wedge dx_j+\\sum_{i=1}^n(\\partial_i b-\\partial_z a_i)\\,dx_i\\wedge dz.$$\n\nA piecewise-$C^1$ path is a continuous $\\gamma:[s_0,s_1]\\to U$ with $s_0\\le s_1$ and admitting a finite partition on each closed subinterval of which it is $C^1$. It is $\\omega$-horizontal when $\\omega_{\\gamma(t)}(\\dot\\gamma(t))=0$ on the interior of each such subinterval. Endpoints where a derivative is one-sided are included by continuity. For an open $V\\subseteq U$, $p$ is horizontally reachable from $q$ within $V$ if a horizontal path in $V$ joins $q$ to $p$. Both signs of time and finite concatenations are allowed by this definition.\n\nOn a neighborhood $W$, an integrating factor for $\\omega$ is a nowhere-zero $\\mu\\in C^1(W)$ for which $\\mu\\omega=dS$ for some $S\\in C^2(W)$ with $dS$ nowhere zero. This definition is local; it asserts neither a global potential on $U$ nor a physical identification or calibration of $S$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tdmath-exact-multiple-implies-pfaff-integrability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$ be open. Let $\\omega$ be a $C^1$ one-form on $U$, $\\mu\\in C^1(U)$ nowhere zero, and $S\\in C^2(U)$ with $dS=\\mu\\omega$. Then $\\omega\\wedge d\\omega=0$ on $U$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $\\mathbb R^3$ with coordinates $(x,y,z)$ take $\\omega=dz-y\\,dx$. It is smooth and nowhere zero because the $dz$ coefficient is $1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Its exterior derivative is $d\\omega=dx\\wedge dy$, so $\\omega\\wedge d\\omega=(dz-y\\,dx)\\wedge dx\\wedge dy=dz\\wedge dx\\wedge dy$, a nonzero coordinate volume form.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If a local $\\mu,S$ as in the refuted claim existed on any open neighborhood, [F2] would force $\\omega\\wedge d\\omega=0$ there, contradicting step 1.2 at every point. Therefore no such local exact multiple exists.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.2",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is on the nonempty open set R3."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The form is nowhere zero because its dz coefficient is 1, step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample has three coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The obstruction is nonzero at every point of R3, step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No path endpoint is used in this pointwise obstruction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness form is explicitly constructed, step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal existence claim rather than proving an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal existence claim rather than proving an iff."
+        }
+      ]
+    },
+    "cex-tdmath-closed-punctured-plane-form-is-not-exact": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-one-form-and-horizontal-path",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^{n+1}$ be open, $n\\ge1$, with coordinates $(x_1,\\ldots,x_n,z)$. A $C^2$ one-form on $U$ is a field of linear functionals on tangent vectors of the form $\\omega=\\sum_{i=1}^n a_i(x,z)\\,dx_i+b(x,z)\\,dz$, where every coefficient is twice continuously differentiable. At $q\\in U$, it acts by $\\omega_q(u_1,\\ldots,u_n,w)=\\sum_i a_i(q)u_i+b(q)w$. It is nonsingular on $U$ when $\\omega_q\\ne0$ for every $q$; then $H_q:=\\ker\\omega_q$ is an $n$-dimensional subspace of $T_qU\\cong\\mathbb R^{n+1}$.\n\nFor one-forms $\\alpha,\\beta$, their exterior product is the alternating two-form $(\\alpha\\wedge\\beta)(u,v)=\\alpha(u)\\beta(v)-\\alpha(v)\\beta(u)$. For a one-form $\\alpha$ and a two-form $\\sigma$, $(\\alpha\\wedge\\sigma)(u,v,w)=\\alpha(u)\\sigma(v,w)-\\alpha(v)\\sigma(u,w)+\\alpha(w)\\sigma(u,v)$. The exterior derivative of the displayed $C^2$ form is the $C^1$ two-form\n\n$$d\\omega=\\sum_{1\\le i<j\\le n}(\\partial_i a_j-\\partial_j a_i)\\,dx_i\\wedge dx_j+\\sum_{i=1}^n(\\partial_i b-\\partial_z a_i)\\,dx_i\\wedge dz.$$\n\nA piecewise-$C^1$ path is a continuous $\\gamma:[s_0,s_1]\\to U$ with $s_0\\le s_1$ and admitting a finite partition on each closed subinterval of which it is $C^1$. It is $\\omega$-horizontal when $\\omega_{\\gamma(t)}(\\dot\\gamma(t))=0$ on the interior of each such subinterval. Endpoints where a derivative is one-sided are included by continuity. For an open $V\\subseteq U$, $p$ is horizontally reachable from $q$ within $V$ if a horizontal path in $V$ joins $q$ to $p$. Both signs of time and finite concatenations are allowed by this definition.\n\nOn a neighborhood $W$, an integrating factor for $\\omega$ is a nowhere-zero $\\mu\\in C^1(W)$ for which $\\mu\\omega=dS$ for some $S\\in C^2(W)$ with $dS$ nowhere zero. This definition is local; it asserts neither a global potential on $U$ nor a physical identification or calibration of $S$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb R^n$ be piecewise-$C^1$. If $a=b$, define both line integrals below to be $0$. If $a<b$, choose an admissible partition $a=t_0<\\cdots<t_m=b$ and a continuous derivative extension $v_i$ on each piece. Let $f$ be a continuous scalar field and $F$ a continuous vector field on a set containing the trace of $\\gamma$. The **scalar line integral with respect to arc length** and the **vector-field line integral** are\n\n$$\\int_\\gamma f\\,ds:=\\sum_{i<m}\\int_{t_i}^{t_{i+1}}f(\\gamma(t))\\lVert v_i(t)\\rVert_2\\,dt,$$\n\n$$\\int_\\gamma F\\cdot d\\mathbf r:=\\sum_{i<m}\\int_{t_i}^{t_{i+1}}\\langle F(\\gamma(t)),v_i(t)\\rangle\\,dt,$$\n\nwhere the inner product is [[def-euclidean-inner-product]]. The summands exist by [[thm-continuous-implies-integrable]]. Independence of the admissible partition is proved in [[lem-line-integrals-are-independent-of-the-piecewise-c1-partition]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gradient-theorem-for-line-integrals",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open, let $\\phi:U\\to\\mathbb R$ be $C^1$, and let $\\gamma:[a,b]\\to U$ be piecewise-$C^1$. Then\n\n$$\\int_\\gamma\\nabla\\phi\\cdot d\\mathbf r=\\phi(\\gamma(b))-\\phi(\\gamma(a)).$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $D=\\mathbb R^2\\setminus\\{(0,0)\\}$ and $\\omega=P\\,dx+Q\\,dy$ with $P(x,y)=-y/(x^2+y^2)$ and $Q(x,y)=x/(x^2+y^2)$. The domain $D$ is open since each nonzero point has a ball avoiding the origin, and the coefficients are smooth with $(P,Q)\\ne(0,0)$ at every point. It is path-connected: if the segment joining $p,q\\in D$ avoids $0$, use that segment; if it contains $0$, then $p,q,0$ are collinear, and a nonzero vector $r$ perpendicular to $p$ makes both segments $[p,r]$ and $[r,q]$ avoid $0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Writing $r^2=x^2+y^2$, direct differentiation gives $\\partial_xQ=(y^2-x^2)/r^4=\\partial_yP$, so $d\\omega=(\\partial_xQ-\\partial_yP)dx\\wedge dy=0$ on $D$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The unit circle $\\gamma(t)=(\\cos t,\\sin t)$, $0\\le t\\le2\\pi$, lies in $D$ and is closed. Along it $(P,Q)=(-\\sin t,\\cos t)=\\gamma'(t)$, hence [F2] gives $\\int_\\gamma\\omega=\\int_0^{2\\pi}1\\,dt=2\\pi$ by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If $\\omega=dS$ globally on $D$, then $F=\\nabla S$ for the corresponding vector field, and [F3] would give $\\int_\\gamma\\omega=S(\\gamma(2\\pi))-S(\\gamma(0))=0$, contradicting step 2.1. Thus $\\omega$ is closed but not globally exact. This does not assert that every possible global integrating factor is absent.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The punctured plane is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The coefficient vector (-y,x)/(x^2+y^2) never vanishes on the punctured plane, step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness is two-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The loop is closed with coinciding endpoints, and its period remains 2pi, step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The gradient theorem applies to the closed smooth loop with the same start and end, step 2.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The form and unit-circle loop are explicitly specified, steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal closed-implies-exact claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a universal closed-implies-exact claim."
+        }
+      ]
+    }
+  }
+}

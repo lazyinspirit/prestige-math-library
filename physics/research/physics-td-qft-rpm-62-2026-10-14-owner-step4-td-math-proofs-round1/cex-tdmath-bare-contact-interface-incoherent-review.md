@@ -1,0 +1,9 @@
+# Scientific release: cex-tdmath-bare-contact-interface-incoherent
+
+Run: physics-td-qft-rpm-62-2026-10-14
+Owner: /root/resolve_step4_td_math_proofs
+Disposition: confirmed-countermodel-interface-gap
+
+The old counterexample independently assigned thermal equivalence, contrary to the supplier definition through mutual compound accessibility. The replacement realizes it through an actual encoded accessibility relation. Whole counterexample reviewed: Gamma_n=R^(n+1), weightn, summed energy and concatenated work coordinates realize every join formula. The only nonsingleton compound-equivalence classes are generated at mass2 between the equal-state separated pair and its joined mass2 representation. Therefore x~T x holds for a Gamma1 state, but its Gamma2 join z is not ~T x: the relevant separated and joined mass3 compounds are distinct singleton classes. Universal equal-mass accessibility gives a second model with C1 true on identical coordinates. Neither model claims all T1–T5 or A/S axioms; both respect the thermal-equivalence defining rule. Public Statement refuted is unchanged.
+
+Review scope: complete actual pre-edit source and exact supplier interfaces read; complete final private carrier reviewed, with at most two review/repair cycles. This is owner scientific evidence, not a native independent verdict, certification, hashing or gate. No original/imported item was edited. No source/stamp/ledger/shared metadata/check/test/transition was written or run. For Georgii1994 reliance, the entire1300-line extraction of the cached25-page paper was read in two contiguous halves; its private extraction is Georgii-LDPsuperstable-full.txt in this directory, from research/physics-td-qft-rpm-62-2026-10-14-owner-native-gate-td-round-1/source-reading/Georgii-LDPsuperstable-current.pdf. No unperformed reading of other external full texts or absent historical bytes is asserted. The original nine proposals remain unchanged.

@@ -1,0 +1,447 @@
+[
+  {
+    "order": 263,
+    "id": "td-thermodynamic-framework",
+    "kind": "A",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Thermodynamic Framework",
+    "companion": "td-thermodynamic-framework-examples",
+    "requires": [
+      "the-zfc-axioms-and-basic-set-constructions",
+      "roots-and-rational-powers",
+      "monotone-sequences-and-cauchy-completeness",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "limits-of-real-functions",
+      "construction-of-the-natural-numbers",
+      "vector-spaces-and-subspaces",
+      "the-total-derivative",
+      "rn-as-a-normed-space",
+      "measures-and-their-basic-properties"
+    ],
+    "items": [
+      {
+        "id": "def-td-si-quantities",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "SI quantities and unit conventions",
+        "statement": "This framework uses the modern International System of Units (SI). A scalar quantity has a real numerical value with the stated unit; a vector quantity has a value in the stated real coordinate space with the stated component unit. The numerical coordinates used elsewhere on this page are divided by their displayed SI units before they are placed in a Euclidean coordinate space.\n\nThe model's energy coordinate $U$ and its process-transfer values $Q$ and $W_{\\mathrm{on}}$ are scalar energies measured in joules (J). Volume $V$ is a scalar measured in cubic metres (m³); amount of substance $n_j$ for species $j$ is a scalar measured in moles (mol); and a particle count $N_j$, when separately used in a microscopic model, is dimensionless. Time $t$ is measured in seconds (s), mass $M$ in kilograms (kg), and a translational velocity $\\mathbf v_{\\mathrm{cm}}$ is a vector in $\\mathbb R^3$ with components measured in metres per second (m/s). The physical meanings of $U,Q,W_{\\mathrm{on}}$ are fixed by the state and process definitions, not by their units alone.\n\nThe relevant exact SI relations are\n\n$$1\\,\\mathrm J=1\\,\\mathrm{kg\\,m^2\\,s^{-2}},\\qquad 1\\,\\mathrm N=1\\,\\mathrm{kg\\,m\\,s^{-2}},\\qquad 1\\,\\mathrm{Pa}=1\\,\\mathrm{J\\,m^{-3}}.$$\n\nThe kelvin (K) is the SI unit of thermodynamic temperature. The Boltzmann constant has the exact defining value $k_{\\mathrm B}=1.380649\\times10^{-23}\\,\\mathrm{J\\,K^{-1}}$. The mole is the SI unit of amount of substance; the Avogadro constant has the exact defining value $N_{\\mathrm A}=6.02214076\\times10^{23}\\,\\mathrm{mol^{-1}}$. When a model uses particle counts, $n_j=N_j/N_{\\mathrm A}$. The molar gas constant is derived as $R=N_{\\mathrm A}k_{\\mathrm B}=8.31446261815324\\,\\mathrm{J\\,mol^{-1}\\,K^{-1}}$. This framework does not set $k_{\\mathrm B}=1$. These SI definitions do not themselves introduce a thermodynamic temperature state function or entropy function.\n\nWithin the macroscopic framework, $(U,V,n_j)$ are adopted state coordinates. A quantity's status as primitive in this model is separate from whether its SI unit is a base or derived unit.",
+        "deps": [],
+        "dependency_roles": {},
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "BIPM, The International System of Units, 9th edition, version 4.01, §§2.3.1–2.3.2 and Table 4",
+              "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics",
+        "physical_scope": "SI types and units used by the nonrelativistic macroscopic thermodynamic framework; this item does not define a thermometer calibration or an equation of state."
+      },
+      {
+        "id": "def-td-system-and-permitted-exchanges",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Thermodynamic systems and permitted exchanges",
+        "statement": "A thermodynamic system $s$ is a model-selected body or collection of bodies together with a specified outer boundary $\\partial s$. The boundary separates the system from its environment for the purpose of classifying transfers; it need not be a material wall. A compound system has named subsystems inside one outer boundary. Transfers between its subsystems are internal to the compound; only transfers across $\\partial s$ are external.\n\nThe model specifies which transfers across $\\partial s$ are permitted. A system is closed when no matter crosses its outer boundary; energy may cross. A system is open when only the named matter species and other named transfer channels may cross its boundary. A system or compound is isolated when no matter or energy crosses its outer boundary. These terms classify the declared model boundary, not the accuracy with which a real apparatus approximates it.\n\nThis boundary classification alone asserts neither an energy-balance law nor equilibration.",
+        "deps": [],
+        "dependency_roles": {},
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ling, Moebs, and Sanny, University Physics Volume 2, §3.1 Thermodynamic Systems",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/3-1-thermodynamic-systems"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §II.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics",
+        "physical_scope": "Boundary and exchange classifications for the nonrelativistic macroscopic thermodynamic framework; no energy-balance law is asserted here."
+      },
+      {
+        "id": "def-td-galilean-rest-frame",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Galilean inertial charts and the center-of-mass rest frame",
+        "statement": "For this nonrelativistic framework, a Newtonian event-coordinate domain is the Cartesian product $I\\times\\mathbb R^3$ ([[def-cartesian-product]]), where $I\\subseteq\\mathbb R$ is an open time interval as in [[def-interval]], measured in seconds, and $\\mathbb R^3$ has the Euclidean inner product and norm of [[def-euclidean-inner-product]] (the norm properties follow from [[thm-cauchy-schwarz-and-the-euclidean-norm]]); lengths are measured in metres as in [[def-td-si-quantities]]. A Galilean inertial chart labels events in such a domain by coordinates $(t,\\mathbf x)$. If a second chart uses the translated time domain $I'=I+\\tau$, the allowed coordinate changes are\n$$t'=t+\\tau,\\qquad \\mathbf x'=R\\mathbf x+\\mathbf a-\\mathbf b t,$$\nwhere $\\tau$ is a constant time shift measured in seconds, $\\mathbf a\\in\\mathbb R^3$ is a constant spatial translation measured in metres, $\\mathbf b\\in\\mathbb R^3$ is a constant boost velocity measured in metres per second, and $R\\in M_{3\\times3}(\\mathbb R)$ is a dimensionless constant matrix ([[def-matrix-space]]) satisfying $R^{\\mathsf T}R=I_3$ using matrix transpose and product ([[def-transpose-of-a-matrix]], [[def-matrix-product-and-identity-matrix]]), with $I_3$ the identity matrix. In the coordinate formula, $(R\\mathbf x)_i:=\\sum_{k<3}R_{ik}x_k$ for $i<3$. Thus time is absolute in this model and no Lorentzian structure is used. Here “frame” means this coordinate chart, not an observer congruence or a basis/tetrad field.\n\nFor a finite point-mass representation with $N\\in\\mathbb N$ ([[def-natural-numbers]]), $N\\ge1$, masses $m_i>0$ in kg at positions $\\mathbf x_i\\in\\mathbb R^3$ in metres for $i<N$, assume $M:=\\sum_{i<N}m_i>0$ ([[def-finite-sum]]) and define the center-of-mass coordinates by $X_{\\mathrm{cm},j}:=M^{-1}\\sum_{i<N}m_i x_{i,j}$ for $j<3$; these three real coordinates form $\\mathbf X_{\\mathrm{cm}}$. The masses are invariant under the allowed chart changes. Other mechanical models must supply their total mass and center-of-mass map; this thermodynamic item does not construct those quantities for a continuum or field model. Every admitted mechanical model must also supply center-of-mass maps and velocities that transform under the displayed Galilean chart changes by $\\mathbf X'_{\\mathrm{cm}}(t')=R\\mathbf X_{\\mathrm{cm}}(t)+\\mathbf a-\\mathbf b t$ and $\\mathbf v'_{\\mathrm{cm}}(t')=R\\mathbf v_{\\mathrm{cm}}(t)-\\mathbf b$, where $t'=t+\\tau$; these are kinematic compatibility conditions, not dynamical theorems about arbitrary mechanical models. When a model supplies three coordinate functions $X_{\\mathrm{cm},j}:I\\to\\mathbb R$ for $j<3$ as in [[def-function-space]], assemble its center-of-mass position as $\\mathbf X_{\\mathrm{cm}}(t):=(X_{\\mathrm{cm},0}(t),X_{\\mathrm{cm},1}(t),X_{\\mathrm{cm},2}(t))\\in\\mathbb R^3$. At a time $t\\in I$ where each component limit exists, define the velocity by $v_{\\mathrm{cm},j}(t)=\\lim_{h\\to0}(X_{\\mathrm{cm},j}(t+h)-X_{\\mathrm{cm},j}(t))/h$ through $H_t:=\\{h\\in\\mathbb R:t+h\\in I,\\ h\\ne0\\}$, for each $j<3$, using the scalar limit of [[def-function-limit]]; these three components form $\\mathbf v_{\\mathrm{cm}}(t)$. A statewise instantaneous center-of-mass rest chart at a specified time $t$ is the Galilean chart obtained by the pure boost $\\mathbf b=\\mathbf v_{\\mathrm{cm}}(t)$ with $R=I_3$, $\\mathbf a=0$, and $\\tau=0$. Its center-of-mass velocity vanishes at that event, but need not vanish at other times because the boost is constant. For an interval $J\\subseteq I$ on which $\\mathbf v_{\\mathrm{cm}}$ exists at every time, a single Galilean chart has zero center-of-mass velocity throughout $J$ if and only if $\\mathbf v_{\\mathrm{cm}}$ is constant on $J$: in such a chart $R\\mathbf v_{\\mathrm{cm}}(t)=\\mathbf b$ for every $t\\in J$, so $\\mathbf v_{\\mathrm{cm}}(t)=R^{\\mathsf T}\\mathbf b$ is constant, and conversely a constant velocity $\\mathbf v_0$ is made zero by the pure boost $\\mathbf b=\\mathbf v_0$. For a fixed closed body with total mass $M>0$ in kg, its separately tracked translational kinetic energy in a selected inertial chart is $K_{\\mathrm{cm}}=\\tfrac12M\\|\\mathbf v_{\\mathrm{cm}}\\|_2^2$ in joules; under a pure boost it is $K'_{\\mathrm{cm}}=\\tfrac12M\\|\\mathbf v_{\\mathrm{cm}}-\\mathbf b\\|_2^2$.\n\nIn this framework $U$ denotes the scalar internal-energy coordinate evaluated at a state in its statewise instantaneous center-of-mass rest chart. Thus an equilibrium preparation's internal energy is evaluated using the boost selected by its center-of-mass velocity at that preparation; a process using one chart with the center of mass at rest throughout its interval must separately satisfy the constant-velocity condition above. Bulk translational kinetic energy and any separately tracked external-field potential energy are excluded from $U$. For a given state, the model treats $U$ as invariant between its center-of-mass rest charts that differ only by spatial translation or orthogonal orientation, and fixes its numerical zero, including any retained or subtracted constituent rest-energy offsets, consistently across the composition changes it admits. This is a nonrelativistic modeling convention, not a derived energy-transformation law.",
+        "deps": [
+          "def-td-si-quantities",
+          "def-interval",
+          "def-cartesian-product",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-function-space",
+          "def-function-limit",
+          "def-natural-numbers",
+          "def-finite-sum",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix"
+        ],
+        "dependency_roles": {
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-interval": "mathematical-premise",
+          "def-cartesian-product": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "def-function-space": "mathematical-premise",
+          "def-function-limit": "mathematical-premise",
+          "def-natural-numbers": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "OpenStax, University Physics Volume 3, §5.1 Invariance of Physical Laws",
+              "url": "https://openstax.org/books/university-physics-volume-3/pages/5-1-invariance-of-physical-laws"
+            },
+            {
+              "title": "OpenStax, University Physics Volume 1, §5.2 Newton's First Law",
+              "url": "https://openstax.org/books/university-physics-volume-1/pages/5-2-newtons-first-law"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics",
+        "physical_scope": "The Newtonian frame convention and internal-energy split used in this thermodynamic framework, restricted to mechanical models that supply positive mass, center-of-mass data, and Galilean-compatible transformations; no relativistic energy law or dynamical theorem is asserted."
+      },
+      {
+        "id": "def-td-equilibrium-state-domain",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Equilibrium state domains",
+        "statement": "Fix a system $s$ as in [[def-td-system-and-permitted-exchanges]]. A material constitution $c$ specifies a finite ordered list of named species $(\\sigma_1,\\ldots,\\sigma_r)$, with $r\\in\\mathbb N$ ([[def-natural-numbers]]) and $r\\ge1$, and the model parameters that identify the material. An equilibrium-preparation label in the set $E_c$ selects a single macrostate that the model designates as an equilibrium state for constitution $c$. The equilibrium designation is primitive model input here; it is not a dynamical equilibration theorem or a global-stability claim. For each admitted preparation, its mechanical model supplies a positive total mass and a defined center-of-mass velocity as in [[def-td-galilean-rest-frame]], so the allowed boost can select a center-of-mass rest chart in which its internal energy is recorded. A preparation for which these mechanical data are unavailable lies outside this framework. A statistical preparation that instead supplies a normalized probability measure on a declared measurable space is as in [[def-probability-measure]] and belongs to a separate statistical branch; it is an element of $E_c$ only if that model also assigns it a single equilibrium macrostate.\n\nEach $e\\in E_c$ is assigned a unique coordinate tuple $(U,V,n_1,\\ldots,n_r)$, where $U$ is the adopted internal-energy coordinate in joules as in [[def-td-galilean-rest-frame]], $V>0$ is volume in cubic metres, and each $n_j>0$ is an amount in moles; the SI unit assignments are those of [[def-td-si-quantities]]. These are real-valued mole amounts in the bulk continuous chart, not integer particle counts. Define the dimensionless numerical coordinates $\\hat U=U/(1\\,\\mathrm J)$, $\\hat V=V/(1\\,\\mathrm{m^3})$, and $\\hat n_j=n_j/(1\\,\\mathrm{mol})$. The representation map $\\pi_c:E_c\\to\\mathbb R^{r+2}$ is a function as in [[def-function]], sends $e$ to $(\\hat U,\\hat V,\\hat n_1,\\ldots,\\hat n_r)$, and the equilibrium state domain is its image $D_c:=\\pi_c(E_c)\\subseteq\\mathbb R^{r+2}$ using inclusion as in [[def-subset-and-proper-subset]]. For $x=(\\hat U,\\hat V,\\hat n_1,\\ldots,\\hat n_r)\\in D_c$, write $U_c(x):=\\hat U\\,\\mathrm J$, $V_c(x):=\\hat V\\,\\mathrm{m^3}$, and $n_{c,j}(x):=\\hat n_j\\,\\mathrm{mol}$ for its dimensioned coordinates. Preparation labels with the same coordinate tuple represent the same thermodynamic state in this framework. Statistical preparations that specify a probability law belong to a separate branch and are not used in this state-domain definition.\n\nFor fixed $n=(n_1,\\ldots,n_r)$ in a chart used by the model, write $\\Gamma_{c,n}=\\{(\\hat U,\\hat V):(\\hat U,\\hat V,\\hat n)\\in D_c\\}\\subseteq\\mathbb R^2$, with inclusion notation as in [[def-subset-and-proper-subset]]. This designated slice is a specified nonempty open convex subset. With the dimensionless Euclidean norm $\\|\\cdot\\|_2$ of [[def-euclidean-inner-product]] (a norm by [[thm-cauchy-schwarz-and-the-euclidean-norm]]), openness means that every $z\\in\\Gamma_{c,n}$ has some $\\epsilon>0$ for which $\\{w\\in\\mathbb R^2:\\|w-z\\|_2<\\epsilon\\}\\subseteq\\Gamma_{c,n}$. Convexity means that $(1-t)z_0+tz_1\\in\\Gamma_{c,n}$ whenever $z_0,z_1\\in\\Gamma_{c,n}$ and $t\\in[0,1]$, as in [[def-convex-subset-of-euclidean-space]]. Both properties are assumptions about the particular slice, not conclusions about every $D_c$; no coordinate tuple is presumed physically realizable merely because it lies in an ambient Euclidean space. A zero amount for an absent species belongs only to a separately specified boundary domain and is not in this positive-mole chart.\n\nIn a simple-compressible chart, volume $V$ is the only mechanical coordinate in the equilibrium representation; composition changes, fields, polarization, surface terms, and other mechanical coordinates require a separately declared state domain and exchange rules. No pressure or reversible-work formula follows from this definition.",
+        "deps": [
+          "def-td-si-quantities",
+          "def-td-system-and-permitted-exchanges",
+          "def-td-galilean-rest-frame",
+          "def-natural-numbers",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-convex-subset-of-euclidean-space",
+          "def-probability-measure",
+          "def-function",
+          "def-subset-and-proper-subset"
+        ],
+        "dependency_roles": {
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-system-and-permitted-exchanges": "formulation-prerequisite",
+          "def-td-galilean-rest-frame": "formulation-prerequisite",
+          "def-natural-numbers": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "def-convex-subset-of-euclidean-space": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise",
+          "def-function": "mathematical-premise",
+          "def-subset-and-proper-subset": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §II.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §III.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Ling, Moebs, and Sanny, University Physics Volume 2, §3.1 Thermodynamic Systems",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/3-1-thermodynamic-systems"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "library": "physics",
+        "physical_scope": "Equilibrium macrostates of nonrelativistic, macroscopic, simple-compressible systems represented by internal energy, volume, and named mole amounts, with admitted preparations recorded in a supplied center-of-mass rest chart; no stability or constitutive law follows from this definition."
+      },
+      {
+        "id": "def-td-process-and-protocol",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Thermodynamic process records and transfer conventions",
+        "statement": "For a system $s$ of constitution $c$, the process model fixes one Galilean inertial chart $g_s$ for kinetic-energy bookkeeping and transfer records and holds that chart fixed throughout each process. A process record is a tuple\n$$P=(I_P,x_P^-,x_P^+,z_P,\\kappa_P,r_P).$$\nFor each finite closed time interval $I_P=[t_0,t_1]\\subseteq\\mathbb R$ with $t_0<t_1$ as in [[def-interval]], measured in seconds, its component fields have these types: $x_P^-,x_P^+\\in D_c$ are equilibrium endpoint coordinates from [[def-td-equilibrium-state-domain]]; $Z_s$ is the model-declared configuration space of the system, its auxiliaries and devices; $Z_s^{\\mathrm{eq}}\\subseteq Z_s$ is the model-declared set of equilibrium configurations and $\\xi_s:Z_s^{\\mathrm{eq}}\\to D_c$ assigns their state coordinates; $z_P:I_P\\to Z_s$ is a function ([[def-function]]); $\\mathcal K_s$ is the model-declared set of control/contact records and $\\kappa_P\\in\\mathcal K_s$; and $\\mathcal R_s$ is the model-declared set of signed transfer records and $r_P\\in\\mathcal R_s$. These fields form a finite Cartesian product ([[def-cartesian-product]]). The admitted records $\\mathcal P_s$ are the model-specified subset of tuples with these types that additionally satisfy $z_P(t_0),z_P(t_1)\\in Z_s^{\\mathrm{eq}}$, $\\xi_s(z_P(t_0))=x_P^-$, and $\\xi_s(z_P(t_1))=x_P^+$. No continuity or differentiability is imposed on $z_P$, and its values at interior times need not represent equilibrium states.\n\nFor an endpoint bookkeeping quantity $F$, write $\\Delta F=F_P^+-F_P^-$. A closed record in the sense of [[def-td-system-and-permitted-exchanges]] has no matter crossing the chosen outer boundary. The core closed-record class $\\mathcal P_{\\mathrm{cl}}(s)\\subseteq\\mathcal P_s$ ([[def-subset-and-proper-subset]]) contains only records for which the system has a supplied total mass $M>0$ and defined center-of-mass velocities at both endpoints in the fixed chart $g_s$, so the kinetic energies $K_{\\mathrm{cm}}^\\pm=\\tfrac12M\\|\\mathbf v_{\\mathrm{cm}}^\\pm\\|_2^2$ are defined as in [[def-td-galilean-rest-frame]]. It further requires $\\Delta K_{\\mathrm{cm}}=0$ and $\\Delta U_{\\mathrm{ext}}=0$, where $U_{\\mathrm{ext}}$ denotes any model-specified external-field potential energy tracked separately from the internal-energy coordinate in $g_s$. Other process classes require an expanded energy bookkeeping rule.\n\nFor each $P\\in\\mathcal P_{\\mathrm{cl}}(s)$, the protocol supplies maps $Q,W_{\\mathrm{on}}:\\mathcal P_{\\mathrm{cl}}(s)\\to\\mathbb R$ whose values are interpreted in joules as in [[def-td-si-quantities]] and whose energy bookkeeping uses $g_s$. $Q[P]>0$ means energy enters the system through the declared thermal-transfer channel; $W_{\\mathrm{on}}[P]>0$ means mechanical work is done on the system. These are functionals of the process record, not state functions of $x_P^-$ and $x_P^+$. Heat is the protocol-assigned thermal mode of energy transfer, not a quantity stored in the equilibrium state. A record is adiabatic exactly when $Q[P]=0$. A closed record may still exchange energy; it is not thereby isolated.\n\nA preparation is a model-specified rule selecting the particular initial equilibrium state $x_P^-$. A statistical extension may instead specify a normalized probability measure on a declared measurable space, as in [[def-probability-measure]]; such a statistical preparation is outside this deterministic process class. A preparation does not assert later equilibration. An admitted record may pass through nonequilibrium configurations even though both endpoints lie in $D_c$.",
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-system-and-permitted-exchanges",
+          "def-td-si-quantities",
+          "def-td-galilean-rest-frame",
+          "def-interval",
+          "def-cartesian-product",
+          "def-function",
+          "def-probability-measure",
+          "def-subset-and-proper-subset"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-system-and-permitted-exchanges": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-galilean-rest-frame": "formulation-prerequisite",
+          "def-interval": "mathematical-premise",
+          "def-cartesian-product": "mathematical-premise",
+          "def-function": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise",
+          "def-subset-and-proper-subset": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tong, Statistical Physics, §4.2 The First Law, full author-hosted HTML section",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S4"
+            },
+            {
+              "title": "Ling, Moebs, and Sanny, University Physics Volume 2, §§3.2–3.3",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/3-2-work-heat-and-internal-energy"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §II.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics",
+        "physical_scope": "Process records with equilibrium endpoints and fixed-chart energy bookkeeping in the nonrelativistic macroscopic thermodynamic framework; trajectories may include nonequilibrium configurations and carry no regularity assumption unless a subclass adds one."
+      },
+      {
+        "id": "post-td-bulk-additivity",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Additive separated systems and tagged bulk scaling",
+        "statement": "Let $A$ and $B$ be two named subsystems with disjoint physical regions as in [[def-td-system-and-permitted-exchanges]], combined as a compound system $A\\sqcup B$ inside a declared outer boundary. Fix their material constitutions $c_A,c_B$, each with a finite ordered list of distinct species labels as in [[def-td-equilibrium-state-domain]]. Fix an ordering $(\\sigma_1,\\ldots,\\sigma_r)$ of the labels occurring in either list, each occurring once, and use this as the species list of the compound constitution $c_{A\\sqcup B}$. For $s\\in\\{A,B,A\\sqcup B\\}$, write $D_s:=D_{c_s}$ and use $U_s,V_s$ for its dimensioned coordinate maps. For every $1\\le j\\le r$, define the aligned amount map $a_{s,j}:D_s\\to[0,\\infty)\\,\\mathrm{mol}$ by $a_{s,j}(x):=n_{c_s,k}(x)$ if $\\sigma_j$ is the $k$-th species in $c_s$'s list, and $a_{s,j}(x):=0\\,\\mathrm{mol}$ if it is absent. Distinctness makes $k$ unique. The absent-species value is a bookkeeping map on the existing $D_s$; it does not insert a zero coordinate into that constitution's positive-mole chart or assert a boundary-state extension.\n\nThe model's admitted separated pairs form a specified subset $\\mathcal C_{AB}\\subseteq D_A\\times D_B$ using [[def-subset-and-proper-subset]] and [[def-cartesian-product]]. Adopt a composition function $\\kappa_{AB}:\\mathcal C_{AB}\\to D_{A\\sqcup B}$ ([[def-function]]) such that, for every $(x_A,x_B)\\in\\mathcal C_{AB}$ and every $1\\le j\\le r$, its output satisfies\n$$U_{A\\sqcup B}(\\kappa_{AB}(x_A,x_B))=U_A(x_A)+U_B(x_B),\\qquad V_{A\\sqcup B}(\\kappa_{AB}(x_A,x_B))=V_A(x_A)+V_B(x_B),\\qquad a_{A\\sqcup B,j}(\\kappa_{AB}(x_A,x_B))=a_{A,j}(x_A)+a_{B,j}(x_B).$$\nAll quantities have the SI units of [[def-td-si-quantities]]. Each union species is present in at least one constituent with positive amount, so the summed amount is positive and agrees with the compound's $j$-th coordinate. The existence of an output in the declared $D_{A\\sqcup B}$ is part of the adopted model, not a consequence of positivity.\n\nHere “extensive coordinates” means precisely the named coordinates declared additive by this postulate. This is an idealized composition rule: cross-interface and long-range interaction energy is omitted from $U_{A\\sqcup B}$, rather than asserted to vanish in nature. The postulate does not assert that every pair of subsystem states is physically admissible.\n\nThe framework's bulk family is a tagged family of material types. For each dimensionless scale $\\lambda>0$ the model may designate a tag $c^{(\\lambda)}$ with the same ordered species list and SI coordinate conventions as $c$, and a subset $B_{c,\\lambda}\\subseteq D_c$ of states admitting a scaled copy, with inclusion as in [[def-subset-and-proper-subset]]. For $x=(\\hat U,\\hat V,\\hat n_1,\\ldots,\\hat n_r)\\in B_{c,\\lambda}$, the scaling map is the function $\\delta_\\lambda:B_{c,\\lambda}\\to D_{c^{(\\lambda)}}$ ([[def-function]]) given by $\\delta_\\lambda(x)=(\\lambda\\hat U,\\lambda\\hat V,\\lambda\\hat n_1,\\ldots,\\lambda\\hat n_r)$. The tag matters: $c^{(\\lambda)}$ is not silently identified with $c$. This postulate specifies the coordinate scaling model and energy additivity only; it does not postulate entropy additivity or exact scaling for every finite physical body.\n\nThis is an adopted physical composition rule, not a deduction from SI units or from the mathematics of Cartesian products.",
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-system-and-permitted-exchanges",
+          "def-td-si-quantities",
+          "def-cartesian-product",
+          "def-function",
+          "def-subset-and-proper-subset"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-system-and-permitted-exchanges": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-cartesian-product": "mathematical-premise",
+          "def-function": "mathematical-premise",
+          "def-subset-and-proper-subset": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §II.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Ling, Moebs, and Sanny, University Physics Volume 2, §3.1 Thermodynamic Systems",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/3-1-thermodynamic-systems"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "library": "physics",
+        "physical_scope": "Separated macroscopic subsystems in the declared bulk family when interface and long-range interaction energy are excluded; no claim is made for interacting, surface-dominated, or gravitational systems."
+      },
+      {
+        "id": "post-td-first-law-energy",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "First-law energy balance for closed process records",
+        "statement": "For every admitted $P\\in\\mathcal P_{\\mathrm{cl}}(s)$ with equilibrium endpoints $x_P^-,x_P^+\\in D_c$, fixed material constitution, zero change in center-of-mass kinetic energy, and zero change in separately tracked external-field potential energy in the fixed chart selected by the process model, the adopted model balance is\n$$U_c(x_P^+)-U_c(x_P^-)=Q[P]+W_{\\mathrm{on}}[P],$$\nwhere $U_c$ is the dimensioned energy-coordinate map of [[def-td-equilibrium-state-domain]].\n\nHere the internal-energy coordinate is evaluated in the center-of-mass rest frame as in [[def-td-galilean-rest-frame]], while $Q[P]$ and $W_{\\mathrm{on}}[P]$ are the protocol transfers defined by [[def-td-process-and-protocol]], in joules as in [[def-td-si-quantities]]. The sign convention is positive $Q$ into the system and positive $W_{\\mathrm{on}}$ for work done on it. If $P$ is adiabatic, no thermal energy crosses its selected outer boundary throughout the record, so $H_P^{\\mathrm{in}}(t)=H_P^{\\mathrm{out}}(t)=0$ for every $t\\in I_P$ and hence $Q[P]=0$; the same adopted balance gives $W_{\\mathrm{on}}[P]=U_c(x_P^+)-U_c(x_P^-)$.\n\nThis equation is an adopted physical postulate of the stated framework. It is not deduced here from a mechanical model or from experimental observations. Records with matter exchange or nonzero changes in omitted kinetic or external-field energy require a separately specified balance and are outside this item.",
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-galilean-rest-frame",
+          "def-td-process-and-protocol",
+          "def-td-si-quantities"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-galilean-rest-frame": "formulation-prerequisite",
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tong, Statistical Physics, §4.2 The First Law, full author-hosted HTML section",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S4"
+            },
+            {
+              "title": "Ling, Moebs, and Sanny, University Physics Volume 2, §3.3 First Law of Thermodynamics",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/3-3-first-law-of-thermodynamics"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §III.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "library": "physics",
+        "physical_scope": "Closed nonrelativistic macroscopic process records with equilibrium endpoints, fixed material constitution, and zero change in center-of-mass kinetic energy and separately tracked external-field potential energy, all booked in the fixed Galilean chart selected by the process model."
+      }
+    ]
+  },
+  {
+    "order": 264,
+    "id": "td-thermodynamic-framework-examples",
+    "kind": "B",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Thermodynamic Framework — Examples",
+    "companion": "td-thermodynamic-framework",
+    "requires": [
+      "td-thermodynamic-framework"
+    ],
+    "items": [
+      {
+        "id": "ex-td-system-exchange-boundaries",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Classifying closed, open, and isolated system boundaries",
+        "statement": "As defined in [[def-td-system-and-permitted-exchanges]], choose the gas inside a sealed cylinder with a conducting wall and movable piston as the system. If the outer boundary allows energy transfer but no matter transfer, it is closed. Choose instead a vessel whose outlet allows water vapour to cross the boundary; it is open because that named matter species crosses. An ideal rigid, impermeable, thermally insulating enclosure with no other external energy channel is isolated. These classifications depend on the selected boundary and stipulated channels; they do not claim that a real apparatus is perfectly sealed or insulated.",
+        "deps": [
+          "def-td-system-and-permitted-exchanges"
+        ],
+        "dependency_roles": {
+          "def-td-system-and-permitted-exchanges": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ling, Moebs, and Sanny, University Physics Volume 2, §3.1 Thermodynamic Systems",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/3-1-thermodynamic-systems"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics",
+        "physical_scope": "Illustrative boundary classifications in the macroscopic thermodynamic model; the setups below are idealized examples, not reported measurements."
+      },
+      {
+        "id": "ex-td-si-unit-arithmetic",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Pressure-volume and force-distance units",
+        "statement": "The SI units make both a pressure-volume product and a force-distance product have units of energy. In particular, one pascal times one cubic metre is one joule, and one newton times one metre is one joule.",
+        "deps": [
+          "def-td-si-quantities"
+        ],
+        "dependency_roles": {
+          "def-td-si-quantities": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "BIPM, The International System of Units, 9th edition, version 4.01, Table 4",
+              "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics",
+        "physical_scope": "Unit arithmetic for the SI quantities used in the thermodynamic framework; the example does not assert a pressure-volume work law.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-first-law-sign-convention",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Converting work-on and work-by conventions",
+        "statement": "Some sources take work done by the system as positive and write the first law as $\\Delta U=Q-W_{\\mathrm{by}}$. The present framework takes work done on the system as positive. Setting $W_{\\mathrm{by}}[P]:=-W_{\\mathrm{on}}[P]$ converts one equation to the other.",
+        "deps": [
+          "def-td-process-and-protocol",
+          "post-td-first-law-energy"
+        ],
+        "dependency_roles": {
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "post-td-first-law-energy": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ling, Moebs, and Sanny, University Physics Volume 2, §3.3 First Law of Thermodynamics",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/3-3-first-law-of-thermodynamics"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "library": "physics",
+        "physical_scope": "Algebraic conversion between two signed-work conventions for the closed process class of the adopted first-law postulate.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-joule-primary-work-heat-report",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Joule's 1850 paddle-wheel report",
+        "statement": "Joule's 1850 report describes falling lead weights driving a paddle wheel in a sealed copper vessel of water. The water apparatus has rotating brass arms working between stationary vanes; a boxwood interruption reduces heat conduction along the shaft. The report describes thermometer calibration and resting trials arranged to estimate heat exchanged with the surroundings, alongside the friction trials. These are source-reported apparatus and procedure details, not measurements made for this library.\n\nThe water-series tabulation reports a nominal mechanical equivalent of 772.692 in the paper's historical convention: foot-pounds of falling-weight work compared with the heat needed to raise one pound of water by one Fahrenheit degree. The concluding proposition rounds that figure to 772 foot-pounds for raising one pound of water, weighed in vacuo and taken between 55°F and 60°F, by 1°F. Joule states that vibration and sound may make the estimate slightly high. This item adds no modern uncertainty interval or statistical inference. The historical result is empirical evidence from a particular apparatus and correction chain; it does not deductively establish the adopted first-law postulate for all systems.",
+        "deps": [],
+        "dependency_roles": {},
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. P. Joule, On the Mechanical Equivalent of Heat, Philosophical Transactions of the Royal Society of London, vol. 140 (1850), pp. 61–82, digitized copy",
+              "url": "https://commons.princeton.edu/josephhenry/wp-content/uploads/sites/71/2021/02/Joule.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics",
+        "physical_scope": "A source-based example of a historical calorimetry report and its apparatus-specific work-heat estimate; it is not a modern remeasurement or a proof of a universal law."
+      }
+    ]
+  }
+]

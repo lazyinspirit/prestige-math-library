@@ -1,0 +1,61 @@
+---
+id: cex-td-tagged-scaling-not-fixed-type-homogeneity
+kind: counterexample
+title: Tagged bulk scaling need not be homogeneity within one fixed tag
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+physical_scope: A formal constitutive-data countermodel to a logical implication between the framework's tagged scaling and entropy-additivity postulates; it is not an empirical model of a material.
+deps:
+  - def-td-equilibrium-state-domain
+  - def-td-si-quantities
+  - post-td-bulk-additivity
+  - post-td-concave-fundamental-entropy
+dependency_roles:
+  def-td-equilibrium-state-domain: formulation-prerequisite
+  def-td-si-quantities: formulation-prerequisite
+  post-td-bulk-additivity: physical-assumption
+  post-td-concave-fundamental-entropy: physical-assumption
+aliases: []
+proof_strategy: counterexample
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: counterexample
+sources:
+  references:
+    - title: Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.9.2
+      url: https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf
+    - title: David Tong, Statistical Physics, complete lecture notes, §1.4.3
+      url: https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S1.html
+---
+
+## Statement refuted
+
+The tagged bulk-scaling relation of [[post-td-concave-fundamental-entropy]] together with the additive coordinate composition of [[post-td-bulk-additivity]] forces the fixed-tag identity $S_c(\lambda x)=\lambda S_c(x)$ for each material constitution $c$.
+
+## Facts & Assumptions
+
+**Given:** A dimensionless positive tag $\tau$, positive state coordinates $U,V,n$, and the following formal family; $U,V,n$ use joules, cubic metres, and moles.
+
+[A1] [[post-td-bulk-additivity]]: Independent separated systems may have a composition map that adds the admitted extensive coordinates, and the bulk scaling map may send a state of tag $c$ to a distinct tag $c^{(\lambda)}$.
+
+[A2] [[post-td-concave-fundamental-entropy]]: Entropy is finite and concave on its specified convex domains, additive for admitted independent separated systems, and satisfies the tagged relation $S_{c^{(\lambda)}}(\delta_\lambda x)=\lambda S_c(x)$. The tag $c^{(\lambda)}$ is not silently identified with $c$.
+
+[F1] [[def-td-equilibrium-state-domain]]: Equilibrium charts use positive physical coordinates $(U,V,n)$ on a domain whose admitted single-phase regions may be open subsets of the corresponding Euclidean coordinate space.
+
+[F2] [[def-td-si-quantities]]: $U,V,n$ have units joules, cubic metres, and moles; entropy has units $\mathrm{J\,K^{-1}}$.
+
+## Counterexample
+
+1.1 Let tags be $\tau>0$, compose them by $\tau_A\oplus\tau_B=\tau_A+\tau_B$, and scale by $\tau^{(\lambda)}=\lambda\tau$. For constants $a>0$ in $\mathrm{K^{-1}}$, $b>0$ in $\mathrm{J\,K^{-1}\,m^{-3}}$, and $q>0$ in $\mathrm{J\,K^{-1}}$, define on $D_\tau=\{(U,V,n):U,V,n>0\}$ the entropy $S_\tau(U,V,n)=aU+bV+q\tau$. By [F1] this is a positive-coordinate domain, and [F2] makes every term in the entropy dimensionally consistent. The function is finite, $C^2$, affine and hence concave, with $S_{\tau,U}=a>0$. [given, F1, F2, algebra]
+
+1.2 For two separated states, define the compound tag as $\tau_A+\tau_B$ and the composition map to add $U,V,n$. Then
+$S_{\tau_A+\tau_B}(U_A+U_B,V_A+V_B,n_A+n_B)=S_{\tau_A}(U_A,V_A,n_A)+S_{\tau_B}(U_B,V_B,n_B)$,
+so the model satisfies the stated coordinate and entropy additivity. [A1, A2, step 1.1, algebra]
+
+2.1 Under scaling, $S_{\lambda\tau}(\lambda U,\lambda V,\lambda n)=a\lambda U+b\lambda V+q\lambda\tau=\lambda S_\tau(U,V,n)$, so the tagged scaling relation in [A2] holds for every $\lambda>0$. [A1, A2, step 1.1, algebra]
+
+2.2 For the same fixed tag $\tau$, however, $S_\tau(2U,2V,2n)=2aU+2bV+q\tau$ whereas $2S_\tau(U,V,n)=2aU+2bV+2q\tau$. Since $q\tau>0$, these values differ. Thus tagged scaling plus the stated additivity does not imply fixed-tag homogeneity. [given, A1, A2, step 1.1, step 2.1, algebra] ∎

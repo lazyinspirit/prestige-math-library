@@ -1,0 +1,30 @@
+Current verified boundary: controller state stage=2-scope-review, paused=true; no Step2 gatesPassedAt. Actual64 loop states have26 accepted and38 held. Existing owner-gate-request attempt0955706b-34b5-44bd-9c53-67a79b49246a is Stage1 1-scaffold, created09:46:52.960Z and consumed09:51:17.984Z. Preserve it and its immutable history; it cannot authorize Step2.
+
+The root integration template records only completed metadata/page/new11 inventory work and ML06 planning prose. Contracts, dependency levels, readiness and final current-source binding remain false until root completes them. The queue helper now requires those additional completed-integration fields and rejects a template receipt. The template itself cannot be used to accept any hold.
+
+1. Finish guarded contract integration, numeric item/batch dependency levels, and readiness/coverage/ledger reconciliation. Verify actual released source currency after metadata header changes using the scientific owners' guards and contract helper's page-body comparisons. Current metadata receipt explicitly says no dependency-level recomputation, rehashing, recertification or gate result. Root performs any current hashing and formatting checks; this packet does not.
+2. Confirm no native/adopted/source/shared writers. Finalize root-completed-integration receipt from actual successful evidence, then run the existing38 native owner-resolve commands. Each command writes a native owner-TIMESTAMP.json and accepted state, preserving successful review/repair history. Do not fabricate native reports, reset counters or request a third review. Source suppliers remain draft pending independent review.
+3. From physics cwd, request the first resume for this same existing run:
+
+```sh
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts resume --run physics-td-qft-rpm-62-2026-10-14 --state-dir .physics-autopilot/physics-td-qft-rpm-62-2026-10-14
+```
+
+The CLI only writes a control command; the live controller consumes it on its next tick. Do not start a duplicate controller. If the existing controller is absent, use the normal existing-run start/recovery route with its current config and state after confirming absence, not a new plan/run.
+
+4. The first resume after resolving holds normally produces research/physics-td-qft-rpm-62-2026-10-14-step2-owner-battery-ready.json, records ownerGatePausedAt, and pauses again. Confirm all64 dispositions accepted and battery_attempted=false. This is a metadata/owner handoff, not a gate receipt. The old owner-pass remains historical.
+5. After all root inputs settle, issue the same resume command again. onProgress now sees ownerGatePausedAt and does not re-pause. The drained gate join calls authorizeOwnerGate, creates a new UUID request with snapshot.stages=['2-scope-review'], and blocks on the missing/stale owner recertification receipt before running a battery. Read the actual new request, never guess its UUID or manufacture a request.
+6. Root performs a fresh dependency-ordered formatting/metadata-only recertification on every actual requested item after request.createdAt, matching its carrier/manifest fingerprints and complete current input snapshot. Write the version2 owner-gate-receipt.json exactly as WORKFLOW specifies: current attempt and snapshotSha256, /root reviewer, drained writers and empty scopes, real review times, every item once in request order, concrete separate formatting/metadata evidence. No mathematical/physics acceptance is implied. All input mutations must precede this final request/receipt; a changed input requires native regeneration and fresh review. Root's immediately-pre-gate hashing/formatting process must account for any source header/stamp changes before accepting the request snapshot.
+7. If controller is unpaused at the pre-gate block, request native retry to re-arm evaluation; if it was explicitly paused, resume. Neither command creates an acceptance receipt:
+
+```sh
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts retry --run physics-td-qft-rpm-62-2026-10-14 --state-dir .physics-autopilot/physics-td-qft-rpm-62-2026-10-14
+```
+
+Native authorization validates and consumes the exact fresh receipt once, archives request+receipt in owner-gate-history, and runs the resolved complete Step2 battery. The actual native gate results decide progression. A failed battery, input mutation or crash after consumption requires a fresh request/receipt cycle; no old pass can be relabelled.
+
+Input pins that matter: the snapshot binds every current run manifest, requested raw item carriers and supplier/discharge context, relevant frontier/prerequisite pages and category classification, math-imports receipt and relevant local+original immutable import bytes, canonical plan, native battery argv/needs/ownerReviewInputs, and implicit proof/source/coverage files selected by the gate tools. In particular batch-scope-review.mjs causes every .json/.md in the scope-review directory (excluding session directories) to be pinned, including new native owner receipts and loop states. Therefore perform owner acceptance before obtaining the Step2 request; do not edit those records afterward. Metadata/ML06 operational receipts are not automatically pinned merely by being in research; their canonical output files are pinned, and any receipt explicitly referenced by a gate/evidence graph also becomes an input. No blanket research-directory pin or new receipt authority is assumed.
+
+Native references inspected: tools/physics-autopilot/stages/mathlib.mts Step2 onProgress/gates (1080–1137); src/executor.mts handleControl, paused boundaries and runGroupGates (1095,1311,1372,1684–1758); src/owner-gate-recertification.mjs gateReviewSnapshot input selection and authorizeOwnerGate (35–218,250–295); tools/physics-support/batch-scope-review.mjs resolveOwner (210–215); bin/autopilot.mts controls (575–585). WORKFLOW.md Whole-batch scope/prerequisite loop and Pre-gate recertification govern this sequence.
+
+No control command, native transition, rehash, recertification, gate or software test was performed to prepare this note.

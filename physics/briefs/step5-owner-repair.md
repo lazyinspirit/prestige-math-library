@@ -22,6 +22,46 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 
 # Step 5 frontier owner repair agent
 
+If `research/<run>-owner-step5-support-index.json` exists for your exact run,
+use its evidence-only pointers for your assigned subjects to avoid repeating
+unchanged focused consumer checks. Proposals are unapplied and grant no source
+ownership or native review authority. Verify current affected arguments, credit
+genuine reused evidence, and record your own current reviews and context hashes.
+Bind immutable evidence actually used through `supporting_evidence`; never claim
+another agent's retrieval or stale review as your own.
+Also read root-published `research/<run>-owner-step5-support-supplement-*.json`
+when present; earlier indexes remain immutable.
+
+A generated `correction-initial` or `correction-repeat` assignment is a
+read-only correction review with narrower authority than ordinary owner repair.
+Read its exact root-bound request, original pack/report, genuine before and
+observed-current carriers, and the confirmed supplier's affected-use evidence.
+Review the distinct inherited finding and adopt or reject the current carrier
+with your own current evidence and context. Preserve the original false-positive
+judge disposition and explicitly retain any earlier instruction violation.
+Do not edit source, metadata, original reports, tasks, or judge tuples. Return
+only the separate correction report required by the generated task. An honest
+rejection or uncertainty blocks collection; never claim retrospective permission,
+independent review of your own edits, or a gate waiver.
+
+When the generated task assigns a root scientific repair, repair its exact
+coupled supplier and consumer in the stated order under the same ownership.
+Preserve sound existing repairs and restore the richest proved approved scope.
+Private candidates are unapplied scientific evidence; understand and verify the
+actual arguments, merge only necessary changes into the current carriers, and
+check affected uses. After the final coupled edits, return both fresh current
+repaired reviews and the task's explicit `root_finding_resolutions` row. Other
+lanes retain only their own ordinary pending work. Report unresolved mathematics
+honestly; do not claim canonical ledger closure, independent acceptance,
+certification, or retrospective permission for any earlier write.
+
+Run each shared metadata patch through
+`node tools/physics-support/step5-shared-write-lock.mjs run --owner DISPATCH_LABEL -- node research/RUN-scoped-metadata-update.mjs`.
+The scoped script must reread current owning files before surgical changes and
+checks. A busy lock exits 2 and runs no patch. Continue disjoint item work and
+retry; never make a separate shared write after failed acquisition. Keep this
+command short, with research and item authoring outside the critical section.
+
 **Proof formatting when editing items:** Separate numbered steps and the first
 step after introductory prose with blank lines. Keep each complete step in one
 paragraph, with single newlines inside it. End every step with valid `[tags]`;

@@ -20,18 +20,14 @@
 import { readdirSync, existsSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { join, resolve } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import { itemHashGuard, shortHash } from '../../physics-support/item-hash.mjs';
 import { isPublishedItem } from '../../physics-support/published-repair-policy.mjs';
-import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
+import { MODEL_PROFILE_NAMES, JUDGE_LINEUPS } from '../../physics-support/models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { alphabeticLabel } from '../../alpha-group-assignment.mjs';
-import { loadStep3 } from '../../physics-support/frontier-snapshot.mjs';
-import { writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
-import { step1Decision } from '../../physics-support/step1-decisions.mjs';
-import { dependencyLevels, orderedItems } from '../../physics-support/item-dependency-levels.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
-import { batchInput, prerequisiteBatches, loopState, collectBatch, accepted, loopPattern, batchPlans, engineRepairEligible, repairCohort } from '../../physics-support/batch-scope-review.mjs';
+import { batchInput, loopState, collectBatch, accepted, loopPattern, batchPlans, engineRepairEligible, repairCohort } from '../../physics-support/batch-scope-review.mjs';
 import { holdStep1 } from './step1-hold.mts';
 import { yaml } from '../../physics-support/pathway-lib.mjs';
 
@@ -57,6 +53,13 @@ const SOL61_MEDIUM = MODEL_PROFILE_NAMES.sol61Medium;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
+// Reload the scheduling loader with this stage in an already-live controller.
+const BATCH_LEVELS_URL = new URL('../../physics-support/batch-dependency-levels.mjs', import.meta.url);
+const BATCH_LEVELS_STAT = statSync(BATCH_LEVELS_URL);
+const { readSchedulingBatchDependencyLevels, writeBatchDependencyLevels } = await import(
+  `${BATCH_LEVELS_URL.href}?v=${BATCH_LEVELS_STAT.mtimeMs}:${BATCH_LEVELS_STAT.size}`
+);
+
 /** Batch numbers, read from disk rather than configured.
  *  A run's batch count is a property of its planning output, and anything that
  *  restates it in a second place will eventually disagree with it. */
@@ -70,126 +73,35 @@ export function batches(ctx: any): string[] {
     .sort((a: any, b: any) => Number(a) - Number(b));
 }
 
-/** Current prerequisite batches from page and actual logical item requirements. */
-function batchDependencies(ctx: any, unit: string): string[] {
-  return prerequisiteBatches(ctx.repo, ctx.run, unit);
+/** Dependency levels prioritize the entire pending queue before slot slicing.
+ * Draft manifests and carrier YAML are mutable while authors run, so queue
+ * priority uses the last valid full graph. Current dependencies and complete
+ * readiness are checked strictly by the drained Step-1 join and gates. */
+export function authoringBatches(ctx: any): string[] {
+  if (ctx.doctor) return batches(ctx);
+  return readSchedulingBatchDependencyLevels(ctx.repo, ctx.run).batches.map(row => row.batch);
 }
 
-/** A scaffold supplier is releasable only after its populated manifest,
- * coverage record, and every current item-readiness receipt exist. The item
- * list is read dynamically because planning intentionally creates empty page
- * shells before the Beta fills them. */
-// Executor contexts are short-lived; the guarded run inputs, rather than the
-// context object's identity, determine whether readiness can be reused.
-type ScaffoldSnapshot = {
-  stamp: string;
-  snapshot: any;
-  levelCheck: ReturnType<typeof dependencyLevels>;
-  itemStamps: Map<string, string>;
-  aliasStamp: string | null;
-  decisions: Map<string, { receiptStamp: string; closed: boolean }>;
-};
-const scaffoldSnapshots = new Map<string, ScaffoldSnapshot>();
-
-function fileStamp(path: string): string {
-  try {
-    const stat = statSync(path, { bigint: true });
-    return `${stat.mtimeNs}:${stat.ctimeNs}:${stat.size}`;
-  } catch { return 'missing'; }
-}
-
-function scaffoldSnapshot(ctx: any) {
-  const key = `${resolve(ctx.repo)}\0${ctx.run}`;
-  const dir = R(ctx, 'research');
-  const files = readdirSync(dir)
-    .filter((name: string) => name.startsWith(`${ctx.run}-batch-`)
-      && (name.endsWith('.pages.json') || name.endsWith('.coverage.json')))
-    .sort();
-  const stamp = [fileStamp(join(dir, 'plan-spec.json')),
-    ...files.map((name: string) => `${name}:${fileStamp(join(dir, name))}`)].join('|');
-  let cached = scaffoldSnapshots.get(key);
-  if (!cached || cached.stamp !== stamp) {
-    const snapshot = loadStep3(ctx.repo, ctx.run);
-    cached = { stamp, snapshot, levelCheck: dependencyLevels(snapshot.pages), itemStamps: new Map(),
-      aliasStamp: null, decisions: new Map() };
-    scaffoldSnapshots.set(key, cached);
-  } else {
-    // Published and in-run item bodies can change without a manifest edit.
-    // Invalidate dependency bytes before checking the next unit in this same
-    // status pass; Step-1 receipt files themselves are read afresh below.
-    for (const [id, prior] of cached.itemStamps) {
-      if (fileStamp(R(ctx, 'items', `${id}.md`)) !== prior) {
-        invalidateScaffoldInputs(cached);
-        break;
-      }
-    }
-    // Alias lookup reads the entire item inventory. A previously unrelated
-    // carrier can acquire/remove an alias, or a new canonical carrier can
-    // replace an alias, so guard that inventory whenever lookup was used.
-    if (cached.aliasStamp !== null && cached.aliasStamp !== scaffoldAliasStamp(ctx)) {
-      invalidateScaffoldInputs(cached);
-    }
-  }
-  return cached;
-}
-
-function scaffoldAliasStamp(ctx: any): string {
-  return readdirSync(R(ctx, 'items')).filter(name => name.endsWith('.md')).sort()
-    .map(name => `${name}:${fileStamp(R(ctx, 'items', name))}`).join('|');
-}
-
-function invalidateScaffoldInputs(cached: ScaffoldSnapshot): void {
-  cached.snapshot.cache.clear();
-  delete cached.snapshot.aliases;
-  cached.itemStamps.clear();
-  cached.aliasStamp = null;
-  cached.decisions.clear();
-}
-
+/** Required local scaffold output, independent of cross-pair supplier readiness.
+ * A finished author must leave nonempty inventories and explicit readiness
+ * records. Escalated or stale readiness remains visible to the complete gate
+ * battery; it does not reserve an authoring slot or prevent another pair start. */
 function scaffoldArtifacts(ctx: any, unit: string): string[] {
   const manifest = `research/${ctx.run}-batch-${unit}.pages.json`;
   const out = [manifest, `research/${ctx.run}-batch-${unit}.coverage.json`];
   let complete = true;
   try {
     const pages = JSON.parse(readFileSync(R(ctx, manifest), 'utf8'));
-    const cached = scaffoldSnapshot(ctx);
-    const { snapshot, levelCheck } = cached;
-    if (levelCheck.errors.some((error: string) => error.startsWith('dependency cycle:'))) complete = false;
     if (!Array.isArray(pages) || !pages.length) complete = false;
     for (const page of Array.isArray(pages) ? pages : []) {
       if (!Array.isArray(page?.items) || !page.items.length) complete = false;
       for (const item of Array.isArray(page?.items) ? page.items : []) {
-        if (typeof item?.id === 'string' && item.id) {
+        if (typeof item?.id === 'string' && item.id)
           out.push(`research/${ctx.run}-step1-${item.id}.json`);
-          const receiptStamp = fileStamp(R(ctx, 'research', `${ctx.run}-step1-${item.id}.json`));
-          let decision = cached.decisions.get(item.id);
-          if (!decision || decision.receiptStamp !== receiptStamp) {
-            decision = { receiptStamp, closed: step1Decision(snapshot, item.id).closed };
-            cached.decisions.set(item.id, decision);
-          }
-          if (!decision.closed) complete = false;
-          if (item.dependency_level !== levelCheck.levels.get(item.id)) complete = false;
-        } else complete = false;
+        else complete = false;
       }
     }
-    // Missing leaves are not cached by dependency(), but their creation must
-    // invalidate a readiness hash that previously included a missing marker.
-    const inputs = new Set<string>(snapshot.cache.keys());
-    for (const input of snapshot.cache.values()) for (const id of input.deps) inputs.add(id);
-    for (const id of inputs) {
-      if (!cached.itemStamps.has(id)) cached.itemStamps.set(id, fileStamp(R(ctx, 'items', `${id}.md`)));
-    }
-    if (snapshot.aliases && cached.aliasStamp === null) cached.aliasStamp = scaffoldAliasStamp(ctx);
-  } catch {
-    // An alias-build error can leave a partial index. Never reuse inputs from
-    // a failed artifact pass on the next scheduling or status call.
-    scaffoldSnapshots.delete(`${resolve(ctx.repo)}\0${ctx.run}`);
-    complete = false;
-  }
-  // Planning creates empty page shells. A successful Beta receipt and coverage
-  // file must not make that initial shell look complete and release consumers.
-  // This sentinel is intentionally never authored; the normal stalemate/hold
-  // path then reports the malformed or empty scaffold for owner resolution.
+  } catch { complete = false; }
   if (!complete) out.push(`research/${ctx.run}-batch-${unit}.scaffold-incomplete`);
   return [...new Set(out)];
 }
@@ -973,6 +885,13 @@ export const authoredContentGates = (ctx: any) => [
  *  receipt (two blockers once lived only in markdown). */
 const ledgerGate = (ctx, { terminal = false } = {}) => {
   const frontier = `research/${ctx.run}-step5-v2/frontier.json`;
+  const transition = `research/${ctx.run}-step3-historical-context-transition.json`;
+  const contextInputs: string[] = [];
+  if (existsSync(R(ctx, transition))) {
+    const pointer = JSON.parse(readFileSync(R(ctx, transition), 'utf8'));
+    const receipt = JSON.parse(readFileSync(R(ctx, pointer.receipt.path), 'utf8'));
+    contextInputs.push(transition, pointer.receipt.path, ...Object.keys(receipt.evidence ?? {}));
+  }
   // Imported/original maintenance remains open outside the owned frontier.
   // Legacy runs without a frozen frontier retain the strict all-run check.
   const scoped = terminal && existsSync(R(ctx, frontier));
@@ -984,7 +903,7 @@ const ledgerGate = (ctx, { terminal = false } = {}) => {
   // No owned open row, including nonfatal ones, may survive closeout.
   ...(terminal ? ['--no-open'] : []),
   ...(scoped ? ['--frontier', frontier] : [])], {
-  ...(scoped ? { ownerReviewInputs: [frontier] } : {}),
+    ...((scoped || contextInputs.length) ? { ownerReviewInputs: [...(scoped ? [frontier] : []), ...contextInputs] } : {}),
   liveness: { pattern: /(\d+) defect row\(s\) checked/.source, min: 1, unit: 'defect rows' },
 });
 };
@@ -1005,7 +924,39 @@ const ledgerGate = (ctx, { terminal = false } = {}) => {
  *            that; an unadjudicated rejection and an open fatal are NOT allowed.
  *   after  — no allowances at all.
  */
-const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = 'sol61', excludePublished = true } = {}) =>
+/** Coverage retains the actual frozen Step-4 judge lineage. Native Step-5
+ * repair/rejudge identities and current certificate guards remain independent. */
+function originalJudgeLineup(ctx: any): string {
+  const dir = R(ctx, 'research', `${ctx.run}-step5-v2`);
+  const verdictPath = resolve(dir, 'step4-verdicts.json');
+  const packPath = resolve(dir, 'initial-1.json');
+  if (!existsSync(verdictPath)) {
+    if (existsSync(packPath) || existsSync(join(dir, 'frontier.json')))
+      throw Error('original judge lineage: incomplete frozen Step-5 authority');
+    return 'luna'; // Modern Step 4, before its Step-5 snapshot exists.
+  }
+  if (!existsSync(packPath)) throw Error('original judge lineage: missing initial frozen pack');
+  const bytes = readFileSync(verdictPath);
+  const verdicts = JSON.parse(bytes.toString('utf8'));
+  const pack = JSON.parse(readFileSync(packPath, 'utf8'));
+  const expected = pack.input_evidence?.[verdictPath]
+    ?? pack.input_evidence?.[relative(ctx.repo, verdictPath)];
+  if (pack.version !== 2 || pack.run !== ctx.run || pack.phase !== 'initial' || pack.round !== 1
+    || !/^[a-f0-9]{64}$/.test(expected ?? '')
+    || createHash('sha256').update(bytes).digest('hex') !== expected)
+    throw Error('original judge lineage: frozen Step-4 bytes are not bound by the initial pack');
+  if (!Array.isArray(verdicts) || !verdicts.length
+    || verdicts.some((row: any) => !row || typeof row.id !== 'string' || typeof row.keep !== 'boolean'))
+    throw Error('original judge lineage: malformed frozen Step-4 verdicts');
+  const models = [...new Set(verdicts.map((row: any) => row.model))];
+  const matches = Object.entries(JUDGE_LINEUPS).filter(([, lanes]) =>
+    lanes.length === 1 && models.length === 1 && lanes[0] === models[0]);
+  if (matches.length !== 1 || pack.judge_model !== models[0])
+    throw Error('original judge lineage: mixed, unknown or inconsistent frozen model');
+  return matches[0][0];
+}
+
+const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = originalJudgeLineup(ctx), excludePublished = true } = {}) =>
   gate('judge-closure', ['env', `JUDGE_LINEUP=${judgeLineup}`, 'node', 'tools/physics-support/level-coverage.mjs',
     '--judge-only', '--verify-current-context',
     ...(excludePublished ? ['--exclude-published'] : []),
@@ -1022,7 +973,7 @@ const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, 
   });
 
 /** Final mechanical coverage of provenance, contracts and current judgments. */
-const levelCoverageGate = (ctx) => gate('level-coverage', ['env', 'JUDGE_LINEUP=sol61', 'node', 'tools/physics-support/level-coverage.mjs',
+const levelCoverageGate = (ctx) => gate('level-coverage', ['env', `JUDGE_LINEUP=${originalJudgeLineup(ctx)}`, 'node', 'tools/physics-support/level-coverage.mjs',
   '--exclude-published',
   '--contracts', contractsPath(ctx),
   '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
@@ -1107,8 +1058,7 @@ export const stages = [
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'scaffolding'
       ? MODEL_PROFILE_NAMES.lunaMax
       : undefined,
-    units: (ctx: any) => batches(ctx),
-    unitPrerequisites: (ctx: any, unit: string) => batchDependencies(ctx, unit),
+    units: (ctx: any) => authoringBatches(ctx),
     artifacts: (ctx: any, unit: string) => [...scaffoldArtifacts(ctx, unit), ...authorArtifacts(ctx, unit)],
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
@@ -1120,7 +1070,7 @@ export const stages = [
         writeBatchDependencyLevels(ctx.repo, ctx.run);
     },
     plan: (ctx, pending) => {
-      const levels = ctx.doctor ? null : writeBatchDependencyLevels(ctx.repo, ctx.run);
+      const levels = ctx.doctor ? null : readSchedulingBatchDependencyLevels(ctx.repo, ctx.run);
       const levelByBatch = new Map(levels?.batches.map(row => [row.batch, row.dependency_level]) ?? []);
       return [...pending].sort((a, b) => (levelByBatch.get(a) ?? 0) - (levelByBatch.get(b) ?? 0))
         .map((u: any) => ({

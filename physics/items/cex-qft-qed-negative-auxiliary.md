@@ -1,0 +1,70 @@
+---
+id: cex-qft-qed-negative-auxiliary
+kind: counterexample
+title: Auxiliary timelike vector has negative form
+status: published
+origin: pipeline
+domain: mathematics
+library: mathematics
+physical_scope: null
+dependency_level: 3
+deps:
+  - def-countable-choice
+  - lem-qft-photon-null-quotient
+  - thm-lebesgue-measure-of-a-box-of-every-kind
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  lem-qft-photon-null-quotient: mathematical-premise
+  thm-lebesgue-measure-of-a-box-of-every-kind: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: David Tong, Quantum Field Theory, Chapter 6, §6.2.2
+      url: https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S6.html
+      locator: Complete author-hosted HTML chapter 6; negative-norm auxiliary polarization and subsidiary quotient.
+    - title: Mark Srednicki, Quantum Field Theory, author-hosted 2006 book draft, §56
+      url: https://www.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf
+      locator: Complete 616-page book draft; covariant auxiliary photon polarizations and physical transverse states.
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+---
+
+## Statement refuted
+
+Assume Countable Choice and the indefinite auxiliary form and subsidiary quotient of [[lem-qft-photon-null-quotient]]. Every vector in the auxiliary space $\mathcal K$ has nonnegative quadratic form $[\epsilon,\epsilon]_\eta$.
+
+## Construction
+
+Assume Countable Choice. Let $E=(5/4,3/2)\times(-1/8,1/8)^2$. Then $E\subset\{\mathbf k:1<|\mathbf k|<2\}$ because $|\mathbf k|>5/4$ and $|\mathbf k|^2<(3/2)^2+2(1/8)^2<4$. Its Lebesgue measure is $|E|=(1/4)^3=1/64$ by [[thm-lebesgue-measure-of-a-box-of-every-kind]]. Set $\epsilon(\mathbf k)=\mathbf1_E(\mathbf k)(1,0,0,0)\in\mathcal K$. Then
+$$[\epsilon,\epsilon]_\eta=-1/64<0,$$
+but $\epsilon\notin\mathcal K_0$ because $-\epsilon^0+n\cdot\boldsymbol\epsilon=-1$ on $E$. Therefore this negative-form auxiliary vector is not a physical state in the subsidiary quotient.
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, the indefinite auxiliary form and subsidiary space, and the null-quotient interface.
+
+[A1] Assume Countable Choice. [[def-countable-choice]]
+
+[F1] The physical subsidiary space requires $-\epsilon^0+n\cdot\boldsymbol\epsilon=0$ almost everywhere; only its null quotient is positive. [[lem-qft-photon-null-quotient]]
+
+[F2] The Lebesgue measure of a rectangular box is the product of its side lengths. [[thm-lebesgue-measure-of-a-box-of-every-kind]]
+
+## Counterexample
+
+**Given:** [A1], [F1], and the box $E$ in the statement.
+
+1.1 The box $E$ has measure $1/64$ by [F2], so $\epsilon\in L^2(\mathbb R^3;\mathbb C^4)$. Its spatial components vanish and its time component equals one on $E$, hence
+$$[\epsilon,\epsilon]_\eta=\int_E(-1)\,d^3\mathbf k=-1/64<0.$$
+[A1, F2, given, algebra]
+
+2.1 On $E$, $-\epsilon^0+n\cdot\boldsymbol\epsilon=-1$, so the subsidiary condition in [F1] fails on a set of measure $1/64>0$ by [F2]. The quotient in [F1] is formed only from $\mathcal K_0$; this vector is outside that space and cannot represent a negative-norm physical quotient class. [F1, F2, step 1.1, given] ∎

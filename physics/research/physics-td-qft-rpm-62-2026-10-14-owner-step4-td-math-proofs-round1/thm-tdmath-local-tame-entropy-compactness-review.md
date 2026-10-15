@@ -1,0 +1,9 @@
+# Scientific release: thm-tdmath-local-tame-entropy-compactness
+
+Run: physics-td-qft-rpm-62-2026-10-14
+Owner: /root/resolve_step4_td_math_proofs
+Disposition: confirmed-choice-interface-restatement-gap
+
+A2 now includes the ultrafilter extension principle together with DC and HB in the exact Eberlein–Smulian hypothesis. All four choices were already in the Statement and deps. Whole proof reviewed: finite-specific-entropy gives finite cube entropy bounds; density entropy tails give uniform integrability and Dunford–Pettis weak compactness. Variational entropy is weakly lower semicontinuous, positivity/mass and consistency/stationarity constraints are weakly closed. Product compactness and standard-Borel extension create stationary laws; Poisson exponential moments and entropy tests give uniform count tails and finite intensity. Count truncation makes tame expectations continuous on the compact constructed family. Countable weak-sequential diagonalization using Eberlein–Smulian and AC gives the sequential conclusion. No stronger compactness assertion is falsely attributed.
+
+Review scope: complete actual pre-edit source and exact supplier interfaces read; complete final private carrier reviewed, with at most two review/repair cycles. This is owner scientific evidence, not a native independent verdict, certification, hashing or gate. No original/imported item was edited. No source/stamp/ledger/shared metadata/check/test/transition was written or run. For Georgii1994 reliance, the entire1300-line extraction of the cached25-page paper was read in two contiguous halves; its private extraction is Georgii-LDPsuperstable-full.txt in this directory, from research/physics-td-qft-rpm-62-2026-10-14-owner-native-gate-td-round-1/source-reading/Georgii-LDPsuperstable-current.pdf. No unperformed reading of other external full texts or absent historical bytes is asserted. The original nine proposals remain unchanged.

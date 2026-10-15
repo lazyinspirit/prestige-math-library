@@ -1,0 +1,99 @@
+{
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "12",
+  "input_sha256": "aba240f57e51ec5f6d8384509f57660ada7ed8d033fdd08d44b54447b4ae7505",
+  "decisions": [
+    {
+      "id": "ex-tdmath-pure-state-versus-average-entropy",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "499b9115e5658ff5d8c1c861d5ecbc8bbfb77922a81a18d55993dc46a55fbcf9",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The Example defines both averages using T^{-1} and claims zero averaged entropy for every T without excluding zero. At T=0 neither average is defined, so the unrestricted assertion has a missing domain hypothesis. Repaired by specifying t in R, T in (0,infinity), entrywise integration, and limits as T tends to +infinity; A1 and the final universal quantifier now carry T>0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-tdmath-pure-state-versus-average-entropy",
+      "disposition": "repaired",
+      "post_sha256": "e0e612193516403b931c83397e709f90070f33944735fb09024a239d895d82d7",
+      "review_context_sha256": "1cdfdb6b1ef287f04be21ff5c33684ce31b8e9e4c791c8816b9847c8501b8135",
+      "reason": "For T>0 the continuous two-by-two matrix orbit has an entrywise integral. Unit-modulus phases preserve the norm of psi, hence each rank-one density has spectrum (1,0) and entropy zero. With omega=(E1-E2)/hbar nonzero, c_T=(exp(-i omega T)-1)/(-2i omega T), so |c_T|<=1/(T|omega|) tends to zero. The averaged matrix has eigenvalues 1/2 plus or minus |c_T|; |c_T|<=1/2 also follows by the integral triangle inequality. Continuity of -x log x at 1/2 proves the stated entropy limit. Checked the seven declared published supplier interfaces and the owning contract; no infinite-dimensional or empirical premise is used. This is the native adjudicator review of its own repair, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect",
+      "item": "ex-tdmath-pure-state-versus-average-entropy",
+      "phase": "repeat",
+      "round": 1,
+      "unit": "12",
+      "context_sha256": "499b9115e5658ff5d8c1c861d5ecbc8bbfb77922a81a18d55993dc46a55fbcf9",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "status": "fixed",
+      "finding": "The unrestricted averaging parameter permits T=0, where both T^{-1} averages are undefined.",
+      "resolution": "The Example defines both averages using T^{-1} and claims zero averaged entropy for every T without excluding zero. At T=0 neither average is defined, so the unrestricted assertion has a missing domain hypothesis. Repaired by specifying t in R, T in (0,infinity), entrywise integration, and limits as T tends to +infinity; A1 and the final universal quantifier now carry T>0.",
+      "post_sha256": "e0e612193516403b931c83397e709f90070f33944735fb09024a239d895d82d7",
+      "uncertain": false
+    }
+  ],
+  "gate_resolutions": [],
+  "supporting_evidence": {
+    "research/physics-td-qft-rpm-62-2026-10-14-batch-12-step5-context.json": "174f3cc8f57378714d420542edfd582ac8f3e27d3fb5fe38365d24a4f5dd4f2d",
+    "research/physics-td-qft-rpm-62-2026-10-14-owner-step4-td-math-proofs-round1/ex-tdmath-pure-state-versus-average-entropy-review.md": "957eafceb1c71e3dab264377e298e0664b0dad1c2f436072b1fbe48ad3858715"
+  },
+  "repair_notes": {
+    "changed_files": [
+      "items/ex-tdmath-pure-state-versus-average-entropy.md"
+    ],
+    "claim_and_conventions": "Two-dimensional complex Hilbert space with first-argument-linear inner product; distinct real energies, positive hbar and k_B; t in R, T>0, entrywise Cesaro integrals and T to +infinity limits. Instantaneous entropy is zero; entropy of the averaged state tends to k_B log 2.",
+    "dependency_ids": [
+      "def-complex-exponential",
+      "def-natural-logarithm",
+      "def-real-and-complex-inner-product-space",
+      "thm-logarithm-derivative-and-integral",
+      "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "thm-complex-exponential-is-entire-with-derivative-itself",
+      "thm-ftc-second-part"
+    ],
+    "sources_and_locators": "Current items/<dependency-id>.md: Definition for the three definitions; Statement for the four published results. Owning research/physics-td-qft-rpm-62-2026-10-14-batch-12.proof-contracts.json: contracts.ex-tdmath-pure-state-versus-average-entropy. The earlier outside scientific release corroborates the elementary spectrum calculation and phase-modulus citation; I checked the current argument and supplier interfaces myself. No external full text was retrieved or read in this dispatch.",
+    "interface_and_consumers": "Only Example and A1 were edited; there is no Statement or Definition section, and the frozen before_statements entry is the empty-section hash. Under the assigned mathematical propagation rule no interface event is generated. A search of current items and library found no item dependency/reference consumers; the sole B-page inventory placement describes the same positive-entropy averaged-density conclusion and remains sound.",
+    "metadata": "The proof paragraphs and exact derivation claims are unchanged. The existing endpoint contract describes the now explicitly defined finite-T average and infinity limit; strict scoped validation passes without a shared metadata edit.",
+    "published_ledger": "No published-supplier or published-consumer defect was found; no published-ledger update is proposed.",
+    "checks": [
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-tdmath-pure-state-versus-average-entropy.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 3 steps, 0 defects"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/ex-tdmath-pure-state-versus-average-entropy.md",
+        "exit_code": 0,
+        "output": "PASS; 1 checked, 0 failing — all clean"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-tdmath-pure-state-versus-average-entropy.md",
+        "exit_code": 0,
+        "output": "OK — 1 file; YAML and all math spans parse"
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-td-qft-rpm-62-2026-10-14-batch-12.proof-contracts.json --strict --items ex-tdmath-pure-state-versus-average-entropy",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 1/1 item(s) checked"
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller collection and native rejudgment; no judgments, stamps, certificates, shared ledgers or round state were written."
+  }
+}

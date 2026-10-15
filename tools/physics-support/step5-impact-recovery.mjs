@@ -5,7 +5,8 @@ import { realpathSync as physicsRealpath } from 'node:fs';
 import { existsSync, readFileSync, readdirSync, writeFileSync, renameSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { advanceImpact, prepareGateRepairPack, digest, impactProgressPath, packPath, workerLabel, workerReport, workflowDir } from './step5-workflow.mjs';
+import { createHash } from 'node:crypto';
+import { advanceImpact, prepareGateRepairPack, impactProgressPath, packPath, workerLabel, workerReport, workflowDir } from './step5-workflow.mjs';
 import { readLibraryItems } from './step5-rounds.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 
@@ -23,7 +24,7 @@ const frozen = (path, value) => {
 };
 function verifyEvidence(evidence) {
   for (const [path, hash] of Object.entries(evidence ?? {}))
-    requireValue(existsSync(path) && digest(readFileSync(path, 'utf8')) === hash, `evidence changed: ${path}`);
+    requireValue(existsSync(path) && createHash('sha256').update(readFileSync(path)).digest('hex') === hash, `evidence changed: ${path}`);
 }
 function assertInactive(state, stateDir) {
   requireValue(state.paused === true, 'run must be paused');
@@ -155,7 +156,7 @@ export function recoverStep5Impact({ repo, run, stateDir, reason }) {
   }
   const snapshot = join(dir, `${activePhase}-${round}-progress-before-supersession.json`);
   frozen(snapshot, progress); artifacts.push(snapshot);
-  const evidence = Object.fromEntries(artifacts.map(path => [path, digest(readFileSync(path, 'utf8'))]));
+  const evidence = Object.fromEntries(artifacts.map(path => [path, createHash('sha256').update(readFileSync(path)).digest('hex')]));
   const entry = { phase: activePhase, reason, previousPhase: progress.passes.at(-2),
     ...(baseGate ? { replacementPhase: 'gate-pass-2' } : {}),
     pack: activePath, pack_sha256: evidence[activePath], evidence };

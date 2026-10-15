@@ -1,0 +1,42 @@
+---
+id: "def-td-controlled-fixed-n-energy-shell"
+kind: "definition"
+title: "Exact-particle-number positional energy shell"
+status: "published"
+origin: "pipeline"
+domain: "physics"
+library: "physics"
+physical_scope: "Finite periodic boxes of the classical pair-potential positional model; shells constrain pair configuration energy only and exclude kinetic momentum energy."
+deps: [def-td-stable-tempered-continuum-preparation, post-td-classical-indistinguishable-particle-measure]
+dependency_roles:
+  def-td-stable-tempered-continuum-preparation: formulation-prerequisite
+  post-td-classical-indistinguishable-particle-measure: formulation-prerequisite
+aliases: []
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "Hans-Otto Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction, Probability Theory and Related Fields 99 (1994), 171–195"
+      url: "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf"
+    - title: "David Tong, Statistical Physics (author-hosted Cambridge lecture notes)"
+      url: "https://davidtong.org/teaching/statistical-physics/statmechhtml/S1"
+dependency_level: 5
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+---
+
+## Definition
+
+Use $\Lambda_n=[-n-\tfrac12,n+\tfrac12)^d$, its side length $L_n=2n+1$ and dimensionless volume $V_n=L_n^d$, the periodic positional energy $H_{L_n,\mathrm{per}}$ of [[def-td-stable-tempered-continuum-preparation]], and the exact-$N$ measure $\mu_{\Lambda_n,N}$ of [[post-td-classical-indistinguishable-particle-measure]]. Given $N_n\in\mathbb N_0$, a reduced configuration-energy center $e\in\mathbb R$ joules per dimensionless reference volume, and a width $\delta_n>0$ in the same units, define
+$$S_n(N_n,e,\delta_n)=\{\omega\subset\Lambda_n:|\omega|=N_n,\ |H_{L_n,\mathrm{per}}(\omega)/V_n-e|\leq\delta_n\}.$$
+When $0<\mu_{\Lambda_n,N_n}(S_n)<\infty$, the uniform positional shell law is
+$$M_n(A)=\frac{\mu_{\Lambda_n,N_n}(A\cap S_n)}{\mu_{\Lambda_n,N_n}(S_n)}.$$
+A shrinking energy-density shell uses some specified sequence $\delta_n\downarrow0$. Its total energy width is $2\delta_nV_n$, which is $o(V_n)$ but need not be microscopic or bounded. Existence of a normalizing shell and the existence of a suitable shrinking sequence are separate theorem obligations. This is not a surface measure on an exact-energy hypersurface and not a phase-space shell for $K(p)+H_N^{\mathrm{per}}$.

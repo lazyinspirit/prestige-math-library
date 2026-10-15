@@ -40,6 +40,53 @@ export function loadStep3(root, run) {
   return { root, run, pages, pairs, items, planned, cache: new Map() };
 }
 
+// Recording authoring readiness is local; global review/gates still use loadStep3.
+// Keep the complete ownership index, including unfinished bare-ID inventories,
+// but reject an unfinished entry if it actually enters the recorded closure.
+export function loadStep1Record(root, run) {
+  safe(run);
+  const dir = join(root, 'research'), pages = [], items = new Map(), pairs = new Map();
+  const invalidItems = new Map(), homes = new Set();
+  const files = readdirSync(dir).filter(f => f.startsWith(`${run}-batch-`) && f.endsWith('.pages.json')
+    && /^\d+$/.test(f.slice(`${run}-batch-`.length, -'.pages.json'.length))).sort();
+  for (const f of files) {
+    const batch = f.slice(`${run}-batch-`.length, -'.pages.json'.length);
+    const manifest = json(join(dir, f));
+    if (!Array.isArray(manifest) || !manifest.length) throw Error(`Invalid run manifest ${f}`);
+    for (const page of manifest) {
+      if (!page || typeof page !== 'object' || typeof page.id !== 'string' || !page.id
+        || homes.has(page.id) || !['A', 'B'].includes(page.kind)
+        || !Array.isArray(page.items) || !Array.isArray(page.requires ?? [])
+        || (page.requires ?? []).some(id => typeof id !== 'string' || !id))
+        throw Error(`Invalid or ambiguous page ownership in ${f}`);
+      homes.add(page.id);
+      const livePage = { ...page, batch };
+      pages.push(livePage);
+      for (const item of page.items) {
+        const id = typeof item === 'string' ? item : item?.id;
+        safe(id);
+        if (items.has(id)) throw Error(`Duplicate item ${id}`);
+        items.set(id, { item, page: livePage });
+        if (typeof item === 'string') invalidItems.set(id, `Unfinished manifest inventory for ${id} in ${f}`);
+      }
+    }
+  }
+  if (!pages.length) throw Error('No run manifests');
+  const claimedCompanions = new Set();
+  for (const a of pages.filter(p => p.kind === 'A')) {
+    const b = pages.find(p => p.id === a.companion && p.kind === 'B');
+    if (!b || (b.companion && b.companion !== a.id) || pairs.has(a.id) || claimedCompanions.has(b.id))
+      throw Error(`Invalid pair ${a.id}`);
+    claimedCompanions.add(b.id);
+    pairs.set(a.id, [a, b]);
+  }
+  if (pairs.size * 2 !== pages.length) throw Error('Every page must belong to one A/B pair');
+  const planned = new Map();
+  for (const page of read(join(dir, 'plan-spec.json'))?.pages ?? [])
+    for (const item of page.items ?? []) planned.set(item.id, { item, page });
+  return { root, run, pages, pairs, items, planned, invalidItems, cache: new Map() };
+}
+
 // Proof repairs do not reopen scope. Changed claims or inventory do.
 export function scopeHash(s, page) {
   const pair = s.pairs.get(page);
@@ -50,6 +97,7 @@ export function scopeHash(s, page) {
 }
 
 function dependency(s, id) {
+  if (s.invalidItems?.has(id)) throw Error(s.invalidItems.get(id));
   if (s.cache.has(id)) return s.cache.get(id);
   const live = s.items.get(id), planned = s.planned.get(id);
   const path = join(s.root, 'items', `${safe(id)}.md`);
@@ -59,6 +107,13 @@ function dependency(s, id) {
   // Missing prerequisites must remain auditable and escalatable, not prevent dispatch.
   if (!contract && !fm) return { bytes: { missing: id }, deps: [] };
   const declarations = [contract?.item, fm].filter(Boolean);
+  if (s.invalidItems) for (const declaration of declarations) {
+    for (const field of ['deps', 'justified_by', 'forward_refs']) {
+      const values = declaration[field] ?? [];
+      if (!Array.isArray(values) || values.some(value => typeof value !== 'string' || !value))
+        throw Error(`${id}: ${field} must name dependency IDs`);
+    }
+  }
   const { verification, ...mathematicalMetadata } = fm ?? {};
   const value = {
     bytes: [contract?.item ?? null, body === null ? null : [mathematicalMetadata,

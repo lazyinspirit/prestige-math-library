@@ -1,0 +1,41 @@
+---
+id: post-rpm-massive-test-particle-action
+kind: postulate
+title: "Massive spinless test-particle action"
+status: published
+origin: pipeline
+domain: physics
+library: physics
+dependency_level: 3
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [post-rpm-test-clock-and-background, thm-rpm-proper-time-parametrization, lem-rpm-length-action-first-variation]
+dependency_roles:
+  post-rpm-test-clock-and-background: formulation-prerequisite
+  thm-rpm-proper-time-parametrization: formulation-prerequisite
+  lem-rpm-length-action-first-variation: formulation-prerequisite
+physical_scope: "Classical spinless structureless point test body of constant primitive mass m>0 on a prescribed smooth background; no self-field, radiation reaction, finite-size, quantum, or global-completeness claim."
+sources:
+  references:
+    - title: "David Tong, General Relativity, author-hosted lecture-note chapter excerpt, §1.1.1 particle action"
+      url: "https://www.davidtong.org/pdfs/teaching/general-relativity/gr1.pdf"
+    - title: "Sean Carroll, Lecture Notes on General Relativity, complete lecture notes, Ch. 3 §3.3"
+      url: "https://arxiv.org/pdf/gr-qc/9712019"
+verification:
+  sources_checked:
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    by: "Completed delegated workflow source/scope reviewers and adjudicators; owner accepted existing evidence"
+  precheck: n/a
+---
+
+## Postulate
+
+Let $a,b\in\mathbb R$ with $a<b$, and let $x:[a,b]\to M$ be a $C^2$ future timelike curve on the prescribed background of [[post-rpm-test-clock-and-background]]. Let $H:(-\epsilon_0,\epsilon_0)\times[a,b]\to M$ be a $C^2$ variation, for some $\epsilon_0>0$, such that each $H(\epsilon,\cdot)$ is future timelike, $H(0,s)=x(s)$, and $H(\epsilon,a)=x(a)$ and $H(\epsilon,b)=x(b)$. For a spinless, structureless massive test body of constant primitive mass $m>0$, measured in kilograms, and the SI conversion constant $c>0$ metres per second, adopt the action on this finite segment
+
+$$S_m[x]=-mc\int_a^b\sqrt{-g(dx/ds,dx/ds)}\,ds=-mc^2\Delta\tau,$$
+
+where $\Delta\tau:=c^{-1}\int_a^b\sqrt{-g(dx/ds,dx/ds)}\,ds$ is the ideal-clock increment specified by [[post-rpm-test-clock-and-background]] on this smooth segment. The model's free trajectories are precisely the curves stationary under the fixed-endpoint $C^2$ variations just specified; this is the local variation class in [[lem-rpm-length-action-first-variation]]. When $s$ is measured in seconds, $T$ has units metres per second, and the action has units joule-seconds. This is an adopted model premise, not a consequence of the metric or clock postulate. It excludes self-gravity, radiation reaction, spin, finite-size structure, particle creation, and quantum effects; it does not assert empirical adequacy for any particular body.

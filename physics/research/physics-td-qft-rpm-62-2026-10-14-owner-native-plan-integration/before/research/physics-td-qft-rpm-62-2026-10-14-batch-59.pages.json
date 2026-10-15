@@ -1,0 +1,542 @@
+[
+  {
+    "order": 557,
+    "id": "qft-ir01",
+    "kind": "A",
+    "category": "quantum-field-theory-mathematics",
+    "library": "mathematics",
+    "title": "Finite-lattice polynomial Hamiltonian data",
+    "companion": "qft-ir01-examples",
+    "requires": [
+      "compact-self-adjoint-hilbert-schmidt-and-trace-class-operators",
+      "density-separability-and-convolution-in-lp",
+      "hilbert-space-geometry-and-riesz-representation",
+      "orthonormal-bases-parseval-and-fourier-series",
+      "relations-functions-and-quotients"
+    ],
+    "items": [
+      {
+        "id": "def-qft-regulated-polynomial-hamiltonian",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite-lattice polynomial Hamiltonian data",
+        "reference": "items/def-qft-regulated-polynomial-hamiltonian.md#Definition",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 0,
+        "deps": [
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). A **finite-mode regulator** in this item is a fixed\nfinite nonempty label set $J$ with $N:=|J|\\ge1$, a fixed enumeration of $J$ by\n$\\{1,\\ldots,N\\}$, and the real coordinate vector\n$q=(q_1,\\ldots,q_N)\\in\\mathbb R^N$. The labels may name sites of a finite\nlattice or finitely many modes; their geometry enters only through the chosen\npolynomial below. No limit in $N$ is part of this definition.\n\nChoose real coefficients $a_1,\\ldots,a_N>0$, constants $c>0$ and $C_0\\ge0$,\nand a real polynomial $V\\in\\mathbb R[q_1,\\ldots,q_N]$ such that\n$$V(q)\\ge c|q|^2-C_0\\qquad(q\\in\\mathbb R^N).$$\nLet $H_N:=L^2(\\mathbb R^N,dq;\\mathbb C)$, with vectors identified up to almost\neverywhere equality and inner product\n$$\\langle u,v\\rangle:=\\int_{\\mathbb R^N}u(q)\\overline{v(q)}\\,dq,$$\nlinear in the first variable. Under Countable Choice this is a complex Hilbert\nspace by [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Let\n$D_0:=C_c^\\infty(\\mathbb R^N;\\mathbb C)$, the smooth compactly supported\ncomplex-valued functions. The associated **polynomial differential expression**\nis the map\n$$h_0:D_0\\to H_N,\\qquad h_0u:=-\\sum_{j=1}^Na_j\\partial_j^2u+Vu.$$\nIt is well defined because each derivative of $u$ and the product $Vu$ are\nsmooth and compactly supported. Set $W:=V+C_0+1$, so\n$W(q)\\ge1+c|q|^2$. This definition specifies finite mathematical data and a\ndifferential expression; it does not choose a self-adjoint operator domain or\nassert a continuum or infinite-volume limit.",
+        "strategy": "Definition; no proof supplied.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §§2.3 and 8.3, pp.76–83 and 212–214",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 8, pp.48–50",
+              "url": "https://arxiv.org/pdf/1203.2344v1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qft-coercive-polynomial-form-domain",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Coercive polynomial form completion and injection",
+        "reference": "items/lem-qft-coercive-polynomial-form-domain.md#Statement",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 1,
+        "deps": [
+          "def-qft-regulated-polynomial-hamiltonian",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-c-c-infinity-rn-is-dense-in-l-p-of-rn",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-qft-regulated-polynomial-hamiltonian": "mathematical-premise",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space": "mathematical-premise",
+          "thm-c-c-infinity-rn-is-dense-in-l-p-of-rn": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice. Use the finite data and notation of\n[[def-qft-regulated-polynomial-hamiltonian]]: $N\\ge1$,\n$H_N=L^2(\\mathbb R^N,dq;\\mathbb C)$, $D_0=C_c^\\infty(\\mathbb R^N;\\mathbb C)$,\nand $W=V+C_0+1\\ge1+c|q|^2$. For $u,v\\in D_0$ define\n$$a(u,v):=\\sum_{j=1}^N a_j\\int_{\\mathbb R^N}(\\partial_j u)\\overline{\\partial_jv}\\,dq+\\int_{\\mathbb R^N}(W+1)u\\overline v\\,dq,$$\nand $\\|u\\|_Q:=a(u,u)^{1/2}$. Let $Q$ be the completion of this inner-product\nspace, constructed as equivalence classes of $\\|\\cdot\\|_Q$-Cauchy sequences.\nThen $Q$ is a complex Hilbert space and the map sending a Cauchy class to its\n$L^2$ limit is a continuous injective linear map $Q\\hookrightarrow H_N$ with\ndense image. Each $u\\in Q$ has weak derivatives $\\partial_j u\\in L^2$ and a\nweighted function $\\sqrt{W+1}\\,u\\in L^2$, and\n$$\\|u\\|_Q^2=\\sum_{j=1}^N a_j\\|\\partial_j u\\|_2^2+\\|\\sqrt{W+1}\\,u\\|_2^2.$$\nHere $g_j=\\partial_j u$ means explicitly that\n$\\int u\\,\\overline{\\partial_j\\varphi}=-\\int g_j\\overline\\varphi$ for every\n$\\varphi\\in D_0$.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Since $W+1\\ge2$ and every $a_j>0$, $a$ is a Hermitian positive-definite sesquilinear form on $D_0$: in particular $a(u,u)=\\sum_j a_j\\|\\partial_j u\\|_2^2+\\|\\sqrt{W+1}\\,u\\|_2^2\\ge2\\|u\\|_2^2$, and $a(u,u)=0$ forces $u=0$ in $H_N$. Thus its Cauchy-sequence completion with the stated equivalence relation is a well-defined inner-product space. [F1, F2, algebra]\n\n2.1 To see that the completion is complete, let $(X_n)$ be a Cauchy sequence of its classes. By [A1], choose $u_n\\in D_0$ with $\\|[u_n]-X_n\\|_Q<2^{-n}$ for each $n$. The triangle inequality makes $(u_n)$ $Q$-Cauchy; its class $X$ is defined by the Cauchy-sequence construction, and $\\|X_n-X\\|_Q\\le2^{-n}+\\|[u_n]-X\\|_Q\\to0$. Hence $Q$ is complete and therefore Hilbert. [A1, step 1.1, algebra]\n\n2.2 For a $Q$-Cauchy representative sequence $(u_n)$, the inequalities $\\|u_n-u_m\\|_2\\le\\|u_n-u_m\\|_Q$, $\\sqrt{a_j}\\|\\partial_j u_n-\\partial_j u_m\\|_2\\le\\|u_n-u_m\\|_Q$, and $\\|\\sqrt{W+1}(u_n-u_m)\\|_2\\le\\|u_n-u_m\\|_Q$ show that $u_n$, each $\\partial_j u_n$, and $\\sqrt{W+1}u_n$ converge in $L^2$ by [F2]; write their limits as $u$, $g_j$, and $h$. The first limit defines a continuous map $Q\\to H_N$, since $\\|u\\|_2\\le\\|[u_n]\\|_Q$, and equivalent Cauchy sequences have the same $L^2$ limit. [F1, F2, step 1.1]\n\n3.1 For every $\\varphi\\in D_0$, integration by parts gives $\\int u_n\\overline{\\partial_j\\varphi}=-\\int (\\partial_j u_n)\\overline\\varphi$. Passing to the limit in both integrals by $L^2$ convergence and Cauchy–Schwarz yields $\\int u\\overline{\\partial_j\\varphi}=-\\int g_j\\overline\\varphi$, so $g_j$ is the stated weak derivative. [step 2.2, F2, F3, algebra]\n\n3.2 On each compact ball $B_R$, the continuous polynomial $W+1$ is bounded. Therefore $\\sqrt{W+1}u_n\\to\\sqrt{W+1}u$ in $L^2(B_R)$, while the same sequence converges there to $h$; uniqueness of limits gives $h=\\sqrt{W+1}u$ almost everywhere on every integer-radius ball and hence almost everywhere on $\\mathbb R^N$. Taking limits of the component norms in $a(u_n,u_n)$ now gives the displayed formula for $\\|u\\|_Q^2$. [step 2.2, F1, F2, algebra]\n\n4.1 If $u=0$ in $L^2$, then step 3.1 says $\\langle g_j,\\varphi\\rangle=0$ for every $\\varphi\\in D_0$; this pairing is continuous by [F3] and $D_0$ is dense by [F4], so it vanishes on all of $H_N$, and taking $\\varphi=g_j$ gives $g_j=0$. Step 3.2 then gives $h=0$; the norm formula yields $\\|[u_n]\\|_Q=0$, so the embedding is injective. Finally its image contains $D_0$, which is dense in $H_N$ by [F4]; thus the continuous injection has dense image and all claims follow. [step 3.1, step 3.2, F3, F4, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §2.3, pp.76–83",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapters 4 and 8, pp.27–32 and 48–50",
+              "url": "https://arxiv.org/pdf/1203.2344v1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qft-cube-poincare-compact-form-inclusion",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Cube mean estimate and compact form inclusion",
+        "reference": "items/lem-qft-cube-poincare-compact-form-inclusion.md#Statement",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 2,
+        "deps": [
+          "lem-qft-coercive-polynomial-form-domain",
+          "def-compact-linear-operator",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "lem-qft-coercive-polynomial-form-domain": "mathematical-premise",
+          "def-compact-linear-operator": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the finite-dimensional coercive form data and Hilbert space $Q$ of\n[[lem-qft-coercive-polynomial-form-domain]]. The inclusion\n$J:Q\\hookrightarrow H_N$ is compact: the closure in $H_N$ of the image of\nevery bounded subset of $Q$ is compact in the metric topology. The proof below\nuses an explicit cube-mean approximation for each finite $N$ and does not\nassume a general Rellich theorem.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** Countable Choice as inherited through [F1], the finite data, and an arbitrary $Q$-bounded set.\n\n1.1 Let $C$ be a cube of side $\\delta>0$ and $u\\in C_c^\\infty(\\mathbb R^N;\\mathbb C)$, with $u_C:=|C|^{-1}\\int_Cu$. Expanding the square and using Fubini on the finite cube gives\n$$\\int_C|u-u_C|^2=\\frac1{2|C|}\\int_C\\int_C|u(x)-u(y)|^2\\,dx\\,dy.$$\nTelescope $u(x)-u(y)$ through the $N$ coordinate changes and use $|\\sum_{j=1}^Nz_j|^2\\le N\\sum_j|z_j|^2$. For the $j$th change, the fundamental theorem of calculus and Cauchy–Schwarz give $|D_j(x,y)|^2\\le\\delta\\int_{\\min(x_j,y_j)}^{\\max(x_j,y_j)}|\\partial_ju|^2$. For fixed values of the other coordinates and fixed $s\\in[0,\\delta]$, the measure of pairs $(x_j,y_j)$ whose segment contains $s$ is $2s(\\delta-s)\\le\\delta^2/2$; integrating the displayed bound over the cube variables and dividing by $2|C|$ therefore yields the safe estimate\n$$\\|u-u_C\\|_{L^2(C)}^2\\le N\\delta^2\\sum_{j=1}^N\\|\\partial_j u\\|_{L^2(C)}^2.$$\nIt applies to complex $u$ because the squared-modulus Cauchy–Schwarz inequality is used. [F3, F4, algebra]\n\n1.2 For $R>0$ and $u\\in Q$, the coercive weight gives\n$$\\int_{|q|>R}|u(q)|^2\\,dq\\le\\frac1{cR^2}\\int_{|q|>R}c|q|^2|u(q)|^2\\,dq\\le\\frac1{cR^2}\\|u\\|_Q^2.$$\nThus the $L^2$ tails of the $Q$ unit ball are uniformly small for large $R$. [F1, algebra]\n\n2.1 The estimate of step 1.1 passes to every $u\\in Q$: approximate $u$ in the $Q$ norm by elements of $C_c^\\infty$ (the defining completion), restrict to $C$, and use [F1] to pass the $L^2$ and derivative limits. [step 1.1, F1]\n\n3.1 Fix $\\varepsilon>0$. Choose $R$ so the squared tail in step 1.2 is below $\\varepsilon^2/16$. For the $Q$ unit ball, [F1] gives $\\sum_j\\|\\partial_j u\\|_2^2\\le\\sum_j a_j^{-1}$. Choose an integer $M$ large enough that $\\delta:=2R/M$ satisfies $N\\delta^2\\sum_j a_j^{-1}<\\varepsilon^2/16$, and partition $[-R,R]^N$ into the resulting finitely many cubes of side $\\delta$. Summing the squared estimates of step 2.1 over these disjoint cubes bounds the total mean-approximation error by $N\\delta^2\\sum_j\\|\\partial_j u\\|_2^2<\\varepsilon^2/16$. The squared error outside $[-R,R]^N$ is the tail from step 1.2; thus replacing $u$ on each cube by its mean and setting it to zero outside the large cube has total squared $L^2$ error below $\\varepsilon^2/8$, hence norm error below $\\varepsilon/2$. [step 2.1, step 1.2, F1, choose, algebra]\n\n4.1 For the finite partition in step 3.1, the piecewise-constant mean function $m_u$ satisfies $\\|m_u\\|_2^2=\\sum_C|C||u_C|^2\\le\\sum_C\\|u\\|_{L^2(C)}^2\\le\\|u\\|_2^2\\le1$ by Cauchy--Schwarz [F3]. Thus each mean coordinate has modulus at most $|C|^{-1/2}$, so the vectors of means lie in a bounded box in a finite-dimensional complex coordinate space. Subdivide its real-and-imaginary coordinates into finitely many boxes of sufficiently small side length so that the associated piecewise-constant functions approximate every mean vector to $L^2$ error below $\\varepsilon/2$. Combining with step 3.1 gives a finite $\\varepsilon$-net for the image of the $Q$ unit ball. Scaling shows that the image of every bounded $Q$ set is totally bounded. [step 3.1, F1, F3, algebra]\n\n5.1 Let $K$ be the $H_N$ closure of the image of the $Q$ unit ball. It is complete because it is closed in the complete space $H_N$ [F1]. Suppose an open cover of $K$ has no finite subcover. For each $n\\ge1$, step 4.1 supplies a finite $2^{-n-2}$-net for the image of the $Q$ unit ball with centers in $H_N$; the corresponding closed balls of radius $2^{-n-1}$ cover its closure $K$. Starting with $C_0=K$, choose the least ball index for which $C_n:=C_{n-1}\\cap\\overline B(p_n,2^{-n-1})$ has no finite subcover. Such an index exists, since otherwise finitely many finite subcovers would cover $C_{n-1}$. Each $C_n$ is nonempty, closed, nested, and has diameter at most $2^{-n}$. For $m>n$, any point of nonempty $C_m$ lies in both selected balls, so $\\|p_m-p_n\\|_2\\le2^{-m-1}+2^{-n-1}$; hence $(p_n)$ is Cauchy and converges to some $p\\in H_N$. Since $C_n$ is nonempty and is contained in both $K$ and $\\overline B(p_n,2^{-n-1})$, the distance from $p_n$ to $K$ is at most $2^{-n-1}$. Therefore $\\operatorname{dist}(p,K)\\le\\|p-p_n\\|_2+2^{-n-1}\\to0$; closedness of $K$ gives $p\\in K$. For fixed $n$ and every $m>n$, nonempty $C_m\\subseteq C_n$ has a point $y\\in C_m$ with $\\|p_m-y\\|_2\\le2^{-m-1}$. Thus there are points of $C_n$ arbitrarily close to $p$, and closedness gives $p\\in C_n$. An open set of the cover containing $p$ contains $K\\cap B(p,r)$ for some $r>0$; for large $n$, $\\operatorname{diam}(C_n)<r$, so that one open set covers $C_n$, a contradiction. Thus $K$ is compact. All recursive ball choices are least admissible indices in finite lists. [step 4.1, F1, algebra]\n\n6.1 Step 5.1 proves that the closed-unit-ball image under $J$ has compact closure; applying the equivalent criterion in [F2] to the linear inclusion proves that $J:Q\\hookrightarrow H_N$ is compact. [step 5.1, F2] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §2.3, pp.76–83",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 8, pp.48–50",
+              "url": "https://arxiv.org/pdf/1203.2344v1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qft-hermite-oscillator-research-supplier",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Anisotropic Hermite oscillator and quadratic form basis",
+        "reference": "items/lem-qft-hermite-oscillator-research-supplier.md#Statement",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 2,
+        "deps": [
+          "lem-qft-coercive-polynomial-form-domain",
+          "thm-nrqm-oscillator-multidimensional-oscillator-completeness",
+          "thm-nrqm-oscillator-hermite-recurrence",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "lem-qft-coercive-polynomial-form-domain": "mathematical-premise",
+          "thm-nrqm-oscillator-multidimensional-oscillator-completeness": "mathematical-premise",
+          "thm-nrqm-oscillator-hermite-recurrence": "mathematical-premise",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization": "mathematical-premise",
+          "thm-hilbert-space-fourier-expansion": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice. Let $N\\ge1$, $a_1,\\ldots,a_N>0$ and $c>0$. Let\n$Q_{\\mathrm{osc}}$ be the completion of $C_c^\\infty(\\mathbb R^N;\\mathbb C)$\nfor the form inner product\n$$a_{\\mathrm{osc}}(u,v):=\\sum_{j=1}^N a_j\\int (\\partial_j u)\\overline{\\partial_jv} +\\int (c|q|^2+2)u\\overline v.$$\nThis is the space $Q$ of\n[[lem-qft-coercive-polynomial-form-domain]] for $V(q)=c|q|^2$ and $C_0=0$.\nFor $\\mathbf n=(n_1,\\ldots,n_N)\\in\\mathbb N_0^N$, there is a smooth product\nHermite function $\\psi_{\\mathbf n}$ such that\n$$\\langle\\psi_{\\mathbf n},\\psi_{\\mathbf m}\\rangle_{L^2}=\\delta_{\\mathbf n\\mathbf m},\\qquad \\overline{\\operatorname{span}}\\{\\psi_{\\mathbf n}\\}=L^2(\\mathbb R^N),$$\nand\n$$\\left(-\\sum_{j=1}^Na_j\\partial_j^2+c|q|^2\\right)\\psi_{\\mathbf n} =\\epsilon_{\\mathbf n}\\psi_{\\mathbf n},\\qquad \\epsilon_{\\mathbf n}:=\\sum_{j=1}^N(2n_j+1)\\sqrt{a_jc}.$$\nFor the ground multi-index $\\mathbf0$, the smooth representative is\n$$\\psi_{\\mathbf0}(q)=\\prod_{j=1}^N(b_j/\\pi)^{1/4}e^{-b_jq_j^2/2}, \\qquad b_j:=\\sqrt{c/a_j}.$$\nEach $\\psi_{\\mathbf n}$ belongs to $Q_{\\mathrm{osc}}$, and every $u\\in\nQ_{\\mathrm{osc}}$ satisfies the exact form expansion\n$$\\sum_{j=1}^N a_j\\|\\partial_j u\\|_2^2+ c\\||q|u\\|_2^2 =\\sum_{\\mathbf n\\in\\mathbb N_0^N}\\epsilon_{\\mathbf n} |\\langle u,\\psi_{\\mathbf n}\\rangle|^2.$$\nAll parameters are positive real mathematical parameters; this lemma makes no\nphysical identification.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** the oscillator form, its completion, and positive coefficients $a_j,c$.\n\n1.1 In [F2] choose $\\hbar=1$, $m_j=(2a_j)^{-1}$ and $\\omega_j=2\\sqrt{a_jc}$. Then $\\hbar^2/(2m_j)=a_j$ and $m_j\\omega_j^2/2=c$. The eigenvalue from [F2] in coordinate $j$ is $\\omega_j(n_j+1/2)=(2n_j+1)\\sqrt{a_jc}$. Summing over the $N$ coordinates gives the displayed differential eigenvalue $\\epsilon_{\\mathbf n}$. In the same scaling, $b_j=m_j\\omega_j=\\sqrt{c/a_j}$ and the normalized $n_j=0$ Gaussian becomes $(b_j/\\pi)^{1/4}e^{-b_jq_j^2/2}$; taking the product gives the stated ground representative. [A1, F2, algebra]\n\n1.2 Each product Hermite function is a polynomial times a Gaussian, so it and all first derivatives have finite squared integrals after multiplication by any fixed polynomial. Choose a smooth radial cutoff $\\chi_R(q)=\\chi(q/R)$ with $\\chi=1$ on $|q|\\le1$, $\\chi=0$ on $|q|\\ge2$, and $|\\nabla\\chi_R|\\le C/R$. Such a $\\chi$ can be formed from $\\eta(s)=e^{-1/s}$ for $s>0$ and $\\eta(s)=0$ for $s\\le0$, by taking $\\chi(q)=\\eta(4-|q|^2)/(\\eta(4-|q|^2)+\\eta(|q|^2-1))$. Then $0\\le\\chi_R\\le1$ and $\\chi_R\\psi_{\\mathbf n}\\in C_c^\\infty$. The weighted-function error is supported on $|q|>R$ and bounded in squared integral by the integrable tail $(c|q|^2+2)|\\psi_{\\mathbf n}|^2$, so its $L^2$ norm tends to zero. For each derivative,\n$$\\partial_j((1-\\chi_R)\\psi_{\\mathbf n})=(1-\\chi_R)\\partial_j\\psi_{\\mathbf n}-(\\partial_j\\chi_R)\\psi_{\\mathbf n};$$\nthe first term tends to zero by its Gaussian tail and the second has norm at most $C\\|\\psi_{\\mathbf n}\\|_2/R$. Thus $\\chi_R\\psi_{\\mathbf n}$ converges in the form norm, proving $\\psi_{\\mathbf n}\\in Q_{\\mathrm{osc}}$. [F1, algebra]\n\n2.1 For $v\\in C_c^\\infty$, integration by parts and the eigenvalue identity in step 1.1 give\n$$a_{\\mathrm{osc}}(\\psi_{\\mathbf n},v)=(\\epsilon_{\\mathbf n}+2) \\langle\\psi_{\\mathbf n},v\\rangle.$$\nThe left side is continuous in the form norm of $v$ by Cauchy--Schwarz [F4] in $Q_{\\mathrm{osc}}$, and the right side is continuous since $\\|v\\|_2\\le\\|v\\|_{Q_{\\mathrm{osc}}}$. Density of $C_c^\\infty$ in its defining completion extends the identity to every $v\\in Q_{\\mathrm{osc}}$. Taking $v=\\psi_{\\mathbf m}$ proves that $\\xi_{\\mathbf n}:=(\\epsilon_{\\mathbf n}+2)^{-1/2}\\psi_{\\mathbf n}$ is orthonormal in $Q_{\\mathrm{osc}}$. If $u\\in Q_{\\mathrm{osc}}$ is orthogonal in this form inner product to every $\\xi_{\\mathbf n}$, conjugating the displayed identity gives $\\langle u,\\psi_{\\mathbf n}\\rangle=0$ for every $\\mathbf n$. Completeness in $L^2$ from [F2] makes the image of $u$ zero, and the injective inclusion in [F1] makes $u=0$ in $Q_{\\mathrm{osc}}$. Thus $(\\xi_{\\mathbf n})$ is complete there. [F1, F2, F4, step 1.1, algebra]\n\n3.1 Parseval in $Q_{\\mathrm{osc}}$ with the complete orthonormal family $(\\xi_{\\mathbf n})$ gives\n$$a_{\\mathrm{osc}}(u,u)=\\sum_{\\mathbf n}(\\epsilon_{\\mathbf n}+2) |\\langle u,\\psi_{\\mathbf n}\\rangle|^2.$$\nParseval in $L^2$ gives $\\|u\\|_2^2=\\sum_{\\mathbf n}|\\langle u,\\psi_{\\mathbf n}\\rangle|^2$. Subtracting $2\\|u\\|_2^2$ from the first identity yields the asserted expansion of the unshifted oscillator form. [F2, F3, step 2.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §8.3, pp.212–214",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf",
+              "locator": "§8.3, printed pp.212–214: Hermite functions, ladder operators and the oscillator eigenbasis."
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 3, pp.21–24",
+              "url": "https://arxiv.org/pdf/1203.2344v1",
+              "locator": "Chapter 3, printed pp.21–24: the one-dimensional Hermite oscillator and its eigenfunctions."
+            },
+            {
+              "title": "Richard Melrose, MIT 18.102 Lecture 23, printed pp.133–135",
+              "url": "https://www.ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2009/5fc9f8fe6fc4fec37683a39268c7b6b0_MIT18_102s09_lec23.pdf",
+              "locator": "Printed pp.133–135: ladder construction, eigenvalues and orthogonality; the lecture does not complete the Hermite completeness proof."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qft-polynomial-positive-compact-resolvent",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Positive injective compact polynomial form resolvent",
+        "reference": "items/lem-qft-polynomial-positive-compact-resolvent.md#Statement",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 3,
+        "deps": [
+          "lem-qft-coercive-polynomial-form-domain",
+          "lem-qft-cube-poincare-compact-form-inclusion",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-bounded-linear-operator",
+          "def-compact-linear-operator",
+          "def-self-adjoint-positive-unitary-and-normal-operator",
+          "thm-double-orthogonal-complement-is-closure",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "lem-qft-coercive-polynomial-form-domain": "mathematical-premise",
+          "lem-qft-cube-poincare-compact-form-inclusion": "mathematical-premise",
+          "thm-riesz-representation-for-hilbert-space": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-compact-linear-operator": "mathematical-premise",
+          "def-self-adjoint-positive-unitary-and-normal-operator": "mathematical-premise",
+          "thm-double-orthogonal-complement-is-closure": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) and use $Q$, $H_N$, $a$, and $W$ from\n[[lem-qft-coercive-polynomial-form-domain]]. For each $f\\in H_N$, let $Rf$ be\nthe unique vector of $Q$ satisfying\n$$a(v,Rf)=\\langle v,f\\rangle_{H_N}\\qquad(v\\in Q),$$\nand view $R$ as an operator $H_N\\to H_N$ by the inclusion of\n[[lem-qft-cube-poincare-compact-form-inclusion]]. Then $R$ is bounded, compact,\nself-adjoint, positive, injective, and has dense range; moreover\n$\\|R\\|\\le\\tfrac12$. This is the variational inverse of the shifted polynomial\nform. It establishes compactness and dense range but does not itself assert a\ndifferential-operator realization.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 For fixed $f\\in H_N$, the functional $v\\mapsto\\langle v,f\\rangle_{H_N}$ is linear and satisfies $|\\langle v,f\\rangle|\\le\\|v\\|_2\\|f\\|_2\\le\\|v\\|_Q\\|f\\|_2$ by [F1] and Cauchy–Schwarz. Thus [F3] applied to the Hilbert space $(Q,a)$ gives a unique $Rf\\in Q$ with the stated variational identity. For $\\alpha,\\beta\\in\\mathbb C$, conjugate-linearity in the second argument gives $a(v,\\alpha Rf+\\beta Rg)=\\langle v,\\alpha f+\\beta g\\rangle$, so uniqueness makes $R$ linear. [A1, F1, F3, F4, given]\n\n2.1 Taking $v=Rf$ in the identity gives $\\|Rf\\|_Q^2=a(Rf,Rf)=\\langle Rf,f\\rangle$. Hence $\\|Rf\\|_Q^2\\le\\|Rf\\|_2\\|f\\|_2\\le\\|Rf\\|_Q\\|f\\|_2$, so $\\|Rf\\|_Q\\le\\|f\\|_2$ (with the zero case immediate). Consequently $R:H_N\\to H_N$ is bounded by [F5]. [step 1.1, F1, F4, F5, algebra]\n\n2.2 The same identity and $a(Rf,Rf)\\ge2\\|Rf\\|_2^2$ give $2\\|Rf\\|_2^2\\le\\|Rf\\|_2\\|f\\|_2$; division when $Rf\\ne0$ yields $\\|R\\|\\le\\tfrac12$. If $Rf=0$, the variational identity says $\\langle v,f\\rangle=0$ for every $v\\in Q$; since $Q$ is dense in $H_N$ by [F1], continuity of the inner product gives $\\langle f,f\\rangle=0$, hence $f=0$. Thus $R$ is injective. [step 1.1, F1, F4, algebra]\n\n2.3 For $f,g\\in H_N$, the variational identity and conjugate symmetry of $a$ yield $\\langle Rf,g\\rangle=a(Rf,Rg)=\\langle f,Rg\\rangle$, so $R$ is self-adjoint by [F7]. Also $\\langle Rf,f\\rangle=a(Rf,Rf)\\ge0$, so it is positive. [step 1.1, F1, F7, algebra]\n\n3.1 The map $f\\mapsto Rf$ is bounded from $H_N$ into $Q$ by step 2.1, and the inclusion $J:Q\\to H_N$ is compact by [F2]. Therefore for every bounded $B\\subseteq H_N$, $R(B)=J(R(B))$ has compact closure, which is exactly compactness by [F6]. [step 2.1, F2, F6]\n\n4.1 If $z\\perp\\operatorname{ran}R$, then $\\langle Rf,z\\rangle=0$ for every $f\\in H_N$. Self-adjointness from step 2.3 gives $\\langle f,Rz\\rangle=0$ for every $f$, so $Rz=0$ and step 2.2 gives $z=0$. Thus $(\\operatorname{ran}R)^\\perp=\\{0\\}$, and [F8] gives $\\overline{\\operatorname{ran}R}=(\\operatorname{ran}R)^{\\perp\\perp}=\\{0\\}^\\perp=H_N$. Therefore $R$ has dense range. [step 2.2, step 2.3, F8] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §2.3, pp.76–83",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 4, pp.27–32",
+              "url": "https://arxiv.org/pdf/1203.2344v1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qft-self-adjoint-regulated-interaction",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Self-adjoint unbounded polynomial interaction at fixed regulator",
+        "reference": "items/thm-qft-self-adjoint-regulated-interaction.md#Statement",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 4,
+        "deps": [
+          "def-qft-regulated-polynomial-hamiltonian",
+          "lem-qft-coercive-polynomial-form-domain",
+          "lem-qft-polynomial-positive-compact-resolvent",
+          "thm-spectral-theorem-for-compact-self-adjoint-operators",
+          "thm-hilbert-space-fourier-expansion",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-unbounded-linear-operator-domain-and-graph",
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-qft-regulated-polynomial-hamiltonian": "mathematical-premise",
+          "lem-qft-coercive-polynomial-form-domain": "mathematical-premise",
+          "lem-qft-polynomial-positive-compact-resolvent": "mathematical-premise",
+          "thm-spectral-theorem-for-compact-self-adjoint-operators": "mathematical-premise",
+          "thm-hilbert-space-fourier-expansion": "mathematical-premise",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "def-unbounded-linear-operator-domain-and-graph": "mathematical-premise",
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice and the data of\n[[lem-qft-polynomial-positive-compact-resolvent]]. Its variational operator $R$\nis compact, self-adjoint, positive, and injective on the infinite-dimensional\ncomplex Hilbert space $H_N$. Let $(\\mu_n)_{n\\ge1}$ be its positive eigenvalues\nin nonincreasing order, with multiplicity, and choose corresponding\northonormal eigenvectors $(\\psi_n)_{n\\ge1}$. Put\n$E_n:=\\mu_n^{-1}-1$ and define\n$$D(S):=\\left\\{u=\\sum_{n\\ge1}c_n\\psi_n\\in H_N:\\sum_{n\\ge1}E_n^2|c_n|^2<\\infty\\right\\},\\qquad Su:=\\sum_{n\\ge1}E_nc_n\\psi_n.$$\nThe series for $u$ converges in $H_N$ by the Hilbert-space expansion theorem.\nThen $S$ is self-adjoint and satisfies $\\langle Su,u\\rangle\\ge\\|u\\|_2^2$\nfor every $u\\in D(S)$; also $(S+I)^{-1}=R$ is compact. For every\n$u\\in C_c^\\infty(\\mathbb R^N;\\mathbb C)$,\n$$Su=-\\sum_{j=1}^Na_j\\partial_j^2u+Wu.$$\nConsequently $h:=S-(C_0+1)I$, on the same domain, is a self-adjoint realization\nof the differential expression in\n[[def-qft-regulated-polynomial-hamiltonian]] and satisfies\n$\\langle hu,u\\rangle\\ge-C_0\\|u\\|_2^2$ for every $u\\in D(h)$.\nIt has compact resolvent, meaning that for some $z\\in\\mathbb C$ the map\n$h-zI:D(h)\\to H_N$ is bijective with bounded inverse on $H_N$, and that\ninverse is compact; here $z=-(C_0+2)$ and $(h+(C_0+2)I)^{-1}=R$. Put\n$\\lambda_n:=E_n-C_0-1$, the eigenvalues of $h$; equivalently,\n$$D(h)=\\left\\{u=\\sum_nc_n\\psi_n:\\sum_n\\lambda_n^2|c_n|^2<\\infty\\right\\}.$$\nFor every $u\\in Q$,\n$$a(u,u)=\\sum_{n\\ge1}(E_n+1)|\\langle u,\\psi_n\\rangle|^2,\\qquad q_h(u):=a(u,u)-(C_0+2)\\|u\\|_2^2 =\\sum_{n\\ge1}\\lambda_n|\\langle u,\\psi_n\\rangle|^2.$$\nThe lowest eigenvalue is attained and has finite multiplicity. This selects a\nform realization; it does not assert that the differential expression on\n$C_c^\\infty$ is essentially self-adjoint or that it has no other self-adjoint\nextensions.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 By [F1], $R$ is compact and self-adjoint. Applying [F2] and using $\\ker R=\\{0\\}$ shows that the closed span of its nonzero eigenspaces is all of $H_N$. If $R\\psi=\\mu\\psi$ with $\\psi\\ne0$, then $\\mu\\|\\psi\\|^2=\\langle R\\psi,\\psi\\rangle\\ge0$ by positivity, while injectivity rules out $\\mu=0$; hence every nonzero eigenvalue is positive. [F1, F2, algebra]\n\n1.2 The domains defined by the squared coefficient sums for $E_n$ and $\\lambda_n=E_n-(C_0+1)$ coincide. Indeed\n$$\\lambda_n^2\\le2E_n^2+2(C_0+1)^2,\\qquad E_n^2\\le2\\lambda_n^2+2(C_0+1)^2.$$\nMultiplying by $|c_n|^2$ and summing preserves finiteness in both directions because $\\sum_n|c_n|^2=\\|u\\|_2^2<\\infty$ by [F4]. This proves the displayed coefficient-domain description of $D(h)$. [F4, algebra]\n\n2.1 Each eigenspace is finite-dimensional by [F2], and so has an orthonormal basis by [F3]. The set of nonzero eigenvalues is at most countable, and [A1] selects these finite bases; their union is an orthonormal family whose closed span is $H_N$ by step 1.1. The space is infinite-dimensional: the indicators of the pairwise disjoint unit cubes $[r,r+1)\\times[0,1)^{N-1}$, $r\\in\\mathbb N$, are nonzero mutually orthogonal $L^2$ vectors. Thus the family can be indexed by $n\\ge1$. The bound $\\|R\\|\\le\\tfrac12$ gives $0<\\mu_n\\le\\tfrac12$ and $E_n\\ge1$. The compact spectral theorem says only finitely many eigenvalues satisfy $\\mu\\ge\\varepsilon$ for each $\\varepsilon>0$; recursively taking a largest remaining eigenvalue (which exists because above half its positive supremum there are only finitely many) orders them nonincreasingly with multiplicity and gives $\\mu_n\\to0$, hence $E_n\\to\\infty$. [A1, F1, F2, F3, step 1.1, algebra]\n\n3.1 The family $(\\psi_n)$ is complete by step 1.1, so [F4] gives $u=\\sum_n\\langle u,\\psi_n\\rangle\\psi_n$ in norm for every $u\\in H_N$ and Parseval. In particular $D(S)$ is dense because it contains all finite linear combinations of the $\\psi_n$. Since each $E_n$ is real, the diagonal formula for $S$ gives $\\langle Su,v\\rangle=\\langle u,Sv\\rangle$ for finite sums, and then for all $u,v\\in D(S)$ by [F7] and convergence of the coefficient series; thus $S$ is symmetric. For $u\\in D(S)$ with coefficients $c_n$, Cauchy--Schwarz [F7] makes $\\sum_nE_n|c_n|^2$ absolutely convergent, and step 2.1 gives $E_n\\ge1$, so $\\langle Su,u\\rangle=\\sum_nE_n|c_n|^2\\ge\\sum_n|c_n|^2=\\|u\\|_2^2$. [F4, F7, step 1.1, step 2.1, algebra]\n\n4.1 To compute the adjoint domain, let $v=\\sum_nd_n\\psi_n\\in D(S^*)$ and write $S^*v=z=\\sum_nz_n\\psi_n$. Testing the adjoint identity on each $\\psi_n$ gives $z_n=E_nd_n$. Because $z\\in H_N$, Parseval gives $\\sum_nE_n^2|d_n|^2<\\infty$, so $v\\in D(S)$. Conversely, if this sum is finite, then $z:=\\sum_nE_nd_n\\psi_n\\in H_N$ and the coefficient identity $\\langle Su,v\\rangle=\\langle u,z\\rangle$ holds first for finite sums and then for every $u\\in D(S)$ by [F7]; hence $v\\in D(S^*)$ and $S^*v=Sv$. Therefore $D(S^*)=D(S)$ and $S^*=S$ as operators; by the unbounded self-adjointness definition in [F5], $S$ is self-adjoint. [F4, F5, F7, step 3.1, algebra]\n\n4.2 On each $\\psi_n$, $(S+I)^{-1}\\psi_n=(E_n+1)^{-1}\\psi_n=\\mu_n\\psi_n=R\\psi_n$. Both sides are bounded operators on $H_N$ and agree on the span of the complete family, so they agree on all of $H_N$. Thus $(S+I)^{-1}=R$, which is compact by [F1]. [F1, F2, step 2.1, step 3.1]\n\n5.1 The variational identity for $R$, applied to $f=\\psi_n$, gives $a(v,R\\psi_n)=\\langle v,\\psi_n\\rangle$ for every $v\\in Q$. Since $R\\psi_n=\\mu_n\\psi_n$ and $\\mu_n>0$, each $\\psi_n$ lies in $Q$ and\n$$a(v,\\psi_n)=\\mu_n^{-1}\\langle v,\\psi_n\\rangle.$$\nThus $\\xi_n:=\\sqrt{\\mu_n}\\,\\psi_n$ is an orthonormal family in $Q$. If $v\\in Q$ is orthogonal in $a$ to every $\\xi_n$, the displayed identity makes all $H_N$ coefficients $\\langle v,\\psi_n\\rangle$ zero. The $H_N$ completeness of $(\\psi_n)$ and injectivity of $Q\\hookrightarrow H_N$ force $v=0$ in $Q$. Hence $(\\xi_n)$ is complete in $Q$, and Parseval in $(Q,a)$ gives\n$$a(v,v)=\\sum_n\\mu_n^{-1}|\\langle v,\\psi_n\\rangle|^2=\\sum_n(E_n+1)|\\langle v,\\psi_n\\rangle|^2.$$\n[F1, F4, F6, step 1.1, step 2.1, step 4.2, algebra]\n\n5.2 Let $u\\in C_c^\\infty$ and set $f:=(-\\sum_ja_j\\partial_j^2+W+1)u\\in H_N$. Integration by parts gives $a(u,v)=\\langle f,v\\rangle$ for $v\\in C_c^\\infty$; both sides are continuous in $v$ for the $Q$ norm by [F7], and $C_c^\\infty$ is dense in $Q$, so the identity holds for all $v\\in Q$. It is the defining variational identity for $Rf$, and uniqueness in [F1] gives $Rf=u$. Hence $u\\in\\operatorname{ran}R=D(S)$ and $(S+I)u=f$, so $Su=-\\sum_ja_j\\partial_j^2u+Wu$. [F1, F7, step 4.2, algebra]\n\n6.1 Parseval in $H_N$ gives $\\|v\\|_2^2=\\sum_n|\\langle v,\\psi_n\\rangle|^2$. Subtracting $(C_0+2)$ times this identity from step 5.1 yields the claimed formula for $q_h(v)$, because $E_n+1-(C_0+2)=E_n-C_0-1=\\lambda_n$. [step 5.1, F4, algebra]\n\n6.2 If $u\\in D(h)=D(S)$ and $c_n=\\langle u,\\psi_n\\rangle$, then $\\sum_nE_n^2|c_n|^2<\\infty$ by the definition of $D(S)$. Since $E_n\\ge1$, $E_n+1\\le2E_n^2$, so $\\sum_n(E_n+1)|c_n|^2<\\infty$. Step 5.1 therefore gives $u\\in Q$. Thus every eigenvector, and indeed every operator-domain vector, belongs to the form domain. [F2, step 5.1, algebra]\n\n7.1 Subtracting the real scalar $(C_0+1)I$ preserves self-adjointness on the same domain, and $E_n\\ge1$ gives eigenvalues $\\lambda_n=E_n-C_0-1\\ge-C_0$. For $u\\in D(h)$, the diagonal expansion and Cauchy--Schwarz [F7] make $\\langle hu,u\\rangle=\\sum_n\\lambda_n|\\langle u,\\psi_n\\rangle|^2$ absolutely convergent; Parseval then gives $\\langle hu,u\\rangle\\ge-C_0\\|u\\|_2^2$. The lowest eigenvalue corresponds to the largest eigenvalue $\\mu_1$ of $R$; its eigenspace is nonzero and finite-dimensional by [F2]. Since $W=V+C_0+1$, step 5.2 shows that $h=S-(C_0+1)I$ extends the specified polynomial differential expression. Finally $h+(C_0+2)I=S+I$, whose inverse is the compact operator $R$ by step 4.2. These statements establish the declared realization and all listed scope limits. [F1, F2, F7, step 2.1, step 4.2, step 5.2] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §2.3, pp.76–83",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf"
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 4, pp.27–32",
+              "url": "https://arxiv.org/pdf/1203.2344v1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qft-regulated-global-unitary-evolution",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Global unitary evolution at fixed finite regulator",
+        "reference": "items/thm-qft-regulated-global-unitary-evolution.md#Statement",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 5,
+        "deps": [
+          "thm-qft-self-adjoint-regulated-interaction",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-qft-self-adjoint-regulated-interaction": "mathematical-premise",
+          "thm-hilbert-space-fourier-expansion": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice and let $h$ be the self-adjoint operator of\n[[thm-qft-self-adjoint-regulated-interaction]], with complete orthonormal\neigenfamily $(\\psi_n)_{n\\ge1}$ and real eigenvalues\n$\\lambda_n=E_n-C_0-1$. For $t\\in\\mathbb R$ define\n$$U(t)f:=\\sum_{n\\ge1}e^{-it\\lambda_n}\\langle f,\\psi_n\\rangle\\psi_n \\qquad(f\\in H_N).$$\nThen the series converges in $H_N$ for every $f$; $U(t)$ is unitary,\n$U(0)=I$, $U(s+t)=U(s)U(t)$, and $t\\mapsto U(t)f$ is norm-continuous for\nevery $f$. Its norm derivative at any $t$ exists exactly for $f\\in D(h)$, and\nthen\n$$\\frac{d}{dt}U(t)f=-i\\,hU(t)f.$$\nThis is a mathematical one-parameter group with a dimensionless real\nparameter; it makes no physical unit or empirical claim.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** $f\\in H_N$, its coefficients $c_n=\\langle f,\\psi_n\\rangle$, and the real sequence $(\\lambda_n)$.\n\n1.1 Parseval gives $\\sum_n|c_n|^2=\\|f\\|^2$. Since $|e^{-it\\lambda_n}|=1$, the finite partial sums defining $U(t)f$ are Cauchy in $H_N$, so converge; Parseval gives $\\|U(t)f\\|^2=\\sum_n|c_n|^2=\\|f\\|^2$. The coefficient formula shows $U(-t)U(t)f=f=U(t)U(-t)f$ and $U(s)U(t)f=U(s+t)f$, first on finite sums and then on all of $H_N$ by norm convergence and the norm bound. Thus $U(t)$ is a surjective isometry, hence unitary, and $U(0)=I$. [A1, F1, F2, algebra]\n\n1.2 Fix $s\\in\\mathbb R$ and $f\\in H_N$. Given $\\varepsilon>0$, choose a finite set $F\\subset\\mathbb N$ with $\\sum_{n\\notin F}|c_n|^2<\\varepsilon^2/64$, possible by convergence of the nonnegative series in [F2]. The norm of the difference on the complement is at most $2(\\sum_{n\\notin F}|c_n|^2)^{1/2}<\\varepsilon/4$. On the finite set $F$, each scalar $e^{-it\\lambda_n}$ is continuous in $t$, so the finite partial difference has norm below $3\\varepsilon/4$ for $t$ sufficiently close to $s$. The triangle inequality proves $\\|U(t)f-U(s)f\\|<\\varepsilon$, establishing strong continuity. [F2, algebra]\n\n1.3 Let $f\\in D(h)$, so $\\sum_n\\lambda_n^2|c_n|^2<\\infty$. Since $|e^{-it\\lambda_n}|=1$, $U(t)f$ has the same finite weighted coefficient sum and belongs to $D(h)$. For $r\\ne0$,\n$$\\frac{U(t+r)f-U(t)f}{r} =\\sum_ne^{-it\\lambda_n}\\frac{e^{-ir\\lambda_n}-1}{r}c_n\\psi_n.$$\nThe scalar integral identity $e^{-ir\\lambda}-1=\\int_0^r(-i\\lambda)e^{-is\\lambda}\\,ds$ gives $|(e^{-ir\\lambda}-1)/r|\\le|\\lambda|$. Thus the difference quotient coefficients are dominated in square sum by $\\lambda_n^2|c_n|^2$. On each finite set they converge to $-i\\lambda_ne^{-it\\lambda_n}c_n$; choosing a finite set with small tail in that dominating series and then taking $r\\to0$ proves convergence in $H_N$ to $-i\\sum_n\\lambda_ne^{-it\\lambda_n}c_n\\psi_n=-ihU(t)f$. [F1, F2, algebra]\n\n2.1 Conversely, suppose the norm derivative at $t=0$ exists and equals $g\\in H_N$. Continuity of the coefficient functional $v\\mapsto\\langle v,\\psi_n\\rangle$ from [F3] makes its value on the difference quotient converge to $-i\\lambda_nc_n$. Hence $\\langle g,\\psi_n\\rangle=-i\\lambda_nc_n$ for every $n$. Parseval for $g$ implies $\\sum_n\\lambda_n^2|c_n|^2=\\|g\\|^2<\\infty$, so $f\\in D(h)$ by [F1]. If the derivative exists at any other $t$, the same coefficient argument multiplies each coefficient by a unit phase and yields the identical summability condition. Thus the differentiability domain is exactly $D(h)$ at every $t$. [F1, F2, F3, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §5.1, pp.145–149",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf",
+              "locator": "§5.1, printed pp.145–149: unitary groups from self-adjoint operators and their generator domains."
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 4, pp.27–32",
+              "url": "https://arxiv.org/pdf/1203.2344v1",
+              "locator": "Chapter 4, printed pp.27–32: discrete spectral expansions from compact resolvent."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-qft-regulated-gibbs-trace",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite-regulator Gibbs trace and bounded expectations",
+        "reference": "items/thm-qft-regulated-gibbs-trace.md#Statement",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-qft-regulated-polynomial-hamiltonian",
+          "thm-qft-self-adjoint-regulated-interaction",
+          "lem-qft-hermite-oscillator-research-supplier",
+          "lem-qft-coercive-polynomial-form-domain",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "lem-finite-rank-operators-are-compact",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "lem-nuclear-series-characterizes-trace-norm",
+          "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues",
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "def-bounded-linear-operator",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-qft-regulated-polynomial-hamiltonian": "mathematical-premise",
+          "thm-qft-self-adjoint-regulated-interaction": "mathematical-premise",
+          "lem-qft-hermite-oscillator-research-supplier": "mathematical-premise",
+          "lem-qft-coercive-polynomial-form-domain": "mathematical-premise",
+          "thm-hilbert-space-fourier-expansion": "mathematical-premise",
+          "thm-riesz-representation-for-hilbert-space": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "lem-finite-rank-operators-are-compact": "mathematical-premise",
+          "thm-norm-limit-of-compact-operators-is-compact": "mathematical-premise",
+          "lem-nuclear-series-characterizes-trace-norm": "mathematical-premise",
+          "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues": "mathematical-premise",
+          "thm-trace-is-absolutely-convergent-and-basis-independent": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice and use the finite-mode data, form domain $Q$, and\nself-adjoint $h$ from [[thm-qft-self-adjoint-regulated-interaction]]. Let\n$\\lambda_0\\le\\lambda_1\\le\\cdots$ be its eigenvalues repeated with\nmultiplicity, and let $\\psi_k$ be a corresponding orthonormal eigenbasis. For\n$\\beta>0$ define the finite-rank truncations\n$$\\rho_{\\beta,M}f:=\\sum_{k=0}^M e^{-\\beta\\lambda_k}\\langle f,\\psi_k\\rangle\\psi_k.$$\nThe proof establishes their operator-norm limit $\\rho_\\beta$, with action\n$$\\rho_\\beta f:=\\sum_{k\\ge0}e^{-\\beta\\lambda_k}\\langle f,\\psi_k\\rangle\\psi_k.$$\nPut $\\alpha_j:=\\sqrt{a_jc}$ and let the oscillator eigenvalues\n$\\epsilon_k$ be the nondecreasing ordering, with multiplicity, of\n$$\\epsilon_{\\mathbf n}=\\sum_{j=1}^N(2n_j+1)\\alpha_j, \\qquad\\mathbf n\\in\\mathbb N_0^N.$$\nThen $\\rho_\\beta$ is positive trace class and its trace\n$$Z_\\beta:=\\operatorname{Tr}(\\rho_\\beta)=\\sum_{k\\ge0}e^{-\\beta\\lambda_k}$$\nsatisfies the finite bound\n$$0<Z_\\beta\\le e^{\\beta C_0} \\prod_{j=1}^N\\frac{e^{-\\beta\\alpha_j}}{1-e^{-2\\beta\\alpha_j}}<\\infty.$$\nFor every bounded linear operator $B:H_N\\to H_N$, the normalized trace\nexpectation is well defined and\n$$Z_\\beta^{-1}\\operatorname{Tr}(\\rho_\\beta B) =Z_\\beta^{-1}\\sum_{k\\ge0}e^{-\\beta\\lambda_k} \\langle B\\psi_k,\\psi_k\\rangle,$$\nwith absolute convergence. This is a finite-$N$ mathematical trace result;\nit assumes no statistical data and makes no continuum-limit claim.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** $N\\ge1$, $a_j,c>0$, $V(q)\\ge c|q|^2-C_0$, the interacting form, and $\\beta>0$.\n\n1.1 Each $\\epsilon_{\\mathbf n}$ is finite, and only finitely many multi-indices have $\\epsilon_{\\mathbf n}\\le M$ for any real $M$: for $M\\ge0$, that inequality bounds every nonnegative integer $n_j$ by $M/(2\\alpha_j)$, while for $M<0$ there are none. Fix the explicit degree-then-lexicographic enumeration of $\\mathbb N_0^N$. Recursively, among the remaining tuples choose one of least energy, breaking a tie by that fixed enumeration; such a least energy exists because below the energy of the first remaining tuple there are only finitely many candidates. Every tuple is eventually listed, since only finitely many tuples have energy at most its energy. This gives the nondecreasing list $(\\epsilon_k)_{k\\ge0}$ with multiplicity. [F2, algebra]\n\n1.2 On $C_c^\\infty$, the shifted interacting form has weight $V+C_0+2\\ge c|q|^2+2$, so it dominates the shifted oscillator form from [F2]. Therefore a Cauchy sequence in $Q$ is Cauchy in the oscillator form norm; the identity map extends to a continuous map $Q\\to Q_{\\mathrm{osc}}$, with the same $L^2$ representative because both completions inject into $H_N$ by [F3]. Subtracting the shifts in the two form norms gives\n$$q_h(u)=a(u,u)-(C_0+2)\\|u\\|_2^2\\ge q_{\\mathrm{osc}}(u)-C_0\\|u\\|_2^2\\qquad(u\\in Q).$$\n[F2, F3, algebra]\n\n2.1 Fix $k\\ge0$ and let $L_k=\\operatorname{span}\\{\\psi_0,\\ldots,\\psi_k\\}$. The linear map from $L_k$ to the span of the first $k$ oscillator eigenvectors, sending $u$ to its $k$ oscillator coefficients, has a nonzero kernel because $\\dim L_k=k+1>k$. Choose $u\\ne0$ in that kernel. Since $u$ lies in the span of the first $k+1$ interacting eigenvectors, [F1] gives $q_h(u)\\le\\lambda_k\\|u\\|_2^2$. Its oscillator coefficients at indices below $k$ vanish, so [F2] gives $q_{\\mathrm{osc}}(u)\\ge\\epsilon_k\\|u\\|_2^2$. Step 1.2 now yields $\\lambda_k\\|u\\|_2^2\\ge q_h(u)\\ge(\\epsilon_k-C_0)\\|u\\|_2^2$, hence\n$$\\lambda_k\\ge\\epsilon_k-C_0.$$\nThis argument also covers $k=0$, when the span of zero oscillator vectors is $\\{0\\}$. [A1, F1, F2, step 1.2, algebra]\n\n3.1 By step 2.1 and $\\beta>0$,\n$$\\sum_{k\\ge0}e^{-\\beta\\lambda_k} \\le e^{\\beta C_0}\\sum_{\\mathbf n\\in\\mathbb N_0^N} e^{-\\beta\\epsilon_{\\mathbf n}} =e^{\\beta C_0}\\prod_{j=1}^N \\left(\\sum_{n_j\\ge0}e^{-\\beta(2n_j+1)\\alpha_j}\\right) =e^{\\beta C_0}\\prod_{j=1}^N \\frac{e^{-\\beta\\alpha_j}}{1-e^{-2\\beta\\alpha_j}}.$$\nThe factorization follows first for finite rectangular sums by distributivity and then by increasing limits of nonnegative sums. Each denominator is positive because $0<e^{-2\\beta\\alpha_j}<1$. The lower bound $Z_\\beta>0$ follows from its positive ground term. [F2, step 2.1, algebra]\n\n4.1 The coefficients satisfy $0<e^{-\\beta\\lambda_k}\\le e^{\\beta C_0}$ by [F1]. For each $f$, Parseval makes the finite partial sums in the defining series for $\\rho_\\beta f$ Cauchy in $H_N$, so the series converges; its coefficient formula gives linearity and $\\|\\rho_\\beta f\\|_2\\le e^{\\beta C_0}\\|f\\|_2$. Moreover Parseval gives\n$$\\|\\rho_\\beta-\\rho_{\\beta,M}\\|\\le\\sup_{k>M}e^{-\\beta\\lambda_k}\\longrightarrow0,$$\nsince $\\lambda_k\\to+\\infty$ and $\\beta>0$. Each truncation is finite rank and hence compact by [F10], so the operator-norm limit $\\rho_\\beta$ is compact by [F11]. The same convergence makes its rank-one partial sums converge in operator norm, and their coefficient sum is $\\sum_ke^{-\\beta\\lambda_k}=Z_\\beta<\\infty$; thus $\\rho_\\beta$ is trace class by [F4]. [A1, F1, F2, F4, F10, F11, F12, step 3.1, algebra]\n\n5.1 Since each $e^{-\\beta\\lambda_k}$ is real, the Fourier expansion [F12] gives\n$$\\langle\\rho_\\beta f,g\\rangle=\\sum_k e^{-\\beta\\lambda_k}\\langle f,\\psi_k\\rangle\\langle\\psi_k,g\\rangle=\\langle f,\\rho_\\beta g\\rangle$$\nfor all $f,g\\in H_N$; the series is absolutely convergent by Cauchy--Schwarz\nfor the coefficient sequences and boundedness of the weights. Thus\n$\\rho_\\beta$ is self-adjoint. It is positive because\n$$\\langle\\rho_\\beta f,f\\rangle =\\sum_ke^{-\\beta\\lambda_k}|\\langle f,\\psi_k\\rangle|^2\\ge0.$$\nThe defining series gives $\\rho_\\beta\\psi_k=e^{-\\beta\\lambda_k}\\psi_k$. If $\\rho_\\beta x=\\mu x$, taking Fourier coefficients shows $(e^{-\\beta\\lambda_k}-\\mu)\\langle x,\\psi_k\\rangle=0$ for every $k$. Completeness [F1, F12] then implies that every nonzero eigenspace is exactly the span of basis vectors with the corresponding repeated diagonal value; since every diagonal value is positive, $0$ is not an eigenvalue. Thus the eigenvalues with multiplicity are precisely $(e^{-\\beta\\lambda_k})$, and [F5] gives $\\operatorname{Tr}(\\rho_\\beta)=Z_\\beta$. For bounded $B$, each $\\rho_{\\beta,M}B$ is finite rank and hence compact by [F10], while\n$$\\|\\rho_{\\beta,M}B-\\rho_\\beta B\\|\\le\\|\\rho_{\\beta,M}-\\rho_\\beta\\|\\,\\|B\\|\\to0$$\nby step 4.1. Therefore $\\rho_\\beta B$ is compact by [F11]. The functional $x\\mapsto\\langle Bx,\\psi_k\\rangle$ is linear and has norm at most $\\|B\\|$ by [F9] and [F8]. By [F6] it is represented by a vector $w_k$ with $\\|w_k\\|\\le\\|B\\|$ and $\\langle Bx,\\psi_k\\rangle=\\langle x,w_k\\rangle$. Hence\n$$\\rho_\\beta Bx=\\sum_k\\langle x,w_k\\rangle e^{-\\beta\\lambda_k}\\psi_k.$$\nThe partial sums converge in operator norm: the norm of the tail after $M$ is at most $\\|B\\|\\sum_{k>M}e^{-\\beta\\lambda_k}\\to0$ by step 3.1. This nuclear representation has coefficient sum at most $\\|B\\|Z_\\beta$. Since $\\rho_\\beta B$ is compact as shown above, [F4] gives that it is trace class. Its basis trace in $(\\psi_k)$ is absolutely convergent and equals the trace by [F7]. The $k$th diagonal entry is\n$$\\langle \\rho_\\beta B\\psi_k,\\psi_k\\rangle =e^{-\\beta\\lambda_k}\\langle B\\psi_k,\\psi_k\\rangle,$$\nso this basis sum is the asserted numerator. Each term is bounded in modulus by $e^{-\\beta\\lambda_k}\\|B\\|$ by [F8] and [F9], giving the stated absolute bound. Division by $Z_\\beta>0$ proves the expectation formula. [A1, F1, F4, F5, F6, F7, F8, F9, F10, F11, F12, step 3.1, step 4.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §§2.3 and 6.3, pp.76–83 and 163–169",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf",
+              "locator": "§2.3, form realization; §6.3, trace ideals and eigenvalue sums for positive operators."
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapters 8–9, pp.48–54",
+              "url": "https://arxiv.org/pdf/1203.2344v1",
+              "locator": "Chapter 8, confining-well compactness; Chapter 9, variational comparison of eigenvalues."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qft-regulated-ground-variational-bound",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Ground eigenvalue as the form variational infimum",
+        "reference": "items/lem-qft-regulated-ground-variational-bound.md#Statement",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 5,
+        "deps": [
+          "thm-qft-self-adjoint-regulated-interaction",
+          "thm-hilbert-space-fourier-expansion",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-qft-self-adjoint-regulated-interaction": "mathematical-premise",
+          "thm-hilbert-space-fourier-expansion": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice and use $Q$, $q_h$, and the operator $h$ from\n[[thm-qft-self-adjoint-regulated-interaction]]. Let $\\lambda_1$ be the least\neigenvalue of $h$. Then\n$$\\inf\\{q_h(u):u\\in Q,\\ \\|u\\|_2=1\\}=\\lambda_1.$$\nThe infimum is attained by every normalized vector in the lowest eigenspace;\nno simplicity or nondegeneracy is assumed.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** $u\\in Q$ and the ordered real eigenvalue list.\n\n1.1 Since $\\lambda_n\\ge\\lambda_1$ for every $n$, [A1], [F1] and [F2] imply\n$$q_h(u)-\\lambda_1\\|u\\|_2^2 =\\sum_n(\\lambda_n-\\lambda_1)|\\langle u,\\psi_n\\rangle|^2\\ge0.$$\nThus every unit vector in $Q$ has form value at least $\\lambda_1$. [A1, F1, F2, algebra]\n\n2.1 A normalized eigenvector $\\psi_1$ belongs to $D(h)\\subseteq Q$ by\n[[thm-qft-self-adjoint-regulated-interaction]], has norm one, and its sole\nnonzero coefficient is at an eigenvalue $\\lambda_1$. Therefore\n$q_h(\\psi_1)=\\lambda_1$, so the lower bound is attained and equals the\ninfimum. If the lowest eigenspace has dimension greater than one, the same\ncoefficient calculation applies to every normalized vector in it. [F1, F2, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §4.4, pp.139–141",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf",
+              "locator": "§4.4, printed pp.139–141: Rayleigh quotients and variational eigenvalue characterizations."
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 9, pp.51–54",
+              "url": "https://arxiv.org/pdf/1203.2344v1",
+              "locator": "Chapter 9, printed pp.51–54: Rayleigh quotient and variational eigenvalue bounds."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 558,
+    "id": "qft-ir01-examples",
+    "kind": "B",
+    "category": "quantum-field-theory-mathematics",
+    "library": "mathematics",
+    "title": "Finite-lattice polynomial Hamiltonian data — Examples",
+    "companion": "qft-ir01",
+    "requires": [
+      "qft-ir01"
+    ],
+    "items": [
+      {
+        "id": "rem-qft-cutoff-vs-continuum-interaction",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Fixed finite-mode results do not establish a continuum limit",
+        "reference": "items/rem-qft-cutoff-vs-continuum-interaction.md#Statement",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-qft-regulated-polynomial-hamiltonian",
+          "thm-qft-self-adjoint-regulated-interaction",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-qft-regulated-polynomial-hamiltonian": "mathematical-premise",
+          "thm-qft-self-adjoint-regulated-interaction": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "In [[def-qft-regulated-polynomial-hamiltonian]], the regulator is one fixed\nfinite mode count $N$ and one fixed polynomial on $\\mathbb R^N$. The self-adjoint\nand compact-resolvent conclusions of\n[[thm-qft-self-adjoint-regulated-interaction]] concern that fixed Hilbert space\nand form realization. They assert no continuum or infinite-volume limit. Here\n“continuum limit” means a limit of a specified family of finite-regulator\nobjects as a cutoff parameter changes, together with an identified comparison\nspace and convergence notion. No such family or convergence structure is part\nof the two cited items. This scope note does not assert that a continuum limit\ndoes not exist.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** [F1] and [F2].\n\n1.1 The hypotheses in [F1] specify a single integer $N$, a single coordinate space $\\mathbb R^N$, and a single potential $V$; they contain no indexed family with varying cutoff. [A1, F1, algebra]\n\n2.1 A convergence assertion for varying cutoffs requires at least a family of objects, a common comparison space or maps between the spaces, and a convergence relation. Neither those data nor a limiting object occur in [F1] or [F2]. Therefore the theorems establish only the stated fixed-$N$ operator properties. The absence of those hypotheses is not a proof of nonexistence of a limit in a separately specified model. [A1, F1, F2, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §2.3, pp.76–83",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf",
+              "locator": "§2.3, printed pp.76–83: quadratic-form construction for a fixed operator domain and Hilbert space."
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 8, pp.48–50",
+              "url": "https://arxiv.org/pdf/1203.2344v1",
+              "locator": "Chapter 8, printed pp.48–50: compactness and spectral conclusions for a fixed confining operator."
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-qft-quartic-ground-energy-bound",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "One-mode quartic ground-energy increment bound",
+        "reference": "items/ex-qft-quartic-ground-energy-bound.md#Statement",
+        "design_state": "Authored draft with complete local argument; independent review remains pending.",
+        "dependency_level": 6,
+        "deps": [
+          "def-qft-regulated-polynomial-hamiltonian",
+          "thm-qft-self-adjoint-regulated-interaction",
+          "lem-qft-hermite-oscillator-research-supplier",
+          "lem-qft-regulated-ground-variational-bound",
+          "lem-qft-coercive-polynomial-form-domain",
+          "thm-dominated-convergence",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-qft-regulated-polynomial-hamiltonian": "mathematical-premise",
+          "thm-qft-self-adjoint-regulated-interaction": "mathematical-premise",
+          "lem-qft-hermite-oscillator-research-supplier": "mathematical-premise",
+          "lem-qft-regulated-ground-variational-bound": "mathematical-premise",
+          "lem-qft-coercive-polynomial-form-domain": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $a>0$, $m>0$, and $\\lambda\\ge0$, all real mathematical parameters.\nFor $N=1$ take the polynomial\n$$V_\\lambda(q)=\\frac{m^2}{2}q^2+\\lambda q^4$$\nand the differential expression $h_\\lambda=-a\\,d^2/dq^2+V_\\lambda(q)$ with\nthe form realization of [[thm-qft-self-adjoint-regulated-interaction]]. Write\n$E_g(\\lambda)$ for its least eigenvalue. Then\n$$0\\le E_g(\\lambda)-E_g(0)\\le\\frac{3a\\lambda}{2m^2}.$$\nThe parameters are mathematical and dimensionless here; no physical mass,\nunit, measurement, or continuum claim is made.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** $a,m>0$, $\\lambda\\ge0$, and the forms $q_0,q_\\lambda$.\n\n1.1 Write $a_\\lambda=q_\\lambda+2\\|\\cdot\\|_2^2$ for the shifted form inner product of the $\\lambda$ completion. On $C_c^\\infty$, $V_\\lambda\\ge V_0$ gives $a_\\lambda(u,u)\\ge a_0(u,u)$, so a $Q_\\lambda$-Cauchy sequence is $Q_0$-Cauchy and the identity extends continuously to $Q_\\lambda\\to Q_0$ with the same $L^2$ representative. The unshifted forms $q_\\lambda=a_\\lambda-2\\|\\cdot\\|_2^2$ and $q_0=a_0-2\\|\\cdot\\|_2^2$ are continuous on their respective form spaces. For any $u\\in Q_\\lambda$, approximate it in $Q_\\lambda$ by $u_r\\in C_c^\\infty$; then $q_\\lambda(u_r)\\ge q_0(u_r)$ for every $r$, and continuity of both forms gives $q_\\lambda(u)\\ge q_0(u)$ in the limit. For normalized $u\\in Q_\\lambda$, [F3] then gives $q_\\lambda(u)\\ge q_0(u)\\ge E_g(0)$. Taking the infimum yields $E_g(\\lambda)\\ge E_g(0)$. [A1, F1, F3, F4, algebra]\n\n1.2 The Gaussian $\\phi_b$ from [F2] and its derivative are polynomial times a Gaussian. For cutoffs $\\chi_R$ as in the cutoff construction of\n[[lem-qft-hermite-oscillator-research-supplier]], $\\chi_R\\phi_b\\in C_c^\\infty$\nconverges to $\\phi_b$ in the $\\lambda$ form norm: the derivative error is\n$(1-\\chi_R)\\phi_b'-(\\chi_R')\\phi_b$, whose first term has vanishing Gaussian\ntail and whose second has norm at most $C\\|\\phi_b\\|_2/R$; the weighted error\nhas squared magnitude bounded by $(m^2q^2/2+\\lambda q^4+2)|\\phi_b|^2$, an\nintegrable polynomial-Gaussian tail. Thus $\\phi_b\\in Q_\\lambda$. [A1, F2, F4, algebra]\n\n2.1 Let $\\mathbb E_b[g]:=\\int g(q)\\sqrt{b/\\pi}e^{-bq^2}\\,dq$. The Hermite\nground function in [F2] is normalized, so $\\mathbb E_b[1]=1$. On any compact\ninterval of positive $b$ values, the derivatives of the integrands through\norder two are bounded by a constant times $(1+|q|^4)e^{-b_*q^2}$ for some\n$b_*>0$, which is integrable; [F5] therefore permits differentiation under the\nintegral. Differentiating $\\mathbb E_b[1]=1$ gives\n$$0=\\mathbb E_b\\!\\left[\\frac1{2b}-q^2\\right],\\qquad \\mathbb E_b[q^2]=\\frac1{2b}.$$\nDifferentiating the second identity and using\n$\\partial_b(\\sqrt{b/\\pi}e^{-bq^2})=(\\frac1{2b}-q^2)\\sqrt{b/\\pi}e^{-bq^2}$ gives\n$$-\\frac1{2b^2}=\\mathbb E_b\\!\\left[q^2\\left(\\frac1{2b}-q^2\\right)\\right] =\\frac1{4b^2}-\\mathbb E_b[q^4],$$\nso $\\mathbb E_b[q^4]=3/(4b^2)$. Since $\\phi_b'=-bq\\phi_b$, this gives\n$\\|\\phi_b'\\|_2^2=b/2$. Hence\n$$\\|\\phi_b\\|_2^2=1,\\quad \\|\\phi_b'\\|_2^2=b/2,\\quad \\int q^2|\\phi_b|^2=1/(2b),\\quad\\int q^4|\\phi_b|^2=3/(4b^2).$$\nThe unperturbed form value\nis $ab/2+m^2/(4b)=m\\sqrt{a/2}=E_g(0)$, using $b=m/\\sqrt{2a}$, and the quartic\ncontribution is $3\\lambda/(4b^2)=3a\\lambda/(2m^2)$. The variational bound\n[F3] applied to this normalized vector yields\n$$E_g(\\lambda)\\le E_g(0)+\\frac{3a\\lambda}{2m^2}.$$\nCombining with step 1.1 proves both inequalities, including $\\lambda=0$.\n[A1, F2, F3, F5, step 1.1, step 1.2, algebra] ∎",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Mathematical Methods in Quantum Mechanics, 2nd ed., §8.3, pp.212–214",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf",
+              "locator": "§8.3, printed pp.212–214: the Hermite ground state and oscillator eigenvalue."
+            },
+            {
+              "title": "Richard S. Laugesen, Spectral Theory of Partial Differential Equations — Lecture Notes, Chapter 3, pp.21–24",
+              "url": "https://arxiv.org/pdf/1203.2344v1",
+              "locator": "Chapter 3, printed pp.21–24: the normalized Gaussian ground state of the one-dimensional oscillator."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

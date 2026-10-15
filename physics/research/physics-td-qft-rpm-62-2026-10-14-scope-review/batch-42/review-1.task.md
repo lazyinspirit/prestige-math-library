@@ -1,0 +1,14 @@
+# Batch 42: review 1
+
+Run: physics-td-qft-rpm-62-2026-10-14
+Batch: 42
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: qft-mf03, qft-mf03-examples
+Items: lem-qft-lorentz-boost-rotation-factorization, def-qft-dirac-projections, lem-qft-dirac-projection-matrices, lem-qft-free-dirac-car-locality, lem-qft-dirac-fermionic-translation-spectrum, lem-qft-dirac-covariance-spectrum, ex-qftmath-dirac-rest-projector
+Consolidated findings: [{"id":"qft-mf03","type":"scope","reason":"The approved plan and current batch manifest require qft-mf02, tempered-distributions-and-the-fourier-transform, sr-spacetime-primitives, sr-lorentz-transformations, sine-cosine-and-the-definition-of-pi, fundamental-trigonometric-identities, and regular-surfaces-and-surface-integrals. The page frontmatter omits `requires`; restore this list in the page carrier."},{"id":"lem-qft-lorentz-boost-rotation-factorization","type":"prerequisite","reason":"Proof step 2.1 sets R=B^{-1}Λ and asserts it is proper orthochronous, using inverse and composition closure of SO+(1,3). Add and cite the group result in published lem-lorentz-map-preserves-metric-and-causal-structure, or prove the needed closure locally."},{"id":"lem-qft-dirac-covariance-spectrum","type":"prerequisite","reason":"The Statement constructs G as a semidirect-product group and a subgroup of triples; proof step 3.1 uses their group products to establish the representation. Record the SO+(1,3) subgroup result from published lem-lorentz-map-preserves-metric-and-causal-structure as a mathematical prerequisite."},{"id":"def-qft-dirac-projections","type":"local","reason":"The Definition asserts that P± are complementary rank-two orthogonal projections and uses their ranges. lem-qft-dirac-projection-matrices, which depends on this definition, proves the projection and closed-range properties; record it in `justified_by`."}]
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

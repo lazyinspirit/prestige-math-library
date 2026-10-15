@@ -1,0 +1,33 @@
+// Root authoring-readiness reconciliation; no native gate or proof acceptance.
+import{readFileSync,writeFileSync,mkdirSync,existsSync}from'node:fs';
+import{loadStep1Record,loadStep3}from'../../tools/physics-support/frontier-snapshot.mjs';
+import{recordStep1,step1Decision,checkStep1}from'../../tools/physics-support/step1-decisions.mjs';
+import{yaml,split}from'../../tools/physics-support/pathway-lib.mjs';
+const run='physics-td-qft-rpm-62-2026-10-14',root=process.cwd();
+if(!process.argv.includes('--writers-drained'))throw Error('Root must confirm current Step-2 writers drained and final handoffs independently guarded');
+// The following historical Stage-1 receipt is retained as historical context.
+// Current Step-2 release authority is root’s separately checked final handoff evidence.
+const release=JSON.parse(readFileSync(`research/${run}-owner-escalations/qft-final-source-release.json`,'utf8'));
+if(release.source_writing_released!==true||release.remaining_live_consumer_handoffs.length)throw Error('Unreleased QFT writer scope');
+const s=loadStep1Record(root,run),meta=new Map(),order=[],seen=new Set(),active=new Set();
+if(s.pages.length!==128||s.items.size!==686||!s.items.has('lem-tdmath-diagonal-model-hilbert-and-domain'))throw Error('Current registered frontier must contain 686 items on 128 pages, including approved new11');
+for(const[id,{item}]of s.items){const fm=yaml().parse(split(readFileSync(`items/${id}.md`,'utf8')).fm);if(fm.id!==id||fm.status!=='draft')throw Error(`Wrong identity or non-draft authoring item ${id}`);if(JSON.stringify(fm.deps)!==JSON.stringify(item.deps))throw Error(`Source dependency mirror is stale ${id}`);meta.set(id,fm);}
+function visit(id){if(seen.has(id)||!meta.has(id))return;if(active.has(id))throw Error(`Logical cycle ${id}`);active.add(id);for(const dep of meta.get(id).deps??[])visit(dep);active.delete(id);seen.add(id);order.push(id);}
+for(const id of [...meta.keys()].sort())visit(id);
+const stamp=new Date().toISOString().replace(/[:.]/g,'-'),archive=`research/${run}-owner-readiness-integration/${stamp}`;mkdirSync(archive,{recursive:true});
+const results=[],unchanged=[],failures=[];
+for(const id of order){
+ try{
+  if(step1Decision(s,id).closed){unchanged.push(id);continue;}
+  const path=`research/${run}-step1-${id}.json`;
+  if(existsSync(path))writeFileSync(`${archive}/${id}.before.json`,readFileSync(path));
+  const row=recordStep1(root,{run,item:id,owner:true,decision:'ready',dependencies:meta.get(id).deps??[],reason:`Initial authoring is complete and source prerequisites are available at their actual draft/published interfaces. All reported source escalations and same-owner consumer repairs are released; root reconciled current source, contract, placement and dependency metadata, retaining historical evidence. This current-hash record is authoring readiness only, not independent review, gate acceptance, empirical validation or publication.`});
+  results.push({id,sha256:row.sha256});
+  if(results.length%25===0)console.log(JSON.stringify({refreshed:results.length,unchanged:unchanged.length,last:id}),null);
+ }catch(error){failures.push({id,error:error.message});}
+}
+const current=checkStep1(loadStep3(root,run));
+writeFileSync(`${archive}/current-check.json`,JSON.stringify(current,null,2)+'\n');
+writeFileSync(`${archive}/receipt.json`,JSON.stringify({run,owner:'/root',at:new Date().toISOString(),results,unchanged,failures,current_summary:{items:current.items,ready:current.ready,closed:current.closed},gate_authorization:false,independent_acceptance:false},null,2)+'\n');
+console.log(JSON.stringify({refreshed:results.length,unchanged:unchanged.length,failures,current:{items:current.items,ready:current.ready,closed:current.closed},receipt:`${archive}/receipt.json`}));
+if(failures.length||!current.closed)process.exitCode=1;

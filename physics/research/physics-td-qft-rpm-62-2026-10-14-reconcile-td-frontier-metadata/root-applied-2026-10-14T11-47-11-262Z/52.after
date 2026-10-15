@@ -1,0 +1,199 @@
+[
+  {
+    "order": 537,
+    "id": "qft-x01",
+    "kind": "A",
+    "category": "quantum-field-theory",
+    "library": "physics",
+    "title": "Example observable types and scoped meanings",
+    "companion": "qft-x01-examples",
+    "requires": [
+      "qft-c01",
+      "qft-mx01"
+    ],
+    "items": [
+      {
+        "id": "def-qft-example-observable-types",
+        "kind": "definition",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Example observable types and scoped meanings",
+        "statement": "Use the framework-local unit and domain dictionary of\n[[def-qft-framework-units]] and the energy, SI/natural-unit, and finite-matrix\nconventions of [[def-qft-example-data]]. A physical quantity is always typed\nrelative to the selected QFT formulation and its declared model data; its name\nor units alone do not identify it with a quantity in another formulation.\n\nFor the **exact finite-regulator class** used on this page, the state space is\nthe finite-dimensional Hilbert space $\\mathcal H=\\mathbb C^d$ for an integer\n$d\\ge1$. Model inputs include the selected Hermitian Hamiltonian matrices,\ntheir time-dependent Hermitian interaction when present, a dimensionless\ncoupling parameter, an initial state, and an explicitly supplied finite\noutcome measurement. A pure initial state is a vector $\\psi\\in\\mathbb C^d$\nwith $\\|\\psi\\|=1$; a mixed state is a matrix $\\rho=\\rho^*$ with\n$\\langle\\rho v,v\\rangle\\ge0$ for every $v$ and $\\operatorname{tr}\\rho=1$.\nAn exact regulated observable on this finite space is a specified Hermitian\nmatrix $O=O^*$ with a declared physical unit. The matrix and state are model\ndata; the measurement procedure and any physical rule assigning outcomes are\nadditional data. This definition does not say that an operator symbol by\nitself is a detector outcome or probability.\n\nA **finite probability law** on the declared outcome set\n$\\{1,\\ldots,m\\}$, $m\\ge1$, is a vector $(p_1,\\ldots,p_m)$ with\n$p_a\\ge0$ and $\\sum_{a=1}^m p_a=1$. It is a mathematical type. Assigning that\nlaw to a particular preparation and measurement is a separate physical\npostulate. A prediction derived from an actually constructed regulated model\nis conditional on those inputs and the adopted rule.\n\nA **formal coefficient record** is a sequence $(c_n)_{n\\in\\mathbb N}$ of\nspecified coefficients, sometimes displayed as the symbol\n$\\sum_{n\\ge0}c_n\\lambda^n$. Unless convergence and an evaluation map are\nseparately proved and adopted, the symbol records coefficients only: it is not\nan evaluated function, exact probability, convergent perturbation series, or\nerror bound. A formal coefficient can be assigned a phenomenological meaning\nonly by a separate, model-specific physical adoption with its approximation\nscope stated.\n\nAn **empirical estimate** is a source-reported number obtained by analyzing a\nfinite record of measurement outcomes under the stated preparation, apparatus,\ncalibration, sampling, and analysis conditions. Its reported uncertainty and\nconditions travel with the estimate. It is not the exact model value, and it\ndoes not prove the framework used to interpret it. The 2022 Fan et al. report\nis an example of a source-reported electron magnetic-moment determination;\nthis definition supplies no numerical result, uncertainty reconstruction, or\nnew experimental claim.\n\nPrimitive and derived status is formulation-relative. In a selected regulated\nmodel, the regulator, Hamiltonian data, coupling, initial state, and supplied\nmeasurement are declared inputs; an evolution, amplitude, or probability law\nis derived only when the construction and adopted rule establish it. In a\nformal calculation, the specified masses, couplings, coefficient rules, and\nsubtraction prescription are inputs, while its listed coefficients are\nderived within that formal calculation. An empirical estimate is a reported\ndata-analysis result, not a primitive model parameter or a theorem.\n\nThe following units are examples of types, not identifications of quantities:\na cross section $\\sigma$ is area-valued with SI unit $\\mathrm{m^2}$; a rate\n$\\Gamma$ is inverse-time-valued with unit $\\mathrm{s^{-1}}$; an energy width\n$\\Gamma_E$ has unit joule. Only a separately stated convention may identify\n$\\Gamma_E=\\hbar\\Gamma$. The fine-structure parameter $\\alpha$, a dimensionless\ncoupling $g$, and a gyromagnetic factor $g_s$ are dimensionless but have\ndifferent physical meanings. The name “width,” a common symbol, or matching\ndimensions does not supply an exponential-decay law or an equality between\nthese parameters.",
+        "deps": [
+          "def-qft-framework-units",
+          "def-qft-example-data"
+        ],
+        "dependency_roles": {
+          "def-qft-framework-units": "formulation-prerequisite",
+          "def-qft-example-data": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Quantum Field Theory, §0.1 “Units and Scales”",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S0.html"
+            },
+            {
+              "title": "X. Fan et al., Measurement of the Electron Magnetic Moment, Physical Review Letters 130, 071801 (2023), arXiv:2209.13084v2 (2022)",
+              "url": "https://arxiv.org/html/2209.13084"
+            }
+          ]
+        },
+        "physical_scope": "Framework-local primitive/derived, unit, observable, formal-coefficient, and empirical-data distinctions for the finite regulated examples and specified formal calculations on this page. No general continuum observable, detector, scattering, or empirical-estimator construction is asserted.",
+        "empirical_premises": [],
+        "dependency_level": 1,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-qft-example-regulated-probability-control",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Exact regulated transition probabilities and controlled coefficients",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), and use the finite regulated model type of\n[[def-qft-example-observable-types]]. Let $d\\ge1$, let $\\tau>0$ be a time\ninterval endpoint in seconds, let $\\hbar>0$ have unit $\\mathrm{J\\,s}$, and\nlet $\\lambda\\in\\mathbb R$ be dimensionless. Let\n$H_0=H_0^*\\in M_d(\\mathbb C)$ have unit joule and let\n$V:[0,\\tau]\\to M_d(\\mathbb C)$ be norm-continuous, Hermitian-valued, and\njoule-valued. Set\n$$V_I(t)=e^{itH_0/\\hbar}V(t)e^{-itH_0/\\hbar},\\qquad B=\\sup_{0\\le t\\le\\tau}\\|V_I(t)\\|,\\qquad z=\\frac{|\\lambda|B\\tau}{\\hbar}.$$\nDefine $S_0(t)=I$ and\n$$S_{n+1}(t)=-\\frac{i}{\\hbar}\\int_0^tV_I(r)S_n(r)\\,dr,\\qquad S(t)=\\sum_{n=0}^\\infty\\lambda^nS_n(t).$$\nWrite $U(\\tau)=e^{-iH_0\\tau/\\hbar}S(\\tau)$ and, for $N\\ge0$,\n$$U_N(\\tau)=e^{-iH_0\\tau/\\hbar}\\sum_{n=0}^N\\lambda^nS_n(\\tau),\\qquad R_N=e^z\\frac{z^{N+1}}{(N+1)!}.$$\n\nLet $\\psi\\in\\mathbb C^d$ be a unit initial vector. A supplied finite\nprojective measurement is a family $P_1,\\ldots,P_m\\in M_d(\\mathbb C)$,\n$m\\ge1$, satisfying $P_a=P_a^*=P_a^2$, $P_aP_b=0$ for $a\\ne b$, and\n$\\sum_{a=1}^mP_a=I$. Equivalently, the one-Kraus-per-outcome data\n$M_{a,1}=P_a$ form a normalized finite instrument in the sense of\n[[def-qft-finite-bounded-kraus-instrument]]. Adopt the constructed-model Born\ninterpretation of [[post-qft-constructed-model-and-measurement]] only for this\nactually constructed finite model and measurement. Define the exact model\nprobability and the truncated squared norm by\n$$p_a=\\|P_aU(\\tau)\\psi\\|^2,\\qquad q_{a,N}=\\|P_aU_N(\\tau)\\psi\\|^2.$$\nThen $p_a\\in[0,1]$, $\\sum_ap_a=1$, and\n$$|p_a-q_{a,N}|\\le\\bigl(2\\sqrt{q_{a,N}}+R_N\\bigr)R_N.$$\nThe nonnegative number $q_{a,N}$ is a truncation-derived square, not generally\na probability.\n\nFor the exact finite interaction matrix write $S(\\tau;\\lambda)=I+i\\mathsf\nT(\\lambda)$ and $\\mathsf T(\\lambda)=\\lambda\\mathsf T_1+\\lambda^2\\mathsf T_2+\\cdots$.\nExact unitarity gives\n$$2\\operatorname{Im}\\mathsf T_{ii}(\\lambda)=\\sum_f|\\mathsf T_{fi}(\\lambda)|^2,\\qquad \\mathsf T_1=\\mathsf T_1^*,\\qquad 2\\operatorname{Im}\\mathsf T_2=\\mathsf T_1^*\\mathsf T_1.$$\nThese are finite-regulator coefficient identities, not continuum optical or\nscattering theorems.\n\nIn the two-level case $H_0=0$, $\\lambda=1$, and\n$V(t)=g_E\\sigma_x$ with $g_E>0$ in joules and\n$\\sigma_x=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, the exact transition\nprobability from $e_1=(1,0)$ to the projector $P=|e_2\\rangle\\langle e_2|$\nis $\\sin^2z$, where $z=g_E\\tau/\\hbar$; the first-order squared transition\ncoefficient is $z^2$ and may exceed $1$. For all real $z$,\n$$|\\sin^2z-z^2|\\le\\frac{|z|^4}{3}.$$\nThe exact survival factor is $\\cos^2z$, which is not $e^{-\\Gamma\\tau}$ for\nany $\\Gamma>0$ on all $\\tau\\ge0$.\n\nFor the occupation truncation with orthonormal basis\n$e_0,\\ldots,e_N$, define $a_Ne_n=\\sqrt n\\,e_{n-1}$ (zero for $n=0$),\n$a_N^*e_n=\\sqrt{n+1}\\,e_{n+1}$ for $n<N$, and $a_N^*e_N=0$. Then\n$$[a_N,a_N^*]=I-(N+1)|e_N\\rangle\\langle e_N|.$$\nMore generally, no finite-dimensional matrices $A,B$ satisfy $[A,B]=I$.\nThese exact regulator facts assert neither an infinite-dimensional CCR\nconstruction nor a continuum limit.",
+        "deps": [
+          "def-qft-example-observable-types",
+          "def-qft-framework-units",
+          "def-qft-example-data",
+          "def-countable-choice",
+          "def-qft-finite-bounded-kraus-instrument",
+          "lem-qft-finite-instrument-normalization",
+          "post-qft-constructed-model-and-measurement",
+          "thm-qft-example-finite-dyson-unitarity"
+        ],
+        "dependency_roles": {
+          "def-qft-example-observable-types": "formulation-prerequisite",
+          "def-qft-framework-units": "formulation-prerequisite",
+          "def-qft-example-data": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-qft-finite-bounded-kraus-instrument": "operational-prerequisite",
+          "lem-qft-finite-instrument-normalization": "mathematical-premise",
+          "post-qft-constructed-model-and-measurement": "physical-assumption",
+          "thm-qft-example-finite-dyson-unitarity": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Quantum Field Theory, Chapter 3 “Interacting Fields,” §3.1.1 “Dyson’s Formula”",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S3.html"
+            },
+            {
+              "title": "J. Watrous, The Theory of Quantum Information, author-hosted prepublication manuscript, §§2.3.1–2.3.2",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf"
+            },
+            {
+              "title": "R. B. Griffiths, Notes on Quantum Information Theory, complete §7",
+              "url": "https://www.andrew.cmu.edu/course/33-658/qit7.pdf"
+            }
+          ]
+        },
+        "physical_scope": "Exact deductions in an explicitly constructed finite-dimensional regulated model with a supplied finite projective measurement and the adopted constructed-model Born postulate. Finite-order squares are not generally probabilities. No continuum QFT, regulator removal, asymptotic scattering operator, empirical result, or sample-based inference is asserted.",
+        "empirical_premises": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 538,
+    "id": "qft-x01-examples",
+    "kind": "B",
+    "category": "quantum-field-theory",
+    "library": "physics",
+    "title": "Example observable types and scoped meanings — Examples",
+    "companion": "qft-x01",
+    "requires": [
+      "qft-x01"
+    ],
+    "items": [
+      {
+        "id": "ex-qft-x01",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Exact two-level transition versus its first coefficient",
+        "statement": "Take $\\mathcal H=\\mathbb C^2$, $H_0=0$, $V(t)=g_E\\sigma_x$ with\n$g_E>0$ joules, dimensionless $\\lambda=1$, initial vector $e_1=(1,0)$, and\nthe two-outcome projective measurement $P=|e_2\\rangle\\langle e_2|$,\n$I-P$, where $e_2=(0,1)$. At\n$\\tau=\\pi\\hbar/(2g_E)$ seconds the exact model transition probability is\n$1$, whereas the first-order squared transition coefficient is\n$\\pi^2/4>1$. The latter is a coefficient-derived square, not a probability.\nThis is an exact constructed-model calculation, not a simulated or reported\nexperiment.",
+        "deps": [
+          "pthm-qft-example-regulated-probability-control",
+          "def-qft-example-data",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-qft-example-regulated-probability-control": "physical-result",
+          "def-qft-example-data": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Quantum Field Theory, Chapter 3 “Interacting Fields,” §3.1.1 “Dyson’s Formula”",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S3.html"
+            }
+          ]
+        },
+        "physical_scope": "One exactly constructed two-level finite Hamiltonian and its explicitly supplied projective measurement. The first-order squared coefficient is not called a probability, and no continuum decay or experimental data is claimed.",
+        "empirical_premises": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-qft-x03",
+        "kind": "example",
+        "domain": "physics",
+        "library": "physics",
+        "title": "One-mode time-ordered correlator versus retarded response",
+        "statement": "For the exact single oscillator mode of\n[[lem-qft-example-oscillator-feynman-prescription]], let $\\omega>0$ in\n$\\mathrm{s^{-1}}$ and choose $t=-\\pi/(2\\omega)$. The normalized\ntime-ordered vacuum correlator is $-i/(2\\omega)$, while the retarded response\nkernel is $0$. The correlator at negative time is not a response to a future\nsource. This fixed-mode calculation does not establish a spatial-causality or\nsuperluminal-signalling result.",
+        "deps": [
+          "post-qft-constructed-model-and-measurement",
+          "lem-qft-example-oscillator-feynman-prescription",
+          "def-qft-example-data",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-qft-constructed-model-and-measurement": "physical-assumption",
+          "lem-qft-example-oscillator-feynman-prescription": "mathematical-premise",
+          "def-qft-example-data": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Quantum Field Theory, §§2.1.1 and 2.7.1–2.7.2",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S2.html"
+            },
+            {
+              "title": "M. Srednicki, Quantum Field Theory, author-hosted prepublication draft, §7 oscillator two-point kernel and frequency prescription",
+              "url": "https://web.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf"
+            }
+          ]
+        },
+        "physical_scope": "One exact oscillator mode with the stated core, vacuum, and conventions. The negative-time correlation differs from a retarded response; this makes no spatial-locality, signalling, interacting-field, or empirical claim.",
+        "empirical_premises": [],
+        "dependency_level": 3,
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

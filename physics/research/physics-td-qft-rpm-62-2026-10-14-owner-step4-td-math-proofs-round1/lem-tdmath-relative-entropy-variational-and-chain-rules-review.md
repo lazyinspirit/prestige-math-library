@@ -1,0 +1,9 @@
+# Scientific release: lem-tdmath-relative-entropy-variational-and-chain-rules
+
+Run: physics-td-qft-rpm-62-2026-10-14
+Owner: /root/resolve_step4_td_math_proofs
+Disposition: confirmed-choice-attribution-gap
+
+A1 now correctly states that the conditional-density kernel/event identities need no AC, while the conditional-expectation-class convention requests AC; AC remains explicitly assumed for the RN supplier. Whole proof reviewed: negative hlogh part is bounded, scalar ulogu>=u-1 gives D>=0, Gibbs tilting bounds every variational test, null-set tests cover nonabsolute-continuity, clipped log densities attain the variational supremum through DCT/MCT even at infinite entropy. Pullback of bounded tests proves data processing. Jointly measurable density kernels and bounded log truncations prove monotonicity under finer conditioning; density factorization and finite total entropy justify the product chain rule without infinity-minus-infinity. Public Statement unchanged.
+
+Review scope: complete actual pre-edit source and exact supplier interfaces read; complete final private carrier reviewed, with at most two review/repair cycles. This is owner scientific evidence, not a native independent verdict, certification, hashing or gate. No original/imported item was edited. No source/stamp/ledger/shared metadata/check/test/transition was written or run. For Georgii1994 reliance, the entire1300-line extraction of the cached25-page paper was read in two contiguous halves; its private extraction is Georgii-LDPsuperstable-full.txt in this directory, from research/physics-td-qft-rpm-62-2026-10-14-owner-native-gate-td-round-1/source-reading/Georgii-LDPsuperstable-current.pdf. No unperformed reading of other external full texts or absent historical bytes is asserted. The original nine proposals remain unchanged.

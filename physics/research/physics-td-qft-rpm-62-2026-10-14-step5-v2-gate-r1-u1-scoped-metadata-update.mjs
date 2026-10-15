@@ -1,0 +1,47 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const run='physics-td-qft-rpm-62-2026-10-14', owner='step5-v2-gate-r1-u1';
+const reportPath=`research/${run}-step5-v2/${owner}.json`;
+const read=p=>JSON.parse(readFileSync(p,'utf8')), sha=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
+const report=read(reportPath), diagnostic=read(`research/${run}-step5-v2/${owner}.gate-diagnostics.json`);
+const risks={
+ 'def-rpm-h-regular-constraint-system':[25,'Checked smooth independent constraint differentials, the exact nonempty regular-level supplier, and the separate empty smooth structure. Restriction equality is vacuous on an empty C; no dimension is inferred there. The total generator is smooth on J times U for the specified smooth time multipliers, with each term assigned matching energy units. Countable Choice is stated and inherited from cotangent suppliers; no stronger choice or existence of dynamics is inferred. Date Eq.3.9 supplies weak-equality context; the precise regular-level hypotheses are checked locally.'],
+ 'def-rpm-h-first-class-constraint-family':[26,'Checked both current suppliers: AComega and the regular-level convention persist; omega(X_F,v)=dF(v) gives a unique smooth vector field by inverse matrix coefficients. Contracting dq wedge dp gives X_G=G_p partial_q-G_q partial_p and dF(X_G)=F_q G_p-F_p G_q, matching the current canonical-flow supplier. Pairwise vanishing on N is exactly weak zero, including vacuous empty N. Date Eq.4.22 supplies first-class context. No algorithm termination, global quotient regularity or stronger choice is concluded.'],
+ 'def-td-regular-elastic-collision-model':[20,'Checked the current elastic-kernel Definition: d=3, relative Borel collision space, three separately assumed exchange symmetries, and the added sigma-finiteness are compatible. Positive mass multiplies the two defining conservation equations to give momentum and kinetic-energy conservation. The units f=s^3 m^-6, dv=m^3 s^-3 and Q=f/s give the weak integral units U_phi m^-3 s^-1; nu=m^9 s^-7 times f^2 gives the same units. A collision representative and absolutely convergent weak testing remain conditional on the exact kernel input/testing domains; no rate, microscopic limit or operator existence follows from units or symmetries. Fitzpatrick Eqs.3.126-3.131 provide exchange context only.'],
+ 'def-tdmath-forward-sector-hypotheses':[6,'Checked all three actual suppliers: finite-support nonnegative coefficient functions, finite mass additivity and function-space operations. Every nonempty formal type has positive weight; represented states w_Gamma e_(Gamma,x) and aggregate nu(c) have exactly mass m(c). Raw scaled tags are distinct but their declared preparation transport is reversible; Q is chosen equal-mass model data, not derived from coordinates. The pullback iff is a definition. The entropy iff quantifies equal-total-weight compounds and is a characterization requirement, with no existence assertion. Empty sums and the optional zero unit are explicit; A1-A7 and S1-S3 are hypotheses, with comparison excluded. Lieb-Yngvason III.B confirms the finite-slope local Lipschitz support assumptions; no physical adoption or cross-type calibration is inferred.']
+};
+const boundaries={
+ 'def-td-thermal-contact-constraints':[2,{
+  'iff-forward':'Definition: If a tested pair is in thermal-contact equilibrium, its selected admitted record lies in E_T, both constituent endpoints remain equal to their initial coordinates, and q_(A to B)=0. This is the stipulated record criterion; untested pairs are excluded and zero net heat need not mean zero heat at all intermediate times.',
+  'iff-reverse':'Definition: For a tested pair with the fixed selected admitted record, membership in E_T together with both unchanged constituent endpoint coordinates and zero net internal heat is precisely the criterion for membership in the declared thermal-equilibrium relation. It asserts no transitivity, equilibration theorem or relation on untagged coordinates.'}],
+ 'def-tdmath-forward-sector-hypotheses':[6,{
+  'iff-forward':'Definition: A prec B means (Pi(A),Pi(B)) belongs to the chosen equal-mass relation Q, so forward implication is substitution of the pullback definition. Separately, an additive entropy density S is required to send every equal-total-weight compound comparison to its finite entropy-sum inequality; this is a characterization requirement, not asserted existence of S.',
+  'iff-reverse':'Definition: Membership of (Pi(A),Pi(B)) in Q implies A prec B by the chosen pullback definition. Separately, only when S is an additive entropy density under the full displayed compound equivalence does its equal-total-weight entropy inequality imply comparison. Single-state representation alone is expressly insufficient; existence and cross-type calibration remain separate obligations.'}],
+ 'def-td-driven-finite-path-model':[19,{
+  'iff-forward':'Definition: In the detailed-balanced subclass, pi_k(i)>0 and pi_k(j)>0. If K_k(i,j)>0, detailed balance pi_k(i)K_k(i,j)=pi_k(j)K_k(j,i) forces K_k(j,i)>0. This implication uses the adopted detailed-balance condition; it is not a property of an arbitrary row-stochastic kernel.',
+  'iff-reverse':'Definition: In the same detailed-balanced subclass, K_k(j,i)>0 implies K_k(i,j)>0 by the same equality and strictly positive canonical weights. The rate ratio is defined only on positive pairs; simultaneous zero entries are admitted, and no heat-only apparatus interpretation follows from support equivalence.'}],
+ 'def-qft-framework-units':[40,{
+  'iff-forward':'Definition: If y belongs to D(H*), there is z in the Hilbert space satisfying <Hx,y>=<x,z> for every x in D(H), and H*y=z. This is the adjoint-domain criterion for the stated dense-domain H; density makes z unique. It is not inferred from the dimensional proof.',
+  'iff-reverse':'Definition: If such a z exists for every x in the specified dense domain D(H), the adjoint-domain definition puts y in D(H*) with H*y=z. Under the separately required self-adjointness, D(H*)=D(H) and H*=H. Neither this criterion nor the unit algebra supplies a model Hamiltonian or self-adjointness proof.'}]
+};
+const docs=new Map(), changes=[];
+function doc(b){const p=`research/${run}-batch-${b}.proof-contracts.json`;if(!docs.has(p))docs.set(p,{data:read(p),before:sha(p),ids:new Set()});return [p,docs.get(p)];}
+for(const [id,[b,notes]] of Object.entries(risks)){const [p,d]=doc(b);if(!d.data.scope.includes(id)||!d.data.contracts[id])throw Error(`missing owned contract ${id}`);d.data.contracts[id].risk_review={status:'complete',reviewer:owner,notes};d.ids.add(id);}
+for(const [id,[b,rows]] of Object.entries(boundaries)){const [p,d]=doc(b);for(const [kind,evidence]of Object.entries(rows)){const c=d.data.contracts[id],matches=c.boundaries.filter(z=>z.case===kind);if(matches.length!==1)throw Error(`ambiguous boundary ${id}/${kind}`);const row=matches[0];delete row.reason;row.status='checked';row.evidence=evidence;}d.ids.add(id);}
+// The global diagnostic owns plan transcription only: no carrier or historical receipt is changed.
+const planPath='research/plan-spec.json', plan=read(planPath), planBefore=sha(planPath), planBy=new Map(plan.pages.map(p=>[p.id,p]));
+const pages=diagnostic.find(d=>d.index===0).failure.output.split('\n').filter(s=>/^  \S+ \(.*\.pages\.json\): same ids,/.test(s)).map(s=>{const m=s.match(/^  (\S+) \(([^)]+)\)/);return{id:m[1],manifest:`research/${m[2]}`};});
+if(pages.length!==38)throw Error('Unexpected splice diagnostic inventory');
+const planEdits=[];
+for(const {id,manifest}of pages){const source=read(manifest).filter(p=>p.id===id),target=planBy.get(id);if(source.length!==1||!target)throw Error(`ambiguous owning page ${id}`);const want=source[0].items,have=target.items;
+ const idOf=i=>typeof i==='string'?i:i.id;if(JSON.stringify(want.map(idOf))!==JSON.stringify(have.map(idOf)))throw Error(`inventory changed ${id}`);
+ const changed=[];for(let i=0;i<want.length;i++){if(JSON.stringify(want[i])===JSON.stringify(have[i]))continue;changed.push({id:idOf(want[i]),fields:Object.keys({...have[i],...want[i]}).filter(k=>JSON.stringify(have[i][k])!==JSON.stringify(want[i][k]))});have[i]=want[i];}
+ if(changed.length)planEdits.push({page:id,manifest,items:changed});
+}
+// All files were reread under the lock; write only the named metadata scopes.
+for(const [p,d]of docs){writeFileSync(p,JSON.stringify(d.data,null,2)+'\n');changes.push({path:p,before_raw_sha256:d.before,after_raw_sha256:sha(p),subjects:[...d.ids]});}
+if(planEdits.length)writeFileSync(planPath,JSON.stringify(plan,null,2)+'\n');
+report.repair_notes.metadata_patch={contracts:changes,plan:{path:planPath,before_raw_sha256:planBefore,after_raw_sha256:sha(planPath),pages:planEdits},scope:'Only owning risk_review and eight assigned iff boundary rows, plus global same-inventory plan item-object transcription. No source interfaces, manifests, receipts, judge tuples or certificates changed.'};
+report.repair_notes.unfinished=['Record seven focused current reviews and the remaining judge-only carrier reviews with immediate contexts.','Validate patched contracts and plan, and retain unresolved controller-only coverage.'];
+writeFileSync(reportPath,JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({owner,contract_files:changes.length,plan_pages:planEdits.length,plan_items:planEdits.reduce((s,p)=>s+p.items.length,0)}));

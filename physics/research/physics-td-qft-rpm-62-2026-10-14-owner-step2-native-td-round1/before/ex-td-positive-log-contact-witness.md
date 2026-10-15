@@ -1,0 +1,93 @@
+---
+id: ex-td-positive-log-contact-witness
+kind: example
+title: Positive logarithmic contact model as a consistency witness
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+physical_scope: A calculated mathematical model showing compatibility of the stated accessibility and contact assumptions for positive-coordinate systems; it is not an experiment or evidence that real materials obey the assumptions.
+deps: [cor-mean-value-theorem, def-natural-logarithm, def-real-power, def-td-scaled-products-and-comparison, def-td-thermal-join, post-td-accessibility-a1-a6, post-td-equilibrium-join-coherence, post-td-simple-system-geometric-axioms, post-td-thermal-join-axioms, post-td-universal-thermal-range, thm-exponential-two-point-convexity, thm-natural-logarithm-laws, thm-real-power-continuity-and-derivatives]
+dependency_roles:
+  cor-mean-value-theorem: mathematical-premise
+  def-natural-logarithm: mathematical-premise
+  def-real-power: mathematical-premise
+  def-td-scaled-products-and-comparison: formulation-prerequisite
+  def-td-thermal-join: formulation-prerequisite
+  post-td-accessibility-a1-a6: physical-assumption
+  post-td-equilibrium-join-coherence: physical-assumption
+  post-td-simple-system-geometric-axioms: physical-assumption
+  post-td-thermal-join-axioms: physical-assumption
+  post-td-universal-thermal-range: physical-assumption
+  thm-exponential-two-point-convexity: mathematical-premise
+  thm-natural-logarithm-laws: mathematical-premise
+  thm-real-power-continuity-and-derivatives: mathematical-premise
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§III.B–IV.A
+      url: https://arxiv.org/pdf/cond-mat/9708200v2
+    - title: "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §§2–4"
+      url: https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file
+generation:
+  role: example
+verification:
+  precheck: n/a
+dependency_level: 10
+---
+
+## Example
+
+Take finitely many tagged simple types $i$, each with positive dimensionless coordinates $u>0,v>0$ (numerical energy and work coordinates relative to fixed units). Choose constants $c_i,r_i>0$, reference values $u_{\star,i},v_{\star,i}>0$, and $b_i\in\mathbb R$, and define
+
+$$s_i(u,v)=c_i\log\frac{u}{u_{\star,i}}+r_i\log\frac{v}{v_{\star,i}}+b_i.$$
+
+For a scaled tag $t i$, set its coefficients to $tc_i,tr_i,tb_i$ and its reference coordinates to $t u_{\star,i},t v_{\star,i}$, so $s_{ti}(tu,tv)=t\,s_i(u,v)$. On finite separated compounds define the relation by nondecrease of the sum of the constituent entropies. For a thermal join of $i,j$, define the joined entropy at $(U,v_i,v_j)$ as the maximum of $s_i(u_i,v_i)+s_j(u_j,v_j)$ over $u_i,u_j>0$ with $u_i+u_j=U$, and define contact equilibrium by equality of the pair entropy with this maximum. For nested joins, use the same maximum construction recursively.
+
+This formal model explicitly declares each equilibrium endpoint domain to be the stated positive numerical orthant, with endpoint coordinate map the identity and accessibility the entropy-sum relation above. Its fixed unit map assigns $U=u(1\,\mathrm J)$ and each work coordinate $W_a=v_aw_a$ for a fixed positive unit $w_a$; this bookkeeping supplies no material realization. Each primitive tag has a fixed formal composition, while the joined endpoint space is the positive orthant in summed energy and retained work coordinates with the summed composition. A scaled copy transports these coordinates and that composition and retains its distinct tag, exactly as in the declared join interface. This provides a nondegenerate consistency witness for the order, geometric, contact, T5, and C1 assumptions on this positive-coordinate family. It supplies no measured parameter values or empirical claim.
+
+## Facts & Assumptions
+
+**Given:** Positive coordinates; fixed $c_i,r_i>0$, reference values and constants; tagged scaling as stated; accessibility is defined by entropy nondecrease; join entropy is the constrained maximum.
+
+[F1] [[def-td-thermal-join]]: a join retains component work coordinates and sums the energy coordinate.
+
+[F2] [[post-td-accessibility-a1-a6]]: A1–A6 are the order conditions to be checked for the example relation.
+
+[F3] [[post-td-simple-system-geometric-axioms]]: A7 and S1–S3 are the geometric conditions to be checked.
+
+[F4] [[post-td-thermal-join-axioms]]: T1–T4 are the contact conditions to be checked.
+
+[F5] [[post-td-universal-thermal-range]] and [[post-td-equilibrium-join-coherence]]: T5 and C1 are separate conditions to be checked.
+
+[F6] [[thm-exponential-two-point-convexity]]: for $a,b\in\mathbb R$ and $t\in[0,1]$, $\exp((1-t)a+tb)\le(1-t)\exp(a)+t\exp(b)$; for $0<t<1$, equality holds exactly when $a=b$.
+
+[F7] [[def-natural-logarithm]] and [[thm-natural-logarithm-laws]]: $\log$ is strictly increasing on $(0,\infty)$, and $\log(ab)=\log a+\log b$.
+
+[F8] [[def-real-power]] and [[thm-real-power-continuity-and-derivatives]]: for $K>0$ and $\alpha\in\mathbb R$, $v^\alpha$ is differentiable for $v>0$ with derivative $\alpha v^{\alpha-1}$.
+
+[F9] [[cor-mean-value-theorem]]: if $g$ is continuous on a closed interval and differentiable inside, its endpoint slope equals $g'$ at some interior point.
+
+## Verification
+**Given:** [F1]–[F5] and the construction in the Example.
+
+1.1 For $a,b>0$, apply [F6] to $\log a,\log b$, then use [F7] and monotonicity of $\log$, to obtain $\log((1-t)a+tb)\ge(1-t)\log a+t\log b$ for $0\le t\le1$. Apply this inequality to the energy ratios $u/u_{\star,i}$ and to the work ratios $v/v_{\star,i}$; multiplying by $c_i,r_i>0$ and adding $b_i$ proves concavity of $s_i$. This verifies the convex-combination accessibility condition. Since $\log$ is strictly increasing, raising $u$ at fixed $v$ gives a strict successor, proving S1. [F3, F6, F7, algebra]
+
+1.2 The boundary equation $s_i(u',v')=s_i(u_x,v_x)$ rearranges to $u'=g(v')=K(v')^{-\alpha}$, where $K=u_xv_x^\alpha>0$ and $\alpha=r_i/c_i>0$. By [F8], $g'=-\alpha K(v')^{-\alpha-1}$ and $g''=\alpha(\alpha+1)K(v')^{-\alpha-2}>0$. Thus $g'$ is increasing by [F9]. For $v'\ne v_x$, the mean value theorem on the interval between them and the monotonicity of $g'$ give $g(v')\ge g(v_x)+g'(v_x)(v'-v_x)$: when $v'<v_x$, both the derivative comparison and the sign of $v'-v_x$ reverse. Hence the forward sector $u'\ge g(v')$ lies above the tangent support $u'-u_x+(r_i u_x/(c_iv_x))(v'-v_x)=0$. A vertical line cannot support this sector because its work coordinate varies on both sides at an interior boundary point. If a nonvertical line with slope parameter $q$ supports there, its inequality on graph points gives $g(v')-g(v_x)+q(v'-v_x)\ge0$ for both signs of $v'-v_x$; dividing by that difference and taking limits forces $q=-g'(v_x)$. This proves uniqueness and gives $P_i=r_i u_x/(c_iv_x)$. On any closed rectangle with $u,\tilde u\le u_1$ and $v,\tilde v\ge v_0>0$, $|u/v-\tilde u/\tilde v|\le |u-\tilde u|/v_0+u_1|v-\tilde v|/v_0^2$, so the slope is locally Lipschitz. The graph over $v'>0$ is arcwise connected, proving S3. [F3, F8, F9, algebra]
+
+1.3 Put $C=c_i+c_j$. For any split $u_i+u_j=U$, [F6] with weights $c_i/C,c_j/C$, followed by [F7], gives $$\frac{c_i}{C}\log\frac{u_i}{c_i}+\frac{c_j}{C}\log\frac{u_j}{c_j}\le\log\frac{U}{C},$$ with equality exactly when $u_i/c_i=u_j/c_j$. Since $u_i+u_j=U$, that equality forces the unique split $u_i=c_iU/C,\ u_j=c_jU/C$. Multiply by $C$ and add the constants $c_i\log(c_i/u_{\star,i})+c_j\log(c_j/u_{\star,j})+b_i+b_j+r_i\log(v_i/v_{\star,i})+r_j\log(v_j/v_{\star,j})$; the resulting inequality is exactly the pair entropy bounded by its value at that split. This proves attainment of the join maximum, T1, and reversible join splitting. For the equal-state scaled split, tagged extensivity gives $s_{ti}(tu,tv)=t s_i(u,v)$ and $s_{(1-t)i}((1-t)u,(1-t)v)=(1-t)s_i(u,v)$, so both sides have equal entropy and the other T2 clause holds. The binary join entropy is $C\log U+r_i\log v_i+r_j\log v_j+C_{ij}$ for a constant $C_{ij}$; its energy-to-coefficient ratio is $U/C=u_i/c_i=u_j/c_j$ at the maximizing split. [F1, F4, F6, F7, algebra]
+
+2.1 On each finite product the relation compares finite real entropy sums. Reflexivity and transitivity follow from the real order; adding the same spectator adds the same number to both sides; positive scaling multiplies the sums by a positive coefficient; and reversible splitting preserves the extensive sum. If $A+\epsilon_nZ_0\prec B+\epsilon_nZ_1$, then $s(A)-s(B)\le\epsilon_n(s(Z_1)-s(Z_0))$. Taking $n\to\infty$ yields $s(A)\le s(B)$ and hence $A\prec B$. This verifies the six adopted order conditions. [F2, step 1.1, algebra]
+
+2.2 For a single system the entropy has the displayed logarithmic form. If a nested join has energy coefficient $C$ and is joined with a system of coefficient $c>0$, the maximum calculation of step 1.3 gives the unique maximizing split at equal energy-to-coefficient ratios; substitution adds $c$ to the energy coefficient and adds the new work term. Induction over the finite joins therefore gives coefficient $C=\sum_k c_k$ and entropy $C\log U+\sum_k r_k\log v_k+C_0$ for the positive work coordinates $v=(v_1,\ldots,v_m)$. Its boundary is $U=g(v)=K\prod_k v_k^{-\alpha_k}$ with $\alpha_k=r_k/C>0$. Direct differentiation gives, for any vector $h$, $$D^2g(v)[h,h]=g(v)\left[\left(\sum_k\alpha_k\frac{h_k}{v_k}\right)^2+\sum_k\alpha_k\left(\frac{h_k}{v_k}\right)^2\right]\ge0.$$ Thus along each segment in the positive work orthant, the derivative of $g$ is nondecreasing by [F9], and the mean value theorem gives $g(v')\ge g(v)+\nabla g(v)\cdot(v'-v)$. The forward sector $U\ge g(v)$ lies above this tangent support; uniqueness follows by applying the support inequality to graph points in each direction $h$ and $-h$, which forces the support functional to equal $\nabla g(v)$. Its finite slope components are $P_k=r_kU/(Cv_k)$; on rectangles bounded away from all coordinate axes, the quotient estimate from step 1.2 applies to each component and proves local Lipschitz regularity. The positive orthant and its graph are arcwise connected. Increasing $U$ gives S1, and the coordinatewise concavity argument of step 1.1 gives the convex-combination accessibility condition. Hence each join satisfies the same simple-system geometry. [F3, F8, F9, step 1.1, step 1.2, step 1.3, algebra]
+
+2.3 Thermal equilibrium is equality of the positive ratios $u_i/c_i$ and $u_j/c_j$ by the unique maximum in step 1.3. Equality is transitive, proving T3. For any state $(u,v)$ choose $0<v_-<v<v_+$; strict increase of entropy with $v$ gives $(u,v_-)\prec\prec(u,v)\prec\prec(u,v_+)$, while the outer states have equal $u/c_i$. This proves T4. [F4, step 1.3, algebra]
+
+3.1 Given any $u_i>0$ and any $v_j>0$, choose $u_j=c_j u_i/c_i$; this verifies T5. For an equilibrated pair, step 1.3 gives $(u_i+u_j)/(c_i+c_j)=u_i/c_i=u_j/c_j$. In a nested join of the joined type with constituent $i$, the pair is therefore at the maximizing split by the same two-factor calculation of step 1.3, so the joined state is thermally equivalent to $i$; replacing $i$ by $j$ proves the second equivalence and C1. [F5, step 1.3, algebra] ∎
+## Remarks
+
+The coefficients are chosen mathematical parameters. Their existence checks compatibility of the postulates but does not report measurements, determine SI entropy units, or prove the assumptions for a real substance.

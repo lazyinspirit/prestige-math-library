@@ -1,0 +1,53 @@
+# Batch 14 notes — Continuum Pressure
+
+Run `physics-td-qft-rpm-62-2026-10-14`, role beta, batch 14. This is Step 1 authoring evidence, not independent mathematical approval.
+
+## Authority and plan reconciliation
+
+The batch task, complete Continuum Pressure design section, `plan-spec.json`, current batch manifest, and owner authoring direction were read. The design at `research/plan-thermodynamics-track.md` L508 names `td-math-ensembles-and-limits` as its earlier page prerequisite. The current plan-spec row and dispatch additionally require the published `product-measures-and-the-fubini-tonelli-theorems` page. The plan controls this discrepancy: both edges remain in the A-page manifest and cross-batch record. No shared plan was edited.
+
+The four reserved A IDs are `def-tdmath-stable-power-tempered-particle-model`, `lem-tdmath-particle-exponential-cutoff`, `lem-tdmath-separated-cube-tail-bound`, and `thm-tdmath-stable-tempered-free-cube-grand-pressure`. One extra A-page lemma, `lem-tdmath-measure-integral-agrees-with-root-lebesgue-integral`, is required to reconcile the actual batch-11 integral definition with the imported Tonelli interface. It is a local, proved intermediate result, within the design reservation of 24. The A page has five items and the B page has two examples, within their caps of 24 and 8 and the hard cap of 100. The B examples are leaf items.
+
+## Inventory, dependencies, and levels
+
+Levels are recomputed from assigned in-run item suppliers only. They are distinct from the dispatch batch level, which is 3 and requires batch 11 (level 2); batch 11 requires batch 4 (level 1), and batch 4 requires batch 3 (level 0).
+
+| Item | Page | Item level | In-run suppliers |
+|---|---|---:|---|
+| `def-tdmath-stable-power-tempered-particle-model` | A | 0 | none |
+| `lem-tdmath-measure-integral-agrees-with-root-lebesgue-integral` | A | 1 | batch-11 `def-tdmath-measure-integral` |
+| `lem-tdmath-particle-exponential-cutoff` | A | 1 | model definition; batch-11 `def-tdmath-measure-integral` |
+| `lem-tdmath-separated-cube-tail-bound` | A | 1 | model definition |
+| `thm-tdmath-stable-tempered-free-cube-grand-pressure` | A | 2 | model definition; cutoff, separated-tail, and integral-bridge lemmas; batch-11 integral definition |
+| `ex-tdmath-repulsive-power-tail` | B | 1 | model definition |
+| `ex-tdmath-hard-core-attractive-power-tail` | B | 1 | model definition |
+
+The model definition is first. The bridge, cutoff, and separated-tail lemmas are level 1; the pressure theorem is written after them at level 2. The B items use only the local model definition. The manifest lists each item's complete direct dependency list, roles, statement, and source records.
+
+## Supplier interface review and remaining page-level dependency
+
+The published product-measures page and the used statements and proofs for product measure existence/uniqueness, box measure, Borel products, translation invariance, Tonelli, and nonnegative-integral additivity were inspected. Their hypotheses match the stated sigma-finiteness, Borel measurability, nonnegativity, and explicit `ACω` use.
+
+The actual batch-11 `def-tdmath-measure-integral` carrier is present as a draft definition. It defines the measure integral by the supremum of nonnegative simple minorants and fixes `0·∞=0`; it has no proof obligation as a definition. The bridge lemma proves equality with the imported nonnegative Lebesgue integral by identifying the same finite-range simple minorants and the same level-set sums. This records interface availability only, not acceptance of the batch-11 page or definition.
+
+The `td-math-ensembles-and-limits` page and all 21 A items are present with current batch-11 manifest, notes, coverage, contracts, and cross-batch evidence. Its required page edge to `td-math-nonsmooth-equilibrium` remains open in the current batch-11 cross-batch record. Batch 4 now has 14 A and 4 B items plus its current pages, notes, coverage, contracts, and cross-batch record; unlike the stale batch-11 note, its scaffold artifact is not missing. The current batch-4 cross-batch record marks `td-math-ordered-composition` open for `td-math-nonsmooth-equilibrium`, and records unresolved unit-point-mass notation and transitive proof/prerequisite closure in the finite-mixture supplier chain. Therefore the required batch-11 page-level input is present but not ready through its own prerequisite chain. The affected claims are page-readiness for batches 4, 11, and 14; no batch-14 item proof consumes the finite-mixture result. Proposed owner-side placement is on the batch-3 A page adjacent to `def-tdmath-tagged-scalable-compound`: define the unit-state compound `e_x` and prove its mass-one interface, update its consumers, add the missing zero-mass case in the additive-representation proof, and close the recorded real-analysis/vector-space/finite-sum page prerequisites before reevaluating the batch-4 page edge. Batch 14 completed all available authoring and records all seven assigned Step 1 decisions as escalated on this exact open page-level edge. No item statement treats the unavailable page-level closure as proved.
+
+The conditional proof route preserves the design: stability gives finite free-cube grand normalization; the cutoff lemma controls the omitted particle tail; the lattice-shell lemma controls interactions between separated cubes; Tonelli and the integral bridge justify exact block factorization; and a liminf/limsup comparison proves the reduced free-cube grand-pressure limit. The result does not claim canonical convergence, arbitrary-boundary independence, stability-alone limits for arbitrary shapes, or all integrable-envelope tails.
+
+## Source reading and disposition record
+
+Full relevant text was read from Adams, *Mathematical Statistical Mechanics*, MPI Lecture Note 30, §5.2, including the complete proof of Theorem 5.3 (printed pp. 37–41); Fisher and Lebowitz, “Asymptotic Free Energy of a System with Periodic Boundary Conditions,” §§II–III and VI; and Ruelle, “Classical Statistical Mechanics of a System of Particles,” the complete 16-page article, with original p. 184 formulas visually checked. These treatments supply context and independent comparison, not proof substitutes: Adams treats a canonical limit under stronger tempering/sign hypotheses; Fisher–Lebowitz §VI gives an abbreviated grand-canonical treatment under different hypotheses; Ruelle's scope is restricted to a three-dimensional radial positive-type/decomposable class. The exact power-tempered grand-pressure claim is proved locally.
+
+For the integral bridge, the full author-hosted text of Tao, “245A Notes 3: Integration on Abstract Measure Spaces and the Convergence Theorems,” and the complete MIT 18.102 Spring 2021 lecture-note PDF were read. Hunter, *Measure Theory Notes*, Chapter 4, §§4.1–4.2, was read in full for the definitions and integral properties used here. MIT Lecture 12, pp. 59–62, gives an independent integral/convergence treatment. The coverage file records each URL, locator, supported item, result harvest, and disposition. Existing successful Tao and MIT full-notes fetch stamps are reused from batch 11 without carrying over its dropped PDFs or single-lecture source.
+
+## Scoped checks and readiness
+
+The final scoped checks report: precheck 6/6 proof-bearing items pass; rendercheck 9/9 item/page files has no errors or warnings; content policy covers all 7 assigned items with no errors or warnings; focused depcheck covers all 7 items and both pages with no errors or warnings; manifest-deps finds all 7 manifest items have explicit dependency arrays; strict proof-contract validation covers all 6 proof-bearing items with zero errors or warnings; coverage-checklist records one A page and 13 harvested results with zero errors or warnings; and source-fetch-check verifies all 6 coverage sources (the Tao and MIT full-notes stamps are reused from batch 11, the other four were newly stamped). The scoped item-level recomputation across batches 11 and 14 checks 32 items with no cycles or label mismatches: the seven assigned levels are 0, 1, 1, 1, 2, 1, and 1 in manifest order.
+
+The required explicit-item `proof-layout.mjs` scan was run after the final item edits, including a retry with the web `tsconfig.json` path. It could not start the renderer: `ItemBody.tsx` fails to resolve `@/components` (`ERR_MODULE_NOT_FOUND`). This is an app-renderer/tooling blocker; precheck, KaTeX rendercheck, and strict proof-contract checks pass, but no proof-layout pass is claimed.
+
+Run-wide `item-dependency-levels.mjs check` remains blocked by empty inventories and unrelated dependency-level mismatches in other batches; the scoped 32-item recomputation above is clean. `batch-dependency-levels.mjs check` cannot recompute the shared graph because YAML parsing fails on an unrelated batch-20 source title containing an unquoted colon in `items/post-td-boltzmann-molecular-chaos-model.md` (line 19). The live physics autopilot separately reports a recorded-scheduling-scope mismatch. The dispatch input still assigns batch 14 level 3 with batch 11 required, and the page-level `requires` edges are unchanged; the shared scheduling artifact was not rewritten. The live physics autopilot status at 2026-10-14 05:10 UTC reports Step 1 scaffold at 38/64, no worker in flight, and owner-repair plus scheduling-scope blockers. No engine state was edited.
+
+All seven assigned Step 1 records are `escalated`, `owner: false`, on the open `td-math-ensembles-and-limits` page-level chain described above. The model definition's record has an empty explicit `dependencies` array; its six direct published mathematical prerequisites remain listed in the item and manifest and are included in the hash-bound input closure. Definitions have no proof-contract obligation. The other six records list their direct item dependencies. The model-definition record has `dependencies: []`; the six direct published mathematical prerequisites remain in its item and manifest, and the stored hash covers the transitive item-dependency closure. The attractive-tail example received its escalation before a final proof clarification; its stored item hash therefore predates the final item carrier. Both rows remain escalated and were not overwritten, as required. The final item manifest and proof contract reflect the final carriers. The run-wide Step 1 check reports 547 items, 219 ready, and `closed: false`; all seven batch-14 items remain escalated. These records are readiness evidence, not independent approval.
+
+No imported mathematical original, shared plan, shared dependency-level receipt, engine state, global verdict, or other batch carrier was edited.

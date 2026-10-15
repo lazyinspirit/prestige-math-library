@@ -1,0 +1,1060 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "batch": "30",
+  "level": "physics-td-qft-rpm-62-2026-10-14-batch-30",
+  "scope": [
+    "lem-rpm-ll-reduced-ode",
+    "lem-rpm-reduction-residual",
+    "post-rpm-lad-effective-equation",
+    "rem-rpm-self-force-status",
+    "ex-rpm-al-future-boundary-preacceleration",
+    "cex-rpm-lad-force-free-runaway"
+  ],
+  "contracts": {
+    "lem-rpm-ll-reduced-ode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sr-affine-minkowski-model",
+          "source_section": "Definition",
+          "quote": "An **oriented time-oriented affine Minkowski space** is a quadruple\n$(A,V,\\eta,C^+)$ with the following data. In this notation $V$ includes its\nspecified orientation; forgetting that orientation gives only the underlying\nreal vector space, not the full datum $V$ of the model.\n\n1. A nonempty affine space $A$ over a $4$-dimensional real vector space $V$,\n   with action $(p,v)\\mapsto p+v$ and displacement $q-p\\in V$\n   ([[def-affine-space-and-displacement]]). In particular $V$ is a real vector\n   space of dimension $4$.\n2. A Lorentz form $\\eta$ on $V$, i.e. a nondegenerate symmetric bilinear form of\n   inertia $(3,1,0)$ ([[def-lorentz-form-and-inertia]]). Its associated quadratic\n   form is $q(v)=\\eta(v,v)$.\n3. An **orientation** of $V$: a positive ray of the determinant line\n   $\\Lambda^4V$, fixed once and for all\n   ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]]).\n4. A **time orientation** $C^+$ of $(V,\\eta)$: one of the two connected\n   components of the timelike set $T=\\{v\\in V:\\eta(v,v)<0\\}$, the other being\n   $C^-:=T\\setminus C^+$ ([[def-time-orientation-and-future-causal-sets]]).\n\nThe following terminology is attached to such a quadruple.\n\n- The elements $p$ of $A$ are the **events**; for events $p,q$ the vector\n  $q-p\\in V$ is the **displacement from $p$ to $q$**.\n- The **interval** of $p,q\\in A$ is the real number\n  $I(p,q):=\\eta(q-p,q-p)=q(q-p)$.\n- Events $p,q$ are **timelike**, **null**, **spacelike** or **causally\n  related** when the displacement $q-p$ is timelike, null, spacelike or causal\n  in the sense of [[def-causal-classification-of-lorentz-vectors]]; they are\n  **future-related** when $q-p$ is future causal and **past-related** when\n  $q-p$ is past causal in the sense of\n  [[def-time-orientation-and-future-causal-sets]].\n\n**No point of $A$ is distinguished.** For every $v\\in V$ the translation\n$\\tau_v:A\\to A$, $\\tau_v(p):=p+v$, is a bijection, since it is inverse to\n$\\tau_{-v}$: $\\tau_{-v}(\\tau_v(p))=(p+v)+(-v)=p+(v-v)=p$ and symmetrically, by\nthe affine action axioms ([[def-affine-space-and-displacement]]). Displacements\nare translation invariant, $\\tau_v(q)-\\tau_v(p)=q-p$, so every $\\tau_v$ preserves\nthe interval, the causal classification of every ordered pair, and the sets\n$C^+$, $C^-$ (which are subsets of $V$, independent of the point of $A$); it\nchanges only the labelling of points. The mathematical structure of the model is\nexactly the quadruple $(A,V,\\eta,C^+)$; no derived physical quantity (proper\ntime, four-velocity, momentum, energy, charge or any field) is part of this\ndefinition, and all later structure of the framework (frames, charts, tensor\nfields, worldlines) is built on this model.\n\n**Well-definedness.** The affine-space definition supplies the action and the\nunique displacements; the Lorentz-form definition supplies $\\eta$ and its\ninertia; the determinant-line definition supplies orientations; and the two\ncomponents of $T$ between which the time-orientation definition chooses exist by\nthe components lemma recorded in the well-definedness clause of\n[[def-time-orientation-and-future-causal-sets]], which is also what makes the\nnames future and past causal in item 4 well defined.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-time-orientation-and-future-causal-sets",
+          "source_section": "Definition",
+          "quote": "Let $(V,\\eta)$ be a Lorentz vector space of signature $(-,+,+,+)$\n([[def-lorentz-form-and-inertia]]), with causal terminology as in\n[[def-causal-classification-of-lorentz-vectors]], and let\n\n$$T:=\\{v\\in V:\\eta(v,v)<0\\}$$\n\nbe its **timelike set**. Components and closures refer to the topology obtained\nby using any ordered basis to identify $V$ with Euclidean $\\mathbb R^4$;\n[[lem-timelike-cone-has-two-convex-components]], step 5.1, proves that the\nresulting open sets are independent of the basis. By that lemma the\nset $T$ has exactly two connected components, and each of them is nonempty,\nopen, convex and path-connected. A **time orientation** of $(V,\\eta)$ is a\nchoice of one of these two components. Fixing such a choice, write $C^+$ for the\nchosen component and\n\n$$C^-:=T\\setminus C^+$$\n\nfor the other component; thus $T=C^+\\sqcup C^-$ is a disjoint union and\n$C^+$, $C^-$ are exactly the two components supplied by the lemma. Relative to\nthis choice a vector $v\\in V$ is\n\n- **future timelike** when $v\\in C^+$;\n- **past timelike** when $v\\in C^-$;\n- **future null** when $v\\neq 0$, $\\eta(v,v)=0$ and $v\\in\\operatorname{cl}(C^+)$;\n- **past null** when $v\\neq 0$, $\\eta(v,v)=0$ and $v\\in\\operatorname{cl}(C^-)$;\n- **future causal** when it is future timelike or future null;\n- **past causal** when it is past timelike or past null.\n\nThe sets $\\operatorname{cl}(C^+)$ and $\\operatorname{cl}(C^-)$ are the\n**future closed cone** and the **past closed cone** of the time-oriented space\n$(V,\\eta,C^+)$. By [[lem-timelike-cone-has-two-convex-components]] each of them\nis a convex cone, their intersection is $\\{0\\}$, and a vector is causal exactly\nwhen it is future causal or past causal, in which case exactly one of these two\nalternatives holds: no nonzero vector is both future causal and past causal.\nThe timelike vectors are exactly the points of $T=C^+\\cup C^-$, and\n$0\\notin T$ because $\\eta(0,0)=0$; since a null vector is nonzero with\n$\\eta(v,v)=0$, no vector is both timelike and null, so the classes above are\nmutually exclusive where the definitions say they are: no vector is both future\nand past causal, and no timelike vector is null.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inertial-frame-and-inertial-chart",
+          "source_section": "Definition",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]]), with orientation fixed as a positive ray of\nthe determinant line $\\Lambda^4V$\n([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]])\nand with the corresponding class of positively oriented ordered bases of $V$\n([[def-orientation-of-a-finite-dimensional-real-vector-space]]); by\n[[prop-orientations-and-positive-basis-classes-agree-in-positive-dimension]] the\npositive ray selects exactly one such class for $\\dim V=4>0$.\n\nAn **inertial frame** of the model is a tuple $(o;e_0,e_1,e_2,e_3)$ consisting\nof an event $o\\in A$ and an ordered basis $(e_0,e_1,e_2,e_3)$ of $V$ that is\n\n1. **$\\eta$-orthonormal**: $\\eta(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$ for all $a,b$ ([[lem-lorentz-form-has-orthonormal-basis]]);\n2. **future**: $e_0\\in C^+$, i.e. $e_0$ is future timelike; and\n3. **positively oriented**: the ordered basis lies in the positive-basis class\n   selected by the fixed orientation.\n\nThe event $o$ is the **origin** of the frame and $e_0,e_1,e_2,e_3$ are its\n**basis vectors**.\n\n**Inertial charts.** For an inertial frame $(o;e_0,e_1,e_2,e_3)$, define\n\n$$E:\\mathbb R^4\\longrightarrow V,\\qquad E(u):=\\sum_{a=0}^3u^ae_a .$$\n\nThen $E$ is a linear isomorphism ([[def-linear-isomorphism-and-invertible-linear-map]]):\nit is linear by construction, and it is bijective because\n$(e_0,e_1,e_2,e_3)$ is an ordered basis, every $v\\in V$ having exactly one\ncoordinate list $u$ with $v=\\sum_au^ae_a$\n([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). The **inertial\nchart** of the frame is the map\n\n$$x:A\\longrightarrow\\mathbb R^4,\\qquad x(p):=E^{-1}(p-o),$$\n\nand its values $x^a(p)$ are the **inertial coordinates of the event $p$** in the\nframe. Since $E$ and $v\\mapsto p+v$ are bijections, $x$ is a bijection\n$A\\to\\mathbb R^4$; and $x(p)=0$ exactly when $p-o=0_V$, that is, exactly when\n$p=o$.\n\n**Transition law.** Let $(o';e'_0,e'_1,e'_2,e'_3)$ be another inertial frame\nwith chart $x'$, and let $M=(M^b_a)$ be the change-of-basis matrix defined by\n$e'_a=\\sum_bM^b_ae_b$, a $4\\times4$ real matrix that is invertible because both\nfamilies are ordered bases. Then $E'(u)=\\sum_au^ae'_a=E(Mu)$ for all\n$u\\in\\mathbb R^4$, for the matrix-vector product $Mu$ in the coordinates of the\nfirst frame, because $\\sum_au^a\\sum_bM^b_ae_b=\\sum_b(\\sum_aM^b_au^a)e_b$; hence\n$E'=E\\circ M$ and $E'^{-1}=M^{-1}\\circ E^{-1}$, so for every event $p$,\n\n$$x'(p)=M^{-1}\\bigl(x(p)-x(o')\\bigr)=M^{-1}x(p)-M^{-1}x(o') .$$\n\nIn particular the transition between two inertial charts is an affine map of\n$\\mathbb R^4$ with invertible linear part $M^{-1}$ and constant part\n$-M^{-1}x(o')$, and it is a bijection of $\\mathbb R^4$ with inverse\n$u\\mapsto Mu+x(o')$, which is the transition in the reverse direction.\n\n**The inertial atlas.** The **inertial atlas** of the model is the family of\nall inertial frames together with their inertial charts. Its charts are\navailable at every event by [[lem-future-oriented-inertial-frames-exist]], which\nsupplies for every $o\\in A$ an inertial frame with origin $o$; and any two of\nits charts are related by the affine transition displayed above.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**\n\n$$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$\n\nFor a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. These are ordinary vector-valued one-variable derivatives in the sense of [[def-vector-valued-derivative-and-integral]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] \u2014 hence the least-upper-bound property \u2014 that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Antisymmetry gives $\\eta(U,f_0)=\\alpha U^aF_{ab}U^b=0$. On the unit shell, $U_a\\Pi_U{}^a{}_b=U_b+(\\eta(U,U)/c^2)U_b=0$, so $\\eta(U,a_{\\rm LL})=0$. The coordinate right-hand side $G=(U,a_{\\rm LL}(x,U))$ is $C^1$ on the open state domain, identified by the inertial chart with an open subset of $\\mathbb R^8$: $F$ is $C^2$, its partials [F3] are $C^1$, and the remaining factors are polynomial in $U$, using [F4]. In any closed rectangular box in this domain, [F6] bounds all first coordinate partial derivatives of the eight components of $G$ by a common constant $D$. For two states $z,z'$ in the box, change their coordinates one at a time; each intervening coordinate segment stays in the box, so [F7] gives $|G_i(z')-G_i(z)|\\le D\\sum_{j=1}^8|z'_j-z_j|\\le\\sqrt8D\\|z'-z\\|_2$ for each component $i$. Therefore $\\|G(z')-G(z)\\|_2\\le8D\\|z'-z\\|_2$, proving that $G$ is locally Lipschitz. Thus [F5] gives a unique local full-state solution through $(x_0,U_0)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For arbitrary $U$, antisymmetry gives $\\eta(U,f_0)=0$ and the projector formula gives $\\eta(U,\\Pi_U B)=(1+\\eta(U,U)/c^2)\\eta(U,B)$. Along the full solution put $h(\\tau)=\\eta(U,U)+c^2$; then\n$$h'(\\tau)=2\\eta(U,a_{\\rm LL})=\\frac{2\\tau_e}{c^2}\\eta(U,B)h(\\tau).$$\nThe coefficient is continuous. The zero function solves this scalar linear IVP with $h(0)=0$, and the scalar vector field is locally Lipschitz in $h$ because it is linear in that variable, so uniqueness [F5] gives $h=0$ on the full common interval. Thus the proper-time normalization $\\eta(U,U)=-c^2$ is preserved.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the inertial frame of [F2], $e_0$ has coordinates $(1,0,0,0)$. For any future timelike $W$, convexity of $C^+$ makes $(1-s)e_0+sW$ timelike for $0\\le s\\le1$. A timelike vector cannot have zeroth component zero, since then its squared norm would be the nonnegative spatial norm square. If $W^0\\le0$, the continuous zeroth component along this segment takes the value zero by [F8], a contradiction; hence every future timelike vector has $W^0>0$. Conversely, if $W$ is timelike and $W^0>0$, then $W^0>|\\mathbf W|$ in this frame, and $(1-s)e_0+sW$ has time component $1-s+sW^0>s|\\mathbf W|$ for every $0\\le s\\le1$. It is therefore timelike throughout and joins $e_0$ to $W$, so $W$ belongs to the same timelike component $C^+$. Thus a timelike vector is future exactly when its zeroth component is positive. Along the solution, the preserved shell makes $U$ timelike. Its initial vector is future, so $U^0(0)>0$; if $U^0$ became nonpositive, [F8] on the interval between that time and $0$ would force a zero component, again impossible. Hence $U$ remains future directed throughout the local interval. No continuation beyond this interval is asserted.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement quantifies over initial data; if O has no admissible point, the local assertion is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses no division by alpha or tau_e, so alpha=0 or tau_e=0 is covered."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton family or one-index boundary occurs in this local IVP statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 handles every shell point because c>0 makes G(u)>0 and the graph remains regular."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 constructs a solution on an open interval about the initial proper-time value; no endpoint extension is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use a fixed datum and a local ODE; no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Reduced-order Landau\u2013Lifshitz local ODE and mass shell: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. A prescribed C2 alternating field gives a smooth reduced LL vector field with c positive, arbitrary alpha and nonnegative radiation time. The locally solved future unit-shell IVP preserves normalization, with no global lifetime or converse model adequacy claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Reduced-order Landau\u2013Lifshitz local ODE and mass shell: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. A prescribed C2 alternating field gives a smooth reduced LL vector field with c positive, arbitrary alpha and nonnegative radiation time. The locally solved future unit-shell IVP preserves normalization, with no global lifetime or converse model adequacy claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Independently checked steps 1.1\u20132.1 and every direct supplier Statement/Definition. On an interior rectangular box the eight coordinate changes stay in the box and the scalar MVT gives Euclidean Lipschitz constant 8D; apply Picard\u2013Lindelof to the autonomous field on R times the open R^8 state domain. Antisymmetry gives eta(U,f0)=0 even off shell; h=eta(U,U)+c^2 satisfies a continuous scalar linear IVP with h(0)=0, preserving normalization on the common interval by uniqueness. Both directions of future iff U^0>0 are proved by the segment to e0; IVT applies on the interval between 0 and any positive or negative solution time. Checked alpha=0 and tau_e=0 (zero coefficient), nonempty initial-data neighborhood, c>0 and timelike exclusion of U^0=0. No AC, global continuation, physical accuracy or empirical input is claimed. Reader repairs match the authentic preimage and retain the Statement."
+      }
+    },
+    "lem-rpm-reduction-residual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-rpm-ll-reduced-ode",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented, time-oriented affine Minkowski space of dimension four with signature $(-,+,+,+)$, and fix an inertial chart $(x^0,x^1,x^2,x^3)$ with $x^0=ct$, $c>0$. Let $O\\subseteq A$ be open and let $F$ be a $C^2$ alternating covariant two-tensor on $O$. In this chart write $F^a{}_b:=\\eta^{ac}F_{cb}$ and let $\\partial_b$ denote the coordinate partial derivative. Fix constants $\\alpha\\in\\mathbb R$ and $\\tau_e\\geq0$. For every $U\\in V$, define\n\n$$\\Pi_U{}^a{}_b:=\\delta^a_b+\\frac{U^aU_b}{c^2},\\qquad f_0^a(x,U):=\\alpha F^a{}_b(x)U^b,$$\n\n$$B^a(x,U):=\\alpha(\\partial_bF^a{}_c)(x)U^bU^c +\\alpha^2F^a{}_b(x)F^b{}_c(x)U^c, \\qquad a_{\\rm LL}^a(x,U):=f_0^a(x,U)+\\tau_e\\Pi_U{}^a{}_bB^b(x,U).$$\n\nFor the physical interpretation, $x^a$ are in metres, $\\tau$ is in seconds, $c$ is in metres per second, $U$ is in metres per second, $\\alpha=q/m$, and $\\tau_e$ is a time. Here a **proper-time parameter** means that the parameter is measured in seconds and the four-velocity is normalized by $\\eta(U,U)=-c^2$; define the future unit shell by $\\mathcal S^+:=\\{U\\in C^+:\\eta(U,U)=-c^2\\}$. For each initial datum $(x_0,U_0)\\in O\\times V$ with $U_0\\in\\mathcal S^+$, the system\n\n$$\\frac{dx^a}{d\\tau}=U^a,\\qquad \\frac{dU^a}{d\\tau}=a_{\\rm LL}^a(x,U),\\qquad (x(0),U(0))=(x_0,U_0)$$\n\nhas a unique local solution on an open proper-time interval about $0$. Along that interval $\\eta(U,U)=-c^2$ and $U$ remains future directed. This is a local ODE statement: it makes no claim of global existence for arbitrary $F$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ftc-first-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]), let $F$ be its integral function\n([[def-the-integral-function]]), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous ([[def-continuity-real]]). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ ([[def-derivative]]) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\n[[def-derivative]] means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "uses": [
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-integrability-of-absolute-values-products-and-lattice-operations",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. $|f|$, $f^{2}$ and $fg$ are integrable on $[a,b]$\n   ([[def-abs-value]], [[def-integer-power]]);\n2. $\\max(f,g)$ and $\\min(f,g)$, defined pointwise\n   ([[def-max-min]]), are integrable on $[a,b]$;\n3. the **triangle inequality for the integral**:\n   $$\\Bigl|\\int_a^b f\\Bigr| \\;\\le\\; \\int_a^b |f| .$$\n\n**Claim 3 is stated with $a < b$ and is not orientation-invariant.** For $u > v$\nthe right-hand side is $-\\int_v^u |f| \\le 0$ while the left-hand side is $\\ge 0$,\nso the inequality as written is false there. The form valid for *every* pair\n$u,v$ on which $f$ is integrable ([[def-oriented-integral]]) is\n\n$$\\Bigl|\\int_u^v f\\Bigr| \\;\\le\\; \\Bigl|\\int_u^v |f|\\,\\Bigr| ,$$\n\nand that is the form the estimates below on this page use whenever the limits\nare not known to be in increasing order.\n\n**The converse of claim 1 fails.** Integrability of $|f|$ does not give\nintegrability of $f$; the witness is on the companion page.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. $f + g$ is integrable on $[a,b]$ and\n   $\\int_a^b (f+g) = \\int_a^b f + \\int_a^b g$;\n2. for every real $\\lambda$, $\\lambda f$ is integrable on $[a,b]$ and\n   $\\int_a^b \\lambda f = \\lambda \\int_a^b f$;\n3. consequently, for all reals $\\lambda, \\mu$ the function $\\lambda f + \\mu g$ is\n   integrable and\n   $$\\int_a^b(\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f \\;+\\; \\mu\\int_a^b g ;$$\n4. the same identity holds with oriented limits: if $u, v \\in [a,b]$ and $f, g$\n   are integrable between $u$ and $v$ ([[def-oriented-integral]]), then\n   $\\int_u^v(\\lambda f + \\mu g) = \\lambda\\int_u^v f + \\mu\\int_u^v g$.\n\n**Linearity of the integral is not linearity of the Darboux sums**, and the\nproof of claim 1 has to squeeze rather than compute. On a subinterval the\ninequality $\\sup(f+g) \\le \\sup f + \\sup g$ can be strict \u2014 take $f(x) = x$ and\n$g(x) = -x$ on $[0,1]$, where the left side is $0$ and the right side is $1$ \u2014\nso $U(f+g,P)$ is in general strictly below $U(f,P) + U(g,P)$ and no identity\nbetween upper sums is available. Claim 2, by contrast, is an identity at the\nlevel of the sums, with the roles of $\\sup$ and $\\inf$ exchanged when\n$\\lambda < 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-metric-compactness",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open sets as in\n[[def-metric-topology]] and balls as in [[def-metric-ball]].\n\n- An **open cover** of $(X,d)$ is a family $\\mathcal{U}$ of open subsets of $X$\n  with $X = \\bigcup \\mathcal{U}$, where\n  $\\bigcup \\mathcal{U} = \\{\\, x \\in X : x \\in U \\text{ for some } U \\in \\mathcal{U} \\,\\}$.\n- A **subcover** of $\\mathcal{U}$ is a subfamily\n  $\\mathcal{V} \\subseteq \\mathcal{U}$ that is itself an open cover.\n- A family $\\mathcal{V}$ of sets is **finite** when $\\mathcal{V} = \\emptyset$ or\n  there are $n \\in \\mathbb{N}$ and sets $V_0, \\dots, V_n$ with\n  $\\mathcal{V} = \\{V_0, \\dots, V_n\\}$; repetitions in the list are allowed and\n  harmless.\n- $(X,d)$ is **compact** when every open cover of it has a finite subcover: for\n  every open cover $\\mathcal{U}$, either $X = \\emptyset$ and the empty subfamily\n  covers it, or there are $n \\in \\mathbb{N}$ and\n  $U_0, \\dots, U_n \\in \\mathcal{U}$ with\n  $$X = U_0 \\cup \\dots \\cup U_n .$$\n- A subset $A \\subseteq X$ is a **compact subset** of $X$ when the metric\n  subspace $(A, d_A)$ is a compact metric space, $d_A$ being the restriction of\n  $d$ to $A \\times A$ ([[def-isometry-and-metric-embedding]]).\n\n**Compactness of a subset is defined intrinsically, and only intrinsically.**\nThe last clause speaks about the subspace $(A,d_A)$ and its own open sets, not\nabout families of open subsets of the ambient $X$. The two readings do agree,\nbut that is a theorem and not a convention: it is\n[[lem-compactness-is-intrinsic]], and no item of this library may use the\nambient reading without citing it. Taking the intrinsic reading as the\ndefinition is what makes \"compact\" a property of the metric space $(A,d_A)$\nalone, so that a set compact in one ambient space is compact in every other one\ncontaining it isometrically.\n\n**The empty space is compact**, since the empty subfamily of any family covers\nit; this is the reason the clause above is written with the two cases. The\none-point space is compact too, and so is every space listed as\n$\\{x_0, \\dots, x_n\\}$: given a cover, each $x_i$ lies in some member, and\nfinitely many members chosen in this way already cover.\n\n**The finiteness convention, and how it is used both ways.** \"Finite\" above is\nthe listing form, matching the finite lists of\n[[def-finite-intersection-property]]. It agrees with the definition of\nfiniteness by equinumerosity with a natural number ([[def-countable]]), and\nboth directions of the agreement are available and are used below:\n\n- A nonempty finite set $F$ in the sense of [[def-countable]] satisfies\n  $F \\approx m$ for some $m \\ge 1$, and a bijection $m \\to F$ is exactly a\n  listing $F = \\{a_0, \\dots, a_{m-1}\\}$.\n- Conversely a set listed as $A = \\{a_0, \\dots, a_n\\}$, that is the image of a\n  function $a$ with domain $\\sigma(n)$, is finite in the sense of\n  [[def-countable]]: the map sending $x \\in A$ to the least $i \\le n$ with\n  $a_i = x$ is an injection of $A$ into $\\sigma(n)$, so $A$ is equinumerous with\n  a subset of $\\mathbb{N}$ bounded above, and such a subset is finite\n  ([[lem-subset-of-countable]]).\n\nNeither direction uses a choice principle: the second selects nothing, taking a\nleast index instead.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then\n\n$$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiating $\\eta(U_\\varepsilon,U_\\varepsilon)=-c^2$ gives $\\eta(U_\\varepsilon,a_\\varepsilon)=0$. Differentiating this identity once more gives $\\eta(U_\\varepsilon,\\dot a_\\varepsilon)=-\\eta(a_\\varepsilon,a_\\varepsilon)$. By [F1], $\\Pi_{U_\\varepsilon}\\dot a_\\varepsilon=\\dot a_\\varepsilon+U_\\varepsilon\\eta(U_\\varepsilon,\\dot a_\\varepsilon)/c^2=\\dot a_\\varepsilon-\\eta(a_\\varepsilon,a_\\varepsilon)U_\\varepsilon/c^2$. Therefore [A1] is exactly $a_\\varepsilon=f_{0,\\varepsilon}+\\varepsilon\\Pi_{U_\\varepsilon}\\dot a_\\varepsilon$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The product and chain rules [F2], with $\\dot x=U$ and $\\dot U=a$, give $$\\dot f_{0,\\varepsilon}^a=\\alpha_\\varepsilon(\\partial_bF^a{}_c)U^bU^c+\\alpha_\\varepsilon F^a{}_b a_\\varepsilon^b, \\qquad B_\\varepsilon^a=\\alpha_\\varepsilon(\\partial_bF^a{}_c)U^bU^c+\\alpha_\\varepsilon F^a{}_b f_{0,\\varepsilon}^b.$$ Subtracting the equalities and using $\\delta_\\varepsilon=a_\\varepsilon-f_{0,\\varepsilon}$ gives $\\dot f_{0,\\varepsilon}-B_\\varepsilon=\\alpha_\\varepsilon F\\delta_\\varepsilon$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Subtract $f_{0,\\varepsilon}+\\varepsilon\\Pi_{U_\\varepsilon}B_\\varepsilon$ from the reformulated LAD equation in step 1.1. Since $\\dot a-B=\\dot\\delta+(\\dot f_0-B)$, step 2.1 yields $$a_\\varepsilon-(f_{0,\\varepsilon}+\\varepsilon\\Pi_{U_\\varepsilon}B_\\varepsilon) =\\varepsilon\\Pi_{U_\\varepsilon}(\\dot\\delta_\\varepsilon+\\alpha_\\varepsilon F\\delta_\\varepsilon).$$ Taking Euclidean norms and applying the assumed bounds gives at each $\\tau\\in I$ $$\\left\\|a_\\varepsilon-(f_{0,\\varepsilon}+\\varepsilon\\Pi_{U_\\varepsilon}B_\\varepsilon)\\right\\| \\leq\\varepsilon P(C_1\\varepsilon+A M C_0\\varepsilon) =P(C_1+AM C_0)\\varepsilon^2.$$ The constants do not depend on $\\varepsilon$ or $\\tau$, so the estimate is uniform on $I$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "owner-step-1-2",
+          "step": "1.2",
+          "claim": "Use the Euclidean phase-space and compact-region conventions of [F8] for the comparison data [A3]. Put $\\delta:=C\\tau_e^2$ and $r(t):=\\|z_1(t)-z_2(t)\\|_1$. For each coordinate component $j$, set $h_j(t):=(z_1-z_2)_j(t)-\\int_0^t[X_{\\tau_e}(z_1(s))-\\widetilde X_{\\tau_e}(z_2(s))]_j\\,ds$. The integrand is continuous because it equals $\\dot z_{1,j}-\\dot z_{2,j}$ by the pointwise ODEs. By [F3], $h_j$ is continuous on $[0,T]$, differentiable in its interior, and has derivative zero there. Equality of the initial data gives $h_j(0)=0$. The mean value theorem [F6] on $[0,t]$ therefore gives $h_j(t)=0$ for each $0<t\\le T$, while this also holds at $t=0$. Consequently $$(z_1-z_2)(t)=\\int_0^t\\bigl(X_{\\tau_e}(z_1(s))-\\widetilde X_{\\tau_e}(z_2(s))\\bigr)\\,ds.$$ Apply the scalar integral bound of [F4] to each component and add the finitely many inequalities using linearity; then split the integrand as $X_{\\tau_e}(z_1)-X_{\\tau_e}(z_2)+X_{\\tau_e}(z_2)-\\widetilde X_{\\tau_e}(z_2)$. The field assumptions and [F9] give $$r(t)\\leq\\int_0^t\\|X_{\\tau_e}(z_1(s))-\\widetilde X_{\\tau_e}(z_2(s))\\|_1\\,ds\\leq L\\int_0^t r(s)\\,ds+\\delta t.$$",
+          "inputs": [
+            "given",
+            "A3",
+            "A4",
+            "A5",
+            "F3",
+            "F4",
+            "F6",
+            "F8",
+            "F9"
+          ],
+          "rule": "the explicit calculation and conditional supplier application displayed in this exact numbered source step"
+        },
+        {
+          "id": "owner-step-2-2",
+          "step": "2.2",
+          "claim": "If $L=0$, step 1.2 gives $r(t)\\leq\\delta t\\leq\\delta T=\\delta T e^{LT}$ by [F7].",
+          "inputs": [
+            "step 1.2",
+            "A4",
+            "F7"
+          ],
+          "rule": "the explicit calculation and conditional supplier application displayed in this exact numbered source step"
+        },
+        {
+          "id": "owner-step-2-3",
+          "step": "2.3",
+          "claim": "Suppose $L>0$ and define $G(t):=\\delta t+L\\int_0^t r(s)\\,ds$. The function $r$ is continuous, so [F3] applies; step 1.2 gives $r\\leq G$, while [F3] gives $G'(t)=\\delta+Lr(t)\\leq\\delta+LG(t)$ for $0<t<T$.",
+          "inputs": [
+            "step 1.2",
+            "A3",
+            "A5",
+            "F3"
+          ],
+          "rule": "the explicit calculation and conditional supplier application displayed in this exact numbered source step"
+        },
+        {
+          "id": "owner-step-3-2",
+          "step": "3.2",
+          "claim": "Define $H(t):=e^{-Lt}(G(t)+\\delta/L)$. By [F5], [F7], and $G'\\leq\\delta+LG$ from step 2.3, $H'(t)=e^{-Lt}(G'(t)-LG(t)-\\delta)\\leq0$ on $(0,T)$. For each $0<t\\leq T$, the mean value theorem [F6] on $[0,t]$ gives $H(t)\\leq H(0)=\\delta/L$, hence $r(t)\\leq G(t)\\leq\\delta(e^{Lt}-1)/L$.",
+          "inputs": [
+            "step 2.3",
+            "F5",
+            "F6",
+            "F7"
+          ],
+          "rule": "the explicit calculation and conditional supplier application displayed in this exact numbered source step"
+        },
+        {
+          "id": "owner-step-4-1",
+          "step": "4.1",
+          "claim": "For $L,t>0$, the mean value theorem and monotonicity of the exponential [F6] give $e^{Lt}-1\\leq Lt e^{Lt}$. Therefore step 3.2 yields $r(t)\\leq\\delta t e^{Lt}\\leq\\delta T e^{LT}$; the same bound holds at $t=0$ by $r(0)=0$. This proves the estimate in the $L>0$ case; together with step 2.2, it covers all $L\\geq0$. Substituting $\\delta=C\\tau_e^2$ gives the asserted uniform stability bound.",
+          "inputs": [
+            "step 2.2",
+            "step 3.2",
+            "A4",
+            "F6"
+          ],
+          "rule": "the explicit calculation and conditional supplier application displayed in this exact numbered source step"
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 states the pointwise estimate, which is vacuous if the common interval has no points."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 remains valid when any bound constant is zero; epsilon itself is positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton family or one-index boundary occurs in the uniform estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 require no invertibility or nondegeneracy beyond c>0 and the normalized shell."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 is pointwise on the closed common interval, so its endpoints are included under the stated uniform bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 is pointwise for the given family and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Conditional finite-interval LAD to LL residual: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. Positive epsilon labels C3 LAD curves on one nondegenerate compact interval, with uniform defect and derivative bounds assumed. The resulting quadratic residual estimate neither constructs those curves nor establishes global convergence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement \u2014 Conditional finite-interval LAD to LL residual: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. Positive epsilon labels C3 LAD curves on one nondegenerate compact interval, with uniform defect and derivative bounds assumed. The resulting quadratic residual estimate neither constructs those curves nor establishes global convergence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Independently checked all eight steps, the current LL Statement and all seventeen other direct supplier interfaces. Twice differentiating eta(U,U)=-c^2 is justified by C^3 curves on a neighborhood of I and gives the projected LAD bracket. The total derivative chain rule applies to C^2 F composed with C^3 x. alpha_epsilon is constant along each curve; dot f0-B=alpha F delta and dot a-B=dot delta+alpha F delta, giving epsilon P(C1 epsilon+AM C0 epsilon), uniformly on I. Does not infer those bounds or existence of the assumed LAD family. For the separate comparison, full-interval C^1 solutions make the composed integrand continuous even without ambient field continuity; componentwise FTC and MVT give the integral identity, scaled scalar triangle inequalities yield r<=L integral r+delta t. L=0 is separate; L>0 integrating factor H=e^-Lt(G+delta/L) has nonpositive derivative, and MVT bounds e^Lt-1 by Lt e^Lt, including endpoints by continuity. Checked C=0, tau_e=0, L=0, empty K (no assumed solutions), d>=1 and positive scales, all time endpoints, and no AC. Fixed-time conditional estimates do not assert LAD trajectory convergence, arbitrary-time accuracy or physical observations."
+      }
+    },
+    "post-rpm-lad-effective-equation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-author",
+        "notes": "Self-check against the authored argument and inspected interfaces; this records authoring only, not independent proof approval."
+      },
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The flat signature, proper time, primitive m and q, prescribed C^2 field, SI tensor convention, epsilon_0, alpha, tau_e and full third-order equation are explicit. The instantaneous rest frame is defined pointwise as the event x(tau), time vector U/c and a positively oriented orthonormal basis of U^perp, with its induced norm."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The item restricts to q!=0, a regular flat curve and a prescribed external field; it makes no point-source, global-existence or quantitative-validity claim."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Landau\u2013Lifshitz \u00a7\u00a775\u201376 and Zhang \u00a72/Appendix A are recorded in item sources and batch coverage with full-text locators."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The equation is explicitly adopted as an effective-model postulate and is not derived from a Maxwell self-field or experiment."
+        }
+      }
+    },
+    "rem-rpm-self-force-status": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rpm-body-moments",
+          "source_section": "Definition",
+          "quote": "Use the charged/spinning body-model conventions of the now-authored batch-24 carrier [[def-rpm-charge-spin-model]]: a smooth time-oriented Lorentzian four-manifold of signature $(-+++)$, coordinates $x^0=ct$ in metres, $c>0$, and a $C^2$ future timelike representative curve $\\zeta:I\\to M$ parametrized by proper time $\\tau$ in seconds, with $U=d\\zeta/d\\tau$ and $g(U,U)=-c^2$. The actual supplier defines these quantities and the SI electromagnetic-tensor convention used here. Assume Countable Choice for the GR smooth-structure, convex-normal and parallel-transport suppliers used below.\n\n**(a) Flat isolated-body moments.** Choose an inertial frame $(o;e_0,e_1,e_2,e_3)$ and its chart $x:A\\to\\mathbb R^4$ as in [[def-inertial-frame-and-inertial-chart]], with the SI coordinate convention $x^0=ct$ and $x^i$ in metres of [[def-rpm-charge-spin-model]]. Thus $e_0$ is future unit timelike and $(e_1,e_2,e_3)$ is the positively oriented orthonormal spatial basis. Let $T$ be a $C^\\infty$ symmetric type-$(2,0)$ tensor field on the affine Minkowski spacetime $A$, whose chart components $T^{ab}$ are the model stress-energy densities with units $\\mathrm J\\,\\mathrm m^{-3}$. The coordinate-time image $J:=\\{x^0(\\zeta(\\tau))/c:\\tau\\in I\\}$ is an open interval, and $\\zeta(t)$ denotes the unique point of the curve with coordinate time $t$; this is well-defined because future timelike curves have strictly increasing inertial coordinate time. For a finite closed interval $[t_1,t_2]\\subset\\mathbb R$, define\n$$K_{[t_1,t_2]}:=\\overline{\\{\\mathbf x\\in\\mathbb R^3:\\text{there are }t\\in[t_1,t_2]\\text{ and }a,b\\in\\{0,1,2,3\\}\\text{ with }T^{ab}(ct,\\mathbf x)\\ne0\\}}.$$\nAssume $K_{[t_1,t_2]}$ is compact for every such interval. For each $t\\in\\mathbb R$, define the spatial support by\n$$\\operatorname{supp}_tT:=\\overline{\\{\\mathbf x\\in\\mathbb R^3:\\text{there are }a,b\\in\\{0,1,2,3\\}\\text{ with }T^{ab}(ct,\\mathbf x)\\ne0\\}}.$$\nAt a fixed time $t$, the spatial slice has coordinates $\\mathbf x=(x^1,x^2,x^3)\\in\\mathbb R^3$ and three-dimensional Lebesgue measure $d^3x$; define\n$$p^a(t):=\\frac1c\\int_{\\mathbb R^3}T^{0a}(ct,\\mathbf x)\\,d^3x,$$\nand, for the representative event $\\zeta(t)$ on that time slice, define\n$$S_{\\zeta(t)}^{ab}(t):=\\frac1c\\int_{\\mathbb R^3}\\left((x-\\zeta(t))^aT^{0b}(ct,\\mathbf x)-(x-\\zeta(t))^bT^{0a}(ct,\\mathbf x)\\right)d^3x.$$\nHere $(x-\\zeta(t))^0=0$ on the chosen slice, $p$ has units $\\mathrm{kg\\,m\\,s^{-1}}$, and $S_{\\zeta(t)}$ has units $\\mathrm{kg\\,m^2\\,s^{-1}}$. These are definitions of moments; no conservation is asserted by clause (a).\n\n**(b) Local curved-body moments.** Let $z\\in M$ and let $U_0$ be a convex normal neighborhood containing $z$. Let $\\Sigma=i(S)\\subset U_0$ be a $C^1$ embedded spacelike hypersurface through $z$, where $S$ is a three-dimensional $C^1$ manifold without boundary and $i:S\\to U_0$ is an injective $C^1$ immersion that is a homeomorphism onto its image. Thus each tangent space $T_x\\Sigma$ is three-dimensional; require the restriction of $g_x$ to it to be positive definite. Let $n_x$ be its continuous future unit normal, meaning $g_x(n_x,n_x)=-1$ and $g_x(n_x,w)=0$ for every $w\\in T_x\\Sigma$. For a local parametrization $X:V\\subseteq\\mathbb R^3\\to\\Sigma$, put $g^\\Sigma_{ij}(y):=g_{X(y)}(\\partial_iX,\\partial_jX)$ and define\n$$d\\Sigma:=\\sqrt{\\det(g^\\Sigma_{ij}(y))}\\,dy^1dy^2dy^3.$$\nThe positive-definite condition makes this density positive, and the coordinate-change rule makes the resulting measure independent of the parametrization; $dy^1dy^2dy^3$ is Lebesgue measure on $V$. Let $T$ be a smooth symmetric type-$(2,0)$ stress-energy tensor field on $U_0$, with components in an orthonormal tetrad in joules per cubic metre; only its restriction $T|_\\Sigma$ is used. With $(n_x)_b:=g_{bc}(x)n_x^c$, define\n$$\\operatorname{supp}_\\Sigma(T|_\\Sigma):=\\overline{\\{x\\in\\Sigma:T_x\\ne0\\}}^{\\,\\Sigma}.$$\nAssume this restricted support is a compact subset of $U_0$ and that all displayed integrands are absolutely integrable with respect to $d\\Sigma$. For every $x\\in\\Sigma$, let $v(x):=\\exp_z^{-1}(x)\\in T_zM$ be the unique joining position vector supplied by [[thm-gr-convex-normal-neighborhoods]] and [[thm-gr-local-geodesics-and-exponential-map]]. Let $H_{x\\to z}:T_xM\\to T_zM$ be parallel transport along that unique geodesic, with existence, uniqueness and metric preservation as in [[lem-gr-parallel-transport-and-geodesic-speed]]. Define $T^\\sharp(n_x)^a:=T^{ab}(x)(n_x)_b$ and\n$$p_z:=\\frac1c\\int_\\Sigma H_{x\\to z}\\!\\left(-T^\\sharp(n_x)\\right)d\\Sigma,\\qquad S_z:=\\frac1c\\int_\\Sigma v(x)\\wedge H_{x\\to z}\\!\\left(-T^\\sharp(n_x)\\right)d\\Sigma,$$\nwhere $(v\\wedge w)^{ab}:=v^aw^b-v^bw^a$ and the finite-dimensional vector and tensor integrals are taken componentwise in any basis of $T_zM$. The resulting $p_z$ and $S_z$ are a vector and an antisymmetric tensor at $z$; their units are $\\mathrm{kg\\,m\\,s^{-1}}$ and $\\mathrm{kg\\,m^2\\,s^{-1}}$. \u201cSupport on $\\Sigma$\u201d here means only compact support of the restriction $T|_\\Sigma$; it does not assert that the ambient smooth field $T$ has spacetime support contained in $\\Sigma$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-rpm-lad-effective-equation",
+          "source_section": "Postulate",
+          "quote": "Restrict [[def-rpm-charge-spin-model]] to its flat affine Minkowski branch, with signature $(-,+,+,+)$, proper time $\\tau$ in seconds, future four-velocity $U=dx/d\\tau$ satisfying $\\eta(U,U)=-c^2$, constant primitive $m>0$ in kilograms and nonzero charge $q\\in\\mathbb R$ in coulombs. Let the prescribed external electromagnetic two-form $F$ be $C^2$ on an open neighborhood of the worldline; use the component convention $F_{0i}=-E_i/c$, $F_{ij}=\\epsilon_{ijk}B_k$ of [[def-em-electromagnetic-tensor]]. Let $a:=dU/d\\tau$ and\n\n$$\\alpha:=q/m,\\qquad \\tau_e:=\\frac{q^2}{6\\pi\\epsilon_0mc^3}>0,\\qquad f_0^a:=\\alpha F^a{}_bU^b,$$\n\nwhere $\\epsilon_0=(\\mu_0c^2)^{-1}$ follows [[def-em-si-conventions]]. Adopt the flat LAD effective equation\n\n$$a^a=f_0^a+\\tau_e\\left(\\frac{da^a}{d\\tau}-\\frac{\\eta_{bc}a^ba^c}{c^2}U^a\\right).$$\n\nThe derivative is the ordinary derivative in an inertial affine chart. Its dimensions are consistent: $a$ and $f_0$ are accelerations, the parenthesized term has acceleration per second, and $\\tau_e$ is a time. This is an adopted effective model equation for sufficiently regular curves (at least $C^3$); it is not asserted to be an exact law of nature, a point-source Maxwell construction, or a globally well-posed dynamics. In particular, no existence, uniqueness, stability, or empirical claim is part of this postulate.\n\nAt each proper-time value $\\tau$, define the particle's instantaneous rest frame to be the tuple $(x(\\tau);e_0,e_1,e_2,e_3)$, where $e_0=U(\\tau)/c$ and $(e_1,e_2,e_3)$ is a positively oriented $\\eta$-orthonormal basis of $U(\\tau)^\\perp$. This is a pointwise basis at the event $x(\\tau)$, not one inertial chart along an accelerated curve; the rest-space norm is $\\|v\\|_{\\rm rest}:=\\sqrt{\\eta(v,v)}$ for $v\\in U(\\tau)^\\perp$. Use of the equation as a reduced physical approximation carries the source's qualitative validity qualification that radiation reaction be small relative to the applied Lorentz force in this instantaneous rest frame. This postulate neither asserts that condition for arbitrary $F$ nor supplies a numerical threshold; the qualification is not used to deduce the local ODE results or the force-free counterexample.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The flat moments and local curved moments in [F1] are definitions for smooth finite-body stress-energy data; the supplier explicitly says no slice-independence theorem or equation of motion is asserted. Thus these moment definitions alone do not specify a point-particle limit or a value of the self-field on the representative worldline.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The LAD equation in [F2] is adopted for a prescribed external field and makes no source construction. Together with the restricted literature results [L1], this establishes the scope of this remark: those specific shrinking-body results do not convert the adopted postulate into an unrestricted fixed-charge point construction or arbitrary-duration global accuracy theorem. The historical source claims remain reports with their own hypotheses, not proofs supplied by this item.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 remains a scope statement even if a particular finite-body stress-energy support is empty; no point field is thereby defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 makes no claim that a zero field or zero charge produces a self-force."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element family or index set is part of the remark."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 preserves the stated finite-family and prescribed-field restrictions; no degenerate limit is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark is not an interval-boundary or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 use inspected definitions and source scope, not a choice construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Remark \u2014 Self-force status and point-particle limits: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. The scope remark separates prescribed-field LAD/LL equations from finite-body moments and the particular shrinking Maxwell-matter family in the cited literature. It makes no universal point-charge construction, global accuracy or source-derived dynamics claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Remark \u2014 Self-force status and point-particle limits: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. The scope remark separates prescribed-field LAD/LL equations from finite-body moments and the particular shrinking Maxwell-matter family in the cited literature. It makes no universal point-charge construction, global accuracy or source-derived dynamics claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Independently checked both proof steps and the current moment Definition and Remarks, current LAD Postulate, reader/refuter reports and primary-source passages. Smooth finite-body moment integrals and a local transport convention supply no limit law; the separately adopted LAD equation supplies no sourced self-field construction. PPV Springer displayed sections 22.1 and 22.6 describe a singular point-charge field, singular/regular split and formal mass renormalization with a tail; displayed equation labels and internal links are 18.x, a website numbering discrepancy, not a change of content. GHW section II assumes exact Maxwell/current/total-stress conservation plus lambda^-2 smooth scaled current and material stress supported within radius lambda R and a retarded field plus jointly smooth homogeneous external field. Summary VI identifies first-order self-force, dipole and spin corrections, and reduction of order for negligible spin/dipole. These reported conditional literature results are not locally proved suppliers; the remark only delimits scope. Checked that mass/charge/size all shrink, no fixed-charge point limit or arbitrary-time accuracy is inferred, no empirical data or certainty invented. Contract quotes refreshed to exact current suppliers after upstream/reader wording changes; no item argument change."
+      }
+    },
+    "ex-rpm-al-future-boundary-preacceleration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ftc-first-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]), let $F$ be its integral function\n([[def-the-integral-function]]), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous ([[def-continuity-real]]). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ ([[def-derivative]]) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\n[[def-derivative]] means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-integral-elementary-bounds",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ satisfy\n\n$$m \\;\\le\\; f(x) \\;\\le\\; M \\qquad \\text{for every } x \\in [a,b],$$\n\nwith $m, M$ real. Then $f$ is bounded ([[def-bounded-set]]), so its Darboux sums\nand integrals are defined ([[def-darboux-sums]], [[def-darboux-integral]]), and\nfor **every** partition $P$ of $[a,b]$ ([[def-partition-and-refinement]])\n\n$$m(b-a) \\;\\le\\; L(f,P) \\;\\le\\; \\underline{\\int_a^b} f \\;\\le\\; \\overline{\\int_a^b} f \\;\\le\\; U(f,P) \\;\\le\\; M(b-a) .$$\n\nIn particular, taking $f$ to be the constant function with value $c$:\n\n$$\\int_a^b c \\;=\\; c\\,(b-a) ,$$\n\nthe constant function being integrable, with $L(f,P) = U(f,P) = c(b-a)$ for\nevery partition $P$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x)\\to+\\infty\\quad(x\\to+\\infty),\\qquad \\exp(x)\\to0\\quad(x\\to-\\infty),$$\nand the range of $\\exp$ is contained in $(0,\\infty)$ and is unbounded above with infimum $0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $I(t):=\\int_t^\\infty e^{(t-s)/\\tau_e}F_{\\rm ext}(s)\\,ds$, interpreting the integral as a finite Riemann integral after any upper truncation beyond $\\max\\{t,T\\}$; compact support makes the value independent of that truncation. For $t<T$, write $I(t)=e^{t/\\tau_e}\\int_t^T e^{-s/\\tau_e}F_{\\rm ext}(s)\\,ds$. By [F1] the integrand is integrable on this compact interval, and [F2] together with the fundamental theorem gives $$I'(t)=-F_{\\rm ext}(t)+\\frac{1}{\\tau_e}I(t)\\qquad (t<T).$$ For $a=I/(m\\tau_e)$ this identity becomes $\\tau_e a'= -F_{\\rm ext}/m+a$, which rearranges to the displayed Abraham\u2013Lorentz equation. For $t>T$, both $I$ and $F_{\\rm ext}$ vanish, so the same equation holds. At $t=T$, smoothness and support imply $F_{\\rm ext}(T)=0$, and the one-sided derivatives agree with the displayed identity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $t\\geq T$, the integration interval contains no point where $F_{\\rm ext}$ is nonzero, so $a(t)=0$. For $t<0$, continuity and nonnegativity of the nonzero pulse give a closed subinterval of $(0,T)$ on which $F_{\\rm ext}\\geq d>0$. The exponential factor is positive and continuous there by [F2, F4]; its minimum is positive by [F5]. The integral over that subinterval is strictly positive by the lower bound [F3], and all remaining contributions are nonnegative. Thus $a(t)>0$. Since $a(t)=0$ for $t\\geq T$, it satisfies the future boundary condition.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $a_1,a_2$ are two solutions, their difference $d=a_1-a_2$ satisfies $d'=d/\\tau_e$. The product rule gives $(e^{-t/\\tau_e}d(t))'=0$, so [F6] implies this product is a constant $C$. By [F4], $d(t)=Ce^{t/\\tau_e}$; if $C\\ne0$, then [F7] makes $|d(t)|\\to\\infty$ as $t\\to+\\infty$, contradicting $d(t)\\to0$. Hence $C=0$ and $d=0$, proving uniqueness. Together with step 2.1, the unique future-decaying solution is strictly positive for all $t<0$: this pre-acceleration is a property of the stated model equation, not an empirical claim.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses require a nonzero pulse, so an empty support cannot satisfy the assumptions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves acceleration is zero for t>=T while retaining strict positivity for every t<0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton cardinality or one-index assertion is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses continuity and nonzero nonnegativity to obtain an interval on which the pulse is bounded below by d>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the equation at t=T using F_ext(T)=0; step 2.1 includes t=T in the zero-force tail."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 selects one positive subinterval from continuity for the fixed pulse and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example \u2014 Future-boundary solution of the nonrelativistic Abraham\u2013Lorentz equation: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. A positive mass and positive radiation time with a nonzero nonnegative compact pulse specify a scalar future-boundary ODE solution. The integral vanishes after T and is positive before the pulse; the assertion is an exact solution and uniqueness example."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example \u2014 Future-boundary solution of the nonrelativistic Abraham\u2013Lorentz equation: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. A positive mass and positive radiation time with a nonzero nonnegative compact pulse specify a scalar future-boundary ODE solution. The integral vanishes after T and is positive before the pulse; the assertion is an exact solution and uniqueness example."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Independently checked steps 1.1\u20133.1 and the exact FTC, integral inequalities, scalar MVT and exponential supplier statements. Compact support makes each improper-looking integral a finite integral. Product/FTC calculation gives I prime=-F+I/tau_e, including the joining point T since F(T)=0. A nonzero continuous nonnegative pulse supported in [0,T] is positive on a nondegenerate closed subinterval of (0,T); the exponential has positive minimum there, proving a(t)>0 for all t<0. Tail is identically zero for t>=T. Difference solves d prime=d/tau_e, so exponential integrating factor is constant by MVT and future decay forces that constant to vanish. Checked m,tau_e,T>0, negative times, endpoints 0,T, exclusion of zero pulse, and no choice use. The result concerns a scalar acceleration ODE only, not global nonrelativistic trajectory validity or measured preacceleration."
+      }
+    },
+    "cex-rpm-lad-force-free-runaway": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hyperbolic-functions",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sinh x:=\\frac{\\exp x-\\exp(-x)}2,\\qquad\\cosh x:=\\frac{\\exp x+\\exp(-x)}2,$$\n$$\\tanh x:=\\frac{\\sinh x}{\\cosh x},\\qquad\\operatorname{sech}x:=\\frac1{\\cosh x}.$$\nFor $x\\ne0$, define\n$$\\coth x:=\\frac{\\cosh x}{\\sinh x},\\qquad\\operatorname{csch}x:=\\frac1{\\sinh x}.$$\n\nThe positivity of $\\exp$ makes $\\cosh x>0$ for every $x$. If $x\\ne0$, then\n$x\\ne-x$, so strict increase of $\\exp$ makes $\\exp x\\ne\\exp(-x)$; hence\n$\\sinh x\\ne0$. Thus all four quotients above are defined on exactly their\nstated domains ([[cor-exponential-reciprocal-and-positivity]],\n[[thm-exponential-is-strictly-increasing]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-hyperbolic-identities-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sinh(x+y)=\\sinh x\\cosh y+\\cosh x\\sinh y,\\qquad\\cosh(x+y)=\\cosh x\\cosh y+\\sinh x\\sinh y,$$\n$$\\cosh^2x-\\sinh^2x=1,\\qquad(\\sinh x)'=\\cosh x,\\qquad(\\cosh x)'=\\sinh x.$$\nMoreover $\\sinh:\\mathbb R\\to\\mathbb R$ is odd, strictly increasing, and onto;\n$\\cosh:\\mathbb R\\to[1,\\infty)$ is even and positive, and its restriction\nto $[0,\\infty)$ is strictly increasing and onto $[1,\\infty)$; and\n$\\tanh:\\mathbb R\\to(-1,1)$ is strictly increasing and onto. On their declared domains,\n$$(\\tanh x)'=\\operatorname{sech}^2x,\\quad(\\coth x)'=-\\operatorname{csch}^2x,\\quad(\\operatorname{sech}x)'=-\\operatorname{sech}x\\tanh x,\\quad(\\operatorname{csch}x)'=-\\operatorname{csch}x\\coth x.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ftc-first-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]), let $F$ be its integral function\n([[def-the-integral-function]]), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous ([[def-continuity-real]]). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ ([[def-derivative]]) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\n[[def-derivative]] means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-rpm-lad-effective-equation",
+          "source_section": "Postulate",
+          "quote": "Restrict [[def-rpm-charge-spin-model]] to its flat affine Minkowski branch, with signature $(-,+,+,+)$, proper time $\\tau$ in seconds, future four-velocity $U=dx/d\\tau$ satisfying $\\eta(U,U)=-c^2$, constant primitive $m>0$ in kilograms and nonzero charge $q\\in\\mathbb R$ in coulombs. Let the prescribed external electromagnetic two-form $F$ be $C^2$ on an open neighborhood of the worldline; use the component convention $F_{0i}=-E_i/c$, $F_{ij}=\\epsilon_{ijk}B_k$ of [[def-em-electromagnetic-tensor]]. Let $a:=dU/d\\tau$ and\n\n$$\\alpha:=q/m,\\qquad \\tau_e:=\\frac{q^2}{6\\pi\\epsilon_0mc^3}>0,\\qquad f_0^a:=\\alpha F^a{}_bU^b,$$\n\nwhere $\\epsilon_0=(\\mu_0c^2)^{-1}$ follows [[def-em-si-conventions]]. Adopt the flat LAD effective equation\n\n$$a^a=f_0^a+\\tau_e\\left(\\frac{da^a}{d\\tau}-\\frac{\\eta_{bc}a^ba^c}{c^2}U^a\\right).$$\n\nThe derivative is the ordinary derivative in an inertial affine chart. Its dimensions are consistent: $a$ and $f_0$ are accelerations, the parenthesized term has acceleration per second, and $\\tau_e$ is a time. This is an adopted effective model equation for sufficiently regular curves (at least $C^3$); it is not asserted to be an exact law of nature, a point-source Maxwell construction, or a globally well-posed dynamics. In particular, no existence, uniqueness, stability, or empirical claim is part of this postulate.\n\nAt each proper-time value $\\tau$, define the particle's instantaneous rest frame to be the tuple $(x(\\tau);e_0,e_1,e_2,e_3)$, where $e_0=U(\\tau)/c$ and $(e_1,e_2,e_3)$ is a positively oriented $\\eta$-orthonormal basis of $U(\\tau)^\\perp$. This is a pointwise basis at the event $x(\\tau)$, not one inertial chart along an accelerated curve; the rest-space norm is $\\|v\\|_{\\rm rest}:=\\sqrt{\\eta(v,v)}$ for $v\\in U(\\tau)^\\perp$. Use of the equation as a reduced physical approximation carries the source's qualitative validity qualification that radiation reaction be small relative to the applied Lorentz force in this instantaneous rest frame. This postulate neither asserts that condition for arbitrary $F$ nor supplies a numerical threshold; the qualification is not used to deduce the local ODE results or the force-free counterexample.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-rpm-ll-reduced-ode",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented, time-oriented affine Minkowski space of dimension four with signature $(-,+,+,+)$, and fix an inertial chart $(x^0,x^1,x^2,x^3)$ with $x^0=ct$, $c>0$. Let $O\\subseteq A$ be open and let $F$ be a $C^2$ alternating covariant two-tensor on $O$. In this chart write $F^a{}_b:=\\eta^{ac}F_{cb}$ and let $\\partial_b$ denote the coordinate partial derivative. Fix constants $\\alpha\\in\\mathbb R$ and $\\tau_e\\geq0$. For every $U\\in V$, define\n\n$$\\Pi_U{}^a{}_b:=\\delta^a_b+\\frac{U^aU_b}{c^2},\\qquad f_0^a(x,U):=\\alpha F^a{}_b(x)U^b,$$\n\n$$B^a(x,U):=\\alpha(\\partial_bF^a{}_c)(x)U^bU^c +\\alpha^2F^a{}_b(x)F^b{}_c(x)U^c, \\qquad a_{\\rm LL}^a(x,U):=f_0^a(x,U)+\\tau_e\\Pi_U{}^a{}_bB^b(x,U).$$\n\nFor the physical interpretation, $x^a$ are in metres, $\\tau$ is in seconds, $c$ is in metres per second, $U$ is in metres per second, $\\alpha=q/m$, and $\\tau_e$ is a time. Here a **proper-time parameter** means that the parameter is measured in seconds and the four-velocity is normalized by $\\eta(U,U)=-c^2$; define the future unit shell by $\\mathcal S^+:=\\{U\\in C^+:\\eta(U,U)=-c^2\\}$. For each initial datum $(x_0,U_0)\\in O\\times V$ with $U_0\\in\\mathcal S^+$, the system\n\n$$\\frac{dx^a}{d\\tau}=U^a,\\qquad \\frac{dU^a}{d\\tau}=a_{\\rm LL}^a(x,U),\\qquad (x(0),U(0))=(x_0,U_0)$$\n\nhas a unique local solution on an open proper-time interval about $0$. Along that interval $\\eta(U,U)=-c^2$ and $U$ remains future directed. This is a local ODE statement: it makes no claim of global existence for arbitrary $F$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The integral defining $x$ is well-defined on every compact $\\tau$ interval because $U$ is smooth by [F2]. The fundamental theorem [F2] gives $\\dot x=U$. By [F1], $\\eta(U,U)=c^2(-\\cosh^2\\theta+\\sinh^2\\theta)=-c^2$. Also $U^0=c\\cosh\\theta>0$, so $U$ is future directed in the chosen inertial chart. Thus $\\tau$ is proper time and $x$ is future timelike.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating with [F1, F2] gives $$a=c\\theta'(\\sinh\\theta,\\cosh\\theta,0,0),\\qquad \\dot a=c\\theta''(\\sinh\\theta,\\cosh\\theta,0,0)+c(\\theta')^2(\\cosh\\theta,\\sinh\\theta,0,0), \\qquad \\eta(a,a)=c^2(\\theta')^2.$$ Consequently $\\dot a-\\eta(a,a)U/c^2=c\\theta''(\\sinh\\theta,\\cosh\\theta,0,0)$, and the force-free equation [F3] is equivalent to $\\theta'=\\tau_e\\theta''$. The chosen $\\theta$ has $\\theta'=Ae^{(\\tau-\\tau_0)/\\tau_e}$ and $\\theta''=\\theta'/\\tau_e$, so the equation holds identically. This proves that the curve solves the adopted LAD equation for every real proper time.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The invariant $\\eta(a,a)=c^2(\\theta')^2$ gives $\\sqrt{\\eta(a,a)}=c|A|e^{(\\tau-\\tau_0)/\\tau_e}$, which is unbounded toward the future. For $F=0$, [F4] gives $a_{\\rm LL}=0$, hence its local solutions have constant $U$. The displayed LAD solution is non-inertial since $A\\ne0$, so it demonstrates that the force-free LAD equation admits runaway solutions even though the reduced LL force-free field does not. This is an ODE comparison, not an empirical conclusion.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The worldline domain is all real proper time and is nonempty by construction in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The excluded boundary A=0 would give the inertial branch; step 3.1 uses the stated A!=0 to get nonzero growing acceleration."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton cardinality or one-index assertion is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate external field F=0 is the chosen force-free case and is checked in steps 2.1 and 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 defines the curve for every real proper time; no finite endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The explicit formula in step 1.1 fixes the entire solution and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement refuted \u2014 Force-free runaway solution of the LAD equation: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. Zero external field is the stipulated LAD branch, tau_e is positive and rapidity amplitude A is nonzero. The smooth all-time solution has exponential unbounded proper acceleration; the comparison concerns adopted ODEs only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement refuted \u2014 Force-free runaway solution of the LAD equation: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. Zero external field is the stipulated LAD branch, tau_e is positive and rapidity amplitude A is nonzero. The smooth all-time solution has exponential unbounded proper acceleration; the comparison concerns adopted ODEs only."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Independently checked all three steps and all ten direct supplier interfaces. The explicit rapidity theta=theta0+A tau_e exp((tau-tau0)/tau_e) is smooth at every finite real proper time. Hyperbolic identity normalizes U, cosh positivity puts U in the future cone, and componentwise FTC constructs x on all finite intervals including reversed integration limits. Differentiation gives dot a-eta(a,a)U/c^2=c theta double prime (sinh theta,cosh theta,0,0); theta prime=tau_e theta double prime exactly solves force-free LAD. eta(a,a)=c^2 A^2 exp(2(tau-tau0)/tau_e), so nonzero A of either sign gives unbounded proper acceleration; A=0 is the excluded inertial branch. LL has f0=B=0. Checked tau_e,c>0 and no finite endpoint/choice issue; all-time smoothness does not assert bounded quantities at infinity. Equation-level counterexample is conditional on the adopted model and intentionally does not invoke the small-radiation physical approximation caveat. Zhang Appendix A matches the rapidity reduction after convention conversion. Refreshed F3 contract quotation to the unchanged equation in the current Postulate."
+      }
+    }
+  }
+}

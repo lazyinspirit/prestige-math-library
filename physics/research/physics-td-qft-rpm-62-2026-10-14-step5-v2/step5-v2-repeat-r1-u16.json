@@ -1,0 +1,187 @@
+{
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "16",
+  "input_sha256": "aba240f57e51ec5f6d8384509f57660ada7ed8d033fdd08d44b54447b4ae7505",
+  "decisions": [
+    {
+      "id": "rem-td-local-equilibrium-branch",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "e66fed1322547a2ee9bd9946d3309ad1d62cd6741654582fd74912149df8f63f",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The final sentence universally excludes global equilibrium whenever any of T, rho or u is nonconstant. In a bounded box in uniform Newtonian gravity, the adopted canonical equilibrium density on position and momentum is proportional to exp[-beta(|p|^2/(2M)+Mgh)], beta=1/(k_B T)>0. Integrating over momentum leaves rho(h) proportional to exp[-beta Mgh], which is nonconstant for M,g>0, while T is constant and the mean velocity vanishes by oddness. This is a conditional equilibrium model, not an observation. The repair preserves all local fields and comparison-cell criteria and replaces the false exclusion with the need for an explicit whole-system equilibrium criterion.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S1.html",
+        "https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S2.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-td-local-equilibrium-profile",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "0ac987ff858ead8bab640e606d203a32aa82301e661e986f36b85677271b6636",
+      "outcome": "false_positive",
+      "reason": "The actual current supplier explicitly requires continuous first spatial and time partial derivatives of z components in its first paragraph, supporting F1. Its following paragraphs explicitly define A_a, the entropy-maximizing E_a and a supplied q(a) in E_a, supporting F2. The example independently checks its maximizer by s(a,0)-s(a,y)=y^2, so neither premise alleged to be missing is missing. This decision does not dismiss the separate scalar/vector convention defect or the F3/contract updates required after the supplier repair; those are reported separately for native owner continuation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rem-td-local-equilibrium-branch",
+      "disposition": "repaired",
+      "post_sha256": "ee1db46139244835e6d5b3385245efcf5350601ac1b609631014a7d0fcd26893",
+      "review_context_sha256": "773d26676cd95b3694d8e13416e77df73e6c4800cc939f6c495f80009951f3c5",
+      "reason": "Reviewed the current Remark and its actual mathematical definitions: fields are C1 components on the stated open space-time domain, constrained entropy maximizers are explicitly defined, and q is supplied with attainment rather than constructed by choice. Only the false whole-system equilibrium exclusion was changed. The local model and no-dynamics/no-empirical-identification qualifications remain intact. This is the adjudicator's own repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S1.html",
+        "https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S2.html"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-td-local-equilibrium-profile",
+      "disposition": "unaffected",
+      "post_sha256": "0f3184b6e3d8142812c1822fe2558616fb1401ea12d0cf7fde61c508f9d6d6d9",
+      "review_context_sha256": "64700507c0176bc47e18c8c63b0e2c0b7880afcda027e006f09d5a4fa2542029",
+      "reason": "F1 and F2 accurately describe the current supplier: its C1 component condition and constrained entropy-maximizer definition are explicit and unchanged. Under the intended scalar/one-coordinate identification, the affine temperature is positive and has difference Theta_0 alpha/2 at the chosen points, while the cell entropy difference y^2 proves E_a={(a,0)} without choice. The item guard equals the assigned before guard and no item edit was made. The separate missing explicit identification and supplier-induced F3/contract citation defects are recorded OPEN in ledger_updates and downstream_details for native owner continuation; this review does not certify their closure.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "rem-td-transport-branch",
+    "ex-td-local-equilibrium-profile"
+  ],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "rem-td-local-equilibrium-branch",
+      "status": "fixed",
+      "finding": "Global equilibrium was incorrectly excluded by nonconstancy of any local field.",
+      "evidence": "For a confined canonical ideal gas in a uniform gravitational field, the positive height-dependent density is a normalizable equilibrium marginal while temperature is constant and velocity mean is zero. The final Remark paragraph now requires an explicit whole-system criterion instead.",
+      "source_urls": [
+        "https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S1.html",
+        "https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S2.html"
+      ],
+      "uncertain": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-td-local-equilibrium-profile",
+      "status": "open",
+      "finding": "Separate from the false-positive rejected tuple: the one-coordinate parameter convention is implicit, and the supplier repair invalidates F3 and exact contract quotations.",
+      "affected_use": "Example identifies Z=(0,infinity) with a subset of the function space R^1, but A1 treats it as a subset of R; z,C and c are written as scalars. F3 retains the removed whole-system exclusion. The contract checker reports citation-quote-mismatch for F2 and F3.",
+      "invalidated_claim": "Literal agreement of parameter types with the supplier and fidelity of F3 and its contract quotation. The constrained entropy difference and temperature difference calculations are correct under the intended canonical identification.",
+      "minimality": "Explicitly identify each real a with the function {0}->R sending 0 to a, consistently for Z,z,C,c; replace F3 with the corrected supplier qualification and update the affected contract quotes. No change to the claimed positive nonconstant profile, entropy model or physical_scope is needed.",
+      "routing": "Native frontier owner continuation after this false-positive read-only item review; do not close the wave until these separately recorded repairs are completed.",
+      "source_urls": [],
+      "uncertain": false
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "status": "no_published_consumer_finding",
+      "reason": "The complete current item/library search found only the draft transport remark and assigned draft example as direct item consumers, plus their draft home pages. No published consumer requiring maintenance was found."
+    }
+  ],
+  "repair_notes": {
+    "state": "Supplier repaired and reviewed; original example rejection adjudicated false positive. Separate consumer convention, fact and contract work is explicitly referred to the controller; no closure or independent acceptance claimed.",
+    "source_reading": "Read Tong section 1.3 through the canonical probability formula (1.22), with the heat-reservoir and Taylor-approximation hypotheses, and section 2.1 through classical phase-space formula (2.49). The gravitational marginal calculation is performed here, not attributed as an explicit example in Tong. The existing Likharev PDF URL timed out; no retrieval or reading of that PDF is claimed.",
+    "next_action": "Controller must schedule the separate consumer convention/F3/contract repair before certification. No uncertainty, new prerequisites, published repairs, gate diagnostics or further interface hops were found in this dispatch.",
+    "changed_files": [
+      "items/rem-td-local-equilibrium-branch.md"
+    ],
+    "unchanged_assigned_items": [
+      "ex-td-local-equilibrium-profile"
+    ],
+    "interface_comparison": "Only the final Remark paragraph changed: the universal assertion that nonconstant T, rho or u cannot describe global equilibrium was replaced by the requirement for a whole-system equilibrium criterion. All field, cell-state, entropy, constraint and q definitions and physical_scope are byte-preserved. This physics public-claim change seeds exactly the two direct item consumers listed in downstream.",
+    "source_evidence": "For the counterexample take a rectangular box (0,A)x(0,B)x(0,H), A,B,H>0 in metre coordinates, p in R^3 in kg m s^-1, particle mass M>0 kg, g>0 m s^-2, and T>0 K. Adopt the canonical equilibrium density proportional to exp[-beta(|p|^2/(2M)+Mgh)] relative to position-momentum volume, with beta=1/(k_B T), k_B>0 J K^-1. The momentum Gaussian is integrable and the box is bounded, so normalization is finite and positive. Integrating momentum gives rho(h)=C exp[-beta Mgh] for C>0 in kg m^-3, a smooth nonconstant profile; odd momentum moments vanish. This is a conditional model counterexample, with no empirical premise. Tong supplies the canonical prescription and classical Hamiltonian measure, not this particular gravitational calculation.",
+    "consumer_search": "Searched the current items and library for both assigned IDs and inspected all matches; rem-td-local-equilibrium-branch has no aliases. No other direct item consumer or reference was found. The example has no item consumers.",
+    "scope_rule": "The explicit instruction Do not edit false-positive items prevents editing the unchanged example for its separately found convention issue or the newly stale F3. Both remain explicit native frontier follow-up obligations, not fabricated repairs or uncertainty. No other lane or published carrier was edited.",
+    "focused_checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/rem-td-local-equilibrium-branch.md items/ex-td-local-equilibrium-profile.md",
+        "exit_code": 0,
+        "result": "PASS example (direct); 1 checked, 0 failing. The remark has no proof-like section."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/rem-td-local-equilibrium-branch.md items/ex-td-local-equilibrium-profile.md --json",
+        "exit_code": 0,
+        "result": {
+          "errors": [],
+          "warnings": [],
+          "checked": 2
+        }
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-td-qft-rpm-62-2026-10-14-batch-16.proof-contracts.json --items ex-td-local-equilibrium-profile --strict --json",
+        "exit_code": 1,
+        "result": {
+          "ok": false,
+          "errors": [
+            {
+              "code": "citation-quote-mismatch",
+              "id": "ex-td-local-equilibrium-profile",
+              "message": "F2 quote does not occur in rem-td-local-equilibrium-branch's Remark"
+            },
+            {
+              "code": "citation-quote-mismatch",
+              "id": "ex-td-local-equilibrium-profile",
+              "message": "F3 quote does not occur in rem-td-local-equilibrium-branch's Remark"
+            }
+          ],
+          "warnings": []
+        },
+        "disposition": "Recorded for the explicitly referred native consumer continuation; no false claim of a passing contract check."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/rem-td-local-equilibrium-branch.md",
+        "exit_code": 0,
+        "result": "proof-layout: 1 items, 0 steps, 0 defects"
+      }
+    ]
+  },
+  "downstream_details": [
+    {
+      "id": "rem-td-transport-branch",
+      "supplier": "rem-td-local-equilibrium-branch",
+      "path": "items/rem-td-transport-branch.md",
+      "affected_use": "The opening of Remark says to use the fields and local-equilibrium regime of rem-td-local-equilibrium-branch; the remainder specifies Fourier and diffusion constitutive maps.",
+      "invalidated_claim": null,
+      "disposition": "examined_unaffected",
+      "reason": "The used field domains, units, spatial regularity and local comparison-state convention are unchanged. No argument invokes the removed assertion that every nonconstant field excludes global equilibrium. Its conditional constitutive scope and requirement of additional balance and boundary data remain sound. No interface change or further hop is necessary."
+    },
+    {
+      "id": "ex-td-local-equilibrium-profile",
+      "supplier": "rem-td-local-equilibrium-branch",
+      "path": "items/ex-td-local-equilibrium-profile.md",
+      "affected_use": "Facts F1/F2 use the unchanged C1 and constrained entropy-maximization definitions. F3 repeats the old universal no-global-equilibrium conclusion, and Verification 2.1 cites F3 for its weaker need-not conclusion. The owning contract quotes the entire old Remark for F2 and the removed sentence for F3.",
+      "invalidated_claim": "F3 no longer faithfully restates the supplier; the two contract quotations no longer occur in the current Remark. The positive nonconstant profile and constrained-cell maximizer calculations are unaffected.",
+      "disposition": "requires_native_owner_continuation",
+      "minimality": "Change F3 to the corrected local-versus-whole-system limitation and align the final qualification without altering the profile or cell maximization. Refresh only the affected F2/F3 supplier quotations and excerpts in the owning contract. Separately state the canonical scalar-to-one-coordinate identification already intended by Z,z,C,c. This dispatch must leave the false-positive item unchanged."
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/thermodynamics/td-irreversible-boundaries.md",
+      "disposition": "unaffected",
+      "reason": "The page says these branches need their own state spaces, dynamics, constitutive inputs and empirical qualifications. It asserts no global-equilibrium exclusion and remains consistent with the repair."
+    },
+    {
+      "path": "library/thermodynamics/td-irreversible-boundaries-examples.md",
+      "disposition": "unaffected",
+      "reason": "The page says continuum examples retain explicit model inputs. Neither the repaired supplier limitation nor the remaining example convention issue changes that account."
+    }
+  ],
+  "supporting_evidence": {
+    "research/physics-td-qft-rpm-62-2026-10-14-batch-16-step5-context.json": "f7068a8f9b77764098bb583a6e1abdef9fd993bcd0a3e4c7303733c01c63d29e"
+  }
+}

@@ -1,0 +1,542 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qft-involutive-algebra-state",
+    "lem-qft-positive-state-cauchy-schwarz",
+    "thm-qft-algebraic-gns-domain",
+    "lem-qft-state-symmetry-implementer",
+    "cex-qft-nonregular-weyl-state"
+  ],
+  "contracts": {
+    "def-qft-involutive-algebra-state": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A specified unit 1_A is part of the definition, so the empty algebra is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition gives no assertion about a zero element or zero value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: state normalization is the condition omega(1_A)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition makes no nondegeneracy assertion about a pairing."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint appears in this algebraic definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition makes no construction requiring a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Definition of Unital star algebra and positive normalized state: A **unital complex star algebra** is a complex vector space $A$ with a complex-bilinear associative product $(a,b)\\mapsto ab$, a specified unit $1_A$, and a conjugate-linear map $a\\mapsto a^*$ such that, for all $a,b\\in A$, $$ (ab)^*=b^*a^*,\\qquad (a^*)^*=a,\\qquad 1_A^*=1_A. $$ A **positive normalized state** on $A$ is a complex-linear functional $\\omega:A\\to\\mathbb C$ such that $\\omega(1_A)=1$ and $\\omega(a^*a)$ is a real nonnegative number for every $a\\in A$. This is an algebraic definition: no norm, topology, boundedness condition, or completion is part of the data. The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Definition of Unital star algebra and positive normalized state: A **unital complex star algebra** is a complex vector space $A$ with a complex-bilinear associative product $(a,b)\\mapsto ab$, a specified unit $1_A$, and a conjugate-linear map $a\\mapsto a^*$ such that, for all $a,b\\in A$, $$ (ab)^*=b^*a^*,\\qquad (a^*)^*=a,\\qquad 1_A^*=1_A. $$ A **positive normalized state** on $A$ is a complex-linear functional $\\omega:A\\to\\mathbb C$ such that $\\omega(1_A)=1$ and $\\omega(a^*a)$ is a real nonnegative number for every $a\\in A$. This is an algebraic definition: no norm, topology, boundedness condition, or completion is part of the data. The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ]
+    },
+    "lem-qft-positive-state-cauchy-schwarz": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qft-involutive-algebra-state",
+          "source_section": "Definition",
+          "quote": "A **positive normalized state** on $A$ is a complex-linear functional $\\omega:A\\to\\mathbb C$ such that $\\omega(1_A)=1$ and $\\omega(a^*a)$ is a real nonnegative number for every $a\\in A$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Put $X:=\\omega(a^*b)$ and $Y:=\\omega(b^*a)$. Positivity makes both $q(a+b)=q(a)+X+Y+q(b)$ and $q(a+ib)=q(a)+iX-iY+q(b)$ real; their imaginary parts give $\\operatorname{Im}(X+Y)=0$ and $\\operatorname{Re}(X-Y)=0$, hence $Y=\\overline X$. Thus $(a,b)_\\omega=\\omega(b^*a)$ is Hermitian.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Suppose $q(b)>0$. For every $z\\in\\mathbb C$, positivity and the star-algebra laws give $0\\le q(a+zb)=q(a)+zX+\\overline z\\,\\overline X+|z|^2q(b)$. Taking $z=-\\overline X/q(b)$ yields $0\\le q(a)-|X|^2/q(b)$, so $|\\omega(b^*a)|^2=|Y|^2=|X|^2\\le q(a)q(b)$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Suppose $q(b)=0$. If $X\\ne0$, taking $z=-t\\overline X$ for real $t>q(a)/(2|X|^2)$ makes $q(a+zb)=q(a)-2t|X|^2<0$, contradicting positivity. Hence $X=Y=0$, so the same Cauchy–Schwarz inequality holds when $q(b)=0$; if instead $q(a)=0$ and $q(b)>0$, step 2.1 forces $Y=0$ as well.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "If $a\\in N_\\omega$, steps 2.1 and 3.1 give $(a,b)_\\omega=0$ for every $b\\in A$; conversely $(a,a)_\\omega=0$ means $a\\in N_\\omega$. Thus $N_\\omega$ is exactly the radical and is a linear subspace. For $c\\in A$, set $d:=c^*ca$. Applying Cauchy–Schwarz to $a,d$ gives $|\\omega(d^*a)|^2\\le q(a)q(d)=0$, while $d^*a=a^*c^*ca=(ca)^*(ca)$; therefore $ca\\in N_\\omega$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A unital algebra contains 1_A, so it is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats q(b)=0 and step 4.1 identifies the radical."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the positive-norm case; with a=b=1_A normalization gives equality."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the zero-norm case without dividing by q(b)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint occurs in this algebraic inequality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses algebra and scalar inequalities, not a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 4.1: Null-state elements are precisely the sesquilinear radical: Cauchy–Schwarz annihilates all pairings, while the self-pairing recovers q(a)=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 4.1: Null-state elements are precisely the sesquilinear radical: Cauchy–Schwarz annihilates all pairings, while the self-pairing recovers q(a)=0."
+        }
+      ]
+    },
+    "thm-qft-algebraic-gns-domain": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qft-positive-state-cauchy-schwarz",
+          "source_section": "Statement",
+          "quote": "The form $(a,b)_\\omega:=\\omega(b^*a)$ is Hermitian and positive semidefinite, $N_\\omega$ is its radical and a complex linear subspace, and $N_\\omega$ is a left ideal: $c a\\in N_\\omega$ whenever $a\\in N_\\omega$ and $c\\in A$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-completion-of-an-inner-product-space-is-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ be a real or complex inner-product space and let $(\\widehat X,\\kappa)$ be its norm completion ([[def-completion-of-a-normed-space]]). Then $\\widehat X$ carries a unique inner product that extends the given one along $\\kappa$ and whose induced length is the completion norm; with it $\\widehat X$ is a Hilbert space, and the extension is unique among inner products that extend the given pairing and induce the completion norm.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "By [F1], $N_\\omega$ is a subspace and every element of it pairs to zero with every element of $A$. Thus $([a],[b])_\\omega=\\omega(b^*a)$ is independent of both representatives; it is Hermitian and nonnegative, and $([a],[a])_\\omega=0$ holds exactly when $a\\in N_\\omega$, so the quotient pairing is positive definite.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "For $a,b\\in A$, replacing $b$ by $b+n$ with $n\\in N_\\omega$ changes $ab$ by $an\\in N_\\omega$ because $N_\\omega$ is a left ideal by [F1]; hence $\\pi_\\omega(a)[b]=[ab]$ is well defined. Bilinearity, associativity and $1_A$ give $\\pi_\\omega(a+b)=\\pi_\\omega(a)+\\pi_\\omega(b)$, $\\pi_\\omega(\\lambda a)=\\lambda\\pi_\\omega(a)$, $\\pi_\\omega(ab)=\\pi_\\omega(a)\\pi_\\omega(b)$ and $\\pi_\\omega(1_A)=I_{\\mathcal D_\\omega}$, and left multiplication keeps $\\mathcal D_\\omega$ invariant.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Apply [F2] to the quotient inner-product space $\\mathcal D_\\omega$; under the stated Countable Choice assumption this gives the Hilbert completion $H_\\omega$ and a dense isometric embedding of $\\mathcal D_\\omega$, which we identify with its image. This is the only completion invoked.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "For $a,b,c\\in A$, the quotient form gives $(\\pi_\\omega(a)[b],[c])_\\omega=\\omega(c^*ab)=([b],\\pi_\\omega(a^*)[c])_\\omega$. By the definition of the Hilbert-space adjoint, this identity for all $[b]\\in\\mathcal D_\\omega$ shows $[c]\\in D(\\pi_\\omega(a)^*)$ and $\\pi_\\omega(a)^*[c]=\\pi_\\omega(a^*)[c]$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Since $([1_A],[1_A])_\\omega=\\omega(1_A)=1$, $\\Omega_\\omega$ is a unit vector. Also $\\pi_\\omega(a)\\Omega_\\omega=[a]$ for every $a\\in A$, so its algebraic orbit is exactly $\\mathcal D_\\omega$ and is dense. Finally $(\\pi_\\omega(a)\\Omega_\\omega,\\Omega_\\omega)_\\omega=([a],[1_A])_\\omega=\\omega(a)$, recovering the state.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "Let $(H',\\mathcal D',\\rho,\\Omega')$ be another algebraically cyclic *-representation of $A$ with common invariant dense domain $\\mathcal D'=\\rho(A)\\Omega'$, $\\rho(a^*)=\\rho(a)^*|_{\\mathcal D'}$, and $\\omega(a)=(\\rho(a)\\Omega',\\Omega')$. Define $U[a]:=\\rho(a)\\Omega'$. If $[a]=[0]$, then $\\|\\rho(a)\\Omega'\\|^2=\\omega(a^*a)=0$, so $U$ is well defined; and for $a,b\\in A$, $(U[a],U[b])=\\omega(b^*a)=([a],[b])_\\omega$ by the representation's adjoint identity. Thus $U$ is an isometry from $\\mathcal D_\\omega$ onto the dense subspace $\\mathcal D'$.",
+          "step": "2.4",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "D7",
+          "claim": "Suppose $x_n\\in\\mathcal D_\\omega$, $x_n\\to0$ in $H_\\omega$, and $\\pi_\\omega(a)x_n\\to y$ in $H_\\omega$. For each $z\\in\\mathcal D_\\omega$, step 2.2 gives $(y,z)_\\omega=\\lim_n(\\pi_\\omega(a)x_n,z)_\\omega=\\lim_n(x_n,\\pi_\\omega(a^*)z)_\\omega=0$. Density forces $y=0$. Therefore the closed graph relation of $\\pi_\\omega(a)$ contains no two distinct outputs over one input: their difference would be a nonzero pair $(0,y)$. The graph closure is a graph, so $\\pi_\\omega(a)$ is closable. In particular, if $a=a^*$ then $\\pi_\\omega(a)$ is symmetric on $\\mathcal D_\\omega$; this does not prove essential self-adjointness.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "given"
+          ]
+        },
+        {
+          "id": "D8",
+          "claim": "The isometry extends uniquely from the dense domain to a unitary $\\overline U:H_\\omega\\to H'$ because its range $\\mathcal D'$ is dense. It sends $\\Omega_\\omega$ to $\\Omega'$ and, for $[b]\\in\\mathcal D_\\omega$, $\\overline U\\pi_\\omega(a)[b]=\\rho(ab)\\Omega'=\\rho(a)\\overline U[b]$; hence it intertwines the representations on the common domains. Uniqueness follows because every vector of $\\mathcal D_\\omega$ has the form $\\pi_\\omega(a)\\Omega_\\omega$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.3",
+            "step 2.4",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.3 gives norm squared of [1_A] equal to omega(1_A)=1, excluding an empty/zero cyclic Hilbert space. The family wording detected is the explicitly assumed Countable Choice axiom, not an empty algebra input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 quotients exactly by N_omega and proves the induced form is positive definite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.3 proves Omega_omega has norm one from omega(1_A)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 removes precisely the radical before forming the inner-product space."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem has no interval or endpoint hypothesis."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes AC_omega, and step 2.1 invokes the Hilbert-completion supplier under that premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of GNS Hilbert reconstruction with invariant operator domain: Let $A$ be a complex vector space with a complex-bilinear associative product, unit $1_A$, and conjugate-linear involution satisfying $(ab)^*=b^*a^*$, $(a^*)^*=a$ and $1_A^*=1_A$. Let $\\omega:A\\to\\mathbb C$ be complex-linear with $\\omega(1_A)=1$ and real nonnegative $\\omega(a^*a)$ for every $a\\in A$. Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$: every countable family of nonempty sets has a choice function. Put $N_\\omega:=\\{a\\in A:\\omega(a^*a)=0\\}$ and $\\mathcal D_\\omega:=A/N_\\omega$, with $$([a],[b])_\\omega:=\\omega(b^*a),$$ using the first-variable-linear convention. Let $H_\\omega$ be the Hilbert completion of this inner-product space, and identify $\\mathcal D_\\omega$ with its canonical dense imag The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of GNS Hilbert reconstruction with invariant operator domain: Let $A$ be a complex vector space with a complex-bilinear associative product, unit $1_A$, and conjugate-linear involution satisfying $(ab)^*=b^*a^*$, $(a^*)^*=a$ and $1_A^*=1_A$. Let $\\omega:A\\to\\mathbb C$ be complex-linear with $\\omega(1_A)=1$ and real nonnegative $\\omega(a^*a)$ for every $a\\in A$. Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$: every countable family of nonempty sets has a choice function. Put $N_\\omega:=\\{a\\in A:\\omega(a^*a)=0\\}$ and $\\mathcal D_\\omega:=A/N_\\omega$, with $$([a],[b])_\\omega:=\\omega(b^*a),$$ using the first-variable-linear convention. Let $H_\\omega$ be the Hilbert completion of this inner-product space, and identify $\\mathcal D_\\omega$ with its canonical dense imag The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "finite_smoke": [
+        {
+          "check": "gns-cyclic-c2-boundaries",
+          "asserts": "The vector $\\Omega_\\omega:=[1_A]$ is a unit cyclic vector",
+          "model_scope": "Only bounded finite group algebra C[C2] normalized states phi(e)=1, phi(s)=q/4, represented by the registry a=4 slice after rescaling by1/4, apply to this normalized theorem. The Gram eigenvalues/rank and cyclic point-vector norm test the finite quotient/cyclic-vector boundary examples.",
+          "limitations": "The registry also runs supplementary unnormalized and domination/purity calculations; these are not claimed to test this theorem. No assertion of checking general star algebras, unbounded operator adjoints, closability, Hilbert completion or Countable Choice is made."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-34",
+        "notes": "Independently checked all eight proof steps and exact F1/F2 supplier Statements and proofs. First-variable-linear convention is consistent. Cauchy–Schwarz includes zero norms; the radical removes precisely null vectors and is a left ideal, so pairing and multiplication descend. AC_omega is stated and supplies completion and countable approximants for the metric graph-closure and isometry-extension arguments; no arbitrary basis or full Choice is used. The adjoint identity holds on the dense invariant domain. For closability, every graph-limit pair (0,y) annihilates that domain, hence y=0; linearity of the graph closure then gives a single-valued operator. The cyclic vector has norm one, excluding a zero representation. Equality of recovered states makes the comparison map an isometry onto the second algebraic cyclic domain; extension is onto by completeness and density, and intertwining plus cyclicity forces uniqueness. Checked Fewster–Rejzner Theorem 10 and complete construction (§2.3), and Schmüdgen Lemma 4.35, Proposition 4.36 and Theorem 4.38 with proofs (§4.4, pp.78–80, full-text mirror recorded in batch coverage). No boundedness or essential self-adjointness is inferred. Reader/refuter identify no defect here. The finite C[C2] smoke check is only a boundary example, not evidence for arbitrary unbounded operators. No repair needed."
+      }
+    },
+    "lem-qft-state-symmetry-implementer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qft-algebraic-gns-domain",
+          "source_section": "Statement",
+          "quote": "For each $a\\in A$ define left multiplication on the common domain $\\mathcal D_\\omega$ by $\\pi_\\omega(a)[b]:=[ab]$. Then $\\pi_\\omega$ is a unital algebra representation of $A$ on the invariant dense domain $\\mathcal D_\\omega$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "If $n\\in N_\\omega$, then $\\omega((\\alpha_g n)^*\\alpha_g n)=\\omega(\\alpha_g(n^*n))=\\omega(n^*n)=0$, so $\\alpha_g(N_\\omega)\\subseteq N_\\omega$. Applying the same argument to $g^{-1}$ gives equality. For $a,b\\in A$, $([\\alpha_g(a)],[\\alpha_g(b)])_\\omega=\\omega(\\alpha_g(b^*a))=\\omega(b^*a)$, so $[a]\\mapsto[\\alpha_g(a)]$ is an isometry on $\\mathcal D_\\omega$ with inverse induced by $\\alpha_{g^{-1}}$; it extends uniquely to a unitary $U_g$ on $H_\\omega$. The action law gives $U_gU_h=U_{gh}$, and $U_g\\Omega_\\omega=\\Omega_\\omega$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "given"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "For $[b]\\in\\mathcal D_\\omega$, $U_g\\pi_\\omega(a)U_g^{-1}[b]=U_g[a\\alpha_{g^{-1}}(b)]=[\\alpha_g(a)b]=\\pi_\\omega(\\alpha_g(a))[b]$, using the representation rule and multiplicativity of $\\alpha_g$. This is the claimed covariance identity on the common domain.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "For $a\\in A$, state invariance and the quotient inner product give $\\|U_g[a]-[a]\\|^2=2\\omega(a^*a)-\\omega(a^*\\alpha_g(a))-\\omega((\\alpha_g(a))^*a)$. The first cross term tends to $\\omega(a^*a)$ as $g\\to e$ by [A2]. For the second, invariance gives $\\omega((\\alpha_g(a))^*a)=\\omega(\\alpha_{g^{-1}}((\\alpha_g(a))^*a))=\\omega(a^*\\alpha_{g^{-1}}(a))$, which also tends to $\\omega(a^*a)$ by [A2] and continuity of inversion. Thus $U_g[a]\\to[a]$ for every $[a]\\in\\mathcal D_\\omega$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Let $\\xi\\in H_\\omega$ and $\\varepsilon>0$. Choose $y\\in\\mathcal D_\\omega$ with $\\|\\xi-y\\|<\\varepsilon/3$. Since each $U_g$ is unitary, $\\|U_g\\xi-\\xi\\|\\le2\\|\\xi-y\\|+\\|U_gy-y\\|$; step 2.2 makes the last term less than $\\varepsilon/3$ for $g$ sufficiently near $e$. Hence every orbit is continuous at $e$. For any $g_0\\in G$, $\\|U_g\\xi-U_{g_0}\\xi\\|=\\|U_{g_0^{-1}g}\\xi-\\xi\\|$, so continuity of multiplication transfers continuity to $g_0$. The unitary representation is strongly continuous on all of $G$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The topological group has an identity e, hence is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 preserves N_omega using both g and g^{-1}; step 2.2 establishes continuity at e on the dense quotient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives U_e=I and fixes Omega_omega."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves alpha_g(N_omega)=N_omega, so the quotient action is well defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Continuity is on a topological group, not a closed interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement explicitly carries AC_omega from the GNS supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of State-preserving symmetries implemented unitarily: Assume Countable Choice $\\mathrm{AC}_\\omega$, the hypothesis of [[thm-qft-algebraic-gns-domain]]. Let $G$ be a topological group with identity $e$. Let $A$ be a unital complex star algebra with positive normalized state $\\omega$, and let $\\alpha:G\\to\\operatorname{Aut}^*(A)$ be a group action: each $\\alpha_g$ is a bijective complex-linear map preserving product, unit and involution, with $\\alpha_e=\\mathrm{id}$ and $\\alpha_g\\alpha_h=\\alpha_{gh}$. Suppose $\\omega(\\alpha_g(a))=\\omega(a)$ for all $g\\in G$ and $a\\in A$. Also suppose that, for every $a,b\\in A$, the coefficient function $g\\mapsto\\omega(b^*\\alpha_g(a))$ is continuous at $e$. Use the GNS representation from [[thm-qft-algebraic-gns-domain]], with common d The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of State-preserving symmetries implemented unitarily: Assume Countable Choice $\\mathrm{AC}_\\omega$, the hypothesis of [[thm-qft-algebraic-gns-domain]]. Let $G$ be a topological group with identity $e$. Let $A$ be a unital complex star algebra with positive normalized state $\\omega$, and let $\\alpha:G\\to\\operatorname{Aut}^*(A)$ be a group action: each $\\alpha_g$ is a bijective complex-linear map preserving product, unit and involution, with $\\alpha_e=\\mathrm{id}$ and $\\alpha_g\\alpha_h=\\alpha_{gh}$. Suppose $\\omega(\\alpha_g(a))=\\omega(a)$ for all $g\\in G$ and $a\\in A$. Also suppose that, for every $a,b\\in A$, the coefficient function $g\\mapsto\\omega(b^*\\alpha_g(a))$ is continuous at $e$. Use the GNS representation from [[thm-qft-algebraic-gns-domain]], with common d The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ]
+    },
+    "cex-qft-nonregular-weyl-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qft-algebraic-gns-domain",
+          "source_section": "Statement",
+          "quote": "For each $a\\in A$ define left multiplication on the common domain $\\mathcal D_\\omega$ by $\\pi_\\omega(a)[b]:=[ab]$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Bilinearity of $\\sigma$ gives $\\sigma(f,g)+\\sigma(f+g,h)=\\sigma(g,h)+\\sigma(f,g+h)$, so the phase factors in $(W(f)W(g))W(h)$ and $W(f)(W(g)W(h))$ agree. Also $(W(f)W(g))^*=e^{i\\sigma(f,g)/2}W(-f-g)=W(-g)W(-f)$ by alternation, and $W(0)$ is a two-sided unit. Thus the displayed operations define a unital complex star algebra.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "For $a=\\sum_{f\\in F}c_fW(f)$ with finite support $F\\subset S$, the Weyl relation gives $a^*a=\\sum_{f,g\\in F}\\overline{c_f}c_g e^{i\\sigma(f,g)/2}W(g-f)$. Only the terms $g=f$ contribute to $\\omega(a^*a)$, and $\\sigma(f,f)=0$, so $\\omega(a^*a)=\\sum_{f\\in F}|c_f|^2\\ge0$; also $\\omega(W(0))=1$. Hence $\\omega$ is a positive normalized state.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "By [F1], its GNS quotient has dense span of the classes $[W(f)]$. For $f,g\\in S$, $([W(f)],[W(g)])_\\omega=\\omega(W(g)^*W(f))$ is $1$ if $f=g$ and $0$ otherwise; these classes are an orthonormal family with dense span. Left multiplication satisfies $\\pi(W(h))[W(f)]=e^{-i\\sigma(h,f)/2}[W(h+f)]$, so it permutes this orthonormal family with unit-modulus phases and extends to a unitary on the Hilbert completion, with inverse $\\pi(W(-h))$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Fix $v\\in S\\setminus\\{0\\}$ and put $U(t):=\\pi(W(tv))$ for $t\\in\\mathbb R$. Since $\\sigma(tv,sv)=ts\\sigma(v,v)=0$, the Weyl relation gives $U(t)U(s)=U(t+s)$ and $U(0)=I$. For every $t\\ne0$, $U(t)\\Omega=[W(tv)]$ is orthogonal to $\\Omega=[W(0)]$, and both are unit vectors; thus $\\|U(t)\\Omega-\\Omega\\|=\\sqrt2$. This orbit is not continuous at $0$, so $U$ is not strongly continuous.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Suppose a dense linear subspace $E$ had a norm derivative $\\lim_{t\\to0}(U(t)\\xi-\\xi)/t$ for every $\\xi\\in E$. Each such orbit would be continuous at $0$. For any $x\\in H_\\omega$ and $\\varepsilon>0$, choose $\\xi\\in E$ with $\\|x-\\xi\\|<\\varepsilon/3$; unitarity gives $\\|U(t)x-x\\|\\le2\\|x-\\xi\\|+\\|U(t)\\xi-\\xi\\|$, so continuity on $E$ would imply continuity at $0$ for every $x$, contradicting step 3.1 at $x=\\Omega$. Therefore no dense domain supports a norm-differentiable generator for this unitary group. The example is purely algebraic and asserts no physical preparation or relativistic vacuum.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algebra has unit W(0), and S=R^2 is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies omega(W(0))=1; step 3.1 compares t=0 with every t!=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies normalization at W(0)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 fixes v!=0 and shows distinct Weyl basis vectors are orthogonal for t!=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 tests continuity at t=0, the identity of the one-parameter group."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example carries AC_omega because its GNS Hilbert completion uses the GNS supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted assertion is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted assertion is not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "For f!=0, put a=1+iW(f). The Weyl relations give a*a=2+iW(f)-iW(-f), hence omega(a*a)=2.",
+          "result": "2 >= 0",
+          "verifies": "A finite two-term instance of the positivity calculation in step 1.2."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,55 @@
+---
+id: def-rpm-relativistic-coulomb-phase-system
+kind: definition
+title: "Repulsive relativistic Coulomb Hamiltonian phase system"
+status: published
+origin: session
+domain: mathematics
+library: mathematics
+dependency_level: 0
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps:
+  - def-euclidean-inner-product
+  - def-cross-product-in-r3
+  - def-first-order-ode-initial-value-problem-and-solution
+dependency_roles:
+  def-euclidean-inner-product: mathematical-premise
+  def-cross-product-in-r3: mathematical-premise
+  def-first-order-ode-initial-value-problem-and-solution: mathematical-premise
+physical_scope: "Pure mathematical definition of a smooth relativistic phase-space ODE with repulsive inverse-radius potential. It does not identify parameters with measured quantities or assert an electromagnetic model."
+sources:
+  references:
+    - title: "L. D. Landau and E. M. Lifshitz, The Classical Theory of Fields, 3rd revised English edition, §39 and Problem 1"
+      url: "https://pierre.ag.gerard.web.ulb.be/textbooks/books/Landau_Lifshitz_T2.pdf"
+    - title: "Timothy H. Boyer, “Unfamiliar trajectories for a relativistic particle in a Kepler or Coulomb potential,” Am. J. Phys. 72 (2004), arXiv:physics/0405090v1, complete paper"
+      url: "https://arxiv.org/html/physics/0405090v1"
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+---
+
+## Definition
+
+Let $m,c,\kappa>0$, let $x,p\in\mathbb R^3$, and set
+
+$$D:=(\mathbb R^3\setminus\{0\})\times\mathbb R^3,\qquad r:=|x|,\qquad \mathcal E(p):=\sqrt{m^2c^4+c^2|p|^2}.$$
+
+The **repulsive relativistic Coulomb Hamiltonian** is
+
+$$H(x,p):=\mathcal E(p)+\frac{\kappa}{r},$$
+
+and its **phase system** is the autonomous ODE on the open set $D$
+
+$$\dot x=\nabla_pH=\frac{c^2p}{\mathcal E(p)},\qquad \dot p=-\nabla_xH=\frac{\kappa x}{r^3}.$$
+
+Here the system parameter $t$ is time in seconds and dot denotes $d/dt$; $m$ is a positive mass parameter (kilograms in the SI interpretation), $c$ a positive speed parameter (metres per second), and $\kappa$ a positive energy-times-length parameter (joule-metres). Define the radial momentum $p_r:=x\cdot p/r$ and angular-momentum vector $J:=x\times p$. A trajectory is a $C^1$ map $z=(x,p):I\to D$ on a real interval $I$ with nonempty interior, satisfying this ODE in the interval-solution sense of [[def-first-order-ode-initial-value-problem-and-solution]]. A trajectory $\widetilde z:\widetilde I\to D$ **extends** $z$ if $I\subseteq\widetilde I$ and $\widetilde z|_I=z$; it is a **proper extension** if $I\subsetneq\widetilde I$. A trajectory is **maximal** if it has no proper extension as a solution of this same system in $D$. This definition alone asserts neither existence nor uniqueness of maximal trajectories.
+
+This is only a mathematical phase system. Its physical interpretation as a charged particle in an externally prescribed Coulomb field requires separate model assumptions.

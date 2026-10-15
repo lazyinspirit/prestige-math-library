@@ -1,0 +1,99 @@
+{
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "phase": "initial",
+  "round": 1,
+  "unit": "42",
+  "input_sha256": "c7d8a222abea8b2aeaf8ca5059b6b3a3871cdaeeeed41debed66cfc1d833fd32",
+  "decisions": [
+    {
+      "id": "lem-qft-dirac-projection-matrices",
+      "model": "gpt-6-luna",
+      "context_sha256": "93e91b9d7eaebbc793aafcc50eceac71061eca5165106c7a87057b5478ca0f73",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "The imported adjoint definition requires a first-variable-linear pairing, whereas H_D uses a second-variable-linear pairing. F2 now transports through (u,v)_1=<v,u> with unchanged norm and density, and conjugates the defining identity. The existing cutoff test then identifies q=\u00b1omega g and proves the exact maximal self-adjoint domain without changing the Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qft-dirac-fermionic-translation-spectrum",
+      "model": "gpt-6-luna",
+      "context_sha256": "e15b2fec8e86809cd7dd49bf05c37768c2747d01617ef657556f3bbb79dbd1cc",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "For every scalar c, H(c Omega)=0. Step 4.2 proves that all positive-particle sectors have positive energy almost everywhere, including mu=0 off the null apex; hence ker H=C Omega, not a unique vector. The Statement now gives the exact eigenspace and uniqueness of normalized vectors only up to phase. F4 also explicitly transports the first-variable adjoint/PVM suppliers to the second-variable Fock pairing, licensing the unchanged cutoff proofs and domains.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-qft-dirac-projection-matrices",
+      "disposition": "repaired",
+      "post_sha256": "4c50cd6f7562c044351939e399a3597787370c8fc64005768251a984f5ee6e23",
+      "review_context_sha256": "cbb0caf83084b96646862071faff18f5a099cf44a9dcc02447bb1aa7f480cca1",
+      "reason": "The imported adjoint definition requires a first-variable-linear pairing, whereas H_D uses a second-variable-linear pairing. F2 now transports through (u,v)_1=<v,u> with unchanged norm and density, and conjugates the defining identity. The existing cutoff test then identifies q=\u00b1omega g and proves the exact maximal self-adjoint domain without changing the Statement. Pauli products, trace-two projection ranks, spin conjugations, countable dense family and W_D trigonometric identities were checked in the current proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-qft-dirac-fermionic-translation-spectrum",
+      "disposition": "repaired",
+      "post_sha256": "3111c4d05718cb2a003ca07f0c4b581387df81bf3c9ccb5216f130877e57bfc1",
+      "review_context_sha256": "4ff5984ce713d802a2db459af30eeb8f8f70f822b7d203133806b200de2fc3d7",
+      "reason": "For every scalar c, H(c Omega)=0. Step 4.2 proves that all positive-particle sectors have positive energy almost everywhere, including mu=0 off the null apex; hence ker H=C Omega, not a unique vector. The Statement now gives the exact eigenspace and uniqueness of normalized vectors only up to phase. F4 also explicitly transports the first-variable adjoint/PVM suppliers to the second-variable Fock pairing, licensing the unchanged cutoff proofs and domains. Checked phase signs, tensor/PVM invariance, strong continuity, direct-sum adjoints, positive cone sums, massless low-energy test vector and dominated-convergence/Fatou generator domain argument.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-qft-dirac-covariance-spectrum",
+    "lem-qft-free-domain-observables",
+    "def-qft-free-field-observables"
+  ],
+  "ledger_updates": [],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "completed": [
+      {
+        "id": "lem-qft-dirac-projection-matrices",
+        "interface_changed": false,
+        "claim": "h_D is self-adjoint on {u: omega u belongs to H_D}; second-variable-linear convention preserved.",
+        "supplier_paths": [
+          "items/def-qft-dirac-projections.md",
+          "items/def-adjoint-of-a-densely-defined-unbounded-operator.md",
+          "items/def-symmetric-self-adjoint-and-essentially-self-adjoint.md"
+        ],
+        "proof_use": "F2 and step 4.1; convention transport, existing real-multiplier cutoff calculation and finite direct sum.",
+        "sources_consulted": [],
+        "next_action": "Repair translation claim and repeat the convention transport in its F4."
+      },
+      {
+        "id": "lem-qft-dirac-fermionic-translation-spectrum",
+        "interface_changed": true,
+        "claim": "ker H=C Omega; normalised zero-energy vectors have only phase freedom.",
+        "supplier_paths": [
+          "items/def-qft-dirac-projections.md",
+          "items/lem-qft-dirac-projection-matrices.md",
+          "items/def-qft-fock-and-test-spaces.md",
+          "items/lem-qft-l2-product-tensor-identification.md",
+          "items/def-projection-valued-measure.md",
+          "items/def-adjoint-of-a-densely-defined-unbounded-operator.md"
+        ],
+        "proof_use": "Statement, F4; steps 3.1, 4.1, 4.2 and 6.1.",
+        "sources_consulted": [],
+        "validation": "Initial scoped strict contract check identified stale fock Definition quotes; owning contract repaired, awaiting final validation.",
+        "next_action": "Repair the repeated vacuum claim in the assigned covariance lemma; refer its physical consumer."
+      }
+    ],
+    "pending": [
+      "Translation vacuum eigenspace clarification and local adjoint convention bridge; direct consumer examination; covariance review; scoped checks."
+    ],
+    "independent_review": false
+  }
+}

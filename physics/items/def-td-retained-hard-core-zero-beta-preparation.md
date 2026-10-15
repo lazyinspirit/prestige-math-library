@@ -1,0 +1,44 @@
+---
+id: "def-td-retained-hard-core-zero-beta-preparation"
+kind: "definition"
+title: "Retained hard-core continuation at zero inverse temperature"
+status: "published"
+origin: "pipeline"
+domain: "physics"
+library: "physics"
+physical_scope: "Finite-volume positional models with forbidden pair separations; this is a declared beta-zero hard-admissibility continuation, not a claim about all infinite-temperature physical preparations."
+deps: [def-td-stable-tempered-continuum-preparation, post-td-classical-indistinguishable-particle-measure]
+dependency_roles:
+  def-td-stable-tempered-continuum-preparation: formulation-prerequisite
+  post-td-classical-indistinguishable-particle-measure: formulation-prerequisite
+aliases: []
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "Hans-Otto Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction, Probability Theory and Related Fields 99 (1994), 171–195"
+      url: "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf"
+    - title: "Konstantin K. Likharev, Essential Graduate Physics, Part SM: Statistical Mechanics (2024 author-hosted lecture notes)"
+      url: "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/03%3A_Ideal_and_Not-So-Ideal_Gases/3.01%3A_Ideal_classical_gas"
+dependency_level: 5
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+---
+
+## Definition
+
+For the pair potential $\varphi$ of [[def-td-stable-tempered-continuum-preparation]], let $B=\{x\in\mathbb R^d:\varphi(x)=+\infty\}$. A finite configuration is hard-admissible if every pair displacement avoids $B$. For $z>0$, define the retained-admissibility zero-inverse-temperature free-wall weight of $\omega$ to be
+$$w_0(\omega)=z^{N(\omega)}\mathbf 1_{\{H_{N(\omega)}(\omega)<\infty\}}.$$
+Its finite-volume partition sum, when finite, is $\Xi_{\Lambda}^{\mathrm{ret},0}(z)=\sum_{N\geq0}\int w_0(\omega)\,\mu_{\Lambda,N}(d\omega)$, using [[post-td-classical-indistinguishable-particle-measure]]. This definition sets the weight of a forbidden configuration to zero; it does not assign a value to the undefined product $0\cdot(+\infty)$. When $B=\varnothing$ the measure is the unrestricted Poisson activity model; for a nonempty hard core it is generally not Poisson. The convention is explicit model data and carries no statement about an arbitrary zero-width energy shell.
+
+For a periodic cell of side $L$ in dimensionless coordinates, use the exact image energy $H_{L,\mathrm{per}}$ of [[def-td-stable-tempered-continuum-preparation]]. Its periodic retained-admissibility weight is
+$$w_{L,0}^{\mathrm{per}}(\omega)=z^{N(\omega)}\mathbf1_{\{H_{L,\mathrm{per}}(\omega)<+\infty\}}=z^{N(\omega)}\mathbf1_{\{\varphi(y-x)<+\infty\text{ for every }x\in\omega,\ y\in\omega^{\mathrm{per}},\ y\ne x\}}.$$
+Thus every forbidden pair between distinct particles and every forbidden periodic-image pair, including a particle with one of its own nontrivial images, receives zero weight. When finite, the corresponding partition sum is $\Xi_{L}^{\mathrm{ret},0,\mathrm{per}}(z)=\sum_{N\geq0}\int w_{L,0}^{\mathrm{per}}\,d\mu_{\Lambda_L,N}$. This is the periodic retained-admissibility convention; it is not an unrestricted zero-beta limit of a shell law.

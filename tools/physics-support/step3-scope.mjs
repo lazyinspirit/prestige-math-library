@@ -24,6 +24,7 @@ import { step3Escalations, externalContextReceipt } from './step3-escalations.mj
 import { step3Adjudicators } from './step3-adjudicators.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { taxonomyOwnership } from './defect-ledger-taxonomy.mjs';
+import { ownerReviewedFindingAlias } from './step3-owner-finding-alias.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -1344,15 +1345,17 @@ if (command === 'check') {
           const sameLocation = (left, right) => String(left ?? '').trim().toLowerCase() === String(right ?? '').trim().toLowerCase();
           const sameObservedCarrier = /^[a-f0-9]{64}$/.test(prior?.target?.observed_sha256 ?? '')
             && prior.target.observed_sha256 === target?.observed_sha256;
+          const reviewedFindingAlias = prior && ownerReviewedFindingAlias(ROOT, run, group.label, prior, decision, target, hashValue);
           const sharedFinding = prior && decision.same_defect_as === prior.obligation
             && typeof decision.same_defect_evidence === 'string' && decision.same_defect_evidence.trim()
             && prior.id === decision.id
             && ['reader', 'flagged'].includes(prior.route)
             && ['reader', 'flagged'].includes(decision.route)
             && prior.verdict === decision.verdict
-            && prior.target?.defect === target?.defect
+            && (prior.target?.defect === target?.defect
+              || reviewedFindingAlias)
             && ((prior.target?.severity === target?.severity
-              && sameLocation(prior.target?.location, target?.location))
+              && (sameLocation(prior.target?.location, target?.location) || reviewedFindingAlias))
               || sameObservedCarrier);
           const sharedCausalAddition = prior && target?.added
             && decision.same_defect_as === prior.obligation
@@ -1362,6 +1365,7 @@ if (command === 'check') {
           if (prior && !sharedFinding && !sharedCausalAddition) error('ledger-double-owned', `${defectId} is referenced by incompatible decisions`);
           if (!prior) referenced.set(defectId, {
             obligation: decision.obligation, id: decision.id, route: decision.route, verdict: decision.verdict, target,
+            historical_delta_unknown: decision.historical_delta_unknown, owner_resolution: decision.owner_resolution,
           });
           const row = mine.find((candidate) => candidate.defect_id === defectId);
           if (!row) { error('ledger-ref-missing', `[${decision.id}] ${decision.obligation} names absent ${defectId}`); continue; }

@@ -1,0 +1,81 @@
+---
+id: lem-qft-fock-unitary-lift
+kind: lemma
+title: Unitary lift to bosonic Fock space
+status: published
+origin: pipeline
+domain: mathematics
+library: mathematics
+physical_scope: null
+dependency_level: 1
+deps:
+  - def-qft-fock-and-test-spaces
+  - def-countable-choice
+  - lem-nrqm-composites-hilbert-tensor-construction
+  - lem-nrqm-composites-permutation-sector-projections
+dependency_roles:
+  def-qft-fock-and-test-spaces: mathematical-premise
+  def-countable-choice: mathematical-premise
+  lem-nrqm-composites-hilbert-tensor-construction: mathematical-premise
+  lem-nrqm-composites-permutation-sector-projections: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: David Tong, Quantum Field Theory, section 2.4
+      url: https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S2.html
+      locator: Author-hosted HTML text of chapter 2, section 2.4, informal multiparticle states and the Fock-space sector picture. It does not prove the general unitary lift or strong-continuity result; those are proved here from the exact tensor-sector definitions.
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+---
+
+## Statement
+
+Assume Countable Choice [[def-countable-choice]]. Let $H$ and $K$ be complex
+Hilbert spaces and let $U:H\to K$ be unitary. The sector maps
+$U^{\otimes n}$ restrict to unitaries $U_s^{(n)}:H_s^{(n)}\to K_s^{(n)}$;
+their direct sum
+$$\Gamma_s(U)=\bigoplus_{n=0}^\infty U_s^{(n)}$$
+is unitary, maps vacuum to vacuum, and maps the finite-particle domain
+$\mathcal D_{\rm fin}(H)$ onto $\mathcal D_{\rm fin}(K)$. It intertwines the
+creation and annihilation maps:
+$$\Gamma_s(U)a_H^\dagger(h)\Gamma_s(U)^{-1}=a_K^\dagger(Uh),\qquad \Gamma_s(U)a_H(h)\Gamma_s(U)^{-1}=a_K(Uh)$$
+on the finite-particle domain. If $G$ is a topological space and $g\mapsto U_g$
+is a family of unitaries such that $g\mapsto U_gh$ is norm-continuous for
+every $h\in H$, then $g\mapsto\Gamma_s(U_g)$ has the same continuity
+property on $\mathcal F_s(H)$.
+
+## Facts & Assumptions
+
+**Given:** Countable Choice; the symmetric tensor-sector Fock conventions and creation/annihilation formulas of [[def-qft-fock-and-test-spaces]].
+
+[A1] Countable Choice is the choice assumption used for the completed tensor and sector constructions. [[def-countable-choice]]
+
+[F1] Fock space is the Hilbert direct sum of symmetric tensor powers, the vacuum is the zeroth sector, finite-particle vectors are dense, and creation and annihilation are the symmetrized tensor-insertion and contraction maps. [[def-qft-fock-and-test-spaces]]
+
+[F2] Hilbert tensor products are completed from elementary tensors, and permutation averaging is the orthogonal projection onto the symmetric subspace. [[lem-nrqm-composites-hilbert-tensor-construction]] [[lem-nrqm-composites-permutation-sector-projections]]
+
+## Proof
+
+1.1 Since $U$ is unitary, $U^{\otimes n}$ is unitary on the completed tensor power by its isometric action on elementary tensors and its inverse $(U^{-1})^{\otimes n}$. It commutes with every tensor-factor permutation, because both compositions send an elementary tensor to $Uh_{\pi(1)}\otimes\cdots\otimes Uh_{\pi(n)}$. It therefore commutes with the symmetric averaging projection of [F2] and restricts to a unitary $U_s^{(n)}$ on its range. The zeroth sector is the identity on $\mathbb C$. [A1, F1, F2, given, algebra]
+
+2.1 The direct sum of the sector unitaries preserves the sum of squared sector norms and has inverse $\bigoplus_n(U^{-1})_s^{(n)}$, so it is unitary. It fixes the zeroth-sector vacuum and preserves finite sums of sectors in both directions. On an elementary symmetric tensor, applying the Fock creation formula before or after this direct sum gives the symmetrization of $Uh$ together with the images of the original tensor factors; hence the two creation maps intertwine. The annihilation formula is its adjoint contraction and the same tensor calculation replaces each contracted vector $h$ by $Uh$. Linearity, boundedness on each fixed sector, and density of elementary tensors extend both identities to $\mathcal D_{\rm fin}$. [F1, F2, step 1.1, given, algebra]
+
+3.1 Fix $n$. For an elementary tensor,
+$$\|U_g^{\otimes n}(h_1\otimes\cdots\otimes h_n) -U_{g_0}^{\otimes n}(h_1\otimes\cdots\otimes h_n)\| \le\sum_{r=1}^n\prod_{s\ne r}\|h_s\|\, \|(U_g-U_{g_0})h_r\|,$$
+by the telescoping expansion of the tensor difference and unitary norm
+preservation. Strong continuity of $U_g$ makes the right side tend to zero.
+Density of elementary tensors and the uniform norm bound $1$ extend
+continuity to the completed sector and its closed symmetric subspace. Finite
+sector sums are dense by [F1]; approximating an arbitrary Fock vector by
+such a sum and using $\|\Gamma_s(U_g)\|=1$ proves strong continuity on the
+whole direct sum. [F1, step 1.1, given, algebra] ∎

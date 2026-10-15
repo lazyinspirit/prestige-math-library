@@ -1,0 +1,541 @@
+[
+  {
+    "order": 265,
+    "id": "td-entropy-foundation",
+    "kind": "A",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Entropy Foundation",
+    "companion": "td-entropy-foundation-examples",
+    "requires": [
+      "td-thermodynamic-framework",
+      "suprema-and-infima",
+      "the-inverse-function-theorem-completed"
+    ],
+    "items": [
+      {
+        "id": "def-td-reversible-process",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Reversible thermodynamic process record",
+        "statement": "Let $P=(I_P,x_P^-,x_P^+,z_P,\\kappa_P,r_P)$ be an admitted closed process record as defined in [[def-td-process-and-protocol]], with equilibrium endpoints $x_P^-,x_P^+\\in D_c$. The record is **reversible relative to its declared boundary and protocol** when the model also admits a reverse record $P^{\\mathrm{rev}}$ for the same system and material constitution, starting at $x_P^+$ and ending at $x_P^-$, such that every auxiliary and device state specified by the protocol is restored to its initial state and every signed boundary transfer is reversed. In particular,\n\n$$Q[P^{\\mathrm{rev}}]=-Q[P],\\qquad W_{\\mathrm{on}}[P^{\\mathrm{rev}}]=-W_{\\mathrm{on}}[P].$$\n\nIf the protocol records additional transfer channels, their signed values must likewise be negatives of their forward values. A record that is slow is not reversible merely because it is slow; it must satisfy the reverse-record condition above. Reversibility is therefore relative to what the model includes inside the boundary and which reverse controls it admits.",
+        "deps": [
+          "def-td-process-and-protocol"
+        ],
+        "dependency_roles": {
+          "def-td-process-and-protocol": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, \u00a7\u00a7II.F and IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, \u00a7\u00a74.3.1\u20134.3.4",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, \u00a7\u00a72.5\u20132.6",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "inventory_expansion_required": false,
+        "library": "physics",
+        "physical_scope": "Admitted closed process records with equilibrium endpoints in the nonrelativistic macroscopic thermodynamic framework; reversibility is relative to the declared system, auxiliary-device boundary, and transfer protocol."
+      },
+      {
+        "id": "def-td-thermal-contact-constraints",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Thermal contact family and constraints",
+        "statement": "For each material constitution $c$, let $D_c$ be the equilibrium state domain from [[def-td-equilibrium-state-domain]]. A **thermal-contact family** is a model-declared set $\\mathcal T$ of tagged pairs $(c,x)$ with $x\\in D_c$. A **thermal-contact protocol** for two states $x,y\\in\\mathcal T$ is an admitted preparation of their compound system in which the two constituents are separated by a declared diathermal contact: matter transfer and mechanical or composition work across that contact are forbidden, while the protocol permits thermal energy transfer between the constituents. The compound's external boundary and all retained constraints are specified as in [[def-td-system-and-permitted-exchanges]] and [[def-td-process-and-protocol]].\n\nThe pair is in **thermal contact equilibrium**, written $x\\sim_T y$, when the admitted contact preparation leaves both constituent coordinates unchanged, is an equilibrium preparation, and permits no net heat transfer between them. The relation $\\sim_T$ is defined only on the stated family $\\mathcal T$ and for the declared contact protocols. This definition does not assert that $\\sim_T$ is reflexive, symmetric, or transitive, and it does not assign a real-valued temperature to its equivalence classes.",
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-system-and-permitted-exchanges",
+          "def-td-process-and-protocol"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-system-and-permitted-exchanges": "formulation-prerequisite",
+          "def-td-process-and-protocol": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, \u00a7\u00a7II.F and IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, \u00a74.1",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, \u00a72.2",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "inventory_expansion_required": false,
+        "library": "physics",
+        "physical_scope": "Admitted pair contacts between equilibrium macrostates of the nonrelativistic macroscopic thermodynamic framework; no temperature scale or contact transitivity is defined here."
+      },
+      {
+        "id": "post-td-concave-fundamental-entropy",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Concave macroscopic fundamental entropy",
+        "statement": "For each admitted material constitution $c$, the model adopts a finite scalar function\n\n$$S_c:D_c\\longrightarrow\\mathbb R\\ \\text{with values measured in }\\mathrm{J\\,K^{-1}},$$\n\non the equilibrium state domain $D_c$ of [[def-td-equilibrium-state-domain]]. This framework treats $S_c$ as primitive constitutive data: its existence and form are assumed, not derived from the word entropy, statistical mechanics, or experimental evidence.\n\nOn every specified convex region $C\\subseteq D_c$ in the dimensionless coordinates of [[def-td-equilibrium-state-domain]], $S_c$ is continuous and concave, meaning that for all $x,y\\in C$ and every $\\alpha\\in[0,1]$ ([[def-interval]]),\n\n$$S_c((1-\\alpha)x+\\alpha y)\\ge (1-\\alpha)S_c(x)+\\alpha S_c(y).$$\n\nThe domain assumptions are local to the material and region named; no unlisted coordinate tuple is presumed physically realizable. The input of $S_c$ is the represented state $\\pi_c(e)$; when the function is written using physical coordinates $(U,V,n_1,\\ldots,n_r)$, those coordinates mean the SI values whose dimensionless numerical tuple is $\\pi_c(e)$. For independent separated macroscopic systems $A,B$ admitted by [[post-td-bulk-additivity]], entropy is additive under that postulate's composition map $\\kappa_{AB}$:\n\n$$S_{A\\sqcup B}(\\kappa_{AB}(x_A,x_B))=S_A(x_A)+S_B(x_B).$$\n\nOn each separately designated open, single-phase chart in the physical coordinates $(U,V,n_1,\\ldots,n_r)$, assume the numerical representative of $S_c$ is $C^2$ in the sense of [[def-ck-euclidean-maps-and-diffeomorphisms]]: its first and second coordinate partial derivatives exist and are continuous. The partial derivative $S_U$ at fixed $V,n_1,\\ldots,n_r$ is the ordinary partial derivative in the $U$ coordinate, as in [[def-directional-and-partial-derivatives]], and is assumed finite and strictly positive. The numerical chart input uses $\\hat U=U/(1\\,\\mathrm J)$; consequently $S_U=(1\\,\\mathrm J)^{-1}\\partial S_c/\\partial\\hat U$ and has units $\\mathrm{K^{-1}}$. The other physical coordinates are similarly represented using the fixed SI units of [[def-td-si-quantities]]. No differentiability, strict concavity, or positive $S_U$ is asserted outside those charts. This item does not itself define a thermometer calibration or claim a temperature law.\n\nFor the tagged bulk family with scaling maps $\\delta_\\lambda$ and domains $B_{c,\\lambda}$ from [[post-td-bulk-additivity]], also adopt, for every admitted $\\lambda>0$ and $x\\in B_{c,\\lambda}$,\n\n$$S_{c^{(\\lambda)}}(\\delta_\\lambda x)=\\lambda S_c(x).$$\n\nThis is a bulk homogeneity assumption for tagged scaled systems, not exact finite-size scaling for every body. Lieb\u2013Yngvason develop a different accessibility-based route in which entropy is represented from additional operational hypotheses; this framework does not claim that their derivation proves the present primitive entropy postulate.",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-directional-and-partial-derivatives",
+          "def-interval",
+          "def-td-equilibrium-state-domain",
+          "def-td-si-quantities",
+          "def-td-system-and-permitted-exchanges",
+          "post-td-bulk-additivity"
+        ],
+        "dependency_roles": {
+          "def-ck-euclidean-maps-and-diffeomorphisms": "formulation-prerequisite",
+          "def-directional-and-partial-derivatives": "formulation-prerequisite",
+          "def-interval": "formulation-prerequisite",
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-system-and-permitted-exchanges": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "post-td-bulk-additivity": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, \u00a7\u00a74.3.1\u20134.3.4",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, \u00a7\u00a72.5\u20132.6 and \u00a72.9",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, \u00a7\u00a7II.F and IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "inventory_expansion_required": false,
+        "library": "physics",
+        "physical_scope": "The adopted entropy representation for the declared nonrelativistic, macroscopic, additive bulk thermodynamic systems; smooth derivative conditions apply only on the named single-phase charts."
+      },
+      {
+        "id": "def-td-isolated-compound-feasible-set",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Isolated compound and feasible equilibrium set",
+        "statement": "Fix a finite list of named subsystems $s_1,\\ldots,s_m$, where $m\\in\\mathbb N$ and $m\\ge1$ ([[def-natural-numbers]]), each having its own equilibrium state domain $D_{c_i}$ as defined in [[def-td-equilibrium-state-domain]]. Their separated endpoint state space is the Cartesian product ([[def-cartesian-product]])\n\n$$\\mathcal D:=D_{c_1}\\times\\cdots\\times D_{c_m}.$$\n\nAn **isolated compound** is the system consisting of those subsystems and any named auxiliaries or work devices included inside a declared outer boundary, with no matter or energy transfer across that outer boundary during the admitted process, in the sense of [[def-td-system-and-permitted-exchanges]]. Transfers between constituents are internal to the compound. Its total energy and other extensive coordinates use the composition convention of [[post-td-bulk-additivity]]. The additive entropy sum applies only when the constituent split is admitted by [[post-td-concave-fundamental-entropy]] as a collection of independent separated macroscopic systems; an interacting compound outside that scope needs its own total-entropy model.\n\nFor specified totals and retained barriers, an **equilibrium feasible set** is the model-declared subset $\\mathcal F\\subseteq\\mathcal D$ of endpoint tuples satisfying those totals and exactly the exchange permissions in the declared protocol. Totals are imposed on the dimensioned coordinate maps $U_c,V_c,n_{c,j}$ of [[def-td-equilibrium-state-domain]], not by treating the dimensionless numerical coordinates as quantities with units. For example, if two constituents are in thermal contact through [[def-td-thermal-contact-constraints]] while their volumes and mole amounts remain fixed, $\\mathcal F$ consists of the energy partitions $(x_A,x_B)$ with the prescribed total energy and those fixed volumes and amounts. Allowing volume or species exchange changes $\\mathcal F$ only when the protocol explicitly permits that exchange; retained walls keep the corresponding coordinates fixed.\n\nThe set $\\mathcal F$ may be empty, noncompact, or otherwise fail to contain an entropy-maximizing state. This definition imposes no existence, compactness, convexity, uniqueness, or attainment assumption.",
+        "deps": [
+          "def-cartesian-product",
+          "def-natural-numbers",
+          "def-td-equilibrium-state-domain",
+          "def-td-system-and-permitted-exchanges",
+          "def-td-thermal-contact-constraints",
+          "post-td-bulk-additivity",
+          "post-td-concave-fundamental-entropy"
+        ],
+        "dependency_roles": {
+          "def-cartesian-product": "mathematical-premise",
+          "def-natural-numbers": "mathematical-premise",
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-system-and-permitted-exchanges": "formulation-prerequisite",
+          "def-td-thermal-contact-constraints": "formulation-prerequisite",
+          "post-td-bulk-additivity": "physical-assumption",
+          "post-td-concave-fundamental-entropy": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, \u00a7\u00a74.1 and 4.3.3",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, \u00a7\u00a72.2, 2.6 and 2.9",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, \u00a7\u00a7II.F and IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "inventory_expansion_required": false,
+        "library": "physics",
+        "physical_scope": "Feasible endpoint macrostates for a declared isolated compound of nonrelativistic macroscopic thermodynamic systems; only explicitly permitted exchanges and retained constraints are included."
+      },
+      {
+        "id": "post-td-entropy-maximum",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Stable equilibrium requires an attained global entropy maximum",
+        "statement": "Let $\\mathcal F$ be the explicitly declared feasible endpoint set of an isolated compound whose constituents are independent separated macroscopic systems, as defined in [[def-td-isolated-compound-feasible-set]]. For this route, adopt the physical criterion that any endpoint tuple the model classifies as a stable equilibrium under these fixed totals, retained partitions, and permitted exchanges satisfies\n\n$$S_{\\mathrm{tot}}(x^{\\mathrm{eq}})=\\max_{x\\in\\mathcal F}S_{\\mathrm{tot}}(x),\\qquad S_{\\mathrm{tot}}(x):=\\sum_{i=1}^{m}S_{c_i}(x_i),$$\n\nHere $\\max$ means that $x^{\\mathrm{eq}}\\in\\mathcal F$ and $S_{\\mathrm{tot}}(x^{\\mathrm{eq}})\\ge S_{\\mathrm{tot}}(x)$ for every $x\\in\\mathcal F$, using maximum in the sense of [[def-max-min]]. The finite sum is as in [[def-finite-sum]], and the summands are those of the separated macroscopic constituents under [[post-td-concave-fundamental-entropy]]. Whenever the stable-equilibrium label is used, attainment is assumed: at least one maximizing endpoint lies in $\\mathcal F$. If $\\mathcal F$ is empty or the entropy supremum is not attained, this item supplies no equilibrium state.\n\n\u201cGlobal\u201d refers to every endpoint in this exact $\\mathcal F$, not just nearby states, states reachable by a restricted short-time dynamics, or states on a selected branch. A local maximum that is not global, or a long-lived preparation trapped by kinetic barriers, is not declared stable equilibrium by this postulate. No uniqueness or relaxation dynamics is assumed.",
+        "deps": [
+          "def-finite-sum",
+          "def-max-min",
+          "post-td-concave-fundamental-entropy",
+          "def-td-isolated-compound-feasible-set",
+          "def-td-thermal-contact-constraints",
+          "post-td-bulk-additivity"
+        ],
+        "dependency_roles": {
+          "def-finite-sum": "formulation-prerequisite",
+          "def-max-min": "formulation-prerequisite",
+          "post-td-concave-fundamental-entropy": "formulation-prerequisite",
+          "def-td-isolated-compound-feasible-set": "formulation-prerequisite",
+          "def-td-thermal-contact-constraints": "formulation-prerequisite",
+          "post-td-bulk-additivity": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, \u00a7\u00a74.3.3\u20134.3.4",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, \u00a72.9",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, \u00a7\u00a7II.F and IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "inventory_expansion_required": false,
+        "library": "physics",
+        "physical_scope": "Global stable equilibrium of an explicitly specified isolated macroscopic compound under its stated total-coordinate constraints and permitted exchanges; no claim about local maxima or dynamical relaxation is included."
+      },
+      {
+        "id": "post-td-macroscopic-second-law",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Macroscopic second law for isolated compounds",
+        "statement": "For every admitted closed process record $P\\in\\mathcal P_{\\mathrm{cl}}(s)$ of an isolated compound, assume its declared outer boundary is isolated throughout, its material constitution is fixed, its center-of-mass kinetic and separately tracked external-field potential energies have zero endpoint change, and both endpoint preparations are equilibrium macrostates. Include every named auxiliary and work device in the compound. Fix the finite constituent split $s_1,\\ldots,s_m$ used for the endpoint bookkeeping, with $m\\in\\mathbb N$, $m\\ge1$, and constitutions $c_1,\\ldots,c_m$. The split accounts for every constituent whose entropy can change; any included auxiliary not represented in it must have an explicitly model-declared zero entropy change between these endpoints. Its endpoint product is\n\n$$\\mathcal D:=D_{c_1}\\times\\cdots\\times D_{c_m},\\qquad \\mathcal F\\subseteq\\mathcal D,$$\n\nwhere $\\mathcal F$ is the model-declared feasible endpoint set for the fixed totals, retained barriers, and permitted exchanges, as in [[def-td-isolated-compound-feasible-set]]. The process model supplies an endpoint association on the two formal endpoint labels $-$ and $+$:\n\n$$\\rho_P:\\{-,+\\}\\longrightarrow\\mathcal F,\\qquad \\rho_P(-)=\\mathbf x_P^-=(x_{1,P}^-,\\ldots,x_{m,P}^-),\\qquad \\rho_P(+)=\\mathbf x_P^+=(x_{1,P}^+,\\ldots,x_{m,P}^+),$$\n\nwhere $\\mathbf x_P^-$ and $\\mathbf x_P^+$ are respectively the declared constituent-state tuples representing the aggregate equilibrium endpoints $x_P^-$ and $x_P^+$ of $P$. Both tuples must belong to the same $\\mathcal F$. Restrict to endpoint splits admitted by [[post-td-concave-fundamental-entropy]] as a collection of independent separated macroscopic systems, so that its additive entropy rule applies. On this admitted $\\mathcal F$, define\n\n$$S_{\\mathrm{tot}}(\\mathbf x):=\\sum_{i=1}^{m}S_{c_i}(x_i)\\qquad\\left(\\mathbf x=(x_1,\\ldots,x_m)\\in\\mathcal F\\right).$$\n\nThis uses the finite-sum convention of [[def-finite-sum]].\n\nThe adopted macroscopic second law is\n\n$$S_{\\mathrm{tot}}(\\rho_P(+))-S_{\\mathrm{tot}}(\\rho_P(-))\\ge0.$$\n\nThe process record and the zero-change conditions are those of [[def-td-process-and-protocol]]. The process may pass through nonequilibrium configurations; this postulate compares endpoint entropies only and assigns no entropy function to those intermediate configurations.\n\nFor an admitted reversible operation in the sense of [[def-td-reversible-process]], adopt $S_{\\mathrm{tot}}(\\rho_P(+))-S_{\\mathrm{tot}}(\\rho_P(-))=0$. An admitted irreversible adiabatic operation may have a strictly positive entropy increase, but strict increase is not required for every irreversible operation. The postulate does not state monotonicity for an open compound, an externally driven process, a subsystem that exchanges energy with an omitted environment, or every microscopic trajectory.",
+        "deps": [
+          "post-td-concave-fundamental-entropy",
+          "def-td-system-and-permitted-exchanges",
+          "def-td-process-and-protocol",
+          "def-td-reversible-process",
+          "def-td-isolated-compound-feasible-set",
+          "def-finite-sum"
+        ],
+        "dependency_roles": {
+          "post-td-concave-fundamental-entropy": "formulation-prerequisite",
+          "def-td-system-and-permitted-exchanges": "formulation-prerequisite",
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "def-td-reversible-process": "formulation-prerequisite",
+          "def-td-isolated-compound-feasible-set": "formulation-prerequisite",
+          "def-finite-sum": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, \u00a74.3",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, \u00a7\u00a72.5\u20132.6",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, \u00a7\u00a7II.F and IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "inventory_expansion_required": false,
+        "library": "physics",
+        "physical_scope": "Endpoint entropy changes for admitted macroscopic processes of an isolated compound, including its named auxiliaries; no pointwise entropy function is assigned to nonequilibrium intermediate configurations."
+      },
+      {
+        "id": "post-td-zeroth-law",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Zeroth law for the declared thermal-contact family",
+        "statement": "For the declared thermal-contact family $\\mathcal T$ and the contact relation $\\sim_T$ of [[def-td-thermal-contact-constraints]], assume that $\\sim_T$ is an equivalence relation: for all $x,y,z\\in\\mathcal T$,\n\n$$x\\sim_T x,\\qquad x\\sim_T y\\Longrightarrow y\\sim_T x,\\qquad x\\sim_T y\\ \\text{and}\\ y\\sim_T z\\Longrightarrow x\\sim_T z.$$\n\nThis is an adopted physical assumption about the stated contact protocols. It does not by itself construct a real-valued thermometer reading, an absolute temperature, a differentiable temperature state function, or a common calibration across different material families. Those require further operational, entropy, regularity, and calibration hypotheses.",
+        "deps": [
+          "def-td-thermal-contact-constraints"
+        ],
+        "dependency_roles": {
+          "def-td-thermal-contact-constraints": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, \u00a74.1",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, \u00a72.2",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, \u00a7IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "inventory_expansion_required": false,
+        "library": "physics",
+        "physical_scope": "Transitivity of thermal-contact equilibrium only within the explicitly declared family of admissible material states and contact protocols; no numerical temperature scale or universal cross-material calibration is assumed."
+      },
+      {
+        "id": "post-td-common-bulk-constitutive-law",
+        "reference": "items/post-td-common-bulk-constitutive-law.md",
+        "design_state": "Owner escalation prerequisite authored; draft with independent pipeline review pending.",
+        "inventory_expansion_required": false,
+        "kind": "postulate",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Common constitutive entropy law for a designated bulk family",
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-si-quantities",
+          "post-td-bulk-additivity",
+          "post-td-concave-fundamental-entropy"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "post-td-bulk-additivity": "formulation-prerequisite",
+          "post-td-concave-fundamental-entropy": "formulation-prerequisite"
+        },
+        "physical_scope": "A separately designated nonrelativistic macroscopic bulk branch of a fixed material law, with fixed species and intensive constitutive parameters, common SI and energy/entropy reference conventions, and omitted interface, surface and long-range interaction terms; exact finite-body or arbitrary gravitating-system extensivity is not asserted.",
+        "statement": "In addition to the general tagged bulk family of [[post-td-bulk-additivity]] and its entropy law in [[post-td-concave-fundamental-entropy]], designate a common-constitutive-law bulk branch as follows. Fix a material constitution $c$ with an ordered species list and fixed intensive constitutive parameters. Let $C\\subseteq D_c$ be a nonempty open single-phase chart in the fixed dimensionless SI numerical coordinates of [[def-td-equilibrium-state-domain]] and [[def-td-si-quantities]], and assume it is a positive cone: $\\lambda x\\in C$ for all $x\\in C$ and $\\lambda>0$. Use the adopted $C^2$ entropy with $S_{c,U}>0$ on this chart.\n\nFor every $\\lambda>0$, admit scaling of every $x\\in C$, so $C\\subseteq B_{c,\\lambda}$, and retain the distinct scaled-system tag $c^{(\\lambda)}$. The image $C^{(\\lambda)}:=\\delta_\\lambda(C)$ is a chart in $D_{c^{(\\lambda)}}$. Adopt a coordinate-preserving material-law transport $j_{c,\\lambda}:C^{(\\lambda)}\\to C$ defined in numerical coordinates by $j_{c,\\lambda}(y)=y$, and adopt entropy preservation under that transport:\n\n$$S_{c^{(\\lambda)}}(y)=S_c(j_{c,\\lambda}(y))\\qquad(y\\in C^{(\\lambda)}).$$\n\nThe transport identifies the constitutive numerical law used for bodies in this branch; it does not equate their physical identities or material tags. It presumes a common ordered species list, units, internal-energy reference and entropy calibration. Fixed material parameters in this branch exclude a hidden size parameter whose independent variation changes the law. Combined with the existing tagged entropy law, this adopted transport gives the same-function relation\n\n$$S_c(\\lambda x)=S_{c^{(\\lambda)}}(\\delta_\\lambda x)=\\lambda S_c(x)\\qquad(x\\in C,\\ \\lambda>0).$$\n\nThis is additional idealized constitutive information for the designated bulk branch. It is not implied by coordinate additivity, SI units, the general tagged relation, or the existence of local equilibrium charts. No empirical proof, finite-size error bound, or assertion for surface-sensitive, interacting long-range or self-gravitating bodies is supplied. Euler and Gibbs\u2013Duhem identities are conditional deductions on this branch, not part of the postulate's source review.",
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, section 2.6.4 and equations 2.103\u20132.112",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 266,
+    "id": "td-entropy-foundation-examples",
+    "kind": "B",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Entropy Foundation \u2014 Examples",
+    "companion": "td-entropy-foundation",
+    "requires": [
+      "td-entropy-foundation",
+      "the-logarithm-and-general-powers",
+      "foundations-of-the-real-numbers"
+    ],
+    "items": [
+      {
+        "id": "ex-td-irreversible-adiabatic-compression",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Entropy increase in an idealized adiabatic compression",
+        "statement": "This is a conditional model calculation, not a report of an observed compression. The gas is taken to have one mole, $n=1\\,\\mathrm{mol}$, of a model whose state variables are a positive temperature $T$ in kelvins, volume $V$ in cubic metres, and uniform pressure $p$ in pascals. The model is monatomic and ideal in the explicit sense that its molar constant-volume heat capacity is $C_V=3R/2$, its internal energy is $U=nC_VT$, and its equation of state is $pV=nRT$. Its entropy difference is\n\n$$S(T,V)-S(T_0,V_0)=nC_V\\ln(T/T_0)+nR\\ln(V/V_0),$$\n\nfor positive reference values $T_0$ in K and $V_0$ in $\\mathrm{m^3}$. At initial equilibrium let $T_i>0$ and $V_i>0$. A piston protocol suddenly raises the external pressure from the initial value $p_i$ to a constant final load $p_f$, compresses the gas adiabatically to $V_f=(9/10)V_i$, and dissipatively settles it to a final equilibrium state. The protocol admits no reverse record, so it is irreversible by [[def-td-reversible-process]]. The idealization assumes no change in the included load's entropy; all numerical behavior is a model assumption and deduction, not an empirical measurement.",
+        "deps": [
+          "def-td-process-and-protocol",
+          "def-td-reversible-process",
+          "def-td-si-quantities",
+          "post-td-first-law-energy",
+          "post-td-concave-fundamental-entropy",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_roles": {
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "def-td-reversible-process": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "post-td-first-law-energy": "physical-assumption",
+          "post-td-concave-fundamental-entropy": "physical-assumption",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, \u00a72.6, ideal-gas entropy and adiabatic examples",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, \u00a7\u00a74.3.3\u20134.3.4",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, \u00a7\u00a7II.F and IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "strategy": "Direct conditional derivation from the stated ideal-gas constitutive model, admitted process/work protocol, first-law postulate, and exact logarithm laws.",
+        "dependency_level": 5,
+        "inventory_expansion_required": false,
+        "library": "physics",
+        "physical_scope": "A conditional one-mole monatomic ideal-gas model with positive initial temperature and volume, a sudden constant-load compression to a stated final volume, dissipative settling, and no empirical claim.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-noncompact-entropy-supremum-not-attained",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A concave entropy supremum not attained on an open energy-partition set",
+        "statement": "Take two independent separated one-species systems $A$ and $B$ with material constitutions $c_A,c_B$ inside an isolated compound. Write $D_A:=D_{c_A}$ and $D_B:=D_{c_B}$ for their equilibrium domains; each is $(0,\\infty)^3$ in the dimensionless coordinates $(\\hat U_i,\\hat V_i,\\hat n_i)$ of [[def-td-equilibrium-state-domain]], and each full domain is designated as an open single-phase chart. Fix positive volumes and amounts $\\hat V_A,\\hat V_B,\\hat n_A,\\hat n_B$, total internal energy $U_A+U_B=1\\,\\mathrm J$, and a thermal-contact protocol that permits internal energy transfer while keeping volumes and amounts fixed, as in [[def-td-thermal-contact-constraints]]. The admitted separated-pair set $\\mathcal C_{AB}$ of [[post-td-bulk-additivity]] includes every pair in the following feasible set:\n\n$$\\phi(x)=((x,\\hat V_A,\\hat n_A),(1-x,\\hat V_B,\\hat n_B)),\\qquad \\mathcal F=\\{\\phi(x):0<x<1\\}\\subseteq\\mathcal C_{AB}\\subseteq D_A\\times D_B.$$\n\nThus $x=\\hat U_A=U_A/(1\\,\\mathrm J)$ and $1-x=\\hat U_B=U_B/(1\\,\\mathrm J)$. With $s_*=1\\,\\mathrm{J\\,K^{-1}}$, adopt the toy constitutive entropies $S_A=2s_*\\hat U_A$ and $S_B=s_*\\hat U_B$. They are finite, continuous, affine (hence concave), $C^2$, and have positive $S_U$ on the stated open domains. For each $\\lambda>0$, use the same formula in the own coordinates of the distinct tags $c_A^{(\\lambda)}$ and $c_B^{(\\lambda)}$. Then the coordinate scaling $\\delta_\\lambda$ of [[post-td-bulk-additivity]] gives $S_{c_A^{(\\lambda)}}(\\delta_\\lambda x_A)=\\lambda S_A(x_A)$ and $S_{c_B^{(\\lambda)}}(\\delta_\\lambda x_B)=\\lambda S_B(x_B)$. Their additive total on $\\mathcal F$ is $S_{\\mathrm{tot}}(\\phi(x))=s_*(1+x)$. The model-declared feasible set is an open energy-partition interval, so its entropy has a finite supremum but no attained maximum. This is a conditional model example, not a claim about a real material.",
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-thermal-contact-constraints",
+          "def-td-isolated-compound-feasible-set",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "post-td-concave-fundamental-entropy",
+          "post-td-bulk-additivity",
+          "post-td-entropy-maximum",
+          "thm-of-archimedean",
+          "lem-finite-set-has-max",
+          "def-complete-ordered-field"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-thermal-contact-constraints": "formulation-prerequisite",
+          "def-td-isolated-compound-feasible-set": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "post-td-concave-fundamental-entropy": "physical-assumption",
+          "post-td-bulk-additivity": "physical-assumption",
+          "post-td-entropy-maximum": "physical-assumption",
+          "thm-of-archimedean": "mathematical-premise",
+          "lem-finite-set-has-max": "mathematical-premise",
+          "def-complete-ordered-field": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, \u00a72.9, equilibrium and stability",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, \u00a7\u00a74.3.3\u20134.3.4",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, \u00a7\u00a7II.F and IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "strategy": "Direct finite-dimensional model verification, an explicit open cover without a finite subcover, and a strictly increasing entropy comparison.",
+        "dependency_level": 7,
+        "inventory_expansion_required": false,
+        "library": "physics",
+        "physical_scope": "An abstract two-system model with positive thermodynamic coordinates, fixed total energy, volume, and composition, and an open feasible energy-partition set; no real-material claim.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-local-entropy-maximum-below-global",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A local entropy maximum below a feasible global maximum",
+        "statement": "Take two independent separated one-species systems $A$ and $B$ with material constitutions $c_A,c_B$ inside an isolated compound. Write $D_A:=D_{c_A}$ and $D_B:=D_{c_B}$ for their equilibrium domains; each is $(0,\\infty)^3$ in $(\\hat U_i,\\hat V_i,\\hat n_i)$, and each full domain is designated as an open single-phase chart. Fix positive $\\hat V_A,\\hat V_B,\\hat n_A,\\hat n_B$, total energy $U_A+U_B=1\\,\\mathrm J$, $s_*=1\\,\\mathrm{J\\,K^{-1}}$, and toy entropies $S_A=2s_*\\hat U_A$, $S_B=s_*\\hat U_B$, using the same formulas on the distinct tagged constitutions $c_A^{(\\lambda)}$ and $c_B^{(\\lambda)}$ for every $\\lambda>0$. Admit every listed separated pair in $\\mathcal C_{AB}$ from [[post-td-bulk-additivity]], and permit internal energy transfer through thermal contact while keeping volumes and amounts fixed. Let\n\n$$\\phi(x)=((x,\\hat V_A,\\hat n_A),(1-x,\\hat V_B,\\hat n_B)),\\qquad \\mathcal F=\\{\\phi(x):x\\in(0,3/10]\\cup[3/5,9/10]\\}.$$\n\nThe retained barrier constraint admits exactly this nonconvex subset of the energy partitions; all its pairs satisfy the same total energy, volume, and amount constraints. The additive entropy is $S_{\\mathrm{tot}}(\\phi(x))=s_*(1+x)$, so $x=3/10$ is a local maximum relative to $\\mathcal F$ but lies below the feasible global maximum at $x=9/10$. These toy constitutive laws and constraints make no claim about a real material; calling an actual preparation metastable would require a separate kinetic model.",
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-thermal-contact-constraints",
+          "def-td-isolated-compound-feasible-set",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "post-td-concave-fundamental-entropy",
+          "post-td-bulk-additivity",
+          "post-td-entropy-maximum"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-thermal-contact-constraints": "formulation-prerequisite",
+          "def-td-isolated-compound-feasible-set": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "post-td-concave-fundamental-entropy": "physical-assumption",
+          "post-td-bulk-additivity": "physical-assumption",
+          "post-td-entropy-maximum": "physical-assumption",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, \u00a72.9, equilibrium and stability",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, Chapter 4 of the complete author-hosted lecture notes, \u00a7\u00a74.3.3\u20134.3.4",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, \u00a7\u00a7II.F and IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "strategy": "Direct verification of the affine concave entropy and of relative local maximality, followed by an explicit higher global value.",
+        "dependency_level": 7,
+        "inventory_expansion_required": false,
+        "library": "physics",
+        "physical_scope": "An abstract two-system model with positive thermodynamic coordinates and a model-declared nonconvex energy-partition constraint; it illustrates global versus local maxima without a material-specific kinetic or empirical claim.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

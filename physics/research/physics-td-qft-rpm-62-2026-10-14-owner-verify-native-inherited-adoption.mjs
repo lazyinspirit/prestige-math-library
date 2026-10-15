@@ -1,0 +1,12 @@
+import fs from 'node:fs';import crypto from 'node:crypto';
+import {correctionAdoption} from '../../tools/physics-support/step5-inherited-repair.mjs';
+import {reviewContextHashes} from '../../tools/physics-support/step5-workflow.mjs';
+const r='physics-td-qft-rpm-62-2026-10-14',dir=`research/${r}-step5-v2`,read=p=>JSON.parse(fs.readFileSync(p)),sha=x=>crypto.createHash('sha256').update(x).digest('hex'),request=read(`${dir}/owner-inherited-repair-dirac-42-20261014.json`),report=read(`${dir}/step5-v2-correction-initial-r1-u1.json`),state=read(`.physics-autopilot/${r}/state.json`);
+if(Object.values(state.dispatches).some(x=>x.startedAt&&!x.endedAt))throw Error('Nativewritersactive');
+for(const ref of [request.original_pack,request.original_report,request.original_task,request.failure_evidence,request.before_source,request.observed_source,request.scientific_review,...request.scientific_support])if(sha(fs.readFileSync(ref.path))!==ref.sha256)throw Error('Boundevidencechanged');
+for(const [p,h] of Object.entries(report.supporting_evidence??{}))if(sha(fs.readFileSync(p))!==h)throw Error('Native supporting evidence changed');
+if(!fs.readFileSync(request.observed_source.path).equals(fs.readFileSync(`items/${request.subject}.md`)))throw Error('Native source changed');
+const dispatch=read(`research/${r}-dispatch/alpha-repair-step5-v2-correction-initial-r1-u1.result.json`);
+if(!dispatch.ok||dispatch.model!=='gpt-6.1-sol'||dispatch.provider_effort!=='high')throw Error('Invalid native identity');
+const current=reviewContextHashes(process.cwd(),[request.subject])[request.subject],adopted=correctionAdoption(report,request,{[request.subject]:current.post_sha256},current);
+const result={run:r,at:new Date().toISOString(),native_adoption_valid:true,subject:adopted.review.id,distinct_finding:adopted.decision.outcome,original_scope_violation_retained:adopted.adoption.original_scope_violation,source_unchanged:true,supporting_refs:Object.keys(report.supporting_evidence??{}).length,dispatch_ended_at:dispatch.ended_at,native_transition:false,recertification:false};fs.writeFileSync(`research/${r}-owner-stage5-initial-battery-4d8d1594/native-adoption-verification.json`,JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

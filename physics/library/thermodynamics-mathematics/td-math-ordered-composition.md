@@ -1,0 +1,30 @@
+---
+page: td-math-ordered-composition
+title: Ordered Composition
+status: published
+library: mathematics
+items:
+  - def-tdmath-tagged-scalable-compound
+  - lem-tdmath-compound-mass-well-defined
+  - def-tdmath-comparison-and-stability
+  - def-tdmath-signed-comparison
+  - lem-tdmath-reciprocal-naturals-tend-zero
+  - lem-tdmath-spectator-cancellation
+  - lem-tdmath-reference-order
+  - lem-tdmath-reference-supremum-bounds
+  - thm-tdmath-additive-entropy-representation
+  - thm-tdmath-affine-entropy-uniqueness
+  - thm-tdmath-common-meter-calibration
+  - thm-tdmath-finite-inequality-alternative
+  - thm-tdmath-reaction-offset-feasibility
+  - def-tdmath-type-offset-vector-space
+  - lem-tdmath-type-offset-vector-space-well-defined
+  - thm-tdmath-infinite-no-sinks-sandwich
+examples: []
+---
+
+This page gives conditional mathematical results for finite-support composition. Compound coefficients are nonnegative formal amounts, and their mass is only a bookkeeping total. A comparison is a preorder with explicitly listed consistency, scaling, splitting, stability, and comparison hypotheses; the comparison hypothesis is not derived from thermodynamic state geometry.
+
+Under a strict reference pair, the shrinking-spectator and least-upper-bound argument constructs a real-valued additive extensive representation. If no strict pair exists, all equal-mass compounds are equivalent and only the degenerate constant representation is asserted. Affine uniqueness assumes another exact additive representation. A finite common meter calibrates finitely many types only under a separately specified equal-mass comparison on the shared raw tags, satisfying the comparison axioms and exact state-to-meter substitutions. The reaction-offset alternative is exact for a finite family of supplied lower-bound inequalities; it does not infer necessity for actual transitions from loose bounds.
+
+The final result constructs a type-offset quotient vector space and applies real dominated Hahn–Banach on the finite domain of an extended sublinear cost, then extends linearly by bases under the Axiom of Choice. Its transition consequence is conditional: this page does not prove that a catalyst-chain cost exists, is well-defined, sublinear, or has no sinks. The adopted prerequisites include the stated basis, Zorn, ZFC, and analytic Hahn–Banach pages; item-level dependencies also cite the exact complete-real, vector-space, finite-sum, and set-construction suppliers used in the proofs.

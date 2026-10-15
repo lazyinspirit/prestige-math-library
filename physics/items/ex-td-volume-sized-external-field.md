@@ -1,0 +1,57 @@
+---
+id: "ex-td-volume-sized-external-field"
+kind: "example"
+title: "A volume-filling field changes ideal-gas pressure"
+status: "published"
+origin: "pipeline"
+domain: "physics"
+library: "physics"
+physical_scope: "A classical ideal positional gas in dimension d at least two with a constant per-particle external energy throughout the volume; a nonzero shift cannot be represented by a uniformly tempered exterior, while the zero shift agrees with the empty exterior. No empirical observation is asserted."
+deps: [def-td-stable-tempered-continuum-preparation, def-td-admissible-van-hove-and-tempered-exterior, post-td-equilibrium-ensemble-sampling, pthm-td-qualified-van-hove-and-exterior-limit]
+dependency_roles:
+  def-td-stable-tempered-continuum-preparation: formulation-prerequisite
+  def-td-admissible-van-hove-and-tempered-exterior: formulation-prerequisite
+  post-td-equilibrium-ensemble-sampling: physical-assumption
+  pthm-td-qualified-van-hove-and-exterior-limit: physical-result
+aliases: []
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+proof_strategy: direct
+dependency_level: 9
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+---
+
+## Example
+
+For the ideal positional gas $\varphi=0$ in dimension $d\geq2$ and a bounded measurable region of dimensionless volume $0\leq V<\infty$, take $z>0$ and $T>0$, with $\beta=(k_{\mathrm B}T)^{-1}>0$ in $\mathrm{J}^{-1}$. The grand partition is $\Xi_V(z,\beta)=e^{zV}$. Now impose a constant external energy $c\in\mathbb R$ joules per particle at every point of the volume, adding $cN$ to the configuration energy and using the same grand weighting convention. The new grand partition is $\Xi_V^{(c)}=e^{ze^{-\beta c}V}$. For $V>0$, the dimensionless per-volume log-partition rate changes from $z$ to $ze^{-\beta c}$ when $c\neq0$. At $V=0$, both partitions are $1$ and no per-volume rate is assigned. For $c\neq0$, this energy shift cannot be represented on the nonempty cubes $\Lambda_n$ by the deterministic exterior interaction used by [[pthm-td-qualified-van-hove-and-exterior-limit]]. For $c=0$, it vanishes and agrees with the empty exterior $\varnothing\in\Omega(0)$ of [[def-td-admissible-van-hove-and-tempered-exterior]]. For every $c$, the ideal potential itself fails the cited theorem's stronger interaction hypotheses.
+
+## Facts & Assumptions
+
+[F1] [[def-td-stable-tempered-continuum-preparation]]: $V$ is dimensionless reference volume, $\beta$ is inverse energy, and the ideal model has $H_N=0$.
+
+[A1] [[post-td-equilibrium-ensemble-sampling]]: $\Xi_V=\sum_{N\geq0}z^NZ_{V,N}$ with the indistinguishable positional factor $1/N!$.
+
+[F2] [[def-td-admissible-van-hove-and-tempered-exterior]]: the deterministic exterior class $\Omega(t)$ has one fixed square-count bound $t\geq0$, and $W_n(\omega,\zeta)=\sum_{x\in\omega}\sum_{y\in\zeta\setminus\Lambda_n}\varphi(x-y)$. Thus $\varnothing\in\Omega(0)$ and, for the ideal potential $\varphi=0$, $W_n=0$ for every allowed exterior.
+
+[L1] [[pthm-td-qualified-van-hove-and-exterior-limit]]: its current conditional statement treats exterior energy only as $W_n(\omega,\zeta)$ for a fixed $\zeta\in\Omega(t)$ and assumes a superstable regular pair potential with an additional positive divergent core for the exterior conclusion. The ideal potential has no such positive core. The theorem is draft and remains conditional on its mathematical suppliers.
+
+## Verification
+
+**Given:** The finite-volume grand weight, an ideal gas, and the uniform per-particle shift $c$ over the entire region.
+
+1.1 Since $H_N=0$, the finite-volume canonical positional integral is $Z_{V,N}=V^N/N!$. Summing the adopted grand weights gives $\Xi_V=\sum_{N\geq0}(zV)^N/N!=e^{zV}$. [given, F1, A1, algebra]
+
+2.1 Adding $cN$ to the energy multiplies the $N$-particle weight by $e^{-\beta cN}$, so $\Xi_V^{(c)}=\sum_{N\geq0}(ze^{-\beta c}V)^N/N!=e^{ze^{-\beta c}V}$. When $V>0$, division of the two logarithms by $V$ gives $z$ and $ze^{-\beta c}$; these differ for $c\neq0$ because $\beta>0$ and $z>0$. When $V=0$, only the vacuum contributes, both partitions equal $1$, and division by $V$ is undefined. [given, A1, step 1.1, algebra]
+
+3.1 For $\varphi=0$, [F2] gives $W_n(\omega,\zeta)=0$ for every allowed exterior. If $c\neq0$, a singleton $\omega=\{x\}$ in any $\Lambda_n$ has $cN=c\neq0$, so no such exterior represents this energy shift. If $c=0$, the shift is zero and agrees with $\zeta=\varnothing\in\Omega(0)$. In either case the ideal potential lacks the positive divergent core required by [L1], so the calculation in step 2.1 contradicts no qualified exterior conclusion. [given, F2, L1, step 2.1] ∎

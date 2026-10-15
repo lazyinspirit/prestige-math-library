@@ -1,0 +1,111 @@
+---
+id: lem-qft-example-oscillator-feynman-prescription
+kind: lemma
+domain: mathematics
+title: One-mode oscillator, Feynman boundary prescription, and retarded contrast
+status: draft
+origin: pipeline
+dependency_level: 1
+deps:
+  - def-qft-example-data
+  - def-complex-exponential
+  - def-countable-choice
+  - def-fourier-transform-on-l-one-of-rn
+  - def-schwartz-space-and-its-seminorms
+  - cor-complex-exponential-cartesian-form-modulus-and-eulers-identity
+  - lem-l-two-with-the-integral-pairing-is-a-hilbert-space
+  - thm-nrqm-oscillator-oscillator-scaling-and-exact-realization
+  - thm-complex-exponential-is-entire-with-derivative-itself
+  - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
+  - thm-fourier-transform-maps-schwartz-space-continuously-to-itself
+  - thm-nrqm-oscillator-hermite-recurrence
+dependency_roles:
+  def-qft-example-data: mathematical-premise
+  def-complex-exponential: mathematical-premise
+  def-countable-choice: mathematical-premise
+  def-fourier-transform-on-l-one-of-rn: mathematical-premise
+  def-schwartz-space-and-its-seminorms: mathematical-premise
+  cor-complex-exponential-cartesian-form-modulus-and-eulers-identity: mathematical-premise
+  lem-l-two-with-the-integral-pairing-is-a-hilbert-space: mathematical-premise
+  thm-nrqm-oscillator-oscillator-scaling-and-exact-realization: mathematical-premise
+  thm-complex-exponential-is-entire-with-derivative-itself: mathematical-premise
+  thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
+  thm-fourier-transform-maps-schwartz-space-continuously-to-itself: mathematical-premise
+  thm-nrqm-oscillator-hermite-recurrence: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: David Tong, Quantum Field Theory, §§2.1.1 and 2.7.1–2.7.2
+      url: https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S2.html
+    - title: M. Srednicki, Quantum Field Theory, author-hosted prepublication draft, §7
+      url: https://web.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf
+---
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]), $m_o>0$ in kilograms, $\omega>0$ in $\mathrm{s}^{-1}$, and $\hbar>0$ in $\mathrm{J\,s}$. Take the complete oscillator family $(\psi_n)_{n\ge0}$ and self-adjoint Hamiltonian $H_{\rm osc}$ of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], with oscillator length $\ell=\sqrt{\hbar/(m_o\omega)}$ and $H_{\rm osc}\psi_n=\hbar\omega(n+\tfrac12)\psi_n$. Let $\mathcal C=\operatorname{span}\{\psi_n:n\ge0\}$ be the finite Hermite span. Multiplication by position $Xf(x)=xf(x)$ maps $\mathcal C$ into itself by the Hermite recurrence. Define $U(t)$ on $\mathcal C$ by $U(t)\psi_n=e^{-i\omega(n+1/2)t}\psi_n$ and extend continuously to a unitary on the oscillator Hilbert space. For $\psi_0$ the normalized ground state, define
+$$C_F(t)=\frac{m_o}{\hbar}\bigl(T X(t)X(0)\psi_0,\psi_0\bigr)_1,\qquad X(t)=U(t)^\dagger XU(t),$$
+where time ordering means $T X(t)X(0)=X(t)X(0)$ for $t\ge0$ and $X(0)X(t)$ for $t<0$. Define $G_R(t)=1_{[0,\infty)}(t)\sin(\omega t)/\omega$.
+
+Then, for every real $t$,
+$$C_F(t)=\frac{e^{-i\omega|t|}}{2\omega},\qquad (\partial_t^2+\omega^2)C_F=-i\delta_0,\qquad (\partial_t^2+\omega^2)G_R=\delta_0.$$
+The derivatives are distributional on $\mathbb R$, and $\delta_0(\varphi)=\varphi(0)$. Both kernels have units of seconds, so the differential identities have units of inverse seconds. In particular, $C_F(t)\ne0$ for $t<0$ while $G_R(t)=0$ there.
+
+For a Schwartz test function $\varphi\in\mathcal S(\mathbb R)$ and $\epsilon>0$, define $\operatorname{PV}\int\varphi(x)/x\,dx:=\lim_{r\downarrow0}\int_{|x|>r}\varphi(x)/x\,dx$ and $\delta_a(\varphi):=\varphi(a)$. The Plemelj boundary identity is
+$$\lim_{\epsilon\downarrow0}\int_{\mathbb R}\frac{\varphi(x)}{x+i\epsilon}\,dx =\operatorname{PV}\int_{\mathbb R}\frac{\varphi(x)}x\,dx-i\pi\varphi(0),$$
+with the opposite sign of $i\epsilon$ reversing the delta sign. In this boundary formula $x$ and $\epsilon$ use one common coordinate unit. For $\nu\in\mathbb R$ in $\mathrm{s}^{-1}$, the frequency regulator $\epsilon>0$ is in $\mathrm{s}^{-1}$ and $\epsilon t$ is dimensionless; the ordinary positive-sign Fourier transform of $e^{-\epsilon|t|}C_F(t)$ is
+$$\frac{i}{2\omega}\left(\frac1{\nu-\omega+i\epsilon}-\frac1{\nu+\omega-i\epsilon}\right).$$
+As $\epsilon\downarrow0$ its distributional limit is
+$$\frac{i}{2\omega}\left[ \operatorname{PV}\frac1{\nu-\omega}-\operatorname{PV}\frac1{\nu+\omega} -i\pi\delta_{\omega}-i\pi\delta_{-\omega}\right],$$
+which is conventionally denoted $i/(\nu^2-\omega^2+i0)$. Here that notation means the displayed pair of opposite boundary values at the two simple poles. This one-mode result makes no spatial-causality or interacting-field claim.
+
+## Facts & Assumptions
+
+**Given:** $\mathrm{AC}_\omega$, $m_o,\omega,\hbar>0$ with units as stated, the published oscillator Hamiltonian and basis, and the time-ordered product on the core $\mathcal C$.
+
+[F1] [[def-qft-example-data]]: energy, time, mass, action, and Hilbert-pairing conventions are as stated; in particular $\omega t$ is dimensionless and the pairing is first-variable-linear.
+
+[F2] [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]]: the operator $H_{\rm osc}$ is self-adjoint and satisfies $H_{\rm osc}\psi_n=\hbar\omega(n+\tfrac12)\psi_n$ for every $n$.
+
+[F11] [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]]: the functions $\psi_n:=Dg_n$, $\psi_n(x)=\ell^{-1/2}g_n(x/\ell)$, form a complete orthonormal family of $L^2(\mathbb R,dx)$.
+
+[F12] [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]: complex $L^2(\mathbb R)$ is complete for the integral pairing and its norm.
+
+[F3] [[thm-nrqm-oscillator-hermite-recurrence]]: $\sqrt2\,y\,g_n=\sqrt n\,g_{n-1}+\sqrt{n+1}\,g_{n+1}$, with $g_{-1}=0$.
+
+[F4] [[def-schwartz-space-and-its-seminorms]]: $\mathcal S(\mathbb R)$ consists of smooth functions for which every polynomially weighted derivative is bounded; its functions and Fourier tests have rapidly decaying tails.
+
+[F5] [[def-fourier-transform-on-l-one-of-rn]]: $\widehat f(\xi)=\int f(t)e^{-2\pi it\xi}\,dt$. The unnormalized positive-sign transform $\mathcal T_+\varphi(t)=\int e^{i\nu t}\varphi(\nu)\,d\nu$ equals $\widehat\varphi(-t/(2\pi))$ after variable naming.
+
+[F6] [[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]]: the normalized Fourier transform maps $\mathcal S$ continuously to $\mathcal S$.
+
+[F7] [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]: absolutely integrable product-space functions may be integrated in either order.
+
+[A1] [[def-countable-choice]]: every countable family of nonempty sets has a choice function; the oscillator and Fourier suppliers are invoked only under this stated axiom.
+
+[F8] [[def-complex-exponential]]: the complex exponential is defined by its power series.
+
+[F9] [[thm-complex-exponential-is-entire-with-derivative-itself]]: the complex exponential is differentiable with derivative itself.
+
+[F10] [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]: $e^{ix}=\cos x+i\sin x$ and $|e^{ix}|=1$ for real $x$.
+
+## Proof
+
+1.1 Let $\ell=\sqrt{\hbar/(m_o\omega)}$ and $\psi_n(x)=\ell^{-1/2}g_n(x/\ell)$ as in [F2] and [F11]. The exact hypotheses include the stated $\mathrm{AC}_\omega$ [A1]. Rescaling [F3] gives $$X\psi_n=\sqrt{\frac{\hbar}{2m_o\omega}}\left(\sqrt n\,\psi_{n-1}+\sqrt{n+1}\,\psi_{n+1}\right),$$ with $\psi_{-1}=0$. Thus $X$ maps the finite span $\mathcal C$ into itself, so all products in the statement are defined on $\psi_0$. On a finite vector $\sum_{n=0}^Nc_n\psi_n$, the phase rule preserves norm by orthonormality [F11]; its inverse is the opposite phase rule. Density of $\mathcal C$ follows from completeness in [F11], and Hilbert completeness [F12] gives unique continuous extensions of both inverse isometries to the whole oscillator Hilbert space. Hence $U(t)$ is unitary and agrees on $\mathcal C$ with the energy evolution [F2]. [given, A1, F1, F2, F3, F10, F11, F12, algebra]
+
+1.2 Fix $\varphi\in\mathcal S(\mathbb R)$. Set $\chi=1_{[-1,1]}$ and $\psi=\varphi-\varphi(0)\chi$. The function $\chi$ is even and integrable, $\psi(0)=0$, and $\psi(x)/x$ is bounded near zero because $\chi=1$ there and $\varphi$ is differentiable. Outside $[-1,1]$, $\psi=\varphi$, so $\psi(x)/x$ is integrable at infinity; on compact sets away from zero it is also integrable. For any integrable complex $q$, put $I=\int q$. If $I=0$, $|I|\le\int|q|$ is immediate; otherwise $\alpha=\overline I/|I|$ gives $|I|=\int\operatorname{Re}(\alpha q)\le\int|q|$. The real part of the regularized integral is $$\int_{\mathbb R}\frac{x\psi(x)}{x^2+\epsilon^2}\,dx=\int_{\mathbb R}\frac{\psi(x)}x\,\frac{x^2}{x^2+\epsilon^2}\,dx,$$ because the omitted $\varphi(0)\chi$ term is odd. To see convergence to $\int\psi(x)/x\,dx$, first restrict to $|x|<r<1$, where the difference is bounded by $2r\sup_{|x|\le r}|\psi(x)/x|$, then on $|x|\ge r$ it is bounded by $(\epsilon^2/r^2)\|\psi/x\|_1$. Let $r$ tend to zero and then $\epsilon$ tend to zero. Since $\operatorname{PV}\int\chi(x)/x\,dx=0$, this is the required principal-value real part. [given, F4, algebra]
+
+1.3 For $\epsilon>0$, the damped kernel is integrable, and its positive-sign Fourier transform is the sum of two ordinary half-line integrals: $$\int_{\mathbb R}e^{i\nu t}e^{-\epsilon|t|}C_F(t)\,dt=\frac1{2\omega}\left(\frac1{\epsilon+i(\omega-\nu)}+\frac1{\epsilon+i(\omega+\nu)}\right)=\frac{i}{2\omega}\left(\frac1{\nu-\omega+i\epsilon}-\frac1{\nu+\omega-i\epsilon}\right).$$ The first equality follows by integrating $e^{-(\epsilon+i(\omega-\nu))t}$ on $t\ge0$ and $e^{-(\epsilon+i(\omega+\nu))|t|}$ on $t<0$; both real decay rates are $\epsilon>0$. [given, F5, F8, F9, algebra]
+
+2.1 The imaginary part is $-\int\varphi(x)\epsilon/(x^2+\epsilon^2)\,dx$. The nonnegative kernel has integral $\pi$, by the antiderivative $\arctan(x/\epsilon)$. For any $r>0$, continuity bounds the error from replacing $\varphi(x)$ by $\varphi(0)$ on $|x|\le r$ by $\pi\sup_{|x|\le r}|\varphi(x)-\varphi(0)|$. On $|x|>r$, the kernel mass is at most $2\epsilon/r$, so the error is at most $4\|\varphi\|_\infty\epsilon/r$. First choose $r$ small and then $\epsilon$ small. This proves the imaginary limit $-\pi\varphi(0)$. Replacing $+i\epsilon$ by $-i\epsilon$ reverses this sign. [given, F4, step 1.2, algebra]
+
+2.2 Put $d_o=\sqrt{\hbar/(2m_o\omega)}$. From step 1.1, $X\psi_0=d_o\psi_1$ and $X\psi_1=d_o(\psi_0+\sqrt2\,\psi_2)$. For $t\ge0$, applying $X(t)=U(t)^\dagger XU(t)$ to $X\psi_0$ and taking the ground-state coefficient gives $$\bigl(X(t)X\psi_0,\psi_0\bigr)_1=d_o^2e^{-i\omega t}.$$ For $t<0$, time ordering gives $\bigl(X X(t)\psi_0,\psi_0\bigr)_1$. Since $U(t)\psi_0=e^{-i\omega t/2}\psi_0$ and $U(t)^\dagger\psi_1=e^{3i\omega t/2}\psi_1$, step 1.1 gives $X(t)\psi_0=d_oe^{i\omega t}\psi_1$; applying $X$ and taking the ground-state coefficient gives $d_o^2e^{i\omega t}$. Multiplying by $m_o/\hbar$ and using $m_od_o^2/\hbar=1/(2\omega)$ proves $C_F(t)=e^{-i\omega|t|}/(2\omega)$. [given, F1, F2, step 1.1, F10, algebra]
+
+3.1 The function $C_F$ is continuous at $0$, solves $C_F''+\omega^2C_F=0$ classically on each open half-line, and has one-sided derivatives $C_F'(0+)= -i/2$ and $C_F'(0-)= i/2$. For a test $\varphi\in C_c^\infty(\mathbb R)$, integrate $\int_{-\infty}^0 C_F\varphi''+\int_0^\infty C_F\varphi''$ by parts twice. The boundary terms in $\varphi'(0)$ cancel because $C_F$ is continuous; the remaining coefficient of $\varphi(0)$ is $C_F'(0+)-C_F'(0-)=-i$. Thus $(\partial_t^2+\omega^2)C_F=-i\delta_0$. [given, step 2.2, algebra]
+
+3.2 The function $G_R$ is zero on $t<0$, solves $G_R''+\omega^2G_R=0$ on $t>0$, is continuous at zero with $G_R(0)=0$, and has derivative jump $G_R'(0+)-G_R'(0-)=1$. The same two integrations by parts show $(\partial_t^2+\omega^2)G_R=\delta_0$. Since $C_F(t)$ has modulus $1/(2\omega)>0$ for $t<0$ but $G_R(t)=0$ there, the Feynman kernel is not the retarded response. [given, step 2.2, F10, algebra]
+
+4.1 To justify the distribution limit, the Fourier transform in [F6] and the rescaling in [F5] preserve the Schwartz test space. The time-side kernels $e^{-\epsilon|t|}C_F(t)$ converge to $C_F$ against every such transformed test: on $|t|\le R$, $|e^{-\epsilon|t|}-1|\le\epsilon R$, and the tail is bounded by $(1/\omega)\int_{|t|>R}|\mathcal T_+\varphi(t)|dt$, which tends to zero as $R\to\infty$. For $\epsilon>0$, Fubini [F7] identifies the transform function in step 1.3 with this dual action, since the absolute double integral is at most $\|e^{-\epsilon|\cdot|}C_F\|_1\|\varphi\|_1$. Applying the Plemelj limits in steps 1.2 and 2.1 to the two shifted poles gives the displayed boundary distribution. Combining the rational terms at finite $\epsilon$ gives $(i+\epsilon/\omega)/(\nu^2-\omega^2+2i\epsilon\omega+\epsilon^2)$, so the numerator tends to $i$ and the two poles approach from opposite sides. In the $i0$ shorthand, the exact partial-fraction definition is $$\frac{i}{\nu^2-\omega^2+i0}:=\frac{i}{2\omega}\left(\frac1{\nu-\omega+i0}-\frac1{\nu+\omega-i0}\right),$$ where each $i0$ is the boundary proved above; the opposite sign at the second pole follows from $\nu^2-\omega^2=(\nu-\omega)(\nu+\omega)$ and $\omega>0$. No contour integration or unproved pole rule is used. [given, F5, F6, F7, step 1.2, step 2.1, step 1.3, algebra] ∎

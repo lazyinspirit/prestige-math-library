@@ -1,0 +1,1102 @@
+{
+  "version": 1,
+  "scope": [
+    "def-emg-geometric-scaling",
+    "thm-emg-field-normalization-equivalence",
+    "thm-emg-conformal-maxwell",
+    "thm-emg-conformal-einstein-transformation",
+    "prop-emg-constant-electrovac-rescaling",
+    "prop-emg-test-field-residual-order",
+    "cex-emg-conformal-maxwell-not-einstein",
+    "ex-emg-coulomb-charge-normalization"
+  ],
+  "contracts": {
+    "def-emg-geometric-scaling": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition introduces parameter maps but makes no existence claim on an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "All defining conversion parameters are strictly positive, and no zero-valued conversion factor is introduced."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No distinguished unit parameter value is required by this definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The background metric is nondegenerate by the referenced Lorentzian definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint occurs in this parameter dictionary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition performs no selection or existence construction beyond the inherited geometry."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item is a definition and states no equivalence."
+        }
+      ]
+    },
+    "thm-emg-field-normalization-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-geometric-scaling",
+          "source_section": "Definition",
+          "quote": "For this conversion dictionary, take $c>0$, $G>0$, and $\\mu_0>0$ as numerical input parameters, with SI dimensions\n\n$$[c]=\\mathrm{m\\,s^{-1}},\\qquad [G]=\\mathrm{m^3\\,kg^{-1}\\,s^{-2}},\\qquad [\\mu_0]=\\mathrm{kg\\,m\\,C^{-2}}.$$\n\nDefine the derived parameters\n\n$$\\varepsilon_0:=\\frac{1}{\\mu_0c^2},\\qquad \\kappa:=\\frac{8\\pi G}{c^4},\\qqua",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-curvature-tensor-and-derived-tensors",
+          "source_section": "Definition",
+          "quote": "$$R_{abcd}:=\\sum_e g_{ae}R^e{}_{bcd},\\qquad \\operatorname{Ric}_{bd}:=\\sum_{a,c}g^{ac}R_{abcd},\\qquad S:=\\sum_{b,d}g^{bd}\\operatorname{Ric}_{bd},\\qquad G_{ab}:=\\operatorname{Ric}_{ab}-\\tfrac12 S\\,g_{ab}.$$\n\nThe fields $R_{abcd}$, $\\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ are called\nthe **Riemann tensor with lowered indices**, t",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-emg-field-normalization-equivalence-step-1-1",
+          "claim": "Contracting the displayed definition of $\\mathcal Q$ gives $g^{ab}\\mathcal Q_{ab}=F_{ac}F^{ac}-\\tfrac14(g^{ab}g_{ab})F_{cd}F^{cd}=F_{cd}F^{cd}-F_{cd}F^{cd}=0$, because the metric dimension is four. Thus $\\mathcal Q$ is trace-free.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "A1"
+          ]
+        },
+        {
+          "id": "thm-emg-field-normalization-equivalence-step-1-2",
+          "claim": "Each term of $\\mathcal Q(g,F)$ contains exactly two factors linear in $F$, so for every scalar $s$, $\\mathcal Q(g,sF)=s^2\\mathcal Q(g,F)$. In particular, $\\mathcal Q(g,\\mathcal F)=\\alpha^2\\mathcal Q(g,F)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "thm-emg-field-normalization-equivalence-step-2-1",
+          "claim": "Since $2\\alpha^2=\\kappa/\\mu_0$ by [F1], the right-hand side $(\\kappa/\\mu_0)\\mathcal Q(g,F)$ equals $2\\mathcal Q(g,\\mathcal F)$; replacing it in the first equation proves equivalence of the first two equations in both directions.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "thm-emg-field-normalization-equivalence-step-2-2",
+          "claim": "By [F2], tracing the second equation gives $-S+4\\Lambda=0$, since $g^{ab}G_{ab}=S-\\tfrac12(4)S=-S$ and the right-hand side is trace-free by step 1.1. Hence $S=4\\Lambda$.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "thm-emg-field-normalization-equivalence-step-3-1",
+          "claim": "Substituting $S=4\\Lambda$ into $G_{ab}+\\Lambda g_{ab}$ gives $\\operatorname{Ric}_{ab}-2\\Lambda g_{ab}+\\Lambda g_{ab}=\\operatorname{Ric}_{ab}-\\Lambda g_{ab}$, proving the second equation implies the third. Conversely, tracing the third equation and using step 1.1 gives $S-4\\Lambda=0$; substituting this into $G_{ab}$ recovers the second equation.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The tensor equations are pointwise; on an empty manifold both equations are vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives Q(g,0)=0 and the vacuum equation is recovered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 applies to every scalar, including scalar one; the identity scaling leaves Q unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypothesis is a Lorentzian metric, so degenerate metrics and nonexistent inverse metrics are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, boundary value, or endpoint hypothesis occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 carries only the inherited AC-omega assumption; its finite contractions use no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 convert the SI equation to the geometric equation and trace-reversed equation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 traces the Ricci equation and recovers the Einstein equation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Contract the trace-free quadratic tensor with g^{ab} in dimension four, then substitute alpha^2 = kappa/(2 mu_0).",
+          "result": "g^{ab} Q_ab = 0 and 2 Q(g, alpha F) = (kappa/mu_0) Q(g,F), so the first two tensor equations have identical right-hand sides.",
+          "verifies": "Steps 1.1–2.1."
+        },
+        {
+          "check": "Trace the Einstein equation and then the trace-reversed equation using g^{ab}G_ab = -S and g^{ab}g_ab = 4.",
+          "result": "Both forms give S = 4 Lambda and substitution recovers the other form.",
+          "verifies": "Steps 2.2–3.1."
+        }
+      ]
+    },
+    "thm-emg-conformal-maxwell": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-emg-conformal-hodge-multiplier",
+          "source_section": "Statement",
+          "quote": "For every smooth $k$-form $\\beta$, $0\\le k\\le4$,\n\n$$\\star_{\\widetilde g}\\beta=\\Omega^{4-2k}\\star_g\\beta.$$\n\nIn degree $2$ the Hodge star is unchanged. This is a statement about the Hodge operators of two conformally related Lorentz metrics; it asserts no conformal invariance of any curvature or field equation.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-emg-lorentzian-forms",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a smooth, Hausdorff, second-countable four-manifold without boundary, with smooth Lorentzian metric $g$ of signature $(-,+,+,+)$ and smooth time-orientation field $N$, as in [[def-gr-smooth-lorentzian-objects]]. Supply an independent orientation $o$ of $M$ in the sense of [[def-oriented-smooth-manifold-and-orien",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-emg-conformal-maxwell-step-1-1",
+          "claim": "In dimension four, $\\det(\\widetilde g_{ab})=\\Omega^8\\det(g_{ab})$. Since $\\Omega>0$, [F2] therefore gives $\\operatorname{vol}_{\\widetilde g}=\\Omega^4\\operatorname{vol}_g$. By [F1], $\\star_{\\widetilde g}F=\\star_gF$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-maxwell-step-1-2",
+          "claim": "If $dF=0$, then the same two-form $F$ still obeys $dF=0$ for $\\widetilde g$, because the exterior derivative does not depend on the metric.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-maxwell-step-1-3",
+          "claim": "The lower tensor satisfies $\\widetilde F_b{}^c=\\Omega^{-2}F_b{}^c$ and $\\widetilde F_{cd}\\widetilde F^{cd}=\\Omega^{-4}F_{cd}F^{cd}$. Substitution in its definition gives $\\widetilde{\\mathcal Q}_{ab}=\\Omega^{-2}\\mathcal Q_{ab}$, hence $\\widetilde T_{ab}=\\Omega^{-2}T_{ab}$. Raising both indices with $\\widetilde g^{-1}=\\Omega^{-2}g^{-1}$ gives $\\widetilde T^{ab}=\\Omega^{-6}T^{ab}$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-maxwell-step-2-1",
+          "claim": "Using step 1.1 and linearity of contraction in its vector argument, $\\iota_{\\widetilde j}\\operatorname{vol}_{\\widetilde g}=\\iota_{\\Omega^{-4}j}(\\Omega^4\\operatorname{vol}_g)=\\iota_j\\operatorname{vol}_g$. Thus $d(\\star_{\\widetilde g}F)=d(\\star_gF)=\\mu_0\\iota_j\\operatorname{vol}_g=\\mu_0\\iota_{\\widetilde j}\\operatorname{vol}_{\\widetilde g}$ whenever the original sourced equation holds.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-maxwell-step-2-2",
+          "claim": "Since $\\widetilde g(\\Omega^{-1}n,\\Omega^{-1}n)=g(n,n)=-1$, the rescaled vector is unit timelike. Contracting the lower-tensor identity twice with $\\widetilde n=\\Omega^{-1}n$ yields $\\widetilde T(\\widetilde n,\\widetilde n)=\\Omega^{-4}T(n,n)$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-maxwell-step-3-1",
+          "claim": "Conversely, $\\widetilde j=\\Omega^{-4}j$ implies $j=\\Omega^4\\widetilde j$. Reversing the contraction equality in step 2.1 and using $\\star_gF=\\star_{\\widetilde g}F$ gives the original sourced equation; the homogeneous equation is unchanged by step 1.2.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-maxwell-step-4-1",
+          "claim": "Raising the two indices of $F$ contributes $\\Omega^{-4}$ and the volume form contributes $\\Omega^4$, so $F_{ab}F^{ab}\\operatorname{vol}_g$ is invariant pointwise. Integration over the same domain preserves equality whenever defined, as do compactly supported action differences.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The differential-form equations are pointwise and vacuous on an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes j=0 and F=0, for which both sourced sides vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 with Omega=1 gives the identity metric and volume scaling."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Omega is strictly positive and g is nondegenerate, so the conformal metric is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint condition is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 records the inherited AC-omega setup and uses only pointwise determinant algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.1 prove the transformed Maxwell equations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 reverses the contraction and Hodge equalities."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Scale a four-dimensional metric matrix by Omega^2 and evaluate the degree-two Hodge multiplier.",
+          "result": "The determinant scales by Omega^8, the oriented volume by Omega^4, and the Hodge exponent 4-2k vanishes at k=2.",
+          "verifies": "Step 1.1."
+        },
+        {
+          "check": "Raise the indices in Q_ab and T_ab under g-tilde = Omega^2 g while keeping the two-form fixed.",
+          "result": "F_b^c has weight Omega^-2, F_cd F-tilde^{cd} has weight Omega^-4, T_ab has weight Omega^-2, and T^{ab} has weight Omega^-6; the observer contraction then has weight Omega^-4.",
+          "verifies": "Steps 2.1–2.2."
+        },
+        {
+          "check": "Apply linearity of contraction to j-tilde = Omega^-4 j and vol-tilde = Omega^4 vol.",
+          "result": "i_{j-tilde} vol-tilde = i_j vol, which preserves the sourced differential-form equation in either direction.",
+          "verifies": "Steps 2.1 and 3.1."
+        },
+        {
+          "check": "Raise both indices of the same two-form and multiply its quadratic scalar by the conformal volume factor.",
+          "result": "F_ab F-tilde^{ab} has weight Omega^-4 while vol-tilde has weight Omega^4, so the action density is pointwise invariant.",
+          "verifies": "Step 4.1."
+        }
+      ]
+    },
+    "thm-emg-conformal-einstein-transformation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-lorentzian-forms",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a smooth, Hausdorff, second-countable four-manifold without boundary, with smooth Lorentzian metric $g$ of signature $(-,+,+,+)$ and smooth time-orientation field $N$, as in [[def-gr-smooth-lorentzian-objects]]. Supply an independent orientation $o$ of $M$ in the sense of [[def-oriented-smooth-manifold-and-orien",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-curvature-tensor-and-derived-tensors",
+          "source_section": "Definition",
+          "quote": "$$R_{abcd}:=\\sum_e g_{ae}R^e{}_{bcd},\\qquad \\operatorname{Ric}_{bd}:=\\sum_{a,c}g^{ac}R_{abcd},\\qquad S:=\\sum_{b,d}g^{bd}\\operatorname{Ric}_{bd},\\qquad G_{ab}:=\\operatorname{Ric}_{ab}-\\tfrac12 S\\,g_{ab}.$$\n\nThe fields $R_{abcd}$, $\\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ are called\nthe **Riemann tensor with lowered indices**, t",
+          "uses": [
+            "2.2",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-metric-selected-connection",
+          "source_section": "Definition",
+          "quote": "A **metric-selected connection** for\n$(M,g)$ is an affine connection on $M$ that is both torsion-free and\n$g$-compatible. Equivalently, it is an element of the class\n\n$$\\operatorname{LC}(M,g):=\\{\\nabla:\\nabla\\text{ is an affine connection on }M,\\ \\nabla\\text{ is torsion-free and }g\\text{-compatible}\\}.$$\n\nThe name records that t",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "The exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-emg-conformal-einstein-transformation-step-1-1",
+          "claim": "In a chart, $\\partial_a\\widetilde g_{bc}=\\Omega^2(\\partial_ag_{bc}+2u_ag_{bc})$ and $\\widetilde g^{ad}=\\Omega^{-2}g^{ad}$. Substituting these into the Christoffel formula [F3] cancels the common $\\Omega^2$ and gives $\\widetilde\\Gamma^a{}_{bc}-\\Gamma^a{}_{bc}=C^a{}_{bc}:=\\delta^a_bu_c+\\delta^a_cu_b-g_{bc}u^a$, where $u^a=g^{ab}u_b$. The reciprocal $\\Omega^{-1}$ is smooth on the positive range by [F6], and $d\\Omega$ is a smooth one-form by [F5], so $u$ and $C$ are smooth.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "A1"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-einstein-transformation-step-2-1",
+          "claim": "By [F5], $0=d(1)=d(\\Omega^{-1}\\Omega)=\\Omega^{-1}d\\Omega+\\Omega\\,d(\\Omega^{-1})$, so $d(\\Omega^{-1})=-\\Omega^{-2}d\\Omega$. Therefore $du=d(\\Omega^{-1})\\wedge d\\Omega+\\Omega^{-1}d^2\\Omega=-\\Omega^{-2}d\\Omega\\wedge d\\Omega=0$. Torsion freedom in [F3] gives $(du)_{ab}=\\nabla_a u_b-\\nabla_bu_a$, hence $H_{ab}=H_{ba}$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-einstein-transformation-step-2-2",
+          "claim": "Expanding the curvature definition [F2] with $\\widetilde\\Gamma=\\Gamma+C$ gives $\\widetilde R^a{}_{bcd}-R^a{}_{bcd}=\\nabla_cC^a{}_{db}-\\nabla_dC^a{}_{cb}+C^a{}_{ce}C^e{}_{db}-C^a{}_{de}C^e{}_{cb}$. Indeed, the terms linear in $C$ from the coordinate curvature formula are its partial derivatives plus the $\\Gamma C$ terms; grouping them by the tensor covariant-derivative rule in [F4] yields the two $\\nabla C$ terms, while the remaining terms are the displayed quadratic products.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-einstein-transformation-step-3-1",
+          "claim": "Contracting $a$ with $c$ as in [F2], the derivative terms are $\\nabla_aC^a{}_{db}-\\nabla_dC^a{}_{ab}$. The definition of $C$ gives $C^a{}_{ab}=4u_b$ and, using $\\nabla g=0$ from [F4], $\\nabla_aC^a{}_{db}=H_{db}+H_{bd}-g_{db}\\theta=2H_{bd}-g_{db}\\theta$ by step 2.1. Thus their difference is $-2H_{bd}-g_{bd}\\theta$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-einstein-transformation-step-4-1",
+          "claim": "The first quadratic contraction is $C^a{}_{ae}C^e{}_{db}=4u_e(\\delta^e_du_b+\\delta^e_bu_d-g_{db}u^e)=8u_bu_d-4g_{bd}s$. Expanding the second contraction into its nine terms gives $C^a{}_{de}C^e{}_{ab}=u_du_b+u_du_b-g_{db}s+4u_du_b+u_du_b-u_du_b-u_du_b-g_{db}s+u_du_b=6u_bu_d-2g_{bd}s$. Their difference is $2u_bu_d-2g_{bd}s$. Combining this with step 3.1 proves the Ricci transformation in the Statement.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-einstein-transformation-step-5-1",
+          "claim": "Contracting the Ricci transformation with $\\widetilde g^{ab}=\\Omega^{-2}g^{ab}$ gives $\\widetilde S=\\Omega^{-2}(S-2\\theta-4\\theta+2s-8s)=\\Omega^{-2}(S-6\\theta-6s)$.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "thm-emg-conformal-einstein-transformation-step-6-1",
+          "claim": "By definition, $\\widetilde G_{ab}=\\widetilde{\\operatorname{Ric}}_{ab}-\\tfrac12\\widetilde S\\,\\widetilde g_{ab}$. Substituting the Ricci formula from step 4.1 and $\\widetilde S\\,\\widetilde g_{ab}=(S-6\\theta-6s)g_{ab}$ from step 5.1 cancels the scalar-curvature terms and leaves $G_{ab}-2H_{ab}+2u_au_b+2g_{ab}\\theta+g_{ab}s$. This is the claimed Einstein-tensor formula.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All identities are pointwise; an empty manifold gives no exceptional case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 with constant Omega has u=0, so all transformation corrections vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Omega=1 in step 1.1 gives C=0 and the identity metric."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Omega>0 preserves nondegeneracy; zero conformal factors are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint condition is present."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 carries AC-omega only for the smooth background; the tensor expansion itself makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states transformation formulas, not an iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states transformation formulas, not an iff assertion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Contract C^a_db = delta^a_d u_b + delta^a_b u_d - g_db u^a in four dimensions, then evaluate the two quadratic Ricci contractions.",
+          "result": "C^a_ab = 4u_b; C^a_ae C^e_db = 8u_bu_d - 4g_db s; C^a_de C^e_ab = 6u_bu_d - 2g_db s; their difference is 2u_bu_d - 2g_db s.",
+          "verifies": "Steps 3.1–4.1."
+        },
+        {
+          "check": "Trace the Ricci correction and subtract one half of the transformed scalar curvature times the transformed metric.",
+          "result": "The scalar correction is -6theta - 6s, and the Einstein correction is -2H_ab + 2u_a u_b + 2g_ab theta + g_ab s.",
+          "verifies": "Steps 5.1–6.1."
+        }
+      ]
+    },
+    "prop-emg-constant-electrovac-rescaling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-emg-field-normalization-equivalence",
+          "source_section": "Statement",
+          "quote": "Define the quadratic tensor\n\n$$\\mathcal Q_{ab}(g,F):=F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd},$$\n\nwhere indices are raised with $g^{-1}$. Then the following equations for the same metric and two-form are equivalent:\n\n$$G_{ab}(g)+\\Lambda g_{ab}=\\frac{\\kappa}{\\mu_0}\\mathcal Q_{ab}(g,F),$$\n\n$$G_{ab}(g)+\\Lambda g_{ab}=2\\mathcal Q_{ab",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-emg-conformal-maxwell",
+          "source_section": "Statement",
+          "quote": "Then $(F,j)$ satisfies the differential-form Maxwell equations\n\n$$dF=0,\\qquad d(\\star_gF)=\\mu_0\\,\\iota_j\\operatorname{vol}_g$$\n\nif and only if $(F,\\widetilde j)$ satisfies the same equations for $\\widetilde g$, where $\\widetilde j:=\\Omega^{-4}j$. In addition,\n\n$$\\operatorname{vol}_{\\widetilde g}=\\Omega^4\\operatorname{vol}_g,\\qqu",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-metric-selected-connection",
+          "source_section": "Definition",
+          "quote": "A **metric-selected connection** for\n$(M,g)$ is an affine connection on $M$ that is both torsion-free and\n$g$-compatible. Equivalently, it is an element of the class\n\n$$\\operatorname{LC}(M,g):=\\{\\nabla:\\nabla\\text{ is an affine connection on }M,\\ \\nabla\\text{ is torsion-free and }g\\text{-compatible}\\}.$$\n\nThe name records that t",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-curvature-tensor-and-derived-tensors",
+          "source_section": "Definition",
+          "quote": "$$R_{abcd}:=\\sum_e g_{ae}R^e{}_{bcd},\\qquad \\operatorname{Ric}_{bd}:=\\sum_{a,c}g^{ac}R_{abcd},\\qquad S:=\\sum_{b,d}g^{bd}\\operatorname{Ric}_{bd},\\qquad G_{ab}:=\\operatorname{Ric}_{ab}-\\tfrac12 S\\,g_{ab}.$$\n\nThe fields $R_{abcd}$, $\\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ are called\nthe **Riemann tensor with lowered indices**, t",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "prop-emg-constant-electrovac-rescaling-step-1-1",
+          "claim": "Since $\\lambda$ is constant, $(g')^{ab}=\\lambda^{-2}g^{ab}$ and $\\partial_cg'_{ab}=\\lambda^2\\partial_cg_{ab}$. Substitution in the Christoffel formula [F3] gives $\\Gamma'[g']{}^a{}_{bc}=\\Gamma[g]^a{}_{bc}$; hence the two curvature operators and their lower-index Ricci tensors agree by [F2]. Tracing with $(g')^{-1}$ gives $S[g']=\\lambda^{-2}S[g]$, so $G_{ab}(g')=G_{ab}(g)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "A1"
+          ]
+        },
+        {
+          "id": "prop-emg-constant-electrovac-rescaling-step-1-2",
+          "claim": "In the definition of $\\mathcal Q$, $F'_{ac}=\\lambda F_{ac}$ while $F'_b{}^c=(g')^{cd}F'_{bd}=\\lambda^{-1}F_b{}^c$, so the first quadratic term is unchanged. Also $F'_{cd}F'^{cd}=\\lambda^{-2}F_{cd}F^{cd}$ and $g'_{ab}=\\lambda^2g_{ab}$, so the trace term is unchanged. Therefore $\\mathcal Q_{ab}(g',F')=\\mathcal Q_{ab}(g,F)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "prop-emg-constant-electrovac-rescaling-step-2-1",
+          "claim": "We have $\\Lambda'g'_{ab}=\\lambda^{-2}\\Lambda\\,\\lambda^2g_{ab}=\\Lambda g_{ab}$. Together with steps 1.1 and 1.2, both sides of the Einstein equation are unchanged. Equivalently, $\\mathcal F'=\\alpha F'=\\lambda\\mathcal F$ and the normalized equation in [F1] has the same quadratic tensor under $(g,\\mathcal F)\\mapsto(g',\\mathcal F')$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "prop-emg-constant-electrovac-rescaling-step-3-1",
+          "claim": "Apply [F2] with the constant conformal factor $\\Omega=\\lambda$: $(g,F,j)$ maps to $(g',F,\\lambda^{-4}j)$. The differential-form Maxwell equations are linear in the pair $(F,j)$, so multiplying both entries of this solution by $\\lambda$ gives $(g',F',j')=(g',\\lambda F,\\lambda^{-3}j)$, which also solves them. This proves the sourced Maxwell transformation; when $j=0$, the transformed source remains zero.",
+          "step": "3.1",
+          "inputs": [
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The field equations are pointwise and vacuous on an empty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 preserves the zero-current case; steps 1.2–2.1 preserve a zero field."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "With lambda=1 all transformed fields and parameters equal their originals in steps 1.1–3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The scaling parameter is required to satisfy lambda>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint condition occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the inherited geometry and finite tensor operations only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition states a solution map, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition states a solution map, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Substitute g-prime = lambda^2 g and F-prime = lambda F into the inverse metric, Christoffel formula, Einstein tensor and quadratic Maxwell tensor.",
+          "result": "The connection and lower Einstein tensor are unchanged; both terms of Q_ab(g-prime,F-prime) equal their original values.",
+          "verifies": "Steps 1.1–2.1."
+        },
+        {
+          "check": "Apply the conformal current rule at Omega=lambda, then scale the Maxwell pair by lambda.",
+          "result": "The source becomes lambda times lambda^-4 j = lambda^-3 j, while Lambda-prime g-prime = Lambda g.",
+          "verifies": "Steps 2.1 and 3.1."
+        }
+      ]
+    },
+    "prop-emg-test-field-residual-order": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-emg-field-normalization-equivalence",
+          "source_section": "Statement",
+          "quote": "Define the quadratic tensor\n\n$$\\mathcal Q_{ab}(g,F):=F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd},$$\n\nwhere indices are raised with $g^{-1}$. Then the following equations for the same metric and two-form are equivalent:\n\n$$G_{ab}(g)+\\Lambda g_{ab}=\\frac{\\kappa}{\\mu_0}\\mathcal Q_{ab}(g,F),$$\n\n$$G_{ab}(g)+\\Lambda g_{ab}=2\\mathcal Q_{ab",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-emg-lorentzian-forms",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a smooth, Hausdorff, second-countable four-manifold without boundary, with smooth Lorentzian metric $g$ of signature $(-,+,+,+)$ and smooth time-orientation field $N$, as in [[def-gr-smooth-lorentzian-objects]]. Supply an independent orientation $o$ of $M$ in the sense of [[def-oriented-smooth-manifold-and-orien",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "prop-emg-test-field-residual-order-step-1-1",
+          "claim": "Exterior differentiation and the Hodge map are linear, so $dF_\\varepsilon=\\varepsilon dF_1=0$ and $d(\\star_gF_\\varepsilon)=\\varepsilon d(\\star_gF_1)=0$. Thus the source-free Maxwell equations remain exactly satisfied on the unchanged $g$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "A1"
+          ]
+        },
+        {
+          "id": "prop-emg-test-field-residual-order-step-1-2",
+          "claim": "Each term of $\\mathcal Q$ is quadratic in $F$, so $\\mathcal Q(g,F_\\varepsilon)=\\varepsilon^2\\mathcal Q(g,F_1)$ and the associated lower tensor is $\\varepsilon^2T^{(1)}$ by the definition in the Statement.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "prop-emg-test-field-residual-order-step-2-1",
+          "claim": "Substituting the assumed vacuum equation $G(g)+\\Lambda g=0$ and step 1.2 into the residual definition gives $\\mathscr R(g,F_\\varepsilon;\\Lambda)=-\\kappa\\varepsilon^2T^{(1)}$ exactly.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "prop-emg-test-field-residual-order-step-3-1",
+          "claim": "Every component of $T^{(1)}$ is continuous on the compact chart set $K$, so each component has finite supremum there and the maximum over the sixteen components is finite. Homogeneity of this norm and $\\kappa>0$ give $\\|\\mathscr R\\|_K=\\kappa\\varepsilon^2\\|T^{(1)}\\|_K$. If $\\varepsilon\\ne0$ and some component of $T^{(1)}$ is nonzero at a point of $K$, step 2.1 makes the residual nonzero there, so the fixed pair fails the coupled equation on $K$. No estimate comparing it with a different metric follows from this identity.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The chart-domain equations are pointwise and no nonempty compact set is required for the residual identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero residual when epsilon=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At epsilon=1, step 2.1 reduces to the exact residual of F1 on the fixed background."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The metric is assumed Lorentzian and nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint is used; compactness applies to K inside a chart."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 carries the inherited AC-omega setup; the calculation is linear and quadratic algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition gives an exact residual, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition gives an exact residual, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Substitute F-epsilon = epsilon F_1 into the quadratic tensor and then into the fixed-background residual.",
+          "result": "Q(g,F-epsilon) = epsilon^2 Q(g,F_1) and R = -kappa epsilon^2 T^(1), exactly; epsilon=0 gives zero residual.",
+          "verifies": "Steps 1.2–3.1."
+        },
+        {
+          "check": "Use the maximum of the sixteen continuous tensor components on the compact chart set K.",
+          "result": "The component norm is finite and homogeneous, so ||R||_K = kappa epsilon^2 ||T^(1)||_K; a nonzero component at a point rules out the coupled equation there.",
+          "verifies": "Step 3.1."
+        }
+      ]
+    },
+    "cex-emg-conformal-maxwell-not-einstein": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-emg-conformal-maxwell",
+          "source_section": "Statement",
+          "quote": "Then $(F,j)$ satisfies the differential-form Maxwell equations\n\n$$dF=0,\\qquad d(\\star_gF)=\\mu_0\\,\\iota_j\\operatorname{vol}_g$$\n\nif and only if $(F,\\widetilde j)$ satisfies the same equations for $\\widetilde g$, where $\\widetilde j:=\\Omega^{-4}j$. In addition,\n\n$$\\operatorname{vol}_{\\widetilde g}=\\Omega^4\\operatorname{vol}_g,\\qqu",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-emg-conformal-einstein-transformation",
+          "source_section": "Statement",
+          "quote": "Then $H_{ab}=H_{ba}$ and\n\n$$\\widetilde{\\operatorname{Ric}}_{ab}=\\operatorname{Ric}_{ab}-2H_{ab}-g_{ab}\\theta+2u_au_b-2g_{ab}s,$$\n\n$$\\widetilde S=\\Omega^{-2}(S-6\\theta-6s),$$\n\n$$\\widetilde G_{ab}=G_{ab}-2H_{ab}+2u_au_b+2g_{ab}\\theta+g_{ab}s.$$\n\nAll curvature conventions are those stated in [[def-gr-curvature-tensor-and-derived-te",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-metric-selected-connection",
+          "source_section": "Definition",
+          "quote": "A **metric-selected connection** for\n$(M,g)$ is an affine connection on $M$ that is both torsion-free and\n$g$-compatible. Equivalently, it is an element of the class\n\n$$\\operatorname{LC}(M,g):=\\{\\nabla:\\nabla\\text{ is an affine connection on }M,\\ \\nabla\\text{ is torsion-free and }g\\text{-compatible}\\}.$$\n\nThe name records that t",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-curvature-tensor-and-derived-tensors",
+          "source_section": "Definition",
+          "quote": "$$R_{abcd}:=\\sum_e g_{ae}R^e{}_{bcd},\\qquad \\operatorname{Ric}_{bd}:=\\sum_{a,c}g^{ac}R_{abcd},\\qquad S:=\\sum_{b,d}g^{bd}\\operatorname{Ric}_{bd},\\qquad G_{ab}:=\\operatorname{Ric}_{ab}-\\tfrac12 S\\,g_{ab}.$$\n\nThe fields $R_{abcd}$, $\\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ are called\nthe **Riemann tensor with lowered indices**, t",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-emg-lorentzian-forms",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a smooth, Hausdorff, second-countable four-manifold without boundary, with smooth Lorentzian metric $g$ of signature $(-,+,+,+)$ and smooth time-orientation field $N$, as in [[def-gr-smooth-lorentzian-objects]]. Supply an independent orientation $o$ of $M$ in the sense of [[def-oriented-smooth-manifold-and-orien",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cex-emg-conformal-maxwell-not-einstein-step-1-1",
+          "claim": "The constant components of $\\eta$ have zero Christoffel symbols by [F3], hence zero curvature and $G(\\eta)=0$ by [F4]. Also $\\mathcal Q(\\eta,0)=0$, while [F5] admits $F=0$, which satisfies both source-free Maxwell equations. Thus $(\\eta,0,0)$ is an exact source-free electrovac solution.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "A1"
+          ]
+        },
+        {
+          "id": "cex-emg-conformal-maxwell-not-einstein-step-2-1",
+          "claim": "For this $\\Omega$, $u=\\Omega^{-1}d\\Omega=k\\,dx^1$. Since the background connection is flat with constant coefficients, $H_{ab}=\\nabla_a u_b=0$ and $\\theta=0$; because $x^1$ is spacelike, $s=\\eta^{ab}u_au_b=k^2$. The scalar-curvature formula [F2] therefore gives $\\widetilde S=-6k^2e^{-2kx^1}$, which is nonzero at every point.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "cex-emg-conformal-maxwell-not-einstein-step-3-1",
+          "claim": "Maxwell remains satisfied because the field and current are still zero. If the rescaled pair solved the electrovac Einstein equation with $\\Lambda=0$, it would have $\\widetilde G=0$; tracing this equation and using [F4] would force $\\widetilde S=0$, contradicting step 2.1. Hence conformal Maxwell covariance does not imply conformal electrovac Einstein covariance.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses the nonempty domain R4."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 deliberately uses the zero field and current; the curvature obstruction remains."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The nontrivial choice k neq 0 makes Omega nonconstant; k=0 would be the identity rescaling and is excluded in the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Omega is strictly positive and the rescaled metric is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The construction is on all of R4 and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the inherited AC-omega background and no arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A counterexample refutes a universal implication; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A counterexample refutes a universal implication; it states no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Evaluate the background and transformed scalar curvature for eta = diag(-1,1,1,1) and Omega = exp(k x^1).",
+          "result": "G(eta)=0 and Q(eta,0)=0; u=k dx^1, H=0, theta=0, s=k^2, and S-tilde=-6k^2 exp(-2kx^1), which is nonzero for k != 0.",
+          "verifies": "Steps 1.1–2.1."
+        },
+        {
+          "check": "Trace a putative four-dimensional vacuum Einstein equation G-tilde=0.",
+          "result": "Its trace forces S-tilde=0, contradicting the computed value while the zero Maxwell field remains source-free.",
+          "verifies": "Step 3.1."
+        }
+      ]
+    },
+    "ex-emg-coulomb-charge-normalization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-geometric-scaling",
+          "source_section": "Definition",
+          "quote": "For this conversion dictionary, take $c>0$, $G>0$, and $\\mu_0>0$ as numerical input parameters, with SI dimensions\n\n$$[c]=\\mathrm{m\\,s^{-1}},\\qquad [G]=\\mathrm{m^3\\,kg^{-1}\\,s^{-2}},\\qquad [\\mu_0]=\\mathrm{kg\\,m\\,C^{-2}}.$$\n\nDefine the derived parameters\n\n$$\\varepsilon_0:=\\frac{1}{\\mu_0c^2},\\qquad \\kappa:=\\frac{8\\pi G}{c^4},\\qqua",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-emg-field-normalization-equivalence",
+          "source_section": "Statement",
+          "quote": "Define the quadratic tensor\n\n$$\\mathcal Q_{ab}(g,F):=F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd},$$\n\nwhere indices are raised with $g^{-1}$. Then the following equations for the same metric and two-form are equivalent:\n\n$$G_{ab}(g)+\\Lambda g_{ab}=\\frac{\\kappa}{\\mu_0}\\mathcal Q_{ab}(g,F),$$\n\n$$G_{ab}(g)+\\Lambda g_{ab}=2\\mathcal Q_{ab",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-emg-coulomb-charge-normalization-step-1-1",
+          "claim": "From [F1], $\\alpha^2=4\\pi G/(\\mu_0c^4)=4\\pi G\\varepsilon_0/c^2$. Since $\\alpha>0$, this gives $\\alpha=\\sqrt{4\\pi G\\varepsilon_0}/c$ and hence $\\alpha/(4\\pi\\varepsilon_0c)=\\sqrt{G/(4\\pi\\varepsilon_0c^4)}$; the positivity assumptions justify taking the positive square root.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "ex-emg-coulomb-charge-normalization-step-2-1",
+          "claim": "Multiplying the Coulomb component by $\\alpha$ and using the equality in step 1.1 yields $\\mathcal F_{0r}=\\alpha F_{0r}=-\\sqrt{G/(4\\pi\\varepsilon_0c^4)}\\,Q_e/r^2=-q_{\\mathrm{geo}}/r^2$. By [F2], this is the geometric charge coefficient in the exact normalized Einstein equation. The equality is valid only on $r>0$ and introduces no point-source solution at the excluded origin.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example domain is the nonempty exterior r>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives q_geo=0 and calF_0r=0 when Q_e=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element or unit-parameter boundary case is required for this symbolic conversion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular point r=0 is excluded from the domain stated in the Example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no time interval or endpoint; the excluded radial boundary is handled by the degenerate case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only positive scalar algebra and inherited AC-omega."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies a conversion identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies a conversion identity, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Simplify alpha/(4 pi epsilon_0 c) using alpha^2 = 4 pi G epsilon_0/c^2 and positive parameters.",
+          "result": "alpha/(4 pi epsilon_0 c) = sqrt(G/(4 pi epsilon_0 c^4)); the negative Coulomb sign is preserved by multiplication by positive alpha.",
+          "verifies": "Steps 1.1–2.1."
+        }
+      ]
+    }
+  }
+}

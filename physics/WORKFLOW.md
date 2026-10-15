@@ -5,6 +5,12 @@ approved build checklist is [research/workflow-rebuild-plan.md](research/workflo
 this workflow. Physics and its sibling engine have separate revisions,
 worker prompts, supporting tools, content and run state.
 
+The physics gate-liveness precheck selects explicit item paths from the current
+run's A/B manifests, including definitions and other items without proof
+contracts. Missing, empty or ambiguous manifests leave the probe unavailable;
+they never trigger a whole-library precheck. The ordinary liveness failure for
+missing probe inputs still applies.
+
 ## Six-step workflow
 
 | Step | Work | Agents and handoff |
@@ -40,14 +46,37 @@ must escalate significant unmet prerequisites directly to the owner, giving the
 smallest missing supplier, consuming claims/steps and affected consumers.
 Scaffolding agents fully author all assigned items, pages and proof contracts;
 a proof strategy or successful process alone is not a completed carrier.
-Readiness records bind the finished carriers. Supplier batches release their
-consumers only after nonempty authored inventories and current readiness exist.
+Readiness records bind the finished carriers. Initial authoring fills every
+available worker slot, up to the shared cap of 30, taking lower dependency levels
+first across the complete pending queue. Levels are priorities, not completion
+barriers: authors start and continue even when another pair's supplier is missing.
+As soon as a worker finishes, the engine starts the next pending pair without
+waiting for the rest of its level.
 
 Batch levels are computed mechanically during planning, recomputed after drift
-materialization and before construction dispatches, and recorded in
-`research/RUN-batch-dependency-levels.json`. The engine checks the current graph,
-including declared carrier dependencies, and waits for completed, current supplier
-content before releasing consumers. This adds no agent stage.
+materialization and at the drained construction join, and recorded in
+`research/RUN-batch-dependency-levels.json`. Queue refill and status use that last
+valid full graph while authors edit draft manifests and carrier YAML. The loader
+validates its DAG, levels and complete current manifest batch scope without
+parsing in-flight drafts. The drained join and gates strictly recompute and check
+the current graph, including declared carrier dependencies. No
+cross-pair prerequisite-completion barrier applies to initial authoring. A missing
+supplier retains its exact planned interface and honest proof-status obligation;
+authors complete the consuming argument conditionally and continue their remaining
+work. They keep explicit unresolved readiness records, never invent supplier
+acceptance or duplicate another pair's ownership. Completion accounting requires
+local authored carriers, inventories, contracts, coverage and readiness records.
+The complete, drained Step-1 gate battery still requires current supplier content,
+resolved readiness and correct dependency levels before review. This adds no stage.
+
+Per-item Step-1 readiness recording retains the complete manifest page/pair and
+item ownership index, but hashes only the target and its actual transitive
+dependencies, including explicitly examined context. A bare item ID in an
+unrelated unfinished inventory does not prevent that local authoring record;
+the same unfinished ID in the target's dependency closure fails recording.
+Malformed JSON, ambiguous ownership and invalid page/pair structure still fail.
+The hash calculation and alias resolution are shared with the strict full-frontier
+checker; local readiness records grant no global acceptance or gate authority.
 
 Item `dependency_level` is determined before writing item/page carriers, recorded
 and independently checked in Step 1: zero
@@ -129,9 +158,33 @@ work.
 
 ## Independent review through closeout
 
+Defect evidence may identify a repository path or an absolute HTTP(S) source
+URL. A source URL remains a source locator; it does not claim a local full-text
+file or reading attestation. Correct invalid taxonomy spellings with guarded,
+append-only taxonomy successors, preserving the original frozen rows.
+
 Step 3 keeps the existing independent batch review, routed adjudication and
 unfinished cross-review continuation. A partial process handoff is not completed
 artifact coverage; continuations require actual completed-obligation progress.
+When two reader/refuter findings classify one defect differently, the owner may
+record `research/RUN-step3-owner-same-defect-aliases.json` and bind its raw hash
+with `same_defect_receipt_sha256` on the alias decision. This route requires an
+explicit root adoption of the original scientific owner's same-issue review,
+the exact frozen finding objects and report hashes, identical observed source
+and carrier bindings, and guarded current source excerpts. All ordinary shared
+finding, ledger and current-content checks still apply. It does not rewrite
+observations, accept source content, or combine unrelated defects. Native owner
+recertification binds this receipt and its evidence inputs before the battery.
+A later same-owner external-context refresh may be bound separately through
+`RUN-step3-historical-context-transition.json`. Its immutable Root receipt must
+bind genuine frozen/current decisions and context preimages, the exact owner
+proposal and preserved review evidence, and actual completed native certification
+of the refreshed consumer. The verifier permits only context receipt seals and
+the explicitly reviewed consumer bindings/evidence to evolve; every observation,
+verdict, subject and other decision field stays exact. Current native external
+context checks remain mandatory. Original closure and historical evidence are
+never resealed. Valid append-only taxonomy successors retain their original
+Step-3 ledger predecessors in the authenticated historical projection.
 Step-3 readers and refuters use GPT-6 Luna/max; batch adjudicators use GPT-6.1
 Sol/medium. Step-4 read-only batch readers use GPT-6.1 Sol/medium, and the
 per-item judge sweep uses GPT-6 Luna/max.
@@ -141,13 +194,40 @@ cannot cover the inventory, and retries target only failing batches.
 Cross-batch page alerts route to the page's owning group, like page concerns.
 Published supplier alerts remain in the original digest as read-only context;
 they do not acquire run ownership or authorize repairs to imported mathematics.
+This also applies to published pages identified by their actual library
+frontmatter; unknown, draft, or ambiguous page targets still fail routing.
 Unknown targets and alerts about the sender's own batch still fail the digest gate.
 
 Step 5 retains the round-based adjudication/repair engine, supplier-before-consumer
-maintenance, frozen frontier guards and its complete gate battery. The
-native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
+maintenance, frozen frontier guards and its complete gate battery. An
+optional run-local `RUN-owner-step5-support-index.json` points native workers to
+outside proposals and genuine prior focused checks as read-only evidence.
+It grants no source ownership, review authority, or transition permission;
+workers verify current arguments and bind only immutable evidence actually used.
+Versioned root-published `RUN-owner-step5-support-supplement-*.json` supplies
+later evidence without modifying indexes already used by workers.
+The native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
+Coverage gates retain the singleton original Step-4 lineup bound by the frozen
+`step4-verdicts.json` and initial adjudication pack. Before Step 5 is frozen,
+modern runs use Luna. Mixed, unknown or unbound frozen lineages fail closed.
+Current Step-5 certification is checked first with all existing content and
+context guards; it is not a replacement judge verdict. Sol 6.1 high repair and
+rejudge work retains its own identity, without requiring untouched original
+items to acquire a different judge lineage.
+Shared metadata patches use the guarded command
+`node tools/physics-support/step5-shared-write-lock.mjs run --owner DISPATCH_LABEL -- COMMAND ARGS...`.
+It acquires the lock before launching the command, launches nothing and exits 2
+when busy, propagates the child exit status, and releases the lock after a child
+completion or failure. Reread owning files and make only scoped changes within
+the command; research and disjoint item authoring stay outside it. Existing
+manual acquire/release callers remain supported and must stop shared writes
+when acquisition fails.
 Collection binds its genuine dispatch receipts while retaining historical lane
-identities for older evidence. Native Step-5 sweeps use `--strict-context`:
+identities for older evidence. Evidence file SHA-256 guards compare exact raw
+bytes, including binary sources; collection and guarded impact recovery never
+decode files before checking those guards. A genuine byte mismatch still blocks
+collection or recovery without rewriting protected evidence.
+Native Step-5 sweeps use `--strict-context`:
 a resumed verdict must match both the current judge-form item hash and its
 current frozen prompt context. A changed supplier context requires a fresh
 verdict even if this item's own bytes are unchanged; exact current verdicts
@@ -159,6 +239,141 @@ consumes the actual rejudge verdicts. The
 judgment/adjudication rounds continue until the latest round's unique confirmed
 fatal original-frontier items are strictly below 2% of the immutable original
 inventory. Exactly 2% requires another round; unresolved defects still block closure.
+
+An initial or repeated adjudicator may encounter a distinct inherited defect
+in an assigned consumer while rejecting the original judge objection. The
+original false-positive verdict does not authorize an edit. If an actual
+collection gate catches such an edit, preserve the original pack, report,
+judge tuple, and task-instruction violation. A root-requested native correction
+review may assess the exact current carrier without rewriting that history.
+The request must bind the original evidence, genuine before bytes, observed
+current bytes, and the same-owner confirmed supplier change that invalidated
+the consumer use. A fresh native Sol 6.1 high owner reviews that separate
+finding and adopts or rejects the current carrier without editing source.
+The root advertises the immutable request with
+`research/RUN-step5-v2/owner-inherited-repair-request.json` containing
+`version:1`, `run`, and `request:{path,sha256}`. The referenced
+`owner-inherited-repair-ID.json` binds the run, phase, round, original unit,
+subject and supplier, original pack/report/task, actual failed gate evidence,
+genuine before and observed source, content guards, and scientific review.
+The engine waits for drained writers before queuing one `correction-initial:1`
+or `correction-repeat:1` unit; completed adjudication units remain complete.
+Collection remains blocked until its exact source guards, fresh review,
+distinct finding, dispatch identity, and request bindings validate. An open
+scope incident is not erased by later adoption. Separate confirmed fatal
+findings count in the round's unique original-frontier fatal-item inventory;
+they never become fabricated original judge tuples. This continuation grants
+no outside source-write permission and does not waive ordinary gate checks.
+
+A completed repeated adjudicator may introduce a confirmed richness scope loss
+in its own assigned source. Before that repeat wave is collected, a distinct
+single-subject native scientific correction may restore the sound scope. Root
+advertises `owner-adjudication-scientific-repair-ID.json` through
+`research/RUN-step5-v2/owner-adjudication-scientific-repair-request.json` with
+`version:1`, `run`, and `request:{path,sha256}`. The immutable request binds the
+unique unsuperseded OPEN owner `richness`/`scope-drop` canonical finding, exact
+original rejected tuple and completed native pack/report/task/dispatch, genuine
+original rich and current narrowed carriers with raw/content/interface guards,
+and the original scientific owner's evidence and unapplied proposals. This is
+not outside authorship, inherited read-only adoption, or coupled impact repair.
+
+At the drained `5.5-adjudicate` join, one fresh native Sol 6.1 high child receives
+only that original-frontier subject. It must actually change the narrowed
+carrier, review the exact current source and dependency context, reconcile the
+original tuple explicitly, resolve the distinct root scope finding, and report
+affected uses. It authors no prerequisite or unrelated source. Original reports,
+decisions, tuples and tasks remain immutable. Parent collection first validates
+all original reports at their authentic historical subject guards, then validates
+only the corrected subject using the separate child decision/review and actual
+current hashes. Any private corrective authorization is confined to that exact
+subject and genuine child repair; it never clears unrelated errors. A return to
+the original rich content requires a fresh false-positive effective adjudication,
+while retaining the original decision as history. No fabricated tuple, stale
+review, extra supplier edit or gate waiver supplies authority. Collection binds
+the genuine correction receipt, and the ordinary full gate battery and later
+consumer maintenance still apply. Root alone closes the canonical finding.
+
+Several distinct confirmed findings can instead receive an explicit native
+owner queue before repeat collection. Root advertises an immutable
+`owner-finding-queue-ID.json` through `owner-finding-queue-request.json` in the
+same workflow directory. Each entry binds one unique unsuperseded OPEN canonical
+owner finding, its original-frontier subject and owner lane, genuine current
+source and content/interface guards, completed native context, and original-owner
+science and unapplied proposals. An entry explicitly selects `native-referral`,
+`assigned-scope-restoration`, or `owner-discovery`. The first requires an actual
+native referral or the actual assigned rejected subject. An assigned original
+tuple must be copied exactly and separately reconciled. A corrective decision may
+include optional narrative `evidence` of at least 40 characters; this text supplies
+no tuple identity, file binding, assignment or certification authority. The discovery mode binds
+the named original scientific owner's final discovery and current snapshot;
+its native outcome is context only and supplies no invented edge or rejection.
+
+After all writers drain, the engine freezes
+`owner-finding-correction-repeat-ROUND.json` with disjoint lanes 1, 2 and 3 and
+binds its exact tasks in `owner-finding-correction-repeat-ROUND-progress.json`.
+Every entry must receive an actual source repair, fresh current native review
+and explicit typed root-finding resolution. No new prerequisite or ordinary
+judge tuple is permitted. Distinct repairs on a correctly false-positive subject
+retain that effective false-positive original decision. Continuation authenticates
+the frozen request/progress, pack/tasks and all three completed native reports
+and dispatches, and requires the changed-source set to equal the authorized
+subjects exactly. Parent collection preserves original history and validates
+only authenticated subject-specific replacements; unrelated errors still block.
+Separate fatal findings count in the round's unique fatal original-frontier item
+inventory, deduplicated by subject, without fabricated model/context tuples.
+Root closes canonical findings only after genuine completed resolutions.
+At the drained three-lane join, the controller authenticates and collects the
+parent before its gate, then pauses once for Root's canonical ledger closure.
+Root resumes after adopting the genuine resolutions; the next gate snapshot
+therefore includes those closures. Resumed progress verifies the existing
+immutable collection before any OPEN-request intake, avoiding stale-input
+recertification and reauthentication of findings already closed. This technical
+handoff neither attempts nor waives the ordinary full gate battery.
+
+An earlier collected single-subject correction remains bound to its genuine
+collected `post` snapshot and immutable native evidence. Later source differences
+are permitted only for the exact subjects of a separately authenticated completed
+root queue starting at that snapshot. Its own live subject and current dependency
+review must still match. A caller-supplied historical hash map is not authority.
+These continuations do not authorize outside source writes, bypass gates, alter
+original reports, or waive normal consumer/context closure and certification.
+
+When an actual initial/repeat collection gate reports a missing original-frontier
+downstream inventory, root may complete the routing metadata through
+`research/RUN-step5-v2/owner-downstream-inventory.json` with `version:1`, `run`,
+and `supplement:{path,sha256}`. Its immutable `downstream-inventory-ID.json`
+binds the phase/round, `reviewer:"/root"`, `authority:"routing-only"`,
+`scientific_review:false`, `source_edit_authority:false`, diagnosis, actual
+failed gate evidence, and additions. The diagnosis binds the original pack,
+every original report, all restated interface guards, and exact missing edges.
+Collection independently requires the additions to equal the complete current
+missing direct-edge set, with current source/consumer guards and drained writers.
+It preserves all reports, decisions and reviews, records `inventory_completion`,
+and then applies the ordinary completeness check. Routing adds no reviews,
+scientific acceptance, source-write permission, or invented interface event;
+the native impact owners still examine the assigned affected uses.
+
+A confirmed open scientific finding may require a coupled supplier and consumer
+repair that the current owner wave did not provide. Root may advertise an
+immutable `owner-scientific-repair-ID.json` through
+`research/RUN-step5-v2/owner-scientific-repair-request.json` with
+`version:1`, `run`, and `request:{path,sha256}`. The request binds the base
+impact phase/round, root reviewer, exact supplier/consumer subjects, the unique
+current unsuperseded OPEN canonical finding, an authenticated completed native
+outcome, genuine current before carriers and content/raw/interface guards,
+and actual scientific evidence and unapplied proposals.
+At the drained join, the engine queues a native continuation with that pair
+exclusively assigned to owner 1, supplier first. Other genuine pending-context
+work continues in parallel on owners 2 and 3. The two sources must actually
+change and receive fresh current native repaired reviews; owner 1 must return
+an explicit `root_finding_resolutions` row. Collection validates this before
+saving an immutable receipt. The request remains pending until validated native
+completion; root still owns canonical ledger closure and certification. No
+formatting flag, outside author grant, fabricated stale context or original
+judge tuple substitutes for that work. An uncertified closed wave can reopen
+only while every original-frontier content guard still equals its preserved
+closed receipt; unlicensed post-close writes require separate reconciliation.
+Original reports, closures and request evidence remain immutable.
 
 An outside repair authorized by the root owner can enter only deferred
 `impact-initial`/`impact-repeat` owner collection, including their continuation
@@ -197,6 +412,14 @@ current `post` carrier. It grants external authorship only: continuation assigns
 the changed carrier for a fresh native owner review before closure or
 certification. It cannot satisfy adjudication, strict collection, or a gate;
 unknown changes and mismatched or stale grants still fail the existing checks.
+A normal collection gate may verify an existing deferred receipt only after the
+same native wave is complete. It checks the bound closure, the original receipt
+and all preserved evidence, current frontier carriers against the closed snapshot,
+and fresh later native reviews of every outside repair, including their current
+supplier interfaces. Current-context checks cover only those repaired items;
+legacy context verification remains supported. This read-only path
+returns the closed current wave; it neither re-adopts historical outside carrier
+guards nor changes the first-adoption deferred-collection requirement.
 
 A completed `impact-initial` or `impact-repeat` owner wave may reopen for an
 actual failed formatting precheck at its drained pre-gate join, before that
@@ -252,7 +475,9 @@ A later native certificate may carry forward a legitimately repaired canonical
 `research/RUN-batch-N.proof-contracts.json` that an earlier certificate bound at
 its old bytes. Ordinary/current certificate verification remains strict. At the
 native certification transition only, the engine checks the immutable prior
-certificate's payload and every static evidence hash; an old live contract
+certificate's payload and every static evidence hash using the original raw
+file bytes, including binary sources. Unchanged binary evidence does not require
+an evidence transition. An old live contract
 binding may evolve only with bound current native owning repair reports,
 assignments, current reviews and Sol 6.1 high dispatch authority, plus the
 consumed predecessor owner-gate history. That gate must cover the complete
@@ -295,6 +520,16 @@ performs mechanical contract closure and emits `step6-` owner-report artifacts;
 its readiness and closeout commit remain evidence-bound. Publishing/pushing are
 owner actions, separate from this build.
 
+Keep fresh owner formatting/metadata check logs and supervision observations in
+`.physics-autopilot/RUN/` during Step 6. The report baseline seals the workspace,
+including research files; later pre-gate receipts must not mutate that protected
+tree. This changes only evidence storage, never scope, checks or gate authority.
+The proof-layout renderer receives its unchanged JSON input through a temporary
+seekable file, cleaned after execution. When app tsx dependencies are absent,
+the TypeScript fallback resolves configured project path aliases and missing
+extensionless relative TypeScript imports; ordinary package resolution retains
+Node export-map checks. These runtime details do not change renderer analysis.
+
 Step-6 terminal defect-ledger gates use the run's frozen Step-5 frontier when
 present. Outside item findings remain recorded with their actual dispositions
 and are reported as excluded, not passed; original mathematical maintenance
@@ -322,6 +557,27 @@ the engine's content commit. All owner-gate authorization remains one-attempt,
 current-hash-bound and formatting/metadata-only under CLAUDE.md.
 
 ## Pre-gate recertification
+
+An owner finding-alias receipt may also bind an exact location-only variant
+between a historically unbound reader and a bound refuter. It must preserve the
+reader's unknown history, bind both frozen findings and reports, and include the
+original supplier owner's same-issue classification, reviewed pre-repair archive,
+final source excerpts and scientific release. This reconciles one canonical
+defect's ownership; it grants no source acceptance or gate exemption.
+
+For a reader/refuter pair with identical observed source bytes but distinct
+contract carriers, `same-source-distinct-carrier` aliases additionally bind both
+original observation hashes, locations and severity, the authentic observed raw
+archive, and the frozen scope. The original scientific owner must explicitly
+classify the same underlying issue. Both reports and observations remain intact;
+ordinary ledger ownership and current-content checks still apply.
+
+An exact published-supplier owned-use context may retain additional distinct
+`nonfatal-recorded` maintenance findings in `reviewed_maintenance_findings`.
+Each entry requires its exact same-supplier, same-batch ledger-row hash and a
+complete guarded scientific review of the owned use. These rows remain separate
+from open missing-marker findings and are neither closed nor superseded. This
+does not create a new in-run obligation or certify the published supplier.
 
 Proof-contract inputs treat a bare decimal as a step reference only when that
 number identifies an actual proof step. Explicit `step p.q` references are

@@ -1,0 +1,17 @@
+---
+page: td-math-local-pfaff-geometry
+title: Local Pfaff Geometry
+status: published
+library: mathematics
+items:
+  - def-tdmath-one-form-and-horizontal-path
+  - lem-tdmath-local-contraction-flow
+  - lem-tdmath-variational-flow-and-commutation
+  - lem-tdmath-exact-multiple-implies-pfaff-integrability
+  - thm-tdmath-codimension-one-frobenius
+  - lem-tdmath-integrable-horizontal-orbits-have-empty-interior
+  - thm-tdmath-local-caratheodory-inaccessibility
+examples: []
+---
+
+This page develops the local geometry of a nonsingular Pfaff one-form $\omega$ on an open finite-dimensional Euclidean domain. It defines horizontal paths and gives local contraction and variational-flow arguments, with their function-space completeness, contraction, and differentiability inputs stated explicitly, before proving the codimension-one Frobenius criterion: locally at $q_0$, $\omega\wedge d\omega=0$ exactly when a local nonzero factor $\mu$ makes $\mu\omega=dS$. A choice-free global orbit lemma proves that local first integrals keep each horizontal reachability class from exhausting any open set, using finite-word flows and rational parameter boxes. The local Carathéodory result uses a precise two-sided horizontal inaccessibility hypothesis and carries the exact implicit-rank input it consumes. Neither result supplies a global entropy, a global potential, a positive-temperature scale, or a physical identification of mathematical horizontal curves with adiabatic processes. The local implicit-rank supplier is available and its proof has been inspected, but it remains a draft; conclusions using it therefore remain conditional on its final acceptance. A global period example on the companion page records why local exactness does not imply a global potential; physical sign, units, and calibration require separate model assumptions.

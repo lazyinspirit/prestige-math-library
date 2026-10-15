@@ -18,7 +18,7 @@ import { resolveLineup } from './models.mjs';
 import { TERMINAL_REJUDGE_ROUNDS } from './step5-terminal-resolution.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
 import { activeOwnershipRows } from '../defect-ledger-ownership.mjs';
-import { protectedEntryHash } from './step6-lib.mjs';
+import { protectedEntryHashes } from './step6-report-tree.mjs';
 import { validateFrontier } from './step5-rounds.mjs';
 
 const LEDGER_TOOL = fileURLToPath(new URL('./defect-ledger.mjs', import.meta.url));
@@ -330,8 +330,11 @@ function files(dir = root, out = []) {
   }
   return out;
 }
-const tree = () => Object.fromEntries(files().sort().map((rel) => [rel,
-  protectedEntryHash(join(root, rel))]));
+const tree = () => {
+  const paths = files().sort();
+  const hashes = protectedEntryHashes(paths.map(rel => join(root, rel)));
+  return Object.fromEntries(paths.map((rel, index) => [rel, hashes[index]]));
+};
 
 if (command === 'snapshot') {
   writeFileSync(integrityPath, `${JSON.stringify({ version: 1, run, protected_tree: tree() }, null, 2)}\n`);

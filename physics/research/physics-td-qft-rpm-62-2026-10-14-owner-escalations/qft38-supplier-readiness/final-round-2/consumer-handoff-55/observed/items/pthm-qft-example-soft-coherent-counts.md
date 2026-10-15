@@ -1,0 +1,230 @@
+---
+id: pthm-qft-example-soft-coherent-counts
+kind: physics-theorem
+title: Regulated soft coherent photon-count prediction
+status: draft
+origin: pipeline
+pipeline_run: physics-td-qft-rpm-62-2026-10-14
+domain: physics
+library: physics
+dependency_level: 8
+deps:
+  - def-countable-choice
+  - def-qft-example-data
+  - def-qft-framework-units
+  - def-qft-fock-and-test-spaces
+  - def-qft-photon-transverse-space
+  - def-qft-x03-photon-count-pvm
+  - lem-qft-segal-weyl-domain
+  - post-qft-constructed-model-and-measurement
+  - post-qft-free-photon-model
+  - thm-qft-example-soft-current-angular-coherent
+  - thm-qft-x03-photon-count-pvm
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  def-qft-example-data: mathematical-premise
+  def-qft-framework-units: formulation-prerequisite
+  def-qft-fock-and-test-spaces: mathematical-premise
+  def-qft-photon-transverse-space: mathematical-premise
+  def-qft-x03-photon-count-pvm: mathematical-premise
+  lem-qft-segal-weyl-domain: mathematical-premise
+  post-qft-constructed-model-and-measurement: physical-assumption
+  post-qft-free-photon-model: physical-assumption
+  thm-qft-example-soft-current-angular-coherent: mathematical-premise
+  thm-qft-x03-photon-count-pvm: mathematical-premise
+proof_strategy: direct
+physical_scope: >-
+  Fixed finite massive prescribed charge-flow current, measurable transverse
+  polarizations, and finite photon-energy cutoffs 0 < lambda < Lambda. The
+  result is the exact count distribution and mean energy of the constructed
+  normalized positive-free-photon coherent state under the adopted finite
+  projective Born interpretation. For positive angular coefficient the
+  zero-cutoff family has no Fock-vector or projective-ray limit despite
+  bounded mean energy. No interacting-QED scattering event, detector response,
+  or empirical observation is asserted.
+empirical_premises: []
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: David Tong, Quantum Field Theory, author-hosted complete lecture notes, Chapter 6, §§6.2.1–6.2.2
+      url: https://www.damtp.cam.ac.uk/user/tong/qft/qfthtml/S6.html
+    - title: Mark Srednicki, Quantum Field Theory, author-hosted 2006 complete prepublication book draft, §§54–56
+      url: https://www.physics.ucsb.edu/~mark/ms-qft-DRAFT.pdf
+    - title: Roy J. Glauber, “Coherent and Incoherent States of the Radiation Field,” Physical Review 131 (1963), 2766–2788, §§II–III and IX
+      url: https://www.ifi.unicamp.br/~cabrera/teaching/aula%2016%202011s1.pdf
+---
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$ [[def-countable-choice]]. Use the SI/natural
+normalizations of [[def-qft-framework-units]] and
+[[def-qft-example-data]], in particular the spacetime metric
+$\eta=\operatorname{diag}(-1,1,1,1)$, the algebraic energy-momentum metric
+$h=-\eta=\operatorname{diag}(1,-1,-1,-1)$, and the dimensionless coupling
+$g_{\mathrm{em}}$ with $g_{\mathrm{em}}^2=4\pi\alpha$. For a finite nonempty
+index set $i=1,\ldots,m$, take future massive energy-momentum vectors
+$p_i=(E_i,\mathbf p_i)$ with components in joules and
+$E_i^2-|\mathbf p_i|^2=M_i^2>0$. Put $\mathbf v_i=\mathbf p_i/E_i$, so
+$|\mathbf v_i|<1$. Choose signs $s_i\in\{-1,+1\}$ and real dimensionless charges
+$Q_i$ satisfying $\sum_i s_iQ_i=0$. These are prescribed current data, not
+dynamical charged-particle trajectories.
+
+For $\mathbf n\in S^2$, let $q=(\omega,\omega\mathbf n)$ with photon energy
+$\omega>0$ in joules and define
+$$p_i\cdot q:=E_i\omega-\mathbf p_i\cdot(\omega\mathbf n),\qquad J^\mu(q):=\sum_{i=1}^m s_iQ_i\frac{p_i^\mu}{p_i\cdot q},\qquad K^\mu(\mathbf n):=\omega J^\mu(\omega,\omega\mathbf n).$$
+The dot in this current formula is $h$-contraction; in particular
+$p_i\cdot q=\omega E_i(1-\mathbf v_i\cdot\mathbf n)>0$. Choose measurable
+real orthonormal spatial polarizations $\epsilon_1(\mathbf n),\epsilon_2(\mathbf n)$
+with $\mathbf n\cdot\epsilon_r(\mathbf n)=0$ almost everywhere. Put
+$\epsilon_r^\mu=(0,\epsilon_r)$ and
+$K\cdot\epsilon_r:=-\mathbf K\cdot\epsilon_r$. Define the finite nonnegative
+angular coefficient
+$$C:=\frac{g_{\mathrm{em}}^2}{2(2\pi)^3} \int_{S^2}\sum_{r=1}^{2}|K(\mathbf n)\cdot\epsilon_r(\mathbf n)|^2\,d\Omega.$$
+
+For fixed energy cutoffs $0<\lambda<\Lambda<\infty$ in joules, define
+$\mathfrak h_E=L^2(\mathbb R^3,d^3\mathbf q/[(2\pi)^3 2\omega];\mathbb C^2)$,
+where $\omega=|\mathbf q|$, and
+$$h_{\lambda,\Lambda,r}(\mathbf q) =g_{\mathrm{em}}J(q)\cdot\epsilon_r(\mathbf q/|\mathbf q|) \,\mathbf1_{\{\lambda<|\mathbf q|<\Lambda\}}.$$
+The current draft mathematical supplier
+[[thm-qft-example-soft-current-angular-coherent]] gives this energy-coordinate
+amplitude's exact norm and unitary identification with the positive transverse one-particle space
+$\mathfrak h_T$ of [[def-qft-photon-transverse-space]] by the unitary map
+$$(U_Eh)(\mathbf k)= \sqrt{\frac{(\hbar c)^2}{(2\pi)^3\,2|\mathbf k|}} \sum_{r=1}^{2}h_r(\hbar c\,\mathbf k)\epsilon_r(\mathbf k), \qquad \mathbf k\in\mathbb R^3\setminus\{0\}.$$
+Here $\mathbf k$ is a wave vector in $\mathrm m^{-1}$ and
+$\hbar c\,\mathbf k$ is the corresponding energy-momentum vector in joules.
+Set $N_\gamma:=C\log(\Lambda/\lambda)$ and prepare the normalized coherent
+vector in the free photon Fock space
+$$\Psi_{\lambda,\Lambda} =e^{-N_\gamma/2}\bigoplus_{n=0}^{\infty} \frac{(U_Eh_{\lambda,\Lambda})^{\otimes_s n}}{\sqrt{n!}} \in\mathcal F_s(\mathfrak h_T),$$
+where the $n=0$ term is the vacuum sector. Let $P_n$ be the number-sector
+projection from [[def-qft-x03-photon-count-pvm]] and define
+$p_n$ as the model probability assigned to outcome $n$ by the finite
+two-outcome projective partition $\{\{n\},\mathbb R\setminus\{n\}\}$.
+Then
+$$p_n=e^{-N_\gamma}\frac{N_\gamma^n}{n!},\qquad n\in\mathbb N_0,$$
+with $0^0:=1$; these probabilities sum to one, the mean photon count is
+$N_\gamma$, and the vacuum probability is $e^{-N_\gamma}$. The expected
+photon energy is
+$$\langle\Psi_{\lambda,\Lambda},H_\gamma\Psi_{\lambda,\Lambda}\rangle =C(\Lambda-\lambda)\ \mathrm J,$$
+for $H_\gamma=\hbar c\,d\Gamma(|\mathbf k|)$ of
+[[post-qft-free-photon-model]]. If $C>0$, the family has no Fock-norm or
+projective-ray limit as $\lambda\downarrow0$ (projective-ray convergence means
+norm convergence after allowing a unit-modulus phase for each cutoff), although
+its mean energy tends to the finite value $C\Lambda$.
+
+For the prescribed one-charge rest-to-velocity current with final velocity
+$v\hat{\mathbf z}$, $0<v<1$, take
+$s_{\rm in}=-1$, $Q_{\rm in}=1$, $p_{\rm in}=(M,\mathbf0)$ and
+$s_{\rm out}=+1$, $Q_{\rm out}=1$,
+$p_{\rm out}=(M\gamma_v,M\gamma_v v\hat{\mathbf z})$, where $M>0$ is the
+rest energy and $\gamma_v=(1-v^2)^{-1/2}$. The same coefficient is
+$$C(v)=\frac{\alpha}{\pi} \left(\frac1v\log\frac{1+v}{1-v}-2\right)>0.$$
+If $C>0$, the cutoff family has no Fock-norm or projective-ray limit as
+$\lambda\downarrow0$; the proof below derives this from adjacent-shell
+overlaps and does not use the supplier's separate conditional infrared-limit
+clause. Its required norm and coherent-state inputs remain conditional on
+the inspected draft supplier until its upstream inputs are current. This
+prediction concerns only the constructed positive free coherent state and
+its count PVM under the adopted physical assumptions. It does not infer that
+a full interacting-QED scattering event emits that state or that a detector
+realizes this PVM.
+
+## Facts & Assumptions
+
+**Given:** The current and energy-coordinate conventions in the Statement, the
+adopted positive free photon model and finite Born interpretation, and the
+current QFT-MX03 draft at the exact inspected interface stated below.
+
+[A1] Assume $\mathrm{AC}_\omega$ [[def-countable-choice]], the countable-choice
+strength used by the Fock and finite-instrument suppliers.
+
+[A2] [[post-qft-free-photon-model]]: the current draft postulate adopts
+$\mathcal F_s(\mathfrak h_T)$ and
+$H_\gamma=\hbar c\,d\Gamma(|\mathbf k|)$ for the source-free positive
+transverse photon model. Its current item and qft-g01 page are present at
+dependency level $7$. Its current Step 1 record is escalated because
+its adopted local-observable dependency chain remains conditional. The
+adopted Hamiltonian interface matches this use, but the model remains
+conditional on that chain.
+
+[A3] [[post-qft-constructed-model-and-measurement]]: the current draft Born
+postulate assigns probabilities only to an actually supplied state and
+normalized finite bounded Kraus instrument. A spectral PVM may be used only
+after its declared finite Borel partition is constructed and verified as a
+finite projective instrument.
+
+[F1] [[def-qft-framework-units]]: spacetime uses $\eta=(-,+,+,+)$,
+$x^0=ct$, $\mathbf k$ has unit $\mathrm m^{-1}$, and photon energy is
+$E_\gamma=\hbar c|\mathbf k|$ in joules.
+
+[F2] [[def-qft-example-data]]: the energy-momentum contraction is
+$h=-\eta=(+---)$ and the dimensionless electric coupling satisfies
+$g_{\mathrm{em}}^2=4\pi\alpha$.
+
+[F3] [[def-qft-photon-transverse-space]]: the positive one-particle space is
+$\mathfrak h_T=\{u\in L^2(\mathbb R^3,d^3\mathbf k;\mathbb C^3):
+\mathbf k\cdot u(\mathbf k)=0\text{ a.e.}\}$; no global continuous
+polarization frame is chosen. Its current QFT-MG01 item carrier and ready
+Step 1 record were inspected.
+
+[F4] [[def-qft-fock-and-test-spaces]]: bosonic Fock space is the
+square-summable direct sum of symmetric sectors, with vacuum sector
+$H_s^{(0)}=\mathbb C$ and the second-variable-linear pairing.
+
+[F5] [[def-qft-x03-photon-count-pvm]]: $P_n=E_N(\{n\})$ is the projection
+onto the $n$th symmetric sector.
+
+[F6] [[thm-qft-x03-photon-count-pvm]]: $N$ is self-adjoint and its sector
+projections form a strongly countably additive PVM; every finite Borel
+partition gives an orthogonal finite resolution of the identity.
+
+[F7] [[lem-qft-segal-weyl-domain]]: $W(h)$ are unitary Weyl operators with
+$W(h)W(k)=e^{-i\operatorname{Im}\langle h,k\rangle_2/2}W(h+k)$ and
+$\langle\Omega,W(h)\Omega\rangle_2=e^{-\|h\|^2/4}$. Its exact statement,
+proof, and current ready record were inspected.
+
+[L1] [[thm-qft-example-soft-current-angular-coherent]]: the draft theorem
+item and batch-47 manifest entry exist, but its physical page file
+`library/quantum-field-theory/qft-mx03.md` is absent. Its current Step 1 record
+is escalated. The exact inspected proof steps 2.1–3.2 establish the
+energy-coordinate cutoff norm, transverse unitary, coherent-sector weights,
+and free energy expectation under [F3] and its other mathematical inputs.
+The item’s opening paragraph correctly says the transverse-space and Q8
+carriers exist; its [F2] fact is stale because it says the transverse-space
+item has no ready record, although [F3] now has a current ready record. The
+current Step 1 escalation also identifies an unregistered QFT-MF01 page edge:
+QFT-MX03 uses Fock/Segal suppliers on qft-mf01, but its page requirements omit
+qft-mf01. The Q8 proof also uses polar integration without declaring its
+polar-coordinate and surface-measure suppliers. Its step 4.2 proves
+projective-ray nonconvergence directly from coherent overlaps. The Q8 lemma
+remains escalated through its photon-energy multiplier; that item’s stored
+reason that [F3] is unregistered is also stale. This proof uses only the
+proved norm, amplitude, coherent-sector and energy results in steps 2.1–3.2,
+and proves the projective-ray claim independently below. The missing
+QFT-MX03 page, QFT-MF01 page edge, and unresolved Q8 inputs remain escalated
+for owner reconciliation.
+## Proof
+
+**Given:** [A1]–[A3], [F1]–[F7], and the exact current and cutoff data in the
+Statement.
+
+1.1 For each $i$ and $\mathbf n\in S^2$, $p_i\cdot q=\omega E_i(1-\mathbf v_i\cdot\mathbf n) \ge\omega E_i(1-|\mathbf v_i|)>0$. Since there are finitely many massive terms, $K^\mu(\mathbf n)=\sum_i s_iQ_i(1,\mathbf v_i)/(1-\mathbf v_i\cdot\mathbf n)$; each denominator is bounded below by $1-|\mathbf v_i|>0$, so $K$ and its transverse components are bounded. For the measurable orthonormal frame $(\epsilon_1,\epsilon_2,\mathbf n)$, $\sum_r|\mathbf K\cdot\epsilon_r|^2 =|\mathbf K-(\mathbf K\cdot\mathbf n)\mathbf n|^2=|K_\perp|^2$. Thus the integrand is nonnegative and measurable, and compactness of $S^2$ gives $0\le C<\infty$. [F2, given, algebra]
+
+2.1 For the one-charge rest-to-velocity current, put $\mu=\mathbf n\cdot\hat{\mathbf z}$. Its spatial current is $\mathbf K=v\hat{\mathbf z}/(1-v\mu)$, hence $|K_\perp|^2=v^2(1-\mu^2)/(1-v\mu)^2$. Integrating over azimuth and then setting $x=1-v\mu$ gives $$I(v):=\int_{-1}^{1}\frac{v^2(1-\mu^2)}{(1-v\mu)^2}\,d\mu =\frac1v\int_{1-v}^{1+v} \left(\frac{v^2-1}{x^2}+\frac2x-1\right)dx =\frac1v\left[\frac{1-v^2}{x}+2\log x-x\right]_{1-v}^{1+v} =\frac2v\log\frac{1+v}{1-v}-4.$$ Therefore $$C(v)=\frac{g_{\mathrm{em}}^2}{2(2\pi)^3}(2\pi I(v)) =\frac{\alpha}{\pi} \left(\frac1v\log\frac{1+v}{1-v}-2\right).$$ For $f(v)=\log((1+v)/(1-v))-2v$, $f(0)=0$ and $f'(v)=2v^2/(1-v^2)>0$ on $(0,1)$, so $C(v)>0$. [F2, step 1.1, algebra]
+
+2.2 The fixed-current, charge-balance, transverse-polarization, and cutoff hypotheses match [L1]. The current formula simplifies to $J(q)=K(\mathbf n)/\omega$, and step 1.1 identifies the polarization sum with $|K_\perp|^2$, exactly the angular convention of [L1]. This is a conditional use of the inspected draft carrier at its actual interface. [F2, L1, step 1.1, algebra]
+
+3.1 The proved norm and unitary-map arguments of [L1] give $\|h_{\lambda,\Lambda}\|^2=N_\gamma$ and the displayed unitary $U_E$ into $\mathfrak h_T$. Its coherent-sector formula supplies the normalized vector $\Psi_{\lambda,\Lambda}$ in the Statement. These uses require only the actual mathematical inputs of the inspected draft carrier; its separate Q8-dependent infrared clause is not used. [A1, F1, F3, F4, L1, step 2.2]
+
+4.1 By [F5]–[F6], $P_n$ is an orthogonal projection and $I-P_n$ is its orthogonal complement. The two Kraus operators $P_n$ and $I-P_n$ are bounded and satisfy $P_n^*P_n+(I-P_n)^*(I-P_n)=P_n+(I-P_n)=I$. They therefore form a normalized finite projective instrument. The state from step 3.1 is normalized, so [A3] assigns the model probability $p_n=\|P_n\Psi_{\lambda,\Lambda}\|^2$ to its first outcome. This uses a finite two-outcome partition for each singleton event and assumes no countably infinite Kraus instrument. [A1, A3, F5, F6, step 3.1, algebra]
+
+4.2 The expected photon energy is the energy-coordinate expectation from [L1], transferred to the adopted free Hamiltonian $H_\gamma$ by its unitary map and [A2]. The cutoffs are energies in joules, so $C(\Lambda-\lambda)$ has unit joule. [F1, A2, L1, step 3.1]
+
+4.3 Let $\lambda_j=\Lambda e^{-j}$ for $j\ge1$, and set $u_j=U_Eh_{\lambda_j,\Lambda}$ and $V_j=W(-i\sqrt2u_j)$. The difference $u_{j+1}-u_j$ is the same current amplitude restricted to the shell $\lambda_{j+1}<\omega<\lambda_j$. Applying [L1]'s cutoff norm formula to that shell gives $\|u_{j+1}-u_j\|^2=C\log(\lambda_j/\lambda_{j+1})=C$. By [L1], $\Psi_{\lambda_j,\Lambda}=V_j\Omega$. Unitarity and the Weyl product law in [F7] give $V_j^*V_{j+1}=e^{i\theta_j}W(-i\sqrt2(u_{j+1}-u_j))$ for some real phase $\theta_j$. Applying the vacuum expectation formula in [F7] yields $$|\langle\Psi_{\lambda_j,\Lambda},\Psi_{\lambda_{j+1},\Lambda}\rangle_2| =e^{-\|u_{j+1}-u_j\|^2/2}=e^{-C/2}<1.$$ [F7, L1, step 1.1, step 3.1, algebra]
+
+5.1 The projection $P_n$ retains exactly sector $n$ by [F5]. The sector formula from [L1] gives $P_n\Psi_{\lambda,\Lambda} =e^{-N_\gamma/2}(U_Eh_{\lambda,\Lambda})^{\otimes_s n}/\sqrt{n!}$. The symmetric tensor norm is multiplicative and $U_E$ preserves the one-particle norm, so $p_n=e^{-N_\gamma}N_\gamma^n/n!$. [F4, F5, L1, step 4.1, algebra]
+
+6.1 The exponential series gives $\sum_{n\ge0}p_n=e^{-N_\gamma}e^{N_\gamma}=1$ and, by reindexing its nonnegative terms, $\sum_{n\ge0}n p_n=e^{-N_\gamma}N_\gamma e^{N_\gamma}=N_\gamma$. The zero-sector term is $e^{-N_\gamma}$, including $N_\gamma=0$ under $0^0=1$. [step 5.1, algebra]
+
+7.1 For unit vectors $x,y$, expansion of $\|x-\zeta y\|^2$ and choice of $\zeta$ to align their inner product give $\inf_{|\zeta|=1}\|x-\zeta y\|^2=2-2|\langle x,y\rangle_2|$. Step 4.3 therefore gives the fixed positive adjacent-ray distance $2(1-e^{-C/2})$ along $\lambda_j$. A projective-ray limit would make these adjacent distances tend to zero, a contradiction. Ordinary Fock-norm convergence is the special case without phase adjustment and is also impossible. The energy from step 4.2 tends to the finite value $C\Lambda$; nonconvergence is not caused by divergent mean energy. [step 4.3, step 4.2, algebra] ∎

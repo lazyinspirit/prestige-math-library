@@ -1,0 +1,85 @@
+---
+id: pthm-td-contact-product-comparison
+kind: physics-theorem
+title: Conditional contact calibrator and product comparison
+status: published
+origin: pipeline
+domain: physics
+library: physics
+physical_scope: Conditional consequence of the adopted A1–A7, S1–S3, T1–T5 and C1 assumptions for the declared finite thermal-contact family; not an unconditional law for real materials.
+deps: [def-tdmath-forward-sector-hypotheses, def-td-scaled-products-and-comparison, def-td-thermal-join, post-td-accessibility-a1-a6, post-td-equilibrium-join-coherence, post-td-simple-system-geometric-axioms, post-td-thermal-join-axioms, post-td-universal-thermal-range, thm-tdmath-conditional-contact-calibrator]
+dependency_roles:
+  def-tdmath-forward-sector-hypotheses: mathematical-premise
+  def-td-scaled-products-and-comparison: formulation-prerequisite
+  def-td-thermal-join: formulation-prerequisite
+  post-td-accessibility-a1-a6: physical-assumption
+  post-td-equilibrium-join-coherence: physical-assumption
+  post-td-simple-system-geometric-axioms: physical-assumption
+  post-td-thermal-join-axioms: physical-assumption
+  post-td-universal-thermal-range: physical-assumption
+  thm-tdmath-conditional-contact-calibrator: mathematical-premise
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 4.8 and §§IV.A–IV.C
+      url: https://arxiv.org/pdf/cond-mat/9708200v2
+    - title: "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §§2–4"
+      url: https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file
+    - title: Goddard, The second law of thermodynamics as variation on a theme of Carathéodory, §§2–3
+      url: https://escholarship.org/content/qt27k6m59q/qt27k6m59q.pdf
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+  precheck: n/a
+dependency_level: 13
+---
+
+## Statement
+
+For every declared family obtained as the closure of finitely many simple-system generators under positive scaling and finite thermal joins of [[def-td-thermal-join]], assume the accessibility axioms A1–A6, the simple-system assumptions A7 and S1–S3, the contact assumptions T1–T4, the universal thermal-equilibrium range T5, and equilibrium-join coherence C1, with the exact formulations in [[post-td-accessibility-a1-a6]], [[post-td-simple-system-geometric-axioms]], [[post-td-thermal-join-axioms]], [[post-td-universal-thermal-range]], and [[post-td-equilibrium-join-coherence]]. The closure itself may be infinite; each join and product expression is finite. Then for any two simple types $i,j$, there are $x_0\prec\prec x_1$ in $i$ and $y_0\prec\prec y_1$ in $j$ such that
+
+$$ (x_0,y_1)\sim(x_1,y_0). $$
+
+Moreover, for this fixed pair $i,j$, every finite separated product made only from positive scaled copies of $i$ and $j$ satisfies the comparison hypothesis: any two equal-formal-mass states $A,B$ of that product type satisfy $A\prec B$ or $B\prec A$. No comparison conclusion for products involving a third primitive type is contained in this pairwise result. These are conditional model deductions. In particular, the conclusion is not claimed from the printed Theorem 4.8 interface with T1–T4 alone; the local mathematical supplier explicitly requires the additional T5 and C1 branch.
+
+## Facts & Assumptions
+
+**Given:** The full contact branch A1–A7, S1–S3, T1–T5 and C1 on all declared simple types and their finite joins.
+
+[A1] [[post-td-accessibility-a1-a6]]: reflexivity, transitivity, consistency, scaling, reversible splitting and stability hold on the equal-composition finite products.
+
+[A2] [[post-td-simple-system-geometric-axioms]]: each simple domain and admitted join is open and convex and satisfies A7 and S1–S3.
+
+[A3] [[post-td-thermal-join-axioms]]: T1–T4 hold for the join and thermal-equilibrium relation of [[def-td-thermal-join]].
+
+[A4] [[post-td-universal-thermal-range]]: T5 supplies a thermal-equilibrium partner at every permitted work coordinate.
+
+[A5] [[post-td-equilibrium-join-coherence]]: C1 relates an equilibrated join to each constituent under nested-join identifications.
+
+[F1] [[thm-tdmath-conditional-contact-calibrator]]: the current draft mathematical statement assumes A1–A7, S1–S3, T1–T5, and C1 on a join-closed family and concludes a strict calibrator pair for each pair of systems and comparison hypothesis on their finite scaled products.
+
+[F2] [[def-tdmath-forward-sector-hypotheses]]: a formal type with primitive amount function $\nu_\Gamma$ has positive weight $w_\Gamma=\sum\nu_\Gamma$, and its state is encoded by $\mathsf{J}_\Gamma(x)=w_\Gamma e_{(\Gamma,x)}$. A separated pair is addition of these maps; a join has the summed weight and aggregate composition. The interpretation $\Pi(c)$ takes the factor amount $c(\Gamma,x)/w_\Gamma$ of each typed state. Its pullback retains raw tags, reversible scaled-copy transport and the stated accessibility axioms. Fixed-type normalization is by the positive factor $1/w_\Gamma$.
+
+## Proof
+**Given:** [A1]–[A5] and the exact mathematical statements [F1]–[F2].
+
+1.1 Fix two simple types $i,j$ in the declared family. Give every primitive material its unit amount vector and use the aggregate composition of [[def-td-scaled-products-and-comparison]] for each scaled, separated or joined type $\Gamma$; its sum is $w_\Gamma>0$ unless the type is empty. Construct [F2]'s encoded state and interpretation maps using the physical tagged scaling maps: a raw coefficient $a>0$ at $(\Gamma,x)$ denotes the preparation $(a/w_\Gamma)x$. The map preserves aggregate composition and formal mass, and distinct raw tags remain distinct. The interpretations of $\mathsf{J}_{s\Gamma}(\delta_s x)$ and $s\mathsf{J}_\Gamma(x)$ are the same declared scaled preparation by composition of scaling maps; reflexivity gives reversible transport. When factor coefficients combine or split, [A1]'s reversible-splitting axiom supplies reversibility, so the pullback inherits composition, positive scaling and stability from [A1]. Dividing fixed-type encoded maps by $w_\Gamma$ and scaling back preserves and reflects comparisons, so the one-copy forward sectors and all geometry in [A2] are unchanged. Any common sign chosen in the mathematical orientation deduction is used only for proof coordinates $u'=\varepsilon U$; the physical energy $U$ retains its fixed SI meaning, units and all independently adopted positive-$S_U$ or calibration qualifications. Since the same sign is applied to each component and join proof coordinate, summed-energy identities are preserved. Thus the actual preparation model supplies the exact formal conventions and all order/geometric hypotheses required by [F1]. [A1, A2, F1, F2, construct]
+
+1.2 By [A3], the physical operation [[def-td-thermal-join]] supplies T1–T4 with the same summed-energy coordinates and reversible splitting used in [F1]. Its pair and join retain the same aggregate composition by [[def-td-thermal-join]], so their encoded weights both equal $w_i+w_j$; no mass-one join is compared to an unweighted mass-two pair. [A3, F1, given]
+
+2.1 [A4] supplies the separately stated T5 quantifiers for every ordered simple-system pair, and [A5] supplies the separate C1 nested-join equivalence. Thus every premise of [F1], including its two stronger contact inputs, is met on the whole declared join-closed family. [A4, A5, F1, step 1.1, step 1.2]
+
+3.1 Apply [F1] to this pair $i,j$. Its first conclusion is states $x_0\prec\prec x_1$ and $y_0\prec\prec y_1$ with $(x_0,y_1)\sim(x_1,y_0)$; its second is comparison for every finite separated product made from scaled copies of these two types. This is precisely the stated pairwise conclusion. [F1, step 2.1] ∎
+## Remarks
+
+Lieb–Yngvason’s printed Theorem 4.8 states T1–T4, while its surrounding contact development includes T5 separately. The current local mathematical calibrator carrier makes its actual input stronger and explicit: it also uses C1, the equilibrium-join coherence bridge. Until that carrier and its upstream batch 6 prerequisites are accepted, this physics theorem remains conditional and escalated.

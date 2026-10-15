@@ -1,0 +1,987 @@
+{
+  "version": 1,
+  "level": "physics-td-qft-rpm-62-2026-10-14",
+  "scope": [
+    "def-qft-example-data",
+    "thm-qft-example-finite-dyson-unitarity",
+    "lem-qft-example-golden-kernel",
+    "lem-qft-example-oscillator-feynman-prescription",
+    "ex-qftmath-x01",
+    "ex-qftmath-x03"
+  ],
+  "contracts": {
+    "def-qft-example-data": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "The algebraic unit identity and positive square root give g^2=4 pi alpha and dimensionless g.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "SI definitions give energy and inverse-length units; the explicitly dimensionless four-dimensional scalar and Dirac kinetic normalizations give field length degrees -1 and -3/2.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "The gauge term and phase have the units required by the derivative and exponential, and the two pairings give the same modulus square.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition sets conventions for four-vectors and coordinates; it asserts no construction over an empty index family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits the zero energy vector, and step 1.2 gives p^2=0 with the same declared J^2 unit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the positive coupling identity for every allowed positive choice of constants."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 uses only algebraic definitions and remains valid for zero momentum and zero rest mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint is part of these unit and coordinate conventions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition and its unit verification make no choice assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines conventions or proves displayed identities and limits; it states no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines conventions or proves displayed identities and limits; it states no iff characterization."
+        }
+      ]
+    },
+    "thm-qft-example-finite-dyson-unitarity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-example-data",
+          "source_section": "Definition",
+          "quote": "Finite-matrix examples act on $\\mathbb C^d$ with the operator norm.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "For fixed $s$ this is the unique continuous $\\mathcal B(H)$-valued solution on $I$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Every $U(t,s)$ is unitary, $U(t,s)^*=U(s,t)=U(t,s)^{-1}$, and",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "The finite matrix exponential is unitary, so conjugation preserves Hermiticity and boundedness of the interaction family.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "The ordered simplex has volume T^n/n!, yielding the z^n/n! coefficient bound and uniform convergence.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "The exponential scalar tail is bounded by e^z z^(N+1)/(N+1)! .",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "The bounded dynamics supplier applies under AC_omega and gives the unique unitary solution.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Expanding exact unitarity gives the optical coefficient identity and the first two coefficient relations.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "The first-order truncation has a nonzero positive-semidefinite unitarity defect unless lambda T1=0.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D7",
+          "claim": "Separating the even and odd powers of sigma_x gives exact and first-order two-level squares; the derivative at zero rules out a positive-rate exponential.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D8",
+          "claim": "Direct action on each truncated occupation vector gives the boundary CCR defect; trace cyclicity rules out [A,B]=I in finite dimension.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires d>=1 and T>0; step 1.2 includes order zero as S_0=I, and step 2.1 explicitly takes an empty denominator product as one. An empty ordered product is therefore handled without removing the constant term."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 give z=0 and zero tail when lambda=0 or B=0; the recursion then yields S=I."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The matrix proof and the explicit one-dimensional specialization remain valid for d=1, as allowed by the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cases V=0 or lambda=0 reduce directly to the identity evolution in steps 1.2 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At t=0 every positive-order integral in step 1.2 vanishes and S(0)=I."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 applies the exact supplier under the explicit AC_omega assumption [A1]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Finite Dyson remainder, coefficient unitarity, and regulator counterexamples: Assume the Countable Choice axiom $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $d\\ge1$, $T>0$, $\\hbar>0$, and $\\lambda\\in\\mathbb R$. Let $H_0=H_0^\\dagger$ be a $d\\times d$ Hermitian matrix with entries in joules, and let $V:[0,T]\\to M_d(\\mathbb C)$ be norm-continuous, Hermitian-valued, and in joules. Define $$V_I(t)=e^{itH_0/\\hbar}V(t)e^{-itH_0/\\hbar},\\qquad B=\\sup_{0\\le t\\le T}\\|V_I(t)\\|,\\qquad z=\\frac{|\\lambda|BT}{\\hbar}.$$ The coupling $\\lambda$ is dimensionless and $z$ is dimensionless. Put $S_0(t)=I$ and $$S_{n+1}(t)=-\\frac{i}{\\hbar}\\int_0^t V_I(r)S_n(r)\\,dr,\\qquad S(t)=\\sum_{n=0}^{\\infty}\\lambda^nS_n(t).$$ Then the series converges in operator norm on $[0,T]$, $S$ is the unique solution of $\\dot S The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Finite Dyson remainder, coefficient unitarity, and regulator counterexamples: Assume the Countable Choice axiom $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $d\\ge1$, $T>0$, $\\hbar>0$, and $\\lambda\\in\\mathbb R$. Let $H_0=H_0^\\dagger$ be a $d\\times d$ Hermitian matrix with entries in joules, and let $V:[0,T]\\to M_d(\\mathbb C)$ be norm-continuous, Hermitian-valued, and in joules. Define $$V_I(t)=e^{itH_0/\\hbar}V(t)e^{-itH_0/\\hbar},\\qquad B=\\sup_{0\\le t\\le T}\\|V_I(t)\\|,\\qquad z=\\frac{|\\lambda|BT}{\\hbar}.$$ The coupling $\\lambda$ is dimensionless and $z$ is dimensionless. Put $S_0(t)=I$ and $$S_{n+1}(t)=-\\frac{i}{\\hbar}\\int_0^t V_I(r)S_n(r)\\,dr,\\qquad S(t)=\\sum_{n=0}^{\\infty}\\lambda^nS_n(t).$$ Then the series converges in operator norm on $[0,T]$, $S$ is the unique solution of $\\dot S The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Checked all eight proof steps and exact bounded-dynamics supplier statement: H=C^d, compact [0,T], positive hbar, norm-continuous self-adjoint lambda V_I, AC_omega, common full bounded domain. Latest-time-left recursion agrees with supplier; simplex volume and uniform exponential convergence apply also lambda=0 or B=0 and N=0. Tail bound has empty-product convention and z>=0. Exact S^dagger S gives diagonal optical identity and Hermitian imaginary part (T2-T2^dagger)/(2i); analytic coefficient comparison is for real lambda. Finite two-level exponential follows even/odd series; survival cannot equal a positive-rate exponential as functions because derivatives differ at zero. N=0 truncated ladder gives commutator zero; positive finite dimension trace obstruction is valid. No empirical probability or continuum theorem claimed. Reader/refuter report no defect for this item; no imported supplier proof audit claimed."
+      }
+    },
+    "lem-qft-example-golden-kernel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-fourier-transform-on-l-one-of-rn",
+          "source_section": "Definition",
+          "quote": "$$\\widehat f(\\xi)=\\mathcal Ff(\\xi):=\\int_{\\mathbb R^n}f(x)\\exp(-2\\pi i x\\cdot\\xi)\\,dx,\\qquad \\xi\\in\\mathbb R^n.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-plancherel",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and let $n\\ge1$. Fourier transformation on Schwartz space extends uniquely to a surjective complex-linear isometry $\\mathcal F_2:L^2(\\mathbb R^n;\\mathbb C)\\to L^2(\\mathbb R^n;\\mathbb C)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-l-one-l-two-agreement-of-fourier-transform",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1\\cap L^2$, its bounded continuous integral transform $\\widehat f$ represents $\\mathcal F_2f$ almost everywhere.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "source_section": "Statement",
+          "quote": "For every nonnegative Borel $h:V\\to[0,\\infty]$, $\\int_V h(y)\\,dy=\\int_U h(T(x))|\\det DT(x)|\\,dx$, with equality in $[0,\\infty]$ and $0\\cdot\\infty=0$.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qft-example-data",
+          "source_section": "Definition",
+          "quote": "Take SI $e>0$ in coulombs, $\\hbar>0$ in joule-seconds, $c>0$ in metres per second, $\\mu_0>0$ in $\\mathrm{H\\,m^{-1}}=\\mathrm{kg\\,m\\,C^{-2}}$, and $\\epsilon_0=(\\mu_0c^2)^{-1}$ in $\\mathrm{F\\,m^{-1}}$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "The exponential integral has the stated continuous zero-frequency value, and elementary bounds give the tail estimate.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Plancherel applied to the interval indicator and the exact angular-frequency substitution give total kernel mass 2 pi.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Subtracting f(0) and splitting the integral at radius r gives the modulus and tail error bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Continuity first fixes r and then large T controls the tail, proving convergence.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "The affine energy substitution rewrites P2/T as the approximate-identity integral and yields the stated coefficient limit and units.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement integrates over the nonempty real frequency and energy lines."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly defines K_T(0)=T and proves the continuous zero-frequency value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows lambda=1 and the formula in step 4.1 reduces without division by lambda."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For w=0 or lambda=0, step 4.1 gives P2(T)=0 and a zero limiting coefficient."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the frequency endpoint omega=0; the energy substitution in step 4.1 is on all of R."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exact AC_omega premise [F1] is used in the published Plancherel and L1/L2 suppliers in step 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement of Golden-rule kernel and its quantified approximate-identity limit: Assume the Countable Choice axiom $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), $\\hbar>0$ in joule-seconds, $T>0$ in seconds, an energy $E_0\\in\\mathbb R$ in joules, a dimensionless $\\lambda\\in\\mathbb R$, and a bounded nonnegative Borel function $w:\\mathbb R\\to[0,\\infty)$ continuous at $E_0$. Here $w$ is a specified transition-density weight in joules; no state density or matrix element is inferred from the name. For angular frequency $\\omega\\in\\mathbb R$ in $\\mathrm{s}^{-1}$, define $$K_T(\\omega)=\\frac1T\\left|\\int_0^T e^{i\\omega t}\\,dt\\right|^2 =\\begin{cases}\\dfrac{4\\sin^2(\\omega T/2)}{T\\omega^2},&\\omega\\ne0,\\\\[4pt]T,&\\omega=0.\\end{cases}$$ Then $K_T\\ge0$, $\\int_{\\mathbb R}K_T(\\omega)\\,d\\omega=2\\pi$, and for The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement of Golden-rule kernel and its quantified approximate-identity limit: Assume the Countable Choice axiom $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), $\\hbar>0$ in joule-seconds, $T>0$ in seconds, an energy $E_0\\in\\mathbb R$ in joules, a dimensionless $\\lambda\\in\\mathbb R$, and a bounded nonnegative Borel function $w:\\mathbb R\\to[0,\\infty)$ continuous at $E_0$. Here $w$ is a specified transition-density weight in joules; no state density or matrix element is inferred from the name. For angular frequency $\\omega\\in\\mathbb R$ in $\\mathrm{s}^{-1}$, define $$K_T(\\omega)=\\frac1T\\left|\\int_0^T e^{i\\omega t}\\,dt\\right|^2 =\\begin{cases}\\dfrac{4\\sin^2(\\omega T/2)}{T\\omega^2},&\\omega\\ne0,\\\\[4pt]T,&\\omega=0.\\end{cases}$$ Then $K_T\\ge0$, $\\int_{\\mathbb R}K_T(\\omega)\\,d\\omega=2\\pi$, and for The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Checked all five steps, exact direct supplier statements and reader/refuter no-finding evidence. For T>0 the bound min(T,4/(T omega^2)) gives integrability; Plancherel on 1_[0,T] under AC_omega with nu=-omega/(2 pi) gives total mass 2 pi. Affine substitution is C1 with positive Jacobian hbar and nonnegative Borel integrand. Tail mass 4/(pi T r), split error omega_f(r)+8||f||/(pi T r) and fixed-r then T limit hold for bounded complex tests. w continuous only at E0 suffices; lambda=0 and w=0 give zero and omega=0 has continuous value T. T=0 excluded. No delta squared, exact decay or probability interpretation follows. AC_omega is inherited by Plancherel/agreement/change-of-variables, with no stronger choice use."
+      }
+    },
+    "lem-qft-example-oscillator-feynman-prescription": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-example-data",
+          "source_section": "Definition",
+          "quote": "For Hilbert spaces, use the first-variable-linear pairing $(u,v)_1=v^\\dagger u$; a displayed coordinate contraction $u^\\dagger v$ is second-variable-linear and equals $\\overline{(u,v)_1}$. Thus norms, traces, and modulus-squared amplitudes agree under conversion, although the unsquared pairing is conjugated.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization",
+          "source_section": "Statement",
+          "quote": "is self-adjoint, satisfies $H_{\\mathrm{osc}}\\psi_n=\\hbar\\omega(n+\\tfrac12)\\psi_n$ for every $n",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization",
+          "source_section": "Statement",
+          "quote": "the functions $\\psi_n:=Dg_n$, $\\psi_n(x)=\\ell^{-1/2}g_n(x/\\ell)$, form a complete orthonormal family of $L^2(\\mathbb R,dx)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqm-oscillator-hermite-recurrence",
+          "source_section": "Statement",
+          "quote": "$\\sqrt2\\,y\\,g_n=\\sqrt n\\,g_{n-1}+\\sqrt{n+1}\\,g_{n+1},\\qquad \\sqrt2\\,g_n'=\\sqrt n\\,g_{n-1}-\\sqrt{n+1}\\,g_{n+1}.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-fourier-transform-on-l-one-of-rn",
+          "source_section": "Definition",
+          "quote": "$$\\widehat f(\\xi)=\\mathcal Ff(\\xi):=\\int_{\\mathbb R^n}f(x)\\exp(-2\\pi i x\\cdot\\xi)\\,dx,\\qquad \\xi\\in\\mathbb R^n.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The negative-sign, $2\\pi$-normalized Fourier transform is continuous $\\mathcal F:\\mathcal S\\to\\mathcal S",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "is a well-defined inner product, linear in the first variable and\nconjugate-linear in the second, positive definite, with\n$\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu;\\mathbb C)$ is a complex\nHilbert space",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Rescaling the Hermite recurrence gives the position action; a norm-preserving phase rule on the dense finite span extends to a unitary using Hilbert completeness.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F10",
+            "F11",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "The only surviving ground-state coefficient yields the time-ordered oscillator correlator for positive and negative times.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Integration by parts on the two half-lines turns the derivative jump -i into the Feynman delta source.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "The retarded kernel's derivative jump is +1 and its negative-time support differs from the correlator.",
+          "step": "3.3",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "An even-cutoff subtraction proves convergence of the first complex kernel contribution to a continuous principal-value functional.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "The approximate-delta contribution converges to -i pi times evaluation for every complex Schwartz test, yielding the Plemelj boundary with either sign.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D7",
+          "claim": "Two convergent half-line exponential integrals yield the exact damped positive-sign Fourier transform.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F8",
+            "F9",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D8",
+          "claim": "Schwartz duality, Fubini, and the already-proved Plemelj limits justify the distributional boundary and its two opposite pole signs.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes the Hermite family indexed by n>=0, including normalized psi_0. The correlator is evaluated in that ground vector, so the detected word family does not quantify over an optional empty oscillator basis.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), $m_o>0$ in kilograms, $\\omega>0$ in $\\mathrm{s}^{-1}$, and $\\hbar>0$ in $\\mathrm{J\\,s}$. Take the complete oscillator family $(\\psi_n)_{n\\ge0}$ and self-adjoint Hamiltonian $H_{\\rm osc}$ of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], with oscillator length $\\ell=\\sqrt{\\hbar/(m_o\\omega)}$ and $H_{\\rm osc}\\psi_n=\\hbar\\omega(n+\\tfrac12)\\psi_n$. Let $\\mathcal C=\\operatorname{span}\\{\\psi_n:n\\ge0\\}$ be the finite Hermite span. Multiplication by position $Xf(x)=xf(x)$ maps $\\mathcal C$ into itself by the Hermite recurrence. Define $U(t)$ on $\\mathcal C$ by $U(t)\\psi_n=e^{-i\\omega(n+1/2)t}\\psi_n$ and extend continuously to a unitary on the oscillator Hilbert space. For $\\psi_0$ the normalized ground state, define\n$$C_F(t)=\\frac{m_o}{\\hbar}\\bigl(T X(t)X(0)\\psi_0,\\psi_0\\bigr)_1,\\qquad X(t)=U(t)^\\dagger XU(t),$$\nwhere time ordering means $T X(t)X(0)=X(t)X(0)$ for $t\\ge0$ and $X(0)X(t)$ for $t<0$. Define $G_R(t)=1_{[0,\\infty)}(t)\\sin(\\omega t)/\\omega$.\n\nThen, for every real $t$,\n$$C_F(t)=\\frac{e^{-i\\omega|t|}}{2\\omega},\\qquad (\\partial_t^2+\\omega^2)C_F=-i\\delta_0,\\qquad (\\partial_t^2+\\omega^2)G_R=\\delta_0.$$\nThe derivatives are distributional on $\\mathbb R$, and $\\delta_0(\\varphi)=\\varphi(0)$. Both kernels have units of seconds, so the differential identities have units of inverse seconds. In particular, $C_F(t)\\ne0$ for $t<0$ while $G_R(t)=0$ there.\n\nFor a Schwartz test function $\\varphi\\in\\mathcal S(\\mathbb R)$ and $\\epsilon>0$, define $\\operatorname{PV}\\int\\varphi(x)/x\\,dx:=\\lim_{r\\downarrow0}\\int_{|x|>r}\\varphi(x)/x\\,dx$ and $\\delta_a(\\varphi):=\\varphi(a)$. The Plemelj boundary identity is\n$$\\lim_{\\epsilon\\downarrow0}\\int_{\\mathbb R}\\frac{\\varphi(x)}{x+i\\epsilon}\\,dx =\\operatorname{PV}\\int_{\\mathbb R}\\frac{\\varphi(x)}x\\,dx-i\\pi\\varphi(0),$$\nwith the opposite sign of $i\\epsilon$ reversing the delta sign. In this boundary formula $x$ and $\\epsilon$ use one common coordinate unit. For $\\nu\\in\\mathbb R$ in $\\mathrm{s}^{-1}$, the frequency regulator $\\epsilon>0$ is in $\\mathrm{s}^{-1}$ and $\\epsilon t$ is dimensionless; the ordinary positive-sign Fourier transform of $e^{-\\epsilon|t|}C_F(t)$ is\n$$\\frac{i}{2\\omega}\\left(\\frac1{\\nu-\\omega+i\\epsilon}-\\frac1{\\nu+\\omega-i\\epsilon}\\right).$$\nAs $\\epsilon\\downarrow0$ its distributional limit is\n$$\\frac{i}{2\\omega}\\left[ \\operatorname{PV}\\frac1{\\nu-\\omega}-\\operatorname{PV}\\frac1{\\nu+\\omega} -i\\pi\\delta_{\\omega}-i\\pi\\delta_{-\\omega}\\right],$$\nwhich is conventionally denoted $i/(\\nu^2-\\omega^2+i0)$. Here that notation means the displayed pair of opposite boundary values at the two simple poles. This one-mode result makes no spatial-causality or interacting-field claim.",
+            "current_raw_sha256": "53bba12080ecf45acb2f696f56967c2f901a6b5237520bf30c55d8083bacef7f",
+            "scope_only_not_proof_acceptance": true,
+            "format_only_native_accepted_case_applicability_preserved": true
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1 evaluate the kernel at t=0 and retain the derivative-jump delta there.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), $m_o>0$ in kilograms, $\\omega>0$ in $\\mathrm{s}^{-1}$, and $\\hbar>0$ in $\\mathrm{J\\,s}$. Take the complete oscillator family $(\\psi_n)_{n\\ge0}$ and self-adjoint Hamiltonian $H_{\\rm osc}$ of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], with oscillator length $\\ell=\\sqrt{\\hbar/(m_o\\omega)}$ and $H_{\\rm osc}\\psi_n=\\hbar\\omega(n+\\tfrac12)\\psi_n$. Let $\\mathcal C=\\operatorname{span}\\{\\psi_n:n\\ge0\\}$ be the finite Hermite span. Multiplication by position $Xf(x)=xf(x)$ maps $\\mathcal C$ into itself by the Hermite recurrence. Define $U(t)$ on $\\mathcal C$ by $U(t)\\psi_n=e^{-i\\omega(n+1/2)t}\\psi_n$ and extend continuously to a unitary on the oscillator Hilbert space. For $\\psi_0$ the normalized ground state, define\n$$C_F(t)=\\frac{m_o}{\\hbar}\\bigl(T X(t)X(0)\\psi_0,\\psi_0\\bigr)_1,\\qquad X(t)=U(t)^\\dagger XU(t),$$\nwhere time ordering means $T X(t)X(0)=X(t)X(0)$ for $t\\ge0$ and $X(0)X(t)$ for $t<0$. Define $G_R(t)=1_{[0,\\infty)}(t)\\sin(\\omega t)/\\omega$.\n\nThen, for every real $t$,\n$$C_F(t)=\\frac{e^{-i\\omega|t|}}{2\\omega},\\qquad (\\partial_t^2+\\omega^2)C_F=-i\\delta_0,\\qquad (\\partial_t^2+\\omega^2)G_R=\\delta_0.$$\nThe derivatives are distributional on $\\mathbb R$, and $\\delta_0(\\varphi)=\\varphi(0)$. Both kernels have units of seconds, so the differential identities have units of inverse seconds. In particular, $C_F(t)\\ne0$ for $t<0$ while $G_R(t)=0$ there.\n\nFor a Schwartz test function $\\varphi\\in\\mathcal S(\\mathbb R)$ and $\\epsilon>0$, define $\\operatorname{PV}\\int\\varphi(x)/x\\,dx:=\\lim_{r\\downarrow0}\\int_{|x|>r}\\varphi(x)/x\\,dx$ and $\\delta_a(\\varphi):=\\varphi(a)$. The Plemelj boundary identity is\n$$\\lim_{\\epsilon\\downarrow0}\\int_{\\mathbb R}\\frac{\\varphi(x)}{x+i\\epsilon}\\,dx =\\operatorname{PV}\\int_{\\mathbb R}\\frac{\\varphi(x)}x\\,dx-i\\pi\\varphi(0),$$\nwith the opposite sign of $i\\epsilon$ reversing the delta sign. In this boundary formula $x$ and $\\epsilon$ use one common coordinate unit. For $\\nu\\in\\mathbb R$ in $\\mathrm{s}^{-1}$, the frequency regulator $\\epsilon>0$ is in $\\mathrm{s}^{-1}$ and $\\epsilon t$ is dimensionless; the ordinary positive-sign Fourier transform of $e^{-\\epsilon|t|}C_F(t)$ is\n$$\\frac{i}{2\\omega}\\left(\\frac1{\\nu-\\omega+i\\epsilon}-\\frac1{\\nu+\\omega-i\\epsilon}\\right).$$\nAs $\\epsilon\\downarrow0$ its distributional limit is\n$$\\frac{i}{2\\omega}\\left[ \\operatorname{PV}\\frac1{\\nu-\\omega}-\\operatorname{PV}\\frac1{\\nu+\\omega} -i\\pi\\delta_{\\omega}-i\\pi\\delta_{-\\omega}\\right],$$\nwhich is conventionally denoted $i/(\\nu^2-\\omega^2+i0)$. Here that notation means the displayed pair of opposite boundary values at the two simple poles. This one-mode result makes no spatial-causality or interacting-field claim.",
+            "current_raw_sha256": "53bba12080ecf45acb2f696f56967c2f901a6b5237520bf30c55d8083bacef7f",
+            "scope_only_not_proof_acceptance": true,
+            "format_only_native_accepted_case_applicability_preserved": true
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction is explicitly one mode and uses the ground state and first excited state in step 2.2.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), $m_o>0$ in kilograms, $\\omega>0$ in $\\mathrm{s}^{-1}$, and $\\hbar>0$ in $\\mathrm{J\\,s}$. Take the complete oscillator family $(\\psi_n)_{n\\ge0}$ and self-adjoint Hamiltonian $H_{\\rm osc}$ of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], with oscillator length $\\ell=\\sqrt{\\hbar/(m_o\\omega)}$ and $H_{\\rm osc}\\psi_n=\\hbar\\omega(n+\\tfrac12)\\psi_n$. Let $\\mathcal C=\\operatorname{span}\\{\\psi_n:n\\ge0\\}$ be the finite Hermite span. Multiplication by position $Xf(x)=xf(x)$ maps $\\mathcal C$ into itself by the Hermite recurrence. Define $U(t)$ on $\\mathcal C$ by $U(t)\\psi_n=e^{-i\\omega(n+1/2)t}\\psi_n$ and extend continuously to a unitary on the oscillator Hilbert space. For $\\psi_0$ the normalized ground state, define\n$$C_F(t)=\\frac{m_o}{\\hbar}\\bigl(T X(t)X(0)\\psi_0,\\psi_0\\bigr)_1,\\qquad X(t)=U(t)^\\dagger XU(t),$$\nwhere time ordering means $T X(t)X(0)=X(t)X(0)$ for $t\\ge0$ and $X(0)X(t)$ for $t<0$. Define $G_R(t)=1_{[0,\\infty)}(t)\\sin(\\omega t)/\\omega$.\n\nThen, for every real $t$,\n$$C_F(t)=\\frac{e^{-i\\omega|t|}}{2\\omega},\\qquad (\\partial_t^2+\\omega^2)C_F=-i\\delta_0,\\qquad (\\partial_t^2+\\omega^2)G_R=\\delta_0.$$\nThe derivatives are distributional on $\\mathbb R$, and $\\delta_0(\\varphi)=\\varphi(0)$. Both kernels have units of seconds, so the differential identities have units of inverse seconds. In particular, $C_F(t)\\ne0$ for $t<0$ while $G_R(t)=0$ there.\n\nFor a Schwartz test function $\\varphi\\in\\mathcal S(\\mathbb R)$ and $\\epsilon>0$, define $\\operatorname{PV}\\int\\varphi(x)/x\\,dx:=\\lim_{r\\downarrow0}\\int_{|x|>r}\\varphi(x)/x\\,dx$ and $\\delta_a(\\varphi):=\\varphi(a)$. The Plemelj boundary identity is\n$$\\lim_{\\epsilon\\downarrow0}\\int_{\\mathbb R}\\frac{\\varphi(x)}{x+i\\epsilon}\\,dx =\\operatorname{PV}\\int_{\\mathbb R}\\frac{\\varphi(x)}x\\,dx-i\\pi\\varphi(0),$$\nwith the opposite sign of $i\\epsilon$ reversing the delta sign. In this boundary formula $x$ and $\\epsilon$ use one common coordinate unit. For $\\nu\\in\\mathbb R$ in $\\mathrm{s}^{-1}$, the frequency regulator $\\epsilon>0$ is in $\\mathrm{s}^{-1}$ and $\\epsilon t$ is dimensionless; the ordinary positive-sign Fourier transform of $e^{-\\epsilon|t|}C_F(t)$ is\n$$\\frac{i}{2\\omega}\\left(\\frac1{\\nu-\\omega+i\\epsilon}-\\frac1{\\nu+\\omega-i\\epsilon}\\right).$$\nAs $\\epsilon\\downarrow0$ its distributional limit is\n$$\\frac{i}{2\\omega}\\left[ \\operatorname{PV}\\frac1{\\nu-\\omega}-\\operatorname{PV}\\frac1{\\nu+\\omega} -i\\pi\\delta_{\\omega}-i\\pi\\delta_{-\\omega}\\right],$$\nwhich is conventionally denoted $i/(\\nu^2-\\omega^2+i0)$. Here that notation means the displayed pair of opposite boundary values at the two simple poles. This one-mode result makes no spatial-causality or interacting-field claim.",
+            "current_raw_sha256": "53bba12080ecf45acb2f696f56967c2f901a6b5237520bf30c55d8083bacef7f",
+            "scope_only_not_proof_acceptance": true,
+            "format_only_native_accepted_case_applicability_preserved": true
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes omega>0; omega=0 would collapse the two simple frequency poles and is outside the statement.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), $m_o>0$ in kilograms, $\\omega>0$ in $\\mathrm{s}^{-1}$, and $\\hbar>0$ in $\\mathrm{J\\,s}$. Take the complete oscillator family $(\\psi_n)_{n\\ge0}$ and self-adjoint Hamiltonian $H_{\\rm osc}$ of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], with oscillator length $\\ell=\\sqrt{\\hbar/(m_o\\omega)}$ and $H_{\\rm osc}\\psi_n=\\hbar\\omega(n+\\tfrac12)\\psi_n$. Let $\\mathcal C=\\operatorname{span}\\{\\psi_n:n\\ge0\\}$ be the finite Hermite span. Multiplication by position $Xf(x)=xf(x)$ maps $\\mathcal C$ into itself by the Hermite recurrence. Define $U(t)$ on $\\mathcal C$ by $U(t)\\psi_n=e^{-i\\omega(n+1/2)t}\\psi_n$ and extend continuously to a unitary on the oscillator Hilbert space. For $\\psi_0$ the normalized ground state, define\n$$C_F(t)=\\frac{m_o}{\\hbar}\\bigl(T X(t)X(0)\\psi_0,\\psi_0\\bigr)_1,\\qquad X(t)=U(t)^\\dagger XU(t),$$\nwhere time ordering means $T X(t)X(0)=X(t)X(0)$ for $t\\ge0$ and $X(0)X(t)$ for $t<0$. Define $G_R(t)=1_{[0,\\infty)}(t)\\sin(\\omega t)/\\omega$.\n\nThen, for every real $t$,\n$$C_F(t)=\\frac{e^{-i\\omega|t|}}{2\\omega},\\qquad (\\partial_t^2+\\omega^2)C_F=-i\\delta_0,\\qquad (\\partial_t^2+\\omega^2)G_R=\\delta_0.$$\nThe derivatives are distributional on $\\mathbb R$, and $\\delta_0(\\varphi)=\\varphi(0)$. Both kernels have units of seconds, so the differential identities have units of inverse seconds. In particular, $C_F(t)\\ne0$ for $t<0$ while $G_R(t)=0$ there.\n\nFor a Schwartz test function $\\varphi\\in\\mathcal S(\\mathbb R)$ and $\\epsilon>0$, define $\\operatorname{PV}\\int\\varphi(x)/x\\,dx:=\\lim_{r\\downarrow0}\\int_{|x|>r}\\varphi(x)/x\\,dx$ and $\\delta_a(\\varphi):=\\varphi(a)$. The Plemelj boundary identity is\n$$\\lim_{\\epsilon\\downarrow0}\\int_{\\mathbb R}\\frac{\\varphi(x)}{x+i\\epsilon}\\,dx =\\operatorname{PV}\\int_{\\mathbb R}\\frac{\\varphi(x)}x\\,dx-i\\pi\\varphi(0),$$\nwith the opposite sign of $i\\epsilon$ reversing the delta sign. In this boundary formula $x$ and $\\epsilon$ use one common coordinate unit. For $\\nu\\in\\mathbb R$ in $\\mathrm{s}^{-1}$, the frequency regulator $\\epsilon>0$ is in $\\mathrm{s}^{-1}$ and $\\epsilon t$ is dimensionless; the ordinary positive-sign Fourier transform of $e^{-\\epsilon|t|}C_F(t)$ is\n$$\\frac{i}{2\\omega}\\left(\\frac1{\\nu-\\omega+i\\epsilon}-\\frac1{\\nu+\\omega-i\\epsilon}\\right).$$\nAs $\\epsilon\\downarrow0$ its distributional limit is\n$$\\frac{i}{2\\omega}\\left[ \\operatorname{PV}\\frac1{\\nu-\\omega}-\\operatorname{PV}\\frac1{\\nu+\\omega} -i\\pi\\delta_{\\omega}-i\\pi\\delta_{-\\omega}\\right],$$\nwhich is conventionally denoted $i/(\\nu^2-\\omega^2+i0)$. Here that notation means the displayed pair of opposite boundary values at the two simple poles. This one-mode result makes no spatial-causality or interacting-field claim.",
+            "current_raw_sha256": "53bba12080ecf45acb2f696f56967c2f901a6b5237520bf30c55d8083bacef7f",
+            "scope_only_not_proof_acceptance": true,
+            "format_only_native_accepted_case_applicability_preserved": true
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 compute the one-sided derivatives at t=0, the only joining point.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), $m_o>0$ in kilograms, $\\omega>0$ in $\\mathrm{s}^{-1}$, and $\\hbar>0$ in $\\mathrm{J\\,s}$. Take the complete oscillator family $(\\psi_n)_{n\\ge0}$ and self-adjoint Hamiltonian $H_{\\rm osc}$ of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], with oscillator length $\\ell=\\sqrt{\\hbar/(m_o\\omega)}$ and $H_{\\rm osc}\\psi_n=\\hbar\\omega(n+\\tfrac12)\\psi_n$. Let $\\mathcal C=\\operatorname{span}\\{\\psi_n:n\\ge0\\}$ be the finite Hermite span. Multiplication by position $Xf(x)=xf(x)$ maps $\\mathcal C$ into itself by the Hermite recurrence. Define $U(t)$ on $\\mathcal C$ by $U(t)\\psi_n=e^{-i\\omega(n+1/2)t}\\psi_n$ and extend continuously to a unitary on the oscillator Hilbert space. For $\\psi_0$ the normalized ground state, define\n$$C_F(t)=\\frac{m_o}{\\hbar}\\bigl(T X(t)X(0)\\psi_0,\\psi_0\\bigr)_1,\\qquad X(t)=U(t)^\\dagger XU(t),$$\nwhere time ordering means $T X(t)X(0)=X(t)X(0)$ for $t\\ge0$ and $X(0)X(t)$ for $t<0$. Define $G_R(t)=1_{[0,\\infty)}(t)\\sin(\\omega t)/\\omega$.\n\nThen, for every real $t$,\n$$C_F(t)=\\frac{e^{-i\\omega|t|}}{2\\omega},\\qquad (\\partial_t^2+\\omega^2)C_F=-i\\delta_0,\\qquad (\\partial_t^2+\\omega^2)G_R=\\delta_0.$$\nThe derivatives are distributional on $\\mathbb R$, and $\\delta_0(\\varphi)=\\varphi(0)$. Both kernels have units of seconds, so the differential identities have units of inverse seconds. In particular, $C_F(t)\\ne0$ for $t<0$ while $G_R(t)=0$ there.\n\nFor a Schwartz test function $\\varphi\\in\\mathcal S(\\mathbb R)$ and $\\epsilon>0$, define $\\operatorname{PV}\\int\\varphi(x)/x\\,dx:=\\lim_{r\\downarrow0}\\int_{|x|>r}\\varphi(x)/x\\,dx$ and $\\delta_a(\\varphi):=\\varphi(a)$. The Plemelj boundary identity is\n$$\\lim_{\\epsilon\\downarrow0}\\int_{\\mathbb R}\\frac{\\varphi(x)}{x+i\\epsilon}\\,dx =\\operatorname{PV}\\int_{\\mathbb R}\\frac{\\varphi(x)}x\\,dx-i\\pi\\varphi(0),$$\nwith the opposite sign of $i\\epsilon$ reversing the delta sign. In this boundary formula $x$ and $\\epsilon$ use one common coordinate unit. For $\\nu\\in\\mathbb R$ in $\\mathrm{s}^{-1}$, the frequency regulator $\\epsilon>0$ is in $\\mathrm{s}^{-1}$ and $\\epsilon t$ is dimensionless; the ordinary positive-sign Fourier transform of $e^{-\\epsilon|t|}C_F(t)$ is\n$$\\frac{i}{2\\omega}\\left(\\frac1{\\nu-\\omega+i\\epsilon}-\\frac1{\\nu+\\omega-i\\epsilon}\\right).$$\nAs $\\epsilon\\downarrow0$ its distributional limit is\n$$\\frac{i}{2\\omega}\\left[ \\operatorname{PV}\\frac1{\\nu-\\omega}-\\operatorname{PV}\\frac1{\\nu+\\omega} -i\\pi\\delta_{\\omega}-i\\pi\\delta_{-\\omega}\\right],$$\nwhich is conventionally denoted $i/(\\nu^2-\\omega^2+i0)$. Here that notation means the displayed pair of opposite boundary values at the two simple poles. This one-mode result makes no spatial-causality or interacting-field claim.",
+            "current_raw_sha256": "53bba12080ecf45acb2f696f56967c2f901a6b5237520bf30c55d8083bacef7f",
+            "scope_only_not_proof_acceptance": true,
+            "format_only_native_accepted_case_applicability_preserved": true
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 carries AC_omega explicitly and applies the exact oscillator and Fourier supplier hypotheses.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), $m_o>0$ in kilograms, $\\omega>0$ in $\\mathrm{s}^{-1}$, and $\\hbar>0$ in $\\mathrm{J\\,s}$. Take the complete oscillator family $(\\psi_n)_{n\\ge0}$ and self-adjoint Hamiltonian $H_{\\rm osc}$ of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], with oscillator length $\\ell=\\sqrt{\\hbar/(m_o\\omega)}$ and $H_{\\rm osc}\\psi_n=\\hbar\\omega(n+\\tfrac12)\\psi_n$. Let $\\mathcal C=\\operatorname{span}\\{\\psi_n:n\\ge0\\}$ be the finite Hermite span. Multiplication by position $Xf(x)=xf(x)$ maps $\\mathcal C$ into itself by the Hermite recurrence. Define $U(t)$ on $\\mathcal C$ by $U(t)\\psi_n=e^{-i\\omega(n+1/2)t}\\psi_n$ and extend continuously to a unitary on the oscillator Hilbert space. For $\\psi_0$ the normalized ground state, define\n$$C_F(t)=\\frac{m_o}{\\hbar}\\bigl(T X(t)X(0)\\psi_0,\\psi_0\\bigr)_1,\\qquad X(t)=U(t)^\\dagger XU(t),$$\nwhere time ordering means $T X(t)X(0)=X(t)X(0)$ for $t\\ge0$ and $X(0)X(t)$ for $t<0$. Define $G_R(t)=1_{[0,\\infty)}(t)\\sin(\\omega t)/\\omega$.\n\nThen, for every real $t$,\n$$C_F(t)=\\frac{e^{-i\\omega|t|}}{2\\omega},\\qquad (\\partial_t^2+\\omega^2)C_F=-i\\delta_0,\\qquad (\\partial_t^2+\\omega^2)G_R=\\delta_0.$$\nThe derivatives are distributional on $\\mathbb R$, and $\\delta_0(\\varphi)=\\varphi(0)$. Both kernels have units of seconds, so the differential identities have units of inverse seconds. In particular, $C_F(t)\\ne0$ for $t<0$ while $G_R(t)=0$ there.\n\nFor a Schwartz test function $\\varphi\\in\\mathcal S(\\mathbb R)$ and $\\epsilon>0$, define $\\operatorname{PV}\\int\\varphi(x)/x\\,dx:=\\lim_{r\\downarrow0}\\int_{|x|>r}\\varphi(x)/x\\,dx$ and $\\delta_a(\\varphi):=\\varphi(a)$. The Plemelj boundary identity is\n$$\\lim_{\\epsilon\\downarrow0}\\int_{\\mathbb R}\\frac{\\varphi(x)}{x+i\\epsilon}\\,dx =\\operatorname{PV}\\int_{\\mathbb R}\\frac{\\varphi(x)}x\\,dx-i\\pi\\varphi(0),$$\nwith the opposite sign of $i\\epsilon$ reversing the delta sign. In this boundary formula $x$ and $\\epsilon$ use one common coordinate unit. For $\\nu\\in\\mathbb R$ in $\\mathrm{s}^{-1}$, the frequency regulator $\\epsilon>0$ is in $\\mathrm{s}^{-1}$ and $\\epsilon t$ is dimensionless; the ordinary positive-sign Fourier transform of $e^{-\\epsilon|t|}C_F(t)$ is\n$$\\frac{i}{2\\omega}\\left(\\frac1{\\nu-\\omega+i\\epsilon}-\\frac1{\\nu+\\omega-i\\epsilon}\\right).$$\nAs $\\epsilon\\downarrow0$ its distributional limit is\n$$\\frac{i}{2\\omega}\\left[ \\operatorname{PV}\\frac1{\\nu-\\omega}-\\operatorname{PV}\\frac1{\\nu+\\omega} -i\\pi\\delta_{\\omega}-i\\pi\\delta_{-\\omega}\\right],$$\nwhich is conventionally denoted $i/(\\nu^2-\\omega^2+i0)$. Here that notation means the displayed pair of opposite boundary values at the two simple poles. This one-mode result makes no spatial-causality or interacting-field claim.",
+            "current_raw_sha256": "53bba12080ecf45acb2f696f56967c2f901a6b5237520bf30c55d8083bacef7f",
+            "scope_only_not_proof_acceptance": true,
+            "format_only_native_accepted_case_applicability_preserved": true
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item defines conventions or proves displayed identities and limits; it states no iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item defines conventions or proves displayed identities and limits; it states no iff characterization."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "All eight steps and twelve direct supplier statements checked, plus published tempered/derivative conventions for comparison with the locally supplied definitions. AC_omega explicitly inherited by oscillator realization, Hilbert completeness and Schwartz Fourier theorem. Dense finite Hermite span supports every X product; opposite phases extend inverse isometries. Ground-state coefficient gives e^(-i omega |t|)/(2 omega) on both sides including t=0. The corrected complex-kernel decomposition passes phi=i exp(-x^2): R_epsilon=0, -i J_epsilon is positive real. PV action bound 2p01+p20, evaluation p00, bounded-kernel and derivative seminorm bounds establish continuity. Weak Schwartz-dual convergence is explicitly defined; Fubini has L1 absolute double integral; tails are integrable Schwartz transforms. Integration by parts has jumps -i and +1 and no jump of the function; t=0 endpoint is consistent. omega=0 excluded, epsilon positive, both pole signs checked. No spatial causality or continuum-existence claim. Ordinary Fourier calculation now follows the correlator derivation."
+      }
+    },
+    "ex-qftmath-x01": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-example-data",
+          "source_section": "Definition",
+          "quote": "Take SI $e>0$ in coulombs, $\\hbar>0$ in joule-seconds, $c>0$ in metres per second, $\\mu_0>0$ in $\\mathrm{H\\,m^{-1}}=\\mathrm{kg\\,m\\,C^{-2}}$, and $\\epsilon_0=(\\mu_0c^2)^{-1}$ in $\\mathrm{F\\,m^{-1}}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qft-example-finite-dyson-unitarity",
+          "source_section": "Statement",
+          "quote": "Its exact off-diagonal matrix-element square is $\\sin^2(g_Et/\\hbar)$; its first-order squared coefficient is $(g_Et/\\hbar)^2$, which can exceed $1$. For every positive rate $\\Gamma$ in $\\mathrm{s}^{-1}$, the survival matrix-element square $\\cos^2(g_Et/\\hbar)$ is not $e^{-\\Gamma t}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "At the first specified time the exact unitary square is one and the first-order squared coefficient is pi squared over four.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "At the second time the exact survival square is one while any positive-rate exponential is strictly below one.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "The first-order value is only a coefficient square; a probability interpretation requires a separate adopted Born rule.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes the nonempty two-dimensional state space C^2."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The worked example fixes g_E>0 and does not evaluate the zero-coupling limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates an exact matrix-element square equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes positive coupling and nonzero times, so the zero-coupling degeneracy is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement chooses positive finite times t1 and t2; the supplier's evolution is defined at each such time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the inherited AC_omega assumption recorded as [A1]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example of Worked example B01 \u2014 exact finite dynamics and its first coefficient: Use the two-level matrix model of [[thm-qft-example-finite-dyson-unitarity]] with $H=g_E\\sigma_x$, where $g_E>0$ is in joules. At $$t_1=\\frac{\\pi\\hbar}{2g_E}>0,$$ the exact off-diagonal matrix-element square is $1$, while its first-order squared coefficient is $\\pi^2/4>1$. At $t_2=\\pi\\hbar/g_E$, the exact survival matrix-element square is $1$, whereas $e^{-\\Gamma t_2}<1$ for every positive rate $\\Gamma$ in $\\mathrm{s}^{-1}$. These are finite-matrix identities. A later Born-rule interpretation may assign the exact square a probability; the mathematics here assigns no probability to an amplitude. The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example of Worked example B01 \u2014 exact finite dynamics and its first coefficient: Use the two-level matrix model of [[thm-qft-example-finite-dyson-unitarity]] with $H=g_E\\sigma_x$, where $g_E>0$ is in joules. At $$t_1=\\frac{\\pi\\hbar}{2g_E}>0,$$ the exact off-diagonal matrix-element square is $1$, while its first-order squared coefficient is $\\pi^2/4>1$. At $t_2=\\pi\\hbar/g_E$, the exact survival matrix-element square is $1$, whereas $e^{-\\Gamma t_2}<1$ for every positive rate $\\Gamma$ in $\\mathrm{s}^{-1}$. These are finite-matrix identities. A later Born-rule interpretation may assign the exact square a probability; the mathematics here assigns no probability to an amplitude. The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ]
+    },
+    "ex-qftmath-x03": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-example-data",
+          "source_section": "Definition",
+          "quote": "For Hilbert spaces, use the first-variable-linear pairing $(u,v)_1=v^\\dagger u$; a displayed coordinate contraction $u^\\dagger v$ is second-variable-linear and equals $\\overline{(u,v)_1}$. Thus norms, traces, and modulus-squared amplitudes agree under conversion, although the unsquared pairing is conjugated.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-example-oscillator-feynman-prescription",
+          "source_section": "Statement",
+          "quote": "$$C_F(t)=\\frac{e^{-i\\omega|t|}}{2\\omega},\\qquad\n(\\partial_t^2+\\omega^2)C_F=-i\\delta_0,\\qquad\n(\\partial_t^2+\\omega^2)G_R=\\delta_0.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "The dimensionless argument at t_* is -pi/2 and the exact correlator equals -i/(2 omega).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "The negative time lies outside the support of the retarded kernel, so its value is zero.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "The numerical difference is confined to the one-mode model and has no spatial-causality implication.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes the nonempty one-mode oscillator specified on the A page."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The chosen time is nonzero and the oscillator frequency is required to be positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the exact kernel value at the selected time."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example excludes omega=0 because the oscillator and its frequency prescription require omega>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The chosen point t_* is a finite negative time, and step 2.1 checks its support side."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example inherits the explicit AC_omega premise recorded as [A1]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Example of Worked example B03 \u2014 nonretarded one-mode correlator: For the one-mode oscillator in [[lem-qft-example-oscillator-feynman-prescription]], choose $t_*=-\\pi/(2\\omega)$, where $\\omega>0$ is in $\\mathrm{s}^{-1}$. Then the normalized Feynman correlator is $-i/(2\\omega)$, while the retarded response kernel is zero. The nonzero negative-time correlation is not a response to a future source. The forward iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Example of Worked example B03 \u2014 nonretarded one-mode correlator: For the one-mode oscillator in [[lem-qft-example-oscillator-feynman-prescription]], choose $t_*=-\\pi/(2\\omega)$, where $\\omega>0$ is in $\\mathrm{s}^{-1}$. Then the normalized Feynman correlator is $-i/(2\\omega)$, while the retarded response kernel is zero. The nonzero negative-time correlation is not a response to a future source. The reverse iff axis adds no separately stated converse hypothesis here; the recorded claim is the displayed construction, identity, implication or scope qualification, not a characterization by a new necessary-and-sufficient condition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Read all three verification steps and exact repaired oscillator Statement/Proof and convention/AC suppliers. omega>0 implies finite negative t*=-pi/(2 omega), omega|t*|=pi/2, C_F=-i/(2 omega), and G_R=0 by the negative-time indicator. Pairing is first-variable-linear and values have seconds units. omega=0 and t*=0 excluded; inherited AC_omega retained. No spatial signalling, source response or empirical inference occurs. Reader/refuter report no separate example defect; supplier findings repaired before this review."
+      }
+    }
+  }
+}

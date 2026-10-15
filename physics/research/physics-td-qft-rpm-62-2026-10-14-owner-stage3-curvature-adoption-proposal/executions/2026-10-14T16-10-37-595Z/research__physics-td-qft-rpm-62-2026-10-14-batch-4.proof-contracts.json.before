@@ -1,0 +1,2500 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-tdmath-extended-convex-epigraph-equivalence",
+    "lem-tdmath-closed-convex-separation",
+    "lem-tdmath-fenchel-young-equality",
+    "thm-tdmath-finite-dimensional-biconjugation",
+    "thm-tdmath-fenchel-attainment",
+    "thm-tdmath-finite-mixture-envelope",
+    "cor-tdmath-ordered-finite-mixture-envelope",
+    "lem-tdmath-lever-rule",
+    "lem-tdmath-constrained-curvature",
+    "lem-tdmath-stoichiometric-tangent-cone",
+    "thm-tdmath-local-implicit-rank",
+    "thm-tdmath-phase-dimension",
+    "ex-tdmath-vertical-separation-biconjugate",
+    "ex-tdmath-flat-face-nonunique-minimizer",
+    "ex-tdmath-singular-phase-rank",
+    "ex-tdmath-water-reaction-boundary-tangent",
+    "lem-tdmath-concave-affine-maximizer-and-hessian"
+  ],
+  "contracts": {
+    "lem-tdmath-extended-convex-epigraph-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-extended-convex-function",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. Write $\\overline{\\mathbb R}=\\mathbb R\\cup\\{+\\infty\\}$ with its usual order and extended addition; in a convex combination set $0\\cdot(+\\infty)=0$ and $\\lambda\\cdot(+\\infty)=+\\infty$ for $\\lambda>0$. A function $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ is **proper** when it never takes the value $-\\infty$ and its effective domain\n\n$$\\operatorname{dom}f:=\\{x\\in\\mathbb R^d:f(x)<+\\infty\\}$$\n\nis nonempty. It is **convex** when\n\n$$f((1-t)x+ty)\\le (1-t)f(x)+tf(y)\\qquad(x,y\\in\\mathbb R^d,\\ t\\in[0,1]).$$\n\nIt is **lower semicontinuous** when each weak sublevel set $\\{x:f(x)\\le a\\}$ is closed in the Euclidean topology, for every $a\\in\\mathbb R$. Its **epigraph** is\n\n$$\\operatorname{epi}f:=\\{(x,r)\\in\\mathbb R^d\\times\\mathbb R:f(x)\\le r\\}.$$\n\nOn this page “closed proper convex” means proper, convex, and lower semicontinuous in these conventions. The pairing of $p,x\\in\\mathbb R^d$ is the Euclidean inner product $\\langle p,x\\rangle$ of [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $f$ is convex and take $(x,r),(y,s)\\in\\operatorname{epi}f$. For $t\\in[0,1]$, the chord inequality gives $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)\\le(1-t)r+ts$, so $(1-t)(x,r)+t(y,s)\\in\\operatorname{epi}f$. Thus the epigraph is convex.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely, if the epigraph is convex and $f(x),f(y)$ are finite, then $(x,f(x))$ and $(y,f(y))$ lie in it; their convex combination lies in it and gives the chord inequality. If either value is $+\\infty$ and its coefficient is positive, the right side is $+\\infty$ and the inequality is automatic; at $t=0$ or $t=1$ it is equality.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Suppose $\\operatorname{epi}f$ is closed and fix $a\\in\\mathbb R$. For $n=d,d+1$ write $d_n(u,v)=\\bigl(\\sum_{j=1}^n(u_j-v_j)^2\\bigr)^{1/2}$ for the Euclidean metric. The slice map $i_a(x)=(x,a)$ satisfies $d_{d+1}(i_a(x),i_a(y))=d_d(x,y)$, so it is continuous. If $f(x)>a$, then $(x,a)\\notin\\operatorname{epi}f$; closedness gives $\\varepsilon>0$ such that the $d_{d+1}$-ball of radius $\\varepsilon$ around $(x,a)$ misses $\\operatorname{epi}f$. Whenever $d_d(x,y)<\\varepsilon$, the distance identity puts $(y,a)$ in that ball, so $f(y)>a$. Thus the complement of $\\{y:f(y)\\le a\\}$ is open, and this weak sublevel set is closed. Equivalently, it is the closed-preimage step for $i_a$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely suppose every weak sublevel set is closed and let $(x,r)\\notin\\operatorname{epi}f$, so $r<f(x)$. Choose a finite real $a$ with $r<a<f(x)$ when $f(x)$ is finite, and choose $a=r+1$ when $f(x)=+\\infty$. The set $N=\\{y:f(y)>a\\}$ is an open neighborhood of $x$, as it is the complement of a closed weak sublevel set. Choose $\\eta>0$ with $r+\\eta<a$. For every $y\\in N$ and $s\\in(r-\\eta,r+\\eta)$ one has $s<a<f(y)$, so $(y,s)\\notin\\operatorname{epi}f$. Thus $N\\times(r-\\eta,r+\\eta)$ is an open neighborhood of $(x,r)$ disjoint from the epigraph. Its complement is open at every point outside the epigraph, so the epigraph is closed.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 handles f(x)=+∞; step 1.2 handles endpoint coefficients in the extended chord inequality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly treats t=0 and t=1 under the 0·(+∞)=0 convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows d=1; steps 1.1 and 1.2 are dimension-independent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 handle infinite function values and empty weak sublevels."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 cover t=0, t=1, and neighborhoods below an epigraph point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The equivalences make no nonempty-set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 prove convexity and lower semicontinuity imply the epigraph properties."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 prove the convexity and closed-epigraph converses."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed all four steps, the two exact dependencies and Bianchi §§1.2,1.4. Both chord/epigraph directions handle infinite values and t=0,1 with the explicit 0·infinity convention. Step 1.3 gives a direct Euclidean-ball proof for weak sublevels; step 2.1 uses an intermediate finite height even when f(x)=infinity and an explicit product neighborhood. Empty sublevels, empty epigraph and identically infinite f are permitted; properness is not needed. No AC. Current expanded step 1.3 is sound but differs from the abbreviated contract derivation, which is synchronized to the current carrier below."
+      }
+    },
+    "lem-tdmath-closed-convex-separation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $e_0\\in E$ and set $R=\\|z-e_0\\|_2+1$. The set $K=E\\cap\\{e:\\|z-e\\|_2\\le R\\}$ is nonempty and bounded; it is closed because $E$ is closed and the distance map is continuous by [L1]. Hence [L2] makes it compact, and the continuous function $e\\mapsto\\|z-e\\|_2^2$ attains a minimum at some $e_*\\in K$ by [L3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "This $e_*$ is nearest to $z$ in all of $E$: every $e\\in E\\setminus K$ satisfies $\\|z-e\\|_2>R>\\|z-e_0\\|_2\\ge\\|z-e_*\\|_2$. Put $u=z-e_*$; since $z\\notin E$, $u\\ne0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $e\\in E$ and put $v=e-e_*$. For $0<t\\le1$, [F2] gives $e_*+tv\\in E$, so minimality of $e_*$ and [F1] imply $2t\\langle u,v\\rangle\\le t^2\\|v\\|_2^2$. If $\\langle u,v\\rangle>0$, then $v\\ne0$; setting $t=\\min\\{1,\\langle u,v\\rangle/\\|v\\|_2^2\\}$ contradicts this inequality whether the minimum is $1$ or the quotient. Hence $\\langle u,v\\rangle\\le0$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore $\\langle u,e\\rangle\\le\\langle u,e_*\\rangle$ for every $e\\in E$, while $\\langle u,z\\rangle=\\langle u,e_*\\rangle+\\|u\\|_2^2>\\langle u,e_*\\rangle$. Taking $c=\\langle u,e_*\\rangle$ proves strict separation.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement explicitly assumes E is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives u≠0 because z lies outside E; step 3.1 includes the v=0 direction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1, and step 1.1 constructs the compact set in that dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles v=0 as the zero inner-product direction."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses e0 from E and obtains a distance minimizer on compact K."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way separation claim, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way separation claim, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked steps 1.1–4.1: the closed bounded nonempty truncated set has a nearest point by positive-dimensional Heine–Borel and extreme value; the explicit t=min(1,<u,v>/||v||²) contradicts a positive projection for both branches. u is nonzero since z is excluded. Nonempty and closed hypotheses are essential; singleton and unbounded E are covered. Read each cited supplier Statement/Definition. Bianchi–Fercoq–Hachem §1.1.1, Proposition 1.3 and Proposition 1.4, pp.3–4, match the projection and separation conclusions; apparent sign typos in their displayed Prop.1.4 proof are not imported by the sound local derivation. No AC or physics premise."
+      }
+    },
+    "lem-tdmath-fenchel-young-equality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-fenchel-transform-and-subgradient",
+          "source_section": "Definition",
+          "quote": "Let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ be proper in the sense of [[def-tdmath-extended-convex-function]]. Its **Fenchel conjugate** is $f^*:\\mathbb R^d\\to\\overline{\\mathbb R}$,\n\n$$f^*(p):=\\sup_{x\\in\\operatorname{dom}f}\\bigl(\\langle p,x\\rangle-f(x)\\bigr).$$\n\nThe supremum is taken in $\\overline{\\mathbb R}$; its defining set is nonempty and consists of real numbers, so $f^*(p)\\in\\mathbb R\\cup\\{+\\infty\\}$. The **biconjugate** is an extended-real expression that may also take $-\\infty$ when its defining supremum is over the empty set:\n\n$$f^{**}(x):=\\sup_{\\{p\\in\\mathbb R^d:f^*(p)<+\\infty\\}}\\bigl(\\langle p,x\\rangle-f^*(p)\\bigr),$$\n\nwith the convention $\\sup\\varnothing=-\\infty$. For $x\\in\\operatorname{dom}f$, the **subdifferential** is\n\n$$\\partial f(x):=\\{p\\in\\mathbb R^d:f(y)\\ge f(x)+\\langle p,y-x\\rangle\\text{ for every }y\\in\\mathbb R^d\\};$$\n\nset $\\partial f(x)=\\varnothing$ for $x\\notin\\operatorname{dom}f$. A vector in $\\partial f(x)$ is a subgradient at $x$. All pairings use [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $x\\in\\operatorname{dom}f$, the value $\\langle p,x\\rangle-f(x)$ is one of the values over which $f^*(p)$ is the supremum; the stated inequality follows.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Equality means every $y\\in\\operatorname{dom}f$ satisfies $\\langle p,y\\rangle-f(y)\\le\\langle p,x\\rangle-f(x)$, which rearranges to the subgradient inequality; for $y\\notin\\operatorname{dom}f$ that inequality is automatic because $f(y)=+\\infty$. Conversely the subgradient inequalities make the value at $x$ a finite upper bound attained there, so $f^*(p)=\\langle p,x\\rangle-f(x)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Properness in the Statement makes dom f nonempty and x∈dom f."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 apply at p=0 without division by p."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows d=1; step 2.1 is dimension-independent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats y outside dom f, where f(y)=+∞."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is part of the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the supplied point x and makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves equality implies the subgradient inequality and attainment."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the subgradient inequality implies equality and attainment."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed both steps and the exact conjugate/subgradient definition; Bianchi §2.3 Proposition 2.9 agrees at finite x. The supremum bounds each defining value even when infinite. Equality with the finite value at x is equivalent to all finite-domain upper bounds, and outside the domain the subgradient inequality is automatic. Conversely the attained finite upper bound yields equality, so no convexity, lsc, uniqueness, or unassumed existence is needed. No AC."
+      }
+    },
+    "thm-tdmath-finite-dimensional-biconjugation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-extended-convex-function",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. Write $\\overline{\\mathbb R}=\\mathbb R\\cup\\{+\\infty\\}$ with its usual order and extended addition; in a convex combination set $0\\cdot(+\\infty)=0$ and $\\lambda\\cdot(+\\infty)=+\\infty$ for $\\lambda>0$. A function $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ is **proper** when it never takes the value $-\\infty$ and its effective domain\n\n$$\\operatorname{dom}f:=\\{x\\in\\mathbb R^d:f(x)<+\\infty\\}$$\n\nis nonempty. It is **convex** when\n\n$$f((1-t)x+ty)\\le (1-t)f(x)+tf(y)\\qquad(x,y\\in\\mathbb R^d,\\ t\\in[0,1]).$$\n\nIt is **lower semicontinuous** when each weak sublevel set $\\{x:f(x)\\le a\\}$ is closed in the Euclidean topology, for every $a\\in\\mathbb R$. Its **epigraph** is\n\n$$\\operatorname{epi}f:=\\{(x,r)\\in\\mathbb R^d\\times\\mathbb R:f(x)\\le r\\}.$$\n\nOn this page “closed proper convex” means proper, convex, and lower semicontinuous in these conventions. The pairing of $p,x\\in\\mathbb R^d$ is the Euclidean inner product $\\langle p,x\\rangle$ of [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tdmath-extended-convex-epigraph-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ use the conventions of [[def-tdmath-extended-convex-function]]. Then $f$ is convex if and only if $\\operatorname{epi}f$ is a convex subset of $\\mathbb R^{d+1}$, and $f$ is lower semicontinuous if and only if $\\operatorname{epi}f$ is closed.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tdmath-closed-convex-separation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $E\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, and let $z\\notin E$. Then there are a nonzero $u\\in\\mathbb R^n$ and a real $c$ such that\n\n$$\\langle u,e\\rangle\\le c<\\langle u,z\\rangle\\qquad(e\\in E).$$\n\nThus an affine hyperplane strictly separates the point from the entire set.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-tdmath-fenchel-transform-and-subgradient",
+          "source_section": "Definition",
+          "quote": "Let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ be proper in the sense of [[def-tdmath-extended-convex-function]]. Its **Fenchel conjugate** is $f^*:\\mathbb R^d\\to\\overline{\\mathbb R}$,\n\n$$f^*(p):=\\sup_{x\\in\\operatorname{dom}f}\\bigl(\\langle p,x\\rangle-f(x)\\bigr).$$\n\nThe supremum is taken in $\\overline{\\mathbb R}$; its defining set is nonempty and consists of real numbers, so $f^*(p)\\in\\mathbb R\\cup\\{+\\infty\\}$. The **biconjugate** is an extended-real expression that may also take $-\\infty$ when its defining supremum is over the empty set:\n\n$$f^{**}(x):=\\sup_{\\{p\\in\\mathbb R^d:f^*(p)<+\\infty\\}}\\bigl(\\langle p,x\\rangle-f^*(p)\\bigr),$$\n\nwith the convention $\\sup\\varnothing=-\\infty$. For $x\\in\\operatorname{dom}f$, the **subdifferential** is\n\n$$\\partial f(x):=\\{p\\in\\mathbb R^d:f(y)\\ge f(x)+\\langle p,y-x\\rangle\\text{ for every }y\\in\\mathbb R^d\\};$$\n\nset $\\partial f(x)=\\varnothing$ for $x\\notin\\operatorname{dom}f$. A vector in $\\partial f(x)$ is a subgradient at $x$. All pairings use [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any $x$ with $f(x)<+\\infty$ and any $p$ with $f^*(p)<+\\infty$, the defining supremum gives $f^*(p)\\ge\\langle p,x\\rangle-f(x)$, hence $\\langle p,x\\rangle-f^*(p)\\le f(x)$; taking the supremum over $p$ yields $f^{**}(x)\\le f(x)$. If $f(x)=+\\infty$, the same upper bound is automatic.",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $x\\in\\operatorname{dom}f$ and a real $t<f(x)$. Apply [F3] to $(x,t)$ and the nonempty closed convex set $\\operatorname{epi}f$, and negate the resulting separator to write $\\langle a,y\\rangle+bs\\ge c>\\langle a,x\\rangle+bt$ for all $(y,s)\\in\\operatorname{epi}f$. Upward closure forces $b\\ge0$. If $b=0$, the inequality at $(x,f(x))\\in\\operatorname{epi}f$ would give $\\langle a,x\\rangle\\ge c>\\langle a,x\\rangle$, impossible. Thus $b>0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Now fix $x\\notin\\operatorname{dom}f$ and $t\\in\\mathbb R$. Apply [F3] to $(x,t)$ and negate the separator to obtain $\\langle a,y\\rangle+bs\\ge c>\\langle a,x\\rangle+bt$ for all $(y,s)\\in\\operatorname{epi}f$. If $b>0$, then $f(y)\\ge-\\langle a/b,y\\rangle+c/b$ for every $y\\in\\operatorname{dom}f$, so with $p=-a/b$ one has $f^*(p)\\le-c/b<+\\infty$ and $f^{**}(x)\\ge\\langle p,x\\rangle-f^*(p)\\ge(c-\\langle a,x\\rangle)/b>t$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting $(y,f(y))$ for every $y\\in\\operatorname{dom}f$ gives the affine minorant $\\ell(y)=-\\langle a/b,y\\rangle+c/b\\le f(y)$. With $p=-a/b$, [F4] gives $f^*(p)\\le-c/b$, hence $f^{**}(x)\\ge\\langle p,x\\rangle-f^*(p)\\ge\\ell(x)>t$. Since this holds for every $t<f(x)$, $f^{**}(x)\\ge f(x)$ on $\\operatorname{dom}f$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In the $b=0$ case of step 1.3, the separator gives $\\langle a,y\\rangle\\ge c>\\langle a,x\\rangle$ for every $y\\in\\operatorname{dom}f$. Choose $y_0\\in\\operatorname{dom}f$ and a finite $t_0<f(y_0)$. Apply [F3] to $(y_0,t_0)$ and $\\operatorname{epi}f$, reversing the separator orientation to obtain $\\langle a_0,y\\rangle+b_0s\\ge c_0>\\langle a_0,y_0\\rangle+b_0t_0$ for every $(y,s)\\in\\operatorname{epi}f$. Upward closure gives $b_0\\ge0$, and $b_0=0$ contradicts the inequality at $(y_0,f(y_0))$, so $b_0>0$. Set $p_0=-a_0/b_0$ and $r_0=c_0/b_0$; substituting $(y,f(y))$ gives the affine minorant $\\ell_0(y)=\\langle p_0,y\\rangle+r_0\\le f(y)$ on $\\operatorname{dom}f$, so [F4] gives $f^*(p_0)\\le-r_0$. For each positive integer $k$, define $\\ell_k(y)=\\ell_0(y)+k(c-\\langle a,y\\rangle)=\\langle p_0-ka,y\\rangle+(r_0+kc)$. Since $c-\\langle a,y\\rangle\\le0$ on $\\operatorname{dom}f$, this is still a minorant; [F4] gives $f^*(p_0-ka)\\le-(r_0+kc)<+\\infty$ and hence $f^{**}(x)\\ge\\ell_k(x)=\\ell_0(x)+k\\delta$, where $\\delta:=c-\\langle a,x\\rangle>0$ by step 1.3. For any prescribed $B\\in\\mathbb R$, apply [L1] to $q=(B-\\ell_0(x))/\\delta$ to choose a positive integer $k$ with $q<k$; multiplying by $\\delta>0$ gives $\\ell_0(x)+k\\delta>B$. Hence $f^{**}(x)$ exceeds every real bound, so $f^{**}(x)=+\\infty=f(x)$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "L1",
+            "step 1.3",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The upper bound from step 1.1 and the lower bounds from steps 2.1 and 2.2 cover respectively finite and infinite values of $f(x)$, proving equality everywhere.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes f is proper, so its effective domain is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 handles the vertical-separator case b=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits d=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.2 handle points where f(x)=+∞."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint occurs in the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 chooses y0 from the nonempty effective domain."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts equality, not an equivalence of conditions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts equality, not an equivalence of conditions."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed six steps and all seven exact suppliers; Bianchi §2.2 Theorem 2.5 and its full proof, pp.15–16, agree with the stated finite-dimensional closed proper convex claim. Upper bound includes an empty finite-conjugate domain initially. At a finite-domain point the separator height coefficient is positive, yielding a finite affine minorant and nonempty conjugate domain. Outside the domain, upward closure again rules out negative height coefficients; positive coefficients handle any prescribed height. The zero coefficient case explicitly builds an independent affine minorant at y0, then adds k(c−<a,y>), remaining a minorant on the entire domain. Its value at x is unbounded by the exact Archimedean supplier. This covers vertical separators and infinite boundary values without assuming interior points or global lower bounds; no AC."
+      }
+    },
+    "thm-tdmath-fenchel-attainment": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-tdmath-extended-convex-epigraph-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ use the conventions of [[def-tdmath-extended-convex-function]]. Then $f$ is convex if and only if $\\operatorname{epi}f$ is a convex subset of $\\mathbb R^{d+1}$, and $f$ is lower semicontinuous if and only if $\\operatorname{epi}f$ is closed.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-compact-iff-finite-intersection-property",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with closed sets as in\n[[def-metric-topology]] and the finite intersection property as in\n[[def-finite-intersection-property]]. For a family $\\mathcal{A}$ of subsets of\n$X$ write\n\n$$\\bigcap \\mathcal{A} \\;:=\\; \\{\\, x \\in X : x \\in F \\text{ for every } F \\in \\mathcal{A} \\,\\},$$\n\nso that $\\bigcap \\emptyset = X$, matching the convention for the empty finite\nintersection in [[def-finite-intersection-property]].\n\nThen $(X,d)$ is compact ([[def-metric-compactness]]) **if and only if** every\nfamily $\\mathcal{A}$ of closed subsets of $X$ with the finite intersection\nproperty satisfies $\\bigcap \\mathcal{A} \\ne \\emptyset$.\n\nNo choice principle is used in either direction: complementation is a canonical\nbijection, so no member of a family ever has to be selected.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-infimum-property",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a\ngreatest lower bound in $\\mathbb{R}$ ([[def-infimum]]), and it is given by\n\n$$\\inf S = -\\sup(-S), \\qquad \\text{where } -S = \\{-s : s \\in S\\}.$$\n\nIn particular the complete ordered field $\\mathbb{R}$ has the\ngreatest-lower-bound property, which is therefore not an extra axiom: it is a\nconsequence of the least-upper-bound property.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-infimum",
+          "source_section": "Definition",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ and $\\ell \\in \\mathbb{R}$. Then $\\ell$ is a\n**greatest lower bound**, or **infimum**, of $S$ if both of the following hold:\n\n- $\\ell$ is a lower bound of $S$ ([[def-bounded-set]]), that is, $\\ell \\le s$ for\n  every $s \\in S$;\n- $\\ell' \\le \\ell$ for every lower bound $\\ell'$ of $S$.\n\nWritten out in one line:\n\n$$\\ell \\text{ is an infimum of } S \\iff \\big[(\\forall s \\in S)\\, \\ell \\le s\\big] \\text{ and } \\big[(\\forall \\ell' \\in \\mathbb{R})\\, \\big((\\forall s \\in S)\\, \\ell' \\le s\\big) \\Rightarrow \\ell' \\le \\ell\\big].$$\n\nAn infimum, when it exists, is unique ([[lem-sup-unique]]), so we may write\n$\\inf S$ for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-inf-epsilon",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below, and let $\\ell$ be a\nlower bound of $S$ ([[def-bounded-set]]). Then\n\n$$\\ell = \\inf S \\quad \\Longleftrightarrow \\quad \\text{for every } \\varepsilon > 0 \\text{ there exists } s \\in S \\text{ with } s < \\ell + \\varepsilon.$$\n\nIn words: among the lower bounds of $S$, the infimum is exactly the one that\ncannot be raised by any positive amount and still bound $S$ from below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-finite-set-has-max",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ and all $a_0, a_1, \\dots, a_n \\in \\mathbb{R}$, the\nset $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum ([[def-max-min]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$.\n\nThe usual reading, that *every nonempty finite subset of $\\mathbb{R}$ has a\nmaximum and a minimum*, follows once one identifies the nonempty finite subsets\nof $\\mathbb{R}$ with the sets listable as $\\{a_0, \\dots, a_n\\}$. That\nidentification is recorded as a stipulation in the Given below, because this page\nhas no definition of finiteness to prove it against. **It is discharged, not\nmerely assumed**: [[lem-finite-subsets-listable]] proves that the two\ndescriptions of a nonempty finite subset of $\\mathbb{R}$ agree. That lemma is\nrecorded in `justified_by` rather than in `deps`, since it is about the sets this\nlemma quantifies over and therefore depends on this one. This is what licenses\nthe notation\n$\\max\\{a_1, \\dots, a_n\\}$ and $\\min\\{a_1, \\dots, a_n\\}$ for finite sets of\n**real** numbers from this page onwards.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-tdmath-fenchel-young-equality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ be proper, let $x\\in\\operatorname{dom}f$, and let $p\\in\\mathbb R^d$. Then $f^*(p)\\ge\\langle p,x\\rangle-f(x)$. Equality holds exactly when $p\\in\\partial f(x)$, equivalently when $x$ attains the supremum defining $f^*(p)$; in that case the supremum is finite.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $f$ is proper, choose $x_0\\in\\operatorname{dom}f$ and put $c=g(x_0)\\in\\mathbb R$. By coercivity, first choose a radius $R_0>0$ such that $g(x)>c+1$ whenever $\\|x\\|_2\\ge R_0$, then enlarge it to $R>\\max\\{R_0,\\|x_0\\|_2\\}$; the same implication holds for this $R$. Let $K=\\{x:\\|x\\|_2\\le R\\}$; it is nonempty, closed, bounded, and therefore compact by [L3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L3",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The epigraph of $g$ is $T^{-1}(\\operatorname{epi}f)$, because $g(x)\\le r$ exactly when $f(x)\\le r+\\langle p,x\\rangle$. By [L1], $\\operatorname{epi}f$ is closed. Fix $z\\notin T^{-1}(\\operatorname{epi}f)$; openness of the complement of $\\operatorname{epi}f$ gives $\\varepsilon>0$ such that the Euclidean ball of radius $\\varepsilon$ around $Tz$ misses $\\operatorname{epi}f$. Set $\\rho=\\varepsilon/(K+1)>0$. If $\\|z'-z\\|_2<\\rho$, [L2] gives $\\|Tz'-Tz\\|_2\\le K\\|z'-z\\|_2<\\varepsilon$, so $Tz'$ also lies outside $\\operatorname{epi}f$. Thus the complement of $T^{-1}(\\operatorname{epi}f)$ is open and $\\operatorname{epi}g$ is closed. By [L1], $g$ is lower semicontinuous.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each real $r>0$, $U_r=\\{x\\in K:g(x)>-r\\}$ is relatively open in $K$, since its complement is the weak sublevel $K\\cap\\{g\\le-r\\}$. These sets cover $K$ because $g(x)\\in\\mathbb R\\cup\\{+\\infty\\}$ for every $x$ (properness excludes $-\\infty$ and the tilt is finite). Compactness gives a finite subcover, and [L6] supplies a largest real index $r_*$ among its finitely many indices. Since the $U_r$ are nested, $U_{r_*}=K$, so every finite value of $g$ on $K$ is greater than $-r_*$.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L6",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $S:=\\{g(x):x\\in K,\\ g(x)<+\\infty\\}$. It is nonempty because $x_0\\in K$ and $g(x_0)=c$, and it is a real set bounded below by $-r_*$ by step 2.1. It therefore has a real infimum $m$. For every $\\varepsilon>0$, [L5] gives $s\\in S$ with $s<m+\\varepsilon$; choosing $x\\in K$ with $g(x)=s$ shows $F_\\varepsilon:=K\\cap\\{x:g(x)\\le m+\\varepsilon\\}$ is nonempty. It is closed in $K$ by [L1]. Any nonempty finite subfamily has nonempty intersection, because the member with least positive $\\varepsilon$ is contained in all the others; the empty subfamily has intersection $K\\ne\\emptyset$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "L5",
+            "step 1.1",
+            "step 2.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Applying [L4] to the family $(F_\\varepsilon)_{\\varepsilon>0}$ gives $x_*\\in\\bigcap_{\\varepsilon>0}F_\\varepsilon$. The bound $g(x_*)\\le m+1$ makes $g(x_*)$ finite, so $g(x_*)\\in S$ and $m\\le g(x_*)$. If $g(x_*)>m$, choose $\\varepsilon=(g(x_*)-m)/2>0$; then $x_*\\in F_\\varepsilon$ would give $g(x_*)\\le m+\\varepsilon<g(x_*)$, a contradiction. Thus $g(x_*)=m$.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "step 3.1",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $x\\notin K$, step 1.1 gives $g(x)>c+1\\ge m+1$, because $x_0\\in K$ implies $m\\le c$. Thus $x_*$ is a global minimizer over $\\mathbb R^d$, and its value $m$ is finite.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "On $\\operatorname{dom}f$, $-g(x)=\\langle p,x\\rangle-f(x)$, and outside this domain $g(x)=+\\infty$. The global minimum $m$ is attained at $x_*\\in\\operatorname{dom}f$, so the supremum in the definition of $f^*(p)$ is finite, equals $-m$, and is attained at $x_*$. Therefore $f^*(p)=\\langle p,x_*\\rangle-f(x_*)$; [L7] yields $p\\in\\partial f(x_*)$.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "L7",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Properness excludes an empty effective domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 6.1 remain valid for p=0; neither divides by p."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement fixes the Euclidean dimension d as an integer with d≥1; Step 1.1 forms a compact interval in the d=1 case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement makes no uniqueness claim; step 6.1 applies to any attained minimizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 5.1 cover the closed-ball boundary and all points outside K."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses x0 from dom f; no family of choices is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a sufficient attainment result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a sufficient attainment result, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed seven steps and all fourteen exact suppliers. Properness supplies a finite x0; coercivity isolates the search in a nonempty compact ball. The bounded shear maps epi(g) to epi(f), and its explicit ball estimate proves lsc. Relatively open sets {g>−r} cover the ball, yielding a finite lower bound with a nonempty finite maximum; the family of closed near-infimum sublevels has FIP including the empty subfamily. Compact FIP gives a finite attained infimum; outside-ball coercivity gives the global minimum, and Fenchel equality yields the finite conjugate maximum and subgradient. No countable selection or uniqueness is inferred. d≥1 is the exact Heine–Borel scope. Bianchi §1.5 Proposition 1.23 and §2.3 Proposition 2.9 are consistent source context."
+      }
+    },
+    "thm-tdmath-finite-mixture-envelope": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-image-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be continuous ([[def-metric-continuity]]). Then:\n\n1. If $(X,d_X)$ is compact ([[def-metric-compactness]]), the image\n   $f[X] \\subseteq Y$ is a compact subset of $Y$.\n2. More generally, if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is\n   a compact subset of $Y$.\n\nNo choice principle is used.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-tdmath-extended-convex-epigraph-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ use the conventions of [[def-tdmath-extended-convex-function]]. Then $f$ is convex if and only if $\\operatorname{epi}f$ is a convex subset of $\\mathbb R^{d+1}$, and $f$ is lower semicontinuous if and only if $\\operatorname{epi}f$ is closed.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tdmath-finite-dimensional-biconjugation",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ be closed, proper, and convex in the sense of [[def-tdmath-extended-convex-function]]. With the Fenchel conjugate and biconjugate of [[def-tdmath-fenchel-transform-and-subgradient]], one has\n\n$$f^{**}(x)=f(x)\\qquad(x\\in\\mathbb R^d).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-tdmath-fenchel-young-equality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ be proper, let $x\\in\\operatorname{dom}f$, and let $p\\in\\mathbb R^d$. Then $f^*(p)\\ge\\langle p,x\\rangle-f(x)$. Equality holds exactly when $p\\in\\partial f(x)$, equivalently when $x$ attains the supremum defining $f^*(p)$; in that case the supremum is finite.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $\\Delta_m$ contains each coordinate vector. The coordinate maps, the sum map $\\theta\\mapsto\\sum_i\\theta_i$, and $Q$ are continuous by [L1]. For any continuous map $T$ into a Euclidean space and any closed set $K$, the complement of $T^{-1}(K)$ is open: if $T(z)\\notin K$, a ball about $T(z)$ misses $K$, and continuity gives a ball about $z$ mapped inside that ball. Thus $T^{-1}(K)$ is closed. Coordinate half-lines $[0,\\infty)$ and singletons are closed, since a point outside either has a positive-distance ball missing it; a finite intersection of closed sets is closed because its complement is a finite union of open sets. These facts show that $\\Delta_m$ is closed and that $\\Theta_x=\\Delta_m\\cap Q^{-1}(\\{x\\})$ is closed. Since $0\\le\\theta_i\\le1$ on $\\Delta_m$, both sets are bounded and hence compact by [F1]. For $x\\in P$, the definition of $P$ makes $\\Theta_x$ nonempty. The linear objective is continuous by [L1] and attains its minimum on $\\Theta_x$ by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $C=\\{\\sum_i\\theta_i(q_i,a_i):\\theta\\in\\Delta_m\\}\\subset\\mathbb R^{d+1}$ and $V=\\{(0,s):s\\ge0\\}$. The affine map defining $C$ is continuous by [L1], so $C$ is compact by [F2]. The set $C$ is convex because convex combinations of points in $\\Delta_m$ remain in $\\Delta_m$ (nonnegativity and the unit-sum equation are preserved) and the defining map is affine; $V$ is closed and convex. If $(x,r)\\in\\operatorname{epi}f_{\\rm mix}$, a minimizing $\\theta\\in\\Theta_x$ gives $(x,f_{\\rm mix}(x))\\in C$ and $r-f_{\\rm mix}(x)\\ge0$, so $(x,r)\\in C+V$. Conversely if $(x,r)=\\sum_i\\theta_i(q_i,a_i)+(0,s)$ with $s\\ge0$, then $f_{\\rm mix}(x)\\le\\sum_i\\theta_i a_i\\le r$. Thus $\\operatorname{epi}f_{\\rm mix}=C+V$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The coordinate vector with $\\theta_i=1$ and all other weights zero shows $f_{\\rm mix}(q_i)\\le a_i$. Let $h:\\mathbb R^d\\to\\overline{\\mathbb R}$ be convex with $h(q_i)\\le a_i$. For any weights $\\theta\\in\\Delta_m$, prove $h(\\sum_i\\theta_iq_i)\\le\\sum_i\\theta_i h(q_i)$ by induction on the number $N$ of positive weights: for $N=1$ it is equality; for $N>1$, choose an index $j$ with $0<\\theta_j<1$, put $y=(1-\\theta_j)^{-1}\\sum_{i\\ne j}\\theta_iq_i$, and apply the induction hypothesis to the normalized remaining weights. Convexity then gives $h(\\sum_i\\theta_iq_i)\\le\\theta_jh(q_j)+(1-\\theta_j)h(y)\\le\\sum_i\\theta_i h(q_i)$. All terms on the right are finite because $h(q_i)\\le a_i$ and the codomain excludes $-\\infty$. For $x\\in P$ and any $\\theta\\in\\Theta_x$, this gives $h(x)\\le\\sum_i\\theta_i a_i$; taking the minimum yields $h(x)\\le f_{\\rm mix}(x)$. For $x\\notin P$, $h(x)\\le+\\infty=f_{\\rm mix}(x)$. Thus $f_{\\rm mix}$ is the greatest convex minorant of the data.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "given",
+            "step 1.1",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The set $C+V$ is convex: for $c_1,c_2\\in C$, $v_1,v_2\\in V$, and $t\\in[0,1]$, $(1-t)(c_1+v_1)+t(c_2+v_2)=((1-t)c_1+tc_2)+((1-t)v_1+tv_2)\\in C+V$ by [F5]. To see it is closed, fix $z=(x,r)\\notin C+V$ and write $c=(u,a)\\in C$. The distance from $z$ to the ray $c+V$ is $\\rho_z(c)=\\sqrt{\\|x-u\\|_2^2+\\max\\{a-r,0\\}^2}$: if $r\\ge a$ the closest ray point has height $r$, and if $r<a$ it has height $a$. This formula is continuous in $c$ because $\\max\\{w,0\\}=(w+|w|)/2$, and it is positive for every $c\\in C$ since $z\\notin c+V$. Compactness of $C$ and [F3] give a minimum $\\delta>0$; every point of $C+V$ is at distance at least $\\delta$ from $z$, so the ball of radius $\\delta/2$ about $z$ misses $C+V$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F4] and step 3.1, $f_{\\rm mix}$ is convex and lower semicontinuous. It is proper because $P$ is nonempty, each value on $P$ is finite by step 1.1, and it is $+\\infty$ outside $P$. Therefore [F6] gives $f_{\\rm mix}=f_{\\rm mix}^{**}$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Let $p\\in\\partial f_{\\rm mix}(x)$ and let $\\theta$ attain the minimum defining $f_{\\rm mix}(x)$. By [F7], $f_{\\rm mix}^*(p)=\\langle p,x\\rangle-f_{\\rm mix}(x)$. Also $f_{\\rm mix}(q_i)\\le a_i$ implies $\\langle p,q_i\\rangle-a_i\\le\\langle p,q_i\\rangle-f_{\\rm mix}(q_i)\\le f_{\\rm mix}^*(p)$. Since $\\langle p,x\\rangle-f_{\\rm mix}(x)=\\sum_i\\theta_i(\\langle p,q_i\\rangle-a_i)$ is a weighted average of terms bounded above by $f_{\\rm mix}^*(p)$, each term with $\\theta_i>0$ equals that bound, proving the supporting-hyperplane formula.",
+          "step": "5.1",
+          "inputs": [
+            "F7",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement assigns +∞ outside P; step 2.2 compares every x outside the finite convex hull."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 handles zero weights by omitting them under the simplex convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement fixes d≥1 as an integer; Step 2.2 includes the N=1 induction base case, and FM1 checks m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 permits nonunique minimizing mixtures; step 5.1 states only occupied-face equality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 include simplex boundary weights and vertex mixtures."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 obtains a minimizer on each nonempty compact fiber Θ_x."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "FM1",
+          "claim": "For m=1, Δ1 contains one vertex and the minimizing mixture is attained at q1 with value a1.",
+          "steps": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed six steps and all twelve exact suppliers. Positive integers m,d make the simplex and Euclidean compactness legal. Nonempty fibers on P are compact and the linear objective attains a finite minimum. The compact image C plus upward ray has exactly the minimized epigraph; the explicit continuous distance-to-ray formula has positive compact minimum off C+V, proving closedness without subsequence choice. Convexity is direct; the finite-weight induction includes N=1 and divides only by 1−theta_j>0. Greatest-minorant inequality is automatic outside P. Biconjugation requires precisely the established closed proper convex hypotheses. Fenchel equality and zero weighted slack force equality only on occupied data points. Repeated points, zero weights, one datum and boundary fibers are covered. No AC, infinite-family claim or physical conclusion."
+      }
+    },
+    "cor-tdmath-ordered-finite-mixture-envelope": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-tdmath-additive-entropy-representation",
+          "source_section": "Statement",
+          "quote": "Let $X$ be nonempty and suppose its finite-support compounds carry the comparison structure of [[def-tdmath-comparison-and-stability]] over the complete ordered field $\\mathbb R$. If there are $x_0,x_1\\in X$ with $x_0\\preceq x_1$ and not $x_1\\preceq x_0$, define $S(x):=\\sup L_x$ using [[lem-tdmath-reference-supremum-bounds]]. Then $S:X\\to\\mathbb R$ is normalized by $S(x_0)=0$, $S(x_1)=1$, and for all equal-mass compounds $A=\\sum_i a_i e_{x_i}$ and $B=\\sum_j b_j e_{y_j}$,\n\n$$A\\preceq B\\quad\\Longleftrightarrow\\quad\\sum_i a_iS(x_i)\\le\\sum_j b_jS(y_j).$$\n\nThus $S$ is an additive extensive representation on finite compounds. If no strict pair exists, CH instead makes every equal-mass pair of compounds equivalent, and any constant state function gives a (degenerate) additive representation. No concavity, continuity, or physical law follows without additional hypotheses.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-tdmath-tagged-scalable-compound",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set of state labels. A **tagged scalable compound over $X$** is a function $c:X\\to\\mathbb R_{\\ge0}$ whose support $\\operatorname{supp}(c):=\\{x\\in X:c(x)\\ne0\\}$ is finite. The coefficient is a dimensionless formal amount; state labels retain their tags, so equal coefficients on different labels do not identify those labels. Compounds are equal exactly when their coefficient functions are equal.\n\nFor compounds $c,d$ and $t\\ge0$, define composition and nonnegative scaling pointwise by $(c+d)(x):=c(x)+d(x)$ and $(tc)(x):=t c(x)$. The zero function is the empty compound; in particular $0c=0$. Comparison axioms involving scaling still require a strictly positive scalar unless explicitly stated otherwise. The **mass** of $c$ is the finite sum $m(c):=\\sum_{x\\in\\operatorname{supp}(c)}c(x)$. It is dimensionless bookkeeping mass, not thermodynamic mass or energy. The compound is positive when $m(c)>0$.\n\nFor every state label $x\\in X$, the **unit-state compound** $e_x$ is the coefficient function with $e_x(y)=1$ if $y=x$ and $e_x(y)=0$ otherwise. Its support is $\\{x\\}$, so it is a tagged compound. In compound comparisons, a state label $x$ denotes $e_x$. Every compound has the canonical finite decomposition $c=\\sum_{x\\in\\operatorname{supp}(c)}c(x)e_x$, with an empty sum when $c=0$; coefficients on this support are strictly positive. The mass-one property $m(e_x)=1$ and the equivalence $m(c)=0\\Longleftrightarrow c=0$ are proved in [[lem-tdmath-compound-mass-well-defined]].\n\nThe formula for mass is independent of the chosen finite set containing the support, and composition and scaling obey $m(c+d)=m(c)+m(d)$ and $m(tc)=t m(c)$; [[lem-tdmath-compound-mass-well-defined]] proves these assertions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-tdmath-compound-mass-well-defined",
+          "source_section": "Statement",
+          "quote": "For every tagged scalable compound $c$, the mass in [[def-tdmath-tagged-scalable-compound]] is independent of the finite summation set used. For any compounds $c,d$ and $t\\ge0$, $m(c+d)=m(c)+m(d)$ and $m(tc)=t m(c)$; $m(0)=0$. For every $x\\in X$, the unit-state compound $e_x$ has $m(e_x)=1$. A compound has zero mass if and only if it is the empty compound.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-tdmath-finite-mixture-envelope",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$ and $d\\ge1$ be integers, let $q_1,\\ldots,q_m\\in\\mathbb R^d$, and let $a_1,\\ldots,a_m\\in\\mathbb R$. Put\n\n$$\\Delta_m=\\{\\theta\\in\\mathbb R^m:\\theta_i\\ge0,\\ \\sum_{i=1}^m\\theta_i=1\\},\\qquad P:=\\left\\{\\sum_{i=1}^m\\theta_iq_i:\\theta\\in\\Delta_m\\right\\}.$$\n\nThus $P$ is the finite convex hull of the listed points, defined here as their convex combinations.\n\nFor $x\\in P$ let $\\Theta_x=\\{\\theta\\in\\Delta_m:\\sum_i\\theta_iq_i=x\\}$ and define\n\n$$f_{\\rm mix}(x)=\\min_{\\theta\\in\\Theta_x}\\sum_{i=1}^m\\theta_i a_i;$$\n\nset $f_{\\rm mix}(x)=+\\infty$ for $x\\notin P$. Then every minimum is attained; $f_{\\rm mix}$ is proper, lower semicontinuous, and convex; and it is pointwise greatest among convex functions $h:\\mathbb R^d\\to\\overline{\\mathbb R}$ satisfying $h(q_i)\\le a_i$ for every $i$. Consequently $f_{\\rm mix}=f_{\\rm mix}^{**}$. If $p\\in\\partial f_{\\rm mix}(x)$ and $\\theta$ is any minimizing mixture for $x$, then every $i$ with $\\theta_i>0$ satisfies\n\n$$a_i=\\langle p,q_i\\rangle-f_{\\rm mix}^*(p).$$\n\nThus all occupied data points $(q_i,a_i)$ lie on one supporting affine hyperplane. The assertion is finite-dimensional and makes no claim about infinite families.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [A1] and [L1], each $a_i=S(s_i)$ is finite. For any $\\theta\\in\\Delta_m$, [L2] gives $m(M_\\theta)=\\sum_i\\theta_i m(e_{s_i})=\\sum_i\\theta_i=1$. If $\\theta_i=0$, its term is the empty compound and contributes zero; equivalently omit such terms, leaving only positive coefficients and never applying a positive-scaling comparison axiom at zero. The representation assigns $M_\\theta$ the value $V(\\theta)=\\sum_i\\theta_i a_i$. By [A3], its coordinate is $\\sum_i\\theta_i q_i$. Since the states are distinct, the coefficient of $s_i$ in $M_\\theta$ is exactly $\\theta_i$, so this parametrization is injective. Hence mixtures in this fixed family with coordinate $x$ correspond exactly to $\\theta\\in\\Theta_x$ from [L3].",
+          "inputs": [
+            "A1",
+            "A3",
+            "L1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The minimum of $V(\\theta)$ over those mixtures is therefore $\\min_{\\theta\\in\\Theta_x}\\sum_i\\theta_i a_i=f_{\\rm mix}(x)$ by [L3], with $+\\infty$ when $\\Theta_x$ is empty. Every further conclusion in the Statement follows by applying the corresponding conclusion of [L3] to the same finite data. The point-mass and zero-coefficient cases are supplied by [L2]; the transfer remains conditional on [A1] and [A3] and records no independent acceptance of the draft representation.",
+          "inputs": [
+            "A1",
+            "A3",
+            "L3",
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 assign +∞ when Θ_x is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses Δ_m, including zero coefficients."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement fixes d≥1 and m≥1 as integers; Step 1.1 applies for a one-state family m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement assumption A1 restricts the result to the strict-reference branch and makes no no-strict-pair assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite state list and its coordinates are supplied; no choice from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion transfers an envelope, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion transfers an envelope, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Reviewed both steps and all five direct suppliers, including the current draft batch-3 point-mass, mass, comparison, additive-representation carriers and the signed/cancellation/reference-supremum proof chain. Finite coefficients S(s_i) are supplied by the explicitly assumed strict-reference representation. Unit point masses have mass one; zero coefficients are omitted rather than used in a positive-scaling axiom. Distinct states make theta -> M_theta injective even with coincident q_i, so each coordinate fiber is exactly Theta_x. The affine chi hypothesis and explicit a_i:=S(s_i) instantiate the finite-mixture theorem in positive dimensions, with its empty-fiber convention. Normalization, attainment, lsc, convexity, biconjugation and occupied-point support all inherit that same finite data. No empirical conclusion or independent acceptance of the draft representation is claimed. One-state, zero-weight, coincident-coordinate and empty-coordinate-fiber cases are covered; no AC. The refuter correctly identified the former unbound a_i, a nonfatal specification defect now repaired."
+      }
+    },
+    "lem-tdmath-lever-rule": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complete-ordered-field",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.\n\n- $u \\in F$ is an **upper bound** of $S$ if $s \\le u$ for all $s \\in S$; $S$ is\n  **bounded above** if it has an upper bound.\n- $u \\in F$ is a **least upper bound** (or **supremum**, $\\sup S$) of $S$ if $u$\n  is an upper bound of $S$ and $u \\le u'$ for every upper bound $u'$ of $S$.\n\n$F$ is a **complete ordered field** (equivalently, $F$ has the\n**least-upper-bound property**, or is **Dedekind complete**) if every nonempty\n$S \\subseteq F$ that is bounded above has a least upper bound in $F$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) with its order\n([[def-real-order]]).\n\nA subset $I \\subseteq \\mathbb{R}$ is **order-convex** when\n\n$$x, y \\in I \\text{ and } x \\le z \\le y \\;\\Longrightarrow\\; z \\in I .$$\n\nThe **intervals** of $\\mathbb{R}$ are the sets of the following nine forms, where\n$a, b \\in \\mathbb{R}$:\n\n| | bounded forms | | one-sided and full forms |\n|---|---|---|---|\n| $(a,b)$ | $\\{x : a < x < b\\}$ | $(a,\\infty)$ | $\\{x : a < x\\}$ |\n| $[a,b]$ | $\\{x : a \\le x \\le b\\}$ | $[a,\\infty)$ | $\\{x : a \\le x\\}$ |\n| $[a,b)$ | $\\{x : a \\le x < b\\}$ | $(-\\infty,b)$ | $\\{x : x < b\\}$ |\n| $(a,b]$ | $\\{x : a < x \\le b\\}$ | $(-\\infty,b]$ | $\\{x : x \\le b\\}$ |\n| | | $(-\\infty,\\infty)$ | $\\mathbb{R}$ |\n\nAn interval is **open** when both of its written endpoints are excluded, that is\nfor the forms $(a,b)$, $(a,\\infty)$, $(-\\infty,b)$ and $(-\\infty,\\infty)$; it is\n**closed** when both written endpoints are included, that is for $[a,b]$,\n$[a,\\infty)$, $(-\\infty,b]$ and $(-\\infty,\\infty)$. The forms $[a,b)$ and\n$(a,b]$ are **half-open**.\n\n**The symbols $\\pm\\infty$ are notation and not elements of $\\mathbb{R}$.** They\nmark which side carries no endpoint condition at all; the five forms in the right\ncolumn are defined by the displayed conditions on $x$ alone, and no arithmetic is\never performed with $\\infty$. This is the same refusal to extend $\\mathbb{R}$\nsilently that [[rem-sup-conventions]] records for suprema.\n\n**Every one of the nine forms is order-convex.** Each is defined by a conjunction\nof at most two conditions, each of the shape $a < x$, $a \\le x$, $x < b$ or\n$x \\le b$, and each such condition is inherited by an intermediate point: if\n$a < x$ and $x \\le z$ then $a < z$, and if $z \\le y$ and $y < b$ then $z < b$,\nby transitivity of the order ([[def-ordered-field]]). Applying this to whichever\none or two conditions define the form in question gives $z \\in I$ whenever\n$x, y \\in I$ and $x \\le z \\le y$.\n\n**Bounded intervals.** An interval is **bounded** ([[def-bounded-set]]) exactly\nwhen it is of one of the four forms in the left column: for those, $a$ is a lower\nbound and $b$ an upper bound. The other five forms are unbounded, on the side or\nsides written with $\\infty$; the verification is in the remarks below.\n\n**Nondegeneracy.** An interval is **degenerate** when it has at most one element,\nand **nondegenerate** when it has at least two. For the four bounded forms with\nendpoints $a$ and $b$:\n\n- $[a,b]$ is nonempty exactly when $a \\le b$, and it is nondegenerate exactly\n  when $a < b$. It is the singleton $\\{a\\}$ when $a = b$.\n- $(a,b)$, $[a,b)$ and $(a,b]$ are nonempty exactly when $a < b$, and then each\n  is nondegenerate.\n\nThe only assertion here that is not immediate from the defining conditions is\nthat $a < b$ makes $(a,b)$ nonempty with at least two points. It holds because\n$a < (a+b)/2 < b$, which follows from $a < b$ by adding $a$, respectively $b$, to\nboth sides and halving ([[def-ordered-field]]); repeating the halving inside\n$(a, (a+b)/2)$ produces a second point.\n\n**Closed bounded intervals.** These are the sets $[a,b]$ with $a \\le b$, which is\nexactly the condition making them nonempty. They are the intervals the nested\ninterval property is stated for, and the phrase *closed bounded interval* always\ncarries the hypothesis $a \\le b$ in this library.\n\n**Length.** The **length** of a bounded interval presented by its endpoints\n$a \\le b$ is\n\n$$\\ell = b - a \\;\\ge\\; 0 .$$\n\nLength is attached to the presentation by endpoints and is not recovered from the\nset: $(a,b)$, $[a,b)$ and $(a,b]$ are all empty when $a = b$, and so is\n$(c,c)$ for any other $c$, while each of these presentations has length $0$, so\nnothing inconsistent arises; but the endpoints are named explicitly at every\npoint where a length is used in this library, and never inferred from the set.\nUnbounded intervals are assigned no length.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From $v=(1-\\lambda)v_a+\\lambda v_b$ one obtains $v-v_a=\\lambda(v_b-v_a)$. Since $v_b-v_a>0$ and $0\\le\\lambda\\le1$, this gives $v_a\\le v\\le v_b$ and forces $\\lambda=(v-v_a)/(v_b-v_a)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conversely, if $v_a\\le v\\le v_b$, the quotient $\\lambda=(v-v_a)/(v_b-v_a)$ lies in $[0,1]$ and substitution gives $v=(1-\\lambda)v_a+\\lambda v_b$. The same forced quotient proves uniqueness and yields the two endpoint values.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The assumptions include two real endpoints with va<vb."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives λ=0 at v=va."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives λ=1 at v=vb."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypothesis va<vb excludes a collapsed interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 establish the endpoint values and exclude values outside [va,vb]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No set selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 derives the interval condition and fraction from the mixture equation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs the mixture for every v in the interval."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "LR1",
+          "claim": "The formula gives λ=0 at va and λ=1 at vb, and 0≤λ≤1 exactly for v∈[va,vb].",
+          "steps": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked both steps and the exact ordered-field and interval definitions: v−va=lambda(vb−va), with vb−va>0, yields the necessary quotient, interval membership, converse and uniqueness. Fractions 0 and 1 give the endpoints; outside values cannot be admissible. Coincident endpoints are explicitly excluded; there is no hidden division by zero or choice. Bianchi §1.1 Definition 1.1 is convex-combination context; the scalar algebra is supplied locally."
+      }
+    },
+    "lem-tdmath-constrained-curvature": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $h_0\\in T$ and $Q_{x_*}(h_0)<0$. Set $\\phi(t)=f(x_*+th_0)$ for $t$ near $0$. Openness of $U$ permits this definition; stationarity gives $\\phi'(0)=0$. The identity in the Statement gives $\\phi''(t)=Q_{x_*+th_0}(h_0)$ wherever defined, and continuity of the entries of $H$ makes this negative for every sufficiently small $t\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose $T\\ne\\{0\\}$ and $Q_{x_*}(h)>0$ for each nonzero $h\\in T$. The unit sphere $S_T=\\{h\\in T:\\|h\\|_2=1\\}$ is nonempty, closed by [L2] and continuity of the norm, and bounded; [L3] makes it compact. The quadratic polynomial $h\\mapsto h^{\\mathsf T}H(x_*)h$ is continuous, so [L4] gives $\\lambda=\\min_{h\\in S_T}Q_{x_*}(h)>0$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose such a small $t>0$. Applying [L5] to $\\phi'$ on $[0,t]$ gives $\\phi'(t)-\\phi'(0)=t\\phi''(s)<0$ for some $s\\in(0,t)$, hence $\\phi'(t)<0$; the same argument applies to every positive endpoint up to $t$. Applying [L5] to $\\phi$ on $[0,t]$ gives $\\phi(t)-\\phi(0)=t\\phi'(r)<0$ for some $r\\in(0,t)$. Since $h_0\\in\\ker A$, $x_*+th_0$ is feasible, so $x_*$ is not a local minimum.",
+          "step": "2.1",
+          "inputs": [
+            "L5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "By continuity of the finitely many entries of $H$, choose $\\delta>0$ so that $\\|x-x_*\\|_2<\\delta$ implies $|Q_x(h)-Q_{x_*}(h)|<\\lambda/2$ for every unit vector $h$: expand the difference as a finite sum of entry differences times $h_i h_j$, each with $|h_i h_j|\\le1$. If $y\\ne x_*$ is feasible and $\\|y-x_*\\|_2<\\delta$, put $v=y-x_*$. Then $v\\in T$, and convexity of $U$ keeps $x_*+tv$ in $U$ for $0\\le t\\le1$. For $\\phi(t)=f(x_*+tv)$, stationarity gives $\\phi'(0)=0$, while homogeneity of the quadratic form gives $\\phi''(t)=Q_{x_*+tv}(v)\\ge(\\lambda/2)\\|v\\|_2^2>0$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any $t\\in(0,1]$, [L5] applied to $\\phi'$ on $[0,t]$ yields $\\phi'(t)-\\phi'(0)=t\\phi''(s)>0$ for some $s\\in(0,t)$, so $\\phi'(t)>0$. Applying [L5] to $\\phi$ on $[0,1]$ gives $\\phi(1)-\\phi(0)=\\phi'(r)>0$ for some $r\\in(0,1)$. Thus every distinct feasible $y$ with $\\|y-x_*\\|_2<\\delta$ has $f(y)>f(x_*)$. If $T=\\{0\\}$, $Ay=Ax_*$ implies $y-x_*\\in T=\\{0\\}$, so $x_*$ is the only feasible point.",
+          "step": "3.1",
+          "inputs": [
+            "L5",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 handles T={0}, when the feasible point is locally unique."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement distinguishes strict negative and positive curvature and makes no conclusion at Q=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement fixes d≥1 and k≥0 as integers; Step 1.2 permits d=1 and its compact unit-sphere argument remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the zero tangent subspace separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 apply the mean-value theorem on closed intervals with t=0 and t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 takes a minimum on the nonempty compact unit sphere when T is nonzero."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result gives necessary/sufficient curvature tests, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result gives necessary/sufficient curvature tests, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked steps 1.1–3.1 and all nine cited suppliers: the pointwise directional identity at every x gives twice differentiable line restrictions, so MVT for phi and phi prime is legitimate. Positive curvature has a uniform positive minimum on the nonempty compact sphere in ker A; finite entry continuity gives a uniform neighborhood bound. Negative curvature gives arbitrarily close lower feasible values. The ker A={0} branch avoids an empty sphere and is vacuously a strict minimum; k=0 is permitted by the bounded-linear-map statement, while d≥1 matches Heine–Borel. Reader dimension clarification accepted; no proof change or AC. Cornell Bindel §6.1.3–6.1.4 provides context, while local proof supplies the precise affine test."
+      }
+    },
+    "lem-tdmath-stoichiometric-tangent-cone": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with $\\|r(h)\\|_2/\\|h\\|_2\\to0$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "source_section": "Definition",
+          "quote": "Let $C\\subseteq\\mathbb R^n$ be convex ([[def-convex-subset-of-euclidean-space]]). The function $f:C\\to\\mathbb R$ is convex when $f((1-t)x+ty)\\le(1-t)f(x)+tf(y)$ for all $x,y\\in C$ and $t\\in[0,1]$. The parameter interval is the closed interval of [[def-interval]].\n\nIt is strictly convex when the inequality is strict for distinct $x,y$ and $0<t<1$. No strict inequality is required at $t=0$ or $t=1$, where the two sides coincide. The empty set and a singleton support convex functions, and strict convexity on either is vacuous.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose $h\\in T_{\\mathcal F}(\\xi_*)$, and choose sequences $t_k,h_k$ from its definition. For each active $j\\in J$, feasibility gives $0+t_k(\\nu h_k)_j\\ge0$, hence $(\\nu h_k)_j\\ge0$. Since [F5] makes the finite matrix map continuous, $h_k\\to h$ implies $\\nu h_k\\to\\nu h$, so $(\\nu h)_j\\ge0$. This proves one inclusion.",
+          "step": "1.1",
+          "inputs": [
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Conversely suppose $(\\nu h)_j\\ge0$ for all $j\\in J$. For each inactive $j$, put $b_j=n^0_j+(\\nu\\xi_*)_j>0$. If $(\\nu h)_j<0$, restrict $0\\le t\\le b_j/[-(\\nu h)_j]$; if $(\\nu h)_j\\ge0$, no restriction is needed. There are finitely many species, so choose a common $\\epsilon>0$ no larger than all positive bounds (or $\\epsilon=1$ if there are none). For $j\\in J$, $n^0_j+(\\nu(\\xi_*+th))_j=t(\\nu h)_j\\ge0$; for inactive $j$, the choice of $\\epsilon$ gives $b_j+t(\\nu h)_j\\ge0$ for $0\\le t\\le\\epsilon$. Thus $\\xi_*+th\\in\\mathcal F$ throughout that interval. Taking $h_k=h$ and any positive $t_k\\le\\epsilon$ tending to zero proves $h\\in T_{\\mathcal F}(\\xi_*)$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By steps 1.1–1.2, every tangent $h$ has a feasible ray $\\xi_*+th$ for all sufficiently small $t\\ge0$. Openness of $U$ keeps the initial part of this ray in $U$. At a relative local minimum, $[f(\\xi_*+th)-f(\\xi_*)]/t\\ge0$ for all sufficiently small $t>0$; differentiability [F1] makes its limit $Df(\\xi_*)h$. Hence $Df(\\xi_*)h\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Now assume $U$ is convex and $f$ convex and differentiable. For any $\\xi\\in\\mathcal F\\cap U$, put $h=\\xi-\\xi_*$. For active $j$, $(\\nu h)_j=n_j(\\xi)-n_j(\\xi_*)=n_j(\\xi)\\ge0$, so step 1.2 makes $h$ a tangent direction; the segment $\\xi_*+th$ also lies in $\\mathcal F\\cap U$ by [F2]. Let $g(t)=f(\\xi_*+th)$. [F4] gives $(g(t)-g(0))/t\\le g(1)-g(0)$ for $0<t<1$; as $t\\downarrow0$, the left side tends to $Df(\\xi_*)h$ by [F1]. If every tangent derivative is nonnegative, then $f(\\xi)-f(\\xi_*)=g(1)-g(0)\\ge Df(\\xi_*)h\\ge0$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The affine map $\\xi\\mapsto n^0+\\nu\\xi$ has derivative $h\\mapsto\\nu h$. By [F3], $Df(\\xi_*)h=D\\Phi(n_*)(\\nu h)$. Since $\\nu h=\\sum_{j=1}^s(\\nu h)_j e_j$ and $D\\Phi(n_*)$ is linear, this equals $\\sum_{j=1}^s(\\nu h)_jD\\Phi(n_*)e_j=\\sum_{j=1}^s\\mu_j(\\nu h)_j=(\\nu^{\\mathsf T}\\mu)\\cdot h$, as claimed.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 covers an empty active set; its finite-coordinate construction takes ε=1 when no inactive coordinate restricts the ray."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the zero extent direction and zero species amounts."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits s=r=1; the finite-coordinate argument still applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 gives the full extent space when no species constraint is active."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is a polyhedral tangent result, not an interval-endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 chooses ε from finitely many positive bounds, or sets ε=1 if none occur."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way optimality result and a tangent-cone equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-way optimality result and a tangent-cone equality, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked all five steps and six cited exact suppliers. Active rows give nonnegative limiting changes by matrix continuity; inactive positive amounts permit a common positive finite minimum step bound, including the case of no restrictions. Constant h and t_k=epsilon/(k+1) witness the reverse inclusion without AC. Every tangent has a feasible ray, so differentiation gives necessity at a relative local minimum; convexity gives global sufficiency through the correctly directed secant inequality. Chain rule on the open amount domain yields nu transpose mu; zero h, empty active set and rank-deficient nu are covered. Cornell Bindel §6.1.4 is context; the local proof supplies the exact polyhedral formula. No empirical premise."
+      }
+    },
+    "thm-tdmath-local-implicit-rank": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invertible-euclidean-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$.  A linear map $A:\\mathbb R^n\\to\\mathbb R^n$\n([[def-euclidean-linear-map]]) is **invertible** when there is a linear map\n$B:\\mathbb R^n\\to\\mathbb R^n$ such that\n\n$$B(Au)=u\\quad\\hbox{and}\\quad A(Bu)=u\\qquad(u\\in\\mathbb R^n).$$\n\nThe map $B$ is unique: if $C$ has the same two properties, then\n$C=C\\circ(A\\circ B)=(C\\circ A)\\circ B=B$.  It is denoted $A^{-1}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "source_section": "Statement",
+          "quote": "For every linear $L:\\mathbb R^m\\to\\mathbb R^n$ there is a unique matrix $A=(a_{ij})_{i<n,j<m}$ such that $(Lh)_i=\\sum_{j<m}a_{ij}h_j$. Moreover there is $K\\ge0$ with $\\|Lh\\|_2\\le K\\|h\\|_2$ for every $h$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]).\n\nA subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.\n\nThe collection\n\n$$\\mathcal{T}_d := \\{\\, U \\subseteq X : U \\text{ is open in } (X,d) \\,\\}$$\n\nof all open subsets is the **metric topology** of $d$ on $X$. A subset of $X$\nthat is both open and closed is called **clopen**.\n\n**Two sets are open for trivial reasons.** $\\emptyset$ is open, because the\ndefining condition quantifies over no points; and $X$ is open, because\n$B(x,r) \\subseteq X$ for every $x$ and every $r > 0$. Consequently $X$ and\n$\\emptyset$ are also closed, and both are clopen.\n\n**A neighbourhood of a point $x$** is any set containing an open set that\ncontains $x$; an **open neighbourhood** is an open set containing $x$. In a\nmetric space, a set is a neighbourhood of $x$ exactly when it contains some\nball $B(x,r)$ with $r>0$. Thus $U$ is open exactly when it is a neighbourhood of\neach of its points, and metric balls suffice to test this condition.\n\n**The metric, not the set, determines $\\mathcal{T}_d$.** Two metrics on the same\nset may have different metric topologies, and two different metrics may have the\nsame one; the systematic comparison is [[def-equivalent-metrics]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First suppose $q<n$. Choose the coordinate permutation that puts the columns of the stated invertible minor into the second block $v\\in\\mathbb R^q$, and write the remaining coordinates as $u\\in\\mathbb R^{n-q}$. Composing $F$ with the inverse permutation preserves openness and the $C^1$ property by [F1], [L3], and [L4]; its second-block derivative at $(u_*,v_*)$ is exactly the chosen invertible minor in the sense of [F2]. Since $n-q\\ge1$ and $q\\ge1$, [L1] applies and gives the neighborhoods, unique graph $\\varphi$, equivalence, and displayed derivative formula.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L1",
+            "L3",
+            "L4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The graph map $u\\mapsto(u,\\varphi(u))$ is one-to-one because its first coordinate is $u$, and its inverse on the graph is coordinate projection. Its parameter domain $P$ is open in $\\mathbb R^{n-q}$, so this is the claimed local graph dimension.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Now suppose $q=n$. The selected minor is the whole square derivative matrix $DF(x_*)$, so it is invertible by [F2]. Apply [L2] on neighborhoods $V$ of $x_*$ and $W$ of $0$. Injectivity of $F|_V$ and $F(x_*)=0$ imply $F(x)=0$ for $x\\in V$ exactly when $x=x_*$. Thus the local zero set is a singleton and has the stated zero-dimensional graph form.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes 1≤q≤n and a point x* in the open domain U."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 applies in the square case when F(x*)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 covers q=n=1 by the inverse-function theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles q=n as an isolated zero of local dimension zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 apply the supplied inverse and implicit function theorems and make no set selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 gives F=0 iff v=φ(u) for q<n."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 gives both directions of the local graph equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked steps 1.1–3.1 and all seven cited supplier statements/definitions. The chosen column permutation is a linear homeomorphism with constant derivative; the chosen minor becomes the invertible v block. q<n ensures both IFT dimensions are positive, and the supplier allows shrinking to keep that block invertible along the graph. The graph/projection maps give precisely the locally defined graph dimension, not a global phase count. q=n uses the separate inverse-function result and injectivity, avoiding a nonexistent R^0 IFT. The stipulated minor is an input, so no rank theorem or choice gap."
+      }
+    },
+    "thm-tdmath-phase-dimension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-c-one-map-and-local-inverse",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and $f:U\\to\\mathbb R^n$. The map $f$ is\n**continuously differentiable**, or of class $C^1$, when it is totally\ndifferentiable at every point of $U$ and the entries of its derivative matrix\nare continuous functions on $U$.\n\nFor an open $U\\subseteq\\mathbb R^n$ and $a\\in U$, a **local inverse of $f$ at\n$a$** is a function $g:W\\to V$ for open neighbourhoods $a\\in V\\subseteq U$\nand $f(a)\\in W\\subseteq\\mathbb R^n$ such that $f|_V:V\\to W$ is bijective and\n$g=(f|_V)^{-1}$. If both $f|_V$ and $g$ are $C^1$, this restriction is a\n**local diffeomorphism** at $a$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-tdmath-local-implicit-rank",
+          "source_section": "Statement",
+          "quote": "Let $1\\le q\\le n$, let $U\\subseteq\\mathbb R^n$ be open, and let $F:U\\to\\mathbb R^q$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]]. Suppose $F(x_*)=0$ and some $q\\times q$ minor of the derivative matrix $DF(x_*)$ is invertible. This nonsingular-minor hypothesis is the explicit full-row-rank condition used here. If $q<n$, then after permuting coordinates $x=(u,v)\\in\\mathbb R^{n-q}\\times\\mathbb R^q$, there are open neighborhoods $P$ of $u_*$ and $Q$ of $v_*$ and a unique $C^1$ map $\\varphi:P\\to Q$ such that\n\n$$F(u,v)=0\\quad\\Longleftrightarrow\\quad v=\\varphi(u)\\qquad((u,v)\\in P\\times Q).$$\n\nIts derivative is\n\n$$D\\varphi(u)=-D_vF(u,\\varphi(u))^{-1}D_uF(u,\\varphi(u)).$$\n\nThus the local zero set is a graph over $n-q$ free coordinates. If $q=n$, the zero is locally isolated, so the local graph dimension is zero. Here “local graph dimension $k$” means a local graph parameterized by an open subset of $\\mathbb R^k$, with a singleton counted as dimension zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-total-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f,g:U\\to\\mathbb R^n$ are totally differentiable at $a$ and $c\\in\\mathbb R$, then $f+g$ and $cf$ are totally differentiable at $a$, with\n\n$$D(f+g)(a)=Df(a)+Dg(a),\\qquad D(cf)(a)=cDf(a).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $P\\ge2$, $F$ has one scalar component for each pair $(i,\\alpha)$ with $1\\le i\\le C$ and $2\\le\\alpha\\le P$, so it has $q=C(P-1)$ components. Each is a difference of $C^1$ maps and therefore $F$ is $C^1$ on the open set $U$ by [F1, L2]. The assumed minor lets [L1] apply, giving local graph dimension $n-q$. Expanding $n=2+P(C-1)$ gives $n-q=2+PC-P-CP+C=C-P+2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $P=1$, no phase-equality equations are indexed because there is no $\\alpha\\ge2$. The local solution set is all of the open domain $U$, which has $n=2+(C-1)=C+1=C-P+2$ coordinates.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the reactive variant, each added affinity is a finite linear combination of $C^1$ coordinate functions and is therefore $C^1$ by [F1, L2]; the combined map has $q+R$ scalar equations. Its stated minor satisfies [L1], so the graph dimension is $n-q-R=2+P(C-1)-C(P-1)-R=C-P+2-R$. Linear independence of the $\\nu^r$ identifies $R$ distinct reaction directions, while the full-rank minor remains a separate necessary assumption on the equation derivatives.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement C,P>=1 exclude an empty component or phase list. C=1 gives R^0={0} and Omega_1={0}; P=1 gives no phase-equality rows. These explicit conventions retain a nonempty coordinate domain.",
+          "case_scope": {
+            "source_section": "Statement",
+            "source_excerpt": "Let $C\\ge1$ be the number of components and $P\\ge1$ the number of phases. Use common positive real coordinates $T,p$, expressed in fixed units if they are given a physical interpretation, and, for each phase $\\alpha$, an interior composition vector\n\n$$x^\\alpha\\in\\Omega_C:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},$$\n\nwith the convention $\\mathbb R^0=\\{0\\}$ and $\\Omega_1=\\{0\\}$. The final component fraction is $1-\\sum_{i<C}x_i>0$. The ambient coordinate domain $U=(0,\\infty)^2\\times\\Omega_C^P$ is open in $\\mathbb R^n$, where $n=2+P(C-1)$. For each phase $\\alpha$ and component $i$, let $\\mu_i^\\alpha(T,p,x^\\alpha)$ be a real-valued $C^1$ coordinate function; these are mathematical maps and no thermodynamic potential or physical realization is assumed.\n\nFor $P\\ge2$, define the $q=C(P-1)$ coexistence equations\n\n$$F_{i,\\alpha}(T,p,x^1,\\ldots,x^P)=\\mu_i^\\alpha(T,p,x^\\alpha)-\\mu_i^1(T,p,x^1)=0\\quad(1\\le i\\le C,\\ 2\\le\\alpha\\le P).$$\n\nAt a solution $z_*\\in U$, assume some $q\\times q$ derivative minor of $F:U\\to\\mathbb R^q$ is invertible. Then the local solution set is a graph of dimension\n\n$$n-q=2+P(C-1)-C(P-1)=C-P+2.$$\n\nFor $P=1$ there are no coexistence equations and the coordinate domain itself has dimension $n=C+1=C-P+2$. In a specified reactive variant with $R\\ge1$, let $\\nu^1,\\ldots,\\nu^R\\in\\mathbb R^C$ be linearly independent dimensionless stoichiometric vectors and add the $R$ affinity equations $A_r=\\sum_{i=1}^C\\nu_i^r\\mu_i^1=0$. If the combined equation map has an invertible $(q+R)\\times(q+R)$ derivative minor at a solution and $q+R\\le n$, its local zero set has dimension\n\n$$n-q-R=C-P+2-R.$$\n\nThese are conditional local dimensions under the displayed nonsingular-minor assumptions. No dimension formula follows at singular solutions, on composition boundaries, or from equation counting alone; no empirical or general physical phase rule is asserted.",
+            "current_raw_sha256": "86b0e377075c53b33e6adbf89636f5b61259d2466a6e01861b9ddb5754aa31eb",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 handles the zero-equation case P=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 covers C=1 under the explicit R^0 convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 treats P=1 separately with q=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Composition-boundary points are excluded from U and no boundary dimension claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The coordinate definitions and local rank theorem use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a dimension formula under a rank hypothesis, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a dimension formula under a rank hypothesis, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "PD1",
+          "claim": "For C=P=2, n=4, q=2 and the regular dimension is 2.",
+          "steps": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "ex-tdmath-vertical-separation-biconjugate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-extended-convex-function",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. Write $\\overline{\\mathbb R}=\\mathbb R\\cup\\{+\\infty\\}$ with its usual order and extended addition; in a convex combination set $0\\cdot(+\\infty)=0$ and $\\lambda\\cdot(+\\infty)=+\\infty$ for $\\lambda>0$. A function $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ is **proper** when it never takes the value $-\\infty$ and its effective domain\n\n$$\\operatorname{dom}f:=\\{x\\in\\mathbb R^d:f(x)<+\\infty\\}$$\n\nis nonempty. It is **convex** when\n\n$$f((1-t)x+ty)\\le (1-t)f(x)+tf(y)\\qquad(x,y\\in\\mathbb R^d,\\ t\\in[0,1]).$$\n\nIt is **lower semicontinuous** when each weak sublevel set $\\{x:f(x)\\le a\\}$ is closed in the Euclidean topology, for every $a\\in\\mathbb R$. Its **epigraph** is\n\n$$\\operatorname{epi}f:=\\{(x,r)\\in\\mathbb R^d\\times\\mathbb R:f(x)\\le r\\}.$$\n\nOn this page “closed proper convex” means proper, convex, and lower semicontinuous in these conventions. The pairing of $p,x\\in\\mathbb R^d$ is the Euclidean inner product $\\langle p,x\\rangle$ of [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tdmath-fenchel-transform-and-subgradient",
+          "source_section": "Definition",
+          "quote": "Let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ be proper in the sense of [[def-tdmath-extended-convex-function]]. Its **Fenchel conjugate** is $f^*:\\mathbb R^d\\to\\overline{\\mathbb R}$,\n\n$$f^*(p):=\\sup_{x\\in\\operatorname{dom}f}\\bigl(\\langle p,x\\rangle-f(x)\\bigr).$$\n\nThe supremum is taken in $\\overline{\\mathbb R}$; its defining set is nonempty and consists of real numbers, so $f^*(p)\\in\\mathbb R\\cup\\{+\\infty\\}$. The **biconjugate** is an extended-real expression that may also take $-\\infty$ when its defining supremum is over the empty set:\n\n$$f^{**}(x):=\\sup_{\\{p\\in\\mathbb R^d:f^*(p)<+\\infty\\}}\\bigl(\\langle p,x\\rangle-f^*(p)\\bigr),$$\n\nwith the convention $\\sup\\varnothing=-\\infty$. For $x\\in\\operatorname{dom}f$, the **subdifferential** is\n\n$$\\partial f(x):=\\{p\\in\\mathbb R^d:f(y)\\ge f(x)+\\langle p,y-x\\rangle\\text{ for every }y\\in\\mathbb R^d\\};$$\n\nset $\\partial f(x)=\\varnothing$ for $x\\notin\\operatorname{dom}f$. A vector in $\\partial f(x)$ is a subgradient at $x$. All pairings use [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tdmath-extended-convex-epigraph-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ use the conventions of [[def-tdmath-extended-convex-function]]. Then $f$ is convex if and only if $\\operatorname{epi}f$ is a convex subset of $\\mathbb R^{d+1}$, and $f$ is lower semicontinuous if and only if $\\operatorname{epi}f$ is closed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-tdmath-closed-convex-separation",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $E\\subseteq\\mathbb R^n$ be nonempty, closed, and convex, and let $z\\notin E$. Then there are a nonzero $u\\in\\mathbb R^n$ and a real $c$ such that\n\n$$\\langle u,e\\rangle\\le c<\\langle u,z\\rangle\\qquad(e\\in E).$$\n\nThus an affine hyperplane strictly separates the point from the entire set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-tdmath-finite-dimensional-biconjugation",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ be closed, proper, and convex in the sense of [[def-tdmath-extended-convex-function]]. With the Fenchel conjugate and biconjugate of [[def-tdmath-fenchel-transform-and-subgradient]], one has\n\n$$f^{**}(x)=f(x)\\qquad(x\\in\\mathbb R^d).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The domain is $[0,\\infty)$, so it is nonempty and $f$ is proper. Its epigraph is $E=\\{(y,s):y\\ge0,\\ s\\ge0\\}$, a nonempty closed convex set; [F3] therefore makes $f$ closed and convex. The point $(-1,0)$ lies outside $E$. With $u=(-1,0)$ and $c=0$, every $(y,s)\\in E$ satisfies $\\langle u,(y,s)\\rangle=-y\\le0<1=\\langle u,(-1,0)\\rangle$, so this is the strict vertical separator; its height coefficient is zero.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $p\\le0$ and $y\\ge0$, $py\\le0$, with equality at $y=0$, so $f^*(p)=0$. For $p>0$, given any real $M$ choose $y>\\max\\{0,M/p\\}$; then $py>M$, so the defining supremum is $+\\infty$. Therefore $\\operatorname{dom}f^*=(-\\infty,0]$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $x=-1$, the biconjugate is $\\sup_{p\\le0}(-p-f^*(p))=\\sup_{p\\le0}(-p)=+\\infty$: for every real bound $M$, the admissible choice $p=-\\max\\{M,0\\}-1$ gives $-p>M$. Thus $f^{**}(-1)=f(-1)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $k\\ge0$ and $y\\ge0$, $\\ell_k(y)=-ky\\le0=f(y)$, so $\\ell_k$ is an affine minorant. Its value at $-1$ is $k$, and the conjugate choice $p=-k$ has $f^*(-k)=0$, so the same family realizes arbitrarily large dual values at the point outside the domain. The conclusion is consistent with the full equality in [L2].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "L2",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The effective domain [0,∞) is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 compute p=0 and the biconjugate at x=−1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is one-dimensional; step 1.1 uses the R² epigraph coordinates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 show the vertical b=0 boundary and infinite value outside dom f."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes y=0, where the finite conjugate supremum is attained."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, and 3.1 use explicit scalar choices only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Let $f:\\mathbb R\\to\\{0,+\\infty\\}$ be the indicator of $[0,\\infty)$: $f(y)=0$ for $y\\ge0$ and $f(y)=+\\infty$ for $y<0$. Boundary iff-forward: The example makes no biconditional assertion.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $f:\\mathbb R\\to\\{0,+\\infty\\}$ be the indicator of $[0,\\infty)$: $f(y)=0$ for $y\\ge0$ and $f(y)=+\\infty$ for $y<0$. At $z=(-1,0)$, the epigraph is separated by a vertical hyperplane (one whose coefficient of the epigraph-height coordinate is zero). The conjugate is $f^*(p)=0$ for $p\\le0$ and $+\\infty$ for $p>0$, so $f^{**}(-1)=+\\infty=f(-1)$. The affine minorants $\\ell_k(y)=-ky$, $k\\ge0$, display the unbounded dual values at $y=-1$.",
+            "current_raw_sha256": "5a751c4007d63e032d1545ed5441892805881508dd854ebd079f083c6c370fbf",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Let $f:\\mathbb R\\to\\{0,+\\infty\\}$ be the indicator of $[0,\\infty)$: $f(y)=0$ for $y\\ge0$ and $f(y)=+\\infty$ for $y<0$. Boundary iff-reverse: The example makes no biconditional assertion.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $f:\\mathbb R\\to\\{0,+\\infty\\}$ be the indicator of $[0,\\infty)$: $f(y)=0$ for $y\\ge0$ and $f(y)=+\\infty$ for $y<0$. At $z=(-1,0)$, the epigraph is separated by a vertical hyperplane (one whose coefficient of the epigraph-height coordinate is zero). The conjugate is $f^*(p)=0$ for $p\\le0$ and $+\\infty$ for $p>0$, so $f^{**}(-1)=+\\infty=f(-1)$. The affine minorants $\\ell_k(y)=-ky$, $k\\ge0$, display the unbounded dual values at $y=-1$.",
+            "current_raw_sha256": "5a751c4007d63e032d1545ed5441892805881508dd854ebd079f083c6c370fbf",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "VC1",
+          "claim": "For p≤0, f*(p)=0; for p>0, f*(p)=+∞; at x=−1, f**(−1)=+∞.",
+          "steps": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked four steps and all five already reviewed exact suppliers. The indicator domain and epigraph are the closed convex nonnegative half-line and quadrant. u=(-1,0),c=0 has zero height coefficient and separates (-1,0) with strict gap 1. For p≤0 the conjugate is zero attained at 0; for p>0 it is infinite. At x=−1, explicit admissible negative p beats every finite bound; ell_k=−ky are minorants and have value k there, including k=0. This directly validates the vertical case without importing an assumed positive height coefficient. No AC or physics premise."
+      }
+    },
+    "ex-tdmath-flat-face-nonunique-minimizer": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tdmath-extended-convex-function",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$. Write $\\overline{\\mathbb R}=\\mathbb R\\cup\\{+\\infty\\}$ with its usual order and extended addition; in a convex combination set $0\\cdot(+\\infty)=0$ and $\\lambda\\cdot(+\\infty)=+\\infty$ for $\\lambda>0$. A function $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ is **proper** when it never takes the value $-\\infty$ and its effective domain\n\n$$\\operatorname{dom}f:=\\{x\\in\\mathbb R^d:f(x)<+\\infty\\}$$\n\nis nonempty. It is **convex** when\n\n$$f((1-t)x+ty)\\le (1-t)f(x)+tf(y)\\qquad(x,y\\in\\mathbb R^d,\\ t\\in[0,1]).$$\n\nIt is **lower semicontinuous** when each weak sublevel set $\\{x:f(x)\\le a\\}$ is closed in the Euclidean topology, for every $a\\in\\mathbb R$. Its **epigraph** is\n\n$$\\operatorname{epi}f:=\\{(x,r)\\in\\mathbb R^d\\times\\mathbb R:f(x)\\le r\\}.$$\n\nOn this page “closed proper convex” means proper, convex, and lower semicontinuous in these conventions. The pairing of $p,x\\in\\mathbb R^d$ is the Euclidean inner product $\\langle p,x\\rangle$ of [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tdmath-fenchel-transform-and-subgradient",
+          "source_section": "Definition",
+          "quote": "Let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ be proper in the sense of [[def-tdmath-extended-convex-function]]. Its **Fenchel conjugate** is $f^*:\\mathbb R^d\\to\\overline{\\mathbb R}$,\n\n$$f^*(p):=\\sup_{x\\in\\operatorname{dom}f}\\bigl(\\langle p,x\\rangle-f(x)\\bigr).$$\n\nThe supremum is taken in $\\overline{\\mathbb R}$; its defining set is nonempty and consists of real numbers, so $f^*(p)\\in\\mathbb R\\cup\\{+\\infty\\}$. The **biconjugate** is an extended-real expression that may also take $-\\infty$ when its defining supremum is over the empty set:\n\n$$f^{**}(x):=\\sup_{\\{p\\in\\mathbb R^d:f^*(p)<+\\infty\\}}\\bigl(\\langle p,x\\rangle-f^*(p)\\bigr),$$\n\nwith the convention $\\sup\\varnothing=-\\infty$. For $x\\in\\operatorname{dom}f$, the **subdifferential** is\n\n$$\\partial f(x):=\\{p\\in\\mathbb R^d:f(y)\\ge f(x)+\\langle p,y-x\\rangle\\text{ for every }y\\in\\mathbb R^d\\};$$\n\nset $\\partial f(x)=\\varnothing$ for $x\\notin\\operatorname{dom}f$. A vector in $\\partial f(x)$ is a subgradient at $x$. All pairings use [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tdmath-extended-convex-epigraph-equivalence",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ and let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ use the conventions of [[def-tdmath-extended-convex-function]]. Then $f$ is convex if and only if $\\operatorname{epi}f$ is a convex subset of $\\mathbb R^{d+1}$, and $f$ is lower semicontinuous if and only if $\\operatorname{epi}f$ is closed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-tdmath-fenchel-young-equality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ be proper, let $x\\in\\operatorname{dom}f$, and let $p\\in\\mathbb R^d$. Then $f^*(p)\\ge\\langle p,x\\rangle-f(x)$. Equality holds exactly when $p\\in\\partial f(x)$, equivalently when $x$ attains the supremum defining $f^*(p)$; in that case the supremum is finite.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-tdmath-fenchel-attainment",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$ be an integer, let $f:\\mathbb R^d\\to\\overline{\\mathbb R}$ be closed, proper, and convex, and let $p\\in\\mathbb R^d$. Define $g(x)=f(x)-\\langle p,x\\rangle$. Assume $g$ is **coercive**, meaning that for every $M\\in\\mathbb R$ there is $R>0$ such that $\\|x\\|_2\\ge R$ implies $g(x)>M$. Then $g$ has a finite global minimum at some $x_*\\in\\operatorname{dom}f$. The supremum defining $f^*(p)$ is finite and attained at $x_*$, and $p\\in\\partial f(x_*)$. No uniqueness is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The epigraph is $[-1,1]\\times[0,\\infty)$, a nonempty closed convex rectangle, and the domain $[-1,1]$ is nonempty; hence the indicator is proper, closed, and convex by [F1, F3]. At slope $p=0$, every $y\\in[-1,1]$ contributes $0$ to the conjugate supremum, and no other $y$ is in the effective domain, so $f^*(0)=0$ and every point of the interval attains this supremum.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix any $x\\in[-1,1]$. For every $y\\in\\mathbb R$, $f(y)\\ge0=f(x)+0(y-x)$: equality holds on the interval and the left side is $+\\infty$ outside it. Hence $0\\in\\partial f(x)$; [L1] also gives $f^*(0)=0=0\\cdot x-f(x)$ at each such $x$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The zero tilt is $g=f$. It is coercive as an extended-real function: for any $M\\in\\mathbb R$, choosing $R=2$ ensures $|x|\\ge R$ implies $g(x)=+\\infty>M$. Its minimum is $0$, attained at every $x\\in[-1,1]$, so this example satisfies [L2] while exhibiting nonuniqueness and a whole flat supporting face.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The interval [-1,1] is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 analyze the zero subgradient and zero tilt."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is a one-dimensional interval calculation and includes both endpoints."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 exhibit the full interval of minimizers rather than uniqueness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 include x=−1 and x=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, and 3.1 describe every minimizer explicitly and make no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The zero tilt $f(y)-0\\cdot y$ has every point of the interval as a minimizer, and $f^*(0)=0$ is attained at every such point. Boundary iff-forward: The example makes no biconditional assertion.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $f$ be the indicator of $[-1,1]$. The zero tilt $f(y)-0\\cdot y$ has every point of the interval as a minimizer, and $f^*(0)=0$ is attained at every such point. Equivalently, $0\\in\\partial f(x)$ for every $x\\in[-1,1]$. Thus the supporting face at slope zero is the whole interval, and coercive Fenchel attainment need not be unique.",
+            "current_raw_sha256": "3d1f152062d640f480c7404d3c7c504de90719763a72fb144f0aa68d9820179e",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The zero tilt $f(y)-0\\cdot y$ has every point of the interval as a minimizer, and $f^*(0)=0$ is attained at every such point. Boundary iff-reverse: The example makes no biconditional assertion.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Let $f$ be the indicator of $[-1,1]$. The zero tilt $f(y)-0\\cdot y$ has every point of the interval as a minimizer, and $f^*(0)=0$ is attained at every such point. Equivalently, $0\\in\\partial f(x)$ for every $x\\in[-1,1]$. Thus the supporting face at slope zero is the whole interval, and coercive Fenchel attainment need not be unique.",
+            "current_raw_sha256": "3d1f152062d640f480c7404d3c7c504de90719763a72fb144f0aa68d9820179e",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "FC1",
+          "claim": "At p=0, f*(0)=0 and every x∈[−1,1] is a minimizer and has 0 in its subdifferential.",
+          "steps": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked three steps and all five reviewed exact suppliers. The indicator of [-1,1] is proper closed convex, and every finite-domain point attains the zero tilt and zero-slope conjugate. The subgradient inequalities are checked both inside and outside the interval, including endpoints. R=2 verifies coercivity for every finite threshold despite infinitely many minimizers; the attainment supplier now explicitly permits d=1 and asserts no uniqueness. The face means precisely this zero-slope contact interval. No AC or physical inference."
+      }
+    },
+    "ex-tdmath-singular-phase-rank": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-tdmath-phase-dimension",
+          "source_section": "Statement",
+          "quote": "Let $C\\ge1$ be the number of components and $P\\ge1$ the number of phases. Use common positive real coordinates $T,p$, expressed in fixed units if they are given a physical interpretation, and, for each phase $\\alpha$, an interior composition vector\n\n$$x^\\alpha\\in\\Omega_C:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},$$\n\nwith the convention $\\mathbb R^0=\\{0\\}$ and $\\Omega_1=\\{0\\}$. The final component fraction is $1-\\sum_{i<C}x_i>0$. The ambient coordinate domain $U=(0,\\infty)^2\\times\\Omega_C^P$ is open in $\\mathbb R^n$, where $n=2+P(C-1)$. For each phase $\\alpha$ and component $i$, let $\\mu_i^\\alpha(T,p,x^\\alpha)$ be a real-valued $C^1$ coordinate function; these are mathematical maps and no thermodynamic potential or physical realization is assumed.\n\nFor $P\\ge2$, define the $q=C(P-1)$ coexistence equations\n\n$$F_{i,\\alpha}(T,p,x^1,\\ldots,x^P)=\\mu_i^\\alpha(T,p,x^\\alpha)-\\mu_i^1(T,p,x^1)=0\\quad(1\\le i\\le C,\\ 2\\le\\alpha\\le P).$$\n\nAt a solution $z_*\\in U$, assume some $q\\times q$ derivative minor of $F:U\\to\\mathbb R^q$ is invertible. Then the local solution set is a graph of dimension\n\n$$n-q=2+P(C-1)-C(P-1)=C-P+2.$$\n\nFor $P=1$ there are no coexistence equations and the coordinate domain itself has dimension $n=C+1=C-P+2$. In a specified reactive variant with $R\\ge1$, let $\\nu^1,\\ldots,\\nu^R\\in\\mathbb R^C$ be linearly independent dimensionless stoichiometric vectors and add the $R$ affinity equations $A_r=\\sum_{i=1}^C\\nu_i^r\\mu_i^1=0$. If the combined equation map has an invertible $(q+R)\\times(q+R)$ derivative minor at a solution and $q+R\\le n$, its local zero set has dimension\n\n$$n-q-R=C-P+2-R.$$\n\nThese are conditional local dimensions under the displayed nonsingular-minor assumptions. No dimension formula follows at singular solutions, on composition boundaries, or from equation counting alone; no empirical or general physical phase rule is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $C=P=2$, there are $n=2+2(2-1)=4$ coordinates and $q=2(2-1)=2$ equations. Since each $\\mu_i^\\alpha$ is identically zero, both differences $\\mu_i^2-\\mu_i^1$ equal zero at every point of $U$. Thus the zero set is exactly the open set $U$, which is locally parameterized by its four original coordinates.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The derivative of each identically zero equation is the zero covector, so the equation Jacobian has rank zero and no $2\\times2$ minor is invertible. Therefore [L1] does not apply; the example does not contradict its regular dimension count, and it shows why equation count alone does not determine local dimension.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The open set (0,∞)^2×(0,1)^2 is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the rank-zero Jacobian."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes C=P=2 rather than a one-component or one-phase case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the rank-zero singular case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The domain is interior and no composition-boundary assertion is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use explicit coordinates and no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Take $C=2$ components and $P=2$ phases on the open coordinate domain $U=(0,\\infty)^2\\times(0,1)^2\\subset\\mathbb R^4$. Boundary iff-forward: The example states no biconditional.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take $C=2$ components and $P=2$ phases on the open coordinate domain $U=(0,\\infty)^2\\times(0,1)^2\\subset\\mathbb R^4$. Set all four chemical-potential coordinate functions $\\mu_i^\\alpha$ identically equal to zero. The two coexistence equations then vanish identically, so the solution set is all of $U$ and has local dimension four. The regular formula would give $C-P+2=2$, but its nonsingular-minor hypothesis fails because the equation Jacobian is zero.",
+            "current_raw_sha256": "33f87caa4fa58ff98a1cbe7232321bece9b6359ef260cb7b6c5f0fa44917a749",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Take $C=2$ components and $P=2$ phases on the open coordinate domain $U=(0,\\infty)^2\\times(0,1)^2\\subset\\mathbb R^4$. Boundary iff-reverse: The example states no biconditional.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "Take $C=2$ components and $P=2$ phases on the open coordinate domain $U=(0,\\infty)^2\\times(0,1)^2\\subset\\mathbb R^4$. Set all four chemical-potential coordinate functions $\\mu_i^\\alpha$ identically equal to zero. The two coexistence equations then vanish identically, so the solution set is all of $U$ and has local dimension four. The regular formula would give $C-P+2=2$, but its nonsingular-minor hypothesis fails because the equation Jacobian is zero.",
+            "current_raw_sha256": "33f87caa4fa58ff98a1cbe7232321bece9b6359ef260cb7b6c5f0fa44917a749",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "SP1",
+          "claim": "C=P=2 gives n=4 and q=2, while the zero equation map has Jacobian rank 0 and its solution set is open in R^4.",
+          "steps": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ]
+    },
+    "ex-tdmath-water-reaction-boundary-tangent": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-tdmath-stoichiometric-tangent-cone",
+          "source_section": "Statement",
+          "quote": "Let $s,r\\ge1$, let $\\nu\\in\\mathbb R^{s\\times r}$ be a stoichiometric matrix (column $k$ gives the signed species-amount change per unit extent of reaction $k$), and let $n^0\\in[0,\\infty)^s$ be initial species amounts. Extents $\\xi\\in\\mathbb R^r$ are measured in one fixed amount unit, so $n(\\xi)=n^0+\\nu\\xi$ has species amounts in that same unit; $\\nu$ is dimensionless. The feasible extent set is the polyhedron\n\n$$\\mathcal F=\\{\\xi\\in\\mathbb R^r:n^0+\\nu\\xi\\in[0,\\infty)^s\\}.$$\n\nAt $\\xi_*\\in\\mathcal F$, let $J=\\{j:n^0_j+(\\nu\\xi_*)_j=0\\}$ be the active species set. Define the Bouligand tangent cone $T_{\\mathcal F}(\\xi_*)$ to consist of all $h\\in\\mathbb R^r$ for which there are $t_k>0$ with $t_k\\to0$ and $h_k\\to h$ such that $\\xi_*+t_kh_k\\in\\mathcal F$. Then\n\n$$T_{\\mathcal F}(\\xi_*)=\\{h\\in\\mathbb R^r:(\\nu h)_j\\ge0\\text{ for every }j\\in J\\}.$$\n\nIf $U\\subseteq\\mathbb R^r$ is open with $\\xi_*\\in U$, and $f:U\\to\\mathbb R$ is differentiable with a local minimum at $\\xi_*$ relative to $\\mathcal F\\cap U$, then $Df(\\xi_*)h\\ge0$ for every $h\\in T_{\\mathcal F}(\\xi_*)$. Conversely, if $U$ is convex and $f$ is convex and differentiable on $U$, this directional inequality for every $h\\in T_{\\mathcal F}(\\xi_*)$ implies $f(\\xi)\\ge f(\\xi_*)$ for every $\\xi\\in\\mathcal F\\cap U$. Suppose $V\\subseteq\\mathbb R^s$ is open, $n_*:=n^0+\\nu\\xi_*\\in V$, $\\Phi:V\\to\\mathbb R$ is totally differentiable at $n_*$, and $f(\\xi)=\\Phi(n^0+\\nu\\xi)$ near $\\xi_*$. For each $j$, let $e_j\\in\\mathbb R^s$ have coordinate $1$ in position $j$ and $0$ in every other position; define $\\mu_j:=D\\Phi(n_*)e_j$. Then\n\n$$Df(\\xi_*)h=\\sum_{j=1}^s\\mu_j(\\nu h)_j=(\\nu^{\\mathsf T}\\mu)\\cdot h.$$\n\nThe tangent-cone and optimality claims are mathematical deductions. They do not assert that a particular physical system obeys this model or is at equilibrium.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The species-amount vector is $n(\\xi)=n^0+\\nu\\xi=(2-2\\xi,1-\\xi,2\\xi)^{\\mathsf T}$. Nonnegativity of its third component requires $\\xi\\ge0$, and nonnegativity of its first two components requires $\\xi\\le1$; hence the feasible set is exactly $[0,1]$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The elemental count matrix is $D=\\begin{pmatrix}2&0&2\\\\0&2&1\\end{pmatrix}$, with first row counting hydrogen atoms and second row oxygen atoms per molecule. Direct multiplication gives $D\\nu=(-4+4,-2+2)^{\\mathsf T}=(0,0)^{\\mathsf T}$, so every change $n(\\xi)-n^0=\\nu\\xi$ preserves both atom totals.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $\\xi_*=0$, only the water component is zero. Its directional change is $(\\nu h)_3=2h$, so [L1] gives $T_{\\mathcal F}(0)=\\{h:2h\\ge0\\}=[0,\\infty)$. A negative direction is infeasible because it would make the water amount $2\\xi$ negative.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $\\Phi(n)=n_3$, the induced function is $f(\\xi)=\\Phi(n(\\xi))=2\\xi$. Its derivative at $0$ is $Df(0)h=2h\\ge0$ for every feasible tangent $h\\ge0$, and $f(\\xi)\\ge f(0)$ for every $\\xi\\in[0,1]$. This verifies the boundary first-order condition and minimum directly for this chosen mathematical objective.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1",
+            "algebra",
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has one reaction and three species with explicit initial amounts."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 evaluate the zero extent at the feasible boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses one reaction extent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the initially absent water species as an active constraint."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 establish the interval endpoints ξ=0 and ξ=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, and 3.1 use explicit finite vectors and matrices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "For the reaction $2\\,\\mathrm{H_2}+\\mathrm{O_2}\\to2\\,\\mathrm{H_2O}$, let extent $\\xi$ and species amounts use moles. Boundary iff-forward: The example makes no biconditional assertion.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "For the reaction $2\\,\\mathrm{H_2}+\\mathrm{O_2}\\to2\\,\\mathrm{H_2O}$, let extent $\\xi$ and species amounts use moles. The dimensionless stoichiometric column is $\\nu=(-2,-1,2)^{\\mathsf T}$ in the species order $(\\mathrm{H_2},\\mathrm{O_2},\\mathrm{H_2O})$, and take $n^0=(2,1,0)^{\\mathsf T}$. Then the feasible extent interval is $[0,1]$, and at $\\xi=0$ the tangent cone permits only forward directions $h\\ge0$. The matrix of hydrogen and oxygen atom counts annihilates $\\nu$. For the explicitly mathematical objective $\\Phi(n)=n_{\\mathrm{H_2O}}$, the induced extent function is $f(\\xi)=2\\xi$ and has a boundary minimum at zero. This is a stoichiometric calculation, not a claim about chemical equilibrium or a measured system.",
+            "current_raw_sha256": "8e6ade457dfc7daeb6d6b42c66d54624b4cd87aa97e371c7e748c324814e43f0",
+            "scope_only_not_proof_acceptance": true
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the reaction $2\\,\\mathrm{H_2}+\\mathrm{O_2}\\to2\\,\\mathrm{H_2O}$, let extent $\\xi$ and species amounts use moles. Boundary iff-reverse: The example makes no biconditional assertion.",
+          "case_scope": {
+            "source_section": "Example",
+            "source_excerpt": "For the reaction $2\\,\\mathrm{H_2}+\\mathrm{O_2}\\to2\\,\\mathrm{H_2O}$, let extent $\\xi$ and species amounts use moles. The dimensionless stoichiometric column is $\\nu=(-2,-1,2)^{\\mathsf T}$ in the species order $(\\mathrm{H_2},\\mathrm{O_2},\\mathrm{H_2O})$, and take $n^0=(2,1,0)^{\\mathsf T}$. Then the feasible extent interval is $[0,1]$, and at $\\xi=0$ the tangent cone permits only forward directions $h\\ge0$. The matrix of hydrogen and oxygen atom counts annihilates $\\nu$. For the explicitly mathematical objective $\\Phi(n)=n_{\\mathrm{H_2O}}$, the induced extent function is $f(\\xi)=2\\xi$ and has a boundary minimum at zero. This is a stoichiometric calculation, not a claim about chemical equilibrium or a measured system.",
+            "current_raw_sha256": "8e6ade457dfc7daeb6d6b42c66d54624b4cd87aa97e371c7e748c324814e43f0",
+            "scope_only_not_proof_acceptance": true
+          }
+        }
+      ],
+      "finite_checks": [
+        {
+          "id": "WR1",
+          "claim": "n(ξ)=(2−2ξ,1−ξ,2ξ) gives ξ∈[0,1], Dν=0, and the tangent cone at 0 is [0,∞).",
+          "steps": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ]
+    },
+    "lem-tdmath-concave-affine-maximizer-and-hessian": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with $\\|r(h)\\|_2/\\|h\\|_2\\to0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.\n\nLet $n\\ge1$ and let $U,V\\subseteq\\mathbb R^n$ be open. A bijection $f:U\\to V$ is a **$C^k$ diffeomorphism** when both $f$ and $f^{-1}$ are $C^k$. For $k\\ge1$, a **local $C^k$ diffeomorphism at $a\\in U$** is a restriction $f|_P:P\\to Q$ between open neighbourhoods of $a$ and $f(a)$ that is a $C^k$ diffeomorphism. At $k=1$ this agrees with [[def-c-one-map-and-local-inverse]]: continuous first partial derivatives give the required total derivative by [[thm-continuous-partial-derivatives-imply-total-differentiability]], while continuity of the total derivative gives continuity of its matrix entries and hence of the first partial derivatives.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For an admissible pair $x,y$ and $0<t<1$, the given concavity inequality yields $f(y)-f(x)\\le(f(x+t(y-x))-f(x))/t$. By [F2] the right side tends to $Df(x)(y-x)$ as $t\\downarrow0$, proving the supporting bound. The convex-region specialization follows from [F1] and the concavity inequality on that region; it does not require any other segment of $U$ to be admissible.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $y\\in F$, linearity gives $A(y-x_*)=0$, so stationarity yields $Df(x_*)(y-x_*)=0$. The assumed segment from $x_*$ to $y$ permits step 1.1, hence $f(y)\\le f(x_*)$, proving global maximality. If $F$ is convex and two distinct points maximize $f$, their midpoint lies in $F$ by [F1], while strict concavity would give a strictly larger midpoint value. Thus the maximum is unique under the further hypothesis.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Under the $C^2$ and local midpoint hypotheses, fix $h$ and put $g(t)=f(x+th)$ near zero. By [F3], $g''(0)=D^2f(x)[h,h]$. Define $R(t)=g(t)-g(0)-g'(0)t-\\tfrac12g''(0)t^2$. Differentiability of $g'$ gives $R'(s)=o(|s|)$; [F4] on the interval between $0$ and $t$ gives $R(t)=tR'(\\xi_t)=o(t^2)$, since $|\\xi_t|\\le|t|$. Therefore $(g(t)+g(-t)-2g(0))/t^2\\to g''(0)$. Its numerator is nonpositive by hypothesis, so $D^2f(x)[h,h]\\le0$. Concavity on a neighborhood implies that midpoint hypothesis on every sufficiently short centered segment; this proves all Hessian claims without strengthening the domain assumptions.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Supporting statements need actual x,y in U; the affine maximum clause assumes x* in F, excluding empty F. No existence of a feasible point is inferred."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A may be the zero map and h may be zero; step2.1 uses only y-x* in ker A. Step3.1 gives D²f(x)[0,0]=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "d=1 is allowed; steps1.1–3.1 are scalar directional and segment arguments with no higher-dimensional exception."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No rank of A is required. If ker A={0}, the nonempty feasible slice is a singleton; global maximum and uniqueness are immediate and consistent with step2.1. Semidefinite Hessian is never strengthened to strict curvature."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step1.1 uses 0<t<1 and the derivative limit at t down to0 on an admitted segment. Step3.1 uses both signs only inside an open neighborhood. Whole U is not assumed convex."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Arbitrary points, segments and directions are fixed individually; no selection from an indexed family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states implications and no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states implications and no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-4",
+        "notes": "Checked steps 1.1–3.1 and all six exact cited supplier statements/definitions. One-sided differentiation of the stated segment inequality gives the supporting bound; affine stationarity kills y−x*, and the midpoint argument gives uniqueness only with strict concavity and convex F. The line restriction is C² by the cited derivative and chain rules; MVT on R gives the o(t²) remainder also for negative t. Zero h and coincident endpoints are harmless. The local midpoint condition yields only nonpositive curvature, with no strictness or global convexity inferred. Bianchi §1.5 is context; the argument is complete locally. No AC or physics premise."
+      }
+    }
+  }
+}

@@ -168,6 +168,8 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   // sweep observer/status reports or authorization state into this snapshot.
   const toolNames = new Set(battery.flatMap(gate => gate.argv.filter(arg => typeof arg === 'string').map(arg => arg.split('/').at(-1))));
   const implicit = [];
+  if (toolNames.has('defect-ledger.mjs') || toolNames.has('step3-close.mjs'))
+    implicit.push(`${ctx.run}-step3-historical-context-transition.json`);
   if (toolNames.has('audit-manifest.mjs')) implicit.push(`${ctx.run}-owner-authoring-direction.md`);
   if (toolNames.has('batch-scope-review.mjs')) {
     const directory=join(research, `${ctx.run}-scope-review`);
@@ -196,6 +198,8 @@ export function gateReviewSnapshot(ctx, gates, stages) {
       implicit.push(`${ctx.run}-step${step}-auditor-${kind}.json`);
   }
   const names = readdirSync(research).sort();
+  if (toolNames.has('step3-scope.mjs')) implicit.push(`${ctx.run}-step3-owner-same-defect-aliases.json`,
+    `${ctx.run}-step3-owner-external-context.json`);
   if (toolNames.has('step3-scope.mjs')) for (const name of names) {
     if (name.startsWith(`${ctx.run}-`) && /(?:-step3-(?:hash|scope|historical-dependencies|auditor-certifications|published-claims)|-refute-\d+|-reader-findings-\d+|-alpha-.*-3a-decisions)\b/.test(name)) implicit.push(name);
   }

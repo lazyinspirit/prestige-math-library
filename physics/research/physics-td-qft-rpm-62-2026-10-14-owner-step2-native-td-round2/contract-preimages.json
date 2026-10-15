@@ -1,0 +1,661 @@
+{
+  "def-tdmath-poisson-configuration-reference": {
+    "boundaries": null
+  },
+  "lem-tdmath-reference-supremum-bounds": {
+    "citations": [
+      {
+        "fact": "A1",
+        "source": "def-tdmath-comparison-and-stability",
+        "source_section": "Definition",
+        "quote": "Fix a nonempty set $X$ and the compounds of [[def-tdmath-tagged-scalable-compound]]. A **comparison relation** $\\preceq$ is defined only for pairs $(A,B)$ with $m(A)=m(B)$. Write $A\\sim B$ when both $A\\preceq B$ and $B\\preceq A$; this is equivalence, not equality of coefficient functions. The following are explicit hypotheses on $\\preceq$:\n\n1. **Preorder:** $A\\preceq A$, and $A\\preceq B\\preceq C$ implies $A\\preceq C$.\n2. **Composition consistency:** $A\\preceq B$ implies $A+C\\preceq B+C$ for every compound $C$.\n3. **Positive scaling:** $A\\preceq B$ implies $tA\\preceq tB$ for every real $t>0$.\n4. **Splitting and recombination:** for $x\\in X$, $t>0$ and $0<s<t$, the one-state compound $te_x$ is equivalent to $se_x+(t-s)e_x$.\n5. **Stability:** for equal-mass $A,B$, fixed positive compounds $Z_0,Z_1$ with $m(Z_0)=m(Z_1)$, and a sequence $\\epsilon_n>0$ decreasing to $0$, if $A+\\epsilon_n Z_0\\preceq B+\\epsilon_n Z_1$ for every $n$, then $A\\preceq B$.\n6. **Comparison hypothesis (CH):** for every equal-mass pair $A,B$, either $A\\preceq B$ or $B\\preceq A$ (or both).\n\nThese are mathematical assumptions, not conclusions about a physical system. No antisymmetry, continuity, convexity, or strict comparison is included. Strict comparison means $A\\preceq B$ and not $B\\preceq A$.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "2.1",
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F1",
+        "source": "def-tdmath-tagged-scalable-compound",
+        "source_section": "Definition",
+        "quote": "Let $X$ be a set of state labels. A **tagged scalable compound over $X$** is a function $c:X\\to\\mathbb R_{\\ge0}$ whose support $\\operatorname{supp}(c):=\\{x\\in X:c(x)\\ne0\\}$ is finite. The coefficient is a dimensionless formal amount; state labels retain their tags, so equal coefficients on different labels do not identify those labels. Compounds are equal exactly when their coefficient functions are equal.\n\nFor compounds $c,d$ and $t\\ge0$, define composition and nonnegative scaling pointwise by $(c+d)(x):=c(x)+d(x)$ and $(tc)(x):=t c(x)$. The zero function is the empty compound; in particular $0c=0$. Comparison axioms involving scaling still require a strictly positive scalar unless explicitly stated otherwise. The **mass** of $c$ is the finite sum $m(c):=\\sum_{x\\in\\operatorname{supp}(c)}c(x)$. It is dimensionless bookkeeping mass, not thermodynamic mass or energy. The compound is positive when $m(c)>0$.\n\nFor every state label $x\\in X$, the **unit-state compound** $e_x$ is the coefficient function with $e_x(y)=1$ if $y=x$ and $e_x(y)=0$ otherwise. Its support is $\\{x\\}$, so it is a tagged compound. In compound comparisons, a state label $x$ denotes $e_x$. Every compound has the canonical finite decomposition $c=\\sum_{x\\in\\operatorname{supp}(c)}c(x)e_x$, with an empty sum when $c=0$; coefficients on this support are strictly positive. The mass-one property $m(e_x)=1$ and the equivalence $m(c)=0\\Longleftrightarrow c=0$ are proved in [[lem-tdmath-compound-mass-well-defined]].\n\nThe formula for mass is independent of the chosen finite set containing the support, and composition and scaling obey $m(c+d)=m(c)+m(d)$ and $m(tc)=t m(c)$; [[lem-tdmath-compound-mass-well-defined]] proves these assertions.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F1",
+        "source": "lem-tdmath-compound-mass-well-defined",
+        "source_section": "Statement",
+        "quote": "For every tagged scalable compound $c$, the mass in [[def-tdmath-tagged-scalable-compound]] is independent of the finite summation set used. For any compounds $c,d$ and $t\\ge0$, $m(c+d)=m(c)+m(d)$ and $m(tc)=t m(c)$; $m(0)=0$. For every $x\\in X$, the unit-state compound $e_x$ has $m(e_x)=1$. A compound has zero mass if and only if it is the empty compound.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "def-tdmath-signed-comparison",
+        "source_section": "Definition",
+        "quote": "Let $u,v:X\\to\\mathbb R$ be finite-support real coefficient maps with equal total coefficient $\\sum_xu(x)=\\sum_xv(x)$. These signed maps are formal comparison notation, not compounds. Put $d:=v-u$ and define $d^+(x):=\\max\\{d(x),0\\}$ and $d^-(x):=\\max\\{-d(x),0\\}$. Then $d^+,d^-$ are nonnegative finite-support compounds of equal mass, as verified in [[lem-tdmath-spectator-cancellation]]. Define\n\n$$u\\preceq_s v\\quad\\Longleftrightarrow\\quad d^-\\preceq d^+,$$\n\nusing the compound comparison relation of [[def-tdmath-comparison-and-stability]]. Thus positive coefficients of $v-u$ remain on the right and negative coefficients move to the left. Signed notation is never a claim that a negative amount of a physical system exists.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "2.1",
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "lem-tdmath-spectator-cancellation",
+        "source_section": "Statement",
+        "quote": "Under [[def-tdmath-comparison-and-stability]], for equal-mass compounds $A,B,C$, $A+C\\preceq B+C$ if and only if $A\\preceq B$. The signed relation of [[def-tdmath-signed-comparison]] is well-defined; on nonnegative equal-mass maps it agrees with $\\preceq$, is invariant under adding the same finite-support signed map to both sides, and is transitive and closed under adding two comparisons.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "2.1",
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "def-tdmath-signed-comparison",
+        "source_section": "Definition",
+        "quote": "Let $u,v:X\\to\\mathbb R$ be finite-support real coefficient maps with equal total coefficient $\\sum_xu(x)=\\sum_xv(x)$. These signed maps are formal comparison notation, not compounds. Put $d:=v-u$ and define $d^+(x):=\\max\\{d(x),0\\}$ and $d^-(x):=\\max\\{-d(x),0\\}$. Then $d^+,d^-$ are nonnegative finite-support compounds of equal mass, as verified in [[lem-tdmath-spectator-cancellation]]. Define\n\n$$u\\preceq_s v\\quad\\Longleftrightarrow\\quad d^-\\preceq d^+,$$\n\nusing the compound comparison relation of [[def-tdmath-comparison-and-stability]]. Thus positive coefficients of $v-u$ remain on the right and negative coefficients move to the left. Signed notation is never a claim that a negative amount of a physical system exists.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "2.1",
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "lem-tdmath-reference-order",
+        "source_section": "Statement",
+        "quote": "Let $x_0,x_1\\in X$ satisfy $x_0\\preceq x_1$ and not $x_1\\preceq x_0$. For every real $\\lambda$, define the signed unit-mass reference map $R_\\lambda:=(1-\\lambda)e_{x_0}+\\lambda e_{x_1}$. For all $\\lambda,\\mu\\in\\mathbb R$,\n\n$$R_\\lambda\\preceq_s R_\\mu\\quad\\Longleftrightarrow\\quad\\lambda\\le\\mu.$$\n\nThe parameters need not lie in $[0,1]$; outside that interval $R_\\lambda$ is signed notation, not a compound.",
+        "uses": [
+          "1.2",
+          "2.1"
+        ]
+      },
+      {
+        "fact": "F4",
+        "source": "lem-tdmath-reciprocal-naturals-tend-zero",
+        "source_section": "Statement",
+        "quote": "In the complete ordered field $\\mathbb R$, the sequence $\\epsilon_n:=1/(n+1)$, $n\\in\\mathbb N$, is positive, strictly decreasing, and converges to zero.",
+        "uses": [
+          "1.1",
+          "1.2",
+          "3.1",
+          "4.1"
+        ]
+      },
+      {
+        "fact": "F5",
+        "source": "def-complete-ordered-field",
+        "source_section": "Definition",
+        "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and $S \\subseteq F$.\n\n- $u \\in F$ is an **upper bound** of $S$ if $s \\le u$ for all $s \\in S$; $S$ is\n  **bounded above** if it has an upper bound.\n- $u \\in F$ is a **least upper bound** (or **supremum**, $\\sup S$) of $S$ if $u$\n  is an upper bound of $S$ and $u \\le u'$ for every upper bound $u'$ of $S$.\n\n$F$ is a **complete ordered field** (equivalently, $F$ has the\n**least-upper-bound property**, or is **Dedekind complete**) if every nonempty\n$S \\subseteq F$ that is bounded above has a least upper bound in $F$.",
+        "uses": [
+          "2.1"
+        ]
+      }
+    ]
+  },
+  "thm-tdmath-forward-boundary-graph": {
+    "derivations": [
+      {
+        "id": "proof-step-1-1",
+        "claim": "For fixed $x=(u_x,v_x)$, the vertical section $I_x:=\\{u:(u,v_x)\\in A_x\\}$ is a relatively closed convex interval by [F1]. The support plane at $x$ confines it to one side of $u_x$. Its inward normal has nonzero energy component, so [F4] gives a nontrivial interior vertical segment on that side.",
+        "step": "1.1",
+        "inputs": [
+          "A1",
+          "F1",
+          "F4"
+        ]
+      },
+      {
+        "id": "proof-step-1-2",
+        "claim": "The fiber orientation is locally constant in $v$. At any $x$, choose one vertical point just inside the supported half-space and one just outside; by [F4] the inside point can be chosen in $\\operatorname{int}A_x$. Openness of $\\Gamma_i$ and of the interior and exterior regions preserves these memberships on nearby fibers. Each such fiber therefore meets $\\partial A_x$ between these two energy values. A support of $A_x$ at that boundary point also supports the point's own sector and so has its S2 orientation; the inside/outside placement fixes that orientation. Thus nearby fibers have the same sign as the fiber through $x$. Since $\\Gamma_i$ is convex, it is connected; a locally constant two-valued sign is constant.",
+        "step": "1.2",
+        "inputs": [
+          "A1",
+          "F2",
+          "F3",
+          "F4"
+        ]
+      },
+      {
+        "id": "proof-step-1-3",
+        "claim": "Let $u,w$ be two $C^1$ graph solutions of $Dq=-P_i(q,v)$ on a common open domain, and suppose $u(v_0)=w(v_0)$. Since $P_i$ is locally Lipschitz, choose a convex neighborhood of $(u(v_0),v_0)$ on which one Lipschitz constant $L$ works. Continuity of $u,w$ lets us choose a convex ball about $v_0$ whose closure lies in the common domain and whose two graph images stay in that neighborhood; take any $v$ in a smaller concentric ball. Put $d=v-v_0$ and $\\gamma(t)=v_0+td$ for $0\\le t\\le1$. By [F8], $r(t)=u(\\gamma(t))-w(\\gamma(t))$ is $C^1$ and\n$r'(t)=[-P_i(u(\\gamma(t)),\\gamma(t))+P_i(w(\\gamma(t)),\\gamma(t))]\\cdot d.$\nThe local Lipschitz bound for $P_i$ gives $|r'(t)|\\le L\\|d\\||r(t)|$. The derivative is continuous, hence integrable by [F10]; [F9] gives $r(t)=\\int_0^t r'(s)\\,ds$; hence $h(t):=|r(t)|\\le L\\|d\\|\\int_0^t h(s)\\,ds$. Apply [F6] on $[0,1]$ to obtain $h=0$. Thus $u=w$ near $v_0$. Along any polygonal path in the common open domain, the set of path parameters at which equality holds is closed by continuity and open by this local result; since the path interval is connected and the set is nonempty, equality holds along the whole path. Every open connected subset of Euclidean space is polygonally connected: points reachable from a fixed point by finitely many segments in small balls form a nonempty relatively open and relatively closed set. Therefore equality extends throughout each common connected domain.",
+        "step": "1.3",
+        "inputs": [
+          "A1",
+          "F6",
+          "F8",
+          "F9",
+          "F10",
+          "given",
+          "construct"
+        ]
+      },
+      {
+        "id": "proof-step-2-1",
+        "claim": "The convex, relatively closed interval $I_x$ contains a nontrivial segment on the inward side by step 1.1 and [F4]. Suppose it does not contain the whole open $\\Gamma_i$-fiber on that side. Its endpoint $b$ toward that side then lies inside $\\Gamma_i$; relative closedness puts $b$ in $I_x$, so the interval from $x$ to $b$ is a compact nondegenerate interval by [F7]. Let $x_1$ be its midpoint. Since $x_1\\in A_x$, transitivity gives $A_{x_1}\\subseteq A_x$. The supporting plane of $A_{x_1}$ has nonzero energy coefficient, so its vertical section lies wholly on one side of $x_1$; being contained in $I_x$, it lies in one half of $[x,b]$ and has at most half its length. It is nonempty and closed relative to $[x,b]$, hence compact. Repeat: take the midpoint $x_{k+1}$ of the current compact interval $I_{x_k}$; then $x_k\\prec x_{k+1}$, so the next section is nested inside the current one and again has at most half its length. These intervals have nonempty total intersection: otherwise their open complements would cover the first compact interval, a finite subcover would do so by [F7], and nesting would make one interval empty. Their lengths tend to zero, so the intersection has a unique point $x_\\infty$, still in the first interval contained in $\\Gamma_i$. The midpoint recursion and this unique intersection require no selection from an arbitrary countable family. Relative closedness puts $x_\\infty$ in every $A_{x_k}$, hence $A_{x_\\infty}\\subseteq A_{x_k}$ by transitivity. Its vertical section is therefore only $\\{x_\\infty\\}$, contradicting the nontrivial interior vertical segment at $x_\\infty$ supplied by [F4]. Thus $I_x$ contains the whole open fiber on its inward side.",
+        "step": "2.1",
+        "inputs": [
+          "A1",
+          "F1",
+          "F4",
+          "F7",
+          "step 1.1",
+          "construct",
+          "1.1"
+        ]
+      },
+      {
+        "id": "proof-step-3-1",
+        "claim": "All states on a fixed work-coordinate fiber have the same orientation. If $x$ is oriented upward and a state $z$ above it were oriented downward, the full upward section from step 2.1 gives $x\\prec z$, and the full downward section from $z$ gives $z\\prec w$ for a state $w$ below $x$, contradicting the support at $x$. If a state $y$ below an upward $x$ were oriented downward, choose $z$ above $x$ with $x\\prec z$; the first collinear implication in [F1], applied to $x$ between $y$ and $z$, gives $y\\prec x$, contradicting the downward support at $y$. The reversed argument handles a downward $x$.",
+        "step": "3.1",
+        "inputs": [
+          "F1",
+          "step 2.1",
+          "algebra",
+          "2.1"
+        ]
+      },
+      {
+        "id": "proof-step-4-1",
+        "claim": "Adopt the coordinate convention $\\varepsilon_i=1$. Step 2.1 and the common orientation give $x\\prec y$ exactly for $u_y\\ge u_x$ at fixed $v$, with strict comparison for $u_y>u_x$.",
+        "step": "4.1",
+        "inputs": [
+          "step 3.1",
+          "step 1.2",
+          "algebra",
+          "3.1",
+          "1.2"
+        ]
+      },
+      {
+        "id": "proof-step-5-1",
+        "claim": "Put $\\rho_x=\\pi_v(\\partial A_x)$. At a boundary point $z\\in\\partial A_x$, [F3] supplies a support to $A_x$. Because $A_z\\subseteq A_x$, that plane also supports $A_z$ and equals its unique S2 plane. Its finite slope gives a nonvertical inward direction; [F4] supplies nearby vertical points inside $A_x$, while the opposite side is outside by the support. Neighborhoods of one inside and one outside point show every nearby work fiber meets $\\partial A_x$. Hence $\\rho_x$ is open. It is connected because S3 makes $\\partial A_x$ arcwise connected and projection is continuous. By step 4.1, every vertical fiber over $\\rho_x$ has exactly one boundary energy; call it $u_x(v)$.",
+        "step": "5.1",
+        "inputs": [
+          "A1",
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "step 4.1",
+          "4.1"
+        ]
+      },
+      {
+        "id": "proof-step-6-1",
+        "claim": "For $v,v'\\in\\rho_x$, convexity of $A_x$ puts every convex combination of their boundary states in $A_x$. On any sufficiently small convex ball in $\\rho_x$, the unique-boundary property and upward orientation make $u_x$ the least energy in each fiber. Therefore $u_x(tv+(1-t)v')\\le t u_x(v)+(1-t)u_x(v')$, so $u_x$ is finite and convex there. It is locally Lipschitz by [F5]. The inward support at $(u_x(v),v)$ gives\n$u_x(v')-u_x(v)\\ge -P_i(u_x(v),v)\\cdot(v'-v).$\nThe support at $(u_x(v'),v')$ gives\n$u_x(v')-u_x(v)\\le -P_i(u_x(v'),v')\\cdot(v'-v).$\nLocal Lipschitz continuity of $u_x$ and $P_i$ makes the difference between these linear bounds $O(\\|v'-v\\|^2)$. Thus $u_x$ is differentiable with derivative $-P_i(u_x(v),v)$, and that derivative is locally Lipschitz. Hence $u_x\\in C^1$ with locally Lipschitz derivative.",
+        "step": "6.1",
+        "inputs": [
+          "A1",
+          "F1",
+          "F5",
+          "F8",
+          "step 5.1",
+          "5.1"
+        ]
+      },
+      {
+        "id": "proof-step-7-1",
+        "claim": "If $y\\in\\partial A_x$, then $A_y\\subseteq A_x$. The boundary graphs agree at $v_y$ and solve the same differential equation. The set of $v\\in\\rho_y$ where $v\\in\\rho_x$ and $u_y(v)=u_x(v)$ is nonempty, open by step 1.3, and closed by continuity and relative closedness of $\\partial A_x$. Connectedness of $\\rho_y$ makes it all of $\\rho_y$. This shows $\\rho_y\\subseteq\\rho_x$. The same argument, using relative closedness of $\\partial A_y$, shows $\\rho_y$ is relatively closed in connected $\\rho_x$; it is relatively open because both projections are open. Hence $\\rho_x=\\rho_y$ and the boundary graphs agree. In particular $x\\in\\partial A_y$, so $y\\prec x$; together with $y\\in A_x$ and transitivity this gives $A_x=A_y$.",
+        "step": "7.1",
+        "inputs": [
+          "A1",
+          "F1",
+          "step 6.1",
+          "step 1.3",
+          "1.3",
+          "6.1"
+        ]
+      }
+    ]
+  },
+  "ex-td-irreversible-adiabatic-compression": {
+    "citations": [
+      {
+        "fact": "F1",
+        "source": "def-td-process-and-protocol",
+        "source_section": "Definition",
+        "quote": "A record is adiabatic exactly when $Q[P]=0$.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "post-td-first-law-energy",
+        "source_section": "Postulate",
+        "quote": "the adopted model balance is $$U_c(x_P^+)-U_c(x_P^-)=Q[P]+W_{\\mathrm{on}}[P],$$",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "post-td-concave-fundamental-entropy",
+        "source_section": "Postulate",
+        "quote": "S_c:D_c\\longrightarrow\\mathbb R\\ \\text{with values measured in }\\mathrm{J\\,K^{-1}}",
+        "uses": [
+          "2.1"
+        ]
+      },
+      {
+        "fact": "L1",
+        "source": "def-natural-logarithm",
+        "source_section": "Definition",
+        "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+        "uses": [
+          "2.1"
+        ]
+      },
+      {
+        "fact": "L1",
+        "source": "thm-natural-logarithm-laws",
+        "source_section": "Statement",
+        "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$, $$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$ Also $\\log 1=0$.",
+        "uses": [
+          "2.1"
+        ]
+      },
+      {
+        "fact": "A2",
+        "source": "def-td-process-and-protocol",
+        "source_section": "Definition",
+        "quote": "For a system $s$ of constitution $c$, the process model fixes one Galilean inertial chart $g_s$ for kinetic-energy bookkeeping and transfer records and holds that chart fixed throughout each process. A process record is a tuple\n$$P=(I_P,x_P^-,x_P^+,z_P,\\kappa_P,r_P).$$\nFor each finite closed time interval $I_P=[t_0,t_1]\\subseteq\\mathbb R$ with $t_0<t_1$ as in [[def-interval]], measured in seconds, its component fields have these types: $x_P^-,x_P^+\\in D_c$ are equilibrium endpoint coordinates from [[def-td-equilibrium-state-domain]]; $Z_s$ is the model-declared configuration space of the system, its auxiliaries and devices; $Z_s^{\\mathrm{eq}}\\subseteq Z_s$ is the model-declared set of equilibrium configurations and $\\xi_s:Z_s^{\\mathrm{eq}}\\to D_c$ assigns their state coordinates; $z_P:I_P\\to Z_s$ is a function ([[def-function-space]]); $\\mathcal K_s$ is the model-declared set of control/contact records and $\\kappa_P\\in\\mathcal K_s$; and $\\mathcal R_s$ is the model-declared set of signed transfer records and $r_P\\in\\mathcal R_s$. These fields form a finite Cartesian product ([[def-cartesian-product]]). The admitted records $\\mathcal P_s$ are the model-specified subset of tuples with these types that additionally satisfy $z_P(t_0),z_P(t_1)\\in Z_s^{\\mathrm{eq}}$, $\\xi_s(z_P(t_0))=x_P^-$, and $\\xi_s(z_P(t_1))=x_P^+$. No continuity or differentiability is imposed on $z_P$, and its values at interior times need not represent equilibrium states.\n\nFor an endpoint bookkeeping quantity $F$, write $\\Delta F=F_P^+-F_P^-$. A closed record in the sense of [[def-td-system-and-permitted-exchanges]] has no matter crossing the chosen outer boundary. The core closed-record class $\\mathcal P_{\\mathrm{cl}}(s)\\subseteq\\mathcal P_s$ ([[def-subset-and-proper-subset]]) contains only records for which the system has a supplied total mass $M>0$ and defined center-of-mass velocities at both endpoints in the fixed chart $g_s$, so the kinetic energies $K_{\\mathrm{cm}}^\\pm=\\tfrac12M\\|\\mathbf v_{\\mathrm{cm}}^\\pm\\|_2^2$ are defined as in [[def-td-galilean-rest-frame]]. It further requires $\\Delta K_{\\mathrm{cm}}=0$ and $\\Delta U_{\\mathrm{ext}}=0$, where $U_{\\mathrm{ext}}$ denotes any model-specified external-field potential energy tracked separately from the internal-energy coordinate in $g_s$. Other process classes require an expanded energy bookkeeping rule.\n\nFor each $P\\in\\mathcal P_{\\mathrm{cl}}(s)$, the protocol supplies maps $Q,W_{\\mathrm{on}}:\\mathcal P_{\\mathrm{cl}}(s)\\to\\mathbb R$ whose values are interpreted in joules as in [[def-td-si-quantities]] and whose energy bookkeeping uses $g_s$. $Q[P]>0$ means energy enters the system through the declared thermal-transfer channel; $W_{\\mathrm{on}}[P]>0$ means mechanical work is done on the system. These are functionals of the process record, not state functions of $x_P^-$ and $x_P^+$. Heat is the protocol-assigned thermal mode of energy transfer, not a quantity stored in the equilibrium state. A record is adiabatic exactly when $Q[P]=0$. A closed record may still exchange energy; it is not thereby isolated.\n\nA preparation is a model-specified rule selecting the particular initial equilibrium state $x_P^-$. A statistical extension may instead specify a normalized probability measure on a declared measurable space, as in [[def-probability-measure]]; such a statistical preparation is outside this deterministic process class. A preparation does not assert later equilibration. An admitted record may pass through nonequilibrium configurations even though both endpoints lie in $D_c$.",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "A2",
+        "source": "def-td-process-and-protocol",
+        "source_section": "Definition",
+        "quote": "For a system $s$ of constitution $c$, the process model fixes one Galilean inertial chart $g_s$ for kinetic-energy bookkeeping and transfer records and holds that chart fixed throughout each process. A process record is a tuple\n$$P=(I_P,x_P^-,x_P^+,z_P,\\kappa_P,r_P).$$\nFor each finite closed time interval $I_P=[t_0,t_1]\\subseteq\\mathbb R$ with $t_0<t_1$ as in [[def-interval]], measured in seconds, its component fields have these types: $x_P^-,x_P^+\\in D_c$ are equilibrium endpoint coordinates from [[def-td-equilibrium-state-domain]]; $Z_s$ is the model-declared configuration space of the system, its auxiliaries and devices; $Z_s^{\\mathrm{eq}}\\subseteq Z_s$ is the model-declared set of equilibrium configurations and $\\xi_s:Z_s^{\\mathrm{eq}}\\to D_c$ assigns their state coordinates; $z_P:I_P\\to Z_s$ is a function ([[def-function-space]]); $\\mathcal K_s$ is the model-declared set of control/contact records and $\\kappa_P\\in\\mathcal K_s$; and $\\mathcal R_s$ is the model-declared set of signed transfer records and $r_P\\in\\mathcal R_s$. These fields form a finite Cartesian product ([[def-cartesian-product]]). The admitted records $\\mathcal P_s$ are the model-specified subset of tuples with these types that additionally satisfy $z_P(t_0),z_P(t_1)\\in Z_s^{\\mathrm{eq}}$, $\\xi_s(z_P(t_0))=x_P^-$, and $\\xi_s(z_P(t_1))=x_P^+$. No continuity or differentiability is imposed on $z_P$, and its values at interior times need not represent equilibrium states.\n\nFor an endpoint bookkeeping quantity $F$, write $\\Delta F=F_P^+-F_P^-$. A closed record in the sense of [[def-td-system-and-permitted-exchanges]] has no matter crossing the chosen outer boundary. The core closed-record class $\\mathcal P_{\\mathrm{cl}}(s)\\subseteq\\mathcal P_s$ ([[def-subset-and-proper-subset]]) contains only records for which the system has a supplied total mass $M>0$ and defined center-of-mass velocities at both endpoints in the fixed chart $g_s$, so the kinetic energies $K_{\\mathrm{cm}}^\\pm=\\tfrac12M\\|\\mathbf v_{\\mathrm{cm}}^\\pm\\|_2^2$ are defined as in [[def-td-galilean-rest-frame]]. It further requires $\\Delta K_{\\mathrm{cm}}=0$ and $\\Delta U_{\\mathrm{ext}}=0$, where $U_{\\mathrm{ext}}$ denotes any model-specified external-field potential energy tracked separately from the internal-energy coordinate in $g_s$. Other process classes require an expanded energy bookkeeping rule.\n\nFor each $P\\in\\mathcal P_{\\mathrm{cl}}(s)$, the protocol supplies maps $Q,W_{\\mathrm{on}}:\\mathcal P_{\\mathrm{cl}}(s)\\to\\mathbb R$ whose values are interpreted in joules as in [[def-td-si-quantities]] and whose energy bookkeeping uses $g_s$. $Q[P]>0$ means energy enters the system through the declared thermal-transfer channel; $W_{\\mathrm{on}}[P]>0$ means mechanical work is done on the system. These are functionals of the process record, not state functions of $x_P^-$ and $x_P^+$. Heat is the protocol-assigned thermal mode of energy transfer, not a quantity stored in the equilibrium state. A record is adiabatic exactly when $Q[P]=0$. A closed record may still exchange energy; it is not thereby isolated.\n\nA preparation is a model-specified rule selecting the particular initial equilibrium state $x_P^-$. A statistical extension may instead specify a normalized probability measure on a declared measurable space, as in [[def-probability-measure]]; such a statistical preparation is outside this deterministic process class. A preparation does not assert later equilibration. An admitted record may pass through nonequilibrium configurations even though both endpoints lie in $D_c$.",
+        "uses": [
+          "1.1"
+        ]
+      }
+    ]
+  },
+  "def-td-thermal-join": {
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "not_applicable",
+        "reason": "Definition declares the distinct tagged separated/joined encodings with fixed composition and physical SI energy summation. It declares its domain/record data rather than deriving existence of a normalized model after removing them.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "For the simple-compressible physical branch, a primitive label is a pair $i=(c_i,n^i)$ of constitution and fixed positive mole amounts. Its numerical state domain is exactly $\\Gamma_i=\\Gamma_{c_i,n^i}$ of [[def-td-equilibrium-state-domain]], with embedding $b_i(u,v)=(u,v,\\hat n^i)\\in D_{c_i}$. The unit map sends $(u,v)$ to $(u\\,\\mathrm J,v\\,\\mathrm{m^3})$; thus $u$ is the numerical value of the fixed internal energy, not a newly oriented energy coordinate. The underlying accessibility is the pullback of the admitted physical endpoint relation along $b_i$. Positive bulk scaling uses the declared scaling of [[post-td-bulk-additivity]], carries the mole vector to $\\lambda n^i$, and retains the distinct scaled tag. More general work coordinates or formal thermometer examples require their own explicitly declared domain, coordinate unit map and endpoint relation; no identification with $D_c$ is supplied by this definition.\n\nFor two named simple-system types $i,j$ with energy/work coordinates $x=(u_i,v_i)$ and $y=(u_j,v_j)$, a thermal join is the model-declared compound state $J_{ij}(x,y)$ whose energy coordinate is $u_i+u_j$ and whose work coordinates retain the ordered pair $(v_i,v_j)$. Its join domain consists exactly of those tuples $(u,v_i,v_j)$ for which there are $u_i,u_j$ with $(u_i,v_i)$ and $(u_j,v_j)$ in the component domains and $u=u_i+u_j$. This is a tagged join state, distinct from the separated pair $(x,y)$, even when their total coordinates agree. The joined domain retains both work coordinates and has aggregate mole composition $n^i+n^j$ (in a common declared species list); it is not thereby a simple-compressible slice of one $D_c$. The contact model supplies its joined equilibrium endpoint space, endpoint coordinate map and admitted process relation. The contact model declares the pair encoding and join encoding to have the same aggregate composition and extends its accessibility relation to these two encodings; the contact axioms specify which such comparisons are admitted.\n\nWrite $x\\sim_T y$ exactly when the pair $(x,y)$ and its join state $J_{ij}(x,y)$ are accessible in both directions under the declared contact operation. Here $\\sim_T$ is a relation between states of the two named systems; it is not numerical equality of temperature. Nested joins use only the model\u2019s declared reassociation and permutation identifications. The coordinate sum alone supplies no accessibility comparison.",
+          "current_raw_sha256": "bffec807891afe22884559240af52bfcd627f0a40a431f90bb4a051a7c6fb4d2",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "zero",
+        "status": "not_applicable",
+        "reason": "Definition declares the distinct tagged separated/joined encodings with fixed composition and physical SI energy summation. Any positivity, zero-value convention or excluded singular parameter is the displayed interface condition; no new zero-parameter theorem is derived.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "For the simple-compressible physical branch, a primitive label is a pair $i=(c_i,n^i)$ of constitution and fixed positive mole amounts. Its numerical state domain is exactly $\\Gamma_i=\\Gamma_{c_i,n^i}$ of [[def-td-equilibrium-state-domain]], with embedding $b_i(u,v)=(u,v,\\hat n^i)\\in D_{c_i}$. The unit map sends $(u,v)$ to $(u\\,\\mathrm J,v\\,\\mathrm{m^3})$; thus $u$ is the numerical value of the fixed internal energy, not a newly oriented energy coordinate. The underlying accessibility is the pullback of the admitted physical endpoint relation along $b_i$. Positive bulk scaling uses the declared scaling of [[post-td-bulk-additivity]], carries the mole vector to $\\lambda n^i$, and retains the distinct scaled tag. More general work coordinates or formal thermometer examples require their own explicitly declared domain, coordinate unit map and endpoint relation; no identification with $D_c$ is supplied by this definition.\n\nFor two named simple-system types $i,j$ with energy/work coordinates $x=(u_i,v_i)$ and $y=(u_j,v_j)$, a thermal join is the model-declared compound state $J_{ij}(x,y)$ whose energy coordinate is $u_i+u_j$ and whose work coordinates retain the ordered pair $(v_i,v_j)$. Its join domain consists exactly of those tuples $(u,v_i,v_j)$ for which there are $u_i,u_j$ with $(u_i,v_i)$ and $(u_j,v_j)$ in the component domains and $u=u_i+u_j$. This is a tagged join state, distinct from the separated pair $(x,y)$, even when their total coordinates agree. The joined domain retains both work coordinates and has aggregate mole composition $n^i+n^j$ (in a common declared species list); it is not thereby a simple-compressible slice of one $D_c$. The contact model supplies its joined equilibrium endpoint space, endpoint coordinate map and admitted process relation. The contact model declares the pair encoding and join encoding to have the same aggregate composition and extends its accessibility relation to these two encodings; the contact axioms specify which such comparisons are admitted.\n\nWrite $x\\sim_T y$ exactly when the pair $(x,y)$ and its join state $J_{ij}(x,y)$ are accessible in both directions under the declared contact operation. Here $\\sim_T$ is a relation between states of the two named systems; it is not numerical equality of temperature. Nested joins use only the model\u2019s declared reassociation and permutation identifications. The coordinate sum alone supplies no accessibility comparison.",
+          "current_raw_sha256": "bffec807891afe22884559240af52bfcd627f0a40a431f90bb4a051a7c6fb4d2",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "one",
+        "status": "not_applicable",
+        "reason": "Definition declares the distinct tagged separated/joined encodings with fixed composition and physical SI energy summation. A singleton substitution is governed by the stated domain conventions; this nonproof carrier proves no special singleton result.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "For the simple-compressible physical branch, a primitive label is a pair $i=(c_i,n^i)$ of constitution and fixed positive mole amounts. Its numerical state domain is exactly $\\Gamma_i=\\Gamma_{c_i,n^i}$ of [[def-td-equilibrium-state-domain]], with embedding $b_i(u,v)=(u,v,\\hat n^i)\\in D_{c_i}$. The unit map sends $(u,v)$ to $(u\\,\\mathrm J,v\\,\\mathrm{m^3})$; thus $u$ is the numerical value of the fixed internal energy, not a newly oriented energy coordinate. The underlying accessibility is the pullback of the admitted physical endpoint relation along $b_i$. Positive bulk scaling uses the declared scaling of [[post-td-bulk-additivity]], carries the mole vector to $\\lambda n^i$, and retains the distinct scaled tag. More general work coordinates or formal thermometer examples require their own explicitly declared domain, coordinate unit map and endpoint relation; no identification with $D_c$ is supplied by this definition.\n\nFor two named simple-system types $i,j$ with energy/work coordinates $x=(u_i,v_i)$ and $y=(u_j,v_j)$, a thermal join is the model-declared compound state $J_{ij}(x,y)$ whose energy coordinate is $u_i+u_j$ and whose work coordinates retain the ordered pair $(v_i,v_j)$. Its join domain consists exactly of those tuples $(u,v_i,v_j)$ for which there are $u_i,u_j$ with $(u_i,v_i)$ and $(u_j,v_j)$ in the component domains and $u=u_i+u_j$. This is a tagged join state, distinct from the separated pair $(x,y)$, even when their total coordinates agree. The joined domain retains both work coordinates and has aggregate mole composition $n^i+n^j$ (in a common declared species list); it is not thereby a simple-compressible slice of one $D_c$. The contact model supplies its joined equilibrium endpoint space, endpoint coordinate map and admitted process relation. The contact model declares the pair encoding and join encoding to have the same aggregate composition and extends its accessibility relation to these two encodings; the contact axioms specify which such comparisons are admitted.\n\nWrite $x\\sim_T y$ exactly when the pair $(x,y)$ and its join state $J_{ij}(x,y)$ are accessible in both directions under the declared contact operation. Here $\\sim_T$ is a relation between states of the two named systems; it is not numerical equality of temperature. Nested joins use only the model\u2019s declared reassociation and permutation identifications. The coordinate sum alone supplies no accessibility comparison.",
+          "current_raw_sha256": "bffec807891afe22884559240af52bfcd627f0a40a431f90bb4a051a7c6fb4d2",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "degenerate",
+        "status": "not_applicable",
+        "reason": "Definition declares the distinct tagged separated/joined encodings with fixed composition and physical SI energy summation. A collapsed chart/domain must obey the actual declared regularity and measurability conditions; no missing proof is supplied by the declaration.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "For the simple-compressible physical branch, a primitive label is a pair $i=(c_i,n^i)$ of constitution and fixed positive mole amounts. Its numerical state domain is exactly $\\Gamma_i=\\Gamma_{c_i,n^i}$ of [[def-td-equilibrium-state-domain]], with embedding $b_i(u,v)=(u,v,\\hat n^i)\\in D_{c_i}$. The unit map sends $(u,v)$ to $(u\\,\\mathrm J,v\\,\\mathrm{m^3})$; thus $u$ is the numerical value of the fixed internal energy, not a newly oriented energy coordinate. The underlying accessibility is the pullback of the admitted physical endpoint relation along $b_i$. Positive bulk scaling uses the declared scaling of [[post-td-bulk-additivity]], carries the mole vector to $\\lambda n^i$, and retains the distinct scaled tag. More general work coordinates or formal thermometer examples require their own explicitly declared domain, coordinate unit map and endpoint relation; no identification with $D_c$ is supplied by this definition.\n\nFor two named simple-system types $i,j$ with energy/work coordinates $x=(u_i,v_i)$ and $y=(u_j,v_j)$, a thermal join is the model-declared compound state $J_{ij}(x,y)$ whose energy coordinate is $u_i+u_j$ and whose work coordinates retain the ordered pair $(v_i,v_j)$. Its join domain consists exactly of those tuples $(u,v_i,v_j)$ for which there are $u_i,u_j$ with $(u_i,v_i)$ and $(u_j,v_j)$ in the component domains and $u=u_i+u_j$. This is a tagged join state, distinct from the separated pair $(x,y)$, even when their total coordinates agree. The joined domain retains both work coordinates and has aggregate mole composition $n^i+n^j$ (in a common declared species list); it is not thereby a simple-compressible slice of one $D_c$. The contact model supplies its joined equilibrium endpoint space, endpoint coordinate map and admitted process relation. The contact model declares the pair encoding and join encoding to have the same aggregate composition and extends its accessibility relation to these two encodings; the contact axioms specify which such comparisons are admitted.\n\nWrite $x\\sim_T y$ exactly when the pair $(x,y)$ and its join state $J_{ij}(x,y)$ are accessible in both directions under the declared contact operation. Here $\\sim_T$ is a relation between states of the two named systems; it is not numerical equality of temperature. Nested joins use only the model\u2019s declared reassociation and permutation identifications. The coordinate sum alone supplies no accessibility comparison.",
+          "current_raw_sha256": "bffec807891afe22884559240af52bfcd627f0a40a431f90bb4a051a7c6fb4d2",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "endpoints",
+        "status": "not_applicable",
+        "reason": "Definition declares the distinct tagged separated/joined encodings with fixed composition and physical SI energy summation. The precise allowed boundary and extension conventions are those written in this section, not a separately proved limit.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "For the simple-compressible physical branch, a primitive label is a pair $i=(c_i,n^i)$ of constitution and fixed positive mole amounts. Its numerical state domain is exactly $\\Gamma_i=\\Gamma_{c_i,n^i}$ of [[def-td-equilibrium-state-domain]], with embedding $b_i(u,v)=(u,v,\\hat n^i)\\in D_{c_i}$. The unit map sends $(u,v)$ to $(u\\,\\mathrm J,v\\,\\mathrm{m^3})$; thus $u$ is the numerical value of the fixed internal energy, not a newly oriented energy coordinate. The underlying accessibility is the pullback of the admitted physical endpoint relation along $b_i$. Positive bulk scaling uses the declared scaling of [[post-td-bulk-additivity]], carries the mole vector to $\\lambda n^i$, and retains the distinct scaled tag. More general work coordinates or formal thermometer examples require their own explicitly declared domain, coordinate unit map and endpoint relation; no identification with $D_c$ is supplied by this definition.\n\nFor two named simple-system types $i,j$ with energy/work coordinates $x=(u_i,v_i)$ and $y=(u_j,v_j)$, a thermal join is the model-declared compound state $J_{ij}(x,y)$ whose energy coordinate is $u_i+u_j$ and whose work coordinates retain the ordered pair $(v_i,v_j)$. Its join domain consists exactly of those tuples $(u,v_i,v_j)$ for which there are $u_i,u_j$ with $(u_i,v_i)$ and $(u_j,v_j)$ in the component domains and $u=u_i+u_j$. This is a tagged join state, distinct from the separated pair $(x,y)$, even when their total coordinates agree. The joined domain retains both work coordinates and has aggregate mole composition $n^i+n^j$ (in a common declared species list); it is not thereby a simple-compressible slice of one $D_c$. The contact model supplies its joined equilibrium endpoint space, endpoint coordinate map and admitted process relation. The contact model declares the pair encoding and join encoding to have the same aggregate composition and extends its accessibility relation to these two encodings; the contact axioms specify which such comparisons are admitted.\n\nWrite $x\\sim_T y$ exactly when the pair $(x,y)$ and its join state $J_{ij}(x,y)$ are accessible in both directions under the declared contact operation. Here $\\sim_T$ is a relation between states of the two named systems; it is not numerical equality of temperature. Nested joins use only the model\u2019s declared reassociation and permutation identifications. The coordinate sum alone supplies no accessibility comparison.",
+          "current_raw_sha256": "bffec807891afe22884559240af52bfcd627f0a40a431f90bb4a051a7c6fb4d2",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "not_applicable",
+        "reason": "Definition declares the distinct tagged separated/joined encodings with fixed composition and physical SI energy summation. Named existence/choice assumptions remain prerequisites; this interface does not prove a new arbitrary-family selection.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "For the simple-compressible physical branch, a primitive label is a pair $i=(c_i,n^i)$ of constitution and fixed positive mole amounts. Its numerical state domain is exactly $\\Gamma_i=\\Gamma_{c_i,n^i}$ of [[def-td-equilibrium-state-domain]], with embedding $b_i(u,v)=(u,v,\\hat n^i)\\in D_{c_i}$. The unit map sends $(u,v)$ to $(u\\,\\mathrm J,v\\,\\mathrm{m^3})$; thus $u$ is the numerical value of the fixed internal energy, not a newly oriented energy coordinate. The underlying accessibility is the pullback of the admitted physical endpoint relation along $b_i$. Positive bulk scaling uses the declared scaling of [[post-td-bulk-additivity]], carries the mole vector to $\\lambda n^i$, and retains the distinct scaled tag. More general work coordinates or formal thermometer examples require their own explicitly declared domain, coordinate unit map and endpoint relation; no identification with $D_c$ is supplied by this definition.\n\nFor two named simple-system types $i,j$ with energy/work coordinates $x=(u_i,v_i)$ and $y=(u_j,v_j)$, a thermal join is the model-declared compound state $J_{ij}(x,y)$ whose energy coordinate is $u_i+u_j$ and whose work coordinates retain the ordered pair $(v_i,v_j)$. Its join domain consists exactly of those tuples $(u,v_i,v_j)$ for which there are $u_i,u_j$ with $(u_i,v_i)$ and $(u_j,v_j)$ in the component domains and $u=u_i+u_j$. This is a tagged join state, distinct from the separated pair $(x,y)$, even when their total coordinates agree. The joined domain retains both work coordinates and has aggregate mole composition $n^i+n^j$ (in a common declared species list); it is not thereby a simple-compressible slice of one $D_c$. The contact model supplies its joined equilibrium endpoint space, endpoint coordinate map and admitted process relation. The contact model declares the pair encoding and join encoding to have the same aggregate composition and extends its accessibility relation to these two encodings; the contact axioms specify which such comparisons are admitted.\n\nWrite $x\\sim_T y$ exactly when the pair $(x,y)$ and its join state $J_{ij}(x,y)$ are accessible in both directions under the declared contact operation. Here $\\sim_T$ is a relation between states of the two named systems; it is not numerical equality of temperature. Nested joins use only the model\u2019s declared reassociation and permutation identifications. The coordinate sum alone supplies no accessibility comparison.",
+          "current_raw_sha256": "bffec807891afe22884559240af52bfcd627f0a40a431f90bb4a051a7c6fb4d2",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "reason": "Definition declares the distinct tagged separated/joined encodings with fixed composition and physical SI energy summation. The section states definitions and scope, not a forward implication theorem with a separate proof worksheet.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "For the simple-compressible physical branch, a primitive label is a pair $i=(c_i,n^i)$ of constitution and fixed positive mole amounts. Its numerical state domain is exactly $\\Gamma_i=\\Gamma_{c_i,n^i}$ of [[def-td-equilibrium-state-domain]], with embedding $b_i(u,v)=(u,v,\\hat n^i)\\in D_{c_i}$. The unit map sends $(u,v)$ to $(u\\,\\mathrm J,v\\,\\mathrm{m^3})$; thus $u$ is the numerical value of the fixed internal energy, not a newly oriented energy coordinate. The underlying accessibility is the pullback of the admitted physical endpoint relation along $b_i$. Positive bulk scaling uses the declared scaling of [[post-td-bulk-additivity]], carries the mole vector to $\\lambda n^i$, and retains the distinct scaled tag. More general work coordinates or formal thermometer examples require their own explicitly declared domain, coordinate unit map and endpoint relation; no identification with $D_c$ is supplied by this definition.\n\nFor two named simple-system types $i,j$ with energy/work coordinates $x=(u_i,v_i)$ and $y=(u_j,v_j)$, a thermal join is the model-declared compound state $J_{ij}(x,y)$ whose energy coordinate is $u_i+u_j$ and whose work coordinates retain the ordered pair $(v_i,v_j)$. Its join domain consists exactly of those tuples $(u,v_i,v_j)$ for which there are $u_i,u_j$ with $(u_i,v_i)$ and $(u_j,v_j)$ in the component domains and $u=u_i+u_j$. This is a tagged join state, distinct from the separated pair $(x,y)$, even when their total coordinates agree. The joined domain retains both work coordinates and has aggregate mole composition $n^i+n^j$ (in a common declared species list); it is not thereby a simple-compressible slice of one $D_c$. The contact model supplies its joined equilibrium endpoint space, endpoint coordinate map and admitted process relation. The contact model declares the pair encoding and join encoding to have the same aggregate composition and extends its accessibility relation to these two encodings; the contact axioms specify which such comparisons are admitted.\n\nWrite $x\\sim_T y$ exactly when the pair $(x,y)$ and its join state $J_{ij}(x,y)$ are accessible in both directions under the declared contact operation. Here $\\sim_T$ is a relation between states of the two named systems; it is not numerical equality of temperature. Nested joins use only the model\u2019s declared reassociation and permutation identifications. The coordinate sum alone supplies no accessibility comparison.",
+          "current_raw_sha256": "bffec807891afe22884559240af52bfcd627f0a40a431f90bb4a051a7c6fb4d2",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "Definition declares the distinct tagged separated/joined encodings with fixed composition and physical SI energy summation. No reverse inference establishing physical adoption or a broader mathematical model is asserted by this definition/scope.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "For the simple-compressible physical branch, a primitive label is a pair $i=(c_i,n^i)$ of constitution and fixed positive mole amounts. Its numerical state domain is exactly $\\Gamma_i=\\Gamma_{c_i,n^i}$ of [[def-td-equilibrium-state-domain]], with embedding $b_i(u,v)=(u,v,\\hat n^i)\\in D_{c_i}$. The unit map sends $(u,v)$ to $(u\\,\\mathrm J,v\\,\\mathrm{m^3})$; thus $u$ is the numerical value of the fixed internal energy, not a newly oriented energy coordinate. The underlying accessibility is the pullback of the admitted physical endpoint relation along $b_i$. Positive bulk scaling uses the declared scaling of [[post-td-bulk-additivity]], carries the mole vector to $\\lambda n^i$, and retains the distinct scaled tag. More general work coordinates or formal thermometer examples require their own explicitly declared domain, coordinate unit map and endpoint relation; no identification with $D_c$ is supplied by this definition.\n\nFor two named simple-system types $i,j$ with energy/work coordinates $x=(u_i,v_i)$ and $y=(u_j,v_j)$, a thermal join is the model-declared compound state $J_{ij}(x,y)$ whose energy coordinate is $u_i+u_j$ and whose work coordinates retain the ordered pair $(v_i,v_j)$. Its join domain consists exactly of those tuples $(u,v_i,v_j)$ for which there are $u_i,u_j$ with $(u_i,v_i)$ and $(u_j,v_j)$ in the component domains and $u=u_i+u_j$. This is a tagged join state, distinct from the separated pair $(x,y)$, even when their total coordinates agree. The joined domain retains both work coordinates and has aggregate mole composition $n^i+n^j$ (in a common declared species list); it is not thereby a simple-compressible slice of one $D_c$. The contact model supplies its joined equilibrium endpoint space, endpoint coordinate map and admitted process relation. The contact model declares the pair encoding and join encoding to have the same aggregate composition and extends its accessibility relation to these two encodings; the contact axioms specify which such comparisons are admitted.\n\nWrite $x\\sim_T y$ exactly when the pair $(x,y)$ and its join state $J_{ij}(x,y)$ are accessible in both directions under the declared contact operation. Here $\\sim_T$ is a relation between states of the two named systems; it is not numerical equality of temperature. Nested joins use only the model\u2019s declared reassociation and permutation identifications. The coordinate sum alone supplies no accessibility comparison.",
+          "current_raw_sha256": "bffec807891afe22884559240af52bfcd627f0a40a431f90bb4a051a7c6fb4d2",
+          "scope_only_not_proof_acceptance": true
+        }
+      }
+    ]
+  },
+  "pthm-td-compact-continuous-phase-mixture": {
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "checked",
+        "evidence": "Statement requires nonempty K and a barycenter in conv K. Proof 3.2 obtains a nonempty compact entropy fiber; proof 5.1 normalizes the supported probability measure.",
+        "case_scope": {
+          "source_section": "Statement",
+          "source_excerpt": "Let $d\\ge1$ and let $K\\subseteq\\mathbb R^d$ be a nonempty compact set of dimensionless generator coordinates. Each $x\\in K$ labels one model-specified phase-generator state; the model assigns it entropy per mole $s(x)\\in\\mathrm{J\\,mol^{-1}K^{-1}}$, and $s:K\\to\\mathbb R$ is continuous, using the numerical entropy value in that fixed unit. Define $\\operatorname{conv}K$ to be the set of all finite convex combinations of points of $K$, and fix $\\bar x\\in\\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$. A Borel probability mixture is a countably additive probability measure $P$ on that sigma algebra; its barycenter and entropy per mole are the coordinatewise integrals $\\int_Kx\\,dP$ and $\\int_Ks\\,dP$. For $x\\in K$, define the unit point mass $\\delta_x$ by $\\delta_x(A)=1$ if $x\\in A$ and $\\delta_x(A)=0$ otherwise, for Borel $A\\subseteq K$. Assume every Borel probability mixture with barycenter $\\bar x$ is feasible and has entropy per mole $\\int_Ks\\,dP$. Then there are $m\\le d+1$, points $x_1,\\ldots,x_m\\in K$, and weights $\\theta_i\\ge0$ with $\\sum_{i=1}^m\\theta_i=1$ such that $P_*:=\\sum_{i=1}^m\\theta_i\\delta_{x_i}$ is a feasible Borel probability mixture and $\\int_Ks\\,dP_*\\ge\\int_Ks\\,dP$ for every feasible mixture $P$.\n\nHere integrals use the measure convention of [[def-tdmath-measure-integral]]. The entropy map is part of the model; this theorem derives neither its microscopic meaning nor compactness of a physical phase domain.",
+          "current_raw_sha256": "44044300dc7d9b48559f40145e7e4a51e5cefb79d18f8734e95a719d37690f7c",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "zero",
+        "status": "checked",
+        "case_scope": {
+          "source_section": "Statement",
+          "source_excerpt": "Let $d\\ge1$ and let $K\\subseteq\\mathbb R^d$ be a nonempty compact set of dimensionless generator coordinates. Each $x\\in K$ labels one model-specified phase-generator state; the model assigns it entropy per mole $s(x)\\in\\mathrm{J\\,mol^{-1}K^{-1}}$, and $s:K\\to\\mathbb R$ is continuous, using the numerical entropy value in that fixed unit. Define $\\operatorname{conv}K$ to be the set of all finite convex combinations of points of $K$, and fix $\\bar x\\in\\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$. A Borel probability mixture is a countably additive probability measure $P$ on that sigma algebra; its barycenter and entropy per mole are the coordinatewise integrals $\\int_Kx\\,dP$ and $\\int_Ks\\,dP$. For $x\\in K$, define the unit point mass $\\delta_x$ by $\\delta_x(A)=1$ if $x\\in A$ and $\\delta_x(A)=0$ otherwise, for Borel $A\\subseteq K$. Assume every Borel probability mixture with barycenter $\\bar x$ is feasible and has entropy per mole $\\int_Ks\\,dP$. Then there are $m\\le d+1$, points $x_1,\\ldots,x_m\\in K$, and weights $\\theta_i\\ge0$ with $\\sum_{i=1}^m\\theta_i=1$ such that $P_*:=\\sum_{i=1}^m\\theta_i\\delta_{x_i}$ is a feasible Borel probability mixture and $\\int_Ks\\,dP_*\\ge\\int_Ks\\,dP$ for every feasible mixture $P$.\n\nHere integrals use the measure convention of [[def-tdmath-measure-integral]]. The entropy map is part of the model; this theorem derives neither its microscopic meaning nor compactness of a physical phase domain.",
+          "current_raw_sha256": "44044300dc7d9b48559f40145e7e4a51e5cefb79d18f8734e95a719d37690f7c",
+          "scope_only_not_proof_acceptance": true
+        },
+        "evidence": "Statement permits s identically zero and zero generator weights. Proof 3.2 still attains the zero entropy fiber and 4.1 removes zero weights; 5.1 normalizes the resulting mixture. No positivity of the entropy values is assumed."
+      },
+      {
+        "case": "one",
+        "status": "checked",
+        "evidence": "Statement permits d=1; the support guarantee is d+1."
+      },
+      {
+        "case": "degenerate",
+        "status": "checked",
+        "case_scope": {
+          "source_section": "Statement",
+          "source_excerpt": "Let $d\\ge1$ and let $K\\subseteq\\mathbb R^d$ be a nonempty compact set of dimensionless generator coordinates. Each $x\\in K$ labels one model-specified phase-generator state; the model assigns it entropy per mole $s(x)\\in\\mathrm{J\\,mol^{-1}K^{-1}}$, and $s:K\\to\\mathbb R$ is continuous, using the numerical entropy value in that fixed unit. Define $\\operatorname{conv}K$ to be the set of all finite convex combinations of points of $K$, and fix $\\bar x\\in\\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$. A Borel probability mixture is a countably additive probability measure $P$ on that sigma algebra; its barycenter and entropy per mole are the coordinatewise integrals $\\int_Kx\\,dP$ and $\\int_Ks\\,dP$. For $x\\in K$, define the unit point mass $\\delta_x$ by $\\delta_x(A)=1$ if $x\\in A$ and $\\delta_x(A)=0$ otherwise, for Borel $A\\subseteq K$. Assume every Borel probability mixture with barycenter $\\bar x$ is feasible and has entropy per mole $\\int_Ks\\,dP$. Then there are $m\\le d+1$, points $x_1,\\ldots,x_m\\in K$, and weights $\\theta_i\\ge0$ with $\\sum_{i=1}^m\\theta_i=1$ such that $P_*:=\\sum_{i=1}^m\\theta_i\\delta_{x_i}$ is a feasible Borel probability mixture and $\\int_Ks\\,dP_*\\ge\\int_Ks\\,dP$ for every feasible mixture $P$.\n\nHere integrals use the measure convention of [[def-tdmath-measure-integral]]. The entropy map is part of the model; this theorem derives neither its microscopic meaning nor compactness of a physical phase domain.",
+          "current_raw_sha256": "44044300dc7d9b48559f40145e7e4a51e5cefb79d18f8734e95a719d37690f7c",
+          "scope_only_not_proof_acceptance": true
+        },
+        "evidence": "Proof 2.1 and 4.1 remove zero weights and reduce any affine-dependent support; the compact generator image need not have full affine dimension. Statement imposes no independence of the selected generator states."
+      },
+      {
+        "case": "endpoints",
+        "status": "not_applicable",
+        "case_scope": {
+          "source_section": "Statement",
+          "source_excerpt": "Let $d\\ge1$ and let $K\\subseteq\\mathbb R^d$ be a nonempty compact set of dimensionless generator coordinates. Each $x\\in K$ labels one model-specified phase-generator state; the model assigns it entropy per mole $s(x)\\in\\mathrm{J\\,mol^{-1}K^{-1}}$, and $s:K\\to\\mathbb R$ is continuous, using the numerical entropy value in that fixed unit. Define $\\operatorname{conv}K$ to be the set of all finite convex combinations of points of $K$, and fix $\\bar x\\in\\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$. A Borel probability mixture is a countably additive probability measure $P$ on that sigma algebra; its barycenter and entropy per mole are the coordinatewise integrals $\\int_Kx\\,dP$ and $\\int_Ks\\,dP$. For $x\\in K$, define the unit point mass $\\delta_x$ by $\\delta_x(A)=1$ if $x\\in A$ and $\\delta_x(A)=0$ otherwise, for Borel $A\\subseteq K$. Assume every Borel probability mixture with barycenter $\\bar x$ is feasible and has entropy per mole $\\int_Ks\\,dP$. Then there are $m\\le d+1$, points $x_1,\\ldots,x_m\\in K$, and weights $\\theta_i\\ge0$ with $\\sum_{i=1}^m\\theta_i=1$ such that $P_*:=\\sum_{i=1}^m\\theta_i\\delta_{x_i}$ is a feasible Borel probability mixture and $\\int_Ks\\,dP_*\\ge\\int_Ks\\,dP$ for every feasible mixture $P$.\n\nHere integrals use the measure convention of [[def-tdmath-measure-integral]]. The entropy map is part of the model; this theorem derives neither its microscopic meaning nor compactness of a physical phase domain.",
+          "current_raw_sha256": "44044300dc7d9b48559f40145e7e4a51e5cefb79d18f8734e95a719d37690f7c",
+          "scope_only_not_proof_acceptance": true
+        },
+        "reason": "The applicable regime is continuous finite entropy on nonempty compact K with prescribed barycenter and a feasible Borel-probability mixture. The item asserts no extension to a boundary of that declared parameter/chart regime; displayed finite-configuration or occupation values remain within the model, not a new endpoint-limit theorem."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "checked",
+        "evidence": "Current proof2.1 pads finite combinations with one fixed point of nonempty K, and proof3.1 makes only finitely many choices of partition representatives for each fixed approximation. Proof4.1 supplies nonempty entropy fiber before the extreme-value theorem is applied; no arbitrary infinite family of selections is used.",
+        "case_scope": {
+          "source_section": "Statement",
+          "source_excerpt": "Let $d\\ge1$ and let $K\\subseteq\\mathbb R^d$ be a nonempty compact set of dimensionless generator coordinates. Each $x\\in K$ labels one model-specified phase-generator state; the model assigns it entropy per mole $s(x)\\in\\mathrm{J\\,mol^{-1}K^{-1}}$, and $s:K\\to\\mathbb R$ is continuous, using the numerical entropy value in that fixed unit. Define $\\operatorname{conv}K$ to be the set of all finite convex combinations of points of $K$, and fix $\\bar x\\in\\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$. A Borel probability mixture is a countably additive probability measure $P$ on that sigma algebra; its barycenter and entropy per mole are the coordinatewise integrals $\\int_Kx\\,dP$ and $\\int_Ks\\,dP$. For $x\\in K$, define the unit point mass $\\delta_x$ by $\\delta_x(A)=1$ if $x\\in A$ and $\\delta_x(A)=0$ otherwise, for Borel $A\\subseteq K$. Assume every Borel probability mixture with barycenter $\\bar x$ is feasible and has entropy per mole $\\int_Ks\\,dP$. Then there are $m\\le d+1$, points $x_1,\\ldots,x_m\\in K$, and weights $\\theta_i\\ge0$ with $\\sum_{i=1}^m\\theta_i=1$ such that $P_*:=\\sum_{i=1}^m\\theta_i\\delta_{x_i}$ is a feasible Borel probability mixture and $\\int_Ks\\,dP_*\\ge\\int_Ks\\,dP$ for every feasible mixture $P$.\n\nHere integrals use the measure convention of [[def-tdmath-measure-integral]]. The entropy map is part of the model; this theorem derives neither its microscopic meaning nor compactness of a physical phase domain.",
+          "current_raw_sha256": "44044300dc7d9b48559f40145e7e4a51e5cefb79d18f8734e95a719d37690f7c",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "case_scope": {
+          "source_section": "Statement",
+          "source_excerpt": "Let $d\\ge1$ and let $K\\subseteq\\mathbb R^d$ be a nonempty compact set of dimensionless generator coordinates. Each $x\\in K$ labels one model-specified phase-generator state; the model assigns it entropy per mole $s(x)\\in\\mathrm{J\\,mol^{-1}K^{-1}}$, and $s:K\\to\\mathbb R$ is continuous, using the numerical entropy value in that fixed unit. Define $\\operatorname{conv}K$ to be the set of all finite convex combinations of points of $K$, and fix $\\bar x\\in\\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$. A Borel probability mixture is a countably additive probability measure $P$ on that sigma algebra; its barycenter and entropy per mole are the coordinatewise integrals $\\int_Kx\\,dP$ and $\\int_Ks\\,dP$. For $x\\in K$, define the unit point mass $\\delta_x$ by $\\delta_x(A)=1$ if $x\\in A$ and $\\delta_x(A)=0$ otherwise, for Borel $A\\subseteq K$. Assume every Borel probability mixture with barycenter $\\bar x$ is feasible and has entropy per mole $\\int_Ks\\,dP$. Then there are $m\\le d+1$, points $x_1,\\ldots,x_m\\in K$, and weights $\\theta_i\\ge0$ with $\\sum_{i=1}^m\\theta_i=1$ such that $P_*:=\\sum_{i=1}^m\\theta_i\\delta_{x_i}$ is a feasible Borel probability mixture and $\\int_Ks\\,dP_*\\ge\\int_Ks\\,dP$ for every feasible mixture $P$.\n\nHere integrals use the measure convention of [[def-tdmath-measure-integral]]. The entropy map is part of the model; this theorem derives neither its microscopic meaning nor compactness of a physical phase domain.",
+          "current_raw_sha256": "44044300dc7d9b48559f40145e7e4a51e5cefb79d18f8734e95a719d37690f7c",
+          "scope_only_not_proof_acceptance": true
+        },
+        "reason": "The forward characterization is not asserted for continuous finite entropy on nonempty compact K with prescribed barycenter and a feasible Borel-probability mixture. The displayed conclusion is the stated conditional calculation or implication; no recovery of its model hypotheses from the result is claimed."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "case_scope": {
+          "source_section": "Statement",
+          "source_excerpt": "Let $d\\ge1$ and let $K\\subseteq\\mathbb R^d$ be a nonempty compact set of dimensionless generator coordinates. Each $x\\in K$ labels one model-specified phase-generator state; the model assigns it entropy per mole $s(x)\\in\\mathrm{J\\,mol^{-1}K^{-1}}$, and $s:K\\to\\mathbb R$ is continuous, using the numerical entropy value in that fixed unit. Define $\\operatorname{conv}K$ to be the set of all finite convex combinations of points of $K$, and fix $\\bar x\\in\\operatorname{conv}K$. Use the Borel sigma algebra relative to $K$. A Borel probability mixture is a countably additive probability measure $P$ on that sigma algebra; its barycenter and entropy per mole are the coordinatewise integrals $\\int_Kx\\,dP$ and $\\int_Ks\\,dP$. For $x\\in K$, define the unit point mass $\\delta_x$ by $\\delta_x(A)=1$ if $x\\in A$ and $\\delta_x(A)=0$ otherwise, for Borel $A\\subseteq K$. Assume every Borel probability mixture with barycenter $\\bar x$ is feasible and has entropy per mole $\\int_Ks\\,dP$. Then there are $m\\le d+1$, points $x_1,\\ldots,x_m\\in K$, and weights $\\theta_i\\ge0$ with $\\sum_{i=1}^m\\theta_i=1$ such that $P_*:=\\sum_{i=1}^m\\theta_i\\delta_{x_i}$ is a feasible Borel probability mixture and $\\int_Ks\\,dP_*\\ge\\int_Ks\\,dP$ for every feasible mixture $P$.\n\nHere integrals use the measure convention of [[def-tdmath-measure-integral]]. The entropy map is part of the model; this theorem derives neither its microscopic meaning nor compactness of a physical phase domain.",
+          "current_raw_sha256": "44044300dc7d9b48559f40145e7e4a51e5cefb79d18f8734e95a719d37690f7c",
+          "scope_only_not_proof_acceptance": true
+        },
+        "reason": "The reverse characterization is not asserted for continuous finite entropy on nonempty compact K with prescribed barycenter and a feasible Borel-probability mixture. The displayed conclusion is the stated conditional calculation or implication; no recovery of its model hypotheses from the result is claimed."
+      }
+    ]
+  },
+  "def-td-phase-and-coexistence-domain": {
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "not_applicable",
+        "reason": "Definition declares the declared phase charts and exact compound exchange/coexistence model. It declares its domain/record data rather than deriving existence of a normalized model after removing them.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "Fix a constitution $c$ with $C\\ge1$ named species and its equilibrium state domain $D_c\\subseteq\\mathbb R^{C+2}$ from [[def-td-equilibrium-state-domain]]. An interior composition is represented by\n\n$$\nx=(x_1,\\ldots,x_{C-1})\\in\\Delta_{C-1}^{\\circ}:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},\n$$\n\nwith $x_C:=1-\\sum_{i<C}x_i>0$; for $C=1$, $\\mathbb R^0=\\{0\\}$ and $x_1=1$.\n\nA **phase branch** $\\alpha$ is model data consisting of an open chart $W_\\alpha\\subseteq(0,\\infty)\\times\\mathbb R\\times\\Delta_{C-1}^{\\circ}\\times(0,\\infty)$ with coordinates $(T,p,x,m)$ and a $C^1$ diffeomorphism $\\sigma_\\alpha:W_\\alpha\\to U_\\alpha$ onto an open subset $U_\\alpha\\subseteq\\mathbb R^{C+2}$ contained in the equilibrium state domain $D_c$. Here $T$ is in kelvins, $p$ is in pascals, $m$ is total amount in moles, and $C^1$ means continuous first coordinate derivatives as in [[def-ck-euclidean-maps-and-diffeomorphisms]]. The chart dimension is $C+2$, matching the ambient dimension of $D_c$. The map $\\sigma_\\alpha$ takes values in numerical state coordinates; its physical SI state map is explicitly $\\chi_\\alpha=\\Phi_c\\circ\\sigma_\\alpha$, where $\\Phi_c$ is the numerical-to-SI unit map of [[def-td-temperature-pressure-chemical-potential]]. Thus the physical amounts at this point are $n_j=m x_j$, and the numerical amount coordinates in $\\sigma_\\alpha$ are $n_j/(1\\,\\mathrm{mol})$. Derivative-defined physical state functions are evaluated on $\\chi_\\alpha(T,p,x,m)$, or equivalently pulled back along $\\Phi_c$ to $\\sigma_\\alpha(T,p,x,m)$. At $\\sigma_\\alpha(T,p,x,m)$ in this precise pullback sense, the derivative-defined state functions of [[def-td-temperature-pressure-chemical-potential]] give temperature $T$, pressure $p$, and mole fractions $x_j=n_j/m$; here $n_{\\mathrm{tot}}:=\\sum_{i=1}^C n_i=m$ uses the finite-sum convention of [[def-finite-sum]]. An **intensive phase branch** additionally has each derivative-defined chemical potential $\\mu_j(T,p,x,m)$ independent of $m$ throughout $W_\\alpha$; write its value as $\\mu_j^\\alpha(T,p,x)$. This scale invariance is an explicit constitutive model property, not a consequence of [[post-td-bulk-additivity]]. A valid local response chart and its inverse are as in [[def-td-response-functions]] and [[def-td-legendre-potentials]]. Existence of $W_\\alpha$ or $\\sigma_\\alpha$ is a model premise, not a consequence of the equations of thermodynamics.\n\nOn a branch with a valid natural-variable chart, $G^\\alpha$ denotes the Gibbs potential of [[def-td-legendre-potentials]] restricted to the branch. For a one-component branch with amount $m_\\alpha>0$, define $g_\\alpha:=G^\\alpha/m_\\alpha$, $s_\\alpha:=S_\\alpha/m_\\alpha$, and $v_\\alpha:=V_\\alpha/m_\\alpha$, in $\\mathrm{J\\,mol^{-1}}$, $\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\mathrm{m^3\\,mol^{-1}}$, respectively. These quotients need not be independent of amount, and $g_\\alpha=\\mu^\\alpha$ is not assumed by this definition. Such an equality requires a separate same-tag homogeneity hypothesis on the branch.\n\nA **phase mixture** of a finite list of branches is a feasible separated compound whose positive phase amounts $m_\\alpha$ have fractions $\\lambda_\\alpha:=m_\\alpha/\\sum_\\beta m_\\beta>0$ with $\\sum_\\alpha\\lambda_\\alpha=1$. Its extensive coordinates and entropy are those supplied by [[post-td-bulk-additivity]] and [[post-td-concave-fundamental-entropy]], on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. The mixture is in **coexistence** when it is an attained global entropy-maximizing endpoint under the declared totals and permitted exchanges, as in [[post-td-entropy-maximum]]. This definition does not assert that a maximum exists, that all branches can exchange every coordinate, or that metastable states are global equilibria.\n\nThe bulk scaling postulate may send a material tag $c$ to a different tag $c^{(\\lambda)}$. It therefore does not supply same-tag degree-one homogeneity of $G^\\alpha$ or $U^\\alpha$ on a phase branch. Any result using $g_\\alpha=\\mu^\\alpha$ must state that additional hypothesis.",
+          "current_raw_sha256": "42b114c7b39c3cd9094e9ec364486bfb673663cd9572f52af745cb03fb72f100",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "zero",
+        "status": "not_applicable",
+        "reason": "Definition declares the declared phase charts and exact compound exchange/coexistence model. Any positivity, zero-value convention or excluded singular parameter is the displayed interface condition; no new zero-parameter theorem is derived.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "Fix a constitution $c$ with $C\\ge1$ named species and its equilibrium state domain $D_c\\subseteq\\mathbb R^{C+2}$ from [[def-td-equilibrium-state-domain]]. An interior composition is represented by\n\n$$\nx=(x_1,\\ldots,x_{C-1})\\in\\Delta_{C-1}^{\\circ}:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},\n$$\n\nwith $x_C:=1-\\sum_{i<C}x_i>0$; for $C=1$, $\\mathbb R^0=\\{0\\}$ and $x_1=1$.\n\nA **phase branch** $\\alpha$ is model data consisting of an open chart $W_\\alpha\\subseteq(0,\\infty)\\times\\mathbb R\\times\\Delta_{C-1}^{\\circ}\\times(0,\\infty)$ with coordinates $(T,p,x,m)$ and a $C^1$ diffeomorphism $\\sigma_\\alpha:W_\\alpha\\to U_\\alpha$ onto an open subset $U_\\alpha\\subseteq\\mathbb R^{C+2}$ contained in the equilibrium state domain $D_c$. Here $T$ is in kelvins, $p$ is in pascals, $m$ is total amount in moles, and $C^1$ means continuous first coordinate derivatives as in [[def-ck-euclidean-maps-and-diffeomorphisms]]. The chart dimension is $C+2$, matching the ambient dimension of $D_c$. The map $\\sigma_\\alpha$ takes values in numerical state coordinates; its physical SI state map is explicitly $\\chi_\\alpha=\\Phi_c\\circ\\sigma_\\alpha$, where $\\Phi_c$ is the numerical-to-SI unit map of [[def-td-temperature-pressure-chemical-potential]]. Thus the physical amounts at this point are $n_j=m x_j$, and the numerical amount coordinates in $\\sigma_\\alpha$ are $n_j/(1\\,\\mathrm{mol})$. Derivative-defined physical state functions are evaluated on $\\chi_\\alpha(T,p,x,m)$, or equivalently pulled back along $\\Phi_c$ to $\\sigma_\\alpha(T,p,x,m)$. At $\\sigma_\\alpha(T,p,x,m)$ in this precise pullback sense, the derivative-defined state functions of [[def-td-temperature-pressure-chemical-potential]] give temperature $T$, pressure $p$, and mole fractions $x_j=n_j/m$; here $n_{\\mathrm{tot}}:=\\sum_{i=1}^C n_i=m$ uses the finite-sum convention of [[def-finite-sum]]. An **intensive phase branch** additionally has each derivative-defined chemical potential $\\mu_j(T,p,x,m)$ independent of $m$ throughout $W_\\alpha$; write its value as $\\mu_j^\\alpha(T,p,x)$. This scale invariance is an explicit constitutive model property, not a consequence of [[post-td-bulk-additivity]]. A valid local response chart and its inverse are as in [[def-td-response-functions]] and [[def-td-legendre-potentials]]. Existence of $W_\\alpha$ or $\\sigma_\\alpha$ is a model premise, not a consequence of the equations of thermodynamics.\n\nOn a branch with a valid natural-variable chart, $G^\\alpha$ denotes the Gibbs potential of [[def-td-legendre-potentials]] restricted to the branch. For a one-component branch with amount $m_\\alpha>0$, define $g_\\alpha:=G^\\alpha/m_\\alpha$, $s_\\alpha:=S_\\alpha/m_\\alpha$, and $v_\\alpha:=V_\\alpha/m_\\alpha$, in $\\mathrm{J\\,mol^{-1}}$, $\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\mathrm{m^3\\,mol^{-1}}$, respectively. These quotients need not be independent of amount, and $g_\\alpha=\\mu^\\alpha$ is not assumed by this definition. Such an equality requires a separate same-tag homogeneity hypothesis on the branch.\n\nA **phase mixture** of a finite list of branches is a feasible separated compound whose positive phase amounts $m_\\alpha$ have fractions $\\lambda_\\alpha:=m_\\alpha/\\sum_\\beta m_\\beta>0$ with $\\sum_\\alpha\\lambda_\\alpha=1$. Its extensive coordinates and entropy are those supplied by [[post-td-bulk-additivity]] and [[post-td-concave-fundamental-entropy]], on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. The mixture is in **coexistence** when it is an attained global entropy-maximizing endpoint under the declared totals and permitted exchanges, as in [[post-td-entropy-maximum]]. This definition does not assert that a maximum exists, that all branches can exchange every coordinate, or that metastable states are global equilibria.\n\nThe bulk scaling postulate may send a material tag $c$ to a different tag $c^{(\\lambda)}$. It therefore does not supply same-tag degree-one homogeneity of $G^\\alpha$ or $U^\\alpha$ on a phase branch. Any result using $g_\\alpha=\\mu^\\alpha$ must state that additional hypothesis.",
+          "current_raw_sha256": "42b114c7b39c3cd9094e9ec364486bfb673663cd9572f52af745cb03fb72f100",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "one",
+        "status": "not_applicable",
+        "reason": "Definition declares the declared phase charts and exact compound exchange/coexistence model. A singleton substitution is governed by the stated domain conventions; this nonproof carrier proves no special singleton result.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "Fix a constitution $c$ with $C\\ge1$ named species and its equilibrium state domain $D_c\\subseteq\\mathbb R^{C+2}$ from [[def-td-equilibrium-state-domain]]. An interior composition is represented by\n\n$$\nx=(x_1,\\ldots,x_{C-1})\\in\\Delta_{C-1}^{\\circ}:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},\n$$\n\nwith $x_C:=1-\\sum_{i<C}x_i>0$; for $C=1$, $\\mathbb R^0=\\{0\\}$ and $x_1=1$.\n\nA **phase branch** $\\alpha$ is model data consisting of an open chart $W_\\alpha\\subseteq(0,\\infty)\\times\\mathbb R\\times\\Delta_{C-1}^{\\circ}\\times(0,\\infty)$ with coordinates $(T,p,x,m)$ and a $C^1$ diffeomorphism $\\sigma_\\alpha:W_\\alpha\\to U_\\alpha$ onto an open subset $U_\\alpha\\subseteq\\mathbb R^{C+2}$ contained in the equilibrium state domain $D_c$. Here $T$ is in kelvins, $p$ is in pascals, $m$ is total amount in moles, and $C^1$ means continuous first coordinate derivatives as in [[def-ck-euclidean-maps-and-diffeomorphisms]]. The chart dimension is $C+2$, matching the ambient dimension of $D_c$. The map $\\sigma_\\alpha$ takes values in numerical state coordinates; its physical SI state map is explicitly $\\chi_\\alpha=\\Phi_c\\circ\\sigma_\\alpha$, where $\\Phi_c$ is the numerical-to-SI unit map of [[def-td-temperature-pressure-chemical-potential]]. Thus the physical amounts at this point are $n_j=m x_j$, and the numerical amount coordinates in $\\sigma_\\alpha$ are $n_j/(1\\,\\mathrm{mol})$. Derivative-defined physical state functions are evaluated on $\\chi_\\alpha(T,p,x,m)$, or equivalently pulled back along $\\Phi_c$ to $\\sigma_\\alpha(T,p,x,m)$. At $\\sigma_\\alpha(T,p,x,m)$ in this precise pullback sense, the derivative-defined state functions of [[def-td-temperature-pressure-chemical-potential]] give temperature $T$, pressure $p$, and mole fractions $x_j=n_j/m$; here $n_{\\mathrm{tot}}:=\\sum_{i=1}^C n_i=m$ uses the finite-sum convention of [[def-finite-sum]]. An **intensive phase branch** additionally has each derivative-defined chemical potential $\\mu_j(T,p,x,m)$ independent of $m$ throughout $W_\\alpha$; write its value as $\\mu_j^\\alpha(T,p,x)$. This scale invariance is an explicit constitutive model property, not a consequence of [[post-td-bulk-additivity]]. A valid local response chart and its inverse are as in [[def-td-response-functions]] and [[def-td-legendre-potentials]]. Existence of $W_\\alpha$ or $\\sigma_\\alpha$ is a model premise, not a consequence of the equations of thermodynamics.\n\nOn a branch with a valid natural-variable chart, $G^\\alpha$ denotes the Gibbs potential of [[def-td-legendre-potentials]] restricted to the branch. For a one-component branch with amount $m_\\alpha>0$, define $g_\\alpha:=G^\\alpha/m_\\alpha$, $s_\\alpha:=S_\\alpha/m_\\alpha$, and $v_\\alpha:=V_\\alpha/m_\\alpha$, in $\\mathrm{J\\,mol^{-1}}$, $\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\mathrm{m^3\\,mol^{-1}}$, respectively. These quotients need not be independent of amount, and $g_\\alpha=\\mu^\\alpha$ is not assumed by this definition. Such an equality requires a separate same-tag homogeneity hypothesis on the branch.\n\nA **phase mixture** of a finite list of branches is a feasible separated compound whose positive phase amounts $m_\\alpha$ have fractions $\\lambda_\\alpha:=m_\\alpha/\\sum_\\beta m_\\beta>0$ with $\\sum_\\alpha\\lambda_\\alpha=1$. Its extensive coordinates and entropy are those supplied by [[post-td-bulk-additivity]] and [[post-td-concave-fundamental-entropy]], on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. The mixture is in **coexistence** when it is an attained global entropy-maximizing endpoint under the declared totals and permitted exchanges, as in [[post-td-entropy-maximum]]. This definition does not assert that a maximum exists, that all branches can exchange every coordinate, or that metastable states are global equilibria.\n\nThe bulk scaling postulate may send a material tag $c$ to a different tag $c^{(\\lambda)}$. It therefore does not supply same-tag degree-one homogeneity of $G^\\alpha$ or $U^\\alpha$ on a phase branch. Any result using $g_\\alpha=\\mu^\\alpha$ must state that additional hypothesis.",
+          "current_raw_sha256": "42b114c7b39c3cd9094e9ec364486bfb673663cd9572f52af745cb03fb72f100",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "degenerate",
+        "status": "not_applicable",
+        "reason": "Definition declares the declared phase charts and exact compound exchange/coexistence model. A collapsed chart/domain must obey the actual declared regularity and measurability conditions; no missing proof is supplied by the declaration.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "Fix a constitution $c$ with $C\\ge1$ named species and its equilibrium state domain $D_c\\subseteq\\mathbb R^{C+2}$ from [[def-td-equilibrium-state-domain]]. An interior composition is represented by\n\n$$\nx=(x_1,\\ldots,x_{C-1})\\in\\Delta_{C-1}^{\\circ}:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},\n$$\n\nwith $x_C:=1-\\sum_{i<C}x_i>0$; for $C=1$, $\\mathbb R^0=\\{0\\}$ and $x_1=1$.\n\nA **phase branch** $\\alpha$ is model data consisting of an open chart $W_\\alpha\\subseteq(0,\\infty)\\times\\mathbb R\\times\\Delta_{C-1}^{\\circ}\\times(0,\\infty)$ with coordinates $(T,p,x,m)$ and a $C^1$ diffeomorphism $\\sigma_\\alpha:W_\\alpha\\to U_\\alpha$ onto an open subset $U_\\alpha\\subseteq\\mathbb R^{C+2}$ contained in the equilibrium state domain $D_c$. Here $T$ is in kelvins, $p$ is in pascals, $m$ is total amount in moles, and $C^1$ means continuous first coordinate derivatives as in [[def-ck-euclidean-maps-and-diffeomorphisms]]. The chart dimension is $C+2$, matching the ambient dimension of $D_c$. The map $\\sigma_\\alpha$ takes values in numerical state coordinates; its physical SI state map is explicitly $\\chi_\\alpha=\\Phi_c\\circ\\sigma_\\alpha$, where $\\Phi_c$ is the numerical-to-SI unit map of [[def-td-temperature-pressure-chemical-potential]]. Thus the physical amounts at this point are $n_j=m x_j$, and the numerical amount coordinates in $\\sigma_\\alpha$ are $n_j/(1\\,\\mathrm{mol})$. Derivative-defined physical state functions are evaluated on $\\chi_\\alpha(T,p,x,m)$, or equivalently pulled back along $\\Phi_c$ to $\\sigma_\\alpha(T,p,x,m)$. At $\\sigma_\\alpha(T,p,x,m)$ in this precise pullback sense, the derivative-defined state functions of [[def-td-temperature-pressure-chemical-potential]] give temperature $T$, pressure $p$, and mole fractions $x_j=n_j/m$; here $n_{\\mathrm{tot}}:=\\sum_{i=1}^C n_i=m$ uses the finite-sum convention of [[def-finite-sum]]. An **intensive phase branch** additionally has each derivative-defined chemical potential $\\mu_j(T,p,x,m)$ independent of $m$ throughout $W_\\alpha$; write its value as $\\mu_j^\\alpha(T,p,x)$. This scale invariance is an explicit constitutive model property, not a consequence of [[post-td-bulk-additivity]]. A valid local response chart and its inverse are as in [[def-td-response-functions]] and [[def-td-legendre-potentials]]. Existence of $W_\\alpha$ or $\\sigma_\\alpha$ is a model premise, not a consequence of the equations of thermodynamics.\n\nOn a branch with a valid natural-variable chart, $G^\\alpha$ denotes the Gibbs potential of [[def-td-legendre-potentials]] restricted to the branch. For a one-component branch with amount $m_\\alpha>0$, define $g_\\alpha:=G^\\alpha/m_\\alpha$, $s_\\alpha:=S_\\alpha/m_\\alpha$, and $v_\\alpha:=V_\\alpha/m_\\alpha$, in $\\mathrm{J\\,mol^{-1}}$, $\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\mathrm{m^3\\,mol^{-1}}$, respectively. These quotients need not be independent of amount, and $g_\\alpha=\\mu^\\alpha$ is not assumed by this definition. Such an equality requires a separate same-tag homogeneity hypothesis on the branch.\n\nA **phase mixture** of a finite list of branches is a feasible separated compound whose positive phase amounts $m_\\alpha$ have fractions $\\lambda_\\alpha:=m_\\alpha/\\sum_\\beta m_\\beta>0$ with $\\sum_\\alpha\\lambda_\\alpha=1$. Its extensive coordinates and entropy are those supplied by [[post-td-bulk-additivity]] and [[post-td-concave-fundamental-entropy]], on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. The mixture is in **coexistence** when it is an attained global entropy-maximizing endpoint under the declared totals and permitted exchanges, as in [[post-td-entropy-maximum]]. This definition does not assert that a maximum exists, that all branches can exchange every coordinate, or that metastable states are global equilibria.\n\nThe bulk scaling postulate may send a material tag $c$ to a different tag $c^{(\\lambda)}$. It therefore does not supply same-tag degree-one homogeneity of $G^\\alpha$ or $U^\\alpha$ on a phase branch. Any result using $g_\\alpha=\\mu^\\alpha$ must state that additional hypothesis.",
+          "current_raw_sha256": "42b114c7b39c3cd9094e9ec364486bfb673663cd9572f52af745cb03fb72f100",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "endpoints",
+        "status": "not_applicable",
+        "reason": "Definition declares the declared phase charts and exact compound exchange/coexistence model. The precise allowed boundary and extension conventions are those written in this section, not a separately proved limit.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "Fix a constitution $c$ with $C\\ge1$ named species and its equilibrium state domain $D_c\\subseteq\\mathbb R^{C+2}$ from [[def-td-equilibrium-state-domain]]. An interior composition is represented by\n\n$$\nx=(x_1,\\ldots,x_{C-1})\\in\\Delta_{C-1}^{\\circ}:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},\n$$\n\nwith $x_C:=1-\\sum_{i<C}x_i>0$; for $C=1$, $\\mathbb R^0=\\{0\\}$ and $x_1=1$.\n\nA **phase branch** $\\alpha$ is model data consisting of an open chart $W_\\alpha\\subseteq(0,\\infty)\\times\\mathbb R\\times\\Delta_{C-1}^{\\circ}\\times(0,\\infty)$ with coordinates $(T,p,x,m)$ and a $C^1$ diffeomorphism $\\sigma_\\alpha:W_\\alpha\\to U_\\alpha$ onto an open subset $U_\\alpha\\subseteq\\mathbb R^{C+2}$ contained in the equilibrium state domain $D_c$. Here $T$ is in kelvins, $p$ is in pascals, $m$ is total amount in moles, and $C^1$ means continuous first coordinate derivatives as in [[def-ck-euclidean-maps-and-diffeomorphisms]]. The chart dimension is $C+2$, matching the ambient dimension of $D_c$. The map $\\sigma_\\alpha$ takes values in numerical state coordinates; its physical SI state map is explicitly $\\chi_\\alpha=\\Phi_c\\circ\\sigma_\\alpha$, where $\\Phi_c$ is the numerical-to-SI unit map of [[def-td-temperature-pressure-chemical-potential]]. Thus the physical amounts at this point are $n_j=m x_j$, and the numerical amount coordinates in $\\sigma_\\alpha$ are $n_j/(1\\,\\mathrm{mol})$. Derivative-defined physical state functions are evaluated on $\\chi_\\alpha(T,p,x,m)$, or equivalently pulled back along $\\Phi_c$ to $\\sigma_\\alpha(T,p,x,m)$. At $\\sigma_\\alpha(T,p,x,m)$ in this precise pullback sense, the derivative-defined state functions of [[def-td-temperature-pressure-chemical-potential]] give temperature $T$, pressure $p$, and mole fractions $x_j=n_j/m$; here $n_{\\mathrm{tot}}:=\\sum_{i=1}^C n_i=m$ uses the finite-sum convention of [[def-finite-sum]]. An **intensive phase branch** additionally has each derivative-defined chemical potential $\\mu_j(T,p,x,m)$ independent of $m$ throughout $W_\\alpha$; write its value as $\\mu_j^\\alpha(T,p,x)$. This scale invariance is an explicit constitutive model property, not a consequence of [[post-td-bulk-additivity]]. A valid local response chart and its inverse are as in [[def-td-response-functions]] and [[def-td-legendre-potentials]]. Existence of $W_\\alpha$ or $\\sigma_\\alpha$ is a model premise, not a consequence of the equations of thermodynamics.\n\nOn a branch with a valid natural-variable chart, $G^\\alpha$ denotes the Gibbs potential of [[def-td-legendre-potentials]] restricted to the branch. For a one-component branch with amount $m_\\alpha>0$, define $g_\\alpha:=G^\\alpha/m_\\alpha$, $s_\\alpha:=S_\\alpha/m_\\alpha$, and $v_\\alpha:=V_\\alpha/m_\\alpha$, in $\\mathrm{J\\,mol^{-1}}$, $\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\mathrm{m^3\\,mol^{-1}}$, respectively. These quotients need not be independent of amount, and $g_\\alpha=\\mu^\\alpha$ is not assumed by this definition. Such an equality requires a separate same-tag homogeneity hypothesis on the branch.\n\nA **phase mixture** of a finite list of branches is a feasible separated compound whose positive phase amounts $m_\\alpha$ have fractions $\\lambda_\\alpha:=m_\\alpha/\\sum_\\beta m_\\beta>0$ with $\\sum_\\alpha\\lambda_\\alpha=1$. Its extensive coordinates and entropy are those supplied by [[post-td-bulk-additivity]] and [[post-td-concave-fundamental-entropy]], on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. The mixture is in **coexistence** when it is an attained global entropy-maximizing endpoint under the declared totals and permitted exchanges, as in [[post-td-entropy-maximum]]. This definition does not assert that a maximum exists, that all branches can exchange every coordinate, or that metastable states are global equilibria.\n\nThe bulk scaling postulate may send a material tag $c$ to a different tag $c^{(\\lambda)}$. It therefore does not supply same-tag degree-one homogeneity of $G^\\alpha$ or $U^\\alpha$ on a phase branch. Any result using $g_\\alpha=\\mu^\\alpha$ must state that additional hypothesis.",
+          "current_raw_sha256": "42b114c7b39c3cd9094e9ec364486bfb673663cd9572f52af745cb03fb72f100",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "not_applicable",
+        "reason": "Definition declares the declared phase charts and exact compound exchange/coexistence model. Named existence/choice assumptions remain prerequisites; this interface does not prove a new arbitrary-family selection.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "Fix a constitution $c$ with $C\\ge1$ named species and its equilibrium state domain $D_c\\subseteq\\mathbb R^{C+2}$ from [[def-td-equilibrium-state-domain]]. An interior composition is represented by\n\n$$\nx=(x_1,\\ldots,x_{C-1})\\in\\Delta_{C-1}^{\\circ}:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},\n$$\n\nwith $x_C:=1-\\sum_{i<C}x_i>0$; for $C=1$, $\\mathbb R^0=\\{0\\}$ and $x_1=1$.\n\nA **phase branch** $\\alpha$ is model data consisting of an open chart $W_\\alpha\\subseteq(0,\\infty)\\times\\mathbb R\\times\\Delta_{C-1}^{\\circ}\\times(0,\\infty)$ with coordinates $(T,p,x,m)$ and a $C^1$ diffeomorphism $\\sigma_\\alpha:W_\\alpha\\to U_\\alpha$ onto an open subset $U_\\alpha\\subseteq\\mathbb R^{C+2}$ contained in the equilibrium state domain $D_c$. Here $T$ is in kelvins, $p$ is in pascals, $m$ is total amount in moles, and $C^1$ means continuous first coordinate derivatives as in [[def-ck-euclidean-maps-and-diffeomorphisms]]. The chart dimension is $C+2$, matching the ambient dimension of $D_c$. The map $\\sigma_\\alpha$ takes values in numerical state coordinates; its physical SI state map is explicitly $\\chi_\\alpha=\\Phi_c\\circ\\sigma_\\alpha$, where $\\Phi_c$ is the numerical-to-SI unit map of [[def-td-temperature-pressure-chemical-potential]]. Thus the physical amounts at this point are $n_j=m x_j$, and the numerical amount coordinates in $\\sigma_\\alpha$ are $n_j/(1\\,\\mathrm{mol})$. Derivative-defined physical state functions are evaluated on $\\chi_\\alpha(T,p,x,m)$, or equivalently pulled back along $\\Phi_c$ to $\\sigma_\\alpha(T,p,x,m)$. At $\\sigma_\\alpha(T,p,x,m)$ in this precise pullback sense, the derivative-defined state functions of [[def-td-temperature-pressure-chemical-potential]] give temperature $T$, pressure $p$, and mole fractions $x_j=n_j/m$; here $n_{\\mathrm{tot}}:=\\sum_{i=1}^C n_i=m$ uses the finite-sum convention of [[def-finite-sum]]. An **intensive phase branch** additionally has each derivative-defined chemical potential $\\mu_j(T,p,x,m)$ independent of $m$ throughout $W_\\alpha$; write its value as $\\mu_j^\\alpha(T,p,x)$. This scale invariance is an explicit constitutive model property, not a consequence of [[post-td-bulk-additivity]]. A valid local response chart and its inverse are as in [[def-td-response-functions]] and [[def-td-legendre-potentials]]. Existence of $W_\\alpha$ or $\\sigma_\\alpha$ is a model premise, not a consequence of the equations of thermodynamics.\n\nOn a branch with a valid natural-variable chart, $G^\\alpha$ denotes the Gibbs potential of [[def-td-legendre-potentials]] restricted to the branch. For a one-component branch with amount $m_\\alpha>0$, define $g_\\alpha:=G^\\alpha/m_\\alpha$, $s_\\alpha:=S_\\alpha/m_\\alpha$, and $v_\\alpha:=V_\\alpha/m_\\alpha$, in $\\mathrm{J\\,mol^{-1}}$, $\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\mathrm{m^3\\,mol^{-1}}$, respectively. These quotients need not be independent of amount, and $g_\\alpha=\\mu^\\alpha$ is not assumed by this definition. Such an equality requires a separate same-tag homogeneity hypothesis on the branch.\n\nA **phase mixture** of a finite list of branches is a feasible separated compound whose positive phase amounts $m_\\alpha$ have fractions $\\lambda_\\alpha:=m_\\alpha/\\sum_\\beta m_\\beta>0$ with $\\sum_\\alpha\\lambda_\\alpha=1$. Its extensive coordinates and entropy are those supplied by [[post-td-bulk-additivity]] and [[post-td-concave-fundamental-entropy]], on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. The mixture is in **coexistence** when it is an attained global entropy-maximizing endpoint under the declared totals and permitted exchanges, as in [[post-td-entropy-maximum]]. This definition does not assert that a maximum exists, that all branches can exchange every coordinate, or that metastable states are global equilibria.\n\nThe bulk scaling postulate may send a material tag $c$ to a different tag $c^{(\\lambda)}$. It therefore does not supply same-tag degree-one homogeneity of $G^\\alpha$ or $U^\\alpha$ on a phase branch. Any result using $g_\\alpha=\\mu^\\alpha$ must state that additional hypothesis.",
+          "current_raw_sha256": "42b114c7b39c3cd9094e9ec364486bfb673663cd9572f52af745cb03fb72f100",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "reason": "Definition declares the declared phase charts and exact compound exchange/coexistence model. The section states definitions and scope, not a forward implication theorem with a separate proof worksheet.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "Fix a constitution $c$ with $C\\ge1$ named species and its equilibrium state domain $D_c\\subseteq\\mathbb R^{C+2}$ from [[def-td-equilibrium-state-domain]]. An interior composition is represented by\n\n$$\nx=(x_1,\\ldots,x_{C-1})\\in\\Delta_{C-1}^{\\circ}:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},\n$$\n\nwith $x_C:=1-\\sum_{i<C}x_i>0$; for $C=1$, $\\mathbb R^0=\\{0\\}$ and $x_1=1$.\n\nA **phase branch** $\\alpha$ is model data consisting of an open chart $W_\\alpha\\subseteq(0,\\infty)\\times\\mathbb R\\times\\Delta_{C-1}^{\\circ}\\times(0,\\infty)$ with coordinates $(T,p,x,m)$ and a $C^1$ diffeomorphism $\\sigma_\\alpha:W_\\alpha\\to U_\\alpha$ onto an open subset $U_\\alpha\\subseteq\\mathbb R^{C+2}$ contained in the equilibrium state domain $D_c$. Here $T$ is in kelvins, $p$ is in pascals, $m$ is total amount in moles, and $C^1$ means continuous first coordinate derivatives as in [[def-ck-euclidean-maps-and-diffeomorphisms]]. The chart dimension is $C+2$, matching the ambient dimension of $D_c$. The map $\\sigma_\\alpha$ takes values in numerical state coordinates; its physical SI state map is explicitly $\\chi_\\alpha=\\Phi_c\\circ\\sigma_\\alpha$, where $\\Phi_c$ is the numerical-to-SI unit map of [[def-td-temperature-pressure-chemical-potential]]. Thus the physical amounts at this point are $n_j=m x_j$, and the numerical amount coordinates in $\\sigma_\\alpha$ are $n_j/(1\\,\\mathrm{mol})$. Derivative-defined physical state functions are evaluated on $\\chi_\\alpha(T,p,x,m)$, or equivalently pulled back along $\\Phi_c$ to $\\sigma_\\alpha(T,p,x,m)$. At $\\sigma_\\alpha(T,p,x,m)$ in this precise pullback sense, the derivative-defined state functions of [[def-td-temperature-pressure-chemical-potential]] give temperature $T$, pressure $p$, and mole fractions $x_j=n_j/m$; here $n_{\\mathrm{tot}}:=\\sum_{i=1}^C n_i=m$ uses the finite-sum convention of [[def-finite-sum]]. An **intensive phase branch** additionally has each derivative-defined chemical potential $\\mu_j(T,p,x,m)$ independent of $m$ throughout $W_\\alpha$; write its value as $\\mu_j^\\alpha(T,p,x)$. This scale invariance is an explicit constitutive model property, not a consequence of [[post-td-bulk-additivity]]. A valid local response chart and its inverse are as in [[def-td-response-functions]] and [[def-td-legendre-potentials]]. Existence of $W_\\alpha$ or $\\sigma_\\alpha$ is a model premise, not a consequence of the equations of thermodynamics.\n\nOn a branch with a valid natural-variable chart, $G^\\alpha$ denotes the Gibbs potential of [[def-td-legendre-potentials]] restricted to the branch. For a one-component branch with amount $m_\\alpha>0$, define $g_\\alpha:=G^\\alpha/m_\\alpha$, $s_\\alpha:=S_\\alpha/m_\\alpha$, and $v_\\alpha:=V_\\alpha/m_\\alpha$, in $\\mathrm{J\\,mol^{-1}}$, $\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\mathrm{m^3\\,mol^{-1}}$, respectively. These quotients need not be independent of amount, and $g_\\alpha=\\mu^\\alpha$ is not assumed by this definition. Such an equality requires a separate same-tag homogeneity hypothesis on the branch.\n\nA **phase mixture** of a finite list of branches is a feasible separated compound whose positive phase amounts $m_\\alpha$ have fractions $\\lambda_\\alpha:=m_\\alpha/\\sum_\\beta m_\\beta>0$ with $\\sum_\\alpha\\lambda_\\alpha=1$. Its extensive coordinates and entropy are those supplied by [[post-td-bulk-additivity]] and [[post-td-concave-fundamental-entropy]], on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. The mixture is in **coexistence** when it is an attained global entropy-maximizing endpoint under the declared totals and permitted exchanges, as in [[post-td-entropy-maximum]]. This definition does not assert that a maximum exists, that all branches can exchange every coordinate, or that metastable states are global equilibria.\n\nThe bulk scaling postulate may send a material tag $c$ to a different tag $c^{(\\lambda)}$. It therefore does not supply same-tag degree-one homogeneity of $G^\\alpha$ or $U^\\alpha$ on a phase branch. Any result using $g_\\alpha=\\mu^\\alpha$ must state that additional hypothesis.",
+          "current_raw_sha256": "42b114c7b39c3cd9094e9ec364486bfb673663cd9572f52af745cb03fb72f100",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "Definition declares the declared phase charts and exact compound exchange/coexistence model. No reverse inference establishing physical adoption or a broader mathematical model is asserted by this definition/scope.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "Fix a constitution $c$ with $C\\ge1$ named species and its equilibrium state domain $D_c\\subseteq\\mathbb R^{C+2}$ from [[def-td-equilibrium-state-domain]]. An interior composition is represented by\n\n$$\nx=(x_1,\\ldots,x_{C-1})\\in\\Delta_{C-1}^{\\circ}:=\\{x\\in\\mathbb R^{C-1}:x_i>0,\\ \\sum_{i=1}^{C-1}x_i<1\\},\n$$\n\nwith $x_C:=1-\\sum_{i<C}x_i>0$; for $C=1$, $\\mathbb R^0=\\{0\\}$ and $x_1=1$.\n\nA **phase branch** $\\alpha$ is model data consisting of an open chart $W_\\alpha\\subseteq(0,\\infty)\\times\\mathbb R\\times\\Delta_{C-1}^{\\circ}\\times(0,\\infty)$ with coordinates $(T,p,x,m)$ and a $C^1$ diffeomorphism $\\sigma_\\alpha:W_\\alpha\\to U_\\alpha$ onto an open subset $U_\\alpha\\subseteq\\mathbb R^{C+2}$ contained in the equilibrium state domain $D_c$. Here $T$ is in kelvins, $p$ is in pascals, $m$ is total amount in moles, and $C^1$ means continuous first coordinate derivatives as in [[def-ck-euclidean-maps-and-diffeomorphisms]]. The chart dimension is $C+2$, matching the ambient dimension of $D_c$. The map $\\sigma_\\alpha$ takes values in numerical state coordinates; its physical SI state map is explicitly $\\chi_\\alpha=\\Phi_c\\circ\\sigma_\\alpha$, where $\\Phi_c$ is the numerical-to-SI unit map of [[def-td-temperature-pressure-chemical-potential]]. Thus the physical amounts at this point are $n_j=m x_j$, and the numerical amount coordinates in $\\sigma_\\alpha$ are $n_j/(1\\,\\mathrm{mol})$. Derivative-defined physical state functions are evaluated on $\\chi_\\alpha(T,p,x,m)$, or equivalently pulled back along $\\Phi_c$ to $\\sigma_\\alpha(T,p,x,m)$. At $\\sigma_\\alpha(T,p,x,m)$ in this precise pullback sense, the derivative-defined state functions of [[def-td-temperature-pressure-chemical-potential]] give temperature $T$, pressure $p$, and mole fractions $x_j=n_j/m$; here $n_{\\mathrm{tot}}:=\\sum_{i=1}^C n_i=m$ uses the finite-sum convention of [[def-finite-sum]]. An **intensive phase branch** additionally has each derivative-defined chemical potential $\\mu_j(T,p,x,m)$ independent of $m$ throughout $W_\\alpha$; write its value as $\\mu_j^\\alpha(T,p,x)$. This scale invariance is an explicit constitutive model property, not a consequence of [[post-td-bulk-additivity]]. A valid local response chart and its inverse are as in [[def-td-response-functions]] and [[def-td-legendre-potentials]]. Existence of $W_\\alpha$ or $\\sigma_\\alpha$ is a model premise, not a consequence of the equations of thermodynamics.\n\nOn a branch with a valid natural-variable chart, $G^\\alpha$ denotes the Gibbs potential of [[def-td-legendre-potentials]] restricted to the branch. For a one-component branch with amount $m_\\alpha>0$, define $g_\\alpha:=G^\\alpha/m_\\alpha$, $s_\\alpha:=S_\\alpha/m_\\alpha$, and $v_\\alpha:=V_\\alpha/m_\\alpha$, in $\\mathrm{J\\,mol^{-1}}$, $\\mathrm{J\\,mol^{-1}K^{-1}}$, and $\\mathrm{m^3\\,mol^{-1}}$, respectively. These quotients need not be independent of amount, and $g_\\alpha=\\mu^\\alpha$ is not assumed by this definition. Such an equality requires a separate same-tag homogeneity hypothesis on the branch.\n\nA **phase mixture** of a finite list of branches is a feasible separated compound whose positive phase amounts $m_\\alpha$ have fractions $\\lambda_\\alpha:=m_\\alpha/\\sum_\\beta m_\\beta>0$ with $\\sum_\\alpha\\lambda_\\alpha=1$. Its extensive coordinates and entropy are those supplied by [[post-td-bulk-additivity]] and [[post-td-concave-fundamental-entropy]], on the exact feasible set of [[def-td-isolated-compound-feasible-set]]. The mixture is in **coexistence** when it is an attained global entropy-maximizing endpoint under the declared totals and permitted exchanges, as in [[post-td-entropy-maximum]]. This definition does not assert that a maximum exists, that all branches can exchange every coordinate, or that metastable states are global equilibria.\n\nThe bulk scaling postulate may send a material tag $c$ to a different tag $c^{(\\lambda)}$. It therefore does not supply same-tag degree-one homogeneity of $G^\\alpha$ or $U^\\alpha$ on a phase branch. Any result using $g_\\alpha=\\mu^\\alpha$ must state that additional hypothesis.",
+          "current_raw_sha256": "42b114c7b39c3cd9094e9ec364486bfb673663cd9572f52af745cb03fb72f100",
+          "scope_only_not_proof_acceptance": true
+        }
+      }
+    ]
+  },
+  "def-tdmath-measure-integral": {
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "not_applicable",
+        "reason": "Definition declares the defined extended nonnegative integral, measurable real/complex classes and their arithmetic conventions. It declares its domain/record data rather than deriving existence of a normalized model after removing them.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "A measure space is a triple $(X,\\Sigma,\\mu)$ where $\\Sigma$ contains $\\varnothing,X$ and is closed under complements and countable unions (a $\\sigma$-algebra) of subsets of $X$ and $\\mu:\\Sigma\\to[0,\\infty]$ is countably additive with $\\mu(\\varnothing)=0$. A measurable function $f:X\\to[-\\infty,\\infty]$ has measurable inverse images of Borel sets, where $[-\\infty,\\infty]$ has its order topology: finite open intervals and the endpoint neighborhoods $[-\\infty,a)$ and $(a,\\infty]$ form a basis. Its Borel sigma-algebra is generated by these open sets. A complex-valued function is measurable exactly when its finite real and imaginary parts are measurable, equivalently for the usual Borel structure of $\\mathbb C$. Almost-everywhere assertions mean outside a measurable $\\mu$-null set; completeness of $\\mu$ is not assumed. Nonnegative extended addition uses $a+\\infty=\\infty+a=\\infty$ for $a\\in[0,\\infty]$; positive scalars multiply $\\infty$ to $\\infty$, while $0\\cdot\\infty=0$. Signed expressions $\\infty-\\infty$ remain undefined and are not used in signed integrals. A nonnegative simple function has the form $s=\\sum_{j=1}^m c_j\\mathbf1_{A_j}$ with finitely many disjoint $A_j\\in\\Sigma$ and finite $c_j\\ge0$. Define $c\\mu(A)=+\\infty$ if $c>0$ and $\\mu(A)=+\\infty$, define $0\\cdot\\infty:=0$, and define the finite sum of these extended nonnegative terms to be $+\\infty$ if any term is $+\\infty$ and otherwise the real finite sum of [[def-finite-sum]]. Then $\\int s\\,d\\mu:=\\sum_j c_j\\mu(A_j)$; using canonical level sets $\\{s=c\\}$ makes this value representation-independent. For measurable $f\\ge0$, define $\\int f\\,d\\mu:=\\sup\\{\\int s\\,d\\mu: s\\text{ is simple and }0\\le s\\le f\\}$, using [[def-complete-ordered-field]] for a bounded set of finite values and setting the supremum to $+\\infty$ when the values are unbounded or one is infinite. A real measurable $f$ is integrable when $\\int|f|\\,d\\mu<\\infty$, and then $\\int f:=\\int f^+-\\int f^-$, where $f^+=\\max(f,0)$ and $f^-:=\\max(-f,0)$. Complex integrability and integration are defined by integrable real and imaginary parts.",
+          "current_raw_sha256": "20e1534f315a2ea5e3f7779668b844ea41d9fc69faa1552d140c2df894b3c65d",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "zero",
+        "status": "not_applicable",
+        "reason": "Definition declares the defined extended nonnegative integral, measurable real/complex classes and their arithmetic conventions. Any positivity, zero-value convention or excluded singular parameter is the displayed interface condition; no new zero-parameter theorem is derived.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "A measure space is a triple $(X,\\Sigma,\\mu)$ where $\\Sigma$ contains $\\varnothing,X$ and is closed under complements and countable unions (a $\\sigma$-algebra) of subsets of $X$ and $\\mu:\\Sigma\\to[0,\\infty]$ is countably additive with $\\mu(\\varnothing)=0$. A measurable function $f:X\\to[-\\infty,\\infty]$ has measurable inverse images of Borel sets, where $[-\\infty,\\infty]$ has its order topology: finite open intervals and the endpoint neighborhoods $[-\\infty,a)$ and $(a,\\infty]$ form a basis. Its Borel sigma-algebra is generated by these open sets. A complex-valued function is measurable exactly when its finite real and imaginary parts are measurable, equivalently for the usual Borel structure of $\\mathbb C$. Almost-everywhere assertions mean outside a measurable $\\mu$-null set; completeness of $\\mu$ is not assumed. Nonnegative extended addition uses $a+\\infty=\\infty+a=\\infty$ for $a\\in[0,\\infty]$; positive scalars multiply $\\infty$ to $\\infty$, while $0\\cdot\\infty=0$. Signed expressions $\\infty-\\infty$ remain undefined and are not used in signed integrals. A nonnegative simple function has the form $s=\\sum_{j=1}^m c_j\\mathbf1_{A_j}$ with finitely many disjoint $A_j\\in\\Sigma$ and finite $c_j\\ge0$. Define $c\\mu(A)=+\\infty$ if $c>0$ and $\\mu(A)=+\\infty$, define $0\\cdot\\infty:=0$, and define the finite sum of these extended nonnegative terms to be $+\\infty$ if any term is $+\\infty$ and otherwise the real finite sum of [[def-finite-sum]]. Then $\\int s\\,d\\mu:=\\sum_j c_j\\mu(A_j)$; using canonical level sets $\\{s=c\\}$ makes this value representation-independent. For measurable $f\\ge0$, define $\\int f\\,d\\mu:=\\sup\\{\\int s\\,d\\mu: s\\text{ is simple and }0\\le s\\le f\\}$, using [[def-complete-ordered-field]] for a bounded set of finite values and setting the supremum to $+\\infty$ when the values are unbounded or one is infinite. A real measurable $f$ is integrable when $\\int|f|\\,d\\mu<\\infty$, and then $\\int f:=\\int f^+-\\int f^-$, where $f^+=\\max(f,0)$ and $f^-:=\\max(-f,0)$. Complex integrability and integration are defined by integrable real and imaginary parts.",
+          "current_raw_sha256": "20e1534f315a2ea5e3f7779668b844ea41d9fc69faa1552d140c2df894b3c65d",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "one",
+        "status": "not_applicable",
+        "reason": "Definition declares the defined extended nonnegative integral, measurable real/complex classes and their arithmetic conventions. A singleton substitution is governed by the stated domain conventions; this nonproof carrier proves no special singleton result.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "A measure space is a triple $(X,\\Sigma,\\mu)$ where $\\Sigma$ contains $\\varnothing,X$ and is closed under complements and countable unions (a $\\sigma$-algebra) of subsets of $X$ and $\\mu:\\Sigma\\to[0,\\infty]$ is countably additive with $\\mu(\\varnothing)=0$. A measurable function $f:X\\to[-\\infty,\\infty]$ has measurable inverse images of Borel sets, where $[-\\infty,\\infty]$ has its order topology: finite open intervals and the endpoint neighborhoods $[-\\infty,a)$ and $(a,\\infty]$ form a basis. Its Borel sigma-algebra is generated by these open sets. A complex-valued function is measurable exactly when its finite real and imaginary parts are measurable, equivalently for the usual Borel structure of $\\mathbb C$. Almost-everywhere assertions mean outside a measurable $\\mu$-null set; completeness of $\\mu$ is not assumed. Nonnegative extended addition uses $a+\\infty=\\infty+a=\\infty$ for $a\\in[0,\\infty]$; positive scalars multiply $\\infty$ to $\\infty$, while $0\\cdot\\infty=0$. Signed expressions $\\infty-\\infty$ remain undefined and are not used in signed integrals. A nonnegative simple function has the form $s=\\sum_{j=1}^m c_j\\mathbf1_{A_j}$ with finitely many disjoint $A_j\\in\\Sigma$ and finite $c_j\\ge0$. Define $c\\mu(A)=+\\infty$ if $c>0$ and $\\mu(A)=+\\infty$, define $0\\cdot\\infty:=0$, and define the finite sum of these extended nonnegative terms to be $+\\infty$ if any term is $+\\infty$ and otherwise the real finite sum of [[def-finite-sum]]. Then $\\int s\\,d\\mu:=\\sum_j c_j\\mu(A_j)$; using canonical level sets $\\{s=c\\}$ makes this value representation-independent. For measurable $f\\ge0$, define $\\int f\\,d\\mu:=\\sup\\{\\int s\\,d\\mu: s\\text{ is simple and }0\\le s\\le f\\}$, using [[def-complete-ordered-field]] for a bounded set of finite values and setting the supremum to $+\\infty$ when the values are unbounded or one is infinite. A real measurable $f$ is integrable when $\\int|f|\\,d\\mu<\\infty$, and then $\\int f:=\\int f^+-\\int f^-$, where $f^+=\\max(f,0)$ and $f^-:=\\max(-f,0)$. Complex integrability and integration are defined by integrable real and imaginary parts.",
+          "current_raw_sha256": "20e1534f315a2ea5e3f7779668b844ea41d9fc69faa1552d140c2df894b3c65d",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "degenerate",
+        "status": "not_applicable",
+        "reason": "Definition declares the defined extended nonnegative integral, measurable real/complex classes and their arithmetic conventions. A collapsed chart/domain must obey the actual declared regularity and measurability conditions; no missing proof is supplied by the declaration.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "A measure space is a triple $(X,\\Sigma,\\mu)$ where $\\Sigma$ contains $\\varnothing,X$ and is closed under complements and countable unions (a $\\sigma$-algebra) of subsets of $X$ and $\\mu:\\Sigma\\to[0,\\infty]$ is countably additive with $\\mu(\\varnothing)=0$. A measurable function $f:X\\to[-\\infty,\\infty]$ has measurable inverse images of Borel sets, where $[-\\infty,\\infty]$ has its order topology: finite open intervals and the endpoint neighborhoods $[-\\infty,a)$ and $(a,\\infty]$ form a basis. Its Borel sigma-algebra is generated by these open sets. A complex-valued function is measurable exactly when its finite real and imaginary parts are measurable, equivalently for the usual Borel structure of $\\mathbb C$. Almost-everywhere assertions mean outside a measurable $\\mu$-null set; completeness of $\\mu$ is not assumed. Nonnegative extended addition uses $a+\\infty=\\infty+a=\\infty$ for $a\\in[0,\\infty]$; positive scalars multiply $\\infty$ to $\\infty$, while $0\\cdot\\infty=0$. Signed expressions $\\infty-\\infty$ remain undefined and are not used in signed integrals. A nonnegative simple function has the form $s=\\sum_{j=1}^m c_j\\mathbf1_{A_j}$ with finitely many disjoint $A_j\\in\\Sigma$ and finite $c_j\\ge0$. Define $c\\mu(A)=+\\infty$ if $c>0$ and $\\mu(A)=+\\infty$, define $0\\cdot\\infty:=0$, and define the finite sum of these extended nonnegative terms to be $+\\infty$ if any term is $+\\infty$ and otherwise the real finite sum of [[def-finite-sum]]. Then $\\int s\\,d\\mu:=\\sum_j c_j\\mu(A_j)$; using canonical level sets $\\{s=c\\}$ makes this value representation-independent. For measurable $f\\ge0$, define $\\int f\\,d\\mu:=\\sup\\{\\int s\\,d\\mu: s\\text{ is simple and }0\\le s\\le f\\}$, using [[def-complete-ordered-field]] for a bounded set of finite values and setting the supremum to $+\\infty$ when the values are unbounded or one is infinite. A real measurable $f$ is integrable when $\\int|f|\\,d\\mu<\\infty$, and then $\\int f:=\\int f^+-\\int f^-$, where $f^+=\\max(f,0)$ and $f^-:=\\max(-f,0)$. Complex integrability and integration are defined by integrable real and imaginary parts.",
+          "current_raw_sha256": "20e1534f315a2ea5e3f7779668b844ea41d9fc69faa1552d140c2df894b3c65d",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "endpoints",
+        "status": "not_applicable",
+        "reason": "Definition declares the defined extended nonnegative integral, measurable real/complex classes and their arithmetic conventions. The precise allowed boundary and extension conventions are those written in this section, not a separately proved limit.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "A measure space is a triple $(X,\\Sigma,\\mu)$ where $\\Sigma$ contains $\\varnothing,X$ and is closed under complements and countable unions (a $\\sigma$-algebra) of subsets of $X$ and $\\mu:\\Sigma\\to[0,\\infty]$ is countably additive with $\\mu(\\varnothing)=0$. A measurable function $f:X\\to[-\\infty,\\infty]$ has measurable inverse images of Borel sets, where $[-\\infty,\\infty]$ has its order topology: finite open intervals and the endpoint neighborhoods $[-\\infty,a)$ and $(a,\\infty]$ form a basis. Its Borel sigma-algebra is generated by these open sets. A complex-valued function is measurable exactly when its finite real and imaginary parts are measurable, equivalently for the usual Borel structure of $\\mathbb C$. Almost-everywhere assertions mean outside a measurable $\\mu$-null set; completeness of $\\mu$ is not assumed. Nonnegative extended addition uses $a+\\infty=\\infty+a=\\infty$ for $a\\in[0,\\infty]$; positive scalars multiply $\\infty$ to $\\infty$, while $0\\cdot\\infty=0$. Signed expressions $\\infty-\\infty$ remain undefined and are not used in signed integrals. A nonnegative simple function has the form $s=\\sum_{j=1}^m c_j\\mathbf1_{A_j}$ with finitely many disjoint $A_j\\in\\Sigma$ and finite $c_j\\ge0$. Define $c\\mu(A)=+\\infty$ if $c>0$ and $\\mu(A)=+\\infty$, define $0\\cdot\\infty:=0$, and define the finite sum of these extended nonnegative terms to be $+\\infty$ if any term is $+\\infty$ and otherwise the real finite sum of [[def-finite-sum]]. Then $\\int s\\,d\\mu:=\\sum_j c_j\\mu(A_j)$; using canonical level sets $\\{s=c\\}$ makes this value representation-independent. For measurable $f\\ge0$, define $\\int f\\,d\\mu:=\\sup\\{\\int s\\,d\\mu: s\\text{ is simple and }0\\le s\\le f\\}$, using [[def-complete-ordered-field]] for a bounded set of finite values and setting the supremum to $+\\infty$ when the values are unbounded or one is infinite. A real measurable $f$ is integrable when $\\int|f|\\,d\\mu<\\infty$, and then $\\int f:=\\int f^+-\\int f^-$, where $f^+=\\max(f,0)$ and $f^-:=\\max(-f,0)$. Complex integrability and integration are defined by integrable real and imaginary parts.",
+          "current_raw_sha256": "20e1534f315a2ea5e3f7779668b844ea41d9fc69faa1552d140c2df894b3c65d",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "not_applicable",
+        "reason": "Definition declares the defined extended nonnegative integral, measurable real/complex classes and their arithmetic conventions. Named existence/choice assumptions remain prerequisites; this interface does not prove a new arbitrary-family selection.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "A measure space is a triple $(X,\\Sigma,\\mu)$ where $\\Sigma$ contains $\\varnothing,X$ and is closed under complements and countable unions (a $\\sigma$-algebra) of subsets of $X$ and $\\mu:\\Sigma\\to[0,\\infty]$ is countably additive with $\\mu(\\varnothing)=0$. A measurable function $f:X\\to[-\\infty,\\infty]$ has measurable inverse images of Borel sets, where $[-\\infty,\\infty]$ has its order topology: finite open intervals and the endpoint neighborhoods $[-\\infty,a)$ and $(a,\\infty]$ form a basis. Its Borel sigma-algebra is generated by these open sets. A complex-valued function is measurable exactly when its finite real and imaginary parts are measurable, equivalently for the usual Borel structure of $\\mathbb C$. Almost-everywhere assertions mean outside a measurable $\\mu$-null set; completeness of $\\mu$ is not assumed. Nonnegative extended addition uses $a+\\infty=\\infty+a=\\infty$ for $a\\in[0,\\infty]$; positive scalars multiply $\\infty$ to $\\infty$, while $0\\cdot\\infty=0$. Signed expressions $\\infty-\\infty$ remain undefined and are not used in signed integrals. A nonnegative simple function has the form $s=\\sum_{j=1}^m c_j\\mathbf1_{A_j}$ with finitely many disjoint $A_j\\in\\Sigma$ and finite $c_j\\ge0$. Define $c\\mu(A)=+\\infty$ if $c>0$ and $\\mu(A)=+\\infty$, define $0\\cdot\\infty:=0$, and define the finite sum of these extended nonnegative terms to be $+\\infty$ if any term is $+\\infty$ and otherwise the real finite sum of [[def-finite-sum]]. Then $\\int s\\,d\\mu:=\\sum_j c_j\\mu(A_j)$; using canonical level sets $\\{s=c\\}$ makes this value representation-independent. For measurable $f\\ge0$, define $\\int f\\,d\\mu:=\\sup\\{\\int s\\,d\\mu: s\\text{ is simple and }0\\le s\\le f\\}$, using [[def-complete-ordered-field]] for a bounded set of finite values and setting the supremum to $+\\infty$ when the values are unbounded or one is infinite. A real measurable $f$ is integrable when $\\int|f|\\,d\\mu<\\infty$, and then $\\int f:=\\int f^+-\\int f^-$, where $f^+=\\max(f,0)$ and $f^-:=\\max(-f,0)$. Complex integrability and integration are defined by integrable real and imaginary parts.",
+          "current_raw_sha256": "20e1534f315a2ea5e3f7779668b844ea41d9fc69faa1552d140c2df894b3c65d",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "reason": "Definition declares the defined extended nonnegative integral, measurable real/complex classes and their arithmetic conventions. The section states definitions and scope, not a forward implication theorem with a separate proof worksheet.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "A measure space is a triple $(X,\\Sigma,\\mu)$ where $\\Sigma$ contains $\\varnothing,X$ and is closed under complements and countable unions (a $\\sigma$-algebra) of subsets of $X$ and $\\mu:\\Sigma\\to[0,\\infty]$ is countably additive with $\\mu(\\varnothing)=0$. A measurable function $f:X\\to[-\\infty,\\infty]$ has measurable inverse images of Borel sets, where $[-\\infty,\\infty]$ has its order topology: finite open intervals and the endpoint neighborhoods $[-\\infty,a)$ and $(a,\\infty]$ form a basis. Its Borel sigma-algebra is generated by these open sets. A complex-valued function is measurable exactly when its finite real and imaginary parts are measurable, equivalently for the usual Borel structure of $\\mathbb C$. Almost-everywhere assertions mean outside a measurable $\\mu$-null set; completeness of $\\mu$ is not assumed. Nonnegative extended addition uses $a+\\infty=\\infty+a=\\infty$ for $a\\in[0,\\infty]$; positive scalars multiply $\\infty$ to $\\infty$, while $0\\cdot\\infty=0$. Signed expressions $\\infty-\\infty$ remain undefined and are not used in signed integrals. A nonnegative simple function has the form $s=\\sum_{j=1}^m c_j\\mathbf1_{A_j}$ with finitely many disjoint $A_j\\in\\Sigma$ and finite $c_j\\ge0$. Define $c\\mu(A)=+\\infty$ if $c>0$ and $\\mu(A)=+\\infty$, define $0\\cdot\\infty:=0$, and define the finite sum of these extended nonnegative terms to be $+\\infty$ if any term is $+\\infty$ and otherwise the real finite sum of [[def-finite-sum]]. Then $\\int s\\,d\\mu:=\\sum_j c_j\\mu(A_j)$; using canonical level sets $\\{s=c\\}$ makes this value representation-independent. For measurable $f\\ge0$, define $\\int f\\,d\\mu:=\\sup\\{\\int s\\,d\\mu: s\\text{ is simple and }0\\le s\\le f\\}$, using [[def-complete-ordered-field]] for a bounded set of finite values and setting the supremum to $+\\infty$ when the values are unbounded or one is infinite. A real measurable $f$ is integrable when $\\int|f|\\,d\\mu<\\infty$, and then $\\int f:=\\int f^+-\\int f^-$, where $f^+=\\max(f,0)$ and $f^-:=\\max(-f,0)$. Complex integrability and integration are defined by integrable real and imaginary parts.",
+          "current_raw_sha256": "20e1534f315a2ea5e3f7779668b844ea41d9fc69faa1552d140c2df894b3c65d",
+          "scope_only_not_proof_acceptance": true
+        }
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "Definition declares the defined extended nonnegative integral, measurable real/complex classes and their arithmetic conventions. No reverse inference establishing physical adoption or a broader mathematical model is asserted by this definition/scope.",
+        "case_scope": {
+          "source_section": "Definition",
+          "source_excerpt": "A measure space is a triple $(X,\\Sigma,\\mu)$ where $\\Sigma$ contains $\\varnothing,X$ and is closed under complements and countable unions (a $\\sigma$-algebra) of subsets of $X$ and $\\mu:\\Sigma\\to[0,\\infty]$ is countably additive with $\\mu(\\varnothing)=0$. A measurable function $f:X\\to[-\\infty,\\infty]$ has measurable inverse images of Borel sets, where $[-\\infty,\\infty]$ has its order topology: finite open intervals and the endpoint neighborhoods $[-\\infty,a)$ and $(a,\\infty]$ form a basis. Its Borel sigma-algebra is generated by these open sets. A complex-valued function is measurable exactly when its finite real and imaginary parts are measurable, equivalently for the usual Borel structure of $\\mathbb C$. Almost-everywhere assertions mean outside a measurable $\\mu$-null set; completeness of $\\mu$ is not assumed. Nonnegative extended addition uses $a+\\infty=\\infty+a=\\infty$ for $a\\in[0,\\infty]$; positive scalars multiply $\\infty$ to $\\infty$, while $0\\cdot\\infty=0$. Signed expressions $\\infty-\\infty$ remain undefined and are not used in signed integrals. A nonnegative simple function has the form $s=\\sum_{j=1}^m c_j\\mathbf1_{A_j}$ with finitely many disjoint $A_j\\in\\Sigma$ and finite $c_j\\ge0$. Define $c\\mu(A)=+\\infty$ if $c>0$ and $\\mu(A)=+\\infty$, define $0\\cdot\\infty:=0$, and define the finite sum of these extended nonnegative terms to be $+\\infty$ if any term is $+\\infty$ and otherwise the real finite sum of [[def-finite-sum]]. Then $\\int s\\,d\\mu:=\\sum_j c_j\\mu(A_j)$; using canonical level sets $\\{s=c\\}$ makes this value representation-independent. For measurable $f\\ge0$, define $\\int f\\,d\\mu:=\\sup\\{\\int s\\,d\\mu: s\\text{ is simple and }0\\le s\\le f\\}$, using [[def-complete-ordered-field]] for a bounded set of finite values and setting the supremum to $+\\infty$ when the values are unbounded or one is infinite. A real measurable $f$ is integrable when $\\int|f|\\,d\\mu<\\infty$, and then $\\int f:=\\int f^+-\\int f^-$, where $f^+=\\max(f,0)$ and $f^-:=\\max(-f,0)$. Complex integrability and integration are defined by integrable real and imaginary parts.",
+          "current_raw_sha256": "20e1534f315a2ea5e3f7779668b844ea41d9fc69faa1552d140c2df894b3c65d",
+          "scope_only_not_proof_acceptance": true
+        }
+      }
+    ]
+  }
+}

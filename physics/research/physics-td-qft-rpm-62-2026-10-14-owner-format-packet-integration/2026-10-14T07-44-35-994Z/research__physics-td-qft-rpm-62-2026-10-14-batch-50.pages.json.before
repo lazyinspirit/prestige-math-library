@@ -1,0 +1,493 @@
+[
+  {
+    "order": 539,
+    "id": "qft-mg02",
+    "kind": "A",
+    "category": "quantum-field-theory-mathematics",
+    "library": "mathematics",
+    "title": "Exact compact U1 rotor plus finite CAR data",
+    "companion": "qft-mg02-examples",
+    "requires": [
+      "orthonormal-bases-parseval-and-fourier-series",
+      "qft-mf01",
+      "unbounded-self-adjoint-operators-and-stones-theorem"
+    ],
+    "items": [
+      {
+        "id": "lem-qft-finite-mode-occupation-basis",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Finite fermion-mode occupation basis",
+        "dependency_level": 2,
+        "deps": [
+          "def-qft-fock-and-test-spaces",
+          "lem-qft-fock-ccr-car",
+          "def-countable-choice",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "lem-nrqm-composites-permutation-sector-projections"
+        ],
+        "dependency_roles": {
+          "def-qft-fock-and-test-spaces": "mathematical-premise",
+          "lem-qft-fock-ccr-car": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "lem-nrqm-composites-permutation-sector-projections": "mathematical-premise"
+        },
+        "statement": "Assume Countable Choice. Let $\\mathcal K$ be a finite-dimensional complex Hilbert space with a finite ordered orthonormal basis $(e_j)_{j\\in J}$, and use the antisymmetric Fock construction and second-variable-linear convention of [[def-qft-fock-and-test-spaces]]. Assume its fermionic operators satisfy the CAR of [[lem-qft-fock-ccr-car]]. For $S=\\{j_1<\\cdots<j_k\\}\\subseteq J$, set\n$$\\xi_S=c^\\dagger(e_{j_1})\\cdots c^\\dagger(e_{j_k})\\Omega,\\qquad \\xi_\\varnothing=\\Omega.$$\nThen $(\\xi_S)_{S\\subseteq J}$ is an orthonormal basis of $\\mathcal F_a(\\mathcal K)$. For each $j\\in J$, the bounded number operator $N_j=c^\\dagger(e_j)c(e_j)$ is an orthogonal projection and\n$$N_j\\xi_S=\\mathbf1_{j\\in S}\\xi_S.$$\nConsequently, for any partition $J=\\bigsqcup_{x\\in V}J_x$ into finite site-mode sets, $n_x=\\sum_{j\\in J_x}N_j$ is bounded self-adjoint and acts on $\\xi_S$ by the occupation count $N_x(S)=|S\\cap J_x|\\in\\{0,\\ldots,|J_x|\\}$.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "physical_scope": null,
+        "reference": "Local A-page prerequisite: prove the finite-mode occupation ONB and site-number spectrum used by the exact Gauss multipliers.",
+        "design_state": "Added after dependency audit; complete local conditional proof from the current Fock and CAR interfaces.",
+        "inventory_expansion_required": true
+      },
+      {
+        "id": "def-qft-compact-lattice-gauge-data",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Exact compact U(1) rotor plus finite CAR data",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q5; reserved proposed inventory, exact conditional statement authored in items/def-qft-compact-lattice-gauge-data.md",
+        "design_state": "Current batch-37 QFT-MF01 Fock/CAR interfaces inspected and matched; model remains conditional on draft suppliers; finite occupation prerequisite supplied locally.",
+        "dependency_level": 3,
+        "deps": [
+          "lem-qft-finite-mode-occupation-basis",
+          "def-qft-fock-and-test-spaces",
+          "lem-qft-fock-ccr-car",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "lem-qft-finite-mode-occupation-basis": "mathematical-premise",
+          "def-qft-fock-and-test-spaces": "mathematical-premise",
+          "lem-qft-fock-ccr-car": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Assume Countable Choice. Let $\\Gamma=(V,E,s,t,\\mathcal P)$ be a finite oriented graph with nonempty finite vertex set $V$, nonempty finite link set $E$, endpoint maps $s,t:E\\to V$, and a finite list $\\mathcal P$ of oriented simple cycles. Parallel links and self-loops are allowed. An oriented simple cycle $p\\in\\mathcal P$ is a finite closed path using each link at most once; write $\\sigma_{p,e}\\in\\{-1,0,1\\}$ for its signed use of link $e$, so its signed incidence at every vertex is zero. Set $\\mathbb T=\\mathbb R/(2\\pi\\mathbb Z)$ with normalized measure $d\\theta/(2\\pi)$ and use product measure on $\\mathbb T^E$.\n\nFix an integer $s\\ge1$ and let $\\mathcal K=\\bigoplus_{x\\in V}\\mathbb C^s$ with orthonormal modes $e_{x\\alpha}$, $1\\le\\alpha\\le s$. This is finite-dimensional and hence separable. Use the antisymmetric Fock space and second-variable-linear inner product convention of [[def-qft-fock-and-test-spaces]]. The current draft supplier [[lem-qft-fock-ccr-car]] states that, assuming Countable Choice, $\\mathcal F_a(\\mathcal K)$ is a Hilbert space and its creation and annihilation operators are bounded and satisfy the CAR; that supplier is still a draft carrier, not an accepted result in this run. The finite-mode basis result [[lem-qft-finite-mode-occupation-basis]] constructs the joint orthonormal occupation basis and proves its number-operator eigenvalues from that exact CAR interface. Write $c_{x\\alpha}=c(e_{x\\alpha})$, $c^\\dagger_{x\\alpha}=c^\\dagger(e_{x\\alpha})$, and $n_x=\\sum_{\\alpha=1}^s c^\\dagger_{x\\alpha}c_{x\\alpha}$. On an occupation label $\\mathbf m=(m_{x\\alpha})$, each $m_{x\\alpha}\\in\\{0,1\\}$ and $n_x$ acts by $N_x(\\mathbf m)=\\sum_{\\alpha=1}^s m_{x\\alpha}$; it is bounded self-adjoint with spectrum contained in $\\{0,\\ldots,s\\}$.\n\nThe kinematical Hilbert space is\n$$\\mathcal H_{\\rm kin}=L^2(\\mathbb T^E)\\widehat\\otimes\\mathcal F_a(\\mathcal K).$$\nThe coordinate Fourier characters $e_{\\mathbf n}(\\theta)=\\exp(i\\sum_{e\\in E}n_e\\theta_e)$, $\\mathbf n\\in\\mathbb Z^E$, form an orthonormal basis of the first factor by [[thm-fourier-basis-and-parseval-on-the-n-torus]]. On this basis define the electric operator $E_e e_{\\mathbf n}=n_e e_{\\mathbf n}$, with its maximal diagonal domain; hence $E_e$ is self-adjoint with integer spectrum. Define the bounded unitary multiplication operator $U_e f(\\theta)=e^{i\\theta_e}f(\\theta)$, equivalently $U_e e_{\\mathbf n}=e_{\\mathbf n+\\delta_e}$, so $[E_e,U_f]=\\delta_{ef}U_f$ on $D(E_e)$.\n\nFix background integers $b_x\\in\\{0,\\ldots,s\\}$. In the joint basis define the real integer multiplier\n$$\\gamma_x(\\mathbf n,\\mathbf m)=\\sum_{e:s(e)=x}n_e-\\sum_{e:t(e)=x}n_e-\\left(\\sum_{\\alpha=1}^s m_{x\\alpha}-b_x\\right),$$\nand let $G_x$ be its maximal diagonal operator, with domain $D(G_x)=\\{\\psi:\\sum_{\\mathbf n,\\mathbf m}|\\gamma_x(\\mathbf n,\\mathbf m)|^2|\\psi_{\\mathbf n,\\mathbf m}|^2<\\infty\\}$. On the common link-electric domain this is the finite sum $\\sum_{s(e)=x}E_e-\\sum_{t(e)=x}E_e-(n_x-b_xI)$. These are the Gauss operators; the operator constraint defines $\\mathcal H_{\\rm phys}:=\\bigcap_{x\\in V}\\ker G_x$. For $\\alpha\\in\\mathbb T^V$ define the diagonal multiplier $U(\\alpha)=\\exp(i\\sum_x\\alpha_xG_x)$; the next lemma proves that these operators form a strongly continuous representation and that their normalized Haar average is the orthogonal projection onto $\\mathcal H_{\\rm phys}$.\n\nFor each $x$, choose a Hermitian matrix $M_x\\in M_s(\\mathbb C)$, and for each link $e$ choose a matrix $T_e\\in M_s(\\mathbb C)$. Choose real coefficients $\\lambda_E>0$ and $\\lambda_p\\in\\mathbb R$ for $p\\in\\mathcal P$. Write\n$$W_p=\\prod_{e\\in E}U_e^{\\sigma_{p,e}},\\qquad V_B=-\\frac12\\sum_{p\\in\\mathcal P}\\lambda_p(W_p+W_p^\\dagger),$$\nand\n$$V_F=\\sum_{x\\in V}\\sum_{\\alpha,\\beta=1}^s c^\\dagger_{x\\alpha}(M_x)_{\\alpha\\beta}c_{x\\beta}+\\sum_{e\\in E}\\left(A_e+A_e^\\dagger\\right),\\qquad A_e=\\sum_{\\alpha,\\beta=1}^s c^\\dagger_{s(e),\\alpha}(T_e)_{\\alpha\\beta}U_e c_{t(e),\\beta}.$$\nThe operator $H_0=\\lambda_E\\sum_{e\\in E}E_e^2$ is the diagonal multiplier with domain\n$$D(H_0)=\\left\\{\\psi:\\sum_{\\mathbf n,\\mathbf m}\\left(\\lambda_E\\sum_{e\\in E}n_e^2\\right)^2|\\psi_{\\mathbf n,\\mathbf m}|^2<\\infty\\right\\},$$\nwhere $\\mathbf m=(m_{x\\alpha})$ ranges over occupation configurations with each $m_{x\\alpha}\\in\\{0,1\\}$, and $N_x(\\mathbf m)=\\sum_{\\alpha=1}^s m_{x\\alpha}$ is the eigenvalue of $n_x$ on that basis vector. The coefficients $\\lambda_E,\\lambda_p$ and entries of $M_x,T_e$ are ordinary real or complex scalars here; no physical units are assigned. Set $H=H_0+V_B+V_F$ on $D(H_0)$. This is a mathematical finite-graph regulator definition. It asserts no physical adoption, continuum limit, Lorentz invariance, or identification with a particular continuum QED model.\n\nFor sign comparison only, if a smooth path $\\gamma_e:[0,1]\\to X$ in a smooth manifold $X$, a real $C^1$ connection one-form $a$, and a real $C^1$ function $\\lambda$ are supplied, take $U_e^{\\rm cont}=\\exp(-ig\\int_0^1a_{\\gamma_e(r)}(\\dot\\gamma_e(r))\\,dr)$ for real $g$. Under $a\\mapsto a+d\\lambda$, the endpoint factor is $e^{ig(\\lambda(s(e))-\\lambda(t(e)))}$, matching the finite vertex-phase convention when $\\alpha_x=g\\lambda(x)$. This comparison supplies no embedding of the finite graph into $X$ and asserts no continuum limit.\n\n",
+        "strategy": "Define the finite graph, link torus, CAR Fock factor, maximal diagonal Gauss operators, bounded plaquette and hopping terms, and exact electric Hamiltonian domain. Preserve the conditional QFT-MF01 CAR supplier and the fixed-regulator scope.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "lem-qft-lattice-gauss-projection",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Gauss operators, gauge group and nonempty physical projection",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q5; reserved proposed inventory, exact conditional statement authored in items/lem-qft-lattice-gauss-projection.md",
+        "design_state": "reserved claim; complete conditional argument authored; Step-1 readiness escalated pending batch-37 carrier",
+        "dependency_level": 4,
+        "deps": [
+          "def-qft-compact-lattice-gauge-data"
+        ],
+        "dependency_roles": {
+          "def-qft-compact-lattice-gauge-data": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the conditional compact-rotor/CAR data of [[def-qft-compact-lattice-gauge-data]]. In the joint Fourier/occupation basis write\n$$\\gamma_x(\\mathbf n,\\mathbf m)=\\sum_{e:s(e)=x}n_e-\\sum_{e:t(e)=x}n_e-\\sum_{\\alpha=1}^s m_{x\\alpha}+b_x\\in\\mathbb Z.$$\nFor every vertex $x$, let $G_x$ be multiplication by $\\gamma_x$ on its maximal diagonal domain\n$$D(G_x)=\\left\\{\\psi:\\sum_{\\mathbf n,\\mathbf m}|\\gamma_x(\\mathbf n,\\mathbf m)|^2|\\psi_{\\mathbf n,\\mathbf m}|^2<\\infty\\right\\}.$$\nThen each $G_x$ is self-adjoint, the $G_x$ strongly commute, and $U(\\alpha)=\\exp(i\\sum_x\\alpha_xG_x)$ is a strongly continuous unitary representation of $\\mathbb T^V$. Its action obeys\n$$U(\\alpha)c_{x\\beta}U(\\alpha)^\\dagger=e^{i\\alpha_x}c_{x\\beta},\\qquad U(\\alpha)U_eU(\\alpha)^\\dagger=e^{i(\\alpha_{s(e)}-\\alpha_{t(e)})}U_e.$$\nThe normalized Haar average\n$$P=\\frac1{(2\\pi)^{|V|}}\\int_{[0,2\\pi]^{|V|}}U(\\alpha)\\,d\\alpha$$\nis the orthogonal projection onto $\\mathcal H_{\\rm phys}=\\bigcap_x\\ker G_x$. This subspace is nonzero for every admissible fixed background $b$: it contains the normalized state with link Fourier labels $n_e=0$ and site occupations $m_{x\\alpha}$ chosen so $\\sum_\\alpha m_{x\\alpha}=b_x$.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "lem-qft-lattice-hamiltonian-selfadjoint",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Rotor interacting Hamiltonian with exact domain",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q5; reserved proposed inventory, exact conditional statement authored in items/lem-qft-lattice-hamiltonian-selfadjoint.md",
+        "design_state": "reserved claim; complete conditional argument authored; Step-1 readiness escalated pending batch-37 carrier",
+        "dependency_level": 4,
+        "deps": [
+          "def-qft-compact-lattice-gauge-data"
+        ],
+        "dependency_roles": {
+          "def-qft-compact-lattice-gauge-data": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the model data of [[def-qft-compact-lattice-gauge-data]]. The nonnegative electric operator $H_0=\\lambda_E\\sum_e E_e^2$ is self-adjoint on the stated maximal diagonal domain and finite Fourier/occupation sums are a graph core. The finite plaquette and fermion interaction $V=V_B+V_F$ is bounded and self-adjoint. Therefore $H=H_0+V$ is self-adjoint on exactly $D(H_0)$. Moreover $H$ commutes with every gauge transformation $U(\\alpha)$ on this domain. No continuum-limit assertion follows.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "lem-qft-lattice-physical-evolution",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Global unitary dynamics in the Gauss sector",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q5; reserved proposed inventory, exact conditional statement authored in items/lem-qft-lattice-physical-evolution.md",
+        "design_state": "reserved claim; complete conditional argument authored; Step-1 readiness escalated pending batch-37 carrier",
+        "dependency_level": 5,
+        "deps": [
+          "def-qft-compact-lattice-gauge-data",
+          "lem-qft-lattice-gauss-projection",
+          "lem-qft-lattice-hamiltonian-selfadjoint",
+          "thm-stone-one-parameter-unitary-groups",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-qft-compact-lattice-gauge-data": "mathematical-premise",
+          "lem-qft-lattice-gauss-projection": "mathematical-premise",
+          "lem-qft-lattice-hamiltonian-selfadjoint": "mathematical-premise",
+          "thm-stone-one-parameter-unitary-groups": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the model data of [[def-qft-compact-lattice-gauge-data]] and the Axiom of Choice. Let $H$ be the self-adjoint Hamiltonian on the exact domain supplied by [[lem-qft-lattice-hamiltonian-selfadjoint]], and let $P$ be the physical projection of [[lem-qft-lattice-gauss-projection]]. For any scalar $\\hbar>0$, the family\n$$\\mathcal U(t)=e^{-itH/\\hbar},\\qquad t\\in\\mathbb R,$$\nis a strongly continuous unitary group on $\\mathcal H_{\\rm kin}$, preserves $D(H)$, and satisfies\n$$\\lim_{h\\to0}\\frac{\\mathcal U(h)\\psi-\\psi}{h}=-\\frac{i}{\\hbar}H\\psi\\quad(\\psi\\in D(H)).$$\nIt commutes with every gauge transformation $U(\\alpha)$ and with $P$. Hence $\\mathcal H_{\\rm phys}=\\operatorname{ran}P$ is a reducing subspace and $\\mathcal U(t)|_{\\mathcal H_{\\rm phys}}$ is a strongly continuous unitary group with skew-adjoint infinitesimal generator $-iH|_{D(H)\\cap\\mathcal H_{\\rm phys}}/\\hbar$; its self-adjoint Stone operator is $-H|_{D(H)\\cap\\mathcal H_{\\rm phys}}/\\hbar$. Equivalently, the restricted physical Hamiltonian $H|_{D(H)\\cap\\mathcal H_{\\rm phys}}$ is self-adjoint. This is an exact fixed-graph result; no continuum dynamics are asserted.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "lem-qft-lattice-local-gauss-flux",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Region charge equals boundary electric flux",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q5; reserved proposed inventory, exact conditional statement authored in items/lem-qft-lattice-local-gauss-flux.md",
+        "design_state": "reserved claim; complete conditional argument authored; Step-1 readiness escalated pending batch-37 carrier",
+        "dependency_level": 5,
+        "deps": [
+          "def-qft-compact-lattice-gauge-data",
+          "lem-qft-lattice-gauss-projection"
+        ],
+        "dependency_roles": {
+          "def-qft-compact-lattice-gauge-data": "mathematical-premise",
+          "lem-qft-lattice-gauss-projection": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the data of [[def-qft-compact-lattice-gauge-data]] and let $R\\subseteq V$. Define\n$$\\partial R=\\{e\\in E:\\text{exactly one endpoint of }e\\text{ lies in }R\\},$$\nwith $\\epsilon(e,R)=1$ when $s(e)\\in R,t(e)\\notin R$ and $\\epsilon(e,R)=-1$ when $t(e)\\in R,s(e)\\notin R$. On the domain\n$$\\mathcal D_R=\\mathcal H_{\\rm phys}\\cap\\bigcap_{e\\in\\partial R}D(E_e),$$\nthe region number $N_R=\\sum_{x\\in R}(n_x-b_xI)$ obeys the exact identity\n$$N_R\\psi=\\left(\\sum_{e\\in\\partial R}\\epsilon(e,R)E_e\\right)\\psi\\qquad(\\psi\\in\\mathcal D_R).$$\nThus for $R=V$, where $\\partial R=\\varnothing$, every physical vector has total occupation $\\sum_x n_x=\\sum_x b_x$. This finite-graph identity is exact and makes no continuum-limit claim.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "lem-qft-lattice-ward-identities",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Exact regulated gauge and infinitesimal Ward identities",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q6; reserved proposed inventory, exact conditional statement authored in items/lem-qft-lattice-ward-identities.md",
+        "design_state": "reserved claim; complete conditional argument authored; Step-1 readiness escalated pending batch-37 carrier",
+        "dependency_level": 6,
+        "deps": [
+          "def-qft-compact-lattice-gauge-data",
+          "lem-qft-lattice-gauss-projection",
+          "lem-qft-lattice-physical-evolution",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-qft-compact-lattice-gauge-data": "mathematical-premise",
+          "lem-qft-lattice-gauss-projection": "mathematical-premise",
+          "lem-qft-lattice-physical-evolution": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the finite-graph model of [[def-qft-compact-lattice-gauge-data]] and the Axiom of Choice. Let $\\psi\\in\\mathcal H_{\\rm phys}$ be a normalized vector. A bounded operator $O$ has gauge charge $q=(q_x)_{x\\in V}\\in\\mathbb Z^V$ when\n$$U(\\alpha)OU(\\alpha)^\\dagger=e^{i\\sum_x q_x\\alpha_x}O.$$\nThen $\\langle\\psi,O\\psi\\rangle=0$ whenever $q\\ne0$, and any finite product of bounded gauge-charge eigenoperators has zero expectation when the sum of its charge vectors is nonzero.\n\nFor each $x$, if $O$ maps $D(G_x)$ into itself and $[G_x,O]$ extends to a bounded operator, then\n$$\\langle\\psi,[G_x,O]\\psi\\rangle=0.$$\nThe same assertions apply to $O(t)=\\mathcal U(t)^\\dagger O\\mathcal U(t)$: the finite-regulator time evolution preserves the gauge charge and the domains $D(G_x)$. These are exact operator identities for the stated regulator; no trace or path-integral identity and no continuum Ward–Takahashi statement is asserted.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "lem-qft-qed-gauss-localization",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Gauss law and charged localization obstruction",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q6; reserved proposed inventory, exact conditional statement authored in items/lem-qft-qed-gauss-localization.md",
+        "design_state": "reserved claim; complete conditional argument authored; Step-1 readiness escalated pending batch-37 carrier",
+        "dependency_level": 6,
+        "deps": [
+          "lem-qft-lattice-local-gauss-flux"
+        ],
+        "dependency_roles": {
+          "lem-qft-lattice-local-gauss-flux": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the exact finite-graph model and let $R\\subseteq V$. Set $Q_R=\\sum_{x\\in R}(n_x-b_xI)$ and let $\\partial R$ and its orientation signs be as in [[lem-qft-lattice-local-gauss-flux]]. On $\\mathcal H_{\\rm phys}\\cap\\bigcap_{e\\in\\partial R}D(E_e)$, suppose a bounded operator $O$ preserves $\\mathcal H_{\\rm phys}$ and, for every boundary link $e$, maps $D(E_e)$ into itself and satisfies $E_eO\\phi=OE_e\\phi$ for every $\\phi\\in D(E_e)$. Then $[Q_R,O]\\psi=0$ for every vector in that physical domain. Consequently, a charge-changing operator with $[Q_R,O]\\psi=qO\\psi$ for a fixed $q\\ne0$ cannot both preserve the physical sector and commute with the boundary electric operators while acting nontrivially on any such physical vector.\n\nThere is also the following conditional continuum statement; it does not assert that a continuum representation exists. Let $D$ be a common invariant dense domain in a Hilbert space, and let $\\rho(f)$ and $E_k(g_k)$ be linear assignments from real-valued test functions $f,g_k\\in C_c^\\infty(\\mathbb R^3)$ to operators $D\\to D$. For a real vector test function $\\mathbf g=(g_1,g_2,g_3)\\in C_c^\\infty(\\mathbb R^3;\\mathbb R^3)$ set $E(\\mathbf g)=\\sum_{k=1}^3E_k(g_k)$. Assume the assignments satisfy on $D$\n$$\\rho(f)=-\\varepsilon_0\\sum_{k=1}^3E_k(\\partial_k f)\\quad(f\\in C_c^\\infty(\\mathbb R^3)),$$\nfor a fixed $\\varepsilon_0>0$, and let $K\\subset\\mathbb R^3$ be compact. Suppose $O$ is bounded, maps $D$ into itself, and satisfies $E(\\mathbf g)O\\psi=OE(\\mathbf g)\\psi$ for every $\\psi\\in D$ whenever $\\operatorname{supp}\\mathbf g$ is disjoint from $K$. For each integer $R\\ge R_0$, choose a real-valued $\\chi_R\\in C_c^\\infty(\\mathbb R^3)$ equal to $1$ on a neighborhood of $K$ and with $\\operatorname{supp}\\nabla\\chi_R$ disjoint from $K$, and put $Q_R=\\rho(\\chi_R)=-\\varepsilon_0 E(\\nabla\\chi_R)$. Assume there is an operator $Q:D\\to D$ such that, for every $\\psi\\in D$, both $Q_R\\psi\\to Q\\psi$ and $Q_RO\\psi\\to QO\\psi$ as integer $R\\to\\infty$. Then $[Q,O]\\psi=0$ on $D$. A bounded charge-changing operator satisfying $[Q,O]\\psi=qO\\psi$ for $q\\ne0$ on $D$ must therefore be the zero operator. These continuum conclusions are conditional on the displayed domain, locality, convergence and commutator-passage assumptions.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "lem-qft-lattice-ward-contact",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Time-ordered Ward contact relation",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q6; reserved proposed inventory, exact conditional statement authored in items/lem-qft-lattice-ward-contact.md",
+        "design_state": "reserved claim; complete conditional argument authored; Step-1 readiness escalated pending batch-37 carrier",
+        "dependency_level": 7,
+        "deps": [
+          "def-qft-compact-lattice-gauge-data",
+          "lem-qft-lattice-ward-identities",
+          "lem-qft-lattice-physical-evolution",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-qft-compact-lattice-gauge-data": "mathematical-premise",
+          "lem-qft-lattice-ward-identities": "mathematical-premise",
+          "lem-qft-lattice-physical-evolution": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the compact finite-graph model and the Axiom of Choice. Fix a vertex $x$, pairwise distinct real times $t_1,\\ldots,t_n$ with $n\\ge1$, bounded operators $O_j$, and a normalized physical vector $\\psi$. Assume each $O_j$ maps $D(G_x)$ into itself and has a bounded commutator with $G_x$. Let\n$$O_j(t_j)=\\mathcal U(t_j)^\\dagger O_j\\mathcal U(t_j),\\qquad G_x(t)=\\mathcal U(t)^\\dagger G_x\\mathcal U(t),$$\nwhere $\\mathcal U(t)=e^{-itH/\\hbar}$. Define ordinary time ordering by placing the factor with the larger time to the left; $G_x$ is bosonic, so moving it past an insertion introduces no grading sign. Then $G_x(t)=G_x$, and, as a distribution in $t$,\n$$\\frac{d}{dt}\\left\\langle\\psi,\\mathcal T\\!\\left[G_x(t)\\prod_{j=1}^nO_j(t_j)\\right]\\psi\\right\\rangle=\\sum_{j=1}^n\\delta(t-t_j)\\left\\langle\\psi,\\mathcal T\\!\\left([G_x,O_j(t_j)]\\prod_{i\\ne j}O_i(t_i)\\right)\\psi\\right\\rangle.$$\nThe products and commutators are evaluated on the common domains just specified. This is a finite-regulator contact identity, not a claim about continuum renormalized time-ordered products.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      }
+    ]
+  },
+  {
+    "order": 540,
+    "id": "qft-mg02-examples",
+    "kind": "B",
+    "category": "quantum-field-theory-mathematics",
+    "library": "mathematics",
+    "title": "Exact compact U1 rotor plus finite CAR data — Examples",
+    "companion": "qft-mg02",
+    "requires": [
+      "qft-mg02"
+    ],
+    "items": [
+      {
+        "id": "ex-qft-qed-nonempty-gauss",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Explicit physical electric/occupation basis state",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q5; reserved proposed inventory, exact conditional statement authored in items/ex-qft-qed-nonempty-gauss.md",
+        "design_state": "reserved claim; complete conditional argument authored; Step-1 readiness escalated pending batch-37 carrier",
+        "dependency_level": 5,
+        "deps": [
+          "lem-qft-lattice-gauss-projection"
+        ],
+        "dependency_roles": {
+          "lem-qft-lattice-gauss-projection": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take two vertices $v_1,v_2$, one oriented link $e:v_1\\to v_2$, one fermion mode at each vertex, and background $b_{v_1}=1,b_{v_2}=0$. Let $\\psi$ be the tensor of the zero-electric Fourier vector and the occupation vector with the $v_1$ mode occupied and the $v_2$ mode empty. This is a concrete nonzero state in the fixed-background physical sector.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "cex-qft-qed-compact-charge-sector",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Compact gauge model fixes total matter charge",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q5; reserved proposed inventory, exact conditional statement authored in items/cex-qft-qed-compact-charge-sector.md",
+        "design_state": "reserved claim; complete conditional argument authored; Step-1 readiness escalated pending batch-37 carrier",
+        "dependency_level": 6,
+        "deps": [
+          "lem-qft-lattice-local-gauss-flux"
+        ],
+        "dependency_roles": {
+          "lem-qft-lattice-local-gauss-flux": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For every finite oriented graph and every fixed background $b$, the compact gauge model has a physical state in every total matter-occupation sector $N\\in\\{0,\\ldots,s|V|\\}$, independently of $b$.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      },
+      {
+        "id": "ex-qft-qed-ward-selection",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Charged expectation vanishes by gauge averaging",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-field-theory/workers/qed/proofs.md#Q6; reserved proposed inventory, exact conditional statement authored in items/ex-qft-qed-ward-selection.md",
+        "design_state": "reserved claim; complete conditional argument authored; Step-1 readiness escalated pending batch-37 carrier",
+        "dependency_level": 7,
+        "deps": [
+          "lem-qft-lattice-ward-identities",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "lem-qft-lattice-ward-identities": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take a two-vertex graph with one link $e:v_1\\to v_2$, one fermion mode per vertex and zero backgrounds. The zero-electric, zero-occupation vector $\\Omega$ is physical. The bounded creation operator $O=c^\\dagger_{v_1,1}$ has nonzero gauge charge at $v_1$, so its expectation in any physical vector, including $\\Omega$, vanishes.\n\n",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John B. Kogut, An Introduction to Lattice Gauge Theory and Spin Systems, Reviews of Modern Physics 51 (1979), §VI.C, printed pp. 694–696",
+              "url": "https://chimera.roma1.infn.it/ENZO/FC/ESTRATTI/DUALITY/kogut1979.pdf"
+            },
+            {
+              "title": "Patrick Emonts and Erez Zohar, Gauss Law, Minimal Coupling and Fermionic PEPS for Lattice Gauge Theories, SciPost Physics Lecture Notes 12 (2020), §§2.1–2.4",
+              "url": "https://arxiv.org/html/1807.01294"
+            }
+          ]
+        },
+        "library": "mathematics"
+      }
+    ]
+  }
+]

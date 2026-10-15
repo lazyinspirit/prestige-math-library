@@ -2,7 +2,7 @@
 import { realpathSync as physicsRealpath } from 'node:fs';
 // Round-based Step 5. Mathematical workers write evidence; only the controller
 // collects it, judges a stable snapshot, and certifies a completed repair wave.
-import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, appendFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, appendFileSync, statSync } from 'node:fs';
 import { resolve, join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
@@ -20,6 +20,37 @@ import { orderedItems, runPages } from './item-dependency-levels.mjs';
 import { ownerRepairHandoffs, ownerHandoffPhase } from './step5-owner-repair-handoffs.mjs';
 import { ownerFormatRepair } from './step5-owner-format-repair.mjs';
 import { certificationEvidenceTransition } from './step5-certification-transition.mjs';
+// The live controller may have loaded an earlier helper during owner review.
+const INHERITED_REPAIR_URL=new URL('./step5-inherited-repair.mjs',import.meta.url);
+const INHERITED_REPAIR_STAT=statSync(INHERITED_REPAIR_URL);
+const { correctionPhase, correctionProgressPath, correctionRequest, assertCorrectionDrained, correctionAdoption } = await import(
+  INHERITED_REPAIR_URL.href+'?v='+INHERITED_REPAIR_STAT.mtimeMs+':'+INHERITED_REPAIR_STAT.size
+);
+
+// Resolve the current routing helper even in a hot-loaded controller.
+const INVENTORY_URL=new URL('./step5-downstream-inventory.mjs',import.meta.url);
+const INVENTORY_STAT=statSync(INVENTORY_URL);
+const { ownerDownstreamInventory }=await import(INVENTORY_URL.href+'?v='+INVENTORY_STAT.mtimeMs+':'+INVENTORY_STAT.size);
+
+const SCIENTIFIC_REPAIR_URL=new URL('./step5-scientific-repair.mjs',import.meta.url);
+const SCIENTIFIC_REPAIR_STAT=statSync(SCIENTIFIC_REPAIR_URL);
+const { ownerScientificRepair, scientificRepairCompletion }=await import(
+  SCIENTIFIC_REPAIR_URL.href+'?v='+SCIENTIFIC_REPAIR_STAT.mtimeMs+':'+SCIENTIFIC_REPAIR_STAT.size
+);
+
+const ADJUDICATION_SCIENCE_URL=new URL('./step5-adjudication-scientific-repair.mjs',import.meta.url);
+const ADJUDICATION_SCIENCE_STAT=statSync(ADJUDICATION_SCIENCE_URL);
+const { scientificCorrectionPhase, scientificCorrectionProgressPath, scientificCorrectionRequest,
+  assertScientificCorrectionDrained, scientificCorrectionCompletion }=await import(
+  ADJUDICATION_SCIENCE_URL.href+'?v='+ADJUDICATION_SCIENCE_STAT.mtimeMs+':'+ADJUDICATION_SCIENCE_STAT.size);
+const OWNER_FINDING_URL=new URL('./step5-owner-finding-queue.mjs',import.meta.url);
+const OWNER_FINDING_STAT=statSync(OWNER_FINDING_URL);
+const { ownerFindingRequest, ownerFindingCompletion }=await import(
+  OWNER_FINDING_URL.href+'?v='+OWNER_FINDING_STAT.mtimeMs+':'+OWNER_FINDING_STAT.size);
+const ownerFindingCollectionToken=Symbol('authenticated native owner finding collection');
+const ownerFindingPhase=phase=>'owner-finding-correction-'+phase;
+const ownerFindingProgressPath=(root,run,phase,round)=>join(workflowDir(root,run),ownerFindingPhase(phase)+'-'+round+'-progress.json');
+const scientificValidationToken=Symbol('authenticated single-subject scientific correction');
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -29,7 +60,7 @@ export const packPath = (root, run, phase, round) => join(workflowDir(root, run)
 const atomic = (path, value) => { mkdirSync(resolve(path, '..'), {recursive:true}); const tmp = `${path}.${process.pid}.tmp`; writeFileSync(tmp, JSON.stringify(value,null,2)+'\n'); renameSync(tmp,path); };
 const frozen = (path, value) => { if (existsSync(path)) { if (JSON.stringify(read(path)) !== JSON.stringify(value)) throw Error(`immutable evidence conflict: ${path}`); } else atomic(path,value); };
 const key = row => `${row.id}\0${row.model}\0${row.context_sha256}`;
-const hashes = root => Object.fromEntries(readLibraryItems(root).map(row => [row.id,itemHashGuard(readFileSync(join(root,'items',`${row.id}.md`),'utf8'))]));
+const hashes = (root,items=readLibraryItems(root)) => Object.fromEntries(items.map(row => [row.id,itemHashGuard(readFileSync(join(root,'items',`${row.id}.md`),'utf8'))]));
 const statementHashes = root => Object.fromEntries(readLibraryItems(root).map(row => [row.id,row.statement_sha256]));
 const diff = (a,b) => [...new Set([...Object.keys(a),...Object.keys(b)])].filter(id=>a[id]!==b[id]).sort();
 const evidenceText = row => typeof row.reason === 'string' && row.reason.trim().length >= 40 && row.uncertain === false
@@ -53,7 +84,7 @@ function sol61Step5Run(root,run) {
   }
   return false;
 }
-const verifyEvidence=evidence=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(existsSync(p)&&digest(readFileSync(p,'utf8'))===hash,`Step 5 evidence changed: ${p}`);};
+const verifyEvidence=evidence=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(existsSync(p)&&createHash('sha256').update(readFileSync(p)).digest('hex')===hash,`Step 5 evidence changed: ${p}`);};
 const rawHashes=root=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.sha256]));
 const creationId=/^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 function gateFrontier(root,run) {
@@ -350,7 +381,10 @@ function writeTasks(root,pack,mode) {
   }
 }
 
-export function validateReports(pack,reports,now,{root=null}={}) {
+export function validateReports(pack,reports,now,{root=null,scientificCorrection=null,ownerFindingCorrection=null}={}) {
+  const childReview=id=>ownerFindingCorrection?.token===ownerFindingCollectionToken
+    ?ownerFindingCorrection.reviews.find(row=>row.id===id):null;
+  const corrected=id=>(scientificCorrection?.token===scientificValidationToken&&scientificCorrection.subject===id)||!!childReview(id);
   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
   for(const unit of pack.units) {
     const report=reports.find(r=>String(r.unit)===unit);
@@ -399,14 +433,14 @@ export function validateReports(pack,reports,now,{root=null}={}) {
   }
   for(const id of changed) {
     if(pack.repair_scope==='frontier'&&!pack.frontier_ids?.includes(id)&&pack.before[id])errors.push(`out-of-frontier consumer cannot be repaired by Step 5: ${id}`);
-    const created=creatorById.get(id),review=reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
-    if(!now[id]||!review||(!created&&!pack.before[id]))errors.push(`unlicensed or unreviewed change ${id}`);
-    if(pack.rejected&&!created&&!decisions.some(r=>r.id===id&&['confirmed_fatal','confirmed_nonfatal'].includes(r.outcome)))errors.push(`change without confirmed adjudication ${id}`);
+    const created=creatorById.get(id),review=childReview(id)??reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
+    if(!now[id]||!review||review.post_sha256!==now[id]||(!created&&!pack.before[id]))errors.push(`unlicensed or unreviewed change ${id}`);
+    if(pack.rejected&&!created&&!corrected(id)&&!decisions.some(r=>r.id===id&&['confirmed_fatal','confirmed_nonfatal'].includes(r.outcome)))errors.push(`change without confirmed adjudication ${id}`);
   }
   for(const id of Object.keys(pack.before))if(!now[id])errors.push(`unlicensed deletion ${id}`);
   for(const id of creatorById.keys())if(!changed.includes(id))errors.push(`claimed creation without new item ${id}`);
   for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id))errors.push(`confirmed defect not repaired ${row.id}`);
-  for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
+  for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id)&&!corrected(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
   if(createdItems.length&&root){
     try{
       const identity=libraryIdentity(root),itemById=new Map(identity.items.map(value=>[value.id,value]));
@@ -438,17 +472,227 @@ export function validateReports(pack,reports,now,{root=null}={}) {
   return {errors,decisions,reviews,changed,created_items:createdItems};
 }
 
-export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
+// The original assignment did not license a false-positive edit. Only a
+// separately completed native adoption can reconcile that historical violation.
+export function adjudicationCorrectionWork(root,run,phase,round) {
+  const path=correctionProgressPath(workflowDir(root,run),phase,round);
+  return [...(existsSync(path)?[correctionPhase(phase)+':1']:[]),
+    ...(existsSync(scientificCorrectionProgressPath(workflowDir(root,run),phase,round))?[scientificCorrectionPhase(phase)+':1']:[]),
+    ...(existsSync(ownerFindingProgressPath(root,run,phase,round))?['1','2','3'].map(unit=>ownerFindingPhase(phase)+':'+unit):[])];
+}
+
+function inheritedContext(root,run,phase,round) {
+  if(!['initial','repeat'].includes(phase))return null;
+  const dir=workflowDir(root,run);
+  if(!existsSync(join(dir,'owner-inherited-repair-request.json')))return null;
+  const pack=readPack(root,run,phase,round),reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
+  const current=hashes(root),items=readLibraryItems(root);
+  return correctionRequest(root,run,phase,round,{pack,reports,current,items,dir,
+    statements:Object.fromEntries(items.map(row=>[row.id,row.statement_sha256])),
+    errors:validateReports(pack,reports,current,{root}).errors});
+}
+
+function scientificAdjudicationContext(root,run,phase,round) {
+  if(phase!=='repeat')return null;
+  const dir=workflowDir(root,run);
+  if(!existsSync(join(dir,'owner-adjudication-scientific-repair-request.json')))return null;
+  const pack=readPack(root,run,phase,round),items=readLibraryItems(root),current=hashes(root,items),contexts=reviewContexts(items);
+  const currentReviewCallback=id=>({post_sha256:current[id],review_context_sha256:contexts.hash(id,current)});
+  return scientificCorrectionRequest(root,run,phase,round,{pack,
+    reports:pack.units.map(unit=>read(workerReport(root,run,phase,round,unit))),
+    current,statements:Object.fromEntries(items.map(row=>[row.id,row.statement_sha256])),items,dir,currentReviewCallback,
+    ...(existsSync(scientificCorrectionProgressPath(dir,phase,round))
+      &&existsSync(workerReport(root,run,scientificCorrectionPhase(phase),round,'1'))
+      ?{allowCompletedContinuation:true,currentReview:reviewContextHashes(root,
+        [read(scientificCorrectionProgressPath(dir,phase,round)).subject])[
+          read(scientificCorrectionProgressPath(dir,phase,round)).subject]}:{})});
+}
+
+function advanceScientificAdjudication(root,run,phase,round) {
+  const context=scientificAdjudicationContext(root,run,phase,round);
+  if(!context)return null;
+  assertScientificCorrectionDrained(root,context);
+  const dir=workflowDir(root,run),path=scientificCorrectionProgressPath(dir,phase,round);
+  if(existsSync(path)){
+    const prior=read(path);
+    requireValue(prior.request.path===context.request.path&&prior.request.sha256===context.request.sha256,'scientific correction request changed');
+    verifyEvidence(prior.evidence);return prior;
+  }
+  const originalPack=readPack(root,run,phase,round),originalReports=originalPack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
+  const originalValidation=validateReports(originalPack,originalReports,hashes(root),{root});
+  requireValue(!originalValidation.errors.length,originalValidation.errors.join('\n'));
+  const identity=libraryIdentity(root),request=context.payload,correction=scientificCorrectionPhase(phase);
+  const pack={version:2,run,phase:correction,round,repair_scope:'frontier',
+    frontier_ids:[...gateFrontier(root,run)],units:['1'],assignments:{'1':[request.subject]},
+    before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),
+    home_pages:manifestHomes(root,run),seeds:[],impacts:[],cycles:[],failures:null,gateAssignments:{},
+    ledger_updates:[],input_evidence:context.evidence};
+  frozen(packPath(root,run,correction,round),pack);writeTasks(root,pack,'repair');
+  const task=workerReport(root,run,correction,round,'1').replace(/\.json$/,'.task.md');
+  writeFileSync(task,readFileSync(task,'utf8')+[
+    '', '# Native single-subject scientific scope restoration',
+    'Read root request '+context.request.path+' and its genuine bound original-owner evidence and proposed restoration.',
+    'Only items/'+request.subject+'.md is assigned for source editing. No other Source, prerequisite creation, shared metadata, original report, original tuple, original task or pack edits are authorized.',
+    'Restore the richest sound generic GR tetrad scope while retaining precise native typing. Future-directed must remain an additional qualification; only that subclass agrees with SR. Preserve all other sound clauses. Check the exact affected uses using original-owner evidence; do not repeat unaffected proof audits.',
+    'Actually repair the current narrowed Source, obtain a fresh review-context immediately after review, and return ordinary decisions:[], created_items:[], one genuine repaired review, downstream and exact downstream_uses.',
+    'Additionally return scientific_correction_adjudications:[{id,model,context_sha256,outcome,defect_type,reason,uncertain:false,source_urls:[],familiar:true}] using ONLY the exact frozen original tuple identity in the request. This is a separately attributed fresh effective decision; preserve the original decision/report unchanged. Restoring the original rich content requires effective outcome false_positive.',
+    'Return root_finding_resolutions:[{defect_id:"'+request.root_finding.defect_id+'",status:"fixed",subjects:["'+request.subject+'"],reason,uncertain:false,source_urls:[],familiar:true}]. This reports a native resolution and does not itself close the canonical ledger.',
+    'Bind all scientific evidence actually used, including nested files, by exact raw SHA256 in supporting_evidence. Report real content checks. Do not run software tests or claim independent certification. Run required proof-layout on the explicit changed item.', ''
+  ].join('\n'));
+  const progress={version:1,run,phase,round,correction_phase:correction,request:context.request,
+    subject:request.subject,evidence:{...context.evidence,
+      [packPath(root,run,correction,round)]:digest(readFileSync(packPath(root,run,correction,round),'utf8')),
+      [task]:digest(readFileSync(task,'utf8'))}};
+  frozen(path,progress);return progress;
+}
+
+function ownerFindingContext(root,run,phase,round) {
+  if(phase!=='repeat')return null;
+  const dir=workflowDir(root,run);
+  if(!existsSync(join(dir,'owner-finding-queue-request.json')))return null;
+  const items=readLibraryItems(root),progress=ownerFindingProgressPath(root,run,phase,round);
+  const continuation=existsSync(progress)&&['1','2','3'].every(unit=>existsSync(workerReport(root,run,ownerFindingPhase(phase),round,unit)));
+  const contexts=continuation?reviewContextHashes(root,read(progress).subjects):null;
+  return ownerFindingRequest(root,run,phase,round,{items,current:hashes(root,items),
+    statements:Object.fromEntries(items.map(row=>[row.id,row.statement_sha256])),dir,
+    allowCompletedContinuation:continuation,currentReviewCallback:id=>contexts?.[id]});
+}
+
+function advanceOwnerFindingQueue(root,run,phase,round) {
+  const context=ownerFindingContext(root,run,phase,round);
+  if(!context)return null;
+  const path=ownerFindingProgressPath(root,run,phase,round);
+  if(existsSync(path)){
+    const prior=read(path);
+    requireValue(prior.request.path===context.request.path&&prior.request.sha256===context.request.sha256,'owner finding queue request changed');
+    verifyEvidence(prior.evidence);return prior;
+  }
+  // Close the prior native scope correction on its genuine own snapshot before
+  // another authorized writer changes other sources. This is no gate attempt.
+  const scientificProgress=scientificCorrectionProgressPath(workflowDir(root,run),phase,round);
+  if(existsSync(scientificProgress)){
+    const prior=scientificAdjudicationContext(root,run,phase,round);
+    requireValue(prior?.continuation,'scope correction has not genuinely completed');
+    collect(root,run,scientificCorrectionPhase(phase),round,{correctionToken:scientificCollectionToken});
+  }
+  const identity=libraryIdentity(root),correction=ownerFindingPhase(phase);
+  const pack={version:2,run,phase:correction,round,repair_scope:'frontier',frontier_ids:[...gateFrontier(root,run)],
+    units:['1','2','3'],assignments:context.assignments,before:hashes(root),before_statements:statementHashes(root),
+    before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds:[],impacts:[],cycles:[],
+    failures:null,gateAssignments:{},ledger_updates:[],input_evidence:context.evidence,
+    owner_finding_queue:{request:context.request,payload:context.payload}};
+  frozen(packPath(root,run,correction,round),pack);writeTasks(root,pack,'repair');
+  const evidence={...context.evidence,[packPath(root,run,correction,round)]:digest(readFileSync(packPath(root,run,correction,round),'utf8'))};
+  for(const unit of pack.units){
+    const task=workerReport(root,run,correction,round,unit).replace(/\.json$/,'.task.md');
+    const entries=context.payload.entries.filter(row=>row.owner_lane===unit);
+    writeFileSync(task,readFileSync(task,'utf8')+[
+      '', '# Explicit canonical owner findings: native repair continuation',
+      'Request: '+context.request.path+'. Assigned findings: '+entries.map(row=>row.root_finding.defect_id).join(', ')+'.',
+      'Repair only assigned Source items and the exact necessary owning contract/metadata. No prerequisite creation, original report, original tuple, original task, frozen pack, baseline or workflow edits. Independent lanes preserve original scientific-owner grouping; work supplier before consumer within your lane.',
+      'Read the actual completed native outcome and original scientific owner evidence/proposals for each entry. Preserve the richest sound scope and completed native improvements. Reuse existing unaffected proof evidence with attribution; no repeated whole-proof audits. Proposals are evidence to check, never automatic proof authority.',
+      'Every entry requires a genuine minimal Source repair, fresh actual review-context and root_finding_resolutions row {defect_id,status:"fixed",subjects:[subject],reason,uncertain:false,source_urls:[],familiar:true}. Ordinary decisions:[] and created_items:[].',
+      'For entries containing original_tuple, also return scientific_correction_adjudications with ONLY that exact frozen id/model/context_sha256 identity and fresh effective outcome/reason/evidence. Preserve the original false-positive outcome for a distinct newly referred defect; do not pretend the original rejection was valid. Keep every original report/decision immutable.',
+      'Return genuine current repaired reviews, exact downstream affected uses and supporting_evidence raw hashes for all nested scientific evidence actually used. Explicitly repair only invalidated contract quotes and metadata under the shared write lock. Report all scoped content checks and proof-layout. No software tests, judges, certificates or claims of independent acceptance.', ''
+    ].join('\n'));
+    evidence[task]=digest(readFileSync(task,'utf8'));
+  }
+  const progress={version:1,run,phase,round,correction_phase:correction,request:context.request,
+    subjects:context.subjects,assignments:context.assignments,evidence};
+  frozen(path,progress);return progress;
+}
+
+export function advanceAdjudicationCorrection(root,run,phase,round) {
+  // Pending writers retain their frozen authority. Full scientific current-
+  // state authentication belongs at the drained completion join, not mid-edit.
+  const queueProgress=ownerFindingProgressPath(root,run,phase,round);
+  if(existsSync(queueProgress)){
+    const prior=read(queueProgress),pointer=read(join(workflowDir(root,run),'owner-finding-queue-request.json'));
+    requireValue(prior.run===run&&prior.phase===phase&&prior.round===round
+      &&resolve(root,pointer.request.path)===prior.request.path&&pointer.request.sha256===prior.request.sha256,
+      'frozen owner finding queue authority changed');
+    verifyEvidence(prior.evidence);
+    const completed=['1','2','3'].every(unit=>{
+      const path=join(root,'research',run+'-dispatch','alpha-repair-'+workerLabel(ownerFindingPhase(phase),round,unit)+'.result.json');
+      return existsSync(path)&&read(path).ok===true;
+    });
+    if(completed){
+      collect(root,run,phase,round);
+      return {...prior,parent_collected:true};
+    }
+    return prior;
+  }
+  const scientific=advanceScientificAdjudication(root,run,phase,round);
+  if(scientific){
+    const path=join(root,'research',run+'-dispatch','alpha-repair-'+workerLabel(scientificCorrectionPhase(phase),round,'1')+'.result.json');
+    if(!existsSync(path)||read(path).ok!==true)return scientific;
+  }
+  const findings=advanceOwnerFindingQueue(root,run,phase,round);
+  if(findings)return findings;
+  if(scientific)return scientific;
+  const context=inheritedContext(root,run,phase,round);
+  if(!context)return null;
+  assertCorrectionDrained(root,context);
+  const dir=workflowDir(root,run),path=correctionProgressPath(dir,phase,round);
+  const correction=correctionPhase(phase),request=context.payload;
+  if(existsSync(path)){
+    const prior=read(path);
+    requireValue(prior.request.path===context.request.path&&prior.request.sha256===context.request.sha256,'inherited correction request changed');
+    verifyEvidence(prior.evidence);return prior;
+  }
+  const identity=libraryIdentity(root);
+  const pack={version:2,run,phase:correction,round,repair_scope:'frontier',
+    frontier_ids:[...gateFrontier(root,run)],units:['1'],assignments:{'1':[request.subject]},
+    before:hashes(root),before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),
+    home_pages:manifestHomes(root,run),seeds:[],impacts:[],cycles:[],failures:null,gateAssignments:{},
+    ledger_updates:[],input_evidence:context.evidence};
+  frozen(packPath(root,run,correction,round),pack);writeTasks(root,pack,'repair');
+  const task=workerReport(root,run,correction,round,'1').replace(/\.json$/,'.task.md');
+  const instructions=[
+    '',
+    '# Native inherited-defect correction review',
+    context.violation,
+    'Root request: '+context.request.path+'. Read its bound before/current carriers and scientific evidence.',
+    'Only '+request.subject+' is assigned. Original confirmed supplier: '+request.supplier+'.',
+    'READ AND ADOPT ONLY: do not edit source, original reports, frozen tuples, contracts or shared metadata. If a further repair is necessary, report uncertainty and stop adoption.',
+    'Inspect the distinct inherited defect in the preserved before carrier, the exact delta, the confirmed supplier interface and actual consumer uses. Reuse genuine completed proof review only with attribution.',
+    'Return ordinary decisions:[], created_items:[], and one reviews row with disposition:unaffected for the exact existing current carrier. Obtain fresh review-contexts after the current review.',
+    'Also return inherited_adjudications:[{id,outcome:confirmed_fatal|confirmed_nonfatal,defect_type:logic,reason,uncertain:false,source_urls:[],familiar:true}]. This finding is separately attributed; omit model/context_sha256 and never invent an original judge tuple.',
+    'Return inherited_adoptions:[{id,disposition:adopted,original_scope_violation:true,reason}]. Confirm no rejected false-positive claim was changed. Preserve the original instruction violation explicitly.',
+    'Bind every additional scientific-review nested source, diff or prior receipt actually read in supporting_evidence using its exact raw SHA256. Reading the parent JSON does not authenticate those nested files.',
+    'Record actual affected consumer uses and necessary referrals in downstream; do not close downstream defects. Do not claim a source repair or independent acceptance for adopting existing content.',
+    ''
+  ].join('\n');
+  writeFileSync(task,readFileSync(task,'utf8')+instructions);
+  const progress={version:1,run,phase,round,correction_phase:correction,request:context.request,
+    subject:request.subject,violation:context.violation,evidence:context.evidence};
+  frozen(path,progress);return progress;
+}
+
+// The correction receipt is collected only inside its authenticated parent.
+const inheritedCollectionToken=Symbol('native inherited correction collection');
+const scientificCollectionToken=Symbol('native scientific correction collection');
+export function collect(root,run,phase,round,{deferImpactClosure=false,correctionToken=null}={}) {
+  if(phase.startsWith('owner-finding-correction-'))requireValue(correctionToken===ownerFindingCollectionToken,
+    'owner finding collection requires its authenticated native parent');
+  if(phase.startsWith('scientific-correction-'))requireValue(correctionToken===scientificCollectionToken,
+    'scientific correction collection requires its authenticated native parent');
+  if(phase.startsWith('correction-'))requireValue(correctionToken===inheritedCollectionToken,
+    'correction collection requires its authenticated native parent');
   const collectedPath=join(workflowDir(root,run),`${phase}-${round}-collected.json`);
   if(existsSync(collectedPath)){
     const prior=read(collectedPath);
-    if(prior.external_owner_repairs?.length)requireValue(deferImpactClosure&&ownerHandoffPhase(phase),'external owner repairs require deferred impact collection');
+    if(prior.external_owner_repairs?.length){
+      requireValue(ownerHandoffPhase(phase),'external owner repairs require deferred impact collection');
+      if(!deferImpactClosure)return verifyClosedOwnerCollection(root,run,phase,round,collectedPath,prior);
+    }
     verifyEvidence(prior.evidence);syncMaintenance(root,run,prior.statement_events??[]);return prior;
   }
   const pack=readPack(root,run,phase,round);
   requireValue(pack.run===run&&pack.phase===phase&&pack.round===round,'collection pack identity mismatch');
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
-  const current=hashes(root),reported={...current};
+  const collectionItems=pack.scientific_repair?readLibraryItems(root):null;
+  const current=hashes(root,collectionItems??undefined),reported={...current};
   let external={repairs:[],evidence:{}};
   if(deferImpactClosure) {
     requireValue(!pack.rejected,'only owner waves can defer impact closure');
@@ -461,8 +705,85 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     // retained in receipt.post and must receive a fresh native owner review.
     for(const repair of external.repairs)reported[repair.id]=pack.before[repair.id];
   }
-  const result=validateReports(pack,reports,reported,{root});
+  let ownerCorrection=null,ownerCompletion=null,ownerContext=null;
+  const ownerProgress=ownerFindingProgressPath(root,run,phase,round);
+  const ownerPack=['initial','repeat'].includes(phase)&&existsSync(ownerProgress)
+    ?readPack(root,run,ownerFindingPhase(phase),round):null;
+  let scientificCorrection=null,scientificAdopted=null,scientificContext=null;
+  let effectiveReports=reports;
+  const scientificProgress=scientificCorrectionProgressPath(workflowDir(root,run),phase,round);
+  if(['initial','repeat'].includes(phase)&&existsSync(scientificProgress)){
+    scientificContext=scientificAdjudicationContext(root,run,phase,round);
+    const progress=read(scientificProgress),context=scientificContext;
+    requireValue(context&&progress.request.path===context.request.path&&progress.request.sha256===context.request.sha256,
+      'missing or stale scientific correction request');
+    assertScientificCorrectionDrained(root,context);verifyEvidence(progress.evidence);
+    const historical={...(ownerPack?.before??reported),[context.payload.subject]:context.payload.narrowed_content_sha256};
+    const originalValidation=validateReports(pack,reports,historical,{root});
+    requireValue(!originalValidation.errors.length,originalValidation.errors.join('\n'));
+    const childPhase=scientificCorrectionPhase(phase),child=read(workerReport(root,run,childPhase,round,'1'));
+    scientificAdopted=scientificCorrectionCompletion(child,context.payload,current,
+      reviewContextHashes(root,[context.payload.subject])[context.payload.subject]);
+    scientificCorrection=collect(root,run,childPhase,round,{correctionToken:scientificCollectionToken});
+    const subject=context.payload.subject,originalKey=key(context.payload.original_tuple);
+    effectiveReports=reports.map(report=>String(report.unit)!==context.payload.unit?report:{...report,
+      decisions:report.decisions.map(row=>key(row)===originalKey?scientificAdopted.decision:row),
+      reviews:report.reviews.map(row=>row.id===subject?scientificAdopted.review:row)});
+  }
+  if(ownerPack){
+    ownerContext=ownerFindingContext(root,run,phase,round);
+    const progress=read(ownerProgress);
+    requireValue(ownerContext&&progress.request.path===ownerContext.request.path&&progress.request.sha256===ownerContext.request.sha256,
+      'missing or stale owner finding queue request');
+    verifyEvidence(progress.evidence);
+    const childPhase=ownerFindingPhase(phase),childReports=ownerPack.units.map(unit=>read(workerReport(root,run,childPhase,round,unit)));
+    const contexts=reviewContextHashes(root,ownerContext.subjects);
+    ownerCompletion=ownerFindingCompletion(ownerPack,childReports,current,id=>contexts[id]);
+    // The earlier native snapshot is genuine queue evidence, not a fabricated
+    // current map. Every original report must validate before any projection.
+    const historical={...ownerPack.before};
+    if(scientificContext)historical[scientificContext.payload.subject]=scientificContext.payload.narrowed_content_sha256;
+    const originals=validateReports(pack,reports,historical,{root});
+    requireValue(!originals.errors.length,originals.errors.join('\n'));
+    ownerCorrection=collect(root,run,childPhase,round,{correctionToken:ownerFindingCollectionToken});
+    const decisions=new Map(ownerCompletion.decisions.map(row=>[key(row),row]));
+    const reviews=new Map(ownerCompletion.reviews.map(row=>[row.id,row]));
+    effectiveReports=effectiveReports.map(report=>({...report,
+      decisions:report.decisions.map(row=>decisions.get(key(row))??row),
+      reviews:report.reviews.map(row=>reviews.get(row.id)??row)}));
+  }
+  const result=validateReports(pack,effectiveReports,reported,{root,
+    scientificCorrection:scientificAdopted?{token:scientificValidationToken,subject:scientificAdopted.subject}:null,
+    ownerFindingCorrection:ownerCompletion?{token:ownerFindingCollectionToken,reviews:ownerCompletion.reviews}:null});
+  if(ownerCompletion){
+    const assigned=new Set(result.reviews.map(row=>row.id));
+    result.reviews.push(...ownerCompletion.reviews.filter(row=>!assigned.has(row.id)));
+  }
+  let correction=null,adopted=null;
+  if(result.errors.length&&['initial','repeat'].includes(phase)){
+    const progressPath=correctionProgressPath(workflowDir(root,run),phase,round);
+    if(existsSync(progressPath)){
+      const context=inheritedContext(root,run,phase,round),progress=read(progressPath);
+      requireValue(context&&progress.request.path===context.request.path&&progress.request.sha256===context.request.sha256,'missing or stale native correction request');
+      assertCorrectionDrained(root,context);verifyEvidence(progress.evidence);
+      const correctionReport=read(workerReport(root,run,correctionPhase(phase),round,'1'));
+      adopted=correctionAdoption(correctionReport,context.payload,current,
+        reviewContextHashes(root,[context.payload.subject])[context.payload.subject]);
+      correction=collect(root,run,correctionPhase(phase),round,{correctionToken:inheritedCollectionToken});
+      // A separately completed native adoption supplies new authority now.
+      // The original false-positive tuple and scope violation remain evidence.
+      result.errors=[];
+      result.reviews=result.reviews.map(row=>row.id===adopted.review.id?adopted.review:row);
+    }
+  }
   if(result.errors.length)throw Error(result.errors.join('\n'));
+  if(pack.owner_finding_queue){
+    const contexts=reviewContextHashes(root,pack.owner_finding_queue.payload.entries.map(row=>row.subject));
+    ownerCompletion=ownerFindingCompletion(pack,reports,current,id=>contexts[id]);
+  }
+  const scientificContexts=collectionItems?reviewContexts(collectionItems):null;
+  const scientificCompletion=scientificRepairCompletion(pack,reports,current,
+    row=>scientificContexts.matches(row,current));
   const evidence={...(pack.input_evidence??{}),...external.evidence,[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
   verifyEvidence(evidence);
   const creationAuthors=new Map();
@@ -516,12 +837,51 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   }
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
   if(external.repairs.length)receipt.external_owner_repairs=external.repairs;
+  if(scientificCompletion)receipt.scientific_repair_completion=scientificCompletion;
+  if(correction){
+    const correctionPath=join(workflowDir(root,run),correctionPhase(phase)+'-'+round+'-collected.json');
+    Object.assign(receipt.evidence,correction.evidence,{[correctionPath]:digest(readFileSync(correctionPath,'utf8'))});
+    receipt.native_corrections=[{phase:correctionPhase(phase),round,id:adopted.review.id,
+      original_scope_violation:true,adoption:adopted.adoption}];
+    receipt.native_correction_decisions=[adopted.decision];
+    receipt.downstream=[...new Set([...receipt.downstream,...correction.downstream])];
+    receipt.ledger_updates.push(...correction.ledger_updates);
+  }
+  if(scientificCorrection){
+    const path=join(workflowDir(root,run),scientificCorrectionPhase(phase)+'-'+round+'-collected.json');
+    Object.assign(receipt.evidence,scientificContext.evidence,scientificCorrection.evidence,{[path]:digest(readFileSync(path,'utf8'))});
+    receipt.native_scientific_corrections=[{phase:scientificCorrectionPhase(phase),round,
+      original_decision:scientificContext.originalDecision,original_review:scientificContext.originalReview,
+      effective_decision:scientificAdopted.decision,review:scientificAdopted.review,
+      root_finding_resolution:scientificAdopted.root_finding_resolution,
+      request:scientificContext.request,projection:'subject-only separately attributed native correction'}];
+    receipt.downstream=[...new Set([...receipt.downstream,...scientificCorrection.downstream])];
+    receipt.ledger_updates.push(...scientificCorrection.ledger_updates);
+  }
+  if(pack.owner_finding_queue)receipt.owner_finding_completion=ownerCompletion;
+  if(ownerCorrection){
+    const path=join(workflowDir(root,run),ownerFindingPhase(phase)+'-'+round+'-collected.json');
+    Object.assign(receipt.evidence,ownerContext.evidence,ownerCorrection.evidence,{[path]:digest(readFileSync(path,'utf8'))});
+    receipt.native_owner_finding_decisions=ownerContext.payload.entries.map(entry=>{
+      const data=read(resolve(root,entry.root_finding.record.path)),finding=Array.isArray(data)?data[0]:data;
+      const resolution=ownerCompletion.root_finding_resolutions.find(row=>row.defect_id===finding.defect_id);
+      requireValue(resolution,'missing authenticated native finding resolution');
+      return {id:entry.subject,outcome:finding.severity==='fatal'?'confirmed_fatal':'confirmed_nonfatal',
+        reason:resolution.reason,root_finding_defect_id:finding.defect_id,
+        attribution:'Separately confirmed native owner finding; not an original judge tuple'};
+    });
+    receipt.native_owner_finding_corrections={request:ownerContext.request,completion:ownerCompletion,
+      original_decisions:reports.flatMap(report=>report.decisions).filter(row=>ownerCompletion.decisions.some(decision=>key(decision)===key(row))),
+      attribution:'Exact separately completed native repairs; original reports preserved'};
+    receipt.downstream=[...new Set([...receipt.downstream,...ownerCorrection.downstream])];
+    receipt.ledger_updates.push(...ownerCorrection.ledger_updates);
+  }
   receipt.restated=restatedIds(pack,diff(pack.before,current),statementHashes(root));
   const afterStatements=statementHashes(root);
   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
   // Gate workers may explicitly refer a failed, unassigned frontier carrier.
   // Retain that inventory for native review without inventing interface seeds.
-  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length&&pack.phase!=='gate'&&pack.basePhase!=='gate')receipt.downstream=[];
+  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length&&pack.phase!=='gate'&&pack.basePhase!=='gate'&&!phase.startsWith('correction-')&&!phase.startsWith('scientific-correction-')&&!scientificCorrection&&!ownerCorrection&&!phase.startsWith('owner-finding-correction-'))receipt.downstream=[];
   const frontier=gateFrontier(root,run);
   const direct=discoverDownstream({items:readLibraryItems(root),repairedIds:receipt.restated});
   const required=direct.filter(row=>frontier.has(row.id));
@@ -530,6 +890,16 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   if(receipt.statement_events.length)for(const id of discoveries)requireValue(typeof uses[id]==='string'&&uses[id].trim().length>=40,`missing exact downstream use for outside consumer: ${id}`);
   if(discoveries.length)for(const event of receipt.statement_events)Object.assign(event,{consumer_ids:discoveries,discovery_evidence:Object.fromEntries(discoveries.map(id=>[id,uses[id]]))});
   receipt.inventory_missing=required.filter(row=>!receipt.downstream.includes(row.id)).map(row=>row.id);
+  if(!deferImpactClosure&&receipt.inventory_missing.length){
+    const completion=ownerDownstreamInventory(root,run,phase,round,{pack,restated:receipt.restated,required,
+      missing:required.filter(row=>receipt.inventory_missing.includes(row.id)),reported:receipt.downstream,
+      current,statements:afterStatements,frontier});
+    if(completion){
+      receipt.downstream=[...new Set([...receipt.downstream,...completion.ids])];
+      Object.assign(receipt.evidence,completion.evidence);receipt.inventory_completion=completion.attribution;
+      receipt.inventory_missing=required.filter(row=>!receipt.downstream.includes(row.id)).map(row=>row.id);
+    }
+  }
   if(!deferImpactClosure)for(const id of receipt.inventory_missing)requireValue(false,`missing downstream inventory: ${id}`);
   // Merge compatibility evidence once, bound to the actual frozen rejection.
   // Never invent a judge verdict or re-label adjudication as an independent pass.
@@ -553,6 +923,61 @@ export function impactClosedPath(root,run,phase,round,progress=null) {
   requireValue(resolve(ref.path,'..')===resolve(dir)&&new RegExp(`^${phase}-${round}-closed(?:-[0-9]+)?\\.json$`).test(basename(ref.path)), 'invalid owner closure pointer');
   requireValue(existsSync(ref.path)&&digest(readFileSync(ref.path,'utf8'))===ref.sha256,'owner closure receipt changed');
   return ref.path;
+}
+
+// Rechecking a completed wave verifies its historical deferred intake; it never
+// re-adopts an outside author's carrier or substitutes for fresh native review.
+function verifyClosedOwnerCollection(root,run,phase,round,collectedPath,prior) {
+  const basePhase=phase.match(/^(impact-(?:initial|repeat))(?:-pass-[1-9][0-9]*)?$/)?.[1];
+  requireValue(basePhase&&prior.run===run&&prior.phase===phase&&prior.round===round,
+    'invalid historical external owner collection');
+  const progressPath=impactProgressPath(root,run,basePhase,round);
+  requireValue(existsSync(progressPath),'external owner repairs require deferred impact collection until native closure');
+  const progress=read(progressPath),passes=progress.passes;
+  requireValue(progress.version===2&&progress.run===run&&progress.phase===basePhase&&progress.round===round
+    &&progress.complete===true&&!progress.activeMaintenance&&progress.closed_receipt
+    &&Array.isArray(passes)&&new Set(passes).size===passes.length&&passes.includes(phase)
+    &&passes.every(pass=>ownerHandoffPhase(pass)&&(pass===basePhase||pass.startsWith(basePhase+'-pass-')))
+    &&progress.activePhase===passes.at(-1),'external owner repair wave lacks complete native closure');
+  const closedPath=impactClosedPath(root,run,basePhase,round,progress),closed=read(closedPath);
+  requireValue(closed.run===run&&closed.phase===basePhase&&closed.round===round
+    &&Array.isArray(closed.errors)&&closed.errors.length===0
+    &&closed.evidence?.[collectedPath]===createHash('sha256').update(readFileSync(collectedPath)).digest('hex')
+    &&Object.entries(prior.evidence??{}).every(([path,hash])=>closed.evidence[path]===hash),
+    'native closure does not bind the original deferred collection');
+  verifyEvidence(closed.evidence);
+  const frontier=gateFrontier(root,run),current={};
+  for(const id of frontier){
+    current[id]=itemHashGuard(readFileSync(join(root,'items',id+'.md'),'utf8'));
+    requireValue(current[id]===closed.post?.[id],'source changed after external owner native closure: '+id);
+  }
+  const items=readLibraryItems(root),contexts=reviewContexts(items);
+  let legacyCurrent=null;
+  const later=passes.slice(passes.indexOf(phase)+1).map(pass=>{
+    const path=join(workflowDir(root,run),pass+'-'+round+'-collected.json');
+    requireValue(closed.evidence[path],'native closure omits a completed continuation');
+    const receipt=read(path),packFile=packPath(root,run,pass,round),pack=readPack(root,run,pass,round);
+    const packHash=closed.evidence[packFile];
+    requireValue(receipt.run===run&&receipt.phase===pass&&receipt.round===round
+      &&pack.run===run&&pack.phase===pass&&pack.round===round,'wrong completed continuation identity');
+    requireValue(/^[a-f0-9]{64}$/.test(packHash??'')&&receipt.evidence?.[packFile]===packHash
+      &&createHash('sha256').update(readFileSync(packFile)).digest('hex')===packHash,
+      'native closure does not bind the actual continuation pack');
+    return {receipt,pack};
+  });
+  for(const repair of prior.external_owner_repairs){
+    const review=closed.reviews?.find(row=>row.id===repair.id);
+    requireValue(repair.phase===phase&&repair.round===round&&frontier.has(repair.id)
+      &&review&&['repaired','unaffected'].includes(review.disposition)
+      &&review.post_sha256===closed.post?.[repair.id]&&evidenceText(review)
+      &&/^[a-f0-9]{64}$/.test(review.review_context_sha256??'')
+      &&(review.review_context_sha256===contexts.hash(repair.id,current)
+        ||contexts.matches(review,legacyCurrent??=hashes(root,items),closed.post))
+      &&later.some(({receipt,pack})=>Object.values(pack.assignments).some(ids=>ids.includes(repair.id))
+        &&receipt.reviews?.some(row=>JSON.stringify(row)===JSON.stringify(review))),
+      'external owner repair lacks fresh completed native review: '+repair.id);
+  }
+  return closed;
 }
 
 export function impactPasses(root,run,phase,round) {
@@ -583,6 +1008,40 @@ export function assertImpactProgress(packs,pending,current) {
 /** Called only after all three dispatches for the active pass have drained.
  * Completed evidence is immutable. Only missing or stale downstream reviews
  * enter the next three-owner pass; certification has not begun at this point. */
+function queueScientificRepair(root,run,phase,round,path,progress,request,current,items,frontier,pending) {
+  const nextPhase=nextImpactPhase(phase,progress),pair=new Set(request.subjects);
+  const {order,cycles}=orderImpacts(items,pending.filter(id=>!pair.has(id)));
+  const assignments={'1':[...request.subjects],'2':[],'3':[]};
+  order.forEach((id,index)=>assignments[index<Math.ceil(order.length/2)?'2':'3'].push(id));
+  const identity=libraryIdentity(root);
+  const pack={version:2,run,phase:nextPhase,basePhase:phase,round,repair_scope:'frontier',frontier_ids:[...frontier].sort(),
+    units:['1','2','3'],assignments,before:current,before_statements:Object.fromEntries(items.map(row=>[row.id,row.statement_sha256])),
+    before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds:[],impacts:[],cycles,
+    failures:null,gateAssignments:{},ledger_updates:[],input_evidence:request.evidence,
+    scientific_repair:{request:request.request,payload:request.payload}};
+  frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
+  const task=workerReport(root,run,nextPhase,round,'1').replace(/\.json$/,'.task.md');
+  const instructions=[
+    '',
+    '# Root scientific repair, native owner 1 only',
+    'Root request: '+request.request.path+'. Root finding: '+request.payload.root_finding.defect_id+'.',
+    'Repair the coupled scientific pair in this order: '+request.subjects.join(', ')+'. Other lanes own only ordinary pending-context targets.',
+    'This is scientific source authoring and review, separate from formatting repair or outside handoff. Preserve all original completed packs/reports and sound existing indexing corrections. Restore the richest sound approved scope from the actual arguments; private proposals are evidence, not proof authority.',
+    'Both requested sources must receive necessary repairs and genuine current native repaired reviews. After the final coupled edits, examine their interface effects and bind both final review contexts; never refresh stale hashes without that examination.',
+    'Return root_finding_resolutions:[{defect_id:'+request.payload.root_finding.defect_id+',status:fixed,subjects:'+JSON.stringify(request.subjects)+',reason,uncertain:false,source_urls:[],familiar:true}]. Propose the corresponding canonical root-defect update in ledger_updates; the root owns adoption of that ledger proposal.',
+    'Do not invent a judge tuple, independent acceptance, canonical closure or certificate. If the requested rich scope is not proved, report uncertainty and leave the finding unresolved. Units 2 and 3 do not own this root-finding resolution.',
+    'Bind all additional nested scientific evidence actually read in supporting_evidence. Carry every necessary downstream affected-use referral in the ordinary report.',
+    ''
+  ].join('\n');
+  writeFileSync(task,readFileSync(task,'utf8')+instructions);
+  progress.scientific_repairs??=[];
+  progress.scientific_repairs.push({request:request.request,evidence:request.evidence,phase:nextPhase,
+    subjects:request.subjects,root_finding:request.payload.root_finding.defect_id,status:'pending'});
+  progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});
+  progress.activePhase=nextPhase;progress.complete=false;atomic(path,progress);
+  return {complete:false,pack,passes:progress.passes};
+}
+
 export function advanceImpact(root,run,phase,round) {
   requireValue(['impact-initial','impact-repeat','gate'].includes(phase),'invalid base owner phase');
   const path=impactProgressPath(root,run,phase,round);
@@ -591,25 +1050,37 @@ export function advanceImpact(root,run,phase,round) {
   for(const row of progress.superseded??[])verifyEvidence(row.evidence);
   verifyEvidence(progress.maintenance_evidence);
   for(const repair of progress.format_repairs??[])verifyEvidence(repair.evidence);
+  for(const repair of progress.scientific_repairs??[])verifyEvidence(repair.evidence);
+  let scientificRequest=null;
   if(progress.complete){
     const closedPath=impactClosedPath(root,run,phase,round,progress);
-    if(existsSync(closedPath))verifyEvidence(read(closedPath).evidence);
-    if(!existsSync(join(workflowDir(root,run),'owner-format-repair-request.json')))return {complete:true,phase,round,passes:progress.passes};
-    const current=hashes(root),frontier=gateFrontier(root,run);
-    const request=ownerFormatRepair(root,run,phase,round,progress,current,frontier,closedPath);
-    if(!request)return {complete:true,phase,round,passes:progress.passes};
-    const nextPhase=nextImpactPhase(phase,progress),identity=libraryIdentity(root);
-    const assignments={'1':[],'2':[],'3':[]},{order,cycles}=orderImpacts(identity.items,request.subjects);
-    order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
-    const pack={version:2,run,phase:nextPhase,basePhase:phase,round,repair_scope:'frontier',frontier_ids:[...frontier].sort(),units:['1','2','3'],assignments,
-      before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
-      seeds:[],impacts:[],cycles,failures:request.failures,gateAssignments:{},ledger_updates:[],input_evidence:request.evidence,
-      review_contexts:reviewContextHashes(root,request.subjects),format_repair:{request:request.request,payload:request.payload,gate_request:request.gate_request}};
-    frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
-    progress.format_repairs??=[];
-    progress.format_repairs.push({request:request.request,evidence:request.evidence,phase:nextPhase,subjects:request.subjects});
-    progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;progress.complete=false;
-    atomic(path,progress);return {complete:false,pack,passes:progress.passes};
+    const closed=existsSync(closedPath)?read(closedPath):null;
+    if(closed)verifyEvidence(closed.evidence);
+    if(existsSync(join(workflowDir(root,run),'owner-scientific-repair-request.json'))){
+      const current=hashes(root),items=readLibraryItems(root),frontier=gateFrontier(root,run);
+      requireValue(closed&&[...frontier].every(id=>current[id]===closed.post?.[id]),
+        'frontier content changed after closure; reconcile authorship before scientific reopening');
+      scientificRequest=ownerScientificRepair(root,run,phase,round,progress,current,items,frontier);
+    }
+    if(scientificRequest)progress.complete=false;
+    else {
+      if(!existsSync(join(workflowDir(root,run),'owner-format-repair-request.json')))return {complete:true,phase,round,passes:progress.passes};
+      const current=hashes(root),frontier=gateFrontier(root,run);
+      const request=ownerFormatRepair(root,run,phase,round,progress,current,frontier,closedPath);
+      if(!request)return {complete:true,phase,round,passes:progress.passes};
+      const nextPhase=nextImpactPhase(phase,progress),identity=libraryIdentity(root);
+      const assignments={'1':[],'2':[],'3':[]},{order,cycles}=orderImpacts(identity.items,request.subjects);
+      order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+      const pack={version:2,run,phase:nextPhase,basePhase:phase,round,repair_scope:'frontier',frontier_ids:[...frontier].sort(),units:['1','2','3'],assignments,
+        before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
+        seeds:[],impacts:[],cycles,failures:request.failures,gateAssignments:{},ledger_updates:[],input_evidence:request.evidence,
+        review_contexts:reviewContextHashes(root,request.subjects),format_repair:{request:request.request,payload:request.payload,gate_request:request.gate_request}};
+      frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
+      progress.format_repairs??=[];
+      progress.format_repairs.push({request:request.request,evidence:request.evidence,phase:nextPhase,subjects:request.subjects});
+      progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;progress.complete=false;
+      atomic(path,progress);return {complete:false,pack,passes:progress.passes};
+    }
   }
   if(progress.activeMaintenance){
     const pack=maintenancePack(root,run,progress.activeMaintenance);
@@ -635,6 +1106,17 @@ export function advanceImpact(root,run,phase,round) {
   const completed=progress.passes.map(pass=>read(join(workflowDir(root,run),`${pass}-${round}-collected.json`)));
   for(const receipt of completed)verifyEvidence(receipt.evidence);
   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root),items=readLibraryItems(root);
+  for(const repair of progress.scientific_repairs??[])if(repair.status==='pending'&&repair.phase===active.phase){
+    const receipt=completed.find(row=>row.phase===active.phase);
+    const completionContexts=reviewContexts(items);
+    const completion=scientificRepairCompletion(active,active.units.map(unit=>read(workerReport(root,run,active.phase,round,unit))),
+      current,row=>completionContexts.matches(row,current));
+    requireValue(completion&&receipt.scientific_repair_completion?.request.sha256===repair.request.sha256,
+      'scientific repair lacks genuine current completion');
+    const receiptPath=join(workflowDir(root,run),active.phase+'-'+round+'-collected.json');
+    repair.status='consumed';repair.completion={path:receiptPath,sha256:digest(readFileSync(receiptPath,'utf8'))};
+    atomic(path,progress);
+  }
   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
   const maintenanceChanges=maintenance.completed_changes.filter(row=>maintenanceIds.has(row.pack));
   const changed=diff(base.before,current),rawSeeds=[...new Set([...(base.seeds??[]),...completed.flatMap(receipt=>receipt.restated??receipt.changed),...maintenanceChanges.filter(row=>row.before_statement_sha256!==row.after_statement_sha256).map(row=>row.id)])];
@@ -661,6 +1143,8 @@ export function advanceImpact(root,run,phase,round) {
   const contexts=reviewContexts(items);
   const snapshots=new Map([sourceReceipt,...completed].filter(Boolean).flatMap(receipt=>receipt.reviews.map(row=>[row.id,receipt.post])));
   const pending=[...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id))).sort();
+  scientificRequest??=ownerScientificRepair(root,run,phase,round,progress,current,items,scope.frontier);
+  if(scientificRequest)return queueScientificRepair(root,run,phase,round,path,progress,scientificRequest,current,items,scope.frontier,pending);
   if(pending.length) {
     assertImpactProgress(progress.passes.map(pass=>readPack(root,run,pass,round)),pending,current);
     const nextPhase=nextImpactPhase(phase,progress);
@@ -675,17 +1159,20 @@ export function advanceImpact(root,run,phase,round) {
     progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;atomic(path,progress);
     return {complete:false,pack,passes:progress.passes};
   }
+  requireValue((progress.scientific_repairs??[]).every(row=>row.status==='consumed'),
+    'root scientific repair still lacks completed native resolution');
   const outside=prepareMaintenance(root,run);
   if(!outside.complete){
     progress.activeMaintenance=outside.pack.id;
     if(!progress.work_order.some(row=>row.kind==='maintenance'&&row.id===outside.pack.id))progress.work_order.push({kind:'maintenance',id:outside.pack.id});
     atomic(path,progress);return {complete:false,maintenance:outside.pack,passes:progress.passes};
   }
-  const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{},...(progress.format_repairs??[]).map(row=>row.evidence));
+  const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{},...(progress.format_repairs??[]).map(row=>row.evidence),...(progress.scientific_repairs??[]).map(row=>row.evidence));
   for(const pass of progress.passes){const p=join(workflowDir(root,run),`${pass}-${round}-collected.json`);evidence[p]=digest(readFileSync(p,'utf8'));}
   for(const collection of maintenance.collections.filter(row=>maintenanceIds.has(row.pack)))evidence[join(root,collection.path)]=collection.sha256;
   const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,restated:seeds,post:current,evidence,downstream:scope.targets,consumer_maintenance:scope.maintenance,maintenance_packs:[...maintenanceIds],ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
-  const closedPath=join(workflowDir(root,run),`${phase}-${round}-closed${progress.format_repairs?.length?`-${progress.format_repairs.length+1}`:''}.json`);
+  const reopenedCount=(progress.format_repairs?.length??0)+(progress.scientific_repairs?.length??0);
+  const closedPath=join(workflowDir(root,run),phase+'-'+round+'-closed'+(reopenedCount?'-'+(reopenedCount+1):'')+'.json');
   frozen(closedPath,receipt);
   progress.closed_receipt={path:closedPath,sha256:digest(readFileSync(closedPath,'utf8'))};
   progress.complete=true;atomic(path,progress);
@@ -837,7 +1324,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
     latest_adjudication_round:phase==='impact-repeat'?round:(prior?.latest_adjudication_round??null)};
   if(phase==='impact-repeat') {
     const frontier=read(join(dir,'frontier.json'));
-    const decisions=sourceResult.decisions.map(d=>({run,round,id:d.id,decision:d.outcome==='confirmed_fatal'?'confirmed-fatal':'rejected-finding',resolved:true,basis:d.reason,item_sha256:readPack(root,run,'repeat',round).before[d.id]}));
+    const decisions=[...sourceResult.decisions,...(sourceResult.native_correction_decisions??[]),...(sourceResult.native_owner_finding_decisions??[])].map(d=>({run,round,id:d.id,decision:d.outcome==='confirmed_fatal'?'confirmed-fatal':'rejected-finding',resolved:true,basis:d.reason,item_sha256:readPack(root,run,'repeat',round).before[d.id]}));
     const byId=new Map();for(const row of decisions){const old=byId.get(row.id);if(!old||row.decision==='confirmed-fatal')byId.set(row.id,row);}
     const threshold=assessFatalThreshold({frontier,round,expectedIds:[...byId.keys()],decisions:[...byId.values()]});
     if(threshold.errors.length)throw Error(threshold.errors.join('\n'));

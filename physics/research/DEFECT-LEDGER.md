@@ -1,15 +1,15 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 8c2386008faf by `tools/physics-support/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ b51a4fff8d74 by `tools/physics-support/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 2539 |
+| defects caught before publication | 3117 |
 | now mechanically prevented | 0 |
 | escaped to publication | 0 |
-| still open | 38 |
+| still open | 84 |
 
 ## physics-cm-qm-gr-79-2026-10-11 — 1605 row(s)
 
@@ -132,6 +132,42 @@
 | missing-explicit-prerequisite | 1 |  |  |
 | missing-map | 1 |  |  |
 
+## physics-td-qft-rpm-62-2026-10-14 — 578 row(s)
+
+| subclass | 3a-adjudicate | 4-judge | 5-adjudicate | owner | 5a-adjudicate |
+|---|---|---|---|---|---|
+| other | 2 | 1 | 94 | 18 |  |
+| citation-inaccurate | 44 |  | 27 | 4 | 1 |
+| missing-hypothesis | 47 |  |  | 15 | 2 |
+| undefined-notation | 57 |  |  | 2 |  |
+| invalid-inference | 9 |  | 42 |  |  |
+| ill-formed | 36 |  |  |  |  |
+| unlicensed-inference | 33 |  |  | 1 |  |
+| false-or-overstrong-statement | 24 |  |  | 1 | 1 |
+| unsupported-inference | 13 |  |  |  |  |
+| ill-typed-claim | 8 |  |  |  | 2 |
+| missing-choice-scope | 5 |  |  | 4 |  |
+| ill-typed-construction | 6 |  |  | 3 |  |
+| frontmatter-schema | 9 |  |  |  |  |
+| scope-drop |  |  |  | 7 | 1 |
+| citation-missing | 7 |  |  |  |  |
+| reader-repair | 6 |  |  |  |  |
+| false-claim | 6 |  |  |  |  |
+| contract-mismatch | 6 |  |  |  |  |
+| false-or-overstrong-title | 5 |  |  |  |  |
+| citation-misattributed | 5 |  |  |  |  |
+| arithmetic-error | 3 |  |  |  | 1 |
+| missing-justification | 4 |  |  |  |  |
+| overstrong-title-or-statement | 3 |  |  |  |  |
+| invalid-witness | 2 |  |  |  |  |
+| missing-case | 2 |  |  |  |  |
+| citation-truncated | 2 |  |  |  |  |
+| undefined-term | 2 |  |  |  |  |
+| missing-map |  |  | 2 |  |  |
+| scope-loss | 1 |  |  |  |  |
+| source-misdescription | 1 |  |  |  |  |
+| citation-inflated |  |  |  |  | 1 |
+
 ## Open
 
 - `physics-em-sr-40-2026-10-08-batch-1-published-char2-symmetry` physics-em-sr-40-2026-10-08 · false-claim · def-alternating-k-linear-map
@@ -172,3 +208,49 @@
 - `physics-cm-qm-gr-79-2026-10-11-owner-refuter71-tt-notation` physics-cm-qm-gr-79-2026-10-11 · undefined-notation · thm-gr-tt-plane-wave-solutions
 - `physics-cm-qm-gr-79-2026-10-11-3a-batch-74-producer71-empty-compact-open` physics-cm-qm-gr-79-2026-10-11 · ill-formed · thm-gr-flat-linearized-curvature-and-gauge
 - `physics-cm-qm-gr-79-2026-10-11-step5-v2-impact-initial-r1-u1-perfect-fluid-data-consumer` physics-cm-qm-gr-79-2026-10-11 · other · ex-gr-perfect-fluid-energy-conditions
+- `physics-td-qft-rpm-62-2026-10-14-3a-batch-19-producer-fourier` physics-td-qft-rpm-62-2026-10-14 · citation-inaccurate · thm-tdmath-ornstein-uhlenbeck-model
+- `physics-td-qft-rpm-62-2026-10-14-3a-batch-19-producer-choice` physics-td-qft-rpm-62-2026-10-14 · missing-choice-scope · thm-tdmath-ornstein-uhlenbeck-model
+- `tdqftrpm62-b8-tagged-contact-open` physics-td-qft-rpm-62-2026-10-14 · ill-typed-construction · def-td-thermal-contact-constraints
+- `tdqft62-b27-3a-worldline-label` physics-td-qft-rpm-62-2026-10-14 · false-or-overstrong-statement · def-rpm-spacetime-observer-and-worldline
+- `tdqft62-b27-3a-bmt-postulate-domain` physics-td-qft-rpm-62-2026-10-14 · ill-formed · post-rpm-bmt-dipole-model
+- `physics-td-qft-rpm-62-2026-10-14-3a-b16-outside-map-citation-def-td-equilibrium-state-domain` physics-td-qft-rpm-62-2026-10-14 · citation-inaccurate · def-td-equilibrium-state-domain
+- `physics-td-qft-rpm-62-2026-10-14-3a-b16-outside-map-citation-post-td-bulk-additivity` physics-td-qft-rpm-62-2026-10-14 · citation-inaccurate · post-td-bulk-additivity
+- `physics-td-qft-rpm-62-2026-10-14-3a-b16-outside-map-citation-def-td-process-and-protocol` physics-td-qft-rpm-62-2026-10-14 · citation-inaccurate · def-td-process-and-protocol
+- `physics-td-qft-rpm-62-2026-10-14-3a-b52-lorentz-topology-open` physics-td-qft-rpm-62-2026-10-14 · ill-formed · lem-qft-photon-covariance-spectrum
+- `physics-td-qft-rpm-62-2026-10-14-3a-b52-historical-boost-open` physics-td-qft-rpm-62-2026-10-14 · unlicensed-inference · lem-qft-photon-covariance-spectrum
+- `physics-td-qft-rpm-62-2026-10-14-3a-b52-photon-continuity-open` physics-td-qft-rpm-62-2026-10-14 · unlicensed-inference · pthm-qft-photon-physical-properties
+- `physics-td-qft-rpm-62-2026-10-14-3a-batch-58-producer-point-family` physics-td-qft-rpm-62-2026-10-14 · false-or-overstrong-statement · lem-qft-free-domain-observables
+- `physics-td-qft-rpm-62-2026-10-14-3a-batch-54-outside-scalar-choice` physics-td-qft-rpm-62-2026-10-14 · missing-hypothesis · cor-qft-example-scalar-tree-coefficients
+- `physics-td-qft-rpm-62-2026-10-14-3a-batch-54-outside-pauli-choice` physics-td-qft-rpm-62-2026-10-14 · missing-hypothesis · lem-qft-example-dirac-pauli-square
+- `physics-td-qft-rpm-62-2026-10-14-3a-batch-54-outside-pauli-syntax` physics-td-qft-rpm-62-2026-10-14 · ill-formed · lem-qft-example-dirac-pauli-square
+- `physics-td-qft-rpm-62-2026-10-14-3a-batch-44-ccr-separability-definition` physics-td-qft-rpm-62-2026-10-14 · undefined-notation · lem-qft-fock-ccr-car
+- `physics-td-qft-rpm-62-2026-10-14-3a-batch-44-segal-separability-definition` physics-td-qft-rpm-62-2026-10-14 · undefined-notation · lem-qft-segal-weyl-domain
+- `physics-td-qft-rpm-62-2026-10-14-3a-b15-external-maintenance-post-nrqm-many-body-canonical-equilibrium-ensemble` physics-td-qft-rpm-62-2026-10-14 · frontmatter-schema · post-nrqm-many-body-canonical-equilibrium-ensemble
+- `physics-td-qft-rpm-62-2026-10-14-3a-b15-external-maintenance-post-nrqm-framework-autonomous-dynamics` physics-td-qft-rpm-62-2026-10-14 · frontmatter-schema · post-nrqm-framework-autonomous-dynamics
+- `physics-td-qft-rpm-62-2026-10-14-3a-b15-external-maintenance-pthm-nrqm-many-body-thermal-equilibrium-characterization` physics-td-qft-rpm-62-2026-10-14 · frontmatter-schema · pthm-nrqm-many-body-thermal-equilibrium-characterization
+- `physics-td-qft-rpm-62-2026-10-14-3a-b15-external-maintenance-pthm-nrqm-many-body-thermal-occupation-predictions` physics-td-qft-rpm-62-2026-10-14 · frontmatter-schema · pthm-nrqm-many-body-thermal-occupation-predictions
+- `physics-td-qft-rpm-62-2026-10-14-3a-b15-external-maintenance-thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace` physics-td-qft-rpm-62-2026-10-14 · frontmatter-schema · thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace
+- `physics-td-qft-rpm-62-2026-10-14-3a-b15-external-maintenance-lem-nrqm-many-body-two-level-thermal-formulas` physics-td-qft-rpm-62-2026-10-14 · frontmatter-schema · lem-nrqm-many-body-two-level-thermal-formulas
+- `physics-td-qft-rpm-62-2026-10-14-3a-b15-external-maintenance-lem-nrqm-composites-hilbert-tensor-construction` physics-td-qft-rpm-62-2026-10-14 · frontmatter-schema · lem-nrqm-composites-hilbert-tensor-construction
+- `physics-td-qft-rpm-62-2026-10-14-3a-b15-external-maintenance-lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma` physics-td-qft-rpm-62-2026-10-14 · frontmatter-schema · lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-fock-generic-h-relation-scope` physics-td-qft-rpm-62-2026-10-14 · scope-drop · def-qft-fock-and-test-spaces
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-unlocked-metadata-u26` physics-td-qft-rpm-62-2026-10-14 · other · step5-shared-metadata-integrity-u26
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-unlocked-metadata-u27` physics-td-qft-rpm-62-2026-10-14 · other · step5-shared-metadata-integrity-u27
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-finite-dyson-hermitian-im-notation` physics-td-qft-rpm-62-2026-10-14 · undefined-notation · thm-qft-example-finite-dyson-unitarity
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-lattice-hamiltonian-generator-restatement` physics-td-qft-rpm-62-2026-10-14 · citation-inaccurate · pthm-qft-lattice-gauge-existence
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-unlocked-metadata-u18` physics-td-qft-rpm-62-2026-10-14 · other · step5-shared-metadata-integrity-u18
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-initial-false-positive-consumer-edit` physics-td-qft-rpm-62-2026-10-14 · other · step5-initial-u42-instruction-boundary
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-missing-frontier-inventory` physics-td-qft-rpm-62-2026-10-14 · other · step5-initial-frontier-routing
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-reservoir-complete-record-and-global-feasible-model` physics-td-qft-rpm-62-2026-10-14 · missing-hypothesis · pthm-td-reservoir-minimum-principles
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-clapeyron-reversible-entropy-premises` physics-td-qft-rpm-62-2026-10-14 · missing-hypothesis · pthm-td-clapeyron-local
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-deferred-handoff-verification-replay` physics-td-qft-rpm-62-2026-10-14 · other · step5-closed-deferred-handoff-gate-verification
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-tetrad-generic-gr-scope-restoration` physics-td-qft-rpm-62-2026-10-14 · scope-drop · def-rpm-spacetime-observer-and-worldline
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-empirical-definition-box-choice` physics-td-qft-rpm-62-2026-10-14 · missing-choice-scope · def-tdmath-periodized-empirical-field
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-coulomb-physical-maximal-extension` physics-td-qft-rpm-62-2026-10-14 · missing-hypothesis · pthm-rpm-relativistic-coulomb-scattering
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-hrt-speed-source-authors` physics-td-qft-rpm-62-2026-10-14 · citation-inaccurate · pthm-rpm-h-massive-and-null-time-motion
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-compression-no-thermal-transfer` physics-td-qft-rpm-62-2026-10-14 · missing-hypothesis · ex-td-irreversible-adiabatic-compression
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-first-law-adiabatic-definition-restatement` physics-td-qft-rpm-62-2026-10-14 · missing-hypothesis · post-td-first-law-energy
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-log-contact-directional-thermal-records` physics-td-qft-rpm-62-2026-10-14 · missing-hypothesis · ex-td-positive-log-contact-witness
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-thermometer-product-operational-records` physics-td-qft-rpm-62-2026-10-14 · missing-hypothesis · cex-td-degenerate-thermometer-comparison
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-profile-distinct-convention-and-supplier-use` physics-td-qft-rpm-62-2026-10-14 · ill-typed-construction · ex-td-local-equilibrium-profile
+- `physics-td-qft-rpm-62-2026-10-14-owner-step5-phase-rule-entropy-neutral-auxiliary-scope` physics-td-qft-rpm-62-2026-10-14 · scope-drop · pthm-td-regular-gibbs-phase-rule

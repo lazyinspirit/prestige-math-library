@@ -1,0 +1,490 @@
+[
+  {
+    "order": 277,
+    "id": "td-cycles-and-low-temperature",
+    "kind": "A",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Cycles And Low Temperature",
+    "companion": "td-cycles-and-low-temperature-examples",
+    "requires": [
+      "the-logarithm-and-general-powers",
+      "td-potentials-and-responses"
+    ],
+    "items": [
+      {
+        "id": "def-td-reservoir-cycle",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Ideal-reservoir thermodynamic cycles",
+        "statement": "Fix a working system $s$ of constitution $c$ and a closed process record $P\\in\\mathcal P_{\\mathrm{cl}}(s)$ with equilibrium endpoints as in [[def-td-process-and-protocol]]. A cycle of the working system is such a record with $x_P^-=x_P^+$; the reservoirs and work store need not return to their initial energy states.\n\nAn ideal thermal reservoir $b$ has an energy interval $J_b\\subseteq\\mathbb R$ measured in joules and a finite entropy function $S_b:J_b\\to\\mathbb R$ measured in $\\mathrm{J\\,K^{-1}}$. On the energy interval admitted for a cycle, assume the exact affine law\n$\nS_b(E_b)=s_{b,0}+\\frac{E_b}{T_b}\n$\nfor a constant $s_{b,0}$ and fixed $T_b>0$ kelvins. Thus $S_b'(E_b)=1/T_b$ in the interior and every admitted endpoint change is exactly $\\Delta S_b=\\Delta E_b/T_b$. This constant is the absolute thermodynamic temperature under [[def-td-temperature-pressure-chemical-potential]]. The affine entropy law on the admitted interval is the ideal-bath model; a finite reservoir whose temperature changes is outside this definition.\n\nAn ideal work store is a named auxiliary with an energy coordinate $E_w$ measured in joules and an assigned entropy $S_w(E_w)=s_w$ constant on the energy interval used by the cycle. It exchanges only mechanical work and no matter or heat. Its energy may change, while its entropy change is zero by this model definition.\n\nA two-reservoir cycle contains one working-system cycle, one hot bath at $T_h$, one cold bath at $T_c$, and the ideal work store. They lie inside one isolated outer boundary in the sense of [[def-td-system-and-permitted-exchanges]], so the full compound has no external matter or energy transfer. There are no unlisted heat, work, matter, kinetic-energy, or external-potential-energy changes. The admitted process and transfer signs are those of [[def-td-process-and-protocol]]. The model declares the endpoint entropy split\n$\nS_{\\mathrm{tot}}=S_{\\mathrm{ws}}(x_{\\mathrm{ws}})+S_h(E_h)+S_{\\mathrm{cold}}(E_c)+S_w(E_w),\n$\nwhere $S_{\\mathrm{ws}}$ is the working-system entropy and the bath and work-store functions are those defined here. This additive constituent split is assumed to be one admitted by [[post-td-concave-fundamental-entropy]] and is the entropy supplied to [[post-td-macroscopic-second-law]]; $S_w$ contributes zero change. Reversibility of the full record is as in [[def-td-reversible-process]].\n\nWhen the second law is applied to the cycle, the model also supplies an admitted closed process record for the full compound. At both endpoints its constituent preparations, with the declared contact controls locked or insulated, are an equilibrium macrostate for that record; its separately tracked center-of-mass kinetic and external-field potential energies have zero endpoint change. This total-compound record is the input to the second law; the working-system record $P$ is the input to its first-law balance.\n\nIn the heat-engine mode, the positive magnitudes $Q_h,Q_c$ in joules mean respectively heat taken from the hot bath into the working system and heat rejected by the working system to the cold bath; accordingly $\\Delta E_h=-Q_h$, $\\Delta E_c=Q_c$, $Q[P]=Q_h-Q_c$, and work output is $W_{\\mathrm{out}}=-W_{\\mathrm{on}}[P]>0$. The work store gains exactly this transferred work, so $\\Delta E_w=W_{\\mathrm{out}}$. In the refrigerator mode, $Q_c>0$ is heat taken from the cold bath into the working system, $Q_h>0$ is heat rejected to the hot bath, so $\\Delta E_c=-Q_c$, $\\Delta E_h=Q_h$, $Q[P]=Q_c-Q_h$, and work input is $W_{\\mathrm{in}}=W_{\\mathrm{on}}[P]>0$. The store supplies that work, so $\\Delta E_w=-W_{\\mathrm{in}}$. These are idealized model conventions, not claims that a particular apparatus realizes the cycle.",
+        "deps": [
+          "def-td-process-and-protocol",
+          "def-td-system-and-permitted-exchanges",
+          "def-td-si-quantities",
+          "def-td-temperature-pressure-chemical-potential",
+          "post-td-concave-fundamental-entropy",
+          "def-td-reversible-process",
+          "post-td-macroscopic-second-law"
+        ],
+        "dependency_roles": {
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "def-td-system-and-permitted-exchanges": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "post-td-concave-fundamental-entropy": "physical-assumption",
+          "def-td-reversible-process": "formulation-prerequisite",
+          "post-td-macroscopic-second-law": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §4.3.1",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §§2.5.2–2.5.4",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "library": "physics",
+        "physical_scope": "Two-reservoir cycles of a fixed-constitution working system with ideal constant-temperature baths and an ideal work store, all inside a declared isolated compound; finite reservoirs and unlisted transfers are excluded."
+      },
+      {
+        "id": "pthm-td-carnot-engine-bound",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Ideal-bath heat-engine efficiency bound",
+        "statement": "Let an admitted heat-engine cycle in the sense of [[def-td-reservoir-cycle]] operate between fixed ideal-bath temperatures $0<T_c<T_h$, absorb $Q_h>0$, reject $Q_c>0$, and deliver $W_{\\mathrm{out}}>0$. Define its efficiency by $\\eta=W_{\\mathrm{out}}/Q_h$. Then\n$\n\\eta\\le 1-\\frac{T_c}{T_h}.\n$\nEquality holds exactly when the total entropy change of the isolated compound is zero. In particular, a reversible cycle in the stated boundary model saturates the bound; zero entropy change is not here asserted to imply full reversibility.",
+        "deps": [
+          "def-td-reservoir-cycle",
+          "post-td-first-law-energy",
+          "post-td-macroscopic-second-law"
+        ],
+        "dependency_roles": {
+          "def-td-reservoir-cycle": "formulation-prerequisite",
+          "post-td-first-law-energy": "physical-assumption",
+          "post-td-macroscopic-second-law": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §4.3.1",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.5.3",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "library": "physics",
+        "physical_scope": "Conditional efficiency bound for an admitted closed engine cycle between positive-temperature ideal baths inside an isolated compound with an ideal work store; finite reservoirs, unlisted transfers, and empirical engine performance are excluded.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-td-refrigerator-bound",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Ideal-bath refrigerator coefficient-of-performance bound",
+        "statement": "Let an admitted refrigerator cycle in the sense of [[def-td-reservoir-cycle]] operate between fixed ideal-bath temperatures $0<T_c<T_h$, extract $Q_c>0$ from the cold bath, reject $Q_h>0$ to the hot bath, and consume $W_{\\mathrm{in}}>0$. Define its cooling coefficient of performance by $\\mathrm{COP}_R=Q_c/W_{\\mathrm{in}}$. Then\n$\n\\mathrm{COP}_R\\le\\frac{T_c}{T_h-T_c}.\n$\nEquality holds exactly when the total entropy change of the isolated compound is zero. A reversible cycle in the stated boundary model saturates the bound; no converse about reversibility is asserted.",
+        "deps": [
+          "def-td-reservoir-cycle",
+          "post-td-first-law-energy",
+          "post-td-macroscopic-second-law"
+        ],
+        "dependency_roles": {
+          "def-td-reservoir-cycle": "formulation-prerequisite",
+          "post-td-first-law-energy": "physical-assumption",
+          "post-td-macroscopic-second-law": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §§4.3.1–4.3.3",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §§2.5.2–2.5.3",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "library": "physics",
+        "physical_scope": "Conditional cooling coefficient-of-performance bound for an admitted closed refrigerator cycle between positive-temperature ideal baths inside an isolated compound with an ideal work store; finite reservoirs, unlisted transfers, and empirical appliance performance are excluded.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "post-td-nernst-scoped",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Uniform Nernst heat-theorem postulate on a compact family",
+        "statement": "Fix a material constitution $c$, a positive temperature $T_0$ in kelvins, and a nonempty set $K$ equipped with a specified topology $\\tau_K$ such that the topological space $(K,\\tau_K)$ is compact. Compact means that every cover of $K$ by $\\tau_K$-open subsets has a finite subcover; the label $a\\in K$ holds its listed external constraints fixed while temperature varies. Let $D_{c,+}\\subseteq D_c$ be the designated open equilibrium charts on which the finite $C^2$ entropy and positive absolute temperature $T_c=1/S_{c,U}$ are defined, as in [[post-td-concave-fundamental-entropy]] and [[def-td-temperature-pressure-chemical-potential]]. A model-specified family map\n$\n\\phi:(0,T_0)\\times K\\longrightarrow D_{c,+}\n$\nassigns an equilibrium state $\\phi(t,a)$ at temperature $t$, so $T_c(\\phi(t,a))=t$. The map need not be continuous in $a$; the postulate below itself requires the displayed supremum to be finite for all sufficiently small $t$. Define $S_K(t,a):=S_c(\\phi(t,a))$, measured in $\\mathrm{J\\,K^{-1}}$.\n\nThe model adopts the following uniform compact-family Nernst heat-theorem postulate:\n$\n\\lim_{t\\downarrow0}\\ \\sup_{a,b\\in K}\\left|S_K(t,a)-S_K(t,b)\\right|=0,\n$\nwhere the supremum is the least upper bound of the displayed real differences. This is an additional low-temperature physical postulate, not a consequence of the first or second law. It is a deliberately scoped uniform formulation; it is not asserted equivalent to every statement called the third law or Nernst's theorem.\n\nThe postulate constrains entropy differences within the declared family. It does not assert that any individual finite limit $S_K(0,a):=\\lim_{t\\downarrow0}S_K(t,a)$ exists, that such a limit is zero, or that the family includes every material or constraint. If the indicated individual limit is to be used, its existence and finiteness are an additional premise.",
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-si-quantities",
+          "def-td-temperature-pressure-chemical-potential",
+          "post-td-concave-fundamental-entropy",
+          "def-complete-ordered-field"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "post-td-concave-fundamental-entropy": "formulation-prerequisite",
+          "def-complete-ordered-field": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §4.5",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.6.2",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "library": "physics",
+        "physical_scope": "A chosen compact family of fixed-constraint equilibrium branches at strictly positive temperatures in the adopted macroscopic thermodynamic framework; no zero-temperature state, absolute entropy normalization, or microscopic identification is supplied."
+      },
+      {
+        "id": "post-td-unattainability-scoped",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Finite-protocol unattainability on a declared zero-temperature boundary",
+        "statement": "For a declared material constitution $c$, let $D_{c,+}\\subseteq D_c$ be its designated equilibrium states with finite positive absolute temperature, and require $D_{c,+}\\ne\\varnothing$ for a nonvacuous application. Let $D_0$ be a separately declared nonempty set of zero-temperature boundary preparations, disjoint from $D_{c,+}$, and let\n$\n\\overline D_c:=D_{c,+}\\sqcup D_0,\\qquad\n\\overline T_c:\\overline D_c\\to[0,\\infty)\n$\nextend the thermodynamic temperature from [[def-td-temperature-pressure-chemical-potential]] by $\\overline T_c|_{D_{c,+}}=T_c$ and $\\overline T_c(y)=0$ for $y\\in D_0$.\n\nLet $\\mathcal U_c$ be the model-declared set of cooling controls, and let $\\mathcal C\\subseteq\\overline D_c\\times\\overline D_c\\times\\mathcal U_c\\times(0,\\infty)$ be the model's full declared family of admitted cooling operation records. Each record $\\gamma=(x^-,x^+,u,\\tau)$ has initial-endpoint map $i(\\gamma)=x^-$, final-endpoint map $f(\\gamma)=x^+$, control $u\\in\\mathcal U_c$, and finite positive duration $\\tau(\\gamma)=\\tau$ seconds. Its positive-temperature portions obey the process conventions of [[def-td-process-and-protocol]], while the model separately declares how a boundary endpoint in $D_0$ is represented. Define two records to be compatible exactly when $f(\\gamma)=i(\\gamma')$. A finite protocol is a tuple $(\\gamma_1,\\ldots,\\gamma_m)$ for $m\\in\\mathbb N$, $m\\ge1$ ([[def-natural-numbers]]), with each successive pair compatible; its initial and final endpoints are $i(\\gamma_1)$ and $f(\\gamma_m)$, and its duration is $\\sum_{j=1}^m\\tau(\\gamma_j)$. Let $\\mathcal P_{\\mathcal C}$ be the set of all such finite protocols and let $\\mathcal P_{\\mathcal C}^{+}:=\\{p\\in\\mathcal P_{\\mathcal C}:i(p)\\in D_{c,+}\\}$. For each $p=(\\gamma_1,\\ldots,\\gamma_m)$, define $i(p):=i(\\gamma_1)$, $f(p):=f(\\gamma_m)$, and $\\tau(p):=\\sum_{j=1}^m\\tau(\\gamma_j)<\\infty$. For a nonvacuous application, require $\\mathcal P_{\\mathcal C}^{+}\\ne\\varnothing$ and declare $\\mathcal C$ as the full operation family rather than defining it to exclude boundary endpoints. Define $\\operatorname{Reach}_{\\mathcal C}:=\\{(i(p),f(p)):p\\in\\mathcal P_{\\mathcal C}\\}\\subseteq\\overline D_c\\times\\overline D_c$.\n\nThe adopted operational unattainability postulate is\n$\n\\operatorname{Reach}_{\\mathcal C}\\cap(D_{c,+}\\times D_0)=\\varnothing.\n$\nThis is a separate physical assumption from the Nernst heat-theorem postulate; neither is deduced here from the first or second law. If $D_{c,+}$, $D_0$, or $\\mathcal P_{\\mathcal C}^{+}$ is empty, or if no boundary endpoint is available in the declared operation-record space because the model defines every operation to stay in $D_{c,+}$, the assertion is absent or vacuous and is not evidence for unattainability. The postulate does not remove the need to state the actual state space, controls, and admitted operations.",
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-process-and-protocol",
+          "def-td-si-quantities",
+          "def-td-temperature-pressure-chemical-potential",
+          "def-natural-numbers"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-process-and-protocol": "operational-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "def-natural-numbers": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §4.5",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §§2.5.5–2.6.2",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "library": "physics",
+        "physical_scope": "A model-specific full family of admitted finite-duration cooling protocols for a nonempty positive-temperature domain and an explicitly represented nonempty zero-temperature boundary; the postulate is substantive only when positive-start protocols are admitted and the family is not defined to exclude the boundary by construction. No universal statement about all possible controls, dynamics, or materials is made."
+      },
+      {
+        "id": "rem-td-residual-entropy",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Residual entropy and the scope of the third-law postulates",
+        "statement": "Residual entropy here means a finite entropy limit at low temperature under a model's specified entropy convention. In a finite canonical model, let a finite set of microstates have energies $E_i$ in joules, assign $p_i(T)\\propto\\exp[-E_i/(k_{\\mathrm B}T)]$ for $T>0$, and use the Gibbs entropy $-k_{\\mathrm B}\\sum_i p_i(T)\\log p_i(T)$. If the ground energy has finite degeneracy $g$ and there is a positive gap to all excited states, this model-specific entropy tends to $k_{\\mathrm B}\\log g$; [[ex-td-finite-canonical-ground-state-entropy]] supplies the full finite-state calculation. Here $g$ is the number of ground states and $\\log$ is the natural logarithm of [[def-natural-logarithm]].\n\nThis formula belongs to that specified microscopic preparation and entropy convention. It does not identify every Gibbs entropy with the macroscopic $S_c$, and it does not establish a universal value $S_c(0)=0$. The uniform Nernst postulate [[post-td-nernst-scoped]] constrains differences across its declared family, not the common entropy offset: adding one fixed constant to every $S_K(t,a)$ leaves every displayed difference unchanged. Thus that postulate alone neither selects an absolute zero nor forces a unique ground state. The Nernst heat theorem, zero-entropy convention for a unique ground state, and operational unattainability remain distinct model statements.",
+        "deps": [
+          "def-td-si-quantities",
+          "def-natural-logarithm",
+          "post-td-nernst-scoped"
+        ],
+        "dependency_roles": {
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-natural-logarithm": "mathematical-premise",
+          "post-td-nernst-scoped": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §4.5",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.6.2",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "library": "physics",
+        "physical_scope": "Interpretive distinction between a macroscopic entropy-difference postulate and a finite microscopic canonical model; no identification of their entropies or universal zero-temperature value is asserted.",
+        "forward_refs": [
+          "ex-td-finite-canonical-ground-state-entropy"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 278,
+    "id": "td-cycles-and-low-temperature-examples",
+    "kind": "B",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Cycles And Low Temperature — Examples",
+    "companion": "td-cycles-and-low-temperature",
+    "requires": [
+      "td-cycles-and-low-temperature",
+      "the-exponential-function"
+    ],
+    "items": [
+      {
+        "id": "ex-td-carnot-engine-600-300",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A symbolic 600 K and 300 K engine bound",
+        "statement": "Consider a hypothetical ideal-reservoir engine cycle with $T_h=600\\,\\mathrm K$ and $T_c=300\\,\\mathrm K$, with all the assumptions of [[pthm-td-carnot-engine-bound]]. Its efficiency is at most $1/2$. This is a model calculation, not an observed performance.",
+        "deps": [
+          "pthm-td-carnot-engine-bound",
+          "def-td-si-quantities"
+        ],
+        "dependency_roles": {
+          "pthm-td-carnot-engine-bound": "physical-result",
+          "def-td-si-quantities": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §4.3.1",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.5.3",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "library": "physics",
+        "physical_scope": "A hypothetical two-ideal-bath engine calculation using the preceding conditional theorem; it reports no measured engine or empirical efficiency.",
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-refrigerator-cop-240-300",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A symbolic 240 K and 300 K refrigerator bound",
+        "statement": "Consider a hypothetical refrigerator cycle with cold-bath temperature $T_c=240\\,\\mathrm K$, hot-bath temperature $T_h=300\\,\\mathrm K$, and $Q_c=1200\\,\\mathrm J$ extracted per cycle. In the ideal-bath model, its cooling coefficient of performance is at most $4$, so its work input is at least $300\\,\\mathrm J$. No appliance measurement is asserted.",
+        "deps": [
+          "pthm-td-refrigerator-bound",
+          "def-td-si-quantities"
+        ],
+        "dependency_roles": {
+          "pthm-td-refrigerator-bound": "physical-result",
+          "def-td-si-quantities": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §4.3.1",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.5.2",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "library": "physics",
+        "physical_scope": "A hypothetical ideal two-bath refrigerator calculation using the preceding conditional theorem; it reports no measured appliance coefficient or work.",
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-td-integrable-capacity-not-integer-power",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Finite entropy integral does not force a heat-capacity power bound of order one or higher",
+        "statement": "For a positive-temperature fixed-$V,n$ chart, write $\\theta=T/T_*$. For a dimensionless real exponent $q\\ge1$, the notation $C_V(T)=O(\\theta^q)$ as $\\theta\\downarrow0$ means that there exist a constant $M>0$ measured in $\\mathrm{J\\,K^{-1}}$ and a dimensionless $\\delta\\in(0,1]$ such that $|C_V(T)|\\le M\\theta^q$ whenever $0<\\theta<\\delta$. Finite convergence of the entropy integral alone does not imply such a bound for any real $q\\ge1$, even when the entropy has a finite limit and the local response-chart identities apply. The displayed branch is a formal chart calculation, not a claim that a particular substance realizes the chart.\n\nThe displayed entropy is $S^{\\rm SI}$ in physical SI coordinates. For this constructed local model, choose the positive-amount open neighborhood stated here (or any positive neighborhood of the fixed amount, extending this entropy independently of amount) and let $O_c$ be the numerical preimage of that product patch under $\\Phi_c(\\hat U,\\hat V,\\hat n)=(\\hat U\\,\\mathrm J,\\hat V\\,\\mathrm{m^3},\\hat n\\,\\mathrm{mol})$. Declare $O_c$ as the model's local state-domain patch and set $S_c=S^{\\rm SI}\\circ\\Phi_c$. The derivatives below are those of $S^{\\rm SI}=S_c\\circ\\Phi_c^{-1}$ on $\\Phi_c(O_c)$, exactly as in [[def-td-temperature-pressure-chemical-potential]]. This supplies the numerical-to-SI chart identification for the formal witness, with no assertion of a measured material or a global constitutive extension.",
+        "deps": [
+          "def-td-response-functions",
+          "def-td-temperature-pressure-chemical-potential",
+          "def-td-si-quantities",
+          "post-td-concave-fundamental-entropy",
+          "def-real-power",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing",
+          "def-ordered-field",
+          "thm-reals-ordered-field",
+          "lem-of-add-order",
+          "def-convex-concave-and-midpoint-convex-functions",
+          "cor-second-derivative-characterises-convexity",
+          "thm-continuous-implies-integrable"
+        ],
+        "dependency_roles": {
+          "def-td-response-functions": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "def-td-si-quantities": "formulation-prerequisite",
+          "post-td-concave-fundamental-entropy": "physical-assumption",
+          "def-real-power": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "thm-newton-leibniz-with-interior-derivative": "mathematical-premise",
+          "thm-chain-sum-product-and-composition-rules-for-banach-derivatives": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "def-ordered-field": "mathematical-premise",
+          "thm-reals-ordered-field": "mathematical-premise",
+          "lem-of-add-order": "mathematical-premise",
+          "def-convex-concave-and-midpoint-convex-functions": "mathematical-premise",
+          "cor-second-derivative-characterises-convexity": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §4.5",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.6.2",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "library": "physics",
+        "physical_scope": "A formal fixed-composition positive-temperature response chart used to refute an inference from integral convergence alone; it is not a measured material or a complete global bulk-family model.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-finite-canonical-ground-state-entropy",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Residual entropy in a finite canonical model",
+        "statement": "Let $X=\\{1,\\ldots,N\\}$ be a finite set of microstates with energy values $E_i$ in joules. Let $E_0=\\min_i E_i$, let exactly $g\\ge1$ states have energy $E_0$, and suppose every other state has energy at least $E_0+\\Delta$ for one fixed gap $\\Delta>0$ joules. For $T>0$ kelvins, adopt the finite canonical probabilities\n$\nw_i(T)=\\exp\\!\\left(-\\frac{E_i-E_0}{k_{\\mathrm B}T}\\right),\\qquad\nZ(T)=\\sum_{i=1}^{N}w_i(T),\\qquad\np_i(T)=\\frac{w_i(T)}{Z(T)}\n$\nand the model entropy\n$\nS_G(T)=-k_{\\mathrm B}\\sum_{i=1}^{N}p_i(T)\\log p_i(T).\n$\nThen\n$\n\\lim_{T\\downarrow0}S_G(T)=k_{\\mathrm B}\\log g.\n$\nThis is a calculation for the adopted finite statistical model, not a deduction of the canonical preparation from macroscopic thermodynamics.",
+        "deps": [
+          "def-td-si-quantities",
+          "def-td-temperature-pressure-chemical-potential",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-limits-and-range",
+          "thm-logarithm-slower-than-every-positive-power"
+        ],
+        "dependency_roles": {
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "thm-exponential-limits-and-range": "mathematical-premise",
+          "thm-logarithm-slower-than-every-positive-power": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete Chapter 4 lecture-note PDF, §4.5",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys4.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.6.2",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "library": "physics",
+        "physical_scope": "A finite discrete Gibbs preparation with a specified energy gap and entropy convention; no identification with the macroscopic entropy postulate or empirical material is assumed.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-td-geometric-cooling-protocol",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A finite-step geometric cooling protocol",
+        "statement": "Fix $T_*>0$ kelvins, an initial temperature $T_{\\mathrm{in}}\\in(0,T_*]$, a ratio $r\\in(0,1)$, and an operation duration $\\tau_*>0$ seconds. Define the model's zero-temperature boundary to be $D_0=\\{0\\}$ and its positive-temperature state coordinates to be $D_+=(0,T_*]$. Each admitted operation maps $T$ to $rT$ and takes duration $\\tau_*$. An admitted finite protocol is any finite chain of these operations; write $T_N$ for its endpoint after $N$ updates. Since the operation is defined only on $D_+$ and always maps into $D_+$, this restricted model has no operation with endpoint in $D_0$; the proof below is a direct property of its update rule, not evidence for the physical unattainability postulate. It does not assert that a real refrigerator or every thermodynamic model has this update rule.",
+        "deps": [
+          "def-td-si-quantities",
+          "def-td-temperature-pressure-chemical-potential",
+          "def-natural-numbers",
+          "thm-induction-principle",
+          "def-ordered-field"
+        ],
+        "dependency_roles": {
+          "def-td-si-quantities": "formulation-prerequisite",
+          "def-td-temperature-pressure-chemical-potential": "formulation-prerequisite",
+          "def-natural-numbers": "mathematical-premise",
+          "thm-induction-principle": "mathematical-premise",
+          "def-ordered-field": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 6,
+        "library": "physics",
+        "physical_scope": "A constructed update-map model with one finite-duration operation repeated finitely many times; it proves only this model's reachability property and is not evidence about actual cooling devices.",
+        "generation": {
+          "role": "example"
+        },
+        "relations": {
+          "motivated_by": [
+            "post-td-unattainability-scoped"
+          ]
+        },
+        "proof_strategy": "induction"
+      }
+    ]
+  }
+]

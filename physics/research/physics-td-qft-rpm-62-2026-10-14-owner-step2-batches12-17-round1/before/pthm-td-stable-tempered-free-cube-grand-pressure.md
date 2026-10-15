@@ -1,0 +1,52 @@
+---
+id: "pthm-td-stable-tempered-free-cube-grand-pressure"
+kind: "physics-theorem"
+title: "Stable-tempered free-cube grand pressure"
+status: "draft"
+origin: "pipeline"
+domain: "physics"
+library: "physics"
+physical_scope: "Positive-temperature grand-canonical positional preparations in cubic free-wall boxes for stable even Borel pair potentials with the explicitly stated decreasing integrable tail."
+deps: [def-axiom-of-choice, def-td-stable-tempered-continuum-preparation, post-td-equilibrium-ensemble-sampling, thm-tdmath-canonical-grand-duality]
+dependency_roles:
+  def-axiom-of-choice: mathematical-premise
+  def-td-stable-tempered-continuum-preparation: formulation-prerequisite
+  post-td-equilibrium-ensemble-sampling: physical-assumption
+  thm-tdmath-canonical-grand-duality: mathematical-premise
+aliases: []
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "David Tong, Statistical Physics (author-hosted Cambridge lecture notes)"
+      url: "https://davidtong.org/teaching/statistical-physics/statmechhtml/S1"
+    - title: "Konstantin K. Likharev, Essential Graduate Physics, Part SM: Statistical Mechanics (2024 author-hosted lecture notes)"
+      url: "https://phys.libretexts.org/Bookshelves/Thermodynamics_and_Statistical_Mechanics/Essential_Graduate_Physics_-_Statistical_Mechanics_%28Likharev%29/03%3A_Ideal_and_Not-So-Ideal_Gases/3.05%3A_Gases_of_weakly_interacting_particles"
+    - title: "Hans-Otto Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction, Probability Theory and Related Fields 99 (1994), 171–195"
+      url: "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf"
+proof_strategy: direct
+dependency_level: 6
+---
+
+## Statement
+
+Assume AC. Let $d\geq2$, $\varphi$ be stable with the regular integrable tail of [[def-td-stable-tempered-continuum-preparation]], and assume its dimensionless representative $\widehat\varphi=\varphi/E_0$ is Borel measurable, as required by the current mathematical supplier. Take $E_0=1\,\mathrm J$, $\beta=(k_BT)^{-1}$, and $\widehat\beta=E_0\beta>0$. For cubes $\Lambda_L=[-L/2,L/2)^d$, let $\Xi_L(z,\beta)$ be the free-wall grand partition function specified by [[post-td-equilibrium-ensemble-sampling]]. Then the positional grand pressure
+$$p_L(z,T)=\frac{k_BT}{\ell_0^d|\Lambda_L|}\log\Xi_L(z,\beta)$$
+has a finite limit as $L\to\infty$. In the dimensionless reference-volume convention of [[thm-tdmath-canonical-grand-duality]], let $P(\alpha,\widehat\beta)=\lim_{L\to\infty}|\Lambda_L|^{-1}\log\Xi_L(e^\alpha,\widehat\beta)$, where the supplier uses numerical energies in units of $E_0$. Then $p=(k_BT/\ell_0^d)P(\log z,\widehat\beta)$. This is a conditional model deduction, not a measurement or an assertion that every real gas realizes the preparation.
+
+## Facts & Assumptions
+
+[F1] [[def-td-stable-tempered-continuum-preparation]]: stability gives $H_N\geq-BN$, and the tail has a nonnegative decreasing envelope $\psi$ with $\int_R^\infty r^{d-1}\psi(r)\,dr<\infty$. Since $|x|_\infty\leq|x|_2$, this Euclidean envelope also bounds $|\widehat\varphi(x)|$ as a nonincreasing maximum-norm envelope, so the regularity hypothesis of the mathematical supplier holds. That supplier uses numerical energy; $\widehat H=H/E_0$ and $\widehat\beta=E_0\beta$ preserve $\beta H=\widehat\beta\widehat H$.
+
+[A1] [[post-td-equilibrium-ensemble-sampling]]: the finite-volume grand law uses $\Xi_\Lambda(z,\beta)=\sum_{N\geq0}z^NZ_{\Lambda,N}$; each $Z_{\Lambda,N}$ integrates $e^{-\beta H_N}$ only on finite-energy configurations and assigns zero weight elsewhere. In identifying this with the mathematical partition, define its extended-real factor as zero at $\widehat H=+\infty$; on finite energies $e^{-\widehat\beta\widehat H}=e^{-\beta H}$.
+
+[L1] [[thm-tdmath-canonical-grand-duality]]: the current carrier's statement defines the dimensionless grand rate from the free-cube activity sum, gives its limit under the stable regular tail hypotheses at positive numerical $\widehat\beta$, and states both Legendre--Fenchel identities for the specified closed effective-domain extension. The physical-to-numerical energy conversion is $\widehat\beta=E_0\beta$. The item and draft proof text are present, and its scoped batch-18 proof-contract entry passes; no Step 1 decision is recorded, so the conclusion remains conditional.
+
+## Proof
+
+**Given:** AC, the stable regularly tempered Borel pair model, the adopted finite-volume positional grand preparation, and the current draft free-cube supplier statement in [L1]. No kinetic partition factor or empirical premise is used.
+
+1.1 By [A1], the physical positional partition sum is $\Xi_L(z,\beta)=\sum_{N\geq0}z^NZ_{\Lambda_L,N}$. Set $\alpha=\log z$; then $z^N=e^{\alpha N}$. Translate the centered cube by $L/2$ in each coordinate to $[0,L)^d$; this preserves Lebesgue measure and every pair displacement, so the positional partition is exactly the free-cube sum of [L1]. The dimensionless energy conversion in [F1] matches its numerical $\widehat\beta$. [given, F1, A1, L1, algebra]
+
+2.1 The conditional conclusion of [L1] gives a finite limit $P(\log z,\widehat\beta)$ for $|\Lambda_L|^{-1}\log\Xi_L$. Multiplying by $k_BT/\ell_0^d$, which is independent of $L$, converts the dimensionless reference-volume rate to pressure per physical volume. [given, F1, L1, step 1.1, algebra] ∎

@@ -4,12 +4,17 @@ Use `physics/WORKFLOW.md` for the six-step stage table, run controls, owner hold
 
 The rebuild plan is `physics/research/workflow-rebuild-plan.md`. Step 1 performs complete initial authoring; Step 2 is the bounded Luna-max whole-batch scope/prerequisite loop. Planning generates group metadata; accepted plan synchronization is part of the Step-2 mechanical handoff. There are no separate assignment or splice stages.
 
+Step-1 authoring fills the shared 30-worker budget from the entire pending queue,
+prioritizing lower dependency levels. Cross-pair prerequisites never block an
+author's start or remaining work. Slot refill is triggered by worker completion;
+current supplier readiness remains a requirement of the drained Step-1 gates.
+
 Current revision: `physics-six-step-v1-construction-scope`. Use fresh run state. The engine owns all transitions and enforces the shared 30-agent cap. See `package.json` for typechecking and focused test commands.
 
 Run the scope-review controls from `physics/` through its `tools` symlink. The CLI resolves the symlink before dispatching `check` or `owner-resolve`; missing current batch acceptance fails with a nonzero exit code.
 Scope repairers use the existing cognitive `authoring` job classification, so dispatch preflight permits their substantive proof and prerequisite repairs. Their batch ownership and bounded review history still apply.
 
-Step 3 ends after independent batch readers, refuters and routed adjudicators, the exact post-3a baseline, and mechanical `3a-close` history freeze. The original adjudication gate battery remains the review boundary. There is no cross-batch review, unfinished-review continuation or impact-audit duty after that boundary; dependency-level authoring orders suppliers before consumers. Historical Step-3b receipts remain historical evidence.
+Step 3 ends after independent batch readers, refuters and routed adjudicators, the exact post-3a baseline, and mechanical `3a-close` history freeze. The original adjudication gate battery remains the review boundary. There is no cross-batch review, unfinished-review continuation or impact-audit duty after that boundary; dependency levels prioritize initial authoring while independent review retains its own prerequisites. Historical Step-3b receipts remain historical evidence.
 
 Within the Step-3 pipeline, ready downstream work gets available slots before
 upstream work: adjudicators, collection tools, refuters, split tools, then readers.

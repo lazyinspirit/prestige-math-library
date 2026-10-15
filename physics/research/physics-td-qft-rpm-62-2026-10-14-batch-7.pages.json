@@ -1,0 +1,674 @@
+[
+  {
+    "order": 271,
+    "id": "td-accessibility-foundation",
+    "kind": "A",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Accessibility Foundation",
+    "companion": "td-accessibility-foundation-examples",
+    "requires": [
+      "td-math-convex-contact-and-mixing",
+      "td-thermodynamic-framework"
+    ],
+    "items": [
+      {
+        "id": "def-td-adiabatic-accessibility",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Adiabatic accessibility",
+        "statement": "Fix a material constitution $c$ and its equilibrium state domain $D_c$ from [[def-td-equilibrium-state-domain]]. For each admitted record $P\\in\\mathcal P_s$, use the nonnegative, nondecreasing cumulative incoming and outgoing thermal-energy maps $H_P^{\\mathrm{in}},H_P^{\\mathrm{out}}:I_P\\to[0,\\infty)$ of [[def-td-process-and-protocol]], with numerical values in joules and initial values zero. For $x,y\\in D_c$, write $x\\prec_c y$, and say that $y$ is adiabatically accessible from $x$, exactly when the declared process model admits at least one record $P\\in\\mathcal P_s$ with $x_P^-=x$, $x_P^+=y$, $H_P^{\\mathrm{in}}(t)=H_P^{\\mathrm{out}}(t)=0$ for every $t\\in I_P$, and the model’s stated auxiliary and work-device endpoint conditions satisfied. The material constitution is the same at both endpoints. The process record must account for the selected outer boundary and every auxiliary included by its protocol; transfers inside that boundary are internal. These maps are supplied on all admitted records, but no energy-balance law outside the core closed-record class follows.\n\nThe sign convention is $Q>0$ for net heat into the system and $W_{\\mathrm{on}}>0$ for work done on it, as fixed in [[def-td-process-and-protocol]]. An adiabatic record has $Q[P]=0$, but zero net heat alone is insufficient: equal nonzero incoming and outgoing transfers cancel in $Q$. Adiabatic means absence of thermal transfer across the selected boundary throughout the record; it imposes neither zero work nor zero energy change, isolation, quasistatic evolution, or reversibility. The relation concerns equilibrium endpoints only; intermediate configurations may be nonequilibrium. Existence of a witness record is model input, not a consequence of this definition.\n\nWhen the constitution is clear, write $x\\prec y$. Define $x\\sim y$ by $x\\prec y$ and $y\\prec x$, and $x\\prec\\prec y$ by $x\\prec y$ and not $y\\prec x$. These are respectively accessibility equivalence and strict one-way accessibility; neither is defined by equality of energy alone.\n\nThe order-theoretic relation of Lieb and Yngvason is an abstract model of this operation. Goddard’s Carathéodory formulation uses a distinct local-inaccessibility route; it is cited as context and does not supply the product comparison results used later.",
+        "deps": [
+          "def-td-equilibrium-state-domain",
+          "def-td-process-and-protocol",
+          "def-td-system-and-permitted-exchanges"
+        ],
+        "dependency_roles": {
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "def-td-system-and-permitted-exchanges": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§II.A–II.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §2",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            },
+            {
+              "title": "Samuel J. Ling, William Moebs, and Jeff Sanny, University Physics Volume 2, §4.1 Reversible and Irreversible Processes",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/4-1-reversible-and-irreversible-processes"
+            },
+            {
+              "title": "Goddard, The second law of thermodynamics as variation on a theme of Carathéodory, §§2–3",
+              "url": "https://escholarship.org/content/qt27k6m59q/qt27k6m59q.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "library": "physics",
+        "physical_scope": "Model-defined transitions between equilibrium states of a fixed thermodynamic composition when the admitted process has no heat transfer; no claim is made that a proposed transition is physically realizable without a process witness."
+      },
+      {
+        "id": "def-td-scaled-products-and-comparison",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Tagged scaled systems and separated products",
+        "statement": "Fix a family $I$ of primitive material labels. A tagged type $c\\in I$ retains its identity even if another type has the same coordinate domain. For the accessibility/contact branch, select a fully scalable model family: for every declared type $c$ and every dimensionless $\\lambda>0$, explicitly assume the tag $c^{(\\lambda)}$ exists, $B_{c,\\lambda}=D_c$, and $D_{c^{(\\lambda)}}=\\delta_\\lambda(D_c)$, with $\\delta_\\lambda:D_c\\to D_{c^{(\\lambda)}}$ the coordinate-multiplication bijection. The inverse divides coordinates by $\\lambda$. These are additional model conditions; the general, partial-domain postulate [[post-td-bulk-additivity]] alone does not supply them. On a declared energy/work chart $X_c$ the same condition means $X_{c^{(\\lambda)}}=\\lambda X_c$, scaling every numerical extensive coordinate and the fixed material amounts. An ordered finite separated type $T=(c_1^{(\\lambda_1)},\\ldots,c_k^{(\\lambda_k)})$, $\\lambda_i>0$, has the full state domain $X_T=\\prod_{i=1}^kD_{c_i^{(\\lambda_i)}}$. A separated state retains its tagged constituent tuple. Permuting factors together with their states and reassociating products give the declared identifications; a compound state means the resulting equivalence class of these representatives. The empty type has the singleton state domain $\\{()\\}$. The aggregate extensive quantities are the sums specified by [[post-td-bulk-additivity]] wherever that postulate admits composition; those sums do not replace the constituent tuple or identify different decompositions.\n\nSupply a process model on these endpoint domains as follows. For each ordered pair $T,T'$ with the same formal composition defined below, declare a configuration set $Z_{T,T'}$ containing the system, auxiliaries and work devices, equilibrium endpoint subsets $Z^-_{T,T'},Z^+_{T,T'}$, and endpoint maps $\\xi^-_{T,T'}:Z^-_{T,T'}\\to X_T$, $\\xi^+_{T,T'}:Z^+_{T,T'}\\to X_{T'}$. Also declare control/contact and transfer-record sets $\\mathcal K_{T,T'},\\mathcal R_{T,T'}$ and a selected outer boundary. The typed records are tuples $P=(I_P,A^-,A^+,z_P,\\kappa_P,r_P)$ with a finite time interval $I_P=[t_0,t_1]$, $t_0<t_1$, in seconds, $A^-\\in X_T$, $A^+\\in X_{T'}$, $z_P:I_P\\to Z_{T,T'}$, $\\kappa_P\\in\\mathcal K_{T,T'}$, $r_P\\in\\mathcal R_{T,T'}$, and $z_P(t_0)\\in Z^-_{T,T'}$, $z_P(t_1)\\in Z^+_{T,T'}$ mapping to $A^-,A^+$. No regularity of $z_P$ is presumed. The model specifies an admitted subset $\\mathcal P_{T,T'}$ of these records, including its auxiliary and work-device endpoint conditions and any adopted conservation constraints. Each admitted transfer record supplies the nonnegative, nondecreasing cumulative maps $H_P^{\\mathrm{in}},H_P^{\\mathrm{out}}:I_P\\to[0,\\infty)$, initially zero and with numerical values in joules, with exactly the outer-boundary convention of [[def-td-process-and-protocol]]; internal thermal exchanges between constituents are excluded from these totals. No admission or balance law follows from the tuple types.\n\nFor $A\\in X_T$, $B\\in X_{T'}$ of equal composition, define $A\\prec B$ exactly when there is $P\\in\\mathcal P_{T,T'}$ with $A^-=A$, $A^+=B$ and $H_P^{\\mathrm{in}}(t)=H_P^{\\mathrm{out}}(t)=0$ for every $t\\in I_P$. Require the declared permutation and reassociation maps to transport admitted records bijectively, preserving endpoint maps, the selected boundary, thermal transfers and auxiliary/work-device conditions. Hence existence of an adiabatic witness is independent of representatives. For one-factor endpoints $D_c$, require this record model to reproduce the records and endpoint conditions of [[def-td-adiabatic-accessibility]], so its restriction is $\\prec_c$. On fixed-amount charts use the constituent coordinate embeddings into these domains. A later contact model may add joined endpoint domains using this same typed-record scheme and must agree with this relation on existing endpoints. Product accessibility is additional process data, not the coordinate-sum pullback and not necessarily the componentwise relation. As for single systems, write $A\\sim B$ when both directions hold and $A\\prec\\prec B$ when only the forward direction holds.\n\nScaling a separated compound scales each factor. Adopt coherent preparation transport: $1x$, $x$, $s(tx)$ and $(st)x$ denote the same preparation after their declared tag transport, and scaling commutes with permutation, reassociation and finite separated product. Their raw tags remain distinct; the model declares these transports reversible under $\\prec$, and transports of later joined types commute with the same operations. This is an explicit accessibility assumption, not an inference from coordinate multiplication. Merging or splitting copies of one preparation is reversible when A5 is adopted.\n\nThe formal composition vector of a compound records, for each primitive label $c$, the sum of its positive scale coefficients. Two compounds have the same composition exactly when these vectors agree. The distinct **formal mass** $m(A)$ is the sum of all scale coefficients in $A$, a dimensionless bookkeeping quantity; it is not physical mass in kilograms, mole amount, energy, or volume. Same-composition compounds have equal formal mass. In particular the relation just defined includes states of the same compound type and may compare different decompositions of the same composition when the model admits a witness.\n\nAn equal-composition comparison is a comparison between states of types with the same formal composition vector. The later reaction-network definition may separately admit transitions between distinct composition types, but the mathematical supplier still requires equal formal mass at both endpoints. A physical application must state how its channel preserves the chosen formal mass and separately record its dimensioned conservation balances. The empty unit has one state and formal mass zero. No identity is imposed between a primitive type and a scaled tag, or between two different decompositions of a compound, beyond the explicitly declared reassociation, permutation, and bulk-composition maps.",
+        "deps": [
+          "def-td-adiabatic-accessibility",
+          "def-td-equilibrium-state-domain",
+          "def-td-process-and-protocol",
+          "post-td-bulk-additivity"
+        ],
+        "dependency_roles": {
+          "def-td-adiabatic-accessibility": "formulation-prerequisite",
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "post-td-bulk-additivity": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§II.A–II.C",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §2",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "library": "physics",
+        "physical_scope": "The formal state and comparison bookkeeping for the declared family of separated bulk systems; mixed-composition transitions are excluded here and are defined separately."
+      },
+      {
+        "id": "post-td-accessibility-a1-a6",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Accessibility axioms A1–A6",
+        "statement": "Use the fully scalable model family of [[def-td-scaled-products-and-comparison]]: every positive scale map is defined on the full state domain, finite separated state spaces are full products, and nested scaling has the declared reversible preparation transport. These additional existence and transport assumptions are not supplied by the general partial-domain bulk postulate. Adopt the following axioms for $\\prec$ on every declared pair of finite compounds with equal formal mass in [[def-td-scaled-products-and-comparison]]. Initially this covers equal-composition adiabatic accessibility. If a later channel model admits comparisons between distinct composition types, the same axioms apply to those comparisons and all their finite scaled products; no cross-type transition is admitted by this postulate alone. They are assumptions of the operational model, not consequences of the process definition or of energy additivity.\n\n**A1 (reflexivity).** $A\\prec A$ for every state $A$.\n\n**A2 (transitivity).** If $A\\prec B$ and $B\\prec C$, then $A\\prec C$.\n\n**A3 (consistency).** If $A\\prec B$, then $A+C\\prec B+C$ for every finite spectator compound $C$ for which both endpoint compounds are admitted and the resulting formal masses agree.\n\n**A4 (scaling).** If $A\\prec B$, then $\\lambda A\\prec\\lambda B$ for every $\\lambda>0$, using the full-domain tagged scaling maps expressly adopted in [[def-td-scaled-products-and-comparison]].\n\n**A5 (splitting).** For each state $x$, positive $s<t$, and tagged scaled copies of its material, the state $t x$ is accessible in both directions to the separated pair $(s x,(t-s)x)$. This states reversible splitting of an equilibrium preparation into scaled copies, not additivity of arbitrary state functions.\n\n**A6 (stability).** Let $A,B$ have equal formal mass. Let $Z_0,Z_1$ be fixed positive spectator compounds of equal formal mass, and let $\\epsilon_n>0$ decrease to zero. If $A+\\epsilon_n Z_0\\prec B+\\epsilon_n Z_1$ for every $n$, then $A\\prec B$.\n\nEquality of formal masses in A6 is required so each comparison is defined; equality of composition vectors is not required when a declared model includes cross-type transitions. A6 is a limiting closure assumption on the relation; it does not assert continuity of any physical process or the existence of a limiting apparatus.",
+        "deps": [
+          "def-td-adiabatic-accessibility",
+          "def-td-scaled-products-and-comparison",
+          "post-td-bulk-additivity"
+        ],
+        "dependency_roles": {
+          "def-td-adiabatic-accessibility": "formulation-prerequisite",
+          "def-td-scaled-products-and-comparison": "formulation-prerequisite",
+          "post-td-bulk-additivity": "operational-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §II.C",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, Appendix A-1–A-6",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            },
+            {
+              "title": "Goddard, The second law of thermodynamics as variation on a theme of Carathéodory, §3",
+              "url": "https://escholarship.org/content/qt27k6m59q/qt27k6m59q.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "library": "physics",
+        "physical_scope": "Adopted order assumptions for adiabatic accessibility on equal-formal-mass finite compounds in the declared family, including cross-type comparisons only when a channel network later admits them; they do not establish that an actual material family satisfies them."
+      },
+      {
+        "id": "def-td-thermal-join",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Thermal joins and thermal equivalence",
+        "statement": "For the simple-compressible physical branch, a primitive label is a pair $i=(c_i,n^i)$ of constitution and fixed positive mole amounts. Its numerical state domain is exactly $\\Gamma_i=\\Gamma_{c_i,n^i}$ of [[def-td-equilibrium-state-domain]], with embedding $b_i(u,v)=(u,v,\\hat n^i)\\in D_{c_i}$. The unit map sends $(u,v)$ to $(u\\,\\mathrm J,v\\,\\mathrm{m^3})$; thus $u$ is the numerical value of the fixed internal energy, not a newly oriented energy coordinate. The underlying accessibility is the pullback of the admitted physical endpoint relation along $b_i$. Positive bulk scaling uses the declared scaling of [[post-td-bulk-additivity]], carries the mole vector to $\\lambda n^i$, and retains the distinct scaled tag. More general work coordinates or formal thermometer examples require their own explicitly declared domain, coordinate unit map and endpoint relation; no identification with $D_c$ is supplied by this definition.\n\nFor two named simple-system types $i,j$ with energy/work coordinates $x=(u_i,v_i)$ and $y=(u_j,v_j)$, a thermal join is the model-declared compound state $J_{ij}(x,y)$ whose energy coordinate is $u_i+u_j$ and whose work coordinates retain the ordered pair $(v_i,v_j)$. Its join domain consists exactly of those tuples $(u,v_i,v_j)$ for which there are $u_i,u_j$ with $(u_i,v_i)$ and $(u_j,v_j)$ in the component domains and $u=u_i+u_j$. This is a tagged join state, distinct from the separated pair $(x,y)$, even when their total coordinates agree. The joined domain retains both work coordinates and has aggregate mole composition $n^i+n^j$ (in a common declared species list); it is not thereby a simple-compressible slice of one $D_c$. The contact model supplies its joined equilibrium endpoint space, endpoint coordinate map and admitted process relation. The contact model declares the pair encoding and join encoding to have the same aggregate composition and extends its accessibility relation to these two encodings; the contact axioms specify which such comparisons are admitted.\n\nWrite $x\\sim_T y$ exactly when the pair $(x,y)$ and its join state $J_{ij}(x,y)$ are accessible in both directions under the declared contact operation. Here $\\sim_T$ is a relation between states of the two named systems; it is not numerical equality of temperature. Nested joins use only the model’s declared reassociation and permutation identifications. The coordinate sum alone supplies no accessibility comparison.",
+        "deps": [
+          "def-td-adiabatic-accessibility",
+          "def-td-scaled-products-and-comparison",
+          "def-td-equilibrium-state-domain",
+          "post-td-bulk-additivity"
+        ],
+        "dependency_roles": {
+          "def-td-adiabatic-accessibility": "formulation-prerequisite",
+          "def-td-scaled-products-and-comparison": "formulation-prerequisite",
+          "def-td-equilibrium-state-domain": "formulation-prerequisite",
+          "post-td-bulk-additivity": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §§2–3",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "library": "physics",
+        "physical_scope": "The energy-summing contact operation for the declared simple-system family; it does not prescribe a temperature scale or guarantee that contact equilibrates any chosen pair."
+      },
+      {
+        "id": "def-td-cross-type-reaction-network",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Cross-type mixing and reaction network",
+        "statement": "A cross-type mixing and reaction network consists of a declared set $\\mathcal G$ of tagged composition types and a state set $X_\\Gamma$ for each type. Each state set comes with a fixed formal composition $\\nu_\\Gamma$, and its states satisfy $\\nu(x)=\\nu_\\Gamma$ as in [[def-tdmath-decorated-chain-costs]]. These mathematical coefficients and their positive type weights are distinct from dimensioned material amounts. For physical channels the model additionally supplies endpoint quantity maps $U_\\Gamma:X_\\Gamma\\to\\mathbb R\\,\\mathrm J$ and $n_\\Gamma:X_\\Gamma\\to\\mathbb R^r\\,\\mathrm{mol}$ in a declared finite species list, together with any separately tracked mechanical or external-field endpoint quantities. No identification of two distinct scaled tags is made.\n\nFor each channel $\\alpha$ from $\\Gamma$ to $\\Gamma'$, the model supplies sets $Z_\\alpha$ of configurations, $\\mathcal K_\\alpha$ of protocol records, $\\mathcal B_\\alpha$ of outer-boundary records, and $\\mathcal R_\\alpha$ of transfer records, and equilibrium subsets and endpoint maps $\\xi^-_\\alpha:Z^-_\\alpha\\to X_\\Gamma$, $\\xi^+_\\alpha:Z^+_\\alpha\\to X_{\\Gamma'}$. A typed record is\n$$P=(I,x^-,x^+,z,\\kappa,b,r),$$\nwhere $I=[t_0,t_1]$, $t_0<t_1$, is a finite time interval in seconds, $x^-\\in X_\\Gamma$, $x^+\\in X_{\\Gamma'}$, $z:I\\to Z_\\alpha$, $z(t_0)\\in Z^-_\\alpha$, $z(t_1)\\in Z^+_\\alpha$, $\\xi^-_\\alpha(z(t_0))=x^-$, $\\xi^+_\\alpha(z(t_1))=x^+$, $\\kappa\\in\\mathcal K_\\alpha$, $b\\in\\mathcal B_\\alpha$, and $r\\in\\mathcal R_\\alpha$. Write $\\mathcal T_\\alpha$ for this typed record set. Transfer maps $Q_\\alpha,W_{\\mathrm{on},\\alpha}:\\mathcal T_\\alpha\\to\\mathbb R\\,\\mathrm J$ and $N_\\alpha:\\mathcal T_\\alpha\\to\\mathbb R^r\\,\\mathrm{mol}$ record heat, work and material transfer with declared signs; any tracked $\\Delta K_{\\mathrm{cm}}$ and $\\Delta U_{\\mathrm{ext}}$ are also joule-valued record maps. The transfer maps may depend on the whole record; factorization through the field $r$ requires an additional declared condition. The channel specifies a balance predicate on $\\mathcal T_\\alpha$, or equivalently a balance map into a declared product of quantity spaces whose required value is zero, and a model-admitted subset satisfying that predicate. The predicate states the actual energy and material constraints of that channel; no balance law, physical admission or endpoint realizability follows from the tuple alone. Other channels require their own adopted constraints. Define $(\\Gamma,x)\\mathcal R(\\Gamma',y)$ exactly when an admitted channel record has those endpoints. No channel is inferred from separated composition.\n\nFor a fixed-constitution core closed channel of system $s$, use $X_\\Gamma=X_{\\Gamma'}=D_c$ and all six original fields, configuration/equilibrium sets and endpoint maps of [[def-td-process-and-protocol]]. Fix the outer-boundary record $b_s$ of that system and take $\\mathcal B_\\alpha=\\{b_s\\}$. The embedding\n\n$$\\iota_s(I,x^-,x^+,z,\\kappa,r)=(I,x^-,x^+,z,\\kappa,b_s,r)$$\n\nis a bijection from $\\mathcal P_{\\mathrm{cl}}(s)$ onto the core channel's admitted subset; its inverse deletes the fixed field $b_s$. Thus the subsets are identified by this map, not by equality of six- and seven-tuples. On the image assign $Q_\\alpha(\\iota_s(P))=Q[P](1\\,\\mathrm J)$ and $W_{\\mathrm{on},\\alpha}(\\iota_s(P))=W_{\\mathrm{on}}[P](1\\,\\mathrm J)$, where the supplier's real values are numerical joule values. Set $N_\\alpha=0$ there and retain the supplier's stronger no-matter-crossing condition throughout the interval, together with its fixed-chart mass, endpoint velocities and zero kinetic/external changes. These assignments need not factor through $r$ alone. Values on other typed records are separate protocol data and do not enlarge the admitted subset or assert an energy-balance law.\n\nFor any permitted equal-formal-mass compound states $A,B$ of the network, define $A\\prec B$ exactly when at least one admitted channel record has initial state $A$ and final state $B$; for named single types this is the relation $\\mathcal R$ above. This is the exact relation supplied to [[def-tdmath-forward-sector-hypotheses]], not a separate abstract order that enlarges or restricts the channel edges. Its extension to finite tagged products and common spectators is governed by the adopted A1–A6 conditions below. Thus every edge in a decorated chain is precisely an admitted channel transition. This identification is a declared model condition.\n\nThe network is **finite-factor closed** when its types admit the declared finite composition and positive scaling operations and each allowed channel respects the model’s stated conservation constraints. In this network class, explicitly adopt the represented state-family conditions of [[def-tdmath-decorated-chain-costs]]. Each $X_T$ is a nonempty set of finite coefficient-map states with its declared fixed $\\nu_T$. The separated-product map\n\n$$\\pi_{T,T\\prime}:X_T\\times X_{T\\prime}\\to X_{T\\times T\\prime},\\qquad \\pi_{T,T\\prime}(a,b)=a+b$$\n\nis surjective, so each admitted separated-product state has a factorization, which need not be unique. For every $t>0$, the positive coefficient-scaling map $s_{t,T}:X_T\\to X_{tT}$, $s_{t,T}(a)=ta$, is a bijection with inverse scaling by $1/t$. These maps commute with the declared reassociation, permutation and scaling conventions and preserve the exact amount-function and formal-mass identities. The empty unit has $X_1=\\{0\\}$ with the empty coefficient map $0$. A chosen finite real baseline entropy family used for the chain costs must obey\n\n$$\\sigma_{T\\times T\\prime}(a+b)=\\sigma_T(a)+\\sigma_{T\\prime}(b),\\qquad \\sigma_{tT}(ta)=t\\sigma_T(a),\\qquad \\sigma_1(0)=0,$$\n\nindependently of a nonunique factorization. These are explicit admissibility and calibration conditions of the declared model, not consequences of a channel record or claims that every physical network satisfies them. Separated products remain sums of represented states; the distinct raw tags of scaled and joined types are retained, with reversible preparation transport as specified in [[def-tdmath-forward-sector-hypotheses]], rather than identifying those tags. The dimensioned endpoint-quantity maps and channel balance predicates remain the separately supplied physical data. In addition, each channel must preserve the dimensionless formal mass $m$ of [[def-td-scaled-products-and-comparison]]; this is the equal-coefficient-mass convention required by the mathematical chain-cost supplier, not a statement that formal mass is kilograms or moles. The common relation on all equal-formal-mass compounds satisfies A1–A6 of [[post-td-accessibility-a1-a6]], including consistency with spectators and stability. A decorated finite chain is exactly a finite sequence of such allowed transitions with a common catalyst and the real baseline-entropy edge costs in [[def-tdmath-decorated-chain-costs]].\n\nFor $\\Gamma,\\Gamma'$, let $F(\\Gamma,\\Gamma')\\in\\mathbb R\\cup\\{-\\infty,+\\infty\\}$ be the infimum of those finite decorated-chain costs, with $+\\infty$ if no witness exists and $-\\infty$ if costs are unbounded below. The network has **no sinks** when, for every ordered type pair,\n\n$$F(\\Gamma,\\Gamma')<+\\infty\\quad\\Longleftrightarrow\\quad F(\\Gamma',\\Gamma)<+\\infty.$$\n\nNo-sinks is an explicit property required of a network used in the global-offset theorem; it is not proved by this definition, and it is not asserted for every physical mixing or reaction. Raw channel data may have an empty channel set, but such data do not satisfy the finite-factor-closed A1–A6 subclass above: each nonempty $X_T$ requires an admitted identity-endpoint witness by A1. That subclass may have no channels between distinct composition types while retaining those reflexive witnesses. In every case no-sinks must be checked, not inferred from the absence of cross-composition channels.",
+        "deps": [
+          "def-td-process-and-protocol",
+          "def-td-scaled-products-and-comparison",
+          "post-td-accessibility-a1-a6",
+          "def-tdmath-decorated-chain-costs",
+          "def-tdmath-forward-sector-hypotheses"
+        ],
+        "dependency_roles": {
+          "def-td-process-and-protocol": "formulation-prerequisite",
+          "def-td-scaled-products-and-comparison": "formulation-prerequisite",
+          "post-td-accessibility-a1-a6": "physical-assumption",
+          "def-tdmath-decorated-chain-costs": "mathematical-premise",
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§VI.A–VI.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "dependency_level": 15,
+        "library": "physics",
+        "physical_scope": "A declared family of allowed transitions between distinct tagged composition types, with finite catalyst chains and an explicit no-sinks condition; this definition does not claim a particular material network satisfies it."
+      },
+      {
+        "id": "post-td-simple-system-geometric-axioms",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Simple-system geometric axioms",
+        "statement": "For each simple-system chart $\\Gamma_i\\subset\\mathbb R^{n_i+1}$, $n_i\\ge1$, let $x=(u,v)$, with one energy coordinate $u$ and $n_i$ work coordinates $v$. The chart is a nonempty open convex domain. The simple-compressible physical case is the fixed-composition slice and embedding of [[def-td-thermal-join]], with $n_i=1$, $u=U/(1\\,\\mathrm J)$ and $v=V/(1\\,\\mathrm{m^3})$. A declared multi-work chart or joined chart instead supplies its own equilibrium endpoint domain and diagonal unit map: $U=u(1\\,\\mathrm J)$ and $W_a=v_a w_a$ for fixed positive work-coordinate units $w_a$. The numerical domain is identified with these physical endpoints by that supplied map, and accessibility is pulled back from the admitted endpoint relation. These identifications preserve the internal-energy meaning and fixed composition; extra work coordinates do not follow from the simple-compressible state definition. Adopt these assumptions for every state $x$ and for every thermal join treated as a simple system:\n\n**A7 (convex-combination accessibility).** For $0<t<1$, the separated scaled pair $(t x,(1-t)y)$ is accessible to the chart state $t x+(1-t)y$, whenever these states are in the declared domains.\n\nFor each $x$, define its forward sector $A_x=\\{y\\in\\Gamma_i:x\\prec y\\}$. Adopt:\n\n**S1 (strict successor).** Some $y\\in\\Gamma_i$ satisfies $x\\prec\\prec y$.\n\n**S2 (unique finite-slope support).** At $x=(u_x,v_x)$, $A_x$ has exactly one supporting hyperplane through $x$, and it can be written\n$$\nu-u_x+P_i(x)\\cdot(v-v_x)=0\n$$\nwith finite $P_i(x)\\in\\mathbb R^{n_i}$. The map $P_i:\\Gamma_i\\to\\mathbb R^{n_i}$ is locally Lipschitz: every point has a neighborhood on which one finite Lipschitz constant bounds $\\|P_i(x)-P_i(y)\\|/\\|x-y\\|$. A supporting hyperplane means $A_x$ lies in one of its closed half-spaces and meets it at $x$.\n\n**S3 (connected relative boundary).** The boundary $\\partial_{\\Gamma_i}A_x$, taken in the topology relative to $\\Gamma_i$, is arcwise connected.\n\nThese are explicit adopted conditions. The slope $P_i$ is a geometric support parameter here; no equation identifying it with measured pressure is asserted. In particular, S1–S3 and A7 do not assert comparison hypothesis for products.",
+        "deps": [
+          "def-td-thermal-join",
+          "def-td-adiabatic-accessibility",
+          "def-td-scaled-products-and-comparison",
+          "post-td-accessibility-a1-a6"
+        ],
+        "dependency_roles": {
+          "def-td-thermal-join": "formulation-prerequisite",
+          "def-td-adiabatic-accessibility": "formulation-prerequisite",
+          "def-td-scaled-products-and-comparison": "formulation-prerequisite",
+          "post-td-accessibility-a1-a6": "operational-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§III.A–III.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §2",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            },
+            {
+              "title": "Goddard, The second law of thermodynamics as variation on a theme of Carathéodory, §3",
+              "url": "https://escholarship.org/content/qt27k6m59q/qt27k6m59q.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "library": "physics",
+        "physical_scope": "Adopted convexity, irreversibility, support regularity and boundary-connectivity conditions on the forward sectors of simple thermodynamic state domains and admitted joins."
+      },
+      {
+        "id": "post-td-thermal-join-axioms",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Thermal-contact axioms T1–T4",
+        "statement": "Use thermal joins and $\\sim_T$ exactly as defined in [[def-td-thermal-join]]. For every ordered pair of simple systems and every admitted finite join, adopt:\n\n**T1 (joining).** $(x,y)\\prec J_{ij}(x,y)$.\n\n**T2 (reversible splitting).** Every join state has at least one split into component states at its stated total energy and work coordinates that is reversible to the join state. Also, for every simple-system state $x=(u,v)$ and every $0<t<1$, adopt\n\n$$J_{ti,(1-t)i}(t x,(1-t)x)=(u,tv,(1-t)v)\\sim(t x,(1-t)x).$$\n\nThe displayed equality specifies coordinates in the tagged join of the two scaled types; it does not identify that join with the original one-work state $x$. A5 of [[post-td-accessibility-a1-a6]] separately gives $(t x,(1-t)x)\\sim x$, hence transitivity also gives equivalence of the join and $x$.\n\n**T3 (thermal-equilibrium transitivity).** If $x\\sim_T y$ and $y\\sim_T z$ in the model’s declared contact family, then $x\\sim_T z$. This requires the model to provide the relevant joined types and identifications.\n\n**T4 (transversality).** For each simple-system state $x$, there are $x_0,x_1$ in that system with $x_0\\prec\\prec x\\prec\\prec x_1$ and $x_0\\sim_T x_1$.\n\nThe axioms apply to admitted types and their joins only. T4 is an assumption about the contact relation; it is not a consequence of an equation of state or of a thermometer reading. The stronger range condition T5 is stated separately in [[post-td-universal-thermal-range]], and join coherence C1 is separately stated in [[post-td-equilibrium-join-coherence]].",
+        "deps": [
+          "def-td-thermal-join",
+          "post-td-accessibility-a1-a6",
+          "post-td-simple-system-geometric-axioms"
+        ],
+        "dependency_roles": {
+          "def-td-thermal-join": "formulation-prerequisite",
+          "post-td-accessibility-a1-a6": "operational-prerequisite",
+          "post-td-simple-system-geometric-axioms": "operational-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §§2–3",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            }
+          ]
+        },
+        "dependency_level": 8,
+        "library": "physics",
+        "physical_scope": "Adopted existence, reversible-splitting, transitivity and transversality assumptions for thermal contact among the declared simple-system family and its finite joins."
+      },
+      {
+        "id": "post-td-universal-thermal-range",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Universal thermal-equilibrium range T5",
+        "statement": "Adopt **T5 (universal thermal-equilibrium range)**: for every ordered pair of simple systems $i,j$, each state $x$ of $i$, and every work-coordinate point $v_j$ in the projection of the state domain of $j$, there is some state $y=(u_j,v_j)$ of $j$ with $x\\sim_T y$, using [[def-td-thermal-join]].\n\nThis is a quantified existence assumption for a thermal-equilibrium partner at each permitted work coordinate. It does not define a numerical temperature, assert that all systems possess the same temperature range as a real apparatus, or supply a calibration map and its uncertainty.",
+        "deps": [
+          "def-td-thermal-join",
+          "post-td-thermal-join-axioms"
+        ],
+        "dependency_roles": {
+          "def-td-thermal-join": "formulation-prerequisite",
+          "post-td-thermal-join-axioms": "operational-prerequisite"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §IV.A, T5",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §§2–3",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "library": "physics",
+        "physical_scope": "The adopted universal range condition for thermal-equilibrium partners in the declared contact family; it is an operational assumption, not an empirical thermometer calibration."
+      },
+      {
+        "id": "post-td-equilibrium-join-coherence",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Equilibrium-join coherence C1",
+        "statement": "Adopt **C1 (equilibrium-join coherence)**: whenever $x\\sim_T y$, the joined state $J_{ij}(x,y)$ is thermally equivalent to each constituent, $J_{ij}(x,y)\\sim_T x$ and $J_{ij}(x,y)\\sim_T y$, using the model’s declared nested-join identifications.\n\nC1 is an additional postulate of this completed contact branch. The source’s Theorem 4.8 is stated with T1–T4; the local conditional calibrator route uses the constituent-to-join bridge in addition to the stronger T5 range assumption. Neither fact licenses deriving C1 from $u=u_i+u_j$, from T1–T4, or from transitivity alone. The displayed source supports the contact context, not the claim that its bare printed axioms already contain C1.",
+        "deps": [
+          "def-td-thermal-join",
+          "post-td-thermal-join-axioms"
+        ],
+        "dependency_roles": {
+          "def-td-thermal-join": "formulation-prerequisite",
+          "post-td-thermal-join-axioms": "operational-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§IV.A–IV.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §§2–3",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "library": "physics",
+        "physical_scope": "An explicit coherence assumption for nested thermal joins of equilibrated pairs; it supplements the energy-summing join rule and is not inferred from that rule."
+      },
+      {
+        "id": "pthm-td-contact-product-comparison",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Conditional contact calibrator and product comparison",
+        "statement": "For every declared family obtained as the closure of finitely many simple-system generators under positive scaling and finite thermal joins of [[def-td-thermal-join]], assume the accessibility axioms A1–A6, the simple-system assumptions A7 and S1–S3, the contact assumptions T1–T4, the universal thermal-equilibrium range T5, and equilibrium-join coherence C1, with the exact formulations in [[post-td-accessibility-a1-a6]], [[post-td-simple-system-geometric-axioms]], [[post-td-thermal-join-axioms]], [[post-td-universal-thermal-range]], and [[post-td-equilibrium-join-coherence]]. The closure itself may be infinite; each join and product expression is finite. Then for any two simple types $i,j$, there are $x_0\\prec\\prec x_1$ in $i$ and $y_0\\prec\\prec y_1$ in $j$ such that\n\n$$ (x_0,y_1)\\sim(x_1,y_0). $$\n\nMoreover, for this fixed pair $i,j$, every finite separated product made only from positive scaled copies of $i$ and $j$ satisfies the comparison hypothesis: any two equal-formal-mass states $A,B$ of that product type satisfy $A\\prec B$ or $B\\prec A$. No comparison conclusion for products involving a third primitive type is contained in this pairwise result. These are conditional model deductions. In particular, the conclusion is not claimed from the printed Theorem 4.8 interface with T1–T4 alone; the local mathematical supplier explicitly requires the additional T5 and C1 branch.",
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-td-scaled-products-and-comparison",
+          "def-td-thermal-join",
+          "post-td-accessibility-a1-a6",
+          "post-td-equilibrium-join-coherence",
+          "post-td-simple-system-geometric-axioms",
+          "post-td-thermal-join-axioms",
+          "post-td-universal-thermal-range",
+          "thm-tdmath-conditional-contact-calibrator"
+        ],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-td-scaled-products-and-comparison": "formulation-prerequisite",
+          "def-td-thermal-join": "formulation-prerequisite",
+          "post-td-accessibility-a1-a6": "physical-assumption",
+          "post-td-equilibrium-join-coherence": "physical-assumption",
+          "post-td-simple-system-geometric-axioms": "physical-assumption",
+          "post-td-thermal-join-axioms": "physical-assumption",
+          "post-td-universal-thermal-range": "physical-assumption",
+          "thm-tdmath-conditional-contact-calibrator": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 4.8 and §§IV.A–IV.C",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §§2–4",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            },
+            {
+              "title": "Goddard, The second law of thermodynamics as variation on a theme of Carathéodory, §§2–3",
+              "url": "https://escholarship.org/content/qt27k6m59q/qt27k6m59q.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13,
+        "library": "physics",
+        "physical_scope": "Conditional consequence of the adopted A1–A7, S1–S3, T1–T5 and C1 assumptions for the declared finite thermal-contact family; not an unconditional law for real materials.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-td-entropy-under-product-comparison",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Entropy representation for finite separated products",
+        "statement": "Let $I$ be a nonempty, possibly infinite set of primitive system labels. Assume the declared family includes every finite separated product and every finite thermal join of positive scaled copies. For every nonempty finite subset $F\\subseteq I$, assume its closure under positive scaling and finite thermal joining satisfies the full hypotheses A1–A7, S1–S3, T1–T5 and C1 of [[thm-tdmath-conditional-contact-calibrator]], with the exact represented-state and preparation conventions of [[def-tdmath-forward-sector-hypotheses]] and [[def-tdmath-thermal-contact-hypotheses]]. The closure may be infinite; “finite” refers to the generators and to each individual product or join expression. These hypotheses concern one common declared physical endpoint relation, with its chart and join interpretations, not independently chosen orders on overlapping families. Also assume the explicit finite-factor representation and fully scalable preparation transport of [[def-td-scaled-products-and-comparison]] and the Axiom of Choice. Then there is a single dimensionless function $\\widetilde S$ on all states of the declared finite-factor family that is additive under separation, extensive under every admitted positive scaling, and characterizes every equal-composition comparison:\n\n$$ A\\prec B\\quad\\Longleftrightarrow\\quad \\widetilde S(A)\\le \\widetilde S(B). $$\n\nFor each simple chart, A7 also makes $\\widetilde S$ concave on every convex region where the stated recombination operation is admitted. The result does not set the entropy unit to $\\mathrm{J\\,K^{-1}}$, determine additive constants across different reaction compositions, or establish empirical validity of the contact assumptions.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-td-scaled-products-and-comparison",
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-thermal-contact-hypotheses",
+          "post-td-accessibility-a1-a6",
+          "post-td-simple-system-geometric-axioms",
+          "post-td-thermal-join-axioms",
+          "thm-tdmath-conditional-contact-calibrator",
+          "thm-tdmath-arbitrary-family-calibration"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-td-scaled-products-and-comparison": "formulation-prerequisite",
+          "post-td-accessibility-a1-a6": "physical-assumption",
+          "post-td-simple-system-geometric-axioms": "physical-assumption",
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-thermal-contact-hypotheses": "mathematical-premise",
+          "post-td-thermal-join-axioms": "physical-assumption",
+          "thm-tdmath-conditional-contact-calibrator": "mathematical-premise",
+          "thm-tdmath-arbitrary-family-calibration": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorems 2.2 and 4.8 and §IV.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §§2–4",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            },
+            {
+              "title": "Goddard, The second law of thermodynamics as variation on a theme of Carathéodory, §§2–3",
+              "url": "https://escholarship.org/content/qt27k6m59q/qt27k6m59q.pdf"
+            }
+          ]
+        },
+        "dependency_level": 14,
+        "library": "physics",
+        "physical_scope": "An order representation for a possibly infinite primitive family and its finite products and joins under the adopted contact assumptions; the entropy is dimensionless until an independent physical calibration fixes its unit.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-td-universal-mixing-entropy",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Conditional weak entropy principle across mixing channels",
+        "statement": "Let $\\mathcal G\\ne\\varnothing$ be a finite-factor-closed network of [[def-td-cross-type-reaction-network]]. Assume the contact hypotheses of [[pthm-td-entropy-under-product-comparison]] provide a finite real baseline entropy $\\sigma_\\Gamma$ on each type. Also assume that network satisfies A1–A6, its exact decorated-chain cost $F$ has the no-sinks property defined there, and the Axiom of Choice. Then there is a real offset $B(\\Gamma)$ for each type, additive under finite composition and extensive under every positive scaling, such that the corrected entropy\n\n$$S_\\Gamma(x):=\\sigma_\\Gamma(x)+B(\\Gamma)$$\n\nis nondecreasing across every admitted channel transition: if $(\\Gamma,x)\\mathcal R(\\Gamma',y)$, then $S_\\Gamma(x)\\le S_{\\Gamma'}(y)$. The conclusion is weak monotonicity only. It does not assert a no-gap identity, uniqueness of $B$, strict increase, or a global entropy principle for networks that fail the stated hypotheses.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-td-cross-type-reaction-network",
+          "pthm-td-entropy-under-product-comparison",
+          "thm-tdmath-splitting-cost-quotient",
+          "thm-tdmath-unattained-cost-entropy-inference"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-td-cross-type-reaction-network": "formulation-prerequisite",
+          "pthm-td-entropy-under-product-comparison": "physical-result",
+          "thm-tdmath-splitting-cost-quotient": "mathematical-premise",
+          "thm-tdmath-unattained-cost-entropy-inference": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 6.1 and §VI.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "dependency_level": 19,
+        "library": "physics",
+        "physical_scope": "Conditional entropy monotonicity across the declared cross-type mixing and reaction network; no-gap, uniqueness, strict increase, and empirical universality are not asserted.",
+        "proof_strategy": "direct",
+        "proof": "**Given:** [A1] and [F1]–[F4].\n\n1.1 Fix an admitted transition $(\\Gamma,x)\\mathcal R(\\Gamma',y)$. [F1] supplies finite baseline state values on both endpoint types, and [F2] supplies the surjective product maps, positive scaling bijections, zero unit and baseline compatibility required by the exact decorated-chain definition, and identifies its cost convention for this pair. Use the composition-preserving type-weighted representation from [F1]'s construction: interpret each encoded coefficient by its amount divided by the positive type weight, keeping the raw scaled and joined tags distinct. The network compares equal formal masses, and this interpretation preserves its admitted endpoint relation and each finite baseline entropy sum; hence each physical finite-chain witness and its coefficient-map image have the same real edge costs. Reversible regrouping of factors uses the adopted reversible-splitting axiom in [F2], so it changes neither the represented endpoints nor their baseline values. The cost $F$ used by [F3] is therefore this exact witness infimum, not one inferred from coordinate equality. Applying [F3] to this exact transition gives $$ \\sigma_{\\Gamma'}(y)-\\sigma_\\Gamma(x)\\ge F(\\Gamma,\\Gamma'). $$ If the edge exists, the one-edge chain makes $F(\\Gamma,\\Gamma')<+\\infty$, so this inequality has an ordinary real right side under the stated no-sinks hypothesis. [F1, F2, F3, given]\n\n2.1 The network’s no-sinks condition and [A1] match the hypotheses of [F4]; its cost is the same $F$ as in step 1.1 by [F2] and [F3]. Thus [F4] supplies one offset function $B$, common to all types, with additivity, positive-scale extensivity and $B(\\Gamma)-B(\\Gamma')\\le F(\\Gamma,\\Gamma')$ for every pair. [A1, F2, F3, F4, step 1.1]\n\n3.1 Subtract the bound in step 2.1 from that in step 1.1: $$ [\\sigma_{\\Gamma'}(y)+B(\\Gamma')]-[\\sigma_\\Gamma(x)+B(\\Gamma)]\\ge0. $$ By the definition of $S$ in the Statement, this is $S_{\\Gamma'}(y)\\ge S_\\Gamma(x)$. The same $B$ works for every admitted transition, proving the conditional weak entropy principle. [step 1.1, step 2.1, algebra] ∎"
+      },
+      {
+        "id": "rem-td-entropy-construction-hypotheses",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Scope of the accessibility entropy construction",
+        "statement": "The order relation in [[def-td-adiabatic-accessibility]] is a model-defined relation between equilibrium endpoints; it is not a measured trajectory law. A1–A6, A7, S1–S3, T1–T5 and C1 are adopted physical assumptions. The contact-product conclusion is conditional on the full list. In the inspected Lieb–Yngvason source, Theorem 4.8 is stated under T1–T4; the local supplier’s proof branch explicitly also needs the universal range T5 and the separate join-coherence bridge C1. The bare printed source interface does not discharge those stronger inputs.\n\nThe product representation $\\widetilde S$ is a dimensionless order parameter normalized by a chosen strict meter. A physical entropy reported in $\\mathrm{J\\,K^{-1}}$ requires an external scale calibration and stated uncertainty. The additive constants for composition types are not fixed by the no-mixing theorem; the mixing theorem fixes only a weak monotonicity selection under its extra hypotheses.\n\nThe arbitrary-family calibration supplier assumes an explicit finite-factor representation and the Axiom of Choice for simultaneous reference/calibrator selections. The mixing supplier further requires an actual cross-type transition network, finite decorated-chain costs, A1–A6 on those transitions, and the no-sinks condition. It does not establish that arbitrary mixing or reaction channels satisfy these conditions. No-gap equality, uniqueness of reaction offsets, or strict entropy increase requires additional hypotheses and is not asserted here.\n\nThe Carathéodory treatment of Goddard is a distinct route based on local inaccessibility. It supports the conceptual distinction between accessibility assumptions and derived consequences, but it is not a second proof of the convex-contact product theorem.",
+        "deps": [
+          "post-td-equilibrium-join-coherence",
+          "post-td-universal-thermal-range",
+          "pthm-td-contact-product-comparison",
+          "pthm-td-entropy-under-product-comparison",
+          "pthm-td-universal-mixing-entropy"
+        ],
+        "dependency_roles": {
+          "post-td-equilibrium-join-coherence": "physical-assumption",
+          "post-td-universal-thermal-range": "physical-assumption",
+          "pthm-td-contact-product-comparison": "physical-result",
+          "pthm-td-entropy-under-product-comparison": "physical-result",
+          "pthm-td-universal-mixing-entropy": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§II.D–II.F, IV.B–IV.C and VI",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §§2–4",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            },
+            {
+              "title": "Goddard, The second law of thermodynamics as variation on a theme of Carathéodory, §§2–3",
+              "url": "https://escholarship.org/content/qt27k6m59q/qt27k6m59q.pdf"
+            },
+            {
+              "title": "Samuel J. Ling, William Moebs, and Jeff Sanny, University Physics Volume 2, §4.1 Reversible and Irreversible Processes",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/4-1-reversible-and-irreversible-processes"
+            },
+            {
+              "title": "Samuel J. Ling, William Moebs, and Jeff Sanny, University Physics Volume 2, §4.4 Statements of the Second Law of Thermodynamics",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/4-4-statements-of-the-second-law-of-thermodynamics"
+            },
+            {
+              "title": "Samuel J. Ling, William Moebs, and Jeff Sanny, University Physics Volume 2, §4.6 Entropy",
+              "url": "https://openstax.org/books/university-physics-volume-2/pages/4-6-entropy"
+            }
+          ]
+        },
+        "dependency_level": 20,
+        "library": "physics",
+        "physical_scope": "Interpretation and limitations of the conditional accessibility, product and mixing entropy results on this page."
+      }
+    ]
+  },
+  {
+    "order": 272,
+    "id": "td-accessibility-foundation-examples",
+    "kind": "B",
+    "category": "thermodynamics",
+    "library": "physics",
+    "title": "Accessibility Foundation — Examples",
+    "companion": "td-accessibility-foundation",
+    "requires": [
+      "td-accessibility-foundation",
+      "the-logarithm-and-general-powers"
+    ],
+    "items": [
+      {
+        "id": "ex-td-positive-log-contact-witness",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Positive logarithmic contact model as a consistency witness",
+        "statement": "Take finitely many tagged simple types $i$, each with positive dimensionless coordinates $u>0,v>0$, where $u=E/(1\\,\\mathrm J)$ for internal energy $E$ measured in joules and $v$ is the numerical work coordinate in its declared fixed unit. Choose dimensionless constants $c_i,r_i>0$, positive dimensionless reference values $u_{\\star,i},v_{\\star,i}>0$, and dimensionless offsets $b_i\\in\\mathbb R$, and define\n\n$$s_i(u,v)=c_i\\log\\frac{u}{u_{\\star,i}}+r_i\\log\\frac{v}{v_{\\star,i}}+b_i.$$\n\nFor a scaled tag $t i$, set its coefficients to $tc_i,tr_i,tb_i$ and its reference coordinates to $t u_{\\star,i},t v_{\\star,i}$, so $s_{ti}(tu,tv)=t\\,s_i(u,v)$. For every finite compound of declared primitive, scaled, or recursively joined tags, assign the sum of the constituent state entropies and declare $A\\prec B$ exactly when this sum for $A$ is no greater than this sum for $B$, on equal-formal-mass pairs. For a thermal join of $i,j$, define the joined entropy at $(u,v_i,v_j)$ as the maximum of $s_i(u_i,v_i)+s_j(u_j,v_j)$ over $u_i,u_j>0$ with $u_i+u_j=u$. Use the same entropy comparison for the separated-pair and joined encodings, which have the same formal composition: the pair accesses the join exactly when its entropy is at most the joined entropy, and the join accesses the pair exactly when the reverse inequality holds. Thus contact equilibrium is equivalent to equality with the maximum. For a positive scaled copy $t\\Delta_{ij}$ of a join, scale all coordinates by $t$ and set $s_{t\\Delta_{ij}}(tZ):=t s_{\\Delta_{ij}}(Z)$; this is consistent with the maximum because scaling $(u_i,u_j)$ by $t$ bijects the splits of $u$ with the splits of $tu$. For nested joins, use the same maximum construction recursively, with the same positive-scaling rule.\n\nTo realize every stated comparison, explicitly declare a formal channel for each ordered pair of endpoint types $T,T'$ of equal formal mass, including pairs with different primitive compositions. Let $X_T,X_{T'}$ be their domains, let $H_T:X_T\\to\\mathbb R$ be the entropy specified above, and let $\\mathcal E_T:X_T\\to\\mathbb R\\,\\mathrm J$ be the energy map (sum over separated factors, or the single summed energy for a join). The configuration space is the disjoint union $Z_{T,T'}=(\\{0\\}\\times X_T)\\cup(\\{1\\}\\times X_{T'})$, with initial and final equilibrium subsets the two summands and endpoint maps $(0,a)\\mapsto a$, $(1,b)\\mapsto b$. Fix singleton protocol and outer-boundary record sets $\\{*\\}$ and the transfer-record set $\\mathcal R_{T,T'}=X_T\\times X_{T'}$. For endpoints $(a,b)$ the one-second record is $P_{a,b}=([0,1],a,b,z_{a,b},*,*,(a,b))$, where $z_{a,b}(0)=(0,a)$ and $z_{a,b}(t)=(1,b)$ for $0<t\\le1$; no path regularity is asserted. Let its transfer record $(a,b)$ supply $H_{P_{a,b}}^{\\mathrm{in}}(t)=H_{P_{a,b}}^{\\mathrm{out}}(t)=0$ for every $t\\in[0,1]$, with numerical values in joules. These nonnegative, nondecreasing maps start at zero and specify no thermal transfer across the selected outer boundary. Deleting the fixed outer-boundary field gives a bijection from these seven-field records to the six-field records of [[def-td-scaled-products-and-comparison]], preserving endpoints, controls, transfers and admission; for one-factor channels use these same records as the single-system model. Permutation and reassociation transport the endpoint tuples and the path labels together; their inverse transports give record bijections, preserving entropy sums, total energy and the zero thermal histories. Assign $Q(a,b)=0\\,\\mathrm J$ from these histories and $W_{\\mathrm{on}}(a,b)=\\mathcal E_{T'}(b)-\\mathcal E_T(a)$. Admit exactly these records with $H_T(a)\\le H_{T'}(b)$; their declared balance is $\\Delta\\mathcal E=Q+W_{\\mathrm{on}}$ and equal formal mass. Accessibility is existence of one of these admitted records. Thus the entropy order, including the cross-composition comparisons, has explicit witnesses, rather than being inferred from equal mass. Primitive composition here is a formal label, not a mole vector; no chemical or material conservation model, actual apparatus, or realization of these discontinuous paths is asserted. The empty type has its sole state, energy zero and entropy zero, and has its identity record.\n\nThis formal model explicitly declares each equilibrium endpoint domain to be the stated positive numerical orthant, with endpoint coordinate map the identity and accessibility the entropy-sum relation above. Its fixed unit map assigns $E=u(1\\,\\mathrm J)$ and each work coordinate $W_a=v_aw_a$ for a fixed positive unit $w_a$; this bookkeeping supplies no material realization. Each primitive tag has a fixed formal composition, while the joined endpoint space is the positive orthant in summed energy and retained work coordinates with the summed composition. A scaled copy transports these coordinates and that composition and retains its distinct tag, exactly as in the declared join interface. This provides a nondegenerate consistency witness for the order, geometric, contact, T5, and C1 assumptions on this positive-coordinate family. It supplies no measured parameter values or empirical claim.",
+        "deps": [
+          "cor-mean-value-theorem",
+          "def-natural-logarithm",
+          "def-real-power",
+          "def-td-scaled-products-and-comparison",
+          "def-td-thermal-join",
+          "post-td-accessibility-a1-a6",
+          "post-td-equilibrium-join-coherence",
+          "post-td-simple-system-geometric-axioms",
+          "post-td-thermal-join-axioms",
+          "post-td-universal-thermal-range",
+          "thm-exponential-two-point-convexity",
+          "thm-natural-logarithm-laws",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "dependency_roles": {
+          "cor-mean-value-theorem": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "def-real-power": "mathematical-premise",
+          "def-td-scaled-products-and-comparison": "formulation-prerequisite",
+          "def-td-thermal-join": "formulation-prerequisite",
+          "post-td-accessibility-a1-a6": "physical-assumption",
+          "post-td-equilibrium-join-coherence": "physical-assumption",
+          "post-td-simple-system-geometric-axioms": "physical-assumption",
+          "post-td-thermal-join-axioms": "physical-assumption",
+          "post-td-universal-thermal-range": "physical-assumption",
+          "thm-exponential-two-point-convexity": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§III.B–IV.A",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §§2–4",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            }
+          ]
+        },
+        "dependency_level": 10,
+        "library": "physics",
+        "physical_scope": "A calculated mathematical model showing compatibility of the stated accessibility and contact assumptions for positive-coordinate systems; it is not an experiment or evidence that real materials obey the assumptions.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-td-degenerate-thermometer-comparison",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Degenerate thermometers can fail product comparison",
+        "statement": "Let $E$ be an internal-energy value measured in joules, and use the dimensionless numerical coordinate $U:=E/(1\\,\\mathrm J)\\in(0,\\infty)$, so $E=U(1\\,\\mathrm J)$, as in [[def-td-si-quantities]]. The one-system order relation $U\\le U'$ on the degenerate thermometer state space $\\Gamma=(0,\\infty)$, together with the thermal equilibration operation described below, need not satisfy T4 or the comparison hypothesis on products. Consequently, a monotone entropy on the single-system space need not represent product accessibility.",
+        "deps": [
+          "thm-natural-logarithm-laws",
+          "def-td-scaled-products-and-comparison",
+          "post-td-thermal-join-axioms",
+          "def-td-si-quantities"
+        ],
+        "dependency_roles": {
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "def-td-scaled-products-and-comparison": "formulation-prerequisite",
+          "post-td-thermal-join-axioms": "physical-assumption",
+          "def-td-si-quantities": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §IV.C, pp. 59–60",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "André Thess, The Lieb–Yngvason Machine: A didactical tool for the definition of entropy in classical thermodynamics, §2",
+              "url": "https://www.dlr.de/de/tt/downloads/dokumente/institut/institutsleitung/Entropie.pdf/@@download/file"
+            },
+            {
+              "title": "Goddard, The second law of thermodynamics as variation on a theme of Carathéodory, §3",
+              "url": "https://escholarship.org/content/qt27k6m59q/qt27k6m59q.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9,
+        "library": "physics",
+        "physical_scope": "An abstract positive-energy thermometer model showing failure of T4 and the comparison hypothesis for products; it is not a measured thermometer or a claim about ordinary thermodynamic bodies.",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

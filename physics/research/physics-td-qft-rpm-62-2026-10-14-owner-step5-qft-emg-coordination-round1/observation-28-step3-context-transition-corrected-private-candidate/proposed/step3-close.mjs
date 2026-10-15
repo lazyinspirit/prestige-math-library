@@ -1,0 +1,147 @@
+#!/usr/bin/env node
+// Freeze dependency-ordered Step 3a after the passed native gate and exact carrier/plan currency checks.
+// Later stages may rewrite items, but cannot rewrite the Step-3 evidence.
+
+import { createHash } from 'node:crypto';
+import { spawnSync } from 'node:child_process';
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { itemHashGuard } from './item-hash.mjs';
+import { isPublishedItem } from './published-repair-policy.mjs';
+import { taxonomyOwnership } from './defect-ledger-taxonomy.mjs';
+import { historicalContextTransition } from './step3-historical-context-transition.mjs';
+
+const argv = process.argv.slice(2);
+const mode = argv[0];
+const opt = (name, fallback = null) => {
+  const at = argv.indexOf(`--${name}`);
+  return at >= 0 && argv[at + 1] && !argv[at + 1].startsWith('--') ? argv[at + 1] : fallback;
+};
+const root = resolve(opt('root', '.'));
+const run = opt('run');
+const R = (...parts) => join(root, ...parts);
+const sha256 = (value) => createHash('sha256').update(value).digest('hex');
+const fail = (message) => { console.error(`step3-close: ${message}`); process.exit(1); };
+if (!run || !['close', 'verify'].includes(mode)) {
+  console.error('usage: node tools/physics-support/step3-close.mjs close|verify --run <run> [--root <repo>]');
+  process.exit(2);
+}
+
+const receiptPath = R('research', `${run}-step3-closure.json`);
+const researchNames = () => readdirSync(R('research'));
+const artifactNames = (version = 3) => researchNames().filter((name) =>
+  name.startsWith(`${run}-step3-hash-`)
+  || name.startsWith(`${run}-step3-scope-`)
+  || name.startsWith(`${run}-reader-findings-`)
+  || new RegExp(`^${run}-reader-\\d+\\.md$`).test(name)
+  || name.startsWith(`${run}-refute-`)
+  || new RegExp(`^${run}-alpha-(?:[a-z]+|batch-[1-9]\\d*)-3a\\.md$`).test(name)
+  || (name.startsWith(`${run}-alpha-`) && name.endsWith('-3a-decisions.json'))
+  || version === 2 && [ `${run}-alpha-3b.md`, `${run}-cross-group-edges.json`,
+    `${run}-3b-verdicts.jsonl` ].includes(name)).sort();
+const artifactHashes = (version = 3) => Object.fromEntries(artifactNames(version).map((name) => [
+  `research/${name}`, sha256(readFileSync(R('research', name))),
+]));
+const jsonl = (path) => existsSync(path)
+  ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
+const canonicalRows = (rows, key) => [...rows].sort((left, right) =>
+  String(key(left)).localeCompare(String(key(right))));
+const step3LedgerRows = () => {
+  const rows = jsonl(R('research', 'defect-ledger.jsonl')).filter(row => row.run === run);
+  const errors = [];
+  // Validate lineage and every substantive field before projecting anything.
+  // Original rows remain present; an arbitrary supersession is never hidden.
+  taxonomyOwnership(rows, errors);
+  if (errors.length) fail(errors.join('; '));
+  return canonicalRows(rows.filter(row =>
+    ['3a-adjudicate', '3b-cross'].includes(row.caught_at_stage)
+    && !isPublishedItem(root, row.subject)),
+  row => row.defect_id);
+};
+const currentRunItems = () => {
+  const ids = new Set();
+  for (const name of researchNames().filter((entry) =>
+    entry.startsWith(`${run}-batch-`) && entry.endsWith('.pages.json'))) {
+    const raw = JSON.parse(readFileSync(R('research', name), 'utf8'));
+    for (const page of (Array.isArray(raw) ? raw : raw.pages ?? [])) {
+      for (const item of page.items ?? []) ids.add(String(typeof item === 'string' ? item : item.id));
+    }
+  }
+  return Object.fromEntries([...ids].sort().map((id) => {
+    const path = R('items', `${id}.md`);
+    return [id, existsSync(path) ? itemHashGuard(readFileSync(path, 'utf8')) : null];
+  }));
+};
+
+if (mode === 'verify') {
+  if (!existsSync(receiptPath)) fail(`missing ${receiptPath}`);
+  let receipt;
+  try { receipt = JSON.parse(readFileSync(receiptPath, 'utf8')); }
+  catch (cause) { fail(`invalid receipt (${cause.message})`); }
+  const errors = [];
+  if (![2, 3].includes(receipt.version) || receipt.run !== run || receipt.status !== 'closed'
+    || receipt.version === 3 && receipt.basis !== 'dependency-ordered-step3a') {
+    errors.push('wrong version, run, or status');
+  }
+  const currentArtifacts = artifactHashes(receipt.version);
+  if (JSON.stringify(Object.keys(currentArtifacts)) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
+    errors.push('the exact Step-3 artifact set changed');
+  }
+  let contextTransitions = new Map();
+  try { contextTransitions = historicalContextTransition(root, run, receipt, currentArtifacts); }
+  catch (cause) { errors.push(cause.message); }
+  for (const [relative, expected] of Object.entries(receipt.artifacts ?? {})) {
+    if (currentArtifacts[relative] === expected) continue;
+    const transition = contextTransitions.get(relative);
+    if (!(transition?.before === expected && transition.current === currentArtifacts[relative])) {
+      errors.push(`${relative} changed after Step 3 closed`);
+    }
+  }
+  // Authenticate taxonomy lineage first, but retain an exact existing closure
+  // even if valid taxonomy corrections were already included when it closed.
+  const matchesLedger = rows => sha256(JSON.stringify(rows)) === receipt.step3_ledger_rows_sha256
+    && rows.length === receipt.step3_ledger_rows_count;
+  let ledgerRows = step3LedgerRows();
+  if (!matchesLedger(ledgerRows)) {
+    // Only authenticated taxonomy successors may be absent from old history.
+    // Original rows and every substantive successor remain in this projection.
+    ledgerRows = ledgerRows.filter(row => row.metadata_correction?.kind !== 'taxonomy-only');
+  }
+  if (!matchesLedger(ledgerRows)) errors.push('Step-3 defect-ledger rows changed');
+  if (errors.length) fail(errors.join('; '));
+  console.log(`step3-close: verified ${Object.keys(receipt.artifacts ?? {}).length} historical artifact(s) for ${run}; ${contextTransitions.size} separately authenticated current context-binding transition(s)`);
+  process.exit(0);
+}
+
+const checks = [
+  ['passed-step3a-currency', ['tools/physics-support/step3-scope.mjs', 'verify-post-3a', '--run', run]],
+  ['splice-verify', ['tools/physics-support/splice-plan.mjs', '--run', run, '--verify']],
+];
+// The routing check is the expensive one: on phase-2-remaining-27's 1,032-item
+// corpus it takes about ten minutes, so a five-minute cap aborted the close
+// with a bare ETIMEDOUT while the check itself was healthy. The bound below is
+// the tool's own safety net; the stage dispatch timeout (30 min) stays the
+// binding budget.
+const checkTimeoutMs = 20 * 60 * 1000;
+for (const [label, args] of checks) {
+  const result = spawnSync(process.execPath, args, {
+    cwd: root, encoding: 'utf8', timeout: checkTimeoutMs, maxBuffer: 32 * 1024 * 1024,
+  });
+  if (result.error) fail(`${label} could not complete: ${result.error.message}`);
+  if (result.status !== 0) fail(`${label} failed\n${result.stderr || result.stdout}`);
+}
+const artifacts = artifactHashes();
+if (!Object.keys(artifacts).length) fail('no exact Step-3 artifacts exist');
+const ledgerRows = step3LedgerRows();
+writeFileSync(receiptPath, `${JSON.stringify({
+  version: 3,
+  basis: 'dependency-ordered-step3a',
+  run,
+  status: 'closed',
+  closed_at: new Date().toISOString(),
+  artifacts,
+  step3_ledger_rows_sha256: sha256(JSON.stringify(ledgerRows)),
+  step3_ledger_rows_count: ledgerRows.length,
+  final_item_hashes: currentRunItems(),
+}, null, 2)}\n`);
+console.log(`step3-close: closed ${run} over ${Object.keys(artifacts).length} frozen artifact(s)`);

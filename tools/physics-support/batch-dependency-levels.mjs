@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Derived scheduling metadata; this is not a content audit or an approval.
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, writeFileSync, renameSync, realpathSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync, renameSync, realpathSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadStep3 } from './frontier-snapshot.mjs';
@@ -42,6 +42,25 @@ export function computeBatchDependencyLevels(graph) {
 export function batchDependencyLevelsPath(root, run) {
   assert(/^[a-zA-Z0-9_-]+$/.test(run ?? ''), 'Invalid run');
   return join(root, 'research', `${run}-batch-dependency-levels.json`);
+}
+
+/** Last valid full graph, for queue priority while authors mutate draft inputs.
+ * This is not current-content validation; the drained write/check remain strict. */
+export function readSchedulingBatchDependencyLevels(root, run) {
+  const path = batchDependencyLevelsPath(root, run);
+  const recorded = JSON.parse(readFileSync(path, 'utf8'));
+  assert(recorded.version === 1 && recorded.run === run
+    && /^[a-f0-9]{64}$/.test(recorded.input_sha256 ?? ''), `Invalid batch dependency levels for ${run}`);
+  assert(Array.isArray(recorded.batches), `Missing batch dependency graph for ${run}`);
+  const rows = computeBatchDependencyLevels(recorded.batches);
+  assert(JSON.stringify(recorded.batches) === JSON.stringify(rows), `Invalid recorded batch dependency levels for ${run}`);
+  const batches = readdirSync(join(root, 'research'))
+    .filter(name => name.startsWith(`${run}-batch-`) && name.endsWith('.pages.json'))
+    .map(name => name.slice(`${run}-batch-`.length, -'.pages.json'.length))
+    .filter(batch => /^\d+$/.test(batch)).sort(compare);
+  assert(JSON.stringify(rows.map(row => row.batch).sort(compare)) === JSON.stringify(batches),
+    `Recorded scheduling scope differs from run manifests for ${run}`);
+  return recorded;
 }
 
 /** Recompute from current manifests and actual logical carrier dependencies. */

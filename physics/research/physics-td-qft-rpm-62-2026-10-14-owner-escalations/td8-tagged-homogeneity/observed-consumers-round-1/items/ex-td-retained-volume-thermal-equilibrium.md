@@ -1,0 +1,69 @@
+---
+id: ex-td-retained-volume-thermal-equilibrium
+kind: example
+title: Thermal equilibrium with retained unequal volumes
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+physical_scope: A constructed two-subsystem entropy-maximization example with fixed volumes; it illustrates the effect of retained constraints and is not an empirical model of a named substance.
+deps:
+  - def-td-isolated-compound-feasible-set
+  - def-td-temperature-pressure-chemical-potential
+  - pthm-td-interior-exchange-equilibrium
+  - post-td-bulk-additivity
+  - post-td-concave-fundamental-entropy
+  - post-td-entropy-maximum
+  - def-natural-logarithm
+  - thm-logarithm-derivative-and-integral
+dependency_roles:
+  def-td-isolated-compound-feasible-set: formulation-prerequisite
+  def-td-temperature-pressure-chemical-potential: formulation-prerequisite
+  pthm-td-interior-exchange-equilibrium: physical-result
+  post-td-bulk-additivity: physical-assumption
+  post-td-concave-fundamental-entropy: physical-assumption
+  post-td-entropy-maximum: physical-assumption
+  def-natural-logarithm: mathematical-premise
+  thm-logarithm-derivative-and-integral: mathematical-premise
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+sources:
+  references:
+    - title: David Tong, Statistical Physics, complete lecture notes, §1.2.4
+      url: https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S1.html
+    - title: Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.9.1
+      url: https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf
+---
+
+## Example
+
+Take two separated fixed-composition subsystems with fixed unequal volumes $V_A=V_0$ and $V_B=2V_0$, where $V_0>0$ is measured in cubic metres. Let each have the stipulated entropy $S_i(U_i,V_i)=a\ln(U_i/U_0)+b\ln(V_i/V_0)$ for $U_i>0$, where $U_0>0$ is in joules and $a,b>0$ are in $\mathrm{J\,K^{-1}}$. The isolated compound permits energy exchange but retains the volume partition, and its adopted total entropy is $S_A+S_B$. For total energy $2U_0$, its unique entropy-maximizing energy split is $U_A=U_B=U_0$, so $T_A=T_B=U_0/a$, while $p_A=bT_A/V_0$ and $p_B=bT_B/(2V_0)=p_A/2$. Thermal equilibrium therefore does not imply pressure equality when the volume exchange is forbidden.
+
+## Facts & Assumptions
+
+**Given:** $a,b>0$ in $\mathrm{J\,K^{-1}}$, $U_0>0$ in joules, $V_0>0$ in cubic metres, two independent separated subsystems, $U_A+U_B=2U_0$, and fixed $V_A=V_0$, $V_B=2V_0$.
+
+[A1] [[post-td-entropy-maximum]]: Under the adopted postulate, a stable equilibrium is an attained global maximum of the summed entropy over the exact feasible set; attainment is assumed, and no uniqueness is supplied.
+
+[F1] [[def-td-isolated-compound-feasible-set]]: The feasible set fixes the declared totals and retained partitions; an exchange is allowed only when the protocol permits it.
+
+[F2] [[post-td-bulk-additivity]] and [[post-td-concave-fundamental-entropy]]: The separated compound uses additive total energy and the sum of the constituent entropies. These postulates do not assert an empirical equation of state.
+
+[F3] [[def-td-temperature-pressure-chemical-potential]]: $T=1/S_U$ and $p=T S_V$ on the smooth positive-temperature chart.
+
+[F4] [[def-natural-logarithm]]: $\ln$ is the natural logarithm on the positive reals.
+
+[F5] [[pthm-td-interior-exchange-equilibrium]]: Pressure equality follows from entropy maximization only when the corresponding volume exchange is locally permitted (and thermal exchange supplies equal temperatures).
+
+[L1] [[thm-logarithm-derivative-and-integral]]: For positive $x$, $\frac{d}{dx}\ln x=1/x$.
+
+## Verification
+
+1.1 Let $u=U_A\in(0,2U_0)$, so $U_B=2U_0-u$. The ratios in $f(u)=a\ln(u/U_0)+a\ln((2U_0-u)/U_0)$ are positive, so [F4] applies. By [L1], $f'(u)=a(1/u-1/(2U_0-u))$ and $f''(u)=-a/u^2-a/(2U_0-u)^2<0$. The derivative is positive for $u<U_0$, zero at $U_0$, and negative for $u>U_0$; hence $u=U_0$ is the unique global maximizer on the feasible interval. The entropy tends to $-\infty$ at both endpoints, so no endpoint maximizer is missed. [given, A1, F1, F2, F4, L1, algebra]
+
+1.2 At the maximizing split, [F3] gives $T_A=U_A/a=U_0/a=T_B$. It gives $p_A=bT_A/V_0$ and $p_B=bT_B/(2V_0)$, hence $p_B=p_A/2\ne p_A$ since $b,T_A,V_0>0$. The partition is retained by [F1], so the exchange hypothesis in [F5] is absent. [given, F1, F3, F5, step 1.1, algebra] ∎

@@ -8,6 +8,8 @@ import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { itemHashGuard } from './item-hash.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
+import { taxonomyOwnership } from './defect-ledger-taxonomy.mjs';
+import { historicalContextTransition } from './step3-historical-context-transition.mjs';
 
 const argv = process.argv.slice(2);
 const mode = argv[0];
@@ -44,12 +46,18 @@ const jsonl = (path) => existsSync(path)
   ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
 const canonicalRows = (rows, key) => [...rows].sort((left, right) =>
   String(key(left)).localeCompare(String(key(right))));
-const step3LedgerRows = () => canonicalRows(
-  jsonl(R('research', 'defect-ledger.jsonl')).filter((row) => row.run === run
-    && ['3a-adjudicate', '3b-cross'].includes(row.caught_at_stage)
+const step3LedgerRows = () => {
+  const rows = jsonl(R('research', 'defect-ledger.jsonl')).filter(row => row.run === run);
+  const errors = [];
+  // Validate lineage and every substantive field before projecting anything.
+  // Original rows remain present; an arbitrary supersession is never hidden.
+  taxonomyOwnership(rows, errors);
+  if (errors.length) fail(errors.join('; '));
+  return canonicalRows(rows.filter(row =>
+    ['3a-adjudicate', '3b-cross'].includes(row.caught_at_stage)
     && !isPublishedItem(root, row.subject)),
-  (row) => row.defect_id,
-);
+  row => row.defect_id);
+};
 const currentRunItems = () => {
   const ids = new Set();
   for (const name of researchNames().filter((entry) =>
@@ -79,16 +87,29 @@ if (mode === 'verify') {
   if (JSON.stringify(Object.keys(currentArtifacts)) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
     errors.push('the exact Step-3 artifact set changed');
   }
+  let contextTransitions = new Map();
+  try { contextTransitions = historicalContextTransition(root, run, receipt, currentArtifacts); }
+  catch (cause) { errors.push(cause.message); }
   for (const [relative, expected] of Object.entries(receipt.artifacts ?? {})) {
-    if (currentArtifacts[relative] !== expected) errors.push(`${relative} changed after Step 3 closed`);
+    if (currentArtifacts[relative] === expected) continue;
+    const transition = contextTransitions.get(relative);
+    if (!(transition?.before === expected && transition.current === currentArtifacts[relative])) {
+      errors.push(`${relative} changed after Step 3 closed`);
+    }
   }
-  const ledgerRows = step3LedgerRows();
-  if (sha256(JSON.stringify(ledgerRows)) !== receipt.step3_ledger_rows_sha256
-    || ledgerRows.length !== receipt.step3_ledger_rows_count) {
-    errors.push('Step-3 defect-ledger rows changed');
+  // Authenticate taxonomy lineage first, but retain an exact existing closure
+  // even if valid taxonomy corrections were already included when it closed.
+  const matchesLedger = rows => sha256(JSON.stringify(rows)) === receipt.step3_ledger_rows_sha256
+    && rows.length === receipt.step3_ledger_rows_count;
+  let ledgerRows = step3LedgerRows();
+  if (!matchesLedger(ledgerRows)) {
+    // Only authenticated taxonomy successors may be absent from old history.
+    // Original rows and every substantive successor remain in this projection.
+    ledgerRows = ledgerRows.filter(row => row.metadata_correction?.kind !== 'taxonomy-only');
   }
+  if (!matchesLedger(ledgerRows)) errors.push('Step-3 defect-ledger rows changed');
   if (errors.length) fail(errors.join('; '));
-  console.log(`step3-close: verified ${Object.keys(receipt.artifacts ?? {}).length} frozen artifact(s) for ${run}`);
+  console.log(`step3-close: verified ${Object.keys(receipt.artifacts ?? {}).length} historical artifact(s) for ${run}; ${contextTransitions.size} separately authenticated current context-binding transition(s)`);
   process.exit(0);
 }
 

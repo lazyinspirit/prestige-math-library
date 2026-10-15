@@ -64,3 +64,13 @@ Use this file as the build checklist and revisit it before integration and audit
 - [x] Final commits and branch verification.
 
 Validation and limitations: [workflow-rebuild-audit.md](workflow-rebuild-audit.md).
+
+## Owner update — 2026-10-14 parallel initial authoring
+
+Fill all available initial-authoring slots up to the shared 30-worker cap,
+prioritizing the full pending queue by dependency level and refilling a slot on
+completion. Missing prerequisites owned by another pair do not block dispatch
+or remaining authoring. Preserve exact conditional supplier interfaces and
+explicit unresolved readiness records; the complete drained Step-1 gates still
+require actual current prerequisites and complete authored carriers. This changes
+initial scheduling only, with no new stage, rebatching or review waiver.

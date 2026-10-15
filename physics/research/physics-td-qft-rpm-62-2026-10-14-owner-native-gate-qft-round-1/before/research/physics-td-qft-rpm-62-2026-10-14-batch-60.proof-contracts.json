@@ -1,0 +1,1202 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "batch": 60,
+  "level": "physics-td-qft-rpm-62-2026-10-14",
+  "scope": [
+    "def-qft-finite-euclidean-interacting-measure",
+    "lem-qft-finite-gaussian-wick-moments",
+    "thm-qft-finite-euclidean-polynomial-measure",
+    "def-qft-finite-wick-normal-powers",
+    "thm-qft-finite-asymptotic-wick-expansion",
+    "cex-qft-zero-dimensional-perturbation-radius-zero",
+    "ex-qft-wick-quartic-coercivity",
+    "ex-qft-finite-wick-quadratic-pair"
+  ],
+  "contracts": {
+    "def-qft-finite-euclidean-interacting-measure": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes finite N>=1 and has no empty-coordinate case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At lambda=0 the density is one, so step 1.1 gives Z=1 and step 2.1 gives the reference probability measure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction applies for N=1 as well as every finite N>=1; steps 1.1-2.1 use no larger-dimension assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The reference law may have singular covariance; step 1.1 only uses its Borel probability property."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint lambda=0 is included in steps 1.1-2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction invokes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A polynomial $U$ is continuous and hence Borel measurable. Since $U\\ge0$ and $\\lambda\\ge0$, [F4] gives $f(q):=\\exp(-\\lambda U(q))$ Borel with $0<f(q)\\le1$. Thus $Z=\\int f\\,d\\gamma_C$ is finite, and [F2] defines $\\nu=f\\,d\\gamma_C$; [F3] gives its measure property. Its total mass is $\\nu(\\mathbb R^N)=Z$ by definition.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under the displayed side condition $0<Z<\\infty$, the scaled measure $\\mu=Z^{-1}\\nu$ is a Borel measure and has total mass $Z^{-1}\\nu(\\mathbb R^N)=1$, so it is a probability measure by [F3] and step 1.1. For a polynomial $P$ integrable under $\\mu$, $\\langle P\\rangle_{C,U,\\lambda}$ is then its well-defined integral by the notation in the Definition.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "lem-qft-finite-gaussian-wick-moments": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty product has expectation one by the statement and step 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly treats zero projected variance as the point mass at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The k=1 diagonal moment is zero for a centered Gaussian by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 2.1 include degenerate scalar normal projections."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the stated Axiom of Choice for the normal-law supplier and makes no separate nonempty-family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-finite-euclidean-interacting-measure",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite and let $C$ be a real symmetric positive-semidefinite $N\\times N$ matrix; positive-semidefinite means $u^{\\mathsf T}Cu\\ge0$ for every $u\\in\\mathbb R^N$. The centered multivariate normal Borel probability law with covariance $C$ is $\\gamma_C:=N_N(0,C)$ as defined by [[def-multivariate-normal-law]]: every linear projection $q\\mapsto u^{\\mathsf T}q$ has scalar normal law $N(0,u^{\\mathsf T}Cu)$, and the law exists even when $C$ is singular. Here $N(0,\\sigma^2)$ is the law specified in [[def-standard-normal-and-normal-laws]], with density $e^{-x^2/2}/\\sqrt{2\\pi}$ for the standard case.\n\nLet $U:\\mathbb R^N\\to[0,\\infty)$ be a real homogeneous quartic polynomial, meaning $U$ is a polynomial and $U(sq)=s^4U(q)$ for all $s\\in\\mathbb R$ and $q\\in\\mathbb R^N$. For a coupling $\\lambda\\ge0$, define the partition integral and its weighted measure by\n\n$$Z_{C,U}(\\lambda):=\\int_{\\mathbb R^N}e^{-\\lambda U(q)}\\,d\\gamma_C(q),\\qquad \\nu_{C,U,\\lambda}(A):=\\int_Ae^{-\\lambda U(q)}\\,d\\gamma_C(q)$$\n\nfor Borel $A\\subseteq\\mathbb R^N$. Whenever $0<Z_{C,U}(\\lambda)<\\infty$, the **finite Euclidean interacting measure** is the Borel probability measure\n\n$$d\\mu_{C,U,\\lambda}(q):=Z_{C,U}(\\lambda)^{-1}e^{-\\lambda U(q)}\\,d\\gamma_C(q).$$\n\nFor a polynomial $P:\\mathbb R^N\\to\\mathbb R$ with finite integral, write $\\langle P\\rangle_{C,U,\\lambda}:=\\int P\\,d\\mu_{C,U,\\lambda}$. The exact supplier [[thm-qft-finite-euclidean-polynomial-measure]] proves that $Z_{C,U}(\\lambda)$ is positive and finite and that every polynomial insertion is integrable. This is a Borel measure on finite-dimensional $\\mathbb R^N$; it is not a measure on distributions on continuum Euclidean spacetime and does not by itself assert reflection positivity or reconstruction of a continuum field.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-characteristic-function-of-a-multivariate-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X\\sim N_d(m,\\Sigma)$, then $$\\Phi_X(t):=\\mathbb E e^{it\\cdot X}=\\exp(it\\cdot m-t^T\\Sigma t/2)\\qquad(t\\in\\mathbb R^d).$$ This transform uniquely determines the law, including singular Sigma.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-moments-give-derivatives-of-the-characteristic-function",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a nonnegative integer, and suppose $\\mathbb E|X|^k<\\infty$, with $|X|^0=1$. Then $\\varphi_X\\in C^k(\\mathbb R)$ and $$\\varphi_X^{(j)}(t)=\\mathbb E[(iX)^j e^{itX}],\\qquad 0\\le j\\le k.$$ No converse is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-generalized-holder-inequality-for-products",
+          "source_section": "Statement",
+          "quote": "Let $1\\le p,q,r\\le\\infty$ satisfy\n\n$$\\frac1r=\\frac1p+\\frac1q,$$\n\nwith the convention $1/\\infty=0$. If $f$ and $g$ lie in the corresponding\nmeasurable-function spaces ($\\mathcal L^p(\\mu)$ or $L^\\infty(\\mu)$ according to\nwhether the exponent is finite or infinite), then $fg$ lies in the\ncorresponding space for $r$ and\n\n$$\\|fg\\|_r\\le\\|f\\|_p\\|g\\|_q.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-substitution-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $J$ be intervals, possibly open at finite or infinite singular ends, and let $\\phi:I\\to J$ be a monotone differentiable surjection. Assume $\\phi'$ is locally Riemann integrable and the proper change-of-variable hypotheses hold on every compact truncation. If $f$ is locally Riemann integrable on $J$, then\n$$\\int_J f(x)\\,dx\\quad\\text{and}\\quad\\int_I f(\\phi(t))|\\phi'(t)|\\,dt$$\nconverge simultaneously and, when convergent, are equal. At several singular ends this assertion is applied separately to the corresponding ends; orientation is retained for decreasing parametrizations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $Z\\sim N(0,1)$. For an integer $k\\ge0$, choose an integer $r$ with $2r\\ge k$. On $|x|\\ge1$, [F7] gives $e^{x^2/4}\\ge (x^2/4)^r/r!$, so $|x|^ke^{-x^2/2}\\le 4^rr!e^{-x^2/4}$. The right side is integrable by [F6], and the integrand is bounded on $[-1,1]$. Since [F2] represents any scalar $N(0,v)$ as $\\sqrt v Z$ with $\\sqrt v$ supplied by [F8], every scalar normal has finite absolute moments of every integer order, including the degenerate $v=0$ case.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $k\\ge1$, define $T_k(u_1,\\ldots,u_k):=\\mathbb E\\prod_{j=1}^k(u_j^{\\mathsf T}Q)$. Each projection has a finite $k$th absolute moment by step 1.1 and [F1]. Applying [F5] successively shows the product is integrable. Linearity of each scalar projection and of the integral makes $T_k$ a symmetric $k$-linear form. The law exists under the stated Choice hypothesis [A1]. Since every polynomial is a finite linear combination of coordinate monomials, the triangle inequality also gives every polynomial a finite absolute moment.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the diagonal, $T_k(u,\\ldots,u)=\\mathbb E[(u^{\\mathsf T}Q)^k]$. Put $v=u^{\\mathsf T}Cu\\ge0$. By [F1], $u^{\\mathsf T}Q\\sim N(0,v)$, so [F3] gives its characteristic function $e^{-vt^2/2}$. At zero, [F4] gives $\\varphi^{(k)}(0)=i^k\\mathbb E[(u^{\\mathsf T}Q)^k]$; extracting the $t^k$ coefficient of $e^{-vt^2/2}$ and dividing by $i^k$ yields zero for odd $k$, and for $k=2m$ gives $$T_{2m}(u,\\ldots,u)=\\frac{(2m)!}{2^m m!}v^m=(2m-1)!!\\,(u^{\\mathsf T}Cu)^m.$$ The identity also holds for $v=0$, when the projected law is the point mass at zero.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For even $k=2m$, define $W_{2m}(u_1,\\ldots,u_{2m})$ by the pairing sum in the Statement; for odd $k$, define $W_k=0$. This is a symmetric $k$-linear form. On the diagonal, every pairing contributes $(u^{\\mathsf T}Cu)^m$, and there are $(2m-1)!!$ pairings: pair index $1$ with one of $2m-1$ indices and repeat on the remaining $2m-2$. Hence $W_k(u,\\ldots,u)=T_k(u,\\ldots,u)$ by step 3.1, also for odd $k$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $k\\ge1$, two symmetric $k$-linear forms agreeing on every diagonal agree everywhere. Indeed, for their difference $A$, expand $$\\sum_{\\varepsilon\\in\\{-1,1\\}^k}\\left(\\prod_{j=1}^k\\varepsilon_j\\right)A\\!\\left(\\sum_i\\varepsilon_i u_i,\\ldots,\\sum_i\\varepsilon_i u_i\\right).$$ In the multilinear expansion, the sum over signs cancels every term unless each label $1,\\ldots,k$ occurs an odd number of times among the $k$ slots. Thus every surviving term uses each label once; symmetry makes all $k!$ such terms equal to $A(u_1,\\ldots,u_k)$, and the sign sum is $2^k k!A(u_1,\\ldots,u_k)$. Since the diagonal of $A=T_k-W_k$ vanishes by step 4.1, this sum is zero and $T_k=W_k$. For $k=0$, the empty product has expectation one and $\\operatorname{Pair}(0)$ contains just the empty pairing, whose empty product is one, so the formula also holds.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-qft-finite-euclidean-polynomial-measure": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes finite N>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1-1.2 include lambda=0, where the density is one and the normalized measure is gamma_C."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The finite moment and density arguments in steps 1.1-1.2 apply when N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The declared Gaussian supplier allows singular C, and step 1.2 uses only its finite moments and probability property."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 treats right derivatives at lambda=0; the theorem states ordinary derivatives for lambda>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The theorem uses the explicit Choice hypothesis and makes no separate selection assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-finite-euclidean-interacting-measure",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite and let $C$ be a real symmetric positive-semidefinite $N\\times N$ matrix; positive-semidefinite means $u^{\\mathsf T}Cu\\ge0$ for every $u\\in\\mathbb R^N$. The centered multivariate normal Borel probability law with covariance $C$ is $\\gamma_C:=N_N(0,C)$ as defined by [[def-multivariate-normal-law]]: every linear projection $q\\mapsto u^{\\mathsf T}q$ has scalar normal law $N(0,u^{\\mathsf T}Cu)$, and the law exists even when $C$ is singular. Here $N(0,\\sigma^2)$ is the law specified in [[def-standard-normal-and-normal-laws]], with density $e^{-x^2/2}/\\sqrt{2\\pi}$ for the standard case.\n\nLet $U:\\mathbb R^N\\to[0,\\infty)$ be a real homogeneous quartic polynomial, meaning $U$ is a polynomial and $U(sq)=s^4U(q)$ for all $s\\in\\mathbb R$ and $q\\in\\mathbb R^N$. For a coupling $\\lambda\\ge0$, define the partition integral and its weighted measure by\n\n$$Z_{C,U}(\\lambda):=\\int_{\\mathbb R^N}e^{-\\lambda U(q)}\\,d\\gamma_C(q),\\qquad \\nu_{C,U,\\lambda}(A):=\\int_Ae^{-\\lambda U(q)}\\,d\\gamma_C(q)$$\n\nfor Borel $A\\subseteq\\mathbb R^N$. Whenever $0<Z_{C,U}(\\lambda)<\\infty$, the **finite Euclidean interacting measure** is the Borel probability measure\n\n$$d\\mu_{C,U,\\lambda}(q):=Z_{C,U}(\\lambda)^{-1}e^{-\\lambda U(q)}\\,d\\gamma_C(q).$$\n\nFor a polynomial $P:\\mathbb R^N\\to\\mathbb R$ with finite integral, write $\\langle P\\rangle_{C,U,\\lambda}:=\\int P\\,d\\mu_{C,U,\\lambda}$. The exact supplier [[thm-qft-finite-euclidean-polynomial-measure]] proves that $Z_{C,U}(\\lambda)$ is positive and finite and that every polynomial insertion is integrable. This is a Borel measure on finite-dimensional $\\mathbb R^N$; it is not a measure on distributions on continuum Euclidean spacetime and does not by itself assert reflection positivity or reconstruction of a continuum field.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-finite-gaussian-wick-moments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite, let $C$ be a real symmetric positive-semidefinite $N\\times N$ covariance matrix, and let $Q\\sim\\gamma_C=N_N(0,C)$ be the law of [[def-qft-finite-euclidean-interacting-measure]]. For $k\\ge0$ and vectors $u_1,\\ldots,u_k\\in\\mathbb R^N$, every product $\\prod_{j=1}^k(u_j^{\\mathsf T}Q)$ is integrable. For $k=0$ its expectation is $1$. If $k$ is odd, its expectation is $0$; if $k=2m$, then\n\n$$\\mathbb E\\!\\left[\\prod_{j=1}^{2m}u_j^{\\mathsf T}Q\\right]=\\sum_{\\pi\\in\\operatorname{Pair}(2m)}\\prod_{\\{a,b\\}\\in\\pi}u_a^{\\mathsf T}Cu_b,$$\n\nwhere $\\operatorname{Pair}(2m)$ is the finite set of partitions of $\\{1,\\ldots,2m\\}$ into unordered two-element subsets. Thus every polynomial in $Q$ has a finite absolute moment, computed by finitely many covariance pairings.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $U(q)\\ge0$ and $\\lambda\\ge0$, [F5] gives $0<\\exp(-\\lambda U(q))\\le1$ for every $q$, so $Z(\\lambda)\\le1$. For each positive integer $n$, let $E_n=\\{q:\\exp(-\\lambda U(q))\\ge1/n\\}$. These are Borel and their union is $\\mathbb R^N$, because the integrand is strictly positive at every $q$. Since $\\gamma_C$ is a probability measure, not all $E_n$ can have measure zero: otherwise countable subadditivity would give $\\gamma_C(\\mathbb R^N)=0$. Thus some $E_n$ has positive measure, and $Z(\\lambda)\\ge\\gamma_C(E_n)/n>0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $r\\ge0$. For $s=0,1,\\ldots,r$, [F6] and [F7] give the pointwise derivative $(-1)^sP(q)U(q)^s\\exp(-\\lambda U(q))$ and its next derivative $(-1)^{s+1}P(q)U(q)^{s+1}\\exp(-\\lambda U(q))$. If $\\lambda_0>0$ and $|h|<\\lambda_0/2$, [F8] bounds the difference quotient of the $s$th derivative by $|P(q)|U(q)^{s+1}\\exp(-\\lambda_0U(q)/2)$, since every intermediate parameter is at least $\\lambda_0/2$ and [F5] makes the exponential increasing. Put $x=U(q)$. If $x=0$ the scalar factor is zero; if $x>0$, put $y=\\lambda_0x/4$. The power-series estimate in [F5] at $2y$ gives $\\exp(2y)\\ge(2y)^{s+1}/(s+1)!$, so its reciprocal gives $x^{s+1}\\exp(-\\lambda_0x/2)\\le(2/\\lambda_0)^{s+1}(s+1)!.$ Thus these difference quotients are bounded by a finite constant times $|P(q)|$, integrable by [F2]. [F3] permits differentiation under the integral inductively through order $r$, giving $N_P^{(r)}(\\lambda)=(-1)^r\\int P U^r\\exp(-\\lambda U)\\,d\\gamma_C$ for $\\lambda>0$. Taking $P=1$ gives the formula for $Z$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The nonnegative Borel density $\\exp(-\\lambda U)/Z(\\lambda)$ has integral one by the definition of $Z$ and step 1.1. By [F4], it defines a Borel probability measure $\\mu_\\lambda$. For any polynomial $P$, [F2] gives $\\int|P|\\,d\\gamma_C<\\infty$; since [F5] gives $\\exp(-\\lambda U)\\le1$ and step 1.1 gives $Z(\\lambda)>0$, $$\\int|P|\\,d\\mu_\\lambda\\le Z(\\lambda)^{-1}\\int|P|\\,d\\gamma_C<\\infty.$$",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At $\\lambda=0$, use right limits and right difference quotients. For $r=0$, dominated convergence [F3] with dominator $|P|$ and [F5] gives $N_P(\\lambda)\\to N_P(0)$ as $\\lambda\\downarrow0$; taking $P=1$ gives the same for $Z$. Now fix $r\\ge1$. For each $s=0,1,\\ldots,r-1$ and $h>0$, [F8] bounds the difference quotient of $(-1)^sP U^s\\exp(-\\lambda U)$ at zero by $|P|U^{s+1}$, since [F5] gives $0<\\exp(-cU)\\le1$ for $c\\ge0$. This bound is integrable by [F2]. Dominated convergence [F3] inductively gives $N_{P,+}^{(r)}(0)=(-1)^r\\int P U^r\\,d\\gamma_C$; applying [F3] to the formula in step 1.2 as $\\lambda\\downarrow0$ shows these derivatives converge continuously to their endpoint values. Taking $P=1$ gives the same assertions for $Z$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "def-qft-finite-wick-normal-powers": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes a coordinate j<N with N>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the formula when C_jj=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=1 coefficient is covered by the finite coefficient formula in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 notes that the polynomial formula remains valid at zero coordinate variance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The formal power-series definition has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition invokes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition contains no biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qft-finite-gaussian-wick-moments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite, let $C$ be a real symmetric positive-semidefinite $N\\times N$ covariance matrix, and let $Q\\sim\\gamma_C=N_N(0,C)$ be the law of [[def-qft-finite-euclidean-interacting-measure]]. For $k\\ge0$ and vectors $u_1,\\ldots,u_k\\in\\mathbb R^N$, every product $\\prod_{j=1}^k(u_j^{\\mathsf T}Q)$ is integrable. For $k=0$ its expectation is $1$. If $k$ is odd, its expectation is $0$; if $k=2m$, then\n\n$$\\mathbb E\\!\\left[\\prod_{j=1}^{2m}u_j^{\\mathsf T}Q\\right]=\\sum_{\\pi\\in\\operatorname{Pair}(2m)}\\prod_{\\{a,b\\}\\in\\pi}u_a^{\\mathsf T}Cu_b,$$\n\nwhere $\\operatorname{Pair}(2m)$ is the finite set of partitions of $\\{1,\\ldots,2m\\}$ into unordered two-element subsets. Thus every polynomial in $Q$ has a finite absolute moment, computed by finitely many covariance pairings.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Multiply the formal series for $e^{tQ_j}$ and $e^{-C_{jj}t^2/2}$. The coefficient of $t^n$ is the finite sum over $0\\le s\\le\\lfloor n/2\\rfloor$ of $Q_j^{n-2s}(-C_{jj}/2)^s/((n-2s)!s!)$. By the defining identity, multiplying this coefficient by $n!$ gives the displayed formula for $:Q_j^n:_C$. This is formal coefficient algebra and requires no convergence assertion.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $n=4$, the terms $s=0,1,2$ are respectively $Q_j^4$, $-6C_{jj}Q_j^2$, and $3C_{jj}^2$, which gives the stated quartic Wick polynomial. The formula also covers $C_{jj}=0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "thm-qft-finite-asymptotic-wick-expansion": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes finite N>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero remainder when lambda U(q)=0, and steps 2.1-3.1 include lambda=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The recurrence handles M=0 in step 1.2, and the quotient estimate through step 3.1 remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The finite moment and pairing arguments in steps 2.1 and 3.1 include singular C."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite-order remainder includes lambda=0 in steps 1.1-2.1, and step 3.1 uses a right neighborhood of zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The theorem uses the explicit Choice hypothesis but makes no separate selection assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-finite-euclidean-interacting-measure",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite and let $C$ be a real symmetric positive-semidefinite $N\\times N$ matrix; positive-semidefinite means $u^{\\mathsf T}Cu\\ge0$ for every $u\\in\\mathbb R^N$. The centered multivariate normal Borel probability law with covariance $C$ is $\\gamma_C:=N_N(0,C)$ as defined by [[def-multivariate-normal-law]]: every linear projection $q\\mapsto u^{\\mathsf T}q$ has scalar normal law $N(0,u^{\\mathsf T}Cu)$, and the law exists even when $C$ is singular. Here $N(0,\\sigma^2)$ is the law specified in [[def-standard-normal-and-normal-laws]], with density $e^{-x^2/2}/\\sqrt{2\\pi}$ for the standard case.\n\nLet $U:\\mathbb R^N\\to[0,\\infty)$ be a real homogeneous quartic polynomial, meaning $U$ is a polynomial and $U(sq)=s^4U(q)$ for all $s\\in\\mathbb R$ and $q\\in\\mathbb R^N$. For a coupling $\\lambda\\ge0$, define the partition integral and its weighted measure by\n\n$$Z_{C,U}(\\lambda):=\\int_{\\mathbb R^N}e^{-\\lambda U(q)}\\,d\\gamma_C(q),\\qquad \\nu_{C,U,\\lambda}(A):=\\int_Ae^{-\\lambda U(q)}\\,d\\gamma_C(q)$$\n\nfor Borel $A\\subseteq\\mathbb R^N$. Whenever $0<Z_{C,U}(\\lambda)<\\infty$, the **finite Euclidean interacting measure** is the Borel probability measure\n\n$$d\\mu_{C,U,\\lambda}(q):=Z_{C,U}(\\lambda)^{-1}e^{-\\lambda U(q)}\\,d\\gamma_C(q).$$\n\nFor a polynomial $P:\\mathbb R^N\\to\\mathbb R$ with finite integral, write $\\langle P\\rangle_{C,U,\\lambda}:=\\int P\\,d\\mu_{C,U,\\lambda}$. The exact supplier [[thm-qft-finite-euclidean-polynomial-measure]] proves that $Z_{C,U}(\\lambda)$ is positive and finite and that every polynomial insertion is integrable. This is a Borel measure on finite-dimensional $\\mathbb R^N$; it is not a measure on distributions on continuum Euclidean spacetime and does not by itself assert reflection positivity or reconstruction of a continuum field.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-finite-gaussian-wick-moments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite, let $C$ be a real symmetric positive-semidefinite $N\\times N$ covariance matrix, and let $Q\\sim\\gamma_C=N_N(0,C)$ be the law of [[def-qft-finite-euclidean-interacting-measure]]. For $k\\ge0$ and vectors $u_1,\\ldots,u_k\\in\\mathbb R^N$, every product $\\prod_{j=1}^k(u_j^{\\mathsf T}Q)$ is integrable. For $k=0$ its expectation is $1$. If $k$ is odd, its expectation is $0$; if $k=2m$, then\n\n$$\\mathbb E\\!\\left[\\prod_{j=1}^{2m}u_j^{\\mathsf T}Q\\right]=\\sum_{\\pi\\in\\operatorname{Pair}(2m)}\\prod_{\\{a,b\\}\\in\\pi}u_a^{\\mathsf T}Cu_b,$$\n\nwhere $\\operatorname{Pair}(2m)$ is the finite set of partitions of $\\{1,\\ldots,2m\\}$ into unordered two-element subsets. Thus every polynomial in $Q$ has a finite absolute moment, computed by finitely many covariance pairings.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qft-finite-euclidean-polynomial-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite, let $C$ be a real symmetric positive-semidefinite covariance matrix, let $\\gamma_C=N_N(0,C)$, let $U:\\mathbb R^N\\to[0,\\infty)$ be a real homogeneous quartic polynomial, and let $\\lambda\\ge0$. Define $Z(\\lambda)=\\int e^{-\\lambda U}\\,d\\gamma_C$ and $N_P(\\lambda)=\\int P e^{-\\lambda U}\\,d\\gamma_C$ for every real polynomial $P$.\n\nThen $0<Z(\\lambda)\\le1$, and $\\mu_\\lambda:=Z(\\lambda)^{-1}e^{-\\lambda U}\\gamma_C$ is a Borel probability measure. Every polynomial insertion is integrable under $\\mu_\\lambda$. For each integer $r\\ge0$,\n\n$$Z^{(r)}(\\lambda)=(-1)^r\\int U^r e^{-\\lambda U}\\,d\\gamma_C,\\qquad N_P^{(r)}(\\lambda)=(-1)^r\\int P U^r e^{-\\lambda U}\\,d\\gamma_C$$\n\nfor $\\lambda>0$, with continuous right derivatives of every finite order at $\\lambda=0$. No continuum field measure is asserted.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-taylor-lagrange-and-cauchy-remainders",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-taylor-schlomilch-roche-remainder]], there are points $\\xi_L,\\xi_C$ between $a$ and $x$ such that\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_L)}{\\iota((n+1)!)}(x-a)^{n+1}$$\nand\n$$R_{n,a}f(x)=\\frac{f^{(n+1)}(\\xi_C)}{\\iota(n!)}(x-\\xi_C)^n(x-a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F5], $f(x)=\\exp(-x)$ is $C^{M+1}$ and $|f^{(M+1)}(\\xi)|=\\exp(-\\xi)$. Apply [F4] at $x=\\lambda U(q)\\ge0$; [F6] gives $\\exp(-\\xi)\\le1$. Thus pointwise $$\\left|\\exp(-\\lambda U(q))-\\sum_{j=0}^M\\frac{(-\\lambda U(q))^j}{j!}\\right|\\le\\frac{\\lambda^{M+1}U(q)^{M+1}}{(M+1)!}.$$ The case $\\lambda U(q)=0$ has zero remainder.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $Z_M(\\lambda)=\\sum_{j=0}^M z_j\\lambda^j$ and $A_M(\\lambda)=\\sum_{j=0}^M a_j(P)\\lambda^j$. By the recurrence defining $b_j(P)$, every coefficient through degree $M$ in $A_M(\\lambda)-\\left(\\sum_{j=0}^M b_j(P)\\lambda^j\\right)Z_M(\\lambda)$ is zero, because $z_0=1$. The remaining polynomial terms have degree at least $M+1$, so their absolute value is bounded by a finite constant times $\\lambda^{M+1}$ on $0\\le\\lambda\\le1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Integrate the inequality in step 1.1 against $\\gamma_C$ to obtain the stated partition-function expansion and bound. Multiply the same pointwise inequality by $|P(q)|$ and integrate to obtain the numerator expansion and bound. Every right-hand expectation is finite by [F2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On $0\\le\\lambda\\le1$, the polynomial $B_M(\\lambda)=\\sum_{j=0}^M b_j(P)\\lambda^j$ is bounded. Using the remainder bounds in step 2.1 and the polynomial identity in step 1.2 therefore gives $|N_P(\\lambda)-B_M(\\lambda)Z(\\lambda)|\\le K_M\\lambda^{M+1}$ for some finite $K_M$. As $\\lambda\\downarrow0$, $\\exp(-\\lambda U(q))\\to1$ pointwise and $0<\\exp(-\\lambda U(q))\\le1$ by [F6], so [F3] gives $Z(\\lambda)\\to Z(0)=1$. Choose $\\delta>0$ such that $Z(\\lambda)\\ge1/2$ for $0\\le\\lambda<\\delta$. Dividing by $Z(\\lambda)$ yields $|\\langle P\\rangle_\\lambda-B_M(\\lambda)|\\le2K_M\\lambda^{M+1}$ there. Finally, [F2] writes every coefficient moment as a finite covariance-pairing sum; no limit in $M$ was taken.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "F2",
+            "F3",
+            "algebra",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "cex-qft-zero-dimensional-perturbation-radius-zero": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is explicitly one-dimensional."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives Z(0)=1, and step 3.1 records that the exact measure exists at zero coupling."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The witness uses N=1 and unit covariance in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The counterexample uses the nondegenerate covariance C=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 distinguishes lambda=0 from every lambda>0 in the allowed half-line."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses a specified scalar Gaussian and no separate choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement contains no biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-finite-euclidean-interacting-measure",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite and let $C$ be a real symmetric positive-semidefinite $N\\times N$ matrix; positive-semidefinite means $u^{\\mathsf T}Cu\\ge0$ for every $u\\in\\mathbb R^N$. The centered multivariate normal Borel probability law with covariance $C$ is $\\gamma_C:=N_N(0,C)$ as defined by [[def-multivariate-normal-law]]: every linear projection $q\\mapsto u^{\\mathsf T}q$ has scalar normal law $N(0,u^{\\mathsf T}Cu)$, and the law exists even when $C$ is singular. Here $N(0,\\sigma^2)$ is the law specified in [[def-standard-normal-and-normal-laws]], with density $e^{-x^2/2}/\\sqrt{2\\pi}$ for the standard case.\n\nLet $U:\\mathbb R^N\\to[0,\\infty)$ be a real homogeneous quartic polynomial, meaning $U$ is a polynomial and $U(sq)=s^4U(q)$ for all $s\\in\\mathbb R$ and $q\\in\\mathbb R^N$. For a coupling $\\lambda\\ge0$, define the partition integral and its weighted measure by\n\n$$Z_{C,U}(\\lambda):=\\int_{\\mathbb R^N}e^{-\\lambda U(q)}\\,d\\gamma_C(q),\\qquad \\nu_{C,U,\\lambda}(A):=\\int_Ae^{-\\lambda U(q)}\\,d\\gamma_C(q)$$\n\nfor Borel $A\\subseteq\\mathbb R^N$. Whenever $0<Z_{C,U}(\\lambda)<\\infty$, the **finite Euclidean interacting measure** is the Borel probability measure\n\n$$d\\mu_{C,U,\\lambda}(q):=Z_{C,U}(\\lambda)^{-1}e^{-\\lambda U(q)}\\,d\\gamma_C(q).$$\n\nFor a polynomial $P:\\mathbb R^N\\to\\mathbb R$ with finite integral, write $\\langle P\\rangle_{C,U,\\lambda}:=\\int P\\,d\\mu_{C,U,\\lambda}$. The exact supplier [[thm-qft-finite-euclidean-polynomial-measure]] proves that $Z_{C,U}(\\lambda)$ is positive and finite and that every polynomial insertion is integrable. This is a Borel measure on finite-dimensional $\\mathbb R^N$; it is not a measure on distributions on continuum Euclidean spacetime and does not by itself assert reflection positivity or reconstruction of a continuum field.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-finite-gaussian-wick-moments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite, let $C$ be a real symmetric positive-semidefinite $N\\times N$ covariance matrix, and let $Q\\sim\\gamma_C=N_N(0,C)$ be the law of [[def-qft-finite-euclidean-interacting-measure]]. For $k\\ge0$ and vectors $u_1,\\ldots,u_k\\in\\mathbb R^N$, every product $\\prod_{j=1}^k(u_j^{\\mathsf T}Q)$ is integrable. For $k=0$ its expectation is $1$. If $k$ is odd, its expectation is $0$; if $k=2m$, then\n\n$$\\mathbb E\\!\\left[\\prod_{j=1}^{2m}u_j^{\\mathsf T}Q\\right]=\\sum_{\\pi\\in\\operatorname{Pair}(2m)}\\prod_{\\{a,b\\}\\in\\pi}u_a^{\\mathsf T}Cu_b,$$\n\nwhere $\\operatorname{Pair}(2m)$ is the finite set of partitions of $\\{1,\\ldots,2m\\}$ into unordered two-element subsets. Thus every polynomial in $Q$ has a finite absolute moment, computed by finitely many covariance pairings.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qft-finite-asymptotic-wick-expansion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice and the hypotheses and notation of [[def-qft-finite-euclidean-interacting-measure]]. Let $P\\in\\mathbb R[q_1,\\ldots,q_N]$, $Z(\\lambda)=\\mathbb E_{\\gamma_C}[e^{-\\lambda U}]$, $N_P(\\lambda)=\\mathbb E_{\\gamma_C}[P e^{-\\lambda U}]$, and $\\langle P\\rangle_\\lambda=N_P(\\lambda)/Z(\\lambda)$. For every $M\\ge0$,\n\n$$Z(\\lambda)=\\sum_{j=0}^M z_j\\lambda^j+R_{M,1}(\\lambda),\\qquad z_j=\\frac{(-1)^j}{j!}\\mathbb E_{\\gamma_C}[U^j],\\qquad |R_{M,1}(\\lambda)|\\le\\frac{\\lambda^{M+1}}{(M+1)!}\\mathbb E_{\\gamma_C}[U^{M+1}]$$\n\nfor $\\lambda\\ge0$. Likewise,\n\n$$N_P(\\lambda)=\\sum_{j=0}^M a_j(P)\\lambda^j+R_{M,P}(\\lambda),\\qquad a_j(P)=\\frac{(-1)^j}{j!}\\mathbb E_{\\gamma_C}[PU^j],\\qquad |R_{M,P}(\\lambda)|\\le\\frac{\\lambda^{M+1}}{(M+1)!}\\mathbb E_{\\gamma_C}[|P|U^{M+1}].$$\n\nDefine $b_0(P)=a_0(P)$ and, for $m\\ge1$, $b_m(P)=a_m(P)-\\sum_{j=1}^m z_jb_{m-j}(P)$. Then\n\n$$\\langle P\\rangle_\\lambda=\\sum_{j=0}^M b_j(P)\\lambda^j+O(\\lambda^{M+1})\\quad\\text{as }\\lambda\\downarrow0.$$\n\nEvery coefficient is computed from finitely many Gaussian polynomial moments and hence from finitely many covariance pairings by [[lem-qft-finite-gaussian-wick-moments]]. These estimates hold separately for each finite $M$; they do not assert convergence of the infinite formal series or any continuum limit.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], $Z(0)=\\int1\\,d\\gamma_1=1$. For $\\lambda>0$, [F3] gives $0<Z(\\lambda)<\\infty$ and identifies the formal coefficients as $(-1)^n\\mathbb E[U^n]/n!$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "With $U(q)=q^4/4!$, [F2] gives $$a_n=\\frac{\\mathbb E[Q^{4n}]}{(4!)^n n!}=\\frac{(4n-1)!!}{(4!)^n n!}=\\frac{(4n)!}{(4!)^n n!\\,2^{2n}(2n)!}.$$ The pairing count follows by pairing the first of $4n$ factors with any of the other $4n-1$ factors and repeating on the remaining factors.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Dividing successive coefficients from step 1.2 yields $$\\frac{a_{n+1}}{a_n}=\\frac{(4n+1)(4n+3)}{24(n+1)}\\longrightarrow\\infty.$$ Hence for each $\\lambda>0$ the absolute term ratio $\\lambda a_{n+1}/a_n$ eventually exceeds $2$, so the terms do not tend to zero and the formal series diverges at every nonzero $\\lambda$; its radius of convergence is zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The exact probability measure still exists for all $\\lambda\\ge0$ by step 1.1, while its perturbation series has zero radius by step 2.1. This refutes the Statement without asserting Borel summability or any continuum-field result.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-qft-wick-quartic-coercivity": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes N=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the lower bound for C=0 and q=0 as well as all other real q."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the planned interface with N=1 and positive kinetic coefficient a."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Wick polynomial and lower bound in step 1.1 include covariance C=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The hypotheses require lambda>0 and alpha>0; no zero-parameter endpoint is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Countable Choice is stated as a supplier hypothesis; the example makes no new selection assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-finite-wick-normal-powers",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, let $Q\\sim N_N(0,C)$ be the centered finite-dimensional Gaussian vector of [[lem-qft-finite-gaussian-wick-moments]], and write $C_{jj}=\\mathbb E[Q_j^2]\\ge0$ for the variance of its $j$th coordinate. For each coordinate $j$ and integer $n\\ge0$, its **finite covariance Wick normal power** is the polynomial $:Q_j^n:_C$ defined by the formal generating identity\n\n$$\\exp\\!\\left(tQ_j-\\frac12t^2C_{jj}\\right)=\\sum_{n=0}^{\\infty}:Q_j^n:_C\\,\\frac{t^n}{n!}.$$\n\nEquivalently,\n\n$$:Q_j^n:_C=n!\\sum_{s=0}^{\\lfloor n/2\\rfloor}\\frac{(-C_{jj}/2)^sQ_j^{n-2s}}{s!(n-2s)!},\\qquad :Q_j^4:_C=Q_j^4-6C_{jj}Q_j^2+3C_{jj}^2.$$\n\nThis is a finite-dimensional polynomial definition; it does not define a product of unsmeared continuum fields.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-qft-coercive-polynomial-form-domain",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Use the finite data and notation of\n[[def-qft-regulated-polynomial-hamiltonian]]: $N\\ge1$,\n$H_N=L^2(\\mathbb R^N,dq;\\mathbb C)$, $D_0=C_c^\\infty(\\mathbb R^N;\\mathbb C)$,\nand $W=V+C_0+1\\ge1+c|q|^2$. For $u,v\\in D_0$ define\n$$a(u,v):=\\sum_{j=1}^N a_j\\int_{\\mathbb R^N}(\\partial_j u)\\overline{\\partial_jv}\\,dq+\\int_{\\mathbb R^N}(W+1)u\\overline v\\,dq,$$\nand $\\|u\\|_Q:=a(u,u)^{1/2}$. Let $Q$ be the completion of this inner-product\nspace, constructed as equivalence classes of $\\|\\cdot\\|_Q$-Cauchy sequences.\nThen $Q$ is a complex Hilbert space and the map sending a Cauchy class to its\n$L^2$ limit is a continuous injective linear map $Q\\hookrightarrow H_N$ with\ndense image. Each $u\\in Q$ has weak derivatives $\\partial_j u\\in L^2$ and a\nweighted function $\\sqrt{W+1}\\,u\\in L^2$, and\n$$\\|u\\|_Q^2=\\sum_{j=1}^N a_j\\|\\partial_j u\\|_2^2+\\|\\sqrt{W+1}\\,u\\|_2^2.$$\nHere $g_j=\\partial_j u$ means explicitly that\n$\\int u\\,\\overline{\\partial_j\\varphi}=-\\int g_j\\overline\\varphi$ for every\n$\\varphi\\in D_0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $y=q^2\\ge0$. By [F1], $:q^4:_C-\\frac12q^4=\\frac12y^2-6Cy+3C^2=\\frac12(y-6C)^2-15C^2\\ge-15C^2$. Thus $:q^4:_C\\ge\\frac12q^4-15C^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The identity $$\\frac\\lambda2q^4-\\alpha q^2+\\frac{\\alpha^2}{2\\lambda}=\\frac\\lambda2\\left(q^2-\\frac\\alpha\\lambda\\right)^2\\ge0$$ gives $\\frac\\lambda2q^4\\ge\\alpha q^2-\\frac{\\alpha^2}{2\\lambda}$. Multiplying the inequality of step 1.1 by $\\lambda>0$ and combining yields $$V(q)=\\lambda:q^4:_C\\ge\\alpha q^2-\\left(15\\lambda C^2+\\frac{\\alpha^2}{2\\lambda}\\right).$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Take $N=1$, the positive kinetic coefficient $a$, $c=\\alpha$, and $C_0=15\\lambda C^2+\\alpha^2/(2\\lambda)\\ge0$. Step 2.1 verifies the exact polynomial lower bound required by [L1]. The current draft statement’s hypotheses therefore match this example, and its stated completion applies conditionally on that supplier argument. The batch does not represent the draft as independently approved.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "L1",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": []
+    },
+    "ex-qft-finite-wick-quadratic-pair": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses a scalar Gaussian coordinate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the identity at C=0, where the law is concentrated at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is explicitly the one-coordinate case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles the degenerate covariance C=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The identity has no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The scalar Gaussian is specified and no nonempty-family selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-multivariate-normal-law",
+          "source_section": "Definition",
+          "quote": "Assume AC and let $d\\ge1$ be finite. For $m\\in\\mathbb R^d$ and a real symmetric positive semidefinite matrix $\\Sigma$, a Borel probability law is denoted $N_d(m,\\Sigma)$ when a vector X with that law satisfies $u\\cdot X\\sim N(u\\cdot m,u^T\\Sigma u)$ for every $u\\in\\mathbb R^d$. Such a law exists, has mean m and covariance Sigma, and can be realized as $m+\\Sigma^{1/2}Z$ with independent standard-normal coordinates. Singular Sigma is allowed. Uniqueness will be proved in the following characteristic-function lemma.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-finite-wick-normal-powers",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice, let $Q\\sim N_N(0,C)$ be the centered finite-dimensional Gaussian vector of [[lem-qft-finite-gaussian-wick-moments]], and write $C_{jj}=\\mathbb E[Q_j^2]\\ge0$ for the variance of its $j$th coordinate. For each coordinate $j$ and integer $n\\ge0$, its **finite covariance Wick normal power** is the polynomial $:Q_j^n:_C$ defined by the formal generating identity\n\n$$\\exp\\!\\left(tQ_j-\\frac12t^2C_{jj}\\right)=\\sum_{n=0}^{\\infty}:Q_j^n:_C\\,\\frac{t^n}{n!}.$$\n\nEquivalently,\n\n$$:Q_j^n:_C=n!\\sum_{s=0}^{\\lfloor n/2\\rfloor}\\frac{(-C_{jj}/2)^sQ_j^{n-2s}}{s!(n-2s)!},\\qquad :Q_j^4:_C=Q_j^4-6C_{jj}Q_j^2+3C_{jj}^2.$$\n\nThis is a finite-dimensional polynomial definition; it does not define a product of unsmeared continuum fields.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-finite-gaussian-wick-moments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $N\\ge1$ be finite, let $C$ be a real symmetric positive-semidefinite $N\\times N$ covariance matrix, and let $Q\\sim\\gamma_C=N_N(0,C)$ be the law of [[def-qft-finite-euclidean-interacting-measure]]. For $k\\ge0$ and vectors $u_1,\\ldots,u_k\\in\\mathbb R^N$, every product $\\prod_{j=1}^k(u_j^{\\mathsf T}Q)$ is integrable. For $k=0$ its expectation is $1$. If $k$ is odd, its expectation is $0$; if $k=2m$, then\n\n$$\\mathbb E\\!\\left[\\prod_{j=1}^{2m}u_j^{\\mathsf T}Q\\right]=\\sum_{\\pi\\in\\operatorname{Pair}(2m)}\\prod_{\\{a,b\\}\\in\\pi}u_a^{\\mathsf T}Cu_b,$$\n\nwhere $\\operatorname{Pair}(2m)$ is the finite set of partitions of $\\{1,\\ldots,2m\\}$ into unordered two-element subsets. Thus every polynomial in $Q$ has a finite absolute moment, computed by finitely many covariance pairings.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F2], $(:Q^2:_C)(:Q^2:_C)=(Q^2-C)^2=Q^4-2CQ^2+C^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Taking expectations and substituting [F3] gives $3C^2-2C\\cdot C+C^2=2C^2$. This also holds at the degenerate endpoint $C=0$, where the law is concentrated at zero. The Gaussian law is available under the stated Choice hypothesis [A1].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    }
+  }
+}

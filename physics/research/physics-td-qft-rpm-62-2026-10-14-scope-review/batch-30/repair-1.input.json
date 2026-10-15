@@ -1,0 +1,120 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-30-1",
+  "inventory": {
+    "pages": [
+      "rpm-radiation-models",
+      "rpm-radiation-models-examples"
+    ],
+    "items": [
+      "lem-rpm-ll-reduced-ode",
+      "lem-rpm-reduction-residual",
+      "post-rpm-lad-effective-equation",
+      "rem-rpm-self-force-status",
+      "ex-rpm-al-future-boundary-preacceleration",
+      "cex-rpm-lad-force-free-runaway"
+    ],
+    "pairs": [
+      "rpm-radiation-models"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/lem-rpm-ll-reduced-ode.md",
+    "items/lem-rpm-reduction-residual.md",
+    "items/post-rpm-lad-effective-equation.md",
+    "items/rem-rpm-self-force-status.md",
+    "items/ex-rpm-al-future-boundary-preacceleration.md",
+    "items/cex-rpm-lad-force-free-runaway.md",
+    "library/relativistic-particle-mechanics/rpm-radiation-models.md",
+    "library/relativistic-particle-mechanics/rpm-radiation-models-examples.md"
+  ],
+  "write_batches": [
+    "30"
+  ],
+  "consumer_scope": [
+    {
+      "id": "cex-rpm-lad-force-free-runaway",
+      "path": [
+        "lem-rpm-ll-reduced-ode",
+        "cex-rpm-lad-force-free-runaway"
+      ],
+      "paths": [
+        [
+          "lem-rpm-ll-reduced-ode",
+          "cex-rpm-lad-force-free-runaway"
+        ],
+        [
+          "post-rpm-lad-effective-equation",
+          "cex-rpm-lad-force-free-runaway"
+        ]
+      ]
+    },
+    {
+      "id": "lem-rpm-reduction-residual",
+      "path": [
+        "lem-rpm-ll-reduced-ode",
+        "lem-rpm-reduction-residual"
+      ],
+      "paths": [
+        [
+          "lem-rpm-ll-reduced-ode",
+          "lem-rpm-reduction-residual"
+        ]
+      ]
+    },
+    {
+      "id": "rem-rpm-self-force-status",
+      "path": [
+        "post-rpm-lad-effective-equation",
+        "rem-rpm-self-force-status"
+      ],
+      "paths": [
+        [
+          "post-rpm-lad-effective-equation",
+          "rem-rpm-self-force-status"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "lem-rpm-ll-reduced-ode": [
+      null,
+      "## Statement\n\nLet $(A,V,\\eta,C^+)$ be an oriented, time-oriented affine Minkowski space of dimension four with signature $(-,+,+,+)$, and fix an inertial chart $(x^0,x^1,x^2,x^3)$ with $x^0=ct$, $c>0$. Let $O\\subseteq A$ be open and let $F$ be a $C^2$ alternating covariant two-tensor on $O$. In this chart write $F^a{}_b:=\\eta^{ac}F_{cb}$ and let $\\partial_b$ denote the coordinate partial derivative. Fix constants $\\alpha\\in\\mathbb R$ and $\\tau_e\\geq0$. For every $U\\in V$, define\n\n$$\\Pi_U{}^a{}_b:=\\delta^a_b+\\frac{U^aU_b}{c^2},\\qquad f_0^a(x,U):=\\alpha F^a{}_b(x)U^b,$$\n\n$$B^a(x,U):=\\alpha(\\partial_bF^a{}_c)(x)U^bU^c +\\alpha^2F^a{}_b(x)F^b{}_c(x)U^c, \\qquad a_{\\rm LL}^a(x,U):=f_0^a(x,U)+\\tau_e\\Pi_U{}^a{}_bB^b(x,U).$$\n\nFor the physical interpretation, $x^a$ are in metres, $\\tau$ is in seconds, $c$ is in metres per second, $U$ is in metres per second, $\\alpha=q/m$, and $\\tau_e$ is a time. Here a **proper-time parameter** means that the parameter is measured in seconds and the four-velocity is normalized by $\\eta(U,U)=-c^2$; define the future unit shell by $\\mathcal S^+:=\\{U\\in C^+:\\eta(U,U)=-c^2\\}$. For each initial datum $(x_0,U_0)\\in O\\times V$ with $U_0\\in\\mathcal S^+$, the system\n\n$$\\frac{dx^a}{d\\tau}=U^a,\\qquad \\frac{dU^a}{d\\tau}=a_{\\rm LL}^a(x,U),\\qquad (x(0),U(0))=(x_0,U_0)$$\n\nhas a unique local solution on an open proper-time interval about $0$. Along that interval $\\eta(U,U)=-c^2$ and $U$ remains future directed. This is a local ODE statement: it makes no claim of global existence for arbitrary $F$."
+    ],
+    "lem-rpm-reduction-residual": [
+      null,
+      "## Statement\n\nUse the flat definitions $f_0$, $B$, and $\\Pi_U$ of [[lem-rpm-ll-reduced-ode]]. Let $I=[\\tau_-,\\tau_+]$ with $\\tau_-<\\tau_+$ be a common compact proper-time interval, and suppose each curve below is $C^3$ on an open neighborhood of $I$. For each $0<\\varepsilon\\leq\\varepsilon_*$, let $x_\\varepsilon:I\\to A$ be a curve in affine Minkowski space with $U_\\varepsilon=\\dot x_\\varepsilon$, $a_\\varepsilon=\\dot U_\\varepsilon$, and $\\eta(U_\\varepsilon,U_\\varepsilon)=-c^2$. Let $F$ be a fixed $C^2$ two-form on a neighborhood of the curves, fix a constant $\\alpha_\\varepsilon\\in\\mathbb R$ for each $\\varepsilon$, and set $f_{0,\\varepsilon}=\\alpha_\\varepsilon F(U_\\varepsilon)$ and $\\delta_\\varepsilon:=a_\\varepsilon-f_{0,\\varepsilon}$. Suppose every curve satisfies the flat LAD equation\n\n$$a_\\varepsilon=f_{0,\\varepsilon}+\\varepsilon\\left(\\dot a_\\varepsilon-\\frac{\\eta(a_\\varepsilon,a_\\varepsilon)}{c^2}U_\\varepsilon\\right).$$\n\nUse the Euclidean norm of inertial components and its induced operator norm. In the SI interpretation $\\varepsilon$ is a time and $\\alpha_\\varepsilon=q/m$; all constants and field norms carry the corresponding units. Assume constants $A,M,P,C_0,C_1\\geq0$, independent of $\\varepsilon$, satisfy on $I$\n\n$$|\\alpha_\\varepsilon|\\leq A,\\quad \\|F\\|_{\\rm op}\\leq M,\\quad \\|\\Pi_{U_\\varepsilon}\\|_{\\rm op}\\leq P,\\quad \\|\\delta_\\varepsilon\\|\\leq C_0\\varepsilon,\\quad \\|\\dot\\delta_\\varepsilon\\|\\leq C_1\\varepsilon.$$\n\nThen throughout $I$,\n\n$$\\left\\|a_\\varepsilon-\\left(f_{0,\\varepsilon}+\\varepsilon\\Pi_{U_\\varepsilon}B_\\varepsilon\\right)\\right\\| \\leq P\\left(C_1+AM C_0\\right)\\varepsilon^2.$$\n\nThe estimate is conditional on the displayed common-interval and uniform bounds. It does not establish that regular LAD solutions satisfying them exist, nor does it imply global-in-time convergence."
+    ],
+    "post-rpm-lad-effective-equation": [
+      {
+        "kind": "postulate",
+        "domain": "physics",
+        "physical_scope": "Adopted flat-space point-particle effective equation in a prescribed external field. It is a model postulate, not a derivation from a coupled Maxwell point source, finite-body limit, or observation; it asserts no solution existence or global accuracy.",
+        "empirical_premises": []
+      },
+      "## Postulate\n\nRestrict [[def-rpm-charge-spin-model]] to its flat affine Minkowski branch, with signature $(-,+,+,+)$, proper time $\\tau$ in seconds, future four-velocity $U=dx/d\\tau$ satisfying $\\eta(U,U)=-c^2$, constant primitive $m>0$ in kilograms and nonzero charge $q\\in\\mathbb R$ in coulombs. Let the prescribed external electromagnetic two-form $F$ be $C^2$ on an open neighborhood of the worldline; use the component convention $F_{0i}=-E_i/c$, $F_{ij}=\\epsilon_{ijk}B_k$ of [[def-em-electromagnetic-tensor]]. Let $a:=dU/d\\tau$ and\n\n$$\\alpha:=q/m,\\qquad \\tau_e:=\\frac{q^2}{6\\pi\\epsilon_0mc^3}>0,\\qquad f_0^a:=\\alpha F^a{}_bU^b,$$\n\nwhere $\\epsilon_0=(\\mu_0c^2)^{-1}$ follows [[def-em-si-conventions]]. Adopt the flat LAD effective equation\n\n$$a^a=f_0^a+\\tau_e\\left(\\frac{da^a}{d\\tau}-\\frac{\\eta_{bc}a^ba^c}{c^2}U^a\\right).$$\n\nThe derivative is the ordinary derivative in an inertial affine chart. Its dimensions are consistent: $a$ and $f_0$ are accelerations, the parenthesized term has acceleration per second, and $\\tau_e$ is a time. This is an adopted effective model equation for sufficiently regular curves (at least $C^3$); it is not asserted to be an exact law of nature, a point-source Maxwell construction, or a globally well-posed dynamics. In particular, no existence, uniqueness, stability, or empirical claim is part of this postulate.\n\nUse of the equation as a reduced physical approximation carries the source qualification that radiation reaction be small relative to the applied Lorentz force in the particle's instantaneous rest frame (the inertial frame momentarily comoving with $U$). This postulate neither asserts that condition for arbitrary $F$ nor supplies a numerical threshold; the qualification is not used to deduce the local ODE results or the force-free counterexample."
+    ],
+    "rem-rpm-self-force-status": [
+      {
+        "kind": "remark",
+        "domain": "physics",
+        "physical_scope": "Scope remark separating prescribed-field LL/LAD effective equations, finite-body moments and literature results for a specific shrinking-body family. It supplies no point-charge self-field, universal fixed-charge point limit, or quantitative global accuracy claim.",
+        "empirical_premises": []
+      }
+    ],
+    "ex-rpm-al-future-boundary-preacceleration": [
+      null
+    ],
+    "cex-rpm-lad-force-free-runaway": [
+      {
+        "kind": "counterexample",
+        "domain": "physics",
+        "physical_scope": "Counterexample within the adopted flat LAD effective ODE: a force-free, smooth future-timelike solution with exponentially growing proper acceleration. It is an equation-level pathology, not an observation or claim about an actual finite charge.",
+        "empirical_premises": []
+      }
+    ]
+  }
+}

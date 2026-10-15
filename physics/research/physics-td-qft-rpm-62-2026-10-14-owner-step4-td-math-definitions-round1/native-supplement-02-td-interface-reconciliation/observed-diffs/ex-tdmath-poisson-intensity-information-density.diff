@@ -1,0 +1,39 @@
+--- research/physics-td-qft-rpm-62-2026-10-14-owner-step4-td-math-definitions-round1/new-failures-wave2/baseline/ex-tdmath-poisson-intensity-information-density.md
++++ items/ex-tdmath-poisson-intensity-information-density.md
+@@ -7,9 +7,10 @@
+ domain: mathematics
+ library: mathematics
+ dependency_level: 4
+-deps: [def-axiom-of-choice, def-tdmath-poisson-configuration-reference, thm-tdmath-poisson-reference-count-properties, def-tdmath-finite-region-relative-entropy, thm-tdmath-specific-entropy-density, def-real-exponential-function-and-e, def-factorial-and-falling-factorial, thm-exponential-addition-formula]
++deps: [def-tdmath-local-tame-topology, def-axiom-of-choice, def-tdmath-poisson-configuration-reference, thm-tdmath-poisson-reference-count-properties, def-tdmath-finite-region-relative-entropy, thm-tdmath-specific-entropy-density, def-real-exponential-function-and-e, def-factorial-and-falling-factorial, thm-exponential-addition-formula]
+ justified_by: []
+ dependency_roles:
++  def-tdmath-local-tame-topology: mathematical-premise
+   def-axiom-of-choice: mathematical-premise
+   def-tdmath-poisson-configuration-reference: mathematical-premise
+   thm-tdmath-poisson-reference-count-properties: mathematical-premise
+@@ -34,13 +35,15 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** $d\geq1$, $z>0$, and $P=Q_z$ with reference $Q=Q_1$.
++**Given:** AC, $d\geq1$, $z>0$, and $P=Q_z$ with reference $Q=Q_1$.
+ 
+-[F1] The cell count under $Q_\lambda$ is Poisson with mean $\lambda$, conditional positions have the same uniform law for all $\lambda$, and disjoint cells are independent ([[def-tdmath-poisson-configuration-reference]], [[thm-tdmath-poisson-reference-count-properties]]).
++[F1] The law $Q_\lambda$ is invariant under every translation, its cell count is Poisson with mean $\lambda$, conditional positions have the same uniform law for all $\lambda$, and disjoint cells are independent ([[def-tdmath-poisson-configuration-reference]], [[thm-tdmath-poisson-reference-count-properties]]).
+ 
+ [F2] Finite-region relative entropy is computed from a Radon–Nikodym density, and the specific entropy is the normalized cube limit ([[def-tdmath-finite-region-relative-entropy]], [[thm-tdmath-specific-entropy-density]]).
+ 
+ [F3] $e^x e^y=e^{x+y}$, $n!=n(n-1)!$ for $n\geq1$, and $e^x=\sum_{n\geq0}x^n/n!$ ([[thm-exponential-addition-formula]], [[def-factorial-and-falling-factorial]], [[def-real-exponential-function-and-e]]).
++
++[F4] The class $\mathcal P^1_{\rm stat}(\Omega)$ consists exactly of laws invariant under every $T_x$ with finite $E_PN_{C_0}$. Such laws integrate every local tame observable ([[def-tdmath-local-tame-topology]]).
+ 
+ ## Verification
+ 
+@@ -52,5 +55,5 @@
+ 
+ 3.1 The count $N_{\Lambda_m}$ is Poisson with mean $zm^d$ by [F1]. Directly from its mass function and the exponential series, $$E_PN_{\Lambda_m}=e^{-zm^d}\sum_{n\geq1}n\frac{(zm^d)^n}{n!}=zm^d e^{-zm^d}\sum_{k\geq0}\frac{(zm^d)^k}{k!}=zm^d.$$ Therefore [F2] gives $$\frac{D(P_{\Lambda_m}\Vert Q_{\Lambda_m})}{m^d}=\frac{E_P\log h_m}{m^d}=1-z+z\log z$$ for every positive integer $m$. [F1, F2, F3, step 2.1, algebra]
+ 
+-4.1 Taking the cube limit in [F2] yields $I(Q_z)=1-z+z\log z$. At $z=1$ the value is zero, the reference-law baseline. [F2, step 3.1] ∎
++4.1 By [F1], $Q_z$ is invariant under every translation, and step 3.1 with $m=1$ gives $E_{Q_z}N_{C_0}=z<\infty$. Thus $Q_z\in\mathcal P^1_{\rm stat}(\Omega)$ by [F4], which verifies the domain hypothesis of the specific-entropy theorem in [F2]. Its integer-cube supremum formula applied to step 3.1 yields $I(Q_z)=1-z+z\log z$ and identifies this value with the real-side cube limit. At $z=1$ the value is zero, the reference-law baseline. [F1, F2, F4, step 3.1] ∎
+ 

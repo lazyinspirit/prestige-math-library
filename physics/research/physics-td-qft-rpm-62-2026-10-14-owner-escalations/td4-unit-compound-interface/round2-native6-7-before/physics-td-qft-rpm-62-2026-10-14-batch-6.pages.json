@@ -1,0 +1,1231 @@
+[
+  {
+    "order": 270,
+    "id": "td-math-convex-contact-and-mixing",
+    "kind": "A",
+    "category": "thermodynamics-mathematics",
+    "library": "mathematics",
+    "title": "Convex Contact And Mixing",
+    "companion": "td-math-convex-contact-and-mixing-examples",
+    "requires": [
+      "td-math-local-pfaff-geometry"
+    ],
+    "items": [
+      {
+        "id": "def-tdmath-forward-sector-hypotheses",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Forward-sector hypotheses for a simple state domain",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 2,
+        "deps": [
+          "def-tdmath-tagged-scalable-compound",
+          "lem-tdmath-compound-mass-well-defined"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "lem-tdmath-compound-mass-well-defined": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I$ be a set of tagged simple-system labels. For each $i\\in I$, let $n_i\\ge1$ and let $\\Gamma_i\\subset\\mathbb R^{n_i+1}$ be nonempty, open, and convex, with coordinates $x=(u,v)$, $u\\in\\mathbb R$, $v\\in\\mathbb R^{n_i}$. A state is a tagged pair $(i,x)$; distinct labels remain distinct even when their coordinate tuples agree. Positive scaled copies and finite compounds use the coefficient maps and total coefficient mass of [[def-tdmath-tagged-scalable-compound]]. A comparison $A\\prec B$ is defined only for equal-mass compounds. For a tagged state $x$, $e_x$ denotes the unit point mass at that state; the zero compound is the empty map. Write $A\\sim B$ when both $A\\prec B$ and $B\\prec A$, and write $A\\prec\\prec B$ when $A\\prec B$ but $B\\not\\prec A$.\n\nThe common relation satisfies A1–A6 on all equal-mass finite compounds: (A1) reflexivity; (A2) transitivity; (A3) if $A\\prec B$, then $A+C\\prec B+C$ for every compound $C$; (A4) if $A\\prec B$, then $tA\\prec tB$ for every $t>0$; (A5) $te_x$ is equivalent to $se_x+(t-s)e_x$ for every state label $x$, $t>0$, and $0<s<t$; (A6) for equal-mass $A,B$, fixed positive equal-mass spectators $Z_0,Z_1$, and every sequence $\\epsilon_n>0$ decreasing to zero, $A+\\epsilon_n Z_0\\prec B+\\epsilon_n Z_1$ for all $n$ implies $A\\prec B$. These are hypotheses, not conclusions. No comparison hypothesis is included here.\n\nFor each $i$ and $x\\in\\Gamma_i$, define the forward sector $A_x:=\\{y\\in\\Gamma_i:(i,x)\\prec(i,y)\\}$. The simple-domain assumptions are: (A7) for $0<t<1$, the compound $((i,tx),(i,(1-t)y))$ compares to $(i,tx+(1-t)y)$; (S1) each $x$ has a strict successor; (S2) $A_x$ has exactly one supporting hyperplane at $x$, expressible as $u-u_x+P_i(x)\\cdot(v-v_x)=0$ with finite slope $P_i(x)$, and $P_i$ is locally Lipschitz; (S3) the boundary of $A_x$ relative to $\\Gamma_i$ is arcwise connected. A supporting hyperplane means that $A_x$ lies in one of its closed half-spaces and meets the plane at $x$. The affine hull is the smallest affine subspace containing a set; relative interior is interior in that affine hull. Closure and boundary are taken in the indicated affine hull or in $\\Gamma_i$, as named; boundary is closure intersected with closure of the complement in that relative topology.\n\nThis definition imposes no physical interpretation, units, or empirical claim. A contact theorem that uses joins must separately assume that each join is a simple domain satisfying these same forward-sector hypotheses.",
+        "proof": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§III.A–III.B",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-tdmath-thermal-contact-hypotheses",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Thermal joins and conditional contact hypotheses",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 3,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "For two simple domains $\\Gamma_i\\subset\\mathbb R^{n_i+1}$ and $\\Gamma_j\\subset\\mathbb R^{n_j+1}$, write their coordinates $(u_i,v_i)$ and $(u_j,v_j)$. Their thermal-join domain is\n\n$$\\Delta_{ij}:=\\{(u,v_i,v_j):\\exists u_i,u_j,\\ (u_i,v_i)\\in\\Gamma_i,\\ (u_j,v_j)\\in\\Gamma_j,\\ u=u_i+u_j\\}.$$\n\nWrite $J_{ij}(x,y)$ for the join state with the summed energy coordinate and the unchanged work coordinates. A compound pair $(x,y)$ and $J_{ij}(x,y)$ have the same total energy and work coordinates but are distinct tagged objects. Define $x\\sim_T y$ exactly when the compound pair and its join state are accessible in both directions. Nested joins use the declared reassociation and permutation identifications.\n\nAssume every finite join is itself a simple domain satisfying [[def-tdmath-forward-sector-hypotheses]]. The contact hypotheses are mathematical assumptions on the common relation: (T1) $(x,y)\\prec J_{ij}(x,y)$; (T2) every join state has at least one reversible split into component states at its stated coordinates, and the equal-state split of any state into positive scaled copies of itself is reversible; (T3) $\\sim_T$ is transitive; (T4) for every simple state $x$ there are states $x_0,x_1$ in its domain with $x_0\\prec\\prec x\\prec\\prec x_1$ and $x_0\\sim_T x_1$; (T5) for every ordered pair of simple systems, every $x$ in the first and every work coordinate $v$ in the second's projection $\\rho(\\Gamma_j):=\\{v:\\exists u,(u,v)\\in\\Gamma_j\\}$, there is a state $y$ with work coordinate $v$ and $x\\sim_T y$.\n\nFor the completed calibrator branch, add (C1) **join coherence**: whenever $x\\sim_T y$, the join state $J_{ij}(x,y)$ is thermally equivalent to each of $x$ and $y$ under the nested-join identifications. The coordinate sum in the definition alone does not assert C1. In later theorem statements, T1–T5 and C1 are explicitly listed as hypotheses; they are not treated as established physical laws.",
+        "proof": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §IV.A, pp. 51–54",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tdmath-relative-interior-segment",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Relative interiors of finite-dimensional convex sets",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft local prerequisite carrier authored; scoped checks pass; independent mathematical review pending.",
+        "dependency_level": 0,
+        "deps": [
+          "def-convex-subset-of-euclidean-space"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-convex-subset-of-euclidean-space": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $C$ be a nonempty convex subset of a finite-dimensional affine Euclidean space $H$. Its relative interior $\\operatorname{ri}_H C$ is the interior in $H=\\operatorname{aff}C$. Then $\\operatorname{ri}_H C$ is nonempty. If $w\\in\\operatorname{ri}_H C$, $y\\in\\overline{C}^{\\,H}$, and $0\\le t<1$, then $(1-t)w+ty\\in\\operatorname{ri}_H C$.",
+        "proof": "1.1 Let $k=\\dim(\\operatorname{aff}C)$. If $k=0$, then $C$ is a singleton and is open in its affine hull. If $k>0$, the definition of affine hull supplies $k+1$ affinely independent points of $C$ spanning it. Their simplex lies in $C$ by [F1]. Its barycenter has all $k+1$ barycentric coordinates positive; sufficiently small coordinate perturbations preserve positivity and their sum one. Thus a relative neighborhood of that barycenter lies in the simplex, proving $\\operatorname{ri}_H C\\ne\\varnothing$. [given, F1, construct]\n\n2.1 Fix $w,y,t$ as in the Statement. The case $t=0$ is $w\\in\\operatorname{ri}_H C$. Suppose $0<t<1$ and put $q=(1-t)w+ty$. Choose $r>0$ so the relative ball $B_H(w,r)$ lies in $C$. Since $y\\in\\overline{C}^{\\,H}$, choose $y_m\\in C$ converging to $y$. For any $q'$ in a sufficiently small relative ball about $q$, the point $w_m(q'):=(q'-ty_m)/(1-t)$ lies in $B_H(w,r)$ once that ball is chosen and then $m$ is large. Hence $q'=(1-t)w_m(q')+ty_m\\in C$ by [F1]. A relative neighborhood of $q$ lies in $C$, so $q\\in\\operatorname{ri}_H C$. [given, F1, choose, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§III.B–III.C",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.1 and 7.2–7.3, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-relative-boundary-support",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Supporting hyperplanes at relative boundary points",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft local prerequisite carrier authored; scoped checks pass; independent mathematical review pending.",
+        "dependency_level": 1,
+        "deps": [
+          "def-convex-subset-of-euclidean-space",
+          "lem-tdmath-closed-convex-separation",
+          "thm-heine-borel-rn",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-convex-subset-of-euclidean-space": "mathematical-premise",
+          "lem-tdmath-closed-convex-separation": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $C$ be a nonempty convex set in a finite-dimensional affine Euclidean space $H$ of dimension $k\\ge1$, let $\\operatorname{aff}C=H$, and put $K=\\overline{C}^{\\,H}$. If $z\\in\\partial_H K$ (that is, $z\\in K$ and every relative neighborhood of $z$ meets $H\\setminus K$), then there is a nonzero linear functional $\\ell$ on the translation space of $H$ such that $\\ell(q-z)\\le0$ for all $q\\in C$. If $C\\subset\\mathbb R^d$ has affine dimension at most $d-2$, then every $z\\in C$ has at least two distinct ambient supporting hyperplanes containing $\\operatorname{aff}C$.",
+        "proof": "1.1 Choose affine coordinates identifying $H$ with $\\mathbb R^k$. Convexity of $C$ makes its closure $K$ convex: approximate any two points of $K$ by sequences in $C$ and pass to the limit in each convex combination. Since $z\\in\\partial_H K$, choose $z_m\\notin K$ with $z_m\\to z$. By [F1], for each $m$ there are $u_m\\ne0$ and $c_m$ with $u_m\\cdot q\\le c_m<u_m\\cdot z_m$ for all $q\\in K$. Normalize $u_m$ to unit length; [F3] places these vectors on the compact unit sphere, which is compact by [F2], so a subsequence converges to a unit vector $u$. [F2] and [F3] provide the convergent subsequence. [given, F1, F2, F3, choose]\n\n2.1 For every $q\\in K$, the inequalities give $u_m\\cdot(q-z_m)<0$. Along the convergent subsequence, continuity of the Euclidean inner product yields $u\\cdot(q-z)\\le0$. The limit vector has unit length, so its functional is nonzero and supports $K$, hence $C$, at $z$. [step 1.1, F3, algebra]\n\n3.1 If $C\\subset\\mathbb R^d$ has affine hull $H$ of dimension at most $d-2$, its orthogonal complement has dimension at least two. Choose two nonparallel nonzero normals $n_1,n_2$ orthogonal to the direction space of $H$. For each $j$, the hyperplane $\\{q:n_j\\cdot(q-z)=0\\}$ contains $H$ and therefore supports $C$ at $z$. The two hyperplanes are distinct because their normals are not parallel. [given, F3, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §III.C",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.1 and 7.2–7.3, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-unique-support-inward-ray",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Interior rays from a unique supporting plane",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft local prerequisite carrier authored; scoped checks pass; independent mathematical review pending.",
+        "dependency_level": 1,
+        "deps": [
+          "def-convex-subset-of-euclidean-space",
+          "lem-tdmath-closed-convex-separation",
+          "thm-heine-borel-rn",
+          "def-euclidean-inner-product"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-convex-subset-of-euclidean-space": "mathematical-premise",
+          "lem-tdmath-closed-convex-separation": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $K\\subset\\mathbb R^d$ be closed and convex with nonempty interior, $d\\ge1$, and let $x\\in\\partial K$. Suppose $K$ has exactly one supporting hyperplane at $x$. Choose its inward unit normal $n$, so $n\\cdot(q-x)\\ge0$ for every $q\\in K$. Then for every $v$ with $n\\cdot v>0$, there is $\\delta>0$ such that $x+tv\\in\\operatorname{int}K$ for every $0<t<\\delta$.",
+        "proof": "1.1 Let $T=\\overline{\\{a(q-x):a\\ge0,\\ q\\in K\\}}$. This is a closed convex cone. If a nonzero functional $\\ell$ is nonnegative on $T$, then it is nonnegative on $K-x$, so its zero plane through $x$ supports $K$. Uniqueness in the hypothesis makes that plane the plane with normal $n$; the inward sign forces $\\ell=c n\\cdot(\\,\\cdot\\,)$ for some $c>0$. [given, F2]\n\n2.1 The support at $x$ gives $T\\subseteq\\{w:n\\cdot w\\ge0\\}$. If $v$ with $n\\cdot v>0$ were outside $T$, strict separation [F1] of $v$ from the cone would give a nonzero functional $\\ell$ nonnegative on $T$ and negative at $v$: the separating bound is zero because $0\\in T$ and $T$ is a cone. Step 1.1 then makes $\\ell$ a positive multiple of $n$, contradicting $n\\cdot v>0$. Thus the open half-space $n\\cdot w>0$ lies in $T$, and each such $v$ is an interior point of $T$. [F1, step 1.1, algebra]\n\n3.1 Fix such $v$. Since $v\\in\\operatorname{int}T$, choose $d+1$ affinely independent vectors in a small ball about $v$ whose simplex contains a neighborhood of $v$. Approximate each vector by a nonzero cone generator $g_j=a_j(q_j-x)$ with $a_j>0$, $q_j\\in K$. Sufficiently close approximations preserve affine independence and keep $v$ in the simplex interior, so a neighborhood $N$ of $v$ lies in the simplex of the $g_j$. For each $w\\in N$, write $w=\\sum_j\\theta_j(w)a_j(q_j-x)$ with $\\theta_j(w)\\ge0$ and $\\sum_j\\theta_j(w)=1$. Shrink $N$ so its closure is a closed bounded neighborhood of $v$ contained in that simplex. Barycentric coordinates vary continuously there; by [F3] the closure is compact, so $A:=\\sup_{w\\in N}\\sum_j\\theta_j(w)a_j<\\infty$. [step 2.1, construct, F2, F3]\n\n4.1 Choose $\\delta>0$ with $\\delta A<1$. For $0<t<\\delta$ and each $w\\in N$, $x+tw=(1-t\\sum_j\\theta_j a_j)x+\\sum_j t\\theta_j a_j q_j$ is a convex combination of points of $K$, hence lies in $K$ by [F4]. Therefore $x+tN\\subset K$, so a neighborhood of $x+tv$ lies in $K$ and $x+tv\\in\\operatorname{int}K$. [step 3.1, given, F4, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §III.C",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.1 and 7.2–7.3, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-convex-function-local-lipschitz",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Finite convex functions are locally Lipschitz",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft local prerequisite carrier authored; scoped checks pass; independent mathematical review pending.",
+        "dependency_level": 0,
+        "deps": [
+          "def-convex-subset-of-euclidean-space"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-convex-subset-of-euclidean-space": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $U\\subset\\mathbb R^d$ be open and convex, and let $f:U\\to\\mathbb R$ be finite and convex. For every $x_0\\in U$, there are a neighborhood $V$ of $x_0$ and $L<\\infty$ such that $|f(x)-f(y)|\\le L\\|x-y\\|$ for all $x,y\\in V$. The same conclusion holds for finite concave functions by applying the result to $-f$.",
+        "proof": "1.1 Choose a closed cube centered at $x_0$ whose concentric dilation by factor $2$ lies in $U$. Every point of the cube is a convex combination of its finitely many vertices, so [F1] and convexity bound $f$ above there by the largest vertex value $M$. If $x$ lies in the cube, then $2x_0-x$ lies in the dilated cube; convexity gives $f(x_0)\\le(f(x)+f(2x_0-x))/2$, hence $f(x)\\ge2f(x_0)-M'$, where $M'$ is the finite upper bound on the dilated cube. Thus $f$ is bounded above and below on a ball about $x_0$. [given, F1, construct]\n\n2.1 Choose concentric balls $B(x_0,r)\\subset B(x_0,2r)\\subset U$ on which $m\\le f\\le M$. For distinct $x,y\\in B(x_0,r/2)$, extend the segment from $x$ through $y$ to $z=y+(r/2)(y-x)/\\|y-x\\|$, which lies in $B(x_0,2r)$. Put $\\theta=\\|y-x\\|/(r/2+\\|y-x\\|)$, so $y=(1-\\theta)x+\\theta z$. Convexity yields $f(y)-f(x)\\le\\theta(M-m)\\le(2(M-m)/r)\\|y-x\\|$. Repeating with $x,y$ interchanged gives the reverse bound. Negation proves the concave case. [step 1.1, F1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §III.C",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.1 and 7.2–7.3, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-integral-zero-uniqueness",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Zero-start integral inequality",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft local prerequisite carrier authored; scoped checks pass; independent mathematical review pending.",
+        "dependency_level": 0,
+        "deps": [
+          "thm-continuous-implies-integrable",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "cor-mean-value-theorem",
+          "thm-derivative-of-exponential"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $L\\ge0$, $T>0$, and let $f:[0,T]\\to[0,\\infty)$ be continuous. If $f(t)\\le L\\int_0^t f(s)\\,ds$ for every $t\\in[0,T]$, then $f(t)=0$ for every $t\\in[0,T]$.",
+        "proof": "1.1 By [F1], the integral defining $h(t)=\\int_0^t f(s)\\,ds$ exists. Continuity of $f$ gives $h'(t)=f(t)$ on $(0,T)$: the difference quotient error is bounded by $\\sup_{|s-t|\\le|r|}|f(s)-f(t)|$, which tends to zero as $r\\to0$. Also $h$ is continuous on $[0,T]$. The hypothesis gives $h'\\le Lh$, so [F2]–[F3] yield $g'(t)\\le0$ for $g(t)=e^{-Lt}h(t)$ on $(0,T)$. The mean value theorem makes $g$ nonincreasing; since $g(0)=0$ and $g\\ge0$, $g\\equiv0$ and $h\\equiv0$. [given, F1, F2, F3, algebra]\n\n2.1 For any $t>0$, the nonnegative continuous function $f$ has integral $h(t)=0$. If $f(t_0)>0$ at any $t_0>0$, continuity gives a positive lower bound on a nonempty subinterval of $[0,t_0]$, contradicting $h(t_0)=0$. At $t=0$ the assumed inequality gives $f(0)\\le0$; nonnegativity gives $f(0)=0$. Hence $f\\equiv0$. [step 1.1, given] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §III.C",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Appendix 9.9, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-forward-spectator-cancellation",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Spectator cancellation without comparison completeness",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 4,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-tagged-scalable-compound",
+          "def-tdmath-forward-signed-comparison"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise",
+          "def-tdmath-forward-signed-comparison": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Under A1–A6 of [[def-tdmath-forward-sector-hypotheses]], for equal-mass compounds $A,B,C$, $A+C\\prec B+C$ if and only if $A\\prec B$. Consequently, for finite-support signed maps $u,v$ of equal total coefficient, define $u\\preceq_s v$ by $(v-u)^-\\prec(v-u)^+$. This relation is well-defined, agrees with $\\prec$ on nonnegative maps, is invariant under adding a common signed map, is transitive, and is closed under addition of two comparisons. No comparison hypothesis is used.",
+        "proof": "1.1 Assume $A+C\\prec B+C$ and $m(C)>0$. Scaling by $1/n$ gives $A/n+C/n\\prec B/n+C/n$. Define $E_j=(n-j)A/n+jB/n+C/n$ for $j=0,\\ldots,n$. For $j<n$, add the common spectator $(n-j-1)A/n+jB/n$ to the scaled comparison to obtain $E_j\\prec E_{j+1}$. Transitivity yields $A+C/n=E_0\\prec E_n=B+C/n$. Stability with bases $A,B$, fixed positive spectators $C,C$, and $\\epsilon_n=1/n$ gives $A\\prec B$. If $m(C)=0$, nonnegativity gives $C=0$ and the implication is immediate. Conversely, consistency gives $A+C\\prec B+C$ from $A\\prec B$. [A1, F1, algebra]\n\n2.1 For equal-total signed maps $u,v$, the difference $d=v-u$ has finite support and total coefficient zero, so $m(d^+)=m(d^-)$. If $u,v$ are nonnegative, their pointwise common part $k(x)=\\min\\{u(x),v(x)\\}$ gives $u=k+d^-$ and $v=k+d^+$. Cancellation in step 1.1 proves $u\\prec v$ exactly when $d^-\\prec d^+$, which by [F2] is $u\\preceq_s v$; adding a common signed map leaves $d$ unchanged by [F2]. [A1, F1, F2, step 1.1]\n\n3.1 If $u\\preceq_s v$ and $v\\preceq_s w$, [F2] identifies these with comparisons of $(v-u)^-$ to $(v-u)^+$ and $(w-v)^-$ to $(w-v)^+$. Consistency combines them. Their pointwise common minimum cancels by step 1.1, leaving $(w-u)^-\\prec(w-u)^+$, which [F2] identifies as $u\\preceq_s w$. The same finite-sum argument proves closure under addition; reflexivity follows from reflexivity of the zero compound. [A1, F1, F2, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 2.1 and §III.C",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.1 and 7.2–7.3, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-tdmath-forward-signed-comparison",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Signed comparison for forward-sector relations",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 3,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-tagged-scalable-compound"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-tagged-scalable-compound": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $u,v$ be finite-support real coefficient maps on the tagged state labels of [[def-tdmath-tagged-scalable-compound]] with equal total coefficient. For a tagged state $x$, the unit point mass $e_x$ is as defined in [[def-tdmath-forward-sector-hypotheses]]. Put $d=v-u$, $d^+(x)=\\max(d(x),0)$ and $d^-(x)=\\max(-d(x),0)$. Define $u\\preceq_s v$ to mean $d^-\\prec d^+$ under the compound relation of [[def-tdmath-forward-sector-hypotheses]]. Write $u\\sim_s v$ when both $u\\preceq_s v$ and $v\\preceq_s u$. These are formal signed comparison maps, not physical negative amounts. The positive and negative parts are finite-support compounds of equal mass. If $u\\sim_s v$, then $cu\\sim_s cv$ for every real $c$: positive $c$ uses scaling, $c=0$ is reflexivity, and negative $c$ swaps the positive and negative parts while equivalence supplies both comparison directions. This Definition introduces the signed notation; ordinary-order compatibility and the signed-order laws are proved separately.",
+        "proof": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §II.D",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §4.1, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tdmath-thermal-scaling-invariance",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Scaling invariance of thermal equivalence",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 4,
+        "deps": [
+          "def-tdmath-thermal-contact-hypotheses"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-thermal-contact-hypotheses": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Under T1–T3 and the equal-state reversible split in [[def-tdmath-thermal-contact-hypotheses]], if $x\\sim_T y$ then $s x\\sim_T t y$ for every $s,t>0$.",
+        "proof": "1.1 Let $x$ be a unit state and $s>0$. The state $z=(1+s)x$ in the scaled type has the equal-state reversible split with fractions $1/(1+s)$ and $s/(1+s)$; its two components are exactly $x$ and $sx$. Thus $(x,sx)$ is reversible with its join, which by definition is $x\\sim_T sx$. The same argument gives $y\\sim_T ty$. [A1, given]\n\n2.1 Since $x\\sim_T y$, symmetry gives $y\\sim_T x$. Transitivity with $x\\sim_T sx$ yields $y\\sim_T sx$; symmetry then gives $sx\\sim_T y$. Transitivity with $y\\sim_T ty$ now yields $sx\\sim_T ty$. [A1, step 1.1, given] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 4.1, p. 51",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-reference-strip-coordinate",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "A unique reference coordinate inside a thermal strip",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 9,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-thermal-contact-hypotheses",
+          "def-tdmath-forward-signed-comparison",
+          "lem-tdmath-forward-spectator-cancellation",
+          "lem-tdmath-thermal-scaling-invariance",
+          "thm-tdmath-sector-nesting"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-thermal-contact-hypotheses": "mathematical-premise",
+          "def-tdmath-forward-signed-comparison": "mathematical-premise",
+          "lem-tdmath-forward-spectator-cancellation": "mathematical-premise",
+          "lem-tdmath-thermal-scaling-invariance": "mathematical-premise",
+          "thm-tdmath-sector-nesting": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let a simple domain and its finite thermal joins satisfy [[def-tdmath-forward-sector-hypotheses]] and [[def-tdmath-thermal-contact-hypotheses]]. Let $x_0\\prec\\prec x_1$ with $x_0\\sim_T x_1$, and let $x$ satisfy $x_0\\prec\\prec x\\prec\\prec x_1$. For $0\\le\\lambda\\le1$, write $R_\\lambda$ for the compound state $((1-\\lambda)x_0,\\lambda x_1)$, omitting a zero coefficient at the endpoints. Then there is a unique $\\lambda\\in(0,1)$ with $R_\\lambda\\sim x$ in the common accessibility relation.",
+        "proof": "**Given:** [A1], [F1]–[F3], and $x_0\\prec\\prec x\\prec\\prec x_1$.\n\n1.1 For $0\\le\\lambda<\\mu\\le1$, the signed difference $R_\\mu-R_\\lambda=(\\mu-\\lambda)(e_{x_1}-e_{x_0})$ has positive part $(\\mu-\\lambda)e_{x_1}$ and negative part $(\\mu-\\lambda)e_{x_0}$. Since $x_0\\prec x_1$, positive scaling and [F2] give $R_\\lambda\\prec R_\\mu$. Thus the reference states are strictly ordered by parameter. [A1, F2, algebra]\n\n1.2 For $0<\\lambda<1$, [F1] makes $(1-\\lambda)x_0$ and $\\lambda x_1$ thermally equivalent. By the definition of thermal equivalence, their compound is reversible with its join state. The equal-state split makes $((1-\\lambda)x,\\lambda x)$ reversible with its join state and with $x$. Both join states belong to the join of two scaled copies of the same simple domain, so [F3] compares them. The endpoint cases use $R_0=x_0$ and $R_1=x_1$ directly. Hence $R_\\lambda$ and $x$ are comparable for every $\\lambda\\in[0,1]$. [F1, F3, given]\n\n2.1 Let $L=\\{\\lambda\\in[0,1]:R_\\lambda\\prec x\\}$. The strict endpoint comparison $x_0\\prec x$ puts $0$ in $L$. Step 1.1 and transitivity make $L$ downward closed. Let $s=\\sup L$. If $s>0$, then $s-1/n\\in L$ for every sufficiently large $n$. Since $R_{s-1/n}+(1/n)x_1=R_s+(1/n)x_0$, consistency yields $R_s+(1/n)x_0\\prec x+(1/n)x_1$. Stability with bases $R_s,x$ and fixed spectators $x_0,x_1$ gives $R_s\\prec x$. If $s=0$, this comparison is the given $x_0\\prec x$. [A1, F2, step 1.1, choose]\n\n3.1 If $s<1$, then $s+1/n\\notin L$ for every sufficiently large $n$. Step 1.2 gives comparability and the definition of $L$ excludes $R_{s+1/n}\\prec x$, so $x\\prec R_{s+1/n}$. The identity $R_{s+1/n}+(1/n)x_0=R_s+(1/n)x_1$ and stability yield $x\\prec R_s$. If $s=1$, the strict strip gives $x\\prec R_1$; together with step 2.1 this would imply $x_1\\prec x$, contrary to $x\\prec\\prec x_1$. Thus $s<1$, and steps 2.1 and 3.1 give $R_s\\sim x$. [A1, F2, step 1.2, step 2.1]\n\n4.1 The equivalence $R_s\\sim x$ also excludes $s=0$, because $R_0=x_0$ and $x_0\\not\\sim x$, and excludes $s=1$ by strictness of $x\\prec\\prec x_1$. If $R_t\\sim x$ for another $t$, transitivity gives $R_s\\sim R_t$; step 1.1 then forces $s=t$. Hence the parameter is unique and lies in $(0,1)$. [F2, step 1.1, step 3.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §IV.B.1, pp. 54–56",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-convex-sector-closedness",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Convexity and relative closedness of forward sectors",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 5,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "lem-tdmath-relative-interior-segment",
+          "lem-tdmath-forward-spectator-cancellation"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "lem-tdmath-relative-interior-segment": "mathematical-premise",
+          "lem-tdmath-forward-spectator-cancellation": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Under [[def-tdmath-forward-sector-hypotheses]], for every simple state $x$, the forward sector $A_x=\\{y\\in\\Gamma_i:x\\prec y\\}$ is convex and closed relative to $\\Gamma_i$. For collinear $y=tx+(1-t)z$, $0<t<1$, $y\\prec z$ implies $x\\prec y$, and $x\\prec z$ implies $x\\prec y$.",
+        "proof": "1.1 If $x\\prec y$ and $x\\prec z$, splitting gives $x\\sim(tx,(1-t)x)$. Consistency, positive scaling, and transitivity then give $(tx,(1-t)x)\\prec(ty,(1-t)z)$. The convex-combination access hypothesis in [A1] gives $(ty,(1-t)z)\\prec ty+(1-t)z$, so the convex combination belongs to $A_x$. [A1, algebra]\n\n1.2 Let $y=tx+(1-t)z$ with $0<t<1$. The convex-combination access hypothesis in [A1] gives $(tx,(1-t)z)\\prec y$. Splitting gives $y\\sim(ty,(1-t)y)$. If $y\\prec z$, scaling by $1-t$ and adding $ty$ gives $(ty,(1-t)y)\\prec(ty,(1-t)z)$. Compose and cancel the common $(1-t)z$ by [F2], then scale by $1/t$, to get $x\\prec y$. If instead $x\\prec z$, scaling by $1-t$ and adding $tx$ gives $(tx,(1-t)x)\\prec(tx,(1-t)z)\\prec y$; recombination gives $x\\prec y$. [A1, F2, algebra]\n\n2.1 Take $y\\in\\overline{A_x}^{\\,\\Gamma_i}$. If $y\\in A_x$, the claim is immediate. Otherwise choose $w\\in\\operatorname{ri} A_x$ by [F1]. Because $\\Gamma_i$ is open, choose $z=w+(1+\\eta)(y-w)\\in\\Gamma_i$ for some $\\eta>0$. For every integer $n>1+\\eta$, $y_n=(1+1/n)y-z/n=w+(1-\\eta/n)(y-w)$ lies in $\\operatorname{ri}A_x$ by [F1], so $x\\prec y_n$. Also $y=\\frac{n}{n+1}y_n+\\frac1{n+1}z$. The convex-combination access hypothesis in [A1] gives $(\\frac n{n+1}y_n,\\frac1{n+1}z)\\prec y$; scaling by $(n+1)/n$ and using the reversible split of $y$ gives $(y_n,z/n)\\prec(y,y/n)$. [A1, F1, step 1.1, algebra]\n\n3.1 Consistency adds the same spectator $z/n$ to $x\\prec y_n$, and transitivity with step 2.1 gives $(x,z/n)\\prec(y,y/n)$ for every $n>1+\\eta$. Apply the stability hypothesis in [A1] to bases $x,y$, fixed unit spectators $z,y$, and the tail sequence $\\epsilon_m=1/(m+n_0)$ with $n_0>1+\\eta$. It follows that $x\\prec y$. Thus every relative closure point belongs to $A_x$. [A1, step 2.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Lemma 3.1 and Theorem 3.2, pp. 42–45",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.1 and 7.2–7.3, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-sector-interior",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Every forward sector has nonempty interior",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 6,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "lem-tdmath-convex-sector-closedness",
+          "lem-tdmath-relative-boundary-support",
+          "lem-tdmath-relative-interior-segment"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "lem-tdmath-convex-sector-closedness": "mathematical-premise",
+          "lem-tdmath-relative-boundary-support": "mathematical-premise",
+          "lem-tdmath-relative-interior-segment": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Under [[def-tdmath-forward-sector-hypotheses]], every forward sector $A_x$ has nonempty interior in its ambient simple domain $\\Gamma_i$.",
+        "proof": "1.1 Suppose $A_x$ has empty ambient interior. If $d=1$, S1 supplies a strict successor $y\\ne x$; convexity puts the nondegenerate interval between $x$ and $y$ in $A_x$, contradicting empty interior. Thus take $d\\ge2$. The affine hull of $A_x$ has dimension at most $d-1$. If its dimension were at most $d-2$, [F2] would give two distinct supporting hyperplanes at $x$, contradicting S2. Hence its affine hull is a hyperplane $H$; this $H$ supports $A_x$ at every point, including $x$. [A1, F2]\n\n1.2 By S1 choose $y$ with $x\\prec\\prec y$. Then $y\\in A_x$ and $x\\notin A_y$. Transitivity gives $A_y\\subseteq A_x\\subseteq H$. If $A_y$ had affine dimension at most $d-2$, [F2] would again give multiple ambient supports at $y$, contrary to S2. Thus $\\operatorname{aff}A_y=H$. [A1, F1, F2]\n\n1.3 Choose $w\\in\\operatorname{ri}_H A_y$ by [F3]. The segment from $w$ to $x$ is contained in $H\\cap\\Gamma_i$ by convexity of both sets, starts in $A_y$, and ends outside $A_y$. Its intersection with $A_y$ is closed by relative closedness [F1], so it has a last point $z$ before $x$. Points immediately after $z$ on this segment lie outside $A_y$ and, because $A_y$ is closed in the open set $\\Gamma_i$, outside $\\overline{A_y}^{\\,H}$. Thus $z\\in\\partial_H\\overline{A_y}^{\\,H}$. The support statement [F2] supplies a nonzero functional on $H$ whose zero hyperplane supports $A_y$ at $z$. [F1, F2, F3, choose]\n\n2.1 Extend this functional to the ambient Euclidean space by taking its normal vector in the direction space of $H$. Its zero hyperplane contains the within-$H$ support and is not $H$ itself. Since $z\\in A_y$, transitivity gives $A_z\\subseteq A_y$, so the extended plane supports $A_z$ at $z$; the plane $H$ also supports $A_z$. These are distinct, contradicting S2 at $z$. Therefore $A_x$ has nonempty ambient interior. [A1, F1, step 1.3, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 3.2, pp. 43–45",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.1 and 7.2–7.3, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-sector-nesting",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Nesting and comparison of simple-system states",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 8,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "lem-tdmath-convex-sector-closedness",
+          "lem-tdmath-sector-interior",
+          "thm-tdmath-forward-boundary-graph",
+          "lem-tdmath-relative-interior-segment"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "lem-tdmath-convex-sector-closedness": "mathematical-premise",
+          "lem-tdmath-sector-interior": "mathematical-premise",
+          "thm-tdmath-forward-boundary-graph": "mathematical-premise",
+          "lem-tdmath-relative-interior-segment": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Under [[def-tdmath-forward-sector-hypotheses]], the sectors are nested: if $y\\in A_x$, then $A_y\\subseteq A_x$; equality holds when $y\\in\\partial A_x$, and $A_y\\subset\\operatorname{int}_{\\Gamma_i}A_x$ when $y\\in\\operatorname{int}_{\\Gamma_i}A_x$. For every $x,y\\in\\Gamma_i$, either $x\\prec y$ or $y\\prec x$ (possibly both). Strict comparison is exactly interior membership: $x\\prec\\prec y$ if and only if $y\\in\\operatorname{int}_{\\Gamma_i}A_x$.",
+        "proof": "1.1 If $y\\in A_x$, transitivity gives $A_y\\subseteq A_x$. If also $y\\in\\partial A_x$, [F3] gives equality. Suppose instead $y\\in\\operatorname{int}A_x$. If $A_y$ met $\\partial A_x$ at $z$, then $z\\in A_y$ and [F3] would give $A_z=A_x$. Since $z\\in A_y$, transitivity gives $A_z\\subseteq A_y\\subseteq A_x$, so $A_y=A_x$. But S2 puts $y$ on $\\partial A_y$, contradicting $y\\in\\operatorname{int}A_x$. Thus $A_y$ avoids $\\partial A_x$ and, being a subset of the closed sector $A_x$, lies in $\\operatorname{int}A_x$. [A1, F3, algebra]\n\n1.2 Suppose neither $y\\in A_x$ nor $x\\in A_y$. Choose $z\\in\\operatorname{int}A_x$ using [F2]. The segment from $y$ to $z$ lies in $\\Gamma_i$ and meets $\\partial A_x$ at a point $w$ strictly between its endpoints. By [F3], $A_w=A_x$, so $w\\prec z$. The collinear implication in [F1], applied to $w=ty+(1-t)z$, gives $y\\prec w\\prec z$. Hence every $z\\in\\operatorname{int}A_x$ lies in $A_y$. Reversing $x,y$ gives $\\operatorname{int}A_y\\subseteq A_x$. [A1, F1, F2, F3]\n\n2.1 Because $A_x$ is full-dimensional by [F2], its affine hull is the ambient space. Fix $w\\in\\operatorname{int}A_x$. For any $q\\in A_x$, relative closedness gives $q\\in\\overline{A_x}^{\\,\\Gamma_i}$, and [F4] puts $(1-t)w+tq$ in $\\operatorname{int}A_x$ for every $0\\le t<1$. Letting $t\\uparrow1$ shows $q\\in\\overline{\\operatorname{int}A_x}^{\\,\\Gamma_i}$. The reverse inclusion follows because $A_x$ is relatively closed. Hence $A_x=\\overline{\\operatorname{int}A_x}^{\\,\\Gamma_i}$; the same holds for $A_y$. Relative closedness from [F1] therefore extends the two interior inclusions in step 1.2 to $A_x\\subseteq A_y$ and $A_y\\subseteq A_x$. Equality would put $x\\in A_y$, contradicting the supposition. Thus at least one of $x\\prec y$ or $y\\prec x$ always holds. [F1, F2, F4, step 1.2]\n\n3.1 If $x\\prec y$, then $y\\in A_x$. If $y$ is a boundary point, step 1.1 gives $A_x=A_y$, hence $x\\prec y$ and $y\\prec x$. Otherwise step 1.1 gives $A_y\\subset\\operatorname{int}A_x$, and $x\\notin A_y$ because S2 places $x$ on $\\partial A_x$. Thus $x\\prec\\prec y$. Conversely, if $y\\in\\operatorname{int}A_x$, step 1.1 and S2 show $x\\notin A_y$, so $x\\prec\\prec y$. [A1, F1, step 1.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorems 3.6–3.8, pp. 47–50",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.1 and 7.2–7.3, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-forward-boundary-graph",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Forward orientation and the Lipschitz boundary graph",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 7,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "lem-tdmath-convex-sector-closedness",
+          "lem-tdmath-sector-interior",
+          "lem-tdmath-relative-boundary-support",
+          "lem-tdmath-unique-support-inward-ray",
+          "lem-tdmath-convex-function-local-lipschitz",
+          "lem-tdmath-integral-zero-uniqueness",
+          "thm-heine-borel-rn",
+          "thm-chain-rule",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-continuous-implies-integrable"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "lem-tdmath-convex-sector-closedness": "mathematical-premise",
+          "lem-tdmath-sector-interior": "mathematical-premise",
+          "lem-tdmath-relative-boundary-support": "mathematical-premise",
+          "lem-tdmath-unique-support-inward-ray": "mathematical-premise",
+          "lem-tdmath-convex-function-local-lipschitz": "mathematical-premise",
+          "lem-tdmath-integral-zero-uniqueness": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-newton-leibniz-with-interior-derivative": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Under [[def-tdmath-forward-sector-hypotheses]], each simple domain has one orientation sign $\\varepsilon_i\\in\\{-1,1\\}$, constant across the domain, such that at fixed work coordinate $v$, $x\\prec y$ exactly when $\\varepsilon_i(u_y-u_x)\\ge0$. In coordinates oriented so $\\varepsilon_i=1$, for each $x\\in\\Gamma_i$ the projection $\\rho_x$ of $\\partial_{\\Gamma_i}A_x$ onto work coordinates is open and connected; the boundary is the graph $(u_x(v),v)$ of a $C^1$ function with locally Lipschitz derivative\n\n$$Du_x(v)=-P_i(u_x(v),v).$$\n\nIf $y\\in\\partial A_x$, then $A_y=A_x$ and their boundary graphs agree.",
+        "proof": "**Given:** [A1] and [F1]–[F10]. Write a support plane's inward unit normal with energy component nonzero, as ensured by its finite-slope form.\n\n1.1 For fixed $x=(u_x,v_x)$, the vertical section $I_x:=\\{u:(u,v_x)\\in A_x\\}$ is a relatively closed convex interval by [F1]. The support plane at $x$ confines it to one side of $u_x$. Its inward normal has nonzero energy component, so [F4] gives a nontrivial interior vertical segment on that side. [A1, F1, F4]\n\n1.2 The fiber orientation is locally constant in $v$. At any $x$, choose one vertical point just inside the supported half-space and one just outside; by [F4] the inside point can be chosen in $\\operatorname{int}A_x$. Openness of $\\Gamma_i$ and of the interior and exterior regions preserves these memberships on nearby fibers. Each such fiber therefore meets $\\partial A_x$ between these two energy values. A support of $A_x$ at that boundary point also supports the point's own sector and so has its S2 orientation; the inside/outside placement fixes that orientation. Thus nearby fibers have the same sign as the fiber through $x$. Since $\\Gamma_i$ is convex, it is connected; a locally constant two-valued sign is constant. [A1, F2, F3, F4]\n\n1.3 Let $u,w$ be two $C^1$ graph solutions of $Dq=-P_i(q,v)$ on a common open domain, and suppose $u(v_0)=w(v_0)$. Since $P_i$ is locally Lipschitz, choose a convex neighborhood of $(u(v_0),v_0)$ on which one Lipschitz constant $L$ works. Continuity of $u,w$ lets us choose a convex ball about $v_0$ whose closure lies in the common domain and whose two graph images stay in that neighborhood; take any $v$ in a smaller concentric ball. Put $d=v-v_0$ and $\\gamma(t)=v_0+td$ for $0\\le t\\le1$. By [F8], $r(t)=u(\\gamma(t))-w(\\gamma(t))$ is $C^1$ and\n$r'(t)=[-P_i(u(\\gamma(t)),\\gamma(t))+P_i(w(\\gamma(t)),\\gamma(t))]\\cdot d.$\nThe local Lipschitz bound for $P_i$ gives $|r'(t)|\\le L\\|d\\||r(t)|$. The derivative is continuous, hence integrable by [F10]; [F9] gives $r(t)=\\int_0^t r'(s)\\,ds$; hence $h(t):=|r(t)|\\le L\\|d\\|\\int_0^t h(s)\\,ds$. Apply [F6] on $[0,1]$ to obtain $h=0$. Thus $u=w$ near $v_0$. Along any polygonal path in the common open domain, the set of path parameters at which equality holds is closed by continuity and open by this local result; since the path interval is connected and the set is nonempty, equality holds along the whole path. Every open connected subset of Euclidean space is polygonally connected: points reachable from a fixed point by finitely many segments in small balls form a nonempty relatively open and relatively closed set. Therefore equality extends throughout each common connected domain. [A1, F6, F8, F9, F10, given, construct]\n\n2.1 The convex, relatively closed interval $I_x$ contains a nontrivial segment on the inward side by step 1.1 and [F4]. Suppose it does not contain the whole open $\\Gamma_i$-fiber on that side. Its endpoint $b$ toward that side then lies inside $\\Gamma_i$; relative closedness puts $b$ in $I_x$, so the interval from $x$ to $b$ is a compact nondegenerate interval by [F7]. Let $x_1$ be its midpoint. Since $x_1\\in A_x$, transitivity gives $A_{x_1}\\subseteq A_x$. The supporting plane of $A_{x_1}$ has nonzero energy coefficient, so its vertical section lies wholly on one side of $x_1$; being contained in $I_x$, it lies in one half of $[x,b]$ and has at most half its length. It is nonempty and closed relative to $[x,b]$, hence compact. Repeat: take the midpoint $x_{k+1}$ of the current compact interval $I_{x_k}$; then $x_k\\prec x_{k+1}$, so the next section is nested inside the current one and again has at most half its length. The nested compact intervals have a common limit point $x_\\infty\\in\\Gamma_i$ by [F7], and their lengths tend to zero. Relative closedness puts $x_\\infty$ in every $A_{x_k}$, hence $A_{x_\\infty}\\subseteq A_{x_k}$ by transitivity. Its vertical section is therefore only $\\{x_\\infty\\}$, contradicting the nontrivial interior vertical segment at $x_\\infty$ supplied by [F4]. Thus $I_x$ contains the whole open fiber on its inward side. [A1, F1, F4, F7, step 1.1, construct]\n\n3.1 All states on a fixed work-coordinate fiber have the same orientation. If $x$ is oriented upward and a state $z$ above it were oriented downward, the full upward section from step 2.1 gives $x\\prec z$, and the full downward section from $z$ gives $z\\prec w$ for a state $w$ below $x$, contradicting the support at $x$. If a state $y$ below an upward $x$ were oriented downward, choose $z$ above $x$ with $x\\prec z$; the first collinear implication in [F1], applied to $x$ between $y$ and $z$, gives $y\\prec x$, contradicting the downward support at $y$. The reversed argument handles a downward $x$. [F1, step 2.1, algebra]\n\n4.1 Adopt the coordinate convention $\\varepsilon_i=1$. Step 2.1 and the common orientation give $x\\prec y$ exactly for $u_y\\ge u_x$ at fixed $v$, with strict comparison for $u_y>u_x$. [step 3.1, step 1.2, algebra]\n\n5.1 Put $\\rho_x=\\pi_v(\\partial A_x)$. At a boundary point $z\\in\\partial A_x$, [F3] supplies a support to $A_x$. Because $A_z\\subseteq A_x$, that plane also supports $A_z$ and equals its unique S2 plane. Its finite slope gives a nonvertical inward direction; [F4] supplies nearby vertical points inside $A_x$, while the opposite side is outside by the support. Neighborhoods of one inside and one outside point show every nearby work fiber meets $\\partial A_x$. Hence $\\rho_x$ is open. It is connected because S3 makes $\\partial A_x$ arcwise connected and projection is continuous. By step 4.1, every vertical fiber over $\\rho_x$ has exactly one boundary energy; call it $u_x(v)$. [A1, F1, F2, F3, F4, step 4.1]\n\n6.1 For $v,v'\\in\\rho_x$, convexity of $A_x$ puts every convex combination of their boundary states in $A_x$. On any sufficiently small convex ball in $\\rho_x$, the unique-boundary property and upward orientation make $u_x$ the least energy in each fiber. Therefore $u_x(tv+(1-t)v')\\le t u_x(v)+(1-t)u_x(v')$, so $u_x$ is finite and convex there. It is locally Lipschitz by [F5]. The inward support at $(u_x(v),v)$ gives\n$u_x(v')-u_x(v)\\ge -P_i(u_x(v),v)\\cdot(v'-v).$\nThe support at $(u_x(v'),v')$ gives\n$u_x(v')-u_x(v)\\le -P_i(u_x(v'),v')\\cdot(v'-v).$\nLocal Lipschitz continuity of $u_x$ and $P_i$ makes the difference between these linear bounds $O(\\|v'-v\\|^2)$. Thus $u_x$ is differentiable with derivative $-P_i(u_x(v),v)$, and that derivative is locally Lipschitz. Hence $u_x\\in C^1$ with locally Lipschitz derivative. [A1, F1, F5, step 5.1]\n\n7.1 If $y\\in\\partial A_x$, then $A_y\\subseteq A_x$. The boundary graphs agree at $v_y$ and solve the same differential equation. The set of $v\\in\\rho_y$ where $v\\in\\rho_x$ and $u_y(v)=u_x(v)$ is nonempty, open by step 1.3, and closed by continuity and relative closedness of $\\partial A_x$. Connectedness of $\\rho_y$ makes it all of $\\rho_y$. This shows $\\rho_y\\subseteq\\rho_x$. The same argument, using relative closedness of $\\partial A_y$, shows $\\rho_y$ is relatively closed in connected $\\rho_x$; it is relatively open because both projections are open. Hence $\\rho_x=\\rho_y$ and the boundary graphs agree. In particular $x\\in\\partial A_y$, so $y\\prec x$; together with $y\\in A_x$ and transitivity this gives $A_x=A_y$. [A1, F1, step 6.1, step 1.3] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorems 3.3–3.5, pp. 45–47",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§4.1 and 7.2–7.3, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-reference-strip-gluing",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Reference-strip gluing proves comparison for scaled copies",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 10,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-thermal-contact-hypotheses",
+          "def-tdmath-forward-signed-comparison",
+          "lem-tdmath-forward-spectator-cancellation",
+          "lem-tdmath-reference-strip-coordinate",
+          "thm-tdmath-sector-nesting",
+          "thm-tdmath-forward-boundary-graph",
+          "thm-heine-borel-rn"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-thermal-contact-hypotheses": "mathematical-premise",
+          "def-tdmath-forward-signed-comparison": "mathematical-premise",
+          "lem-tdmath-forward-spectator-cancellation": "mathematical-premise",
+          "lem-tdmath-reference-strip-coordinate": "mathematical-premise",
+          "thm-tdmath-sector-nesting": "mathematical-premise",
+          "thm-tdmath-forward-boundary-graph": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume [[def-tdmath-forward-sector-hypotheses]] and T1–T4 of [[def-tdmath-thermal-contact-hypotheses]] for every finite join. For any one simple type $\\Gamma_i$, every two finite compounds of its scaled copies with the same total coefficient mass are comparable. Thus CH holds on all multiple scaled products of that type. No entropy across different material types is asserted here.",
+        "proof": "1.1 By T4, the open strips $\\Sigma(a,b):=\\{x:a\\prec\\prec x\\prec\\prec b\\}$ with $a\\prec\\prec b$ and $a\\sim_T b$ cover $\\Gamma_i$. They are open: by [F2], $a\\prec\\prec x$ is $x\\in\\operatorname{int}A_a$, and $x\\prec\\prec b$ is $x\\notin A_b$; the latter set is open because $A_b$ is relatively closed. [A1, A2, F2]\n\n2.1 Let $\\Sigma(a,b)$ and $\\Sigma(c,d)$ overlap. Their intersection is open. Choose two states $e\\prec\\prec f$ in a small vertical segment contained in the overlap, using [F4]. Let $s_e,s_f$ be their coordinates in the first strip and $t_e,t_f$ in the second, supplied by [F1]. If $s_f<s_e$, step 1.1 gives $R_{s_f}\\prec R_{s_e}$, so $f\\prec e$ by the two reference equivalences; if $s_f=s_e$, those references coincide and give $f\\sim e$. Both contradict $e\\prec\\prec f$. Hence $s_f>s_e$, and the same argument gives $t_f>t_e$. [A1, F1, F2, F4, step 1.1, construct]\n\n3.1 The four reference equivalences give, in signed comparison,\n$f-e\\sim_s(s_f-s_e)(b-a),\\qquad f-e\\sim_s(t_f-t_e)(d-c).$\nPut $r=(s_f-s_e)/(t_f-t_e)>0$. Additivity and positive scaling in [F3] give $d-c\\sim_s r(b-a)$. Applying the same algebra to the equivalences for $e$ gives $c\\sim_s a+(s_e-r t_e)(b-a)$. Consequently a state in the second strip with coordinate $t$ has first-chart coordinate $s_e+r(t-t_e)$. The change of chart is affine with strictly positive slope. [F1, F3, step 2.1, algebra]\n\n4.1 The same calculation covers a finite chain of overlapping strips: after each overlap, express the new strip's endpoint states as signed-equivalent affine maps in the existing reference pair. The local strip lemma gives every state $z$ of the added strip a coordinate $s_z\\in\\mathbb R$ with $e_z\\sim_s(1-s_z)e_a+s_ze_b$ in the existing chart. Signed addition, positive scaling, translation, and equivalence under negative scaling are valid by [F3]; hence induction along a finite overlap chain gives one such common chart for every state in the union. [F3, step 3.1, algebra]\n\n5.1 Take any finite list of target states in $\\Gamma_i$ and join them in order by finitely many straight segments, which lie in $\\Gamma_i$ by convexity. The resulting connected path is a finite union of closed bounded segments, hence compact by [F5]. The open strips from step 1.1 cover it, so compactness gives a finite subcover. The intersection graph of those strips meeting the path is connected: otherwise their unions would partition the connected path into two disjoint nonempty relatively open sets. Order a spanning tree from one root strip; each later strip overlaps an earlier one in an open set and can be glued by step 4.1. Thus every target state has a common signed chart $e_z\\sim_s(1-s_z)e_a+s_ze_b$ with $a\\prec\\prec b$. [A1, F5, step 1.1, step 4.1, construct]\n\n6.1 Let $A=\\sum_j\\alpha_j e_{x_j}$ and $B=\\sum_k\\beta_k e_{y_k}$ have equal total mass $M$, and let $s_j,t_k$ be their common-chart coordinates. If $M=0$, nonnegativity makes both maps empty and reflexivity compares them. Assume $M>0$. Each state has signed equivalence $e_{x_j}\\sim_s(1-s_j)e_a+s_je_b$ in the common chart; signed addition, scaling, and splitting [F3] therefore make $A$ and $B$ each signed-equivalent to reference maps $R_{q_A}=(M-q_A)e_a+q_Ae_b$ and $R_{q_B}=(M-q_B)e_a+q_Be_b$, where $q_A=\\sum_j\\alpha_js_j$ and $q_B=\\sum_k\\beta_kt_k$. If $q_A<q_B$, the signed difference has positive part $(q_B-q_A)e_b$ and negative part $(q_B-q_A)e_a$, so $a\\prec b$ and positive scaling compare $R_{q_A}\\prec R_{q_B}$ by [F3]. If $q_A=q_B$, the reference maps coincide and reflexivity applies; if $q_B<q_A$, the same argument compares in the reverse direction. Transitivity transfers that comparison to $A,B$. Hence any equal-mass pair is comparable, proving CH. [A1, F3, step 5.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 4.4 and Lemma 4.1, pp. 54–56",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-tdmath-thermal-class-dichotomy",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Thermal classes either fill the domain or split an adiabat",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 11,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-thermal-contact-hypotheses",
+          "lem-tdmath-convex-function-local-lipschitz",
+          "thm-tdmath-forward-boundary-graph",
+          "thm-tdmath-reference-strip-gluing",
+          "thm-tdmath-additive-entropy-representation",
+          "thm-heine-borel-rn",
+          "thm-tdmath-sector-nesting"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-thermal-contact-hypotheses": "mathematical-premise",
+          "lem-tdmath-convex-function-local-lipschitz": "mathematical-premise",
+          "thm-tdmath-forward-boundary-graph": "mathematical-premise",
+          "thm-tdmath-reference-strip-gluing": "mathematical-premise",
+          "thm-tdmath-additive-entropy-representation": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-tdmath-sector-nesting": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Let $\\Gamma\\subset\\mathbb R^{n+1}$ be a simple domain satisfying the forward-sector hypotheses and T1–T4. Let $S$ be the additive extensive entropy supplied by [[thm-tdmath-additive-entropy-representation]] after CH for its finite scaled products is proved by [[thm-tdmath-reference-strip-gluing]]. Then either all pairs of states in $\\Gamma$ are thermally equivalent, or there are $x,y$ on one entropy level (equivalently, one adiabat $\\partial A_x$ by [[thm-tdmath-sector-nesting]]) with $x\\not\\sim_T y$.",
+        "proof": "1.1 Apply [F2] using [F1]. The convex-combination access hypothesis in [A1] and additivity imply concavity: for $0<t<1$, accessibility of $(tx,(1-t)y)$ to $tx+(1-t)y$ gives $tS(x)+(1-t)S(y)\\le S(tx+(1-t)y)$. By [F3], $S$ is strictly increasing in energy at fixed work coordinate. [A1, F1, F2, F3]\n\n1.2 Fix a work coordinate $v$ and let $J_v:=\\{u:(u,v)\\in\\Gamma\\}$, an open interval. The restriction $s_v(u)=S(u,v)$ is finite, concave, continuous by [F4], and strictly increasing by [F3]. For an interior $u$, concavity makes the right secant slopes nonincreasing as the secant endpoint moves right, and the left secant slopes monotone as the endpoint approaches $u$; hence the one-sided derivative limits $s'_{v,+}(u)$ and $s'_{v,-}(u)$ exist. Choose $a<u<b$ in $J_v$: the secants to $a,b$ bound those limits, so they are finite, and concavity gives $s'_-\\ge s'_+$. Monotonicity gives nonnegative slopes. If $s'_+(u)=0$, then for every $z>u$ concavity bounds $(s_v(z)-s_v(u))/(z-u)\\le s'_+(u)=0$, contradicting strict increase. Thus $s'_-\\ge s'_+>0$. Define $\\Theta(u,v)=[1/s'_{v,-}(u),1/s'_{v,+}(u)]$, a nonempty compact interval of positive finite reciprocal slopes. [A1, F3, F4, algebra]\n\n1.3 Suppose the second alternative fails, so each adiabat contains one thermal-equivalence class. By [F1]–[F2], $A_x=\\{y:S(y)\\ge S(x)\\}$. Continuity of $S$ and strict increase in energy at fixed work coordinate imply that every point with $S=\\sigma$ has arbitrarily nearby points with larger and smaller entropy; hence each entropy level $E_\\sigma=\\{x:S(x)=\\sigma\\}$ is a forward-sector boundary. The supposition makes each $E_\\sigma$ lie in one thermal class. Let $R=S(\\Gamma)$ and, for each thermal class $C_\\alpha$, put $R_\\alpha=\\{S(x):x\\in C_\\alpha\\}$. These sets partition $R$: two distinct classes cannot share a level under the supposition. The range $R$ is an interval, since any two points of the convex domain are joined by a segment and the continuous entropy takes every intermediate value along it. [A1, A2, F1, F2, F3, F4, F6]\n\n2.1 Fix $x=(u_1,v_1)$ and $y=(u_2,v_2)$ of this same simple type, and let $U=u_1+u_2$. The admissible energy splits form the open interval $D=\\{w:(U-w,v_1)\\in\\Gamma,\\ (w,v_2)\\in\\Gamma\\}$, which contains $u_2$. Define $g(w)=s_{v_1}(U-w)+s_{v_2}(w)$. For the join state $J(x,y)$, T2 gives an admissible split $q$ whose pair is reversible with the join. For every other split $p$, T1 gives $p\\prec J(x,y)\\prec q$, so $p\\prec q$. The pair states $p,q$ are finite compounds of two copies of this same simple type; [F1]–[F2] and their entropy representation therefore give $g(p)\\le g(q)$. Thus $q$ maximizes $g$. If the initial split $x,y$ is reversible with the join, it is equivalent to $q$; entropy representation gives equal entropy, so it too maximizes $g$. Conversely, if $u_2$ maximizes $g$, then $g(u_2)=g(q)$, and [F1]–[F2] make the initial pair reversible with $q$; composing with $q\\sim J(x,y)$ shows $x\\sim_T y$. For a concave function at an interior point, maximality is equivalent to $g'_+(u_2)\\le0\\le g'_-(u_2)$: right secants are bounded above by the right derivative and left secants below by the left derivative. Here\n$g'_+(u_2)=-s'_{v_1,-}(u_1)+s'_{v_2,+}(u_2),\\qquad\ng'_-(u_2)=-s'_{v_1,+}(u_1)+s'_{v_2,-}(u_2).$\nThe two inequalities are exactly $s'_{v_1,+}(u_1)\\le s'_{v_2,-}(u_2)$ and $s'_{v_2,+}(u_2)\\le s'_{v_1,-}(u_1)$, which say the positive slope intervals intersect; reciprocal reverses their endpoints, so this is equivalent to $\\Theta(x)\\cap\\Theta(y)\\ne\\varnothing$. [A1, A2, F1, F2, step 1.2]\n\n3.1 Let $T_\\alpha$ be one thermal class. The compact intervals $\\Theta(x)$, $x\\in T_\\alpha$, pairwise intersect by step 2.1. For any finite subfamily, pairwise intersection implies common intersection: the largest left endpoint is no greater than the smallest right endpoint, since the intervals attaining those two endpoints intersect. Fix $x_0\\in T_\\alpha$; the sets $\\Theta(x)\\cap\\Theta(x_0)$ are closed subsets of the compact interval $\\Theta(x_0)$ and have the finite-intersection property. Compactness [F5] gives a common point, so $I_\\alpha:=\\bigcap_{x\\in T_\\alpha}\\Theta(x)$ is a nonempty compact interval. If distinct classes had intersecting common intervals, representatives $x,y$ would have intersecting $\\Theta$ intervals and would be thermally equivalent by step 2.1, a contradiction. Thus the intervals $I_\\alpha$ for distinct classes are disjoint and strictly ordered on the real line; use this as the order of the classes. [A2, F5, step 2.1]\n\n4.1 For each work coordinate $v$, strict continuity of $s_v$ maps the open interval $J_v$ onto an open interval $R_v\\subset R$. On $R_v$, the level-to-class map is nondecreasing: as $u$ increases, concavity makes both one-sided slopes nonincreasing, so both endpoints of $\\Theta(u,v)$ are nondecreasing. If two such intervals $\\Theta$ are disjoint, monotonicity of both endpoints forces the earlier interval to lie strictly below the later one; by step 3.1, this is the class order. The local class maps agree on overlaps of $R_v$ because each entropy level lies in one class. The open intervals $R_v$ cover $R$. Any compact subinterval of $R$ has a finite subcover by these intervals by [F5]; its intersection graph is connected, since otherwise the connected subinterval would be split into two disjoint nonempty relatively open sets. Chaining the local orders through overlaps proves that the class map is nondecreasing on all of $R$. [A1, F3, F4, F5, step 1.2, step 1.3, step 3.1]\n\n5.1 Fix $\\sigma\\in R_\\alpha$ and $x\\in E_\\sigma$. T4 gives $x_0\\prec\\prec x\\prec\\prec x_1$ with $x_0\\sim_T x_1$. Entropy representation gives $S(x_0)<\\sigma<S(x_1)$, and their levels belong to the same class $R_\\alpha$. The global nondecreasing order from step 4.1 forces every level between them, including an open neighborhood of $\\sigma$, into $R_\\alpha$. Thus each class set is open in the interval $R$. Since these disjoint open sets partition connected $R$, only one nonempty class exists. Under the supposition, all states are thermally equivalent, proving the dichotomy. [A2, F2, step 4.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 4.6, pp. 56–57",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-conditional-contact-calibrator",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Contact calibrators under explicit join coherence",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 12,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-thermal-contact-hypotheses",
+          "lem-tdmath-forward-spectator-cancellation",
+          "def-tdmath-forward-signed-comparison",
+          "thm-tdmath-sector-nesting",
+          "thm-tdmath-forward-boundary-graph",
+          "thm-tdmath-reference-strip-gluing",
+          "thm-tdmath-additive-entropy-representation",
+          "lem-tdmath-thermal-class-dichotomy"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-thermal-contact-hypotheses": "mathematical-premise",
+          "lem-tdmath-forward-spectator-cancellation": "mathematical-premise",
+          "def-tdmath-forward-signed-comparison": "mathematical-premise",
+          "thm-tdmath-sector-nesting": "mathematical-premise",
+          "thm-tdmath-forward-boundary-graph": "mathematical-premise",
+          "thm-tdmath-reference-strip-gluing": "mathematical-premise",
+          "thm-tdmath-additive-entropy-representation": "mathematical-premise",
+          "lem-tdmath-thermal-class-dichotomy": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\Gamma_1,\\Gamma_2$ be simple domains in a family of finite thermal joins satisfying A1–A7, S1–S3, T1–T5, and C1 of [[def-tdmath-forward-sector-hypotheses]] and [[def-tdmath-thermal-contact-hypotheses]]. Then there are $x_0\\prec\\prec x_1$ in $\\Gamma_1$ and $y_0\\prec\\prec y_1$ in $\\Gamma_2$ such that\n\n$$(x_0,y_1)\\sim(x_1,y_0).$$\n\nMoreover, for every fixed finite composition of scaled copies of $\\Gamma_1$ and $\\Gamma_2$, any two equal-mass states of that same composition are comparable (CH). The conclusion is conditional on the explicitly stated join-coherence and universal-range assumptions C1 and T5.",
+        "proof": "**Given:** [A1]–[A2] and [F1]–[F5].\n\n1.1 Apply [F1] and [F2] to each simple type, including every finite join. The convex-combination access hypothesis in [A1] makes each resulting entropy concave, since the comparison of a scaled pair with its convex-combination state translates under the representation to the concavity inequality. By [F4], each entropy is strictly increasing with energy at fixed work coordinates. [A1, F1, F2, F4]\n\n1.2 Use T5 to choose $\\bar x\\in\\Gamma_1$ and $\\bar y\\in\\Gamma_2$ with $\\bar x\\sim_T\\bar y$. Let $\\phi=J_{12}(\\bar x,\\bar y)$ and consider its adiabat $\\partial A_\\phi$. T2 gives every $Z$ on that adiabat at least one split $Z=J_{12}(x_Z,y_Z)$ with $x_Z\\sim_T y_Z$. [A2, F4, choose]\n\n2.1 Suppose a join state $Z$ on $\\partial A_\\phi$ has two distinct equilibrium splits $(x^{(1)},y^{(1)})$ and $(x^{(2)},y^{(2)})$. By the definition of $\\sim_T$, both pairs are reversible with $Z$, hence mutually accessible compounds. Their work coordinates are fixed by $Z$ and their total energies equal its energy. If the first-component energies agreed, both component states in the splits would agree, so distinctness forces unequal first-component energies. If $u_{x^{(1)}}<u_{x^{(2)}}$, fixed-work comparison [F4] gives $x^{(1)}\\prec\\prec x^{(2)}$; conservation of total energy gives $u_{y^{(2)}}<u_{y^{(1)}}$, hence $y^{(2)}\\prec\\prec y^{(1)}$. Taking $(x_0,x_1,y_0,y_1)=(x^{(1)},x^{(2)},y^{(2)},y^{(1)})$ gives $(x_0,y_1)\\sim(x_1,y_0)$ because both split compounds are reversible with $Z$. If the first energies occur in the opposite order, swap the two splits and obtain the same calibrator form. Therefore, if no calibrator exists, every $Z\\in\\partial A_\\phi$ has a unique equilibrium split. [A2, F4, step 1.2, choose]\n\n3.1 Assume no calibrator exists. For any equilibrium split $(x_Z,y_Z)$ of $Z\\in\\partial A_\\phi$, reversibility with $Z$ and the common adiabat give $(x_Z,y_Z)\\sim(\\bar x,\\bar y)$ as compounds. By [F1], $x_Z$ and $\\bar x$ are comparable; [F4] says their sectors coincide exactly when they are equivalent. If $x_Z\\prec\\prec\\bar x$, pair reversibility gives $(\\bar x,\\bar y)\\prec(x_Z,y_Z)$. Consistency adds $\\bar y$ to $x_Z\\prec\\bar x$, and cancellation [F5] gives $\\bar y\\prec y_Z$. If $y_Z\\prec\\bar y$, consistency and the pair comparison instead cancel to give $\\bar x\\prec x_Z$, a contradiction. Thus $\\bar y\\prec\\prec y_Z$, making a calibrator. The case $\\bar x\\prec\\prec x_Z$ is symmetric: it gives $y_Z\\prec\\prec\\bar y$, again a calibrator. Since neither is allowed under the assumption, $x_Z\\sim\\bar x$. Adding spectators to the two directions and cancelling by [F5] then gives both $\\bar y\\prec y_Z$ and $y_Z\\prec\\bar y$, so $y_Z\\sim\\bar y$. Thus every split on this adiabat has components in the corresponding component adiabats. [A1, A2, F1, F4, F5, step 1.2, step 2.1, algebra]\n\n4.1 Under the no-calibrator assumption, fix a first-component work coordinate $v_1$ in the projection of $\\partial A_{\\bar x}$. The boundary-graph result [F4] gives exactly one state $x_*$ on that component adiabat at $v_1$. Every split of a join state on $\\partial A_\\phi$ with first work coordinate $v_1$ therefore has first component $x_*$. Each split is thermal, so $x_*\\sim_T y_Z$ for its second component. T3 makes all such $y_Z$ thermally equivalent, and C1 makes each joined state $J(x_*,y_Z)=Z$ thermally equivalent to $x_*$. Hence all join states on this adiabat over fixed $v_1$ lie in one thermal class. Fixing a second-component work coordinate instead gives the corresponding conclusion for first components. [A2, F4, step 3.1]\n\n5.1 Let $\\Omega$ be the open connected work-coordinate projection of $\\partial A_\\phi$ from [F4]. From any point of $\\Omega$, the set reachable by finitely many coordinate-axis segments contained in open boxes in $\\Omega$ is relatively open, and its complement is also relatively open; connectedness makes the reachable set all of $\\Omega$. Along each such segment, step 4.1 gives equivalence of the corresponding join states; T3 composes these finitely many equivalences. Thus the whole adiabat $\\partial A_\\phi$ is one thermal class. Since the argument works for every starting join state, every join adiabat is one thermal class. [A2, F4, step 4.1, construct]\n\n6.1 Still assuming no calibrator, apply [F3] to each join system. Its alternative with two thermally inequivalent states on one adiabat is excluded by step 5.1, so all states of each join system are thermally equivalent. For any $x,x'\\in\\Gamma_1$, use T5 with one allowed second work coordinate to choose $y,y'$ with $x\\sim_T y$ and $x'\\sim_T y'$. C1 relates each component to its joined state, and all join states are in one thermal class; T3 therefore gives $x\\sim_T x'$. The same argument gives one thermal class in $\\Gamma_2$. Now take $Z=\\phi\\in\\partial A_\\phi$ and a split $(x,y)$ supplied by T2. Choose nonzero sufficiently small $\\delta$ so $(u_x+\\delta,v_1)\\in\\Gamma_1$ and $(u_y-\\delta,v_2)\\in\\Gamma_2$, possible because the domains are open. These states form a distinct split of the same $Z$. Since the original split has $x\\sim_T y$ and each component type is one thermal class, T3 gives thermal equivalence of the changed pair as well. This contradicts uniqueness of the split from step 2.1. Therefore a calibrator exists. [A2, F3, step 1.2, step 2.1, step 5.1, choose]\n\n7.1 Fix a calibrator $x_0\\prec\\prec x_1$, $y_0\\prec\\prec y_1$, whose existence is step 6.1. Choose same-type entropy representatives $S_1,S_2$ from [F2], with positive gaps $h_1=S_1(x_1)-S_1(x_0)$ and $h_2=S_2(y_1)-S_2(y_0)$. Normalize $\\widetilde S_i=S_i/h_i$, so both calibrator increments are one, and put $s(x)=\\widetilde S_1(x)-\\widetilde S_1(x_0)$ and $t(y)=\\widetilde S_2(y)-\\widetilde S_2(y_0)$. Write $u=e_{x_0}+e_{y_1}$ and $v=e_{x_1}+e_{y_0}$. The calibrator says $u\\sim v$, so $v-u=(e_{x_1}-e_{x_0})-(e_{y_1}-e_{y_0})$ is equivalent to zero; translation and cancellation [F5] give $(e_{x_1}-e_{x_0})\\sim_s(e_{y_1}-e_{y_0})$. For any state $x$, the signed map $d_x=e_x-(1-s(x))e_{x_0}-s(x)e_{x_1}$ has total mass and $\\widetilde S_1$-value zero. Its positive and negative parts have equal mass and entropy, so [F2] makes them equivalent. Hence $e_x\\sim_s(1-s(x))e_{x_0}+s(x)e_{x_1}$; the same argument applies to states of the second type. These are formal signed maps when a coefficient lies outside $[0,1]$. [F2, F5, step 6.1, algebra]\n\n8.1 For a state pair $(x,y)$, put $\\lambda=(s(x)+t(y))/2$ and $\\delta=(s(x)-t(y))/2$. Adding the signed reductions from step 7.1 makes the pair equivalent to $(1-\\lambda)(e_{x_0}+e_{y_0})+\\lambda(e_{x_1}+e_{y_1})$ plus $\\delta[(e_{x_1}-e_{x_0})-(e_{y_1}-e_{y_0})]$. The calibrator increment equivalence from step 7.1 makes the latter term equivalent to zero for either sign of $\\delta$. Thus each pair reduces to its reference map at parameter $\\lambda$. For any finite compound $A$ with amounts $M_1,M_2$ of the two types, add and scale these single-state reductions. Writing $q_1(A),q_2(A)$ for the amount-weighted sums of $s(x),t(y)$, respectively, gives $A\\sim_s(M_1-q_1(A))e_{x_0}+q_1(A)e_{x_1}+(M_2-q_2(A))e_{y_0}+q_2(A)e_{y_1}$. Using $(e_{x_1}-e_{x_0})\\sim_s(e_{y_1}-e_{y_0})$, this is equivalent to $M_1e_{x_0}+M_2e_{y_0}+Q(A)(e_{x_1}-e_{x_0})$, where $Q(A)=q_1(A)+q_2(A)$. If the total mass is zero, both compounds are empty and reflexivity compares them. Otherwise, for same-composition $A,B$, their base terms agree. If $Q(A)<Q(B)$, the positive and negative parts of the reference-map difference are $(Q(B)-Q(A))e_{x_1}$ and $(Q(B)-Q(A))e_{x_0}$, so $x_0\\prec x_1$ and positive scaling compares the maps forward. If the Q values agree the maps coincide; if $Q(A)>Q(B)$ the reverse comparison holds. Translation, addition, and ordinary-order compatibility [F5] transfer the result to $A,B$. This proves CH for every fixed finite composition of the two types and their scaled copies. [A1, F2, F5, step 7.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorems 4.5–4.8, pp. 55–59",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-arbitrary-family-calibration",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Calibration of an arbitrary family of simple-system entropies",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 13,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-thermal-contact-hypotheses",
+          "def-axiom-of-choice",
+          "thm-tdmath-conditional-contact-calibrator",
+          "thm-tdmath-additive-entropy-representation",
+          "def-tdmath-forward-signed-comparison",
+          "lem-tdmath-forward-spectator-cancellation"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-thermal-contact-hypotheses": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "thm-tdmath-conditional-contact-calibrator": "mathematical-premise",
+          "thm-tdmath-additive-entropy-representation": "mathematical-premise",
+          "def-tdmath-forward-signed-comparison": "mathematical-premise",
+          "lem-tdmath-forward-spectator-cancellation": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I$ be a nonempty set of primitive simple-system labels containing a distinguished meter label $m$. Assume every finite separated product is explicitly represented by its finitely many tagged elementary factors; positive scaling and finite product are the only identifications. Suppose the join-closed family satisfies the hypotheses of [[thm-tdmath-conditional-contact-calibrator]], and fix a strict meter pair $z_0\\prec\\prec z_1$ in $\\Gamma_m$. Assume the Axiom of Choice. Then one can choose, for every $i\\in I$, an additive constant and positive scale for its same-type entropy so that\n\n$$S\\big((t_1i_1,x_1),\\ldots,(t_ni_n,x_n)\\big)=\\sum_{\\ell=1}^n t_\\ell S_{i_\\ell}(x_\\ell)$$\n\nis additive, extensive, and characterizes every same-composition comparison on every finite separated product. No conclusion is asserted for transitions that change composition.",
+        "proof": "**Given:** [A1], [F1]–[F3].\n\n1.1 Apply [F2] to the meter type and choose its entropy $S_m$ so $S_m(z_0)=0$ and $S_m(z_1)=1$. Set the meter reference to $r_m=z_0$, and use [A1] to choose a reference state $r_i$ and one same-type entropy representative for every $i\\ne m$. For each $i\\ne m$, use [F1] to choose calibrator states $a_i,b_i\\in\\Gamma_i$ and $c_i,d_i\\in\\Gamma_m$ such that $a_i\\prec\\prec b_i$, $c_i\\prec\\prec d_i$, and $(a_i,d_i)\\sim(b_i,c_i)$; also choose $r_i\\in\\Gamma_i$. For the meter label set $a_m=c_m=z_0$ and $b_m=d_m=z_1$; the two pairs $(z_0,z_1)$ and $(z_1,z_0)$ are the same two-copy meter compound up to permutation. Write $S_i^0$ for the selected entropy representative, with $S_m^0=S_m$, and put $\\Delta_i=S_i^0(b_i)-S_i^0(a_i)>0$ and $\\mu_i=S_m(d_i)-S_m(c_i)>0$. Define $S_i(x):=\\frac{\\mu_i}{\\Delta_i}\\bigl(S_i^0(x)-S_i^0(r_i)\\bigr)$. Then $S_i(r_i)=0$ and $S_i(b_i)-S_i(a_i)=\\mu_i$, matching the meter entropy increment across the chosen calibrator endpoints. For $i=m$, $\\Delta_m=\\mu_m=1$, so this agrees with the fixed meter normalization. [A1, F1, F2, choose]\n\n2.1 For a finite separated compound $A$ with factors $(t_\\ell i_\\ell,x_\\ell)$, define $S(A):=\\sum_\\ell t_\\ell S_{i_\\ell}(x_\\ell)$. The sum is finite and invariant under reordering; concatenating compounds adds the sums, and scaling every amount by $t>0$ multiplies it by $t$. The explicit-factor convention in the Statement therefore makes $S$ well-defined, additive, and extensive. [A1, step 1.1, construct]\n\n3.1 Fix a composition with amounts $M_i$ for finitely many labels and let $A,B$ be two states of that same composition. For a state $x$ of type $i$, put\n$s_i(x):=\\frac{S_i(x)-S_i(a_i)}{\\mu_i}.$\nThe same-type entropy representation and the CH for type $i$ show\n$e_x\\sim_s(1-s_i(x))e_{a_i}+s_i(x)e_{b_i}.$\nIndeed, the signed difference has total coefficient zero and $S_i$-value zero, so its positive and negative parts have equal mass and entropy and therefore compare both ways by [F2]. The calibrator relation gives\n$(e_{b_i}-e_{a_i})\\sim_s(e_{d_i}-e_{c_i})$\nby taking the signed difference of $(a_i,d_i)\\sim(b_i,c_i)$ and canceling common terms with [F3]. Add and scale these identities over the finitely many factors of $A$. With\n$q_i(A):=\\sum_{\\ell:\\,i_\\ell=i}t_\\ell s_i(x_\\ell),$\nthe resulting signed map is\n$A\\sim_s \\sum_i M_i e_{a_i}+\\sum_i q_i(A)(e_{d_i}-e_{c_i}),$\nwhere the sums range over the finite support of the composition. The same holds for $B$. Since they have the same composition, the reference base cancels, and $B-A$ is signed-equivalent to the finite meter map\n$D:=\\sum_i\\bigl(q_i(B)-q_i(A)\\bigr)(e_{d_i}-e_{c_i}).$\nExtend the meter entropy linearly to finite signed maps. Then\n$S_m(D)=\\sum_i\\bigl(q_i(B)-q_i(A)\\bigr)\\mu_i=S(B)-S(A).$\nThe positive and negative parts of $D$ have equal mass. If $S(A)\\le S(B)$, the same-type entropy representation [F2] for finite meter products gives $D^-\\prec D^+$, hence $D$ compares in the forward signed direction. Translation, addition, and ordinary-order compatibility [F3] transfer this to $A\\prec B$. Reversing the entropy inequality gives the reverse comparison. Thus $S$ characterizes every same-composition comparison. Each particular comparison uses only finitely many labels; no infinite sum or uncountable product occurs. [A1, F1, F2, F3, step 1.1, step 2.1, algebra]\n\n4.1 The meter normalization fixes the multiplicative unit. Changing the chosen reference state for type $i$ changes only its additive constant; on a finite compound these constants contribute amount-weighted conserved-type offsets. This proves the stated freedom and completes the construction. [A1, step 1.1, step 2.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 2.5 and §IV.B.2, pp. 27–29, 56–59",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-tdmath-decorated-chain-costs",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Decorated finite-chain costs with catalysts",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 14,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "thm-tdmath-arbitrary-family-calibration"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "thm-tdmath-arbitrary-family-calibration": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mathcal G$ be a set of tagged system types closed under finite composition $T\\times T'$ and positive scaling $tT$. Scaling is associative and acts componentwise on products: $s(tT)=(st)T$ and $t(T\\times T')=(tT)\\times(tT')$. Each type $T$ has a nonempty state set $X_T$ of finite tagged compounds, every state in $X_T$ has total coefficient mass $m(T)\\ge0$, and $m(T\\times T')=m(T)+m(T')$, $m(tT)=t\\,m(T)$. The entropy $\\sigma_T:X_T\\to\\mathbb R$ is the finite additive extensive entropy from [[thm-tdmath-arbitrary-family-calibration]]; in particular $\\sigma_{tT}(ta)=t\\sigma_T(a)$.\n\nInclude the formal empty unit type $1$, with $X_1=\\{*\\}$, $m(1)=0$, $\\sigma_1(*)=0$, $T\\times1=T$, and $t1=1$. A transition edge from type $T$ to type $T'$ is a pair $a\\in X_T$, $b\\in X_{T'}$ such that the underlying equal-mass compounds satisfy $a\\prec b$ under [[def-tdmath-forward-sector-hypotheses]]. Thus an edge can exist only when $m(T)=m(T')$. Its cost is the finite real number $\\sigma_{T'}(b)-\\sigma_T(a)$.\n\nA decorated finite chain from $\\Gamma$ to $\\Gamma'$ consists of a catalyst type $C\\in\\mathcal G$, an integer $N\\ge1$, types $T_0=\\Gamma\\times C,T_1,\\ldots,T_N=\\Gamma'\\times C$, and states $a_k\\in X_{T_k}$, $b_{k+1}\\in X_{T_{k+1}}$ with an edge $a_k\\prec b_{k+1}$ for every $0\\le k<N$. Its cost is the finite real sum\n\n$$c=\\sum_{k=0}^{N-1}\\bigl(\\sigma_{T_{k+1}}(b_{k+1})-\\sigma_{T_k}(a_k)\\bigr).$$\n\nDefine $F(\\Gamma,\\Gamma')$ as the infimum of all such witness costs. Set $F=+\\infty$ if there is no witness and $F=-\\infty$ if the witness costs are unbounded below. The infimum is over real witness costs, so no subtraction of extended-real infima is used. Type permutations, reassociation, reversible identifications, and the identity $T\\times1=T$ are part of the declared type structure. The cost identities and inequalities require a separate proof.",
+        "proof": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §VI.B, Eqs. 6.6, 6.9, and 6.10, pp. 74–75",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tdmath-decorated-cost-algebra",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Algebraic properties of decorated-chain costs",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 15,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-decorated-chain-costs",
+          "thm-tdmath-arbitrary-family-calibration"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-decorated-chain-costs": "mathematical-premise",
+          "thm-tdmath-arbitrary-family-calibration": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "For the cost $F$ of [[def-tdmath-decorated-chain-costs]], $F(\\Gamma,\\Gamma)=0$, $F$ is positively homogeneous, invariant under adding the same catalyst to both endpoints, and satisfies the triangle inequality whenever the extended-real sum on its right is defined. It is subadditive under composition whenever $F(\\Gamma_1,\\Gamma'_1)+F(\\Gamma_2,\\Gamma'_2)$ is defined. Every pair of actual forward and reverse decorated-chain witnesses has nonnegative total cost. A finite reverse witness therefore bounds all forward costs below; $F=-\\infty$ can occur only when the reverse direction has no witness.",
+        "proof": "1.1 A reflexive identity edge from any nonempty state of $\\Gamma$ to itself has cost zero, so $F(\\Gamma,\\Gamma)\\le0$. For a decorated closed chain, start with the compound containing every edge input $a_0,\\ldots,a_{N-1}$. Apply the edge $a_0\\prec b_1$ with all other edge inputs as spectators, then apply $a_1\\prec b_2$ with the already produced $b_1$ and all still-unused inputs as spectators, and continue through $a_{N-1}\\prec b_N$. Consistency and transitivity give $\\sum_{k=0}^{N-1}a_k\\prec\\sum_{k=1}^{N}b_k$. Since $T_N=T_0$ and the intermediate types occur once on each side, these two compounds have the same total type up to the declared reassociation and permutation. Their entropy difference is exactly the chain cost. The same-type entropy representation [F2] makes this difference nonnegative. Hence every closed-chain witness costs at least zero and $F(\\Gamma,\\Gamma)=0$. [A1, F1, F2, construct]\n\n1.2 Take finite witnesses for $(\\Gamma_1,\\Gamma'_1)$ and $(\\Gamma_2,\\Gamma'_2)$. Run the first chain with a fixed state of $\\Gamma_2$ and its second catalyst as spectators; then run the second chain with the first chain's output state and first catalyst as spectators. Consistency allows both sequences, and each fixed spectator contributes zero entropy difference. The resulting witness from $\\Gamma_1\\times\\Gamma_2$ to $\\Gamma'_1\\times\\Gamma'_2$ has the sum of the two costs. If both infima are finite real numbers, choose witnesses within $\\epsilon/2$ of each infimum and let $\\epsilon\\downarrow0$. If one infimum is $-\\infty$ and the other is finite, use a fixed finite witness for the latter and arbitrarily negative witnesses for the former; the product costs are unbounded below. If both are $-\\infty$, choose both costs arbitrarily negative, so the product infimum is $-\\infty$. If either is $+\\infty$ and the other is not $-\\infty$, the right side is $+\\infty$ and the inequality is automatic. The mixed extended sum $+\\infty+(-\\infty)$ is undefined and is excluded by the Statement. [A1, F1, F2, construct]\n\n1.3 A witness for $F(\\Gamma\\times C_0,\\Gamma'\\times C_0)$ is a witness for $F(\\Gamma,\\Gamma')$ with enlarged catalyst $C_0\\times C$, so $F(\\Gamma,\\Gamma')\\le F(\\Gamma\\times C_0,\\Gamma'\\times C_0)$. Conversely, add one fixed state of the nonempty catalyst $C_0$ to every edge of an arbitrary witness for $F(\\Gamma,\\Gamma')$. Its cost is unchanged, proving the reverse inequality. Thus $F(\\Gamma\\times C_0,\\Gamma'\\times C_0)=F(\\Gamma,\\Gamma')$. [A1, F1, F2]\n\n2.1 Scaling every state, type, and catalyst in a witness by $t>0$ multiplies its cost by $t$ because $\\sigma_{tT}(ta)=t\\sigma_T(a)$. This gives $F(t\\Gamma,t\\Gamma')\\le tF(\\Gamma,\\Gamma')$; applying the same argument with scale $1/t$ gives equality, including the extended values. [A1, F1, F2, step 1.1]\n\n3.1 Concatenate a witness from $\\Gamma$ to $\\Gamma'$ with one from $\\Gamma'$ to $\\Gamma''$, adding the other chain's fixed catalyst state as spectator to each edge. The result is a witness from $\\Gamma$ to $\\Gamma''$ whose cost is the sum. Taking finite approximations proves the triangle inequality when both costs are finite; an unbounded-below term with a finite witness in the other direction gives the corresponding $-\\infty$ case; if a term is $+\\infty$ and the sum is defined, the inequality is automatic. For an actual forward witness and an actual reverse witness with possibly different catalysts, add the reverse catalyst's fixed state to every forward edge and the forward catalyst's fixed state to every reverse edge. Consistency supplies these padded edges, and additivity makes each edge cost unchanged. The padded chains now have the same catalyst, so concatenate them into a closed chain; step 1.1 gives $c+d\\ge0$. Thus any fixed finite reverse witness of cost $d$ bounds every forward witness below by $-d$. [A1, F1, F2, step 1.1, construct] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §VI.B, Eqs. 6.6–6.16, pp. 74–75",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-unattained-cost-entropy-inference",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Catalyst-chain cost characterizes cross-type transitions",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 16,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "thm-tdmath-arbitrary-family-calibration",
+          "def-tdmath-decorated-chain-costs",
+          "lem-tdmath-decorated-cost-algebra",
+          "lem-tdmath-forward-spectator-cancellation"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "thm-tdmath-arbitrary-family-calibration": "mathematical-premise",
+          "def-tdmath-decorated-chain-costs": "mathematical-premise",
+          "lem-tdmath-decorated-cost-algebra": "mathematical-premise",
+          "lem-tdmath-forward-spectator-cancellation": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the calibrated entropy family of [[thm-tdmath-arbitrary-family-calibration]], the cross-type accessibility axioms A1–A6 of [[def-tdmath-forward-sector-hypotheses]], and the decorated cost $F$ of [[def-tdmath-decorated-chain-costs]]. For every pair of types $\\Gamma,\\Gamma'$ and states $x\\in X_\\Gamma$, $y\\in X_{\\Gamma'}$,\n\n$$x\\prec y\\quad\\Longleftrightarrow\\quad \\sigma_\\Gamma(x)+F(\\Gamma,\\Gamma')\\le \\sigma_{\\Gamma'}(y).$$\n\nThe infimum defining $F$ need not be attained. If $F=+\\infty$, the right side is false; if $F=-\\infty$, the right side is true.",
+        "proof": "1.1 If $x\\prec y$, the one-edge witness with an identity catalyst has cost $\\sigma_{\\Gamma'}(y)-\\sigma_\\Gamma(x)$. Hence $F(\\Gamma,\\Gamma')\\le\\sigma_{\\Gamma'}(y)-\\sigma_\\Gamma(x)$, which is the forward inequality, including the case $F=+\\infty$ where no such transition can exist. [F1, F2]\n\n1.2 Conversely assume the displayed entropy inequality. It is impossible when $F=+\\infty$. For each integer $n\\ge1$, choose a decorated witness of real cost $c_n\\le\\Delta\\sigma+h/n$, where $\\Delta\\sigma=\\sigma_{\\Gamma'}(y)-\\sigma_\\Gamma(x)$ and $h=\\sigma(z_1)-\\sigma(z_0)>0$ is the entropy gap of a fixed strict meter pair from [F1]. Such witnesses exist from the definition of infimum, also if $F=-\\infty$. Write their types as $T_0=\\Gamma\\times C,T_1,\\ldots,T_N=\\Gamma'\\times C$, their edges as $a_k\\prec b_{k+1}$, and their endpoints as $a_0=(\\widetilde x,c_0)$, $b_N=(\\widetilde y,d_0)$. [F1, F2, F3, choose]\n\n2.1 Put $\\delta_n=1/n$. In one finite compound type form\n$L_n=(x,b_N,b_1,\\ldots,b_{N-1},\\delta_n z_0),\\qquad R_n=(a_0,y,a_1,\\ldots,a_{N-1},\\delta_n z_1).$\nThese have the same composition: both contain $\\Gamma$, $\\Gamma'$, the catalyst $C$, every intermediate type $T_1,\\ldots,T_{N-1}$, and one scaled meter state, up to reassociation and permutation. Additivity of $\\sigma$ and the definition of chain cost give\n$\\sigma(R_n)-\\sigma(L_n)=\\Delta\\sigma-c_n+\\delta_n h\\ge0.$\nThus the same-composition entropy representation [F1] gives $L_n\\prec R_n$. [A1, F1, F3, step 1.2, algebra]\n\n3.1 Starting from $R_n$, use consistency on $a_0\\prec b_1$ with $y,\\delta_nz_1,a_1,\\ldots,a_{N-1}$ as spectators. The result contains $b_1$ in place of $a_0$. Next use $a_1\\prec b_2$ with $y,\\delta_nz_1,b_1,a_2,\\ldots,a_{N-1}$ as spectators, and continue in order. At stage $k$, the current compound contains $a_k$, the earlier outputs $b_1,\\ldots,b_k$, all later inputs $a_{k+1},\\ldots,a_{N-1}$, and the unchanged $y,\\delta_nz_1$. After the last edge, transitivity gives $R_n\\prec R'_n$, where $R'_n=(b_1,\\ldots,b_N,y,\\delta_nz_1)$. Compose this with $L_n\\prec R_n$ from step 2.1. The compounds $L_n$ and $R'_n$ share the finite spectator $b_1+\\cdots+b_N$; cancel it by [F4]. The result is $x+\\delta_nz_0\\prec y+\\delta_nz_1$ for every $n$. [A1, F4, step 2.1]\n\n4.1 Since $\\delta_n\\downarrow0$, stability in [A1] with bases $x,y$ and fixed positive spectators $z_0,z_1$ yields $x\\prec y$. This proves the reverse implication without assuming that any infimum is attained. [A1, step 3.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, Theorem 6.1 and proof, pp. 75–76",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-tdmath-cost-offset-difference-space",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Cost-zero type offsets and their difference space",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 16,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-decorated-chain-costs",
+          "lem-tdmath-decorated-cost-algebra"
+        ],
+        "justified_by": [
+          "lem-tdmath-cost-offset-difference-space-well-defined"
+        ],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-decorated-chain-costs": "mathematical-premise",
+          "lem-tdmath-decorated-cost-algebra": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "For the type set $\\mathcal G$ and cost $F$ of [[def-tdmath-decorated-chain-costs]], define the relation $\\Gamma\\approx_0\\Gamma'$ by $F(\\Gamma,\\Gamma')=F(\\Gamma',\\Gamma)=0$. Let $\\mathcal P:=\\mathcal G\\times\\mathcal G$ be the set of raw type pairs. Define a relation on raw pairs by\n\n$$(A,B)\\equiv(A',B')\\quad\\Longleftrightarrow\\quad\\exists C\\text{ such that }A\\times B'\\times C\\approx_0 A'\\times B\\times C.$$\n\nThe separate well-definedness lemma proves that $\\approx_0$ is an equivalence compatible with composition and positive scaling, that $\\equiv$ is an equivalence on $\\mathcal P$, and that the following operations are well-defined on its classes. After that proof, write $V_F:=\\mathcal P/\\equiv$. Define addition by $[(A,B)]+[(D,E)]:=[(A\\times D,B\\times E)]$, negation by $-[(A,B)]:=[(B,A)]$, and positive scaling by $t[(A,B)]:=[(tA,tB)]$. Set zero to $[(1,1)]$, where $1$ is the empty unit type. The same lemma establishes that these operations make $V_F$ a real vector space; no vector-space law is assumed by this Definition.",
+        "proof": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §VI.B, pp. 76–79",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tdmath-cost-offset-difference-space-well-defined",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "The cost-zero offset construction is a real vector space",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 17,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-decorated-chain-costs",
+          "lem-tdmath-decorated-cost-algebra",
+          "def-tdmath-cost-offset-difference-space"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-decorated-chain-costs": "mathematical-premise",
+          "lem-tdmath-decorated-cost-algebra": "mathematical-premise",
+          "def-tdmath-cost-offset-difference-space": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "For the construction in [[def-tdmath-cost-offset-difference-space]], $\\approx_0$ is an equivalence compatible with product and positive scaling; $V_F$ is a real vector space and its displayed operations are representative-independent.",
+        "proof": "1.1 The relation $\\approx_0$ is reflexive because $F(\\Gamma,\\Gamma)=0$, and symmetric by definition. Suppose $\\Gamma\\approx_0\\Gamma'$ and $\\Gamma'\\approx_0\\Gamma''$. The triangle inequality gives both directed costs between $\\Gamma$ and $\\Gamma''$ at most zero. For any $\\epsilon>0$, choose a finite reverse witness of cost $d<\\epsilon$; such witnesses exist because the reverse infimum is zero. Every forward witness of cost $c$ closes with it, so [F2] gives $c+d\\ge0$, hence $c>-\\epsilon$. Letting $\\epsilon\\downarrow0$ shows every forward witness has nonnegative cost and its infimum is at least zero; the same argument reverses the direction. Both infima are therefore zero, proving transitivity. The same argument proves product compatibility: subadditivity makes both product costs at most zero, and any finite reverse witness bounds every forward product witness below by a quantity tending to zero. Positive homogeneity gives scaling compatibility directly. Thus $\\approx_0$ is an equivalence compatible with product and positive scaling, and the quotient is a commutative monoid. [F1, F2, algebra]\n\n1.2 Reversible splitting [A1] gives accessible transitions in both directions between $(s+t)\\Gamma$ and $s\\Gamma\\times t\\Gamma$. Extensivity makes each such edge have zero entropy cost. Any reverse witness bounds all forward costs below by [F2]'s closed-cycle inequality, so both infima are zero. Hence $(s+t)\\Gamma\\approx_0 s\\Gamma\\times t\\Gamma$. The empty type $1$ is an identity under composition; its reassociation and permutation identifications have zero cost by the type conventions. [A1, F1, F2]\n\n2.1 The pair relation $\\equiv$ is reflexive using unit catalyst $1$ and symmetric by swapping the two sides. Suppose $(A,B)\\equiv(A',B')$ via catalyst $C$, and $(A',B')\\equiv(A'',B'')$ via catalyst $D$. Their witnesses are\n$A\\times B'\\times C\\approx_0 A'\\times B\\times C,\\qquad\nA'\\times B''\\times D\\approx_0 A''\\times B'\\times D.$\nMultiply the first equivalence by $B''\\times D$, the second by $B\\times C$, and compose. Reassociating and permuting gives\n$A\\times B''\\times(B'\\times C\\times D)\\approx_0 A''\\times B\\times(B'\\times C\\times D),$\nwhich witnesses $(A,B)\\equiv(A'',B'')$. Hence $\\equiv$ is an equivalence relation. [F1, step 1.1, algebra]\n\n3.1 If $(A,B)\\equiv(A',B')$ via $C$, multiplying its witness by any type $D$ shows $(A\\times D,B\\times D)\\equiv(A'\\times D,B'\\times D)$. Applying this to each summand proves addition is independent of representatives. Compatibility of $\\approx_0$ with positive scaling from step 1.1 similarly proves positive scalar multiplication is independent of representatives. Product commutativity and associativity make addition commutative and associative; swapping $(A,B)$ gives an additive inverse, and $(1,1)$ is an additive identity. [F1, step 1.1, step 2.1]\n\n4.1 For $t>0$, the displayed operation $t(A,B)=(tA,tB)$ satisfies $t(v+w)=tv+tw$ because scaling distributes over type composition, and $t(sv)=(ts)v$ for $s>0$ by associativity of type scaling. Also $1v=v$. The scalar-addition law for positive $s,t$ follows from step 1.2:\n$(s+t)[A,B]=[(s+t)A,(s+t)B]=[sA\\times tA,sB\\times tB]=s[A,B]+t[A,B].$\nThe zero scalar is defined as the additive identity, and $(-t)v$ is defined as $t(-v)$, where $-v$ swaps the pair. [F1, step 1.2, step 3.1]\n\n5.1 The positive scalar laws extend to negative scalars by swapping pairs. For the scalar-addition law with opposite signs, write $s-t$ with $s,t\\ge0$. If $s\\ge t$, positive scalar addition gives $sv=(s-t)v+tv$, so cancellation in the additive group gives $(s-t)v=sv-tv$; if $t>s$, apply the same identity to $t=(t-s)+s$ and negate. Cases with zero are immediate. For scalar composition, write each nonzero scalar as its sign times a positive magnitude; the defined action swaps the pair once for each negative sign and scales by the product of magnitudes, so $(rs)v=r(sv)$, with zero cases immediate. For distributivity over vector addition, positive scalars distribute by step 4.1 and a negative scalar distributes by taking the additive inverse of that identity. Together with the abelian-group laws in step 3.1, these are all real-vector-space axioms. [F1, step 4.1, step 3.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §VI.B, pp. 76–79",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-tdmath-splitting-cost-quotient",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "No-sinks cost offsets give a weak global entropy",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft carrier authored; scoped checks pass; prerequisite readiness is escalated; independent mathematical review pending.",
+        "dependency_level": 18,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-decorated-chain-costs",
+          "lem-tdmath-decorated-cost-algebra",
+          "def-tdmath-cost-offset-difference-space",
+          "lem-tdmath-cost-offset-difference-space-well-defined",
+          "thm-tdmath-unattained-cost-entropy-inference",
+          "thm-tdmath-infinite-no-sinks-sandwich"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-decorated-chain-costs": "mathematical-premise",
+          "lem-tdmath-decorated-cost-algebra": "mathematical-premise",
+          "def-tdmath-cost-offset-difference-space": "mathematical-premise",
+          "lem-tdmath-cost-offset-difference-space-well-defined": "mathematical-premise",
+          "thm-tdmath-unattained-cost-entropy-inference": "mathematical-premise",
+          "thm-tdmath-infinite-no-sinks-sandwich": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice. Let $F$ be the decorated cost of [[def-tdmath-decorated-chain-costs]], and assume the **no-sinks condition**\n\n$$F(\\Gamma,\\Gamma')<+\\infty\\quad\\Longleftrightarrow\\quad F(\\Gamma',\\Gamma)<+\\infty$$\n\nfor every type pair. Let $V_F$ be the real difference space of [[def-tdmath-cost-offset-difference-space]]. Then there is an additive extensive offset $B:\\mathcal G\\to\\mathbb R$ such that\n\n$$-F(\\Gamma',\\Gamma)\\le B(\\Gamma)-B(\\Gamma')\\le F(\\Gamma,\\Gamma').$$\n\nIf every admitted cross-type transition $x\\prec y$ from $\\Gamma$ to $\\Gamma'$ satisfies the calibrated cost inequality of [[thm-tdmath-unattained-cost-entropy-inference]], then $\\sigma_\\Gamma(x)+B(\\Gamma)$ is nondecreasing across every such transition. Only this weak inequality is asserted; no-gap equalities and strict extensions are not concluded.",
+        "proof": "**Given:** [A1], [F1]–[F4], and the no-sinks condition.\n\n1.1 If $F(\\Gamma,\\Gamma')<+\\infty$, no-sinks gives a finite reverse witness of some real cost $c$. Concatenating it with any forward witness makes a closed chain, so [F2] gives forward cost at least $-c$. Thus $F(\\Gamma,\\Gamma')>-\\infty$ whenever it is finite; all cost values are in $\\mathbb R\\cup\\{+\\infty\\}$. [A1, F2, given]\n\n2.1 For a pair class $v=[\\Gamma,\\Gamma']\\in V_F$, define $p(v):=F(\\Gamma,\\Gamma')$. Suppose $(\\Gamma,\\Gamma')\\equiv(\\Lambda,\\Lambda')$ via $C$, so $P=\\Gamma\\times\\Lambda'\\times C\\approx_0 Q=\\Lambda\\times\\Gamma'\\times C$. Put $D=\\Gamma'\\times\\Lambda'\\times C$. Since $P\\approx_0 Q$, the triangle inequality gives $F(P,D)\\le F(Q,D)$ and $F(Q,D)\\le F(P,D)$; the costs have no $-\\infty$ by step 1.1, so these inequalities imply equality. Catalyst invariance from [F2] gives $F(P,D)=F(\\Gamma,\\Gamma')$ and $F(Q,D)=F(\\Lambda,\\Lambda')$. Therefore $p$ is independent of the pair representative. [F1, F2, step 1.1, algebra]\n\n2.2 The identity $F(\\Gamma,\\Gamma)=0$ gives $p(0)=0$. Homogeneity of $F$ gives $p(tv)=tp(v)$ for $t>0$, and its product subadditivity gives $p(v+w)\\le p(v)+p(w)$. The no-sinks condition says $p(v)<+\\infty$ exactly when $p(-v)<+\\infty$. By step 1.1, $p$ has no $-\\infty$ value. [F1, F2, given, step 1.1]\n\n3.1 Apply [F3] to $V_F$ and $p$. It gives a real-linear $L:V_F\\to\\mathbb R$ with $-p(-v)\\le L(v)\\le p(v)$ for all $v$. Put $B(\\Gamma)=L([\\Gamma,1])$, where $1$ is the empty unit type. Since $[\\Gamma\\times\\Gamma',1]=[\\Gamma,1]+[\\Gamma',1]$, $B$ is additive. Since $[t\\Gamma,1]=t[\\Gamma,1]$ (the unit type satisfies $t1=1$), $B(t\\Gamma)=tB(\\Gamma)$ for $t>0$. Also $[\\Gamma,\\Gamma']=[\\Gamma,1]-[\\Gamma',1]$, so applying the sandwich to this pair gives the displayed two-sided cost bound. [A1, F1, F3, step 2.2, algebra]\n\n4.1 For an admitted transition, [F4] gives $\\sigma_{\\Gamma'}(y)-\\sigma_\\Gamma(x)\\ge F(\\Gamma,\\Gamma')$, while step 3.1 gives $B(\\Gamma)-B(\\Gamma')\\le F(\\Gamma,\\Gamma')$. Subtracting the latter from the former yields\n$[\\sigma_{\\Gamma'}(y)+B(\\Gamma')]-[\\sigma_\\Gamma(x)+B(\\Gamma)]\\ge0.$\nThus the offset entropy is nondecreasing across every admitted transition. [F4, step 3.1, algebra] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §VI.B, pp. 76–80",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 292,
+    "id": "td-math-convex-contact-and-mixing-examples",
+    "kind": "B",
+    "category": "thermodynamics-mathematics",
+    "library": "mathematics",
+    "title": "Convex Contact And Mixing — Examples",
+    "companion": "td-math-convex-contact-and-mixing",
+    "requires": [
+      "td-math-convex-contact-and-mixing"
+    ],
+    "items": [
+      {
+        "id": "cex-tdmath-bare-contact-interface-incoherent",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "The bare join coordinates do not determine contact coherence",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft B example/counterexample authored; scoped checks pass; required A-page input remains open.",
+        "dependency_level": 4,
+        "deps": [
+          "def-tdmath-thermal-contact-hypotheses"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-thermal-contact-hypotheses": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "The coordinate set formula for a thermal join, without an accessibility or thermal-equilibrium specification, forces C1 join coherence.",
+        "proof": "1.1 Take one simple coordinate set $\\Gamma=\\mathbb R^2$ and a distinct tagged join set\n$\\Delta=\\{(u,v_1,v_2):\\exists u_1,u_2\\in\\mathbb R,\\ u=u_1+u_2\\}=\\mathbb R^3.$\nFor tagged states $x=(u_1,v_1)$ and $y=(u_2,v_2)$, define $J(x,y)=(u_1+u_2,v_1,v_2)$. This satisfies the stated set-level coordinate formula. [F1, given, construct]\n\n2.1 On the disjoint tagged union $S=\\Gamma\\sqcup\\Delta$, interpret an otherwise unconstrained relation symbol $\\sim_T$ as equality. It is an equivalence relation. For any $x\\in\\Gamma$, $x\\sim_T x$, but $J(x,x)\\in\\Delta$ is a distinct tagged object and hence $J(x,x)\\not\\sim_T x$. Thus C1 fails while the coordinate formula remains satisfied. [F1, step 1.1, algebra]\n\n3.1 On the same tagged sets, interpreting $\\sim_T$ as the universal relation instead makes C1 true, without changing $\\Gamma$, $\\Delta$, or $J$. The bare coordinate data therefore do not determine C1. These interpretations are countermodels only to the stated set-data implication; they are not claimed to satisfy T1–T5. [F1, step 1.1, step 2.1] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §IV.A, pp. 51–54",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-tdmath-logarithmic-coherence-witness",
+        "kind": "example",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "physical_scope": null,
+        "title": "Logarithmic contact model with coherent joins",
+        "reference": "research/plan-thermodynamics-track.md#L443-L477",
+        "design_state": "Draft B example/counterexample authored; scoped checks pass; required A-page input remains open.",
+        "dependency_level": 4,
+        "deps": [
+          "def-tdmath-forward-sector-hypotheses",
+          "def-tdmath-thermal-contact-hypotheses",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "thm-weighted-am-gm-real",
+          "thm-exponential-two-point-convexity"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-tdmath-forward-sector-hypotheses": "mathematical-premise",
+          "def-tdmath-thermal-contact-hypotheses": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "thm-weighted-am-gm-real": "mathematical-premise",
+          "thm-exponential-two-point-convexity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I$ be a finite nonempty set of primitive labels, choose $c_i,r_i,u_i^*,v_i^*>0$ and $b_i\\in\\mathbb R$ for each $i\\in I$, and use the positive state domain $\\Gamma_i=(0,\\infty)^2$ with coordinates $(U,V)$. Close these tags under positive scaling, finite separated products, and finite thermal joins, retaining all constituent tags. The reference scales $u_i^*,v_i^*$ have the same respective units as $U,V$; write $\\ln$ for the natural logarithm $\\log$ of [[def-natural-logarithm]]. Thus every logarithm argument is dimensionless. For a unit amount set $\\sigma_i(U,V)=c_i\\ln(U/u_i^*)+r_i\\ln(V/v_i^*)+b_i$. For any amount $t>0$, define on the scaled type $ti$\n\n$$\\sigma_{ti}(U,V)=tc_i\\ln\\!\\left(\\frac{U}{tu_i^*}\\right)+tr_i\\ln\\!\\left(\\frac{V}{tv_i^*}\\right)+tb_i.$$\n\nFor a separated finite product, add component entropies. For a thermal join of a finite nonempty list of components indexed $j=1,\\ldots,m$, write $\\alpha_j=t_jc_{i_j}$, $\\beta_j=t_jr_{i_j}$, $d_j=t_ju_{i_j}^*$, $e_j=t_jv_{i_j}^*$, and $C=\\sum_j\\alpha_j>0$. Define its entropy at total energy $U>0$ and positive work coordinates $V_j$ by\n\n$$\\sigma_J(U,V_1,\\ldots,V_m)=\\sum_{j=1}^m\\alpha_j\\ln\\!\\left(\\frac{\\alpha_jU}{Cd_j}\\right)+\\sum_{j=1}^m\\beta_j\\ln\\!\\left(\\frac{V_j}{e_j}\\right)+\\sum_{j=1}^mt_jb_{i_j}.$$\n\nOn every finite compound of these closed tagged types, define accessibility by nondecrease of this entropy across states of the same composition, including the separated and joined representations of a contact. This is a mathematical consistency model; it is not an observed gas experiment or a universal thermodynamic assertion.",
+        "proof": "**Given:** The formulas and definitions in the Example, with all $c_i,r_i,u_i^*,v_i^*>0$.\n\n1.1 Fix a finite list of scaled components with amounts $t_j>0$ and labels $i_j\\in I$. Write $\\alpha_j=t_jc_{i_j}$, $\\beta_j=t_jr_{i_j}$, $d_j=t_ju^*_{i_j}$, and $e_j=t_jv^*_{i_j}$, with $C=\\sum_j\\alpha_j>0$. For a split of total energy $U>0$ into positive $U_j$ with $\\sum_jU_j=U$, put $p_j=\\alpha_j/C$ and $r_j=U_j/\\alpha_j$. Then $\\sum_jp_jr_j=U/C$. By [F5] and monotonicity of $\\log$ from [F3],\n$\\sum_j\\alpha_j\\log(U_j/d_j)\n=\\sum_j\\alpha_j\\log(\\alpha_j/d_j)+C\\sum_jp_j\\log r_j\n\\le \\sum_j\\alpha_j\\log(\\alpha_j/d_j)+C\\log(U/C)\n=\\sum_j\\alpha_j\\log(\\alpha_jU/(Cd_j)).$\nEquality in the finite weighted Jensen step occurs only when all $r_j$ are equal: [F6] gives strict concavity for any unequal pair with positive weights, and grouping terms applies this two-point strict inequality inductively. Since the weighted average is $U/C$, equality requires $r_j=U/C$, or $U_j=\\alpha_jU/C$. This allocation is positive and feasible, so the maximum is attained uniquely. The work-coordinate terms do not depend on the energy split, giving exactly the displayed join entropy. Grouping nested joins is the same finite maximization over all $U_j$, so the formula is associative under grouping and permutation. [F2, F3, F5, F6, given, algebra]\n\n1.2 On each fixed composition, define accessibility by nondecrease of the displayed entropy. Reflexivity and transitivity follow from the real order. A common spectator adds the same entropy to both sides; positive scaling multiplies each entropy comparison by a positive factor. For a simple scaled type, replacing $(U,V,t)$ by $(sU,sV,st)$ leaves both log ratios unchanged and multiplies their coefficients and constant term by $s$. In a join, scaling every amount, energy, and work coordinate by $s$ likewise leaves $\\alpha_jU/(Cd_j)$ and $V_j/e_j$ unchanged and scales all coefficients and additive constants by $s$. Extensivity gives $\\sigma_{(s+t)i}((s+t)x)=\\sigma_{si}(sx)+\\sigma_{ti}(tx)$, proving reversible splitting. For the stability condition, if $\\sigma(A)+\\epsilon_n\\sigma(Z_0)\\le\\sigma(B)+\\epsilon_n\\sigma(Z_1)$ for all $n$ and $\\epsilon_n\\downarrow0$, the four entropies are finite, so taking limits gives $\\sigma(A)\\le\\sigma(B)$. This verifies the stated accessibility and stability hypotheses on the declared comparison domains. [F1, F2, given, algebra]\n\n1.3 For $x,y\\in\\Gamma_i$ and $0<t<1$, strict concavity of $\\log$ from [F6] gives concavity of $(U,V)\\mapsto c_i\\log(U/u_i^*)+r_i\\log(V/v_i^*)$. Jensen's inequality in each coordinate yields $t\\sigma_i(x)+(1-t)\\sigma_i(y)\\le\\sigma_i(tx+(1-t)y)$, so the convex-combination access condition in [F1] holds. Strict increase of $\\log U$ at fixed $V$ gives a strict successor, proving S1. [F1, F3, F4, F6, given, algebra]\n\n1.4 For a simple type of amount $t$, put $\\alpha=tc_i$ and $\\beta=tr_i$. Its forward sector is the superlevel set of $\\alpha\\log U+\\beta\\log V$; the boundary through $(U_0,V_0)$ is the smooth graph $U=U_0(V/V_0)^{-\\beta/\\alpha}$ for $V>0$. By [F4], its tangent slope is $dU/dV=-\\beta U/(\\alpha V)$, so the support plane has the required form with $P(U,V)=\\beta U/(\\alpha V)$. The gradient is nonzero. For any boundary tangent vector, a differentiable boundary curve exists with that tangent; applying a supporting linear inequality to both positive and negative curve parameters forces the support normal to annihilate the tangent space. That space has codimension one and its normal is the nonzero gradient, so the supporting hyperplane is unique. The slope $P$ is smooth and locally Lipschitz. The graph domain $(0,\\infty)$ is arcwise connected, proving S2–S3. For a finite join, replace $\\alpha$ by $C$ and use each positive $\\beta_j$; the boundary graph $U=K\\prod_jV_j^{-\\beta_j/C}$ lies over the connected positive orthant and has locally Lipschitz slopes $P_j=\\beta_jU/(CV_j)$. [F1, F3, F4, given, algebra]\n\n1.5 For any state $(U,V)$ of amount $t$ and any allowed work coordinate $W>0$ in a second type of amount $t'$, choose $Y=(t'c_jU/(tc_i),W)$. It lies in the positive state domain and satisfies $\\theta_{ti}(U,V)=\\theta_{t'j}(Y)$, verifying T5. For T4, choose $0<V_0<V<V_1$ at fixed $U$. Strict increase in the volume coordinate gives $(U,V_0)\\prec\\prec(U,V)\\prec\\prec(U,V_1)$, while the endpoints have the same $\\theta=U/(tc_i)$ and hence are thermally equivalent. [F1, F2, F3, given, choose]\n\n2.1 Step 1.1 shows that joined entropy is the maximum of the separated entropy over all admissible energy splits. Thus every split compares upward to the join, and the maximizing split has equal entropy with the join, so it compares back; this verifies T1–T2. For a pair of simple components, the maximizing allocation is characterized by $U_i/\\alpha_i=U_j/\\alpha_j$, exactly equality of $\\theta_{t_i i}(U_i,V_i):=U_i/(t_ic_i)$ and $\\theta_{t_j j}(U_j,V_j)$. The initial split is reversible with the join exactly when its entropy equals the maximum, which is exactly this equality. Therefore $\\sim_T$ is equality of the scalar label, and transitivity follows. [F1, F2, F3, F5, step 1.1, given]\n\n3.1 If two component states are thermally equivalent, their common label is $\\theta$. At their join, the maximizing split has energies $U_i=t_ic_i\\theta$ and $U_j=t_jc_j\\theta$, so the joined label is $(U_i+U_j)/(t_ic_i+t_jc_j)=\\theta$. The same identity holds after any finite grouping by step 1.1. Therefore the joined state is thermally equivalent to each component, verifying C1 under the declared nested-join identifications. Every logarithm argument is a ratio of like positive quantities, hence dimensionless. The parameter $\\theta$ is only a mathematical contact label; this example asserts no empirical temperature law. [F1, F2, step 1.1, step 2.1] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §§III–IV, pp. 37–59",
+              "url": "https://arxiv.org/pdf/cond-mat/9708200v2"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapters 2 and 4, complete 607-page edition",
+              "url": "https://courses.physics.ucsd.edu/2010/Spring/physics210a/LECTURES/STATMECH.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

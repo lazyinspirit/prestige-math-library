@@ -1,0 +1,175 @@
+---
+id: thm-qft-conformal-external-scalar
+kind: theorem
+title: Exact massless scalar on a conformally flat external metric
+status: published
+origin: pipeline
+domain: mathematics
+library: mathematics
+physical_scope: null
+dependency_level: 5
+deps:
+  - def-countable-choice
+  - def-fixed-support-test-function-frechet-space
+  - def-gr-curvature-tensor-and-derived-tensors
+  - def-qft-fock-and-test-spaces
+  - def-qft-scalar-mass-shell
+  - def-schwartz-space-and-its-seminorms
+  - def-test-function-topology
+  - lem-nrqm-composites-bounded-tensor-maps
+  - lem-nrqm-composites-permutation-sector-projections
+  - lem-test-function-lf-topology-universal-property
+  - lem-qft-smeared-free-scalar
+  - lem-qft-scalar-causal-commutator
+  - thm-emg-conformal-einstein-transformation
+  - thm-gr-nondegenerate-levi-civita-and-tensor-derivative
+  - thm-fourier-transform-maps-schwartz-space-continuously-to-itself
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  def-fixed-support-test-function-frechet-space: mathematical-premise
+  def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
+  def-qft-fock-and-test-spaces: mathematical-premise
+  def-qft-scalar-mass-shell: mathematical-premise
+  def-schwartz-space-and-its-seminorms: mathematical-premise
+  def-test-function-topology: mathematical-premise
+  lem-nrqm-composites-bounded-tensor-maps: mathematical-premise
+  lem-nrqm-composites-permutation-sector-projections: mathematical-premise
+  lem-test-function-lf-topology-universal-property: mathematical-premise
+  lem-qft-smeared-free-scalar: mathematical-premise
+  lem-qft-scalar-causal-commutator: mathematical-premise
+  thm-emg-conformal-einstein-transformation: mathematical-premise
+  thm-gr-nondegenerate-levi-civita-and-tensor-derivative: mathematical-premise
+  thm-fourier-transform-maps-schwartz-space-continuously-to-itself: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: Christopher J. Fewster, Lectures on quantum field theory in curved spacetime, Lecture Note 39/2008, §3.1
+      url: https://inspirehep.net/files/a02ec079ff7063d1254ba3df86641d86
+    - title: L. H. Ford, Quantum Field Theory in Curved Spacetime, arXiv:gr-qc/9707062v1, §§1.1–1.2
+      url: https://arxiv.org/html/gr-qc/9707062v1
+pipeline_run: physics-td-qft-rpm-62-2026-10-14
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+---
+
+## Statement
+
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ of [[def-countable-choice]]. On $M=\mathbb R^4$ with global coordinates $x=(x^0,x^1,x^2,x^3)$, set $\eta_{ab}=\operatorname{diag}(-1,1,1,1)$, orient $M$ by $o=dx^0\wedge dx^1\wedge dx^2\wedge dx^3$, and use $\partial_0$ to select the standard future cone. Coordinates have length units, derivatives have inverse-length units, and the Fourier phase and conformal factor are dimensionless, consistent with [[def-qft-scalar-mass-shell]]. Thus $\Box_\eta$, $\Box_g$, $R_g$, and $P_g$ have inverse-length-squared units. Let $\Omega\in C^\infty(\mathbb R^4;(0,\infty))$ be real and dimensionless, and define the prescribed external Lorentzian metric $g_{ab}=\Omega^2\eta_{ab}$. No field equation for $g$ is assumed. Write $d\mathrm{vol}_g=\Omega^4d^4x$ for its positive integration density and $\Box_\eta=\eta^{ab}\partial_a\partial_b$. Let $R_g$ be the scalar curvature with the convention of [[def-gr-curvature-tensor-and-derived-tensors]], which is also used by [[thm-emg-conformal-einstein-transformation]], and define
+$$\Box_g h:=\Omega^{-4}\partial_a\!\left(\Omega^2\eta^{ab}\partial_bh\right),\qquad P_g:=\Box_g-\frac16R_g.$$
+The test space is $\mathcal D=C_c^\infty(\mathbb R^4;\mathbb C)$ with the LF test-function topology of [[def-test-function-topology]]. Let $\Phi_0$ be the massless Minkowski Fock field and let $\varpi_0\in\mathcal D_{\rm fin}$ be its normalized vacuum vector, written $|0\rangle$ in Dirac notation. The common dense invariant domain and field convention are those of [[lem-qft-smeared-free-scalar]] and [[lem-qft-scalar-causal-commutator]]. For $f\in\mathcal D$, define the curved-background smeared field by
+$$\Phi_g(f):=\Phi_0(\Omega^3f).$$
+
+Then, with all equalities understood on $\mathcal D_{\rm fin}$ or as distributional equalities as appropriate:
+
+1. The exact curvature and scalar wave identities are
+$$R_g=-6\Omega^{-3}\Box_\eta\Omega,\qquad P_g(\Omega^{-1}u)=\Omega^{-3}\Box_\eta u\quad(u\in C^\infty(\mathbb R^4;\mathbb C)).$$
+
+2. The map $f\mapsto\Phi_g(f)$ is a weak operator-valued distribution on $\mathcal D_{\rm fin}$, meaning that for every $\chi,\psi\in\mathcal D_{\rm fin}$ the map $f\mapsto\langle\chi,\Phi_g(f)\psi\rangle_2$ is a continuous complex-linear functional on $\mathcal D$ with its test-function topology. It satisfies $\Phi_g(P_gf)=0$ for every $f\in\mathcal D$. The normalized Minkowski vacuum defines a positive state on the finite polynomial $*$-algebra generated by the real-test fields.
+
+3. If $\operatorname{supp}f$ and $\operatorname{supp}h$ are spacelike separated (every pair of points in the two supports has positive $\eta$-squared separation), then $[\Phi_g(f),\Phi_g(h)]=0$ on $\mathcal D_{\rm fin}$.
+
+4. The two-point distribution relative to $d\mathrm{vol}_g(x)d\mathrm{vol}_g(y)$ is
+$$W_g(x,y)=\Omega(x)^{-1}\Omega(y)^{-1}W_0(x,y),$$
+where $W_0$ is the massless Minkowski Fock-vacuum two-point distribution from [[lem-qft-smeared-free-scalar]], relative to $d^4x\,d^4y$ and paired bilinearly as $W_0(f,h)=\langle\varpi_0,\Phi_0(f)\Phi_0(h)\varpi_0\rangle_2$. On compact tests, $P_g$ is formally symmetric for $d\mathrm{vol}_g$.
+
+This is a selected free-field representation obtained from one Minkowski Fock vacuum. It asserts no uniqueness of a curved-spacetime state, generic Hadamard-state existence, thermal-state result, renormalized stress-tensor transformation, massive or minimally coupled result, Einstein equation, or backreaction claim. The metric is prescribed background data, not a dynamical solution.
+
+## Facts & Assumptions
+
+**Given:** The smooth positive conformal factor and geometric data in the Statement, $\mathrm{AC}_\omega$, and the current draft supplier interfaces below. The EMG and QFT-MF02 inputs are current draft carriers. Their exact interfaces are used under their stated hypotheses; current authoring records and file existence do not constitute independent proof acceptance.
+
+[A1] $\Omega$ is smooth, real, and strictly positive on all of $\mathbb R^4$, and $g=\Omega^2\eta$ is prescribed. In particular, multiplication by $\Omega^3$ and $\Omega^{-1}$ is smooth on every compact set.
+
+[A2] Adopt $\mathrm{AC}_\omega$ as defined by [[def-countable-choice]]: every countable family of nonempty sets has a choice function. The QFT Fock suppliers and the EMG geometry supplier carry this assumption in their declared dependency closures; no stronger choice principle is used here.
+
+[F1] [[def-countable-choice]] defines $\mathrm{AC}_\omega$ as choice functions for countable families of nonempty sets.
+
+[F2] [[def-gr-curvature-tensor-and-derived-tensors]] fixes the curvature-operator sign by $R(X,Y)Z=\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z$.
+
+[F3] The current draft [[thm-emg-conformal-einstein-transformation]] states $\widetilde S=\Omega^{-2}(S-6\theta-6s)$, where $u=\Omega^{-1}d\Omega$, $H=\nabla u$, $\theta=\operatorname{tr}_gH$, and $s=|u|_g^2$. Its Step 1 record is ready at the inspected carrier hash; this is Step 1 readiness, not independent proof approval.
+
+[F4] The current draft [[lem-qft-smeared-free-scalar]] defines $\Phi_\mu(f)=a(K_\mu\overline f)+a^\dagger(K_\mu f)$ as a map $\mathcal D_{\rm fin}\to\mathcal D_{\rm fin}$ on the common invariant domain, states complex linearity and real-test symmetry, and gives $\langle\Omega,\Phi_\mu(f)\Phi_\mu(g)\Omega\rangle_2=\langle K_\mu\overline f,K_\mu g\rangle_2$. Its carrier remains draft; its exact interface is the logical input, while current workflow readiness is separately maintained.
+
+[F5] The current draft [[lem-qft-scalar-causal-commutator]] states that real compact tests have commuting fields for spacelike-separated supports, with causal support $\operatorname{supp}\Delta_\mu\subseteq\{(t,\mathbf x):t^2-|\mathbf x|^2\ge0\}$. Its carrier remains draft; its exact interface is the logical input, while current workflow readiness is separately maintained.
+
+[F6] [[def-qft-fock-and-test-spaces]] defines the bosonic sector maps $a_n^\dagger(h)\Psi_n=\sqrt{n+1}P_{s,n+1}(h\otimes\Psi_n)$ and $a_n(h)\Psi_n=\sqrt n(C_h\otimes I^{\otimes(n-1)})\Psi_n$, with $C_h(v)=\langle h,v\rangle_2$.
+
+[F7] [[def-qft-scalar-mass-shell]] defines the shell transform $K_0f(p)=\int f(x)e^{ip\circ x}\,d^4x$.
+
+[F8] [[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]] states that the standard Fourier transform is continuous from $\mathcal S$ to $\mathcal S$.
+
+[F9] [[lem-nrqm-composites-bounded-tensor-maps]] gives $\|S\otimes T\|\le\|S\|\,\|T\|$ for bounded maps on completed Hilbert tensor products.
+
+[F10] [[lem-nrqm-composites-permutation-sector-projections]] states that the averaging operators $P_+$ and $P_-$ are orthogonal projections.
+
+[F11] [[def-schwartz-space-and-its-seminorms]] defines $p_{\alpha\beta}(h)=\sup_x|x^\alpha\partial^\beta h(x)|$ and the Schwartz space by finiteness of these seminorms.
+
+[F12] [[def-fixed-support-test-function-frechet-space]] defines $\mathcal D_K$ and, on it, the derivative seminorms $p_m(f)=\max_{|\alpha|\le m}\sup_{x\in K}|\partial^\alpha f(x)|$.
+
+[F13] [[def-test-function-topology]] defines the LF test-function topology by the seminorms continuous on each fixed-support stage. [[lem-test-function-lf-topology-universal-property]] states that a linear map from $\mathcal D$ to a locally convex space is continuous exactly when all its fixed-support restrictions are continuous.
+
+[F14] [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]] gives the metric-selected connection formula $\Gamma^a{}_{bc}=\tfrac12g^{ad}(\partial_bg_{dc}+\partial_cg_{bd}-\partial_dg_{bc})$.
+
+[F15] [[def-qft-fock-and-test-spaces]] fixes the second-variable-linear tensor pairing as the product of the factor pairings on elementary tensors.
+
+[F16] [[def-qft-scalar-mass-shell]] identifies $\mathcal F_+f(p^0,\mathbf p)=\widehat f(-p^0/(2\pi),\mathbf p/(2\pi))$ for the displayed mass-shell Fourier phase.
+
+[F17] [[def-qft-scalar-mass-shell]] fixes the dispersion $\omega_\mu(\mathbf k)=\sqrt{|\mathbf k|^2+\mu^2}$, so $\omega_0(\mathbf k)=|\mathbf k|$.
+
+[F18] [[def-qft-fock-and-test-spaces]] defines $\mathcal D_{\rm fin}$ as sequences with only finitely many nonzero particle-sector components.
+
+[F19] [[def-qft-fock-and-test-spaces]] defines $P_{s,n}=n!^{-1}\sum_{\pi\in S_n}U_\pi$, the symmetrizing average used in the creation formula.
+
+[F20] [[def-qft-scalar-mass-shell]] defines $d\nu_\mu(p_\mu(\mathbf k))=d^3\mathbf k/((2\pi)^3 2\omega_\mu(\mathbf k))$ on the shell.
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Put $u_a=\Omega^{-1}\partial_a\Omega$. Since $\eta_{ab}$ is constant, [F14] gives $\Gamma^a{}_{bc}(\eta)=0$. Coordinate fields commute, so the curvature definition [F2] gives $R(\partial_c,\partial_d)\partial_b=0$ for all indices; every curvature component and its Ricci and scalar contractions therefore vanish, in particular $S_\eta=0$. Thus for the base metric $\eta$, $\nabla=\partial$, $\theta=\eta^{ab}\partial_a u_b$, and $s=\eta^{ab}u_au_b$ in [F3]. Applying that conformal formula gives $R_g=-6\Omega^{-2}(\eta^{ab}\partial_a u_b+\eta^{ab}u_au_b)$. Since $\partial_a u_b=\Omega^{-1}\partial_a\partial_b\Omega-\Omega^{-2}(\partial_a\Omega)(\partial_b\Omega)$ and $u_au_b=\Omega^{-2}(\partial_a\Omega)(\partial_b\Omega)$, the gradient-square terms cancel, giving $R_g=-6\Omega^{-3}\Box_\eta\Omega$. [given, A1, A2, F1, F2, F3, F14, algebra]
+
+1.2 Fix compact $K$ and let $f\in\mathcal D_K$. The product rule and boundedness on $K$ of each $x^\alpha\partial^\gamma(\Omega^3)$ give, for each $\alpha,\beta$, $p_{\alpha\beta}(\Omega^3f)\le C_{K,\alpha,\beta}p_{|\beta|}(f)$; multiplication preserves support. Thus $f\mapsto\Omega^3f$ is continuous $\mathcal D_K\to\mathcal S$ by [F11,F12]. For arbitrary $\psi\in\mathcal S$, [F7,F16] identify $K_0\psi$ as the restriction of $\mathcal F_+\psi$ to $p=(|\mathbf k|,\mathbf k)$, where $\mathcal F_+$ is the standard continuous Schwartz Fourier transform followed by a fixed invertible linear change of frequency variables. This pullback is continuous on Schwartz seminorms by the chain rule and fixed linear coordinate bounds. The weight $(1+|p|)^2$ is bounded by a finite sum of coordinate monomials of degree at most two, so $q_2(F):=\sup_{p\in\mathbb R^4}(1+|p|)^2|F(p)|$ is controlled by finitely many Schwartz seminorms from [F11]. Continuity of the Fourier map [F8] therefore gives $q_2(\mathcal F_+\psi)\le C\sum_{(\alpha,\beta)\in E}p_{\alpha\beta}(\psi)$ for some finite set $E$ and finite $C$. For $r=|\mathbf k|$, the dispersion in [F17] and mass-shell measure in [F20] yield
+$$\|K_0\psi\|_{H_0}^2\le\frac{q_2(\mathcal F_+\psi)^2}{2(2\pi)^3}\,4\pi\int_0^\infty r(1+\sqrt2r)^{-4}\,dr<\infty;$$
+the radial integrand is $O(r)$ at zero and $O(r^{-3})$ at infinity. This proves continuity $K_0:\mathcal S\to H_0$, so [F13] and the fixed-support multiplier estimates prove continuity $f\mapsto K_0(\Omega^3f)$ from $\mathcal D$ to $H_0$.
+For $h\in H_0$, Cauchy--Schwarz gives $\|C_h\|\le\|h\|$. [F9] bounds its tensor extension by the same norm, and by [F19], $P_{s,n+1}$ is the averaging operator $P_+$ of [F10], so it is orthogonal and has norm at most one. The product tensor pairing in [F15] gives $\|h\otimes\Psi_n\|=\|h\|\|\Psi_n\|$. Its sector formulas [F6] therefore imply $\|a_n(h)\Psi_n\|\le\sqrt n\|h\|\|\Psi_n\|$ and $\|a_n^\dagger(h)\Psi_n\|\le\sqrt{n+1}\|h\|\|\Psi_n\|$. By [F18], each $\Psi\in\mathcal D_{\rm fin}$ has sectors only through some $N$; for either creation or annihilation, different input sectors give orthogonal output sectors. Summing squared sector norms thus bounds each full operator by its largest sector bound, and the triangle inequality between creation and annihilation gives
+$$\|\Phi_0(\Omega^3f)\Psi\|\le\bigl(\sqrt N\,\|K_0(\Omega^3\overline f)\|+\sqrt{N+1}\,\|K_0(\Omega^3f)\|\bigr)\|\Psi\|.$$
+Both shell-vector terms depend continuously on $f$ (complex conjugation preserves the fixed-support seminorms). For each $\chi,\Psi\in\mathcal D_{\rm fin}$, Cauchy--Schwarz now makes $f\mapsto\langle\chi,\Phi_g(f)\Psi\rangle_2$ continuous; it is complex-linear by [F4] and the second-variable-linear pairing. Hence $\Phi_g$ is the stated weak operator-valued distribution. [given, A1, A2, F4, F6, F7, F8, F9, F10, F11, F12, F13, F15, F16, F17, F18, F19, F20, construct, algebra]
+
+1.3 For every real compact test $f$, $\Omega^3f$ is real, so [F4] makes $\Phi_g(f)=\Phi_0(\Omega^3f)$ symmetric on $\mathcal D_{\rm fin}$. Each generator preserves $\mathcal D_{\rm fin}$, so finite products and linear combinations do too; repeated use of symmetry gives $\langle\chi,B\psi\rangle_2=\langle B^*\chi,\psi\rangle_2$ for every polynomial $B$ and $\chi,\psi\in\mathcal D_{\rm fin}$. Define $\omega_g(B):=\langle\varpi_0,B\varpi_0\rangle_2$. Then $\omega_g(B^*B)=\langle B\varpi_0,B\varpi_0\rangle_2=\|B\varpi_0\|^2\ge0$, and $\omega_g(1)=1$. [given, A2, F1, F4, construct]
+
+1.4 At every point $g(v,v)=\Omega^2\eta(v,v)$, so the future causal cones for $g$ and $\eta$ coincide and use the direction selected by $\partial_0$. Define causal reachability by piecewise $C^1$ curves whose tangent is future-causal on each smooth piece, allowing constant curves; such a curve is admissible for $g$ exactly when it is admissible for $\eta$. In $(-+++)$ coordinates a future causal tangent satisfies $\dot x^0\ge|\dot{\mathbf x}|$; integrating along each piece and using the triangle inequality gives $|\Delta\mathbf x|\le\Delta x^0$ for a future causal curve. Conversely, if $\Delta x^0\ge|\Delta\mathbf x|$, the straight segment has future causal tangent (including the constant segment when the endpoints agree). Reversing endpoints handles the past direction. Thus two points are causally related exactly when their coordinate difference has nonpositive $\eta$-squared norm, for both $g$ and $\eta$; positive-$\eta$-squared pairs are spacelike for both. [given, A1, algebra]
+
+2.1 Matrix inversion and $\det(\Omega^2\eta)=-\Omega^8$ give $g^{ab}=\Omega^{-2}\eta^{ab}$ and the density $\Omega^4d^4x$. Thus $\Box_gh=\Omega^{-4}\partial_a(\Omega^2\partial^ah)$, where $\partial^a=\eta^{ab}\partial_b$. For $h=\Omega^{-1}u$, the differentiated numerator is $\partial_a(\Omega\partial^au-u\partial^a\Omega)=\Omega\Box_\eta u-u\Box_\eta\Omega$, because the two cross-gradient terms cancel. Hence $\Box_g(\Omega^{-1}u)=\Omega^{-3}\Box_\eta u-\Omega^{-4}u\Box_\eta\Omega$. By step 1.1, $-R_gh/6=+\Omega^{-4}u\Box_\eta\Omega$, so the curvature term cancels the second term and $P_g(\Omega^{-1}u)=\Omega^{-3}\Box_\eta u$. [given, A1, step 1.1, algebra]
+
+2.2 Write $f=f_R+if_I$ and $h=h_R+ih_I$ with real compact tests. Their supports and the supports of $\Omega^3f_R,\Omega^3f_I,\Omega^3h_R,\Omega^3h_I$ lie in the original spacelike-separated support sets by step 1.2; step 1.4 confirms that these pairs are spacelike for $g$ as well as $\eta$. Bilinearity of the commutator and the real-test locality of [F5] on each of the four pairs therefore give $[\Phi_g(f),\Phi_g(h)]=0$ on $\mathcal D_{\rm fin}$. [given, F5, step 1.2, step 1.4, algebra]
+
+2.3 For $F\in C_c^\infty(\mathbb R^8;\mathbb C)$ define
+$$\mathcal G F(p):=\int_{\mathbb R^4}\!\int_{\mathbb R^4}F(x,y)e^{-ip\circ x}e^{ip\circ y}\,d^4x\,d^4y.$$ 
+This is the standard eight-dimensional Fourier transform of $F$ restricted to the fixed injective linear frequency map $p\mapsto((p^0,-\mathbf p),(-p^0,\mathbf p))/(2\pi)$, determined by the phase $p\circ x$; the chain rule and fixed coordinate bounds make this a continuous map $\mathcal S(\mathbb R^8)\to\mathcal S(\mathbb R^4)$ by [F8]. Let $q_4(G):=\sup_p(1+|p|)^4|G(p)|$. The weight is bounded by finitely many degree-at-most-four coordinate monomials, so [F11] and Fourier continuity give $q_4(\mathcal G F)\le C\sum_{(\alpha,\beta)\in E}p_{\alpha\beta}(F)$ for some finite set $E$ and constant $C$.
+For $p=(|\mathbf k|,\mathbf k)$, $|p|=\sqrt2|\mathbf k|$. Thus [F17,F20] imply
+$$\int_{H_0^+}|\mathcal G F(p)|\,d\nu_0(p)\le\frac{q_4(\mathcal G F)}{2(2\pi)^3}\,4\pi\int_0^\infty r(1+\sqrt2r)^{-4}\,dr<\infty;$$
+the radial integrand is $O(r)$ at zero and $O(r^{-3})$ at infinity. Define $W_0(F):=\int_{H_0^+}\mathcal G F(p)\,d\nu_0(p)$. On each fixed compact support, every Schwartz seminorm of $F$ in the bound is controlled by a fixed-support derivative seminorm from [F12], since each coordinate weight is bounded there. The bound and the fixed-support criterion [F13] therefore make this a continuous distribution on $\mathbb R^8$. For $F(x,y)=f(x)h(y)$, its pairing is
+$$W_0(f,h)=\int_{H_0^+}\overline{K_0\overline f(p)}K_0h(p)\,d\nu_0(p)=\langle K_0\overline f,K_0h\rangle_2,$$
+which is the vacuum covariance in [F4].
+Since $\Omega$ is smooth and positive, define the curved-volume pairing of $W_g$ on $F$ by $W_g(F):=W_0(\Omega^3(x)\Omega^3(y)F(x,y))$. This is a distribution, and relative to $d\mathrm{vol}_g(x)d\mathrm{vol}_g(y)$ its scalar kernel is $\Omega(x)^{-1}\Omega(y)^{-1}W_0(x,y)$ because $d\mathrm{vol}_g=\Omega^4d^4x$. On product tests it equals $W_0(\Omega^3f,\Omega^3h)$, the covariance of $\Phi_g$ by [F4]; step 1.2 confirms the pulled-back field matrix coefficients are continuous on the same test space. [given, A1, F4, F7, F8, F11, F12, F13, F17, F20, step 1.2, construct, algebra]
+
+2.4 For compact $f,h$, integrate inside a finite coordinate box containing both supports. Using $\Box_gh=\Omega^{-4}\partial_a(\Omega^2\partial^ah)$ and vanishing boundary terms gives $\int\overline f\,\Box_gh\,d\mathrm{vol}_g=-\int\Omega^2\eta^{ab}(\partial_a\overline f)(\partial_bh)\,d^4x=\int\overline{\Box_gf}\,h\,d\mathrm{vol}_g$. Since $R_g$ is real by step 1.1, the multiplication term $R_g/6$ is symmetric too, so $P_g$ is formally symmetric. [given, A1, step 1.1, algebra]
+
+3.1 Substituting $u=\Omega f$ in step 2.1 gives $\Omega^3P_gf=\Box_\eta(\Omega f)$, with $\Omega f\in\mathcal D$. For $\psi\in\mathcal D$ and a massless shell point $p=(|\mathbf k|,\mathbf k)$, two integrations by parts in the compact support give
+$$K_0(\Box_\eta\psi)(p)=\int\psi(x)(-\partial_0^2+\Delta)e^{i(|\mathbf k|x^0-\mathbf k\cdot\mathbf x)}\,d^4x=(\omega_0(\mathbf k)^2-|\mathbf k|^2)K_0\psi(p)=0,$$
+and the same holds for $\overline\psi$ because $\Box_\eta$ has real coefficients. The field formula [F4] therefore gives $\Phi_0(\Box_\eta\psi)=a(K_0\Box_\eta\overline\psi)+a^\dagger(K_0\Box_\eta\psi)=0$. Taking $\psi=\Omega f$ proves $\Phi_g(P_gf)=0$. The operator $P_g$ preserves compact smooth tests because its coefficients are smooth. [given, F4, F7, F17, step 2.1, algebra] ∎
+
+## Remarks
+
+- The local multiplier estimates require only smoothness on each compact set. No boundedness or decay condition on $\Omega$ or its derivatives at infinity is assumed.
+- The result concerns the chosen free Fock-field representation and its state. It does not assert that arbitrary quantum observables, especially a renormalized stress tensor, transform without anomaly.

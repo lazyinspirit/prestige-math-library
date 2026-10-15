@@ -36,6 +36,7 @@ import { spawnSync } from 'node:child_process';
 import { closeSync, existsSync, mkdtempSync, openSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { loadStep1Record } from './frontier-snapshot.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (name, fallback = null) => {
@@ -70,6 +71,16 @@ if (!run) {
   process.exit(2);
 }
 
+// Probe the owned run frontier; absent manifests must never select the corpus.
+let frontierFiles = [];
+let frontierError = null;
+try {
+  frontierFiles = [...loadStep1Record(process.cwd(), run).items.keys()]
+    .map(id => join('items', `${id}.md`));
+} catch (cause) {
+  frontierError = cause.message;
+}
+
 /** Each probe names the gate, how to invoke it, and how to read the number of
  *  things it examined out of its own output. The regex is deliberately tied to
  *  the gate's real wording — if a gate changes its summary line, this reports
@@ -100,8 +111,10 @@ const PROBES = [
   },
   {
     name: 'precheck',
-    needs: () => existsSync('tools/physics-support/precheck.mts'),
-    argv: () => ['tools/physics-support/tsx-run.mjs', 'tools/physics-support/precheck.mts'],
+    needs: () => !frontierError && frontierFiles.length > 0
+      && existsSync('tools/physics-support/precheck.mts')
+      && frontierFiles.every(file => existsSync(file)),
+    argv: () => ['tools/physics-support/tsx-run.mjs', 'tools/physics-support/precheck.mts', ...frontierFiles],
     count: (out) => /(\d+)\s+checked/.exec(out)?.[1],
     unit: 'items checked',
   },
@@ -129,7 +142,8 @@ function runProbe(argv) {
 const results = [];
 for (const p of PROBES) {
   if (!p.needs()) {
-    results.push({ gate: p.name, status: 'skipped', why: 'inputs not present' });
+    results.push({ gate: p.name, status: 'skipped', why: p.name === 'precheck' && frontierError
+      ? `run frontier unavailable: ${frontierError}` : 'inputs not present' });
     continue;
   }
   const r = runProbe(p.argv());

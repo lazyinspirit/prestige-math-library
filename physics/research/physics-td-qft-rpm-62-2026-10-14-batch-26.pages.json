@@ -1,0 +1,704 @@
+[
+  {
+    "order": 421,
+    "id": "rpm-symmetries-hamilton-jacobi",
+    "kind": "A",
+    "category": "relativistic-particle-mechanics",
+    "library": "physics",
+    "title": "Poincare semidirect group, dual pairing and moment components",
+    "companion": "rpm-symmetries-hamilton-jacobi-examples",
+    "requires": [
+      "moment-maps-and-symplectic-reduction",
+      "rpm-hamiltonian-constraints"
+    ],
+    "items": [
+      {
+        "id": "def-rpm-h-poincare-charge-space",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Poincare semidirect group, dual pairing and moment components",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the referenced cotangent and symplectic-action conventions. Work on affine Minkowski spacetime with inertial coordinates $x^0=ct,x^1,x^2,x^3$ in metres, metric matrix $\\eta=\\operatorname{diag}(-1,1,1,1)$, and cotangent coordinates $(x^a,p_a)$, where each $p_a$ has SI momentum units. Fix the future cone as the timelike component containing the positive $x^0$ axis, equivalently $v^0>\\lvert\\mathbf v\\rvert$. Let $SO^+(1,3)$ denote the determinant-one, future-cone-preserving Lorentz subgroup. Define the proper orthochronous Poincar\u00e9 group and its multiplication by\n\n$$G=\\mathbb R^4\\rtimes SO^+(1,3),\\qquad (a,\\Lambda)(b,L)=(a+\\Lambda b,\\Lambda L).$$\n\nIts action on spacetime and the cotangent lift are $x'=\\Lambda x+a$ and $p'=\\Lambda^{-T}p$. The Lie algebra consists of pairs $(a,A)$ with $A^T\\eta+\\eta A=0$, bracket\n\n$$[(a,A),(b,B)]=(Ab-Ba,[A,B]).$$\n\nUse the library convention $\\xi_M=\\left.\\frac d{ds}\\right|_0\\exp_G(-s\\xi)\\cdot z$. Thus the positive affine generator on spacetime is $Y_{(a,A)}(x)=a+Ax$, the fundamental field is its negative, and the cotangent-lifted positive field is $(a+Ax,-A^Tp)$. Pair the cotangent point with a Lie-algebra element by\n\n$$\\ell_{(a,A)}(x,p)=p_b(a^b+A^b{}_cx^c).$$\n\nDefine $P^a=\\eta^{ab}p_b$ and $J^{ab}=x^aP^b-x^bP^a$. The equivalent dual pairing is $\\ell_{(a,A)}=p_ba^b-\\tfrac12J_{bc}A^{bc}$, where $A^{bc}=A^b{}_d\\eta^{dc}$ and $J_{bc}=\\eta_{bd}\\eta_{ce}J^{de}$. Here $[P^a]=\\mathrm{kg\\,m/s}$ and $[J^{ab}]=\\mathrm{J\\,s}$. These are charge-space definitions on the full cotangent bundle; shell reduction and the moment-map identities are stated separately. No spin or particle model is included.",
+        "deps": [
+          "thm-sr-proper-orthochronous-lorentz-algebra",
+          "def-rpm-h-cotangent-phase-space",
+          "def-symplectic-and-hamiltonian-lie-group-action",
+          "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "def-countable-choice",
+          "lem-timelike-cone-has-two-convex-components",
+          "lem-lorentz-lie-algebra-structure"
+        ],
+        "dependency_roles": {
+          "thm-sr-proper-orthochronous-lorentz-algebra": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "def-symplectic-and-hamiltonian-lie-group-action": "mathematical-premise",
+          "thm-a-regular-level-set-is-an-embedded-submanifold": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise",
+          "lem-lorentz-lie-algebra-structure": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            },
+            {
+              "title": "Nesta van der Schaaf, Classical and Quantum Particles in Galilean and Poincar\u00e9 Spacetime, complete 2017 monograph PDF; \u00a79.3 PDF pp. 77\u201379; \u00a710.2.2 PDF pp. 81\u201382.",
+              "url": "https://www.math.ru.nl/~landsman/Nesta.pdf",
+              "locator": "Complete 85-page monograph; full relevant sections inspected. Source uses natural units and signature (+---), translated explicitly in local statements."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-rpm-h-first-class-constraint-family",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "First-class closure for a regular constraint family",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ as in [[def-rpm-h-regular-constraint-system]]. Let $(P,\\omega)$ be a smooth symplectic manifold. For every smooth real function $F$ on an open set $U\\subseteq P$, define its Hamiltonian vector field $X_F$ by $\\omega_z(X_F(z),v)=dF_z(v)$ for every $z\\in U$ and $v\\in T_zP$, and define $\\{F,G\\}:=dF(X_G)$. Nondegeneracy of $\\omega$ makes $X_F$ unique; in local coordinates its coefficients are obtained by inverting the smooth nonsingular matrix of $\\omega$, so $X_F$ and the bracket are smooth. Let $\\chi_1,\\ldots,\\chi_r\\in C^\\infty(U,\\mathbb R)$ be a regular constraint family on the common zero surface $N=\\{z\\in U:\\chi_a(z)=0\\text{ for all }a\\}$ as defined by [[def-rpm-h-regular-constraint-system]]: the differentials $d\\chi_a$ are linearly independent at every point of $N$. The family is **first-class on $N$** when\n\n$$\\{\\chi_a,\\chi_b\\}(z)=0\\qquad\\text{for every }z\\in N\\text{ and all }a,b.$$\n\nEquivalently, each pairwise bracket is weakly zero in the notation $F\\approx0$ of [[def-rpm-h-regular-constraint-system]]. On a canonical cotangent phase space this intrinsic convention agrees with [[thm-rpm-h-canonical-poisson-and-flow]]: $\\{F,G\\}=F_{q^i}G_{p_i}-F_{p_i}G_{q^i}$. This definition is a pointwise closure condition on the stated regular surface; it does not assert multiplier-algorithm termination or global quotient regularity.",
+        "deps": [
+          "def-rpm-h-regular-constraint-system",
+          "thm-rpm-h-canonical-poisson-and-flow"
+        ],
+        "dependency_roles": {
+          "def-rpm-h-regular-constraint-system": "mathematical-premise",
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "library": "physics",
+        "physical_scope": null,
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Hanson, Tullio Regge and Claudio Teitelboim, Constrained Hamiltonian Systems, Part 1 (1976)",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "35-page Part 1 PDF inspected; Chapter I, printed pp. 7\u201311, especially the weak-equality and first-class criterion on pp. 9\u201310."
+            },
+            {
+              "title": "Ghanashyam Date, Lectures on Constrained Systems, arXiv:1010.2062 (2010)",
+              "url": "https://arxiv.org/pdf/1010.2062",
+              "locator": "28-page PDF inspected; \u00a73, PDF pp. 13\u201314, Eq. (3.9), and \u00a74, PDF p. 20, Eq. (4.22), for weak equality and first-class bracket closure."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-rpm-h-local-hamilton-jacobi",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Local Hamilton-Jacobi solution by invertible characteristics",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $H\\in C^\\infty(U,\\mathbb R)$ on an open set $U\\subset\\mathbb R\\times T^*\\mathbb R^n$, with coordinates $(t,q,p)$, and let $S_0\\in C^\\infty(Q_0,\\mathbb R)$ on an open $Q_0\\subset\\mathbb R^n$. The Hamilton characteristic ODE is $\\dot q^i=\\partial H/\\partial p_i$ and $\\dot p_i=-\\partial H/\\partial q^i$. For a covector $p$ and vector $v$ in the canonical coordinates, write $p\\cdot v:=\\sum_i p_i v^i$. For each $a_0\\in Q_0$ such that $(0,a_0,dS_0(a_0))\\in U$, there are neighbourhoods of $(0,a_0)$ and a time interval on which this ODE with $q(0,a)=a$, $p(0,a)=dS_0(a)$ has a smooth solution and $(t,a)\\mapsto(t,q(t,a))$ is a diffeomorphism onto its image after restriction. On that image the function\n\n$$S(t,q(t,a))=S_0(a)+\\int_0^t[p(u,a)\\cdot\\dot q(u,a)-H(u,q(u,a),p(u,a))]\\,du$$\n\nis smooth, has initial value $S_0$, and satisfies $S_t+H(t,q,S_q)=0$. The claim is local to the invertible projection domain; it asserts no continuation beyond a point where the characteristic projection loses invertibility. For the SI interpretation, assign $S_0$ action units $\\mathrm{J\\,s}$ as well as assigning $t,q,p,H$ SI time, length, momentum, and energy units. Then both $S_0$ and the integral have action units, so $[S]=\\mathrm{J\\,s}$, $[S_q]=[p]$, and $[S_t]=\\mathrm J$.",
+        "deps": [
+          "thm-rpm-h-canonical-poisson-and-flow",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters": "mathematical-premise",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            },
+            {
+              "title": "MIT OpenCourseWare 8.09 Classical Mechanics III, Fall 2014, complete Chapter 4 lecture notes PDF; \u00a74.4 Hamilton\u2013Jacobi equation and complete integrals, all 33 PDF pages inspected.",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/f00f7f68ac7ba346a0868efb7430582c_MIT8_09F14_Chapter_4.pdf",
+              "locator": "Complete 33-page chapter; full relevant section inspected."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-rpm-h-poincare-moment-map-and-algebra",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Poincare cotangent moment map and full generator algebra",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. For the group and cotangent conventions of [[def-rpm-h-poincare-charge-space]], the map $\\mu:T^*\\mathbb R^4\\to\\mathfrak g^*$ defined by $\\langle\\mu(x,p),(a,A)\\rangle=\\ell_{(a,A)}(x,p)$ is a smooth equivariant moment map and obeys\n\n$$\\{\\ell_\\xi,\\ell_\\eta\\}=\\ell_{[\\xi,\\eta]},\\quad \\{P^a,P^b\\}=0,\\quad \\{J^{ab},P^c\\}=\\eta^{ac}P^b-\\eta^{bc}P^a,$$\n\n$$\\{J^{ab},J^{cd}\\}=\\eta^{ac}J^{bd}-\\eta^{ad}J^{bc}-\\eta^{bc}J^{ad}+\\eta^{bd}J^{ac}.$$\n\nFor shell coordinates write $\\mathbf p=(p_1,p_2,p_3)$ and $|\\mathbf p|^2:=p_1^2+p_2^2+p_3^2$. For each future massive shell with $m>0$ in kg, $c>0$ in m/s, $p_0=-E/c$, and $E=\\sqrt{m^2c^4+c^2|\\mathbf p|^2}$, or nonzero future null shell with $m=0$ and $|\\mathbf p|>0$, its Poincare charges descend to the global ray quotient. For vectors $u,v\\in\\mathbb R^4$, define $(u\\wedge v)^{ab}:=u^av^b-u^bv^a$. The induced dual action is $(P,J)\\mapsto(\\Lambda P,\\Lambda J\\Lambda^T+a\\wedge\\Lambda P)$. On the fixed-time slice $x^0=ct$, with physical position $q^i=x^i$, the boost component $B_i=J^{0i}=ct p_i-q^iE/c$ is explicitly time dependent and satisfies $\\partial_tB_i+\\{B_i,E\\}=0$. These are mathematical identities; conservation is conditional on the stated free-shell evolution.",
+        "deps": [
+          "def-rpm-h-poincare-charge-space",
+          "thm-rpm-h-canonical-poisson-and-flow",
+          "prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map",
+          "thm-rpm-h-flat-shell-global-reduction",
+          "thm-rpm-h-inertial-time-reduced-hamiltonian",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-rpm-h-poincare-charge-space": "mathematical-premise",
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise",
+          "prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map": "mathematical-premise",
+          "thm-rpm-h-flat-shell-global-reduction": "mathematical-premise",
+          "thm-rpm-h-inertial-time-reduced-hamiltonian": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            },
+            {
+              "title": "Nesta van der Schaaf, Classical and Quantum Particles in Galilean and Poincar\u00e9 Spacetime, complete 2017 monograph PDF; \u00a79.3 PDF pp. 77\u201379; \u00a710.2.2 PDF pp. 81\u201382.",
+              "url": "https://www.math.ru.nl/~landsman/Nesta.pdf",
+              "locator": "Complete 85-page monograph; full relevant sections inspected. Source uses natural units and signature (+---), translated explicitly in local statements."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-rpm-h-positive-spin-orbit",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Positive classical spin Poincare orbit and stabilizer jump",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $G=\\mathbb R^4\\rtimes SO^+(1,3)$ act coadjointly on the dual charge space of [[def-rpm-h-poincare-charge-space]]. At a charge point $(P^a,J^{ab})$, define $P_b:=\\eta_{ba}P^a$, $J_{cd}:=\\eta_{ce}\\eta_{df}J^{ef}$, and $P^2:=\\eta_{ab}P^aP^b$. Let $\\varepsilon_{abcd}$ be the totally antisymmetric Minkowski volume tensor with $\\varepsilon_{0123}=+1$; raising all indices with $\\eta=\\operatorname{diag}(-1,1,1,1)$ gives $\\varepsilon^{0123}=-1$. Define the algebraic vector $W^a:=\\tfrac12\\varepsilon^{abcd}P_bJ_{cd}$, and write $W^2:=\\eta_{ab}W^aW^b$ and $W\\cdot P:=\\eta_{ab}W^aP^b$. For fixed mass $m>0$ in kg, angular-momentum parameter $s>0$ in kg m$^2$/s, and $c>0$ in m/s, take the rest charge point with $P^a=(mc,0,0,0)$ and $J^{12}=s$, all other independent components of $J$ being zero. Its coadjoint orbit is an eight-dimensional smooth symplectic manifold with its KKS form. On this orbit, $P^2=-m^2c^2$, $P$ is future, $W\\cdot P=0$, and $W^2=m^2c^2s^2$. The exact joint invariant set with these values is this one orbit. At $s=0$ the rest stabilizer has dimension four and the spinless orbit has dimension six; no smoothness claim is made for a larger union of Casimir level sets.",
+        "deps": [
+          "thm-rpm-h-poincare-moment-map-and-algebra",
+          "thm-coadjoint-orbits-are-symplectic-manifolds",
+          "def-countable-choice",
+          "def-rpm-h-poincare-charge-space"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-poincare-moment-map-and-algebra": "mathematical-premise",
+          "thm-coadjoint-orbits-are-symplectic-manifolds": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-poincare-charge-space": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Nesta van der Schaaf, Classical and Quantum Particles in Galilean and Poincar\u00e9 Spacetime, complete 2017 monograph PDF; \u00a79.3 PDF pp. 77\u201379; \u00a710.2.2 PDF pp. 81\u201382.",
+              "url": "https://www.math.ru.nl/~landsman/Nesta.pdf",
+              "locator": "Complete 85-page monograph; full relevant sections inspected. Source uses natural units and signature (+---), translated explicitly in local statements."
+            },
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "post-rpm-h-classical-spin-orbit-model",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Optional adopted classical spinning-orbit model",
+        "statement": "**Adopted model postulate (optional):** Under $\\mathrm{AC}_\\omega$ for the referenced KKS orbit, and for fixed primitive parameters $m>0$ (kg) and $s>0$ (angular momentum units), use the coadjoint orbit and KKS symplectic form of [[thm-rpm-h-positive-spin-orbit]] as the phase space of a classical spinning particle. In a selected inertial frame choose the Hamiltonian $H=cP^0$ (joules). This premise chooses a mathematical model; it is not inferred from the spinless action, an experiment, or the existence of the orbit alone. It does not assert a quantum spin spectrum, a Wigner unitary representation, a spin supplementary condition, a charged-spin force law, or radiation dynamics.",
+        "deps": [
+          "thm-rpm-h-positive-spin-orbit",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-positive-spin-orbit": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Nesta van der Schaaf, Classical and Quantum Particles in Galilean and Poincar\u00e9 Spacetime, complete 2017 monograph PDF; \u00a79.3 PDF pp. 77\u201379; \u00a710.2.2 PDF pp. 81\u201382.",
+              "url": "https://www.math.ru.nl/~landsman/Nesta.pdf",
+              "locator": "Complete 85-page monograph; full relevant sections inspected. Source uses natural units and signature (+---), translated explicitly in local statements."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Adopt specified KKS phase orbit, primitive m,s, chosen H=cP0; no quantum spectrum/unitary Wigner/spin-supplementary or force law inferred.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-spinless-kks-identification",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Massive spinless shell reduction is a single KKS orbit",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Fix mass $m>0$ in kg and $c>0$ in m/s. For a charge point $(P^a,J^{ab})$, lower indices by $P_b:=\\eta_{ba}P^a$ and $J_{cd}:=\\eta_{ce}\\eta_{df}J^{ef}$, and define $P^2:=\\eta_{ab}P^aP^b$. Let $\\varepsilon_{abcd}$ be the totally antisymmetric Minkowski volume tensor with $\\varepsilon_{0123}=+1$; raising all indices with $\\eta=\\operatorname{diag}(-1,1,1,1)$ gives $\\varepsilon^{0123}=-1$. Let $\\Sigma_m^+$ be the future mass shell in flat Minkowski cotangent space and quotient its complete characteristic lines as in the current draft H8 supplier. The resulting global phase space has coordinates $(a^i,p_i)\\in\\mathbb R^6$ and form $da^i\\wedge dp_i$. Under the charge map of [[thm-rpm-h-poincare-moment-map-and-algebra]], it is globally symplectomorphic to the single coadjoint orbit through $(P=(mc,0),J=0)$. Its image is exactly the future massive charge pairs with $P^2=-m^2c^2$ and $W=0$, where $W^a=\\tfrac12\\varepsilon^{abcd}P_bJ_{cd}$. This statement identifies one smooth orbit; it makes no regularity claim about a union of Casimir level sets.",
+        "deps": [
+          "thm-rpm-h-poincare-moment-map-and-algebra",
+          "thm-rpm-h-flat-shell-global-reduction",
+          "thm-coadjoint-orbits-are-symplectic-manifolds",
+          "def-countable-choice",
+          "def-rpm-h-poincare-charge-space"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-poincare-moment-map-and-algebra": "mathematical-premise",
+          "thm-rpm-h-flat-shell-global-reduction": "mathematical-premise",
+          "thm-coadjoint-orbits-are-symplectic-manifolds": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-poincare-charge-space": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Nesta van der Schaaf, Classical and Quantum Particles in Galilean and Poincar\u00e9 Spacetime, complete 2017 monograph PDF; \u00a79.3 PDF pp. 77\u201379; \u00a710.2.2 PDF pp. 81\u201382.",
+              "url": "https://www.math.ru.nl/~landsman/Nesta.pdf",
+              "locator": "Complete 85-page monograph; full relevant sections inspected. Source uses natural units and signature (+---), translated explicitly in local statements."
+            },
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-rpm-h-classical-orbit-evolution",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Conditional classical orbit evolution and invariant labels",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Adopt the optional classical spinning-orbit model of [[post-rpm-h-classical-spin-orbit-model]] with fixed $m,s>0$ and selected inertial Hamiltonian $H=cP^0$. Conditional on the KKS orbit and canonical Hamiltonian conventions, its Hamiltonian flow is the one-parameter coadjoint action of the corresponding time-translation subgroup (with the sign fixed by the library convention). It exists for all real evolution parameters and preserves $m$ and $s$. This is a deduction inside the adopted classical model, not evidence for that model or a derivation of quantum spin.",
+        "deps": [
+          "post-rpm-h-classical-spin-orbit-model",
+          "thm-rpm-h-positive-spin-orbit",
+          "thm-rpm-h-canonical-poisson-and-flow",
+          "thm-coadjoint-orbits-are-symplectic-manifolds",
+          "def-rpm-h-poincare-charge-space",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-rpm-h-classical-spin-orbit-model": "physical-assumption",
+          "thm-rpm-h-positive-spin-orbit": "mathematical-premise",
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise",
+          "thm-coadjoint-orbits-are-symplectic-manifolds": "mathematical-premise",
+          "def-rpm-h-poincare-charge-space": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Nesta van der Schaaf, Classical and Quantum Particles in Galilean and Poincar\u00e9 Spacetime, complete 2017 monograph PDF; \u00a79.3 PDF pp. 77\u201379; \u00a710.2.2 PDF pp. 81\u201382.",
+              "url": "https://www.math.ru.nl/~landsman/Nesta.pdf",
+              "locator": "Complete 85-page monograph; full relevant sections inspected. Source uses natural units and signature (+---), translated explicitly in local statements."
+            },
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Selected linear H generates complete group translation on the orbit; m,s labels preserved.",
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-rpm-h-killing-shell-first-integral",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Killing scalar conservation in cotangent shell form",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the cotangent supplier. Let $(M,g)$ be a smooth Lorentzian manifold with canonical cotangent coordinates $(x^a,p_a)$ and $C_m(x,p)=\\tfrac12(g^{ab}p_ap_b+m^2c^2)$ for fixed $m\\ge0$. For any smooth vector field $\\xi$, set $F_\\xi=p_a\\xi^a(x)$. With canonical bracket $\\{F,G\\}=F_xG_p-F_pG_x$,\n\n$$\\{F_\\xi,C_m\\}=-\\tfrac12(\\mathcal L_\\xi g^{-1})^{ab}p_ap_b.$$\n\nIf $\\xi$ is Killing, this bracket vanishes for all cotangent covectors, and $F_\\xi$ is constant along every constrained free-shell trajectory generated by $eC_m$ with any smooth multiplier $e$ on its actual interval. No global existence or empirical conservation is asserted.",
+        "deps": [
+          "thm-rpm-h-canonical-poisson-and-flow",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            },
+            {
+              "title": "Nesta van der Schaaf, Classical and Quantum Particles in Galilean and Poincar\u00e9 Spacetime, complete 2017 monograph PDF; \u00a79.3 PDF pp. 77\u201379; \u00a710.2.2 PDF pp. 81\u201382.",
+              "url": "https://www.math.ru.nl/~landsman/Nesta.pdf",
+              "locator": "Complete 85-page monograph; full relevant sections inspected. Source uses natural units and signature (+---), translated explicitly in local statements."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-rpm-h-free-symmetry-conservation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Conditional free Poincare and background Killing charges",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the moment-map supplier. Adopt either the massive free test-particle action or the distinct massless shell action of [[post-rpm-h-free-test-particle-action]] and [[post-rpm-h-massless-shell-action]]. Conditional on those model choices and the corresponding future free-shell equations, the affine Poincar\u00e9 charges are conserved on flat spacetime; in a fixed-time Hamiltonian description the boost charge includes its explicit partial-time derivative. On a prescribed curved background, every mechanical scalar $p_a\\xi^a$ for a Killing field is conserved along the adopted free shell. These are model deductions. They do not establish the empirical adequacy of either action, and they do not extend to arbitrary interacting potentials.",
+        "deps": [
+          "post-rpm-h-free-test-particle-action",
+          "post-rpm-h-massless-shell-action",
+          "thm-rpm-h-poincare-moment-map-and-algebra",
+          "thm-rpm-h-killing-shell-first-integral",
+          "thm-rpm-h-first-order-action-and-geodesics",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-rpm-h-free-test-particle-action": "physical-assumption",
+          "post-rpm-h-massless-shell-action": "physical-assumption",
+          "thm-rpm-h-poincare-moment-map-and-algebra": "mathematical-premise",
+          "thm-rpm-h-killing-shell-first-integral": "mathematical-premise",
+          "thm-rpm-h-first-order-action-and-geodesics": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            },
+            {
+              "title": "Nesta van der Schaaf, Classical and Quantum Particles in Galilean and Poincar\u00e9 Spacetime, complete 2017 monograph PDF; \u00a79.3 PDF pp. 77\u201379; \u00a710.2.2 PDF pp. 81\u201382.",
+              "url": "https://www.math.ru.nl/~landsman/Nesta.pdf",
+              "locator": "Complete 85-page monograph; full relevant sections inspected. Source uses natural units and signature (+---), translated explicitly in local statements."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Under the exact action and background symmetry, adopted mechanical charge observables are conserved; time-dependent boosts include partial-time cancellation.",
+        "library": "physics",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-rpm-h-complete-integral-coordinates",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Complete integrals and covariant versus time Hamilton-Jacobi",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the cotangent/HJ supplier chain and let $n\\ge1$. Let $U_H\\subset\\mathbb R\\times T^*\\mathbb R^n$ be open and $H\\in C^\\infty(U_H,\\mathbb R)$. Let $D_S\\subset\\mathbb R\\times\\mathbb R^n_q\\times\\mathbb R^n_\\alpha$ be open and $S\\in C^3(D_S,\\mathbb R)$, with $S_t+H(t,q,S_q)=0$ wherever $(t,q,\\alpha)\\in D_S$ and $(t,q,S_q(t,q,\\alpha))\\in U_H$. If the mixed matrix $S_{q\\alpha}$ is invertible at $(t,q,\\alpha)$, then after restricting neighborhoods the equations $p_i=S_{q^i}$, $\\beta^i=S_{\\alpha_i}$ define a local $C^2$ diffeomorphism $F_t:(q,p)\\mapsto(\\beta,\\alpha)$ at each fixed $t$. Equip the old chart $(q,p)$ with $\\omega_{\\rm old}=\\sum_i dq^i\\wedge dp_i$ and the target chart, whose position coordinates are $\\beta^i$ and momentum coordinates are $\\alpha_i$, with $\\omega_{\\rm new}=\\sum_i d\\beta^i\\wedge d\\alpha_i$. Then $F_t^*\\omega_{\\rm new}=\\omega_{\\rm old}$, so this is a local canonical transformation in the stated convention, and $\\beta$ is constant along the Hamilton characteristics $\\dot q=H_p$, $\\dot p=-H_q$. Such a family is a complete integral only on that nonsingular local domain. In the physical interpretation, $q^i,\\beta^i$ have units m, $p_i,\\alpha_i$ have units kg m/s, $t$ has units s, and $S$ has units J s. $S$ is assigned action units in this interpretation.\n\nFor the relativistic specialization, take $n=3$, $m\\ge0$ in kilograms and $c>0$ in metres per second, and a temporal product chart $(x^0,q)\\in I_0\\times\\Omega$ with the selected future normal of [[thm-rpm-h-temporal-shell-reduction]]. Write its metric as $g=-N^2(dx^0)^2+h_{ij}(dq^i+b^i dx^0)(dq^j+b^j dx^0)$, where $N>0$, $b^i$ and the positive-definite symmetric matrix $h_{ij}$ are smooth; $h^{ij}$ is the inverse matrix. The notation $b^i$ denotes the shift, distinct from the integration coordinate $\\beta^i$. Set $x^0=ct$ and require the Hamiltonian in this specialization to be exactly\n\n$$H(t,q,p)=c\\left(N(ct,q)\\sqrt{m^2c^2+h^{ij}(ct,q)p_ip_j}-b^i(ct,q)p_i\\right),$$\n\non $U_H=\\{t:ct\\in I_0\\}\\times T^*\\Omega$ for $m>0$, or its open part $p\\ne0$ for $m=0$. For each fixed $\\alpha$, define the spacetime action $\\mathscr S(x^0,q,\\alpha):=S(x^0/c,q,\\alpha)$ on the corresponding chart domain and write $S_a:=\\partial_{x^a}\\mathscr S$. Then the covariant equation $g^{ab}S_aS_b+m^2c^2=0$ with $(d\\mathscr S)^\\sharp$ future, excluding the zero covector when $m=0$, is equivalent to $S_t+H(t,q,S_q)=0$, with $p_0=S_t/c=-H/c$. The canonical-coordinate result above still applies to arbitrary $H$; the covariant-shell equivalence uses this specified reduced Hamiltonian.",
+        "deps": [
+          "thm-rpm-h-local-hamilton-jacobi",
+          "thm-rpm-h-temporal-shell-reduction",
+          "thm-euclidean-inverse-function-theorem",
+          "def-countable-choice",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-local-hamilton-jacobi": "mathematical-premise",
+          "thm-rpm-h-temporal-shell-reduction": "mathematical-premise",
+          "thm-euclidean-inverse-function-theorem": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            },
+            {
+              "title": "MIT OpenCourseWare 8.09 Classical Mechanics III, Fall 2014, complete Chapter 4 lecture notes PDF; \u00a74.4 Hamilton\u2013Jacobi equation and complete integrals, all 33 PDF pages inspected.",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/f00f7f68ac7ba346a0868efb7430582c_MIT8_09F14_Chapter_4.pdf",
+              "locator": "Complete 33-page chapter; full relevant section inspected."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-rpm-h-hj-trajectories",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Conditional particle trajectories from Hamilton-Jacobi characteristics",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the cotangent/H7/H9 supplier chain. Adopt the massive free action or separate massless shell action in [[post-rpm-h-free-test-particle-action]] and [[post-rpm-h-massless-shell-action]]. Let $I\\subseteq\\mathbb R$ be an open time interval, $\\Omega\\subseteq\\mathbb R^3$ an open spatial chart domain, and $(N,\\beta,h)$ smooth temporal-chart data with $N>0$ and $h_{ij}$ positive definite as in [[def-rpm-h-temporal-chart-data]]. Take $m\\ge0$ in kg and $c>0$ in m/s. On the future shell define $\\kappa(t,q,p)=\\sqrt{m^2c^2+h^{ij}(t,q)p_ip_j}$ and the positive-root reduced Hamiltonian $H(t,q,p)=c\\bigl(N\\kappa-\\beta^ip_i\\bigr)$ from [[thm-rpm-h-temporal-shell-reduction]]; its domain is $U=I\\times T^*\\Omega$ for $m>0$, and the open subset with $p\\ne0$ for $m=0$. Here $t$ is measured in seconds, $q$ in metres, $p$ in kg m/s, $H$ in joules, and $S$ in joule-seconds. Let $D\\subseteq I\\times\\Omega$ be open and let $S\\in C^2(D,\\mathbb R)$ (all partial derivatives through order two are continuous) satisfy $S_t+H(t,q,S_q)=0$ wherever $(t,q,S_q)\\in U$. If $S$ is the smooth local solution supplied by [[thm-rpm-h-local-hamilton-jacobi]] from an initial exact-graph point in $U$, and $J=[t_1,t_2]\\subset I$ with $t_1<t_2$ is an interval on which its characteristic projection remains invertible, let $q:J\\to\\Omega$ be a $C^1$ characteristic with $\\dot q=H_p(t,q,S_q)$. Then $p(t):=S_q(t,q(t))$ satisfies $\\dot p=-H_q$, so $(q,p)$ obey Hamilton's equations. The smooth ODE makes this characteristic smooth; by [[thm-rpm-h-temporal-shell-reduction]] these reduced equations are exactly the equations of the future-shell first-order system of [[thm-rpm-h-first-order-action-and-geodesics]]. Under the matching adopted model postulate, this curve is a trajectory of the massive or separate massless model. The conclusion holds only on the chart and local solution interval; it does not continue through a caustic or assert a global HJ solution. It is a conditional mathematical prediction, not a reported observation.\n\nThe characteristic graph is restricted to points with $(t,q,S_q(t,q))\\in U$. The action $S$ is measured in joule-seconds.",
+        "deps": [
+          "post-rpm-h-free-test-particle-action",
+          "post-rpm-h-massless-shell-action",
+          "thm-rpm-h-first-order-action-and-geodesics",
+          "thm-rpm-h-temporal-shell-reduction",
+          "thm-rpm-h-local-hamilton-jacobi",
+          "thm-rpm-h-complete-integral-coordinates",
+          "def-countable-choice",
+          "def-rpm-h-temporal-chart-data"
+        ],
+        "dependency_roles": {
+          "post-rpm-h-free-test-particle-action": "physical-assumption",
+          "post-rpm-h-massless-shell-action": "physical-assumption",
+          "thm-rpm-h-first-order-action-and-geodesics": "mathematical-premise",
+          "thm-rpm-h-temporal-shell-reduction": "mathematical-premise",
+          "thm-rpm-h-local-hamilton-jacobi": "mathematical-premise",
+          "thm-rpm-h-complete-integral-coordinates": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-temporal-chart-data": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            },
+            {
+              "title": "MIT OpenCourseWare 8.09 Classical Mechanics III, Fall 2014, complete Chapter 4 lecture notes PDF; \u00a74.4 Hamilton\u2013Jacobi equation and complete integrals, all 33 PDF pages inspected.",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/f00f7f68ac7ba346a0868efb7430582c_MIT8_09F14_Chapter_4.pdf",
+              "locator": "Complete 33-page chapter; full relevant section inspected."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "physical_scope": "Adopted free test-particle/massless model, future momentum graph, actual invertible chart domain; no global solution through caustics.",
+        "library": "physics",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 422,
+    "id": "rpm-symmetries-hamilton-jacobi-examples",
+    "kind": "B",
+    "category": "relativistic-particle-mechanics",
+    "library": "physics",
+    "title": "Poincare semidirect group, dual pairing and moment components \u2014 Examples",
+    "companion": "rpm-symmetries-hamilton-jacobi",
+    "requires": [
+      "rpm-symmetries-hamilton-jacobi"
+    ],
+    "items": [
+      {
+        "id": "cex-rpm-h-instantaneous-potential-free-boost",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Free boost plus instantaneous relativistic pair potential violates the charge algebra",
+        "statement": "Let $\\mathcal P=(T^*\\mathbb R)^2\\cong\\mathbb R^4$ have coordinates $(q_1,p_1,q_2,p_2)$, symplectic form $\\omega=\\sum_{a=1}^2dq_a\\wedge dp_a$, and canonical bracket $\\{F,G\\}=\\sum_{a=1}^2(F_{q_a}G_{p_a}-F_{p_a}G_{q_a})$. Let $q_a$ be one-dimensional positions in metres, $p_a$ momenta in kg m/s, $t$ an external equal-time parameter in seconds, $m_a>0$ in kg, and $c>0$ in m/s. For $k>0$ in kg/s$^2$ define $E_a(p_a)=\\sqrt{m_a^2c^4+c^2p_a^2}$, $V(r)=kr^2/2$ with $r=q_1-q_2$, $H=E_1+E_2+V(r)$, $P=p_1+p_2$, and $K=(q_1E_1+q_2E_2)/c^2-tP$. The proposed assertion that this Hamiltonian and unchanged free boost satisfy $\\{K,P\\}=H/c^2$ at every configuration is false.",
+        "deps": [
+          "thm-rpm-h-poincare-moment-map-and-algebra",
+          "def-rpm-h-poincare-charge-space",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-poincare-moment-map-and-algebra": "mathematical-premise",
+          "def-rpm-h-poincare-charge-space": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            },
+            {
+              "title": "Nesta van der Schaaf, Classical and Quantum Particles in Galilean and Poincar\u00e9 Spacetime, complete 2017 monograph PDF; \u00a79.3 PDF pp. 77\u201379; \u00a710.2.2 PDF pp. 81\u201382.",
+              "url": "https://www.math.ru.nl/~landsman/Nesta.pdf",
+              "locator": "Complete 85-page monograph; full relevant sections inspected. Source uses natural units and signature (+---), translated explicitly in local statements."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-rpm-h-two-shell-consistency-obstruction",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "A linear two-shell potential fails first-class closure",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the cotangent/constraint supplier. Use the product cotangent domain $\\mathcal P=T^*(\\mathbb R^4\\times\\mathbb R^4)$ with coordinates $(x_i^a,p_{ia})$ for $i=1,2$, Minkowski metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, canonical form $\\omega=\\sum_{i=1}^2\\sum_{a=0}^3dx_i^a\\wedge dp_{ia}$, and induced bracket $\\{F,G\\}=\\sum_{i=1}^2\\sum_{a=0}^3(F_{x_i^a}G_{p_{ia}}-F_{p_{ia}}G_{x_i^a})$. Take $x_i^a$ in metres, $p_{ia}$ in kg m/s, $P_i^a:=\\eta^{ab}p_{ib}$, $p_i^2:=\\eta^{ab}p_{ia}p_{ib}$, $r^a:=x_1^a-x_2^a$, and $r^2:=\\eta_{ab}r^ar^b$. Use constraints\n\n$$C_1=\\tfrac12(p_1^2+m_1^2c^2)+V(r^2),\\qquad C_2=\\tfrac12(p_2^2+m_2^2c^2)+V(r^2).$$\n\nHere $m_i>0$ in kg, $c>0$ in m/s, and $V:\\mathbb R\\to\\mathbb R$ is smooth with units of momentum squared. Their canonical bracket is\n\n$$\\{C_1,C_2\\}=-2V'(r^2)\\,r\\cdot(P_1+P_2).$$\n\nFor $V(z)=\\lambda z$, with $\\lambda>0$ in momentum squared per square metre, this bracket is nonzero at explicit points on the joint surface $C_1=C_2=0$ where $dC_1,dC_2$ are independent. Thus, by [[def-rpm-h-first-class-constraint-family]], the pair fails first-class closure on the local regular surface around each such point, and arbitrary independent multipliers need not preserve both constraints there. Additional consistency conditions are required; no universal obstruction for all interacting relativistic models is claimed.",
+        "deps": [
+          "thm-rpm-h-constraint-consistency",
+          "def-countable-choice",
+          "def-rpm-h-first-class-constraint-family",
+          "thm-rpm-h-canonical-poisson-and-flow"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-constraint-consistency": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-first-class-constraint-family": "mathematical-premise",
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-rpm-h-relativistic-hj-caustic",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Smooth free relativistic Hamilton-Jacobi data form a caustic",
+        "statement": "Let $\\mathcal P=T^*\\mathbb R$ have position coordinate $q\\in\\mathbb R$ in metres, momentum coordinate $p\\in\\mathbb R$ in kg m/s, and symplectic form $\\omega=dq\\wedge dp$. For fixed mass $m>0$ in kg and speed $c>0$ in m/s, take the free Hamiltonian $H(p)=E(p)=\\sqrt{m^2c^4+c^2p^2}$, in joules, on $\\mathcal P$; time $t$ is measured in seconds. The proposed assertion that every smooth initial action $S_0:\\mathbb R\\to\\mathbb R$ produces a characteristic family extending as a smooth single-valued graph $p=S_q(t,q)$ with finite $S_{qq}$ through every finite future time $t\\ge0$ is false.",
+        "deps": [
+          "thm-rpm-h-local-hamilton-jacobi",
+          "thm-rpm-h-inertial-time-reduced-hamiltonian",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-local-hamilton-jacobi": "mathematical-premise",
+          "thm-rpm-h-inertial-time-reduced-hamiltonian": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            },
+            {
+              "title": "MIT OpenCourseWare 8.09 Classical Mechanics III, Fall 2014, complete Chapter 4 lecture notes PDF; \u00a74.4 Hamilton\u2013Jacobi equation and complete integrals, all 33 PDF pages inspected.",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/f00f7f68ac7ba346a0868efb7430582c_MIT8_09F14_Chapter_4.pdf",
+              "locator": "Complete 33-page chapter; full relevant section inspected."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-rpm-h-free-relativistic-complete-integral",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Explicit massive and nonzero-null free complete integral",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ for the cotangent-shell supplier. Work with spatial position $q\\in\\mathbb R^3$ in metres and momentum parameter $\\alpha\\in\\mathbb R^3$ in kg m/s, with the Euclidean dot product and norm $|\\alpha|=\\sqrt{\\alpha\\cdot\\alpha}$; at fixed time the spatial phase space has canonical form $\\omega=\\sum_{i=1}^3dq^i\\wedge dp_i$. Here $t\\in\\mathbb R$ is measured in seconds, $m\\ge0$ is in kg, and $c>0$ is in m/s. The parameter domain is all $\\mathbb R^3_\\alpha$ when $m>0$, and $\\mathbb R^3_\\alpha\\setminus\\{0\\}$ when $m=0$. For a free massive particle with $m>0$, or a nonzero massless particle with $m=0$ and $\\alpha\\ne0$, define\n\n$$S(t,q,\\alpha)=q\\cdot\\alpha-tE(\\alpha),\\qquad E(\\alpha)=\\sqrt{m^2c^4+c^2|\\alpha|^2}.$$\n\nThen $S_t+E(S_q)=0$, $S_{q\\alpha}=I$, and its integration coordinates satisfy $\\beta=S_\\alpha=q-tc^2\\alpha/E$, equivalently $q=\\beta+t c^2\\alpha/E$. The mixed Hessian is everywhere nonsingular on the stated domain, so this is a complete integral there. $[S]=\\mathrm{J\\,s}$, $[\\alpha]=\\mathrm{kg\\,m/s}$, and $[\\beta]=\\mathrm m$.",
+        "deps": [
+          "thm-rpm-h-complete-integral-coordinates",
+          "thm-rpm-h-inertial-time-reduced-hamiltonian",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-complete-integral-coordinates": "mathematical-premise",
+          "thm-rpm-h-inertial-time-reduced-hamiltonian": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; \u00a712.1 Theorem 12.1.4 pp. 393\u2013395; \u00a712.4 Theorem 12.4.1 pp. 412\u2013413; \u00a7\u00a714.2\u201314.3 pp. 466\u2013473; \u00a77.9 pp. 208\u2013211.",
+              "url": "https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf",
+              "locator": "Complete 549-page book; full relevant sections inspected."
+            },
+            {
+              "title": "MIT OpenCourseWare 8.09 Classical Mechanics III, Fall 2014, complete Chapter 4 lecture notes PDF; \u00a74.4 Hamilton\u2013Jacobi equation and complete integrals, all 33 PDF pages inspected.",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/f00f7f68ac7ba346a0868efb7430582c_MIT8_09F14_Chapter_4.pdf",
+              "locator": "Complete 33-page chapter; full relevant section inspected."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "library": "physics",
+        "physical_scope": null,
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

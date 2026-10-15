@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { frontierGateScope } from './frontier-gate-scope.mjs';
 import { MODELS } from './models.mjs';
 const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
+const fileHash = path => createHash('sha256').update(readFileSync(path)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
 const check = (ok, message) => { if (!ok) throw Error(`Step 5 certification transition: ${message}`); };
 const checkPassed = row => row?.verdict === 'pass' && typeof row.evidence === 'string' && row.evidence.trim();
@@ -38,7 +39,7 @@ export function certificationEvidenceTransition(root, run, phase, round, prior, 
   const evidence = {}, transitions = [];
   if (!prior) return { evidence, transitions };
   root = resolve(root);
-  const stale = Object.entries(prior.evidence).filter(([path, sha]) => !existsSync(resolve(root, path)) || hash(readFileSync(resolve(root, path), 'utf8')) !== sha);
+  const stale = Object.entries(prior.evidence).filter(([path, sha]) => !existsSync(resolve(root, path)) || fileHash(resolve(root, path)) !== sha);
   if (!stale.length) return { evidence, transitions };
   check(['impact-repeat', 'gate'].includes(phase), 'only a subsequent native wave may evolve evidence');
   const dir = join(root, 'research', `${run}-step5-v2`), frontier = read(join(dir, 'frontier.json'));

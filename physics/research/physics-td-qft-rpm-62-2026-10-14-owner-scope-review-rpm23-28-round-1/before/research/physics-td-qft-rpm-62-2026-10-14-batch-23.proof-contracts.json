@@ -1,0 +1,1295 @@
+{
+  "version": 1,
+  "level": "physics-td-qft-rpm-62-2026-10-14-batch-23",
+  "scope": [
+    "post-rpm-isolated-collision-balance",
+    "pthm-rpm-inverse-momentum-and-work",
+    "thm-rpm-finite-future-momentum-sum",
+    "pthm-rpm-system-mass-threshold",
+    "pthm-rpm-fixed-target-threshold",
+    "pthm-rpm-two-body-com-kinematics",
+    "pthm-rpm-two-null-invariant-energy",
+    "pthm-rpm-kinematic-elastic-channel",
+    "texp-rpm-ideal-fusion-mass",
+    "texp-rpm-one-null-decay-recoil"
+  ],
+  "contracts": {
+    "post-rpm-isolated-collision-balance": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate adopts Q_in=Q_out only for a finite event configuration declared isolated and complete, reusing clause (iii) of post-sr-massive-particle-dynamics."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope confines the rule to flat relativistic-particle mechanics and excludes external transfer, omitted legs, interaction mechanisms, rates and channel occurrence."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong §7.5.2 and Taylor–Wheeler §7.6 were read at the cited full-text locations; coverage records them as context, while balance remains an adopted premise."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The item is explicitly a postulate with proof provenance not-applicable; its text says balance is adopted, not deduced or experimentally proved."
+        }
+      }
+    },
+    "pthm-rpm-inverse-momentum-and-work": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-sr-massive-particle-dynamics",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the relativistic particle model, on top of the\nflat spacetime model of [[def-sr-affine-minkowski-model]] and the SI unit\nconventions of [[def-sr-si-units-and-coordinate-conventions]], together with\nthe framework's idealisations of point particles, ideal clocks and ideal light\nsignals:\n\n**(i) Mass and momentum.** Every massive classical particle of the model\ncarries a positive constant invariant mass parameter $m>0$ and has\nfour-momentum $P=mU$, where $U$ is the four-velocity of its future timelike\nworldline ([[def-sr-regular-causal-curve-and-worldline]],\n[[def-sr-four-velocity-and-four-acceleration]],\n[[thm-sr-proper-time-and-observer-decomposition]]); $P$ is a vector of $V$\nwhose SI unit is kilogram metre per second. The formula is adopted only for\n$m>0$; the case $m=0$ is not defined by it and is the separate premise\n[[post-sr-ideal-massless-particle-momentum]]. In particular $\\eta(P,P)=-m^2c^2$\nis a consequence of the four-velocity normalisation, not a separate\nassumption.\n\n**(ii) Observer measurement identification.** Relative to a future unit\nobserver $n$, the model identifies the measured energy of the particle with\n$E_n(P)$, its measured spatial momentum with $q_n(P)$, its kinetic energy with\n$T_n(P)=E_n(P)-mc^2$ and its rest energy with $mc^2$, where $E_n,q_n,T_n$ are\nthe quantities of [[def-sr-observed-energy-momentum-and-kinetic-energy]]; the\nunits are the joule, kilogram metre per second and kilogram of\n[[def-sr-si-units-and-coordinate-conventions]]. This clause is a formulation\nconvention identifying mathematical quantities with the quantities the model\ncalls measured; it is not a measurement report and no experiment is claimed.\n\n**(iii) Isolated collision balance.** An isolated collision is represented by\na mass-specified on-shell collision datum at an event, with finite nonempty\nincoming and outgoing lists of the massive particles of (i) and/or the ideal\nmassless particles of [[post-sr-ideal-massless-particle-momentum]], and with\nno external four-momentum transfer or omitted leg. The interaction is\nidealized as confined to that event. The sum of the incoming four-momenta equals the sum of the\noutgoing four-momenta, in the sense of the collision data of\n[[def-sr-collision-datum-and-conservation]]: the model adopts\n$Q_{\\mathrm{in}}=Q_{\\mathrm{out}}$ for such an isolated datum. No particular\ncollision is asserted to occur, and no mechanism, probability, cross section\nor amplitude is supplied by this clause.\n\n**(iv) Equation of motion for a stipulated force.** Put\n$H_c^+:=\\{U\\in C^+:\\eta(U,U)=-c^2\\}$. A stipulated force law is a given\nmap $F:D\\to V$ on a given subset $D\\subseteq A\\times H_c^+$,\nwith force components in $\\mathrm{kg}\\,\\mathrm m/\\mathrm s^2$. No regularity\naway from the specified worldline is assumed. Along a given $C^2$ massive worldline\n$x:I\\to A$ with $(x(s),U(s))\\in D$ for all $s\\in I$, the model's particle\nequation is $m\\,dU/d\\tau=F(x,U)$, with\n$dU/d\\tau$ the proper-time derivative of\n[[def-sr-proper-time-derivative-and-four-force]], so that the stipulated $F$\nis the four-force of the motion. A particular force law, and the existence,\nuniqueness and domain of solutions of the resulting equation, are not adopted\nhere and belong to a separate model.\n\nEmpirical support for these assumptions is a nonlogical relation of the\nframework, not a proof; the idealisations of point particles, ideal clocks,\nideal light signals and flat spacetime are inherited and travel to every\nconsumer of this premise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-rpm-mechanical-momentum-and-observer-energy",
+          "source_section": "Definition",
+          "quote": "Use the massive and null sectors as separately adopted in [[post-rpm-massive-test-particle-action]] and [[post-rpm-null-test-particle-action]]. For a massive body of constant mass $m>0$, its **mechanical four-momentum** is $P=mU$, where $U$ is its future unit tangent with $g(U,U)=-c^2$. In the null sector, the mechanical four-momentum is the separately specified nonzero future-null vector $P$ from the einbein formulation; no null proper time or $P=mU$ is defined.\n\nAt an event, for any observer $n$ of [[def-gr-observer-and-rest-space]], define the spatial momentum and observer energy by\n\n$$q_n(P):=P+g(P,n)n\\in n^\\perp,\\qquad E_n(P):=-c\\,g(P,n).$$\n\nThe projection identity and positive-definiteness of $n^\\perp$ are supplied by [[lem-gr-observer-projection-decomposition]]. With SI units, $P$ has units kg m s$^{-1}$, $q_n$ has the same units, and $E_n$ has units joules. This definition is pointwise and does not assert conservation, positivity, or an energy interpretation for an arbitrary vector field that is not an observer.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sr-proper-time-and-observer-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $c > 0$ and let $(A,V,\\eta,C^{+})$ be an oriented time-oriented affine\nMinkowski space ([[def-sr-affine-minkowski-model]]).\n\n**(a) Norm of the four-velocity.** Let $x : I \\to A$ be a $C^{1}$ future\ntimelike worldline with four-velocity $U$\n([[def-sr-four-velocity-and-four-acceleration]]). Then\n$\\eta(U(s),U(s)) = -c^{2}$ for every $s \\in I$; equivalently the dimensionless\nfour-velocity $u = U/c$ satisfies $\\eta(u,u) = -1$, and $U(s)$ is future\ntimelike. Thus the dimensionless four-velocity lies on the future unit\nhyperboloid $\\{v \\in C^{+}:\\eta(v,v)=-1\\}$.\n\n**(b) Orthogonality of the four-acceleration.** If $x$ is $C^{2}$ at $s$, then\n$\\eta(U(s),A(s)) = 0$: the four-acceleration has no component along the\nfour-velocity; if in addition $A(s) \\ne 0$, then $A(s)$ is spacelike.\n\n**(c) Rest space and projection.** Let $n \\in V$ be future unit timelike,\n$\\eta(n,n) = -1$, and put $n^{\\perp} := \\{\\,v \\in V : \\eta(n,v) = 0\\,\\}$\n([[def-lorentz-orthogonality-and-orthogonal-complement]]). Then $n^{\\perp}$ is a\n3-dimensional linear subspace of $V$, the restriction of $\\eta$ to $n^{\\perp}$\nis positive definite, and the map $h : V \\to V$, $h(v) := v + \\eta(n,v)\\,n$, is\nlinear, idempotent with $h \\circ h = h$, has image $n^{\\perp}$ and kernel\n$\\operatorname{span}(n)$, satisfies $h(n) = 0$ and $\\eta(n,h(v)) = 0$ for all\n$v \\in V$, and every $v \\in V$ has the unique decomposition\n$v = -\\eta(n,v)\\,n + h(v)$. Moreover $|w| := \\sqrt{\\eta(w,w)}$ defines a norm\non $n^{\\perp}$.\n\n**(d) Relative velocity and Lorentz factor.** Let $n$ and $u$ be future unit\ntimelike vectors, put $\\gamma := -\\eta(n,u)$ and $w := c\\,h(u)/\\gamma$. Then\n$\\gamma \\ge 1$, $w$ lies in $n^{\\perp}$,\n$u = \\gamma\\,(n + w/c)$, $|w|^{2} = c^{2}(1-\\gamma^{-2}) < c^{2}$,\n$\\gamma = (1-|w|^{2}/c^{2})^{-1/2}$, and $\\gamma = 1$ if and only if $u = n$.\nThe vector $w$ is the velocity of a worldline with four-velocity $cu$ relative\nto the observer $n$, and $\\gamma$ is its Lorentz factor.\n\n**(e) Coordinate form.** Let $(o;e_0,\\dots,e_3)$ be an inertial frame and let\n$y$ be a $C^{1}$ future timelike worldline whose inertial coordinates are\n$t \\mapsto (ct,r(t))$, with coordinate velocity $w(t) := r'(t)$ in\n$\\mathbb{R}^{3}$ and, when $y$ is $C^{2}$, coordinate acceleration\n$a(t) := w'(t)$. Then $|w(t)| < c$, the four-velocity is\n$U = \\gamma_w\\,(c,w)$ with $\\gamma_w := (1-|w|^{2}/c^{2})^{-1/2}$, and the\nfour-acceleration is $A = \\gamma_w\\,\\frac{d}{dt}\\bigl(\\gamma_w(c,w)\\bigr)$, so\nthat\n\n$$A^{0} = \\gamma_w^{4}\\,\\frac{w \\cdot a}{c}, \\qquad A_{\\mathrm{vec}} = \\gamma_w^{2}\\,a + \\gamma_w^{4}\\,\\frac{(w \\cdot a)\\,w}{c^{2}} ;$$\n\nconsequently\n$\\eta(A,A) = \\gamma_w^{4}|a|^{2} + \\gamma_w^{6}(w \\cdot a)^{2}/c^{2} \\ge 0$,\nwith $\\eta(A,A) = 0$ if and only if $a = 0$, and $\\eta(U,A) = 0$. For the\nobserver $n = e_0$ of the chart, clauses (c) and (d) specialize to\n$\\gamma = \\gamma_w$ and $w_{\\mathrm{rel}} = (0,w)$ in the frame coordinates, identified with $w$ via the spatial basis.\n\n**(f) Scope.** The statement is a theorem about the affine Minkowski model with\na fixed positive constant $c$; it asserts no clock reading and identifies no\nphysical four-velocity. No choice principle is used.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rpm-spacetime-observer-and-worldline",
+          "source_section": "Definition",
+          "quote": "Use the signature $(-,+,+,+)$ throughout. In the flat case, **Minkowski spacetime** means the affine model $(A,V,\\eta,C^+)$ of [[def-sr-affine-minkowski-model]]: $A$ is an affine space, $\\eta$ is a nondegenerate Lorentz form on its four-dimensional displacement space, and $C^+$ selects the future cone. In the curved case, a **background spacetime** means a prescribed smooth time-oriented Lorentzian four-manifold $(M,g,N)$ of [[def-gr-smooth-lorentzian-objects]]; the metric and time orientation are fixed data, not dynamical unknowns here. No field equation or completeness assumption is included.\n\nA **massive worldline** on an open interval $I\\subseteq\\mathbb R$ is a $C^2$ curve $x:I\\to M$ with future-directed timelike tangent $T=dx/ds$ at every parameter value. This is the smooth subclass of [[def-gr-timelike-worldline-and-proper-time]]. A **null worldline** is a $C^2$ curve with nonzero future-directed null tangent everywhere. Its tangent has no proper-time normalization: $g(T,T)=0$, so the massive proper-time formula does not apply. In the flat model these are affine curves into $A$ with tangent in the selected future timelike or null cone from [[def-sr-affine-minkowski-model]].\n\nAn **observer at an event** $p\\in M$ is a future unit timelike vector $n\\in T_pM$ with $g_p(n,n)=-1$, as in [[def-gr-observer-and-rest-space]]. Its instantaneous rest space is $n^\\perp=\\{v:g_p(v,n)=0\\}$. This is a pointwise vector-space construction; the definition does not assign a clock reading or a moving frame to a lone observer.\n\nAn **observer congruence** on an open set $U\\subseteq M$ is a smooth field of future unit timelike vectors on $U$, as in [[def-gr-observer-congruence-and-adapted-charts]]; its observer curves are its integral curves. A **tetrad** is a chosen orthonormal frame field, as in [[def-gr-local-frame-and-tetrad-fields]]. A **chart** is a coordinate map; an adapted chart is a chart whose spatial coordinates are constant along the congruence's integral curves. These objects are distinct: a chart need not be inertial, a tetrad need not be coordinate induced, and a congruence is a field of observers rather than a chart or a frame. This distinction agrees with [[def-sr-chart-tetrad-and-congruence-distinction]].\n\nThe coordinates and units used later are SI: in an inertial chart $x^0=ct$ and $x^i$ are metres, $t$ is seconds, $c>0$ is metres per second, and proper time is measured in seconds. In a general chart, coordinate components inherit their coordinate units; invariant equations are tensorial. No global inertial chart, global tetrad, or global observer congruence is asserted to exist.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-inertial-frame-and-inertial-chart",
+          "source_section": "Definition",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]]), with orientation fixed as a positive ray of\nthe determinant line $\\Lambda^4V$\n([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]])\nand with the corresponding class of positively oriented ordered bases of $V$\n([[def-orientation-of-a-finite-dimensional-real-vector-space]]); by\n[[prop-orientations-and-positive-basis-classes-agree-in-positive-dimension]] the\npositive ray selects exactly one such class for $\\dim V=4>0$.\n\nAn **inertial frame** of the model is a tuple $(o;e_0,e_1,e_2,e_3)$ consisting\nof an event $o\\in A$ and an ordered basis $(e_0,e_1,e_2,e_3)$ of $V$ that is\n\n1. **$\\eta$-orthonormal**: $\\eta(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$ for all $a,b$ ([[lem-lorentz-form-has-orthonormal-basis]]);\n2. **future**: $e_0\\in C^+$, i.e. $e_0$ is future timelike; and\n3. **positively oriented**: the ordered basis lies in the positive-basis class\n   selected by the fixed orientation.\n\nThe event $o$ is the **origin** of the frame and $e_0,e_1,e_2,e_3$ are its\n**basis vectors**.\n\n**Inertial charts.** For an inertial frame $(o;e_0,e_1,e_2,e_3)$, define\n\n$$E:\\mathbb R^4\\longrightarrow V,\\qquad E(u):=\\sum_{a=0}^3u^ae_a .$$\n\nThen $E$ is a linear isomorphism ([[def-linear-isomorphism-and-invertible-linear-map]]):\nit is linear by construction, and it is bijective because\n$(e_0,e_1,e_2,e_3)$ is an ordered basis, every $v\\in V$ having exactly one\ncoordinate list $u$ with $v=\\sum_au^ae_a$\n([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). The **inertial\nchart** of the frame is the map\n\n$$x:A\\longrightarrow\\mathbb R^4,\\qquad x(p):=E^{-1}(p-o),$$\n\nand its values $x^a(p)$ are the **inertial coordinates of the event $p$** in the\nframe. Since $E$ and $v\\mapsto p+v$ are bijections, $x$ is a bijection\n$A\\to\\mathbb R^4$; and $x(p)=0$ exactly when $p-o=0_V$, that is, exactly when\n$p=o$.\n\n**Transition law.** Let $(o';e'_0,e'_1,e'_2,e'_3)$ be another inertial frame\nwith chart $x'$, and let $M=(M^b_a)$ be the change-of-basis matrix defined by\n$e'_a=\\sum_bM^b_ae_b$, a $4\\times4$ real matrix that is invertible because both\nfamilies are ordered bases. Then $E'(u)=\\sum_au^ae'_a=E(Mu)$ for all\n$u\\in\\mathbb R^4$, for the matrix-vector product $Mu$ in the coordinates of the\nfirst frame, because $\\sum_au^a\\sum_bM^b_ae_b=\\sum_b(\\sum_aM^b_au^a)e_b$; hence\n$E'=E\\circ M$ and $E'^{-1}=M^{-1}\\circ E^{-1}$, so for every event $p$,\n\n$$x'(p)=M^{-1}\\bigl(x(p)-x(o')\\bigr)=M^{-1}x(p)-M^{-1}x(o') .$$\n\nIn particular the transition between two inertial charts is an affine map of\n$\\mathbb R^4$ with invertible linear part $M^{-1}$ and constant part\n$-M^{-1}x(o')$, and it is a bijection of $\\mathbb R^4$ with inverse\n$u\\mapsto Mu+x(o')$, which is the transition in the reverse direction.\n\n**The inertial atlas.** The **inertial atlas** of the model is the family of\nall inertial frames together with their inertial charts. Its charts are\navailable at every event by [[lem-future-oriented-inertial-frames-exist]], which\nsupplies for every $o\\in A$ an inertial frame with origin $o$; and any two of\nits charts are related by the affine transition displayed above.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-spatial-euclidean-structure-of-an-inertial-frame",
+          "source_section": "Definition",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space and let\n$(o;e_0,e_1,e_2,e_3)$ be an inertial frame\n([[def-inertial-frame-and-inertial-chart]]). Put\n\n$$S:=\\operatorname{span}(e_1,e_2,e_3)=\\{w\\in V:\\eta(e_0,w)=0\\},$$\n\nthe equality holding because a vector $w=\\sum_aw^ae_a$ satisfies\n$\\eta(e_0,w)=-w^0$ by $\\eta$-orthonormality, so $\\eta(e_0,w)=0$ exactly when\n$w$ is a linear combination of $e_1,e_2,e_3$. In particular $S$ is the linear\nsubspace of $V$ spanned by the three spatial basis vectors of the frame, and\n$V=S\\oplus\\operatorname{span}(e_0)$.\n\nLet $\\delta$ be the restriction of $\\eta$ to $S$, i.e.\n$\\delta(w,z):=\\eta(w,z)$ for $w,z\\in S$. Writing $w=\\sum_{i=1}^3w^ie_i$ and\n$z=\\sum_{i=1}^3z^ie_i$ and using $\\eta(e_i,e_j)=\\delta_{ij}$ for $i,j\\ge1$, one\nhas\n\n$$\\delta(w,z)=w^1z^1+w^2z^2+w^3z^3,\\qquad \\delta(w,w)=(w^1)^2+(w^2)^2+(w^3)^2 .$$\n\nHence $\\delta$ is a symmetric bilinear form on $S$ that is positive definite:\n$\\delta(w,w)\\ge0$, with equality exactly for $w=0$ by uniqueness of coordinates\nin the basis $(e_1,e_2,e_3)$ of $S$\n([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). Thus $\\delta$\nis an inner product on the real vector space $S$\n([[def-inner-product-space]]); the induced function\n\n$$\\lvert w\\rvert:=\\sqrt{\\delta(w,w)}=\\bigl\\lVert(w^1,w^2,w^3)\\bigr\\rVert_2$$\n\nis the Euclidean norm of the coordinate vector of $w$\n([[def-euclidean-inner-product]]), and it is a norm on $S$\n([[cor-triangle-inequality-for-inner-product-norm]]). The ordered basis\n$(e_1,e_2,e_3)$ of $S$ is $\\delta$-orthonormal, and it is declared **positively\noriented** in $S$ by the convention that an ordered triple $(u_1,u_2,u_3)$ of\nelements of $S$ is positively oriented when the ordered basis\n$(e_0,u_1,u_2,u_3)$ of $V$ is positively oriented for the fixed orientation of\n$V$. The pair $(S,\\delta)$, together with this orientation and the frame's\nbasis, is the **Euclidean spatial structure of the inertial frame**\n$(o;e_0,e_1,e_2,e_3)$.\n\n**Vector product.** For $w=\\sum_{i=1}^3w^ie_i$ and $z=\\sum_{i=1}^3z^ie_i$ in\n$S$, define the **vector product** $w\\times z$ to be the unique element of $S$\nwhose coordinates are\n\n$$(w\\times z)^1=w^2z^3-w^3z^2,\\qquad (w\\times z)^2=w^3z^1-w^1z^3,\\qquad (w\\times z)^3=w^1z^2-w^2z^1 .$$\n\nThis is well defined by uniqueness of coordinates in the basis\n$(e_1,e_2,e_3)$. It is bilinear in $(w,z)$, alternating\n($z\\times w=-(w\\times z)$ and $w\\times w=0$), and it satisfies, for all\n$w,z,y\\in S$,\n\n$$\\delta(w\\times z,y)=\\det\\begin{pmatrix}w^1&z^1&y^1\\\\ w^2&z^2&y^2\\\\ w^3&z^3&y^3\\end{pmatrix},\\qquad \\lvert w\\times z\\rvert^2=\\lvert w\\rvert^2\\lvert z\\rvert^2-\\delta(w,z)^2 .$$\n\nThe first identity is the expansion of the determinant along its columns, both\nsides equalling $\\sum_i(w\\times z)^iy^i$; the second is Lagrange's identity,\nobtained by expanding $\\lvert w\\times z\\rvert^2+\\delta(w,z)^2$ and comparing\ntermwise with $\\lvert w\\rvert^2\\lvert z\\rvert^2$ using\n$\\lvert w\\rvert^2=\\delta(w,w)$\n([[def-determinant-of-a-square-matrix]]).\n\n**Frame dependence.** The objects $S$, $\\delta$, $\\lvert\\cdot\\rvert$ and\n$\\times$ belong to the spatial three-space of the **named** inertial frame:\nreplacing the spatial basis by another $\\delta$-orthonormal positively oriented\nbasis of $S$ transforms coordinates by an orientation-preserving orthogonal\nmatrix, under which $\\delta$, the norm and the displayed identities are\nunchanged, while a general change of inertial frame with a different time axis\n$e_0$ changes $S$ itself and hence changes the domains of $\\delta$ and $\\times$.\nThe Lorentz form, the fixed orientation of $V$, and the time orientation $C^+$\nare data of the model independent of the named inertial frame\n([[def-sr-affine-minkowski-model]]). The Euclidean spatial structure instead\nrequires the choice of a time axis $e_0$; it is not an additional\nframe-independent structure on the whole of $V$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [A1] and [F2], $P=mU=(\\gamma mc,\\gamma m\\mathbf v)$, and [F4] identifies these with the time and spatial components in the chosen frame. The definitions in [F1] give $E=\\gamma mc^2$ and $\\mathbf p=\\gamma m\\mathbf v$. Hence $E^2-c^2|\\mathbf p|^2=\\gamma^2m^2c^4(1-|\\mathbf v|^2/c^2)=m^2c^4$, and $\\gamma m>0$ gives $E>0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Dividing the spatial identity $\\mathbf p=\\gamma m\\mathbf v$ by $E=\\gamma mc^2$ yields $\\mathbf p/E=\\mathbf v/c^2$, and therefore $\\mathbf v=c^2\\mathbf p/E$. The division is valid because $E>0$ by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Differentiating the mass shell of step 1.1 with respect to $t$ gives $2E\\,dE/dt=2c^2\\mathbf p\\cdot\\mathbf F$. Substituting $\\mathbf p/E=\\mathbf v/c^2$ from step 2.1 yields $dE/dt=\\mathbf F\\cdot\\mathbf v$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "In inertial coordinates, $dP/dt=(c^{-1}dE/dt,\\mathbf F)$, and [F2] gives $d/d\\tau=(dt/d\\tau)d/dt=\\gamma\\,d/dt$. Substituting the work identity of step 3.1 proves $K=\\gamma(\\mathbf F\\cdot\\mathbf v/c,\\mathbf F)$. This is a kinematic identity, not a force law.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "For the separate variable-mass ansatz, bilinearity and $\\eta(U,U)=-c^2$ give $\\eta(P,P)=m(\\tau)^2\\eta(U,U)=-m(\\tau)^2c^2$. Since $m$ and $U$ are $C^1$, $P$ is differentiable and $K=dP/d\\tau$ exists. Differentiating with respect to $\\tau$ gives $2\\eta(P,K)=-2m(dm/d\\tau)c^2$, so $\\eta(P,K)=-m(dm/d\\tau)c^2$. No equation for $m$ was used.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires a nonempty open interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives E=mc^2 and p=0 when v=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No particle-count assertion is made; this is one specified worldline."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 differentiates a separate variable-mass ansatz without a force law."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 gives |v|<c; the light-speed endpoint is excluded by timelikeness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "One fixed frame is used; no choice from a family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The statement contains no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The statement contains no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set v=0 and F=0.",
+          "result": "gamma=1, E=mc^2, p=0 and dE/dt=0.",
+          "verifies": "Rest and zero-work boundary in steps 1.1 and 3.1."
+        }
+      ]
+    },
+    "thm-rpm-finite-future-momentum-sum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sr-total-four-momentum-and-invariant-mass",
+          "source_section": "Definition",
+          "quote": "Throughout, $(A,V,\\eta,C^+)$ is the oriented time-oriented affine Minkowski\nmodel of [[def-sr-affine-minkowski-model]] and $c>0$.\n\n**(a) Total four-momentum.** For a finite list $(P_1,\\dots,P_N)$, $N\\ge0$, of\nvectors of $V$, define the **total four-momentum**\n$P_{\\mathrm{tot}}:=\\sum_{i=1}^{N}P_i$ as the finite sum of\n[[def-finite-sum-in-a-commutative-monoid]] in the additive group $(V,+)$ of\nthe vector space $V$; the empty sum is $0$. The sum uses the vectors $P_i$\nalone: no event, no position and no simultaneity datum enters it, and the\norder of the list does not affect $P_{\\mathrm{tot}}$ because addition in $V$\nis commutative.\n\n**(b) Invariant mass of the total.** If $P_{\\mathrm{tot}}$ is future timelike\n([[def-causal-classification-of-lorentz-vectors]],\n[[def-time-orientation-and-future-causal-sets]]), define the **invariant\nmass** of the system and its **rest energy** by\n\n$$M:=M(P_{\\mathrm{tot}}):=\\frac{\\sqrt{-\\eta(P_{\\mathrm{tot}},P_{\\mathrm{tot}})}}{c}>0$$\n\nand its rest energy is $Mc^2$.\n\nThe square root is a real number because\n$\\eta(P_{\\mathrm{tot}},P_{\\mathrm{tot}})<0$ for a timelike vector, and it is\nstrictly positive, so $M>0$ ([[def-rational-power]]). If\n$P_{\\mathrm{tot}}$ is future null, set $M:=0$ and say that the system has no\nrest frame. For $P_{\\mathrm{tot}}$ equal to zero, spacelike or past causal,\nthis convention defines no invariant mass.\n\n**(c) Center-of-momentum frame.** A **center-of-momentum frame** of a nonzero\n$P_{\\mathrm{tot}}$ is an inertial frame $(o;e_0,e_1,e_2,e_3)$\n([[def-inertial-frame-and-inertial-chart]]) whose first vector satisfies\n\n$$h_{e_0}(P_{\\mathrm{tot}})=0,\\qquad h_{e_0}(v):=v+\\eta(v,e_0)e_0\\quad(v\\in V),$$\n\nwhere the projection is defined on all of $V$; for a future causal total this\nis $q_{e_0}(P_{\\mathrm{tot}})=0$, meaning that its total spatial momentum\nvanishes for the observer stationary in the frame\n([[def-sr-observed-energy-momentum-and-kinetic-energy]]). The condition is equivalent to\n$P_{\\mathrm{tot}}=-\\eta(P_{\\mathrm{tot}},e_0)e_0$, i.e. to\n$P_{\\mathrm{tot}}\\in\\mathrm{span}(e_0)$; if $P_{\\mathrm{tot}}$ is future\ntimelike this holds exactly when $P_{\\mathrm{tot}}=\\lambda e_0$ with\n$\\lambda>0$, and then $E_{e_0}(P_{\\mathrm{tot}})=Mc^2$ for $M$ as in (b).\n\n**(d) Comparison with the single-vector convention.** For a single future\ntimelike vector $P$, the invariant mass $M$ of (b) coincides with $m(P)$ of\n[[def-sr-observed-energy-momentum-and-kinetic-energy]]; in particular if\n$P=mU$ with $m>0$ and $\\eta(U,U)=-c^2$ (the four-velocity normalisation of\n[[def-sr-four-velocity-and-four-acceleration]]), then $M=m$. Both quantities\nare functions of the scalar $\\eta(P,P)$ alone.\n\n**(e) Scope.** This definition asserts no existence of a center-of-momentum\nframe (that is [[lem-sr-center-of-momentum-frame]]), no physical conservation\nlaw and no dynamics; only the total vector carries the invariant mass, and the\nindividual summands need not be causal for the sum to be defined. No choice\nprinciple is used.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sr-observed-energy-momentum-and-kinetic-energy",
+          "source_section": "Definition",
+          "quote": "Throughout, $(A,V,\\eta,C^+)$ is the oriented time-oriented affine Minkowski\nmodel of [[def-sr-affine-minkowski-model]], $c>0$, and $n\\in V$ is future unit\ntimelike, $\\eta(n,n)=-1$ ([[def-lorentz-form-and-inertia]],\n[[def-time-orientation-and-future-causal-sets]]). Write\n$n^\\perp=\\{v\\in V:\\eta(n,v)=0\\}$ for the rest space of $n$,\n$h(v):=v+\\eta(n,v)n$ for the rest\nprojection and $|w|:=\\sqrt{\\eta(w,w)}$ for the norm on $n^\\perp$\n([[thm-sr-proper-time-and-observer-decomposition]]\\,(c)); recall from that\nclause that $h$ is linear with image $n^\\perp$ and kernel $\\mathrm{span}(n)$,\nthat $V=\\mathrm{span}(n)\\oplus n^\\perp$, and that the restriction of $\\eta$ to\n$n^\\perp$ is positive definite.\n\n**(a) Observer energy, spatial momentum and invariant mass.** For every $P$ in\nthe future closed cone $\\mathrm{cl}(C^+)$ define\n\n$$E_n(P):=-c\\,\\eta(P,n), \\qquad q_n(P):=h(P),$$\n\nand, when $P$ is nonzero future causal, define the **invariant mass** of $P$ by\n\n$$m(P):=\\frac{\\sqrt{-\\eta(P,P)}}{c} .$$\n\nThen $q_n(P)\\in n^\\perp$, $\\eta(n,P)=-E_n(P)/c$, and\n\n$$P=\\frac{E_n(P)}{c}\\,n+q_n(P)$$\n\nis the unique decomposition of $P$ as a real multiple of $n$ plus a vector of\n$n^\\perp$: a vector $P$ has $P=\\lambda n+w$ with $\\lambda\\in\\mathbb R$ and\n$w\\in n^\\perp$ if and only if $\\lambda=E_n(P)/c$ and $w=q_n(P)$. Equivalently,\n$E_n(P)$ and $q_n(P)$ are the unique pair consisting of a real number and a\nvector of $n^\\perp$ with that property. The pair $(E_n,q_n)$ is the\nrestriction to $\\mathrm{cl}(C^+)$ of the pair of linear maps\n$P\\mapsto -c\\,\\eta(P,n)$ and $P\\mapsto h(P)$ on $V$. For future null $P$ the\nformula for $m(P)$ gives $m(P)=0$, because $\\eta(P,P)=0$.\n\n**(b) Rest-mass parameter, rest energy and kinetic energy.** Let $m>0$ and let\n$P=mU$ with $U$ future timelike and $\\eta(U,U)=-c^2$, the four-velocity\nnormalisation of [[def-sr-four-velocity-and-four-acceleration]]. Then call $m$\nthe **rest-mass parameter** of $P$ as written, $mc^2$ its **rest energy**, and\n\n$$T_n(P):=E_n(P)-mc^2$$\n\nits **kinetic energy** relative to the observer $n$. Bilinearity gives\n$\\eta(P,P)=m^2\\eta(U,U)=-m^2c^2$, so $m=m(P)>0$ is determined by $P$.\nThus $T_n(P)=E_n(P)-m(P)c^2$ is a function of $(P,n)$ on the future\ntimelike cone; recording $m$ supplies no independent parameter.\n\n**(c) No positivity, inequality or measurement claim.** This definition claims\nno positivity of $E_n$, no inequality or vanishing property of $T_n$, and no\nphysical measurement. The names observer energy, spatial momentum, invariant\nmass, rest energy and kinetic energy, and the units joule, kilogram metre per\nsecond and kilogram, belong to the unit conventions of\n[[def-sr-si-units-and-coordinate-conventions]] and to the physical postulates\nof this framework; the mathematical content asserted here is only the explicit\ndependence of the five quantities on $P$, $n$ and $m$.\n\n**(d) What the objects depend on.** $E_n$ and $q_n$ are functions of the pair\n$(P,n)$: $q_n(P)$ is an element of the vector space $V$, not a coordinate\ntriple, and no basis of $V$ enters its definition, while\n$E_n(P)=-c\\,\\eta(P,n)$ uses the Lorentz form alone. $m(P)$ depends on the\nscalar $\\eta(P,P)$ alone and hence on no observer and no basis; $T_n(P)$\nuses the rest mass $m=m(P)$ fixed by that scalar. No choice principle is\nused.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-inertial-frame-and-inertial-chart",
+          "source_section": "Definition",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]]), with orientation fixed as a positive ray of\nthe determinant line $\\Lambda^4V$\n([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]])\nand with the corresponding class of positively oriented ordered bases of $V$\n([[def-orientation-of-a-finite-dimensional-real-vector-space]]); by\n[[prop-orientations-and-positive-basis-classes-agree-in-positive-dimension]] the\npositive ray selects exactly one such class for $\\dim V=4>0$.\n\nAn **inertial frame** of the model is a tuple $(o;e_0,e_1,e_2,e_3)$ consisting\nof an event $o\\in A$ and an ordered basis $(e_0,e_1,e_2,e_3)$ of $V$ that is\n\n1. **$\\eta$-orthonormal**: $\\eta(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$ for all $a,b$ ([[lem-lorentz-form-has-orthonormal-basis]]);\n2. **future**: $e_0\\in C^+$, i.e. $e_0$ is future timelike; and\n3. **positively oriented**: the ordered basis lies in the positive-basis class\n   selected by the fixed orientation.\n\nThe event $o$ is the **origin** of the frame and $e_0,e_1,e_2,e_3$ are its\n**basis vectors**.\n\n**Inertial charts.** For an inertial frame $(o;e_0,e_1,e_2,e_3)$, define\n\n$$E:\\mathbb R^4\\longrightarrow V,\\qquad E(u):=\\sum_{a=0}^3u^ae_a .$$\n\nThen $E$ is a linear isomorphism ([[def-linear-isomorphism-and-invertible-linear-map]]):\nit is linear by construction, and it is bijective because\n$(e_0,e_1,e_2,e_3)$ is an ordered basis, every $v\\in V$ having exactly one\ncoordinate list $u$ with $v=\\sum_au^ae_a$\n([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). The **inertial\nchart** of the frame is the map\n\n$$x:A\\longrightarrow\\mathbb R^4,\\qquad x(p):=E^{-1}(p-o),$$\n\nand its values $x^a(p)$ are the **inertial coordinates of the event $p$** in the\nframe. Since $E$ and $v\\mapsto p+v$ are bijections, $x$ is a bijection\n$A\\to\\mathbb R^4$; and $x(p)=0$ exactly when $p-o=0_V$, that is, exactly when\n$p=o$.\n\n**Transition law.** Let $(o';e'_0,e'_1,e'_2,e'_3)$ be another inertial frame\nwith chart $x'$, and let $M=(M^b_a)$ be the change-of-basis matrix defined by\n$e'_a=\\sum_bM^b_ae_b$, a $4\\times4$ real matrix that is invertible because both\nfamilies are ordered bases. Then $E'(u)=\\sum_au^ae'_a=E(Mu)$ for all\n$u\\in\\mathbb R^4$, for the matrix-vector product $Mu$ in the coordinates of the\nfirst frame, because $\\sum_au^a\\sum_bM^b_ae_b=\\sum_b(\\sum_aM^b_au^a)e_b$; hence\n$E'=E\\circ M$ and $E'^{-1}=M^{-1}\\circ E^{-1}$, so for every event $p$,\n\n$$x'(p)=M^{-1}\\bigl(x(p)-x(o')\\bigr)=M^{-1}x(p)-M^{-1}x(o') .$$\n\nIn particular the transition between two inertial charts is an affine map of\n$\\mathbb R^4$ with invertible linear part $M^{-1}$ and constant part\n$-M^{-1}x(o')$, and it is a bijection of $\\mathbb R^4$ with inverse\n$u\\mapsto Mu+x(o')$, which is the transition in the reverse direction.\n\n**The inertial atlas.** The **inertial atlas** of the model is the family of\nall inertial frames together with their inertial charts. Its charts are\navailable at every event by [[lem-future-oriented-inertial-frames-exist]], which\nsupplies for every $o\\in A$ an inertial frame with origin $o$; and any two of\nits charts are related by the affine transition displayed above.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sr-future-causal-sums-and-inertial-coordinate-criterion",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be the oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]], [[def-lorentz-form-and-inertia]]) and use\nthe reachability objects $J^+$, $I^+$ of\n[[def-sr-causal-reachability-in-affine-minkowski-space]]. Let\n$(o;e_0,e_1,e_2,e_3)$ be an inertial frame with chart $x$\n([[def-inertial-frame-and-inertial-chart]]) and let\n$$|v_s|:=\\sqrt{(v^1)^2+(v^2)^2+(v^3)^2}$$\nbe the Euclidean norm of the spatial part $v_s:=v^1e_1+v^2e_2+v^3e_3$ of a\nvector $v=v^0e_0+v_s$\n([[def-spatial-euclidean-structure-of-an-inertial-frame]]). Then:\n\n**(a) Cone description.** $C^+=\\{v:v^0>|v_s|\\}$,\n$\\overline{C^+}=\\{v:v^0\\ge|v_s|\\}$, $C^-=\\{v:-v^0>|v_s|\\}$ and\n$\\overline{C^-}=\\{v:-v^0\\ge|v_s|\\}$; moreover every $v\\in\\overline{C^+}$ with\n$v\\ne 0$ satisfies $-\\eta(v,e_0)=v^0>0$ and $|v_s|\\le v^0$, and $v$ is future\nnull exactly when $|v_s|=v^0>0$.\n\n**(b) Finite sums.** If $v_1,\\dots,v_k$ lie in $\\overline{C^+}$\n($k\\ge 1$), then $v_1+\\cdots+v_k\\in\\overline{C^+}$; if in addition at least one\n$v_i$ lies in $C^+$, then the sum lies in $C^+$; and if $v+w=0$ with\n$v,w\\in\\overline{C^+}$, then $v=w=0$.\n\n**(c) Coordinate criterion.** For events $p,q\\in A$ put\n$D^a:=x^a(q)-x^a(p)$ and $D_s:=(D^1,D^2,D^3)$. Then: $q\\in J^+(p)$ if and only\nif $D^0\\ge|D_s|$; $q\\in I^+(p)$ if and only if $D^0>|D_s|$; $q\\in J^+(p)$ with\n$q\\ne p$ if and only if $D^0\\ge|D_s|$ and $D^0>0$; and for $q\\in J^+(p)$ with\n$q\\ne p$ one has $0<D^0$ and $|D_s|\\le D^0$. The criteria are stated for the\nchart of any inertial frame, because every inertial basis is\n$\\eta$-orthonormal with future first vector.\n\n**(d) Scope.** The lemma is a statement about the affine model and the fixed\ntime orientation; it attaches no physical meaning to $\\le$, $J^+$ or $I^+$ and\nuses no choice principle.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-sr-center-of-momentum-frame",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be the oriented time-oriented affine Minkowski model\n([[def-sr-affine-minkowski-model]]), $c>0$, and let $Q\\in V$ be future\ntimelike with invariant mass $M:=\\sqrt{-\\eta(Q,Q)}/c$\n([[def-sr-total-four-momentum-and-invariant-mass]]\\,(b)); put\n$n_Q:=Q/(Mc)$, so that $\\eta(n_Q,n_Q)=-1$, $n_Q\\in C^+$ and $Q=Mc\\,n_Q$.\n\n**(a)** There exists an inertial frame $(o;e_0,e_1,e_2,e_3)$ with $e_0=n_Q$;\nin every such frame $q_{e_0}(Q)=0$, $E_{e_0}(Q)=Mc^2$ and the components of\n$Q$ are $(Mc,0,0,0)$. Such a frame is a center-of-momentum frame of $Q$ in the\nsense of [[def-sr-total-four-momentum-and-invariant-mass]]\\,(c).\n\n**(b)** Conversely, if an inertial frame satisfies $q_{e_0}(Q)=0$, then\n$e_0=n_Q$. Hence the time vector of a center-of-momentum frame of $Q$ is\nunique, and two center-of-momentum frames of $Q$ differ only by the choice of\norigin and by a positively oriented $\\eta$-orthonormal change of the spatial\nbasis $(e_1,e_2,e_3)$ of $n_Q^\\perp$; in particular the center-of-momentum\nframe at a fixed origin is unique up to spatial rotations.\n\n**(c)** If $Q$ is a nonzero future null vector, then no inertial frame\nsatisfies $q_{e_0}(Q)=0$: a nonzero future null vector has no\ncenter-of-momentum frame.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-sr-energy-momentum-observer-identities",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be the oriented time-oriented affine Minkowski model\n([[def-sr-affine-minkowski-model]]), $c>0$, let $n\\in V$ be future unit\ntimelike, $\\eta(n,n)=-1$, and let $E_n,q_n,m,T_n$ be the quantities of\n[[def-sr-observed-energy-momentum-and-kinetic-energy]].\n\n**(a)** If $P$ is nonzero future causal, then $E_n(P)>0$, $q_n(P)\\in n^\\perp$\nand\n\n$$\\eta(q_n(P),q_n(P))=\\frac{E_n(P)^2}{c^2}+\\eta(P,P)\\ \\ge\\ 0 .$$\n\nConsequently: (i) if $P$ is future null, then $\\eta(P,P)=0$ and\n$E_n(P)=c\\,|q_n(P)|>0$; (ii) if $P$ is future timelike with invariant mass\n$m(P)$, then $\\eta(P,P)=-m(P)^2c^2$ and the mass-shell identity\n\n$$E_n(P)^2=m(P)^2c^4+c^2\\,|q_n(P)|^2$$\n\nholds. The invariant mass $m(P)$ depends only on the scalar $\\eta(P,P)$ and\ntherefore on no observer $n$ and no basis, while $E_n$ and $q_n$ do depend on\n$n$.\n\n**(b)** Let $P=mU$ with $m>0$ constant, let $U$ be future timelike with\n$\\eta(U,U)=-c^2$ (the four-velocity normalisation of\n[[def-sr-four-velocity-and-four-acceleration]]), and put\n$\\gamma:=-\\eta(U/c,n)\\ge1$ and $w:=c\\,h(U/c)/\\gamma\\in n^\\perp$, the\nrelative velocity of [[thm-sr-proper-time-and-observer-decomposition]]\\,(d)\napplied to the future unit vector $u=U/c$; equivalently $w=h(U)/\\gamma$. Then\n\n$$E_n(P)=mc^2\\gamma,\\qquad T_n(P)=mc^2(\\gamma-1)\\ \\ge\\ 0,\\qquad q_n(P)=m\\gamma w,$$\n\nand $m(P)=m$. Moreover $T_n(P)=0$ if and only if $\\gamma=1$, that is $U=cn$,\nequivalently $P=mcn$ (the particle is at rest relative to $n$). Finally\n$|q_n(P)|=m\\gamma|w|=mc\\sqrt{\\gamma^2-1}$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-finite",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $a_0, \\dots, a_{n-1}$ and $b_0, \\dots, b_{n-1}$ be\nreals, with finite sums as in [[def-finite-sum]]. Then\n\n$$\\Big(\\sum_{k<n} a_k b_k\\Big)^{2} \\;\\le\\; \\Big(\\sum_{k<n} a_k^{2}\\Big)\\Big(\\sum_{k<n} b_k^{2}\\Big),$$\n\nand, in root form ([[thm-of-square-roots]]),\n\n$$\\Big|\\sum_{k<n} a_k b_k\\Big| \\;\\le\\; \\sqrt{\\sum_{k<n} a_k^{2}} \\; \\sqrt{\\sum_{k<n} b_k^{2}}.$$\n\nEquality holds in the first display if and only if the two lists are\nproportional, in the symmetric sense that there is a pair\n$(\\lambda, \\mu) \\ne (0,0)$ of reals with $\\lambda a_k = \\mu b_k$ for every\n$k < n$.\n\n**No root is used in the proof of the squared form.** That form is an identity\nplus a sign argument in the ordered field, and the root form is only a\nrestatement of it through the monotonicity of squaring on the nonnegatives\n([[lem-of-square-monotone]]); the root enters nowhere but the last step, where\nthat restatement is made and [[thm-of-square-roots]] is what supplies the\nsquare-root symbol. This matters here, because it makes the squared\ninequality independent of the existence theorem for roots.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F3], applying the finite-sum cone rule to the nonzero future-causal $P_i$ shows that $Q$ is future causal. In the fixed inertial frame each nonzero future-causal summand has positive time component, so the time component of $Q$ is a finite sum of positive numbers and $Q\\ne0$. If one summand is timelike, [F3] gives that $Q$ is future timelike.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Suppose every $P_i$ is null. Write its coordinates as $P_i=(a_i,u_i)$ in the fixed frame. By [F3], $a_i=|u_i|>0$. Then $Q$ is null exactly when $|\\sum_i u_i|=\\sum_i|u_i|$. Squaring both sides, this equality is equivalent to $\\sum_{i<j}(|u_i||u_j|-u_i\\cdot u_j)=0$. For each pair, apply [F6] to singleton coordinate lists to get $u_i\\cdot u_j\\le|u_i||u_j|$; therefore every summand is nonnegative. Equality of the sum forces equality for every pair, and equality with positive dot product forces each pair to be positively proportional. Thus all $P_i$ lie on one future null ray. Conversely, positive multiples of one future-null vector sum to a future-null vector. If the directions are not all the same, the inequality is strict, so the already future-causal $Q$ is timelike.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "claim": "Let $Q$ be future timelike and use the center-of-momentum frame of [F4]. The total spatial momentum is zero and $E_{n_Q}(Q)=M(Q)c^2$. By linearity of $E_{n_Q}$, $M(Q)c^2=\\sum_i E_{n_Q}(P_i)$. Each term satisfies $E_{n_Q}(P_i)\\ge m_i c^2$ by the mass-shell identities in [F5], proving $M(Q)\\ge\\sum_i m_i$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Equality in step 1.3 requires equality in every nonnegative term $E_{n_Q}(P_i)-m_i c^2$. A nonzero null $P_i$ has $m_i=0$ but $E_{n_Q}(P_i)>0$ by [F5], so equality excludes null legs. For a timelike leg, [F5] gives $E_{n_Q}(P_i)=m_i c^2$ exactly when $q_{n_Q}(P_i)=0$; then its observer decomposition is $P_i=(E_{n_Q}(P_i)/c)n_Q=m_i c n_Q$. Conversely, if every leg has the form $P_i=m_i c n$ with one common future unit timelike $n$, then $Q=c(\\sum_i m_i)n$, so $M(Q)=\\sum_i m_i$ directly.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires a finite nonempty list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves Q is nonzero from nonzero future-causal summands."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers one summand; step 1.3 gives equality for one massive leg."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 treats collinear future-null summands."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Steps 1.2 and 2.1 characterize null and mass-equality boundaries."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Finite coordinate sums use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves a null total forces a common future-null ray."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 proves a common future-null ray gives a null total."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take one future timelike vector P=mc n.",
+          "result": "Q=P is timelike, its rest observer is n, and M(Q)=m.",
+          "verifies": "One-summand equality in steps 1.1 and 1.3."
+        },
+        {
+          "check": "Take positive multiples of one future-null vector.",
+          "result": "Their sum is nonzero future null and has no rest frame.",
+          "verifies": "Collinear null boundary in step 1.2."
+        }
+      ]
+    },
+    "pthm-rpm-system-mass-threshold": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-rpm-isolated-collision-balance",
+          "source_section": "Postulate",
+          "quote": "For the relativistic-particle-mechanics collision configurations of [[def-rpm-collision-objects]], adopt the isolated-collision balance already stated in clause (iii) of [[post-sr-massive-particle-dynamics]]: when the event is isolated and the incoming and outgoing lists contain every leg, $Q_{\\rm in}=Q_{\\rm out}$. This local postulate records the exact collision interface used on this page; it is a scoped reuse of the existing adopted model assumption, not a second independent conservation assumption.\n\nThe balance is an adopted physical premise. It does not show that any specified reaction occurs and supplies no interaction mechanism, selection rule, probability, cross section, or amplitude. The cited treatments motivate and explain the model formulation; they do not turn the postulate into a deductive theorem or a report of an observed collision.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-rpm-collision-objects",
+          "source_section": "Definition",
+          "quote": "Use the flat oriented, time-oriented affine Minkowski model, signature $(-,+,+,+)$, and SI convention $x^0=ct$ of [[def-rpm-spacetime-observer-and-worldline]]. A **relativistic-particle-mechanics collision configuration** is a mass-specified causal collision datum of [[def-sr-collision-datum-and-conservation]]: an event $p\\in A$, a finite nonempty incoming list $P_1,\\ldots,P_N\\in V$, and a finite nonempty outgoing list $P'_1,\\ldots,P'_K\\in V$, where every leg is a nonzero future-causal vector in the same displacement space $V$. A massive leg has a recorded mass $m>0$ and the massive-sector momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]; a null leg has recorded mass $0$ and is a nonzero future-null vector with its scale specified independently. The definition does not identify a null momentum with $mU$ at $m=0$.\n\nThe side totals are the finite vector sums $Q_{\\rm in}:=\\sum_{i=1}^N P_i$ and $Q_{\\rm out}:=\\sum_{j=1}^K P'_j$. All legs are attached to the same event, so the sums compare vectors in one affine displacement space; no transport between different events is part of the datum. The adjective **isolated** is reserved for a model condition used by the postulate below: no external four-momentum transfer during the idealized event and no omitted incoming or outgoing leg.\n\nAt an event, an **observer** is a future unit timelike vector $n$ with $\\eta(n,n)=-1$, and its rest space is $n^\\perp=\\{v\\in V:\\eta(v,n)=0\\}$, as in [[def-rpm-spacetime-observer-and-worldline]]. Observer energy $E_n(P):=-c\\eta(P,n)$ and spatial momentum $q_n(P):=P+\\eta(P,n)n\\in n^\\perp$ are those of [[def-rpm-mechanical-momentum-and-observer-energy]]. Their units are joules and kilogram metres per second. An inertial laboratory means one named inertial chart and its time-axis observer; it is not a general observer congruence or an arbitrary coordinate chart.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rpm-finite-future-momentum-sum",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be the oriented time-oriented affine Minkowski model with $c>0$, and fix an inertial frame. For a finite nonempty list $P_1,\\ldots,P_N$ of nonzero future-causal vectors in $V$, let $Q:=\\sum_{i=1}^N P_i$, let $m_i:=\\sqrt{-\\eta(P_i,P_i)}/c$ (so $m_i=0$ exactly for a null leg), and let $M(Q)$ be the invariant mass of the total when $Q$ is timelike, as defined in [[def-sr-total-four-momentum-and-invariant-mass]].\n\nThen $Q$ is nonzero and future causal. If at least one $P_i$ is timelike, then $Q$ is future timelike. If all $P_i$ are null, then $Q$ is null exactly when all $P_i$ lie on the same future null ray; otherwise $Q$ is future timelike. Whenever $Q$ is timelike, the center-of-momentum frame exists, its time-axis observer $n_Q=Q/(M(Q)c)$ has zero total spatial momentum and total observer energy $M(Q)c^2$, and\n\n$$M(Q)\\ge\\sum_{i=1}^N m_i.$$\n\nEquality holds exactly when every $P_i$ is massive and there is one future unit timelike vector $n$ such that $P_i=m_i c\\,n$ for every $i$. A nonzero future-null total has no center-of-momentum frame.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-rpm-inverse-momentum-and-work",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval, and let $x:I\\to A$ be a $C^2$ future-timelike worldline in the flat Minkowski model of [[def-rpm-spacetime-observer-and-worldline]]. Use one inertial frame and parameterize the curve by that chart's time coordinate $t$, so its coordinates are $(ct,\\mathbf x(t))$ ([[def-inertial-frame-and-inertial-chart]]). Identify the observer rest space with $\\mathbb R^3$ by the frame's spatial orthonormal basis and use its Euclidean dot product and norm ([[def-spatial-euclidean-structure-of-an-inertial-frame]]). Write $\\mathbf v=d\\mathbf x/dt$, $\\gamma=(1-|\\mathbf v|^2/c^2)^{-1/2}$, proper time $\\tau$, and $U=dx/d\\tau$. In the constant-mass sector of [[post-sr-massive-particle-dynamics]], let $m>0$ be constant and $P=mU$. In this chart write $P=(E/c,\\mathbf p)$, where $E$ and $\\mathbf p$ are the observer energy and spatial momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]. Then $|\\mathbf v|<c$, $E=\\gamma mc^2>0$, $\\mathbf p=\\gamma m\\mathbf v$, and\n\n$$E^2=m^2c^4+c^2|\\mathbf p|^2,\\qquad \\mathbf v=\\frac{c^2\\mathbf p}{E}.$$\n\nDefine the three-force by $\\mathbf F:=d\\mathbf p/dt$ and the four-force by $K:=dP/d\\tau$ in this flat inertial chart. In SI units $m$ is in kilograms, $c$ and $\\mathbf v$ in metres per second, $E$ in joules, $\\mathbf p$ in kilogram metres per second, and $\\mathbf F,K$ in newtons. Then\n\n$$\\frac{dE}{dt}=\\mathbf F\\cdot\\mathbf v,\\qquad K=\\gamma\\left(\\frac{\\mathbf F\\cdot\\mathbf v}{c},\\mathbf F\\right).$$\n\nSeparately, let $I_\\tau\\subseteq\\mathbb R$ be a nonempty open proper-time interval, let $m:I_\\tau\\to(0,\\infty)$ be $C^1$, and let $U:I_\\tau\\to V$ be a $C^1$ future timelike vector field with $\\eta(U,U)=-c^2$. Measure $m$ in kilograms and $dm/d\\tau$ in kilograms per second, and set $P(\\tau):=m(\\tau)U(\\tau)$. With $K:=dP/d\\tau$, the kinematic ansatz satisfies\n\n$$\\eta(P,K)=-m\\,\\frac{dm}{d\\tau}\\,c^2.$$\n\nThe last identity is only a differentiated mass-shell relation; it prescribes no evolution for $m$. None of these conclusions assumes a force law.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sr-total-four-momentum-and-invariant-mass",
+          "source_section": "Definition",
+          "quote": "Throughout, $(A,V,\\eta,C^+)$ is the oriented time-oriented affine Minkowski\nmodel of [[def-sr-affine-minkowski-model]] and $c>0$.\n\n**(a) Total four-momentum.** For a finite list $(P_1,\\dots,P_N)$, $N\\ge0$, of\nvectors of $V$, define the **total four-momentum**\n$P_{\\mathrm{tot}}:=\\sum_{i=1}^{N}P_i$ as the finite sum of\n[[def-finite-sum-in-a-commutative-monoid]] in the additive group $(V,+)$ of\nthe vector space $V$; the empty sum is $0$. The sum uses the vectors $P_i$\nalone: no event, no position and no simultaneity datum enters it, and the\norder of the list does not affect $P_{\\mathrm{tot}}$ because addition in $V$\nis commutative.\n\n**(b) Invariant mass of the total.** If $P_{\\mathrm{tot}}$ is future timelike\n([[def-causal-classification-of-lorentz-vectors]],\n[[def-time-orientation-and-future-causal-sets]]), define the **invariant\nmass** of the system and its **rest energy** by\n\n$$M:=M(P_{\\mathrm{tot}}):=\\frac{\\sqrt{-\\eta(P_{\\mathrm{tot}},P_{\\mathrm{tot}})}}{c}>0$$\n\nand its rest energy is $Mc^2$.\n\nThe square root is a real number because\n$\\eta(P_{\\mathrm{tot}},P_{\\mathrm{tot}})<0$ for a timelike vector, and it is\nstrictly positive, so $M>0$ ([[def-rational-power]]). If\n$P_{\\mathrm{tot}}$ is future null, set $M:=0$ and say that the system has no\nrest frame. For $P_{\\mathrm{tot}}$ equal to zero, spacelike or past causal,\nthis convention defines no invariant mass.\n\n**(c) Center-of-momentum frame.** A **center-of-momentum frame** of a nonzero\n$P_{\\mathrm{tot}}$ is an inertial frame $(o;e_0,e_1,e_2,e_3)$\n([[def-inertial-frame-and-inertial-chart]]) whose first vector satisfies\n\n$$h_{e_0}(P_{\\mathrm{tot}})=0,\\qquad h_{e_0}(v):=v+\\eta(v,e_0)e_0\\quad(v\\in V),$$\n\nwhere the projection is defined on all of $V$; for a future causal total this\nis $q_{e_0}(P_{\\mathrm{tot}})=0$, meaning that its total spatial momentum\nvanishes for the observer stationary in the frame\n([[def-sr-observed-energy-momentum-and-kinetic-energy]]). The condition is equivalent to\n$P_{\\mathrm{tot}}=-\\eta(P_{\\mathrm{tot}},e_0)e_0$, i.e. to\n$P_{\\mathrm{tot}}\\in\\mathrm{span}(e_0)$; if $P_{\\mathrm{tot}}$ is future\ntimelike this holds exactly when $P_{\\mathrm{tot}}=\\lambda e_0$ with\n$\\lambda>0$, and then $E_{e_0}(P_{\\mathrm{tot}})=Mc^2$ for $M$ as in (b).\n\n**(d) Comparison with the single-vector convention.** For a single future\ntimelike vector $P$, the invariant mass $M$ of (b) coincides with $m(P)$ of\n[[def-sr-observed-energy-momentum-and-kinetic-energy]]; in particular if\n$P=mU$ with $m>0$ and $\\eta(U,U)=-c^2$ (the four-velocity normalisation of\n[[def-sr-four-velocity-and-four-acceleration]]), then $M=m$. Both quantities\nare functions of the scalar $\\eta(P,P)$ alone.\n\n**(e) Scope.** This definition asserts no existence of a center-of-momentum\nframe (that is [[lem-sr-center-of-momentum-frame]]), no physical conservation\nlaw and no dynamics; only the total vector carries the invariant mass, and the\nindividual summands need not be causal for the sum to be defined. No choice\nprinciple is used.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By the isolated-event assumption [A1], the incoming and outgoing total vectors are the same $Q$. The collision data [F1] give finite nonempty lists of nonzero future-causal summands, so [F2] applies to each side and shows that $Q$ is future causal and nonzero. Thus the two sides have the same causal character; if $Q$ is timelike, it has one common invariant mass $M$ as defined in [F4].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "In the timelike case, apply the mass inequality of [F2] first to the incoming list and then to the outgoing list. By [F3], each massive leg's invariant mass equals its recorded rest mass, and each null leg has invariant mass zero; hence the sums of leg masses in [F2] are $\\mu_{\\rm in}$ and $\\mu_{\\rm out}$. Since both side totals equal $Q$, each has invariant mass $M$, so $M\\ge\\mu_{\\rm in}$ and $M\\ge\\mu_{\\rm out}$. For a proposed final list, set $\\mu=\\mu_{\\rm out}$ and multiply $M\\ge\\mu$ by $c^2>0$ before squaring nonnegative quantities; this gives $\\sigma=M^2c^4\\ge\\mu^2c^4$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F2], equality for a timelike side holds exactly when all its legs are massive and co-moving; any nonzero null leg makes the mass inequality strict. If the common total is null, [F2] says both lists contain only null legs on the same ray, so no massive leg occurs and no rest frame is available. The inequalities constrain kinematics only; [A1] is the sole physical collision assumption and asserts no interaction mechanism or channel occurrence.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both lists are finite and nonempty by the collision definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the common total is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The finite-sum supplier applies to a one-leg side."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats a common null total and excludes massive legs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives equality for co-moving massive legs and strictness with a null leg."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite sums only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 applies F2: equality for a timelike side forces every leg to be massive and co-moving. This proves the necessity direction of the Statement's exact equality criterion, separately from the threshold inequalities."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the converse equality clause in F2: an all-massive co-moving side attains total invariant mass equal to its rest-mass sum. This proves sufficiency in the Statement; no channel occurrence is inferred."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Take one massive leg of mass m at rest.",
+          "result": "The side invariant mass is m and equality holds.",
+          "verifies": "One-leg threshold case in step 1.2."
+        },
+        {
+          "check": "Add a nonzero null leg to a timelike side.",
+          "result": "Its positive observer energy makes the mass inequality strict.",
+          "verifies": "Strict null clause in step 2.1."
+        }
+      ]
+    },
+    "pthm-rpm-fixed-target-threshold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-rpm-inverse-momentum-and-work",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval, and let $x:I\\to A$ be a $C^2$ future-timelike worldline in the flat Minkowski model of [[def-rpm-spacetime-observer-and-worldline]]. Use one inertial frame and parameterize the curve by that chart's time coordinate $t$, so its coordinates are $(ct,\\mathbf x(t))$ ([[def-inertial-frame-and-inertial-chart]]). Identify the observer rest space with $\\mathbb R^3$ by the frame's spatial orthonormal basis and use its Euclidean dot product and norm ([[def-spatial-euclidean-structure-of-an-inertial-frame]]). Write $\\mathbf v=d\\mathbf x/dt$, $\\gamma=(1-|\\mathbf v|^2/c^2)^{-1/2}$, proper time $\\tau$, and $U=dx/d\\tau$. In the constant-mass sector of [[post-sr-massive-particle-dynamics]], let $m>0$ be constant and $P=mU$. In this chart write $P=(E/c,\\mathbf p)$, where $E$ and $\\mathbf p$ are the observer energy and spatial momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]. Then $|\\mathbf v|<c$, $E=\\gamma mc^2>0$, $\\mathbf p=\\gamma m\\mathbf v$, and\n\n$$E^2=m^2c^4+c^2|\\mathbf p|^2,\\qquad \\mathbf v=\\frac{c^2\\mathbf p}{E}.$$\n\nDefine the three-force by $\\mathbf F:=d\\mathbf p/dt$ and the four-force by $K:=dP/d\\tau$ in this flat inertial chart. In SI units $m$ is in kilograms, $c$ and $\\mathbf v$ in metres per second, $E$ in joules, $\\mathbf p$ in kilogram metres per second, and $\\mathbf F,K$ in newtons. Then\n\n$$\\frac{dE}{dt}=\\mathbf F\\cdot\\mathbf v,\\qquad K=\\gamma\\left(\\frac{\\mathbf F\\cdot\\mathbf v}{c},\\mathbf F\\right).$$\n\nSeparately, let $I_\\tau\\subseteq\\mathbb R$ be a nonempty open proper-time interval, let $m:I_\\tau\\to(0,\\infty)$ be $C^1$, and let $U:I_\\tau\\to V$ be a $C^1$ future timelike vector field with $\\eta(U,U)=-c^2$. Measure $m$ in kilograms and $dm/d\\tau$ in kilograms per second, and set $P(\\tau):=m(\\tau)U(\\tau)$. With $K:=dP/d\\tau$, the kinematic ansatz satisfies\n\n$$\\eta(P,K)=-m\\,\\frac{dm}{d\\tau}\\,c^2.$$\n\nThe last identity is only a differentiated mass-shell relation; it prescribes no evolution for $m$. None of these conclusions assumes a force law.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-rpm-mechanical-momentum-and-observer-energy",
+          "source_section": "Definition",
+          "quote": "Use the massive and null sectors as separately adopted in [[post-rpm-massive-test-particle-action]] and [[post-rpm-null-test-particle-action]]. For a massive body of constant mass $m>0$, its **mechanical four-momentum** is $P=mU$, where $U$ is its future unit tangent with $g(U,U)=-c^2$. In the null sector, the mechanical four-momentum is the separately specified nonzero future-null vector $P$ from the einbein formulation; no null proper time or $P=mU$ is defined.\n\nAt an event, for any observer $n$ of [[def-gr-observer-and-rest-space]], define the spatial momentum and observer energy by\n\n$$q_n(P):=P+g(P,n)n\\in n^\\perp,\\qquad E_n(P):=-c\\,g(P,n).$$\n\nThe projection identity and positive-definiteness of $n^\\perp$ are supplied by [[lem-gr-observer-projection-decomposition]]. With SI units, $P$ has units kg m s$^{-1}$, $q_n$ has the same units, and $E_n$ has units joules. This definition is pointwise and does not assert conservation, positivity, or an energy interpretation for an arbitrary vector field that is not an observer.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-rpm-system-mass-threshold",
+          "source_section": "Statement",
+          "quote": "Let a mass-specified isolated collision configuration of [[def-rpm-collision-objects]] satisfy the balance postulate [[post-rpm-isolated-collision-balance]]. Write its common total as $Q:=Q_{\\rm in}=Q_{\\rm out}$. It is nonzero future causal, and it is timelike if either side contains a massive leg. If $Q$ is future timelike, let $M:=\\sqrt{-\\eta(Q,Q)}/c$, and let $\\mu_{\\rm in}$ and $\\mu_{\\rm out}$ be the sums of the recorded rest masses on the two sides. Then\n\n$$M\\ge\\mu_{\\rm in},\\qquad M\\ge\\mu_{\\rm out}.$$\n\nIn particular, a proposed final collection with total rest mass $\\mu$ requires the invariant squared energy $\\sigma:=-c^2\\eta(Q,Q)=M^2c^4$ to satisfy $\\sigma\\ge\\mu^2c^4$. If an actual final collection contains a nonzero null leg, then the inequality is strict. Equality is kinematically attained exactly when every leg on the relevant side is massive and all its four-momenta are proportional to the same future unit timelike vector. This is a necessary kinematic condition; it does not establish that the interaction realizes the channel.\n\nIf instead $Q$ is future null, each side consists only of null legs on one common future null ray; no center-of-momentum frame exists and no positive-mass final leg is compatible with that total. In SI units $m_i,M,\\mu$ are kilograms, $Mc^2$ is joules, and $\\sigma$ is joules squared.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The projectile shell in [F1] gives $E_1^2-c^2|\\mathbf p_1|^2=m_1^2c^4$. The stationary target condition and [F2] give $P_2=(m_2c,\\mathbf0)$. With signature $(-,+,+,+)$, expansion yields $\\sigma=(E_1+m_2c^2)^2-c^2|\\mathbf p_1|^2=m_1^2c^4+m_2^2c^4+2m_2c^2E_1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Applying [F3] and dividing by $2m_2c^2>0$ gives $E_1\\ge(\\mu^2-m_1^2-m_2^2)c^2/(2m_2)$. The projectile shell also gives $E_1\\ge m_1c^2$ because $E_1>0$ and $E_1^2=m_1^2c^4+c^2|\\mathbf p_1|^2\\ge m_1^2c^4$. The strict case for a required nonzero null leg follows from the strict clause in [F3].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The incoming state has two named massive legs and the proposed final collection is finite."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives E1=m1c^2 at zero projectile momentum."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The claim is specifically for a distinct projectile and target."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 substitutes the target-at-rest four-momentum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 retains strictness if a nonzero null final leg is required."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a finite coordinate expansion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only necessary inequalities are asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Only necessary inequalities are asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set projectile momentum p1=0 and E1=m1c^2.",
+          "result": "sigma=(m1+m2)^2c^4.",
+          "verifies": "Stationary-projectile endpoint in step 1.1."
+        }
+      ]
+    },
+    "pthm-rpm-two-body-com-kinematics": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-rpm-isolated-collision-balance",
+          "source_section": "Postulate",
+          "quote": "For the relativistic-particle-mechanics collision configurations of [[def-rpm-collision-objects]], adopt the isolated-collision balance already stated in clause (iii) of [[post-sr-massive-particle-dynamics]]: when the event is isolated and the incoming and outgoing lists contain every leg, $Q_{\\rm in}=Q_{\\rm out}$. This local postulate records the exact collision interface used on this page; it is a scoped reuse of the existing adopted model assumption, not a second independent conservation assumption.\n\nThe balance is an adopted physical premise. It does not show that any specified reaction occurs and supplies no interaction mechanism, selection rule, probability, cross section, or amplitude. The cited treatments motivate and explain the model formulation; they do not turn the postulate into a deductive theorem or a report of an observed collision.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-rpm-collision-objects",
+          "source_section": "Definition",
+          "quote": "Use the flat oriented, time-oriented affine Minkowski model, signature $(-,+,+,+)$, and SI convention $x^0=ct$ of [[def-rpm-spacetime-observer-and-worldline]]. A **relativistic-particle-mechanics collision configuration** is a mass-specified causal collision datum of [[def-sr-collision-datum-and-conservation]]: an event $p\\in A$, a finite nonempty incoming list $P_1,\\ldots,P_N\\in V$, and a finite nonempty outgoing list $P'_1,\\ldots,P'_K\\in V$, where every leg is a nonzero future-causal vector in the same displacement space $V$. A massive leg has a recorded mass $m>0$ and the massive-sector momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]; a null leg has recorded mass $0$ and is a nonzero future-null vector with its scale specified independently. The definition does not identify a null momentum with $mU$ at $m=0$.\n\nThe side totals are the finite vector sums $Q_{\\rm in}:=\\sum_{i=1}^N P_i$ and $Q_{\\rm out}:=\\sum_{j=1}^K P'_j$. All legs are attached to the same event, so the sums compare vectors in one affine displacement space; no transport between different events is part of the datum. The adjective **isolated** is reserved for a model condition used by the postulate below: no external four-momentum transfer during the idealized event and no omitted incoming or outgoing leg.\n\nAt an event, an **observer** is a future unit timelike vector $n$ with $\\eta(n,n)=-1$, and its rest space is $n^\\perp=\\{v\\in V:\\eta(v,n)=0\\}$, as in [[def-rpm-spacetime-observer-and-worldline]]. Observer energy $E_n(P):=-c\\eta(P,n)$ and spatial momentum $q_n(P):=P+\\eta(P,n)n\\in n^\\perp$ are those of [[def-rpm-mechanical-momentum-and-observer-energy]]. Their units are joules and kilogram metres per second. An inertial laboratory means one named inertial chart and its time-axis observer; it is not a general observer congruence or an arbitrary coordinate chart.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-rpm-system-mass-threshold",
+          "source_section": "Statement",
+          "quote": "Let a mass-specified isolated collision configuration of [[def-rpm-collision-objects]] satisfy the balance postulate [[post-rpm-isolated-collision-balance]]. Write its common total as $Q:=Q_{\\rm in}=Q_{\\rm out}$. It is nonzero future causal, and it is timelike if either side contains a massive leg. If $Q$ is future timelike, let $M:=\\sqrt{-\\eta(Q,Q)}/c$, and let $\\mu_{\\rm in}$ and $\\mu_{\\rm out}$ be the sums of the recorded rest masses on the two sides. Then\n\n$$M\\ge\\mu_{\\rm in},\\qquad M\\ge\\mu_{\\rm out}.$$\n\nIn particular, a proposed final collection with total rest mass $\\mu$ requires the invariant squared energy $\\sigma:=-c^2\\eta(Q,Q)=M^2c^4$ to satisfy $\\sigma\\ge\\mu^2c^4$. If an actual final collection contains a nonzero null leg, then the inequality is strict. Equality is kinematically attained exactly when every leg on the relevant side is massive and all its four-momenta are proportional to the same future unit timelike vector. This is a necessary kinematic condition; it does not establish that the interaction realizes the channel.\n\nIf instead $Q$ is future null, each side consists only of null legs on one common future null ray; no center-of-momentum frame exists and no positive-mass final leg is compatible with that total. In SI units $m_i,M,\\mu$ are kilograms, $Mc^2$ is joules, and $\\sigma$ is joules squared.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sr-center-of-momentum-frame",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be the oriented time-oriented affine Minkowski model\n([[def-sr-affine-minkowski-model]]), $c>0$, and let $Q\\in V$ be future\ntimelike with invariant mass $M:=\\sqrt{-\\eta(Q,Q)}/c$\n([[def-sr-total-four-momentum-and-invariant-mass]]\\,(b)); put\n$n_Q:=Q/(Mc)$, so that $\\eta(n_Q,n_Q)=-1$, $n_Q\\in C^+$ and $Q=Mc\\,n_Q$.\n\n**(a)** There exists an inertial frame $(o;e_0,e_1,e_2,e_3)$ with $e_0=n_Q$;\nin every such frame $q_{e_0}(Q)=0$, $E_{e_0}(Q)=Mc^2$ and the components of\n$Q$ are $(Mc,0,0,0)$. Such a frame is a center-of-momentum frame of $Q$ in the\nsense of [[def-sr-total-four-momentum-and-invariant-mass]]\\,(c).\n\n**(b)** Conversely, if an inertial frame satisfies $q_{e_0}(Q)=0$, then\n$e_0=n_Q$. Hence the time vector of a center-of-momentum frame of $Q$ is\nunique, and two center-of-momentum frames of $Q$ differ only by the choice of\norigin and by a positively oriented $\\eta$-orthonormal change of the spatial\nbasis $(e_1,e_2,e_3)$ of $n_Q^\\perp$; in particular the center-of-momentum\nframe at a fixed origin is unique up to spatial rotations.\n\n**(c)** If $Q$ is a nonzero future null vector, then no inertial frame\nsatisfies $q_{e_0}(Q)=0$: a nonzero future null vector has no\ncenter-of-momentum frame.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-rpm-mechanical-momentum-and-observer-energy",
+          "source_section": "Definition",
+          "quote": "Use the massive and null sectors as separately adopted in [[post-rpm-massive-test-particle-action]] and [[post-rpm-null-test-particle-action]]. For a massive body of constant mass $m>0$, its **mechanical four-momentum** is $P=mU$, where $U$ is its future unit tangent with $g(U,U)=-c^2$. In the null sector, the mechanical four-momentum is the separately specified nonzero future-null vector $P$ from the einbein formulation; no null proper time or $P=mU$ is defined.\n\nAt an event, for any observer $n$ of [[def-gr-observer-and-rest-space]], define the spatial momentum and observer energy by\n\n$$q_n(P):=P+g(P,n)n\\in n^\\perp,\\qquad E_n(P):=-c\\,g(P,n).$$\n\nThe projection identity and positive-definiteness of $n^\\perp$ are supplied by [[lem-gr-observer-projection-decomposition]]. With SI units, $P$ has units kg m s$^{-1}$, $q_n$ has the same units, and $E_n$ has units joules. This definition is pointwise and does not assert conservation, positivity, or an energy interpretation for an arbitrary vector field that is not an observer.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-rpm-inverse-momentum-and-work",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval, and let $x:I\\to A$ be a $C^2$ future-timelike worldline in the flat Minkowski model of [[def-rpm-spacetime-observer-and-worldline]]. Use one inertial frame and parameterize the curve by that chart's time coordinate $t$, so its coordinates are $(ct,\\mathbf x(t))$ ([[def-inertial-frame-and-inertial-chart]]). Identify the observer rest space with $\\mathbb R^3$ by the frame's spatial orthonormal basis and use its Euclidean dot product and norm ([[def-spatial-euclidean-structure-of-an-inertial-frame]]). Write $\\mathbf v=d\\mathbf x/dt$, $\\gamma=(1-|\\mathbf v|^2/c^2)^{-1/2}$, proper time $\\tau$, and $U=dx/d\\tau$. In the constant-mass sector of [[post-sr-massive-particle-dynamics]], let $m>0$ be constant and $P=mU$. In this chart write $P=(E/c,\\mathbf p)$, where $E$ and $\\mathbf p$ are the observer energy and spatial momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]. Then $|\\mathbf v|<c$, $E=\\gamma mc^2>0$, $\\mathbf p=\\gamma m\\mathbf v$, and\n\n$$E^2=m^2c^4+c^2|\\mathbf p|^2,\\qquad \\mathbf v=\\frac{c^2\\mathbf p}{E}.$$\n\nDefine the three-force by $\\mathbf F:=d\\mathbf p/dt$ and the four-force by $K:=dP/d\\tau$ in this flat inertial chart. In SI units $m$ is in kilograms, $c$ and $\\mathbf v$ in metres per second, $E$ in joules, $\\mathbf p$ in kilogram metres per second, and $\\mathbf F,K$ in newtons. Then\n\n$$\\frac{dE}{dt}=\\mathbf F\\cdot\\mathbf v,\\qquad K=\\gamma\\left(\\frac{\\mathbf F\\cdot\\mathbf v}{c},\\mathbf F\\right).$$\n\nSeparately, let $I_\\tau\\subseteq\\mathbb R$ be a nonempty open proper-time interval, let $m:I_\\tau\\to(0,\\infty)$ be $C^1$, and let $U:I_\\tau\\to V$ be a $C^1$ future timelike vector field with $\\eta(U,U)=-c^2$. Measure $m$ in kilograms and $dm/d\\tau$ in kilograms per second, and set $P(\\tau):=m(\\tau)U(\\tau)$. With $K:=dP/d\\tau$, the kinematic ansatz satisfies\n\n$$\\eta(P,K)=-m\\,\\frac{dm}{d\\tau}\\,c^2.$$\n\nThe last identity is only a differentiated mass-shell relation; it prescribes no evolution for $m$. None of these conclusions assumes a force law.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-sr-future-causal-sums-and-inertial-coordinate-criterion",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be the oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]], [[def-lorentz-form-and-inertia]]) and use\nthe reachability objects $J^+$, $I^+$ of\n[[def-sr-causal-reachability-in-affine-minkowski-space]]. Let\n$(o;e_0,e_1,e_2,e_3)$ be an inertial frame with chart $x$\n([[def-inertial-frame-and-inertial-chart]]) and let\n$$|v_s|:=\\sqrt{(v^1)^2+(v^2)^2+(v^3)^2}$$\nbe the Euclidean norm of the spatial part $v_s:=v^1e_1+v^2e_2+v^3e_3$ of a\nvector $v=v^0e_0+v_s$\n([[def-spatial-euclidean-structure-of-an-inertial-frame]]). Then:\n\n**(a) Cone description.** $C^+=\\{v:v^0>|v_s|\\}$,\n$\\overline{C^+}=\\{v:v^0\\ge|v_s|\\}$, $C^-=\\{v:-v^0>|v_s|\\}$ and\n$\\overline{C^-}=\\{v:-v^0\\ge|v_s|\\}$; moreover every $v\\in\\overline{C^+}$ with\n$v\\ne 0$ satisfies $-\\eta(v,e_0)=v^0>0$ and $|v_s|\\le v^0$, and $v$ is future\nnull exactly when $|v_s|=v^0>0$.\n\n**(b) Finite sums.** If $v_1,\\dots,v_k$ lie in $\\overline{C^+}$\n($k\\ge 1$), then $v_1+\\cdots+v_k\\in\\overline{C^+}$; if in addition at least one\n$v_i$ lies in $C^+$, then the sum lies in $C^+$; and if $v+w=0$ with\n$v,w\\in\\overline{C^+}$, then $v=w=0$.\n\n**(c) Coordinate criterion.** For events $p,q\\in A$ put\n$D^a:=x^a(q)-x^a(p)$ and $D_s:=(D^1,D^2,D^3)$. Then: $q\\in J^+(p)$ if and only\nif $D^0\\ge|D_s|$; $q\\in I^+(p)$ if and only if $D^0>|D_s|$; $q\\in J^+(p)$ with\n$q\\ne p$ if and only if $D^0\\ge|D_s|$ and $D^0>0$; and for $q\\in J^+(p)$ with\n$q\\ne p$ one has $0<D^0$ and $|D_s|\\le D^0$. The criteria are stated for the\nchart of any inertial frame, because every inertial basis is\n$\\eta$-orthonormal with future first vector.\n\n**(d) Scope.** The lemma is a statement about the affine model and the fixed\ntime orientation; it attaches no physical meaning to $\\le$, $J^+$ or $I^+$ and\nuses no choice principle.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "In the center-of-momentum frame from [F3], $Q=(W/c)n_Q$ has zero total spatial momentum, so balance [A1] forces $\\mathbf p_b=-\\mathbf p_a$. Put $k:=|\\mathbf p_a|\\ge0$; if $k>0$, write $\\mathbf p_a=k\\mathbf e$ with $|\\mathbf e|=1$ in the Euclidean rest space $n_Q^\\perp$. The massive and null mass shells from [F1] and [F5] give $E_a^2=a^2c^4+c^2k^2$ and $E_b^2=b^2c^4+c^2k^2$, while the time component of balance is $E_a+E_b=W$ by [F2] and [F4].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Subtracting the shell equations and using $E_a+E_b=W>0$ gives $(E_a-E_b)W=(a^2-b^2)c^4$. Solving this and $E_a+E_b=W$ yields the stated $E_a,E_b$ formulas. Substituting the formula for $E_a$ into $c^2k^2=E_a^2-a^2c^4$ and factoring gives the stated expression for $k^2$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Necessity of $W\\ge(a+b)c^2$ follows from [F2]. Conversely, under this bound the second factor in $k^2$ is nonnegative because $W\\ge(a+b)c^2\\ge|a-b|c^2$. Also $E_a-ac^2=((W-ac^2)^2-b^2c^4)/(2W)\\ge0$ and symmetrically $E_b-bc^2\\ge0$, so both energies are future-directed. If $a,b>0$, equality at $W=(a+b)c^2$ gives $k=0$ and two valid massive legs. If either mass is zero, that equality gives zero momentum and zero energy for that leg, which is not an admissible nonzero null vector; hence the strict bound is necessary and sufficient in that case.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Under the stated admissible bound, choose any unit vector $\\mathbf e\\in n_Q^\\perp$ (this rest space is three-dimensional by [F3]) and define $P_a=(E_a/c)n_Q+k\\mathbf e$, $P_b=(E_b/c)n_Q-k\\mathbf e$. Their spatial sum is zero and their energies sum to $W$, so $P_a+P_b=(W/c)n_Q=Q$. Their orthogonal decompositions and the formulas for $E_a,E_b,k$ give $\\eta(P_a,P_a)=-a^2c^2$ and $\\eta(P_b,P_b)=-b^2c^2$; the energies are positive, and any zero-mass leg has $k>0$, so both vectors are nonzero future causal by the cone criterion in [F5]. Thus the constructed pair satisfies the balance and both mass shells.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement fixes the complete outgoing list to exactly two legs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 excludes the zero-vector massless endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 treats exactly one zero recorded mass."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats k=0 at the two-mass threshold."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Steps 3.1 and 4.1 verify the massive endpoint and reject the massless endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 needs one unit vector in a three-dimensional rest space, not a choice family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the necessary energy bound."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 prove the Statement's converse: the admissible threshold gives nonnegative k squared and positive energies; opposite rest-space momenta give future nonzero legs summing to Q. Threshold equality is permitted only for two positive masses."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set W=(a+b)c^2 with a,b>0.",
+          "result": "k=0, Ea=ac^2 and Eb=bc^2.",
+          "verifies": "Massive threshold endpoint in step 3.1."
+        },
+        {
+          "check": "Set a=0 and W=bc^2 with b>0.",
+          "result": "Ea=k=0, which would require the forbidden zero null vector.",
+          "verifies": "Strict massless endpoint in step 3.1."
+        },
+        {
+          "check": "Set a=b=0 and W>0.",
+          "result": "Ea=Eb=W/2 and k=W/(2c)>0.",
+          "verifies": "Two-null admissible case in steps 2.1–3.1."
+        }
+      ]
+    },
+    "pthm-rpm-two-null-invariant-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rpm-collision-objects",
+          "source_section": "Definition",
+          "quote": "Use the flat oriented, time-oriented affine Minkowski model, signature $(-,+,+,+)$, and SI convention $x^0=ct$ of [[def-rpm-spacetime-observer-and-worldline]]. A **relativistic-particle-mechanics collision configuration** is a mass-specified causal collision datum of [[def-sr-collision-datum-and-conservation]]: an event $p\\in A$, a finite nonempty incoming list $P_1,\\ldots,P_N\\in V$, and a finite nonempty outgoing list $P'_1,\\ldots,P'_K\\in V$, where every leg is a nonzero future-causal vector in the same displacement space $V$. A massive leg has a recorded mass $m>0$ and the massive-sector momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]; a null leg has recorded mass $0$ and is a nonzero future-null vector with its scale specified independently. The definition does not identify a null momentum with $mU$ at $m=0$.\n\nThe side totals are the finite vector sums $Q_{\\rm in}:=\\sum_{i=1}^N P_i$ and $Q_{\\rm out}:=\\sum_{j=1}^K P'_j$. All legs are attached to the same event, so the sums compare vectors in one affine displacement space; no transport between different events is part of the datum. The adjective **isolated** is reserved for a model condition used by the postulate below: no external four-momentum transfer during the idealized event and no omitted incoming or outgoing leg.\n\nAt an event, an **observer** is a future unit timelike vector $n$ with $\\eta(n,n)=-1$, and its rest space is $n^\\perp=\\{v\\in V:\\eta(v,n)=0\\}$, as in [[def-rpm-spacetime-observer-and-worldline]]. Observer energy $E_n(P):=-c\\eta(P,n)$ and spatial momentum $q_n(P):=P+\\eta(P,n)n\\in n^\\perp$ are those of [[def-rpm-mechanical-momentum-and-observer-energy]]. Their units are joules and kilogram metres per second. An inertial laboratory means one named inertial chart and its time-axis observer; it is not a general observer congruence or an arbitrary coordinate chart.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-rpm-mechanical-momentum-and-observer-energy",
+          "source_section": "Definition",
+          "quote": "Use the massive and null sectors as separately adopted in [[post-rpm-massive-test-particle-action]] and [[post-rpm-null-test-particle-action]]. For a massive body of constant mass $m>0$, its **mechanical four-momentum** is $P=mU$, where $U$ is its future unit tangent with $g(U,U)=-c^2$. In the null sector, the mechanical four-momentum is the separately specified nonzero future-null vector $P$ from the einbein formulation; no null proper time or $P=mU$ is defined.\n\nAt an event, for any observer $n$ of [[def-gr-observer-and-rest-space]], define the spatial momentum and observer energy by\n\n$$q_n(P):=P+g(P,n)n\\in n^\\perp,\\qquad E_n(P):=-c\\,g(P,n).$$\n\nThe projection identity and positive-definiteness of $n^\\perp$ are supplied by [[lem-gr-observer-projection-decomposition]]. With SI units, $P$ has units kg m s$^{-1}$, $q_n$ has the same units, and $E_n$ has units joules. This definition is pointwise and does not assert conservation, positivity, or an energy interpretation for an arbitrary vector field that is not an observer.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-rpm-system-mass-threshold",
+          "source_section": "Statement",
+          "quote": "Let a mass-specified isolated collision configuration of [[def-rpm-collision-objects]] satisfy the balance postulate [[post-rpm-isolated-collision-balance]]. Write its common total as $Q:=Q_{\\rm in}=Q_{\\rm out}$. It is nonzero future causal, and it is timelike if either side contains a massive leg. If $Q$ is future timelike, let $M:=\\sqrt{-\\eta(Q,Q)}/c$, and let $\\mu_{\\rm in}$ and $\\mu_{\\rm out}$ be the sums of the recorded rest masses on the two sides. Then\n\n$$M\\ge\\mu_{\\rm in},\\qquad M\\ge\\mu_{\\rm out}.$$\n\nIn particular, a proposed final collection with total rest mass $\\mu$ requires the invariant squared energy $\\sigma:=-c^2\\eta(Q,Q)=M^2c^4$ to satisfy $\\sigma\\ge\\mu^2c^4$. If an actual final collection contains a nonzero null leg, then the inequality is strict. Equality is kinematically attained exactly when every leg on the relevant side is massive and all its four-momenta are proportional to the same future unit timelike vector. This is a necessary kinematic condition; it does not establish that the interaction realizes the channel.\n\nIf instead $Q$ is future null, each side consists only of null legs on one common future null ray; no center-of-momentum frame exists and no positive-mass final leg is compatible with that total. In SI units $m_i,M,\\mu$ are kilograms, $Mc^2$ is joules, and $\\sigma$ is joules squared.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-sr-energy-momentum-observer-identities",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be the oriented time-oriented affine Minkowski model\n([[def-sr-affine-minkowski-model]]), $c>0$, let $n\\in V$ be future unit\ntimelike, $\\eta(n,n)=-1$, and let $E_n,q_n,m,T_n$ be the quantities of\n[[def-sr-observed-energy-momentum-and-kinetic-energy]].\n\n**(a)** If $P$ is nonzero future causal, then $E_n(P)>0$, $q_n(P)\\in n^\\perp$\nand\n\n$$\\eta(q_n(P),q_n(P))=\\frac{E_n(P)^2}{c^2}+\\eta(P,P)\\ \\ge\\ 0 .$$\n\nConsequently: (i) if $P$ is future null, then $\\eta(P,P)=0$ and\n$E_n(P)=c\\,|q_n(P)|>0$; (ii) if $P$ is future timelike with invariant mass\n$m(P)$, then $\\eta(P,P)=-m(P)^2c^2$ and the mass-shell identity\n\n$$E_n(P)^2=m(P)^2c^4+c^2\\,|q_n(P)|^2$$\n\nholds. The invariant mass $m(P)$ depends only on the scalar $\\eta(P,P)$ and\ntherefore on no observer $n$ and no basis, while $E_n$ and $q_n$ do depend on\n$n$.\n\n**(b)** Let $P=mU$ with $m>0$ constant, let $U$ be future timelike with\n$\\eta(U,U)=-c^2$ (the four-velocity normalisation of\n[[def-sr-four-velocity-and-four-acceleration]]), and put\n$\\gamma:=-\\eta(U/c,n)\\ge1$ and $w:=c\\,h(U/c)/\\gamma\\in n^\\perp$, the\nrelative velocity of [[thm-sr-proper-time-and-observer-decomposition]]\\,(d)\napplied to the future unit vector $u=U/c$; equivalently $w=h(U)/\\gamma$. Then\n\n$$E_n(P)=mc^2\\gamma,\\qquad T_n(P)=mc^2(\\gamma-1)\\ \\ge\\ 0,\\qquad q_n(P)=m\\gamma w,$$\n\nand $m(P)=m$. Moreover $T_n(P)=0$ if and only if $\\gamma=1$, that is $U=cn$,\nequivalently $P=mcn$ (the particle is at rest relative to $n$). Finally\n$|q_n(P)|=m\\gamma|w|=mc\\sqrt{\\gamma^2-1}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-sr-future-causal-sums-and-inertial-coordinate-criterion",
+          "source_section": "Statement",
+          "quote": "Let $(A,V,\\eta,C^+)$ be the oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]], [[def-lorentz-form-and-inertia]]) and use\nthe reachability objects $J^+$, $I^+$ of\n[[def-sr-causal-reachability-in-affine-minkowski-space]]. Let\n$(o;e_0,e_1,e_2,e_3)$ be an inertial frame with chart $x$\n([[def-inertial-frame-and-inertial-chart]]) and let\n$$|v_s|:=\\sqrt{(v^1)^2+(v^2)^2+(v^3)^2}$$\nbe the Euclidean norm of the spatial part $v_s:=v^1e_1+v^2e_2+v^3e_3$ of a\nvector $v=v^0e_0+v_s$\n([[def-spatial-euclidean-structure-of-an-inertial-frame]]). Then:\n\n**(a) Cone description.** $C^+=\\{v:v^0>|v_s|\\}$,\n$\\overline{C^+}=\\{v:v^0\\ge|v_s|\\}$, $C^-=\\{v:-v^0>|v_s|\\}$ and\n$\\overline{C^-}=\\{v:-v^0\\ge|v_s|\\}$; moreover every $v\\in\\overline{C^+}$ with\n$v\\ne 0$ satisfies $-\\eta(v,e_0)=v^0>0$ and $|v_s|\\le v^0$, and $v$ is future\nnull exactly when $|v_s|=v^0>0$.\n\n**(b) Finite sums.** If $v_1,\\dots,v_k$ lie in $\\overline{C^+}$\n($k\\ge 1$), then $v_1+\\cdots+v_k\\in\\overline{C^+}$; if in addition at least one\n$v_i$ lies in $C^+$, then the sum lies in $C^+$; and if $v+w=0$ with\n$v,w\\in\\overline{C^+}$, then $v=w=0$.\n\n**(c) Coordinate criterion.** For events $p,q\\in A$ put\n$D^a:=x^a(q)-x^a(p)$ and $D_s:=(D^1,D^2,D^3)$. Then: $q\\in J^+(p)$ if and only\nif $D^0\\ge|D_s|$; $q\\in I^+(p)$ if and only if $D^0>|D_s|$; $q\\in J^+(p)$ with\n$q\\ne p$ if and only if $D^0\\ge|D_s|$ and $D^0>0$; and for $q\\in J^+(p)$ with\n$q\\ne p$ one has $0<D^0$ and $|D_s|\\le D^0$. The criteria are stated for the\nchart of any inertial frame, because every inertial basis is\n$\\eta$-orthonormal with future first vector.\n\n**(d) Scope.** The lemma is a statement about the affine model and the fixed\ntime orientation; it attaches no physical meaning to $\\le$, $J^+$ or $I^+$ and\nuses no choice principle.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F2], $P_i=(E_i/c)n+\\mathbf p_i$, with $\\mathbf p_i\\in n^\\perp$. The null mass-shell identity of [F4] gives $|\\mathbf p_i|=E_i/c$, and [F4] also gives $E_i>0$, so the spatial angle is well-defined.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Orthogonality to $n$ gives $\\eta(P_1,P_2)=-E_1E_2/c^2+\\langle\\mathbf p_1,\\mathbf p_2\\rangle_n$. Since $P_i$ are null, $\\sigma=-c^2\\eta(P_1+P_2,P_1+P_2)=-2c^2\\eta(P_1,P_2)=2E_1E_2(1-\\cos\\theta)$. Substituting into [F3] proves the mass formula when $\\sigma>0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Because $E_1E_2>0$ and $1-\\cos\\theta\\ge0$, $\\sigma=0$ exactly when $\\cos\\theta=1$, or $\\theta=0$; then the spatial vectors have the same direction and the null four-vectors are positive multiples of one future-null vector. For $\\theta>0$, $\\sigma>0$, and [F5] makes $Q$ future timelike, so it has a center-of-momentum frame. At $\\theta=\\pi$, substitution gives $M=2\\sqrt{E_1E_2}/c^2$, and equal energies give $2E/c^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement concerns two fixed nonzero incoming vectors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies sigma=0 exactly at theta=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Exactly two incoming null momenta are assumed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the common-ray null-total case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement and step 2.1 calculate theta=0 and theta=pi."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection or infinite family is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves a null total forces theta=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves theta=0 makes the total null."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set theta=0.",
+          "result": "sigma=0 and the vectors share one future ray.",
+          "verifies": "Collinear boundary in step 2.1."
+        },
+        {
+          "check": "Set theta=pi.",
+          "result": "sigma=4E1E2 and M=2 sqrt(E1E2)/c^2.",
+          "verifies": "Head-on case in the statement and step 2.1."
+        }
+      ]
+    },
+    "pthm-rpm-kinematic-elastic-channel": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-rpm-isolated-collision-balance",
+          "source_section": "Postulate",
+          "quote": "For the relativistic-particle-mechanics collision configurations of [[def-rpm-collision-objects]], adopt the isolated-collision balance already stated in clause (iii) of [[post-sr-massive-particle-dynamics]]: when the event is isolated and the incoming and outgoing lists contain every leg, $Q_{\\rm in}=Q_{\\rm out}$. This local postulate records the exact collision interface used on this page; it is a scoped reuse of the existing adopted model assumption, not a second independent conservation assumption.\n\nThe balance is an adopted physical premise. It does not show that any specified reaction occurs and supplies no interaction mechanism, selection rule, probability, cross section, or amplitude. The cited treatments motivate and explain the model formulation; they do not turn the postulate into a deductive theorem or a report of an observed collision.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-rpm-collision-objects",
+          "source_section": "Definition",
+          "quote": "Use the flat oriented, time-oriented affine Minkowski model, signature $(-,+,+,+)$, and SI convention $x^0=ct$ of [[def-rpm-spacetime-observer-and-worldline]]. A **relativistic-particle-mechanics collision configuration** is a mass-specified causal collision datum of [[def-sr-collision-datum-and-conservation]]: an event $p\\in A$, a finite nonempty incoming list $P_1,\\ldots,P_N\\in V$, and a finite nonempty outgoing list $P'_1,\\ldots,P'_K\\in V$, where every leg is a nonzero future-causal vector in the same displacement space $V$. A massive leg has a recorded mass $m>0$ and the massive-sector momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]; a null leg has recorded mass $0$ and is a nonzero future-null vector with its scale specified independently. The definition does not identify a null momentum with $mU$ at $m=0$.\n\nThe side totals are the finite vector sums $Q_{\\rm in}:=\\sum_{i=1}^N P_i$ and $Q_{\\rm out}:=\\sum_{j=1}^K P'_j$. All legs are attached to the same event, so the sums compare vectors in one affine displacement space; no transport between different events is part of the datum. The adjective **isolated** is reserved for a model condition used by the postulate below: no external four-momentum transfer during the idealized event and no omitted incoming or outgoing leg.\n\nAt an event, an **observer** is a future unit timelike vector $n$ with $\\eta(n,n)=-1$, and its rest space is $n^\\perp=\\{v\\in V:\\eta(v,n)=0\\}$, as in [[def-rpm-spacetime-observer-and-worldline]]. Observer energy $E_n(P):=-c\\eta(P,n)$ and spatial momentum $q_n(P):=P+\\eta(P,n)n\\in n^\\perp$ are those of [[def-rpm-mechanical-momentum-and-observer-energy]]. Their units are joules and kilogram metres per second. An inertial laboratory means one named inertial chart and its time-axis observer; it is not a general observer congruence or an arbitrary coordinate chart.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-rpm-two-body-com-kinematics",
+          "source_section": "Statement",
+          "quote": "Let a finite isolated collision have future-timelike total $Q$ of invariant mass $M>0$, and set $W:=Mc^2$. Suppose the complete outgoing list consists of exactly two legs, with recorded rest masses $a,b\\ge0$; by the adopted balance postulate, their four-momenta must sum to $Q$. In a center-of-momentum frame with time-axis observer $n_Q$, a nonzero two-product state with $\\mathbf p_a+\\mathbf p_b=0$ exists exactly when\n\n$$W\\ge(a+b)c^2\\quad\\hbox{if }a,b>0,\\qquad W>(a+b)c^2\\quad\\hbox{if }a=0\\hbox{ or }b=0.$$\n\nWhen it exists, there are $k\\ge0$ and a unit vector $\\mathbf e\\in n_Q^\\perp$ such that $\\mathbf p_a=k\\mathbf e$ and $\\mathbf p_b=-k\\mathbf e$. The energies and momentum magnitude are\n\n$$E_a=\\frac{W^2+(a^2-b^2)c^4}{2W},\\qquad E_b=\\frac{W^2+(b^2-a^2)c^4}{2W},\\qquad k^2=\\frac{[W^2-(a+b)^2c^4][W^2-(a-b)^2c^4]}{4W^2c^2}.$$\n\nFor $a,b>0$ at threshold, $k=0$ and the direction is immaterial. If a massless product is present, the strict threshold is required because a zero momentum would be the forbidden zero four-vector. These equations describe kinematic balance only. In SI units $a,b,M$ are kilograms, $W,E_a,E_b$ are joules, and $k$ is kilogram metres per second; the norm and dot product on $n_Q^\\perp$ are induced by $\\eta$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rpm-mechanical-momentum-and-observer-energy",
+          "source_section": "Definition",
+          "quote": "Use the massive and null sectors as separately adopted in [[post-rpm-massive-test-particle-action]] and [[post-rpm-null-test-particle-action]]. For a massive body of constant mass $m>0$, its **mechanical four-momentum** is $P=mU$, where $U$ is its future unit tangent with $g(U,U)=-c^2$. In the null sector, the mechanical four-momentum is the separately specified nonzero future-null vector $P$ from the einbein formulation; no null proper time or $P=mU$ is defined.\n\nAt an event, for any observer $n$ of [[def-gr-observer-and-rest-space]], define the spatial momentum and observer energy by\n\n$$q_n(P):=P+g(P,n)n\\in n^\\perp,\\qquad E_n(P):=-c\\,g(P,n).$$\n\nThe projection identity and positive-definiteness of $n^\\perp$ are supplied by [[lem-gr-observer-projection-decomposition]]. With SI units, $P$ has units kg m s$^{-1}$, $q_n$ has the same units, and $E_n$ has units joules. This definition is pointwise and does not assert conservation, positivity, or an energy interpretation for an arbitrary vector field that is not an observer.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Apply [F2] to the incoming pair with masses $a,b$ and total rest energy $W=Mc^2$. It has a unique magnitude $k$ determined by $W,a,b$. The outgoing pair has the same two masses by the elastic hypothesis and the same total by [A1], so [F2] gives the same $W$ and the same magnitude $k$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "If $k>0$, let $\\mathbf e_{\\rm out}$ be any unit vector in $n_Q^\\perp$ and use [F2] to construct the two outgoing momenta with spatial parts $\\pm k\\mathbf e_{\\rm out}$ and the corresponding energies. They satisfy both mass shells and sum to $Q$. If $k=0$, the spatial parts vanish, so no direction is defined. The free kinematic parameter supplies no probability measure or scattering dynamics, hence it entails no isotropic law.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement requires exactly two incoming and two outgoing legs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 says k=0 leaves no direction parameter."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item is restricted to two-product channels."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the k=0 degenerate direction case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 distinguishes k=0 from k>0 direction freedom."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs a pair from any one rest-space unit vector."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement — Elastic channel momentum magnitude and direction freedom: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. Complete two-leg incoming and outgoing lists have pairwise fixed masses and one timelike total. Positive common momentum admits any outgoing direction; threshold zero momentum leaves direction undefined, with no isotropic probability prediction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement — Elastic channel momentum magnitude and direction freedom: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. Complete two-leg incoming and outgoing lists have pairwise fixed masses and one timelike total. Positive common momentum admits any outgoing direction; threshold zero momentum leaves direction undefined, with no isotropic probability prediction."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set k=0.",
+          "result": "Both outgoing spatial momenta vanish and direction is undefined.",
+          "verifies": "Degenerate case in step 2.1."
+        },
+        {
+          "check": "For k>0 replace e_in by any unit e_out.",
+          "result": "The opposite pair keeps zero spatial total and the same on-shell energies.",
+          "verifies": "Direction freedom in step 2.1."
+        }
+      ]
+    },
+    "texp-rpm-ideal-fusion-mass": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-rpm-isolated-collision-balance",
+          "source_section": "Postulate",
+          "quote": "For the relativistic-particle-mechanics collision configurations of [[def-rpm-collision-objects]], adopt the isolated-collision balance already stated in clause (iii) of [[post-sr-massive-particle-dynamics]]: when the event is isolated and the incoming and outgoing lists contain every leg, $Q_{\\rm in}=Q_{\\rm out}$. This local postulate records the exact collision interface used on this page; it is a scoped reuse of the existing adopted model assumption, not a second independent conservation assumption.\n\nThe balance is an adopted physical premise. It does not show that any specified reaction occurs and supplies no interaction mechanism, selection rule, probability, cross section, or amplitude. The cited treatments motivate and explain the model formulation; they do not turn the postulate into a deductive theorem or a report of an observed collision.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-rpm-collision-objects",
+          "source_section": "Definition",
+          "quote": "Use the flat oriented, time-oriented affine Minkowski model, signature $(-,+,+,+)$, and SI convention $x^0=ct$ of [[def-rpm-spacetime-observer-and-worldline]]. A **relativistic-particle-mechanics collision configuration** is a mass-specified causal collision datum of [[def-sr-collision-datum-and-conservation]]: an event $p\\in A$, a finite nonempty incoming list $P_1,\\ldots,P_N\\in V$, and a finite nonempty outgoing list $P'_1,\\ldots,P'_K\\in V$, where every leg is a nonzero future-causal vector in the same displacement space $V$. A massive leg has a recorded mass $m>0$ and the massive-sector momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]; a null leg has recorded mass $0$ and is a nonzero future-null vector with its scale specified independently. The definition does not identify a null momentum with $mU$ at $m=0$.\n\nThe side totals are the finite vector sums $Q_{\\rm in}:=\\sum_{i=1}^N P_i$ and $Q_{\\rm out}:=\\sum_{j=1}^K P'_j$. All legs are attached to the same event, so the sums compare vectors in one affine displacement space; no transport between different events is part of the datum. The adjective **isolated** is reserved for a model condition used by the postulate below: no external four-momentum transfer during the idealized event and no omitted incoming or outgoing leg.\n\nAt an event, an **observer** is a future unit timelike vector $n$ with $\\eta(n,n)=-1$, and its rest space is $n^\\perp=\\{v\\in V:\\eta(v,n)=0\\}$, as in [[def-rpm-spacetime-observer-and-worldline]]. Observer energy $E_n(P):=-c\\eta(P,n)$ and spatial momentum $q_n(P):=P+\\eta(P,n)n\\in n^\\perp$ are those of [[def-rpm-mechanical-momentum-and-observer-energy]]. Their units are joules and kilogram metres per second. An inertial laboratory means one named inertial chart and its time-axis observer; it is not a general observer congruence or an arbitrary coordinate chart.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-rpm-inverse-momentum-and-work",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval, and let $x:I\\to A$ be a $C^2$ future-timelike worldline in the flat Minkowski model of [[def-rpm-spacetime-observer-and-worldline]]. Use one inertial frame and parameterize the curve by that chart's time coordinate $t$, so its coordinates are $(ct,\\mathbf x(t))$ ([[def-inertial-frame-and-inertial-chart]]). Identify the observer rest space with $\\mathbb R^3$ by the frame's spatial orthonormal basis and use its Euclidean dot product and norm ([[def-spatial-euclidean-structure-of-an-inertial-frame]]). Write $\\mathbf v=d\\mathbf x/dt$, $\\gamma=(1-|\\mathbf v|^2/c^2)^{-1/2}$, proper time $\\tau$, and $U=dx/d\\tau$. In the constant-mass sector of [[post-sr-massive-particle-dynamics]], let $m>0$ be constant and $P=mU$. In this chart write $P=(E/c,\\mathbf p)$, where $E$ and $\\mathbf p$ are the observer energy and spatial momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]. Then $|\\mathbf v|<c$, $E=\\gamma mc^2>0$, $\\mathbf p=\\gamma m\\mathbf v$, and\n\n$$E^2=m^2c^4+c^2|\\mathbf p|^2,\\qquad \\mathbf v=\\frac{c^2\\mathbf p}{E}.$$\n\nDefine the three-force by $\\mathbf F:=d\\mathbf p/dt$ and the four-force by $K:=dP/d\\tau$ in this flat inertial chart. In SI units $m$ is in kilograms, $c$ and $\\mathbf v$ in metres per second, $E$ in joules, $\\mathbf p$ in kilogram metres per second, and $\\mathbf F,K$ in newtons. Then\n\n$$\\frac{dE}{dt}=\\mathbf F\\cdot\\mathbf v,\\qquad K=\\gamma\\left(\\frac{\\mathbf F\\cdot\\mathbf v}{c},\\mathbf F\\right).$$\n\nSeparately, let $I_\\tau\\subseteq\\mathbb R$ be a nonempty open proper-time interval, let $m:I_\\tau\\to(0,\\infty)$ be $C^1$, and let $U:I_\\tau\\to V$ be a $C^1$ future timelike vector field with $\\eta(U,U)=-c^2$. Measure $m$ in kilograms and $dm/d\\tau$ in kilograms per second, and set $P(\\tau):=m(\\tau)U(\\tau)$. With $K:=dP/d\\tau$, the kinematic ansatz satisfies\n\n$$\\eta(P,K)=-m\\,\\frac{dm}{d\\tau}\\,c^2.$$\n\nThe last identity is only a differentiated mass-shell relation; it prescribes no evolution for $m$. None of these conclusions assumes a force law.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F2], the two incoming momenta in the laboratory are $P_1=(\\gamma mc,\\gamma m\\mathbf v)$ and $P_2=(\\gamma mc,-\\gamma m\\mathbf v)$. Thus $Q_{\\rm in}=P_1+P_2=(2\\gamma mc,\\mathbf0)$, which is future timelike and has invariant mass $\\sqrt{-\\eta(Q_{\\rm in},Q_{\\rm in})}/c=2m\\gamma$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "The output is one massive leg at rest, so [F2] gives $P_{\\rm out}=(Mc,\\mathbf0)$. Balance [A1] gives $P_{\\rm out}=Q_{\\rm in}$ and therefore $M=2m\\gamma$. Subtracting the two incoming rest masses gives $M-2m=2m(\\gamma-1)$; multiplying by $c^2$ gives the rest-energy increase. By [F2], the incoming total energy is $2\\gamma mc^2$ and its rest-energy baseline is $2mc^2$, so the same difference is the incoming kinetic energy. Since $\\gamma=1$ exactly at $\\mathbf v=0$, the zero-speed boundary gives zero excess.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The setup specifies two incoming legs and one output leg."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero excess when v=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The setup explicitly has two incoming particles."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the v=0 boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The timelike hypothesis gives |v|<c and finite gamma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The thought experiment uses explicit finite data and no choice assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement — Ideal two-particle fusion and internal mass: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. Two equal positive masses with opposite subluminal velocities hypothetically form one complete rest product. Momentum balance gives twice gamma times incoming rest mass, with zero excess at zero velocity; no actual channel occurrence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement — Ideal two-particle fusion and internal mass: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. Two equal positive masses with opposite subluminal velocities hypothetically form one complete rest product. Momentum balance gives twice gamma times incoming rest mass, with zero excess at zero velocity; no actual channel occurrence is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set v=0 and gamma=1.",
+          "result": "M=2m and excess rest mass and energy are zero.",
+          "verifies": "Zero-speed boundary in step 2.1."
+        }
+      ]
+    },
+    "texp-rpm-one-null-decay-recoil": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-rpm-isolated-collision-balance",
+          "source_section": "Postulate",
+          "quote": "For the relativistic-particle-mechanics collision configurations of [[def-rpm-collision-objects]], adopt the isolated-collision balance already stated in clause (iii) of [[post-sr-massive-particle-dynamics]]: when the event is isolated and the incoming and outgoing lists contain every leg, $Q_{\\rm in}=Q_{\\rm out}$. This local postulate records the exact collision interface used on this page; it is a scoped reuse of the existing adopted model assumption, not a second independent conservation assumption.\n\nThe balance is an adopted physical premise. It does not show that any specified reaction occurs and supplies no interaction mechanism, selection rule, probability, cross section, or amplitude. The cited treatments motivate and explain the model formulation; they do not turn the postulate into a deductive theorem or a report of an observed collision.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-rpm-collision-objects",
+          "source_section": "Definition",
+          "quote": "Use the flat oriented, time-oriented affine Minkowski model, signature $(-,+,+,+)$, and SI convention $x^0=ct$ of [[def-rpm-spacetime-observer-and-worldline]]. A **relativistic-particle-mechanics collision configuration** is a mass-specified causal collision datum of [[def-sr-collision-datum-and-conservation]]: an event $p\\in A$, a finite nonempty incoming list $P_1,\\ldots,P_N\\in V$, and a finite nonempty outgoing list $P'_1,\\ldots,P'_K\\in V$, where every leg is a nonzero future-causal vector in the same displacement space $V$. A massive leg has a recorded mass $m>0$ and the massive-sector momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]; a null leg has recorded mass $0$ and is a nonzero future-null vector with its scale specified independently. The definition does not identify a null momentum with $mU$ at $m=0$.\n\nThe side totals are the finite vector sums $Q_{\\rm in}:=\\sum_{i=1}^N P_i$ and $Q_{\\rm out}:=\\sum_{j=1}^K P'_j$. All legs are attached to the same event, so the sums compare vectors in one affine displacement space; no transport between different events is part of the datum. The adjective **isolated** is reserved for a model condition used by the postulate below: no external four-momentum transfer during the idealized event and no omitted incoming or outgoing leg.\n\nAt an event, an **observer** is a future unit timelike vector $n$ with $\\eta(n,n)=-1$, and its rest space is $n^\\perp=\\{v\\in V:\\eta(v,n)=0\\}$, as in [[def-rpm-spacetime-observer-and-worldline]]. Observer energy $E_n(P):=-c\\eta(P,n)$ and spatial momentum $q_n(P):=P+\\eta(P,n)n\\in n^\\perp$ are those of [[def-rpm-mechanical-momentum-and-observer-energy]]. Their units are joules and kilogram metres per second. An inertial laboratory means one named inertial chart and its time-axis observer; it is not a general observer congruence or an arbitrary coordinate chart.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-rpm-two-body-com-kinematics",
+          "source_section": "Statement",
+          "quote": "Let a finite isolated collision have future-timelike total $Q$ of invariant mass $M>0$, and set $W:=Mc^2$. Suppose the complete outgoing list consists of exactly two legs, with recorded rest masses $a,b\\ge0$; by the adopted balance postulate, their four-momenta must sum to $Q$. In a center-of-momentum frame with time-axis observer $n_Q$, a nonzero two-product state with $\\mathbf p_a+\\mathbf p_b=0$ exists exactly when\n\n$$W\\ge(a+b)c^2\\quad\\hbox{if }a,b>0,\\qquad W>(a+b)c^2\\quad\\hbox{if }a=0\\hbox{ or }b=0.$$\n\nWhen it exists, there are $k\\ge0$ and a unit vector $\\mathbf e\\in n_Q^\\perp$ such that $\\mathbf p_a=k\\mathbf e$ and $\\mathbf p_b=-k\\mathbf e$. The energies and momentum magnitude are\n\n$$E_a=\\frac{W^2+(a^2-b^2)c^4}{2W},\\qquad E_b=\\frac{W^2+(b^2-a^2)c^4}{2W},\\qquad k^2=\\frac{[W^2-(a+b)^2c^4][W^2-(a-b)^2c^4]}{4W^2c^2}.$$\n\nFor $a,b>0$ at threshold, $k=0$ and the direction is immaterial. If a massless product is present, the strict threshold is required because a zero momentum would be the forbidden zero four-vector. These equations describe kinematic balance only. In SI units $a,b,M$ are kilograms, $W,E_a,E_b$ are joules, and $k$ is kilogram metres per second; the norm and dot product on $n_Q^\\perp$ are induced by $\\eta$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-rpm-inverse-momentum-and-work",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval, and let $x:I\\to A$ be a $C^2$ future-timelike worldline in the flat Minkowski model of [[def-rpm-spacetime-observer-and-worldline]]. Use one inertial frame and parameterize the curve by that chart's time coordinate $t$, so its coordinates are $(ct,\\mathbf x(t))$ ([[def-inertial-frame-and-inertial-chart]]). Identify the observer rest space with $\\mathbb R^3$ by the frame's spatial orthonormal basis and use its Euclidean dot product and norm ([[def-spatial-euclidean-structure-of-an-inertial-frame]]). Write $\\mathbf v=d\\mathbf x/dt$, $\\gamma=(1-|\\mathbf v|^2/c^2)^{-1/2}$, proper time $\\tau$, and $U=dx/d\\tau$. In the constant-mass sector of [[post-sr-massive-particle-dynamics]], let $m>0$ be constant and $P=mU$. In this chart write $P=(E/c,\\mathbf p)$, where $E$ and $\\mathbf p$ are the observer energy and spatial momentum of [[def-rpm-mechanical-momentum-and-observer-energy]]. Then $|\\mathbf v|<c$, $E=\\gamma mc^2>0$, $\\mathbf p=\\gamma m\\mathbf v$, and\n\n$$E^2=m^2c^4+c^2|\\mathbf p|^2,\\qquad \\mathbf v=\\frac{c^2\\mathbf p}{E}.$$\n\nDefine the three-force by $\\mathbf F:=d\\mathbf p/dt$ and the four-force by $K:=dP/d\\tau$ in this flat inertial chart. In SI units $m$ is in kilograms, $c$ and $\\mathbf v$ in metres per second, $E$ in joules, $\\mathbf p$ in kilogram metres per second, and $\\mathbf F,K$ in newtons. Then\n\n$$\\frac{dE}{dt}=\\mathbf F\\cdot\\mathbf v,\\qquad K=\\gamma\\left(\\frac{\\mathbf F\\cdot\\mathbf v}{c},\\mathbf F\\right).$$\n\nSeparately, let $I_\\tau\\subseteq\\mathbb R$ be a nonempty open proper-time interval, let $m:I_\\tau\\to(0,\\infty)$ be $C^1$, and let $U:I_\\tau\\to V$ be a $C^1$ future timelike vector field with $\\eta(U,U)=-c^2$. Measure $m$ in kilograms and $dm/d\\tau$ in kilograms per second, and set $P(\\tau):=m(\\tau)U(\\tau)$. With $K:=dP/d\\tau$, the kinematic ansatz satisfies\n\n$$\\eta(P,K)=-m\\,\\frac{dm}{d\\tau}\\,c^2.$$\n\nThe last identity is only a differentiated mass-shell relation; it prescribes no evolution for $m$. None of these conclusions assumes a force law.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The parent rest frame is the center-of-momentum frame of its initial total, with $W=Mc^2$. Apply [F2] with outgoing masses $a=m$ and $b=0$. Since $M>m$, the strict condition $W>mc^2$ holds, so the null output is nonzero. The formula for $k$ gives $k=\\sqrt{[W^2-m^2c^4]^2}/(2Wc)=(M^2-m^2)c/(2M)$; the energy formulas give the stated $E_{\\rm d}$ and $E_{\\rm null}$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "By [F3], $|\\mathbf v_{\\rm d}|=c^2k/E_{\\rm d}=(M^2-m^2)c/(M^2+m^2)<c$, since $M^2-m^2<M^2+m^2$. Also $E_{\\rm d}-mc^2=(M-m)^2c^2/(2M)$, so $E_{\\rm null}+(E_{\\rm d}-mc^2)=(M-m)c^2$; for $0<m<M$, this daughter kinetic term is positive and $E_{\\rm null}<(M-m)c^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The setup specifies one parent and exactly two outgoing legs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The strict hypothesis 0<m<M makes k positive in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats one massive and one null product."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes M=m because it would force a zero null vector."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Steps 1.1–2.1 use 0<m<M to keep k positive and daughter speed below c."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The calculation uses explicit finite data and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement — One-null decay and massive recoil: These conditional identities or constructions do not assert an additional biconditional beyond their stated formulation. A hypothetical parent of positive mass decays completely into a smaller positive-mass daughter and a nonzero null leg. The strict daughter-parent mass ordering keeps recoil momentum positive and yields the stated kinetic-energy remainder."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement — One-null decay and massive recoil: No reverse implication from an observed or formal output to a broader model or unspecified input is asserted. A hypothetical parent of positive mass decays completely into a smaller positive-mass daughter and a nonzero null leg. The strict daughter-parent mass ordering keeps recoil momentum positive and yields the stated kinetic-energy remainder."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Let m approach M from below.",
+          "result": "k and E_null tend to zero; m=M is excluded because it would require a zero null vector.",
+          "verifies": "Strict endpoint in steps 1.1–2.1."
+        }
+      ]
+    }
+  }
+}

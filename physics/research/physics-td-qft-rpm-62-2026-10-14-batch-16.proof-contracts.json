@@ -1,0 +1,902 @@
+{
+  "version": 1,
+  "level": "physics-td-qft-rpm-62-2026-10-14",
+  "scope": [
+    "pthm-td-unitary-entropy-invariance",
+    "ex-td-macrocell-and-gibbs-entropy",
+    "ex-td-mean-vs-trial-outcome",
+    "ex-td-local-equilibrium-profile",
+    "ex-td-transport-coefficient-model-input"
+  ],
+  "contracts": {
+    "pthm-td-unitary-entropy-invariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-nrqm-many-body-unitary-evolution-preserves-entropy",
+          "source_section": "Statement",
+          "quote": "(a) *entropy is conserved*: for every declared sector preparation $\\rho(0)$\nof the model and every $t\\in\\mathbb R$,\n$$s(\\rho(t))=s(\\rho(0));$$\n\n(b) *the canonical preparation is stationary*:\n$U(t)\\rho_\\beta U(t)^*=\\rho_\\beta$ for every $t$, and every thermal mean\n$\\operatorname{tr}(\\rho_\\beta A)$ of an assigned observable is time\nindependent;\n\n(c) *no unitary production of the canonical preparation*: if\n$\\rho(0)\\ne\\rho_\\beta$ then $\\rho(t)\\ne\\rho_\\beta$ for every $t\\in\\mathbb R$;\nequivalently, no evolution of this isolated model maps a non-canonical\ndeclared preparation to the canonical one at any time;",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqm-many-body-framework-entropy-and-free-energy",
+          "source_section": "Definition",
+          "quote": "**(d) Physical entropy.** The **physical entropy** of $\\rho$ is\n$$S(\\rho):=k_B\\,s(\\rho),$$\nread in $\\mathrm J\\,\\mathrm K^{-1}$. It is nonnegative, is at most\n$k_B\\log D$, and vanishes exactly for pure preparations.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-td-macro-versus-micro-entropy-claim",
+          "source_section": "Definition",
+          "quote": "These are distinct definitions on different domains: $S_c$ acts on an equilibrium macrostate, $S_{\\mathrm B}$ on a chosen macrocell, $S_{\\mathrm G}$ on a specified probability vector, and $S_{\\mathrm{vN}}$ on a finite-sector density operator. A numerical equality among them requires an additional, explicit identification of model, coarse-graining, preparation and applicable limit. This item supplies no such identification and adopts no canonical or microcanonical sampling rule.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nrqm-many-body-framework-declared-fixed-n-model",
+          "source_section": "Definition",
+          "quote": "**(e) The model's energy reading and evolution.** In every realization with\n$\\mathfrak H_N^\\sigma\\ne\\{0\\}$, the pair $(H_N^\\sigma,\\mathrm J)$ is declared to be the **assigned energy\nobservable** of the $N$-particle sector in the sense of\n[[def-nrqm-observables-framework-observable-and-outcome-law]] clause (a): its\noutcome law in a declared sector preparation $\\rho$ is the law\n$\\mu^{H_N^\\sigma}_\\rho(B)=\\operatorname{tr}(\\rho E_{H_N^\\sigma}(B))$ of that\ndefinition clause (b), and its spectral data are those of the self-adjoint\noperator constructed in clause (d). The **model evolution** is the unitary\nflow $U(t)=\\exp(-itH_N^\\sigma/\\hbar)$ of\n[[def-nrqm-autonomous-dynamics-framework-evolution]] clause (b) with this\ngenerator. If $\\mathfrak H_N^\\sigma=\\{0\\}$, clause (d) retains the unique\nzero-space operator only as mathematical bookkeeping: every operator on this\nspace has trace zero, so there is no trace-one preparation, no assigned\nphysical energy observable and no preparation evolution under P1-P4.\nThe identification of the operator with the energy of a concrete\nsample, and the assignment of numerical masses, couplings and potentials to a\nlaboratory species, are tested identifications with uncertainty under P7;\nthey are not consequences of P1-P6.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nrqm-framework-quantities-and-units",
+          "source_section": "Definition",
+          "quote": "**(b) Reference units.** The **metre** (m), **second** (s), **kilogram** (kg) and **coulomb** (C) are the reference units of length, duration, mass and charge; a quantity of dimension $\\ell^{a}\\tau^{b}\\mu^{c}\\vartheta^{d}$ is expressed in the unit $\\mathrm m^{a}\\mathrm s^{b}\\mathrm kg^{c}\\mathrm C^{d}$. Coordinates of an inertial frame are read with the time coordinate $t$ in seconds, $[t]=\\tau$, and the spatial coordinates $x_{i}$ in metres, $[x_{i}]=\\ell$; slice distances of the arena are read in metres. In the temperature extension the reference unit of $\\Theta$ is the kelvin (K), so the general reference unit gains a factor $\\mathrm K^e$.\n\n**(c) Defining constants of the current SI.** The framework keeps $\\hbar$ explicit. In the current SI the constants $h$, $c$ and $e$ are exact defining constants, with the values $h=6{,}626\\,070\\,15\\times10^{-34}$ J s, $c=2{,}99792458\\times10^{8}$ m s$^{-1}$ and $e=1{,}602\\,176\\,634\\times10^{-19}$ C, and $\\hbar:=h/(2\\pi)$. These are real scalar constants with dimensions and units $[h]=[\\hbar]=\\mu\\ell^{2}\\tau^{-1}$ (J s), $[c]=\\ell\\tau^{-1}$ (m s$^{-1}$), and $[e]=\\vartheta$ (C). The vacuum permeability $\\mu_{0}$ is a positive real scalar that is experimentally determined in the current SI, with $[\\mu_{0}]=\\mu\\ell\\vartheta^{-2}$ (N A$^{-2}$ = H m$^{-1}$); $\\varepsilon_{0}:=(\\mu_{0}c^{2})^{-1}$ is a positive real scalar with $[\\varepsilon_{0}]=\\mu^{-1}\\ell^{-3}\\tau^{2}\\vartheta^{2}$ (F m$^{-1}$). These are unit-convention statements of the SI, not measurements reported by this framework; $c$ enters the framework only through the separate radiation assumptions adopted on their own pages, not in the nonrelativistic spacetime of [[def-nrqm-framework-newtonian-spacetime]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-nrqm-autonomous-dynamics-framework-evolution",
+          "source_section": "Definition",
+          "quote": "a general preparation $\\rho$, that is an element of the state space $D(H)$ of [[def-nrqm-state-geometry-framework-state-space]], evolves by\n$$\\rho(t):=U(t)\\rho(0)U(t)^{*},$$\nthe reading of clause (iii) of P4 in the density-operator vocabulary of [[def-nrqm-state-geometry-pure-mixed-states-and-purity]] ([[def-self-adjoint-positive-unitary-and-normal-operator]], [[lem-nrqm-composites-density-and-scalar-spectral-probability]]). In this picture the assigned observables are held fixed at their assigned values and the preparation moves.\n\n**(d) Heisenberg picture.** For a **bounded** assigned sharp observable $(A,u_A)$ — that is, an assigned sharp observable with $A\\in\\mathcal B(H)$ ([[def-bounded-linear-operator]]),",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-nrqm-autonomous-dynamics-framework-evolution",
+          "source_section": "Definition",
+          "quote": "**(b) The unitary flow.** The **time evolution** or **flow** of the isolated system is the family\n$$U(t):=\\exp\\!\\Bigl(-\\frac{i}{\\hbar}tH_{\\mathrm{op}}\\Bigr):=\\int_{\\mathbb R}e^{-it\\lambda/\\hbar}\\,dE_H(\\lambda)\\qquad(t\\in\\mathbb R),$$\nthe reading of clause (ii) of P4 in the spectral calculus of $H_{\\mathrm{op}}$ ([[def-unbounded-integral-against-a-pvm]]); here $\\hbar>0$ is the reduced Planck constant with its value and unit fixed by [[def-nrqm-framework-quantities-and-units]], so that $tH_{\\mathrm{op}}/\\hbar$ is dimensionless. Equivalently, $U(t)=e^{itT}$ for the self-adjoint generator $T:=-H_{\\mathrm{op}}/\\hbar$ with $D(T)=D(H_{\\mathrm{op}})$; the two readings agree by the uniqueness of the generator in Stone's",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-nrqm-many-body-framework-entropy-and-free-energy",
+          "source_section": "Definition",
+          "quote": "**(f) Scope.** This definition covers only declared models with\nfinite-dimensional sector space, with the zero-sector branch of (a), and preparations in\n$\\mathcal D(\\mathfrak H_N^\\sigma)$. For a declared spatial realization, whose\nsector space is infinite-dimensional, the operator $\\rho\\log\\rho$ need not be\ntrace class; no entropy, physical entropy or free energy is defined here for\nthat case, and a separate trace-class statement would be required. The\ndefinition asserts no increase of entropy in time, no equilibration to\n$\\rho_\\beta$, no thermodynamic limit, no pressure or volume variable, and no\nmeasured temperature, entropy or free energy.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "pthm-nrqm-many-body-unitary-evolution-preserves-entropy",
+          "carrier": "items/pthm-nrqm-many-body-unitary-evolution-preserves-entropy.md",
+          "status": "Read-only published carrier inspected; interface excerpt only, not independent acceptance.",
+          "source_section": "Statement",
+          "exact_statement": "(a) *entropy is conserved*: for every declared sector preparation $\\rho(0)$\nof the model and every $t\\in\\mathbb R$,\n$$s(\\rho(t))=s(\\rho(0));$$\n\n(b) *the canonical preparation is stationary*:\n$U(t)\\rho_\\beta U(t)^*=\\rho_\\beta$ for every $t$, and every thermal mean\n$\\operatorname{tr}(\\rho_\\beta A)$ of an assigned observable is time\nindependent;\n\n(c) *no unitary production of the canonical preparation*: if\n$\\rho(0)\\ne\\rho_\\beta$ then $\\rho(t)\\ne\\rho_\\beta$ for every $t\\in\\mathbb R$;\nequivalently, no evolution of this isolated model maps a non-canonical\ndeclared preparation to the canonical one at any time;",
+          "supplier_proof_status": "published theorem interface and proof status inspected; status is preserved.",
+          "consumer_use": "Facts & Assumptions F1 at 1.1, 1.2."
+        },
+        {
+          "supplier": "def-nrqm-many-body-framework-entropy-and-free-energy",
+          "carrier": "items/def-nrqm-many-body-framework-entropy-and-free-energy.md",
+          "status": "Read-only published carrier inspected; interface excerpt only, not independent acceptance.",
+          "source_section": "Definition",
+          "exact_statement": "**(d) Physical entropy.** The **physical entropy** of $\\rho$ is\n$$S(\\rho):=k_B\\,s(\\rho),$$\nread in $\\mathrm J\\,\\mathrm K^{-1}$. It is nonnegative, is at most\n$k_B\\log D$, and vanishes exactly for pure preparations.",
+          "supplier_proof_status": "published definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions F2 at 1.1."
+        },
+        {
+          "supplier": "def-td-macro-versus-micro-entropy-claim",
+          "carrier": "items/def-td-macro-versus-micro-entropy-claim.md",
+          "status": "Current draft carrier inspected; its status is preserved and no independent approval is claimed.",
+          "source_section": "Definition",
+          "exact_statement": "These are distinct definitions on different domains: $S_c$ acts on an equilibrium macrostate, $S_{\\mathrm B}$ on a chosen macrocell, $S_{\\mathrm G}$ on a specified probability vector, and $S_{\\mathrm{vN}}$ on a finite-sector density operator. A numerical equality among them requires an additional, explicit identification of model, coarse-graining, preparation and applicable limit. This item supplies no such identification and adopts no canonical or microcanonical sampling rule.",
+          "supplier_proof_status": "draft definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions F3 at 2.1."
+        },
+        {
+          "supplier": "def-nrqm-many-body-framework-declared-fixed-n-model",
+          "carrier": "items/def-nrqm-many-body-framework-declared-fixed-n-model.md",
+          "status": "Read-only published carrier inspected; interface excerpt only, not independent acceptance.",
+          "source_section": "Definition",
+          "exact_statement": "**(e) The model's energy reading and evolution.** In every realization with\n$\\mathfrak H_N^\\sigma\\ne\\{0\\}$, the pair $(H_N^\\sigma,\\mathrm J)$ is declared to be the **assigned energy\nobservable** of the $N$-particle sector in the sense of\n[[def-nrqm-observables-framework-observable-and-outcome-law]] clause (a): its\noutcome law in a declared sector preparation $\\rho$ is the law\n$\\mu^{H_N^\\sigma}_\\rho(B)=\\operatorname{tr}(\\rho E_{H_N^\\sigma}(B))$ of that\ndefinition clause (b), and its spectral data are those of the self-adjoint\noperator constructed in clause (d). The **model evolution** is the unitary\nflow $U(t)=\\exp(-itH_N^\\sigma/\\hbar)$ of\n[[def-nrqm-autonomous-dynamics-framework-evolution]] clause (b) with this\ngenerator. If $\\mathfrak H_N^\\sigma=\\{0\\}$, clause (d) retains the unique\nzero-space operator only as mathematical bookkeeping: every operator on this\nspace has trace zero, so there is no trace-one preparation, no assigned\nphysical energy observable and no preparation evolution under P1-P4.\nThe identification of the operator with the energy of a concrete\nsample, and the assignment of numerical masses, couplings and potentials to a\nlaboratory species, are tested identifications with uncertainty under P7;\nthey are not consequences of P1-P6.",
+          "supplier_proof_status": "published definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions F4 at 1.1, 1.2."
+        },
+        {
+          "supplier": "def-nrqm-framework-quantities-and-units",
+          "carrier": "items/def-nrqm-framework-quantities-and-units.md",
+          "status": "Read-only published carrier inspected; interface excerpt only, not independent acceptance.",
+          "source_section": "Definition",
+          "exact_statement": "**(b) Reference units.** The **metre** (m), **second** (s), **kilogram** (kg) and **coulomb** (C) are the reference units of length, duration, mass and charge; a quantity of dimension $\\ell^{a}\\tau^{b}\\mu^{c}\\vartheta^{d}$ is expressed in the unit $\\mathrm m^{a}\\mathrm s^{b}\\mathrm kg^{c}\\mathrm C^{d}$. Coordinates of an inertial frame are read with the time coordinate $t$ in seconds, $[t]=\\tau$, and the spatial coordinates $x_{i}$ in metres, $[x_{i}]=\\ell$; slice distances of the arena are read in metres. In the temperature extension the reference unit of $\\Theta$ is the kelvin (K), so the general reference unit gains a factor $\\mathrm K^e$.\n\n**(c) Defining constants of the current SI.** The framework keeps $\\hbar$ explicit. In the current SI the constants $h$, $c$ and $e$ are exact defining constants, with the values $h=6{,}626\\,070\\,15\\times10^{-34}$ J s, $c=2{,}99792458\\times10^{8}$ m s$^{-1}$ and $e=1{,}602\\,176\\,634\\times10^{-19}$ C, and $\\hbar:=h/(2\\pi)$. These are real scalar constants with dimensions and units $[h]=[\\hbar]=\\mu\\ell^{2}\\tau^{-1}$ (J s), $[c]=\\ell\\tau^{-1}$ (m s$^{-1}$), and $[e]=\\vartheta$ (C). The vacuum permeability $\\mu_{0}$ is a positive real scalar that is experimentally determined in the current SI, with $[\\mu_{0}]=\\mu\\ell\\vartheta^{-2}$ (N A$^{-2}$ = H m$^{-1}$); $\\varepsilon_{0}:=(\\mu_{0}c^{2})^{-1}$ is a positive real scalar with $[\\varepsilon_{0}]=\\mu^{-1}\\ell^{-3}\\tau^{2}\\vartheta^{2}$ (F m$^{-1}$). These are unit-convention statements of the SI, not measurements reported by this framework; $c$ enters the framework only through the separate radiation assumptions adopted on their own pages, not in the nonrelativistic spacetime of [[def-nrqm-framework-newtonian-spacetime]].",
+          "supplier_proof_status": "published definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions F5 at 1.1, 1.2."
+        },
+        {
+          "supplier": "def-nrqm-autonomous-dynamics-framework-evolution",
+          "carrier": "items/def-nrqm-autonomous-dynamics-framework-evolution.md",
+          "status": "Read-only published carrier inspected; interface excerpt only, not independent acceptance.",
+          "source_section": "Definition",
+          "exact_statement": "a general preparation $\\rho$, that is an element of the state space $D(H)$ of [[def-nrqm-state-geometry-framework-state-space]], evolves by\n$$\\rho(t):=U(t)\\rho(0)U(t)^{*},$$\nthe reading of clause (iii) of P4 in the density-operator vocabulary of [[def-nrqm-state-geometry-pure-mixed-states-and-purity]] ([[def-self-adjoint-positive-unitary-and-normal-operator]], [[lem-nrqm-composites-density-and-scalar-spectral-probability]]). In this picture the assigned observables are held fixed at their assigned values and the preparation moves.\n\n**(d) Heisenberg picture.** For a **bounded** assigned sharp observable $(A,u_A)$ — that is, an assigned sharp observable with $A\\in\\mathcal B(H)$ ([[def-bounded-linear-operator]]),",
+          "supplier_proof_status": "published definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions F6 at 1.1, 1.2."
+        },
+        {
+          "supplier": "def-nrqm-autonomous-dynamics-framework-evolution",
+          "carrier": "items/def-nrqm-autonomous-dynamics-framework-evolution.md",
+          "status": "Read-only published carrier inspected; interface excerpt only, not independent acceptance.",
+          "source_section": "Definition",
+          "exact_statement": "**(b) The unitary flow.** The **time evolution** or **flow** of the isolated system is the family\n$$U(t):=\\exp\\!\\Bigl(-\\frac{i}{\\hbar}tH_{\\mathrm{op}}\\Bigr):=\\int_{\\mathbb R}e^{-it\\lambda/\\hbar}\\,dE_H(\\lambda)\\qquad(t\\in\\mathbb R),$$\nthe reading of clause (ii) of P4 in the spectral calculus of $H_{\\mathrm{op}}$ ([[def-unbounded-integral-against-a-pvm]]); here $\\hbar>0$ is the reduced Planck constant with its value and unit fixed by [[def-nrqm-framework-quantities-and-units]], so that $tH_{\\mathrm{op}}/\\hbar$ is dimensionless. Equivalently, $U(t)=e^{itT}$ for the self-adjoint generator $T:=-H_{\\mathrm{op}}/\\hbar$ with $D(T)=D(H_{\\mathrm{op}})$; the two readings agree by the uniqueness of the generator in Stone's",
+          "supplier_proof_status": "published definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions F7 at 2.1."
+        },
+        {
+          "supplier": "def-nrqm-many-body-framework-entropy-and-free-energy",
+          "carrier": "items/def-nrqm-many-body-framework-entropy-and-free-energy.md",
+          "status": "Read-only published carrier inspected; interface excerpt only, not independent acceptance.",
+          "source_section": "Definition",
+          "exact_statement": "**(f) Scope.** This definition covers only declared models with\nfinite-dimensional sector space, with the zero-sector branch of (a), and preparations in\n$\\mathcal D(\\mathfrak H_N^\\sigma)$. For a declared spatial realization, whose\nsector space is infinite-dimensional, the operator $\\rho\\log\\rho$ need not be\ntrace class; no entropy, physical entropy or free energy is defined here for\nthat case, and a separate trace-class statement would be required. The\ndefinition asserts no increase of entropy in time, no equilibration to\n$\\rho_\\beta$, no thermodynamic limit, no pressure or volume variable, and no\nmeasured temperature, entropy or free energy.",
+          "supplier_proof_status": "published definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions F8 at 2.1."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Read-only published carrier inspected; interface excerpt only, not independent acceptance.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "supplier_proof_status": "published definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions A1 at 1.1, 1.2."
+        },
+        {
+          "supplier": "def-axiom-of-choice",
+          "carrier": "items/def-axiom-of-choice.md",
+          "status": "Read-only published carrier inspected; interface excerpt only, not independent acceptance.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "supplier_proof_status": "published definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions A1 at 1.1, 1.2."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the finite-sector model [F4], units and time convention [F5], flow [F6], and both choice assumptions [A1], clause (a) of [F1] gives $s(\\rho(t))=s(\\rho(0))$ for every declared preparation and every real $t$. Multiplying by the fixed $k_{\\mathrm B}$ and using [F2] yields $S_{\\mathrm{vN}}(\\rho(t))=S_{\\mathrm{vN}}(\\rho(0))$. This proves conclusion 1.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Clause (b) of [F1] gives conclusion 2 under the same model and choice assumptions. The canonical preparation is an adopted premise of [F1]; its stationarity does not derive that preparation or a relaxation process.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "A1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\rho(t)=\\rho_\\beta$ for some $t$, then applying $U(t)^*$ on the left and $U(t)$ on the right, using [F7], gives $\\rho(0)=U(t)^*\\rho_\\beta U(t)$. Stationarity in step 1.2 at time $-t$ makes the right-hand side $\\rho_\\beta$. Thus $\\rho(0)\\ne\\rho_\\beta$ implies $\\rho(t)\\ne\\rho_\\beta$ for every real $t$, which is conclusion 3. By [F3] the invariant in step 1.1 is defined on density operators, while the macroscopic entropy is defined on equilibrium macrostates; [F8] also keeps the von Neumann entropy restricted to finite-dimensional sectors. None of the premises identifies those domains or supplies a bath or macroscopic relaxation law, so no monotonicity claim for $S_c$, bath relaxation, or thermalization follows.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The adopted normalized canonical preparation in the Statement is a declared density operator, so the empty-sector case is excluded; step 1.1 applies only to declared preparations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Pure preparations have zero dimensionless entropy by the entropy definition; step 1.1 preserves the full eigenvalue multiset, including zero eigenvalues."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional nonzero sector is covered by the universal finite-sector supplier in [F1]; step 1.1 preserves its sole eigenvalue and step 1.2 its canonical state."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No nondegenerate-spectrum premise is added; the finite-sector theorem [F1] covers its declared self-adjoint generator, and step 1.2 uses its canonical spectral form."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The conclusion quantifies over every real time, including t=0 and both signs; steps 1.1, 1.2, and 2.1 use that full domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Countable Choice and Axiom of Choice are explicit in [A1]; steps 1.1 and 1.2 retain them as exact supplier premises."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is claimed; conclusion 3 is the one-way statement that a distinct initial preparation cannot evolve to the canonical one."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization is claimed; step 2.1 proves only the stated no-production implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Independently read all three current steps, the complete published entropy-invariance supplier proof and exact entropy/dynamics/fixed-N/units/choice definitions. The adopted normalized canonical preparation forces nonzero finite dimension: the zero branch has no trace-one state and no canonical density, so it is excluded rather than used in a vacuous stationarity claim. Unitary conjugation preserves eigenvalue multiplicities including zero eigenvalues; entropy omits zero-log terms. Canonical density is diagonal in the generator eigenbasis, so phases cancel; inverse evolution at -t proves nonproduction at all real times, including t=0. Multiplication by the fixed positive SI kB yields physical entropy, with tH/hbar dimensionless. AC and Countable Choice are explicitly carried from general spectral/evolution interfaces; no new choice is spent by the three finite algebraic steps. No infinite-sector entropy, microscopic/macroscopic identification, thermalization, observation or statistical certainty is inferred. Reader/refuter identify no local theorem defect; macro-domain producer citation alerts remain separately routed outside batch 16."
+      },
+      "manual_model_obligations": {
+        "status": "non-executable-author-worksheet",
+        "rows": [
+          {
+            "case": "finite-sector entropy conservation",
+            "status": "checked",
+            "evidence": "Step 1.1 transfers the exact finite-sector eigenvalue-multiset invariant; the entropy unit conversion multiplies by the fixed k_B."
+          },
+          {
+            "case": "canonical stationarity and inverse-time no-production",
+            "status": "checked",
+            "evidence": "Steps 1.2 and 2.1 use the canonical spectral form and U(t)^*=U(-t), with all model postulates and choice assumptions inherited from [F1]."
+          }
+        ],
+        "reason": "Native finite-smoke accepts only registered check/asserts obligations. These are manual case/evidence rows, and no applicable TD check is registered. Preserve the author worksheet as non-executable metadata; do not claim native execution or add an unrelated checker.",
+        "native_execution": false
+      }
+    },
+    "ex-td-macrocell-and-gibbs-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-td-macro-versus-micro-entropy-claim",
+          "source_section": "Definition",
+          "quote": "Only labels with $N_m\\ge1$ are admitted here. The Boltzmann macrocell entropy of this specified coarse-graining is\n\n$$S_{\\mathrm B}(m):=k_{\\mathrm B}\\log N_m.$$\n\nUnder this enumeration, a probability vector $p=(p_1,\\ldots,p_N)$ assigns probability $p_i$ to microstate $\\omega_i$, where $p_i\\ge0$ and $\\sum_{i=1}^N p_i=1$. Define its Gibbs–Shannon entropy by\n\n$$S_{\\mathrm G}(p):=-k_{\\mathrm B}\\sum_{i=1}^N p_i\\log p_i,$$\n\nwith the summand $p_i\\log p_i$ defined to be $0$ when $p_i=0$. Both expressions have units $\\mathrm{J\\,K^{-1}}$, because their logarithms are dimensionless and $k_{\\mathrm B}$ has those units. The finite sum and logarithm have the meanings of [[def-finite-sum]] and [[def-natural-logarithm]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-td-si-quantities",
+          "source_section": "Definition",
+          "quote": "The kelvin (K) is the SI unit of thermodynamic temperature. The Boltzmann constant has the exact defining value $k_{\\mathrm B}=1.380649\\times10^{-23}\\,\\mathrm{J\\,K^{-1}}$. The mole is the SI unit of amount of substance; the Avogadro constant has the exact defining value $N_{\\mathrm A}=6.02214076\\times10^{23}\\,\\mathrm{mol^{-1}}$. When a model uses particle counts, $n_j=N_j/N_{\\mathrm A}$. The molar gas constant is derived as $R=N_{\\mathrm A}k_{\\mathrm B}=8.31446261815324\\,\\mathrm{J\\,mol^{-1}\\,K^{-1}}$. This framework does not set $k_{\\mathrm B}=1$. These SI definitions do not themselves introduce a thermodynamic temperature state function or entropy function.\n\nWithin the macroscopic framework, $(U,V,n_j)$ are ad",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-td-macro-versus-micro-entropy-claim",
+          "carrier": "items/def-td-macro-versus-micro-entropy-claim.md",
+          "status": "Current draft carrier inspected; its status is preserved and no independent approval is claimed.",
+          "source_section": "Definition",
+          "exact_statement": "Only labels with $N_m\\ge1$ are admitted here. The Boltzmann macrocell entropy of this specified coarse-graining is\n\n$$S_{\\mathrm B}(m):=k_{\\mathrm B}\\log N_m.$$\n\nUnder this enumeration, a probability vector $p=(p_1,\\ldots,p_N)$ assigns probability $p_i$ to microstate $\\omega_i$, where $p_i\\ge0$ and $\\sum_{i=1}^N p_i=1$. Define its Gibbs–Shannon entropy by\n\n$$S_{\\mathrm G}(p):=-k_{\\mathrm B}\\sum_{i=1}^N p_i\\log p_i,$$\n\nwith the summand $p_i\\log p_i$ defined to be $0$ when $p_i=0$. Both expressions have units $\\mathrm{J\\,K^{-1}}$, because their logarithms are dimensionless and $k_{\\mathrm B}$ has those units. The finite sum and logarithm have the meanings of [[def-finite-sum]] and [[def-natural-logarithm]].",
+          "supplier_proof_status": "draft definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions F1 at 1.1, 1.2."
+        },
+        {
+          "supplier": "def-td-si-quantities",
+          "carrier": "items/def-td-si-quantities.md",
+          "status": "Current draft carrier inspected; its status is preserved and no independent approval is claimed.",
+          "source_section": "Definition",
+          "exact_statement": "The kelvin (K) is the SI unit of thermodynamic temperature. The Boltzmann constant has the exact defining value $k_{\\mathrm B}=1.380649\\times10^{-23}\\,\\mathrm{J\\,K^{-1}}$. The mole is the SI unit of amount of substance; the Avogadro constant has the exact defining value $N_{\\mathrm A}=6.02214076\\times10^{23}\\,\\mathrm{mol^{-1}}$. When a model uses particle counts, $n_j=N_j/N_{\\mathrm A}$. The molar gas constant is derived as $R=N_{\\mathrm A}k_{\\mathrm B}=8.31446261815324\\,\\mathrm{J\\,mol^{-1}\\,K^{-1}}$. This framework does not set $k_{\\mathrm B}=1$. These SI definitions do not themselves introduce a thermodynamic temperature state function or entropy function.\n\nWithin the macroscopic framework, $(U,V,n_j)$ are ad",
+          "supplier_proof_status": "draft definition inspected; exact interface only, not an extra theorem proof.",
+          "consumer_use": "Facts & Assumptions F2 at 2.1."
+        },
+        {
+          "supplier": "thm-natural-logarithm-laws",
+          "carrier": "items/thm-natural-logarithm-laws.md",
+          "status": "Read-only published carrier inspected; interface excerpt only, not independent acceptance.",
+          "source_section": "Statement",
+          "exact_statement": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "supplier_proof_status": "published theorem interface and proof status inspected; status is preserved.",
+          "consumer_use": "Facts & Assumptions L1 at 1.2, 2.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $N_m=2$, the macrocell entropy is $S_{\\mathrm B}(m)=k_{\\mathrm B}\\log 2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The only nonzero probability term is $1\\log1=0$; the $p_2=0$ term is zero by definition. Hence $S_{\\mathrm G}(p)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "L1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $2>1$, [L1] gives $\\log2>\\log1=0$. With $k_{\\mathrm B}>0$ from [F2], step 1.1 is strictly positive while step 1.2 is zero, so these two defined quantities differ in this model. This example asserts no general inequality or thermodynamic identification.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "L1",
+            "step 1.1",
+            "step 1.2",
+            "algebra",
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The given state set and selected macrocell are nonempty with two states; step 1.1 uses N_m=2, not the empty-cell convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 applies the definition 0 log 0 = 0 to p_2=0 explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The probability vector has p_1=1; step 1.2 evaluates its unit-probability term as 1 log 1=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example and A1 assign zero numerical energy to both distinct microstates. Steps 1.1 and 1.2 depend only on the cell count and probabilities, so the allowed energy degeneracy changes neither entropy value."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limit is taken; the only entropy endpoint p_2=0 is directly evaluated in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two labelled states and the single macrocell are explicitly listed in the Example, so no selection from a family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares two values for one stipulated input and claims no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example claims no converse or characterization; steps 1.1–2.1 establish only this concrete mismatch."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Independently checked all three steps against the entropy definition, SI constant, finite sums and complete logarithm-laws theorem: declared N_m=2, weights 1 and 0 sum to one; 0 log 0 is a defined summand convention and does not evaluate log at zero. log1=0 and strict increase give log2>0; positive kB gives SB=kB log2>SG=0. The single cell and distribution are stipulated separate inputs, with no uniform sampling, macroscopic equilibrium bridge, dynamics or observations. N_m=2 is explicit in A1 and specifies two distinct states. No AC is needed. Reader/refuter identify no local defect; current carrier is unchanged from pre/post snapshots."
+      },
+      "manual_model_obligations": {
+        "status": "non-executable-author-worksheet",
+        "rows": [
+          {
+            "case": "two-state entropy values",
+            "status": "checked",
+            "evidence": "Steps 1.1–2.1 calculate S_B=k_B log 2>0 and S_G=0 exactly for p=(1,0)."
+          }
+        ],
+        "reason": "Native finite-smoke accepts only registered check/asserts obligations. These are manual case/evidence rows, and no applicable TD check is registered. Preserve the author worksheet as non-executable metadata; do not claim native execution or add an unrelated checker.",
+        "native_execution": false
+      },
+      "repair_review": {
+        "reviewer": "step5-v2-initial-r1-u16",
+        "independent_review": false,
+        "notes": "Native adjudication supplies the formerly omitted finite map epsilon:Omega->R, epsilon(omega_1)=epsilon(omega_2)=0, with distinct microstates and explicit singleton-label coarse-graining. The current proof and derivation IDs are unchanged: SB=kB log2>0 and SG=0 use the declared 0 log0 convention and log1=0. No internal-energy interpretation or equilibrium preparation is inferred. The earlier independent risk review is preserved as historical evidence."
+      }
+    },
+    "ex-td-mean-vs-trial-outcome": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-expectation-by-distribution",
+          "source_section": "Statement",
+          "quote": "If $X$ is a real random variable on a finite probability space, then\n$$\\mathbb E[X]=\\sum_{x\\in X(\\Omega)}x\\,\\mathbb P(X=x).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "supplier_excerpts": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two values of $Y$ are distinct because $a>0$. By [F2]–[F3], $Y$ is a real random variable on the stated finite probability space, so [F1] gives $\\mathbb E[Y]=(3/4)(2a)+(1/4)(-2a)=a>0$. Its unit is $\\mathrm{J\\,K^{-1}}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The event $\\{\\omega\\in\\Omega:Y(\\omega)<0\\}$ is exactly $\\{\\omega_-\\}$, so by [F2] its probability is $P(Y<0)=1/4>0$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Steps 1.1 and 1.2 exhibit a positive mean together with a negative realization of nonzero probability. Therefore positivity of an ensemble mean alone does not imply a nonnegative value in every trial. The example is not a fluctuation theorem or a claim about measured entropy production.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra",
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stipulated sample space has exactly two listed outcomes and is nonempty; no empty sample-space case is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both assigned values are nonzero because a>0; step 1.2 identifies the negative event exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Both outcome probabilities lie strictly between zero and one, so neither outcome has probability one; step 1.2 gives 1/4 for the negative event."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The degenerate case a=0 is excluded by A1; the strict sign conclusions use a>0 in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No parameter limit is taken; probabilities and values are fixed at 3/4, 1/4, 2a, and -2a."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Both outcomes and their probabilities are named explicitly in A1, and step 1.2 computes the negative event; no family selection occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves a coexistence of positive mean and negative outcome, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed; steps 1.1–2.1 establish only the exhibited counterexample to a universal implication."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-16 (author self-review)",
+        "notes": "Checked finite expectation and event probability from the stated law. The entropy-valued label does not represent a physical path variable or experiment."
+      },
+      "manual_model_obligations": {
+        "status": "non-executable-author-worksheet",
+        "rows": [
+          {
+            "case": "two-outcome mean and sign probability",
+            "status": "checked",
+            "evidence": "Steps 1.1–1.2 give E[Y]=a>0 and P(Y<0)=1/4 exactly."
+          }
+        ],
+        "reason": "Native finite-smoke accepts only registered check/asserts obligations. These are manual case/evidence rows, and no applicable TD check is registered. Preserve the author worksheet as non-executable metadata; do not claim native execution or add an unrelated checker.",
+        "native_execution": false
+      }
+    },
+    "ex-td-local-equilibrium-profile": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "rem-td-local-equilibrium-branch",
+          "source_section": "Remark",
+          "quote": "For a declared continuum model, let $m\\in\\mathbb N$ with $m\\ge1$ ([[def-natural-numbers]]) and let $\\mathcal O\\subseteq\\mathbb R^3$ be open in the metric topology induced by the Euclidean norm ([[def-euclidean-inner-product]], [[def-metric-topology]], [[def-subset-and-proper-subset]]). Its spatial coordinates are in metres. In the conventional physical display $\\mathbf x=(x_1,x_2,x_3)$, $x_i$ denotes the function coordinate at index $i-1$ of the library's $\\mathbb R^3$ ([[def-euclidean-inner-product]]). Let $I=(t_0,t_1)\\subseteq\\mathbb R$ be a nonempty open interval of time ([[def-interval]]) with coordinates in seconds. A field is a function on the stated space-time domain, with its domain and codomain shown, as in [[def-function]]. The model chooses a local-state parameter set $\\mathcal Z\\subseteq\\mathbb R^m$ and a field $z=(z_1,\\ldots,z_m):\\mathcal O\\times I\\to\\mathcal Z$ whose component functions have continuous first partial derivatives in the three spatial coordinates and time; the partial derivatives are those of [[def-directional-and-partial-derivatives]]. Each $z_j$ is the dimensionless numerical value of its local quantity divided by its model-declared reference unit $u_j$; the model specifies $u_j$ and the physical meaning of each component. In particular, if temperature is the component $z_{j_T}$, the model declares that index and reads $T(\\mathbf x,t)=(1\\,\\mathrm K)z_{j_T}(\\mathbf x,t)$, so $T:\\mathcal O\\times I\\to(0,\\infty)$ has units kelvins. If the model includes mass density and fluid velocity, their types are $\\rho:\\mathcal O\\times I\\to[0,\\infty)$ in $\\mathrm{kg\\,m^{-3}}$ and $\\mathbf u:\\mathcal O\\times I\\to\\mathbb R^3$ in $\\mathrm{m\\,s^{-1}}$; these fields may also be required to have continuous first partial derivatives. Each model must specify its remaining coordinates and equation of state; $\\mathcal Z$ is not universal.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-td-local-equilibrium-branch",
+          "source_section": "Remark",
+          "quote": "A **local-equilibrium approximation** requires an explicit equilibrium criterion for a homogeneous comparison cell at each parameter value $a\\in\\mathcal Z$. One entropy-based specification consists of a set $\\mathcal X$ of cell states, a finite-valued numerical entropy $s:\\mathcal X\\to\\mathbb R$ (physical entropy $(1\\,\\mathrm{J\\,K^{-1}})s$), a map $C:\\mathcal X\\to\\mathbb R^r$ of retained conserved quantities in declared reference units, a map $c:\\mathcal Z\\to\\mathbb R^r$ of their fixed values, and a specified set $B_a\\subseteq\\mathcal X$ of states allowed by the retained cell constraints. Here $r\\ge1$ is a specified integer, and the physical meanings of the states, conserved quantities and constraints are model data. Define\n\n$$A_a:=\\{e\\in B_a:C(e)=c(a)\\},\\qquad E_a:=\\{e\\in A_a:s(e)\\ge s(e')\\text{ for every }e'\\in A_a\\},\\qquad \\mathcal E_{\\mathrm{eq}}:=\\bigcup_{a\\in\\mathcal Z}E_a.$$\n\nThus equilibrium means entropy maximization under the stated constraints, not an arbitrary label. The model must supply a map $q:\\mathcal Z\\to\\mathcal E_{\\mathrm{eq}}$ satisfying $q(a)\\in E_a$ for every $a$; existence, attainment and a selection in the case of multiple maximizers are requirements on the supplied model, not conclusions here. No choice axiom or equilibration theorem is being invoked to construct $q$. A different equilibrium formulation must instead give its full mathematical condition, its physical constraints and parameter matching, and verify that its supplied $q(a)$ satisfies that condition; naming a target set equilibrium does not suffice. For example, a kinetic collision-equilibrium condition must specify the distribution class, collision operator and retained moments, and require the selected distribution to have those moments and zero collision term. This condition alone does not assert a maximum-entropy characterization or solve the full transport equation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "rem-td-local-equilibrium-branch",
+          "source_section": "Remark",
+          "quote": "Nonconstant fields $T(\\mathbf x,t)$, $\\rho(\\mathbf x,t)$, or $\\mathbf u(\\mathbf x,t)$ are permitted in this continuum model. The pointwise comparison-cell criterion alone neither establishes nor excludes equilibrium of the whole system: that requires a separately specified whole-system equilibrium criterion, including its external forces, boundary conditions and retained constraints. In particular, spatial nonconstancy alone is not a universal test for absence of global equilibrium. Initial data, boundary conditions, conservation equations, constitutive assumptions and their empirical scope must be supplied before any time evolution or transport conclusion is claimed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "rem-td-local-equilibrium-branch",
+          "carrier": "items/rem-td-local-equilibrium-branch.md",
+          "status": "Current draft carrier inspected; its status is preserved and no independent approval is claimed.",
+          "source_section": "Remark",
+          "exact_statement": "For a declared continuum model, let $m\\in\\mathbb N$ with $m\\ge1$ ([[def-natural-numbers]]) and let $\\mathcal O\\subseteq\\mathbb R^3$ be open in the metric topology induced by the Euclidean norm ([[def-euclidean-inner-product]], [[def-metric-topology]], [[def-subset-and-proper-subset]]). Its spatial coordinates are in metres. In the conventional physical display $\\mathbf x=(x_1,x_2,x_3)$, $x_i$ denotes the function coordinate at index $i-1$ of the library's $\\mathbb R^3$ ([[def-euclidean-inner-product]]). Let $I=(t_0,t_1)\\subseteq\\mathbb R$ be a nonempty open interval of time ([[def-interval]]) with coordinates in seconds. A field is a function on the stated space-time domain, with its domain and codomain shown, as in [[def-function]]. The model chooses a local-state parameter set $\\mathcal Z\\subseteq\\mathbb R^m$ and a field $z=(z_1,\\ldots,z_m):\\mathcal O\\times I\\to\\mathcal Z$ whose component functions have continuous first partial derivatives in the three spatial coordinates and time; the partial derivatives are those of [[def-directional-and-partial-derivatives]]. Each $z_j$ is the dimensionless numerical value of its local quantity divided by its model-declared reference unit $u_j$; the model specifies $u_j$ and the physical meaning of each component. In particular, if temperature is the component $z_{j_T}$, the model declares that index and reads $T(\\mathbf x,t)=(1\\,\\mathrm K)z_{j_T}(\\mathbf x,t)$, so $T:\\mathcal O\\times I\\to(0,\\infty)$ has units kelvins. If the model includes mass density and fluid velocity, their types are $\\rho:\\mathcal O\\times I\\to[0,\\infty)$ in $\\mathrm{kg\\,m^{-3}}$ and $\\mathbf u:\\mathcal O\\times I\\to\\mathbb R^3$ in $\\mathrm{m\\,s^{-1}}$; these fields may also be required to have continuous first partial derivatives. Each model must specify its remaining coordinates and equation of state; $\\mathcal Z$ is not universal.",
+          "supplier_proof_status": "draft remark inspected as a convention; no theorem proof claimed.",
+          "consumer_use": "Facts & Assumptions F1 at 2.1."
+        },
+        {
+          "supplier": "rem-td-local-equilibrium-branch",
+          "carrier": "items/rem-td-local-equilibrium-branch.md",
+          "status": "Current draft carrier inspected; its status is preserved and no independent approval is claimed.",
+          "source_section": "Remark",
+          "exact_statement": "A **local-equilibrium approximation** requires an explicit equilibrium criterion for a homogeneous comparison cell at each parameter value $a\\in\\mathcal Z$. One entropy-based specification consists of a set $\\mathcal X$ of cell states, a finite-valued numerical entropy $s:\\mathcal X\\to\\mathbb R$ (physical entropy $(1\\,\\mathrm{J\\,K^{-1}})s$), a map $C:\\mathcal X\\to\\mathbb R^r$ of retained conserved quantities in declared reference units, a map $c:\\mathcal Z\\to\\mathbb R^r$ of their fixed values, and a specified set $B_a\\subseteq\\mathcal X$ of states allowed by the retained cell constraints. Here $r\\ge1$ is a specified integer, and the physical meanings of the states, conserved quantities and constraints are model data. Define\n\n$$A_a:=\\{e\\in B_a:C(e)=c(a)\\},\\qquad E_a:=\\{e\\in A_a:s(e)\\ge s(e')\\text{ for every }e'\\in A_a\\},\\qquad \\mathcal E_{\\mathrm{eq}}:=\\bigcup_{a\\in\\mathcal Z}E_a.$$\n\nThus equilibrium means entropy maximization under the stated constraints, not an arbitrary label. The model must supply a map $q:\\mathcal Z\\to\\mathcal E_{\\mathrm{eq}}$ satisfying $q(a)\\in E_a$ for every $a$; existence, attainment and a selection in the case of multiple maximizers are requirements on the supplied model, not conclusions here. No choice axiom or equilibration theorem is being invoked to construct $q$. A different equilibrium formulation must instead give its full mathematical condition, its physical constraints and parameter matching, and verify that its supplied $q(a)$ satisfies that condition; naming a target set equilibrium does not suffice. For example, a kinetic collision-equilibrium condition must specify the distribution class, collision operator and retained moments, and require the selected distribution to have those moments and zero collision term. This condition alone does not assert a maximum-entropy characterization or solve the full transport equation.",
+          "supplier_proof_status": "draft remark inspected as a convention; no theorem proof claimed.",
+          "consumer_use": "Facts & Assumptions F2 at 2.1."
+        },
+        {
+          "supplier": "rem-td-local-equilibrium-branch",
+          "carrier": "items/rem-td-local-equilibrium-branch.md",
+          "status": "Current draft carrier inspected; its status is preserved and no independent approval is claimed.",
+          "source_section": "Remark",
+          "exact_statement": "Nonconstant fields $T(\\mathbf x,t)$, $\\rho(\\mathbf x,t)$, or $\\mathbf u(\\mathbf x,t)$ are permitted in this continuum model. The pointwise comparison-cell criterion alone neither establishes nor excludes equilibrium of the whole system: that requires a separately specified whole-system equilibrium criterion, including its external forces, boundary conditions and retained constraints. In particular, spatial nonconstancy alone is not a universal test for absence of global equilibrium. Initial data, boundary conditions, conservation equations, constitutive assumptions and their empirical scope must be supplied before any time evolution or transport conclusion is claimed.",
+          "supplier_proof_status": "draft remark inspected as a convention; no theorem proof claimed.",
+          "consumer_use": "Facts & Assumptions F3 at 2.1."
+        },
+        {
+          "supplier": "def-euclidean-inner-product",
+          "carrier": "items/def-euclidean-inner-product.md",
+          "status": "Read-only published mathematical supplier; no alteration or new acceptance.",
+          "source_section": "Definition",
+          "exact_statement": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.",
+          "supplier_proof_status": "Published definition; only its exact R^1 function-space convention is used.",
+          "consumer_use": "Example: iota maps a real to the function on {0} with value a; inverse evaluation gives the scalar convention for Z,z,C,c,q."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $0<x_1<L$, $1+\\alpha x_1/L>1$, so $z(\\mathbf x,t)>\\Theta_0/(1\\,\\mathrm K)>0$ and $T(\\mathbf x,t)= (1\\,\\mathrm K)z(\\mathbf x,t)>\\Theta_0>0\\,\\mathrm K$. The affine formulas are $C^1$ on $\\mathcal O\\times I$ and meet the field regularity in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "algebra",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Choose interior points with $x_1=L/4$ and $x_1=3L/4$, keeping the other coordinates fixed. Their temperature difference is $\\Theta_0\\alpha/2>0$, so the field is not constant.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $a>0$, [A1] gives $A_a=\\{(a,y):y\\in\\mathbb R\\}$ and $s(a,0)-s(a,y)=y^2\\ge0$, with equality exactly at $y=0$. Thus $E_a=\\{(a,0)\\}$ and $q(a)\\in E_a$, meeting the constrained-maximum criterion in [F2]. The logarithm is finite since $a>0$. By [F1] and step 1.1, the one-coordinate field has the declared range and regularity, so its supplied comparison state is $q(z(\\mathbf x,t))$. Steps 1.1–1.2 show that its temperature component is positive and spatially nonconstant; [F3] says this need not describe global equilibrium. No dynamics or experimental outcome is inferred.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra",
+            "1.1",
+            "1.2",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The open cube (0,L)^3 and interval (0,tau) are nonempty because L,tau>0; the example contains no empty region case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The temperature remains strictly above T_0>0 at every point by step 1.1, so the zero-temperature boundary is excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The profile is nonconstant by step 1.2, so no single constant-field case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The endpoint parameter values alpha=0 and alpha=1 are excluded; A1 assumes 0<alpha<1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The spatial domain is open and no boundary trace or limiting value is used; steps 1.1–1.2 use interior points only."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two interior x_1 coordinates are specified explicitly in step 1.2, so no point-selection axiom is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is claimed; the example exhibits one nonconstant positive local-equilibrium field."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed; the example does not characterize all local-equilibrium fields."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-16",
+        "notes": "Independently checked all three current steps and the exact local-equilibrium supplier: L,tau,Theta0 positive, 0<alpha<1, open nonempty cube/time domain, dimensionless x1/L, positive temperature, continuous constant first partials and static time dependence. Interior x1=L/4 and 3L/4 give temperature difference Theta0 alpha/2>0. Identity q on the declared local-label set is an adopted model assignment, not an equilibrium deduction, evolution law or observation. Reader/refuter report no local finding on this carrier; current raw bytes equal post snapshot. No AC or empirical premise is used. Current owner repair replaces the former label-only identity assignment with explicit cell states, log(e)-y² entropy, fixed-energy fibers and the unique maximizer (a,0), verified in step 2.1; prior independent review remains historical."
+      },
+      "manual_model_obligations": {
+        "status": "non-executable-author-worksheet",
+        "rows": [
+          {
+            "case": "two interior temperatures",
+            "status": "checked",
+            "evidence": "Steps 1.1–1.2 verify positivity and a temperature difference T_0 alpha/2>0 at the two selected interior points."
+          }
+        ],
+        "reason": "Native finite-smoke accepts only registered check/asserts obligations. These are manual case/evidence rows, and no applicable TD check is registered. Preserve the author worksheet as non-executable metadata; do not claim native execution or add an unrelated checker.",
+        "native_execution": false
+      }
+    },
+    "ex-td-transport-coefficient-model-input": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "rem-td-transport-branch",
+          "source_section": "Remark",
+          "quote": "Use the fields and local-equilibrium regime of [[rem-td-local-equilibrium-branch]]. For this constitutive relation, assume $T$ has continuous first spatial partial derivatives, defined as in [[def-directional-and-partial-derivatives]], and write\n\n$\\nabla T:=(\\partial_{x_1}T,\\partial_{x_2}T,\\partial_{x_3}T)\\in\\mathbb R^3.$\n\nHere the physical coordinate indices $i=1,2,3$ correspond to function indices $i-1$ in [[def-euclidean-inner-product]] and [[def-directional-and-partial-derivatives]].\n\nThe components of $\\nabla T$ have units $\\mathrm{K\\,m^{-1}}$.\n\nMatrices are elements of $M_{3\\times3}(\\mathbb R)$ as in [[def-matrix-space]]. In the physical one-based display, $K_{ij}$ denotes the library matrix entry with indices $(i-1,j-1)$, and $v_i$ denotes vector coordinate $i-1$, for $i,j=1,2,3$. The action is $(Kv)_i:=\\sum_{j=1}^3K_{ij}v_j$; $I_3$ is the matrix with entries $1$ on the diagonal and $0$ off it as in [[def-matrix-product-and-identity-matrix]]. A Fourier heat-transport model may postulate\n\n$$\\mathbf j_Q(\\mathbf x,t)=-K(\\mathbf x,t)\\nabla T(\\mathbf x,t),$$\n\nwhere $\\mathbf j_Q:\\mathcal O\\times I\\to\\mathbb R^3$ is a continuous heat-energy flux field in $\\mathrm{W\\,m^{-2}}$ and $K:\\mathcal O\\times I\\to M_{3\\times3}(\\mathbb R)$ is a declared conductivity tensor field with entries in $\\mathrm{W\\,m^{-1}\\,K^{-1}}$. In an isotropic model $K(\\mathbf x,t)=\\kappa(\\mathbf x,t)I_3$, where $\\kappa:\\mathcal O\\times I\\to[0,\\infty)$ is the declared scalar conductivity field. A diffusion model may separately postulate $\\mathbf j_n=-D\\nabla n$, where number density $n:\\mathcal O\\times I\\to[0,\\infty)$ is in $\\mathrm{m^{-3}}$, number flux $\\mathbf j_n:\\mathcal O\\times I\\to\\mathbb R^3$ is in $\\mathrm{m^{-2}\\,s^{-1}}$, and $D$ is either a scalar field $D:\\mathcal O\\times I\\to\\mathbb R$ or a matrix field $D:\\mathcal O\\times I\\to M_{3\\times3}(\\mathbb R)$ with coefficient units $\\mathrm{m^2\\,s^{-1}}$; its regularity and positivity conditions are model data.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "rem-td-transport-branch",
+          "carrier": "items/rem-td-transport-branch.md",
+          "status": "Current draft carrier inspected; its status is preserved and no independent approval is claimed.",
+          "source_section": "Remark",
+          "exact_statement": "Use the fields and local-equilibrium regime of [[rem-td-local-equilibrium-branch]]. For this constitutive relation, assume $T$ has continuous first spatial partial derivatives, defined as in [[def-directional-and-partial-derivatives]], and write\n\n$\\nabla T:=(\\partial_{x_1}T,\\partial_{x_2}T,\\partial_{x_3}T)\\in\\mathbb R^3.$\n\nHere the physical coordinate indices $i=1,2,3$ correspond to function indices $i-1$ in [[def-euclidean-inner-product]] and [[def-directional-and-partial-derivatives]].\n\nThe components of $\\nabla T$ have units $\\mathrm{K\\,m^{-1}}$.\n\nMatrices are elements of $M_{3\\times3}(\\mathbb R)$ as in [[def-matrix-space]]. In the physical one-based display, $K_{ij}$ denotes the library matrix entry with indices $(i-1,j-1)$, and $v_i$ denotes vector coordinate $i-1$, for $i,j=1,2,3$. The action is $(Kv)_i:=\\sum_{j=1}^3K_{ij}v_j$; $I_3$ is the matrix with entries $1$ on the diagonal and $0$ off it as in [[def-matrix-product-and-identity-matrix]]. A Fourier heat-transport model may postulate\n\n$$\\mathbf j_Q(\\mathbf x,t)=-K(\\mathbf x,t)\\nabla T(\\mathbf x,t),$$\n\nwhere $\\mathbf j_Q:\\mathcal O\\times I\\to\\mathbb R^3$ is a continuous heat-energy flux field in $\\mathrm{W\\,m^{-2}}$ and $K:\\mathcal O\\times I\\to M_{3\\times3}(\\mathbb R)$ is a declared conductivity tensor field with entries in $\\mathrm{W\\,m^{-1}\\,K^{-1}}$. In an isotropic model $K(\\mathbf x,t)=\\kappa(\\mathbf x,t)I_3$, where $\\kappa:\\mathcal O\\times I\\to[0,\\infty)$ is the declared scalar conductivity field. A diffusion model may separately postulate $\\mathbf j_n=-D\\nabla n$, where number density $n:\\mathcal O\\times I\\to[0,\\infty)$ is in $\\mathrm{m^{-3}}$, number flux $\\mathbf j_n:\\mathcal O\\times I\\to\\mathbb R^3$ is in $\\mathrm{m^{-2}\\,s^{-1}}$, and $D$ is either a scalar field $D:\\mathcal O\\times I\\to\\mathbb R$ or a matrix field $D:\\mathcal O\\times I\\to M_{3\\times3}(\\mathbb R)$ with coefficient units $\\mathrm{m^2\\,s^{-1}}$; its regularity and positivity conditions are model data.",
+          "supplier_proof_status": "draft remark inspected as a convention; no theorem proof claimed.",
+          "consumer_use": "Facts & Assumptions F1 at 3.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The common temperature gradient is $\\nabla T=(\\Delta T/L)\\mathbf e_1$. The two assigned model fluxes are therefore $\\mathbf j_{Q,1}=-\\kappa_1(\\Delta T/L)\\mathbf e_1$ and $\\mathbf j_{Q,2}=-\\kappa_2(\\Delta T/L)\\mathbf e_1$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Their difference is $\\mathbf j_{Q,1}-\\mathbf j_{Q,2}=-(\\kappa_1-\\kappa_2)(\\Delta T/L)\\mathbf e_1\\ne0$. The same field profile therefore has different predicted fluxes under these two constitutive choices.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The calculation uses the Fourier relation as a stated model input and does not determine either $\\kappa_i$ from equilibrium entropy data. It is a model comparison, not a measured result.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The field is defined on the nonempty open cube because L>0; no empty spatial domain is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The imposed gradient is nonzero because Delta T>0; step 2.1 therefore gives distinct nonzero flux vectors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each model uses a single positive scalar conductivity, while two distinct coefficients are compared in A1 and step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The equal-coefficient case is excluded by kappa_1 ne kappa_2; the example compares only distinct model inputs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No boundary limit or boundary flux is evaluated; the same constant gradient is computed in the open region."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Both coefficients and the common profile are explicitly assigned in A1 and used in steps 1.1 and 2.1; no family selection occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is claimed; the example computes the consequence of two distinct chosen coefficients."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed; different fluxes do not characterize all possible constitutive laws."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-16 (author self-review)",
+        "notes": "Checked the gradient and vector flux difference with units: Delta T/L is K m^-1, and multiplication by kappa gives W m^-2. Coefficients are model inputs, not fitted values."
+      },
+      "manual_model_obligations": {
+        "status": "non-executable-author-worksheet",
+        "rows": [
+          {
+            "case": "two Fourier model fluxes",
+            "status": "checked",
+            "evidence": "Steps 1.1–3.1 give the gradient, the nonzero flux difference, and the limit to stipulated model inputs exactly."
+          }
+        ],
+        "reason": "Native finite-smoke accepts only registered check/asserts obligations. These are manual case/evidence rows, and no applicable TD check is registered. Preserve the author worksheet as non-executable metadata; do not claim native execution or add an unrelated checker.",
+        "native_execution": false
+      }
+    }
+  }
+}

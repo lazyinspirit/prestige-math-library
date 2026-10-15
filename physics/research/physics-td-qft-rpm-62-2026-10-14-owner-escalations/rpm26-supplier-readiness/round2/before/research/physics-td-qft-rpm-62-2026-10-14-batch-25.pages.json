@@ -1,0 +1,1015 @@
+[
+  {
+    "order": 419,
+    "id": "rpm-hamiltonian-constraints",
+    "kind": "A",
+    "category": "relativistic-particle-mechanics",
+    "library": "physics",
+    "title": "Cotangent phase data, observables and action dimensions",
+    "companion": "rpm-hamiltonian-constraints-examples",
+    "requires": [
+      "distributions-integral-manifolds-and-the-frobenius-theorem",
+      "geodesics-the-exponential-map-completeness-and-hopf-rinow",
+      "hamiltonian-mechanics-and-completely-integrable-systems",
+      "rank-theorems-and-embedded-submanifolds",
+      "rpm-geometry-actions",
+      "symplectic-manifolds-moser-stability-and-darboux-weinstein-theory"
+    ],
+    "items": [
+      {
+        "id": "def-rpm-h-cotangent-phase-space",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Cotangent phase data, observables and action dimensions",
+        "statement": "Assume countable choice $\\mathrm{AC}_{\\omega}$: every sequence of nonempty sets has a choice function ([[def-countable-choice]]). Let $Q$ be a finite-dimensional, Hausdorff, second-countable smooth manifold without boundary, of dimension $n$. Its cotangent bundle is\n\n$$T^*Q=\\coprod_{q\\in Q}T_q^*Q,\\qquad \\pi:T^*Q\\to Q,\\quad \\pi(q,p)=q,$$\n\nwith the canonical smooth structure and induced cotangent charts supplied by the manifold construction in [[def-tautological-one-form-on-a-cotangent-bundle]]. The **tautological one-form** is $\\theta_{(q,p)}(\\xi)=p(d\\pi_{(q,p)}\\xi)$, and the **canonical cotangent two-form** is $\\omega=-d\\theta$. The exact theorem [[thm-the-canonical-cotangent-two-form-is-symplectic]] makes $(T^*Q,\\omega)$ a symplectic manifold in the sense of [[def-symplectic-form-and-symplectic-manifold]]. We call this pair the **cotangent phase space** of $Q$.\n\nIn an induced chart $(q^1,\\ldots,q^n,p_1,\\ldots,p_n)$, $\\theta=p_i\\,dq^i$ and $\\omega=dq^i\\wedge dp_i$. A mathematical **observable** on this phase space means a smooth function $F:T^*Q\\to\\mathbb R$; this definition does not assert that a measurement has been performed or that every such function is physically measurable.\n\nFor an interpreted particle model, assign coordinates $q^i$ their declared units and assign the conjugate covector components $p_i$ units of action divided by the units of $q^i$. Thus $\\theta$ and $\\omega$ have action units, conventionally joule-seconds, and a bracket of quantities with units \\([F]\\) and \\([G]\\) has units \\([F][G]/(\\text{action})\\). These are dimensional interpretations of the model, not additional mathematical premises. The use of $\\mathrm{AC}_{\\omega}$ is exactly the use in the smooth cotangent-bundle suppliers; no full Axiom of Choice is used.",
+        "deps": [
+          "def-countable-choice",
+          "def-tautological-one-form-on-a-cotangent-bundle",
+          "thm-the-canonical-cotangent-two-form-is-symplectic",
+          "def-symplectic-form-and-symplectic-manifold"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-tautological-one-form-on-a-cotangent-bundle": "mathematical-premise",
+          "thm-the-canonical-cotangent-two-form-is-symplectic": "mathematical-premise",
+          "def-symplectic-form-and-symplectic-manifold": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eckhard Meinrenken, Symplectic Geometry, complete lecture notes",
+              "url": "https://web.archive.org/web/20250806200149if_/https://www.math.utoronto.ca/mein/teaching/LectureNotes/symplectic.pdf",
+              "locator": "§3.4, Definition 3.10, printed pp. 34–35: tautological cotangent one-form."
+            },
+            {
+              "title": "Ana Cannas da Silva, Lectures on Symplectic Geometry, complete lecture notes",
+              "url": "https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf",
+              "locator": "Lecture 1, printed pp. 11–12: cotangent bundle canonical symplectic form."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics",
+        "physical_scope": "Mathematical cotangent phase-space conventions; action units are interpretations assigned by a particle model, with no dynamics or measurement asserted."
+      },
+      {
+        "id": "def-rpm-h-temporal-chart-data",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Temporal chart with lapse, shift and positive slice metric",
+        "statement": "Assume countable choice ACω, as in [[def-countable-choice]], for the smooth cotangent-bundle carrier convention used by this page; no full Axiom of Choice is assumed.\n\nLet $(M,g,T)$ be a smooth, time-oriented Lorentzian four-manifold of signature $(-+++)$, with the geometric meaning fixed by [[def-gr-smooth-lorentzian-objects]]. Here $T$ denotes the future-cone field called $N$ in that definition. A **temporal product chart** is a smooth coordinate map from an open product $I\\times\\Omega\\subset\\mathbb R\\times\\mathbb R^3$ onto an open subset of $M$, with coordinates $(x^0,x^1,x^2,x^3)$. We require $x^0$ to have length units and each $x^i$ to have length units in the physical interpretation.\n\nThe chart has **lapse-shift data** $(N,\\beta,h)$ when $N:I\\times\\Omega\\to(0,\\infty)$, $\\beta^i:I\\times\\Omega\\to\\mathbb R$, and $h_{ij}:I\\times\\Omega\\to\\mathbb R$ are smooth, $h_{ij}=h_{ji}$, and the matrix $(h_{ij})$ is positive definite at each point, with\n\n$$g=-N^2(dx^0)^2+h_{ij}(dx^i+\\beta^i dx^0)(dx^j+\\beta^j dx^0).$$\n\nWrite $h^{ij}$ for the inverse matrix. The normal field is\n\n$$n=N^{-1}(\\partial_0-\\beta^i\\partial_i).$$\n\nDirect contraction gives $g(n,n)=-1$; require that $n$ is future-directed in the supplied time orientation. This field of observers is distinct from the coordinate vector $\\partial_0$, which may be spacelike. The coefficients $N,\\beta^i,h_{ij}$ are dimensionless when all four coordinates are in metres. This definition is local to the specified product chart; it asserts no global temporal foliation.",
+        "deps": [
+          "def-countable-choice",
+          "def-gr-smooth-lorentzian-objects"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity, complete lecture notes (arXiv:gr-qc/0703035)",
+              "url": "https://arxiv.org/pdf/gr-qc/0703035",
+              "locator": "Complete 220-page notes; §§3.3.1–3.3.3, printed pp. 41–44, and §§4.2.2–4.2.3, pp. 56–58; full relevant sections inspected."
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "library": "physics",
+        "physical_scope": "Local lapse-shift chart and observer split for particle models; no global foliation or empirical claim is made."
+      },
+      {
+        "id": "def-rpm-h-almost-regular-legendre",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Regular, hyperregular and almost-regular Legendre domains",
+        "statement": "Assume countable choice ACω, as in [[def-countable-choice]], for the smooth cotangent-bundle carrier convention used by this page; no full Axiom of Choice is assumed.\n\nLet $\\mathcal D$ be an open subset of the time-dependent tangent bundle $\\mathbb R\\times TQ$ of a finite-dimensional smooth manifold $Q$, and let $L:\\mathcal D\\to\\mathbb R$ be smooth. For fixed $t$, the **fibre derivative** is the map\n\n$$\\mathbb F L(t,q,v)=(t,q,p),\\qquad p(w)=\\left.\\frac{d}{ds}\\right|_{s=0}L(t,q,v+sw),$$\n\nas in [[def-fibre-derivative-and-legendre-transform-of-a-lagrangian]]. In induced coordinates $p_i=\\partial L/\\partial v^i$.\n\nThe Lagrangian is **regular** at $(t,q,v)$ when the velocity Hessian $(\\partial^2L/\\partial v^i\\partial v^j)$ is invertible there; regularity gives only a local inverse branch. It is **hyperregular on a declared domain** when $\\mathbb F L$ is a diffeomorphism from that entire domain onto an open subset of $\\mathbb R\\times T^*Q$.\n\nIt is **almost regular on a declared domain $\\mathcal D_0\\subseteq\\mathcal D$** when the following are all assumed: $\\mathbb F L|_{\\mathcal D_0}$ has constant rank; its image $N$ is an embedded submanifold of $\\mathbb R\\times T^*Q$; its corestriction $\\mathcal D_0\\to N$ is a surjective submersion (its differential is surjective at every point); and every fibre of that corestriction is connected. These hypotheses are not consequences of singularity alone.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-cotangent-phase-space",
+          "def-fibre-derivative-and-legendre-transform-of-a-lagrangian"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "def-fibre-derivative-and-legendre-transform-of-a-lagrangian": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Hanson, Tullio Regge and Claudio Teitelboim, Constrained Hamiltonian Systems, Part 1, Chapter I",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Printed pp. 7–9: singular Lagrangians, primary constraints and the failure of unique velocity inversion."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics",
+        "physical_scope": "Mathematical regularity package for Lagrangian models; it does not assert that a particular physical Lagrangian satisfies the package."
+      },
+      {
+        "id": "def-rpm-h-background-and-model-quantities",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Lorentz background, particle quantities and parameter units",
+        "statement": "Assume countable choice ACω, as in [[def-countable-choice]], for the smooth cotangent-bundle carrier convention used by this page; no full Axiom of Choice is assumed.\n\nFix a prescribed smooth time-oriented Lorentzian four-manifold $(M,g,T)$ with signature $(-+++)$, as in [[def-gr-smooth-lorentzian-objects]]. Here $T$ denotes the supplied smooth timelike field selecting the future cone, called $N$ in that geometric definition. Use the distinction among a spacetime, a worldline, a pointwise observer, an observer congruence, a tetrad and a chart given in [[def-rpm-spacetime-observer-and-worldline]]. This definition does not make $g$ dynamical.\n\nIn this relativistic-particle model, $m>0$ is a fixed **primitive mass parameter** measured in kilograms, and $c>0$ is a fixed **primitive conversion parameter** measured in metres per second. They are parameters of the adopted physical formulation, not quantities derived by this definition. Coordinates $x^a$ in an SI chart have length units; a cotangent vector $p=p_a\\,dx^a$ has units of momentum, $\\mathrm{kg\\,m\\,s^{-1}}$, when all four coordinates are in metres. The canonical one-form $p_a\\,dx^a$ therefore has action units $\\mathrm{J\\,s}$. Along a future-directed timelike curve with tangent $V=dx/d\\lambda$, set $s:=\\sqrt{-g(V,V)}$; then $d\\tau=s\\,d\\lambda/c$, independently of the increasing regular parameter. The length action $-mc\\int s\\,d\\lambda$ has action units. For a future unit observer $n$ and future causal covector $p$, define the model normal-observer energy and spatial momentum covector by\n\n$$E_n(p):=-c\\,p(n),\\qquad q_n(p):=p+p(n)n^\\flat,$$\n\nwhere $n^\\flat=g(n,\\cdot)$. The restriction of $g^{-1}$ to covectors annihilating $n$ is positive definite, so it supplies the norm of $q_n(p)$. These are quantity definitions and unit conventions; they do not identify canonical momentum with mechanical momentum, assert that an apparatus measured these values, or establish a dynamical law.",
+        "deps": [
+          "def-countable-choice",
+          "def-gr-smooth-lorentzian-objects",
+          "def-rpm-h-cotangent-phase-space",
+          "def-rpm-spacetime-observer-and-worldline"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "def-rpm-spacetime-observer-and-worldline": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sean M. Carroll, Lecture Notes on General Relativity, complete lecture notes (arXiv:gr-qc/9712019v1)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Complete 238-page notes; Chapter 1, printed pp. 25–27, and Chapter 3, printed pp. 68–72; full relevant sections inspected."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "physical_scope": "Classical spinless test-particle quantities on a prescribed smooth time-oriented Lorentzian four-manifold. Mass and c are primitive parameters of this model; no particle action, force law, backreaction, empirical result, or universal identification with another framework is included.",
+        "library": "physics"
+      },
+      {
+        "id": "def-rpm-h-regular-constraint-system",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Regular primary constraints and total generator",
+        "statement": "Assume $\\mathrm{AC}_{\\omega}$ and let $(M^{2n},\\omega)$ be a smooth symplectic manifold. A finite family of smooth functions $\\chi_1,\\ldots,\\chi_r$ defined on an open neighborhood $U\\subseteq M$ is a **regular primary constraint family** on\n\n$$C:=\\{z\\in U:\\chi_1(z)=\\cdots=\\chi_r(z)=0\\}$$\n\nwhen $d\\chi_1(z),\\ldots,d\\chi_r(z)$ are linearly independent at every $z\\in C$. The regular-level theorem [[thm-a-regular-level-set-is-an-embedded-submanifold]] then gives $C$ its embedded-submanifold structure and $T_zC=\\bigcap_a\\ker d\\chi_a(z)$. For functions $F,G$ on $U$, write $F\\approx G$ when $F|_C=G|_C$; thus $F\\approx0$ means that $F$ vanishes on $C$, without requiring it to vanish off $C$.\n\nGiven a smooth canonical Hamiltonian $H_c$ on $U$ and multiplier functions $u^a(t)$, the **total generator** is\n\n$$H_T(t,z):=H_c(t,z)+\\sum_{a=1}^r u^a(t)\\chi_a(z).$$\n\nThe functions $u^a$ are independent parameter functions; the definition does not assert that their equations determine them. If $H_c$ is an energy and $\\chi_a$ has units \\([\\chi_a]\\), then $u^a$ has units energy divided by \\([\\chi_a]\\), so every term in $H_T$ has the same units. A later constraint, if generated by consistency, is not declared primary by this definition.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-cotangent-phase-space",
+          "def-symplectic-form-and-symplectic-manifold",
+          "thm-a-regular-level-set-is-an-embedded-submanifold"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "def-symplectic-form-and-symplectic-manifold": "mathematical-premise",
+          "thm-a-regular-level-set-is-an-embedded-submanifold": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Hanson, Tullio Regge and Claudio Teitelboim, Constrained Hamiltonian Systems, Part 1, Chapter I",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Printed pp. 7–10: weak equality, primary and secondary constraints, multipliers and consistency."
+            },
+            {
+              "title": "Ghanashyam Date, Lectures on Constrained Systems, §§3–4",
+              "url": "https://arxiv.org/pdf/1010.2062",
+              "locator": "Printed pp. 12–22: regular constraint surfaces, multiplier consistency and first/second-class classification."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "library": "physics",
+        "physical_scope": "Mathematical local constraint-surface and total-generator conventions; no dynamics or physical constraint model is adopted."
+      },
+      {
+        "id": "thm-rpm-h-canonical-poisson-and-flow",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Canonical Poisson brackets and local Hamiltonian flow",
+        "statement": "Let $Q$ be a finite-dimensional smooth manifold as in [[def-rpm-h-cotangent-phase-space]], and write its cotangent phase space in induced coordinates $(q^i,p_i)$. With $\\omega=dq^i\\wedge dp_i$, define $X_H$ by $\\iota_{X_H}\\omega=dH$ and define the Poisson bracket by $\\{F,G\\}:=X_G(F)$. Then\n\n$$X_H=\\frac{\\partial H}{\\partial p_i}\\frac{\\partial}{\\partial q^i}-\\frac{\\partial H}{\\partial q^i}\\frac{\\partial}{\\partial p_i},\\qquad \\{F,G\\}=F_{q^i}G_{p_i}-F_{p_i}G_{q^i}.$$\n\nThe bracket is coordinate independent and makes smooth functions a Poisson algebra. If $H_t$ is smooth on an open time-dependent domain $D\\subset\\mathbb R\\times T^*Q$, each solution of $\\dot z=X_{H_t}(z)$ has local uniqueness and smooth dependence on initial data and parameters; on its actual interval,\n\n$$\\frac{d}{dt}F(t,z(t))=\\partial_tF+\\{F,H_t\\}.$$\n\nNo completeness or global flow is asserted. If $H$ is smooth, each local time-$t$ flow map preserves ω.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-cotangent-phase-space",
+          "thm-smooth-functions-form-a-poisson-algebra",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "thm-smooth-functions-form-a-poisson-algebra": "mathematical-premise",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Hanson, Tullio Regge and Claudio Teitelboim, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter I, printed pp. 7–11: canonical Hamiltonian conventions in constrained mechanics."
+            },
+            {
+              "title": "Ghanashyam Date, Lectures on Constrained Systems, arXiv:1010.2062",
+              "url": "https://arxiv.org/pdf/1010.2062",
+              "locator": "§§3–4, printed pp. 12–22: phase-space Poisson bracket convention."
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "physical_scope": "Mathematical cotangent phase space; physical dimensions are interpreted only when a model assigns units to coordinates and observables.",
+        "library": "physics"
+      },
+      {
+        "id": "post-rpm-h-free-test-particle-action",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Free massive test-particle action",
+        "statement": "For a $C^2$ future-directed timelike worldline $x:I\\to M$ on a prescribed smooth, time-oriented Lorentzian background $(M,g,T)$ of signature $(-+++)$, with $m>0$ a fixed primitive mass in kg and $c>0$ in m/s, adopt the stationary-action model\n\n$$S_m[x]=-mc\\int_I\\sqrt{-g(x',x') }\\,d\\lambda.$$\n\nHere λ is an increasing regular parameter, endpoint events are fixed, and admissible variations remain future timelike. The integrand is the proper-time length density, so $S_m=-mc^2\\int d\\tau$; its dimension is action (J s). The adopted premise concerns this ideal free test body only. It is neither a theorem about all matter nor an empirical report, and supplies no backreaction or completeness claim. The flat ideal-clock specialization agrees with [[post-sr-ideal-clocks-and-light]]; adopting this action on a curved background remains a separate premise.\n\nThe cotangent phase-space carrier convention assumes countable choice ACω only; full choice is not assumed.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-background-and-model-quantities",
+          "def-rpm-h-cotangent-phase-space",
+          "post-sr-ideal-clocks-and-light"
+        ],
+        "dependency_roles": {
+          "post-sr-ideal-clocks-and-light": "flat-specialization-check",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-background-and-model-quantities": "formulation-prerequisite",
+          "def-rpm-h-cotangent-phase-space": "dimensional-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Hanson, Tullio Regge and Claudio Teitelboim, Constrained Hamiltonian Systems, Part 1, complete monograph",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Complete 35-page Part 1; Chapter II, printed pp. 27–30, relativistic spinless point particle."
+            },
+            {
+              "title": "B. F. Chagas-Filho, Free massless particles and extended space-time algebra, comparison for the distinct massive square-root action",
+              "url": "https://arxiv.org/pdf/hep-th/0401091",
+              "locator": "§1, pp. 1–2."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "physical_scope": "Classical spinless structureless point test body with fixed primitive mass m>0 on a prescribed background; excludes self-field, radiation reaction, finite size, spin and quantum effects.",
+        "library": "physics"
+      },
+      {
+        "id": "post-rpm-h-massless-shell-action",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Separate massless shell action",
+        "statement": "On a prescribed background $(M,g,T)$, adopt a distinct massless classical particle model with fields $x:I\\to M$, $p(\\lambda)\\in T^*_{x(\\lambda)}M$, and a positive smooth multiplier $e(\\lambda)>0$:\n\n$$S_0[x,p,e]=\\int_I\\left[p_a x'^a-eC_0(x,p)\\right]d\\lambda,\\qquad C_0=\\tfrac12g^{ab}p_ap_b.$$\n\nVariations of $p,e$ are independent; the physical branch is $p\\ne0$, $p^\\sharp$ future null. With all spacetime coordinates measured in metres and dimensionless λ, $p_a$ has units kg m/s, $C_0$ has units kg²m²/s² and $e$ has units s/kg, making the action J s. Other parameter units scale $e$ accordingly. This is a separate adopted model: null curves have no proper-time parameter, the model does not arise by setting $m=0$ in $P=mU$, and its positive momentum scale is additional initial data. On the nonzero branch, the vertical differential is $d_pC_0=p^\\sharp\\ne0$: nondegeneracy of $g^{-1}$ and $p\\ne0$ give $p^\\sharp\\ne0$. Hence the shell is a regular primary constraint in the sense of [[def-rpm-h-regular-constraint-system]]. This postulate is not an empirical observation or a deduction from the massive model.\n\nThe cotangent phase-space carrier convention assumes countable choice ACω only; full choice is not assumed.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-background-and-model-quantities",
+          "def-rpm-h-cotangent-phase-space",
+          "def-rpm-h-regular-constraint-system"
+        ],
+        "dependency_roles": {
+          "def-rpm-h-regular-constraint-system": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-background-and-model-quantities": "formulation-prerequisite",
+          "def-rpm-h-cotangent-phase-space": "dimensional-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "W. F. Chagas-Filho, Free massless particles and extended space-time algebra, complete paper",
+              "url": "https://arxiv.org/pdf/hep-th/0401091",
+              "locator": "§§1–2, pp. 1–3, einbein action and massless constraint."
+            },
+            {
+              "title": "Sean M. Carroll, Lecture Notes on General Relativity, complete lecture notes (arXiv:gr-qc/9712019v1)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Complete 238-page notes; Chapter 1, printed pp. 25–27, and Chapter 3, printed pp. 68–72; full relevant sections inspected."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "physical_scope": "Separate classical massless test-particle formulation with nonzero future-null momentum; no proper-time parameter, no mU identification and no empirical realization claim.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-constraint-consistency",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Constraint consistency for a regular first-order model",
+        "statement": "Let $I\\subset\\mathbb R$ be an open interval and $(P,\\omega)$ a symplectic manifold. Let $\\chi_a:I\\times P\\to\\mathbb R$ be smooth and suppose the covectors $d_z\\chi_a(\\lambda,z)$ are linearly independent at every $z\\in N_\\lambda:=\\{z:\\chi_1(\\lambda,z)=\\cdots=\\chi_r(\\lambda,z)=0\\}$; this is the regular constraint condition of [[def-rpm-h-regular-constraint-system]] on each slice. Let $H_c:I\\times P\\to\\mathbb R$ be a smooth ambient extension of a specified descended Hamiltonian. Work in a Darboux chart with coordinates $(q^i,p_i)$ and local potential $\\theta=p_i\\,dq^i$, so $d\\theta=-\\omega$ under the convention $\\omega=dq^i\\wedge dp_i$; paths stay in this chart.\nFor any compact interval $[a,b]\\subset I$ with $a<b$, paths $z:[a,b]\\to P$ that stay in the chart and smooth multipliers $u^a:[a,b]\\to\\mathbb R$ have action\n\n$$I[z,u]=\\int_a^b\\left[\\theta(\\dot z)-H_c(\\lambda,z)-u^a(\\lambda)\\chi_a(\\lambda,z)\\right]d\\lambda.$$\n\nFixed-endpoint variations of $z$ and unrestricted variations of $u$ imply $z(\\lambda)\\in N_\\lambda$ and $\\dot z=X_{H_c(\\lambda,\\cdot)}+u^a(\\lambda)X_{\\chi_a(\\lambda,\\cdot)}$. A trajectory remains in the moving level set only when\n\n$$\\partial_\\lambda\\chi_a+\\{\\chi_a,H_c(\\lambda,\\cdot)\\}+u^b(\\lambda)\\{\\chi_a,\\chi_b\\}=0\\quad\\text{on }N_\\lambda.$$\n\nFor constraints independent of $\\lambda$, the first term is zero.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-cotangent-phase-space",
+          "def-rpm-h-regular-constraint-system",
+          "thm-rpm-h-canonical-poisson-and-flow",
+          "thm-darboux-theorem",
+          "thm-cm-stationarity-iff-euler-lagrange"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "def-rpm-h-regular-constraint-system": "mathematical-premise",
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise",
+          "thm-darboux-theorem": "mathematical-premise",
+          "thm-cm-stationarity-iff-euler-lagrange": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henneaux, Teitelboim and Regge, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter I, printed pp. 7–11, constraint consistency."
+            },
+            {
+              "title": "Ghanashyam Date, Lectures on Constrained Systems, arXiv:1010.2062",
+              "url": "https://arxiv.org/pdf/1010.2062",
+              "locator": "§§3–4, printed pp. 12–22; multiplier consistency and Dirac bracket."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional local result for a specified regular constraint surface and total-Hamiltonian ansatz; no universal termination or global quotient claim.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-first-class-local-reduction",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Regular first-class constraints admit local symplectic reduction",
+        "statement": "Let $(P^{2n},\\omega)$ be symplectic, and let $N=\\{\\chi_1=\\cdots=\\chi_r=0\\}$ be a regular embedded level surface with $\\{\\chi_a,\\chi_b\\}=0$ on $N$. Then $\\ker(\\omega|_N)$ is exactly the rank-$r$ distribution spanned by the restricted Hamiltonian vector fields $X_{\\chi_a}$. This distribution is involutive. Around every point of $N$, its leaves admit smooth Frobenius coordinates $(s^1,\\ldots,s^r,y^1,\\ldots,y^{2n-2r})$, and the local leaf space has a unique smooth closed nondegenerate two-form $\\omega_{\\mathrm{red}}$ whose pullback is $\\omega|_N$. Thus regular first-class constraints yield a local symplectic quotient. No global orbit-space regularity follows from these hypotheses.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-regular-constraint-system",
+          "def-symplectic-form-and-symplectic-manifold",
+          "def-symplectic-orthogonal-complement",
+          "prop-symplectic-double-orthogonal-and-dimension-identities",
+          "thm-frobenius-local-coordinate-theorem",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "thm-rpm-h-canonical-poisson-and-flow"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-regular-constraint-system": "mathematical-premise",
+          "def-symplectic-form-and-symplectic-manifold": "mathematical-premise",
+          "def-symplectic-orthogonal-complement": "mathematical-premise",
+          "prop-symplectic-double-orthogonal-and-dimension-identities": "mathematical-premise",
+          "thm-frobenius-local-coordinate-theorem": "mathematical-premise",
+          "thm-smooth-dependence-of-ode-solutions-on-parameters": "mathematical-premise",
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henneaux, Teitelboim and Regge, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter I, printed pp. 7–11."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "physical_scope": "Local differential-geometric quotient only; no global Hausdorff quotient or global gauge-fixing assertion.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-homogeneous-legendre-degeneracy",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Positive homogeneity forces Legendre degeneracy",
+        "statement": "Let $L(q,v)$ be $C^2$ on a conic open subset of a tangent bundle, and suppose $L(q,av)=aL(q,v)$ for every $a>0$ in its domain. At each nonzero $v$,\n\n$$v^iL_{v^i}=L,\\qquad L_{v^iv^j}v^i=0,\\qquad E_L:=v^iL_{v^i}-L=0.$$\n\nConsequently the velocity Hessian is singular and the fibre derivative cannot be a local diffeomorphism there; a regular Legendre equivalence theorem cannot be applied. These conclusions do not imply that the motion is static or that the Lagrangian has a specified constraint surface.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-almost-regular-legendre",
+          "def-fibre-derivative-and-legendre-transform-of-a-lagrangian"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-almost-regular-legendre": "mathematical-premise",
+          "def-fibre-derivative-and-legendre-transform-of-a-lagrangian": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sean M. Carroll, Lecture Notes on General Relativity, complete lecture notes (arXiv:gr-qc/9712019v1)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Complete 238-page notes; Chapter 1, printed pp. 25–27, and Chapter 3, printed pp. 68–72; full relevant sections inspected."
+            },
+            {
+              "title": "Henneaux, Teitelboim and Regge, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter I, pp. 7–11: singular Lagrangians and primary constraints."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "physical_scope": "Pure conditional result for smooth positively homogeneous Lagrangians; it does not assert every singular system is almost regular.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-local-legendre-and-energy-descent",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Energy descends through an almost-regular Legendre map",
+        "statement": "Let $L(t,q,v)$ be smooth on an open velocity domain and let $\\mathbb FL(t,q,v)=(t,q,L_v)$ be almost regular in the sense that it is a surjective submersion onto a specified embedded image $N$ and every fibre is connected. Define $E_L=v^iL_{v^i}-L$. Then there is a unique smooth function $h:N\\to\\mathbb R$ with $E_L=h\\circ\\mathbb FL$. The assertion is local in the stated domains; no global inverse velocity map is asserted.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-almost-regular-legendre",
+          "def-fibre-derivative-and-legendre-transform-of-a-lagrangian",
+          "cor-local-normal-form-for-submersions"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-almost-regular-legendre": "mathematical-premise",
+          "def-fibre-derivative-and-legendre-transform-of-a-lagrangian": "mathematical-premise",
+          "cor-local-normal-form-for-submersions": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henneaux, Teitelboim and Regge, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter I, pp. 7–11."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional theorem under the explicit almost-regular package; not a universal theorem for singular Lagrangians.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-second-class-dirac-bracket",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Second-class constraints and the Dirac bracket",
+        "statement": "Let $(P,\\omega)$ be symplectic and let $\\chi_1,\\ldots,\\chi_{2k}$ be smooth on an open set $U$, with $C_{ab}=\\{\\chi_a,\\chi_b\\}$ invertible at every point of $U$. Write $C^{ab}$ for its inverse and $N=\\{\\chi=0\\}\\cap U$. Then $N$ is an embedded symplectic submanifold, and the bracket\n\n$$\\{F,G\\}_D=\\{F,G\\}-\\{F,\\chi_a\\}C^{ab}\\{\\chi_b,G\\}$$\n\nis the Poisson bracket of the restricted symplectic form on $N$. It is independent of ambient extensions of $F,G$, and every $\\chi_a$ is a Casimir. This is local and assumes invertibility on $U$; it does not cover singular points.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-regular-constraint-system",
+          "def-symplectic-form-and-symplectic-manifold",
+          "thm-smooth-functions-form-a-poisson-algebra",
+          "thm-a-regular-level-set-is-an-embedded-submanifold"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-regular-constraint-system": "mathematical-premise",
+          "def-symplectic-form-and-symplectic-manifold": "mathematical-premise",
+          "thm-smooth-functions-form-a-poisson-algebra": "mathematical-premise",
+          "thm-a-regular-level-set-is-an-embedded-submanifold": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henneaux, Teitelboim and Regge, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter II, printed pp. 27–30; second-class constraints and bracket."
+            },
+            {
+              "title": "Ghanashyam Date, Lectures on Constrained Systems, arXiv:1010.2062",
+              "url": "https://arxiv.org/pdf/1010.2062",
+              "locator": "§4, printed pp. 18–22."
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct",
+        "physical_scope": "Local result on an open neighborhood where the constraint bracket matrix is invertible.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-flat-shell-global-reduction",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Flat future mass shell has an explicit global orbit quotient",
+        "statement": "In affine Minkowski space with inertial coordinates $x^0,x^i$ measured in metres and metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, let $m\\ge0$ and let\n\n$$\\Sigma_m^+=\\{(x,p): -p_0=P^0=\\sqrt{m^2c^2+|\\mathbf p|^2},\\ p_0<0\\},$$\n\nwhere $\\mathbf p\\ne0$ when $m=0$, and write $P^i=p_i$ for the spatial raised momentum components. The characteristic flow of the restricted canonical form is $(x,p)\\mapsto(x+\\alpha P,p)$, and its orbit space is globally diffeomorphic to $B_m=\\mathbb R^3_a\\times\\mathbb R^3_p$ for $m>0$, or $\\mathbb R^3_a\\times(\\mathbb R^3_p\\setminus\\{0\\})$ for $m=0$, by\n\n$$a^i=x^i-\\frac{P^i}{P^0}x^0,\\qquad p_i=p_i.$$\n\nThe reduced symplectic form is $da^i\\wedge dp_i$. The quotient is Hausdorff and second countable and each full characteristic line meets each slice $x^0=ct$ exactly once. This is an explicit free flat quotient, not a conclusion about arbitrary first-class systems.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-cotangent-phase-space",
+          "def-sr-affine-minkowski-model",
+          "thm-rpm-h-canonical-poisson-and-flow",
+          "thm-rpm-h-first-class-local-reduction"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise",
+          "thm-rpm-h-first-class-local-reduction": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henneaux, Teitelboim and Regge, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter II, printed pp. 27–30, free relativistic particle."
+            },
+            {
+              "title": "Sean M. Carroll, Lecture Notes on General Relativity, complete lecture notes (arXiv:gr-qc/9712019v1)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Complete 238-page notes; Chapter 1, printed pp. 25–27, and Chapter 3, printed pp. 68–72; full relevant sections inspected."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "physical_scope": "Explicit global reduction only for a free flat future massive or nonzero-null shell; no curved global quotient claim.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-homogeneous-massive-shell",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Massive square-root Legendre map and its future shell",
+        "statement": "Let $(M,g,T)$ be a smooth time-oriented Lorentzian four-manifold, $m>0$, and $L(x,V)=-mc\\sqrt{-g(V,V)}$ on the future timelike tangent cone. Its fibre derivative is\n\n$$p_a=mc\\frac{g_{ab}V^b}{s},\\qquad s=\\sqrt{-g(V,V)}>0.$$\n\nThe velocity Hessian is $mc(g_{ab}/s+V_aV_b/s^3)$, has kernel exactly $\\mathbb RV$, and rank three. The image consists exactly of the future shell $\\Sigma_m^+=\\{(x,p)\\in T^*M:g_x^{-1}(p,p)=-m^2c^2,\\ p^\\sharp\\text{ future}\\}$. Each fibre is a connected positive ray, and the Legendre map is a surjective submersion onto this embedded image. Its energy $p(V)-L$ is zero; the map has no local inverse in the four-velocity direction.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-background-and-model-quantities",
+          "def-rpm-spacetime-observer-and-worldline",
+          "def-rpm-h-cotangent-phase-space",
+          "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "thm-rpm-h-homogeneous-legendre-degeneracy",
+          "lem-lorentz-form-has-orthonormal-basis",
+          "thm-sr-proper-time-and-observer-decomposition"
+        ],
+        "dependency_roles": {
+          "lem-lorentz-form-has-orthonormal-basis": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-background-and-model-quantities": "mathematical-premise",
+          "def-rpm-spacetime-observer-and-worldline": "formulation-prerequisite",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "thm-a-regular-level-set-is-an-embedded-submanifold": "mathematical-premise",
+          "thm-rpm-h-homogeneous-legendre-degeneracy": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sean M. Carroll, Lecture Notes on General Relativity, complete lecture notes (arXiv:gr-qc/9712019v1)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Complete 238-page notes; Chapter 1, printed pp. 25–27, and Chapter 3, printed pp. 68–72; full relevant sections inspected."
+            },
+            {
+              "title": "Henneaux, Teitelboim and Regge, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter II, printed pp. 27–30."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional geometric analysis of the adopted square-root free particle Lagrangian on a prescribed background.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-regular-local-gauge-slice",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "A transverse local gauge condition gives a second-class slice",
+        "statement": "Let $\\chi_1,\\ldots,\\chi_r$ be regular first-class constraints on $N$ as in [[thm-rpm-h-first-class-local-reduction]]. Let $\\phi_1,\\ldots,\\phi_r$ be smooth gauge functions such that $A_{ab}=\\{\\chi_a,\\phi_b\\}$ is invertible on their common zero set near a point. Then the combined constraint matrix for $(\\chi,\\phi)$ is invertible there, so the combined surface is second class and carries the Dirac symplectic form. After shrinking the neighborhood, each nearby characteristic leaf intersects the gauge surface in exactly one point within that coordinate neighborhood. This is a local slice assertion only. When $r=0$ the characteristic leaves are points and the empty gauge condition is immediate; the proof below treats $r\\ge1$.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-regular-constraint-system",
+          "thm-rpm-h-first-class-local-reduction",
+          "thm-rpm-h-second-class-dirac-bracket",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space"
+        ],
+        "dependency_roles": {
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-regular-constraint-system": "mathematical-premise",
+          "thm-rpm-h-first-class-local-reduction": "mathematical-premise",
+          "thm-rpm-h-second-class-dirac-bracket": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henneaux, Teitelboim and Regge, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter I, printed pp. 7–11, gauge fixing; Chapter II, pp. 27–30."
+            },
+            {
+              "title": "Ghanashyam Date, Lectures on Constrained Systems, arXiv:1010.2062",
+              "url": "https://arxiv.org/pdf/1010.2062",
+              "locator": "§4, printed pp. 18–22."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "physical_scope": "Local slice near a point where the gauge matrix is invertible; no uniqueness for distant orbits.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-first-order-action-and-geodesics",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "First-order shell action yields massive and null geodesics",
+        "statement": "Let $(M,g,T)$ be a prescribed smooth time-oriented Lorentzian four-manifold with signature $(-+++)$. Work in a spacetime chart on a compact parameter interval $[a,b]$ with $a<b$; take $x,p,e$ smooth on a neighbourhood of that interval, $e>0$, and $m\\ge0$. Restrict to the future shell branch: when $m>0$, $p^\\sharp$ is future timelike; when $m=0$, require $p\\ne0$ and $p^\\sharp$ future null. Set $C_m=\\tfrac12(g^{ab}p_ap_b+m^2c^2)$ and define the first-order functional\n\n$$I_m[x,p,e]=\\int_a^b\\left(p_ax'^a-eC_m(x,p)\\right)d\\lambda.$$\n\nTake independent smooth variations of $p,e$ and fixed-endpoint variations of $x$. Stationarity on the chart segment is equivalent to\n\n$$x'^a=e g^{ab}p_b,\\quad p'_a=-\\tfrac e2\\partial_a g^{bc}p_bp_c,\\quad C_m=0.$$\n\nOn the massive future branch $m>0$, these equations are equivalent to stationary paths of the square-root action in [[post-rpm-h-free-test-particle-action]]; the mechanical covector is $p=mc\\,x'^\\flat/\\sqrt{-g(x',x')}$, and proper-time gauge has $e=1/m$. For the separate nonzero future-null branch $m=0$, the equations describe a null geodesic with an arbitrary positive parameter multiplier; no proper-time parameter exists. In both cases the unparameterized path is a geodesic, and no existence or completeness claim is made.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-background-and-model-quantities",
+          "def-rpm-h-cotangent-phase-space",
+          "post-rpm-h-free-test-particle-action",
+          "post-rpm-h-massless-shell-action",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "def-geodesic-of-an-affine-connection",
+          "def-covariant-derivative-along-a-curve",
+          "thm-cm-stationarity-iff-euler-lagrange",
+          "def-rpm-h-regular-constraint-system",
+          "thm-rpm-h-canonical-poisson-and-flow",
+          "thm-rpm-h-homogeneous-massive-shell"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-homogeneous-massive-shell": "mathematical-premise",
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise",
+          "def-rpm-h-regular-constraint-system": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-background-and-model-quantities": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "post-rpm-h-free-test-particle-action": "physical-assumption",
+          "post-rpm-h-massless-shell-action": "physical-assumption",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative": "mathematical-premise",
+          "def-geodesic-of-an-affine-connection": "mathematical-premise",
+          "def-covariant-derivative-along-a-curve": "mathematical-premise",
+          "thm-cm-stationarity-iff-euler-lagrange": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sean M. Carroll, Lecture Notes on General Relativity, complete lecture notes (arXiv:gr-qc/9712019v1)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Complete 238-page notes; Chapter 1, printed pp. 25–27, and Chapter 3, printed pp. 68–72; full relevant sections inspected."
+            },
+            {
+              "title": "W. F. Chagas-Filho, Free massless particles and extended space-time algebra",
+              "url": "https://arxiv.org/pdf/hep-th/0401091",
+              "locator": "§§1–2, pp. 1–3: separate massless einbein action."
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional variational equivalence on a prescribed smooth background; does not assert empirical validity or global geodesic completeness.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-inertial-time-reduced-hamiltonian",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Free shell in inertial time has the square-root Hamiltonian",
+        "statement": "In affine Minkowski space with $x^0=ct$, let $m\\ge0$, $p_i$ be spatial momentum components and $p_i\\ne0$ for $m=0$. On the future shell, $p_0=-E/c$, where\n\n$$E(\\mathbf p)=\\sqrt{m^2c^4+c^2|\\mathbf p|^2}.$$\n\nOn any compact interval $J=[t_1,t_2]$ of inertial time, the gauge $x^0=ct$ reduces the first-order shell action to\n\n$$I_J=\\int_{t_1}^{t_2}\\left(p_i\\dot q^i-E(\\mathbf p)\\right)dt,\\qquad q^i=x^i.$$\n\nThe gauge pair $C_m=0$, $\\psi=x^0-ct=0$ is second class because $\\{C_m,\\psi\\}=-P^0\\ne0$ on the future shell; its Dirac reduction gives the canonical spatial bracket. The reduced Hamilton equations are $\\dot q^i=c^2p_i/E$, $\\dot p_i=0$, agreeing with the unreduced characteristic trajectories. On this full flat future shell every characteristic line meets each inertial-time slice once; this global assertion does not extend by this proof to a curved temporal chart.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-cotangent-phase-space",
+          "def-sr-affine-minkowski-model",
+          "thm-rpm-h-flat-shell-global-reduction",
+          "thm-rpm-h-first-order-action-and-geodesics",
+          "thm-rpm-h-second-class-dirac-bracket",
+          "thm-rpm-h-canonical-poisson-and-flow"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise",
+          "thm-rpm-h-second-class-dirac-bracket": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "def-sr-affine-minkowski-model": "mathematical-premise",
+          "thm-rpm-h-flat-shell-global-reduction": "mathematical-premise",
+          "thm-rpm-h-first-order-action-and-geodesics": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sean M. Carroll, Lecture Notes on General Relativity, complete lecture notes (arXiv:gr-qc/9712019v1)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Complete 238-page notes; Chapter 1, printed pp. 25–27, and Chapter 3, printed pp. 68–72; full relevant sections inspected."
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "physical_scope": "Flat free particle on the full future shell; inertial time gauge is global here only because P0 is strictly positive.",
+        "library": "physics"
+      },
+      {
+        "id": "pthm-rpm-h-action-mechanical-momentum",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Square-root action momentum equals massive mechanical momentum",
+        "statement": "For the massive square-root Lagrangian $L=-mc\\sqrt{-g(V,V)}$ on a prescribed smooth Lorentzian background, its fibre derivative is $p=mc\\,V^\\flat/\\sqrt{-g(V,V)}$. If τ is proper time along the timelike curve, $U=dx/d\\tau=cV/\\sqrt{-g(V,V)}$, so the raised momentum is $p^\\sharp=mU$. In flat spacetime this agrees with the adopted special-relativistic mechanical momentum convention. This is a model identity, not a measurement.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-background-and-model-quantities",
+          "thm-rpm-h-homogeneous-massive-shell",
+          "thm-sr-proper-time-and-observer-decomposition",
+          "post-rpm-h-free-test-particle-action",
+          "thm-rpm-h-first-order-action-and-geodesics"
+        ],
+        "dependency_roles": {
+          "thm-rpm-h-first-order-action-and-geodesics": "mathematical-premise",
+          "post-rpm-h-free-test-particle-action": "physical-assumption",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-background-and-model-quantities": "mathematical-premise",
+          "thm-rpm-h-homogeneous-massive-shell": "mathematical-premise",
+          "thm-sr-proper-time-and-observer-decomposition": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sean M. Carroll, Lecture Notes on General Relativity, complete lecture notes (arXiv:gr-qc/9712019v1)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Complete 238-page notes; Chapter 1, printed pp. 25–27, and Chapter 3, printed pp. 68–72; full relevant sections inspected."
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "physical_scope": "Identity in the adopted massive point-particle model; the SR supplier is used only for the explicitly flat consistency check.",
+        "library": "physics"
+      },
+      {
+        "id": "pthm-rpm-h-massive-and-null-time-motion",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Massive and null free particles in inertial time",
+        "statement": "In the flat inertial-time model of [[thm-rpm-h-inertial-time-reduced-hamiltonian]], the coordinate velocity is $\\dot{\\mathbf q}=c^2\\mathbf p/E$. For $m>0$, its Euclidean magnitude is strictly less than $c$; for the separate massless model $m=0$, with $\\mathbf p\\ne0$ and its magnitude is exactly $c$. Spatial momentum is constant in both cases. These are deductions from the adopted free actions, not experimental measurements.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-background-and-model-quantities",
+          "post-rpm-h-free-test-particle-action",
+          "post-rpm-h-massless-shell-action",
+          "thm-rpm-h-inertial-time-reduced-hamiltonian"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-background-and-model-quantities": "mathematical-premise",
+          "post-rpm-h-free-test-particle-action": "physical-assumption",
+          "post-rpm-h-massless-shell-action": "physical-assumption",
+          "thm-rpm-h-inertial-time-reduced-hamiltonian": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Sean M. Carroll, Lecture Notes on General Relativity, complete lecture notes (arXiv:gr-qc/9712019v1)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Complete 238-page notes; Chapter 1, printed pp. 25–27, and Chapter 3, printed pp. 68–72; full relevant sections inspected."
+            },
+            {
+              "title": "Henneaux, Teitelboim and Regge, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter II, printed pp. 27–30."
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional flat-spacetime kinematic prediction of the two adopted free models; no empirical speed measurement is claimed.",
+        "library": "physics"
+      },
+      {
+        "id": "thm-rpm-h-temporal-shell-reduction",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "A curved temporal chart gives a local reduced Hamiltonian",
+        "statement": "Assume a temporal product chart with lapse-shift data $(N,\\beta,h)$ as in [[def-rpm-h-temporal-chart-data]], all four coordinates measured in metres. On the future shell $C_m=\\tfrac12(g^{ab}p_ap_b+m^2c^2)=0$, define\n\n$$\\kappa=\\sqrt{m^2c^2+h^{ij}p_ip_j},\\quad p_0=\\beta^ip_i-N\\kappa,\\quad H(t,q,p)=-cp_0=c(N\\kappa-\\beta^ip_i).$$\n\nFor $m=0$, require $p_i\\ne0$. On any compact interval $J=[t_1,t_2]$ whose path stays in the chart, the gauge $x^0=ct$ reduces the first-order action to $\\int_{t_1}^{t_2}(p_i\\dot q^i-H)dt$, and its variational equations on the interior of $J$ are exactly",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-temporal-chart-data",
+          "def-rpm-h-background-and-model-quantities",
+          "def-rpm-h-cotangent-phase-space",
+          "thm-rpm-h-first-order-action-and-geodesics",
+          "thm-rpm-h-canonical-poisson-and-flow",
+          "thm-a-regular-level-set-is-an-embedded-submanifold"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-temporal-chart-data": "mathematical-premise",
+          "def-rpm-h-background-and-model-quantities": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "thm-rpm-h-first-order-action-and-geodesics": "mathematical-premise",
+          "thm-rpm-h-canonical-poisson-and-flow": "mathematical-premise",
+          "thm-a-regular-level-set-is-an-embedded-submanifold": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity, complete lecture notes (arXiv:gr-qc/0703035)",
+              "url": "https://arxiv.org/pdf/gr-qc/0703035",
+              "locator": "Complete 220-page notes; §§3.3.1–3.3.3, printed pp. 41–44, and §§4.2.2–4.2.3, pp. 56–58; full relevant sections inspected."
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "physical_scope": "Local reduction on a supplied lapse-shift temporal product chart and trajectory interval; no global gauge or curved-space quotient is asserted.",
+        "library": "physics"
+      },
+      {
+        "id": "pthm-rpm-h-coordinate-versus-observer-energy",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Coordinate Hamiltonian and normal-observer energy differ by shift",
+        "statement": "Under the hypotheses of [[thm-rpm-h-temporal-shell-reduction]], the future unit normal $n=N^{-1}(\\partial_0-\\beta^i\\partial_i)$ measures positive particle energy\n\n$$E_n=-c\\,p(n)=c\\kappa,$$\n\nwhile the chart's reduced Hamiltonian is $H=c(N\\kappa-\\beta^ip_i)$. The normal-frame spatial velocity is $w^i=(\\dot q^i/c+\\beta^i)/N=h^{ij}p_j/\\kappa$, with $h_{ij}w^iw^j<1$ for $m>0$ and $=1$ for a nonzero massless state. Write $|\\beta|_h:=\\sqrt{h_{ij}\\beta^i\\beta^j}$ and $|p|_{h^{-1}}:=\\sqrt{h^{ij}p_ip_j}$. If $\\beta^2:=h_{ij}\\beta^i\\beta^j<N^2$, then $H>0$. If $\\beta^2>N^2$, $H$ can be negative even though $E_n>0$. Along a Hamiltonian solution, $dH/dt=\\partial_tH$; only explicit time independence implies its conservation.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-background-and-model-quantities",
+          "def-rpm-h-temporal-chart-data",
+          "thm-rpm-h-temporal-shell-reduction",
+          "pthm-sr-momentum-and-four-force",
+          "post-rpm-h-free-test-particle-action",
+          "post-rpm-h-massless-shell-action"
+        ],
+        "dependency_roles": {
+          "post-rpm-h-massless-shell-action": "physical-assumption",
+          "post-rpm-h-free-test-particle-action": "physical-assumption",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-background-and-model-quantities": "mathematical-premise",
+          "def-rpm-h-temporal-chart-data": "mathematical-premise",
+          "thm-rpm-h-temporal-shell-reduction": "mathematical-premise",
+          "pthm-sr-momentum-and-four-force": "flat-specialization-check"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity, complete lecture notes (arXiv:gr-qc/0703035)",
+              "url": "https://arxiv.org/pdf/gr-qc/0703035",
+              "locator": "Complete 220-page notes; §§3.3.1–3.3.3, printed pp. 41–44, and §§4.2.2–4.2.3, pp. 56–58; full relevant sections inspected."
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional energy identities in a supplied temporal chart; SR is used only as a flat consistency specialization, not as a curved premise.",
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 420,
+    "id": "rpm-hamiltonian-constraints-examples",
+    "kind": "B",
+    "category": "relativistic-particle-mechanics",
+    "library": "physics",
+    "title": "Cotangent phase data, observables and action dimensions — Examples",
+    "companion": "rpm-hamiltonian-constraints",
+    "requires": [
+      "rpm-hamiltonian-constraints"
+    ],
+    "items": [
+      {
+        "id": "cex-rpm-h-nonhausdorff-first-class-quotient",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "A regular first-class quotient can be non-Hausdorff",
+        "statement": "Let $T^2=\\mathbb R^2/\\mathbb Z^2$ with periodic coordinates $x,y$, irrational $a\\in\\mathbb R\\setminus\\mathbb Q$, and canonical cotangent coordinates $(x,y,p_x,p_y)$. On $T^*T^2$ use $\\omega=dx\\wedge dp_x+dy\\wedge dp_y$ and the single constraint $C=p_x+a p_y=0$. It is regular and first class. Its flow on the constraint surface is $(x,y,p_x,p_y)\\mapsto(x+s,y+as,p_x,p_y)$. Every orbit on a fixed momentum fibre is dense in that torus, and the orbit quotient is not Hausdorff. Thus regular first-class constraints need not produce a Hausdorff global quotient, despite the local result of [[thm-rpm-h-first-class-local-reduction]].",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-cotangent-phase-space",
+          "def-rpm-h-regular-constraint-system",
+          "thm-rpm-h-first-class-local-reduction"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-cotangent-phase-space": "mathematical-premise",
+          "def-rpm-h-regular-constraint-system": "mathematical-premise",
+          "thm-rpm-h-first-class-local-reduction": "scope-contrast"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henneaux, Teitelboim and Regge, Constrained Hamiltonian Systems, Part 1",
+              "url": "https://scholarworks.iu.edu/dspace/bitstreams/0e1d11ee-2741-4da4-83ed-b7cabc0cd7d6/download",
+              "locator": "Chapter I, printed pp. 7–11, first-class constraints and gauge orbits."
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "construction",
+        "physical_scope": "Explicit mathematical counterexample on a compact cotangent phase space; no physical claim about a particle model.",
+        "library": "physics"
+      },
+      {
+        "id": "ex-rpm-h-shifted-chart-negative-energy",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Flat shifted chart with negative coordinate Hamiltonian",
+        "statement": "On $\\mathbb R^4$, set $N=1$, $h_{ij}=\\delta_{ij}$, and $\\beta=(2,0,0)$. The metric is\n\n$$g=-(dx^0)^2+(dx^1+2dx^0)^2+(dx^2)^2+(dx^3)^2.$$\n\nIt is flat under $X^0=x^0, X^1=x^1+2x^0, X^2=x^2, X^3=x^3$, while the chart remains temporal. For a massive state $m>0$ with spatial momentum $p=(p_1,0,0)$, $p_1>mc/\\sqrt3$, the future shell has\n\n$$H=c\\left(\\sqrt{m^2c^2+p_1^2}-2p_1\\right)<0,$$\n\nbut the normal-observer energy $E_n=c\\sqrt{m^2c^2+p_1^2}>0$. The coordinate speed magnitude exceeds $c$, while the local normal-observer speed remains below $c$.",
+        "deps": [
+          "def-countable-choice",
+          "def-rpm-h-temporal-chart-data",
+          "thm-rpm-h-temporal-shell-reduction",
+          "def-rpm-h-background-and-model-quantities"
+        ],
+        "dependency_roles": {
+          "def-rpm-h-background-and-model-quantities": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-rpm-h-temporal-chart-data": "mathematical-premise",
+          "thm-rpm-h-temporal-shell-reduction": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Eric Gourgoulhon, 3+1 Formalism and Bases of Numerical Relativity, complete lecture notes (arXiv:gr-qc/0703035)",
+              "url": "https://arxiv.org/pdf/gr-qc/0703035",
+              "locator": "Complete 220-page notes; §§3.3.1–3.3.3, printed pp. 41–44, and §§4.2.2–4.2.3, pp. 56–58; full relevant sections inspected."
+            }
+          ]
+        },
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "physical_scope": "Exact flat-metric coordinate example; no measurement or curved-background claim.",
+        "library": "physics"
+      }
+    ]
+  }
+]

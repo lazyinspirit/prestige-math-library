@@ -1,0 +1,39 @@
+---
+id: post-td-first-law-energy
+kind: postulate
+title: First-law energy balance for closed process records
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+physical_scope: Closed nonrelativistic macroscopic process records with equilibrium endpoints, fixed material constitution, and zero change in center-of-mass kinetic energy and separately tracked external-field potential energy, all booked in the fixed Galilean chart selected by the process model.
+deps: [def-td-equilibrium-state-domain, def-td-galilean-rest-frame, def-td-process-and-protocol, def-td-si-quantities]
+dependency_roles:
+  def-td-equilibrium-state-domain: formulation-prerequisite
+  def-td-galilean-rest-frame: formulation-prerequisite
+  def-td-process-and-protocol: formulation-prerequisite
+  def-td-si-quantities: formulation-prerequisite
+aliases: []
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: Tong, Statistical Physics, §4.2 The First Law, full author-hosted HTML section
+      url: https://davidtong.org/teaching/statistical-physics/statmechhtml/S4
+    - title: Ling, Moebs, and Sanny, University Physics Volume 2, §3.3 First Law of Thermodynamics
+      url: https://openstax.org/books/university-physics-volume-2/pages/3-3-first-law-of-thermodynamics
+    - title: Lieb and Yngvason, The Physics and Mathematics of the Second Law of Thermodynamics, §III.A
+      url: https://arxiv.org/pdf/cond-mat/9708200v2
+dependency_level: 4
+---
+
+## Postulate
+
+For every admitted $P\in\mathcal P_{\mathrm{cl}}(s)$ with equilibrium endpoints $x_P^-,x_P^+\in D_c$, fixed material constitution, zero change in center-of-mass kinetic energy, and zero change in separately tracked external-field potential energy in the fixed chart selected by the process model, the adopted model balance is
+$$U_c(x_P^+)-U_c(x_P^-)=Q[P]+W_{\mathrm{on}}[P],$$
+where $U_c$ is the dimensioned energy-coordinate map of [[def-td-equilibrium-state-domain]].
+
+Here the internal-energy coordinate is evaluated in the center-of-mass rest frame as in [[def-td-galilean-rest-frame]], while $Q[P]$ and $W_{\mathrm{on}}[P]$ are the protocol transfers defined by [[def-td-process-and-protocol]], in joules as in [[def-td-si-quantities]]. The sign convention is positive $Q$ into the system and positive $W_{\mathrm{on}}$ for work done on it. If $P$ is adiabatic, its no-thermal-transfer condition implies $Q[P]=0$, so the same adopted balance gives $W_{\mathrm{on}}[P]=U_c(x_P^+)-U_c(x_P^-)$.
+
+This equation is an adopted physical postulate of the stated framework. It is not deduced here from a mechanical model or from experimental observations. Records with matter exchange or nonzero changes in omitted kinetic or external-field energy require a separately specified balance and are outside this item.

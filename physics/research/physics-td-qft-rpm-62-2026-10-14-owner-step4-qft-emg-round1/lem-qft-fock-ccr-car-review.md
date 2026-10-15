@@ -1,0 +1,5 @@
+# Necessary arbitrary-Hilbert Fock supplier review
+
+Necessary supplier prerequisite. Whole current five-step proof and exact published NRQM tensor/boundedtensor/permutation Statementinterfaces read; all suppliers permit arbitraryHilbertspaces underCC. Tensorfinite sectors/dense elementary spans, square-summabledirectsumcompleteness/truncationcores, sectorbounds/adjointpairing, coordinate maximaladjoints, elementaryCCR and onefixedh orthogonalCARsplit require no separability. Transport rootadjoint by conjugation, explicitly give reverseadjoint test. Proposed arbitraryH claims hold inclH=0,h=0; Segal remains separateseparable theorem. OldCCR applicationsall remain valid because only a unused hypothesis is deleted.
+
+Source baseline is the genuine prior source.final.md archive in owner-stage3-fock37-separability-round1, whose whole current text was read here before proposal creation. Prior111cone evidence is focused interface-use coverage, explicitly not whole-proof acceptance. Current16direct uses inspected; prior111/current109 union preserved. New4physical/quote consumers are reviewed locally and proposed separately.

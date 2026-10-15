@@ -1,0 +1,1500 @@
+{
+  "version": 1,
+  "level": "physics-td-qft-rpm-62-2026-10-14",
+  "scope": [
+    "lem-qft-lorentz-boost-rotation-factorization",
+    "def-qft-dirac-projections",
+    "lem-qft-dirac-projection-matrices",
+    "lem-qft-free-dirac-car-locality",
+    "lem-qft-dirac-fermionic-translation-spectrum",
+    "lem-qft-dirac-covariance-spectrum",
+    "ex-qftmath-dirac-rest-projector"
+  ],
+  "contracts": {
+    "lem-qft-lorentz-boost-rotation-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sr-affine-minkowski-model",
+          "source_section": "Definition",
+          "quote": "An **oriented time-oriented affine Minkowski space** is a quadruple\n$(A,V,\\eta,C^+)$ with the following data. In this notation $V$ includes its\nspecified orientation; forgetting that orientation gives only the underlying\nreal vector space, not the full datum $V$ of the model.\n\n1. A nonempty affine space $A$ over a $4$-dimensional real vector space $V$,\n   with action $(p,v)\\mapsto p+v$ and displacement $q-p\\in V$\n   ([[def-affine-space-and-displacement]]). In particular $V$ is a real vector\n   space of dimension $4$.\n2. A Lorentz form $\\eta$ on $V$, i.e. a nondegenerate symmetric bilinear form of\n   inertia $(3,1,0)$ ([[def-lorentz-form-and-inertia]]). Its associated quadratic\n   form is $q(v)=\\eta(v,v)$.\n3. An **orientation** of $V$: a positive ray of the determinant line\n   $\\Lambda^4V$, fixed once and for all\n   ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]]).\n4. A **time orientation** $C^+$ of $(V,\\eta)$: one of the two connected\n   components of the timelike set $T=\\{v\\in V:\\eta(v,v)<0\\}$, the other being\n   $C^-:=T\\setminus C^+$ ([[def-time-orientation-and-future-causal-sets]]).\n\nThe following terminology is attached to such a quadruple.\n\n- The elements $p$ of $A$ are the **events**; for events $p,q$ the vector\n  $q-p\\in V$ is the **displacement from $p$ to $q$**.\n- The **interval** of $p,q\\in A$ is the real number\n  $I(p,q):=\\eta(q-p,q-p)=q(q-p)$.\n- Events $p,q$ are **timelike**, **null**, **spacelike** or **causally\n  related** when the displacement $q-p$ is timelike, null, spacelike or causal\n  in the sense of [[def-causal-classification-of-lorentz-vectors]]; they are\n  **future-related** when $q-p$ is future causal and **past-related** when\n  $q-p$ is past causal in the sense of\n  [[def-time-orientation-and-future-causal-sets]].\n\n**No point of $A$ is distinguished.** For every $v\\in V$ the translation\n$\\tau_v:A\\to A$, $\\tau_v(p):=p+v$, is a bijection, since it is inverse to\n$\\tau_{-v}$: $\\tau_{-v}(\\tau_v(p))=(p+v)+(-v)=p+(v-v)=p$ and symmetrically, by\nthe affine action axioms ([[def-affine-space-and-displacement]]). Displacements\nare translation invariant, $\\tau_v(q)-\\tau_v(p)=q-p$, so every $\\tau_v$ preserves\nthe interval, the causal classification of every ordered pair, and the sets\n$C^+$, $C^-$ (which are subsets of $V$, independent of the point of $A$); it\nchanges only the labelling of points. The mathematical structure of the model is\nexactly the quadruple $(A,V,\\eta,C^+)$; no derived physical quantity (proper\ntime, four-velocity, momentum, energy, charge or any field) is part of this\ndefinition, and all later structure of the framework (frames, charts, tensor\nfields, worldlines) is built on this model.\n\n**Well-definedness.** The affine-space definition supplies the action and the\nunique displacements; the Lorentz-form definition supplies $\\eta$ and its\ninertia; the determinant-line definition supplies orientations; and the two\ncomponents of $T$ between which the time-orientation definition chooses exist by\nthe components lemma recorded in the well-definedness clause of\n[[def-time-orientation-and-future-causal-sets]], which is also what makes the\nnames future and past causal in item 4 well defined.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-inertial-frame-and-inertial-chart",
+          "source_section": "Definition",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]]), with orientation fixed as a positive ray of\nthe determinant line $\\Lambda^4V$\n([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]])\nand with the corresponding class of positively oriented ordered bases of $V$\n([[def-orientation-of-a-finite-dimensional-real-vector-space]]); by\n[[prop-orientations-and-positive-basis-classes-agree-in-positive-dimension]] the\npositive ray selects exactly one such class for $\\dim V=4>0$.\n\nAn **inertial frame** of the model is a tuple $(o;e_0,e_1,e_2,e_3)$ consisting\nof an event $o\\in A$ and an ordered basis $(e_0,e_1,e_2,e_3)$ of $V$ that is\n\n1. **$\\eta$-orthonormal**: $\\eta(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$ for all $a,b$ ([[lem-lorentz-form-has-orthonormal-basis]]);\n2. **future**: $e_0\\in C^+$, i.e. $e_0$ is future timelike; and\n3. **positively oriented**: the ordered basis lies in the positive-basis class\n   selected by the fixed orientation.\n\nThe event $o$ is the **origin** of the frame and $e_0,e_1,e_2,e_3$ are its\n**basis vectors**.\n\n**Inertial charts.** For an inertial frame $(o;e_0,e_1,e_2,e_3)$, define\n\n$$E:\\mathbb R^4\\longrightarrow V,\\qquad E(u):=\\sum_{a=0}^3u^ae_a .$$\n\nThen $E$ is a linear isomorphism ([[def-linear-isomorphism-and-invertible-linear-map]]):\nit is linear by construction, and it is bijective because\n$(e_0,e_1,e_2,e_3)$ is an ordered basis, every $v\\in V$ having exactly one\ncoordinate list $u$ with $v=\\sum_au^ae_a$\n([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). The **inertial\nchart** of the frame is the map\n\n$$x:A\\longrightarrow\\mathbb R^4,\\qquad x(p):=E^{-1}(p-o),$$\n\nand its values $x^a(p)$ are the **inertial coordinates of the event $p$** in the\nframe. Since $E$ and $v\\mapsto p+v$ are bijections, $x$ is a bijection\n$A\\to\\mathbb R^4$; and $x(p)=0$ exactly when $p-o=0_V$, that is, exactly when\n$p=o$.\n\n**Transition law.** Let $(o';e'_0,e'_1,e'_2,e'_3)$ be another inertial frame\nwith chart $x'$, and let $M=(M^b_a)$ be the change-of-basis matrix defined by\n$e'_a=\\sum_bM^b_ae_b$, a $4\\times4$ real matrix that is invertible because both\nfamilies are ordered bases. Then $E'(u)=\\sum_au^ae'_a=E(Mu)$ for all\n$u\\in\\mathbb R^4$, for the matrix-vector product $Mu$ in the coordinates of the\nfirst frame, because $\\sum_au^a\\sum_bM^b_ae_b=\\sum_b(\\sum_aM^b_au^a)e_b$; hence\n$E'=E\\circ M$ and $E'^{-1}=M^{-1}\\circ E^{-1}$, so for every event $p$,\n\n$$x'(p)=M^{-1}\\bigl(x(p)-x(o')\\bigr)=M^{-1}x(p)-M^{-1}x(o') .$$\n\nIn particular the transition between two inertial charts is an affine map of\n$\\mathbb R^4$ with invertible linear part $M^{-1}$ and constant part\n$-M^{-1}x(o')$, and it is a bijection of $\\mathbb R^4$ with inverse\n$u\\mapsto Mu+x(o')$, which is the transition in the reverse direction.\n\n**The inertial atlas.** The **inertial atlas** of the model is the family of\nall inertial frames together with their inertial charts. Its charts are\navailable at every event by [[lem-future-oriented-inertial-frames-exist]], which\nsupplies for every $o\\in A$ an inertial frame with origin $o$; and any two of\nits charts are related by the affine transition displayed above.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lorentz-map-and-lorentz-group",
+          "source_section": "Definition",
+          "quote": "Let $(V,\\eta)$ be a $4$-dimensional Lorentz vector space\n([[def-lorentz-form-and-inertia]]) equipped with a time orientation $C^+$\n([[def-time-orientation-and-future-causal-sets]]), and let\n$(A,V,\\eta,C^+)$ be the corresponding oriented time-oriented affine Minkowski\nspace ([[def-sr-affine-minkowski-model]]).\n\n**(a) Linear Lorentz maps.** A **linear Lorentz map** is a linear map\n$L:V\\to V$ ([[def-linear-map]]) such that\n\n$$\\eta(Lv,Lw)=\\eta(v,w)\\qquad\\text{for all }v,w\\in V.$$\n\nThe set of all linear Lorentz maps is denoted $O(V,\\eta)$.\n\n**(b) Matrix criterion.** Let $(e_0,e_1,e_2,e_3)$ be an ordered\n$\\eta$-orthonormal basis of $V$ ([[lem-lorentz-form-has-orthonormal-basis]]),\nso that $\\eta_0:=\\operatorname{diag}(-1,1,1,1)$ is the matrix of $\\eta$ in\nthat basis, and let $M$ be the matrix of $L$ in that basis\n([[def-coordinate-column-and-matrix-of-a-linear-map]]). Then $L$ is a linear\nLorentz map if and only if\n\n$$M^{T}\\eta_0 M=\\eta_0,$$\n\nwhere the product is matrix multiplication\n([[def-matrix-product-and-identity-matrix]]). Every linear Lorentz map is a\nlinear isomorphism of $V$ ([[def-linear-isomorphism-and-invertible-linear-map]]),\nand the criterion itself does not depend on the $\\eta$-orthonormal basis used.\nThe three assertions of this clause are proved in\n[[lem-lorentz-map-preserves-metric-and-causal-structure]].\n\n**(c) Proper and orthochronous maps; the Lorentz group.** A linear Lorentz map\n$L$ is **proper** if $\\det L=+1$ ([[def-determinant-of-a-linear-operator]]) and\n**orthochronous** if $L(C^+)=C^+$, a condition on the image of the set $C^+$.\nThe set of proper orthochronous linear Lorentz maps is denoted\n$SO^{+}(V,\\eta)$. The set $O(V,\\eta)$ is called the **(full) Lorentz group** of\n$(V,\\eta)$ and $SO^{+}(V,\\eta)$ the **proper orthochronous Lorentz group**;\nthat these sets are groups under composition is proved in\n[[lem-lorentz-map-preserves-metric-and-causal-structure]], which also shows\nthat $L$ is orthochronous if and only if $L(C^+)$ is contained in $C^+$.\n\n**(d) Affine Lorentz maps.** An **affine Lorentz map** is a map $F:A\\to A$\nfor which there exist $p_0\\in A$ and a linear Lorentz map $L$ with\n\n$$F(p_0+v)=F(p_0)+Lv\\qquad\\text{for all }v\\in V.$$\n\nEquivalently $F(p)=F(p_0)+L(p-p_0)$ for all $p\\in A$, and $L$ is then unique:\nit is recovered as $Lv=F(p+v)-F(p)$ for every $p\\in A$, so it is independent\nof the base event. $F$ is called **proper** (respectively **orthochronous**)\nwhen its linear part $L$ is. If $x$ is the chart of an inertial frame\n([[def-inertial-frame-and-inertial-chart]]), then\n\n$$x(F(p))=M\\,x(p)+b\\qquad\\text{for all }p\\in A,$$\n\nwhere $M$ is the matrix of $L$ in the frame's ordered basis and\n$b:=x(F(o))-Mx(o)\\in\\mathbb R^4$; the two sides are column vectors in\n$\\mathbb R^4$.\n\n**(e) Convention.** In this framework, unless stated otherwise, the term\n**Lorentz transformation** means a proper orthochronous affine Lorentz map.\nImproper or non-orthochronous Lorentz maps are always named explicitly.\n\nThe composition of two affine Lorentz maps is affine Lorentz with linear part\nthe composition of the linear parts, and the identity and the inverse of an\naffine Lorentz map are again such maps; these facts are part of\n[[lem-lorentz-map-preserves-metric-and-causal-structure]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hyperbolic-functions",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sinh x:=\\frac{\\exp x-\\exp(-x)}2,\\qquad\\cosh x:=\\frac{\\exp x+\\exp(-x)}2,$$\n$$\\tanh x:=\\frac{\\sinh x}{\\cosh x},\\qquad\\operatorname{sech}x:=\\frac1{\\cosh x}.$$\nFor $x\\ne0$, define\n$$\\coth x:=\\frac{\\cosh x}{\\sinh x},\\qquad\\operatorname{csch}x:=\\frac1{\\sinh x}.$$\n\nThe positivity of $\\exp$ makes $\\cosh x>0$ for every $x$. If $x\\ne0$, then\n$x\\ne-x$, so strict increase of $\\exp$ makes $\\exp x\\ne\\exp(-x)$; hence\n$\\sinh x\\ne0$. Thus all four quotients above are defined on exactly their\nstated domains ([[cor-exponential-reciprocal-and-positivity]],\n[[thm-exponential-is-strictly-increasing]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hyperbolic-identities-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sinh(x+y)=\\sinh x\\cosh y+\\cosh x\\sinh y,\\qquad\\cosh(x+y)=\\cosh x\\cosh y+\\sinh x\\sinh y,$$\n$$\\cosh^2x-\\sinh^2x=1,\\qquad(\\sinh x)'=\\cosh x,\\qquad(\\cosh x)'=\\sinh x.$$\nMoreover $\\sinh:\\mathbb R\\to\\mathbb R$ is odd, strictly increasing, and onto;\n$\\cosh:\\mathbb R\\to[1,\\infty)$ is even and positive, and its restriction\nto $[0,\\infty)$ is strictly increasing and onto $[1,\\infty)$; and\n$\\tanh:\\mathbb R\\to(-1,1)$ is strictly increasing and onto. On their declared domains,\n$$(\\tanh x)'=\\operatorname{sech}^2x,\\quad(\\coth x)'=-\\operatorname{csch}^2x,\\quad(\\operatorname{sech}x)'=-\\operatorname{sech}x\\tanh x,\\quad(\\operatorname{csch}x)'=-\\operatorname{csch}x\\coth x.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.\n\n**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.\n\n**Completeness of $\\mathbb{R}$ is what does the work.** The bisection produces a\nnested sequence of closed bounded intervals whose lengths tend to $0$, and it is\n[[thm-nested-interval-property]] — hence the least-upper-bound property — that\nsupplies the point. Over an ordered field that is not complete the theorem\nfails; the witness for that, stated for an arbitrary ordered field and worked\nover $\\mathbb{Q}$, is\n[[cex-evt-and-ivt-fail-over-a-non-complete-field]], which states its own\n$\\varepsilon$-$\\delta$ continuity inline and is not an instance of this page's\ndefinition.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The map $t\\mapsto(\\cos t,\\sin t)$ is a bijection from $[0,2\\pi)$ onto $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hyperbolic-functions",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sinh x:=\\frac{\\exp x-\\exp(-x)}2,\\qquad\\cosh x:=\\frac{\\exp x+\\exp(-x)}2,$$\n$$\\tanh x:=\\frac{\\sinh x}{\\cosh x},\\qquad\\operatorname{sech}x:=\\frac1{\\cosh x}.$$\nFor $x\\ne0$, define\n$$\\coth x:=\\frac{\\cosh x}{\\sinh x},\\qquad\\operatorname{csch}x:=\\frac1{\\sinh x}.$$\n\nThe positivity of $\\exp$ makes $\\cosh x>0$ for every $x$. If $x\\ne0$, then\n$x\\ne-x$, so strict increase of $\\exp$ makes $\\exp x\\ne\\exp(-x)$; hence\n$\\sinh x\\ne0$. Thus all four quotients above are defined on exactly their\nstated domains ([[cor-exponential-reciprocal-and-positivity]],\n[[thm-exponential-is-strictly-increasing]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Construct a proper boost sending the chosen future unit vector to Lambda e0, with the time-orientation check.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "The residual Lorentz map fixes the time axis and restricts to an element of SO(3).",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Every matrix in SO(3) has a fixed unit axis and its orthogonal restriction is a plane rotation.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Combine the boost and spatial rotation to obtain the claimed factorization, including the time-axis-fixed case.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns a given Lorentz map and has no empty-domain or empty-family case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 takes the zero-spatial-boost case B=I; step 3.1 handles the resulting spatial rotation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the single residual spatial map Q in SO(3)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 cover the identity boost and identity or nontrivial plane rotation cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 permits rapidity chi=0, and step 3.1 parametrizes the full rotation including angle zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 constructs and normalizes a fixed axis from the characteristic polynomial."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional or forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional or reverse implication."
+        }
+      ]
+    },
+    "def-qft-dirac-projections": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This definition fixes matrix, shell and Hilbert-space conventions; it asserts no proof or construction case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This definition fixes matrix, shell and Hilbert-space conventions; it asserts no proof or construction case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This definition fixes matrix, shell and Hilbert-space conventions; it asserts no proof or construction case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This definition fixes matrix, shell and Hilbert-space conventions; it asserts no proof or construction case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This definition fixes matrix, shell and Hilbert-space conventions; it asserts no proof or construction case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This definition fixes matrix, shell and Hilbert-space conventions; it asserts no proof or construction case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition fixes matrix, shell and Hilbert-space conventions; it asserts no proof or construction case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This definition fixes matrix, shell and Hilbert-space conventions; it asserts no proof or construction case."
+        }
+      ]
+    },
+    "lem-qft-dirac-projection-matrices": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-dirac-projections",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]], the mathematical scalar shell conventions of [[def-qft-scalar-mass-shell]], and the second-variable-linear Hilbert pairing of [[def-qft-fock-and-test-spaces]]. In the fixed inertial coordinates $x=(x^0,\\mathbf x)$ of [[def-inertial-frame-and-inertial-chart]] on the affine Minkowski model [[def-sr-affine-minkowski-model]], $\\eta=\\operatorname{diag}(-1,1,1,1)$; these coordinates have length units under [[def-qft-scalar-mass-shell]]. The parameter $\\mu\\ge0$ and momentum coordinate $\\mathbf k$ have inverse-length units, and $\\omega(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2}$ has the same units. The parameter is not identified here with a physical rest mass. Matrix $h_D$ has inverse-length units; the dimensionless spin matrices have no physical unit assignment in this mathematical item.\n\nUse the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.\n\nLet $\\mathcal H_D$ be the space of measurable functions $u:\\mathbb R^3\\to\\mathbb C^4$, modulo equality almost everywhere, with\n$$\\|u\\|^2=\\int_{\\mathbb R^3}u(\\mathbf k)^\\dagger u(\\mathbf k)\\,\\frac{d^3\\mathbf k}{(2\\pi)^3}<\\infty,$$\nand pairing $\\langle u,v\\rangle=\\int u(\\mathbf k)^\\dagger v(\\mathbf k)\\,d^3\\mathbf k/(2\\pi)^3$. Define the measurable matrix $h_D(\\mathbf k)=\\sum_j\\alpha_j k_j+\\beta\\mu$ and its maximal multiplication operator with domain $D(h_D)=\\{u\\in\\mathcal H_D:h_Du\\in\\mathcal H_D\\}$. For $\\omega(\\mathbf k)>0$, define the matrix fields\n$$P_\\pm(\\mathbf k)=\\frac12\\left(I_4\\pm\\frac{h_D(\\mathbf k)}{\\omega(\\mathbf k)}\\right).$$\nWhen $\\mu=0$ at $\\mathbf k=0$, set $P_+(0)=\\operatorname{diag}(I_2,0)$ and $P_-(0)=\\operatorname{diag}(0,I_2)$. These are complementary rank-two orthogonal projections; the value at this Lebesgue-null point does not change their multiplication operators. Write $M_{P_\\pm}$ for their maximal multiplication operators and $\\mathcal H_\\pm=\\operatorname{ran}M_{P_\\pm}$. The companion matrix lemma on this page proves these are bounded orthogonal projections with closed ranges. The conjugate Hilbert space $\\overline{\\mathcal H_-}$ has vectors $\\bar u$, scalar multiplication $z\\bar u=\\overline{\\bar z u}$, and pairing $\\langle\\bar u,\\bar v\\rangle=\\langle v,u\\rangle$.\n\nUse the sine and cosine definitions of [[def-sine-and-cosine-by-power-series]]. For a length-coordinate increment $t\\in\\mathbb R$ and $\\omega(\\mathbf k)>0$, define the matrix multiplier\n$$W_D(t,\\mathbf k)=\\cos(\\omega t)I_4+i\\frac{\\sin(\\omega t)}{\\omega}h_D(\\mathbf k).$$\nAt the massless apex set $W_D(t,0)=I_4$. Its unitarity, group law and generator identity are proved by the companion matrix lemma on this page.\n\nThe symbols $P_+$ and $P_-$ designate the positive- and negative-energy matrix formulas for this fixed free Dirac operator. This is purely mathematical data; no physical spin-statistics postulate or empirical assertion is included.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-unbounded-linear-operator-domain-and-graph",
+          "source_section": "Definition",
+          "quote": "Throughout this page $H$ is a complex Hilbert space ([[def-hilbert-space]]) with\ninner product linear in the first variable and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]).\n\nA **(possibly unbounded) linear operator on $H$** is a linear map\n$T:D(T)\\to H$ ([[def-linear-map]]) whose **domain** $D(T)\\subseteq H$ is a linear\nsubspace ([[def-linear-subspace]]). The domain is part of the data: $T=S$ means\n$D(T)=D(S)$ and $Tx=Sx$ for all $x\\in D(T)$. One writes $T\\subseteq S$, and\ncalls $S$ an **extension** of $T$, when $D(T)\\subseteq D(S)$ and $Sx=Tx$ for\nevery $x\\in D(T)$.\n\nThe **graph** of $T$ is\n$$\\Gamma(T):=\\{(x,Tx):x\\in D(T)\\}\\subseteq H\\oplus H .$$\nThe direct sum $H\\oplus H$ is read as the complex vector space of pairs with\ncoordinatewise operations and the inner product\n$\\langle (x,y),(u,v)\\rangle=\\langle x,u\\rangle+\\langle y,v\\rangle$, whose induced\nnorm is\n$$\\|(x,y)\\|=(\\|x\\|^2+\\|y\\|^2)^{1/2};$$\nit is complete because $H$ is ([[def-complete-metric-space]]). The **graph norm**\non $D(T)$ is\n$$\\|x\\|_T:=(\\|x\\|^2+\\|Tx\\|^2)^{1/2},$$\nso that $x\\mapsto(x,Tx)$ is an isometric isomorphism of $(D(T),\\|\\cdot\\|_T)$\nonto $\\Gamma(T)$ with the norm restricted from $H\\oplus H$.\n\n$T$ is **closed** when $\\Gamma(T)$ is a closed subset of $H\\oplus H$. A linear\noperator is determined by its graph, and the following elementary translations\nare used silently below: $\\Gamma(T)$ is a linear subspace of $H\\oplus H$;\n$\\Gamma(T)\\cap(\\{0\\}\\oplus H)=\\{(0,0)\\}$; the image of $\\Gamma(T)$ under the\nfirst coordinate projection is $D(T)$; and $T\\subseteq S$ if and only if\n$\\Gamma(T)\\subseteq\\Gamma(S)$. In particular a closed operator is exactly one\nwhose graph is a closed subspace of $H\\oplus H$.\n\n**Notation.** No boundedness of $T$ is assumed, and $T$ is frequently called\n*unbounded* to stress this; a bounded everywhere defined operator on $H$ is the\nspecial case $D(T)=H$ in which $\\Gamma(T)$ is a closed subspace by continuity.\nThe letter $I$ denotes the identity operator on $H$ with domain $H$.\n\n**Completeness of $H\\oplus H$.** If $(x_n,y_n)$ is a Cauchy sequence in\n$H\\oplus H$, then $\\|x_n-x_m\\|\\le\\|(x_n-x_m,y_n-y_m)\\|$ and\n$\\|y_n-y_m\\|\\le\\|(x_n-x_m,y_n-y_m)\\|$ show that $(x_n)$ and $(y_n)$ are Cauchy\nin $H$; let $x,y$ be their limits. Then\n$\\|(x_n,y_n)-(x,y)\\|^2=\\|x_n-x\\|^2+\\|y_n-y\\|^2\\to0$, so $H\\oplus H$ is\ncomplete. Consequently a sequence in $H\\oplus H$ converges exactly when its two\ncoordinate sequences converge in $H$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-densely-defined-closed-and-closable-operator",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $T$ be a linear\noperator on $H$ with domain $D(T)$ and graph $\\Gamma(T)$\n([[def-unbounded-linear-operator-domain-and-graph]]).\n\n$T$ is **densely defined** when $D(T)$ is a dense subset of $H$\n([[def-dense-top]]); **closed** when $\\Gamma(T)$ is a closed subset of\n$H\\oplus H$; and **closable** when $T$ has a closed extension.\nRecall that the graph norm is $\\|x\\|_T=(\\|x\\|^2+\\|Tx\\|^2)^{1/2}$.\n\n**The graph-norm dictionary.** The following three statements are part of the\ndefinition's content and are proved in the remarks below rather than assumed:\n\n1. $\\|\\cdot\\|_T$ is a norm on $D(T)$, and\n   $x\\mapsto(x,Tx)$ is an isometric isomorphism of $(D(T),\\|\\cdot\\|_T)$ onto\n   $\\Gamma(T)$;\n2. $T$ is closed if and only if $(D(T),\\|\\cdot\\|_T)$ is a complete metric space\n   ([[def-complete-metric-space]]);\n3. if $T$ is closed, then $D(T)$ is a Hilbert space for the inner product\n   $\\langle x,y\\rangle_T=\\langle x,y\\rangle+\\langle Tx,Ty\\rangle$ whose induced\n   norm is $\\|\\cdot\\|_T$.\n\nA linear subspace $D_0\\subseteq D(T)$ is a **core** for a closed operator $T$\nwhen $D_0$ is dense in $(D(T),\\|\\cdot\\|_T)$, equivalently when\n$\\overline{\\Gamma(T|_{D_0})}=\\Gamma(T)$, where the closure is taken in\n$H\\oplus H$ and $T|_{D_0}$ denotes the restriction of $T$ to $D_0$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $T$ be a\ndensely defined linear operator on $H$, with domain $D(T)$ dense in $H$\n([[def-densely-defined-closed-and-closable-operator]], [[def-dense-top]]).\nSince $D(T)$ is dense, and since $H$ is complete ([[def-hilbert-space]]), every\nbounded linear functional on the normed space $(D(T),\\|\\cdot\\|)$\n([[def-bounded-linear-operator]]) extends uniquely to a bounded linear\nfunctional $\\widetilde\\varphi$ on $H$ of the same norm, by setting\n$\\widetilde\\varphi(z)=\\lim_n\\varphi(z_n)$ for any sequence $z_n\\in D(T)$ with\n$z_n\\to z$ in $H$; the limit exists because $\\varphi$ is bounded on a dense\nsubspace and $H$ is complete, and it does not depend on the sequence because a\nbounded functional is uniformly continuous.\n\nA vector $y\\in H$ belongs to the **adjoint domain** $D(T^*)$ when the linear\nfunctional $\\varphi_y:D(T)\\to\\mathbb C$, $\\varphi_y(x)=\\langle Tx,y\\rangle$, is\nbounded on $(D(T),\\|\\cdot\\|)$. In that case Hilbert space Riesz representation\n([[thm-riesz-representation-for-hilbert-space]]) applied to the extension\n$\\widetilde{\\varphi_y}$ produces a unique vector $T^*y\\in H$ with\n$$T^*y\\text{ is the unique }w\\in H\\text{ such that }\\langle Tx,y\\rangle=\\langle x,w\\rangle\\quad\\text{for all }x\\in D(T),$$\nequivalently $\\widetilde{\\varphi_y}(z)=\\langle z,T^*y\\rangle$ for all $z\\in H$.\nThe map $T^*:D(T^*)\\to H$, $y\\mapsto T^*y$, is the **adjoint** of $T$.\n\n**Well-definedness.** The functional $\\varphi_y$ is linear in $x$ for each\n$y$, so its domain of boundedness $D(T^*)$ is a linear subspace: if\n$\\varphi_y,\\varphi_{y'}$ are bounded so is $\\varphi_{ay+by'}$ for scalars\n$a,b$, because the first-variable-linear convention gives\n$\\varphi_{ay+by'}=\\overline a\\,\\varphi_y+\\overline b\\,\\varphi_{y'}$. On\n$D(T^*)$ the map $T^*$ is linear: if $y,y'$ are represented by $w,w'$, then\n$ay+by'$ is represented by $aw+bw'$, since\n$\\langle x,aw+bw'\\rangle=\\overline a\\langle x,w\\rangle+\n\\overline b\\langle x,w'\\rangle$; the representing vector is unique. By Riesz representation for the Hilbert space\n$H$ a vector $w\\in H$ is determined by the values $\\langle z,w\\rangle$ with\n$z$ ranging over $H$, and those values are determined by the functional\n$\\widetilde{\\varphi_y}$. Equivalently, if $w,w'$ both represent $\\varphi_y$,\nthen $\\langle x,w-w'\\rangle=0$ for every $x\\in D(T)$; density of $D(T)$ and\ncontinuity of the inner product extend this equality to every $x\\in H$, and\ntaking $x=w-w'$ gives $w=w'$. Finally only\nambient-norm boundedness of $\\varphi_y$ on $D(T)$ is required: no extension,\nno closure and no closedness of $T$ is presupposed.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $T$ be a densely defined linear operator on $H$.\n\n- $T$ is **symmetric** when $T\\subseteq T^*$, that is, $D(T)\\subseteq D(T^*)$ and\n  $Tx=T^*x$ for all $x\\in D(T)$; equivalently\n  $\\langle Tx,y\\rangle=\\langle x,Ty\\rangle$ for all $x,y\\in D(T)$.\n- $T$ is **self-adjoint** when $T=T^*$, that is, the domains and the values\n  agree.\n- $T$ is **essentially self-adjoint** when its closure $\\overline T$ is\n  self-adjoint; by [[thm-closable-iff-adjoint-domain-is-dense]] this presupposes\n  that $T$ is closable.\n\n**Consequences, with proofs.** These are part of the content of the definition.\n\n1. *A symmetric $T$ is closable.* $T\\subseteq T^*$ and $T^*$ is closed\n   ([[lem-unbounded-adjoint-is-well-defined-and-closed]]), so $T^*$ is a closed\n   extension of $T$. In particular the closure $\\overline T$ exists and\n   $\\overline T\\subseteq T^*$.\n2. *The closure of a symmetric operator is symmetric.* If $T\\subseteq T^*$,\n   the inclusion reversal of\n   [[lem-unbounded-adjoint-is-well-defined-and-closed]] applied to\n   $T\\subseteq T^*$ gives $(T^*)^*\\subseteq T^*$, that is\n   $T^{**}\\subseteq T^*$. Applying it once more to the inclusion\n   $T^{**}\\subseteq T^*$ gives $(T^*)^*\\subseteq(T^{**})^*$, that is\n   $T^{**}\\subseteq T^{***}$. Since $\\overline T=T^{**}$ and\n   $(\\overline T)^*=T^{***}$\n   ([[thm-closable-iff-adjoint-domain-is-dense]]), this reads\n   $\\overline T\\subseteq(\\overline T)^*$: the closure is symmetric. (Each\n   application is legitimate because the adjoint is defined once its operator\n   is densely defined, and $D(T^{**})$ is dense because\n   $T\\subseteq T^{**}=\\overline T$, so that $D(T^{**})$ contains the dense\n   domain $D(T)$.)\n3. *A self-adjoint operator has no proper symmetric extension.* If $T=T^*$ and\n   $T\\subseteq S\\subseteq S^*$, then $S^*\\subseteq T^*$ by inclusion reversal,\n   so $T\\subseteq S\\subseteq S^*\\subseteq T^*=T$ and all inclusions are\n   equalities.\n4. *A self-adjoint operator is closed*, being equal to the adjoint $T^*$ of the\n   densely defined $T$, and *an essentially self-adjoint operator has exactly\n   one self-adjoint extension*, namely $\\overline T$: a self-adjoint extension\n   $S$ of $T$ is closed, hence contains the least closed extension\n   $\\overline T$, and then $S\\subseteq S^*\\subseteq(\\overline T)^*=\\overline T$\n   by item 2 and symmetry, so $S=\\overline T$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1 \\le p < \\infty$. The finite linear combinations of indicator functions of\nhalf-open boxes with rational endpoints and rational coefficients form a\ncountable dense subset of $L^p(\\mathbb{R}^n)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qft-lorentz-boost-rotation-factorization",
+          "source_section": "Statement",
+          "quote": "Fix an inertial frame of [[def-inertial-frame-and-inertial-chart]] and identify its vector coordinates with $\\mathbb R^4$ and $\\eta_0=\\operatorname{diag}(-1,1,1,1)$. For a unit spatial vector $\\mathbf n_B$ and $\\chi\\in\\mathbb R$, define the boost $B_{\\mathbf n_B}(\\chi)$ by $B e_0=\\cosh\\chi\\,e_0+\\sinh\\chi\\,\\mathbf n_B$, $B\\mathbf n_B=\\sinh\\chi\\,e_0+\\cosh\\chi\\,\\mathbf n_B$, and $Bw=w$ for every $w$ Euclidean-orthogonal to $\\operatorname{span}(e_0,\\mathbf n_B)$. Every proper orthochronous linear Lorentz map $\\Lambda\\in SO^+(1,3)$, as defined in [[def-lorentz-map-and-lorentz-group]], admits $\\Lambda=B_{\\mathbf n_B}(\\chi)R_{\\mathbf n_R}(\\theta)$, where $R_{\\mathbf n_R}(\\theta)$ fixes the time axis and $\\mathbf n_R$, and sends $\\mathbf v_\\perp$ to $\\cos\\theta\\,\\mathbf v_\\perp+\\sin\\theta\\,\\mathbf n_R\\times\\mathbf v_\\perp$ on the orthogonal plane, where $\\mathbf v_\\parallel=(\\mathbf v\\cdot\\mathbf n_R)\\mathbf n_R$ and $\\mathbf v_\\perp=\\mathbf v-\\mathbf v_\\parallel$; the cross product is [[def-cross-product-in-r3]]. If $\\Lambda e_0=e_0$, choose $\\chi=0$ and $R_{\\mathbf n_R}(\\theta)=\\Lambda$.",
+          "uses": [
+            "2.3",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sin x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}.$$\n\nThese are real power series in the sense of [[def-real-power-series-and-radius-of-convergence]]. Their convergence for every real argument is discharged by [[lem-sine-and-cosine-series-converge-everywhere]].",
+          "uses": [
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.3",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.\n\nThis is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.3",
+            "2.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "The explicit Pauli blocks give the stated Hermiticity, Clifford identities and h_D squared equal to omega squared.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "The positive and negative matrices are complementary orthogonal rank-two projections with closed ranges.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Countable Choice and the rational-box dense family give separability of the Hilbert space and projection ranges.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "The real maximal multipliers on the two energy ranges are self-adjoint, and their direct sum has exactly the stated h_D domain.",
+          "step": "2.3",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "The gamma matrices satisfy the stated (-+++) Clifford relation and the Fourier Dirac Hamiltonian equation.",
+          "step": "2.4",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "The explicit spin rotation conjugates slash p by the stated spatial rotation and preserves beta.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 2.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "D7",
+          "claim": "The explicit spin boost conjugates slash p by the stated boost and preserves beta.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D8",
+          "claim": "The sine/cosine formula for W_D is unitary, has the group law and differentiates to i h_D W_D.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a four-dimensional spinor fiber and contains no empty-family case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 cover the massless apex by the explicit complementary projection and W_D conventions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that each of P_+ and P_- has rank two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the separately assigned massless-apex values; all almost-everywhere formulas remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 includes t=0 in the group law and gives W_D(0)=I."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 states and uses Countable Choice to select points from nonempty base intersections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional or forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional or reverse implication."
+        }
+      ]
+    },
+    "lem-qft-free-dirac-car-locality": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h(v)=\\langle h,v\\rangle_2$ and its tensor extension is the bounded map of\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-dirac-projections",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]], the mathematical scalar shell conventions of [[def-qft-scalar-mass-shell]], and the second-variable-linear Hilbert pairing of [[def-qft-fock-and-test-spaces]]. In the fixed inertial coordinates $x=(x^0,\\mathbf x)$ of [[def-inertial-frame-and-inertial-chart]] on the affine Minkowski model [[def-sr-affine-minkowski-model]], $\\eta=\\operatorname{diag}(-1,1,1,1)$; these coordinates have length units under [[def-qft-scalar-mass-shell]]. The parameter $\\mu\\ge0$ and momentum coordinate $\\mathbf k$ have inverse-length units, and $\\omega(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2}$ has the same units. The parameter is not identified here with a physical rest mass. Matrix $h_D$ has inverse-length units; the dimensionless spin matrices have no physical unit assignment in this mathematical item.\n\nUse the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.\n\nLet $\\mathcal H_D$ be the space of measurable functions $u:\\mathbb R^3\\to\\mathbb C^4$, modulo equality almost everywhere, with\n$$\\|u\\|^2=\\int_{\\mathbb R^3}u(\\mathbf k)^\\dagger u(\\mathbf k)\\,\\frac{d^3\\mathbf k}{(2\\pi)^3}<\\infty,$$\nand pairing $\\langle u,v\\rangle=\\int u(\\mathbf k)^\\dagger v(\\mathbf k)\\,d^3\\mathbf k/(2\\pi)^3$. Define the measurable matrix $h_D(\\mathbf k)=\\sum_j\\alpha_j k_j+\\beta\\mu$ and its maximal multiplication operator with domain $D(h_D)=\\{u\\in\\mathcal H_D:h_Du\\in\\mathcal H_D\\}$. For $\\omega(\\mathbf k)>0$, define the matrix fields\n$$P_\\pm(\\mathbf k)=\\frac12\\left(I_4\\pm\\frac{h_D(\\mathbf k)}{\\omega(\\mathbf k)}\\right).$$\nWhen $\\mu=0$ at $\\mathbf k=0$, set $P_+(0)=\\operatorname{diag}(I_2,0)$ and $P_-(0)=\\operatorname{diag}(0,I_2)$. These are complementary rank-two orthogonal projections; the value at this Lebesgue-null point does not change their multiplication operators. Write $M_{P_\\pm}$ for their maximal multiplication operators and $\\mathcal H_\\pm=\\operatorname{ran}M_{P_\\pm}$. The companion matrix lemma on this page proves these are bounded orthogonal projections with closed ranges. The conjugate Hilbert space $\\overline{\\mathcal H_-}$ has vectors $\\bar u$, scalar multiplication $z\\bar u=\\overline{\\bar z u}$, and pairing $\\langle\\bar u,\\bar v\\rangle=\\langle v,u\\rangle$.\n\nUse the sine and cosine definitions of [[def-sine-and-cosine-by-power-series]]. For a length-coordinate increment $t\\in\\mathbb R$ and $\\omega(\\mathbf k)>0$, define the matrix multiplier\n$$W_D(t,\\mathbf k)=\\cos(\\omega t)I_4+i\\frac{\\sin(\\omega t)}{\\omega}h_D(\\mathbf k).$$\nAt the massless apex set $W_D(t,0)=I_4$. Its unitarity, group law and generator identity are proved by the companion matrix lemma on this page.\n\nThe symbols $P_+$ and $P_-$ designate the positive- and negative-energy matrix formulas for this fixed free Dirac operator. This is purely mathematical data; no physical spin-statistics postulate or empirical assertion is included.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-dirac-projection-matrices",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and use the definitions in [[def-qft-dirac-projections]]. For every $\\mu\\ge0$ and almost every $\\mathbf k$, the displayed Pauli blocks satisfy $h_D(\\mathbf k)^\\dagger=h_D(\\mathbf k)$, $h_D(\\mathbf k)^2=\\omega(\\mathbf k)^2I_4$, and $P_\\pm(\\mathbf k)$ are complementary orthogonal projections of rank two. The ranges $\\mathcal H_\\pm$ are closed separable Hilbert subspaces of $\\mathcal H_D$, and $h_D$ is self-adjoint on $D(h_D)=\\{u:\\omega u\\in\\mathcal H_D\\}$. The matrices also satisfy $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$ and $\\gamma^{0\\dagger}=\\gamma^0$, $\\gamma^{j\\dagger}=-\\gamma^j$.\n\nFor a unit spatial vector $\\mathbf n$, put $\\Sigma_{\\mathbf n}=\\operatorname{diag}(\\boldsymbol\\sigma\\cdot\\mathbf n,\\boldsymbol\\sigma\\cdot\\mathbf n)$, $S_R(\\theta)=\\cos(\\theta/2)I_4-i\\sin(\\theta/2)\\Sigma_{\\mathbf n}$, and $S_B(\\chi)=\\cosh(\\chi/2)I_4+\\sinh(\\chi/2)\\boldsymbol\\alpha\\cdot\\mathbf n$. With $R_{\\mathbf n}(\\theta)$ the rotation $\\mathbf v_\\parallel+\\cos\\theta\\,\\mathbf v_\\perp+\\sin\\theta\\,\\mathbf n\\times\\mathbf v_\\perp$ using [[def-cross-product-in-r3]], with $\\mathbf v_\\parallel=(\\mathbf v\\cdot\\mathbf n)\\mathbf n$ and $\\mathbf v_\\perp=\\mathbf v-\\mathbf v_\\parallel$, and $B_{\\mathbf n}(\\chi)$ the boost defined in [[lem-qft-lorentz-boost-rotation-factorization]], these matrices satisfy $S_R\\Gamma(p)S_R^{-1}=\\Gamma(R_{\\mathbf n}(\\theta)p)$, $S_B\\Gamma(p)S_B^{-1}=\\Gamma(B_{\\mathbf n}(\\chi)p)$, and $S_R\\beta S_R^\\dagger=S_B\\beta S_B^\\dagger=\\beta$.\n\nFor each real $t$, $W_D(t,\\mathbf k)$ of [[def-qft-dirac-projections]] is unitary, satisfies $W_D(t+s,\\mathbf k)=W_D(t,\\mathbf k)W_D(s,\\mathbf k)$, and obeys $\\partial_tW_D(t,\\mathbf k)=i h_D(\\mathbf k)W_D(t,\\mathbf k)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-fock-ccr-car",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and let $H$ be a separable\ncomplex Hilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]]. On $\\mathcal D_{\\rm fin}$ define the bosonic\ncreation and annihilation maps $a^\\dagger(h)$ and $a(h)$ and the fermionic maps\n$c^\\dagger(h)$ and $c(h)$ as in\n[[def-qft-fock-and-test-spaces]]. Write $a_n(h)$ and $a_n^\\dagger(h)$ for\ntheir restrictions to the $n$th bosonic sector. For bosons set\n\n$$D(a(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge1}\\|a_n(h)\\Psi_n\\|^2<\\infty\\},\\qquad D(a^\\dagger(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge0}\\|a_n^\\dagger(h)\\Psi_n\\|^2<\\infty\\}.$$\n\nThen $\\mathcal F_s(H)$ and $\\mathcal F_a(H)$ are Hilbert spaces,\n$\\mathcal D_{\\rm fin}$ is dense, and it is a graph core for both maximal\nbosonic sector maps. The bosonic operators on their displayed domains are\nclosed and mutually adjoint, and on $\\mathcal D_{\\rm fin}$ satisfy\n\n$$[a(h),a^\\dagger(k)]=\\langle h,k\\rangle_2I,\\qquad [a(h),a(k)]=[a^\\dagger(h),a^\\dagger(k)]=0.$$\n\nThe fermionic $c(h)$ and $c^\\dagger(h)$ extend to bounded operators on the\nwhole Fock space, with norms $\\|h\\|$, and satisfy on the whole space\n\n$$\\{c(h),c^\\dagger(k)\\}=\\langle h,k\\rangle_2I,\\qquad \\{c(h),c(k)\\}=\\{c^\\dagger(h),c^\\dagger(k)\\}=0.$$\n\nThis is a mathematical construction of the two Fock representations; it does\nnot assign particle statistics to a physical species.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and use the negative-sign $2\\pi$ normalization.  If\n$f\\in L^1(\\mathbb R^n;\\mathbb C)$, then\n\n$$\\mathcal F u_f=u_{\\widehat f},$$\n\nwhere $\\widehat f$ is the integral Fourier transform.  If\n$f\\in L^2(\\mathbb R^n;\\mathbb C)$, then\n\n$$\\mathcal F u_f=u_{\\mathcal F_2f},$$\n\nwhere $\\mathcal F_2$ is the Plancherel extension.  These equalities are in\n$\\mathcal S'(\\mathbb R^n)$ and therefore depend only on the corresponding\nalmost-everywhere classes.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad\np_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))=\n\\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad\nH_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x\n=\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4}\n\\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\n\\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qft-scalar-causal-commutator",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For $\\mu\\ge0$, define the tempered distribution\n$$\\Delta_\\mu(t,\\mathbf x)=\n\\int_{\\mathbb R^3}\\frac{d^3\\mathbf k}{(2\\pi)^3}\n\\frac{\\sin(\\omega_\\mu(\\mathbf k)t)}{\\omega_\\mu(\\mathbf k)}\ne^{i\\mathbf k\\cdot\\mathbf x},$$\nwith the massless integrand defined off $\\mathbf k=0$; its $1/|\\mathbf k|$\nbehavior is locally integrable in three dimensions. Then\n$$\\operatorname{supp}\\Delta_\\mu\n\\subseteq\\{(t,\\mathbf x):t^2-|\\mathbf x|^2\\ge0\\},$$\nthe closed causal cone for the $(-+++)$ metric. For real compactly supported\nsmooth $f,g$, put\n$$\\Delta_\\mu(f,g)=\n\\int_{\\mathbb R^4}\\!\\int_{\\mathbb R^4}\nf(x)g(y)\\Delta_\\mu(x-y)\\,d^4x\\,d^4y.$$\nOn $\\mathcal D_{\\rm fin}$ the smeared fields of\n[[lem-qft-smeared-free-scalar]] satisfy\n$$[\\Phi_\\mu(f),\\Phi_\\mu(g)]=-i\\Delta_\\mu(f,g)I.$$\nConsequently spacelike-separated supports give commuting fields.",
+          "uses": [
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sr-affine-minkowski-model",
+          "source_section": "Definition",
+          "quote": "An **oriented time-oriented affine Minkowski space** is a quadruple\n$(A,V,\\eta,C^+)$ with the following data. In this notation $V$ includes its\nspecified orientation; forgetting that orientation gives only the underlying\nreal vector space, not the full datum $V$ of the model.\n\n1. A nonempty affine space $A$ over a $4$-dimensional real vector space $V$,\n   with action $(p,v)\\mapsto p+v$ and displacement $q-p\\in V$\n   ([[def-affine-space-and-displacement]]). In particular $V$ is a real vector\n   space of dimension $4$.\n2. A Lorentz form $\\eta$ on $V$, i.e. a nondegenerate symmetric bilinear form of\n   inertia $(3,1,0)$ ([[def-lorentz-form-and-inertia]]). Its associated quadratic\n   form is $q(v)=\\eta(v,v)$.\n3. An **orientation** of $V$: a positive ray of the determinant line\n   $\\Lambda^4V$, fixed once and for all\n   ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]]).\n4. A **time orientation** $C^+$ of $(V,\\eta)$: one of the two connected\n   components of the timelike set $T=\\{v\\in V:\\eta(v,v)<0\\}$, the other being\n   $C^-:=T\\setminus C^+$ ([[def-time-orientation-and-future-causal-sets]]).\n\nThe following terminology is attached to such a quadruple.\n\n- The elements $p$ of $A$ are the **events**; for events $p,q$ the vector\n  $q-p\\in V$ is the **displacement from $p$ to $q$**.\n- The **interval** of $p,q\\in A$ is the real number\n  $I(p,q):=\\eta(q-p,q-p)=q(q-p)$.\n- Events $p,q$ are **timelike**, **null**, **spacelike** or **causally\n  related** when the displacement $q-p$ is timelike, null, spacelike or causal\n  in the sense of [[def-causal-classification-of-lorentz-vectors]]; they are\n  **future-related** when $q-p$ is future causal and **past-related** when\n  $q-p$ is past causal in the sense of\n  [[def-time-orientation-and-future-causal-sets]].\n\n**No point of $A$ is distinguished.** For every $v\\in V$ the translation\n$\\tau_v:A\\to A$, $\\tau_v(p):=p+v$, is a bijection, since it is inverse to\n$\\tau_{-v}$: $\\tau_{-v}(\\tau_v(p))=(p+v)+(-v)=p+(v-v)=p$ and symmetrically, by\nthe affine action axioms ([[def-affine-space-and-displacement]]). Displacements\nare translation invariant, $\\tau_v(q)-\\tau_v(p)=q-p$, so every $\\tau_v$ preserves\nthe interval, the causal classification of every ordered pair, and the sets\n$C^+$, $C^-$ (which are subsets of $V$, independent of the point of $A$); it\nchanges only the labelling of points. The mathematical structure of the model is\nexactly the quadruple $(A,V,\\eta,C^+)$; no derived physical quantity (proper\ntime, four-velocity, momentum, energy, charge or any field) is part of this\ndefinition, and all later structure of the framework (frames, charts, tensor\nfields, worldlines) is built on this model.\n\n**Well-definedness.** The affine-space definition supplies the action and the\nunique displacements; the Lorentz-form definition supplies $\\eta$ and its\ninertia; the determinant-line definition supplies orientations; and the two\ncomponents of $T$ between which the time-orientation definition chooses exist by\nthe components lemma recorded in the well-definedness clause of\n[[def-time-orientation-and-future-causal-sets]], which is also what makes the\nnames future and past causal in item 4 well defined.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-inertial-frame-and-inertial-chart",
+          "source_section": "Definition",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]]), with orientation fixed as a positive ray of\nthe determinant line $\\Lambda^4V$\n([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]])\nand with the corresponding class of positively oriented ordered bases of $V$\n([[def-orientation-of-a-finite-dimensional-real-vector-space]]); by\n[[prop-orientations-and-positive-basis-classes-agree-in-positive-dimension]] the\npositive ray selects exactly one such class for $\\dim V=4>0$.\n\nAn **inertial frame** of the model is a tuple $(o;e_0,e_1,e_2,e_3)$ consisting\nof an event $o\\in A$ and an ordered basis $(e_0,e_1,e_2,e_3)$ of $V$ that is\n\n1. **$\\eta$-orthonormal**: $\\eta(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$ for all $a,b$ ([[lem-lorentz-form-has-orthonormal-basis]]);\n2. **future**: $e_0\\in C^+$, i.e. $e_0$ is future timelike; and\n3. **positively oriented**: the ordered basis lies in the positive-basis class\n   selected by the fixed orientation.\n\nThe event $o$ is the **origin** of the frame and $e_0,e_1,e_2,e_3$ are its\n**basis vectors**.\n\n**Inertial charts.** For an inertial frame $(o;e_0,e_1,e_2,e_3)$, define\n\n$$E:\\mathbb R^4\\longrightarrow V,\\qquad E(u):=\\sum_{a=0}^3u^ae_a .$$\n\nThen $E$ is a linear isomorphism ([[def-linear-isomorphism-and-invertible-linear-map]]):\nit is linear by construction, and it is bijective because\n$(e_0,e_1,e_2,e_3)$ is an ordered basis, every $v\\in V$ having exactly one\ncoordinate list $u$ with $v=\\sum_au^ae_a$\n([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). The **inertial\nchart** of the frame is the map\n\n$$x:A\\longrightarrow\\mathbb R^4,\\qquad x(p):=E^{-1}(p-o),$$\n\nand its values $x^a(p)$ are the **inertial coordinates of the event $p$** in the\nframe. Since $E$ and $v\\mapsto p+v$ are bijections, $x$ is a bijection\n$A\\to\\mathbb R^4$; and $x(p)=0$ exactly when $p-o=0_V$, that is, exactly when\n$p=o$.\n\n**Transition law.** Let $(o';e'_0,e'_1,e'_2,e'_3)$ be another inertial frame\nwith chart $x'$, and let $M=(M^b_a)$ be the change-of-basis matrix defined by\n$e'_a=\\sum_bM^b_ae_b$, a $4\\times4$ real matrix that is invertible because both\nfamilies are ordered bases. Then $E'(u)=\\sum_au^ae'_a=E(Mu)$ for all\n$u\\in\\mathbb R^4$, for the matrix-vector product $Mu$ in the coordinates of the\nfirst frame, because $\\sum_au^a\\sum_bM^b_ae_b=\\sum_b(\\sum_aM^b_au^a)e_b$; hence\n$E'=E\\circ M$ and $E'^{-1}=M^{-1}\\circ E^{-1}$, so for every event $p$,\n\n$$x'(p)=M^{-1}\\bigl(x(p)-x(o')\\bigr)=M^{-1}x(p)-M^{-1}x(o') .$$\n\nIn particular the transition between two inertial charts is an affine map of\n$\\mathbb R^4$ with invertible linear part $M^{-1}$ and constant part\n$-M^{-1}x(o')$, and it is a bijection of $\\mathbb R^4$ with inverse\n$u\\mapsto Mu+x(o')$, which is the transition in the reverse direction.\n\n**The inertial atlas.** The **inertial atlas** of the model is the family of\nall inertial frames together with their inertial charts. Its charts are\navailable at every event by [[lem-future-oriented-inertial-frames-exist]], which\nsupplies for every $o\\in A$ an inertial frame with origin $o$; and any two of\nits charts are related by the affine transition displayed above.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Spatial integration by parts gives rapid momentum decay and a continuous L2 test-to-mode map.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "The Fock CAR give bounded antilinear smeared fields and the stated positive/negative split anticommutators.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Integration by parts in time proves the tested free Dirac equation.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Plancherel and P_++P_-=I give the equal-time CAR.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "The two shell kernels sum to the scalar-causal derivative kernel, so their distributional support is causal.",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "Spacelike-separated compact tests annihilate the kernel pairing, and even fermionic polynomials commute.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "step 2.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The field statement concerns arbitrary Schwartz tests and has no empty-family assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives the zero test the zero field and the CAR identity with both sides zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 verifies the equal-time CAR for each single pair of spatial tests."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.3 treats the massless shell apex as null and uses the separately defined scalar distribution."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 justifies both temporal boundary limits t to plus and minus infinity by Schwartz decay."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 carries the Countable Choice hypothesis required by the draft Fock CAR supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional or forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional or reverse implication."
+        }
+      ]
+    },
+    "lem-qft-dirac-fermionic-translation-spectrum": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-dirac-projections",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]], the mathematical scalar shell conventions of [[def-qft-scalar-mass-shell]], and the second-variable-linear Hilbert pairing of [[def-qft-fock-and-test-spaces]]. In the fixed inertial coordinates $x=(x^0,\\mathbf x)$ of [[def-inertial-frame-and-inertial-chart]] on the affine Minkowski model [[def-sr-affine-minkowski-model]], $\\eta=\\operatorname{diag}(-1,1,1,1)$; these coordinates have length units under [[def-qft-scalar-mass-shell]]. The parameter $\\mu\\ge0$ and momentum coordinate $\\mathbf k$ have inverse-length units, and $\\omega(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2}$ has the same units. The parameter is not identified here with a physical rest mass. Matrix $h_D$ has inverse-length units; the dimensionless spin matrices have no physical unit assignment in this mathematical item.\n\nUse the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.\n\nLet $\\mathcal H_D$ be the space of measurable functions $u:\\mathbb R^3\\to\\mathbb C^4$, modulo equality almost everywhere, with\n$$\\|u\\|^2=\\int_{\\mathbb R^3}u(\\mathbf k)^\\dagger u(\\mathbf k)\\,\\frac{d^3\\mathbf k}{(2\\pi)^3}<\\infty,$$\nand pairing $\\langle u,v\\rangle=\\int u(\\mathbf k)^\\dagger v(\\mathbf k)\\,d^3\\mathbf k/(2\\pi)^3$. Define the measurable matrix $h_D(\\mathbf k)=\\sum_j\\alpha_j k_j+\\beta\\mu$ and its maximal multiplication operator with domain $D(h_D)=\\{u\\in\\mathcal H_D:h_Du\\in\\mathcal H_D\\}$. For $\\omega(\\mathbf k)>0$, define the matrix fields\n$$P_\\pm(\\mathbf k)=\\frac12\\left(I_4\\pm\\frac{h_D(\\mathbf k)}{\\omega(\\mathbf k)}\\right).$$\nWhen $\\mu=0$ at $\\mathbf k=0$, set $P_+(0)=\\operatorname{diag}(I_2,0)$ and $P_-(0)=\\operatorname{diag}(0,I_2)$. These are complementary rank-two orthogonal projections; the value at this Lebesgue-null point does not change their multiplication operators. Write $M_{P_\\pm}$ for their maximal multiplication operators and $\\mathcal H_\\pm=\\operatorname{ran}M_{P_\\pm}$. The companion matrix lemma on this page proves these are bounded orthogonal projections with closed ranges. The conjugate Hilbert space $\\overline{\\mathcal H_-}$ has vectors $\\bar u$, scalar multiplication $z\\bar u=\\overline{\\bar z u}$, and pairing $\\langle\\bar u,\\bar v\\rangle=\\langle v,u\\rangle$.\n\nUse the sine and cosine definitions of [[def-sine-and-cosine-by-power-series]]. For a length-coordinate increment $t\\in\\mathbb R$ and $\\omega(\\mathbf k)>0$, define the matrix multiplier\n$$W_D(t,\\mathbf k)=\\cos(\\omega t)I_4+i\\frac{\\sin(\\omega t)}{\\omega}h_D(\\mathbf k).$$\nAt the massless apex set $W_D(t,0)=I_4$. Its unitarity, group law and generator identity are proved by the companion matrix lemma on this page.\n\nThe symbols $P_+$ and $P_-$ designate the positive- and negative-energy matrix formulas for this fixed free Dirac operator. This is purely mathematical data; no physical spin-statistics postulate or empirical assertion is included.",
+          "uses": [
+            "1.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qft-dirac-projection-matrices",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and use the definitions in [[def-qft-dirac-projections]]. For every $\\mu\\ge0$ and almost every $\\mathbf k$, the displayed Pauli blocks satisfy $h_D(\\mathbf k)^\\dagger=h_D(\\mathbf k)$, $h_D(\\mathbf k)^2=\\omega(\\mathbf k)^2I_4$, and $P_\\pm(\\mathbf k)$ are complementary orthogonal projections of rank two. The ranges $\\mathcal H_\\pm$ are closed separable Hilbert subspaces of $\\mathcal H_D$, and $h_D$ is self-adjoint on $D(h_D)=\\{u:\\omega u\\in\\mathcal H_D\\}$. The matrices also satisfy $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$ and $\\gamma^{0\\dagger}=\\gamma^0$, $\\gamma^{j\\dagger}=-\\gamma^j$.\n\nFor a unit spatial vector $\\mathbf n$, put $\\Sigma_{\\mathbf n}=\\operatorname{diag}(\\boldsymbol\\sigma\\cdot\\mathbf n,\\boldsymbol\\sigma\\cdot\\mathbf n)$, $S_R(\\theta)=\\cos(\\theta/2)I_4-i\\sin(\\theta/2)\\Sigma_{\\mathbf n}$, and $S_B(\\chi)=\\cosh(\\chi/2)I_4+\\sinh(\\chi/2)\\boldsymbol\\alpha\\cdot\\mathbf n$. With $R_{\\mathbf n}(\\theta)$ the rotation $\\mathbf v_\\parallel+\\cos\\theta\\,\\mathbf v_\\perp+\\sin\\theta\\,\\mathbf n\\times\\mathbf v_\\perp$ using [[def-cross-product-in-r3]], with $\\mathbf v_\\parallel=(\\mathbf v\\cdot\\mathbf n)\\mathbf n$ and $\\mathbf v_\\perp=\\mathbf v-\\mathbf v_\\parallel$, and $B_{\\mathbf n}(\\chi)$ the boost defined in [[lem-qft-lorentz-boost-rotation-factorization]], these matrices satisfy $S_R\\Gamma(p)S_R^{-1}=\\Gamma(R_{\\mathbf n}(\\theta)p)$, $S_B\\Gamma(p)S_B^{-1}=\\Gamma(B_{\\mathbf n}(\\chi)p)$, and $S_R\\beta S_R^\\dagger=S_B\\beta S_B^\\dagger=\\beta$.\n\nFor each real $t$, $W_D(t,\\mathbf k)$ of [[def-qft-dirac-projections]] is unitary, satisfies $W_D(t+s,\\mathbf k)=W_D(t,\\mathbf k)W_D(s,\\mathbf k)$, and obeys $\\partial_tW_D(t,\\mathbf k)=i h_D(\\mathbf k)W_D(t,\\mathbf k)$.",
+          "uses": [
+            "1.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h(v)=\\langle h,v\\rangle_2$ and its tensor extension is the bounded map of\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-l2-product-tensor-identification",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice [[def-countable-choice]]. Let\n$(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure spaces,\nlet $\\overline{\\mu\\times\\nu}$ be their completed product measure, and put\n$H_X=L^2(X,\\mu;\\mathbb C)$ and $H_Y=L^2(Y,\\nu;\\mathbb C)$ with the\nsecond-variable-linear pairing fixed in\n[[def-qft-fock-and-test-spaces]]. There is a unique unitary\n\n$$T:H_X\\widehat\\otimes H_Y\\longrightarrow L^2(X\\times Y,\\overline{\\mu\\times\\nu};\\mathbb C)$$\n\nwhose value on each elementary tensor is\n$T(f\\otimes g)(x,y)=f(x)g(y)$ almost everywhere. In particular, the Hilbert\ntensor completion is identified with the full product $L^2$ space, not only\nwith the closure of a chosen class of product functions.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h(v)=\\langle h,v\\rangle_2$ and its tensor extension is the bounded map of\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-projection-valued-measure",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $(X,\\Sigma)$ be a measurable space\n([[def-measurable-space]], [[def-sigma-algebra]]) and let $H$ be a complex\nHilbert space ([[def-hilbert-space]]). A **projection valued measure** (PVM) on\n$(X,\\Sigma)$ is a map\n\n$$E:\\Sigma\\longrightarrow\\mathcal B(H),\\qquad B\\longmapsto E(B),$$\n\nsuch that:\n\n1. $E(B)$ is an **orthogonal projection** for every $B\\in\\Sigma$, that is, a\n   bounded operator with $E(B)^2=E(B)=E(B)^*$; there is no finite-dimensional\n   restriction;\n2. $E(\\varnothing)=0$ and $E(X)=I$;\n3. $E(B\\cap C)=E(B)E(C)$ for all $B,C\\in\\Sigma$;\n4. for every pairwise disjoint sequence $(B_n)_{n\\in\\mathbb N}$ in $\\Sigma$ with\n   union $B$ and every $x\\in H$, the series $\\sum_nE(B_n)x$ converges in norm\n   to $E(B)x$, that is\n   $$E(B)x=\\sum_{n=0}^{\\infty}E(B_n)x .$$\n\nClause 4 is **strong countable additivity**. A PVM is called **regular** when\n$X$ is a locally compact Hausdorff space ([[def-locally-compact-space]]), the\n$\\sigma$-algebra is the Borel $\\sigma$-algebra, and every one of the finite\npositive measures\n\n$$E_x(B):=\\langle E(B)x,x\\rangle,\\qquad x\\in H,\\ B\\in\\Sigma,$$\n\nis a regular Borel measure ([[def-regular-borel-measure-on-an-lch-space]]). Inner\nproducts are linear in the first variable and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]); this fixed convention is the one\nused for every pairing $E_{x,y}(B)=\\langle E(B)x,y\\rangle$ on this page.\n\n**Well-definedness: the projection clause.** The conditions $P^2=P=P^*$ are\nsimultaneously meaningful and describe exactly the Hilbert orthogonal\nprojections, with no hidden finite-dimensional hypothesis. Indeed, for a\nbounded $P$ with $P^2=P=P^*$ the range $\\operatorname{ran}P$ is a linear\nsubspace, and for $y=Pw$ one has\n$\\langle x-Px,y\\rangle=\\langle P(x-Px),w\\rangle=\\langle Px-P^2x,w\\rangle=0$, so\n$x-Px\\perp\\operatorname{ran}P$; conversely $\\langle Pz,Pz\\rangle=\\langle z,P^*Pz\\rangle=\\langle z,Pz\\rangle=0$\nfor $z\\perp\\operatorname{ran}P$, so $z\\in\\ker P$, while\n$\\langle z,Px\\rangle=\\langle Pz,x\\rangle=0$ for $z\\in\\ker P$ gives\n$\\ker P=(\\operatorname{ran}P)^\\perp$\n([[thm-hilbert-adjoint-properties]],\n[[def-real-and-complex-inner-product-space]]). Hence\n$\\operatorname{ran}P=(\\ker P)^\\perp$ is closed, and the two defining properties\n$Px\\in\\operatorname{ran}P$, $x-Px\\in(\\operatorname{ran}P)^\\perp$ of\n[[def-hilbert-orthogonal-projection]] show that $P=P_{\\operatorname{ran}P}$ is\nthe Hilbert orthogonal projection onto a closed subspace, and conversely every\nsuch $P_M$ is idempotent and self-adjoint by\n[[lem-orthogonal-projection-is-linear-self-adjoint-contractive]] and\n[[thm-orthogonal-decomposition-by-a-closed-subspace]]. Finally $P$ is\ncontractive: from $\\langle Px,x\\rangle=\\langle Px,Px\\rangle=\\|Px\\|^2$ and\nCauchy–Schwarz, $\\|Px\\|^2\\le\\|Px\\|\\,\\|x\\|$, so $\\|Px\\|\\le\\|x\\|$ for all $x$,\nand $\\langle Px,x\\rangle=\\|Px\\|^2\\ge0$ is a nonnegative real number.\n\n**Well-definedness: the regularity clause.** For an orthogonal projection value\nthe pairing $E_x(B)=\\langle E(B)x,x\\rangle$ is a nonnegative real number and\n$E_x(X)=\\langle x,x\\rangle=\\|x\\|^2<+\\infty$, so every $E_x$ is a finite\nnonnegative set function and the regularity requirement is a meaningful\ncondition on it; that each $E_x$ is genuinely a countably additive measure of\ntotal mass $\\|x\\|^2$, and that the polarized pairings $E_{x,y}$ are finite\ncomplex measures, is proved as\n[[lem-scalar-and-complex-measures-from-a-pvm]] before either is used.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $T$ be a\ndensely defined linear operator on $H$, with domain $D(T)$ dense in $H$\n([[def-densely-defined-closed-and-closable-operator]], [[def-dense-top]]).\nSince $D(T)$ is dense, and since $H$ is complete ([[def-hilbert-space]]), every\nbounded linear functional on the normed space $(D(T),\\|\\cdot\\|)$\n([[def-bounded-linear-operator]]) extends uniquely to a bounded linear\nfunctional $\\widetilde\\varphi$ on $H$ of the same norm, by setting\n$\\widetilde\\varphi(z)=\\lim_n\\varphi(z_n)$ for any sequence $z_n\\in D(T)$ with\n$z_n\\to z$ in $H$; the limit exists because $\\varphi$ is bounded on a dense\nsubspace and $H$ is complete, and it does not depend on the sequence because a\nbounded functional is uniformly continuous.\n\nA vector $y\\in H$ belongs to the **adjoint domain** $D(T^*)$ when the linear\nfunctional $\\varphi_y:D(T)\\to\\mathbb C$, $\\varphi_y(x)=\\langle Tx,y\\rangle$, is\nbounded on $(D(T),\\|\\cdot\\|)$. In that case Hilbert space Riesz representation\n([[thm-riesz-representation-for-hilbert-space]]) applied to the extension\n$\\widetilde{\\varphi_y}$ produces a unique vector $T^*y\\in H$ with\n$$T^*y\\text{ is the unique }w\\in H\\text{ such that }\\langle Tx,y\\rangle=\\langle x,w\\rangle\\quad\\text{for all }x\\in D(T),$$\nequivalently $\\widetilde{\\varphi_y}(z)=\\langle z,T^*y\\rangle$ for all $z\\in H$.\nThe map $T^*:D(T^*)\\to H$, $y\\mapsto T^*y$, is the **adjoint** of $T$.\n\n**Well-definedness.** The functional $\\varphi_y$ is linear in $x$ for each\n$y$, so its domain of boundedness $D(T^*)$ is a linear subspace: if\n$\\varphi_y,\\varphi_{y'}$ are bounded so is $\\varphi_{ay+by'}$ for scalars\n$a,b$, because the first-variable-linear convention gives\n$\\varphi_{ay+by'}=\\overline a\\,\\varphi_y+\\overline b\\,\\varphi_{y'}$. On\n$D(T^*)$ the map $T^*$ is linear: if $y,y'$ are represented by $w,w'$, then\n$ay+by'$ is represented by $aw+bw'$, since\n$\\langle x,aw+bw'\\rangle=\\overline a\\langle x,w\\rangle+\n\\overline b\\langle x,w'\\rangle$; the representing vector is unique. By Riesz representation for the Hilbert space\n$H$ a vector $w\\in H$ is determined by the values $\\langle z,w\\rangle$ with\n$z$ ranging over $H$, and those values are determined by the functional\n$\\widetilde{\\varphi_y}$. Equivalently, if $w,w'$ both represent $\\varphi_y$,\nthen $\\langle x,w-w'\\rangle=0$ for every $x\\in D(T)$; density of $D(T)$ and\ncontinuity of the inner product extend this equality to every $x\\in H$, and\ntaking $x=w-w'$ gives $w=w'$. Finally only\nambient-norm boundedness of $\\varphi_y$ on $D(T)$ is required: no extension,\nno closure and no closedness of $T$ is presupposed.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $T$ be a densely defined linear operator on $H$.\n\n- $T$ is **symmetric** when $T\\subseteq T^*$, that is, $D(T)\\subseteq D(T^*)$ and\n  $Tx=T^*x$ for all $x\\in D(T)$; equivalently\n  $\\langle Tx,y\\rangle=\\langle x,Ty\\rangle$ for all $x,y\\in D(T)$.\n- $T$ is **self-adjoint** when $T=T^*$, that is, the domains and the values\n  agree.\n- $T$ is **essentially self-adjoint** when its closure $\\overline T$ is\n  self-adjoint; by [[thm-closable-iff-adjoint-domain-is-dense]] this presupposes\n  that $T$ is closable.\n\n**Consequences, with proofs.** These are part of the content of the definition.\n\n1. *A symmetric $T$ is closable.* $T\\subseteq T^*$ and $T^*$ is closed\n   ([[lem-unbounded-adjoint-is-well-defined-and-closed]]), so $T^*$ is a closed\n   extension of $T$. In particular the closure $\\overline T$ exists and\n   $\\overline T\\subseteq T^*$.\n2. *The closure of a symmetric operator is symmetric.* If $T\\subseteq T^*$,\n   the inclusion reversal of\n   [[lem-unbounded-adjoint-is-well-defined-and-closed]] applied to\n   $T\\subseteq T^*$ gives $(T^*)^*\\subseteq T^*$, that is\n   $T^{**}\\subseteq T^*$. Applying it once more to the inclusion\n   $T^{**}\\subseteq T^*$ gives $(T^*)^*\\subseteq(T^{**})^*$, that is\n   $T^{**}\\subseteq T^{***}$. Since $\\overline T=T^{**}$ and\n   $(\\overline T)^*=T^{***}$\n   ([[thm-closable-iff-adjoint-domain-is-dense]]), this reads\n   $\\overline T\\subseteq(\\overline T)^*$: the closure is symmetric. (Each\n   application is legitimate because the adjoint is defined once its operator\n   is densely defined, and $D(T^{**})$ is dense because\n   $T\\subseteq T^{**}=\\overline T$, so that $D(T^{**})$ contains the dense\n   domain $D(T)$.)\n3. *A self-adjoint operator has no proper symmetric extension.* If $T=T^*$ and\n   $T\\subseteq S\\subseteq S^*$, then $S^*\\subseteq T^*$ by inclusion reversal,\n   so $T\\subseteq S\\subseteq S^*\\subseteq T^*=T$ and all inclusions are\n   equalities.\n4. *A self-adjoint operator is closed*, being equal to the adjoint $T^*$ of the\n   densely defined $T$, and *an essentially self-adjoint operator has exactly\n   one self-adjoint extension*, namely $\\overline T$: a self-adjoint extension\n   $S$ of $T$ is closed, hence contains the least closed extension\n   $\\overline T$, and then $S\\subseteq S^*\\subseteq(\\overline T)^*=\\overline T$\n   by item 2 and symmetry, so $S=\\overline T$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-unbounded-linear-operator-domain-and-graph",
+          "source_section": "Definition",
+          "quote": "Throughout this page $H$ is a complex Hilbert space ([[def-hilbert-space]]) with\ninner product linear in the first variable and conjugate-linear in the second\n([[def-real-and-complex-inner-product-space]]).\n\nA **(possibly unbounded) linear operator on $H$** is a linear map\n$T:D(T)\\to H$ ([[def-linear-map]]) whose **domain** $D(T)\\subseteq H$ is a linear\nsubspace ([[def-linear-subspace]]). The domain is part of the data: $T=S$ means\n$D(T)=D(S)$ and $Tx=Sx$ for all $x\\in D(T)$. One writes $T\\subseteq S$, and\ncalls $S$ an **extension** of $T$, when $D(T)\\subseteq D(S)$ and $Sx=Tx$ for\nevery $x\\in D(T)$.\n\nThe **graph** of $T$ is\n$$\\Gamma(T):=\\{(x,Tx):x\\in D(T)\\}\\subseteq H\\oplus H .$$\nThe direct sum $H\\oplus H$ is read as the complex vector space of pairs with\ncoordinatewise operations and the inner product\n$\\langle (x,y),(u,v)\\rangle=\\langle x,u\\rangle+\\langle y,v\\rangle$, whose induced\nnorm is\n$$\\|(x,y)\\|=(\\|x\\|^2+\\|y\\|^2)^{1/2};$$\nit is complete because $H$ is ([[def-complete-metric-space]]). The **graph norm**\non $D(T)$ is\n$$\\|x\\|_T:=(\\|x\\|^2+\\|Tx\\|^2)^{1/2},$$\nso that $x\\mapsto(x,Tx)$ is an isometric isomorphism of $(D(T),\\|\\cdot\\|_T)$\nonto $\\Gamma(T)$ with the norm restricted from $H\\oplus H$.\n\n$T$ is **closed** when $\\Gamma(T)$ is a closed subset of $H\\oplus H$. A linear\noperator is determined by its graph, and the following elementary translations\nare used silently below: $\\Gamma(T)$ is a linear subspace of $H\\oplus H$;\n$\\Gamma(T)\\cap(\\{0\\}\\oplus H)=\\{(0,0)\\}$; the image of $\\Gamma(T)$ under the\nfirst coordinate projection is $D(T)$; and $T\\subseteq S$ if and only if\n$\\Gamma(T)\\subseteq\\Gamma(S)$. In particular a closed operator is exactly one\nwhose graph is a closed subspace of $H\\oplus H$.\n\n**Notation.** No boundedness of $T$ is assumed, and $T$ is frequently called\n*unbounded* to stress this; a bounded everywhere defined operator on $H$ is the\nspecial case $D(T)=H$ in which $\\Gamma(T)$ is a closed subspace by continuity.\nThe letter $I$ denotes the identity operator on $H$ with domain $H$.\n\n**Completeness of $H\\oplus H$.** If $(x_n,y_n)$ is a Cauchy sequence in\n$H\\oplus H$, then $\\|x_n-x_m\\|\\le\\|(x_n-x_m,y_n-y_m)\\|$ and\n$\\|y_n-y_m\\|\\le\\|(x_n-x_m,y_n-y_m)\\|$ show that $(x_n)$ and $(y_n)$ are Cauchy\nin $H$; let $x,y$ be their limits. Then\n$\\|(x_n,y_n)-(x,y)\\|^2=\\|x_n-x\\|^2+\\|y_n-y\\|^2\\to0$, so $H\\oplus H$ is\ncomplete. Consequently a sequence in $H\\oplus H$ converges exactly when its two\ncoordinate sequences converge in $H$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-densely-defined-closed-and-closable-operator",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $T$ be a linear\noperator on $H$ with domain $D(T)$ and graph $\\Gamma(T)$\n([[def-unbounded-linear-operator-domain-and-graph]]).\n\n$T$ is **densely defined** when $D(T)$ is a dense subset of $H$\n([[def-dense-top]]); **closed** when $\\Gamma(T)$ is a closed subset of\n$H\\oplus H$; and **closable** when $T$ has a closed extension.\nRecall that the graph norm is $\\|x\\|_T=(\\|x\\|^2+\\|Tx\\|^2)^{1/2}$.\n\n**The graph-norm dictionary.** The following three statements are part of the\ndefinition's content and are proved in the remarks below rather than assumed:\n\n1. $\\|\\cdot\\|_T$ is a norm on $D(T)$, and\n   $x\\mapsto(x,Tx)$ is an isometric isomorphism of $(D(T),\\|\\cdot\\|_T)$ onto\n   $\\Gamma(T)$;\n2. $T$ is closed if and only if $(D(T),\\|\\cdot\\|_T)$ is a complete metric space\n   ([[def-complete-metric-space]]);\n3. if $T$ is closed, then $D(T)$ is a Hilbert space for the inner product\n   $\\langle x,y\\rangle_T=\\langle x,y\\rangle+\\langle Tx,Ty\\rangle$ whose induced\n   norm is $\\|\\cdot\\|_T$.\n\nA linear subspace $D_0\\subseteq D(T)$ is a **core** for a closed operator $T$\nwhen $D_0$ is dense in $(D(T),\\|\\cdot\\|_T)$, equivalently when\n$\\overline{\\Gamma(T|_{D_0})}=\\Gamma(T)$, where the closure is taken in\n$H\\oplus H$ and $T|_{D_0}$ denotes the restriction of $T$ to $D_0$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sin x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}.$$\n\nThese are real power series in the sense of [[def-real-power-series-and-radius-of-convergence]]. Their convergence for every real argument is discharged by [[lem-sine-and-cosine-series-converge-everywhere]].",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fatou-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(f_n)$ be nonnegative measurable functions. Then\n$$\\int \\liminf_{n\\to\\infty}f_n\\,d\\mu\\le\\liminf_{n\\to\\infty}\\int f_n\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-triangle-inequality-for-inner-product-norm",
+          "source_section": "Statement",
+          "quote": "The function induced by an inner product satisfies, for all vectors $u,v$ and scalars $\\lambda$,\n\n$$\\lVert v\\rVert\\ge0,\\qquad \\lVert v\\rVert=0\\Longleftrightarrow v=0,$$\n\n$$\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert,\\qquad \\lVert u+v\\rVert\\le\\lVert u\\rVert+\\lVert v\\rVert.$$",
+          "uses": [
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "The shell phases preserve the projected one-particle space and form a unitary translation representation.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Dominated convergence and tensor-density approximation establish strong continuity on the antisymmetric Fock space.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "The measurable permutation-invariant momentum sum induces a strongly countably additive joint PVM on every antisymmetric sector.",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Each real coordinate multiplier on a fixed antisymmetric sector is self-adjoint on its maximal domain.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "The direct sum multiplier is self-adjoint on exactly the square-summable maximal domain.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "Finite sums of future-shell momenta lie in the future cone; only the vacuum has zero energy and positive mass has the stated lower bound.",
+          "step": "4.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F7",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D7",
+          "claim": "A nonzero projected one-particle vector supported in an arbitrarily small momentum ball proves the massless spectrum has no positive gap.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 4.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "D8",
+          "claim": "The one-parameter difference quotients have exactly the displayed maximal generator domains and spatial momentum signs.",
+          "step": "6.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 4.2 include the zero-particle vacuum sector with s_0=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.2 proves that the vacuum is the unique zero-energy vector, including mu=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 constructs one-particle vectors with energy below every positive epsilon when mu=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 4.2 and 5.1 treat both positive-mass and massless cases, including the massless apex convention."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.1 takes the difference-quotient limit at t=0 and proves both directions of the domain characterization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses Countable Choice for the completed Fock-space tensor-density argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional or forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional or reverse implication."
+        }
+      ]
+    },
+    "lem-qft-dirac-covariance-spectrum": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-dirac-projections",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]], the mathematical scalar shell conventions of [[def-qft-scalar-mass-shell]], and the second-variable-linear Hilbert pairing of [[def-qft-fock-and-test-spaces]]. In the fixed inertial coordinates $x=(x^0,\\mathbf x)$ of [[def-inertial-frame-and-inertial-chart]] on the affine Minkowski model [[def-sr-affine-minkowski-model]], $\\eta=\\operatorname{diag}(-1,1,1,1)$; these coordinates have length units under [[def-qft-scalar-mass-shell]]. The parameter $\\mu\\ge0$ and momentum coordinate $\\mathbf k$ have inverse-length units, and $\\omega(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2}$ has the same units. The parameter is not identified here with a physical rest mass. Matrix $h_D$ has inverse-length units; the dimensionless spin matrices have no physical unit assignment in this mathematical item.\n\nUse the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.\n\nLet $\\mathcal H_D$ be the space of measurable functions $u:\\mathbb R^3\\to\\mathbb C^4$, modulo equality almost everywhere, with\n$$\\|u\\|^2=\\int_{\\mathbb R^3}u(\\mathbf k)^\\dagger u(\\mathbf k)\\,\\frac{d^3\\mathbf k}{(2\\pi)^3}<\\infty,$$\nand pairing $\\langle u,v\\rangle=\\int u(\\mathbf k)^\\dagger v(\\mathbf k)\\,d^3\\mathbf k/(2\\pi)^3$. Define the measurable matrix $h_D(\\mathbf k)=\\sum_j\\alpha_j k_j+\\beta\\mu$ and its maximal multiplication operator with domain $D(h_D)=\\{u\\in\\mathcal H_D:h_Du\\in\\mathcal H_D\\}$. For $\\omega(\\mathbf k)>0$, define the matrix fields\n$$P_\\pm(\\mathbf k)=\\frac12\\left(I_4\\pm\\frac{h_D(\\mathbf k)}{\\omega(\\mathbf k)}\\right).$$\nWhen $\\mu=0$ at $\\mathbf k=0$, set $P_+(0)=\\operatorname{diag}(I_2,0)$ and $P_-(0)=\\operatorname{diag}(0,I_2)$. These are complementary rank-two orthogonal projections; the value at this Lebesgue-null point does not change their multiplication operators. Write $M_{P_\\pm}$ for their maximal multiplication operators and $\\mathcal H_\\pm=\\operatorname{ran}M_{P_\\pm}$. The companion matrix lemma on this page proves these are bounded orthogonal projections with closed ranges. The conjugate Hilbert space $\\overline{\\mathcal H_-}$ has vectors $\\bar u$, scalar multiplication $z\\bar u=\\overline{\\bar z u}$, and pairing $\\langle\\bar u,\\bar v\\rangle=\\langle v,u\\rangle$.\n\nUse the sine and cosine definitions of [[def-sine-and-cosine-by-power-series]]. For a length-coordinate increment $t\\in\\mathbb R$ and $\\omega(\\mathbf k)>0$, define the matrix multiplier\n$$W_D(t,\\mathbf k)=\\cos(\\omega t)I_4+i\\frac{\\sin(\\omega t)}{\\omega}h_D(\\mathbf k).$$\nAt the massless apex set $W_D(t,0)=I_4$. Its unitarity, group law and generator identity are proved by the companion matrix lemma on this page.\n\nThe symbols $P_+$ and $P_-$ designate the positive- and negative-energy matrix formulas for this fixed free Dirac operator. This is purely mathematical data; no physical spin-statistics postulate or empirical assertion is included.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-dirac-projection-matrices",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and use the definitions in [[def-qft-dirac-projections]]. For every $\\mu\\ge0$ and almost every $\\mathbf k$, the displayed Pauli blocks satisfy $h_D(\\mathbf k)^\\dagger=h_D(\\mathbf k)$, $h_D(\\mathbf k)^2=\\omega(\\mathbf k)^2I_4$, and $P_\\pm(\\mathbf k)$ are complementary orthogonal projections of rank two. The ranges $\\mathcal H_\\pm$ are closed separable Hilbert subspaces of $\\mathcal H_D$, and $h_D$ is self-adjoint on $D(h_D)=\\{u:\\omega u\\in\\mathcal H_D\\}$. The matrices also satisfy $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$ and $\\gamma^{0\\dagger}=\\gamma^0$, $\\gamma^{j\\dagger}=-\\gamma^j$.\n\nFor a unit spatial vector $\\mathbf n$, put $\\Sigma_{\\mathbf n}=\\operatorname{diag}(\\boldsymbol\\sigma\\cdot\\mathbf n,\\boldsymbol\\sigma\\cdot\\mathbf n)$, $S_R(\\theta)=\\cos(\\theta/2)I_4-i\\sin(\\theta/2)\\Sigma_{\\mathbf n}$, and $S_B(\\chi)=\\cosh(\\chi/2)I_4+\\sinh(\\chi/2)\\boldsymbol\\alpha\\cdot\\mathbf n$. With $R_{\\mathbf n}(\\theta)$ the rotation $\\mathbf v_\\parallel+\\cos\\theta\\,\\mathbf v_\\perp+\\sin\\theta\\,\\mathbf n\\times\\mathbf v_\\perp$ using [[def-cross-product-in-r3]], with $\\mathbf v_\\parallel=(\\mathbf v\\cdot\\mathbf n)\\mathbf n$ and $\\mathbf v_\\perp=\\mathbf v-\\mathbf v_\\parallel$, and $B_{\\mathbf n}(\\chi)$ the boost defined in [[lem-qft-lorentz-boost-rotation-factorization]], these matrices satisfy $S_R\\Gamma(p)S_R^{-1}=\\Gamma(R_{\\mathbf n}(\\theta)p)$, $S_B\\Gamma(p)S_B^{-1}=\\Gamma(B_{\\mathbf n}(\\chi)p)$, and $S_R\\beta S_R^\\dagger=S_B\\beta S_B^\\dagger=\\beta$.\n\nFor each real $t$, $W_D(t,\\mathbf k)$ of [[def-qft-dirac-projections]] is unitary, satisfies $W_D(t+s,\\mathbf k)=W_D(t,\\mathbf k)W_D(s,\\mathbf k)$, and obeys $\\partial_tW_D(t,\\mathbf k)=i h_D(\\mathbf k)W_D(t,\\mathbf k)$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-lorentz-boost-rotation-factorization",
+          "source_section": "Statement",
+          "quote": "Fix an inertial frame of [[def-inertial-frame-and-inertial-chart]] and identify its vector coordinates with $\\mathbb R^4$ and $\\eta_0=\\operatorname{diag}(-1,1,1,1)$. For a unit spatial vector $\\mathbf n_B$ and $\\chi\\in\\mathbb R$, define the boost $B_{\\mathbf n_B}(\\chi)$ by $B e_0=\\cosh\\chi\\,e_0+\\sinh\\chi\\,\\mathbf n_B$, $B\\mathbf n_B=\\sinh\\chi\\,e_0+\\cosh\\chi\\,\\mathbf n_B$, and $Bw=w$ for every $w$ Euclidean-orthogonal to $\\operatorname{span}(e_0,\\mathbf n_B)$. Every proper orthochronous linear Lorentz map $\\Lambda\\in SO^+(1,3)$, as defined in [[def-lorentz-map-and-lorentz-group]], admits $\\Lambda=B_{\\mathbf n_B}(\\chi)R_{\\mathbf n_R}(\\theta)$, where $R_{\\mathbf n_R}(\\theta)$ fixes the time axis and $\\mathbf n_R$, and sends $\\mathbf v_\\perp$ to $\\cos\\theta\\,\\mathbf v_\\perp+\\sin\\theta\\,\\mathbf n_R\\times\\mathbf v_\\perp$ on the orthogonal plane, where $\\mathbf v_\\parallel=(\\mathbf v\\cdot\\mathbf n_R)\\mathbf n_R$ and $\\mathbf v_\\perp=\\mathbf v-\\mathbf v_\\parallel$; the cross product is [[def-cross-product-in-r3]]. If $\\Lambda e_0=e_0$, choose $\\chi=0$ and $R_{\\mathbf n_R}(\\theta)=\\Lambda$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad\np_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))=\n\\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad\nH_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x\n=\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4}\n\\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\n\\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-mass-shell-measure-invariant",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. For every $\\mu\\ge0$, the measure $d\\nu_\\mu$ of\n[[def-qft-scalar-mass-shell]] is locally finite and sigma-finite on $H_\\mu^+$.\nFor every proper orthochronous Lorentz transformation $\\Lambda$ and every\nnonnegative Borel function $g$ on $H_\\mu^+$,\n$$\\int_{H_\\mu^+}g(\\Lambda^{-1}p)\\,d\\nu_\\mu(p)\n=\\int_{H_\\mu^+}g(p)\\,d\\nu_\\mu(p).$$\nThe claim applies off the omitted apex when $\\mu=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qft-free-dirac-car-locality",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]], let $\\mu\\ge0$, and use [[def-qft-dirac-projections]], [[lem-qft-dirac-projection-matrices]], and the antisymmetric Fock and CAR conventions of [[def-qft-fock-and-test-spaces]] and [[lem-qft-fock-ccr-car]]. For $F\\in\\mathscr S(\\mathbb R^4;\\mathbb C^4)$, define\n$$\\widehat F(t,\\mathbf k)=\\int_{\\mathbb R^3}e^{-i\\mathbf k\\cdot\\mathbf x}F(t,\\mathbf x)\\,d^3\\mathbf x,\\qquad u_F(\\mathbf k)=\\int_{\\mathbb R}W_D(t,\\mathbf k)\\widehat F(t,\\mathbf k)\\,dt.$$\nThen $u_F\\in\\mathcal H_D$, continuously in the Schwartz topology, and\n$$\\Psi(F)=c(P_+u_F)+c^\\dagger(\\overline{P_-u_F})$$\ndefines a bounded operator on $\\mathcal F_a(\\mathcal H_+\\oplus\\overline{\\mathcal H_-})$, antilinear in $F$. It satisfies\n$$\\{\\Psi(F),\\Psi(G)\\}=0,\\qquad \\{\\Psi(F),\\Psi(G)^\\dagger\\}=\\langle u_F,u_G\\rangle_{\\mathcal H_D}I.$$\nThe positive and negative contraction kernels, defined as tempered distributions by their Fourier integrals, are\n$$C_+(\\tau,\\mathbf x)=\\int e^{-i(\\omega\\tau-\\mathbf k\\cdot\\mathbf x)}P_+(\\mathbf k)\\,\\frac{d^3\\mathbf k}{(2\\pi)^3},\\qquad C_-(\\tau,\\mathbf x)=\\int e^{+i(\\omega\\tau+\\mathbf k\\cdot\\mathbf x)}P_-(\\mathbf k)\\,\\frac{d^3\\mathbf k}{(2\\pi)^3}.$$\nTheir tested pairings give respectively $\\langle P_+u_F,P_+u_G\\rangle$ and $\\langle P_-u_F,P_-u_G\\rangle$; their sum is the anticommutator kernel $R$ below.\nIts tested free equation is $u_{(i\\partial_0-h_D(-i\\nabla))F}=0$. For spatial Schwartz spinors $u,v$, the equal-time field $\\Psi_t(u)=c(P_+W_D(t,\\mathbf k)\\widehat u)+c^\\dagger(\\overline{P_-W_D(t,\\mathbf k)\\widehat u})$ satisfies $\\{\\Psi_t(u),\\Psi_t(v)^\\dagger\\}=\\int u(\\mathbf x)^\\dagger v(\\mathbf x)\\,d^3\\mathbf x\\,I$ and $\\{\\Psi_t(u),\\Psi_t(v)\\}=0$.\n\nThe spacetime anticommutator kernel is\n$$R(\\tau,\\mathbf x)=\\int_{\\mathbb R^3}W_D(-\\tau,\\mathbf k)e^{i\\mathbf k\\cdot\\mathbf x}\\,\\frac{d^3\\mathbf k}{(2\\pi)^3}=\\partial_\\tau\\Delta_\\mu(\\tau,\\mathbf x)I_4-i h_D(-i\\nabla)\\Delta_\\mu(\\tau,\\mathbf x),$$\nwhere $\\Delta_\\mu$ is the scalar causal commutator distribution of [[lem-qft-scalar-causal-commutator]]. Thus the kernel is supported in the closed causal cone. Spinor tests with compact spacelike-separated supports have vanishing anticommutators with one another and with each other's adjoints. Consequently, even polynomials in the bounded smeared fields commute across spacelike-separated regions. These are mathematical properties of the specified free-field construction.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h(v)=\\langle h,v\\rangle_2$ and its tensor extension is the bounded map of\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qft-fock-ccr-car",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and let $H$ be a separable\ncomplex Hilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]]. On $\\mathcal D_{\\rm fin}$ define the bosonic\ncreation and annihilation maps $a^\\dagger(h)$ and $a(h)$ and the fermionic maps\n$c^\\dagger(h)$ and $c(h)$ as in\n[[def-qft-fock-and-test-spaces]]. Write $a_n(h)$ and $a_n^\\dagger(h)$ for\ntheir restrictions to the $n$th bosonic sector. For bosons set\n\n$$D(a(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge1}\\|a_n(h)\\Psi_n\\|^2<\\infty\\},\\qquad D(a^\\dagger(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge0}\\|a_n^\\dagger(h)\\Psi_n\\|^2<\\infty\\}.$$\n\nThen $\\mathcal F_s(H)$ and $\\mathcal F_a(H)$ are Hilbert spaces,\n$\\mathcal D_{\\rm fin}$ is dense, and it is a graph core for both maximal\nbosonic sector maps. The bosonic operators on their displayed domains are\nclosed and mutually adjoint, and on $\\mathcal D_{\\rm fin}$ satisfy\n\n$$[a(h),a^\\dagger(k)]=\\langle h,k\\rangle_2I,\\qquad [a(h),a(k)]=[a^\\dagger(h),a^\\dagger(k)]=0.$$\n\nThe fermionic $c(h)$ and $c^\\dagger(h)$ extend to bounded operators on the\nwhole Fock space, with norms $\\|h\\|$, and satisfy on the whole space\n\n$$\\{c(h),c^\\dagger(k)\\}=\\langle h,k\\rangle_2I,\\qquad \\{c(h),c(k)\\}=\\{c^\\dagger(h),c^\\dagger(k)\\}=0.$$\n\nThis is a mathematical construction of the two Fock representations; it does\nnot assign particle statistics to a physical species.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open with $n\\ge1$ and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then $C_c^\\infty(\\Omega;\\mathbb K)$ is dense in $L^2(\\Omega;\\mathbb K)$: for every $f\\in L^2(\\Omega;\\mathbb K)$ and every $\\delta>0$ there is $\\varphi\\in C_c^\\infty(\\Omega;\\mathbb K)$ with $\\|\\varphi-f\\|_{L^2(\\Omega)}<\\delta$. Consequently $H^1_0(\\Omega)$ is dense in $L^2(\\Omega)$, and if a class $h\\in L^2(\\Omega)$ satisfies $(h,v)_{L^2}=0$ for all $v\\in H^1_0(\\Omega)$, then $h=0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qft-dirac-fermionic-translation-spectrum",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and use [[def-qft-dirac-projections]] and [[lem-qft-dirac-projection-matrices]]. Define $\\chi(s)=\\cos s+i\\sin s$ for real $s$, using [[def-sine-and-cosine-by-power-series]]. Let $X=(\\{+\\}\\times\\mathbb R^3)\\sqcup(\\{-\\}\\times\\mathbb R^3)$ carry counting measure on the species label and $d^3\\mathbf k/(2\\pi)^3$ on each copy. The fiber $\\mathcal V_x$ is $\\mathbb C^4$ for $x=(+,\\mathbf k)$ and $\\overline{\\mathbb C^4}$ for $x=(-,\\mathbf k)$; $L^2(X;\\mathcal V)$ denotes measurable sections with square-integrable fiber norm, and is the direct sum $L^2(\\mathbb R^3;\\mathbb C^4)\\oplus L^2(\\mathbb R^3;\\overline{\\mathbb C^4})$. Identify $\\mathcal K=\\mathcal H_+\\oplus\\overline{\\mathcal H_-}$ with the closed subspace whose $+$ fibers lie in $\\operatorname{ran}P_+(\\mathbf k)$ and whose $-$ fibers lie in $\\overline{\\operatorname{ran}P_-(\\mathbf k)}$; form its antisymmetric Fock space $\\mathcal F_a(\\mathcal K)$ using [[def-qft-fock-and-test-spaces]]. For $x=(+,\\mathbf k)$ set $q(x)=(\\omega(\\mathbf k),\\mathbf k)$, and for $x=(-,\\mathbf k)$ set $q(x)=(\\omega(\\mathbf k),-\\mathbf k)$. The one-particle translation multipliers $V(a)u(x)=\\chi(q^0(x)a^0-\\mathbf q(x)\\cdot\\mathbf a)u(x)$ preserve $\\mathcal K$ and lift to a strongly continuous unitary representation on $\\mathcal F_a(\\mathcal K)$. Write $U_j(t)$ for its Fock lift along the $j$th coordinate axis of $\\mathbb R^4$.\n\nOn the $n$-particle sector, let $s_n(x_1,\\ldots,x_n)=\\sum_{r=1}^n q(x_r)$ and set $s_0=0$ on the vacuum sector. The joint spectral measure is multiplication by $\\mathbf1_{s_n^{-1}(B)}$ on each sector, restricted to its antisymmetric subspace. Its support is contained in the closed future cone $\\{(E,\\mathbf p):E\\ge|\\mathbf p|\\}$. Define the time generator $H$ and spatial momentum components $P_j$ by $U(te_0)=\\chi(tH)$ and $U(te_j)=\\chi(-tP_j)$, where $e_\\alpha$ are the coordinate vectors in translation space. Then $H$ and each $P_j$ are the maximal real multipliers by $s_{n,0}$ and $s_{n,j}$, respectively, with domains $\\{\\Psi:\\sum_n\\|s_{n,\\alpha}\\Psi_n\\|^2<\\infty\\}$; the minus sign in spatial translation phases is the Minkowski pairing convention in $V(a)$. The vacuum is the unique zero-energy vector; for $\\mu>0$ the nonvacuum spectrum has gap at least $\\mu$, while for $\\mu=0$ it has no positive gap.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-sr-affine-minkowski-model",
+          "source_section": "Definition",
+          "quote": "An **oriented time-oriented affine Minkowski space** is a quadruple\n$(A,V,\\eta,C^+)$ with the following data. In this notation $V$ includes its\nspecified orientation; forgetting that orientation gives only the underlying\nreal vector space, not the full datum $V$ of the model.\n\n1. A nonempty affine space $A$ over a $4$-dimensional real vector space $V$,\n   with action $(p,v)\\mapsto p+v$ and displacement $q-p\\in V$\n   ([[def-affine-space-and-displacement]]). In particular $V$ is a real vector\n   space of dimension $4$.\n2. A Lorentz form $\\eta$ on $V$, i.e. a nondegenerate symmetric bilinear form of\n   inertia $(3,1,0)$ ([[def-lorentz-form-and-inertia]]). Its associated quadratic\n   form is $q(v)=\\eta(v,v)$.\n3. An **orientation** of $V$: a positive ray of the determinant line\n   $\\Lambda^4V$, fixed once and for all\n   ([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]]).\n4. A **time orientation** $C^+$ of $(V,\\eta)$: one of the two connected\n   components of the timelike set $T=\\{v\\in V:\\eta(v,v)<0\\}$, the other being\n   $C^-:=T\\setminus C^+$ ([[def-time-orientation-and-future-causal-sets]]).\n\nThe following terminology is attached to such a quadruple.\n\n- The elements $p$ of $A$ are the **events**; for events $p,q$ the vector\n  $q-p\\in V$ is the **displacement from $p$ to $q$**.\n- The **interval** of $p,q\\in A$ is the real number\n  $I(p,q):=\\eta(q-p,q-p)=q(q-p)$.\n- Events $p,q$ are **timelike**, **null**, **spacelike** or **causally\n  related** when the displacement $q-p$ is timelike, null, spacelike or causal\n  in the sense of [[def-causal-classification-of-lorentz-vectors]]; they are\n  **future-related** when $q-p$ is future causal and **past-related** when\n  $q-p$ is past causal in the sense of\n  [[def-time-orientation-and-future-causal-sets]].\n\n**No point of $A$ is distinguished.** For every $v\\in V$ the translation\n$\\tau_v:A\\to A$, $\\tau_v(p):=p+v$, is a bijection, since it is inverse to\n$\\tau_{-v}$: $\\tau_{-v}(\\tau_v(p))=(p+v)+(-v)=p+(v-v)=p$ and symmetrically, by\nthe affine action axioms ([[def-affine-space-and-displacement]]). Displacements\nare translation invariant, $\\tau_v(q)-\\tau_v(p)=q-p$, so every $\\tau_v$ preserves\nthe interval, the causal classification of every ordered pair, and the sets\n$C^+$, $C^-$ (which are subsets of $V$, independent of the point of $A$); it\nchanges only the labelling of points. The mathematical structure of the model is\nexactly the quadruple $(A,V,\\eta,C^+)$; no derived physical quantity (proper\ntime, four-velocity, momentum, energy, charge or any field) is part of this\ndefinition, and all later structure of the framework (frames, charts, tensor\nfields, worldlines) is built on this model.\n\n**Well-definedness.** The affine-space definition supplies the action and the\nunique displacements; the Lorentz-form definition supplies $\\eta$ and its\ninertia; the determinant-line definition supplies orientations; and the two\ncomponents of $T$ between which the time-orientation definition chooses exist by\nthe components lemma recorded in the well-definedness clause of\n[[def-time-orientation-and-future-causal-sets]], which is also what makes the\nnames future and past causal in item 4 well defined.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-inertial-frame-and-inertial-chart",
+          "source_section": "Definition",
+          "quote": "Let $(A,V,\\eta,C^+)$ be an oriented time-oriented affine Minkowski space\n([[def-sr-affine-minkowski-model]]), with orientation fixed as a positive ray of\nthe determinant line $\\Lambda^4V$\n([[def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space]])\nand with the corresponding class of positively oriented ordered bases of $V$\n([[def-orientation-of-a-finite-dimensional-real-vector-space]]); by\n[[prop-orientations-and-positive-basis-classes-agree-in-positive-dimension]] the\npositive ray selects exactly one such class for $\\dim V=4>0$.\n\nAn **inertial frame** of the model is a tuple $(o;e_0,e_1,e_2,e_3)$ consisting\nof an event $o\\in A$ and an ordered basis $(e_0,e_1,e_2,e_3)$ of $V$ that is\n\n1. **$\\eta$-orthonormal**: $\\eta(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$ for all $a,b$ ([[lem-lorentz-form-has-orthonormal-basis]]);\n2. **future**: $e_0\\in C^+$, i.e. $e_0$ is future timelike; and\n3. **positively oriented**: the ordered basis lies in the positive-basis class\n   selected by the fixed orientation.\n\nThe event $o$ is the **origin** of the frame and $e_0,e_1,e_2,e_3$ are its\n**basis vectors**.\n\n**Inertial charts.** For an inertial frame $(o;e_0,e_1,e_2,e_3)$, define\n\n$$E:\\mathbb R^4\\longrightarrow V,\\qquad E(u):=\\sum_{a=0}^3u^ae_a .$$\n\nThen $E$ is a linear isomorphism ([[def-linear-isomorphism-and-invertible-linear-map]]):\nit is linear by construction, and it is bijective because\n$(e_0,e_1,e_2,e_3)$ is an ordered basis, every $v\\in V$ having exactly one\ncoordinate list $u$ with $v=\\sum_au^ae_a$\n([[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). The **inertial\nchart** of the frame is the map\n\n$$x:A\\longrightarrow\\mathbb R^4,\\qquad x(p):=E^{-1}(p-o),$$\n\nand its values $x^a(p)$ are the **inertial coordinates of the event $p$** in the\nframe. Since $E$ and $v\\mapsto p+v$ are bijections, $x$ is a bijection\n$A\\to\\mathbb R^4$; and $x(p)=0$ exactly when $p-o=0_V$, that is, exactly when\n$p=o$.\n\n**Transition law.** Let $(o';e'_0,e'_1,e'_2,e'_3)$ be another inertial frame\nwith chart $x'$, and let $M=(M^b_a)$ be the change-of-basis matrix defined by\n$e'_a=\\sum_bM^b_ae_b$, a $4\\times4$ real matrix that is invertible because both\nfamilies are ordered bases. Then $E'(u)=\\sum_au^ae'_a=E(Mu)$ for all\n$u\\in\\mathbb R^4$, for the matrix-vector product $Mu$ in the coordinates of the\nfirst frame, because $\\sum_au^a\\sum_bM^b_ae_b=\\sum_b(\\sum_aM^b_au^a)e_b$; hence\n$E'=E\\circ M$ and $E'^{-1}=M^{-1}\\circ E^{-1}$, so for every event $p$,\n\n$$x'(p)=M^{-1}\\bigl(x(p)-x(o')\\bigr)=M^{-1}x(p)-M^{-1}x(o') .$$\n\nIn particular the transition between two inertial charts is an affine map of\n$\\mathbb R^4$ with invertible linear part $M^{-1}$ and constant part\n$-M^{-1}x(o')$, and it is a bijection of $\\mathbb R^4$ with inverse\n$u\\mapsto Mu+x(o')$, which is the transition in the reverse direction.\n\n**The inertial atlas.** The **inertial atlas** of the model is the family of\nall inertial frames together with their inertial charts. Its charts are\navailable at every event by [[lem-future-oriented-inertial-frames-exist]], which\nsupplies for every $o\\in A$ an inertial frame with origin $o$; and any two of\nits charts are related by the affine transition displayed above.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-lorentz-map-and-lorentz-group",
+          "source_section": "Definition",
+          "quote": "Let $(V,\\eta)$ be a $4$-dimensional Lorentz vector space\n([[def-lorentz-form-and-inertia]]) equipped with a time orientation $C^+$\n([[def-time-orientation-and-future-causal-sets]]), and let\n$(A,V,\\eta,C^+)$ be the corresponding oriented time-oriented affine Minkowski\nspace ([[def-sr-affine-minkowski-model]]).\n\n**(a) Linear Lorentz maps.** A **linear Lorentz map** is a linear map\n$L:V\\to V$ ([[def-linear-map]]) such that\n\n$$\\eta(Lv,Lw)=\\eta(v,w)\\qquad\\text{for all }v,w\\in V.$$\n\nThe set of all linear Lorentz maps is denoted $O(V,\\eta)$.\n\n**(b) Matrix criterion.** Let $(e_0,e_1,e_2,e_3)$ be an ordered\n$\\eta$-orthonormal basis of $V$ ([[lem-lorentz-form-has-orthonormal-basis]]),\nso that $\\eta_0:=\\operatorname{diag}(-1,1,1,1)$ is the matrix of $\\eta$ in\nthat basis, and let $M$ be the matrix of $L$ in that basis\n([[def-coordinate-column-and-matrix-of-a-linear-map]]). Then $L$ is a linear\nLorentz map if and only if\n\n$$M^{T}\\eta_0 M=\\eta_0,$$\n\nwhere the product is matrix multiplication\n([[def-matrix-product-and-identity-matrix]]). Every linear Lorentz map is a\nlinear isomorphism of $V$ ([[def-linear-isomorphism-and-invertible-linear-map]]),\nand the criterion itself does not depend on the $\\eta$-orthonormal basis used.\nThe three assertions of this clause are proved in\n[[lem-lorentz-map-preserves-metric-and-causal-structure]].\n\n**(c) Proper and orthochronous maps; the Lorentz group.** A linear Lorentz map\n$L$ is **proper** if $\\det L=+1$ ([[def-determinant-of-a-linear-operator]]) and\n**orthochronous** if $L(C^+)=C^+$, a condition on the image of the set $C^+$.\nThe set of proper orthochronous linear Lorentz maps is denoted\n$SO^{+}(V,\\eta)$. The set $O(V,\\eta)$ is called the **(full) Lorentz group** of\n$(V,\\eta)$ and $SO^{+}(V,\\eta)$ the **proper orthochronous Lorentz group**;\nthat these sets are groups under composition is proved in\n[[lem-lorentz-map-preserves-metric-and-causal-structure]], which also shows\nthat $L$ is orthochronous if and only if $L(C^+)$ is contained in $C^+$.\n\n**(d) Affine Lorentz maps.** An **affine Lorentz map** is a map $F:A\\to A$\nfor which there exist $p_0\\in A$ and a linear Lorentz map $L$ with\n\n$$F(p_0+v)=F(p_0)+Lv\\qquad\\text{for all }v\\in V.$$\n\nEquivalently $F(p)=F(p_0)+L(p-p_0)$ for all $p\\in A$, and $L$ is then unique:\nit is recovered as $Lv=F(p+v)-F(p)$ for every $p\\in A$, so it is independent\nof the base event. $F$ is called **proper** (respectively **orthochronous**)\nwhen its linear part $L$ is. If $x$ is the chart of an inertial frame\n([[def-inertial-frame-and-inertial-chart]]), then\n\n$$x(F(p))=M\\,x(p)+b\\qquad\\text{for all }p\\in A,$$\n\nwhere $M$ is the matrix of $L$ in the frame's ordered basis and\n$b:=x(F(o))-Mx(o)\\in\\mathbb R^4$; the two sides are column vectors in\n$\\mathbb R^4$.\n\n**(e) Convention.** In this framework, unless stated otherwise, the term\n**Lorentz transformation** means a proper orthochronous affine Lorentz map.\nImproper or non-orthochronous Lorentz maps are always named explicitly.\n\nThe composition of two affine Lorentz maps is affine Lorentz with linear part\nthe composition of the linear parts, and the identity and the inverse of an\naffine Lorentz map are again such maps; these facts are part of\n[[lem-lorentz-map-preserves-metric-and-causal-structure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$\nIn particular,\n$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Invariant shell measure and the explicit spin identities transform the positive and negative kernels separately.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "The two tested kernel pairings are preserved, giving isometries on particle and conjugate antiparticle test ranges.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F8",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Smooth compact momentum tests and the W_D inverse construct dense test-generated particle and antiparticle ranges.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "The one-particle maps lift to a unitary Fock representation that implements the field covariance and group product.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Schwartz continuity, bounded operators and tensor approximation give strong continuity of the Fock representation.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "Dense one-particle creation ranges generate every antisymmetric sector, so the global vacuum is cyclic.",
+          "step": "4.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D7",
+          "claim": "The translation phases reproduce the positive Fock spectrum and the 2pi/4pi rotation actions.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "F9",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns the stated spin-cover group and has no empty-group claim."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 fixes the vacuum, while step 5.1 covers the identity translation and its zero-energy sector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 establish covariance and density first on the one-particle test ranges."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 removes only the measure-null massless apex, and step 5.1 handles mu=0 through the spectrum supplier."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 checks both the 2pi sign and the 4pi identity for the spin rotation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 carries Countable Choice for the completed antisymmetric Fock lift."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional or forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional or reverse implication."
+        }
+      ]
+    },
+    "ex-qftmath-dirac-rest-projector": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qft-dirac-projections",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]], the mathematical scalar shell conventions of [[def-qft-scalar-mass-shell]], and the second-variable-linear Hilbert pairing of [[def-qft-fock-and-test-spaces]]. In the fixed inertial coordinates $x=(x^0,\\mathbf x)$ of [[def-inertial-frame-and-inertial-chart]] on the affine Minkowski model [[def-sr-affine-minkowski-model]], $\\eta=\\operatorname{diag}(-1,1,1,1)$; these coordinates have length units under [[def-qft-scalar-mass-shell]]. The parameter $\\mu\\ge0$ and momentum coordinate $\\mathbf k$ have inverse-length units, and $\\omega(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2}$ has the same units. The parameter is not identified here with a physical rest mass. Matrix $h_D$ has inverse-length units; the dimensionless spin matrices have no physical unit assignment in this mathematical item.\n\nUse the Pauli matrices $\\sigma_1=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, $\\sigma_2=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$, and $\\sigma_3=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$. On $\\mathbb C^4=\\mathbb C^2\\oplus\\mathbb C^2$, define\n$$\\beta=\\begin{pmatrix}I_2&0\\\\0&-I_2\\end{pmatrix},\\qquad \\alpha_j=\\begin{pmatrix}0&\\sigma_j\\\\\\sigma_j&0\\end{pmatrix},\\qquad \\gamma^0=\\beta,\\qquad \\gamma^j=\\beta\\alpha_j.$$\nFor a spinor column $z\\in\\mathbb C^4$, its Dirac adjoint is $\\bar z=z^\\dagger\\beta$. The Clifford contraction is $\\Gamma(p):=\\gamma^0p^0-\\sum_{j=1}^3\\gamma^jp_j$; this contraction uses the effective matrix $-\\eta$ in the relation $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$.\n\nLet $\\mathcal H_D$ be the space of measurable functions $u:\\mathbb R^3\\to\\mathbb C^4$, modulo equality almost everywhere, with\n$$\\|u\\|^2=\\int_{\\mathbb R^3}u(\\mathbf k)^\\dagger u(\\mathbf k)\\,\\frac{d^3\\mathbf k}{(2\\pi)^3}<\\infty,$$\nand pairing $\\langle u,v\\rangle=\\int u(\\mathbf k)^\\dagger v(\\mathbf k)\\,d^3\\mathbf k/(2\\pi)^3$. Define the measurable matrix $h_D(\\mathbf k)=\\sum_j\\alpha_j k_j+\\beta\\mu$ and its maximal multiplication operator with domain $D(h_D)=\\{u\\in\\mathcal H_D:h_Du\\in\\mathcal H_D\\}$. For $\\omega(\\mathbf k)>0$, define the matrix fields\n$$P_\\pm(\\mathbf k)=\\frac12\\left(I_4\\pm\\frac{h_D(\\mathbf k)}{\\omega(\\mathbf k)}\\right).$$\nWhen $\\mu=0$ at $\\mathbf k=0$, set $P_+(0)=\\operatorname{diag}(I_2,0)$ and $P_-(0)=\\operatorname{diag}(0,I_2)$. These are complementary rank-two orthogonal projections; the value at this Lebesgue-null point does not change their multiplication operators. Write $M_{P_\\pm}$ for their maximal multiplication operators and $\\mathcal H_\\pm=\\operatorname{ran}M_{P_\\pm}$. The companion matrix lemma on this page proves these are bounded orthogonal projections with closed ranges. The conjugate Hilbert space $\\overline{\\mathcal H_-}$ has vectors $\\bar u$, scalar multiplication $z\\bar u=\\overline{\\bar z u}$, and pairing $\\langle\\bar u,\\bar v\\rangle=\\langle v,u\\rangle$.\n\nUse the sine and cosine definitions of [[def-sine-and-cosine-by-power-series]]. For a length-coordinate increment $t\\in\\mathbb R$ and $\\omega(\\mathbf k)>0$, define the matrix multiplier\n$$W_D(t,\\mathbf k)=\\cos(\\omega t)I_4+i\\frac{\\sin(\\omega t)}{\\omega}h_D(\\mathbf k).$$\nAt the massless apex set $W_D(t,0)=I_4$. Its unitarity, group law and generator identity are proved by the companion matrix lemma on this page.\n\nThe symbols $P_+$ and $P_-$ designate the positive- and negative-energy matrix formulas for this fixed free Dirac operator. This is purely mathematical data; no physical spin-statistics postulate or empirical assertion is included.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-dirac-projection-matrices",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and use the definitions in [[def-qft-dirac-projections]]. For every $\\mu\\ge0$ and almost every $\\mathbf k$, the displayed Pauli blocks satisfy $h_D(\\mathbf k)^\\dagger=h_D(\\mathbf k)$, $h_D(\\mathbf k)^2=\\omega(\\mathbf k)^2I_4$, and $P_\\pm(\\mathbf k)$ are complementary orthogonal projections of rank two. The ranges $\\mathcal H_\\pm$ are closed separable Hilbert subspaces of $\\mathcal H_D$, and $h_D$ is self-adjoint on $D(h_D)=\\{u:\\omega u\\in\\mathcal H_D\\}$. The matrices also satisfy $\\{\\gamma^a,\\gamma^b\\}=-2\\eta^{ab}I_4$ and $\\gamma^{0\\dagger}=\\gamma^0$, $\\gamma^{j\\dagger}=-\\gamma^j$.\n\nFor a unit spatial vector $\\mathbf n$, put $\\Sigma_{\\mathbf n}=\\operatorname{diag}(\\boldsymbol\\sigma\\cdot\\mathbf n,\\boldsymbol\\sigma\\cdot\\mathbf n)$, $S_R(\\theta)=\\cos(\\theta/2)I_4-i\\sin(\\theta/2)\\Sigma_{\\mathbf n}$, and $S_B(\\chi)=\\cosh(\\chi/2)I_4+\\sinh(\\chi/2)\\boldsymbol\\alpha\\cdot\\mathbf n$. With $R_{\\mathbf n}(\\theta)$ the rotation $\\mathbf v_\\parallel+\\cos\\theta\\,\\mathbf v_\\perp+\\sin\\theta\\,\\mathbf n\\times\\mathbf v_\\perp$ using [[def-cross-product-in-r3]], with $\\mathbf v_\\parallel=(\\mathbf v\\cdot\\mathbf n)\\mathbf n$ and $\\mathbf v_\\perp=\\mathbf v-\\mathbf v_\\parallel$, and $B_{\\mathbf n}(\\chi)$ the boost defined in [[lem-qft-lorentz-boost-rotation-factorization]], these matrices satisfy $S_R\\Gamma(p)S_R^{-1}=\\Gamma(R_{\\mathbf n}(\\theta)p)$, $S_B\\Gamma(p)S_B^{-1}=\\Gamma(B_{\\mathbf n}(\\chi)p)$, and $S_R\\beta S_R^\\dagger=S_B\\beta S_B^\\dagger=\\beta$.\n\nFor each real $t$, $W_D(t,\\mathbf k)$ of [[def-qft-dirac-projections]] is unitary, satisfies $W_D(t+s,\\mathbf k)=W_D(t,\\mathbf k)W_D(s,\\mathbf k)$, and obeys $\\partial_tW_D(t,\\mathbf k)=i h_D(\\mathbf k)W_D(t,\\mathbf k)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "At positive-mass zero momentum the Hamiltonian and shell energy reduce to beta mu and mu, giving the displayed diagonal projectors.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "The coordinate basis splits into two orthonormal two-dimensional projector ranges in the finite momentum fiber.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example evaluates one specified finite-dimensional momentum fiber, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example excludes mu=0 at the shell apex and makes no massless rest-state claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives two orthonormal basis vectors in each of the two projector ranges."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the degenerate zero-spatial-momentum fiber at mu>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval, limit or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The coordinate spinors are explicitly displayed; the example makes no choice assertion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional or forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example contains no biconditional or reverse implication."
+        }
+      ]
+    }
+  }
+}

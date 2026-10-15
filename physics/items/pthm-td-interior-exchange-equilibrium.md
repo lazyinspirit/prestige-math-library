@@ -1,0 +1,95 @@
+---
+id: pthm-td-interior-exchange-equilibrium
+kind: physics-theorem
+title: Interior exchange conditions from entropy maximization
+status: published
+origin: pipeline
+domain: physics
+library: physics
+physical_scope: Attained global equilibrium maxima for two independent separated systems in smooth single-phase positive-temperature charts, with only the specified energy, volume, and species exchanges permitted.
+deps:
+  - def-td-equilibrium-state-domain
+  - def-td-si-quantities
+  - def-td-isolated-compound-feasible-set
+  - def-td-thermal-contact-constraints
+  - post-td-bulk-additivity
+  - post-td-concave-fundamental-entropy
+  - post-td-entropy-maximum
+  - def-td-temperature-pressure-chemical-potential
+  - post-td-mechanical-conjugate-identification
+  - thm-chain-rule-for-total-derivatives
+dependency_roles:
+  def-td-equilibrium-state-domain: formulation-prerequisite
+  def-td-si-quantities: formulation-prerequisite
+  def-td-isolated-compound-feasible-set: formulation-prerequisite
+  def-td-thermal-contact-constraints: formulation-prerequisite
+  post-td-bulk-additivity: physical-assumption
+  post-td-concave-fundamental-entropy: physical-assumption
+  post-td-entropy-maximum: physical-assumption
+  def-td-temperature-pressure-chemical-potential: formulation-prerequisite
+  post-td-mechanical-conjugate-identification: physical-assumption
+  thm-chain-rule-for-total-derivatives: mathematical-premise
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: David Tong, Statistical Physics, complete lecture notes, §§1.2.4 and 1.4
+      url: https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S1.html
+    - title: Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, Chapter 2, §2.9.1
+      url: https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/CH02.pdf
+dependency_level: 7
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+---
+
+## Statement
+
+Consider two independent separated subsystems $A,B$ of fixed material constitutions, with states in domains $D_{c_A},D_{c_B}$ as in [[def-td-equilibrium-state-domain]], and additive total energy, volume, and aligned mole amounts as in [[post-td-bulk-additivity]] using SI coordinates ([[def-td-si-quantities]]). Let $S_{\mathrm{tot}}=S_A+S_B$ be their adopted total entropy, and let $\mathcal F$ be the exact feasible endpoint set fixed by the totals, retained partitions, and permitted exchanges in [[def-td-isolated-compound-feasible-set]]. Suppose $x_*=(x_A^*,x_B^*)\in\mathcal F$ is a stable equilibrium attaining the global entropy maximum adopted by [[post-td-entropy-maximum]]. Assume both subsystems lie in open $C^2$ single-phase charts with finite positive temperatures, and assume every exchange direction named below is locally feasible for both signs at $x_*$. Then:
+
+- If energy exchange is permitted, $T_A=T_B$.
+- If volume exchange is permitted, then $p_A/T_A=p_B/T_B$; if energy exchange is also permitted, this gives $p_A=p_B$.
+- If species $j$ can be exchanged, then $\mu_{A,j}/T_A=\mu_{B,j}/T_B$; if energy exchange is also permitted, this gives $\mu_{A,j}=\mu_{B,j}$.
+
+The pressure equality concerns the derivative-defined pressures of [[def-td-temperature-pressure-chemical-potential]]. It is equality of mechanical piston pressures only when the coupling of [[post-td-mechanical-conjugate-identification]] applies. A retained volume or species constraint supplies no corresponding equality.
+
+## Facts & Assumptions
+
+**Given:** Two named subsystems in independent separated states, fixed total coordinates, an explicitly declared feasible set $\mathcal F$, an attained global entropy-maximizing equilibrium point interior to every exchange direction used, $C^2$ entropy on the local charts, $S_{U}>0$, and SI coordinates. No empirical premise is used.
+
+[A1] [[post-td-entropy-maximum]]: For a stable equilibrium of the declared isolated compound, the model adopts an attained global maximum of the summed entropy on the exact feasible endpoint set. It assumes attainment; it proves no dynamics or uniqueness.
+
+[F1] [[def-td-isolated-compound-feasible-set]]: $\mathcal F$ is the declared subset of the product of constituent state domains satisfying the specified totals and exactly the allowed exchanges; retained barriers fix the associated coordinates.
+
+[F2] [[post-td-concave-fundamental-entropy]] and [[post-td-bulk-additivity]]: On the selected smooth single-phase charts the entropy has finite $C^2$ derivatives and $S_U>0$, and independent separated constituents have additive entropy and the declared additive extensive coordinates.
+
+[F3] [[def-td-thermal-contact-constraints]]: A diathermal contact permits thermal energy transfer between constituents while forbidding matter transfer and mechanical or composition work across that contact. Here it supports the energy-exchange variation only; [F1] and the stated bilateral-feasibility hypothesis govern the other named exchange channels.
+
+[F4] [[def-td-temperature-pressure-chemical-potential]]: Each $D_{c_i}$ uses dimensionless coordinates, and its physical chart is the image under $\Phi_{c_i}$; the entropy on physical tuples is the composition with $\Phi_{c_i}^{-1}$. Write $(U_i^*,V_i^*,n_i^*)=\Phi_{c_i}(x_i^*)$ for the physical SI tuple of subsystem $i$. The derivative identities are $S_{i,U}=1/T_i$, $S_{i,V}=p_i/T_i$, and $S_{i,n_j}=-\mu_{i,j}/T_i$, with other physical coordinates fixed.
+
+[F5] [[def-td-si-quantities]]: The coordinates $U,V,n_j$ use joules, cubic metres, and moles; $T$ is in kelvins, $p$ in pascals, and $\mu_j$ in joules per mole.
+
+[A2] [[post-td-mechanical-conjugate-identification]]: Along a $C^1$ path of equilibrium states for the specified simple-compressible chart, a constant-area piston satisfies $V=V_*+A\ell$ with $A>0$. Such a path is quasistatic in the postulate's stated equilibrium-path sense, mechanically equilibrated when its net normal force vanishes, and frictionless when its tangential contact force vanishes. The postulate adopts $p_{\mathrm{mech}}=p_c$ and $\delta W_{\mathrm{on}}=-p_c\,dV$ on such a path; this is a physical assumption, not a mathematical consequence.
+
+[L1] [[thm-chain-rule-for-total-derivatives]]: For differentiable maps between open Euclidean sets, the derivative of a composition is the composition of the derivatives. This is the mathematical chain rule used to differentiate entropy along each feasible one-parameter exchange.
+
+## Proof
+
+1.1 For energy exchange choose an arbitrary sufficiently small nonzero $h$ joules and the feasible physical-coordinate curves $z_A(t)=(U_A^*+t h,V_A^*,n_A^*)$, $z_B(t)=(U_B^*-t h,V_B^*,n_B^*)$ for $t$ near $0$. Their state-domain coordinates are $\Phi_{c_A}^{-1}(z_A(t))$ and $\Phi_{c_B}^{-1}(z_B(t))$; openness of the physical charts and the bilateral-feasibility hypothesis make both signs locally feasible. By [A1], $g(t):=S_A(z_A(t))+S_B(z_B(t))$ has a local maximum at $0$; [F1] and [F3] specify that this thermal energy exchange is allowed. For $t>0$, $(g(t)-g(0))/t\le0$; for $t<0$, the same quotient is $\ge0$. Its derivative exists by [F2], so the two one-sided limits force $g'(0)=0$. The chain rule [L1] gives $g'(0)=h(S_{A,U}-S_{B,U})$. Since $h\ne0$, $S_{A,U}=S_{B,U}$. [given, A1, F1, F2, F3, L1, construct]
+
+2.1 By [F4], $S_{i,U}=1/T_i$ for $i=A,B$. The temperatures are finite and positive, so equality of their reciprocals gives $T_A=T_B$. [given, F4, step 1.1, algebra]
+
+3.1 If volume exchange is permitted, hold the energy and species partitions fixed and vary $V_A(t)=V_A^*+t k$, $V_B(t)=V_B^*-t k$ for an arbitrary sufficiently small nonzero volume increment $k$. The same two-sided local-maximum argument in step 1.1 gives $0=k(S_{A,V}-S_{B,V})$, hence $S_{A,V}=S_{B,V}$. By [F4], $p_A/T_A=p_B/T_B$. When energy exchange is also permitted, step 2.1 gives $T_A=T_B>0$, hence $p_A=p_B$. By [A2], this is equality of the two derivative pressures with their respective mechanical piston pressures whenever that coupling applies to each subsystem. [given, A1, A2, F1, F2, F4, F5, L1, step 1.1, step 2.1, construct]
+
+3.2 If species $j$ is permitted to cross the partition, hold other coordinates fixed and vary $n_{A,j}(t)=n_{A,j}^*+t q$, $n_{B,j}(t)=n_{B,j}^*-t q$ for a sufficiently small nonzero mole increment $q$. Both signs are feasible by hypothesis, so the same derivative argument as in step 1.1 gives $S_{A,n_j}=S_{B,n_j}$. By [F4], $-\mu_{A,j}/T_A=-\mu_{B,j}/T_B$; when energy exchange is also permitted, step 2.1 gives equal positive temperatures and hence $\mu_{A,j}=\mu_{B,j}$. [given, A1, F1, F2, F4, F5, L1, step 1.1, step 2.1, construct]
+
+4.1 If a volume or species coordinate is retained by the definition of $\mathcal F$, its corresponding two-sided feasible curve does not exist. The derivative argument above therefore yields no equality for that coordinate. Boundary points are also excluded by the stated local two-sided feasibility hypothesis. [given, F1, step 3.1, step 3.2] ∎

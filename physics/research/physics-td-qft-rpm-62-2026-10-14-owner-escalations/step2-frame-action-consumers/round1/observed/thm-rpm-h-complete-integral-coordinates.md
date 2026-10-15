@@ -1,0 +1,63 @@
+---
+id: thm-rpm-h-complete-integral-coordinates
+kind: theorem
+title: "Complete integrals and covariant versus time Hamilton-Jacobi"
+status: draft
+origin: pipeline
+pipeline_run: physics-td-qft-rpm-62-2026-10-14
+domain: mathematics
+library: physics
+physical_scope: null
+dependency_level: 6
+deps: ["thm-rpm-h-local-hamilton-jacobi", "thm-rpm-h-temporal-shell-reduction", "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space", "def-countable-choice"]
+dependency_roles: {"thm-rpm-h-local-hamilton-jacobi": "mathematical-premise", "thm-rpm-h-temporal-shell-reduction": "mathematical-premise", "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space": "mathematical-premise", "def-countable-choice": "mathematical-premise"}
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "Jerrold E. Marsden and Tudor S. Ratiu, Introduction to Mechanics and Symmetry, 2nd ed., complete book PDF; §12.1 Theorem 12.1.4 pp. 393–395; §12.4 Theorem 12.4.1 pp. 412–413; §§14.2–14.3 pp. 466–473; §7.9 pp. 208–211."
+      url: https://fisica.net/mecanicaclassica/introduction_to_mechanics_and_symmetry_by_jerrold_marsden.pdf
+      locator: "Complete 549-page book; full relevant sections inspected."
+    - title: "MIT OpenCourseWare 8.09 Classical Mechanics III, Fall 2014, complete Chapter 4 lecture notes PDF; §4.4 Hamilton–Jacobi equation and complete integrals, all 33 PDF pages inspected."
+      url: https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/f00f7f68ac7ba346a0868efb7430582c_MIT8_09F14_Chapter_4.pdf
+      locator: "Complete 33-page chapter; full relevant section inspected."
+landmark: false
+---
+
+## Statement
+
+Assume $\mathrm{AC}_\omega$ for the cotangent/HJ supplier chain and let $n\ge1$. Let $U_H\subset\mathbb R\times T^*\mathbb R^n$ be open and $H\in C^\infty(U_H,\mathbb R)$. Let $D_S\subset\mathbb R\times\mathbb R^n_q\times\mathbb R^n_\alpha$ be open and $S\in C^3(D_S,\mathbb R)$, with $S_t+H(t,q,S_q)=0$ wherever $(t,q,\alpha)\in D_S$ and $(t,q,S_q(t,q,\alpha))\in U_H$. If the mixed matrix $S_{q\alpha}$ is invertible at $(t,q,\alpha)$, then after restricting neighborhoods the equations $p_i=S_{q^i}$, $\beta^i=S_{\alpha_i}$ define a local diffeomorphism $F_t:(q,p)\mapsto(\beta,\alpha)$ at each fixed $t$. Equip the old chart $(q,p)$ with $\omega_{\rm old}=\sum_i dq^i\wedge dp_i$ and the target chart, whose position coordinates are $\beta^i$ and momentum coordinates are $\alpha_i$, with $\omega_{\rm new}=\sum_i d\beta^i\wedge d\alpha_i$. Then $F_t^*\omega_{\rm new}=\omega_{\rm old}$, so this is a local canonical transformation in the stated convention, and $\beta$ is constant along the Hamilton characteristics $\dot q=H_p$, $\dot p=-H_q$. Such a family is a complete integral only on that nonsingular local domain. In the physical interpretation, $q^i,\beta^i$ have units m, $p_i,\alpha_i$ have units kg m/s, $t$ has units s, and $S$ has units J s. In a temporal spacetime chart satisfying H9, the covariant future-shell equation $g^{ab}S_aS_b+m^2c^2=0$ reduces to the time Hamilton–Jacobi equation with $p_0=S_t/c=-H/c$; for $m=0$ require a nonzero future null covector. $S$ is an action, not a dimensionless phase.
+
+For the relativistic shell equation, $m$ is measured in kilograms and $c$ in metres per second.
+
+## Facts & Assumptions
+
+**Given:** $n\ge1$, the open domains and smooth Hamiltonian in the statement, a local $C^3$ HJ solution, and a point where $S_{q\alpha}$ is invertible.
+
+[A1] [[def-countable-choice]]: assume countable choice $\mathrm{AC}_\omega$ only for the cotangent and HJ supplier chain; no full axiom of choice is used.
+
+[L1] [[thm-rpm-h-local-hamilton-jacobi]]: for each initial point $(0,a_0,dS_0(a_0))$ lying in its open Hamiltonian domain, the local characteristic construction supplies an actual smooth HJ solution while its projection remains invertible; no continuation through a caustic is asserted.
+
+[F1] [[lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space]]: a smooth map with invertible derivative has a smooth local inverse.
+
+[L2] [[thm-rpm-h-temporal-shell-reduction]]: the current H9 draft assumes a temporal product chart, $N>0$, positive spatial metric, and excludes $p_i=0$ on the massless branch; it gives $p_0=\beta^ip_i-N\sqrt{m^2c^2+h^{ij}p_ip_j}$ and $H=-cp_0$. The supplier is a mathematical deduction within its stated chart, positive-root and nonzero-null hypotheses; it introduces no physical action adoption.
+
+## Proof
+
+**Proof technique:** implicit-function and generating-function identities.
+
+**Given:** The hypotheses in the statement and exact conditional temporal-shell interface [L2].
+
+1.1 At fixed $t$, the map $(q,\alpha)\mapsto(q,p=S_q)$ has derivative $\begin{pmatrix}I&0\\S_{qq}&S_{q\alpha}\end{pmatrix}$, which is invertible at the stated point. By [F1], after restriction it is a diffeomorphism and solves locally for $\alpha=\alpha(t,q,p)$. Define $\beta=S_\alpha(t,q,\alpha(t,q,p))$; this gives a smooth local map $(q,p)\mapsto(\beta,\alpha)$. [F1, given, algebra]
+
+1.2 The map $(q,\alpha)\mapsto(\beta=S_\alpha,\alpha)$ has derivative $\begin{pmatrix}S_{\alpha q}&S_{\alpha\alpha}\\0&I\end{pmatrix}$, which is invertible because $S_{\alpha q}=(S_{q\alpha})^T$. By [F1] it has a smooth local inverse solving for $q$ from $(\beta,\alpha)$; then $p=S_q$ gives the smooth inverse map to the one in step 1.1. The equations therefore define the claimed local diffeomorphism. [F1, step 1.1, algebra]
+
+1.3 At fixed $t$, the differential in $(q,\alpha)$ is $d_{(q,\alpha)}S=p_i\,dq^i+\beta^i\,d\alpha_i$. Taking its exterior derivative gives $0=dp_i\wedge dq^i+d\beta^i\wedge d\alpha_i$, hence $\sum_i dq^i\wedge dp_i=\sum_i d\beta^i\wedge d\alpha_i$. This is exactly $F_t^*\omega_{\rm new}=\omega_{\rm old}$ for the source and target forms stated above. [given, step 1.1, step 1.2, algebra]
+
+2.1 Along a Hamilton characteristic, $\dot q=H_p$ and $\dot\alpha=0$. Differentiate the HJ equation with respect to $\alpha$: $S_{\alpha t}+S_{\alpha q}H_p=0$. Thus $\dot\beta=\frac d{dt}S_\alpha=S_{\alpha t}+S_{\alpha q}\dot q=0$. [L1, A1, algebra]
+
+3.1 In the temporal chart, $x^0=ct$ implies $p_0=\partial_{x^0}S=S_t/c$. The future mass-shell root [L2] says $p_0=-H/c$, hence $S_t+H(t,q,S_q)=0$. Conversely, substitution of this root into the covariant shell equation recovers the same time HJ equation, with the future sign fixed by $P^0>0$ and the nonzero null restriction when $m=0$. [L2, A1, given, algebra]
+
+4.1 Here $p=S_q$ and $\alpha$ have units kg m/s, while $q$ and $\beta=S_\alpha$ have metres; with $t$ in seconds and $H$ in joules, the HJ equation makes $S_t$ energy, so $S$ has joule-seconds. The canonical generating identity therefore pairs length with momentum and respects the action units. [given, algebra] ∎

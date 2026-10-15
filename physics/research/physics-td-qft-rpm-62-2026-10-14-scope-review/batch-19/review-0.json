@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "run": "physics-td-qft-rpm-62-2026-10-14",
+  "batch": "19",
+  "round": 0,
+  "reviewed_items": [
+    "def-td-driven-finite-path-model",
+    "def-td-detailed-balance-rate-model",
+    "post-td-canonical-protocol-preparation",
+    "post-td-stationary-bath-kernel",
+    "post-td-linear-ornstein-uhlenbeck-bath",
+    "def-td-finite-memory-reset-model",
+    "pthm-td-finite-pathwise-first-law",
+    "pthm-td-markov-relative-entropy-and-convergence",
+    "pthm-td-finite-jarzynski",
+    "pthm-td-finite-crooks",
+    "pthm-td-ornstein-uhlenbeck-thermal-fluctuations",
+    "pthm-td-qualified-landauer-reset",
+    "pthm-td-mean-dissipation",
+    "ex-td-finite-quench-work-fluctuation",
+    "ex-td-disconnected-markov-relaxation",
+    "ex-td-biased-bath-shannon-entropy-decreases",
+    "ex-td-ornstein-uhlenbeck-spectrum",
+    "ex-td-biased-memory-reset-bound",
+    "ex-td-correlated-memory-zero-conditional-reset-cost"
+  ],
+  "reviewed_pages": [
+    "td-stochastic-protocols",
+    "td-stochastic-protocols-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch is within the approved inventory limits. Its deductions are sound under their stated model assumptions, and it makes no empirical claims. One local repair pass should close the definition, frame, and unit gaps below.",
+  "findings": [
+    {
+      "id": "def-td-driven-finite-path-model",
+      "type": "local",
+      "reason": "The Definition calls μ₀ an initial law and P_F a path probability without specifying that μ₀: Ω→[0,1] and Σᵢ μ₀(i)=1. State this finite probability-vector condition so the generic path weights normalize. Consumers reviewed: post-td-canonical-protocol-preparation, post-td-stationary-bath-kernel, pthm-td-finite-pathwise-first-law, pthm-td-finite-jarzynski, pthm-td-finite-crooks, pthm-td-mean-dissipation, and ex-td-finite-quench-work-fluctuation."
+    },
+    {
+      "id": "def-td-detailed-balance-rate-model",
+      "type": "local",
+      "reason": "The rate branch gives qᵢⱼ and the master equation but no time domain or regularity for p(t). Specify the intended domain (the consumers use t≥0) and solution class, e.g. p∈C¹([0,∞), Δ(S)) solving the equation there. This is used by pthm-td-markov-relative-entropy-and-convergence, ex-td-disconnected-markov-relaxation, and ex-td-biased-bath-shannon-entropy-decreases; pthm-td-finite-crooks uses only the discrete-kernel clause."
+    },
+    {
+      "id": "post-td-linear-ornstein-uhlenbeck-bath",
+      "type": "prerequisite",
+      "reason": "The physical postulate uses k_B and SI dimensions but does not depend on def-td-si-quantities; it also uses a position x in a harmonic trap without specifying the coordinate relative to the trap center or its frame. Cite the exact SI supplier and define the displacement in a specified trap/bath Galilean chart, using the available def-td-galilean-rest-frame. Consumers reviewed: pthm-td-ornstein-uhlenbeck-thermal-fluctuations and ex-td-ornstein-uhlenbeck-spectrum."
+    },
+    {
+      "id": "pthm-td-qualified-landauer-reset",
+      "type": "prerequisite",
+      "reason": "The bound uses k_B, T_b, work W, and bath heat Q_b without linking to def-td-si-quantities or assigning W and Q_b energy units. State W,Q_b∈J and identify the exact SI convention for k_B and T_b. Consumers reviewed: ex-td-biased-memory-reset-bound and ex-td-correlated-memory-zero-conditional-reset-cost."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "post-td-canonical-protocol-preparation",
+      "decision": "accept",
+      "reason": "Its initial law is the normalized finite canonical vector."
+    },
+    {
+      "id": "post-td-stationary-bath-kernel",
+      "decision": "accept",
+      "reason": "Its stationarity assumption is independent of the generic initial law."
+    },
+    {
+      "id": "pthm-td-finite-pathwise-first-law",
+      "decision": "accept",
+      "reason": "The pathwise telescoping identity is unaffected by normalizing the initial law."
+    },
+    {
+      "id": "pthm-td-finite-jarzynski",
+      "decision": "accept",
+      "reason": "Its initial law is π₀, a normalized finite canonical vector."
+    },
+    {
+      "id": "pthm-td-finite-crooks",
+      "decision": "accept",
+      "reason": "Its forward and reverse path laws use normalized canonical endpoints; its rate-model use is the discrete-kernel clause."
+    },
+    {
+      "id": "pthm-td-mean-dissipation",
+      "decision": "accept",
+      "reason": "Its finite Jensen argument inherits the normalized forward path law from Jarzynski."
+    },
+    {
+      "id": "ex-td-finite-quench-work-fluctuation",
+      "decision": "accept",
+      "reason": "The two initial probabilities are explicitly 1/2, and the quench calculation is unchanged."
+    },
+    {
+      "id": "pthm-td-markov-relative-entropy-and-convergence",
+      "decision": "accept",
+      "reason": "Its statement and proof use a classical solution for t≥0, matching the requested explicit solution class."
+    },
+    {
+      "id": "ex-td-disconnected-markov-relaxation",
+      "decision": "accept",
+      "reason": "The calculation solves the stated finite master equation for t≥0."
+    },
+    {
+      "id": "ex-td-biased-bath-shannon-entropy-decreases",
+      "decision": "accept",
+      "reason": "The calculation solves the stated finite master equation for t≥0."
+    },
+    {
+      "id": "pthm-td-ornstein-uhlenbeck-thermal-fluctuations",
+      "decision": "accept",
+      "reason": "Its conditional covariance and spectrum deductions remain valid under the specified SI and trap-frame interpretation."
+    },
+    {
+      "id": "ex-td-ornstein-uhlenbeck-spectrum",
+      "decision": "accept",
+      "reason": "Its spectrum and averaging formulas inherit the OU model’s coordinate and unit conventions."
+    },
+    {
+      "id": "ex-td-biased-memory-reset-bound",
+      "decision": "accept",
+      "reason": "Its symbolic bound inherits the reset theorem’s work and SI conventions."
+    },
+    {
+      "id": "ex-td-correlated-memory-zero-conditional-reset-cost",
+      "decision": "accept",
+      "reason": "Its conditional-entropy calculation and reset conclusion are unchanged by explicit work units."
+    },
+    {
+      "id": "td-stochastic-protocols",
+      "decision": "accept",
+      "reason": "The page summary preserves the conditional scope of the finite protocol, rate, OU, and reset results."
+    },
+    {
+      "id": "td-stochastic-protocols-examples",
+      "decision": "accept",
+      "reason": "The examples remain model calculations, with no empirical interpretation."
+    }
+  ]
+}

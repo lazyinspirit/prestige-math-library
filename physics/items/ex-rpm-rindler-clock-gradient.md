@@ -1,0 +1,53 @@
+---
+id: ex-rpm-rindler-clock-gradient
+kind: example
+title: "Two stationary clocks and one radial Rindler ray"
+status: published
+origin: pipeline
+domain: physics
+library: physics
+dependency_level: 2
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+proof_strategy: direct
+physical_scope: "A symbolic specialization of the conditional right-wedge Rindler theorem. The numerical parameters are chosen model values, not measured quantities; the instantaneous received-frequency reading is conditional on the theorem's additional adopted local phase-reception model, with its local ray-regime and finite-apparatus qualifications and no numerical accuracy or empirical validation claim."
+empirical_premises: []
+deps:
+  - pthm-rpm-rindler-clock-gradient
+dependency_roles:
+  pthm-rpm-rindler-clock-gradient: physical-result
+sources:
+  references:
+    - title: "Eric Gourgoulhon, Special relativity from an accelerated observer perspective, full author-hosted talk slides, slides 26–30"
+      url: "https://people-lux.obspm.fr/gourgoulhon/fr/present_rec/imcce_syrte10.pdf"
+      locator: "Slides 26–30 of the 55-page PDF: Rindler map, clock-rate gradient, null rays and redshift; the full relevant section inspected."
+    - title: "Tevian Dray, Geometry of General Relativity, Chapter 4: Rindler Geometry, online textbook sections §1 The Rindler Metric and §2 Rindler Geometry"
+      url: "https://sites.science.oregonstate.edu/physics/coursewikis/GGR/book/ggr/rindprop.html"
+      locator: "Chapter 4 §2 Rindler Geometry: stationary-observer proper time and acceleration used in this symbolic example; complete section inspected."
+verification:
+  verified:
+    model: "gpt-6-luna, gpt-6.1-sol, and delegated Codex review/repair agents; see completed run evidence"
+    verdict: "Owner accepted completed review and adjudication evidence for publication"
+    date: "2026-10-15"
+    scope: "Owner accepted completed delegated review and resolved adjudication evidence from research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json for publication. No new mathematical audit or source retrieval performed for publication; outside-frontier supplier limitations remain as recorded in the final report."
+    evidence: "research/physics-td-qft-rpm-62-2026-10-14-step6-evidence.json"
+    publication: "research/physics-td-qft-rpm-62-2026-10-14-publication-2026-10-15.json"
+    delegated_by: "owner; publication instruction 2026-10-15"
+---
+
+## Example
+
+Specialize [[pthm-rpm-rindler-clock-gradient]] to $a=2\,\mathrm{m\,s^{-2}}$, emission radius $\rho_E=2\,\mathrm m$, reception radius $\rho_R=4\,\mathrm m$, and a future outward radial ray. These are exact model parameters. The one-way coordinate travel time is $(c/2\,\mathrm{m\,s^{-2}})\log 2$, and over a shared Rindler-time interval the ideal-clock ratio is $\Delta\tau_R/\Delta\tau_E=2$. The instantaneous received-frequency ratio is $\omega_R/\omega_E=1/2$ under the theorem's additional adopted local phase-reception rule, with its local ray-regime and short-observation qualifications for finite apparatus and no numerical error bound or empirical validation. No experiment is described.
+
+## Facts & Assumptions
+
+**Given:** The parameter values above and the right-wedge definitions and model readings of the theorem.
+
+[F1] [[pthm-rpm-rindler-clock-gradient]]: radial travel has $\Delta T=(c/a)|\log(\rho_R/\rho_E)|$, stationary ideal-clock increments scale as $\rho$, and the wave-covector contraction functional scales as $1/\rho$; the instantaneous reception interpretation adopts the theorem's [A2] and retains all its qualifications.
+
+## Verification
+
+1.1 Substitute $a=2\,\mathrm{m\,s^{-2}}$, $\rho_R/\rho_E=2$ into the theorem's travel-time formula. Since both radii are positive and the ray is outward, $\Delta T=(c/a)\log2=(c/2\,\mathrm{m\,s^{-2}})\log2$, which is finite. [given, F1, algebra]
+
+2.1 The clock-gradient formula gives $\Delta\tau_R/\Delta\tau_E=\rho_R/\rho_E=4\,\mathrm m/(2\,\mathrm m)=2$. The contraction functional gives $\omega_R/\omega_E=\rho_E/\rho_R=1/2$. By [F1], the latter is the instantaneous received-frequency ratio within the additional adopted local phase-reception model, with its local ray-regime and finite-apparatus limits; no measured accuracy is asserted. [step 1.1, F1, algebra] ∎
