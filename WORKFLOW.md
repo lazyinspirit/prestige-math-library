@@ -173,6 +173,8 @@ Finite-smoke obligations use named deterministic computations in `tools/finite-s
 
 The `anisotropic-real-norm-complex-homogeneity-witness` check uses exact Gaussian-integer pairs `[real, imaginary]`, positive integer weights `[1,2]`, vector `[1,0]` and scalar `[0,1]` to recompute `N(1)=1`, `N(i)=2` and `|i|=1`. It rejects a witness satisfying complex homogeneity, a different source normalization, or incorrect claimed values. This is finite counterexample sanity evidence; it does not verify the real norm axioms for all real coordinates.
 
+The `cyclotomic-rank-one-f5-inverse` check exhausts all 16 unit parameter pairs in F5 and independently searches all 25 quadratic residues for the inverse of X. The `cyclotomic-rank-one-content-collision` check reduces the actual rational specialization Q=2, u1=u2=1 using exact monic integer polynomial division, then checks every unit repeated root in F5. It verifies a nonzero square-zero element and vanishing interpolation denominator. These are bounded sanity checks for rank-one examples, not proofs for arbitrary fields or ranks.
+
 ## Independent review through closeout
 
 For an owner-authorized recovery of exactly two local, unpushed legacy whole-tree

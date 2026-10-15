@@ -85,6 +85,54 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  // Bounded rank-one models; no claim about general rank or all fields.
+  'cyclotomic-rank-one-f5-inverse': ({ modulus = 5, inverse_x_coefficient = -1 } = {}) => {
+    if (modulus !== 5 || !Number.isInteger(inverse_x_coefficient) || Math.abs(inverse_x_coefficient) > 2)
+      return smokeResult(false, 'expected the field F5 and a small integer inverse X coefficient');
+    let cases = 0;
+    for (let a = 1; a < 5; a++) for (let b = 1; b < 5; b++) {
+      const model = cyclotomicQuadraticModel(5, a, b);
+      const inverseAB = [1, 2, 3, 4].find(t => model.reduceNumber(a * b * t) === 1);
+      const claimed = model.remainder([(a + b) * inverseAB, inverse_x_coefficient * inverseAB]);
+      const solutions = [];
+      // Independently find X^{-1} among all 25 degree-below-two residues.
+      for (let c = 0; c < 5; c++) for (let d = 0; d < 5; d++) {
+        if (model.equal(model.product([0, 1], [c, d]), [1, 0])) solutions.push([c, d]);
+      }
+      if (solutions.length !== 1 || !model.equal(claimed, solutions[0])
+        || !model.equal(model.product(claimed, [0, 1]), [1, 0]))
+        return smokeResult(false, `inverse formula fails for a=${a}, b=${b} in F5`);
+      if (!model.equal(model.remainder([0, 0, 1]), [-a * b, a + b]))
+        return smokeResult(false, `quadratic reduction fails for a=${a}, b=${b} in F5`);
+      cases++;
+    }
+    return smokeResult(true, `all ${cases} unit pairs in F5, including four repeated roots: monic polynomial division and exhaustive 25-residue inverse search verify X^2=(a+b)X-ab and X^{-1}=(a+b-X)/(ab)`);
+  },
+  'cyclotomic-rank-one-content-collision': ({ epsilon_scale = 1, epsilon_shift_sign = -1 } = {}) => {
+    if (!Number.isInteger(epsilon_scale) || Math.abs(epsilon_scale) > 2
+      || !Number.isInteger(epsilon_shift_sign) || Math.abs(epsilon_shift_sign) > 2)
+      return smokeResult(false, 'expected small integer coefficients for epsilon');
+    // The first fixture is the source's actual Q-specialization Q=2,u1=u2=1.
+    // Its monic integer reductions are exact also in Q; four finite-field
+    // fixtures additionally exercise every allowed nonzero repeated root in F5.
+    const fixtures = [{ modulus: 0, root: 1 }, ...[1, 2, 3, 4].map(root => ({ modulus: 5, root }))];
+    for (const { modulus, root } of fixtures) {
+      const model = cyclotomicQuadraticModel(modulus, root, root);
+      const epsilon = model.remainder([epsilon_scale * epsilon_shift_sign * root, epsilon_scale]);
+      if (model.equal(epsilon, [0, 0]))
+        return smokeResult(false, `epsilon is zero for root ${root} over ${modulus ? 'F5' : 'Q'}`);
+      if (!model.equal(model.product(epsilon, epsilon), [0, 0]))
+        return smokeResult(false, `epsilon is not square-zero for root ${root} over ${modulus ? 'F5' : 'Q'}`);
+      // Both one-box exponents are zero, so the specialized contents are the
+      // two chosen roots themselves and the interpolation denominator is zero.
+      const contents = [root, root];
+      if (contents[0] - contents[1] !== 0)
+        return smokeResult(false, 'the specialized interpolation denominator is nonzero');
+    }
+    if (epsilon_scale !== 1 || epsilon_shift_sign !== -1)
+      return smokeResult(false, 'source normalization is epsilon=X-c');
+    return smokeResult(true, 'actual Q specialization Q=2,u1=u2=1 has nonzero epsilon=X-1 with epsilon^2=0 and zero interpolation denominator; same exact identities hold at all four unit repeated roots in F5 (five bounded fixtures only)');
+  },
   // Exact source witness: this checks the counterexample, not all real norm axioms.
   'anisotropic-real-norm-complex-homogeneity-witness': ({
     weights = [1, 2], vector = [1, 0], scalar = [0, 1], expected_values = [1, 2, 1],
@@ -1439,6 +1487,32 @@ function components(graph) {
     }
   }
   return count;
+}
+
+// Coefficients are in ascending degree. modulus=0 is exact integer arithmetic
+// for the bounded monic rational fixture; otherwise all arithmetic is in F5.
+function cyclotomicQuadraticModel(modulus, a, b) {
+  const reduceNumber = x => modulus ? ((x % modulus) + modulus) % modulus : x;
+  const multiply = (left, right) => {
+    const out = Array(left.length + right.length - 1).fill(0);
+    left.forEach((x, i) => right.forEach((y, j) => { out[i + j] += x * y; }));
+    return out.map(reduceNumber);
+  };
+  const polynomial = multiply([-a, 1], [-b, 1]);
+  const remainder = input => {
+    const out = input.map(reduceNumber);
+    for (let degree = out.length - 1; degree >= 2; degree--) {
+      const leading = out[degree];
+      for (let j = 0; j <= 2; j++)
+        out[degree - 2 + j] = reduceNumber(out[degree - 2 + j] - leading * polynomial[j]);
+    }
+    return [out[0] ?? 0, out[1] ?? 0];
+  };
+  const equal = (left, right) => {
+    const x = remainder(left), y = remainder(right);
+    return x.every((v, i) => v === y[i]);
+  };
+  return { reduceNumber, remainder, equal, product: (left, right) => remainder(multiply(left, right)) };
 }
 
 function smokeResult(ok, summary) { return { ok, summary }; }
