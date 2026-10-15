@@ -5,6 +5,7 @@ import { existsSync, readFileSync, readdirSync, mkdirSync, writeFileSync, rename
 import { join, dirname } from 'node:path';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { statementHash } from './step5-statement.mjs';
+import { itemHashGuard } from './item-hash.mjs';
 
 const digest = (value) => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const unique = (values) => [...new Set(values)].sort();
@@ -38,11 +39,34 @@ export function validateFrontier(frontier) {
   return rebuilt;
 }
 
+// An active independent writer may briefly remove or truncate a file between
+// directory enumeration and open. Retry only those local shape/read races;
+// persistent missing or invalid files remain hard errors, never skipped rows.
+const itemReadWait = new Int32Array(new SharedArrayBuffer(4));
+function readLibraryItemSource(path, name) {
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    try {
+      const text = readFileSync(path, 'utf8');
+      const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+      if (!match) throw Object.assign(new Error(`missing frontmatter: ${name}`), { transientItemRead: true });
+      const id = match[1].match(/^id:\s*["']?([^\r\n"']+)["']?\s*$/m)?.[1]?.trim();
+      if (id !== name.slice(0, -3))
+        throw Object.assign(new Error(`item id mismatch: ${name}`), { transientItemRead: true });
+      return text;
+    } catch (error) {
+      if (attempt === 5 || (error.code !== 'ENOENT' && error.transientItemRead !== true)) throw error;
+      // Five waits total at most 3.1 seconds per transient file. No model, write, skip,
+      // corpus rescan or unbounded busy retry occurs here.
+      Atomics.wait(itemReadWait, 0, 0, 100 * 2 ** attempt);
+    }
+  }
+}
+
 /** Dependencies and other links are direct examination candidates, not edit
  * mandates. Only a new consumer statement change propagates another hop. */
 export function readLibraryItems(repo) {
   return readdirSync(join(repo, 'items')).filter((name) => name.endsWith('.md')).sort().map((name) => {
-    const text = readFileSync(join(repo, 'items', name), 'utf8');
+    const text = readLibraryItemSource(join(repo, 'items', name), name);
     const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
     requireValue(match, `missing frontmatter: ${name}`);
     const fm = match[1];
@@ -53,7 +77,7 @@ export function readLibraryItems(repo) {
     const links = [...body.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)].map((m) => m[1]);
     const deps = unique([...frontmatterList(fm, 'deps'), ...frontmatterList(fm, 'justified_by'), ...frontmatterList(fm, 'forward_refs')]);
     const references = unique([...links, ...frontmatterList(fm, 'external_refs')]).filter(id => !deps.includes(id));
-    return { id, deps, references, body_links: unique(links), aliases: frontmatterList(fm, 'aliases'), published: scalar('status') === 'published', sha256: digest(text), statement_sha256: statementHash(text) };
+    return { id, deps, references, body_links: unique(links), aliases: frontmatterList(fm, 'aliases'), published: scalar('status') === 'published', sha256: digest(text), guard_sha256: itemHashGuard(text), statement_sha256: statementHash(text) };
   });
 }
 
