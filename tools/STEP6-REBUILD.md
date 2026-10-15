@@ -50,6 +50,15 @@ commit when both its current and staged native run projections equal HEAD and
 only foreign raw content changed. Exact policy preflight remains required;
 run-relevant shared changes retain their existing explicit ownership requirement.
 
+Published-ledger commit ownership uses only the run marker or a primary record
+subject among actual owned item/page IDs, including exact
+selected item carriers. Incidental supplier mentions and reachable prerequisite IDs
+remain readiness context and confer no commit ownership. Foreign-only ledger
+changes stay outside the commit even when relevant as context. Mixed changes to
+owned and foreign ledger records fail closed for separate integration; table
+records are classified individually. This ownership rule applies only to explicit
+policies; default shared-input restrictions and readiness context seals remain.
+
 The final report records status, frontier counts, material caveats, measured
 elapsed time/retries/token usage when available, and an audit link. It omits
 exhaustive bookkeeping; full evidence stays in JSON. Missing telemetry is not

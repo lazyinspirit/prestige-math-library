@@ -74,6 +74,24 @@ export function step6OwnedInputs(run, root, { physics = false } = {}) {
   return selectSharedOwnership(run, root, { physics, scope, selected, policy: false });
 }
 
+// Commit authority uses actual owned subjects, never their prerequisite closure.
+// Keep readiness's broader scientific context projection independently intact.
+function publishedOwnershipParts(text, run, ownedIds) {
+  const owns = value => {
+    if (value.includes(run)) return true;
+    // Supplier mentions inside another run's record are context, not authority.
+    const subject = /^\s*(?:\|\s*)?(?:`|\[\[)?([a-z][a-z0-9]*(?:-[a-z0-9]+)+)(?=[`|\]\s])/.exec(value)?.[1];
+    return ownedIds.has(subject);
+  };
+  const parts = { owned: [], foreign: [] };
+  for (const block of text.split(/\n\s*\n/).filter(block => block.trim())) {
+    // Individual table records cannot lend authority to their neighbouring rows.
+    const records = block.trimStart().startsWith('|') ? block.split('\n') : [block];
+    for (const record of records) parts[owns(record) ? 'owned' : 'foreign'].push(record);
+  }
+  return Object.fromEntries(Object.entries(parts).map(([key, rows]) => [key, JSON.stringify(rows)]));
+}
+
 function selectSharedOwnership(run, root, { physics, scope, selected, policy }) {
   // Preserve unchanged and foreign-only shared edits outside the commit.
   // Reuse precisely the native scientific projections, not a filename-prefix
@@ -104,6 +122,20 @@ function selectSharedOwnership(run, root, { physics, scope, selected, policy }) 
     // Explicit policy owns only its selected carriers. Other relevant shared
     // records remain sealed context, without acquiring commit ownership.
     if (policy && !selected.has(path)) continue;
+    if (policy && path === 'research/published-consumer-supplier-ledger.md') {
+      const ownedIds = new Set([...scope.items.map(row => row.id), ...scope.pages.map(row => row.id),
+        ...[...selected].flatMap(file => /^items\/([^/]+)\.md$/.exec(file)?.slice(1) ?? [])]);
+      const committedOwnership = publishedOwnershipParts(headSources[path], run, ownedIds);
+      const currentOwnership = publishedOwnershipParts(workingSources[path], run, ownedIds);
+      const stagedOwnership = publishedOwnershipParts(indexSources[path], run, ownedIds);
+      const ownChange = currentOwnership.owned !== committedOwnership.owned
+        || stagedOwnership.owned !== committedOwnership.owned;
+      if (!ownChange) selected.delete(path);
+      else if (currentOwnership.foreign !== committedOwnership.foreign
+        || stagedOwnership.foreign !== committedOwnership.foreign)
+        throw Error(`mixed owned and foreign published-ledger changes require separate integration: ${path}`);
+      continue;
+    }
     const relevantChange = (current[path] ?? '') !== (committed[path] ?? '')
       || (staged[path] ?? '') !== (committed[path] ?? '');
     if (relevantChange) {
